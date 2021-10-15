@@ -1,5 +1,30 @@
+
+**/.idea
+.ssh
+.lock
+*.lock
+.awcache
+
+**/node_modules
+
+**/*-support-processor.properties
+
+*.iml
+**/*.iml
+**/.DS_Store
+
+**/target
+
+**/log
+**/logs
+
+overlays
+out
+**/.flattened-pom.xml
+
+
 # Compiled class file
-*.class
+#*.class
 
 # Log file
 *.log
@@ -21,3 +46,4 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
