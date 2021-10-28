@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- 自动生成标记，请不要删除本行 simple-dao-codegen-flag=org.springframework.boot  -->
+    <!-- Auto gen by simple-dao-codegen Mon Oct 18 14:12:39 CST 2021 -->
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.5.RELEASE</version>
+    </parent>
+
+    <groupId>com.levin.oak.base</groupId>
+    <artifactId>framework-base</artifactId>
+    <version>${revision}</version>
+
+    <packaging>pom</packaging>
+
+    <properties>
+
+        <revision>1.0.0-SNAPSHOT</revision>
+
+        <levin.simple-dao.groupId>com.levin.commons</levin.simple-dao.groupId>
+        <levin.simple-dao.version>2.2.32-SNAPSHOT</levin.simple-dao.version>
+
+        <levin.service-support.groupId>com.github.Levin-Li</levin.service-support.groupId>
+        <levin.service-support.version>1.1.21-SNAPSHOT</levin.service-support.version>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <maven.test.skip>false</maven.test.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+        <maven.source.skip>true</maven.source.skip>
+
+        <sa-token.version>1.27.0</sa-token.version>
+
+        <maven-source-plugin.attach>true</maven-source-plugin.attach>
+        <maven-jar-plugin.addMavenDescriptor>false</maven-jar-plugin.addMavenDescriptor>
+
+    </properties>
+
+
+    <modules>
+        <module>testcase</module>
+
+        <module>api</module>
+
+        <module>services</module>
+
+
+        <module>entities</module>
+
+
+    </modules>
+
+    <repositories>
+
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+
+        <!--        在 gitpack.io 打包时会非常的慢-->
+        <!--        <repository>
+                    &lt;!&ndash; 仓库首页 https://maven.aliyun.com/ &ndash;&gt;
+                    <id>aliyun-central仓和jcenter仓的聚合仓</id>
+                    <url>https://maven.aliyun.com/repository/public</url>
+                </repository>-->
+
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <!--  插件库 -->
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+
+    <distributionManagement>
+
+        <!--具体变量来自 Setting 文件-->
+        <repository>
+            <id>${dist-repo}</id>
+            <url>${dist-repo.releases.url}</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>${dist-repo}</id>
+            <url>${dist-repo.snapshots.url}</url>
+        </snapshotRepository>
+
+    </distributionManagement>
+
+    <profiles>
+
+        <profile>
+            <id>01-跳过测试</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+
+        </profile>
+
+        <profile>
+            <id>02-上传源代码到 Maven</id>
+            <properties>
+                <maven.source.skip>false</maven.source.skip>
+            </properties>
+        </profile>
+
+
+        <profile>
+            <id>03-上传JavaDoc到 Maven</id>
+            <properties>
+                <maven.javadoc.skip>false</maven.javadoc.skip>
+            </properties>
+        </profile>
+
+    </profiles>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>${levin.simple-dao.groupId}</groupId>
+                <artifactId>simple-dao-annotations</artifactId>
+                <version>${levin.simple-dao.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${levin.simple-dao.groupId}</groupId>
+                <artifactId>simple-dao-core</artifactId>
+                <version>${levin.simple-dao.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${levin.simple-dao.groupId}</groupId>
+                <artifactId>simple-dao-jpa</artifactId>
+                <version>${levin.simple-dao.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${levin.simple-dao.groupId}</groupId>
+                <artifactId>simple-dao-jpa-starter</artifactId>
+                <version>${levin.simple-dao.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${levin.service-support.groupId}</groupId>
+                <artifactId>service-support</artifactId>
+                <version>${levin.service-support.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>2.3.5.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.session</groupId>
+                <artifactId>spring-session-data-redis</artifactId>
+            </dependency>
+
+            <!-- 引入Swagger3依赖 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>2.1.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.1.24</version>
+            </dependency>
+
+
+            <!-- Sa-Token插件：权限缓存与业务缓存分离 -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-alone-redis</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+
+
+            <!-- Sa-Token 整合 Redis （使用jackson序列化方式） -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-dao-redis-jackson</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+
+            <!-- Sa-Token-Quick-Login 插件 -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-quick-login</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+
+            <!-- Sa-Token 权限认证, 在线文档：http://sa-token.dev33.cn/ -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>${levin.simple-dao.groupId}</groupId>
+            <artifactId>simple-dao-jpa</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>${levin.service-support.groupId}</groupId>
+            <artifactId>service-support</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <plugins>
+
+            <plugin>
+                <groupId>${levin.simple-dao.groupId}</groupId>
+                <artifactId>simple-dao-codegen</artifactId>
+                <version>${levin.simple-dao.version}</version>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>${levin.service-support.groupId}</groupId>
+                        <artifactId>service-support</artifactId>
+                        <version>${levin.service-support.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+
+                <!--  flatten-maven-plugin 插件由 spring boot 进行版本管理-->
+
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+
+                <executions>
+
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+
+                </executions>
+
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
