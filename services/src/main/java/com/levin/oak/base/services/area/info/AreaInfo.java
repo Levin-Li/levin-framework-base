@@ -37,8 +37,8 @@ import java.util.Date;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"" + E_Area.code})
-@ToString(exclude = {"" + E_Area.parent,"" + E_Area.children,})
+@EqualsAndHashCode(of = {"code" })
+@ToString(exclude = {"parent","children",})
 @FieldNameConstants
 public class AreaInfo implements Serializable {
 

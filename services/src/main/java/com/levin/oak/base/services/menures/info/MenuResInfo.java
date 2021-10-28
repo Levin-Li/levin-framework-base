@@ -39,8 +39,8 @@ import java.util.Date;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"" + E_MenuRes.id})
-@ToString(exclude = {"" + E_MenuRes.parent,"" + E_MenuRes.children,})
+@EqualsAndHashCode(of = {"id"  })
+@ToString(exclude = {"parent"  ,"children"  ,})
 @FieldNameConstants
 public class MenuResInfo implements Serializable {
 
