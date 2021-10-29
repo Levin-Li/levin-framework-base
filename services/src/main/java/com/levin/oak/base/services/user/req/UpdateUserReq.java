@@ -115,8 +115,8 @@ public class UpdateUserReq implements ServiceReq {
     @Schema(description = "阿里 OpendId")
     private String aliOpenId;
 
-    @Schema(description = "租户ID")
-    private Long tenantId;
+//    @Schema(description = "租户ID")
+//    private Long tenantId;
 
     @Size(max = 512)
     @Schema(description = "创建者")

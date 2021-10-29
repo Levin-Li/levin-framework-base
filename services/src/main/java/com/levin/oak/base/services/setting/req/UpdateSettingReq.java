@@ -81,8 +81,8 @@ public class UpdateSettingReq implements ServiceReq {
     @Schema(description = "名称")
     private String name;
 
-    @Schema(description = "租户ID")
-    private Long tenantId;
+//    @Schema(description = "租户ID")
+//    private Long tenantId;
 
     @Size(max = 512)
     @Schema(description = "创建者")

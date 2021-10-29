@@ -114,7 +114,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //        })).addPathPatterns("/**");
 
 
-        registry.addInterceptor(new SaAnnotationInterceptor()).addPathPatterns(API_PATH + "/**");
+        registry.addInterceptor(new SaAnnotationInterceptor())
+                .addPathPatterns(API_PATH + "/**");
 
     }
 

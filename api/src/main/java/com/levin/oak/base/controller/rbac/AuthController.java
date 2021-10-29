@@ -66,7 +66,7 @@ public class AuthController {
      */
     @PostMapping("login")
     @Operation(tags = {"认证管理"}, summary = "登录")
-    public ApiResp<String> create(@RequestBody LoginReq req, @RequestHeader("user-agent") String ua) {
+    public ApiResp<String> login(@RequestBody LoginReq req, @RequestHeader("user-agent") String ua) {
 
         if (!StringUtils.hasText(req.getAccount())
                 || !StringUtils.hasText(req.getPassword())) {
@@ -100,20 +100,38 @@ public class AuthController {
 
         StpUtil.login(user.getId(), deviceType);
 
-        return ApiResp.ok(StpUtil.getTokenValueByLoginId(user.getId(), deviceType));
+        return ApiResp.ok(StpUtil.getTokenValue());
 
     }
 
+    /**
+     * 新增
+     *
+     * @return ApiResp
+     */
+    @PostMapping("logout")
+    @Operation(tags = {"认证管理"}, summary = "登出")
+    public ApiResp logout() {
+        StpUtil.logout();
+        return ApiResp.ok();
+    }
 
     public static String getDeviceType(String ua) {
 
-        // ua = ua.toLowerCase();
+//        1. http://whatsmyuseragent.com/
+//        2. http://whatsmyua.com/
+//        3. http://www.useragentstring.com/
 
-        if (ua.contains("Android ") || ua.contains("iPhone OS ")) {
+        if (ua.contains("Android ")
+                || ua.contains("iPhone;")
+                || ua.contains("iOS ")
+                || ua.contains("iPhone OS ")) {
             return "Phone";
-        } else if (ua.contains("iPad;") || ua.contains("iPhone OS ")) {
-            return "Pad";
-        } else if (ua.contains("Windows ") || ua.contains("iPhone OS ")) {
+        } else if (ua.contains("iPad;")) {
+            return "iPad";
+        } else if (ua.contains("Windows ")
+                || ua.contains("Macintosh;")
+                || ua.contains(" Mac OS X ")) {
             return "PC";
         }
 

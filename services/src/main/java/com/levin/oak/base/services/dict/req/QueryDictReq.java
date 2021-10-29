@@ -60,8 +60,8 @@ public class QueryDictReq implements ServiceReq  {
     private Type type;
 
 
-    @Schema(description = "编码")
-    private String code;
+//    @Schema(description = "编码")
+//    private String code;
 
 
     @Schema(description = "编码项")
@@ -74,8 +74,8 @@ public class QueryDictReq implements ServiceReq  {
     private String name;
 
 
-    @Schema(description = "租户ID")
-    private Long tenantId;
+//    @Schema(description = "租户ID")
+//    private Long tenantId;
 
 
     @Schema(description = "创建者")

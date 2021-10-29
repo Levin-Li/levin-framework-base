@@ -38,8 +38,9 @@ public class ScheduledTask
     @Column(nullable = false)
     String cron;
 
-    @Schema(description = "执行表达式")
+    @Schema(description = "执行表达式", title = "可以是 Groovy")
     @Column(nullable = false)
+    @Lob
     String invokeExpr;
 
     @Schema(description = "允许并发执行")

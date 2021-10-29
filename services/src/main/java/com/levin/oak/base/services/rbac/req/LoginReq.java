@@ -6,6 +6,7 @@ import com.levin.commons.dao.annotation.CList;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.Ignore;
 import com.levin.commons.dao.annotation.logic.OR;
+import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.domain.ServiceReq;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
@@ -52,6 +53,10 @@ public class LoginReq implements ServiceReq {
     @Eq(require = true)
     @NotNull
     private String password;
+
+    @Schema(description = "租户ID")
+    @InjectVar(isRequired = "false")
+    private String tenantId;
 
 //    @Schema(description = "验证码")
 //    @Ignore

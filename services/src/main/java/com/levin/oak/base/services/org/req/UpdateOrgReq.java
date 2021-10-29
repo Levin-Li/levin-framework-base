@@ -61,8 +61,8 @@ public class UpdateOrgReq implements ServiceReq {
     @Eq(require = true)
     private Long id;
 
-    @Schema(description = "租户ID")
-    private Long tenantId;
+//    @Schema(description = "租户ID")
+//    private Long tenantId;
 
     @Schema(description = "编码")
     private String code;

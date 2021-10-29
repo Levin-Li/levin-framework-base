@@ -14,7 +14,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @Service(PLUGIN_PREFIX + "AuthService")
 @Slf4j
-@ConditionalOnMissingBean
+//@ConditionalOnMissingBean(AuthService.class)
 public class AuthServiceImpl implements AuthService {
 
     @Autowired

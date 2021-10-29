@@ -20,8 +20,8 @@ import javax.persistence.*;
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-//                @Index(columnList = JobPost.Fields.code),
-//                @Index(columnList = JobPost.Fields.type),
+                @Index(columnList = JobPost.Fields.code),
+                @Index(columnList = JobPost.Fields.type),
                 @Index(columnList = AbstractMultiTenantObject.Fields.tenantId),
         },
 

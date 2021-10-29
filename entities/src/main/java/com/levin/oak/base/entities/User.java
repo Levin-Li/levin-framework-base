@@ -139,7 +139,7 @@ public class User
 
     @Schema(description = "所属部门")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "org_id", insertable = false, updatable = false)
+    @JoinColumn(name = E_User.orgId, insertable = false, updatable = false)
     Org org;
 
     @Override
@@ -155,4 +155,16 @@ public class User
     @Schema(description = "阿里 OpendId")
     String aliOpenId;
 
+
+    @Override
+    @PrePersist
+    public void prePersist() {
+
+        super.prePersist();
+
+        if (state == null) {
+            state = State.Normal;
+        }
+
+    }
 }

@@ -55,7 +55,7 @@ public class Area
 
     @Schema(description = "父区域")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_code", insertable = false, updatable = false)
+    @JoinColumn(name = E_Area.parentCode, insertable = false, updatable = false)
     protected Area parent;
 
     @Schema(description = "子区域")
