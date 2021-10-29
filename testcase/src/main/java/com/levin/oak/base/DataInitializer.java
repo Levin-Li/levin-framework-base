@@ -1,66 +1,10 @@
 package com.levin.oak.base;
 
-import static com.levin.oak.base.ModuleOption.*;
-
-import com.levin.commons.dao.SimpleDao;
-import com.levin.commons.plugin.PluginManager;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
-
-import java.lang.annotation.Annotation;
-import java.net.InetAddress;
-import java.util.*;
-import java.util.concurrent.Executor;
-
-import com.levin.oak.base.entities.Role;
-import com.levin.oak.base.entities.Setting;
-import com.levin.oak.base.entities.Dict;
-import com.levin.oak.base.entities.User;
-import com.levin.oak.base.entities.AccessLog;
-import com.levin.oak.base.entities.ScheduledTask;
-import com.levin.oak.base.entities.Org;
-import com.levin.oak.base.entities.JobPost;
-import com.levin.oak.base.entities.Area;
-import com.levin.oak.base.entities.MenuRes;
-
-import com.levin.oak.base.services.role.RoleService;
-import com.levin.oak.base.services.setting.SettingService;
-import com.levin.oak.base.services.dict.DictService;
-import com.levin.oak.base.services.user.UserService;
-import com.levin.oak.base.services.accesslog.AccessLogService;
-import com.levin.oak.base.services.scheduledtask.ScheduledTaskService;
-import com.levin.oak.base.services.org.OrgService;
-import com.levin.oak.base.services.jobpost.JobPostService;
-import com.levin.oak.base.services.area.AreaService;
-import com.levin.oak.base.services.menures.MenuResService;
-
-import com.levin.oak.base.controller.role.RoleController;
-import com.levin.oak.base.controller.setting.SettingController;
-import com.levin.oak.base.controller.dict.DictController;
-import com.levin.oak.base.controller.user.UserController;
-import com.levin.oak.base.controller.accesslog.AccessLogController;
-import com.levin.oak.base.controller.scheduledtask.ScheduledTaskController;
-import com.levin.oak.base.controller.org.OrgController;
-import com.levin.oak.base.controller.jobpost.JobPostController;
-import com.levin.oak.base.controller.area.AreaController;
-import com.levin.oak.base.controller.menures.MenuResController;
-
-
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.method.HandlerMethod;
-
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.utils.ClassUtils;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,8 +30,9 @@ import java.util.*;
 import java.util.concurrent.Executor;
 
 /**
- *  数据初始化
- *  @author Auto gen by simple-dao-codegen 2021-10-28 9:46:17
+ * 数据初始化
+ *
+ * @author Auto gen by simple-dao-codegen 2021-10-28 9:46:17
  */
 @Component
 @Slf4j
@@ -134,6 +79,7 @@ public class DataInitializer implements ApplicationContextAware, ApplicationList
 
     }
 
+    @SneakyThrows
     void initData() {
 
         log.info("***** ActiveProfiles:" + Arrays.asList(environment.getActiveProfiles()) + " , 工作目录：[" + new File(".").getAbsolutePath() + "]" + " , 数据库URL：[" + dataSourceProperties.getUrl() + "]");
@@ -150,17 +96,19 @@ public class DataInitializer implements ApplicationContextAware, ApplicationList
 
         log.info("***** 服务根路径： http://" + rootUrl);
 
-        boolean haveSwagger = org.springframework.util.ClassUtils.isPresent("springfox.documentation.spring.web.plugins.Docket", getClass().getClassLoader());
+        final String docketClsName = "springfox.documentation.spring.web.plugins.Docket";
+
+        boolean haveSwagger = org.springframework.util.ClassUtils.isPresent(docketClsName, getClass().getClassLoader());
 
         if (haveSwagger) {
-            if (applicationContext.getBeanProvider(springfox.documentation.spring.web.plugins.Docket.class).stream().findAny().isPresent()) {
-                log.info("***** API文档： http://" + rootUrl + "swagger-ui/index.html");
+            if (applicationContext.getBeanProvider(Class.forName(docketClsName)).stream().findAny().isPresent()) {
+                log.info("***** API文档： http://" + rootUrl + "/swagger-ui/index.html");
             } else {
                 log.warn("***** 当前项目没有配置 Swagger docket.");
+                getControllerUrls(rootUrl, true);
             }
         } else {
             log.info("***** 当前项目没有引入 Swagger 组件，建议引入[io.springfox:springfox-boot-starter]组件");
-
             getControllerUrls(rootUrl, true);
         }
 

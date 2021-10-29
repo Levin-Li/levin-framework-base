@@ -2,6 +2,7 @@ package com.levin.oak.base.controller.user;
 
 import static com.levin.oak.base.ModuleOption.*;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +47,7 @@ import static com.levin.oak.base.ModuleOption.*;
 
 @Tag(name = "用户", description = "用户管理")
 @Slf4j @Valid
+@SaCheckLogin
 public class UserController {
 
     private static final String ENTITY_NAME ="用户";

@@ -157,10 +157,10 @@
                 <scope>test</scope>
             </dependency>
 
-            <dependency>
+<!--            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-security</artifactId>
-            </dependency>
+            </dependency>-->
 
 
     </dependencies>
@@ -175,7 +175,6 @@
         </pluginManagement>
 
         <plugins>
-
 
                 <plugin>
                     <artifactId>maven-dependency-plugin</artifactId>

@@ -1,6 +1,10 @@
 package com.levin.oak.base.config;
 
+import static com.levin.oak.base.ModuleOption.*;
+
 import cn.dev33.satoken.interceptor.SaAnnotationInterceptor;
+import com.levin.oak.base.*;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
@@ -8,12 +12,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.config.annotation.*;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import static com.levin.oak.base.ModuleOption.*;
+import org.springframework.web.servlet.config.annotation.*;
 
 
 @Configuration(PLUGIN_PREFIX + "ModuleWebMvcConfigurer")
@@ -34,7 +37,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
             if (isCorsPreflightRequest
                     && HttpMethod.OPTIONS.toString().equals(request.getMethod())
-                    && request.getRequestURI().startsWith("/" + API_PATH)) {
+                    && request.getRequestURI().startsWith(API_PATH)) {
 
                 //跨域预检请求
                 //Access-Control-Max-Age: <delta-seconds>
@@ -76,19 +79,20 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         //注意每个资源路径后面的路径加 / !!! 重要的事情说三遍
         //注意每个资源路径后面的路径加 / !!! 重要的事情说三遍
 
+        registry.addResourceHandler(ADMIN_PATH + "**")
+                .addResourceLocations("classpath:public" + ADMIN_PATH);
 
-        registry.addResourceHandler("/" + ADMIN_PATH + "/**")
-                .addResourceLocations("classpath:/public/" + ADMIN_PATH);
+        registry.addResourceHandler(H5_PATH + "**")
+                .addResourceLocations("classpath:public" + H5_PATH);
 
-        registry.addResourceHandler("/" + H5_PATH + "/**")
-                .addResourceLocations("classpath:/public/" + H5_PATH);
-
+        registry.addResourceHandler(H5_PATH + "**")
+                .addResourceLocations("classpath:public" + H5_PATH);
     }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
 
-        registry.addMapping("/" + API_PATH + "/**")
+        registry.addMapping(API_PATH + "**")
                 .allowCredentials(true)
                 .allowedHeaders("*")
                 .allowedMethods("*")
@@ -114,8 +118,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //        })).addPathPatterns("/**");
 
 
-        registry.addInterceptor(new SaAnnotationInterceptor())
-                .addPathPatterns(API_PATH + "/**");
+        registry.addInterceptor(new SaAnnotationInterceptor()).addPathPatterns(API_PATH + "**");
 
     }
 

@@ -21,7 +21,7 @@ import java.util.Date;
         @Index(columnList = AbstractNamedEntityObject.Fields.name),
         @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
         @Index(columnList = AbstractMultiTenantObject.Fields.tenantId),
-        @Index(columnList = E_ScheduledTask.group),
+        @Index(columnList = E_ScheduledTask.groupName),
 })
 public class ScheduledTask
         extends MultiTenantNamedEntity<Long> {
@@ -32,14 +32,13 @@ public class ScheduledTask
 
     @Schema(description = "任务组")
     @Column(nullable = false)
-    String group;
+    String groupName;
 
     @Schema(description = "调度表达式")
     @Column(nullable = false)
     String cron;
 
     @Schema(description = "执行表达式", title = "可以是 Groovy")
-    @Column(nullable = false)
     @Lob
     String invokeExpr;
 

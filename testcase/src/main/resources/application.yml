@@ -1,4 +1,7 @@
 #Auto gen by simple-dao-codegen 2021-10-28 9:46:17
+server:
+  servlet:
+    context-path: /rabc
 
 spring:
   application:
@@ -69,7 +72,7 @@ spring:
 logging:
   level:
     root: info
-    com.levin: trace
+    com.levin: debug
 
 #swagger配置
 swagger:
@@ -91,4 +94,5 @@ sa-token:
   # token风格
   token-style: uuid
   # 是否输出操作日志
-  is-log: false
+  is-log: true
+
