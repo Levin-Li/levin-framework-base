@@ -54,5 +54,4 @@ public class PluginManagerController {
     public ApiResp<Plugin> plugin(@PathVariable String pluginId) {
         return ApiResp.ok(pluginManager.getInstalledPlugin(pluginId));
     }
-
 }

@@ -1,10 +1,13 @@
 package com.levin.oak.base.services.rbac;
 
 import cn.dev33.satoken.stp.StpInterface;
+import cn.dev33.satoken.strategy.SaStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -19,8 +22,14 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Service(PLUGIN_PREFIX + "StpInterface")
 @Slf4j
 @ConditionalOnMissingBean(StpInterface.class)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "StpInterface", havingValue = "false", matchIfMissing = true)
 public class StpInterfaceImpl
         implements StpInterface {
+
+    @PostConstruct
+    void init() {
+       // SaStrategy.me.setHasElement();
+    }
 
     @Override
     public List<String> getPermissionList(Object loginId, String loginType) {
@@ -31,4 +40,5 @@ public class StpInterfaceImpl
     public List<String> getRoleList(Object loginId, String loginType) {
         return null;
     }
+
 }

@@ -29,4 +29,5 @@ public class ResPermission implements Serializable {
     @Schema(description = "资源操作列表", title = "逗号隔开")
     protected String resOperationList;
 
+
 }
