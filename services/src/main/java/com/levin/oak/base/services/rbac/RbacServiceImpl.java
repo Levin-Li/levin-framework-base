@@ -39,7 +39,6 @@ import org.springframework.context.expression.BeanFactoryResolver;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -163,7 +162,7 @@ public class RbacServiceImpl implements RbacService {
      * @param permissionList 权限列表
      * @return 是否可以访问指定资源
      */
-    public boolean canAccess(String resPrefix, Res.Action action, List<String> roleList, List<String> permissionList, Map<String, Object>... exprContexts) {
+    public boolean isAuthorized(String resPrefix, Res.Action action, List<String> roleList, List<String> permissionList, Map<String, Object>... exprContexts) {
 
         //过滤
         List<String> requireAnyRoles = action.getAnyRoles().parallelStream().filter(Objects::nonNull).collect(Collectors.toList());
@@ -186,8 +185,9 @@ public class RbacServiceImpl implements RbacService {
                     ctx.setBeanResolver(new BeanFactoryResolver(applicationContext));
                     ctx.setVariable("stpLogic", StpUtil.stpLogic);
                     //设置环境变量
-                    Stream.of(Optional.ofNullable(exprContexts).orElse(new Map[0]))
-                            .filter(Objects::nonNull).forEach(ctx::setVariables);
+                    if (exprContexts != null) {
+                        Stream.of(exprContexts).filter(Objects::nonNull).forEach(ctx::setVariables);
+                    }
                 }) : null;
 
         //合并闭包
@@ -202,8 +202,29 @@ public class RbacServiceImpl implements RbacService {
     }
 
 
+    /**
+     * 验证是否授权
+     *
+     * @param requirePermission
+     * @param roleList
+     * @param permissionList
+     * @return
+     */
+    public boolean isAuthorized(String requirePermission, List<String> roleList, List<String> permissionList) {
+        if (requirePermission.contains(getDelimiter())) {
+            return SaStrategy.me.hasElement.apply(permissionList, requirePermission);
+        } else {
+            return roleList.contains(requirePermission);
+        }
+    }
+
+    /**
+     * 获取授权的菜单列表
+     *
+     * @param userId
+     * @return
+     */
     @Override
-    @Transactional
     public List<MenuResInfo> getAuthorizedMenuList(Object userId) {
 
         //1、找出所有的菜单
@@ -246,19 +267,35 @@ public class RbacServiceImpl implements RbacService {
 
         if (userId != null) {
 
+            List<String> roleList = StpUtil.getRoleList(userId);
+            List<String> permissionList = StpUtil.getPermissionList(userId);
+
             for (Map.Entry<Long, MenuResInfo> entry : cacheMap2.entrySet()) {
-
                 //
-                entry.getValue().getRequireAuthorizations().split(",");
+                MenuResInfo info = entry.getValue();
 
+                List<String> requirePermissions = Stream.of(info.getRequireAuthorizations().split("[,;]"))
+                        .filter(StringUtils::hasText).collect(Collectors.toList());
+
+                if (requirePermissions.isEmpty()
+                        || requirePermissions.parallelStream().allMatch(requirePermission -> this.isAuthorized(requirePermission, roleList, permissionList))) {
+                    //如果没有要求权限，或是权限都满足，要求显示菜单
+                    info.setEnable(true);
+                } else if (Boolean.TRUE.equals(info.getAlwaysShow())) {
+                    //菜单显示，但被禁用
+                    info.setEnable(false);
+                } else {
+                    //如果没有权限
+                    cacheMap.remove(entry.getKey());
+                }
             }
         }
-
 
         return cacheMap.values().parallelStream()
                 .filter(m -> m.getParentId() == null)
                 .collect(Collectors.toList());
     }
+
 
     /**
      * 获取资源授权清单
@@ -323,7 +360,7 @@ public class RbacServiceImpl implements RbacService {
 
                         if (hasUser) {
                             //加入拥有的权限
-                            if (canAccess(prefix, action, roleList, permissionList)) {
+                            if (isAuthorized(prefix, action, roleList, permissionList)) {
                                 resInfo.getActionList().add(actionInfo);
                             }
                         } else {
@@ -466,7 +503,7 @@ public class RbacServiceImpl implements RbacService {
 
         ///////////////////////// 构建权限检查逻辑的闭包 //////////////////////////////////////
 
-        boolean ok = canAccess(
+        boolean ok = isAuthorized(
                 String.join(getDelimiter(), resAuthorize.domain(), resAuthorize.type(), resAuthorize.res()),
                 SimpleResAction.newAction(resAuthorize),
                 StpUtil.isLogin() ? StpUtil.getRoleList() : Collections.emptyList(),

@@ -102,6 +102,8 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
 
     @Override
     public <M extends MenuItem> List<M> getMenuList() {
+
+
         return null;
     }
 

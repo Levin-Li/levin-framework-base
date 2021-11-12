@@ -3,7 +3,6 @@ package com.levin.oak.base.services.rbac;
 import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.Permission;
 import com.levin.oak.base.entities.E_User;
-import com.levin.oak.base.entities.MenuRes;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.rbac.info.ModuleInfo;
 import com.levin.oak.base.services.rbac.req.LoginReq;
@@ -56,7 +55,7 @@ public interface RbacService {
     void logout();
 
     /**
-     * 获取授权的菜单
+     * 获取授权的菜单列表
      *
      * @param userId
      * @return

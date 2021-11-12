@@ -5,7 +5,6 @@ import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.dao.domain.support.AbstractTreeObject;
 import com.levin.commons.rbac.MenuItem;
-import com.levin.commons.rbac.TreeRes;
 import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -36,8 +35,8 @@ import javax.persistence.*;
 //        }
 )
 public class MenuRes
-        extends AbstractTreeObject<MenuRes, MenuRes>
-        implements MenuItem<MenuRes, MenuRes>, MultiTenantObject  {
+        extends AbstractTreeObject<Long, MenuRes>
+        implements MenuItem<MenuRes, MenuRes>, MultiTenantObject {
 
     @Id
     @GeneratedValue
@@ -50,7 +49,7 @@ public class MenuRes
     @Schema(description = "子域")
     String domain;
 
-    @Schema(description = "需要的授权")
+    @Schema(description = "需要的授权，权限或角色用逗号隔开")
     @Column(length = 1800)
     String requireAuthorizations;
 

@@ -55,7 +55,7 @@ import javax.persistence.*;
 
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Org
-        extends AbstractTreeObject<Org, Org>
+        extends AbstractTreeObject<Long, Org>
         implements MultiTenantObject, StatefulObject {
 
     public enum State {
