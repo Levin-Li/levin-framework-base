@@ -60,7 +60,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  区域测试
  *
- *  @author auto gen by simple-dao-codegen 2021-10-28 9:46:17
+ *  @author auto gen by simple-dao-codegen 2021-11-12 9:56:47
  *
  */
 
@@ -99,8 +99,6 @@ public class AreaServiceTest {
             // req.setType(Type.Nation);//类型 必填
 
             // req.setName("这是文本512");//名称 必填
-
-            // req.setCreator("这是文本512");//创建者 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -157,7 +155,6 @@ public class AreaServiceTest {
            // req.setParentCode("父区域ID_1");//父区域ID 
            // req.setType(Type.Nation);//类型 必填
            // req.setName("这是文本512");//名称 必填
-           // req.setCreator("这是文本512");//创建者 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

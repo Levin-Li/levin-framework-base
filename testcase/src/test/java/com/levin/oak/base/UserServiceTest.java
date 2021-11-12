@@ -13,6 +13,7 @@ import com.levin.oak.base.services.user.info.*;
 //自动导入列表
 import com.levin.oak.base.entities.User.*;
 import java.util.Date;
+import java.util.List;
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
@@ -60,7 +61,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  用户测试
  *
- *  @author auto gen by simple-dao-codegen 2021-10-28 9:46:17
+ *  @author auto gen by simple-dao-codegen 2021-11-12 9:56:47
  *
  */
 
@@ -92,6 +93,8 @@ public class UserServiceTest {
 
         CreateUserReq req = new CreateUserReq();
 
+            // req.setTenantId("租户ID_1");//租户ID 
+
             // req.setLoginName("登录名_1");//登录名 
 
             // req.setPassword("登录密码_1");//登录密码 
@@ -120,17 +123,13 @@ public class UserServiceTest {
 
             // req.setJobPostCode("岗位职级_1");//岗位职级 
 
-            // req.setRoleList("这是文本1800");//角色列表 
+            // req.setRoles("这是文本1800");//角色列表 
 
             // req.setOrgId("这是文本512");//所属部门ID 
 
             // req.setWxOpenId("微信 OpendId_1");//微信 OpendId 
 
             // req.setAliOpenId("阿里 OpendId_1");//阿里 OpendId 
-
-            // req.setTenantId(null);//租户ID 
-
-            // req.setCreator("这是文本512");//创建者 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -156,6 +155,7 @@ public class UserServiceTest {
         QueryUserReq req = new QueryUserReq();
 
         // req.setId(null);//id
+        // req.setTenantId("租户ID_1");//租户ID
         // req.setLoginName("登录名_1");//登录名
         // req.setPassword("登录密码_1");//登录密码
         // req.setPhone("手机号_1");//手机号
@@ -171,12 +171,12 @@ public class UserServiceTest {
         // req.setState(State.Normal);//帐号状态
         // req.setStaffNo("工号_1");//工号
         // req.setJobPostCode("岗位职级_1");//岗位职级
-        // req.setRoleList("这是文本1800");//角色列表
+        // req.setRoles("这是文本1800");//角色列表
+        // req.setRoleList(null);//角色列表
         // req.setOrgId("这是文本512");//所属部门ID
         // req.setLoadOrg(true);//加载所属部门
         // req.setWxOpenId("微信 OpendId_1");//微信 OpendId
         // req.setAliOpenId("阿里 OpendId_1");//阿里 OpendId
-        // req.setTenantId(null);//租户ID
         // req.setCreator("这是文本512");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -198,6 +198,7 @@ public class UserServiceTest {
          req.setId(id);
 
 
+           // req.setTenantId("租户ID_1");//租户ID 
            // req.setLoginName("登录名_1");//登录名 
            // req.setPassword("登录密码_1");//登录密码 
            // req.setPhone("手机号_1");//手机号 
@@ -212,12 +213,10 @@ public class UserServiceTest {
            // req.setState(State.Normal);//帐号状态 必填
            // req.setStaffNo("工号_1");//工号 
            // req.setJobPostCode("岗位职级_1");//岗位职级 
-           // req.setRoleList("这是文本1800");//角色列表 
+           // req.setRoles("这是文本1800");//角色列表 
            // req.setOrgId("这是文本512");//所属部门ID 
            // req.setWxOpenId("微信 OpendId_1");//微信 OpendId 
            // req.setAliOpenId("阿里 OpendId_1");//阿里 OpendId 
-           // req.setTenantId(null);//租户ID 
-           // req.setCreator("这是文本512");//创建者 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

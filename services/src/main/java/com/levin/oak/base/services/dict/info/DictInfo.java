@@ -24,18 +24,19 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 import com.levin.oak.base.entities.Dict.*;
 import java.util.List;
+import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
 * 字典
-* @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+* @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
 */
 @Schema(description ="字典")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"" + E_Dict.id})
+@EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
 public class DictInfo implements Serializable {
@@ -66,14 +67,15 @@ public class DictInfo implements Serializable {
    private List<Item> itemList;
 
 
+   @InjectVar
+   @Schema(description = "租户ID")
+   private String tenantId;
+
+
    @NotNull
-   @Size(max = 768)
+   @Size(max = 512)
    @Schema(description = "名称")
    private String name;
-
-
-   @Schema(description = "租户ID")
-   private Long tenantId;
 
 
    @Size(max = 512)

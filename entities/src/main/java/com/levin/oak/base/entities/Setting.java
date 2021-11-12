@@ -1,8 +1,6 @@
 package com.levin.oak.base.entities;
 
-import com.levin.commons.dao.domain.Identifiable;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
-import com.levin.commons.dao.domain.support.AbstractMultiTenantObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -11,7 +9,7 @@ import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 
-@Entity(name = TableOption.PREFIX + "setting")
+@Entity(name = EntityConst.PREFIX + "setting")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
@@ -21,19 +19,20 @@ import javax.persistence.*;
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = AbstractMultiTenantObject.Fields.tenantId),
+                @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
                 @Index(columnList = E_Setting.code),
                 @Index(columnList = E_Setting.categoryName),
                 @Index(columnList = E_Setting.groupName),
-        },
-
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {AbstractMultiTenantObject.Fields.tenantId, E_Setting.code}),
         }
+
+//        ,
+//
+//        uniqueConstraints = {
+//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Setting.code}),
+//        }
 )
 public class Setting
-        extends MultiTenantNamedEntity<Long>
-        implements Identifiable<Long> {
+        extends MultiTenantNamedEntity  {
 
     public enum ValueType {
         @Schema(description = "文本")

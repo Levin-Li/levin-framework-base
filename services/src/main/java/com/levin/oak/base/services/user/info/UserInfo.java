@@ -24,20 +24,21 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 import com.levin.oak.base.entities.User.*;
 import java.util.Date;
+import java.util.List;
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
 * 用户
-* @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+* @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
 */
 @Schema(description ="用户")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"" + E_User.id})
-@ToString(exclude = {"" + E_User.org,})
+@EqualsAndHashCode(of = {"id"})
+@ToString(exclude = {"org",})
 @FieldNameConstants
 public class UserInfo implements Serializable {
 
@@ -47,6 +48,10 @@ public class UserInfo implements Serializable {
    @NotNull
    @Schema(description = "id")
    private Long id;
+
+
+   @Schema(description = "租户ID")
+   private String tenantId;
 
 
    @Schema(description = "登录名")
@@ -109,7 +114,11 @@ public class UserInfo implements Serializable {
 
    @Size(max = 1800)
    @Schema(description = "角色列表")
-   private String roleList;
+   private String roles;
+
+
+   @Schema(description = "角色列表")
+   private List<String> roleList;
 
 
    @Size(max = 512)
@@ -128,10 +137,6 @@ public class UserInfo implements Serializable {
 
    @Schema(description = "阿里 OpendId")
    private String aliOpenId;
-
-
-   @Schema(description = "租户ID")
-   private Long tenantId;
 
 
    @Size(max = 512)

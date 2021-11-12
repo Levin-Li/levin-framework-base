@@ -54,7 +54,7 @@ public class LoginReq implements ServiceReq {
     @NotNull
     private String password;
 
-    @Schema(description = "租户ID")
+    @Schema(description = "租户ID",hidden = true)
     @InjectVar(isRequired = "false")
     private String tenantId;
 
@@ -62,7 +62,11 @@ public class LoginReq implements ServiceReq {
 //    @Ignore
 //    private String verificationCode;
 
-    @Schema(description = "客户端类型")
+    @Schema(description = "客户端类型",hidden = true)
+    @Ignore
+    private String ua;
+
+    @Schema(description = "客户端类型",hidden = true)
     @Ignore
     private String clientType;
 

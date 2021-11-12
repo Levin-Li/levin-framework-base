@@ -29,13 +29,14 @@ import com.levin.oak.base.entities.*;
 //自动导入列表
     import com.levin.oak.base.entities.User.*;
     import java.util.Date;
+    import java.util.List;
     import com.levin.oak.base.services.org.info.*;
     import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
  *  查询用户
- *  @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+ *  @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "查询用户")
 @Data
@@ -55,6 +56,10 @@ public class QueryUserReq implements ServiceReq  {
 
     @Schema(description = "id")
     private Long id;
+
+
+    @Schema(description = "租户ID")
+    private String tenantId;
 
 
     @Schema(description = "登录名")
@@ -120,7 +125,11 @@ public class QueryUserReq implements ServiceReq  {
 
 
     @Schema(description = "角色列表")
-    private String roleList;
+    private String roles;
+
+
+    @Schema(description = "角色列表")
+    private List<String> roleList;
 
 
     @Schema(description = "所属部门ID")
@@ -138,10 +147,6 @@ public class QueryUserReq implements ServiceReq  {
 
     @Schema(description = "阿里 OpendId")
     private String aliOpenId;
-
-
-    @Schema(description = "租户ID")
-    private Long tenantId;
 
 
     @Schema(description = "创建者")

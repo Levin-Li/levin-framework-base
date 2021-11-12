@@ -1,18 +1,29 @@
 package com.levin.oak.base.config;
 
-import com.levin.commons.service.domain.ApiResp;
+import static com.levin.oak.base.ModuleOption.*;
+import com.levin.oak.base.*;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.HandlerInterceptor;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.servlet.config.annotation.*;
 
-import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import lombok.extern.slf4j.Slf4j;
+
+import java.text.SimpleDateFormat;
+
 
 
 /**
@@ -62,34 +73,6 @@ public class ModuleWebControllerAdvice {
 //        Result result = new Result(1000, "网络繁忙,请稍后再试");
 //        logger.error("application error", e);
 //        return result;
-//    }
-
-//    @ResponseBody
-//    @ExceptionHandler
-//    public ApiResp handlerException(Exception ex, HttpServletRequest request, HttpServletResponse response) throws Exception {
-//
-//
-//
-//        // 不同异常返回不同状态码
-//        AjaxJson aj = null;
-//        if (e instanceof NotLoginException) {    // 如果是未登录异常
-//            NotLoginException ee = (NotLoginException) e;
-//            aj = AjaxJson.getNotLogin().setMsg(ee.getMessage());
-//        } else if (e instanceof NotRoleException) {        // 如果是角色异常
-//            NotRoleException ee = (NotRoleException) e;
-//            aj = AjaxJson.getNotJur("无此角色：" + ee.getRole());
-//        } else if (e instanceof NotPermissionException) {    // 如果是权限异常
-//            NotPermissionException ee = (NotPermissionException) e;
-//            aj = AjaxJson.getNotJur("无此权限：" + ee.getCode());
-//        } else if (e instanceof DisableLoginException) {    // 如果是被封禁异常
-//            DisableLoginException ee = (DisableLoginException) e;
-//            aj = AjaxJson.getNotJur("账号被封禁：" + ee.getDisableTime() + "秒后解封");
-//        } else {    // 普通异常, 输出：500 + 异常信息
-//            aj = AjaxJson.getError(e.getMessage());
-//        }
-//
-//        // 返回给前端
-//        return aj;
 //    }
 
 }

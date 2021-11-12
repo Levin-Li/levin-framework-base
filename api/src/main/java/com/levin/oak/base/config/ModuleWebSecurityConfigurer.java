@@ -5,6 +5,7 @@ import com.levin.oak.base.*;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -20,11 +21,13 @@ import org.springframework.security.web.firewall.*;
 
 //参考文章： https://blog.csdn.net/u012702547/article/details/106800446/
 
+//默认不开启
 //@Configuration(PLUGIN_PREFIX + "ModuleWebSecurityConfigurer")
 //@Order(1701662913)
 @Slf4j
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 //@EnableGlobalAuthentication
+@ConditionalOnClass({WebSecurityConfigurer.class})
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleWebSecurityConfigurer", havingValue = "false", matchIfMissing = true)
 public class ModuleWebSecurityConfigurer implements WebSecurityConfigurer<WebSecurity>  {
 
@@ -71,10 +74,10 @@ public class ModuleWebSecurityConfigurer implements WebSecurityConfigurer<WebSec
                 "/swagger-ui/**/*",
                 "/springfox-swagger-ui/**/*",
                 "/swagger-resources/**",
-                "/" + ADMIN_PATH + "**",
-                "/" + H5_PATH + "**",
-                "/" + API_PATH + "auth/**",
-                "/" + API_PATH + "weixin/**"
+                ADMIN_UI_PATH + "**",
+                H5_UI_PATH + "**",
+                API_PATH + "auth/**",
+                API_PATH + "weixin/**"
         );
 
         log.debug("config WebSecurity");

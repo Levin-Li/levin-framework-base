@@ -22,9 +22,9 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
-import com.levin.commons.plugin.MenuItem.*;
-import com.levin.oak.base.entities.ResOperation;
-import java.util.List;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.rbac.MenuItem.*;
+import java.io.Serializable;
 import com.levin.oak.base.entities.MenuRes;
 import com.levin.oak.base.services.menures.info.*;
 import java.util.Set;
@@ -33,14 +33,14 @@ import java.util.Date;
 
 /**
 * 菜单
-* @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:42
+* @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
 */
 @Schema(description ="菜单")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"id"  })
-@ToString(exclude = {"parent"  ,"children"  ,})
+@EqualsAndHashCode(of = {"id"})
+@ToString(exclude = {"parent","children",})
 @FieldNameConstants
 public class MenuResInfo implements Serializable {
 
@@ -52,6 +52,7 @@ public class MenuResInfo implements Serializable {
    private Long id;
 
 
+   @InjectVar
    @Schema(description = "租户ID")
    private Long tenantId;
 
@@ -91,16 +92,8 @@ public class MenuResInfo implements Serializable {
    private String params;
 
 
-   @Schema(description = "操作列表")
-   private String operationList;
-
-
-   @Schema(description = "操作列表")
-   private List<ResOperation> operations;
-
-
    @Schema(description = "父ID")
-   private Long parentId;
+   private Serializable parentId;
 
 
    //@Fetch //默认不加载，请通过查询对象控制

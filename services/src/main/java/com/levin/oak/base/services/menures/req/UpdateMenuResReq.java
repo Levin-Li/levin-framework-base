@@ -26,9 +26,9 @@ import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.plugin.MenuItem.*;
-    import com.levin.oak.base.entities.ResOperation;
-    import java.util.List;
+    import com.levin.commons.service.domain.InjectVar;
+    import com.levin.commons.rbac.MenuItem.*;
+    import java.io.Serializable;
     import com.levin.oak.base.entities.MenuRes;
     import com.levin.oak.base.services.menures.info.*;
     import java.util.Set;
@@ -38,7 +38,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新菜单
- *  Auto gen by simple-dao-codegen 2021-10-28 16:17:42
+ *  Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "更新菜单")
 @Data
@@ -56,18 +56,19 @@ public class UpdateMenuResReq implements ServiceReq {
 
     private static final long serialVersionUID = -887712701L;
 
-    @Schema(description = "id")
+    @Schema(description = "id" , required = true)
     @NotNull
     @Eq(require = true)
     private Long id;
 
-//    @Schema(description = "租户ID")
-//    private Long tenantId;
+    //@InjectVar
+    @Schema(description = "租户ID")
+    private Long tenantId;
 
     @Schema(description = "子域")
     private String domain;
 
-    @Size(max = 1800)
+    //@Size(max = 1800)
     @Schema(description = "需要的授权")
     private String requireAuthorizations;
 
@@ -86,27 +87,17 @@ public class UpdateMenuResReq implements ServiceReq {
     @Schema(description = "路径/链接")
     private String path;
 
-    @Size(max = 1800)
+    //@Size(max = 1800)
     @Schema(description = "参数")
     private String params;
 
-    @Schema(description = "操作列表")
-    private String operationList;
-
-    @Schema(description = "父ID")
-    private Long parentId;
-
-    @Size(max = 1800)
+    //@Size(max = 1800)
     @Schema(description = "id路径， 使用|包围，如|1|3|15|")
     private String idPath;
 
-    @Size(max = 512)
+    //@Size(max = 512)
     @Schema(description = "名称")
     private String name;
-
-    @Size(max = 512)
-    @Schema(description = "创建者")
-    private String creator;
 
     @Schema(description = "更新时间")
     private Date lastUpdateTime;
@@ -120,7 +111,7 @@ public class UpdateMenuResReq implements ServiceReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    @Size(max = 1800)
+    //@Size(max = 1800)
     @Schema(description = "备注")
     private String remark;
 

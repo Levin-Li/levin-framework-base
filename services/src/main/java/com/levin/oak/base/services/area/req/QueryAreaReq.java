@@ -36,7 +36,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询区域
- *  @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:42
+ *  @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "查询区域")
 @Data

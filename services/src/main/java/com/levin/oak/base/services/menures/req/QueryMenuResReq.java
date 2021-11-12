@@ -27,9 +27,9 @@ import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.plugin.MenuItem.*;
-    import com.levin.oak.base.entities.ResOperation;
-    import java.util.List;
+    import com.levin.commons.service.domain.InjectVar;
+    import com.levin.commons.rbac.MenuItem.*;
+    import java.io.Serializable;
     import com.levin.oak.base.entities.MenuRes;
     import com.levin.oak.base.services.menures.info.*;
     import java.util.Set;
@@ -38,7 +38,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询菜单
- *  @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:42
+ *  @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:31
  */
 @Schema(description = "查询菜单")
 @Data
@@ -96,14 +96,6 @@ public class QueryMenuResReq implements ServiceReq  {
     private String params;
 
 
-    @Schema(description = "操作列表")
-    private String operationList;
-
-
-
-
-    @Schema(description = "父ID")
-    private Long parentId;
 
 
     @Schema(description = "加载父对象")

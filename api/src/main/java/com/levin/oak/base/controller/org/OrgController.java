@@ -1,7 +1,5 @@
 package com.levin.oak.base.controller.org;
 
-import static com.levin.oak.base.ModuleOption.*;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +16,7 @@ import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
 import javax.validation.constraints.*;
 
+import com.levin.oak.base.controller.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.org.*;
@@ -25,8 +24,9 @@ import com.levin.oak.base.services.org.req.*;
 import com.levin.oak.base.services.org.info.*;
 
 import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2021-10-28 9:46:17
+//Auto gen by simple-dao-codegen 2021-11-12 9:56:30
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -43,20 +43,14 @@ import static com.levin.oak.base.ModuleOption.*;
 @RestController(PLUGIN_PREFIX + "OrgController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "OrgController", havingValue = "false", matchIfMissing = true)
 @RequestMapping(API_PATH + "org")
+//默认需要权限访问
+//@ResAuthorize(domain = ID, type = TYPE_NAME)
+@Tag(name = E_Org.BIZ_NAME, description = E_Org.BIZ_NAME + MAINTAIN_ACTION)
+@Slf4j
+@Valid
+public class OrgController extends BaseController{
 
-@Tag(name = "机构", description = "机构管理")
-@Slf4j @Valid
-public class OrgController {
-
-    private static final String ENTITY_NAME ="机构";
-
-    //请求级别变量
-    @Autowired
-    HttpServletResponse httpResponse;
-
-    //请求级别变量
-    @Autowired
-    HttpServletRequest httpRequest;
+    private static final String BIZ_NAME = E_Org.BIZ_NAME;
 
     @Autowired
     OrgService orgService;
@@ -68,7 +62,7 @@ public class OrgController {
      * @return  ApiResp<PagingData<OrgInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {ENTITY_NAME}, summary = "分页查找" + ENTITY_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION + BIZ_NAME)
     public ApiResp<PagingData<OrgInfo>> query(QueryOrgReq req , SimplePaging paging) {
         return ApiResp.ok(orgService.query(req,paging));
     }
@@ -80,7 +74,7 @@ public class OrgController {
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {ENTITY_NAME}, summary = "新增" + ENTITY_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION + BIZ_NAME)
     public ApiResp<Long> create(@RequestBody CreateOrgReq req) {
         return ApiResp.ok(orgService.create(req));
     }
@@ -92,7 +86,7 @@ public class OrgController {
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {ENTITY_NAME}, summary = "批量新增" + ENTITY_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION + BIZ_NAME)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateOrgReq> reqList) {
         return ApiResp.ok(orgService.batchCreate(reqList));
     }
@@ -103,28 +97,26 @@ public class OrgController {
     * @param id Long
     */
     @GetMapping("/{id}")
-    @Operation(tags = {ENTITY_NAME}, summary = "通过ID找回" + ENTITY_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION + BIZ_NAME)
     public ApiResp<OrgInfo> retrieve(@PathVariable @NotNull Long id) {
          return ApiResp.ok(orgService.findById(id));
      }
 
     /**
      * 更新
-     * @param id Long
+     * @param req UpdateOrgReq
      */
-     @PutMapping({"" , "/{id}"})
-     @Operation(tags = {ENTITY_NAME}, summary = "更新" + ENTITY_NAME)
-     public ApiResp<Void> update(@PathVariable Long id , @RequestBody UpdateOrgReq req) {
-         //路径参数优先使用
-         if (isNotEmpty(id)) { req.setId(id); }
-         return orgService.update(req) > 0 ? ApiResp.ok() : ApiResp.error("更新" + ENTITY_NAME + "失败");
+     @PutMapping({""})
+     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION + BIZ_NAME)
+     public ApiResp<Void> update(@RequestBody UpdateOrgReq req) {
+         return orgService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
     }
 
     /**
      * 批量更新
      */
      @PutMapping("/batchUpdate")
-     @Operation(tags = {ENTITY_NAME}, summary = "批量更新" + ENTITY_NAME)
+     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION + BIZ_NAME)
      public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateOrgReq> reqList) {
         return ApiResp.ok(orgService.batchUpdate(reqList));
     }
@@ -133,17 +125,22 @@ public class OrgController {
      * 删除
      * @param id Long
      */
-    @DeleteMapping({"" , "/{id}"})
-    @Operation(tags = {ENTITY_NAME}, summary = "删除" + ENTITY_NAME)
-    public ApiResp<Void> delete(@PathVariable Long id , DeleteOrgReq req) {
-        //路径参数优先使用
-        if (isNotEmpty(id)) { req.setId(id); }
-        return orgService.delete(req) > 0 ? ApiResp.ok() : ApiResp.error("删除" + ENTITY_NAME + "失败");
+    @DeleteMapping({"/{id}"})
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION + BIZ_NAME)
+    public ApiResp<Void> delete(@PathVariable @NotNull Long id) {
+        return orgService.delete(new DeleteOrgReq().setId(id)) > 0
+                                                ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
     }
 
-    protected boolean isNotEmpty(Object value) {
-        return value != null
-        && (!(value instanceof CharSequence) || StringUtils.hasText((CharSequence) value));
-    }
+    /**
+     * 批量删除
+     * @param req DeleteOrgReq
+     */
+    @DeleteMapping({"/batchDelete"})
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION + BIZ_NAME)
+    public ApiResp<Void> batchDelete(@NotNull DeleteOrgReq req) {
+        //new DeleteOrgReq().setIdList(idList)
+        return orgService.delete(req) > 0 ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+    }  
 
 }

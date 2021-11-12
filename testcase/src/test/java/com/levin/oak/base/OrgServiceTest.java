@@ -11,9 +11,11 @@ import com.levin.oak.base.services.org.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Org.*;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
+import java.io.Serializable;
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 import java.util.Set;
@@ -62,7 +64,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  机构测试
  *
- *  @author auto gen by simple-dao-codegen 2021-10-28 9:46:17
+ *  @author auto gen by simple-dao-codegen 2021-11-12 9:56:47
  *
  */
 
@@ -124,13 +126,9 @@ public class OrgServiceTest {
 
             // req.setZipCode("邮政编码_1");//邮政编码 
 
-            // req.setParentId(null);//父ID 
-
             // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
 
             // req.setName("这是文本512");//名称 必填
-
-            // req.setCreator("这是文本512");//创建者 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -172,7 +170,6 @@ public class OrgServiceTest {
         // req.setEmails("联系邮箱_1");//联系邮箱
         // req.setAddress("联系地址_1");//联系地址
         // req.setZipCode("邮政编码_1");//邮政编码
-        // req.setParentId(null);//父ID
         // req.setLoadParent(true);//加载父对象
         // req.setLoadChildren(true);//加载子节点
         // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15|
@@ -213,10 +210,8 @@ public class OrgServiceTest {
            // req.setEmails("联系邮箱_1");//联系邮箱 
            // req.setAddress("联系地址_1");//联系地址 
            // req.setZipCode("邮政编码_1");//邮政编码 
-           // req.setParentId(null);//父ID 
            // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
            // req.setName("这是文本512");//名称 必填
-           // req.setCreator("这是文本512");//创建者 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

@@ -11,6 +11,7 @@ import com.levin.oak.base.services.accesslog.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -56,7 +57,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  访问日志测试
  *
- *  @author auto gen by simple-dao-codegen 2021-10-28 9:46:17
+ *  @author auto gen by simple-dao-codegen 2021-11-12 9:56:47
  *
  */
 

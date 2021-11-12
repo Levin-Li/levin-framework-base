@@ -25,11 +25,12 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 //自动导入列表
     import java.util.Date;
+    import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 /**
  *  删除调度任务
- *  //Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+ *  //Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "删除调度任务")
 @Data
@@ -47,20 +48,22 @@ public class DeleteScheduledTaskReq implements ServiceReq {
 
     private static final long serialVersionUID = -2056389676L;
 
-    @Schema(description = "id")
+    @OR
+    @Schema(description = "id" , hidden = true)
     private Long id;
 
+    @END
     @Schema(description = "id集合")
     @In(E_ScheduledTask.id)
-    @Validator(expr = "id != null || ( ids != null &&  ids.length > 0)" , promptInfo = "删除调度任务必须指定ID")
-    private Long[] ids;
+    @Validator(expr = "id != null || ( idList != null &&  idList.length > 0)" , promptInfo = "删除调度任务必须指定ID")
+    private Long[] idList;
 
 
     public DeleteScheduledTaskReq(Long id) {
         this.id = id;
     }
 
-    public DeleteScheduledTaskReq(Long... ids) {
-        this.ids = ids;
+    public DeleteScheduledTaskReq(Long... idList) {
+        this.idList = idList;
     }
 }

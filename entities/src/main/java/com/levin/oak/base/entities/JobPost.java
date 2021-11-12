@@ -1,7 +1,6 @@
 package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
-import com.levin.commons.dao.domain.support.AbstractMultiTenantObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -10,7 +9,7 @@ import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 
-@Entity(name = TableOption.PREFIX + "job_post")
+@Entity(name = EntityConst.PREFIX + "job_post")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
@@ -22,17 +21,19 @@ import javax.persistence.*;
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = JobPost.Fields.code),
                 @Index(columnList = JobPost.Fields.type),
-                @Index(columnList = AbstractMultiTenantObject.Fields.tenantId),
-        },
-
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {AbstractMultiTenantObject.Fields.tenantId, E_JobPost.code}),
-                @UniqueConstraint(columnNames = {AbstractMultiTenantObject.Fields.tenantId, E_MultiTenantNamedEntity.name}),
+                @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
         }
+
+//        ,
+//
+//        uniqueConstraints = {
+//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_JobPost.code}),
+//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_MultiTenantNamedEntity.name}),
+//        }
 )
 
 public class JobPost
-        extends MultiTenantNamedEntity<Long> {
+        extends MultiTenantNamedEntity  {
 
     public enum Type {
         @Schema(description = "管理岗")

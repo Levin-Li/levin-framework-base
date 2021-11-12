@@ -11,7 +11,7 @@ import lombok.experimental.FieldNameConstants;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity(name = TableOption.PREFIX + "area")
+@Entity(name = EntityConst.PREFIX + "area")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
@@ -24,9 +24,9 @@ import java.util.Set;
         @Index(columnList = E_Area.type),
 })
 public class Area
-        extends AbstractNamedEntityObject<String>
+        extends AbstractNamedEntityObject
         implements
-        TreeObject<String, Area> {
+        TreeObject<Area, Area> {
 
     public enum Type {
         @Schema(description = "国家")
@@ -55,7 +55,7 @@ public class Area
 
     @Schema(description = "父区域")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = E_Area.parentCode, insertable = false, updatable = false)
+    @JoinColumn(name = "parentCode", insertable = false, updatable = false)
     protected Area parent;
 
     @Schema(description = "子区域")

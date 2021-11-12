@@ -12,6 +12,7 @@ import com.levin.oak.base.services.scheduledtask.info.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
+import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -57,7 +58,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  调度任务测试
  *
- *  @author auto gen by simple-dao-codegen 2021-10-28 9:46:17
+ *  @author auto gen by simple-dao-codegen 2021-11-12 9:56:47
  *
  */
 
@@ -89,25 +90,25 @@ public class ScheduledTaskServiceTest {
 
         CreateScheduledTaskReq req = new CreateScheduledTaskReq();
 
-            // req.setGroup("任务组_1");//任务组 必填
+            // req.setCategory("任务分类_1");//任务分类 必填
+
+            // req.setGroupName("任务组_1");//任务组 必填
 
             // req.setCron("调度表达式_1");//调度表达式 必填
 
-            // req.setInvokeExpr("执行表达式_1");//执行表达式 必填
+            // req.setInvokeExpr("执行表达式_1");//执行表达式 
 
             // req.setParallelInvoke(true);//允许并发执行 
 
             // req.setLastInvokedTime(new Date());//最后一次时间 
 
-            // req.setInvokeResult("执行结果_1");//执行结果 
-
             // req.setNextInvokeTime(new Date());//下一次时间 
 
-            // req.setName("这是文本768");//名称 必填
+            // req.setOrgId("机构ID_1");//机构ID 
 
-            // req.setTenantId(null);//租户ID 
+            // req.setTenantId("租户ID_1");//租户ID 
 
-            // req.setCreator("这是文本512");//创建者 
+            // req.setName("这是文本512");//名称 必填
 
             // req.setOrderCode(1);//排序代码 
 
@@ -133,17 +134,18 @@ public class ScheduledTaskServiceTest {
         QueryScheduledTaskReq req = new QueryScheduledTaskReq();
 
         // req.setId(null);//id
-        // req.setGroup("任务组_1");//任务组
+        // req.setCategory("任务分类_1");//任务分类
+        // req.setGroupName("任务组_1");//任务组
         // req.setCron("调度表达式_1");//调度表达式
         // req.setInvokeExpr("执行表达式_1");//执行表达式
         // req.setParallelInvoke(true);//允许并发执行
         // req.setMinLastInvokedTime(DateUtils.getZoneHour(new Date()));//最小最后一次时间
         // req.setMaxLastInvokedTime(DateUtils.getEndHour(new Date()));//最大最后一次时间
-        // req.setInvokeResult("执行结果_1");//执行结果
         // req.setMinNextInvokeTime(DateUtils.getZoneHour(new Date()));//最小下一次时间
         // req.setMaxNextInvokeTime(DateUtils.getEndHour(new Date()));//最大下一次时间
-        // req.setName("这是文本768");//名称
-        // req.setTenantId(null);//租户ID
+        // req.setOrgId("机构ID_1");//机构ID
+        // req.setTenantId("租户ID_1");//租户ID
+        // req.setName("这是文本512");//名称
         // req.setCreator("这是文本512");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -165,16 +167,16 @@ public class ScheduledTaskServiceTest {
          req.setId(id);
 
 
-           // req.setGroup("任务组_1");//任务组 必填
+           // req.setCategory("任务分类_1");//任务分类 必填
+           // req.setGroupName("任务组_1");//任务组 必填
            // req.setCron("调度表达式_1");//调度表达式 必填
-           // req.setInvokeExpr("执行表达式_1");//执行表达式 必填
+           // req.setInvokeExpr("执行表达式_1");//执行表达式 
            // req.setParallelInvoke(true);//允许并发执行 
            // req.setLastInvokedTime(new Date());//最后一次时间 
-           // req.setInvokeResult("执行结果_1");//执行结果 
            // req.setNextInvokeTime(new Date());//下一次时间 
-           // req.setName("这是文本768");//名称 必填
-           // req.setTenantId(null);//租户ID 
-           // req.setCreator("这是文本512");//创建者 
+           // req.setOrgId("机构ID_1");//机构ID 
+           // req.setTenantId("租户ID_1");//租户ID 
+           // req.setName("这是文本512");//名称 必填
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

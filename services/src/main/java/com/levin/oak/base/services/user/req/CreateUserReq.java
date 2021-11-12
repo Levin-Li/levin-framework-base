@@ -27,6 +27,7 @@ import com.levin.oak.base.entities.*;
 //自动导入列表
     import com.levin.oak.base.entities.User.*;
     import java.util.Date;
+    import java.util.List;
     import com.levin.oak.base.services.org.info.*;
     import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
@@ -34,7 +35,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  新增用户
- *  //Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+ *  //Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "新增用户")
 @Data
@@ -52,116 +53,120 @@ public class CreateUserReq implements ServiceReq {
 
 
 
-    @Schema(description = "登录名")
+    @Schema(description = "租户ID" )
+    private String tenantId;
+
+
+    @Schema(description = "登录名" )
     private String loginName;
 
 
-    @Schema(description = "登录密码")
+    @Schema(description = "登录密码" )
     private String password;
 
 
-    @Schema(description = "手机号")
+    @Schema(description = "手机号" )
     private String phone;
 
 
-    @Schema(description = "邮箱")
+    @Schema(description = "邮箱" )
     private String email;
 
 
-    @Schema(description = "名称")
+    @Schema(description = "名称" )
     private String name;
 
 
-    @Schema(description = "昵称")
+    @Schema(description = "昵称" )
     private String nickName;
 
 
-    @Schema(description = "头像")
+    @Schema(description = "头像" )
     private String avatar;
 
 
-    @Schema(description = "性别")
+    @Schema(description = "性别" )
     private Sex sex;
 
 
-    @Schema(description = "帐号标签")
+    @Schema(description = "帐号标签" )
     @Size(max = 1800)
     private String tags;
 
 
-    @Schema(description = "帐号类型")
+    @Schema(description = "帐号类型" )
     private Category category;
 
 
-    @Schema(description = "过期时间")
+    @Schema(description = "过期时间" )
     private Date expiredDate;
 
 
-    @Schema(description = "帐号状态")
+    @Schema(description = "帐号状态" , required = true)
     @NotNull
     private State state;
 
 
-    @Schema(description = "工号")
+    @Schema(description = "工号" )
     private String staffNo;
 
 
-    @Schema(description = "岗位职级")
+    @Schema(description = "岗位职级" )
     private String jobPostCode;
 
 
-    @Schema(description = "角色列表")
+    @Schema(description = "角色列表" )
     @Size(max = 1800)
-    private String roleList;
+    private String roles;
 
 
-    @Schema(description = "所属部门ID")
+    @Schema(description = "角色列表" )
+    private List<String> roleList;
+
+
+    @Schema(description = "所属部门ID" )
     @Size(max = 512)
     private String orgId;
 
 
 
-    @Schema(description = "微信 OpendId")
+    @Schema(description = "微信 OpendId" )
     private String wxOpenId;
 
 
-    @Schema(description = "阿里 OpendId")
+    @Schema(description = "阿里 OpendId" )
     private String aliOpenId;
 
 
-    @Schema(description = "租户ID")
-    private Long tenantId;
-
-
-    @Schema(description = "创建者")
+    @Schema(description = "创建者" )
     @Size(max = 512)
     private String creator;
 
 
-    @Schema(description = "创建时间")
+    @Schema(description = "创建时间" , required = true)
     @NotNull
     private Date createTime;
 
 
-    @Schema(description = "更新时间")
+    @Schema(description = "更新时间" )
     private Date lastUpdateTime;
 
 
-    @Schema(description = "排序代码")
+    @Schema(description = "排序代码" )
     private Integer orderCode;
 
 
-    @Schema(description = "是否允许")
+    @Schema(description = "是否允许" , required = true)
     @NotNull
     private Boolean enable;
 
 
-    @Schema(description = "是否可编辑")
+    @Schema(description = "是否可编辑" , required = true)
     @NotNull
     private Boolean editable;
 
 
-    @Schema(description = "备注")
+    @Schema(description = "备注" )
     @Size(max = 1800)
     private String remark;
 

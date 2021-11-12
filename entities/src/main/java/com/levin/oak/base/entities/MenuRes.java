@@ -1,18 +1,20 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.dao.domain.support.AbstractTreeObject;
-import com.levin.commons.plugin.MenuItem;
+import com.levin.commons.rbac.MenuItem;
+import com.levin.commons.rbac.TreeRes;
+import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
-import java.util.List;
 
-@Entity(name = TableOption.PREFIX + "menu_res")
+@Entity(name = EntityConst.PREFIX + "menu_res")
 @Data
 @Accessors(chain = true)
 
@@ -34,14 +36,15 @@ import java.util.List;
 //        }
 )
 public class MenuRes
-        extends AbstractTreeObject<Long, MenuRes>
-        implements MenuItem<MenuRes, MenuRes> {
+        extends AbstractTreeObject<MenuRes, MenuRes>
+        implements MenuItem<MenuRes, MenuRes>, MultiTenantObject  {
 
     @Id
     @GeneratedValue
     Long id;
 
     @Schema(description = "租户ID")
+    @InjectVar
     Long tenantId;
 
     @Schema(description = "子域")
@@ -72,13 +75,11 @@ public class MenuRes
     @Column(length = 1800)
     String params;
 
-    @Schema(description = "操作列表", title = "操作，Json")
-    @Lob
-    String operationList;
 
-    @Transient
-    @Schema(description = "操作列表")
-    List<ResOperation> operations;
+    @Override
+    public boolean isAlwaysShow() {
+        return Boolean.TRUE.equals(alwaysShow);
+    }
 
 }
 

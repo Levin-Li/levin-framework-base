@@ -24,9 +24,9 @@ import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.plugin.MenuItem.*;
-    import com.levin.oak.base.entities.ResOperation;
-    import java.util.List;
+    import com.levin.commons.service.domain.InjectVar;
+    import com.levin.commons.rbac.MenuItem.*;
+    import java.io.Serializable;
     import com.levin.oak.base.entities.MenuRes;
     import com.levin.oak.base.services.menures.info.*;
     import java.util.Set;
@@ -35,7 +35,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  删除菜单
- *  //Auto gen by simple-dao-codegen 2021-10-28 16:17:42
+ *  //Auto gen by simple-dao-codegen 2021-11-12 9:56:31
  */
 @Schema(description = "删除菜单")
 @Data
@@ -53,20 +53,22 @@ public class DeleteMenuResReq implements ServiceReq {
 
     private static final long serialVersionUID = -887712701L;
 
-    @Schema(description = "id")
+    @OR
+    @Schema(description = "id" , hidden = true)
     private Long id;
 
+    @END
     @Schema(description = "id集合")
     @In(E_MenuRes.id)
-    @Validator(expr = "id != null || ( ids != null &&  ids.length > 0)" , promptInfo = "删除菜单必须指定ID")
-    private Long[] ids;
+    @Validator(expr = "id != null || ( idList != null &&  idList.length > 0)" , promptInfo = "删除菜单必须指定ID")
+    private Long[] idList;
 
 
     public DeleteMenuResReq(Long id) {
         this.id = id;
     }
 
-    public DeleteMenuResReq(Long... ids) {
-        this.ids = ids;
+    public DeleteMenuResReq(Long... idList) {
+        this.idList = idList;
     }
 }

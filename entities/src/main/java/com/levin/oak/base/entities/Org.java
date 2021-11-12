@@ -5,6 +5,7 @@ import com.levin.commons.dao.domain.StatefulObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.dao.domain.support.AbstractTreeObject;
+import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -13,7 +14,7 @@ import lombok.experimental.FieldNameConstants;
 import javax.persistence.*;
 
 
-@Entity(name = TableOption.PREFIX + "org")
+@Entity(name = EntityConst.PREFIX + "org")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
@@ -34,11 +35,11 @@ import javax.persistence.*;
                 @Index(columnList = E_Org.state),
                 @Index(columnList = E_Org.level),
         }
-        ,
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {E_Org.tenantId, E_Org.code}),
-                @UniqueConstraint(columnNames = {E_Org.tenantId, E_Org.name}),
-        }
+//        ,
+//        uniqueConstraints = {
+//                @UniqueConstraint(columnNames = {E_Org.tenantId, E_Org.code}),
+//                @UniqueConstraint(columnNames = {E_Org.tenantId, E_Org.name}),
+//        }
 )
 
 //关于 JPA 继承模型
@@ -54,8 +55,8 @@ import javax.persistence.*;
 
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Org
-        extends AbstractTreeObject<Long, Org>
-        implements MultiTenantObject<Long>, StatefulObject<Org.State> {
+        extends AbstractTreeObject<Org, Org>
+        implements MultiTenantObject, StatefulObject {
 
     public enum State {
         @Schema(description = "正常")
@@ -84,6 +85,7 @@ public class Org
     protected Long id;
 
     @Schema(description = "租户ID")
+    @InjectVar
     protected Long tenantId;
 
     @Schema(description = "编码", title = "对于公司是统一信用码")
@@ -109,7 +111,7 @@ public class Org
 
     @Schema(description = "所属区域")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = E_Org.areaCode, insertable = false, updatable = false)
+    @JoinColumn(name = "areaCode", insertable = false, updatable = false)
     protected Area area;
 
     @Schema(description = "机构级别", title = "使用字典值配置")

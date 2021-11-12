@@ -27,12 +27,13 @@ import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
 //自动导入列表
+    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  查询访问日志
- *  @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+ *  @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "查询访问日志")
 @Data

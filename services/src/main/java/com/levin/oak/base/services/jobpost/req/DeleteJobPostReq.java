@@ -25,12 +25,13 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.oak.base.entities.JobPost.*;
+    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  删除工作岗位
- *  //Auto gen by simple-dao-codegen 2021-10-28 16:17:42
+ *  //Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "删除工作岗位")
 @Data
@@ -48,20 +49,22 @@ public class DeleteJobPostReq implements ServiceReq {
 
     private static final long serialVersionUID = 1018878847L;
 
-    @Schema(description = "id")
+    @OR
+    @Schema(description = "id" , hidden = true)
     private Long id;
 
+    @END
     @Schema(description = "id集合")
     @In(E_JobPost.id)
-    @Validator(expr = "id != null || ( ids != null &&  ids.length > 0)" , promptInfo = "删除工作岗位必须指定ID")
-    private Long[] ids;
+    @Validator(expr = "id != null || ( idList != null &&  idList.length > 0)" , promptInfo = "删除工作岗位必须指定ID")
+    private Long[] idList;
 
 
     public DeleteJobPostReq(Long id) {
         this.id = id;
     }
 
-    public DeleteJobPostReq(Long... ids) {
-        this.ids = ids;
+    public DeleteJobPostReq(Long... idList) {
+        this.idList = idList;
     }
 }

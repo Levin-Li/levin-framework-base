@@ -27,14 +27,15 @@ import com.levin.oak.base.entities.*;
 //自动导入列表
     import com.levin.oak.base.entities.Role.*;
     import java.util.List;
-    import com.levin.oak.base.entities.ResPermission;
+    import com.levin.commons.rbac.ResPermission;
+    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  新增角色
- *  //Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+ *  //Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "新增角色")
 @Data
@@ -52,68 +53,69 @@ public class CreateRoleReq implements ServiceReq {
 
 
 
-    @Schema(description = "编码")
+    @Schema(description = "编码" , required = true)
     @NotNull
     private String code;
 
 
-    @Schema(description = "图标")
+    @Schema(description = "图标" )
     private String icon;
 
 
-    @Schema(description = "部门数据权限")
+    @Schema(description = "部门数据权限" , required = true)
     @NotNull
     private OrgDataScope orgDataScope;
 
 
-    @Schema(description = "指定的部门列表")
+    @Schema(description = "指定的部门列表" )
     private String assignedOrgIdList;
 
 
-    @Schema(description = "资源权限")
+    @Schema(description = "资源权限" )
     private String permissions;
 
 
 
-    @Schema(description = "名称")
+    @Schema(description = "租户ID" )
+    @InjectVar
+    private String tenantId;
+
+
+    @Schema(description = "名称" , required = true)
     @NotNull
-    @Size(max = 768)
+    @Size(max = 512)
     private String name;
 
 
-    @Schema(description = "租户ID")
-    private Long tenantId;
-
-
-    @Schema(description = "创建者")
+    @Schema(description = "创建者" )
     @Size(max = 512)
     private String creator;
 
 
-    @Schema(description = "创建时间")
+    @Schema(description = "创建时间" , required = true)
     @NotNull
     private Date createTime;
 
 
-    @Schema(description = "更新时间")
+    @Schema(description = "更新时间" )
     private Date lastUpdateTime;
 
 
-    @Schema(description = "排序代码")
+    @Schema(description = "排序代码" )
     private Integer orderCode;
 
 
-    @Schema(description = "是否允许")
+    @Schema(description = "是否允许" , required = true)
     @NotNull
     private Boolean enable;
 
 
-    @Schema(description = "是否可编辑")
+    @Schema(description = "是否可编辑" , required = true)
     @NotNull
     private Boolean editable;
 
 
-    @Schema(description = "备注")
+    @Schema(description = "备注" )
     @Size(max = 1800)
     private String remark;
 

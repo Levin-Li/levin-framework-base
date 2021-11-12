@@ -3,16 +3,16 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.domain.Identifiable;
 import com.levin.commons.dao.domain.MultiTenantObject;
+import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
-@Entity(name = TableOption.PREFIX + "access_log")
+@Entity(name = EntityConst.PREFIX + "access_log")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
@@ -28,18 +28,18 @@ import java.util.Date;
 @Schema(description = "访问日志")
 public class AccessLog
         implements
-        MultiTenantObject<Long>,
-        Identifiable<Long>,
-        Serializable {
+        MultiTenantObject, Identifiable {
 
     @Id
     @GeneratedValue
     protected Long id;
 
     @Schema(description = "租户ID")
+    @InjectVar
     protected Long tenantId;
 
     @Schema(description = "请求的域名")
+    @InjectVar
     protected String domain;
 
     @Schema(description = "访问者")

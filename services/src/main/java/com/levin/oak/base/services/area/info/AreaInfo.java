@@ -31,13 +31,13 @@ import java.util.Date;
 
 /**
 * 区域
-* @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:42
+* @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
 */
 @Schema(description ="区域")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"code" })
+@EqualsAndHashCode(of = {"code"})
 @ToString(exclude = {"parent","children",})
 @FieldNameConstants
 public class AreaInfo implements Serializable {

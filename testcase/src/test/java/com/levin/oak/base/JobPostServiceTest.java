@@ -12,6 +12,7 @@ import com.levin.oak.base.services.jobpost.info.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.JobPost.*;
+import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -57,7 +58,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  工作岗位测试
  *
- *  @author auto gen by simple-dao-codegen 2021-10-28 9:46:17
+ *  @author auto gen by simple-dao-codegen 2021-11-12 9:56:47
  *
  */
 
@@ -93,11 +94,9 @@ public class JobPostServiceTest {
 
             // req.setType(Type.Manager);//类型 必填
 
-            // req.setName("这是文本768");//名称 必填
+            // req.setTenantId("租户ID_1");//租户ID 
 
-            // req.setTenantId(null);//租户ID 
-
-            // req.setCreator("这是文本512");//创建者 
+            // req.setName("这是文本512");//名称 必填
 
             // req.setOrderCode(1);//排序代码 
 
@@ -125,8 +124,8 @@ public class JobPostServiceTest {
         // req.setId(null);//id
         // req.setCode("编码_1");//编码
         // req.setType(Type.Manager);//类型
-        // req.setName("这是文本768");//名称
-        // req.setTenantId(null);//租户ID
+        // req.setTenantId("租户ID_1");//租户ID
+        // req.setName("这是文本512");//名称
         // req.setCreator("这是文本512");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -150,9 +149,8 @@ public class JobPostServiceTest {
 
            // req.setCode("编码_1");//编码 必填
            // req.setType(Type.Manager);//类型 必填
-           // req.setName("这是文本768");//名称 必填
-           // req.setTenantId(null);//租户ID 
-           // req.setCreator("这是文本512");//创建者 
+           // req.setTenantId("租户ID_1");//租户ID 
+           // req.setName("这是文本512");//名称 必填
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

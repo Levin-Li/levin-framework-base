@@ -27,9 +27,11 @@ import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
 //自动导入列表
+    import com.levin.commons.service.domain.InjectVar;
     import com.levin.oak.base.entities.Org.*;
     import com.levin.oak.base.entities.Area;
     import com.levin.oak.base.services.area.info.*;
+    import java.io.Serializable;
     import com.levin.oak.base.services.org.info.*;
     import com.levin.oak.base.entities.Org;
     import java.util.Set;
@@ -38,7 +40,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询机构
- *  @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:42
+ *  @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "查询机构")
 @Data
@@ -125,8 +127,6 @@ public class QueryOrgReq implements ServiceReq  {
     private String zipCode;
 
 
-    @Schema(description = "父ID")
-    private Long parentId;
 
 
     @Schema(description = "加载父对象")

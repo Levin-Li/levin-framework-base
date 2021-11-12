@@ -22,18 +22,19 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
+import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
 * 访问日志
-* @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+* @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
 */
 @Schema(description ="访问日志")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"" + E_AccessLog.id})
+@EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
 public class AccessLogInfo implements Serializable {
@@ -46,10 +47,12 @@ public class AccessLogInfo implements Serializable {
    private Long id;
 
 
+   @InjectVar
    @Schema(description = "租户ID")
    private Long tenantId;
 
 
+   @InjectVar
    @Schema(description = "请求的域名")
    private String domain;
 

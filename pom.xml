@@ -25,10 +25,11 @@
         <revision>1.0.0-SNAPSHOT</revision>
 
         <levin.simple-dao.groupId>com.levin.commons</levin.simple-dao.groupId>
-        <levin.simple-dao.version>2.2.32-SNAPSHOT</levin.simple-dao.version>
+        <levin.simple-dao.version>2.3.1-SNAPSHOT</levin.simple-dao.version>
 
         <levin.service-support.groupId>com.github.Levin-Li</levin.service-support.groupId>
-        <levin.service-support.version>1.1.21-SNAPSHOT</levin.service-support.version>
+        <levin.service-support.groupId>com.levin.commons</levin.service-support.groupId>
+        <levin.service-support.version>1.1.22-SNAPSHOT</levin.service-support.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -52,9 +53,7 @@
 
         <module>services</module>
 
-
         <module>entities</module>
-
 
     </modules>
 

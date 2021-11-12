@@ -1,7 +1,8 @@
 package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
-import com.levin.commons.dao.domain.support.AbstractMultiTenantObject;
+import com.levin.commons.rbac.ResPermission;
+import com.levin.commons.rbac.RoleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -10,7 +11,7 @@ import lombok.experimental.FieldNameConstants;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = TableOption.PREFIX + "role")
+@Entity(name = EntityConst.PREFIX + "role")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
@@ -18,19 +19,22 @@ import java.util.List;
 
 @Table(
         indexes = {
-                @Index(columnList = AbstractMultiTenantObject.Fields.tenantId),
+                @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
                 @Index(columnList = E_MultiTenantNamedEntity.name),
                 @Index(columnList = E_Role.code),
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-        },
-
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {AbstractMultiTenantObject.Fields.tenantId, E_Role.code}),
-                @UniqueConstraint(columnNames = {AbstractMultiTenantObject.Fields.tenantId, E_MultiTenantNamedEntity.name}),
         }
+
+//        ,
+//
+//        uniqueConstraints = {
+//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Role.code}),
+//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_MultiTenantNamedEntity.name}),
+//        }
 )
 public class Role
-        extends MultiTenantNamedEntity<Long> {
+        extends MultiTenantNamedEntity
+        implements RoleObject {
 
     public enum OrgDataScope {
         @Schema(description = "所有部门") All,
@@ -59,13 +63,13 @@ public class Role
     @Lob
     protected String assignedOrgIdList;
 
-    @Schema(description = "资源权限", title = "JSON 存储")
+    @Schema(description = "资源权限", title = "JSON List 存储")
     @Lob
     protected String permissions;
 
     @Transient
     @Schema(description = "资源权限列表")
-    protected List<ResPermission> resPermissionList;
+    protected List<ResPermission> permissionList;
 
     @Override
     public void prePersist() {
@@ -75,7 +79,6 @@ public class Role
         if (orgDataScope == null) {
             orgDataScope = OrgDataScope.MySelf;
         }
-
     }
 
 }

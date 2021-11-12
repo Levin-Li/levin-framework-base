@@ -11,9 +11,9 @@ import com.levin.oak.base.services.menures.info.*;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.plugin.MenuItem.*;
-import com.levin.oak.base.entities.ResOperation;
-import java.util.List;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.rbac.MenuItem.*;
+import java.io.Serializable;
 import com.levin.oak.base.entities.MenuRes;
 import com.levin.oak.base.services.menures.info.*;
 import java.util.Set;
@@ -62,7 +62,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  菜单测试
  *
- *  @author auto gen by simple-dao-codegen 2021-10-28 9:46:17
+ *  @author auto gen by simple-dao-codegen 2021-11-12 9:56:47
  *
  */
 
@@ -112,15 +112,9 @@ public class MenuResServiceTest {
 
             // req.setParams("这是文本1800");//参数 
 
-            // req.setOperationList("操作列表_1");//操作列表 
-
-            // req.setParentId(null);//父ID 
-
             // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
 
             // req.setName("这是文本512");//名称 必填
-
-            // req.setCreator("这是文本512");//创建者 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -155,8 +149,6 @@ public class MenuResServiceTest {
         // req.setIcon("图标_1");//图标
         // req.setPath("路径/链接_1");//路径/链接
         // req.setParams("这是文本1800");//参数
-        // req.setOperationList("操作列表_1");//操作列表
-        // req.setParentId(null);//父ID
         // req.setLoadParent(true);//加载父对象
         // req.setLoadChildren(true);//加载子节点
         // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15|
@@ -191,11 +183,8 @@ public class MenuResServiceTest {
            // req.setIcon("图标_1");//图标 
            // req.setPath("路径/链接_1");//路径/链接 
            // req.setParams("这是文本1800");//参数 
-           // req.setOperationList("操作列表_1");//操作列表 
-           // req.setParentId(null);//父ID 
            // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
            // req.setName("这是文本512");//名称 必填
-           // req.setCreator("这是文本512");//创建者 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

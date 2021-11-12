@@ -1,7 +1,6 @@
 package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
-import com.levin.commons.dao.domain.support.AbstractMultiTenantObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -9,10 +8,9 @@ import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
-@Entity(name = TableOption.PREFIX + "dict")
+@Entity(name = EntityConst.PREFIX + "dict")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
@@ -24,16 +22,17 @@ import java.util.List;
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = E_Dict.code),
                 @Index(columnList = E_Dict.type),
-                @Index(columnList = AbstractMultiTenantObject.Fields.tenantId),
-        },
-
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {AbstractMultiTenantObject.Fields.tenantId, E_Dict.code}),
-                @UniqueConstraint(columnNames = {AbstractMultiTenantObject.Fields.tenantId, E_MultiTenantNamedEntity.name}),
+                @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
         }
+//        ,
+//        uniqueConstraints = {
+//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Dict.code}),
+//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_MultiTenantNamedEntity.name}),
+//        }
 )
 
-public class Dict extends MultiTenantNamedEntity<Long> {
+public class Dict
+        extends MultiTenantNamedEntity {
 
     private static final long serialVersionUID = -123456789L;
 
@@ -49,8 +48,7 @@ public class Dict extends MultiTenantNamedEntity<Long> {
     @FieldNameConstants
     @Schema(description = "字典项")
     public static class Item
-            extends AbstractNamedEntityObject<String>
-            implements Serializable {
+            extends AbstractNamedEntityObject {
 
         @Id
         @Schema(description = "编码")

@@ -27,12 +27,13 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 //自动导入列表
     import java.util.Date;
+    import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 
 /**
  *  更新调度任务
- *  Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+ *  Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "更新调度任务")
 @Data
@@ -50,13 +51,16 @@ public class UpdateScheduledTaskReq implements ServiceReq {
 
     private static final long serialVersionUID = -2056389676L;
 
-    @Schema(description = "id")
+    @Schema(description = "id" , required = true)
     @NotNull
     @Eq(require = true)
     private Long id;
 
+    @Schema(description = "任务分类")
+    private String category;
+
     @Schema(description = "任务组")
-    private String group;
+    private String groupName;
 
     @Schema(description = "调度表达式")
     private String cron;
@@ -70,22 +74,20 @@ public class UpdateScheduledTaskReq implements ServiceReq {
     @Schema(description = "最后一次时间")
     private Date lastInvokedTime;
 
-    @Schema(description = "执行结果")
-    private String invokeResult;
-
     @Schema(description = "下一次时间")
     private Date nextInvokeTime;
 
-    @Size(max = 768)
+    //@InjectVar
+    @Schema(description = "机构ID")
+    private String orgId;
+
+    //@InjectVar
+    @Schema(description = "租户ID")
+    private String tenantId;
+
+    //@Size(max = 512)
     @Schema(description = "名称")
     private String name;
-
-//    @Schema(description = "租户ID")
-//    private Long tenantId;
-
-    @Size(max = 512)
-    @Schema(description = "创建者")
-    private String creator;
 
     @Schema(description = "更新时间")
     private Date lastUpdateTime;
@@ -99,7 +101,7 @@ public class UpdateScheduledTaskReq implements ServiceReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    @Size(max = 1800)
+    //@Size(max = 1800)
     @Schema(description = "备注")
     private String remark;
 

@@ -28,12 +28,13 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.oak.base.entities.JobPost.*;
+    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  查询工作岗位
- *  @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:42
+ *  @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "查询工作岗位")
 @Data
@@ -63,12 +64,12 @@ public class QueryJobPostReq implements ServiceReq  {
     private Type type;
 
 
+    @Schema(description = "租户ID")
+    private String tenantId;
+
+
     @Schema(description = "名称")
     private String name;
-
-
-    @Schema(description = "租户ID")
-    private Long tenantId;
 
 
     @Schema(description = "创建者")

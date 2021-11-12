@@ -28,11 +28,12 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 //自动导入列表
     import java.util.Date;
+    import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 /**
  *  查询调度任务
- *  @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+ *  @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "查询调度任务")
 @Data
@@ -54,8 +55,12 @@ public class QueryScheduledTaskReq implements ServiceReq  {
     private Long id;
 
 
+    @Schema(description = "任务分类")
+    private String category;
+
+
     @Schema(description = "任务组")
-    private String group;
+    private String groupName;
 
 
     @Schema(description = "调度表达式")
@@ -80,10 +85,6 @@ public class QueryScheduledTaskReq implements ServiceReq  {
 
 
 
-    @Schema(description = "执行结果")
-    private String invokeResult;
-
-
     @Schema(description = "最小下一次时间")
     @Gte(E_ScheduledTask.nextInvokeTime)
     private Date minNextInvokeTime;
@@ -94,12 +95,16 @@ public class QueryScheduledTaskReq implements ServiceReq  {
 
 
 
-    @Schema(description = "名称")
-    private String name;
+    @Schema(description = "机构ID")
+    private String orgId;
 
 
     @Schema(description = "租户ID")
-    private Long tenantId;
+    private String tenantId;
+
+
+    @Schema(description = "名称")
+    private String name;
 
 
     @Schema(description = "创建者")

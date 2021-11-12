@@ -25,13 +25,14 @@ import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
 //自动导入列表
+    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  新增访问日志
- *  //Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+ *  //Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "新增访问日志")
 @Data
@@ -49,89 +50,91 @@ public class CreateAccessLogReq implements ServiceReq {
 
 
 
-    @Schema(description = "租户ID")
+    @Schema(description = "租户ID" )
+    @InjectVar
     private Long tenantId;
 
 
-    @Schema(description = "请求的域名")
+    @Schema(description = "请求的域名" )
+    @InjectVar
     private String domain;
 
 
-    @Schema(description = "访问者")
+    @Schema(description = "访问者" )
     private String visitor;
 
 
-    @Schema(description = "创建时间")
+    @Schema(description = "创建时间" , required = true)
     @NotNull
     private Date createTime;
 
 
-    @Schema(description = "标题")
+    @Schema(description = "标题" , required = true)
     @NotNull
     private String title;
 
 
-    @Schema(description = "日志类型")
+    @Schema(description = "日志类型" )
     private String logType;
 
 
-    @Schema(description = "差异修改数据")
+    @Schema(description = "差异修改数据" )
     private String diffModifyData;
 
 
-    @Schema(description = "业务主键")
+    @Schema(description = "业务主键" )
     private String bizKey;
 
 
-    @Schema(description = "业务类型")
+    @Schema(description = "业务类型" )
     private String bizType;
 
 
-    @Schema(description = "请求URI")
+    @Schema(description = "请求URI" )
     private String requestUri;
 
 
-    @Schema(description = "请求方法")
+    @Schema(description = "请求方法" )
     private String requestMethod;
 
 
-    @Schema(description = "请求参数")
+    @Schema(description = "请求参数" )
     private String requestParams;
 
 
-    @Schema(description = "响应数据")
+    @Schema(description = "响应数据" )
     private String responseData;
 
 
-    @Schema(description = "操作IP地址")
+    @Schema(description = "操作IP地址" )
     private String remoteAddr;
 
 
-    @Schema(description = "服务器地址")
+    @Schema(description = "服务器地址" )
     private String serverAddr;
 
 
-    @Schema(description = "是否有异常")
+    @Schema(description = "是否有异常" )
     private String isException;
 
 
-    @Schema(description = "异常信息")
+    @Schema(description = "异常信息" )
     private String exceptionInfo;
 
 
-    @Schema(description = "用户代理")
+    @Schema(description = "用户代理" )
     private String userAgent;
 
 
-    @Schema(description = "设备名称/操作系统")
+    @Schema(description = "设备名称/操作系统" )
     private String deviceName;
 
 
-    @Schema(description = "浏览器名称")
+    @Schema(description = "浏览器名称" )
     private String browserName;
 
 
-    @Schema(description = "执行时间(ms)")
+    @Schema(description = "执行时间(ms)" )
     private Long executeTime;
 
 

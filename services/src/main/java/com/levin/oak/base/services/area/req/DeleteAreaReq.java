@@ -33,7 +33,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  删除区域
- *  //Auto gen by simple-dao-codegen 2021-10-28 16:17:42
+ *  //Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "删除区域")
 @Data
@@ -51,20 +51,22 @@ public class DeleteAreaReq implements ServiceReq {
 
     private static final long serialVersionUID = -445860277L;
 
-    @Schema(description = "编码")
+    @OR
+    @Schema(description = "编码" , hidden = true)
     private String code;
 
+    @END
     @Schema(description = "编码集合")
     @In(E_Area.code)
-    @Validator(expr = "code != null || ( codes != null &&  codes.length > 0)" , promptInfo = "删除区域必须指定ID")
-    private String[] codes;
+    @Validator(expr = "code != null || ( codeList != null &&  codeList.length > 0)" , promptInfo = "删除区域必须指定ID")
+    private String[] codeList;
 
 
     public DeleteAreaReq(String code) {
         this.code = code;
     }
 
-    public DeleteAreaReq(String... codes) {
-        this.codes = codes;
+    public DeleteAreaReq(String... codeList) {
+        this.codeList = codeList;
     }
 }

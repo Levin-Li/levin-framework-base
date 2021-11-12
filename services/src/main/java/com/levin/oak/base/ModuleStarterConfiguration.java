@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 
-//Auto gen by simple-dao-codegen 2021-10-28 16:17:42
+//Auto gen by simple-dao-codegen 2021-11-12 9:56:31
 
 @Configuration(PLUGIN_PREFIX + "ModuleStarterConfiguration")
 @Slf4j

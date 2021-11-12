@@ -1,8 +1,9 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
-import com.levin.commons.dao.domain.support.AbstractMultiTenantObject;
+import com.levin.commons.rbac.UserObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
@@ -11,9 +12,10 @@ import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
-@Entity(name = TableOption.PREFIX + "user")
+@Entity(name = EntityConst.PREFIX + "user")
 @Data
 @Accessors(chain = true)
 
@@ -25,7 +27,7 @@ import java.util.Date;
 @Table(
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-                @Index(columnList = AbstractMultiTenantObject.Fields.tenantId),
+                @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
                 @Index(columnList = E_User.staffNo),
                 @Index(columnList = E_User.loginName),
                 @Index(columnList = E_User.phone),
@@ -43,8 +45,8 @@ import java.util.Date;
 //        }
 )
 public class User
-        extends AbstractMultiTenantObject<Long>
-        implements OrganizedObject<String> {
+        extends AbstractBaseEntityObject
+        implements OrganizedObject, UserObject, MultiTenantObject {
 
     public enum State {
         @Schema(description = "正常")
@@ -80,6 +82,9 @@ public class User
     @Id
     @GeneratedValue
     Long id;
+
+    @Schema(description = "租户ID")
+    String tenantId;
 
     @Schema(description = "登录名")
     String loginName;
@@ -128,9 +133,13 @@ public class User
     @Schema(description = "岗位职级")
     String jobPostCode;
 
-    @Schema(description = "角色列表", title = "半角逗号隔开")
+    @Schema(description = "角色列表", title = "Json")
     @Column(length = 1800)
-    String roleList;
+    String roles;
+
+    @Transient
+    @Schema(description = "角色列表")
+    List<String> roleList;
 
     ///////////////////////////////////////////////////////////////////////
     @Schema(description = "所属部门ID")
@@ -139,13 +148,8 @@ public class User
 
     @Schema(description = "所属部门")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = E_User.orgId, insertable = false, updatable = false)
+    @JoinColumn(name = "orgId", insertable = false, updatable = false)
     Org org;
-
-    @Override
-    public String getBelongOrgId() {
-        return orgId;
-    }
 
     //////////////////////////////////////////////////////////////////////
 
@@ -154,7 +158,6 @@ public class User
 
     @Schema(description = "阿里 OpendId")
     String aliOpenId;
-
 
     @Override
     @PrePersist

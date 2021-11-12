@@ -1,25 +1,17 @@
 package com.levin.oak.base;
 
 import com.levin.commons.dao.SimpleDao;
-import com.levin.commons.dao.support.SimplePaging;
-import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.services.accesslog.AccessLogService;
 import com.levin.oak.base.services.area.AreaService;
 import com.levin.oak.base.services.dict.DictService;
 import com.levin.oak.base.services.jobpost.JobPostService;
 import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.org.OrgService;
-import com.levin.oak.base.services.rbac.AuthService;
+import com.levin.oak.base.services.rbac.RbacService;
 import com.levin.oak.base.services.role.RoleService;
-import com.levin.oak.base.services.role.info.RoleInfo;
-import com.levin.oak.base.services.role.req.CreateRoleReq;
-import com.levin.oak.base.services.role.req.QueryRoleReq;
 import com.levin.oak.base.services.scheduledtask.ScheduledTaskService;
 import com.levin.oak.base.services.setting.SettingService;
 import com.levin.oak.base.services.user.UserService;
-import com.levin.oak.base.services.user.info.UserInfo;
-import com.levin.oak.base.services.user.req.CreateUserReq;
-import com.levin.oak.base.services.user.req.QueryUserReq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +22,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.Random;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
@@ -74,9 +69,8 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
     @Autowired
     MenuResService menuResService;
 
-    @Autowired
-    AuthService authService;
-
+    @Resource
+    RbacService rbacService;
 
     private ApplicationContext applicationContext;
 
@@ -98,26 +92,9 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
 
         log.info("[ {} ] on init ...", ModuleOption.ID);
 
-        RoleInfo role = roleService.query(new QueryRoleReq(), new SimplePaging().setPageSize(1).setPageIndex(1)).getFirst();
+        Random random = new Random(this.hashCode());
 
-        if (role == null) {
-            roleService.create(new CreateRoleReq()
-                    .setName("超级管理员")
-                    .setOrgDataScope(Role.OrgDataScope.All)
-                    .setPermissions("*:*:*:*")
-                    .setCode("SA"));
-        }
-
-        UserInfo user = userService.query(new QueryUserReq(), new SimplePaging().setPageSize(1).setPageIndex(1)).getFirst();
-
-        if (user == null) {
-            userService.create(new CreateUserReq()
-                    .setLoginName("admin")
-                    .setPassword(authService.encryptPassword("123456"))
-                    .setStaffNo("0000")
-                    .setRoleList("SA")
-            );
-        }
+        rbacService.initData();
 
         //@todo 初始化数据
 

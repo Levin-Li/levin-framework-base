@@ -28,6 +28,7 @@ import com.levin.oak.base.entities.*;
 //自动导入列表
     import com.levin.oak.base.entities.User.*;
     import java.util.Date;
+    import java.util.List;
     import com.levin.oak.base.services.org.info.*;
     import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
@@ -35,7 +36,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新用户
- *  Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+ *  Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "更新用户")
 @Data
@@ -53,10 +54,13 @@ public class UpdateUserReq implements ServiceReq {
 
     private static final long serialVersionUID = -445263479L;
 
-    @Schema(description = "id")
+    @Schema(description = "id" , required = true)
     @NotNull
     @Eq(require = true)
     private Long id;
+
+    @Schema(description = "租户ID")
+    private String tenantId;
 
     @Schema(description = "登录名")
     private String loginName;
@@ -82,7 +86,7 @@ public class UpdateUserReq implements ServiceReq {
     @Schema(description = "性别")
     private Sex sex;
 
-    @Size(max = 1800)
+    //@Size(max = 1800)
     @Schema(description = "帐号标签")
     private String tags;
 
@@ -101,11 +105,14 @@ public class UpdateUserReq implements ServiceReq {
     @Schema(description = "岗位职级")
     private String jobPostCode;
 
-    @Size(max = 1800)
+    //@Size(max = 1800)
     @Schema(description = "角色列表")
-    private String roleList;
+    private String roles;
 
-    @Size(max = 512)
+    @Schema(description = "角色列表")
+    private List<String> roleList;
+
+    //@Size(max = 512)
     @Schema(description = "所属部门ID")
     private String orgId;
 
@@ -114,13 +121,6 @@ public class UpdateUserReq implements ServiceReq {
 
     @Schema(description = "阿里 OpendId")
     private String aliOpenId;
-
-//    @Schema(description = "租户ID")
-//    private Long tenantId;
-
-    @Size(max = 512)
-    @Schema(description = "创建者")
-    private String creator;
 
     @Schema(description = "更新时间")
     private Date lastUpdateTime;
@@ -134,7 +134,7 @@ public class UpdateUserReq implements ServiceReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    @Size(max = 1800)
+    //@Size(max = 1800)
     @Schema(description = "备注")
     private String remark;
 

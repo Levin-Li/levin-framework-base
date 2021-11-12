@@ -1,7 +1,5 @@
 package com.levin.oak.base.controller.area;
 
-import static com.levin.oak.base.ModuleOption.*;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +16,7 @@ import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
 import javax.validation.constraints.*;
 
+import com.levin.oak.base.controller.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.area.*;
@@ -25,8 +24,9 @@ import com.levin.oak.base.services.area.req.*;
 import com.levin.oak.base.services.area.info.*;
 
 import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2021-10-28 9:46:17
+//Auto gen by simple-dao-codegen 2021-11-12 9:56:30
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -43,20 +43,14 @@ import static com.levin.oak.base.ModuleOption.*;
 @RestController(PLUGIN_PREFIX + "AreaController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "AreaController", havingValue = "false", matchIfMissing = true)
 @RequestMapping(API_PATH + "area")
+//默认需要权限访问
+//@ResAuthorize(domain = ID, type = TYPE_NAME)
+@Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
+@Slf4j
+@Valid
+public class AreaController extends BaseController{
 
-@Tag(name = "区域", description = "区域管理")
-@Slf4j @Valid
-public class AreaController {
-
-    private static final String ENTITY_NAME ="区域";
-
-    //请求级别变量
-    @Autowired
-    HttpServletResponse httpResponse;
-
-    //请求级别变量
-    @Autowired
-    HttpServletRequest httpRequest;
+    private static final String BIZ_NAME = E_Area.BIZ_NAME;
 
     @Autowired
     AreaService areaService;
@@ -68,7 +62,7 @@ public class AreaController {
      * @return  ApiResp<PagingData<AreaInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {ENTITY_NAME}, summary = "分页查找" + ENTITY_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION + BIZ_NAME)
     public ApiResp<PagingData<AreaInfo>> query(QueryAreaReq req , SimplePaging paging) {
         return ApiResp.ok(areaService.query(req,paging));
     }
@@ -80,7 +74,7 @@ public class AreaController {
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {ENTITY_NAME}, summary = "新增" + ENTITY_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION + BIZ_NAME)
     public ApiResp<String> create(@RequestBody CreateAreaReq req) {
         return ApiResp.ok(areaService.create(req));
     }
@@ -92,7 +86,7 @@ public class AreaController {
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {ENTITY_NAME}, summary = "批量新增" + ENTITY_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateAreaReq> reqList) {
         return ApiResp.ok(areaService.batchCreate(reqList));
     }
@@ -103,28 +97,26 @@ public class AreaController {
     * @param code String
     */
     @GetMapping("/{code}")
-    @Operation(tags = {ENTITY_NAME}, summary = "通过ID找回" + ENTITY_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION + BIZ_NAME)
     public ApiResp<AreaInfo> retrieve(@PathVariable @NotNull String code) {
          return ApiResp.ok(areaService.findById(code));
      }
 
     /**
      * 更新
-     * @param code String
+     * @param req UpdateAreaReq
      */
-     @PutMapping({"" , "/{code}"})
-     @Operation(tags = {ENTITY_NAME}, summary = "更新" + ENTITY_NAME)
-     public ApiResp<Void> update(@PathVariable String code , @RequestBody UpdateAreaReq req) {
-         //路径参数优先使用
-         if (isNotEmpty(code)) { req.setCode(code); }
-         return areaService.update(req) > 0 ? ApiResp.ok() : ApiResp.error("更新" + ENTITY_NAME + "失败");
+     @PutMapping({""})
+     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION + BIZ_NAME)
+     public ApiResp<Void> update(@RequestBody UpdateAreaReq req) {
+         return areaService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
     }
 
     /**
      * 批量更新
      */
      @PutMapping("/batchUpdate")
-     @Operation(tags = {ENTITY_NAME}, summary = "批量更新" + ENTITY_NAME)
+     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION + BIZ_NAME)
      public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateAreaReq> reqList) {
         return ApiResp.ok(areaService.batchUpdate(reqList));
     }
@@ -133,17 +125,22 @@ public class AreaController {
      * 删除
      * @param code String
      */
-    @DeleteMapping({"" , "/{code}"})
-    @Operation(tags = {ENTITY_NAME}, summary = "删除" + ENTITY_NAME)
-    public ApiResp<Void> delete(@PathVariable String code , DeleteAreaReq req) {
-        //路径参数优先使用
-        if (isNotEmpty(code)) { req.setCode(code); }
-        return areaService.delete(req) > 0 ? ApiResp.ok() : ApiResp.error("删除" + ENTITY_NAME + "失败");
+    @DeleteMapping({"/{code}"})
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION + BIZ_NAME)
+    public ApiResp<Void> delete(@PathVariable @NotNull String code) {
+        return areaService.delete(new DeleteAreaReq().setCode(code)) > 0
+                                                ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
     }
 
-    protected boolean isNotEmpty(Object value) {
-        return value != null
-        && (!(value instanceof CharSequence) || StringUtils.hasText((CharSequence) value));
-    }
+    /**
+     * 批量删除
+     * @param req DeleteAreaReq
+     */
+    @DeleteMapping({"/batchDelete"})
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION + BIZ_NAME)
+    public ApiResp<Void> batchDelete(@NotNull DeleteAreaReq req) {
+        //new DeleteAreaReq().setCodeList(codeList)
+        return areaService.delete(req) > 0 ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+    }  
 
 }

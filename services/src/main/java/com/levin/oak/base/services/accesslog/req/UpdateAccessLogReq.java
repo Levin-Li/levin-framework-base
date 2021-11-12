@@ -26,13 +26,14 @@ import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
 //自动导入列表
+    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  更新访问日志
- *  Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+ *  Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "更新访问日志")
 @Data
@@ -50,14 +51,16 @@ public class UpdateAccessLogReq implements ServiceReq {
 
     private static final long serialVersionUID = 1030736962L;
 
-    @Schema(description = "id")
+    @Schema(description = "id" , required = true)
     @NotNull
     @Eq(require = true)
     private Long id;
 
+    //@InjectVar
     @Schema(description = "租户ID")
     private Long tenantId;
 
+    //@InjectVar
     @Schema(description = "请求的域名")
     private String domain;
 

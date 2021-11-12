@@ -26,12 +26,13 @@ import com.levin.oak.base.entities.*;
 //自动导入列表
     import com.levin.oak.base.entities.Dict.*;
     import java.util.List;
+    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  删除字典
- *  //Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+ *  //Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "删除字典")
 @Data
@@ -49,20 +50,22 @@ public class DeleteDictReq implements ServiceReq {
 
     private static final long serialVersionUID = -445779596L;
 
-    @Schema(description = "id")
+    @OR
+    @Schema(description = "id" , hidden = true)
     private Long id;
 
+    @END
     @Schema(description = "id集合")
     @In(E_Dict.id)
-    @Validator(expr = "id != null || ( ids != null &&  ids.length > 0)" , promptInfo = "删除字典必须指定ID")
-    private Long[] ids;
+    @Validator(expr = "id != null || ( idList != null &&  idList.length > 0)" , promptInfo = "删除字典必须指定ID")
+    private Long[] idList;
 
 
     public DeleteDictReq(Long id) {
         this.id = id;
     }
 
-    public DeleteDictReq(Long... ids) {
-        this.ids = ids;
+    public DeleteDictReq(Long... idList) {
+        this.idList = idList;
     }
 }

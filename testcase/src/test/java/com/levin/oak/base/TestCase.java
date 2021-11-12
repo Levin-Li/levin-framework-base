@@ -25,6 +25,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import com.levin.oak.base.services.role.RoleService;
+import com.levin.oak.base.services.simpleapi.SimpleApiService;
+import com.levin.oak.base.services.scheduledlog.ScheduledLogService;
 import com.levin.oak.base.services.setting.SettingService;
 import com.levin.oak.base.services.dict.DictService;
 import com.levin.oak.base.services.user.UserService;
@@ -32,10 +34,13 @@ import com.levin.oak.base.services.accesslog.AccessLogService;
 import com.levin.oak.base.services.scheduledtask.ScheduledTaskService;
 import com.levin.oak.base.services.org.OrgService;
 import com.levin.oak.base.services.jobpost.JobPostService;
+import com.levin.oak.base.services.i18nres.I18nResService;
 import com.levin.oak.base.services.area.AreaService;
 import com.levin.oak.base.services.menures.MenuResService;
 
 import com.levin.oak.base.controller.role.RoleController;
+import com.levin.oak.base.controller.simpleapi.SimpleApiController;
+import com.levin.oak.base.controller.scheduledlog.ScheduledLogController;
 import com.levin.oak.base.controller.setting.SettingController;
 import com.levin.oak.base.controller.dict.DictController;
 import com.levin.oak.base.controller.user.UserController;
@@ -43,6 +48,7 @@ import com.levin.oak.base.controller.accesslog.AccessLogController;
 import com.levin.oak.base.controller.scheduledtask.ScheduledTaskController;
 import com.levin.oak.base.controller.org.OrgController;
 import com.levin.oak.base.controller.jobpost.JobPostController;
+import com.levin.oak.base.controller.i18nres.I18nResController;
 import com.levin.oak.base.controller.area.AreaController;
 import com.levin.oak.base.controller.menures.MenuResController;
 
@@ -63,7 +69,7 @@ import com.levin.oak.base.controller.menures.MenuResController;
 //@DataNeo4jTest //测试对Neo4j的操作
 /**
  *  测试类
- *  @author Auto gen by simple-dao-codegen 2021-10-28 9:46:17
+ *  @author Auto gen by simple-dao-codegen 2021-11-12 9:56:47
  */
 public class TestCase {
 

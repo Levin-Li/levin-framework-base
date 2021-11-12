@@ -23,17 +23,18 @@ import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
 import java.util.Date;
+import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 /**
 * 调度任务
-* @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:41
+* @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
 */
 @Schema(description ="调度任务")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"" + E_ScheduledTask.id})
+@EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
 public class ScheduledTaskInfo implements Serializable {
@@ -47,8 +48,13 @@ public class ScheduledTaskInfo implements Serializable {
 
 
    @NotNull
+   @Schema(description = "任务分类")
+   private String category;
+
+
+   @NotNull
    @Schema(description = "任务组")
-   private String group;
+   private String groupName;
 
 
    @NotNull
@@ -56,7 +62,6 @@ public class ScheduledTaskInfo implements Serializable {
    private String cron;
 
 
-   @NotNull
    @Schema(description = "执行表达式")
    private String invokeExpr;
 
@@ -69,22 +74,24 @@ public class ScheduledTaskInfo implements Serializable {
    private Date lastInvokedTime;
 
 
-   @Schema(description = "执行结果")
-   private String invokeResult;
-
-
    @Schema(description = "下一次时间")
    private Date nextInvokeTime;
 
 
+   @InjectVar
+   @Schema(description = "机构ID")
+   private String orgId;
+
+
+   @InjectVar
+   @Schema(description = "租户ID")
+   private String tenantId;
+
+
    @NotNull
-   @Size(max = 768)
+   @Size(max = 512)
    @Schema(description = "名称")
    private String name;
-
-
-   @Schema(description = "租户ID")
-   private Long tenantId;
 
 
    @Size(max = 512)

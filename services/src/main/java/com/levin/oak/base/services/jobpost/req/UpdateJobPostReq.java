@@ -27,13 +27,14 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.oak.base.entities.JobPost.*;
+    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  更新工作岗位
- *  Auto gen by simple-dao-codegen 2021-10-28 16:17:42
+ *  Auto gen by simple-dao-codegen 2021-11-12 9:56:30
  */
 @Schema(description = "更新工作岗位")
 @Data
@@ -51,7 +52,7 @@ public class UpdateJobPostReq implements ServiceReq {
 
     private static final long serialVersionUID = 1018878847L;
 
-    @Schema(description = "id")
+    @Schema(description = "id" , required = true)
     @NotNull
     @Eq(require = true)
     private Long id;
@@ -62,16 +63,13 @@ public class UpdateJobPostReq implements ServiceReq {
     @Schema(description = "类型")
     private Type type;
 
-    @Size(max = 768)
+    //@InjectVar
+    @Schema(description = "租户ID")
+    private String tenantId;
+
+    //@Size(max = 512)
     @Schema(description = "名称")
     private String name;
-
-//    @Schema(description = "租户ID")
-//    private Long tenantId;
-
-    @Size(max = 512)
-    @Schema(description = "创建者")
-    private String creator;
 
     @Schema(description = "更新时间")
     private Date lastUpdateTime;
@@ -85,7 +83,7 @@ public class UpdateJobPostReq implements ServiceReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    @Size(max = 1800)
+    //@Size(max = 1800)
     @Schema(description = "备注")
     private String remark;
 

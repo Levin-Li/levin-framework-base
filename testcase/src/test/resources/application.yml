@@ -64,6 +64,8 @@ spring:
     scheduling:
       pool:
         size: 30
+  cache:
+    type: caffeine
 
 #日志配置
 logging:
