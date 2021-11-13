@@ -11,6 +11,7 @@ import com.levin.commons.rbac.RbacUtils;
 import com.levin.commons.rbac.Res;
 import com.levin.commons.rbac.ResLoader;
 import com.levin.commons.service.domain.Identifiable;
+import com.levin.oak.base.entities.EntityConst;
 import com.levin.oak.base.services.i18nres.I18nResService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,6 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
 
     @Resource
     ApplicationContext context;
-
 
     @Resource
     I18nResService i18nResService;
@@ -95,16 +95,13 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
 
     @Override
     public ResLoader getResLoader() {
-
         //@todo 返回资源加载器
         return resLoader;
     }
 
     @Override
     public <M extends MenuItem> List<M> getMenuList() {
-
-
-        return null;
+        return (List<M>) RbacUtils.getMenuItemByController(context, ModuleOption.ID, EntityConst.QUERY_ACTION);
     }
 
     @Override

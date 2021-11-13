@@ -16,11 +16,10 @@ public interface EntityConst {
      */
     String PREFIX = "com.levin.oak.base-";
 
-
     /**
      *
      */
-    String TYPE_NAME = "实体";
+    String TYPE_NAME = "数据";
 
     /**
      *

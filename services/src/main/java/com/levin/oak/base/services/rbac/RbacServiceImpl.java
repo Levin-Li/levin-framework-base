@@ -552,6 +552,7 @@ public class RbacServiceImpl implements RbacService {
 
         Role role = simpleDao.selectFrom(Role.class)
                 .eq(E_Role.code, "SA")
+                .isNull(E_Role.tenantId)
                 .findOne();
 
         if (role == null) {
@@ -575,7 +576,7 @@ public class RbacServiceImpl implements RbacService {
 
             permissions.add(new ResPermission()
                     .setDomain(ModuleOption.ID)
-                    .setType("实体")
+                    .setType("数据")
                     .setRes("*")
                     .setAction(EntityConst.QUERY_ACTION + "*")
                     .toString());
@@ -589,6 +590,7 @@ public class RbacServiceImpl implements RbacService {
 
 
         User user = simpleDao.selectFrom(User.class)
+                .isNull(E_User.tenantId)
                 .eq(E_User.loginName, "admin")
                 .findOne();
 

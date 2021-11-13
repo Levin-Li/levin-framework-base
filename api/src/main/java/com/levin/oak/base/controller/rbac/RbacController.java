@@ -39,7 +39,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @RestController(PLUGIN_PREFIX + "AuthController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "AuthController", havingValue = "false", matchIfMissing = true)
 @RequestMapping(API_PATH + "rbac")
-@Tag(name = "权限认证", description = "权限认证")
+@Tag(name = "权限认证", description = "权限管理")
 @Slf4j
 @Valid
 public class RbacController {
