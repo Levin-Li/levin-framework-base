@@ -75,7 +75,7 @@ public class RbacServiceImpl implements RbacService {
 
 
     @Resource
-    ApplicationContext applicationContext;
+    ApplicationContext context;
 
     @Resource
     SimpleDao simpleDao;
@@ -144,7 +144,7 @@ public class RbacServiceImpl implements RbacService {
 
     //    @Override
     public List<Identifiable> getModuleList() {
-        return applicationContext.getBeansOfType(Plugin.class).values()
+        return context.getBeansOfType(Plugin.class).values()
                 .parallelStream().map(plugin -> new IdentifiableObject()
                         .setId(plugin.getId()).setName(plugin.getName()).setRemark(plugin.getRemark()))
                 .collect(Collectors.toList());
@@ -182,7 +182,7 @@ public class RbacServiceImpl implements RbacService {
         //3、表达式闭包
         Supplier<Boolean> expressTrue = StringUtils.hasText(verifyExpression) ? () -> (Boolean) ExpressionUtils.evalSpEL(null, verifyExpression,
                 (ctx) -> {
-                    ctx.setBeanResolver(new BeanFactoryResolver(applicationContext));
+                    ctx.setBeanResolver(new BeanFactoryResolver(context));
                     ctx.setVariable("stpLogic", StpUtil.stpLogic);
                     //设置环境变量
                     if (exprContexts != null) {
@@ -273,9 +273,9 @@ public class RbacServiceImpl implements RbacService {
             for (Map.Entry<Long, MenuResInfo> entry : cacheMap2.entrySet()) {
                 //
                 MenuResInfo info = entry.getValue();
-
-                List<String> requirePermissions = Stream.of(info.getRequireAuthorizations().split("[,;]"))
-                        .filter(StringUtils::hasText).collect(Collectors.toList());
+                //获取菜单要求的权限
+                List<String> requirePermissions = !StringUtils.hasText(info.getRequireAuthorizations()) ? Collections.emptyList()
+                        : Stream.of(info.getRequireAuthorizations().split("[,;]")).filter(StringUtils::hasText).collect(Collectors.toList());
 
                 if (requirePermissions.isEmpty()
                         || requirePermissions.parallelStream().allMatch(requirePermission -> this.isAuthorized(requirePermission, roleList, permissionList))) {
@@ -550,6 +550,46 @@ public class RbacServiceImpl implements RbacService {
     @Override
     public void initData() {
 
+        initUser();
+
+        initMenu();
+    }
+
+    /**
+     * 自动创建一些空菜单
+     */
+    private void initMenu() {
+
+        for (Plugin plugin : pluginManager.getInstalledPlugins()) {
+
+            MenuRes menu = simpleDao.selectFrom(MenuRes.class)
+                    .eq(E_MenuRes.domain, plugin.getId())
+                    .isNull(E_Role.tenantId).findOne();
+
+            if (menu != null) {
+                continue;
+            }
+
+            MenuRes pluginRootMenu = simpleDao.create(new MenuRes().setDomain(plugin.getId())
+                    .setName(plugin.getName())
+                    .setEnable(plugin.isEnable())
+                    .setOrderCode(plugin.getOrderCode())
+                    .setRemark(plugin.getRemark()));
+
+            RbacUtils.getMenuItemByController(context, plugin.getId(), EntityConst.QUERY_ACTION)
+                    .parallelStream().forEach(menuItem -> {
+                //创建菜单
+                log.info("创建插件[ {} ]的默认菜单[ {} --> {}]", plugin.getId(), menuItem.getName(), menuItem.getPath());
+                simpleDao.create(simpleDao.copyProperties(menuItem, new MenuRes().setParentId(pluginRootMenu.getId()),
+                        1, E_MenuRes.parentId, E_MenuRes.children, E_MenuRes.parent));
+            });
+
+        }
+
+    }
+
+    private void initUser() {
+
         Role role = simpleDao.selectFrom(Role.class)
                 .eq(E_Role.code, "SA")
                 .isNull(E_Role.tenantId)
@@ -620,7 +660,6 @@ public class RbacServiceImpl implements RbacService {
 
             );
         }
-
     }
 
 }

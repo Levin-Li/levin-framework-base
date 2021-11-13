@@ -80,5 +80,16 @@ public class MenuRes
         return Boolean.TRUE.equals(alwaysShow);
     }
 
+
+    @Override
+    @PrePersist
+    public void prePersist() {
+
+        super.prePersist();
+
+        if (alwaysShow == null) {
+            alwaysShow = false;
+        }
+    }
 }
 
