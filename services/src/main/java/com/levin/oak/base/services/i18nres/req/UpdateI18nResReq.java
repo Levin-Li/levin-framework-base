@@ -33,7 +33,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新国际化资源
- *  Auto gen by simple-dao-codegen 2021-11-12 9:56:30
+ *  Auto gen by simple-dao-codegen 2021-11-13 23:58:00
  */
 @Schema(description = "更新国际化资源")
 @Data

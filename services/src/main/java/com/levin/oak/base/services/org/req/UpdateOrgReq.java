@@ -30,7 +30,6 @@ import com.levin.oak.base.entities.*;
     import com.levin.oak.base.entities.Org.*;
     import com.levin.oak.base.entities.Area;
     import com.levin.oak.base.services.area.info.*;
-    import java.io.Serializable;
     import com.levin.oak.base.services.org.info.*;
     import com.levin.oak.base.entities.Org;
     import java.util.Set;
@@ -40,7 +39,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新机构
- *  Auto gen by simple-dao-codegen 2021-11-12 9:56:30
+ *  Auto gen by simple-dao-codegen 2021-11-13 23:58:00
  */
 @Schema(description = "更新机构")
 @Data
@@ -108,6 +107,9 @@ public class UpdateOrgReq implements ServiceReq {
 
     @Schema(description = "邮政编码")
     private String zipCode;
+
+    @Schema(description = "父ID")
+    private Long parentId;
 
     //@Size(max = 1800)
     @Schema(description = "id路径， 使用|包围，如|1|3|15|")

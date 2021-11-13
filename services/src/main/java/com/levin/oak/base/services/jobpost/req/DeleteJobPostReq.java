@@ -31,7 +31,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  删除工作岗位
- *  //Auto gen by simple-dao-codegen 2021-11-12 9:56:30
+ *  //Auto gen by simple-dao-codegen 2021-11-13 23:58:00
  */
 @Schema(description = "删除工作岗位")
 @Data

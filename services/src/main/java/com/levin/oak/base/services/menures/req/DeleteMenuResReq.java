@@ -26,7 +26,6 @@ import com.levin.oak.base.entities.*;
 //自动导入列表
     import com.levin.commons.service.domain.InjectVar;
     import com.levin.commons.rbac.MenuItem.*;
-    import java.io.Serializable;
     import com.levin.oak.base.entities.MenuRes;
     import com.levin.oak.base.services.menures.info.*;
     import java.util.Set;
@@ -35,7 +34,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  删除菜单
- *  //Auto gen by simple-dao-codegen 2021-11-12 9:56:31
+ *  //Auto gen by simple-dao-codegen 2021-11-13 23:58:01
  */
 @Schema(description = "删除菜单")
 @Data

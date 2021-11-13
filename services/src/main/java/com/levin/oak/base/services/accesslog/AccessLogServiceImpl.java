@@ -36,7 +36,7 @@ import com.levin.oak.base.services.accesslog.info.*;
 /**
  *  访问日志-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-11-12 9:56:30
+ *@author auto gen by simple-dao-codegen 2021-11-13 23:58:00
  *
  */
 
@@ -51,46 +51,46 @@ public class AccessLogServiceImpl implements AccessLogService {
     @Autowired
     private SimpleDao simpleDao;
 
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Override
     public Long create(CreateAccessLogReq req){
         AccessLog entity = simpleDao.create(req);
         return entity.getId();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = Exception.class)
     @Override
     public List<Long> batchCreate(List<CreateAccessLogReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     @Override
     public AccessLogInfo findById(Long id) {
         return simpleDao.findOneByQueryObj(new QueryAccessLogReq().setId(id));
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
     public int update(UpdateAccessLogReq req) {
         return simpleDao.updateByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = Exception.class)
     @Override
     public List<Integer> batchUpdate(List<UpdateAccessLogReq> reqList){
         return reqList.stream().map(this::update).collect(Collectors.toList());
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     public int delete(DeleteAccessLogReq req) {
         return simpleDao.deleteByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     @Override
     public PagingData<AccessLogInfo> query(QueryAccessLogReq req, Paging paging) {
         return simpleDao.findPagingDataByQueryObj(req, paging);

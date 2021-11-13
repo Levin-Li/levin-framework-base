@@ -26,7 +26,7 @@ import com.levin.oak.base.services.role.info.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2021-11-12 9:56:30
+//Auto gen by simple-dao-codegen 2021-11-13 23:58:00
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -62,7 +62,7 @@ public class RoleController extends BaseController{
      * @return  ApiResp<PagingData<RoleInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     public ApiResp<PagingData<RoleInfo>> query(QueryRoleReq req , SimplePaging paging) {
         return ApiResp.ok(roleService.query(req,paging));
     }
@@ -74,7 +74,7 @@ public class RoleController extends BaseController{
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     public ApiResp<Long> create(@RequestBody CreateRoleReq req) {
         return ApiResp.ok(roleService.create(req));
     }
@@ -86,7 +86,7 @@ public class RoleController extends BaseController{
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateRoleReq> reqList) {
         return ApiResp.ok(roleService.batchCreate(reqList));
     }
@@ -97,7 +97,7 @@ public class RoleController extends BaseController{
     * @param id Long
     */
     @GetMapping("/{id}")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     public ApiResp<RoleInfo> retrieve(@PathVariable @NotNull Long id) {
          return ApiResp.ok(roleService.findById(id));
      }
@@ -107,7 +107,7 @@ public class RoleController extends BaseController{
      * @param req UpdateRoleReq
      */
      @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION + BIZ_NAME)
+     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
      public ApiResp<Void> update(@RequestBody UpdateRoleReq req) {
          return roleService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
     }
@@ -116,7 +116,7 @@ public class RoleController extends BaseController{
      * 批量更新
      */
      @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION + BIZ_NAME)
+     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
      public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateRoleReq> reqList) {
         return ApiResp.ok(roleService.batchUpdate(reqList));
     }
@@ -126,7 +126,7 @@ public class RoleController extends BaseController{
      * @param id Long
      */
     @DeleteMapping({"/{id}"})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     public ApiResp<Void> delete(@PathVariable @NotNull Long id) {
         return roleService.delete(new DeleteRoleReq().setId(id)) > 0
                                                 ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
@@ -137,7 +137,7 @@ public class RoleController extends BaseController{
      * @param req DeleteRoleReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
     public ApiResp<Void> batchDelete(@NotNull DeleteRoleReq req) {
         //new DeleteRoleReq().setIdList(idList)
         return roleService.delete(req) > 0 ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");

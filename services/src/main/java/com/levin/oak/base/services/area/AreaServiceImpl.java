@@ -39,7 +39,7 @@ import com.levin.oak.base.services.area.info.*;
 /**
  *  区域-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-11-12 9:56:30
+ *@author auto gen by simple-dao-codegen 2021-11-13 23:58:01
  *
  */
 
@@ -54,46 +54,46 @@ public class AreaServiceImpl implements AreaService {
     @Autowired
     private SimpleDao simpleDao;
 
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Override
     public String create(CreateAreaReq req){
         Area entity = simpleDao.create(req);
         return entity.getCode();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = Exception.class)
     @Override
     public List<String> batchCreate(List<CreateAreaReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     @Override
     public AreaInfo findById(String code) {
         return simpleDao.findOneByQueryObj(new QueryAreaReq().setCode(code));
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
     public int update(UpdateAreaReq req) {
         return simpleDao.updateByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = Exception.class)
     @Override
     public List<Integer> batchUpdate(List<UpdateAreaReq> reqList){
         return reqList.stream().map(this::update).collect(Collectors.toList());
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     public int delete(DeleteAreaReq req) {
         return simpleDao.deleteByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     @Override
     public PagingData<AreaInfo> query(QueryAreaReq req, Paging paging) {
         return simpleDao.findPagingDataByQueryObj(req, paging);

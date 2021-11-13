@@ -28,7 +28,6 @@ import com.levin.oak.base.entities.*;
 //自动导入列表
     import com.levin.commons.service.domain.InjectVar;
     import com.levin.commons.rbac.MenuItem.*;
-    import java.io.Serializable;
     import com.levin.oak.base.entities.MenuRes;
     import com.levin.oak.base.services.menures.info.*;
     import java.util.Set;
@@ -38,7 +37,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新菜单
- *  Auto gen by simple-dao-codegen 2021-11-12 9:56:30
+ *  Auto gen by simple-dao-codegen 2021-11-13 23:58:01
  */
 @Schema(description = "更新菜单")
 @Data
@@ -69,7 +68,7 @@ public class UpdateMenuResReq implements ServiceReq {
     private String domain;
 
     //@Size(max = 1800)
-    @Schema(description = "需要的授权")
+    @Schema(description = "需要的授权，权限或角色用逗号隔开")
     private String requireAuthorizations;
 
     @Schema(description = "无权限时是否展示")
@@ -90,6 +89,9 @@ public class UpdateMenuResReq implements ServiceReq {
     //@Size(max = 1800)
     @Schema(description = "参数")
     private String params;
+
+    @Schema(description = "父ID")
+    private Long parentId;
 
     //@Size(max = 1800)
     @Schema(description = "id路径， 使用|包围，如|1|3|15|")

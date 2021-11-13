@@ -26,7 +26,6 @@ import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Org.*;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
-import java.io.Serializable;
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 import java.util.Set;
@@ -35,7 +34,7 @@ import java.util.Date;
 
 /**
 * 机构
-* @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
+* @Author Auto gen by simple-dao-codegen 2021-11-13 23:58:00
 */
 @Schema(description ="机构")
 @Data
@@ -126,7 +125,7 @@ public class OrgInfo implements Serializable {
 
 
    @Schema(description = "父ID")
-   private Serializable parentId;
+   private Long parentId;
 
 
    //@Fetch //默认不加载，请通过查询对象控制

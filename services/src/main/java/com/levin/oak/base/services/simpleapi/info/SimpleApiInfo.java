@@ -29,7 +29,7 @@ import java.util.Date;
 
 /**
 * 动态API
-* @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
+* @Author Auto gen by simple-dao-codegen 2021-11-13 23:58:00
 */
 @Schema(description ="动态API")
 @Data

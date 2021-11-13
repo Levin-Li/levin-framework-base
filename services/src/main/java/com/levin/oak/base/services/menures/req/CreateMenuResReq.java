@@ -27,7 +27,6 @@ import com.levin.oak.base.entities.*;
 //自动导入列表
     import com.levin.commons.service.domain.InjectVar;
     import com.levin.commons.rbac.MenuItem.*;
-    import java.io.Serializable;
     import com.levin.oak.base.entities.MenuRes;
     import com.levin.oak.base.services.menures.info.*;
     import java.util.Set;
@@ -37,7 +36,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  新增菜单
- *  //Auto gen by simple-dao-codegen 2021-11-12 9:56:30
+ *  //Auto gen by simple-dao-codegen 2021-11-13 23:58:01
  */
 @Schema(description = "新增菜单")
 @Data
@@ -53,6 +52,8 @@ public class CreateMenuResReq implements ServiceReq {
 
     private static final long serialVersionUID = -887712701L;
 
+
+
     @Schema(description = "租户ID" )
     @InjectVar
     private Long tenantId;
@@ -62,7 +63,7 @@ public class CreateMenuResReq implements ServiceReq {
     private String domain;
 
 
-    @Schema(description = "需要的授权" )
+    @Schema(description = "需要的授权，权限或角色用逗号隔开" )
     @Size(max = 1800)
     private String requireAuthorizations;
 
@@ -93,6 +94,12 @@ public class CreateMenuResReq implements ServiceReq {
     private String params;
 
 
+    @Schema(description = "父ID" )
+    private Long parentId;
+
+
+
+
     @Schema(description = "id路径， 使用|包围，如|1|3|15|" )
     @Size(max = 1800)
     private String idPath;
@@ -109,6 +116,29 @@ public class CreateMenuResReq implements ServiceReq {
     private String creator;
 
 
+    @Schema(description = "创建时间" , required = true)
+    @NotNull
+    private Date createTime;
+
+
+    @Schema(description = "更新时间" )
+    private Date lastUpdateTime;
+
+
+    @Schema(description = "排序代码" )
+    private Integer orderCode;
+
+
+    @Schema(description = "是否允许" , required = true)
+    @NotNull
+    private Boolean enable;
+
+
+    @Schema(description = "是否可编辑" , required = true)
+    @NotNull
+    private Boolean editable;
+
+
     @Schema(description = "备注" )
     @Size(max = 1800)
     private String remark;
@@ -116,6 +146,13 @@ public class CreateMenuResReq implements ServiceReq {
 
     @PostConstruct
     public void prePersist() {
+
+       //@todo 保存之前初始化数据
+
+
+        if(getCreateTime() == null){
+            setCreateTime(new Date());
+        }
 
     }
 

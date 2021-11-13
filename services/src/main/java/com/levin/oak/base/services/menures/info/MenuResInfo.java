@@ -24,7 +24,6 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.rbac.MenuItem.*;
-import java.io.Serializable;
 import com.levin.oak.base.entities.MenuRes;
 import com.levin.oak.base.services.menures.info.*;
 import java.util.Set;
@@ -33,7 +32,7 @@ import java.util.Date;
 
 /**
 * 菜单
-* @Author Auto gen by simple-dao-codegen 2021-11-12 9:56:30
+* @Author Auto gen by simple-dao-codegen 2021-11-13 23:58:01
 */
 @Schema(description ="菜单")
 @Data
@@ -62,7 +61,7 @@ public class MenuResInfo implements Serializable {
 
 
    @Size(max = 1800)
-   @Schema(description = "需要的授权")
+   @Schema(description = "需要的授权，权限或角色用逗号隔开")
    private String requireAuthorizations;
 
 
@@ -93,7 +92,7 @@ public class MenuResInfo implements Serializable {
 
 
    @Schema(description = "父ID")
-   private Serializable parentId;
+   private Long parentId;
 
 
    //@Fetch //默认不加载，请通过查询对象控制
