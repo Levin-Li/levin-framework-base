@@ -33,7 +33,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新访问日志
- *  Auto gen by simple-dao-codegen 2021-11-13 23:58:00
+ *  Auto gen by simple-dao-codegen 2021-11-15 15:01:48
  */
 @Schema(description = "更新访问日志")
 @Data

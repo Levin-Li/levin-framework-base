@@ -35,7 +35,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  新增区域
- *  //Auto gen by simple-dao-codegen 2021-11-13 23:58:00
+ *  //Auto gen by simple-dao-codegen 2021-11-15 15:01:49
  */
 @Schema(description = "新增区域")
 @Data

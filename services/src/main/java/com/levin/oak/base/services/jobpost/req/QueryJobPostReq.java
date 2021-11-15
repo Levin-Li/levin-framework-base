@@ -34,7 +34,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询工作岗位
- *  @Author Auto gen by simple-dao-codegen 2021-11-13 23:58:00
+ *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:01:48
  */
 @Schema(description = "查询工作岗位")
 @Data
@@ -66,6 +66,10 @@ public class QueryJobPostReq implements ServiceReq  {
 
     @Schema(description = "租户ID")
     private String tenantId;
+
+
+    @Schema(description = "子域，模块或是自系统")
+    private String domain;
 
 
     @Schema(description = "名称")

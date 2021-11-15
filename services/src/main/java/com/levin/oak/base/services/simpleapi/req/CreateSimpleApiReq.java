@@ -33,7 +33,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  新增动态API
- *  //Auto gen by simple-dao-codegen 2021-11-13 23:58:00
+ *  //Auto gen by simple-dao-codegen 2021-11-15 15:01:48
  */
 @Schema(description = "新增动态API")
 @Data
@@ -49,6 +49,10 @@ public class CreateSimpleApiReq implements ServiceReq {
 
     private static final long serialVersionUID = 1021385738L;
 
+
+
+    @Schema(description = "子域" )
+    private String domain;
 
 
     @Schema(description = "分类名称" , required = true)
@@ -84,9 +88,17 @@ public class CreateSimpleApiReq implements ServiceReq {
     private String orgId;
 
 
+    @Schema(description = "子域" )
+    private String domain;
+
+
     @Schema(description = "租户ID" )
     @InjectVar
     private String tenantId;
+
+
+    @Schema(description = "子域，模块或是自系统" )
+    private String domain;
 
 
     @Schema(description = "名称" , required = true)

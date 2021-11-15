@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  国际化资源-服务接口
- *  @author Auto gen by simple-dao-codegen 2021-11-13 23:58:00
+ *  @author Auto gen by simple-dao-codegen 2021-11-15 15:01:49
  */
 @Tag(name = E_I18nRes.BIZ_NAME, description = E_I18nRes.BIZ_NAME + MAINTAIN_ACTION)
 

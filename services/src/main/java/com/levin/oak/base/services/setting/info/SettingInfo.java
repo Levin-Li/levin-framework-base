@@ -29,7 +29,7 @@ import java.util.Date;
 
 /**
 * 系统设置
-* @Author Auto gen by simple-dao-codegen 2021-11-13 23:58:00
+* @Author Auto gen by simple-dao-codegen 2021-11-15 15:01:48
 */
 @Schema(description ="系统设置")
 @Data
@@ -82,6 +82,10 @@ public class SettingInfo implements Serializable {
    @InjectVar
    @Schema(description = "租户ID")
    private String tenantId;
+
+
+   @Schema(description = "子域，模块或是自系统")
+   private String domain;
 
 
    @NotNull

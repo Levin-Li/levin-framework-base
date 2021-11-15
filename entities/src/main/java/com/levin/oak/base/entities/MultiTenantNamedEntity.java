@@ -8,9 +8,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
 
 @MappedSuperclass
 @Data
@@ -24,4 +22,6 @@ public abstract class MultiTenantNamedEntity
     @InjectVar
     protected String tenantId;
 
+    @Schema(description = "子域，模块或是自系统")
+    protected String domain;
 }

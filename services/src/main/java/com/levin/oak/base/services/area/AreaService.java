@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  区域-服务接口
- *  @author Auto gen by simple-dao-codegen 2021-11-13 23:58:01
+ *  @author Auto gen by simple-dao-codegen 2021-11-15 15:01:49
  */
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
 

@@ -39,7 +39,7 @@ import com.levin.oak.base.services.area.info.*;
 /**
  *  区域-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-11-13 23:58:01
+ *@author auto gen by simple-dao-codegen 2021-11-15 15:01:49
  *
  */
 

@@ -33,7 +33,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  新增工作岗位
- *  //Auto gen by simple-dao-codegen 2021-11-13 23:58:00
+ *  //Auto gen by simple-dao-codegen 2021-11-15 15:01:48
  */
 @Schema(description = "新增工作岗位")
 @Data
@@ -64,6 +64,10 @@ public class CreateJobPostReq implements ServiceReq {
     @Schema(description = "租户ID" )
     @InjectVar
     private String tenantId;
+
+
+    @Schema(description = "子域，模块或是自系统" )
+    private String domain;
 
 
     @Schema(description = "名称" , required = true)

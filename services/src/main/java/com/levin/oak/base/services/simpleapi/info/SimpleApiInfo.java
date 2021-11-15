@@ -29,7 +29,7 @@ import java.util.Date;
 
 /**
 * 动态API
-* @Author Auto gen by simple-dao-codegen 2021-11-13 23:58:00
+* @Author Auto gen by simple-dao-codegen 2021-11-15 15:01:48
 */
 @Schema(description ="动态API")
 @Data
@@ -46,6 +46,10 @@ public class SimpleApiInfo implements Serializable {
    @NotNull
    @Schema(description = "id")
    private Long id;
+
+
+   @Schema(description = "子域")
+   private String domain;
 
 
    @NotNull
@@ -81,9 +85,17 @@ public class SimpleApiInfo implements Serializable {
    private String orgId;
 
 
+   @Schema(description = "子域")
+   private String domain;
+
+
    @InjectVar
    @Schema(description = "租户ID")
    private String tenantId;
+
+
+   @Schema(description = "子域，模块或是自系统")
+   private String domain;
 
 
    @NotNull

@@ -21,4 +21,7 @@ public abstract class MultiTenantAndOrganizedEntity
     @InjectVar
     protected String orgId;
 
+    @Schema(description = "子域")
+    protected String domain;
+
 }

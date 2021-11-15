@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  动态API-服务接口
- *  @author Auto gen by simple-dao-codegen 2021-11-13 23:58:00
+ *  @author Auto gen by simple-dao-codegen 2021-11-15 15:01:48
  */
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 

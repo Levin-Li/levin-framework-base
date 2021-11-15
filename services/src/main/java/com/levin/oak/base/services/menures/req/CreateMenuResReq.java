@@ -36,7 +36,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  新增菜单
- *  //Auto gen by simple-dao-codegen 2021-11-13 23:58:01
+ *  //Auto gen by simple-dao-codegen 2021-11-15 15:01:49
  */
 @Schema(description = "新增菜单")
 @Data

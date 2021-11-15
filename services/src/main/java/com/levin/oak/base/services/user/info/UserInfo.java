@@ -31,7 +31,7 @@ import com.levin.oak.base.entities.Org;
 
 /**
 * 用户
-* @Author Auto gen by simple-dao-codegen 2021-11-13 23:58:00
+* @Author Auto gen by simple-dao-codegen 2021-11-15 15:01:48
 */
 @Schema(description ="用户")
 @Data
