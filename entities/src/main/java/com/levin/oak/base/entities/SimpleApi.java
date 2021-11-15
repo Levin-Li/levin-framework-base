@@ -45,9 +45,6 @@ public class SimpleApi
         JavaScript,
     }
 
-    @Schema(description = "子域")
-    String domain;
-
     @Schema(description = "分类名称")
     @Column(nullable = false)
     protected String category;

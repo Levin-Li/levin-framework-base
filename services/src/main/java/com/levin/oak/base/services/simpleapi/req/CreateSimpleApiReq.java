@@ -88,17 +88,10 @@ public class CreateSimpleApiReq implements ServiceReq {
     private String orgId;
 
 
-    @Schema(description = "子域" )
-    private String domain;
-
-
     @Schema(description = "租户ID" )
     @InjectVar
     private String tenantId;
 
-
-    @Schema(description = "子域，模块或是自系统" )
-    private String domain;
 
 
     @Schema(description = "名称" , required = true)
