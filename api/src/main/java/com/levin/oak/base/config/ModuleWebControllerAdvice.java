@@ -1,30 +1,21 @@
 package com.levin.oak.base.config;
 
-import static com.levin.oak.base.ModuleOption.*;
-import com.levin.oak.base.*;
-
+import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.SaTokenException;
+import com.levin.commons.service.domain.ApiResp;
+import com.levin.commons.service.exception.AccessDeniedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.web.servlet.config.annotation.*;
-
-import lombok.extern.slf4j.Slf4j;
-
-import java.text.SimpleDateFormat;
-
+import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
 /**
@@ -45,6 +36,7 @@ public class ModuleWebControllerAdvice {
 //    public UserDetails modelAttribute() {
 //        return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //    }
+
 //    // @InitBinder标注的initBinder()方法表示注册一个Date类型的类型转换器，用于将类似这样的2019-06-10
 //    // 日期格式的字符串转换成Date对象
 //    @InitBinder
@@ -53,14 +45,29 @@ public class ModuleWebControllerAdvice {
 //        dateFormat.setLenient(false);
 //        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 //    }
-//    // 这里表示Controller抛出的MethodArgumentNotValidException异常由这个方法处理
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public Result exceptionHandler(MethodArgumentNotValidException e) {
-//        Result result = new Result(BizExceptionEnum.INVALID_REQ_PARAM.getErrorCode(),
-//                BizExceptionEnum.INVALID_REQ_PARAM.getErrorMsg());
-//        logger.error("req params error", e);
-//        return result;
-//    }
+
+    @ExceptionHandler({MethodArgumentNotValidException.class,
+            MissingServletRequestParameterException.class})
+    public ApiResp onParameterException(Exception e) {
+        return ApiResp.error(100, "请求参数异常：" + e.getMessage()).setHttpStatusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @ExceptionHandler({NotLoginException.class,})
+    public ApiResp onNotLoginException(Exception e) {
+        return ApiResp.error(1, "未登录：" + e.getMessage()).setHttpStatusCode(HttpStatus.UNAUTHORIZED.value());
+    }
+
+    @ExceptionHandler({SaTokenException.class,})
+    public ApiResp onSaTokenException(Exception e) {
+        return ApiResp.error(2, "帐号异常：" + e.getMessage()).setHttpStatusCode(HttpStatus.UNAUTHORIZED.value());
+    }
+
+    @ExceptionHandler({AccessDeniedException.class,})
+    public ApiResp onAccessDeniedException(Exception e) {
+        return ApiResp.error(2, "访问异常：" + e.getMessage()).setHttpStatusCode(HttpStatus.UNAUTHORIZED.value());
+    }
+
+
 //    // 这里表示Controller抛出的BizException异常由这个方法处理
 //    @ExceptionHandler(BizException.class)
 //    public Result exceptionHandler(BizException e) {
@@ -70,11 +77,10 @@ public class ModuleWebControllerAdvice {
 //        return result;
 //    }
 //    // 这里就是通用的异常处理器了,所有预料之外的Exception异常都由这里处理
-//    @ExceptionHandler(Exception.class)
-//    public Result exceptionHandler(Exception e) {
-//        Result result = new Result(1000, "网络繁忙,请稍后再试");
-//        logger.error("application error", e);
-//        return result;
-//    }
+
+    @ExceptionHandler(Exception.class)
+    public ApiResp onUnknownExceptionHandler(Exception e) {
+        return ApiResp.error(99, e.getMessage()).setHttpStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+    }
 
 }
