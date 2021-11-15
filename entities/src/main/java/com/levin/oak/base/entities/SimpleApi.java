@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "动态API")
+@Schema(description = "简单接口")
 
 @Table(
         indexes = {
