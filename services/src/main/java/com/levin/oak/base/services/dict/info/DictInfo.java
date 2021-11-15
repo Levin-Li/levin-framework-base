@@ -30,7 +30,7 @@ import java.util.Date;
 
 /**
 * 字典
-* @Author Auto gen by simple-dao-codegen 2021-11-15 15:01:48
+* @Author Auto gen by simple-dao-codegen 2021-11-15 15:08:50
 */
 @Schema(description ="字典")
 @Data
@@ -72,7 +72,7 @@ public class DictInfo implements Serializable {
    private String tenantId;
 
 
-   @Schema(description = "子域，模块或是自系统")
+   @Schema(description = "系统子域")
    private String domain;
 
 

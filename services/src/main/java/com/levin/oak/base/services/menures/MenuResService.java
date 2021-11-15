@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  菜单-服务接口
- *  @author Auto gen by simple-dao-codegen 2021-11-15 15:01:49
+ *  @author Auto gen by simple-dao-codegen 2021-11-15 15:08:51
  */
 @Tag(name = E_MenuRes.BIZ_NAME, description = E_MenuRes.BIZ_NAME + MAINTAIN_ACTION)
 

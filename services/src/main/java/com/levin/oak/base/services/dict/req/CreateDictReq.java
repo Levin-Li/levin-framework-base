@@ -34,7 +34,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  新增字典
- *  //Auto gen by simple-dao-codegen 2021-11-15 15:01:48
+ *  //Auto gen by simple-dao-codegen 2021-11-15 15:08:50
  */
 @Schema(description = "新增字典")
 @Data
@@ -72,7 +72,7 @@ public class CreateDictReq implements ServiceReq {
     private String tenantId;
 
 
-    @Schema(description = "子域，模块或是自系统" )
+    @Schema(description = "系统子域" )
     private String domain;
 
 

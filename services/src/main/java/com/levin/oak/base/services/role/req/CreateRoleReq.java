@@ -35,7 +35,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  新增角色
- *  //Auto gen by simple-dao-codegen 2021-11-15 15:01:48
+ *  //Auto gen by simple-dao-codegen 2021-11-15 15:08:50
  */
 @Schema(description = "新增角色")
 @Data
@@ -81,7 +81,7 @@ public class CreateRoleReq implements ServiceReq {
     private String tenantId;
 
 
-    @Schema(description = "子域，模块或是自系统" )
+    @Schema(description = "系统子域" )
     private String domain;
 
 

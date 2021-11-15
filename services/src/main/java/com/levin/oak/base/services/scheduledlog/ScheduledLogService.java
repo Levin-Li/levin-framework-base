@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  调度日志-服务接口
- *  @author Auto gen by simple-dao-codegen 2021-11-15 15:01:48
+ *  @author Auto gen by simple-dao-codegen 2021-11-15 15:08:50
  */
 @Tag(name = E_ScheduledLog.BIZ_NAME, description = E_ScheduledLog.BIZ_NAME + MAINTAIN_ACTION)
 

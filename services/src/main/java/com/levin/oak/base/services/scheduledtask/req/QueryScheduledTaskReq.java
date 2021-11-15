@@ -33,7 +33,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询调度任务
- *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:01:48
+ *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:08:50
  */
 @Schema(description = "查询调度任务")
 @Data
@@ -99,15 +99,11 @@ public class QueryScheduledTaskReq implements ServiceReq  {
     private String orgId;
 
 
-    @Schema(description = "子域")
-    private String domain;
-
-
     @Schema(description = "租户ID")
     private String tenantId;
 
 
-    @Schema(description = "子域，模块或是自系统")
+    @Schema(description = "系统子域")
     private String domain;
 
 

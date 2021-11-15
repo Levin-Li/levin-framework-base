@@ -39,7 +39,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询机构
- *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:01:48
+ *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:08:51
  */
 @Schema(description = "查询机构")
 @Data

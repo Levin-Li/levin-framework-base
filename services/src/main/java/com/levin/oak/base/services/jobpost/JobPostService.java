@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  工作岗位-服务接口
- *  @author Auto gen by simple-dao-codegen 2021-11-15 15:01:48
+ *  @author Auto gen by simple-dao-codegen 2021-11-15 15:08:51
  */
 @Tag(name = E_JobPost.BIZ_NAME, description = E_JobPost.BIZ_NAME + MAINTAIN_ACTION)
 

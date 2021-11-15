@@ -33,7 +33,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询国际化资源
- *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:01:49
+ *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:08:51
  */
 @Schema(description = "查询国际化资源")
 @Data
@@ -71,7 +71,7 @@ public class QueryI18nResReq implements ServiceReq  {
     private String tenantId;
 
 
-    @Schema(description = "子域，模块或是自系统")
+    @Schema(description = "系统子域")
     private String domain;
 
 

@@ -40,7 +40,7 @@ import com.levin.oak.base.services.menures.info.*;
 /**
  *  菜单-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-11-15 15:01:49
+ *@author auto gen by simple-dao-codegen 2021-11-15 15:08:51
  *
  */
 

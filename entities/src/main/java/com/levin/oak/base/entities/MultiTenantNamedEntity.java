@@ -22,6 +22,6 @@ public abstract class MultiTenantNamedEntity
     @InjectVar
     protected String tenantId;
 
-    @Schema(description = "子域，模块或是自系统")
+    @Schema(description = "系统子域")
     protected String domain;
 }

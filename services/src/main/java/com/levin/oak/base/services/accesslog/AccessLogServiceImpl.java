@@ -36,7 +36,7 @@ import com.levin.oak.base.services.accesslog.info.*;
 /**
  *  访问日志-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-11-15 15:01:48
+ *@author auto gen by simple-dao-codegen 2021-11-15 15:08:50
  *
  */
 

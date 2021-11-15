@@ -36,7 +36,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  删除机构
- *  //Auto gen by simple-dao-codegen 2021-11-15 15:01:48
+ *  //Auto gen by simple-dao-codegen 2021-11-15 15:08:51
  */
 @Schema(description = "删除机构")
 @Data
