@@ -1,20 +1,20 @@
 package com.levin.oak.base.config;
 
-import static com.levin.oak.base.ModuleOption.*;
-import com.levin.oak.base.*;
-
+import com.levin.oak.base.interceptor.AuthorizeAnnotationInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
-
+import org.springframework.web.servlet.config.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.web.servlet.config.annotation.*;
+
+import static com.levin.oak.base.ModuleOption.*;
 
 
 @Configuration(PLUGIN_PREFIX + "ModuleWebMvcConfigurer")
@@ -112,9 +112,14 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //            SaRouter.match("/comment/**", r -> StpUtil.checkPermission("comment"));
 //        })).addPathPatterns("/**");
 
+        //授权检查
+        registry.addInterceptor(authorizeAnnotationInterceptor()).addPathPatterns(API_PATH + "**");
 
-//        registry.addInterceptor(new SaAnnotationInterceptor()).addPathPatterns(API_PATH + "**");
+    }
 
+    @Bean(PLUGIN_PREFIX + "AuthorizeAnnotationInterceptor")
+    public AuthorizeAnnotationInterceptor authorizeAnnotationInterceptor() {
+        return new AuthorizeAnnotationInterceptor();
     }
 
     @Override

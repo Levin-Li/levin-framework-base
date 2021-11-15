@@ -1,30 +1,15 @@
 package com.levin.oak.base.config;
 
-import static com.levin.oak.base.ModuleOption.*;
-import com.levin.oak.base.*;
-
+import com.levin.commons.service.domain.ApiResp;
+import com.levin.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.web.servlet.config.annotation.*;
-
-import lombok.extern.slf4j.Slf4j;
-
-import java.text.SimpleDateFormat;
-
+import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
 /**
@@ -34,12 +19,11 @@ import java.text.SimpleDateFormat;
  */
 @Slf4j
 @Component(PLUGIN_PREFIX + "ModuleWebControllerAdvice")
-@ConditionalOnMissingBean(name = {PLUGIN_PREFIX + "ModuleWebControllerAdvice"})
 @RestControllerAdvice(PACKAGE_NAME)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleWebControllerAdvice", havingValue = "false", matchIfMissing = true)
 public class ModuleWebControllerAdvice {
 
-//    // 这里@ModelAttribute("loginUserInfo")标注的modelAttribute()方法表示会在Controller方法之前
+    //    // 这里@ModelAttribute("loginUserInfo")标注的modelAttribute()方法表示会在Controller方法之前
 //    // 执行，返回当前登录用户的UserDetails对象
 //    @ModelAttribute("loginUserInfo")
 //    public UserDetails modelAttribute() {
@@ -70,11 +54,11 @@ public class ModuleWebControllerAdvice {
 //        return result;
 //    }
 //    // 这里就是通用的异常处理器了,所有预料之外的Exception异常都由这里处理
-//    @ExceptionHandler(Exception.class)
-//    public Result exceptionHandler(Exception e) {
-//        Result result = new Result(1000, "网络繁忙,请稍后再试");
-//        logger.error("application error", e);
-//        return result;
-//    }
+    @ExceptionHandler(Exception.class)
+    public ApiResp exceptionHandler(Exception e) {
+        return (ApiResp) ApiResp.error(1, e.getMessage())
+                .setHttpStatusCode(500)
+                .setDetailMsg(ExceptionUtils.getPrintInfo(e));
+    }
 
 }

@@ -446,7 +446,7 @@ public class RbacServiceImpl implements RbacService {
             return;
         }
 
-        Class<?> controllerClass = AopProxyUtils.ultimateTargetClass(method.getDeclaringClass());
+        Class<?> controllerClass = method.getDeclaringClass();// AopProxyUtils.ultimateTargetClass(method.getDeclaringClass());
 
         ///////////////////////////////获取 res 和 action 用于权限验证 //////////////////////////////////////////
         //
