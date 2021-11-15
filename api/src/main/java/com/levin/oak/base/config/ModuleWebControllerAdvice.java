@@ -4,6 +4,7 @@ import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.exception.SaTokenException;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.commons.service.exception.AccessDeniedException;
+import com.levin.commons.service.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -46,11 +47,6 @@ public class ModuleWebControllerAdvice {
 //        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 //    }
 
-    @ExceptionHandler({MethodArgumentNotValidException.class,
-            MissingServletRequestParameterException.class})
-    public ApiResp onParameterException(Exception e) {
-        return ApiResp.error(100, "请求参数异常：" + e.getMessage()).setHttpStatusCode(HttpStatus.BAD_REQUEST.value());
-    }
 
     @ExceptionHandler({NotLoginException.class,})
     public ApiResp onNotLoginException(Exception e) {
@@ -67,19 +63,20 @@ public class ModuleWebControllerAdvice {
         return ApiResp.error(2, "访问异常：" + e.getMessage()).setHttpStatusCode(HttpStatus.UNAUTHORIZED.value());
     }
 
+    @ExceptionHandler({MethodArgumentNotValidException.class,
+            MissingServletRequestParameterException.class})
+    public ApiResp onParameterException(Exception e) {
+        return ApiResp.error(9, "请求参数异常：" + e.getMessage()).setHttpStatusCode(HttpStatus.BAD_REQUEST.value());
+    }
 
-//    // 这里表示Controller抛出的BizException异常由这个方法处理
-//    @ExceptionHandler(BizException.class)
-//    public Result exceptionHandler(BizException e) {
-//        BizExceptionEnum exceptionEnum = e.getBizExceptionEnum();
-//        Result result = new Result(exceptionEnum.getErrorCode(), exceptionEnum.getErrorMsg());
-//        logger.error("business error", e);
-//        return result;
-//    }
-//    // 这里就是通用的异常处理器了,所有预料之外的Exception异常都由这里处理
+    @ExceptionHandler(ServiceException.class)
+    public ApiResp onServiceException(Exception e) {
+        return ApiResp.error(10, e.getMessage()).setHttpStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+    }
 
+    // 这里就是通用的异常处理器了,所有预料之外的Exception异常都由这里处理
     @ExceptionHandler(Exception.class)
-    public ApiResp onUnknownExceptionHandler(Exception e) {
+    public ApiResp onUnknownException(Exception e) {
         return ApiResp.error(99, e.getMessage()).setHttpStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
