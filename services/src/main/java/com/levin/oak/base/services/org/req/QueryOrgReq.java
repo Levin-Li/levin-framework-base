@@ -126,7 +126,9 @@ public class QueryOrgReq implements ServiceReq  {
     private String zipCode;
 
 
-    @Schema(description = "父ID")
+    @Eq(condition = "#_val != null && #_val > 0")
+    @IsNull(condition = "#_val != null && #_val <= 0")
+    @Schema(description = "父ID-传0可以查顶级对象")
     private Long parentId;
 
 
