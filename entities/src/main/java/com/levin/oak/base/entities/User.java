@@ -27,7 +27,7 @@ import java.util.List;
 @Table(
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-                @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
+                @Index(columnList = E_User.tenantId),
                 @Index(columnList = E_User.staffNo),
                 @Index(columnList = E_User.loginName),
                 @Index(columnList = E_User.phone),
@@ -39,10 +39,12 @@ import java.util.List;
                 @Index(columnList = E_User.aliOpenId),
         }
 
-//        ,
-//        uniqueConstraints = {
-//                @UniqueConstraint(columnNames = {AbstractMultiTenantObject.Fields.tenantId, Setting.Fields.code}),
-//        }
+        ,
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.phone}),
+                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.loginName}),
+                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
+        }
 )
 public class User
         extends AbstractBaseEntityObject

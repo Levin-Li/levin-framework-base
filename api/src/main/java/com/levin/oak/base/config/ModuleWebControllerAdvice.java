@@ -15,6 +15,8 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ValidationException;
+
 import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
@@ -69,9 +71,20 @@ public class ModuleWebControllerAdvice {
         return ApiResp.error(9, "请求参数异常：" + e.getMessage()).setHttpStatusCode(HttpStatus.BAD_REQUEST.value());
     }
 
+    @ExceptionHandler(ValidationException.class)
+    public ApiResp onValidationException(Exception e) {
+        return ApiResp.error(9, "请求参数异常：" + e.getMessage()).setHttpStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+    }
+
     @ExceptionHandler(ServiceException.class)
     public ApiResp onServiceException(Exception e) {
         return ApiResp.error(10, e.getMessage()).setHttpStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+    }
+
+    @ExceptionHandler(org.hibernate.exception.ConstraintViolationException.class)
+    public ApiResp onConstraintViolationException(Exception e) {
+        log.error("发生数据约束异常", e);
+        return ApiResp.error(20, "数据已经被使用或是数据已经存在").setHttpStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
     // 这里就是通用的异常处理器了,所有预料之外的Exception异常都由这里处理

@@ -27,6 +27,11 @@ public interface RbacService {
     String login(@NonNull LoginReq req) throws AuthorizationException;
 
     /**
+     * 用户登出
+     */
+    void logout();
+
+    /**
      * 检查用户状态
      *
      * @param user
@@ -41,7 +46,7 @@ public interface RbacService {
     void checkAuthorize(@NonNull Method method) throws AuthorizationException;
 
     /**
-     * 获取分隔符
+     * 获取权限分隔符
      *
      * @return
      */
@@ -49,10 +54,6 @@ public interface RbacService {
         return Permission.DELIMITER;
     }
 
-    /**
-     * 用户登出
-     */
-    void logout();
 
     /**
      * 获取授权的菜单列表

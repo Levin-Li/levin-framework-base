@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
@@ -117,6 +119,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
     }
 
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     @Bean(PLUGIN_PREFIX + "AuthorizeAnnotationInterceptor")
     public AuthorizeAnnotationInterceptor authorizeAnnotationInterceptor() {
         return new AuthorizeAnnotationInterceptor();

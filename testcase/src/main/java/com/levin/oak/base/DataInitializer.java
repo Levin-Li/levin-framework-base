@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondit
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.net.InetAddress;
 import java.util.*;
@@ -64,6 +65,7 @@ public class DataInitializer implements ApplicationContextAware, ApplicationList
     @Autowired
     Environment environment;
 
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
@@ -81,6 +83,7 @@ public class DataInitializer implements ApplicationContextAware, ApplicationList
 
     @SneakyThrows
     void initData() {
+
 
         log.info("***** ActiveProfiles:" + Arrays.asList(environment.getActiveProfiles()) + " , 工作目录：[" + new File(".").getAbsolutePath() + "]" + " , 数据库URL：[" + dataSourceProperties.getUrl() + "]");
 
