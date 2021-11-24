@@ -18,6 +18,9 @@ import javax.persistence.*;
 @Table(
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
+                @Index(columnList = AbstractBaseEntityObject.Fields.enable),
+                @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
+                @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
                 @Index(columnList = E_Setting.code),

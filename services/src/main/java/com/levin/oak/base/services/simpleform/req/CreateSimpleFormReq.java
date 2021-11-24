@@ -31,10 +31,10 @@ import com.levin.oak.base.entities.*;
 
 
 /**
- *  新增动态API
- *  //Auto gen by simple-dao-codegen 2021-11-15 15:08:51
+ *  新增简单表单
+ *  //Auto gen by simple-dao-codegen 2021-11-23 16:11:31
  */
-@Schema(description = "新增动态API")
+@Schema(description = "新增简单表单")
 @Data
 @Accessors(chain = true)
 @ToString
@@ -49,6 +49,10 @@ public class CreateSimpleFormReq implements ServiceReq {
     private static final long serialVersionUID = 1598335188L;
 
 
+    @Schema(description = "提交地址" )
+    private String commitApi;
+
+
 
     @Schema(description = "分类名称" , required = true)
     @NotNull
@@ -60,13 +64,13 @@ public class CreateSimpleFormReq implements ServiceReq {
     private String groupName;
 
 
-    @Schema(description = "路径" , required = true)
+    @Schema(description = "访问路径" , required = true)
     @NotNull
     private String path;
 
 
-    @Schema(description = "表单文本" )
-    private String formText;
+    @Schema(description = "内容" )
+    private String content;
 
 
     @Schema(description = "机构ID" )

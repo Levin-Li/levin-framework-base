@@ -33,10 +33,10 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 
 /**
- *  查询动态API
- *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:08:50
+ *  查询简单接口
+ *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
  */
-@Schema(description = "查询动态API")
+@Schema(description = "查询简单接口")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -52,6 +52,14 @@ public class QuerySimpleApiReq implements ServiceReq  {
     private static final long serialVersionUID = 1021385738L;
 
 
+    @Schema(description = "http方法")
+    private String methods;
+
+
+    @Schema(description = "脚本语言")
+    private Language language;
+
+
     @Schema(description = "id")
     private Long id;
 
@@ -64,20 +72,12 @@ public class QuerySimpleApiReq implements ServiceReq  {
     private String groupName;
 
 
-    @Schema(description = "路径")
+    @Schema(description = "访问路径")
     private String path;
 
 
-    @Schema(description = "http方法")
-    private String methods;
-
-
-    @Schema(description = "脚本语言")
-    private Language language;
-
-
-    @Schema(description = "处理脚本")
-    private String script;
+    @Schema(description = "内容")
+    private String content;
 
 
     @Schema(description = "机构ID")
@@ -100,23 +100,23 @@ public class QuerySimpleApiReq implements ServiceReq  {
     private String creator;
 
 
-    @Schema(description = "最小创建时间")
-    @Gte(E_SimpleApi.createTime)
-    private Date minCreateTime;
+    @Schema(description = "大于等于创建时间")
+    @Gte
+    private Date gteCreateTime;
 
-    @Schema(description = "最大创建时间")
-    @Lte(E_SimpleApi.createTime)
-    private Date maxCreateTime;
+    @Schema(description = "小于等于创建时间")
+    @Lte
+    private Date lteCreateTime;
 
 
 
-    @Schema(description = "最小更新时间")
-    @Gte(E_SimpleApi.lastUpdateTime)
-    private Date minLastUpdateTime;
+    @Schema(description = "大于等于更新时间")
+    @Gte
+    private Date gteLastUpdateTime;
 
-    @Schema(description = "最大更新时间")
-    @Lte(E_SimpleApi.lastUpdateTime)
-    private Date maxLastUpdateTime;
+    @Schema(description = "小于等于更新时间")
+    @Lte
+    private Date lteLastUpdateTime;
 
 
 

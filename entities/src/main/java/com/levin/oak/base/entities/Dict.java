@@ -19,6 +19,10 @@ import java.util.List;
 @Table(
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
+                @Index(columnList = AbstractBaseEntityObject.Fields.enable),
+                @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
+                @Index(columnList = AbstractBaseEntityObject.Fields.creator),
+
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = E_Dict.code),
                 @Index(columnList = E_Dict.type),

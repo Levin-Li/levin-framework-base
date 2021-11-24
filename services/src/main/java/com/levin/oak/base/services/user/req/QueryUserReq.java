@@ -36,7 +36,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询用户
- *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:08:50
+ *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
  */
 @Schema(description = "查询用户")
 @Data
@@ -102,13 +102,13 @@ public class QueryUserReq implements ServiceReq  {
     private Category category;
 
 
-    @Schema(description = "最小过期时间")
-    @Gte(E_User.expiredDate)
-    private Date minExpiredDate;
+    @Schema(description = "大于等于过期时间")
+    @Gte
+    private Date gteExpiredDate;
 
-    @Schema(description = "最大过期时间")
-    @Lte(E_User.expiredDate)
-    private Date maxExpiredDate;
+    @Schema(description = "小于等于过期时间")
+    @Lte
+    private Date lteExpiredDate;
 
 
 
@@ -136,7 +136,7 @@ public class QueryUserReq implements ServiceReq  {
     private String orgId;
 
 
-    @Schema(description = "加载所属部门")
+    @Schema(description = "是否加载所属部门")
     @Fetch(attrs = E_User.org, condition = "#_val == true")
     private Boolean loadOrg;
 
@@ -153,23 +153,23 @@ public class QueryUserReq implements ServiceReq  {
     private String creator;
 
 
-    @Schema(description = "最小创建时间")
-    @Gte(E_User.createTime)
-    private Date minCreateTime;
+    @Schema(description = "大于等于创建时间")
+    @Gte
+    private Date gteCreateTime;
 
-    @Schema(description = "最大创建时间")
-    @Lte(E_User.createTime)
-    private Date maxCreateTime;
+    @Schema(description = "小于等于创建时间")
+    @Lte
+    private Date lteCreateTime;
 
 
 
-    @Schema(description = "最小更新时间")
-    @Gte(E_User.lastUpdateTime)
-    private Date minLastUpdateTime;
+    @Schema(description = "大于等于更新时间")
+    @Gte
+    private Date gteLastUpdateTime;
 
-    @Schema(description = "最大更新时间")
-    @Lte(E_User.lastUpdateTime)
-    private Date maxLastUpdateTime;
+    @Schema(description = "小于等于更新时间")
+    @Lte
+    private Date lteLastUpdateTime;
 
 
 

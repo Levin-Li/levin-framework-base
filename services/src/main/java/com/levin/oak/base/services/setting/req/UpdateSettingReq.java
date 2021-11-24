@@ -34,7 +34,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新系统设置
- *  Auto gen by simple-dao-codegen 2021-11-15 15:08:50
+ *  Auto gen by simple-dao-codegen 2021-11-23 16:11:31
  */
 @Schema(description = "更新系统设置")
 @Data

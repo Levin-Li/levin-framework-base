@@ -33,7 +33,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询调度日志
- *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:08:50
+ *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
  */
 @Schema(description = "查询调度日志")
 @Data
@@ -67,13 +67,13 @@ public class QueryScheduledLogReq implements ServiceReq  {
     private String taskId;
 
 
-    @Schema(description = "最小创建时间")
-    @Gte(E_ScheduledLog.createTime)
-    private Date minCreateTime;
+    @Schema(description = "大于等于创建时间")
+    @Gte
+    private Date gteCreateTime;
 
-    @Schema(description = "最大创建时间")
-    @Lte(E_ScheduledLog.createTime)
-    private Date maxCreateTime;
+    @Schema(description = "小于等于创建时间")
+    @Lte
+    private Date lteCreateTime;
 
 
 

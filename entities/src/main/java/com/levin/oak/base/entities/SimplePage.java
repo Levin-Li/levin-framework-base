@@ -7,13 +7,16 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
 
-@Entity(name = EntityConst.PREFIX + "i18n_res")
+@Entity(name = EntityConst.PREFIX + "simple_page")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "国际化资源")
+@Schema(description = "简单页面")
 
 @Table(
         indexes = {
@@ -23,46 +26,25 @@ import javax.persistence.*;
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
-                @Index(columnList = E_I18nRes.category),
-                @Index(columnList = E_I18nRes.lang),
+                @Index(columnList = MultiTenantNamedEntity.Fields.domain),
+                @Index(columnList = MultiTenantAndOrganizedEntity.Fields.orgId),
+                @Index(columnList = SimpleEntity.Fields.path),
+                @Index(columnList = SimpleEntity.Fields.category),
+                @Index(columnList = SimpleEntity.Fields.groupName),
         }
+
 //        ,
+//
 //        uniqueConstraints = {
-//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Dict.code}),
-//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_MultiTenantNamedEntity.name}),
+//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Setting.code}),
 //        }
 )
-public class I18nRes
-        extends MultiTenantNamedEntity {
-
-    private static final long serialVersionUID = -123456789L;
-
-    @Id
-    @GeneratedValue
-    protected Long id;
-
-    @Schema(description = "分类")
-    @Column(nullable = false)
-    String category;
-
-    @Schema(description = "语言")
-    @Column(nullable = false, length = 32)
-    String lang;
-
-    @Schema(description = "标签")
-    @Column(nullable = false, length = 768)
-    String label;
-
+public class SimplePage extends SimpleEntity {
 
     @Override
     @PrePersist
     public void prePersist() {
-
         super.prePersist();
-
-        if (lang == null) {
-            lang = "zh_CN";
-        }
-
     }
+
 }

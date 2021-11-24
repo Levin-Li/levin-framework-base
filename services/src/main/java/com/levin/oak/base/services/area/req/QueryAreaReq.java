@@ -36,7 +36,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询区域
- *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:08:51
+ *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
  */
 @Schema(description = "查询区域")
 @Data
@@ -66,12 +66,12 @@ public class QueryAreaReq implements ServiceReq  {
     private String parentCode;
 
 
-    @Schema(description = "加载父区域")
+    @Schema(description = "是否加载父区域")
     @Fetch(attrs = E_Area.parent, condition = "#_val == true")
     private Boolean loadParent;
 
 
-    @Schema(description = "加载子区域")
+    @Schema(description = "是否加载子区域")
     @Fetch(attrs = E_Area.children, condition = "#_val == true")
     private Boolean loadChildren;
 
@@ -88,23 +88,23 @@ public class QueryAreaReq implements ServiceReq  {
     private String creator;
 
 
-    @Schema(description = "最小创建时间")
-    @Gte(E_Area.createTime)
-    private Date minCreateTime;
+    @Schema(description = "大于等于创建时间")
+    @Gte
+    private Date gteCreateTime;
 
-    @Schema(description = "最大创建时间")
-    @Lte(E_Area.createTime)
-    private Date maxCreateTime;
+    @Schema(description = "小于等于创建时间")
+    @Lte
+    private Date lteCreateTime;
 
 
 
-    @Schema(description = "最小更新时间")
-    @Gte(E_Area.lastUpdateTime)
-    private Date minLastUpdateTime;
+    @Schema(description = "大于等于更新时间")
+    @Gte
+    private Date gteLastUpdateTime;
 
-    @Schema(description = "最大更新时间")
-    @Lte(E_Area.lastUpdateTime)
-    private Date maxLastUpdateTime;
+    @Schema(description = "小于等于更新时间")
+    @Lte
+    private Date lteLastUpdateTime;
 
 
 

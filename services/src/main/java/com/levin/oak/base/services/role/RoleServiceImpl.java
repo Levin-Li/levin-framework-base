@@ -39,7 +39,7 @@ import com.levin.oak.base.services.role.info.*;
 /**
  *  角色-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-11-15 15:08:50
+ *@author auto gen by simple-dao-codegen 2021-11-23 16:11:31
  *
  */
 

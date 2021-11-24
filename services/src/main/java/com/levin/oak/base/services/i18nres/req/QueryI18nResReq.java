@@ -33,7 +33,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询国际化资源
- *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:08:51
+ *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
  */
 @Schema(description = "查询国际化资源")
 @Data
@@ -83,23 +83,23 @@ public class QueryI18nResReq implements ServiceReq  {
     private String creator;
 
 
-    @Schema(description = "最小创建时间")
-    @Gte(E_I18nRes.createTime)
-    private Date minCreateTime;
+    @Schema(description = "大于等于创建时间")
+    @Gte
+    private Date gteCreateTime;
 
-    @Schema(description = "最大创建时间")
-    @Lte(E_I18nRes.createTime)
-    private Date maxCreateTime;
+    @Schema(description = "小于等于创建时间")
+    @Lte
+    private Date lteCreateTime;
 
 
 
-    @Schema(description = "最小更新时间")
-    @Gte(E_I18nRes.lastUpdateTime)
-    private Date minLastUpdateTime;
+    @Schema(description = "大于等于更新时间")
+    @Gte
+    private Date gteLastUpdateTime;
 
-    @Schema(description = "最大更新时间")
-    @Lte(E_I18nRes.lastUpdateTime)
-    private Date maxLastUpdateTime;
+    @Schema(description = "小于等于更新时间")
+    @Lte
+    private Date lteLastUpdateTime;
 
 
 

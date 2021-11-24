@@ -17,6 +17,7 @@ import com.levin.commons.utils.ExpressionUtils;
 import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.BaseService;
 import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.rbac.info.ActionInfo;
@@ -57,7 +58,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 //@ConditionalOnMissingBean(AuthService.class)
 
 @ResAuthorize(ignored = true)
-public class RbacServiceImpl implements RbacService {
+public class RbacServiceImpl extends BaseService implements RbacService {
 
     static final Gson gson = new Gson();
 
@@ -111,6 +112,27 @@ public class RbacServiceImpl implements RbacService {
         StpUtil.login("" + user.getId(), deviceType);
 
         return StpUtil.getTokenValue();
+    }
+
+
+    @Override
+    public boolean isLogin() {
+        return StpUtil.isLogin();
+    }
+
+    @Override
+    public <T> T getLoginUserId() {
+        return (T) StpUtil.getLoginId();
+    }
+
+    @Override
+    public UserInfo getUserInfo() {
+
+        if (!StpUtil.isLogin()) {
+            return null;
+        }
+
+        return userService.findById(Long.parseLong("" + StpUtil.getLoginId()));
     }
 
     @Override
@@ -224,7 +246,7 @@ public class RbacServiceImpl implements RbacService {
      * @return
      */
     @Override
-    public List<MenuResInfo> getAuthorizedMenuList(Object userId) {
+    public List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, Object userId) {
 
         //1、找出所有的菜单
         List<MenuResInfo> menuRes = simpleDao.selectFrom(MenuRes.class)
@@ -280,7 +302,7 @@ public class RbacServiceImpl implements RbacService {
                         || requirePermissions.parallelStream().allMatch(requirePermission -> this.isAuthorized(requirePermission, roleList, permissionList))) {
                     //如果没有要求权限，或是权限都满足，要求显示菜单
                     info.setEnable(true);
-                } else if (Boolean.TRUE.equals(info.getAlwaysShow())) {
+                } else if (isShowNotPermissionMenu || Boolean.TRUE.equals(info.getAlwaysShow())) {
                     //菜单显示，但被禁用
                     info.setEnable(false);
                 } else {

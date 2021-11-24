@@ -29,10 +29,10 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 
 /**
- *  删除动态API
- *  //Auto gen by simple-dao-codegen 2021-11-15 15:08:51
+ *  删除简单表单
+ *  //Auto gen by simple-dao-codegen 2021-11-23 16:11:31
  */
-@Schema(description = "删除动态API")
+@Schema(description = "删除简单表单")
 @Data
 
 @AllArgsConstructor
@@ -55,7 +55,7 @@ public class DeleteSimpleFormReq implements ServiceReq {
     @END
     @Schema(description = "id集合")
     @In(E_SimpleForm.id)
-    @Validator(expr = "id != null || ( idList != null &&  idList.length > 0)" , promptInfo = "删除动态API必须指定ID")
+    @Validator(expr = "id != null || ( idList != null &&  idList.length > 0)" , promptInfo = "删除简单表单必须指定ID")
     private Long[] idList;
 
 

@@ -23,7 +23,7 @@ import com.levin.oak.base.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2021-11-15 15:01:47
+//Auto gen by simple-dao-codegen 2021-11-23 16:11:30
 
 
 /**

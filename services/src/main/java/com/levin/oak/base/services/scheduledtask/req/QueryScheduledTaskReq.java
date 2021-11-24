@@ -33,7 +33,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询调度任务
- *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:08:50
+ *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
  */
 @Schema(description = "查询调度任务")
 @Data
@@ -75,23 +75,23 @@ public class QueryScheduledTaskReq implements ServiceReq  {
     private Boolean parallelInvoke;
 
 
-    @Schema(description = "最小最后一次时间")
-    @Gte(E_ScheduledTask.lastInvokedTime)
-    private Date minLastInvokedTime;
+    @Schema(description = "大于等于最后一次时间")
+    @Gte
+    private Date gteLastInvokedTime;
 
-    @Schema(description = "最大最后一次时间")
-    @Lte(E_ScheduledTask.lastInvokedTime)
-    private Date maxLastInvokedTime;
+    @Schema(description = "小于等于最后一次时间")
+    @Lte
+    private Date lteLastInvokedTime;
 
 
 
-    @Schema(description = "最小下一次时间")
-    @Gte(E_ScheduledTask.nextInvokeTime)
-    private Date minNextInvokeTime;
+    @Schema(description = "大于等于下一次时间")
+    @Gte
+    private Date gteNextInvokeTime;
 
-    @Schema(description = "最大下一次时间")
-    @Lte(E_ScheduledTask.nextInvokeTime)
-    private Date maxNextInvokeTime;
+    @Schema(description = "小于等于下一次时间")
+    @Lte
+    private Date lteNextInvokeTime;
 
 
 
@@ -115,23 +115,23 @@ public class QueryScheduledTaskReq implements ServiceReq  {
     private String creator;
 
 
-    @Schema(description = "最小创建时间")
-    @Gte(E_ScheduledTask.createTime)
-    private Date minCreateTime;
+    @Schema(description = "大于等于创建时间")
+    @Gte
+    private Date gteCreateTime;
 
-    @Schema(description = "最大创建时间")
-    @Lte(E_ScheduledTask.createTime)
-    private Date maxCreateTime;
+    @Schema(description = "小于等于创建时间")
+    @Lte
+    private Date lteCreateTime;
 
 
 
-    @Schema(description = "最小更新时间")
-    @Gte(E_ScheduledTask.lastUpdateTime)
-    private Date minLastUpdateTime;
+    @Schema(description = "大于等于更新时间")
+    @Gte
+    private Date gteLastUpdateTime;
 
-    @Schema(description = "最大更新时间")
-    @Lte(E_ScheduledTask.lastUpdateTime)
-    private Date maxLastUpdateTime;
+    @Schema(description = "小于等于更新时间")
+    @Lte
+    private Date lteLastUpdateTime;
 
 
 

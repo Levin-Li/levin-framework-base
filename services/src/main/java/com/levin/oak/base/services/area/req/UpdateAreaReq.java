@@ -36,7 +36,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新区域
- *  Auto gen by simple-dao-codegen 2021-11-15 15:08:51
+ *  Auto gen by simple-dao-codegen 2021-11-23 16:11:31
  */
 @Schema(description = "更新区域")
 @Data

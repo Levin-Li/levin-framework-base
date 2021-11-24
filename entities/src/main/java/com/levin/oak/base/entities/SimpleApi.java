@@ -18,13 +18,16 @@ import javax.persistence.*;
 @Table(
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
+                @Index(columnList = AbstractBaseEntityObject.Fields.enable),
+                @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
+                @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
                 @Index(columnList = MultiTenantNamedEntity.Fields.domain),
                 @Index(columnList = MultiTenantAndOrganizedEntity.Fields.orgId),
-                @Index(columnList = E_SimpleApi.path),
-                @Index(columnList = E_SimpleApi.category),
-                @Index(columnList = E_SimpleApi.groupName),
+                @Index(columnList = SimpleEntity.Fields.path),
+                @Index(columnList = SimpleEntity.Fields.category),
+                @Index(columnList = SimpleEntity.Fields.groupName),
         }
 
 //        ,
@@ -33,29 +36,14 @@ import javax.persistence.*;
 //                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Setting.code}),
 //        }
 )
-public class SimpleApi
-        extends MultiTenantAndOrganizedEntity {
+public class SimpleApi extends SimpleEntity {
 
-    @Id
-    protected Long id;
 
     public enum Language {
         Groovy,
         Spel,
         JavaScript,
     }
-
-    @Schema(description = "分类名称")
-    @Column(nullable = false)
-    protected String category;
-
-    @Schema(description = "分组名称")
-    @Column(nullable = false)
-    protected String groupName;
-
-    @Schema(description = "路径")
-    @Column(nullable = false)
-    protected String path;
 
     @Schema(description = "http方法", title = "逗号隔开")
     protected String methods;
@@ -65,17 +53,11 @@ public class SimpleApi
     @Enumerated(EnumType.STRING)
     Language language;
 
-    @Schema(description = "处理脚本")
-    @Lob
-    protected String script;
-
     @Override
     @PrePersist
     public void prePersist() {
 
         super.prePersist();
-
-        this.editable = orgId == null;
 
     }
 

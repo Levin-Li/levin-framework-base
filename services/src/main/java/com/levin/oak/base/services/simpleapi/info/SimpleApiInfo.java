@@ -28,10 +28,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
-* 动态API
-* @Author Auto gen by simple-dao-codegen 2021-11-15 15:08:50
+* 简单接口
+* @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
 */
-@Schema(description ="动态API")
+@Schema(description ="简单接口")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
@@ -41,6 +41,15 @@ import java.util.Date;
 public class SimpleApiInfo implements Serializable {
 
    private static final long serialVersionUID = 1021385738L;
+
+
+   @Schema(description = "http方法")
+   private String methods;
+
+
+   @NotNull
+   @Schema(description = "脚本语言")
+   private Language language;
 
 
    @NotNull
@@ -59,21 +68,12 @@ public class SimpleApiInfo implements Serializable {
 
 
    @NotNull
-   @Schema(description = "路径")
+   @Schema(description = "访问路径")
    private String path;
 
 
-   @Schema(description = "http方法")
-   private String methods;
-
-
-   @NotNull
-   @Schema(description = "脚本语言")
-   private Language language;
-
-
-   @Schema(description = "处理脚本")
-   private String script;
+   @Schema(description = "内容")
+   private String content;
 
 
    @InjectVar

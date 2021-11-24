@@ -1,13 +1,12 @@
 package com.levin.oak.base.controller.rbac;
 
-import cn.dev33.satoken.stp.StpUtil;
 import com.levin.commons.service.domain.ApiResp;
-import com.levin.oak.base.entities.MenuRes;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.rbac.RbacService;
 import com.levin.oak.base.services.rbac.info.ModuleInfo;
 import com.levin.oak.base.services.rbac.req.LoginReq;
 import com.levin.oak.base.services.role.RoleService;
+import com.levin.oak.base.services.user.info.UserInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -70,12 +69,19 @@ public class RbacController {
         return ApiResp.ok(rbacService.login(req.setUa(ua)));
     }
 
+
+    @PostMapping("userInfo")
+    @Operation(tags = {"权限认证"}, summary = "用户信息")
+    public ApiResp<UserInfo> getUserInfo() {
+        return ApiResp.ok(rbacService.getUserInfo());
+    }
+
     /**
      * 登出
      *
      * @return ApiResp
      */
-    @PostMapping("logout")
+    @GetMapping("logout")
     @Operation(tags = {"权限认证"}, summary = "用户登出")
     public ApiResp logout() {
         rbacService.logout();
@@ -89,8 +95,8 @@ public class RbacController {
      */
     @GetMapping("authorizedResList")
     @Operation(tags = {"权限认证"}, summary = "获取可分配的权限资源")
-    public List<ModuleInfo> getAuthorizedResList() {
-        return rbacService.getAuthorizedResList(StpUtil.getLoginId());
+    public ApiResp<List<ModuleInfo>> getAuthorizedResList() {
+        return ApiResp.ok(rbacService.getAuthorizedResList(rbacService.getLoginUserId()));
     }
 
 
@@ -101,9 +107,8 @@ public class RbacController {
      */
     @GetMapping("authorizedMenuList")
     @Operation(tags = {"权限认证"}, summary = "获取菜单列表")
-    public List<MenuResInfo> getAuthorizedMenuList() {
-        return rbacService.getAuthorizedMenuList(StpUtil.getLoginId());
+    public ApiResp<List<MenuResInfo>> getAuthorizedMenuList(boolean isShowNotPermissionMenu) {
+        return ApiResp.ok(rbacService.getAuthorizedMenuList(isShowNotPermissionMenu, rbacService.getLoginUserId()));
     }
-
 
 }

@@ -19,6 +19,9 @@ import java.util.List;
 
 @Table(
         indexes = {
+                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
+                @Index(columnList = AbstractBaseEntityObject.Fields.enable),
+                @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
                 @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
                 @Index(columnList = E_MultiTenantNamedEntity.name),
                 @Index(columnList = E_Role.code),

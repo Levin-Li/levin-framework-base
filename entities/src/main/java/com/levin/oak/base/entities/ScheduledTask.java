@@ -20,6 +20,10 @@ import java.util.Date;
 @Schema(description = "调度任务")
 
 @Table(indexes = {
+        @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
+        @Index(columnList = AbstractBaseEntityObject.Fields.enable),
+        @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
+        @Index(columnList = AbstractBaseEntityObject.Fields.creator),
         @Index(columnList = AbstractNamedEntityObject.Fields.name),
         @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
         @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),

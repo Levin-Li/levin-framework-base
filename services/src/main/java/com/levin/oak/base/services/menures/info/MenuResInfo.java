@@ -32,7 +32,7 @@ import java.util.Date;
 
 /**
 * 菜单
-* @Author Auto gen by simple-dao-codegen 2021-11-15 15:08:51
+* @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
 */
 @Schema(description ="菜单")
 @Data

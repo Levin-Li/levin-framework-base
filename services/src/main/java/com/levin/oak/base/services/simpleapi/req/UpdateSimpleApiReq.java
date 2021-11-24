@@ -33,10 +33,10 @@ import com.levin.oak.base.entities.*;
 
 
 /**
- *  更新动态API
- *  Auto gen by simple-dao-codegen 2021-11-15 15:08:50
+ *  更新简单接口
+ *  Auto gen by simple-dao-codegen 2021-11-23 16:11:31
  */
-@Schema(description = "更新动态API")
+@Schema(description = "更新简单接口")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -57,23 +57,23 @@ public class UpdateSimpleApiReq implements ServiceReq {
     @Eq(require = true)
     private Long id;
 
-    @Schema(description = "分类名称")
-    private String category;
-
-    @Schema(description = "分组名称")
-    private String groupName;
-
-    @Schema(description = "路径")
-    private String path;
-
     @Schema(description = "http方法")
     private String methods;
 
     @Schema(description = "脚本语言")
     private Language language;
 
-    @Schema(description = "处理脚本")
-    private String script;
+    @Schema(description = "分类名称")
+    private String category;
+
+    @Schema(description = "分组名称")
+    private String groupName;
+
+    @Schema(description = "访问路径")
+    private String path;
+
+    @Schema(description = "内容")
+    private String content;
 
     //@InjectVar
     @Schema(description = "机构ID")

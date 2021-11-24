@@ -26,6 +26,29 @@ public interface RbacService {
      */
     String login(@NonNull LoginReq req) throws AuthorizationException;
 
+
+    /**
+     * 是否登录
+     *
+     * @return
+     */
+    boolean isLogin();
+
+
+    /**
+     * 获取登录用户ID
+     *
+     * @return
+     */
+    <T> T getLoginUserId();
+
+    /**
+     * 获取用户信息
+     *
+     * @return
+     */
+    UserInfo getUserInfo();
+
     /**
      * 用户登出
      */
@@ -61,7 +84,7 @@ public interface RbacService {
      * @param userId
      * @return
      */
-    List<MenuResInfo> getAuthorizedMenuList(@Nullable Object userId);
+    List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, @Nullable Object userId);
 
     /**
      * 获取资源授权清单
@@ -113,4 +136,6 @@ public interface RbacService {
      * 初始化数据
      */
     void initData();
+
+
 }

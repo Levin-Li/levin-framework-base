@@ -32,10 +32,10 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 
 /**
- *  查询动态API
- *  @Author Auto gen by simple-dao-codegen 2021-11-15 15:08:51
+ *  查询简单表单
+ *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
  */
-@Schema(description = "查询动态API")
+@Schema(description = "查询简单表单")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -51,6 +51,10 @@ public class QuerySimpleFormReq implements ServiceReq  {
     private static final long serialVersionUID = 1598335188L;
 
 
+    @Schema(description = "提交地址")
+    private String commitApi;
+
+
     @Schema(description = "id")
     private Long id;
 
@@ -63,12 +67,12 @@ public class QuerySimpleFormReq implements ServiceReq  {
     private String groupName;
 
 
-    @Schema(description = "路径")
+    @Schema(description = "访问路径")
     private String path;
 
 
-    @Schema(description = "表单文本")
-    private String formText;
+    @Schema(description = "内容")
+    private String content;
 
 
     @Schema(description = "机构ID")
@@ -91,23 +95,23 @@ public class QuerySimpleFormReq implements ServiceReq  {
     private String creator;
 
 
-    @Schema(description = "最小创建时间")
-    @Gte(E_SimpleForm.createTime)
-    private Date minCreateTime;
+    @Schema(description = "大于等于创建时间")
+    @Gte
+    private Date gteCreateTime;
 
-    @Schema(description = "最大创建时间")
-    @Lte(E_SimpleForm.createTime)
-    private Date maxCreateTime;
+    @Schema(description = "小于等于创建时间")
+    @Lte
+    private Date lteCreateTime;
 
 
 
-    @Schema(description = "最小更新时间")
-    @Gte(E_SimpleForm.lastUpdateTime)
-    private Date minLastUpdateTime;
+    @Schema(description = "大于等于更新时间")
+    @Gte
+    private Date gteLastUpdateTime;
 
-    @Schema(description = "最大更新时间")
-    @Lte(E_SimpleForm.lastUpdateTime)
-    private Date maxLastUpdateTime;
+    @Schema(description = "小于等于更新时间")
+    @Lte
+    private Date lteLastUpdateTime;
 
 
 

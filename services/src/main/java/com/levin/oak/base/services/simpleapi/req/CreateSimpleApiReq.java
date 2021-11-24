@@ -32,10 +32,10 @@ import com.levin.oak.base.entities.*;
 
 
 /**
- *  新增动态API
- *  //Auto gen by simple-dao-codegen 2021-11-15 15:08:50
+ *  新增简单接口
+ *  //Auto gen by simple-dao-codegen 2021-11-23 16:11:31
  */
-@Schema(description = "新增动态API")
+@Schema(description = "新增简单接口")
 @Data
 @Accessors(chain = true)
 @ToString
@@ -50,6 +50,15 @@ public class CreateSimpleApiReq implements ServiceReq {
     private static final long serialVersionUID = 1021385738L;
 
 
+    @Schema(description = "http方法" )
+    private String methods;
+
+
+    @Schema(description = "脚本语言" , required = true)
+    @NotNull
+    private Language language;
+
+
 
     @Schema(description = "分类名称" , required = true)
     @NotNull
@@ -61,22 +70,13 @@ public class CreateSimpleApiReq implements ServiceReq {
     private String groupName;
 
 
-    @Schema(description = "路径" , required = true)
+    @Schema(description = "访问路径" , required = true)
     @NotNull
     private String path;
 
 
-    @Schema(description = "http方法" )
-    private String methods;
-
-
-    @Schema(description = "脚本语言" , required = true)
-    @NotNull
-    private Language language;
-
-
-    @Schema(description = "处理脚本" )
-    private String script;
+    @Schema(description = "内容" )
+    private String content;
 
 
     @Schema(description = "机构ID" )
