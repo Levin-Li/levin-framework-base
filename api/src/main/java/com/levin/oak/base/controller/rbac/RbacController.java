@@ -1,12 +1,14 @@
 package com.levin.oak.base.controller.rbac;
 
+import com.levin.commons.rbac.UserBaseInfo;
 import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
+import com.levin.oak.base.services.rbac.AuthService;
 import com.levin.oak.base.services.rbac.RbacService;
 import com.levin.oak.base.services.rbac.info.ModuleInfo;
 import com.levin.oak.base.services.rbac.req.LoginReq;
 import com.levin.oak.base.services.role.RoleService;
-import com.levin.oak.base.services.user.info.UserInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -41,21 +41,16 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Tag(name = "权限认证", description = "权限管理")
 @Slf4j
 @Valid
-public class RbacController {
-
-    //请求级别变量
-    @Autowired
-    HttpServletResponse httpResponse;
-
-    //请求级别变量
-    @Autowired
-    HttpServletRequest httpRequest;
+public class RbacController extends BaseController {
 
     @Autowired
     RoleService roleService;
 
     @Autowired
     RbacService rbacService;
+
+    @Autowired
+    AuthService authService;
 
     /**
      * 登录
@@ -66,14 +61,14 @@ public class RbacController {
     @PostMapping("login")
     @Operation(tags = {"权限认证"}, summary = "用户登录")
     public ApiResp<String> login(LoginReq req, @RequestHeader(value = "user-agent", required = false) String ua) {
-        return ApiResp.ok(rbacService.login(req.setUa(ua)));
+        return ApiResp.ok(authService.loginByPassword(req.setUa(ua)));
     }
 
 
     @PostMapping("userInfo")
     @Operation(tags = {"权限认证"}, summary = "用户信息")
-    public ApiResp<UserInfo> getUserInfo() {
-        return ApiResp.ok(rbacService.getUserInfo());
+    public ApiResp<UserBaseInfo> getUserInfo() {
+        return ApiResp.ok(authService.getBaseUserInfo());
     }
 
     /**
@@ -84,7 +79,7 @@ public class RbacController {
     @GetMapping("logout")
     @Operation(tags = {"权限认证"}, summary = "用户登出")
     public ApiResp logout() {
-        rbacService.logout();
+        authService.logout();
         return ApiResp.ok();
     }
 
@@ -96,9 +91,8 @@ public class RbacController {
     @GetMapping("authorizedResList")
     @Operation(tags = {"权限认证"}, summary = "获取可分配的权限资源")
     public ApiResp<List<ModuleInfo>> getAuthorizedResList() {
-        return ApiResp.ok(rbacService.getAuthorizedResList(rbacService.getLoginUserId()));
+        return ApiResp.ok(rbacService.getAuthorizedResList(authService.getLoginUserId()));
     }
-
 
     /**
      * 获取菜单列表
@@ -108,7 +102,7 @@ public class RbacController {
     @GetMapping("authorizedMenuList")
     @Operation(tags = {"权限认证"}, summary = "获取菜单列表")
     public ApiResp<List<MenuResInfo>> getAuthorizedMenuList(boolean isShowNotPermissionMenu) {
-        return ApiResp.ok(rbacService.getAuthorizedMenuList(isShowNotPermissionMenu, rbacService.getLoginUserId()));
+        return ApiResp.ok(rbacService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId()));
     }
 
 }

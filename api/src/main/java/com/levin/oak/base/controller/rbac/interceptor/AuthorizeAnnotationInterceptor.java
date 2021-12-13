@@ -1,4 +1,4 @@
-package com.levin.oak.base.interceptor;
+package com.levin.oak.base.controller.rbac.interceptor;
 
 import com.levin.oak.base.services.rbac.RbacService;
 import org.springframework.web.method.HandlerMethod;
@@ -21,9 +21,6 @@ public class AuthorizeAnnotationInterceptor implements HandlerInterceptor {
         }
         //检查权限
         rbacService.checkAuthorize(((HandlerMethod) handler).getMethod());
-
-
-        //
 
         return true;
     }

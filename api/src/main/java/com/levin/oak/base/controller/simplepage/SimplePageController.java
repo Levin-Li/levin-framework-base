@@ -1,4 +1,4 @@
-package com.levin.oak.base.controller.scheduledlog;
+package com.levin.oak.base.controller.simplepage;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,9 +19,9 @@ import javax.validation.constraints.*;
 import com.levin.oak.base.controller.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.scheduledlog.*;
-import com.levin.oak.base.services.scheduledlog.req.*;
-import com.levin.oak.base.services.scheduledlog.info.*;
+import com.levin.oak.base.services.simplepage.*;
+import com.levin.oak.base.services.simplepage.req.*;
+import com.levin.oak.base.services.simplepage.info.*;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
@@ -40,55 +40,55 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-@RestController(PLUGIN_PREFIX + "ScheduledLogController")
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "ScheduledLogController", havingValue = "false", matchIfMissing = true)
-@RequestMapping(API_PATH + "scheduledlog")
+@RestController(PLUGIN_PREFIX + "SimplePageController")
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "SimplePageController", havingValue = "false", matchIfMissing = true)
+@RequestMapping(API_PATH + "simplepage")
 //默认需要权限访问
 //@ResAuthorize(domain = ID, type = TYPE_NAME)
-@Tag(name = E_ScheduledLog.BIZ_NAME, description = E_ScheduledLog.BIZ_NAME + MAINTAIN_ACTION)
+@Tag(name = E_SimplePage.BIZ_NAME, description = E_SimplePage.BIZ_NAME + MAINTAIN_ACTION)
 @Slf4j
 @Valid
-public class ScheduledLogController extends BaseController{
+public class SimplePageController extends BaseController{
 
-    private static final String BIZ_NAME = E_ScheduledLog.BIZ_NAME;
+    private static final String BIZ_NAME = E_SimplePage.BIZ_NAME;
 
     @Autowired
-    ScheduledLogService scheduledLogService;
+    SimplePageService simplePageService;
 
     /**
      * 分页查找
      *
-     * @param req  QueryScheduledLogReq
-     * @return  ApiResp<PagingData<ScheduledLogInfo>>
+     * @param req  QuerySimplePageReq
+     * @return  ApiResp<PagingData<SimplePageInfo>>
      */
     @GetMapping("/query")
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    public ApiResp<PagingData<ScheduledLogInfo>> query(QueryScheduledLogReq req , SimplePaging paging) {
-        return ApiResp.ok(scheduledLogService.query(req,paging));
+    public ApiResp<PagingData<SimplePageInfo>> query(QuerySimplePageReq req , SimplePaging paging) {
+        return ApiResp.ok(simplePageService.query(req,paging));
     }
 
     /**
      * 新增
      *
-     * @param req CreateScheduledLogEvt
+     * @param req CreateSimplePageEvt
      * @return ApiResp
      */
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    public ApiResp<Long> create(@RequestBody CreateScheduledLogReq req) {
-        return ApiResp.ok(scheduledLogService.create(req));
+    public ApiResp<Long> create(@RequestBody CreateSimplePageReq req) {
+        return ApiResp.ok(simplePageService.create(req));
     }
 
     /**
      * 批量新增
      *
-     * @param reqList List<CreateScheduledLogEvt>
+     * @param reqList List<CreateSimplePageEvt>
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateScheduledLogReq> reqList) {
-        return ApiResp.ok(scheduledLogService.batchCreate(reqList));
+    public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateSimplePageReq> reqList) {
+        return ApiResp.ok(simplePageService.batchCreate(reqList));
     }
 
     /**
@@ -98,18 +98,18 @@ public class ScheduledLogController extends BaseController{
     */
     @GetMapping("/{id}")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    public ApiResp<ScheduledLogInfo> retrieve(@PathVariable @NotNull Long id) {
-         return ApiResp.ok(scheduledLogService.findById(id));
+    public ApiResp<SimplePageInfo> retrieve(@PathVariable @NotNull Long id) {
+         return ApiResp.ok(simplePageService.findById(id));
      }
 
     /**
      * 更新
-     * @param req UpdateScheduledLogReq
+     * @param req UpdateSimplePageReq
      */
      @PutMapping({""})
      @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-     public ApiResp<Void> update(@RequestBody UpdateScheduledLogReq req) {
-         return scheduledLogService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
+     public ApiResp<Void> update(@RequestBody UpdateSimplePageReq req) {
+         return simplePageService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
     }
 
     /**
@@ -117,8 +117,8 @@ public class ScheduledLogController extends BaseController{
      */
      @PutMapping("/batchUpdate")
      @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-     public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateScheduledLogReq> reqList) {
-        return ApiResp.ok(scheduledLogService.batchUpdate(reqList));
+     public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateSimplePageReq> reqList) {
+        return ApiResp.ok(simplePageService.batchUpdate(reqList));
     }
 
     /**
@@ -128,19 +128,19 @@ public class ScheduledLogController extends BaseController{
     @DeleteMapping({"/{id}"})
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     public ApiResp<Void> delete(@PathVariable @NotNull Long id) {
-        return scheduledLogService.delete(new DeleteScheduledLogReq().setId(id)) > 0
+        return simplePageService.delete(new DeleteSimplePageReq().setId(id)) > 0
                                                 ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
     }
 
     /**
      * 批量删除
-     * @param req DeleteScheduledLogReq
+     * @param req DeleteSimplePageReq
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<Void> batchDelete(@NotNull DeleteScheduledLogReq req) {
-        //new DeleteScheduledLogReq().setIdList(idList)
-        return scheduledLogService.delete(req) > 0 ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+    public ApiResp<Void> batchDelete(@NotNull DeleteSimplePageReq req) {
+        //new DeleteSimplePageReq().setIdList(idList)
+        return simplePageService.delete(req) > 0 ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
     }  
 
 }

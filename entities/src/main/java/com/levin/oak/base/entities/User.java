@@ -6,6 +6,7 @@ import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.rbac.UserObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
@@ -15,8 +16,9 @@ import java.util.Date;
 import java.util.List;
 
 
-@Entity(name = EntityConst.PREFIX + "user")
+
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 
 @ToString(exclude = "org")
@@ -24,13 +26,15 @@ import java.util.List;
 @FieldNameConstants
 @Schema(description = "用户")
 
+@Entity(name = EntityConst.PREFIX + "User")
+
 @Table(
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
                 @Index(columnList = E_User.tenantId),
                 @Index(columnList = E_User.staffNo),
                 @Index(columnList = E_User.loginName),
-                @Index(columnList = E_User.phone),
+                @Index(columnList = E_User.telephone),
                 @Index(columnList = E_User.email),
                 @Index(columnList = E_User.state),
                 @Index(columnList = E_User.name),
@@ -41,7 +45,7 @@ import java.util.List;
 
         ,
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.phone}),
+                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.telephone}),
                 @UniqueConstraint(columnNames = {E_User.tenantId, E_User.loginName}),
                 @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
         }
@@ -95,7 +99,7 @@ public class User
     String password;
 
     @Schema(description = "手机号")
-    String phone;
+    String telephone;
 
     @Schema(description = "邮箱")
     String email;
@@ -104,7 +108,7 @@ public class User
     String name;
 
     @Schema(description = "昵称")
-    String nickName;
+    String nickname;
 
     @Schema(description = "头像")
     String avatar;

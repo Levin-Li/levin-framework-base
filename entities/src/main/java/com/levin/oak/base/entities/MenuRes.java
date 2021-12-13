@@ -8,15 +8,16 @@ import com.levin.commons.rbac.MenuItem;
 import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 
-@Entity(name = EntityConst.PREFIX + "menu_res")
+@Entity(name = EntityConst.PREFIX + "MenuRes")
 @Data
 @Accessors(chain = true)
-
+@EqualsAndHashCode(of = {"id"})
 @FieldNameConstants
 @Schema(description = "菜单")
 @Table(

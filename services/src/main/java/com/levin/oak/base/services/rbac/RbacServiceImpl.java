@@ -1,11 +1,9 @@
 package com.levin.oak.base.services.rbac;
 
-import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.strategy.SaStrategy;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
@@ -15,21 +13,14 @@ import com.levin.commons.service.support.ContextHolder;
 import com.levin.commons.utils.ClassUtils;
 import com.levin.commons.utils.ExpressionUtils;
 import com.levin.commons.utils.MapUtils;
-import com.levin.oak.base.ModuleOption;
-import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.E_MenuRes;
+import com.levin.oak.base.entities.MenuRes;
 import com.levin.oak.base.services.BaseService;
-import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.rbac.info.ActionInfo;
 import com.levin.oak.base.services.rbac.info.ModuleInfo;
 import com.levin.oak.base.services.rbac.info.ResInfo;
 import com.levin.oak.base.services.rbac.info.ResTypeInfo;
-import com.levin.oak.base.services.rbac.req.LoginReq;
-import com.levin.oak.base.services.role.RoleService;
-import com.levin.oak.base.services.role.req.CreateRoleReq;
-import com.levin.oak.base.services.user.UserService;
-import com.levin.oak.base.services.user.info.UserInfo;
-import com.levin.oak.base.services.user.req.CreateUserReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -60,116 +51,16 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @ResAuthorize(ignored = true)
 public class RbacServiceImpl extends BaseService implements RbacService {
 
-    static final Gson gson = new Gson();
-
-    static final Type resPermissionListType = new TypeToken<List<ResPermission>>() {
-    }.getType();
-
-    static final Type listStrType = new TypeToken<List<String>>() {
-    }.getType();
 
     static final ContextHolder<Method, ResAuthorize> cache = ContextHolder.buildContext(true);
 
-
     final ResAuthorize defaultResAuthorize = getClass().getAnnotation(ResAuthorize.class);
-
 
     @Resource
     ApplicationContext context;
 
     @Resource
-    SimpleDao simpleDao;
-
-    @Resource
-    UserService userService;
-
-    @Resource
-    RoleService roleService;
-
-    @Resource
-    MenuResService menuResService;
-
-    @Resource
     PluginManager pluginManager;
-
-    @Override
-    public String login(LoginReq req) {
-
-        if (!StringUtils.hasText(req.getAccount())
-                || !StringUtils.hasText(req.getPassword())) {
-            throw new AuthorizationException("401", "请输入正确的帐号或密码");
-        }
-
-        //密码加密
-        req.setPassword(encryptPassword(req.getPassword()));
-
-        String deviceType = getDeviceType(req.getUa());
-
-        UserInfo user = simpleDao.findOneByQueryObj(req);
-
-        checkUserState(user);
-
-        StpUtil.login("" + user.getId(), deviceType);
-
-        return StpUtil.getTokenValue();
-    }
-
-
-    @Override
-    public boolean isLogin() {
-        return StpUtil.isLogin();
-    }
-
-    @Override
-    public <T> T getLoginUserId() {
-        return (T) StpUtil.getLoginId();
-    }
-
-    @Override
-    public UserInfo getUserInfo() {
-
-        if (!StpUtil.isLogin()) {
-            return null;
-        }
-
-        return userService.findById(Long.parseLong("" + StpUtil.getLoginId()));
-    }
-
-    @Override
-    public void checkUserState(UserInfo user) throws AuthorizationException {
-
-        if (user == null) {
-            throw new AuthorizationException("401", "1帐号或密码错误");
-        }
-
-//        if (!SaSecureUtil.sha1(req.getPassword()).equals(user.getPassword())) {
-//            return ApiResp.error("2帐号或密码错误");
-//        }
-
-        if (!user.getEnable()
-                || !User.State.Normal.equals(user.getState())) {
-            throw new AuthorizationException("401", "2帐号状态异常");
-        }
-
-        if (user.getExpiredDate() != null
-                && user.getExpiredDate().getTime() < System.currentTimeMillis()) {
-            throw new AuthorizationException("401", "3帐号已过期");
-        }
-    }
-
-
-    @Override
-    public void logout() {
-        StpUtil.logout();
-    }
-
-    //    @Override
-    public List<Identifiable> getModuleList() {
-        return context.getBeansOfType(Plugin.class).values()
-                .parallelStream().map(plugin -> new IdentifiableObject()
-                        .setId(plugin.getId()).setName(plugin.getName()).setRemark(plugin.getRemark()))
-                .collect(Collectors.toList());
-    }
 
 
     /**
@@ -222,7 +113,6 @@ public class RbacServiceImpl extends BaseService implements RbacService {
                 : suppliers.parallelStream().anyMatch(Supplier::get);
     }
 
-
     /**
      * 验证是否授权
      *
@@ -238,222 +128,6 @@ public class RbacServiceImpl extends BaseService implements RbacService {
             return roleList.contains(requirePermission);
         }
     }
-
-    /**
-     * 获取授权的菜单列表
-     *
-     * @param userId
-     * @return
-     */
-    @Override
-    public List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, Object userId) {
-
-        //1、找出所有的菜单
-        List<MenuResInfo> menuRes = simpleDao.selectFrom(MenuRes.class)
-                .eq(E_MenuRes.enable, true)
-                .orderBy(OrderBy.Type.Asc, E_MenuRes.orderCode)
-                .find(MenuResInfo.class);
-
-        //@todo
-
-        final Map<Long, MenuResInfo> cacheMap = new LinkedHashMap<>();
-
-        //2、放入Map
-        menuRes.parallelStream()
-                .forEachOrdered(m -> cacheMap.put(m.getId(), m));
-
-
-        final Map<Long, MenuResInfo> cacheMap2 = new LinkedHashMap<>(cacheMap);
-
-        //3、构建下级关系网络
-        for (Map.Entry<Long, MenuResInfo> entry : cacheMap.entrySet()) {
-
-            MenuResInfo menu = entry.getValue();
-
-            Serializable parentId = menu.getParentId();
-
-            if (parentId == null) {
-                continue;
-            }
-
-            MenuResInfo parent = cacheMap2.get(parentId);
-
-            if (parent.getChildren() == null) {
-                parent.setChildren(new HashSet<>());
-            }
-
-            //设置关系
-            parent.getChildren().add(menu);
-        }
-
-        if (userId != null) {
-
-            List<String> roleList = StpUtil.getRoleList(userId);
-            List<String> permissionList = StpUtil.getPermissionList(userId);
-
-            for (Map.Entry<Long, MenuResInfo> entry : cacheMap2.entrySet()) {
-                //
-                MenuResInfo info = entry.getValue();
-                //获取菜单要求的权限
-                List<String> requirePermissions = !StringUtils.hasText(info.getRequireAuthorizations()) ? Collections.emptyList()
-                        : Stream.of(info.getRequireAuthorizations().split("[,;]")).filter(StringUtils::hasText).collect(Collectors.toList());
-
-                if (requirePermissions.isEmpty()
-                        || requirePermissions.parallelStream().allMatch(requirePermission -> this.isAuthorized(requirePermission, roleList, permissionList))) {
-                    //如果没有要求权限，或是权限都满足，要求显示菜单
-                    info.setEnable(true);
-                } else if (isShowNotPermissionMenu || Boolean.TRUE.equals(info.getAlwaysShow())) {
-                    //菜单显示，但被禁用
-                    info.setEnable(false);
-                } else {
-                    //如果没有权限
-                    cacheMap.remove(entry.getKey());
-                }
-            }
-        }
-
-        return cacheMap.values().parallelStream()
-                .filter(m -> m.getParentId() == null)
-                .collect(Collectors.toList());
-    }
-
-
-    /**
-     * 获取资源授权清单
-     *
-     * @param userId 如果 userId 为null，则表示获取全部的
-     * @return
-     */
-    @Override
-    public List<ModuleInfo> getAuthorizedResList(Object userId) {
-
-        boolean hasUser = userId != null;
-
-        if (hasUser) {
-            UserInfo user = userService.findById(Long.parseLong(userId.toString()));
-            checkUserState(user);
-        }
-
-        List<ModuleInfo> result = new LinkedList<>();
-
-        List<String> roleList = hasUser ? StpUtil.getRoleList(userId) : null;
-        List<String> permissionList = hasUser ? StpUtil.getPermissionList(userId) : null;
-
-        //第一层循环 插件
-        for (Plugin plugin : pluginManager.getInstalledPlugins()) {
-
-            ModuleInfo moduleInfo = new ModuleInfo();
-
-            BeanUtils.copyProperties(plugin, moduleInfo);
-
-            //资源加载器
-            ResLoader resLoader = plugin.getResLoader();
-
-            if (resLoader == null) {
-                continue;
-            }
-
-            //第二层循环 资源类型
-            for (Identifiable resType : resLoader.getResTypes()) {
-
-                ResTypeInfo typeInfo = new ResTypeInfo();
-
-                BeanUtils.copyProperties(resType, typeInfo);
-
-                //全部加入
-                Collection<Res> resItems = resLoader.getResItems(resType.getId(), 0);
-
-                //第三层循环 资源列表
-                for (Res res : resItems) {
-
-                    ResInfo resInfo = new ResInfo();
-
-                    BeanUtils.copyProperties(res, resInfo, ResInfo.Fields.actionList);
-
-                    String prefix = String.join(getDelimiter(), "" + res.getDomain(), "" + res.getType(), "" + res.getId());
-
-                    //第四层循环 资源操作
-                    for (Res.Action action : new ArrayList<Res.Action>(res.getActionList())) {
-
-                        ActionInfo actionInfo = new ActionInfo();
-
-                        BeanUtils.copyProperties(action, actionInfo);
-
-                        if (hasUser) {
-                            //加入拥有的权限
-                            if (isAuthorized(prefix, action, roleList, permissionList)) {
-                                resInfo.getActionList().add(actionInfo);
-                            }
-                        } else {
-                            resInfo.getActionList().add(actionInfo);
-                        }
-                    }
-
-                    if (!resInfo.getActionList().isEmpty()) {
-                        typeInfo.getResList().add(resInfo);
-                    }
-                }
-
-                //如果没有内容，不加入
-                if (!typeInfo.getResList().isEmpty()) {
-                    moduleInfo.getTypeList().add(typeInfo);
-                }
-
-            }
-
-            //如果没有内容，不加入
-            if (!moduleInfo.getTypeList().isEmpty()) {
-                result.add(moduleInfo);
-            }
-        }
-
-
-        return result;
-    }
-
-    @Override
-    public List<String> getPermissionList(Object userId) {
-
-        UserInfo user = userService.findById(Long.parseLong(userId.toString()));
-
-        checkUserState(user);
-
-        final List<String> permissionList = new LinkedList<>();
-
-        simpleDao.selectFrom(Role.class)
-                .select(E_Role.permissions)
-                .eq(E_Role.enable, true)
-                .in(E_Role.code, getRoleList(userId))
-                .<String>find()
-                .parallelStream()
-                .filter(StringUtils::hasText)
-                //JSON 转换
-                .map(json -> (List<String>) gson.fromJson(json, listStrType))
-//                .map(json -> (List<ResPermission>) gson.fromJson(json, resPermissionListType))
-                .forEach(resPermissions -> {
-                    //装换成数组
-                    resPermissions.parallelStream().forEach(permissionList::add);
-//                    resPermissions.parallelStream().map(ResPermission::toString).forEach(permissionList::add);
-                });
-
-        return permissionList;
-    }
-
-    @Override
-    public List<String> getRoleList(Object userId) {
-
-        UserInfo user = userService.findById(Long.parseLong(userId.toString()));
-
-        checkUserState(user);
-
-        return StringUtils.hasText(user.getRoles()) ?
-                gson.<List<String>>fromJson(user.getRoles(), listStrType)
-                        .parallelStream()
-                        .filter(StringUtils::hasText)
-                        .collect(Collectors.toList())
-                : Collections.emptyList();
-    }
-
 
     /**
      * 检查访问权限
@@ -536,151 +210,170 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         }
     }
 
-    @Override
-    public String encryptPassword(String pwd) {
-        return SaSecureUtil.sha1(pwd);
-    }
-
-    @Override
-    public String getDeviceType(String ua) {
-
-//        1. http://whatsmyuseragent.com/
-//        2. http://whatsmyua.com/
-//        3. http://www.useragentstring.com/
-
-        if (ua.contains("Android ")
-                || ua.contains("iPhone;")
-                || ua.contains("iOS ")
-                || ua.contains("iPhone OS ")) {
-            return "Phone";
-        } else if (ua.contains("iPad;")) {
-            return "iPad";
-        } else if (ua.contains("Windows ")
-                || ua.contains("Macintosh;")
-                || ua.contains(" Mac OS X ")) {
-            return "PC";
-        }
-
-        return "Unknown";
-
-    }
-
     /**
-     * 初始化数据
+     * 获取授权的菜单列表
+     *
+     * @param userId
+     * @return
      */
     @Override
-    public void initData() {
+    public List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, Object userId) {
 
-        initUser();
+        //1、找出所有的菜单
+        List<MenuResInfo> menuRes = simpleDao.selectFrom(MenuRes.class)
+                .eq(E_MenuRes.enable, true)
+                .orderBy(OrderBy.Type.Asc, E_MenuRes.orderCode)
+                .find(MenuResInfo.class);
 
-        initMenu();
-    }
+        final Map<Long, MenuResInfo> cacheMap = new LinkedHashMap<>();
 
-    /**
-     * 自动创建一些空菜单
-     */
-    private void initMenu() {
+        //2、放入Map
+        menuRes.parallelStream()
+                .forEachOrdered(m -> cacheMap.put(m.getId(), m));
 
-        for (Plugin plugin : pluginManager.getInstalledPlugins()) {
+        final Map<Long, MenuResInfo> cacheMap2 = new LinkedHashMap<>(cacheMap);
 
-            MenuRes menu = simpleDao.selectFrom(MenuRes.class)
-                    .eq(E_MenuRes.domain, plugin.getId())
-                    .isNull(E_Role.tenantId).findOne();
+        //3、构建菜单层级
+        for (Map.Entry<Long, MenuResInfo> entry : cacheMap.entrySet()) {
 
-            if (menu != null) {
+            MenuResInfo menu = entry.getValue();
+
+            Serializable parentId = menu.getParentId();
+
+            if (parentId == null) {
                 continue;
             }
 
-            MenuRes pluginRootMenu = simpleDao.create(new MenuRes().setDomain(plugin.getId())
-                    .setName(plugin.getName())
-                    .setEnable(plugin.isEnable())
-                    .setOrderCode(plugin.getOrderCode())
-                    .setRemark(plugin.getRemark()));
+            MenuResInfo parent = cacheMap2.get(parentId);
 
-            RbacUtils.getMenuItemByController(context, plugin.getId(), EntityConst.QUERY_ACTION)
-                    .parallelStream().forEach(menuItem -> {
-                //创建菜单
-                log.info("创建插件[ {} ]的默认菜单[ {} --> {}]", plugin.getId(), menuItem.getName(), menuItem.getPath());
-                simpleDao.create(simpleDao.copyProperties(menuItem, new MenuRes().setParentId(pluginRootMenu.getId()),
-                        1, E_MenuRes.parentId, E_MenuRes.children, E_MenuRes.parent));
-            });
+            if (parent.getChildren() == null) {
+                parent.setChildren(new HashSet<>());
+            }
 
+            //设置关系
+            parent.getChildren().add(menu);
         }
 
+        ///////////////////////////////////////////////////////////////////////////
+
+        if (userId != null) {
+
+            //过滤出有权限的菜单，或是设置为enable = false
+
+            List<String> roleList = StpUtil.getRoleList(userId);
+            List<String> permissionList = StpUtil.getPermissionList(userId);
+
+            for (Map.Entry<Long, MenuResInfo> entry : cacheMap2.entrySet()) {
+                //
+                MenuResInfo info = entry.getValue();
+                //获取菜单要求的权限
+                List<String> requirePermissions = !StringUtils.hasText(info.getRequireAuthorizations()) ? Collections.emptyList()
+                        : Stream.of(info.getRequireAuthorizations().split("[,;]")).filter(StringUtils::hasText).collect(Collectors.toList());
+
+                if (requirePermissions.isEmpty()
+                        || requirePermissions.parallelStream().allMatch(requirePermission -> this.isAuthorized(requirePermission, roleList, permissionList))) {
+                    //如果没有要求权限，或是权限都满足，要求显示菜单
+                    info.setEnable(true);
+                } else if (isShowNotPermissionMenu || Boolean.TRUE.equals(info.getAlwaysShow())) {
+                    //菜单显示，但被禁用
+                    info.setEnable(false);
+                } else {
+                    //如果没有权限
+                    cacheMap.remove(entry.getKey());
+                }
+            }
+        }
+
+        return cacheMap.values().parallelStream()
+                .filter(m -> m.getParentId() == null)
+                .collect(Collectors.toList());
     }
 
-    private void initUser() {
+    /**
+     * 获取资源授权清单
+     *
+     * @param userId 如果 userId 为null，则表示获取全部的
+     * @return
+     */
+    @Override
+    public List<ModuleInfo> getAuthorizedResList(Object userId) {
 
-        Role role = simpleDao.selectFrom(Role.class)
-                .eq(E_Role.code, "SA")
-                .isNull(E_Role.tenantId)
-                .findOne();
+        boolean hasUser = userId != null;
 
-        if (role == null) {
+        List<ModuleInfo> result = new LinkedList<>();
 
-            List<String> permissions = new LinkedList<>();
+        List<String> roleList = hasUser ? StpUtil.getRoleList(userId) : null;
+        List<String> permissionList = hasUser ? StpUtil.getPermissionList(userId) : null;
 
-            permissions.add(new ResPermission()
-                    .setDomain("*")
-                    .setType("*")
-                    .setRes("*")
-                    .setAction("*")
-                    .toString());
+        //第一层循环 插件
+        for (Plugin plugin : pluginManager.getInstalledPlugins()) {
 
-            roleService.create(new CreateRoleReq()
-                    .setCode("SA")
-                    .setName("超级管理员")
-                    .setOrgDataScope(Role.OrgDataScope.All)
-                    .setPermissions(gson.toJson(permissions)));
+            ModuleInfo moduleInfo = new ModuleInfo();
 
-            permissions.clear();
+            BeanUtils.copyProperties(plugin, moduleInfo);
 
-            permissions.add(new ResPermission()
-                    .setDomain(ModuleOption.ID)
-                    .setType("数据")
-                    .setRes("*")
-                    .setAction(EntityConst.QUERY_ACTION + "*")
-                    .toString());
+            //资源加载器
+            ResLoader resLoader = plugin.getResLoader();
 
-            roleService.create(new CreateRoleReq()
-                    .setCode("test")
-                    .setName("测试员")
-                    .setOrgDataScope(Role.OrgDataScope.MySelf)
-                    .setPermissions(gson.toJson(permissions)));
+            if (resLoader == null) {
+                continue;
+            }
+
+            //第二层循环 资源类型
+            for (Identifiable resType : resLoader.getResTypes()) {
+
+                ResTypeInfo typeInfo = new ResTypeInfo();
+
+                BeanUtils.copyProperties(resType, typeInfo);
+
+                //全部加入
+                Collection<Res> resItems = resLoader.getResItems(resType.getId(), 0);
+
+                //第三层循环 资源列表
+                for (Res res : resItems) {
+
+                    ResInfo resInfo = new ResInfo();
+
+                    BeanUtils.copyProperties(res, resInfo, ResInfo.Fields.actionList);
+
+                    String prefix = String.join(getDelimiter(), "" + res.getDomain(), "" + res.getType(), "" + res.getId());
+
+                    //第四层循环 资源操作
+                    for (Res.Action action : new ArrayList<Res.Action>(res.getActionList())) {
+
+                        ActionInfo actionInfo = new ActionInfo();
+
+                        BeanUtils.copyProperties(action, actionInfo);
+
+                        if (hasUser) {
+                            //加入拥有的权限
+                            if (isAuthorized(prefix, action, roleList, permissionList)) {
+                                resInfo.getActionList().add(actionInfo);
+                            }
+                        } else {
+                            resInfo.getActionList().add(actionInfo);
+                        }
+                    }
+
+                    if (!resInfo.getActionList().isEmpty()) {
+                        typeInfo.getResList().add(resInfo);
+                    }
+                }
+
+                //如果没有内容，不加入
+                if (!typeInfo.getResList().isEmpty()) {
+                    moduleInfo.getTypeList().add(typeInfo);
+                }
+
+            }
+
+            //如果没有内容，不加入
+            if (!moduleInfo.getTypeList().isEmpty()) {
+                result.add(moduleInfo);
+            }
         }
 
-
-        User user = simpleDao.selectFrom(User.class)
-                .isNull(E_User.tenantId)
-                .eq(E_User.loginName, "admin")
-                .findOne();
-
-        if (user == null) {
-
-            List<String> roleList = new LinkedList<>();
-
-            roleList.add("SA");
-            userService.create(new CreateUserReq()
-                    .setLoginName("admin")
-                    .setPassword(encryptPassword("123456"))
-                    .setName("超级管理员")
-                    .setStaffNo("0000")
-                    .setRoles(gson.toJson(roleList))
-
-            );
-
-            roleList.clear();
-            roleList.add("test");
-
-            userService.create(new CreateUserReq()
-                    .setLoginName("test")
-                    .setPassword(encryptPassword("123456"))
-                    .setName("测试帐号")
-                    .setStaffNo("9999")
-                    .setRoles(gson.toJson(roleList))
-
-            );
-        }
+        return result;
     }
 
 }

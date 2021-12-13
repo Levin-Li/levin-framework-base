@@ -5,68 +5,26 @@ import com.levin.commons.rbac.Permission;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.rbac.info.ModuleInfo;
-import com.levin.oak.base.services.rbac.req.LoginReq;
-import com.levin.oak.base.services.user.info.UserInfo;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.lang.reflect.Method;
-import java.util.Collections;
 import java.util.List;
 
 @CacheConfig(cacheNames = {E_User.CLASS_NAME})
+
+/**
+ *
+ * Rbac 基本服务
+ *
+ * 1、获取可以使用的资源清单
+ * 2、获取可以使用的菜单清单
+ * 3、方法授权检查
+ *
+ *
+ */
 public interface RbacService {
-
-    /**
-     * 登录 并且返回 token
-     *
-     * @param req
-     * @return token
-     */
-    String login(@NonNull LoginReq req) throws AuthorizationException;
-
-
-    /**
-     * 是否登录
-     *
-     * @return
-     */
-    boolean isLogin();
-
-
-    /**
-     * 获取登录用户ID
-     *
-     * @return
-     */
-    <T> T getLoginUserId();
-
-    /**
-     * 获取用户信息
-     *
-     * @return
-     */
-    UserInfo getUserInfo();
-
-    /**
-     * 用户登出
-     */
-    void logout();
-
-    /**
-     * 检查用户状态
-     *
-     * @param user
-     */
-    void checkUserState(@NonNull UserInfo user) throws AuthorizationException;
-
-    /**
-     * 检查方法授权
-     *
-     * @param method
-     */
-    void checkAuthorize(@NonNull Method method) throws AuthorizationException;
 
     /**
      * 获取权限分隔符
@@ -77,65 +35,27 @@ public interface RbacService {
         return Permission.DELIMITER;
     }
 
+    /**
+     * 检查当前用户的方法调用授权
+     *
+     * @param method 控制器或是服务的方法
+     */
+    void checkAuthorize(@NonNull Method method) throws AuthorizationException;
 
     /**
-     * 获取授权的菜单列表
+     * 获取指定用户的授权菜单列表
      *
-     * @param userId
+     * @param userId 如果 userId 为null，则返回所有
      * @return
      */
     List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, @Nullable Object userId);
 
     /**
-     * 获取资源授权清单
+     * 获取指定用户的资源授权清单
      *
-     * @param userId 如果 userId 为null，则表示获取全部的
+     * @param userId 如果 userId 为null，则返回所有
      * @return
      */
     List<ModuleInfo> getAuthorizedResList(@Nullable Object userId);
-
-    /**
-     * 获取指定用户的权限列表
-     *
-     * @param userId
-     * @return
-     */
-//    @Cacheable(sync = false, condition = "#id != null", unless = "#result == null ", key = E_User.CACHE_KEY_PREFIX + "#id")
-    default List<String> getPermissionList(@NonNull Object userId) {
-        return Collections.emptyList();
-    }
-
-    /**
-     * 获取指定用户的角色列表
-     *
-     * @param userId
-     * @return
-     */
-//    @Cacheable(sync = false, condition = "#id != null", unless = "#result == null ", key = E_User.CACHE_KEY_PREFIX + "#id")
-    default List<String> getRoleList(@NonNull Object userId) {
-        return Collections.emptyList();
-    }
-
-    /**
-     * 加密密码
-     *
-     * @param pwd
-     * @return
-     */
-    String encryptPassword(String pwd);
-
-    /**
-     * 获取设备类型
-     *
-     * @param ua
-     * @return
-     */
-    String getDeviceType(String ua);
-
-    /**
-     * 初始化数据
-     */
-    void initData();
-
 
 }

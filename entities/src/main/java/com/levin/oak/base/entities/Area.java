@@ -5,14 +5,16 @@ import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity(name = EntityConst.PREFIX + "area")
+@Entity(name = EntityConst.PREFIX + "Area")
 @Data
+@EqualsAndHashCode(of = {"code"})
 @Accessors(chain = true)
 @FieldNameConstants
 @Schema(description = "区域")

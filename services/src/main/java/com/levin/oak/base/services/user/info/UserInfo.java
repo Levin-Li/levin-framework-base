@@ -1,6 +1,7 @@
 package com.levin.oak.base.services.user.info;
 
 
+import com.levin.commons.rbac.UserBaseInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.*;
@@ -40,7 +41,7 @@ import com.levin.oak.base.entities.Org;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"org",})
 @FieldNameConstants
-public class UserInfo implements Serializable {
+public class UserInfo implements Serializable , UserBaseInfo {
 
    private static final long serialVersionUID = -445263479L;
 
@@ -63,7 +64,7 @@ public class UserInfo implements Serializable {
 
 
    @Schema(description = "手机号")
-   private String phone;
+   private String telephone;
 
 
    @Schema(description = "邮箱")
@@ -75,7 +76,7 @@ public class UserInfo implements Serializable {
 
 
    @Schema(description = "昵称")
-   private String nickName;
+   private String nickname;
 
 
    @Schema(description = "头像")

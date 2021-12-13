@@ -4,13 +4,15 @@ import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 
-@Entity(name = EntityConst.PREFIX + "simple_form")
+@Entity(name = EntityConst.PREFIX + "SimpleForm")
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
 @Schema(description = "简单表单")

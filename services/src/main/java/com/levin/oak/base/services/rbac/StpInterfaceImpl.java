@@ -2,8 +2,6 @@ package com.levin.oak.base.services.rbac;
 
 import cn.dev33.satoken.SaManager;
 import cn.dev33.satoken.stp.StpInterface;
-import com.levin.oak.base.services.role.RoleService;
-import com.levin.oak.base.services.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -30,13 +28,7 @@ public class StpInterfaceImpl
         implements StpInterface {
 
     @Resource
-    UserService userService;
-
-    @Resource
-    RoleService roleService;
-
-    @Resource
-    RbacService rbacService;
+    AuthService authService;
 
     @PostConstruct
     void init() {
@@ -47,12 +39,12 @@ public class StpInterfaceImpl
 
     @Override
     public List<String> getPermissionList(Object loginId, String loginType) {
-        return rbacService.getPermissionList(loginId);
+        return authService.getPermissionList(loginId);
     }
 
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
-        return rbacService.getRoleList(loginId);
+        return authService.getRoleList(loginId);
     }
 
 }

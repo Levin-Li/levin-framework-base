@@ -6,16 +6,19 @@ import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = EntityConst.PREFIX + "access_log")
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
+
+@Entity(name = EntityConst.PREFIX + "AccessLog")
 
 @Table(indexes = {
         @Index(columnList = E_AccessLog.tenantId),

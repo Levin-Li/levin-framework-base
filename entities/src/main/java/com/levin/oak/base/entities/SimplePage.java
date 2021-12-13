@@ -4,6 +4,7 @@ import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
@@ -12,8 +13,9 @@ import javax.persistence.Index;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
-@Entity(name = EntityConst.PREFIX + "simple_page")
+@Entity(name = EntityConst.PREFIX + "SimplePage")
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
 @Schema(description = "简单页面")

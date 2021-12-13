@@ -1,18 +1,20 @@
 package com.levin.oak.base.config;
 
-import static com.levin.oak.base.ModuleOption.*;
-
-import com.levin.oak.base.*;
-import com.levin.commons.service.support.*;
-import com.levin.commons.utils.*;
+import com.levin.commons.service.support.HttpRequestInfoResolver;
+import com.levin.commons.service.support.VariableResolver;
+import com.levin.commons.service.support.VariableResolverConfigurer;
+import com.levin.commons.service.support.VariableResolverManager;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.context.annotation.*;
-import org.springframework.core.annotation.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
-import javax.servlet.http.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
 /**
@@ -46,6 +48,8 @@ public class ModuleVariableResolverConfigurer
 
     /**
      * 全局的环境变量
+     * <p>
+     * 该方法只执行一次
      *
      * @return
      */
@@ -80,7 +84,7 @@ public class ModuleVariableResolverConfigurer
      */
     @Bean(PLUGIN_PREFIX + "DefaultModuleVariableResolver")
     @Order(2)
-    VariableResolver moduleDefaultModuleVariableResolver() {
+    VariableResolver defaultModuleVariableResolver() {
         return new VariableResolver.MapVariableResolver(this::getModuleContextVars);
     }
 

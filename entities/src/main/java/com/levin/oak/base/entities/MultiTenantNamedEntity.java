@@ -5,6 +5,7 @@ import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 

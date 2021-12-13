@@ -1,9 +1,11 @@
 package com.levin.oak.base.controller.rbac;
 
 import com.levin.commons.rbac.MenuItem;
+import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.AmisMenu;
 import com.levin.oak.base.controller.rbac.dto.AmisResp;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
+import com.levin.oak.base.services.rbac.AuthService;
 import com.levin.oak.base.services.rbac.RbacService;
 import com.levin.oak.base.services.role.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,21 +47,16 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Tag(name = "权限认证", description = "权限管理")
 @Slf4j
 @Valid
-public class AmisController {
-
-    //请求级别变量
-    @Autowired
-    HttpServletResponse httpResponse;
-
-    //请求级别变量
-    @Autowired
-    HttpServletRequest httpRequest;
+public class AmisController  extends BaseController {
 
     @Autowired
     RoleService roleService;
 
     @Autowired
     RbacService rbacService;
+
+    @Autowired
+    AuthService authService;
 
     /**
      * 获取菜单列表
@@ -74,11 +71,11 @@ public class AmisController {
 
         resp.getData().put(AmisMenu.DATA_KEY, Collections.emptyList());
 
-        if (!rbacService.isLogin()) {
+        if (!authService.isLogin()) {
             return resp.setStatus(9).setMsg("未登录");
         }
 
-        List<MenuResInfo> authorizedMenuList = rbacService.getAuthorizedMenuList(isShowNotPermissionMenu, rbacService.getLoginUserId());
+        List<MenuResInfo> authorizedMenuList = rbacService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId());
 
         if (authorizedMenuList != null) {
             resp.getData().put(AmisMenu.DATA_KEY,
@@ -99,14 +96,16 @@ public class AmisController {
 
         AmisMenu amisMenu = new AmisMenu().setLabel(item.getName())
                 .setIcon(item.getIcon())
-                .setUrl(item.getPath());
+                //固定加上index
+                .setUrl((item.getPath() + "/index").replace("//", "/"));
 
         if (MenuItem.ActionType.Redirect.equals(item.getActionType())) {
             amisMenu.setRedirect(item.getParams());
         } else if (MenuItem.ActionType.NewWindow.equals(item.getActionType())) {
             amisMenu.setLink(item.getParams());
         } else {
-            amisMenu.setSchemaApi(item.getPath()+"?");
+            //固定参数
+            amisMenu.setSchemaApi(amisMenu.getUrl() + "?AmisUI=true");
         }
 
         //转换子菜单

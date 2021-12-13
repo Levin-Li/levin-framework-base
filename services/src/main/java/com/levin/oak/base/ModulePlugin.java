@@ -11,8 +11,7 @@ import com.levin.commons.rbac.RbacUtils;
 import com.levin.commons.rbac.Res;
 import com.levin.commons.rbac.ResLoader;
 import com.levin.commons.service.domain.Identifiable;
-import com.levin.oak.base.entities.EntityConst;
-import com.levin.oak.base.services.i18nres.I18nResService;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -26,6 +25,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.levin.oak.base.entities.EntityConst;
+import com.levin.oak.base.services.i18nres.I18nResService;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 //Auto gen by simple-dao-codegen 2021-11-3 15:08:04

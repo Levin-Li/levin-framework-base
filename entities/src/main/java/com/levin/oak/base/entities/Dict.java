@@ -4,19 +4,23 @@ import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = EntityConst.PREFIX + "dict")
+
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
 @Schema(description = "字典")
 
+@Entity( name = EntityConst.PREFIX + "Dict")
 @Table(
+
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
                 @Index(columnList = AbstractBaseEntityObject.Fields.enable),

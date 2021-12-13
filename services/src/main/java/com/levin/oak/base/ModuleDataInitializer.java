@@ -7,6 +7,7 @@ import com.levin.oak.base.services.dict.DictService;
 import com.levin.oak.base.services.jobpost.JobPostService;
 import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.org.OrgService;
+import com.levin.oak.base.services.rbac.AuthService;
 import com.levin.oak.base.services.rbac.RbacService;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.scheduledtask.ScheduledTaskService;
@@ -70,7 +71,7 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
     MenuResService menuResService;
 
     @Resource
-    RbacService rbacService;
+    AuthService authService;
 
     private ApplicationContext applicationContext;
 
@@ -94,7 +95,7 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
 
         Random random = new Random(this.hashCode());
 
-        rbacService.initData();
+        authService.initData();
 
         //@todo 初始化数据
 

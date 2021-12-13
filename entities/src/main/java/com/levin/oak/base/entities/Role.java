@@ -5,14 +5,16 @@ import com.levin.commons.rbac.ResPermission;
 import com.levin.commons.rbac.RoleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = EntityConst.PREFIX + "role")
+@Entity(name = EntityConst.PREFIX + "Role")
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
 @Schema(description = "角色")

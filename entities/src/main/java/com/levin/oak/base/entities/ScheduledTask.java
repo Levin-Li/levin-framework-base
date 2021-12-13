@@ -4,6 +4,7 @@ import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
@@ -13,12 +14,15 @@ import java.util.Date;
 /**
  * 调用任务，可以用于定期数据采集
  */
-@Entity(name = EntityConst.PREFIX + "scheduled_task")
+
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
+
 @Schema(description = "调度任务")
 
+@Entity(name = EntityConst.PREFIX + "ScheduledTask")
 @Table(indexes = {
         @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
         @Index(columnList = AbstractBaseEntityObject.Fields.enable),

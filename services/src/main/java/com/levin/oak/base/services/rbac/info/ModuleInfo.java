@@ -14,12 +14,12 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(of = "id")
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-public class ModuleInfo  extends IdentifiableObject {
+public class ModuleInfo extends IdentifiableObject {
 
-    final List<ResTypeInfo> typeList= new LinkedList<>();
+    final List<ResTypeInfo> typeList = new LinkedList<>();
 
 }

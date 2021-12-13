@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(of = "id")
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants

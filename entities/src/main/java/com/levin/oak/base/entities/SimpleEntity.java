@@ -3,6 +3,7 @@ package com.levin.oak.base.entities;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 
 @MappedSuperclass
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
 @Schema(description = "抽象实体")

@@ -1,4 +1,4 @@
-package com.levin.oak.base.interceptor;
+package com.levin.oak.base.controller.rbac.interceptor;
 
 import com.levin.oak.base.services.rbac.RbacService;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * UI 请求拦截器
  */
-public class UIRequestInterceptor implements HandlerInterceptor {
+public class AmisUIRequestInterceptor implements HandlerInterceptor {
 
     @Resource
     RbacService rbacService;
@@ -18,10 +18,15 @@ public class UIRequestInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        String param = request.getParameter("AmisUI");
+
+        if (param == null
+                || !param.trim().equalsIgnoreCase("true")) {
+            return true;
+        }
+
+        ///com.levin.oak.base/V1/api/menures/index
         String requestURI = request.getRequestURI();
-
-
-
 
         return false;
     }

@@ -51,6 +51,9 @@ spring:
         #模块表名前缀映射类，重要
         physical-strategy: com.levin.commons.dao.support.EntityNamingStrategy
 
+    properties:
+      table_name_prefix_mappings: com.levin.oak.base=oak_base,com.levin.oak.base=oak_base
+
   #      MYSQL 配置选项
   #      properties:
   #        hibernate.dialect: org.hibernate.dialect.MySQL57Dialect
