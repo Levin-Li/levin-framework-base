@@ -30,7 +30,7 @@ import javax.persistence.*;
 
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = AbstractTreeObject.Fields.parentId),
-                @Index(columnList = AbstractTreeObject.Fields.idPath),
+//                @Index(columnList = AbstractTreeObject.Fields.idPath),
 
                 @Index(columnList = E_Org.code),
                 @Index(columnList = E_Org.areaCode),

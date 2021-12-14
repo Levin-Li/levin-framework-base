@@ -150,7 +150,7 @@ public class User
     ///////////////////////////////////////////////////////////////////////
     @Schema(description = "所属部门ID")
     @Column(length = 512)
-    String orgId;
+    Long orgId;
 
     @Schema(description = "所属部门")
     @ManyToOne(fetch = FetchType.LAZY)
