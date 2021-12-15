@@ -297,7 +297,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
             permissions.clear();
 
             permissions.add(new ResPermission()
-                    .setDomain(ModuleOption.ID)
+                    .setDomain("*")
                     .setType(EntityConst.TYPE_NAME)
                     .setRes("*")
                     .setAction(EntityConst.QUERY_ACTION + "*")

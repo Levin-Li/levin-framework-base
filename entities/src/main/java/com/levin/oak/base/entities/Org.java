@@ -94,6 +94,7 @@ public class Org
     protected Long tenantId;
 
     @Schema(description = "编码", title = "对于公司是统一信用码")
+    @Column(length = 128)
     protected String code;
 
     @Schema(description = "图标")
@@ -108,10 +109,11 @@ public class Org
     protected Type type;
 
     @Schema(description = "所属行业")
+    @Column(length = 64)
     protected String industries;
 
     @Schema(description = "区域编码")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 64)
     protected String areaCode;
 
     @Schema(description = "所属区域")
@@ -120,9 +122,10 @@ public class Org
     protected Area area;
 
     @Schema(description = "机构级别", title = "使用字典值配置")
+    @Column(length = 128)
     protected String level;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 128)
     @Schema(description = "机构类别", title = "使用字典值配置")
     protected String category;
 
@@ -133,18 +136,22 @@ public class Org
     //////////////////////////////////////////////////////////////////////
 
     @Schema(description = "联系人")
+    @Column(length = 64)
     protected String contacts;
 
     @Schema(description = "联系电话")
+    @Column(length = 20)
     protected String phones;
 
     @Schema(description = "联系邮箱")
+    @Column(length = 32)
     protected String emails;
 
     @Schema(description = "联系地址")
     protected String address;
 
     @Schema(description = "邮政编码")
+    @Column(length = 32)
     protected String zipCode;
 
     @Override

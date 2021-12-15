@@ -47,12 +47,14 @@ public class Area
 
     @Schema(description = "编码")
     @Id
+    @Column( length = 64)
     protected String code;
 
     @Schema(description = "图标")
     protected String icon;
 
     @Schema(description = "父区域ID")
+    @Column( length = 64)
     protected String parentCode;
 
     @Schema(description = "父区域")

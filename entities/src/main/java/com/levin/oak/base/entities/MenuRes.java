@@ -50,6 +50,7 @@ public class MenuRes
     Long tenantId;
 
     @Schema(description = "子域")
+    @Column( length = 64)
     String domain;
 
     @Schema(description = "需要的授权，权限或角色用逗号隔开")
@@ -61,6 +62,7 @@ public class MenuRes
     Boolean alwaysShow;
 
     @Schema(description = "目标")
+    @Column( length = 64)
     String target;
 
     @Schema(description = "打开方式")

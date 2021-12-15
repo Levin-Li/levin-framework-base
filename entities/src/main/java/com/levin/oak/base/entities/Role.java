@@ -3,6 +3,7 @@ package com.levin.oak.base.entities;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.rbac.ResPermission;
 import com.levin.commons.rbac.RoleObject;
+import com.levin.commons.service.domain.EnumDesc;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -41,7 +42,7 @@ public class Role
         extends MultiTenantNamedEntity
         implements RoleObject {
 
-    public enum OrgDataScope {
+    public enum OrgDataScope implements EnumDesc {
         @Schema(description = "所有部门") All,
         @Schema(description = "指定部门") Assigned,
         @Schema(description = "仅本部门（不含子部门）") MyDept,

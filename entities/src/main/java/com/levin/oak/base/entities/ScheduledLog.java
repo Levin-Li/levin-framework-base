@@ -35,23 +35,25 @@ public class ScheduledLog
 
     @Schema(description = "租户ID")
     @InjectVar
+    @Column(length = 64)
     String tenantId;
 
     @Schema(description = "归属组织", required = true)
     @InjectVar
-    @Column(nullable = false)
+    @Column(nullable = false, length = 64)
     String orgId;
 
     @Schema(description = "任务ID", required = true)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 64)
     String taskId;
 
     @Schema(description = "创建时间")
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    protected Date createTime;
+    Date createTime;
 
     @Schema(description = "执行周期")
+    @Column(length = 256)
     String invokeCycle;
 
     @Schema(description = "是否错误")

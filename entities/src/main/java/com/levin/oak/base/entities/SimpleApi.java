@@ -48,6 +48,7 @@ public class SimpleApi extends SimpleEntity {
     }
 
     @Schema(description = "http方法", title = "逗号隔开")
+    @Column(length = 16)
     protected String methods;
 
     @Schema(description = "脚本语言")

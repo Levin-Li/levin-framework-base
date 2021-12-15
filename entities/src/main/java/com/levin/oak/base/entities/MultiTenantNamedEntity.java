@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
@@ -21,8 +22,10 @@ public abstract class MultiTenantNamedEntity
 
     @Schema(description = "租户ID")
     @InjectVar
+    @Column( length = 64)
     protected String tenantId;
 
     @Schema(description = "系统子域")
+    @Column( length = 64)
     protected String domain;
 }

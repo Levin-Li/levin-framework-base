@@ -44,7 +44,7 @@ public class I18nRes
     protected Long id;
 
     @Schema(description = "分类")
-    @Column(nullable = false)
+    @Column(nullable = false,length = 64)
     String category;
 
     @Schema(description = "语言")

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
@@ -19,6 +20,7 @@ public abstract class MultiTenantAndOrganizedEntity
 
     @Schema(description = "机构ID")
     @InjectVar
+    @Column( length = 64)
     protected String orgId;
 
 }

@@ -43,9 +43,11 @@ public class AccessLog
 
     @Schema(description = "请求的域名")
     @InjectVar
+    @Column(length = 64)
     protected String domain;
 
     @Schema(description = "访问者")
+    @Column(length = 64)
     protected String visitor;
 
     @Schema(description = "创建时间")
@@ -58,6 +60,7 @@ public class AccessLog
     protected String title;
 
     @Schema(description = "日志类型")
+    @Column(length = 64)
     protected String logType;
 
     ////////////////////////////////////
@@ -77,9 +80,11 @@ public class AccessLog
     protected String requestUri;
 
     @Schema(description = "请求方法")
+    @Column(length = 32)
     protected String requestMethod;
 
     @Schema(description = "请求参数")
+    @Column(length = 768)
     protected String requestParams;
 
     @Lob
@@ -87,25 +92,30 @@ public class AccessLog
     protected String responseData;
 
     @Schema(description = "操作IP地址")
+    @Column(length = 64)
     protected String remoteAddr;
 
     @Schema(description = "服务器地址")
+    @Column(length = 64)
     protected String serverAddr;
 
     @Schema(description = "是否有异常")
-    protected String isException;
+    protected Boolean isException;
 
     @Lob
     @Schema(description = "异常信息")
     protected String exceptionInfo;
 
     @Schema(description = "用户代理")
+    @Column( length = 512)
     protected String userAgent;
 
     @Schema(description = "设备名称/操作系统")
+    @Column(length = 128)
     protected String deviceName;
 
     @Schema(description = "浏览器名称")
+    @Column( length = 64)
     protected String browserName;
 
     @Schema(description = "执行时间(ms)")

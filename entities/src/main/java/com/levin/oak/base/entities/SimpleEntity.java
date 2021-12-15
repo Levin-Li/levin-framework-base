@@ -23,11 +23,11 @@ public abstract class SimpleEntity
     protected Long id;
 
     @Schema(description = "分类名称")
-    @Column(nullable = false)
+    @Column(nullable = false,length = 64)
     protected String category;
 
     @Schema(description = "分组名称")
-    @Column(nullable = false)
+    @Column(nullable = false,length = 64)
     protected String groupName;
 
     @Schema(description = "访问路径")

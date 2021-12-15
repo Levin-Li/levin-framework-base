@@ -90,24 +90,31 @@ public class User
     Long id;
 
     @Schema(description = "租户ID")
+            @Column(length = 64)
     String tenantId;
 
     @Schema(description = "登录名")
+    @Column(length = 64)
     String loginName;
 
     @Schema(description = "登录密码")
+    @Column(length = 256)
     String password;
 
     @Schema(description = "手机号")
+    @Column(length = 20)
     String telephone;
 
     @Schema(description = "邮箱")
+    @Column(length = 32)
     String email;
 
     @Schema(description = "名称")
+    @Column(length = 64)
     String name;
 
     @Schema(description = "昵称")
+    @Column(length = 32)
     String nickname;
 
     @Schema(description = "头像")
@@ -134,9 +141,11 @@ public class User
     State state;
 
     @Schema(description = "工号")
+    @Column(length = 32)
     String staffNo;
 
     @Schema(description = "岗位职级")
+    @Column(length = 128)
     String jobPostCode;
 
     @Schema(description = "角色列表", title = "Json")
@@ -149,7 +158,6 @@ public class User
 
     ///////////////////////////////////////////////////////////////////////
     @Schema(description = "所属部门ID")
-    @Column(length = 512)
     Long orgId;
 
     @Schema(description = "所属部门")
@@ -160,9 +168,11 @@ public class User
     //////////////////////////////////////////////////////////////////////
 
     @Schema(description = "微信 OpendId")
+    @Column(length = 128)
     String wxOpenId;
 
     @Schema(description = "阿里 OpendId")
+    @Column(length = 128)
     String aliOpenId;
 
     @Override

@@ -55,14 +55,15 @@ public class Setting
     protected Long id;
 
     @Schema(description = "分类名称")
-    @Column(nullable = false)
+    @Column(nullable = false,length = 64)
     protected String categoryName;
 
     @Schema(description = "分组名称")
+    @Column(length = 64)
     protected String groupName;
 
     @Schema(description = "编码")
-    @Column(nullable = false)
+    @Column(nullable = false,length = 64)
     protected String code;
 
     @Schema(description = "值类型")
@@ -77,6 +78,7 @@ public class Setting
     protected Boolean nullable;
 
     @Schema(description = "输入占位提示")
+    @Column(length = 64)
     protected String inputPlaceholder;
 
     @Override

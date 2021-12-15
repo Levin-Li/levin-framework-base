@@ -80,7 +80,7 @@ public class Dict
     protected Type type;
 
     @Schema(description = "编码")
-    @Column(nullable = false)
+    @Column(nullable = false,length = 64)
     protected String code;
 
     @Schema(description = "编码项", title = "Json 存储")
