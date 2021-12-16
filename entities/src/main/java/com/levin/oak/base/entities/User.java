@@ -38,7 +38,7 @@ import java.util.List;
                 @Index(columnList = E_User.email),
                 @Index(columnList = E_User.state),
                 @Index(columnList = E_User.name),
-                @Index(columnList = E_User.orgId),
+//                @Index(columnList = E_User.orgId),
                 @Index(columnList = E_User.wxOpenId),
                 @Index(columnList = E_User.aliOpenId),
         }

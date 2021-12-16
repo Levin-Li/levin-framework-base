@@ -1,14 +1,15 @@
 package com.levin.oak.base.config;
 
-import static com.levin.oak.base.ModuleOption.*;
-import com.levin.oak.base.*;
-
+import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.SaTokenException;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.exception.ServiceException;
 import com.levin.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -23,10 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
-import org.springframework.web.servlet.config.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import lombok.extern.slf4j.Slf4j;
-import java.text.SimpleDateFormat;
+import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 /**
  * 在Spring 3.2中
@@ -81,6 +80,17 @@ public class ModuleWebControllerAdvice {
 //        return result;
 //    }
 
+    @ExceptionHandler({NotLoginException.class,})
+    public ApiResp onNotLoginException(Exception e) {
+        return ApiResp.error(1, "未登录：" + e.getMessage())
+                .setHttpStatusCode(HttpStatus.UNAUTHORIZED.value());
+    }
+
+    @ExceptionHandler({SaTokenException.class,})
+    public ApiResp onSaTokenException(Exception e) {
+        return ApiResp.error(1, "认证异常：" + e.getMessage())
+                .setHttpStatusCode(HttpStatus.UNAUTHORIZED.value());
+    }
 
     @ExceptionHandler({AccessDeniedException.class,})
     public ApiResp onAccessDeniedException(Exception e) {
