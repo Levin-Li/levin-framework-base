@@ -34,7 +34,7 @@ import java.util.Date;
 
 /**
 * 机构
-* @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+* @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
 */
 @Schema(description ="机构")
 @Data
@@ -58,6 +58,7 @@ public class OrgInfo implements Serializable {
    private Long tenantId;
 
 
+   @Size(max = 128)
    @Schema(description = "编码")
    private String code;
 
@@ -76,11 +77,13 @@ public class OrgInfo implements Serializable {
    private Type type;
 
 
+   @Size(max = 64)
    @Schema(description = "所属行业")
    private String industries;
 
 
    @NotNull
+   @Size(max = 64)
    @Schema(description = "区域编码")
    private String areaCode;
 
@@ -90,11 +93,13 @@ public class OrgInfo implements Serializable {
    private AreaInfo area;
 
 
+   @Size(max = 128)
    @Schema(description = "机构级别")
    private String level;
 
 
    @NotNull
+   @Size(max = 128)
    @Schema(description = "机构类别")
    private String category;
 
@@ -104,14 +109,17 @@ public class OrgInfo implements Serializable {
    private Boolean isExternal;
 
 
+   @Size(max = 64)
    @Schema(description = "联系人")
    private String contacts;
 
 
+   @Size(max = 20)
    @Schema(description = "联系电话")
    private String phones;
 
 
+   @Size(max = 32)
    @Schema(description = "联系邮箱")
    private String emails;
 
@@ -120,6 +128,7 @@ public class OrgInfo implements Serializable {
    private String address;
 
 
+   @Size(max = 32)
    @Schema(description = "邮政编码")
    private String zipCode;
 
@@ -149,7 +158,7 @@ public class OrgInfo implements Serializable {
    private String name;
 
 
-   @Size(max = 512)
+   @Size(max = 128)
    @Schema(description = "创建者")
    private String creator;
 
@@ -177,7 +186,7 @@ public class OrgInfo implements Serializable {
    private Boolean editable;
 
 
-   @Size(max = 1800)
+   @Size(max = 512)
    @Schema(description = "备注")
    private String remark;
 

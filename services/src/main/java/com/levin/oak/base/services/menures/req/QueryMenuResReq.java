@@ -24,6 +24,7 @@ import com.levin.oak.base.services.menures.info.*;
 import com.levin.oak.base.entities.MenuRes;
 
 import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -37,7 +38,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询菜单
- *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "查询菜单")
 @Data
@@ -50,7 +51,7 @@ import com.levin.oak.base.entities.*;
 @FieldNameConstants
 @TargetOption(entityClass = MenuRes.class, alias = E_MenuRes.ALIAS
 , resultClass = MenuResInfo.class)
-public class QueryMenuResReq implements ServiceReq  {
+public class QueryMenuResReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -887712701L;
 

@@ -23,6 +23,7 @@ import java.util.*;
 import com.levin.oak.base.entities.ScheduledTask;
 import com.levin.oak.base.entities.*;
 
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -33,7 +34,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新调度任务
- *  Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "更新调度任务")
 @Data
@@ -47,7 +48,7 @@ import com.levin.oak.base.entities.*;
 @TargetOption(entityClass = ScheduledTask.class, alias = E_ScheduledTask.ALIAS)
 //默认更新注解
 @Update
-public class UpdateScheduledTaskReq implements ServiceReq {
+public class UpdateScheduledTaskReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -2056389676L;
 
@@ -56,9 +57,11 @@ public class UpdateScheduledTaskReq implements ServiceReq {
     @Eq(require = true)
     private Long id;
 
+    //@Size(max = 64)
     @Schema(description = "任务分类")
     private String category;
 
+    //@Size(max = 64)
     @Schema(description = "任务组")
     private String groupName;
 
@@ -78,13 +81,16 @@ public class UpdateScheduledTaskReq implements ServiceReq {
     private Date nextInvokeTime;
 
     //@InjectVar
+    //@Size(max = 64)
     @Schema(description = "机构ID")
     private String orgId;
 
     //@InjectVar
+    //@Size(max = 64)
     @Schema(description = "租户ID")
     private String tenantId;
 
+    //@Size(max = 64)
     @Schema(description = "系统子域")
     private String domain;
 
@@ -104,7 +110,7 @@ public class UpdateScheduledTaskReq implements ServiceReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 1800)
+    //@Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

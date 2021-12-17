@@ -21,11 +21,9 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  国际化资源-服务接口
- *  @author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  @author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Tag(name = E_I18nRes.BIZ_NAME, description = E_I18nRes.BIZ_NAME + MAINTAIN_ACTION)
-
-@CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_I18nRes.SIMPLE_CLASS_NAME})
 public interface I18nResService {
 
     String BIZ_NAME = E_I18nRes.BIZ_NAME;
@@ -37,24 +35,16 @@ public interface I18nResService {
     List<Long> batchCreate(List<CreateI18nResReq> reqList);
 
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    @Cacheable(sync = false, condition = "#id != null", unless = "#result == null ", key = E_I18nRes.CACHE_KEY_PREFIX + "#id")
     I18nResInfo findById(Long id);
 
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    @CacheEvict(condition = "#req.id != null", key = E_I18nRes.CACHE_KEY_PREFIX + "#req.id")
     int update(UpdateI18nResReq req);
 
     //尽量不用调用批量删除，会导致缓存清空
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    @CacheEvict(condition = "#reqList != null && #reqList.size() > 0", allEntries = true)
     List<Integer> batchUpdate(List<UpdateI18nResReq> reqList);
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    @Caching(evict = {  //尽量不用调用批量删除，会导致缓存清空
-        @CacheEvict(condition = "#req.id != null", key = E_I18nRes.CACHE_KEY_PREFIX + "#req.id"),
-        @CacheEvict(condition = "#req.idList != null && #req.idList.length > 0", allEntries = true),
-    })
     int delete(DeleteI18nResReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)

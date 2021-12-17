@@ -22,7 +22,7 @@ import com.levin.commons.dao.annotation.misc.*;
 
 
 import com.levin.oak.base.entities.*;
-
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.commons.service.domain.InjectVar;
@@ -36,7 +36,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  新增菜单
- *  //Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  //Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "新增菜单")
 @Data
@@ -48,7 +48,7 @@ import com.levin.oak.base.entities.*;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = MenuRes.class, alias = E_MenuRes.ALIAS)
-public class CreateMenuResReq implements ServiceReq {
+public class CreateMenuResReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -887712701L;
 
@@ -60,6 +60,7 @@ public class CreateMenuResReq implements ServiceReq {
 
 
     @Schema(description = "子域" )
+    @Size(max = 64)
     private String domain;
 
 
@@ -74,6 +75,7 @@ public class CreateMenuResReq implements ServiceReq {
 
 
     @Schema(description = "目标" )
+    @Size(max = 64)
     private String target;
 
 
@@ -112,7 +114,7 @@ public class CreateMenuResReq implements ServiceReq {
 
 
     @Schema(description = "创建者" )
-    @Size(max = 512)
+    @Size(max = 128)
     private String creator;
 
 
@@ -140,7 +142,7 @@ public class CreateMenuResReq implements ServiceReq {
 
 
     @Schema(description = "备注" )
-    @Size(max = 1800)
+    @Size(max = 512)
     private String remark;
 
 

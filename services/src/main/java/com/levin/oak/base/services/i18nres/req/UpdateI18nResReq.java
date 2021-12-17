@@ -23,6 +23,7 @@ import java.util.*;
 import com.levin.oak.base.entities.I18nRes;
 import com.levin.oak.base.entities.*;
 
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -33,7 +34,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新国际化资源
- *  Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "更新国际化资源")
 @Data
@@ -47,7 +48,7 @@ import com.levin.oak.base.entities.*;
 @TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS)
 //默认更新注解
 @Update
-public class UpdateI18nResReq implements ServiceReq {
+public class UpdateI18nResReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -1681554652L;
 
@@ -56,6 +57,7 @@ public class UpdateI18nResReq implements ServiceReq {
     @Eq(require = true)
     private Long id;
 
+    //@Size(max = 64)
     @Schema(description = "分类")
     private String category;
 
@@ -68,9 +70,11 @@ public class UpdateI18nResReq implements ServiceReq {
     private String label;
 
     //@InjectVar
+    //@Size(max = 64)
     @Schema(description = "租户ID")
     private String tenantId;
 
+    //@Size(max = 64)
     @Schema(description = "系统子域")
     private String domain;
 
@@ -90,7 +94,7 @@ public class UpdateI18nResReq implements ServiceReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 1800)
+    //@Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

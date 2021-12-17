@@ -5,7 +5,7 @@ package com.levin.oak.base;
  * <p>
  * eg.
  * <p>
- * //Auto gen by simple-dao-codegen 2021-11-13 23:58:01
+ * //Auto gen by simple-dao-codegen 2021-12-17 11:53:25
  */
 public interface ModuleOption {
 

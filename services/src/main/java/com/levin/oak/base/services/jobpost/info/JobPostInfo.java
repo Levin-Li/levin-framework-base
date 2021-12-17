@@ -29,7 +29,7 @@ import java.util.Date;
 
 /**
 * 工作岗位
-* @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+* @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
 */
 @Schema(description ="工作岗位")
 @Data
@@ -49,6 +49,7 @@ public class JobPostInfo implements Serializable {
 
 
    @NotNull
+   @Size(max = 64)
    @Schema(description = "编码")
    private String code;
 
@@ -59,10 +60,12 @@ public class JobPostInfo implements Serializable {
 
 
    @InjectVar
+   @Size(max = 64)
    @Schema(description = "租户ID")
    private String tenantId;
 
 
+   @Size(max = 64)
    @Schema(description = "系统子域")
    private String domain;
 
@@ -73,7 +76,7 @@ public class JobPostInfo implements Serializable {
    private String name;
 
 
-   @Size(max = 512)
+   @Size(max = 128)
    @Schema(description = "创建者")
    private String creator;
 
@@ -101,7 +104,7 @@ public class JobPostInfo implements Serializable {
    private Boolean editable;
 
 
-   @Size(max = 1800)
+   @Size(max = 512)
    @Schema(description = "备注")
    private String remark;
 

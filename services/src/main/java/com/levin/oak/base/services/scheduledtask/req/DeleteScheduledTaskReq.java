@@ -21,7 +21,7 @@ import java.util.*;
 
 import com.levin.oak.base.entities.ScheduledTask;
 import com.levin.oak.base.entities.*;
-
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import java.util.Date;
@@ -30,7 +30,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  删除调度任务
- *  //Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  //Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "删除调度任务")
 @Data
@@ -44,7 +44,7 @@ import com.levin.oak.base.entities.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = ScheduledTask.class, alias = E_ScheduledTask.ALIAS)
-public class DeleteScheduledTaskReq implements ServiceReq {
+public class DeleteScheduledTaskReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -2056389676L;
 

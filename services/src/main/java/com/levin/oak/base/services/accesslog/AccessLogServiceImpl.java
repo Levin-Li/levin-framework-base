@@ -9,6 +9,7 @@ import com.levin.commons.service.domain.*;
 
 import java.util.*;
 import java.util.stream.*;
+import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.util.*;
 import org.springframework.beans.BeanUtils;
@@ -26,6 +27,8 @@ import com.levin.oak.base.entities.AccessLog;
 import com.levin.oak.base.services.accesslog.req.*;
 import com.levin.oak.base.services.accesslog.info.*;
 
+import com.levin.oak.base.*;
+
 
 ////////////////////////////////////
 //自动导入列表
@@ -36,7 +39,7 @@ import com.levin.oak.base.services.accesslog.info.*;
 /**
  *  访问日志-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *@author auto gen by simple-dao-codegen 2021-12-17 11:53:24
  *
  */
 
@@ -46,6 +49,7 @@ import com.levin.oak.base.services.accesslog.info.*;
 @Slf4j
 //@Validated
 @Tag(name = E_AccessLog.BIZ_NAME, description = E_AccessLog.BIZ_NAME + MAINTAIN_ACTION)
+@CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_AccessLog.SIMPLE_CLASS_NAME})
 public class AccessLogServiceImpl implements AccessLogService {
 
     @Autowired
@@ -67,12 +71,15 @@ public class AccessLogServiceImpl implements AccessLogService {
 
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     @Override
+    //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
+    @Cacheable(sync = false, condition = "#id != null", unless = "#result == null ", key = E_AccessLog.CACHE_KEY_PREFIX + "#id")
     public AccessLogInfo findById(Long id) {
         return simpleDao.findOneByQueryObj(new QueryAccessLogReq().setId(id));
     }
 
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
+    @CacheEvict(condition = "#req.id != null", key = E_AccessLog.CACHE_KEY_PREFIX + "#req.id")    
     public int update(UpdateAccessLogReq req) {
         return simpleDao.updateByQueryObj(req);
     }
@@ -80,12 +87,17 @@ public class AccessLogServiceImpl implements AccessLogService {
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = Exception.class)
     @Override
+    @CacheEvict(condition = "#reqList != null && #reqList.size() > 0", allEntries = true)
     public List<Integer> batchUpdate(List<UpdateAccessLogReq> reqList){
         return reqList.stream().map(this::update).collect(Collectors.toList());
     }
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
+    @Caching(evict = {  //尽量不用调用批量删除，会导致缓存清空
+        @CacheEvict(condition = "#req.id != null", key = E_AccessLog.CACHE_KEY_PREFIX + "#req.id"),
+        @CacheEvict(condition = "#req.idList != null && #req.idList.length > 0", allEntries = true),
+    })                    
     public int delete(DeleteAccessLogReq req) {
         return simpleDao.deleteByQueryObj(req);
     }

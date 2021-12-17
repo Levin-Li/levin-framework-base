@@ -26,7 +26,7 @@ import com.levin.oak.base.services.accesslog.info.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2021-12-10 16:55:46
+//Auto gen by simple-dao-codegen 2021-12-17 11:53:24
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性

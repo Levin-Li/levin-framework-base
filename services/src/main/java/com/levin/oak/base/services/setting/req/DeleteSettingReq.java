@@ -21,7 +21,7 @@ import java.util.*;
 
 import com.levin.oak.base.entities.Setting;
 import com.levin.oak.base.entities.*;
-
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.oak.base.entities.Setting.*;
@@ -31,7 +31,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  删除系统设置
- *  //Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  //Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "删除系统设置")
 @Data
@@ -45,7 +45,7 @@ import com.levin.oak.base.entities.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Setting.class, alias = E_Setting.ALIAS)
-public class DeleteSettingReq implements ServiceReq {
+public class DeleteSettingReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 147875794L;
 

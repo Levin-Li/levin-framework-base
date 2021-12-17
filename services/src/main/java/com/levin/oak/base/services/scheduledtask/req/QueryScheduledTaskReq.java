@@ -24,6 +24,7 @@ import com.levin.oak.base.services.scheduledtask.info.*;
 import com.levin.oak.base.entities.ScheduledTask;
 
 import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -33,7 +34,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询调度任务
- *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "查询调度任务")
 @Data
@@ -46,7 +47,7 @@ import com.levin.oak.base.entities.*;
 @FieldNameConstants
 @TargetOption(entityClass = ScheduledTask.class, alias = E_ScheduledTask.ALIAS
 , resultClass = ScheduledTaskInfo.class)
-public class QueryScheduledTaskReq implements ServiceReq  {
+public class QueryScheduledTaskReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -2056389676L;
 

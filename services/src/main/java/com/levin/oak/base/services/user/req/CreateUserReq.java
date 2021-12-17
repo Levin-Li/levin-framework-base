@@ -22,7 +22,7 @@ import com.levin.commons.dao.annotation.misc.*;
 
 
 import com.levin.oak.base.entities.*;
-
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.oak.base.entities.User.*;
@@ -35,7 +35,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  新增用户
- *  //Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  //Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "新增用户")
 @Data
@@ -47,38 +47,45 @@ import com.levin.oak.base.entities.*;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS)
-public class CreateUserReq implements ServiceReq {
+public class CreateUserReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445263479L;
 
 
 
     @Schema(description = "租户ID" )
+    @Size(max = 64)
     private String tenantId;
 
 
     @Schema(description = "登录名" )
+    @Size(max = 64)
     private String loginName;
 
 
     @Schema(description = "登录密码" )
+    @Size(max = 256)
     private String password;
 
 
     @Schema(description = "手机号" )
-    private String phone;
+    @Size(max = 20)
+    private String telephone;
 
 
     @Schema(description = "邮箱" )
+    @Size(max = 32)
     private String email;
 
 
     @Schema(description = "名称" )
+    @Size(max = 64)
     private String name;
 
 
     @Schema(description = "昵称" )
-    private String nickName;
+    @Size(max = 32)
+    private String nickname;
 
 
     @Schema(description = "头像" )
@@ -108,10 +115,12 @@ public class CreateUserReq implements ServiceReq {
 
 
     @Schema(description = "工号" )
+    @Size(max = 32)
     private String staffNo;
 
 
     @Schema(description = "岗位职级" )
+    @Size(max = 128)
     private String jobPostCode;
 
 
@@ -125,21 +134,22 @@ public class CreateUserReq implements ServiceReq {
 
 
     @Schema(description = "所属部门ID" )
-    @Size(max = 512)
-    private String orgId;
+    private Long orgId;
 
 
 
     @Schema(description = "微信 OpendId" )
+    @Size(max = 128)
     private String wxOpenId;
 
 
     @Schema(description = "阿里 OpendId" )
+    @Size(max = 128)
     private String aliOpenId;
 
 
     @Schema(description = "创建者" )
-    @Size(max = 512)
+    @Size(max = 128)
     private String creator;
 
 
@@ -167,7 +177,7 @@ public class CreateUserReq implements ServiceReq {
 
 
     @Schema(description = "备注" )
-    @Size(max = 1800)
+    @Size(max = 512)
     private String remark;
 
 

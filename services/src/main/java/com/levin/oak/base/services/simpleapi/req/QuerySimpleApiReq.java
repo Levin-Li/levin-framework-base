@@ -24,6 +24,7 @@ import com.levin.oak.base.services.simpleapi.info.*;
 import com.levin.oak.base.entities.SimpleApi;
 
 import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -34,7 +35,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询简单接口
- *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "查询简单接口")
 @Data
@@ -47,7 +48,7 @@ import com.levin.oak.base.entities.*;
 @FieldNameConstants
 @TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS
 , resultClass = SimpleApiInfo.class)
-public class QuerySimpleApiReq implements ServiceReq  {
+public class QuerySimpleApiReq extends MultiTenantReq{
 
     private static final long serialVersionUID = 1021385738L;
 

@@ -24,6 +24,7 @@ import com.levin.oak.base.services.dict.info.*;
 import com.levin.oak.base.entities.Dict;
 
 import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -35,7 +36,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询字典
- *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "查询字典")
 @Data
@@ -48,7 +49,7 @@ import com.levin.oak.base.entities.*;
 @FieldNameConstants
 @TargetOption(entityClass = Dict.class, alias = E_Dict.ALIAS
 , resultClass = DictInfo.class)
-public class QueryDictReq implements ServiceReq  {
+public class QueryDictReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -445779596L;
 

@@ -23,6 +23,7 @@ import java.util.*;
 import com.levin.oak.base.entities.Org;
 import com.levin.oak.base.entities.*;
 
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -39,7 +40,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新机构
- *  Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "更新机构")
 @Data
@@ -53,7 +54,7 @@ import com.levin.oak.base.entities.*;
 @TargetOption(entityClass = Org.class, alias = E_Org.ALIAS)
 //默认更新注解
 @Update
-public class UpdateOrgReq implements ServiceReq {
+public class UpdateOrgReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -1399842458L;
 
@@ -66,6 +67,7 @@ public class UpdateOrgReq implements ServiceReq {
     @Schema(description = "租户ID")
     private Long tenantId;
 
+    //@Size(max = 128)
     @Schema(description = "编码")
     private String code;
 
@@ -78,33 +80,41 @@ public class UpdateOrgReq implements ServiceReq {
     @Schema(description = "类型")
     private Type type;
 
+    //@Size(max = 64)
     @Schema(description = "所属行业")
     private String industries;
 
+    //@Size(max = 64)
     @Schema(description = "区域编码")
     private String areaCode;
 
+    //@Size(max = 128)
     @Schema(description = "机构级别")
     private String level;
 
+    //@Size(max = 128)
     @Schema(description = "机构类别")
     private String category;
 
     @Schema(description = "是否外部机构")
     private Boolean isExternal;
 
+    //@Size(max = 64)
     @Schema(description = "联系人")
     private String contacts;
 
+    //@Size(max = 20)
     @Schema(description = "联系电话")
     private String phones;
 
+    //@Size(max = 32)
     @Schema(description = "联系邮箱")
     private String emails;
 
     @Schema(description = "联系地址")
     private String address;
 
+    //@Size(max = 32)
     @Schema(description = "邮政编码")
     private String zipCode;
 
@@ -131,7 +141,7 @@ public class UpdateOrgReq implements ServiceReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 1800)
+    //@Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

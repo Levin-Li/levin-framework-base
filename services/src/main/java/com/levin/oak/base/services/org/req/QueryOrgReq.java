@@ -24,6 +24,7 @@ import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 
 import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -39,7 +40,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询机构
- *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "查询机构")
 @Data
@@ -52,7 +53,7 @@ import com.levin.oak.base.entities.*;
 @FieldNameConstants
 @TargetOption(entityClass = Org.class, alias = E_Org.ALIAS
 , resultClass = OrgInfo.class)
-public class QueryOrgReq implements ServiceReq  {
+public class QueryOrgReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -1399842458L;
 

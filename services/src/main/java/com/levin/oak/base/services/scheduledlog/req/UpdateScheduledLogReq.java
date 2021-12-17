@@ -23,6 +23,7 @@ import java.util.*;
 import com.levin.oak.base.entities.ScheduledLog;
 import com.levin.oak.base.entities.*;
 
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -33,7 +34,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新调度日志
- *  Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "更新调度日志")
 @Data
@@ -47,7 +48,7 @@ import com.levin.oak.base.entities.*;
 @TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS)
 //默认更新注解
 @Update
-public class UpdateScheduledLogReq implements ServiceReq {
+public class UpdateScheduledLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1319130901L;
 
@@ -57,16 +58,20 @@ public class UpdateScheduledLogReq implements ServiceReq {
     private Long id;
 
     //@InjectVar
+    //@Size(max = 64)
     @Schema(description = "租户ID")
     private String tenantId;
 
     //@InjectVar
+    //@Size(max = 64)
     @Schema(description = "归属组织")
     private String orgId;
 
+    //@Size(max = 64)
     @Schema(description = "任务ID")
     private String taskId;
 
+    //@Size(max = 256)
     @Schema(description = "执行周期")
     private String invokeCycle;
 

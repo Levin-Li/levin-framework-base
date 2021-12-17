@@ -23,6 +23,7 @@ import java.util.*;
 import com.levin.oak.base.entities.Setting;
 import com.levin.oak.base.entities.*;
 
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -34,7 +35,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新系统设置
- *  Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "更新系统设置")
 @Data
@@ -48,7 +49,7 @@ import com.levin.oak.base.entities.*;
 @TargetOption(entityClass = Setting.class, alias = E_Setting.ALIAS)
 //默认更新注解
 @Update
-public class UpdateSettingReq implements ServiceReq {
+public class UpdateSettingReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 147875794L;
 
@@ -57,12 +58,15 @@ public class UpdateSettingReq implements ServiceReq {
     @Eq(require = true)
     private Long id;
 
+    //@Size(max = 64)
     @Schema(description = "分类名称")
     private String categoryName;
 
+    //@Size(max = 64)
     @Schema(description = "分组名称")
     private String groupName;
 
+    //@Size(max = 64)
     @Schema(description = "编码")
     private String code;
 
@@ -75,13 +79,16 @@ public class UpdateSettingReq implements ServiceReq {
     @Schema(description = "值是否可空")
     private Boolean nullable;
 
+    //@Size(max = 64)
     @Schema(description = "输入占位提示")
     private String inputPlaceholder;
 
     //@InjectVar
+    //@Size(max = 64)
     @Schema(description = "租户ID")
     private String tenantId;
 
+    //@Size(max = 64)
     @Schema(description = "系统子域")
     private String domain;
 
@@ -101,7 +108,7 @@ public class UpdateSettingReq implements ServiceReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 1800)
+    //@Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

@@ -28,7 +28,7 @@ import java.util.Date;
 
 /**
 * 国际化资源
-* @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+* @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
 */
 @Schema(description ="国际化资源")
 @Data
@@ -48,6 +48,7 @@ public class I18nResInfo implements Serializable {
 
 
    @NotNull
+   @Size(max = 64)
    @Schema(description = "分类")
    private String category;
 
@@ -65,10 +66,12 @@ public class I18nResInfo implements Serializable {
 
 
    @InjectVar
+   @Size(max = 64)
    @Schema(description = "租户ID")
    private String tenantId;
 
 
+   @Size(max = 64)
    @Schema(description = "系统子域")
    private String domain;
 
@@ -79,7 +82,7 @@ public class I18nResInfo implements Serializable {
    private String name;
 
 
-   @Size(max = 512)
+   @Size(max = 128)
    @Schema(description = "创建者")
    private String creator;
 
@@ -107,7 +110,7 @@ public class I18nResInfo implements Serializable {
    private Boolean editable;
 
 
-   @Size(max = 1800)
+   @Size(max = 512)
    @Schema(description = "备注")
    private String remark;
 

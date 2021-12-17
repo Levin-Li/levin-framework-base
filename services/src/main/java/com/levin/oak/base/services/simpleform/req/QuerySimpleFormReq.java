@@ -24,6 +24,7 @@ import com.levin.oak.base.services.simpleform.info.*;
 import com.levin.oak.base.entities.SimpleForm;
 
 import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -33,7 +34,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询简单表单
- *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:25
  */
 @Schema(description = "查询简单表单")
 @Data
@@ -46,7 +47,7 @@ import com.levin.oak.base.entities.*;
 @FieldNameConstants
 @TargetOption(entityClass = SimpleForm.class, alias = E_SimpleForm.ALIAS
 , resultClass = SimpleFormInfo.class)
-public class QuerySimpleFormReq implements ServiceReq  {
+public class QuerySimpleFormReq extends MultiTenantReq{
 
     private static final long serialVersionUID = 1598335188L;
 

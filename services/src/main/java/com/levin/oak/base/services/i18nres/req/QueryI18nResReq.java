@@ -24,6 +24,7 @@ import com.levin.oak.base.services.i18nres.info.*;
 import com.levin.oak.base.entities.I18nRes;
 
 import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -33,7 +34,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询国际化资源
- *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "查询国际化资源")
 @Data
@@ -46,7 +47,7 @@ import com.levin.oak.base.entities.*;
 @FieldNameConstants
 @TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS
 , resultClass = I18nResInfo.class)
-public class QueryI18nResReq implements ServiceReq  {
+public class QueryI18nResReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -1681554652L;
 

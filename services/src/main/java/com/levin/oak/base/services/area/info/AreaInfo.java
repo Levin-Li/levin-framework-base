@@ -31,7 +31,7 @@ import java.util.Date;
 
 /**
 * 区域
-* @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+* @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
 */
 @Schema(description ="区域")
 @Data
@@ -46,6 +46,7 @@ public class AreaInfo implements Serializable {
 
 
    @NotNull
+   @Size(max = 64)
    @Schema(description = "编码")
    private String code;
 
@@ -54,6 +55,7 @@ public class AreaInfo implements Serializable {
    private String icon;
 
 
+   @Size(max = 64)
    @Schema(description = "父区域ID")
    private String parentCode;
 
@@ -79,7 +81,7 @@ public class AreaInfo implements Serializable {
    private String name;
 
 
-   @Size(max = 512)
+   @Size(max = 128)
    @Schema(description = "创建者")
    private String creator;
 
@@ -107,7 +109,7 @@ public class AreaInfo implements Serializable {
    private Boolean editable;
 
 
-   @Size(max = 1800)
+   @Size(max = 512)
    @Schema(description = "备注")
    private String remark;
 

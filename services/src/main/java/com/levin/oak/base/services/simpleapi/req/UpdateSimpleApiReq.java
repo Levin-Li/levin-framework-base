@@ -23,6 +23,7 @@ import java.util.*;
 import com.levin.oak.base.entities.SimpleApi;
 import com.levin.oak.base.entities.*;
 
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -34,7 +35,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新简单接口
- *  Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "更新简单接口")
 @Data
@@ -48,7 +49,7 @@ import com.levin.oak.base.entities.*;
 @TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS)
 //默认更新注解
 @Update
-public class UpdateSimpleApiReq implements ServiceReq {
+public class UpdateSimpleApiReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1021385738L;
 
@@ -57,15 +58,18 @@ public class UpdateSimpleApiReq implements ServiceReq {
     @Eq(require = true)
     private Long id;
 
+    //@Size(max = 16)
     @Schema(description = "http方法")
     private String methods;
 
     @Schema(description = "脚本语言")
     private Language language;
 
+    //@Size(max = 64)
     @Schema(description = "分类名称")
     private String category;
 
+    //@Size(max = 64)
     @Schema(description = "分组名称")
     private String groupName;
 
@@ -76,13 +80,16 @@ public class UpdateSimpleApiReq implements ServiceReq {
     private String content;
 
     //@InjectVar
+    //@Size(max = 64)
     @Schema(description = "机构ID")
     private String orgId;
 
     //@InjectVar
+    //@Size(max = 64)
     @Schema(description = "租户ID")
     private String tenantId;
 
+    //@Size(max = 64)
     @Schema(description = "系统子域")
     private String domain;
 
@@ -102,7 +109,7 @@ public class UpdateSimpleApiReq implements ServiceReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 1800)
+    //@Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

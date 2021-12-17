@@ -24,6 +24,7 @@ import com.levin.oak.base.services.area.info.*;
 import com.levin.oak.base.entities.Area;
 
 import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -36,7 +37,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询区域
- *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "查询区域")
 @Data
@@ -49,7 +50,7 @@ import com.levin.oak.base.entities.*;
 @FieldNameConstants
 @TargetOption(entityClass = Area.class, alias = E_Area.ALIAS
 , resultClass = AreaInfo.class)
-public class QueryAreaReq implements ServiceReq  {
+public class QueryAreaReq extends BaseReq{
 
     private static final long serialVersionUID = -445860277L;
 

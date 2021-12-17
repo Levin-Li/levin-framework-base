@@ -1,7 +1,6 @@
 package com.levin.oak.base.services.user.info;
 
 
-import com.levin.commons.rbac.UserBaseInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.*;
@@ -32,7 +31,7 @@ import com.levin.oak.base.entities.Org;
 
 /**
 * 用户
-* @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+* @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
 */
 @Schema(description ="用户")
 @Data
@@ -41,7 +40,7 @@ import com.levin.oak.base.entities.Org;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"org",})
 @FieldNameConstants
-public class UserInfo implements Serializable , UserBaseInfo {
+public class UserInfo implements Serializable {
 
    private static final long serialVersionUID = -445263479L;
 
@@ -51,30 +50,37 @@ public class UserInfo implements Serializable , UserBaseInfo {
    private Long id;
 
 
+   @Size(max = 64)
    @Schema(description = "租户ID")
    private String tenantId;
 
 
+   @Size(max = 64)
    @Schema(description = "登录名")
    private String loginName;
 
 
-//   @Schema(description = "登录密码")
-//   private String password;
+   @Size(max = 256)
+   @Schema(description = "登录密码")
+   private String password;
 
 
+   @Size(max = 20)
    @Schema(description = "手机号")
    private String telephone;
 
 
+   @Size(max = 32)
    @Schema(description = "邮箱")
    private String email;
 
 
+   @Size(max = 64)
    @Schema(description = "名称")
    private String name;
 
 
+   @Size(max = 32)
    @Schema(description = "昵称")
    private String nickname;
 
@@ -105,10 +111,12 @@ public class UserInfo implements Serializable , UserBaseInfo {
    private State state;
 
 
+   @Size(max = 32)
    @Schema(description = "工号")
    private String staffNo;
 
 
+   @Size(max = 128)
    @Schema(description = "岗位职级")
    private String jobPostCode;
 
@@ -122,9 +130,8 @@ public class UserInfo implements Serializable , UserBaseInfo {
    private List<String> roleList;
 
 
-   @Size(max = 512)
    @Schema(description = "所属部门ID")
-   private String orgId;
+   private Long orgId;
 
 
    //@Fetch //默认不加载，请通过查询对象控制
@@ -132,15 +139,17 @@ public class UserInfo implements Serializable , UserBaseInfo {
    private OrgInfo org;
 
 
+   @Size(max = 128)
    @Schema(description = "微信 OpendId")
    private String wxOpenId;
 
 
+   @Size(max = 128)
    @Schema(description = "阿里 OpendId")
    private String aliOpenId;
 
 
-   @Size(max = 512)
+   @Size(max = 128)
    @Schema(description = "创建者")
    private String creator;
 
@@ -168,7 +177,7 @@ public class UserInfo implements Serializable , UserBaseInfo {
    private Boolean editable;
 
 
-   @Size(max = 1800)
+   @Size(max = 512)
    @Schema(description = "备注")
    private String remark;
 

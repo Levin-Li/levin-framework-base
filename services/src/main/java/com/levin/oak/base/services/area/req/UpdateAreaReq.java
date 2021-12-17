@@ -23,6 +23,7 @@ import java.util.*;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.entities.*;
 
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -36,7 +37,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新区域
- *  Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "更新区域")
 @Data
@@ -50,7 +51,7 @@ import com.levin.oak.base.entities.*;
 @TargetOption(entityClass = Area.class, alias = E_Area.ALIAS)
 //默认更新注解
 @Update
-public class UpdateAreaReq implements ServiceReq {
+public class UpdateAreaReq extends BaseReq {
 
     private static final long serialVersionUID = -445860277L;
 
@@ -62,6 +63,7 @@ public class UpdateAreaReq implements ServiceReq {
     @Schema(description = "图标")
     private String icon;
 
+    //@Size(max = 64)
     @Schema(description = "父区域ID")
     private String parentCode;
 
@@ -84,7 +86,7 @@ public class UpdateAreaReq implements ServiceReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 1800)
+    //@Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

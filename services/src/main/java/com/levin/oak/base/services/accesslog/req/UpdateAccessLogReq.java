@@ -23,6 +23,7 @@ import java.util.*;
 import com.levin.oak.base.entities.AccessLog;
 import com.levin.oak.base.entities.*;
 
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -33,7 +34,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新访问日志
- *  Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "更新访问日志")
 @Data
@@ -47,7 +48,7 @@ import com.levin.oak.base.entities.*;
 @TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS)
 //默认更新注解
 @Update
-public class UpdateAccessLogReq implements ServiceReq {
+public class UpdateAccessLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1030736962L;
 
@@ -61,15 +62,18 @@ public class UpdateAccessLogReq implements ServiceReq {
     private Long tenantId;
 
     //@InjectVar
+    //@Size(max = 64)
     @Schema(description = "请求的域名")
     private String domain;
 
+    //@Size(max = 64)
     @Schema(description = "访问者")
     private String visitor;
 
     @Schema(description = "标题")
     private String title;
 
+    //@Size(max = 64)
     @Schema(description = "日志类型")
     private String logType;
 
@@ -85,33 +89,40 @@ public class UpdateAccessLogReq implements ServiceReq {
     @Schema(description = "请求URI")
     private String requestUri;
 
+    //@Size(max = 32)
     @Schema(description = "请求方法")
     private String requestMethod;
 
+    //@Size(max = 768)
     @Schema(description = "请求参数")
     private String requestParams;
 
     @Schema(description = "响应数据")
     private String responseData;
 
+    //@Size(max = 64)
     @Schema(description = "操作IP地址")
     private String remoteAddr;
 
+    //@Size(max = 64)
     @Schema(description = "服务器地址")
     private String serverAddr;
 
     @Schema(description = "是否有异常")
-    private String isException;
+    private Boolean isException;
 
     @Schema(description = "异常信息")
     private String exceptionInfo;
 
+    //@Size(max = 512)
     @Schema(description = "用户代理")
     private String userAgent;
 
+    //@Size(max = 128)
     @Schema(description = "设备名称/操作系统")
     private String deviceName;
 
+    //@Size(max = 64)
     @Schema(description = "浏览器名称")
     private String browserName;
 

@@ -24,6 +24,7 @@ import com.levin.oak.base.services.role.info.*;
 import com.levin.oak.base.entities.Role;
 
 import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -36,7 +37,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询角色
- *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "查询角色")
 @Data
@@ -49,7 +50,7 @@ import com.levin.oak.base.entities.*;
 @FieldNameConstants
 @TargetOption(entityClass = Role.class, alias = E_Role.ALIAS
 , resultClass = RoleInfo.class)
-public class QueryRoleReq implements ServiceReq  {
+public class QueryRoleReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -445356492L;
 

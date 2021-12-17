@@ -23,6 +23,7 @@ import java.util.*;
 import com.levin.oak.base.entities.User;
 import com.levin.oak.base.entities.*;
 
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -36,7 +37,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新用户
- *  Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "更新用户")
 @Data
@@ -50,7 +51,7 @@ import com.levin.oak.base.entities.*;
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS)
 //默认更新注解
 @Update
-public class UpdateUserReq implements ServiceReq {
+public class UpdateUserReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445263479L;
 
@@ -59,26 +60,33 @@ public class UpdateUserReq implements ServiceReq {
     @Eq(require = true)
     private Long id;
 
+    //@Size(max = 64)
     @Schema(description = "租户ID")
     private String tenantId;
 
+    //@Size(max = 64)
     @Schema(description = "登录名")
     private String loginName;
 
+    //@Size(max = 256)
     @Schema(description = "登录密码")
     private String password;
 
+    //@Size(max = 20)
     @Schema(description = "手机号")
-    private String phone;
+    private String telephone;
 
+    //@Size(max = 32)
     @Schema(description = "邮箱")
     private String email;
 
+    //@Size(max = 64)
     @Schema(description = "名称")
     private String name;
 
+    //@Size(max = 32)
     @Schema(description = "昵称")
-    private String nickName;
+    private String nickname;
 
     @Schema(description = "头像")
     private String avatar;
@@ -99,9 +107,11 @@ public class UpdateUserReq implements ServiceReq {
     @Schema(description = "帐号状态")
     private State state;
 
+    //@Size(max = 32)
     @Schema(description = "工号")
     private String staffNo;
 
+    //@Size(max = 128)
     @Schema(description = "岗位职级")
     private String jobPostCode;
 
@@ -112,13 +122,14 @@ public class UpdateUserReq implements ServiceReq {
     @Schema(description = "角色列表")
     private List<String> roleList;
 
-    //@Size(max = 512)
     @Schema(description = "所属部门ID")
-    private String orgId;
+    private Long orgId;
 
+    //@Size(max = 128)
     @Schema(description = "微信 OpendId")
     private String wxOpenId;
 
+    //@Size(max = 128)
     @Schema(description = "阿里 OpendId")
     private String aliOpenId;
 
@@ -134,7 +145,7 @@ public class UpdateUserReq implements ServiceReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 1800)
+    //@Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

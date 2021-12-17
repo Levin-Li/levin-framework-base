@@ -22,7 +22,7 @@ import com.levin.commons.dao.annotation.misc.*;
 
 
 import com.levin.oak.base.entities.*;
-
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.oak.base.entities.Role.*;
@@ -35,7 +35,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  新增角色
- *  //Auto gen by simple-dao-codegen 2021-11-23 16:11:30
+ *  //Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "新增角色")
 @Data
@@ -47,7 +47,7 @@ import com.levin.oak.base.entities.*;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = Role.class, alias = E_Role.ALIAS)
-public class CreateRoleReq implements ServiceReq {
+public class CreateRoleReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445356492L;
 
@@ -78,10 +78,12 @@ public class CreateRoleReq implements ServiceReq {
 
     @Schema(description = "租户ID" )
     @InjectVar
+    @Size(max = 64)
     private String tenantId;
 
 
     @Schema(description = "系统子域" )
+    @Size(max = 64)
     private String domain;
 
 
@@ -92,7 +94,7 @@ public class CreateRoleReq implements ServiceReq {
 
 
     @Schema(description = "创建者" )
-    @Size(max = 512)
+    @Size(max = 128)
     private String creator;
 
 
@@ -120,7 +122,7 @@ public class CreateRoleReq implements ServiceReq {
 
 
     @Schema(description = "备注" )
-    @Size(max = 1800)
+    @Size(max = 512)
     private String remark;
 
 

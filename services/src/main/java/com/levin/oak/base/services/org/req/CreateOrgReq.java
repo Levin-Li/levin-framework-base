@@ -22,7 +22,7 @@ import com.levin.commons.dao.annotation.misc.*;
 
 
 import com.levin.oak.base.entities.*;
-
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.commons.service.domain.InjectVar;
@@ -38,7 +38,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  新增机构
- *  //Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  //Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "新增机构")
 @Data
@@ -50,7 +50,7 @@ import com.levin.oak.base.entities.*;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = Org.class, alias = E_Org.ALIAS)
-public class CreateOrgReq implements ServiceReq {
+public class CreateOrgReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -1399842458L;
 
@@ -62,6 +62,7 @@ public class CreateOrgReq implements ServiceReq {
 
 
     @Schema(description = "编码" )
+    @Size(max = 128)
     private String code;
 
 
@@ -80,21 +81,25 @@ public class CreateOrgReq implements ServiceReq {
 
 
     @Schema(description = "所属行业" )
+    @Size(max = 64)
     private String industries;
 
 
     @Schema(description = "区域编码" , required = true)
     @NotNull
+    @Size(max = 64)
     private String areaCode;
 
 
 
     @Schema(description = "机构级别" )
+    @Size(max = 128)
     private String level;
 
 
     @Schema(description = "机构类别" , required = true)
     @NotNull
+    @Size(max = 128)
     private String category;
 
 
@@ -104,14 +109,17 @@ public class CreateOrgReq implements ServiceReq {
 
 
     @Schema(description = "联系人" )
+    @Size(max = 64)
     private String contacts;
 
 
     @Schema(description = "联系电话" )
+    @Size(max = 20)
     private String phones;
 
 
     @Schema(description = "联系邮箱" )
+    @Size(max = 32)
     private String emails;
 
 
@@ -120,6 +128,7 @@ public class CreateOrgReq implements ServiceReq {
 
 
     @Schema(description = "邮政编码" )
+    @Size(max = 32)
     private String zipCode;
 
 
@@ -141,7 +150,7 @@ public class CreateOrgReq implements ServiceReq {
 
 
     @Schema(description = "创建者" )
-    @Size(max = 512)
+    @Size(max = 128)
     private String creator;
 
 
@@ -169,7 +178,7 @@ public class CreateOrgReq implements ServiceReq {
 
 
     @Schema(description = "备注" )
-    @Size(max = 1800)
+    @Size(max = 512)
     private String remark;
 
 

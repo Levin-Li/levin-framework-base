@@ -24,6 +24,7 @@ import com.levin.oak.base.services.setting.info.*;
 import com.levin.oak.base.entities.Setting;
 
 import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -34,7 +35,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询系统设置
- *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "查询系统设置")
 @Data
@@ -47,7 +48,7 @@ import com.levin.oak.base.entities.*;
 @FieldNameConstants
 @TargetOption(entityClass = Setting.class, alias = E_Setting.ALIAS
 , resultClass = SettingInfo.class)
-public class QuerySettingReq implements ServiceReq  {
+public class QuerySettingReq extends MultiTenantReq{
 
     private static final long serialVersionUID = 147875794L;
 

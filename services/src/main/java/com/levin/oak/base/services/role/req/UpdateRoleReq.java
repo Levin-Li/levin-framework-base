@@ -23,6 +23,7 @@ import java.util.*;
 import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.entities.*;
 
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -36,7 +37,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  更新角色
- *  Auto gen by simple-dao-codegen 2021-11-23 16:11:30
+ *  Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "更新角色")
 @Data
@@ -50,7 +51,7 @@ import com.levin.oak.base.entities.*;
 @TargetOption(entityClass = Role.class, alias = E_Role.ALIAS)
 //默认更新注解
 @Update
-public class UpdateRoleReq implements ServiceReq {
+public class UpdateRoleReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445356492L;
 
@@ -75,9 +76,11 @@ public class UpdateRoleReq implements ServiceReq {
     private String permissions;
 
     //@InjectVar
+    //@Size(max = 64)
     @Schema(description = "租户ID")
     private String tenantId;
 
+    //@Size(max = 64)
     @Schema(description = "系统子域")
     private String domain;
 
@@ -97,7 +100,7 @@ public class UpdateRoleReq implements ServiceReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 1800)
+    //@Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

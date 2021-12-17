@@ -32,7 +32,7 @@ import java.util.Date;
 
 /**
 * 菜单
-* @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+* @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
 */
 @Schema(description ="菜单")
 @Data
@@ -56,6 +56,7 @@ public class MenuResInfo implements Serializable {
    private Long tenantId;
 
 
+   @Size(max = 64)
    @Schema(description = "子域")
    private String domain;
 
@@ -70,6 +71,7 @@ public class MenuResInfo implements Serializable {
    private Boolean alwaysShow;
 
 
+   @Size(max = 64)
    @Schema(description = "目标")
    private String target;
 
@@ -116,7 +118,7 @@ public class MenuResInfo implements Serializable {
    private String name;
 
 
-   @Size(max = 512)
+   @Size(max = 128)
    @Schema(description = "创建者")
    private String creator;
 
@@ -144,7 +146,7 @@ public class MenuResInfo implements Serializable {
    private Boolean editable;
 
 
-   @Size(max = 1800)
+   @Size(max = 512)
    @Schema(description = "备注")
    private String remark;
 

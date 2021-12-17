@@ -22,7 +22,7 @@ import com.levin.commons.dao.annotation.misc.*;
 
 
 import com.levin.oak.base.entities.*;
-
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.commons.service.domain.InjectVar;
@@ -32,7 +32,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  新增调度日志
- *  //Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  //Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "新增调度日志")
 @Data
@@ -44,7 +44,7 @@ import com.levin.oak.base.entities.*;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS)
-public class CreateScheduledLogReq implements ServiceReq {
+public class CreateScheduledLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1319130901L;
 
@@ -52,17 +52,20 @@ public class CreateScheduledLogReq implements ServiceReq {
 
     @Schema(description = "租户ID" )
     @InjectVar
+    @Size(max = 64)
     private String tenantId;
 
 
     @Schema(description = "归属组织" , required = true)
     @NotNull
     @InjectVar
+    @Size(max = 64)
     private String orgId;
 
 
     @Schema(description = "任务ID" , required = true)
     @NotNull
+    @Size(max = 64)
     private String taskId;
 
 
@@ -72,6 +75,7 @@ public class CreateScheduledLogReq implements ServiceReq {
 
 
     @Schema(description = "执行周期" )
+    @Size(max = 256)
     private String invokeCycle;
 
 

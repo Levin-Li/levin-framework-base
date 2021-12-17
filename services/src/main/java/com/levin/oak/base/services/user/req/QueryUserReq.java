@@ -24,6 +24,7 @@ import com.levin.oak.base.services.user.info.*;
 import com.levin.oak.base.entities.User;
 
 import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -36,7 +37,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询用户
- *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "查询用户")
 @Data
@@ -49,7 +50,7 @@ import com.levin.oak.base.entities.*;
 @FieldNameConstants
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS
 , resultClass = UserInfo.class)
-public class QueryUserReq implements ServiceReq  {
+public class QueryUserReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -445263479L;
 
@@ -71,7 +72,7 @@ public class QueryUserReq implements ServiceReq  {
 
 
     @Schema(description = "手机号")
-    private String phone;
+    private String telephone;
 
 
     @Schema(description = "邮箱")
@@ -83,7 +84,7 @@ public class QueryUserReq implements ServiceReq  {
 
 
     @Schema(description = "昵称")
-    private String nickName;
+    private String nickname;
 
 
     @Schema(description = "头像")
@@ -133,7 +134,7 @@ public class QueryUserReq implements ServiceReq  {
 
 
     @Schema(description = "所属部门ID")
-    private String orgId;
+    private Long orgId;
 
 
     @Schema(description = "是否加载所属部门")

@@ -24,6 +24,7 @@ import com.levin.oak.base.services.jobpost.info.*;
 import com.levin.oak.base.entities.JobPost;
 
 import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
@@ -34,7 +35,7 @@ import com.levin.oak.base.entities.*;
 
 /**
  *  查询工作岗位
- *  @Author Auto gen by simple-dao-codegen 2021-11-23 16:11:31
+ *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
  */
 @Schema(description = "查询工作岗位")
 @Data
@@ -47,7 +48,7 @@ import com.levin.oak.base.entities.*;
 @FieldNameConstants
 @TargetOption(entityClass = JobPost.class, alias = E_JobPost.ALIAS
 , resultClass = JobPostInfo.class)
-public class QueryJobPostReq implements ServiceReq  {
+public class QueryJobPostReq extends MultiTenantReq{
 
     private static final long serialVersionUID = 1018878847L;
 
