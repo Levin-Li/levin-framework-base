@@ -28,7 +28,7 @@ import com.levin.commons.service.domain.InjectVar;
 
 /**
 * 调度任务
-* @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
+* @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:22
 */
 @Schema(description ="调度任务")
 @Data

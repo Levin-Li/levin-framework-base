@@ -91,7 +91,7 @@ public class Org
 
     @Schema(description = "租户ID")
     @InjectVar
-    protected Long tenantId;
+    protected String tenantId;
 
     @Schema(description = "编码", title = "对于公司是统一信用码")
     @Column(length = 128)

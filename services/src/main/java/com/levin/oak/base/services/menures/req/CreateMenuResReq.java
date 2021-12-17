@@ -36,7 +36,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增菜单
- *  //Auto gen by simple-dao-codegen 2021-12-17 11:53:24
+ *  //Auto gen by simple-dao-codegen 2021-12-17 11:57:23
  */
 @Schema(description = "新增菜单")
 @Data
@@ -56,7 +56,7 @@ public class CreateMenuResReq extends MultiTenantReq {
 
     @Schema(description = "租户ID" )
     @InjectVar
-    private Long tenantId;
+    private String tenantId;
 
 
     @Schema(description = "子域" )

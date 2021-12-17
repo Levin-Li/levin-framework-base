@@ -28,7 +28,7 @@ import java.util.Date;
 
 /**
 * 访问日志
-* @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
+* @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:22
 */
 @Schema(description ="访问日志")
 @Data
@@ -49,7 +49,7 @@ public class AccessLogInfo implements Serializable {
 
    @InjectVar
    @Schema(description = "租户ID")
-   private Long tenantId;
+   private String tenantId;
 
 
    @InjectVar

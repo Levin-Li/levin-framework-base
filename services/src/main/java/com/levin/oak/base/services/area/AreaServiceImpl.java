@@ -42,7 +42,7 @@ import com.levin.oak.base.*;
 /**
  *  区域-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-12-17 11:53:24
+ *@author auto gen by simple-dao-codegen 2021-12-17 11:57:22
  *
  */
 

@@ -34,7 +34,7 @@ import java.util.Date;
 
 /**
 * 机构
-* @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
+* @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:22
 */
 @Schema(description ="机构")
 @Data
@@ -55,7 +55,7 @@ public class OrgInfo implements Serializable {
 
    @InjectVar
    @Schema(description = "租户ID")
-   private Long tenantId;
+   private String tenantId;
 
 
    @Size(max = 128)

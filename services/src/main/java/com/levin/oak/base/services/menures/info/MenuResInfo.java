@@ -32,7 +32,7 @@ import java.util.Date;
 
 /**
 * 菜单
-* @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
+* @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:23
 */
 @Schema(description ="菜单")
 @Data
@@ -53,7 +53,7 @@ public class MenuResInfo implements Serializable {
 
    @InjectVar
    @Schema(description = "租户ID")
-   private Long tenantId;
+   private String tenantId;
 
 
    @Size(max = 64)

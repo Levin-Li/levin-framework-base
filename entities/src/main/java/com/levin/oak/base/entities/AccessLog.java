@@ -39,7 +39,7 @@ public class AccessLog
 
     @Schema(description = "租户ID")
     @InjectVar
-    protected Long tenantId;
+    protected String tenantId;
 
     @Schema(description = "请求的域名")
     @InjectVar

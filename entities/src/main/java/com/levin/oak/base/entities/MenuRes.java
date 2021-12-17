@@ -47,7 +47,7 @@ public class MenuRes
 
     @Schema(description = "租户ID")
     @InjectVar
-    Long tenantId;
+    String tenantId;
 
     @Schema(description = "子域")
     @Column( length = 64)

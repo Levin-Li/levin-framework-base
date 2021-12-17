@@ -34,7 +34,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询简单表单
- *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:25
+ *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:23
  */
 @Schema(description = "查询简单表单")
 @Data

@@ -34,7 +34,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  删除菜单
- *  //Auto gen by simple-dao-codegen 2021-12-17 11:53:24
+ *  //Auto gen by simple-dao-codegen 2021-12-17 11:57:23
  */
 @Schema(description = "删除菜单")
 @Data

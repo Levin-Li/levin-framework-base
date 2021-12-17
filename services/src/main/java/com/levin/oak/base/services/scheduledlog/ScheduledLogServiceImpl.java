@@ -39,7 +39,7 @@ import com.levin.oak.base.*;
 /**
  *  调度日志-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-12-17 11:53:24
+ *@author auto gen by simple-dao-codegen 2021-12-17 11:57:22
  *
  */
 

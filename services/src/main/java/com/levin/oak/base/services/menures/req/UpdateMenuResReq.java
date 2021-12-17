@@ -38,7 +38,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  更新菜单
- *  Auto gen by simple-dao-codegen 2021-12-17 11:53:24
+ *  Auto gen by simple-dao-codegen 2021-12-17 11:57:23
  */
 @Schema(description = "更新菜单")
 @Data
@@ -63,7 +63,7 @@ public class UpdateMenuResReq extends MultiTenantReq {
 
     //@InjectVar
     @Schema(description = "租户ID")
-    private Long tenantId;
+    private String tenantId;
 
     //@Size(max = 64)
     @Schema(description = "子域")

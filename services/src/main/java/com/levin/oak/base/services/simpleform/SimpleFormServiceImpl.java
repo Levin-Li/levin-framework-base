@@ -39,7 +39,7 @@ import com.levin.oak.base.*;
 /**
  *  简单表单-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-12-17 11:53:25
+ *@author auto gen by simple-dao-codegen 2021-12-17 11:57:23
  *
  */
 

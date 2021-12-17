@@ -29,7 +29,7 @@ import java.util.Date;
 
 /**
 * 工作岗位
-* @Author Auto gen by simple-dao-codegen 2021-12-17 11:53:24
+* @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:22
 */
 @Schema(description ="工作岗位")
 @Data
