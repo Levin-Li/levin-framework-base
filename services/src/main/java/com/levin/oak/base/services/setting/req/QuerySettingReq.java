@@ -29,13 +29,12 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.oak.base.entities.Setting.*;
-    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  查询系统设置
- *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "查询系统设置")
 @Data
@@ -83,10 +82,6 @@ public class QuerySettingReq extends MultiTenantReq{
 
     @Schema(description = "输入占位提示")
     private String inputPlaceholder;
-
-
-    @Schema(description = "租户ID")
-    private String tenantId;
 
 
     @Schema(description = "系统子域")

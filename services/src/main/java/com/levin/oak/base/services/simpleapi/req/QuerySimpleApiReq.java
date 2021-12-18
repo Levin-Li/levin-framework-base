@@ -29,13 +29,12 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.oak.base.entities.SimpleApi.*;
-    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  查询简单接口
- *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "查询简单接口")
 @Data
@@ -79,14 +78,6 @@ public class QuerySimpleApiReq extends MultiTenantReq{
 
     @Schema(description = "内容")
     private String content;
-
-
-    @Schema(description = "机构ID")
-    private String orgId;
-
-
-    @Schema(description = "租户ID")
-    private String tenantId;
 
 
     @Schema(description = "系统子域")

@@ -32,7 +32,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增访问日志
- *  //Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  //Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "新增访问日志")
 @Data
@@ -48,11 +48,6 @@ public class CreateAccessLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1030736962L;
 
-
-
-    @Schema(description = "租户ID" )
-    @InjectVar
-    private String tenantId;
 
 
     @Schema(description = "请求的域名" )

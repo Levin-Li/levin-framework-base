@@ -25,13 +25,12 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.oak.base.entities.JobPost.*;
-    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  删除工作岗位
- *  //Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  //Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "删除工作岗位")
 @Data

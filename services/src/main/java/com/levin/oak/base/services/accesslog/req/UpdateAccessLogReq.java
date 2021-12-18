@@ -34,7 +34,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  更新访问日志
- *  Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "更新访问日志")
 @Data
@@ -56,10 +56,6 @@ public class UpdateAccessLogReq extends MultiTenantReq {
     @NotNull
     @Eq(require = true)
     private Long id;
-
-    //@InjectVar
-    @Schema(description = "租户ID")
-    private String tenantId;
 
     //@InjectVar
     //@Size(max = 64)

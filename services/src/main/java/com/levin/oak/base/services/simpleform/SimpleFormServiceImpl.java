@@ -32,14 +32,13 @@ import com.levin.oak.base.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  简单表单-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-12-17 11:57:23
+ *@author auto gen by simple-dao-codegen 2021-12-18 11:15:49
  *
  */
 

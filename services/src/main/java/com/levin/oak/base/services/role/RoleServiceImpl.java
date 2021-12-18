@@ -35,14 +35,13 @@ import com.levin.oak.base.*;
     import com.levin.oak.base.entities.Role.*;
     import java.util.List;
     import com.levin.commons.rbac.ResPermission;
-    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  角色-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *@author auto gen by simple-dao-codegen 2021-12-18 11:15:48
  *
  */
 

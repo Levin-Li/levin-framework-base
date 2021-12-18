@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  系统设置-服务接口
- *  @author Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  @author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Tag(name = E_Setting.BIZ_NAME, description = E_Setting.BIZ_NAME + MAINTAIN_ACTION)
 public interface SettingService {

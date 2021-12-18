@@ -30,14 +30,13 @@ import com.levin.oak.base.services.commons.req.*;
     import com.levin.oak.base.entities.Role.*;
     import java.util.List;
     import com.levin.commons.rbac.ResPermission;
-    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  更新角色
- *  Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  Auto gen by simple-dao-codegen 2021-12-18 11:15:48
  */
 @Schema(description = "更新角色")
 @Data
@@ -74,11 +73,6 @@ public class UpdateRoleReq extends MultiTenantReq {
 
     @Schema(description = "资源权限")
     private String permissions;
-
-    //@InjectVar
-    //@Size(max = 64)
-    @Schema(description = "租户ID")
-    private String tenantId;
 
     //@Size(max = 64)
     @Schema(description = "系统子域")

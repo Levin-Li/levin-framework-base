@@ -28,14 +28,13 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.oak.base.entities.Setting.*;
-    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  更新系统设置
- *  Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "更新系统设置")
 @Data
@@ -82,11 +81,6 @@ public class UpdateSettingReq extends MultiTenantReq {
     //@Size(max = 64)
     @Schema(description = "输入占位提示")
     private String inputPlaceholder;
-
-    //@InjectVar
-    //@Size(max = 64)
-    @Schema(description = "租户ID")
-    private String tenantId;
 
     //@Size(max = 64)
     @Schema(description = "系统子域")

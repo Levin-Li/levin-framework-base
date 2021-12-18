@@ -28,13 +28,12 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import java.util.Date;
-    import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 
 /**
  *  更新调度任务
- *  Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "更新调度任务")
 @Data
@@ -79,16 +78,6 @@ public class UpdateScheduledTaskReq extends MultiTenantReq {
 
     @Schema(description = "下一次时间")
     private Date nextInvokeTime;
-
-    //@InjectVar
-    //@Size(max = 64)
-    @Schema(description = "机构ID")
-    private String orgId;
-
-    //@InjectVar
-    //@Size(max = 64)
-    @Schema(description = "租户ID")
-    private String tenantId;
 
     //@Size(max = 64)
     @Schema(description = "系统子域")

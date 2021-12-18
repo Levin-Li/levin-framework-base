@@ -27,14 +27,13 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
     import com.levin.oak.base.entities.Dict.*;
     import java.util.List;
-    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  新增字典
- *  //Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  //Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "新增字典")
 @Data
@@ -66,12 +65,6 @@ public class CreateDictReq extends MultiTenantReq {
     @Schema(description = "编码项" )
     private String items;
 
-
-
-    @Schema(description = "租户ID" )
-    @InjectVar
-    @Size(max = 64)
-    private String tenantId;
 
 
     @Schema(description = "系统子域" )

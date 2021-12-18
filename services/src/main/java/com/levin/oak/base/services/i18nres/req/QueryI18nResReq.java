@@ -28,13 +28,12 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  查询国际化资源
- *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "查询国际化资源")
 @Data
@@ -66,10 +65,6 @@ public class QueryI18nResReq extends MultiTenantReq{
 
     @Schema(description = "标签")
     private String label;
-
-
-    @Schema(description = "租户ID")
-    private String tenantId;
 
 
     @Schema(description = "系统子域")

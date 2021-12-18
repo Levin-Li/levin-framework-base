@@ -28,7 +28,6 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.domain.InjectVar;
     import com.levin.oak.base.entities.Org.*;
     import com.levin.oak.base.entities.Area;
     import com.levin.oak.base.services.area.info.*;
@@ -40,7 +39,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询机构
- *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "查询机构")
 @Data
@@ -60,10 +59,6 @@ public class QueryOrgReq extends MultiTenantReq{
 
     @Schema(description = "id")
     private Long id;
-
-
-    @Schema(description = "租户ID")
-    private String tenantId;
 
 
     @Schema(description = "编码")

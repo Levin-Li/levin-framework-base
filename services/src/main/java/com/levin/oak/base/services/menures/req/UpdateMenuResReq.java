@@ -27,7 +27,6 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.domain.InjectVar;
     import com.levin.commons.rbac.MenuItem.*;
     import com.levin.oak.base.entities.MenuRes;
     import com.levin.oak.base.services.menures.info.*;
@@ -38,7 +37,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  更新菜单
- *  Auto gen by simple-dao-codegen 2021-12-17 11:57:23
+ *  Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "更新菜单")
 @Data
@@ -60,10 +59,6 @@ public class UpdateMenuResReq extends MultiTenantReq {
     @NotNull
     @Eq(require = true)
     private Long id;
-
-    //@InjectVar
-    @Schema(description = "租户ID")
-    private String tenantId;
 
     //@Size(max = 64)
     @Schema(description = "子域")

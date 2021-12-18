@@ -37,7 +37,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询用户
- *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "查询用户")
 @Data
@@ -57,10 +57,6 @@ public class QueryUserReq extends MultiTenantReq{
 
     @Schema(description = "id")
     private Long id;
-
-
-    @Schema(description = "租户ID")
-    private String tenantId;
 
 
     @Schema(description = "登录名")
@@ -131,10 +127,6 @@ public class QueryUserReq extends MultiTenantReq{
 
     @Schema(description = "角色列表")
     private List<String> roleList;
-
-
-    @Schema(description = "所属部门ID")
-    private Long orgId;
 
 
     @Schema(description = "是否加载所属部门")

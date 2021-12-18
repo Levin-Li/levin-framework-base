@@ -35,7 +35,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增用户
- *  //Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  //Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "新增用户")
 @Data
@@ -51,11 +51,6 @@ public class CreateUserReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445263479L;
 
-
-
-    @Schema(description = "租户ID" )
-    @Size(max = 64)
-    private String tenantId;
 
 
     @Schema(description = "登录名" )
@@ -131,10 +126,6 @@ public class CreateUserReq extends MultiTenantReq {
 
     @Schema(description = "角色列表" )
     private List<String> roleList;
-
-
-    @Schema(description = "所属部门ID" )
-    private Long orgId;
 
 
 

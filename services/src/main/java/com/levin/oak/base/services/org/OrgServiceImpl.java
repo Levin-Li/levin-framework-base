@@ -32,7 +32,6 @@ import com.levin.oak.base.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.domain.InjectVar;
     import com.levin.oak.base.entities.Org.*;
     import com.levin.oak.base.entities.Area;
     import com.levin.oak.base.services.area.info.*;
@@ -45,7 +44,7 @@ import com.levin.oak.base.*;
 /**
  *  机构-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *@author auto gen by simple-dao-codegen 2021-12-18 11:15:49
  *
  */
 

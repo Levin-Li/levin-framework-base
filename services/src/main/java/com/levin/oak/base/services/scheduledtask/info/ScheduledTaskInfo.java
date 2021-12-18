@@ -23,12 +23,11 @@ import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
 import java.util.Date;
-import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 /**
 * 调度任务
-* @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+* @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
 */
 @Schema(description ="调度任务")
 @Data
@@ -78,18 +77,6 @@ public class ScheduledTaskInfo implements Serializable {
 
    @Schema(description = "下一次时间")
    private Date nextInvokeTime;
-
-
-   @InjectVar
-   @Size(max = 64)
-   @Schema(description = "机构ID")
-   private String orgId;
-
-
-   @InjectVar
-   @Size(max = 64)
-   @Schema(description = "租户ID")
-   private String tenantId;
 
 
    @Size(max = 64)

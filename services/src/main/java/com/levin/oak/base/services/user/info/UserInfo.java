@@ -32,7 +32,7 @@ import com.levin.oak.base.entities.Org;
 
 /**
 * 用户
-* @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+* @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
 */
 @Schema(description ="用户")
 @Data
@@ -49,11 +49,6 @@ public class UserInfo implements UserBaseInfo, Serializable {
    @NotNull
    @Schema(description = "id")
    private Long id;
-
-
-   @Size(max = 64)
-   @Schema(description = "租户ID")
-   private String tenantId;
 
 
    @Size(max = 64)
@@ -129,10 +124,6 @@ public class UserInfo implements UserBaseInfo, Serializable {
 
    @Schema(description = "角色列表")
    private List<String> roleList;
-
-
-   @Schema(description = "所属部门ID")
-   private Long orgId;
 
 
    //@Fetch //默认不加载，请通过查询对象控制

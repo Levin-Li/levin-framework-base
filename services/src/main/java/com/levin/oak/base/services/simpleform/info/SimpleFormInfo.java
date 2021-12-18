@@ -22,13 +22,12 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
-import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
 * 简单表单
-* @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:23
+* @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
 */
 @Schema(description ="简单表单")
 @Data
@@ -70,18 +69,6 @@ public class SimpleFormInfo implements Serializable {
 
    @Schema(description = "内容")
    private String content;
-
-
-   @InjectVar
-   @Size(max = 64)
-   @Schema(description = "机构ID")
-   private String orgId;
-
-
-   @InjectVar
-   @Size(max = 64)
-   @Schema(description = "租户ID")
-   private String tenantId;
 
 
    @Size(max = 64)

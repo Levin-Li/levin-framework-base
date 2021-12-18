@@ -22,7 +22,6 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
-import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Org.*;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
@@ -34,7 +33,7 @@ import java.util.Date;
 
 /**
 * 机构
-* @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+* @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
 */
 @Schema(description ="机构")
 @Data
@@ -51,11 +50,6 @@ public class OrgInfo implements Serializable {
    @NotNull
    @Schema(description = "id")
    private Long id;
-
-
-   @InjectVar
-   @Schema(description = "租户ID")
-   private String tenantId;
 
 
    @Size(max = 128)

@@ -25,14 +25,13 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  新增简单表单
- *  //Auto gen by simple-dao-codegen 2021-12-17 11:57:23
+ *  //Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "新增简单表单")
 @Data
@@ -73,18 +72,6 @@ public class CreateSimpleFormReq extends MultiTenantReq {
 
     @Schema(description = "内容" )
     private String content;
-
-
-    @Schema(description = "机构ID" )
-    @InjectVar
-    @Size(max = 64)
-    private String orgId;
-
-
-    @Schema(description = "租户ID" )
-    @InjectVar
-    @Size(max = 64)
-    private String tenantId;
 
 
     @Schema(description = "系统子域" )

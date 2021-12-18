@@ -24,7 +24,6 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.domain.InjectVar;
     import com.levin.oak.base.entities.Org.*;
     import com.levin.oak.base.entities.Area;
     import com.levin.oak.base.services.area.info.*;
@@ -36,7 +35,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  删除机构
- *  //Auto gen by simple-dao-codegen 2021-12-17 11:57:22
+ *  //Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "删除机构")
 @Data

@@ -28,7 +28,6 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.domain.InjectVar;
     import com.levin.commons.rbac.MenuItem.*;
     import com.levin.oak.base.entities.MenuRes;
     import com.levin.oak.base.services.menures.info.*;
@@ -38,7 +37,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询菜单
- *  @Author Auto gen by simple-dao-codegen 2021-12-17 11:57:23
+ *  @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
  */
 @Schema(description = "查询菜单")
 @Data
@@ -58,10 +57,6 @@ public class QueryMenuResReq extends MultiTenantReq{
 
     @Schema(description = "id")
     private Long id;
-
-
-    @Schema(description = "租户ID")
-    private String tenantId;
 
 
     @Schema(description = "子域")
