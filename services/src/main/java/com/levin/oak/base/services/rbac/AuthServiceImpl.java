@@ -10,7 +10,7 @@ import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.RbacUtils;
 import com.levin.commons.rbac.ResPermission;
 import com.levin.commons.rbac.UserBaseInfo;
-import com.levin.oak.base.ModuleOption;
+import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.BaseService;
 import com.levin.oak.base.services.menures.MenuResService;
@@ -21,6 +21,7 @@ import com.levin.oak.base.services.user.UserService;
 import com.levin.oak.base.services.user.info.UserInfo;
 import com.levin.oak.base.services.user.req.CreateUserReq;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -31,14 +32,15 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
-@Service(PLUGIN_PREFIX + "AuthService")
+@Service(PLUGIN_PREFIX + "DefaultAuthService")
 @Slf4j
-
+@ConditionalOnMissingBean(AuthService.class)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", havingValue = "false", matchIfMissing = true)
 
 /**
@@ -71,7 +73,79 @@ public class AuthServiceImpl extends BaseService implements AuthService {
     @Resource
     PluginManager pluginManager;
 
+
+    /**
+     * 认证，并返回token
+     *
+     * @param account
+     * @param password
+     * @param userAgent
+     * @param params
+     * @return 认证成功后的token
+     */
     @Override
+    public String auth(String account, String password, String userAgent, Map<String, Object>... params) {
+        return loginByPassword(new LoginReq().setAccount(account).setPassword(password).setUa(userAgent));
+    }
+
+    /**
+     * 直接认证，并返回token
+     *
+     * @param userInfo
+     * @param userAgent
+     * @param params
+     * @return 认证成功后的token
+     */
+    @Override
+    public String auth(UserBaseInfo userInfo, String userAgent, Map<String, Object>... params) {
+
+        if (userInfo == null
+                || userInfo.getId() == null) {
+            throw new IllegalArgumentException("userInfo is null");
+        }
+
+        //默认登录
+        StpUtil.login("" + userInfo.getId(), getDeviceType(userAgent));
+
+        return StpUtil.getTokenValue();
+    }
+
+    @Override
+    public boolean isLogin() {
+        return StpUtil.isLogin();
+    }
+
+    @Override
+    public UserInfo getUserInfo() {
+        return getUserInfo(StpUtil.getTokenValue());
+    }
+
+    @Override
+    public UserInfo getUserInfo(String token) {
+
+        UserInfo info = userService.findById(Long.parseLong("" + StpUtil.getLoginIdByToken(token)));
+
+        if (info == null) {
+            throw new AccessDeniedException("token invalid");
+        }
+
+        return info;
+    }
+
+    @Override
+    public void invalidate(String token) {
+
+        if (StringUtils.hasText(token)) {
+            StpUtil.logoutByTokenValue(token);
+        }
+
+    }
+
+    @Override
+    public void logout() {
+        invalidate(StpUtil.getTokenValue());
+    }
+
     public String loginByPassword(LoginReq req) {
 
         if (!StringUtils.hasText(req.getAccount())
@@ -82,32 +156,16 @@ public class AuthServiceImpl extends BaseService implements AuthService {
         //密码加密
         req.setPassword(encryptPassword(req.getPassword()));
 
-        String deviceType = getDeviceType(req.getUa());
+//        String deviceType = getDeviceType(req.getUa());
 
         UserInfo user = simpleDao.findOneByQueryObj(req);
 
         checkUserState(user);
 
-        return login(user, deviceType);
+        return auth(user, req.getUa());
+
     }
 
-    @Override
-    public String login(UserBaseInfo info, String deviceType) {
-
-        StpUtil.login("" + info.getId(), deviceType);
-
-        return StpUtil.getTokenValue();
-    }
-
-    @Override
-    public UserInfo getBaseUserInfo() {
-
-        if (!StpUtil.isLogin()) {
-            return null;
-        }
-
-        return userService.findById(Long.parseLong("" + StpUtil.getLoginId()));
-    }
 
     private void checkUserState(UserInfo user) throws AuthorizationException {
 
@@ -131,14 +189,10 @@ public class AuthServiceImpl extends BaseService implements AuthService {
     }
 
     @Override
-    public boolean isLogin() {
-        return StpUtil.isLogin();
-    }
-
-    @Override
     public <T> T getLoginUserId() {
         return (T) StpUtil.getLoginId();
     }
+
 
     @Override
     public List<String> getPermissionList(Object loginId) {
@@ -193,11 +247,6 @@ public class AuthServiceImpl extends BaseService implements AuthService {
 
 
     @Override
-    public void logout() {
-        StpUtil.logout();
-    }
-
-    @Override
     public String encryptPassword(String pwd) {
         return SaSecureUtil.sha1(pwd);
     }
@@ -229,7 +278,6 @@ public class AuthServiceImpl extends BaseService implements AuthService {
     /**
      * 初始化数据
      */
-    @Override
     public void initData() {
 
         initUser();

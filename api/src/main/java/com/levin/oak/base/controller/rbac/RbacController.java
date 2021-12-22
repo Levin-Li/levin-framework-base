@@ -38,7 +38,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @RestController(PLUGIN_PREFIX + "AuthController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "AuthController", havingValue = "false", matchIfMissing = true)
 @RequestMapping(API_PATH + "rbac")
-@Tag(name = "权限认证", description = "权限管理")
+@Tag(name = "授权管理", description = "授权管理")
 @Slf4j
 @Valid
 public class RbacController extends BaseController {
@@ -59,16 +59,16 @@ public class RbacController extends BaseController {
      * @return ApiResp
      */
     @PostMapping("login")
-    @Operation(tags = {"权限认证"}, summary = "用户登录")
+    @Operation(tags = {"授权管理"}, summary = "用户登录")
     public ApiResp<String> login(LoginReq req, @RequestHeader(value = "user-agent", required = false) String ua) {
-        return ApiResp.ok(authService.loginByPassword(req.setUa(ua)));
+        return ApiResp.ok(authService.auth(req.getAccount(), req.getPassword(), ua));
     }
 
 
     @PostMapping("userInfo")
-    @Operation(tags = {"权限认证"}, summary = "用户信息")
+    @Operation(tags = {"授权管理"}, summary = "用户信息")
     public ApiResp<UserBaseInfo> getUserInfo() {
-        return ApiResp.ok(authService.getBaseUserInfo());
+        return ApiResp.ok(authService.getUserInfo());
     }
 
     /**
@@ -77,7 +77,7 @@ public class RbacController extends BaseController {
      * @return ApiResp
      */
     @GetMapping("logout")
-    @Operation(tags = {"权限认证"}, summary = "用户登出")
+    @Operation(tags = {"授权管理"}, summary = "用户登出")
     public ApiResp logout() {
         authService.logout();
         return ApiResp.ok();
@@ -89,7 +89,7 @@ public class RbacController extends BaseController {
      * @return ApiResp
      */
     @GetMapping("authorizedResList")
-    @Operation(tags = {"权限认证"}, summary = "获取可分配的权限资源")
+    @Operation(tags = {"授权管理"}, summary = "获取可分配的权限资源")
     public ApiResp<List<ModuleInfo>> getAuthorizedResList() {
         return ApiResp.ok(rbacService.getAuthorizedResList(authService.getLoginUserId()));
     }
@@ -100,7 +100,7 @@ public class RbacController extends BaseController {
      * @return ApiResp
      */
     @GetMapping("authorizedMenuList")
-    @Operation(tags = {"权限认证"}, summary = "获取菜单列表")
+    @Operation(tags = {"授权管理"}, summary = "获取菜单列表")
     public ApiResp<List<MenuResInfo>> getAuthorizedMenuList(boolean isShowNotPermissionMenu) {
         return ApiResp.ok(rbacService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId()));
     }

@@ -1,33 +1,15 @@
 package com.levin.oak.base.services.rbac;
 
-import com.levin.commons.rbac.AuthorizationException;
+import com.levin.commons.rbac.SimpleAuthService;
 import com.levin.commons.rbac.UserBaseInfo;
-import com.levin.oak.base.entities.E_User;
-import com.levin.oak.base.services.rbac.req.LoginReq;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.lang.NonNull;
 
 import java.util.List;
 
-@CacheConfig(cacheNames = {E_User.CLASS_NAME})
-public interface AuthService {
 
-    /**
-     * 登录 并且返回 token
-     *
-     * @param req
-     * @return token
-     */
-    String loginByPassword(@NonNull LoginReq req) throws AuthorizationException;
-
-    /**
-     * 登录
-     *
-     * @param info
-     * @param deviceType
-     * @return
-     */
-    String login(UserBaseInfo info, String deviceType);
+/**
+ * 认证服务
+ */
+public interface AuthService extends SimpleAuthService<UserBaseInfo> {
 
     /**
      * 是否登录
@@ -44,6 +26,13 @@ public interface AuthService {
     <T> T getLoginUserId();
 
     /**
+     * 获取当前登录用户信息
+     *
+     * @return
+     */
+    UserBaseInfo getUserInfo();
+
+    /**
      * 获取用户的权限列表
      *
      * @param loginId 如果为空，则默认为当前用户
@@ -58,13 +47,6 @@ public interface AuthService {
      * @return
      */
     List<String> getRoleList(Object loginId);
-
-    /**
-     * 获取用户信息
-     *
-     * @return
-     */
-    UserBaseInfo getBaseUserInfo();
 
 
     /**
@@ -87,10 +69,5 @@ public interface AuthService {
      * @return
      */
     String getDeviceType(String ua);
-
-    /**
-     * 初始化数据
-     */
-    void initData();
 
 }
