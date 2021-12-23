@@ -19,6 +19,7 @@ public class AuthorizeAnnotationInterceptor implements HandlerInterceptor {
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }
+
         //检查权限
         rbacService.checkAuthorize(((HandlerMethod) handler).getMethod());
 
