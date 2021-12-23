@@ -1,7 +1,6 @@
 package com.levin.oak.base.services.rbac;
 
-import cn.dev33.satoken.stp.StpUtil;
-import cn.dev33.satoken.strategy.SaStrategy;
+
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
@@ -35,6 +34,7 @@ import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.function.Supplier;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -59,6 +59,54 @@ public class RbacServiceImpl extends BaseService implements RbacService {
     PluginManager pluginManager;
 
 
+    @Resource
+    AuthService authService;
+
+
+    /**
+     * 字符串模糊匹配
+     * <p>example:
+     * <p> user* user-add   --  true
+     * <p> user* art-add    --  false
+     *
+     * @param patt 表达式
+     * @param str  待匹配的字符串
+     * @return 是否可以匹配
+     */
+    public static boolean vagueMatch(String patt, String str) {
+        // 如果表达式不带有*号，则只需简单equals即可 (速度提升200倍)
+        if (patt.indexOf("*") == -1) {
+            return patt.equals(str);
+        }
+        return Pattern.matches(patt.replaceAll("\\*", ".*"), str);
+    }
+
+    /**
+     * 判断：集合中是否包含指定元素（模糊匹配）
+     */
+    public static boolean hasElement(List<String> list, String element) {
+
+        // 空集合直接返回false
+        if (list == null || list.size() == 0) {
+            return false;
+        }
+
+        // 先尝试一下简单匹配，如果可以匹配成功则无需继续模糊匹配
+        if (list.contains(element)) {
+            return true;
+        }
+
+        // 开始模糊匹配
+        for (String patt : list) {
+            if (vagueMatch(patt, element)) {
+                return true;
+            }
+        }
+
+        // 走出for循环说明没有一个元素可以匹配成功
+        return false;
+    }
+
     /**
      * 授权验证，是否可以访问指定资源
      * <p>
@@ -79,7 +127,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         String requirePermission = String.join(getDelimiter(), resPrefix, action.getId());
 
         //1、权限检查闭包
-        Supplier<Boolean> hasPermission = () -> SaStrategy.me.hasElement.apply(permissionList, requirePermission);
+        Supplier<Boolean> hasPermission = () -> hasElement(permissionList, requirePermission);
 
         //2、角色检查闭包
         Supplier<Boolean> hasAnyRoles = requireAnyRoles.isEmpty() ? null : () -> requireAnyRoles.parallelStream().anyMatch(roleList::contains);
@@ -91,7 +139,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         Supplier<Boolean> expressTrue = StringUtils.hasText(verifyExpression) ? () -> (Boolean) ExpressionUtils.evalSpEL(null, verifyExpression,
                 (ctx) -> {
                     ctx.setBeanResolver(new BeanFactoryResolver(context));
-                    ctx.setVariable("stpLogic", StpUtil.stpLogic);
+                    // ctx.setVariable("stpLogic", StpUtil.stpLogic);
                     //设置环境变量
                     if (exprContexts != null) {
                         Stream.of(exprContexts).filter(Objects::nonNull).forEach(ctx::setVariables);
@@ -119,7 +167,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
      */
     public boolean isAuthorized(String requirePermission, List<String> roleList, List<String> permissionList) {
         if (requirePermission.contains(getDelimiter())) {
-            return SaStrategy.me.hasElement.apply(permissionList, requirePermission);
+            return hasElement(permissionList, requirePermission);
         } else {
             return roleList.contains(requirePermission);
         }
@@ -136,6 +184,8 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         if (method == null) {
             return;
         }
+
+        boolean isLogin = authService.isLogin();
 
         Class<?> controllerClass = method.getDeclaringClass();// AopProxyUtils.ultimateTargetClass(method.getDeclaringClass());
 
@@ -184,7 +234,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
             return;
         }
 
-        if (!StpUtil.isLogin()) {
+        if (!isLogin) {
             throw new AuthorizationException("not login", "未登录");
         }
 
@@ -197,8 +247,8 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         boolean ok = isAuthorized(
                 String.join(getDelimiter(), resAuthorize.domain(), resAuthorize.type(), resAuthorize.res()),
                 SimpleResAction.newAction(resAuthorize),
-                StpUtil.isLogin() ? StpUtil.getRoleList() : Collections.emptyList(),
-                StpUtil.isLogin() ? StpUtil.getPermissionList() : Collections.emptyList()
+                isLogin ? authService.getRoleList(authService.getLoginUserId()) : Collections.emptyList(),
+                isLogin ? authService.getPermissionList(authService.getLoginUserId()) : Collections.emptyList()
         );
 
         if (!ok) {
@@ -256,8 +306,8 @@ public class RbacServiceImpl extends BaseService implements RbacService {
 
             //过滤出有权限的菜单，或是设置为enable = false
 
-            List<String> roleList = StpUtil.getRoleList(userId);
-            List<String> permissionList = StpUtil.getPermissionList(userId);
+            List<String> roleList = authService.getRoleList(userId);
+            List<String> permissionList = authService.getPermissionList(userId);
 
             for (Map.Entry<Long, MenuResInfo> entry : cacheMap2.entrySet()) {
                 //
@@ -298,8 +348,8 @@ public class RbacServiceImpl extends BaseService implements RbacService {
 
         List<ModuleInfo> result = new LinkedList<>();
 
-        List<String> roleList = hasUser ? StpUtil.getRoleList(userId) : null;
-        List<String> permissionList = hasUser ? StpUtil.getPermissionList(userId) : null;
+        List<String> roleList = hasUser ? authService.getRoleList(userId) : null;
+        List<String> permissionList = hasUser ? authService.getPermissionList(userId) : null;
 
         //第一层循环 插件
         for (Plugin plugin : pluginManager.getInstalledPlugins()) {
