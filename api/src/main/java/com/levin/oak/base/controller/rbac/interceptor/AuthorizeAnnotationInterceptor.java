@@ -21,12 +21,12 @@ public class AuthorizeAnnotationInterceptor implements HandlerInterceptor {
     }
 
     public AuthorizeAnnotationInterceptor(RbacService rbacService) {
-        Assert.isNull(rbacService, "rbacService is null");
+        Assert.notNull(rbacService, "rbacService is null");
         this.rbacService = rbacService;
     }
 
     public AuthorizeAnnotationInterceptor(Supplier<RbacService> supplier) {
-        Assert.isNull(supplier, "supplier is null");
+        Assert.notNull(supplier, "supplier is null");
         this.supplier = supplier;
     }
 
