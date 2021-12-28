@@ -34,7 +34,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
  */
 @Slf4j
 @Component(PLUGIN_PREFIX + "ModuleWebControllerAdvice")
-@ConditionalOnMissingBean(name = {PLUGIN_PREFIX + "ModuleWebControllerAdvice"})
+//@ConditionalOnMissingBean(name = {PLUGIN_PREFIX + "ModuleWebControllerAdvice"})
 @RestControllerAdvice(PACKAGE_NAME)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleWebControllerAdvice", havingValue = "false", matchIfMissing = true)
 public class ModuleWebControllerAdvice {
