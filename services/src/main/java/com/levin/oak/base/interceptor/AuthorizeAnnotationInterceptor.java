@@ -1,4 +1,4 @@
-package com.levin.oak.base.controller.rbac.interceptor;
+package com.levin.oak.base.interceptor;
 
 import com.levin.oak.base.services.rbac.RbacService;
 import org.springframework.util.Assert;
