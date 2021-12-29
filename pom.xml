@@ -266,6 +266,32 @@
         <plugins>
 
             <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <inherited>true</inherited>
+
+                <configuration>
+
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+
+                        <configuration>
+                            <!--默认不上传到maven库-->
+                            <attach>true</attach>
+                            <skipSource>${maven.source.skip}</skipSource>
+                        </configuration>
+
+                    </execution>
+                </executions>
+
+            </plugin>
+
+            <plugin>
                 <groupId>${levin.simple-dao.groupId}</groupId>
                 <artifactId>simple-dao-codegen</artifactId>
                 <version>${levin.simple-dao.version}</version>

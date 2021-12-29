@@ -84,27 +84,14 @@ public class RbacServiceImpl extends BaseService implements RbacService {
     /**
      * 判断：集合中是否包含指定元素（模糊匹配）
      */
-    public static boolean hasElement(List<String> list, String element) {
+    public static boolean hasElement(List<String> list, String key) {
 
-        // 空集合直接返回false
-        if (list == null || list.size() == 0) {
-            return false;
-        }
+        return Optional.ofNullable(list).map(patternList ->
+                patternList.parallelStream()
+                        .filter(Objects::nonNull)
+                        .anyMatch(pattern -> pattern.equals(key) || vagueMatch(pattern, key))
+        ).orElse(false);
 
-        // 先尝试一下简单匹配，如果可以匹配成功则无需继续模糊匹配
-        if (list.contains(element)) {
-            return true;
-        }
-
-        // 开始模糊匹配
-        for (String patt : list) {
-            if (vagueMatch(patt, element)) {
-                return true;
-            }
-        }
-
-        // 走出for循环说明没有一个元素可以匹配成功
-        return false;
     }
 
     /**
