@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.util.*;
@@ -27,7 +28,7 @@ import com.levin.oak.base.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2021-12-18 11:15:48
+//Auto gen by simple-dao-codegen 2022-1-5 15:46:43
 
 
 /**
@@ -41,8 +42,22 @@ public abstract class BaseService {
     @Resource
     protected SimpleDao simpleDao;
 
+    @Resource
+    protected ApplicationContext applicationContext;
+
+    protected Object selfProxy = null;
+
     public final String getModuleId() {
         return ModuleOption.ID;
+    }
+
+    protected <T> T getSelfProxy(Class<T> type) {
+
+        if (selfProxy == null) {
+            selfProxy = applicationContext.getBean(type);
+        }
+
+        return (T) selfProxy;
     }
 
 }

@@ -37,7 +37,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  更新用户
- *  Auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  Auto gen by simple-dao-codegen 2022-1-5 15:29:20
  */
 @Schema(description = "更新用户")
 @Data

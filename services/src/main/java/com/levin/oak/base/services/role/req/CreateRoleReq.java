@@ -34,7 +34,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增角色
- *  //Auto gen by simple-dao-codegen 2021-12-18 11:15:48
+ *  //Auto gen by simple-dao-codegen 2022-1-5 15:46:43
  */
 @Schema(description = "新增角色")
 @Data

@@ -31,7 +31,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增国际化资源
- *  //Auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  //Auto gen by simple-dao-codegen 2022-1-5 15:46:44
  */
 @Schema(description = "新增国际化资源")
 @Data

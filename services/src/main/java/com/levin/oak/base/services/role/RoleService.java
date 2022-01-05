@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  角色-服务接口
- *  @author Auto gen by simple-dao-codegen 2021-12-18 11:15:48
+ *  @author Auto gen by simple-dao-codegen 2022-1-5 15:46:43
  */
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)
 public interface RoleService {
@@ -37,6 +37,9 @@ public interface RoleService {
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     RoleInfo findById(Long id);
 
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    RoleInfo findById(QueryRoleByIdReq req);
+
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     int update(UpdateRoleReq req);
 
@@ -50,4 +53,6 @@ public interface RoleService {
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<RoleInfo> query(QueryRoleReq req , Paging paging);
 
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    RoleInfo findOne(QueryRoleReq req);
 }

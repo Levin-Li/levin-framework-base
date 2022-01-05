@@ -26,7 +26,7 @@ import com.levin.oak.base.services.simpleapi.info.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2021-12-17 11:53:24
+//Auto gen by simple-dao-codegen 2022-1-5 15:29:20
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -91,6 +91,21 @@ public class SimpleApiController extends BaseController{
         return ApiResp.ok(simpleApiService.batchCreate(reqList));
     }
 
+
+    /**
+    * 查看详情
+    *
+    * @param req QuerySimpleApiByIdReq
+    */
+    @GetMapping("/retrieve")
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    public ApiResp<SimpleApiInfo> retrieve(@NotNull QuerySimpleApiByIdReq req) {
+
+         return ApiResp.ok(simpleApiService.findById(req));
+
+         //return ApiResp.ok(simpleApiService.findById(id));
+     }
+
     /**
     * 查看详情
     *
@@ -99,8 +114,12 @@ public class SimpleApiController extends BaseController{
     @GetMapping("/{id}")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     public ApiResp<SimpleApiInfo> retrieve(@PathVariable @NotNull Long id) {
-         return ApiResp.ok(simpleApiService.findById(id));
+
+         return getSelfProxy(getClass()).retrieve(new QuerySimpleApiByIdReq().setId(id));
+
+         //return ApiResp.ok(simpleApiService.findById(id));
      }
+
 
     /**
      * 更新
@@ -127,9 +146,8 @@ public class SimpleApiController extends BaseController{
      */
     @DeleteMapping({"/{id}"})
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    public ApiResp<Void> delete(@PathVariable @NotNull Long id) {
-        return simpleApiService.delete(new DeleteSimpleApiReq().setId(id)) > 0
-                                                ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+    public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
+        return getSelfProxy(getClass()).batchDelete(new DeleteSimpleApiReq().setId(id));
     }
 
     /**
@@ -138,9 +156,13 @@ public class SimpleApiController extends BaseController{
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<Void> batchDelete(@NotNull DeleteSimpleApiReq req) {
+    public ApiResp<Integer> batchDelete(@NotNull DeleteSimpleApiReq req) {
+
         //new DeleteSimpleApiReq().setIdList(idList)
-        return simpleApiService.delete(req) > 0 ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+
+        int n = simpleApiService.delete(req);
+
+        return  n > 0 ? ApiResp.ok(n) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
     }  
 
 }

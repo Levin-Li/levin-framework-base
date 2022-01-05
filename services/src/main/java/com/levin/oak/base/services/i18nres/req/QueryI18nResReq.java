@@ -15,6 +15,7 @@ import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
 
 import javax.validation.constraints.*;
+import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
@@ -33,7 +34,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询国际化资源
- *  @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @Author Auto gen by simple-dao-codegen 2022-1-5 15:46:44
  */
 @Schema(description = "查询国际化资源")
 @Data
@@ -118,4 +119,10 @@ public class QueryI18nResReq extends MultiTenantReq{
     public QueryI18nResReq(Long id) {
         this.id = id;
     }
+
+    @PostConstruct
+    public void preQuery() {
+        //@todo 查询之前初始化数据
+    }
+
 }

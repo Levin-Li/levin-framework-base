@@ -26,7 +26,7 @@ import com.levin.oak.base.services.area.info.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2021-12-17 11:53:24
+//Auto gen by simple-dao-codegen 2022-1-5 15:29:21
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -91,6 +91,21 @@ public class AreaController extends BaseController{
         return ApiResp.ok(areaService.batchCreate(reqList));
     }
 
+
+    /**
+    * 查看详情
+    *
+    * @param req QueryAreaByIdReq
+    */
+    @GetMapping("/retrieve")
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    public ApiResp<AreaInfo> retrieve(@NotNull QueryAreaByIdReq req) {
+
+         return ApiResp.ok(areaService.findById(req));
+
+         //return ApiResp.ok(areaService.findById(code));
+     }
+
     /**
     * 查看详情
     *
@@ -99,8 +114,12 @@ public class AreaController extends BaseController{
     @GetMapping("/{code}")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     public ApiResp<AreaInfo> retrieve(@PathVariable @NotNull String code) {
-         return ApiResp.ok(areaService.findById(code));
+
+         return getSelfProxy(getClass()).retrieve(new QueryAreaByIdReq().setCode(code));
+
+         //return ApiResp.ok(areaService.findById(code));
      }
+
 
     /**
      * 更新
@@ -127,9 +146,8 @@ public class AreaController extends BaseController{
      */
     @DeleteMapping({"/{code}"})
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    public ApiResp<Void> delete(@PathVariable @NotNull String code) {
-        return areaService.delete(new DeleteAreaReq().setCode(code)) > 0
-                                                ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+    public ApiResp<Integer> delete(@PathVariable @NotNull String code) {
+        return getSelfProxy(getClass()).batchDelete(new DeleteAreaReq().setCode(code));
     }
 
     /**
@@ -138,9 +156,13 @@ public class AreaController extends BaseController{
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<Void> batchDelete(@NotNull DeleteAreaReq req) {
+    public ApiResp<Integer> batchDelete(@NotNull DeleteAreaReq req) {
+
         //new DeleteAreaReq().setCodeList(codeList)
-        return areaService.delete(req) > 0 ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+
+        int n = areaService.delete(req);
+
+        return  n > 0 ? ApiResp.ok(n) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
     }  
 
 }

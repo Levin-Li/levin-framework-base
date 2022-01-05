@@ -13,6 +13,7 @@ import com.levin.commons.dao.annotation.order.*;
 import com.levin.commons.dao.annotation.logic.*;
 import com.levin.commons.dao.annotation.misc.*;
 
+import javax.annotation.*;
 import javax.validation.constraints.*;
 
 import lombok.*;
@@ -32,7 +33,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  删除角色
- *  //Auto gen by simple-dao-codegen 2021-12-18 11:15:48
+ *  //Auto gen by simple-dao-codegen 2022-1-5 15:46:43
  */
 @Schema(description = "删除角色")
 @Data
@@ -68,4 +69,10 @@ public class DeleteRoleReq extends MultiTenantReq {
     public DeleteRoleReq(Long... idList) {
         this.idList = idList;
     }
+
+    @PostConstruct
+    public void preDelete() {
+        //@todo 删除之前初始化数据
+    }
+
 }

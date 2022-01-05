@@ -20,7 +20,7 @@ import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
 
-//Auto gen by simple-dao-codegen 2021-12-17 11:53:25
+//Auto gen by simple-dao-codegen 2022-1-5 13:46:42
 //模块插件
 
 @Slf4j

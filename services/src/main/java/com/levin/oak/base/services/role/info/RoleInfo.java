@@ -25,12 +25,13 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.Role.*;
 import java.util.List;
 import com.levin.commons.rbac.ResPermission;
+import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
 * 角色
-* @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:48
+* @Author Auto gen by simple-dao-codegen 2022-1-5 15:46:43
 */
 @Schema(description ="角色")
 @Data
@@ -73,6 +74,12 @@ public class RoleInfo implements Serializable {
 
    @Schema(description = "资源权限列表")
    private List<ResPermission> permissionList;
+
+
+   @InjectVar
+   @Size(max = 64)
+   @Schema(description = "租户ID")
+   private String tenantId;
 
 
    @Size(max = 64)

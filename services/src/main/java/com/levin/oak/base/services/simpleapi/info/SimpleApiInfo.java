@@ -23,12 +23,13 @@ import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
 import com.levin.oak.base.entities.SimpleApi.*;
+import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
 * 简单接口
-* @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
+* @Author Auto gen by simple-dao-codegen 2022-1-5 15:46:43
 */
 @Schema(description ="简单接口")
 @Data
@@ -76,6 +77,18 @@ public class SimpleApiInfo implements Serializable {
 
    @Schema(description = "内容")
    private String content;
+
+
+   @InjectVar
+   @Size(max = 64)
+   @Schema(description = "机构ID")
+   private String orgId;
+
+
+   @InjectVar
+   @Size(max = 64)
+   @Schema(description = "租户ID")
+   private String tenantId;
 
 
    @Size(max = 64)

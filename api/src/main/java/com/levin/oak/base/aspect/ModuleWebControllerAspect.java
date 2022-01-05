@@ -58,7 +58,7 @@ public class ModuleWebControllerAspect {
     /**
      * 存储本模块的变量解析器
      */
-    private List<VariableResolver> resolverList = null;
+    private List<VariableResolver> moduleResolverList = null;
 
     @PostConstruct
     void init() {
@@ -66,7 +66,9 @@ public class ModuleWebControllerAspect {
         this.enableHttpLog.set(enableLog);
 
         //只找出本模块的解析器
-        this.resolverList = SpringContextHolder.findBeanByBeanName(context, VariableResolver.class, PLUGIN_PREFIX);
+        this.moduleResolverList = SpringContextHolder.findBeanByBeanName(context, VariableResolver.class, PLUGIN_PREFIX);
+
+        log.info("init...");
     }
 
     /**
@@ -107,22 +109,21 @@ public class ModuleWebControllerAspect {
     @Before("modulePackagePointcut() && controllerPointcut() && requestMappingPointcut()")
     public void injectVar(JoinPoint joinPoint) {
 
-        log.debug("开始为方法 {} 注入变量...", joinPoint.getSignature());
+        if(log.isDebugEnabled()) {
+            log.debug("开始为方法 {} 注入变量...", joinPoint.getSignature());
+        }
 
         String headerValue = request.getHeader(PLUGIN_PREFIX + "logHttp");
         if (StringUtils.hasText(headerValue)) {
             enableHttpLog.set(Boolean.TRUE.toString().equalsIgnoreCase(headerValue));
         }
-
-        //加入线程级别的http请求解析器，线程级别解析器会被优先使用
-        //httpRequestInfoResolver;
-
+        
         Optional.ofNullable(joinPoint.getArgs()).ifPresent(args -> {
             Arrays.stream(args)
                     .filter(Objects::nonNull)
                     .forEachOrdered(arg -> {
                         variableInjector.injectByVariableResolver(arg
-                                , () -> resolverList
+                                , () -> moduleResolverList
                                 , () -> variableResolverManager.getVariableResolvers());
                     });
         });
@@ -136,7 +137,7 @@ public class ModuleWebControllerAspect {
     @Around("modulePackagePointcut() && controllerPointcut() && requestMappingPointcut()")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        if (!enableHttpLog.get()) {
+        if (!enableHttpLog.get() || !log.isDebugEnabled()) {
             return joinPoint.proceed(joinPoint.getArgs());
         }
 
@@ -162,7 +163,6 @@ public class ModuleWebControllerAspect {
         //如果这里不返回result，则目标对象实际返回值会被置为null
 
         return result;
-
     }
 
 

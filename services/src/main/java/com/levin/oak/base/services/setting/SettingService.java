@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  系统设置-服务接口
- *  @author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author Auto gen by simple-dao-codegen 2022-1-5 15:46:43
  */
 @Tag(name = E_Setting.BIZ_NAME, description = E_Setting.BIZ_NAME + MAINTAIN_ACTION)
 public interface SettingService {
@@ -37,6 +37,9 @@ public interface SettingService {
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     SettingInfo findById(Long id);
 
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    SettingInfo findById(QuerySettingByIdReq req);
+
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     int update(UpdateSettingReq req);
 
@@ -50,4 +53,6 @@ public interface SettingService {
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<SettingInfo> query(QuerySettingReq req , Paging paging);
 
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    SettingInfo findOne(QuerySettingReq req);
 }

@@ -24,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -38,16 +40,15 @@ import java.util.stream.Collectors;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
-@Service(PLUGIN_PREFIX + "DefaultAuthService")
-@Slf4j
-@ConditionalOnMissingBean(AuthService.class)
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", havingValue = "false", matchIfMissing = true)
-
 /**
- *
  * 认证服务
- *
  */
+
+@Slf4j
+@Order
+//@ConditionalOnMissingBean(AuthService.class)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", havingValue = "false", matchIfMissing = true)
+@Service(PLUGIN_PREFIX + "DefaultAuthService")
 public class AuthServiceImpl extends BaseService implements AuthService {
 
     static final Gson gson = new Gson();
@@ -201,29 +202,29 @@ public class AuthServiceImpl extends BaseService implements AuthService {
             loginId = getLoginUserId();
         }
 
+        List<String> roleList = getRoleList(loginId);
+
+        if (roleList == null || roleList.isEmpty()) {
+            return Collections.emptyList();
+        }
+
         UserInfo user = userService.findById(Long.parseLong(loginId.toString()));
 
         checkUserState(user);
 
-        final List<String> permissionList = new LinkedList<>();
-
-        simpleDao.selectFrom(Role.class)
+        return simpleDao.selectFrom(Role.class)
                 .select(E_Role.permissions)
                 .eq(E_Role.enable, true)
-                .in(E_Role.code, getRoleList(loginId))
+                .in(E_Role.code, roleList)
                 .<String>find()
                 .parallelStream()
                 .filter(StringUtils::hasText)
                 //JSON 转换
-                .map(json -> (List<String>) gson.fromJson(json, listStrType))
+                .flatMap(json -> ((List<String>) gson.fromJson(json, listStrType)).stream())
 //                .map(json -> (List<ResPermission>) gson.fromJson(json, resPermissionListType))
-                .forEach(resPermissions -> {
-                    //装换成数组
-                    resPermissions.parallelStream().forEach(permissionList::add);
-//                    resPermissions.parallelStream().map(ResPermission::toString).forEach(permissionList::add);
-                });
+                .filter(StringUtils::hasText)
+                .collect(Collectors.toList());
 
-        return permissionList;
     }
 
     @Override

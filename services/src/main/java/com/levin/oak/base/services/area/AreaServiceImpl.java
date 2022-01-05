@@ -42,7 +42,7 @@ import com.levin.oak.base.*;
 /**
  *  区域-服务实现
  *
- *@author auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *@author auto gen by simple-dao-codegen 2022-1-5 15:46:44
  *
  */
 
@@ -77,7 +77,15 @@ public class AreaServiceImpl implements AreaService {
     //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
     @Cacheable(sync = false, condition = "#code != null", unless = "#result == null ", key = E_Area.CACHE_KEY_PREFIX + "#code")
     public AreaInfo findById(String code) {
+        Assert.notNull(code, BIZ_NAME + " code 不能为空");
         return simpleDao.findOneByQueryObj(new QueryAreaReq().setCode(code));
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Override
+    @Cacheable(condition = "#req.getCacheId() != null", unless = "#result == null ", key = E_Area.CACHE_KEY_PREFIX + "#req.getCacheId()")
+    public AreaInfo findById(QueryAreaByIdReq req) {
+        return simpleDao.findOneByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
@@ -97,7 +105,8 @@ public class AreaServiceImpl implements AreaService {
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
-    @Caching(evict = {  //尽量不用调用批量删除，会导致缓存清空
+    @Caching(evict = {
+         //尽量不用调用批量删除，会导致缓存清空
         @CacheEvict(condition = "#req.code != null", key = E_Area.CACHE_KEY_PREFIX + "#req.code"),
         @CacheEvict(condition = "#req.codeList != null && #req.codeList.length > 0", allEntries = true),
     })                    
@@ -109,5 +118,11 @@ public class AreaServiceImpl implements AreaService {
     @Override
     public PagingData<AreaInfo> query(QueryAreaReq req, Paging paging) {
         return simpleDao.findPagingDataByQueryObj(req, paging);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public AreaInfo findOne(QueryAreaReq req){
+        return simpleDao.findOneByQueryObj(req);
     }
 }

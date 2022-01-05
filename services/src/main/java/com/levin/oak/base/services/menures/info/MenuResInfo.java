@@ -22,6 +22,7 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
+import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.rbac.MenuItem.*;
 import com.levin.oak.base.entities.MenuRes;
 import com.levin.oak.base.services.menures.info.*;
@@ -31,7 +32,7 @@ import java.util.Date;
 
 /**
 * 菜单
-* @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
+* @Author Auto gen by simple-dao-codegen 2022-1-5 15:46:44
 */
 @Schema(description ="菜单")
 @Data
@@ -48,6 +49,11 @@ public class MenuResInfo implements Serializable {
    @NotNull
    @Schema(description = "id")
    private Long id;
+
+
+   @InjectVar
+   @Schema(description = "租户ID")
+   private String tenantId;
 
 
    @Size(max = 64)

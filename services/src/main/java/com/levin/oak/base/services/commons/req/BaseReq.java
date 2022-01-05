@@ -26,16 +26,19 @@ import java.util.*;
 
 /**
  *  基本查询对象
- *  @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:48
+ *  @Author Auto gen by simple-dao-codegen 2022-1-5 15:46:43
  */
 @Schema(description = "基本查询对象")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
-public abstract class BaseReq implements OrganizedObject , ServiceReq  {
+public abstract class BaseReq
+        implements
+//        OrganizedObject ,
+        ServiceReq  {
 
-    @Schema(description = "组织ID" , hidden = true)
-    @InjectVar(value = InjectConsts.ORG_ID , isRequired = "false")
-    String orgId;
+//    @Schema(description = "组织ID" , hidden = true)
+//    @InjectVar(value = InjectConsts.ORG_ID , isRequired = "false")
+//    protected String orgId;
 
 }

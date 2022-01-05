@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.context.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.util.*;
@@ -23,7 +24,7 @@ import com.levin.oak.base.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2021-12-17 11:53:23
+//Auto gen by simple-dao-codegen 2022-1-5 15:29:19
 
 
 /**
@@ -42,6 +43,11 @@ public abstract class BaseController {
     @Resource
     protected HttpServletResponse httpResponse;
 
+    @Resource
+    protected ApplicationContext applicationContext;
+
+    protected Object selfProxy = null;
+
     public final String getModuleId() {
         return ModuleOption.ID;
     }
@@ -49,5 +55,14 @@ public abstract class BaseController {
     protected boolean isNotEmpty(Object value) {
         return value != null
                 && (!(value instanceof CharSequence) || StringUtils.hasText((CharSequence) value));
+    }
+
+    protected <T> T getSelfProxy(Class<T> type) {
+
+        if (selfProxy == null) {
+            selfProxy = applicationContext.getBean(type);
+        }
+
+        return (T) selfProxy;
     }
 }

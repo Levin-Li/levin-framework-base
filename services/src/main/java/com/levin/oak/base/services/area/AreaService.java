@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  区域-服务接口
- *  @author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author Auto gen by simple-dao-codegen 2022-1-5 15:46:44
  */
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
 public interface AreaService {
@@ -37,6 +37,9 @@ public interface AreaService {
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     AreaInfo findById(String code);
 
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    AreaInfo findById(QueryAreaByIdReq req);
+
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     int update(UpdateAreaReq req);
 
@@ -50,4 +53,6 @@ public interface AreaService {
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<AreaInfo> query(QueryAreaReq req , Paging paging);
 
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    AreaInfo findOne(QueryAreaReq req);
 }

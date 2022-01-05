@@ -13,6 +13,7 @@ import com.levin.commons.dao.annotation.order.*;
 import com.levin.commons.dao.annotation.logic.*;
 import com.levin.commons.dao.annotation.misc.*;
 
+import javax.annotation.*;
 import javax.validation.constraints.*;
 
 import lombok.*;
@@ -33,7 +34,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  删除用户
- *  //Auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  //Auto gen by simple-dao-codegen 2022-1-5 15:29:20
  */
 @Schema(description = "删除用户")
 @Data
@@ -69,4 +70,10 @@ public class DeleteUserReq extends MultiTenantReq {
     public DeleteUserReq(Long... idList) {
         this.idList = idList;
     }
+
+    @PostConstruct
+    public void preDelete() {
+        //@todo 删除之前初始化数据
+    }
+
 }

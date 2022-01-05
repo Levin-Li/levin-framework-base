@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  国际化资源-服务接口
- *  @author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author Auto gen by simple-dao-codegen 2022-1-5 15:46:44
  */
 @Tag(name = E_I18nRes.BIZ_NAME, description = E_I18nRes.BIZ_NAME + MAINTAIN_ACTION)
 public interface I18nResService {
@@ -37,6 +37,9 @@ public interface I18nResService {
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     I18nResInfo findById(Long id);
 
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    I18nResInfo findById(QueryI18nResByIdReq req);
+
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     int update(UpdateI18nResReq req);
 
@@ -50,4 +53,6 @@ public interface I18nResService {
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<I18nResInfo> query(QueryI18nResReq req , Paging paging);
 
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    I18nResInfo findOne(QueryI18nResReq req);
 }

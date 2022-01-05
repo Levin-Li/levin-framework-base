@@ -26,7 +26,7 @@ import com.levin.oak.base.services.i18nres.info.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2021-12-17 11:53:24
+//Auto gen by simple-dao-codegen 2022-1-5 15:29:20
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -91,6 +91,21 @@ public class I18nResController extends BaseController{
         return ApiResp.ok(i18nResService.batchCreate(reqList));
     }
 
+
+    /**
+    * 查看详情
+    *
+    * @param req QueryI18nResByIdReq
+    */
+    @GetMapping("/retrieve")
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    public ApiResp<I18nResInfo> retrieve(@NotNull QueryI18nResByIdReq req) {
+
+         return ApiResp.ok(i18nResService.findById(req));
+
+         //return ApiResp.ok(i18nResService.findById(id));
+     }
+
     /**
     * 查看详情
     *
@@ -99,8 +114,12 @@ public class I18nResController extends BaseController{
     @GetMapping("/{id}")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     public ApiResp<I18nResInfo> retrieve(@PathVariable @NotNull Long id) {
-         return ApiResp.ok(i18nResService.findById(id));
+
+         return getSelfProxy(getClass()).retrieve(new QueryI18nResByIdReq().setId(id));
+
+         //return ApiResp.ok(i18nResService.findById(id));
      }
+
 
     /**
      * 更新
@@ -127,9 +146,8 @@ public class I18nResController extends BaseController{
      */
     @DeleteMapping({"/{id}"})
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    public ApiResp<Void> delete(@PathVariable @NotNull Long id) {
-        return i18nResService.delete(new DeleteI18nResReq().setId(id)) > 0
-                                                ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+    public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
+        return getSelfProxy(getClass()).batchDelete(new DeleteI18nResReq().setId(id));
     }
 
     /**
@@ -138,9 +156,13 @@ public class I18nResController extends BaseController{
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<Void> batchDelete(@NotNull DeleteI18nResReq req) {
+    public ApiResp<Integer> batchDelete(@NotNull DeleteI18nResReq req) {
+
         //new DeleteI18nResReq().setIdList(idList)
-        return i18nResService.delete(req) > 0 ? ApiResp.ok() : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+
+        int n = i18nResService.delete(req);
+
+        return  n > 0 ? ApiResp.ok(n) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
     }  
 
 }

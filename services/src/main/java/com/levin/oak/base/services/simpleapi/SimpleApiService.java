@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  简单接口-服务接口
- *  @author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author Auto gen by simple-dao-codegen 2022-1-5 15:46:43
  */
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimpleApiService {
@@ -37,6 +37,9 @@ public interface SimpleApiService {
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     SimpleApiInfo findById(Long id);
 
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    SimpleApiInfo findById(QuerySimpleApiByIdReq req);
+
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     int update(UpdateSimpleApiReq req);
 
@@ -50,4 +53,6 @@ public interface SimpleApiService {
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<SimpleApiInfo> query(QuerySimpleApiReq req , Paging paging);
 
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    SimpleApiInfo findOne(QuerySimpleApiReq req);
 }

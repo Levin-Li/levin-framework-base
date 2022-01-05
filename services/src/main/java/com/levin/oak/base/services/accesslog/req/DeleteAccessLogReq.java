@@ -13,6 +13,7 @@ import com.levin.commons.dao.annotation.order.*;
 import com.levin.commons.dao.annotation.logic.*;
 import com.levin.commons.dao.annotation.misc.*;
 
+import javax.annotation.*;
 import javax.validation.constraints.*;
 
 import lombok.*;
@@ -30,7 +31,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  删除访问日志
- *  //Auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  //Auto gen by simple-dao-codegen 2022-1-5 15:46:44
  */
 @Schema(description = "删除访问日志")
 @Data
@@ -66,4 +67,10 @@ public class DeleteAccessLogReq extends MultiTenantReq {
     public DeleteAccessLogReq(Long... idList) {
         this.idList = idList;
     }
+
+    @PostConstruct
+    public void preDelete() {
+        //@todo 删除之前初始化数据
+    }
+
 }

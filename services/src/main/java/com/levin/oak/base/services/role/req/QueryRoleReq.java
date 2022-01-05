@@ -15,6 +15,7 @@ import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
 
 import javax.validation.constraints.*;
+import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
@@ -36,7 +37,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询角色
- *  @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:48
+ *  @Author Auto gen by simple-dao-codegen 2022-1-5 15:46:43
  */
 @Schema(description = "查询角色")
 @Data
@@ -131,4 +132,10 @@ public class QueryRoleReq extends MultiTenantReq{
     public QueryRoleReq(Long id) {
         this.id = id;
     }
+
+    @PostConstruct
+    public void preQuery() {
+        //@todo 查询之前初始化数据
+    }
+
 }

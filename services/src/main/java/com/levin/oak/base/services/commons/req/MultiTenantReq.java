@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.commons.req;
 
+import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.service.domain.InjectVar;
@@ -16,7 +17,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户查询对象
  *
- * @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:48
+ * @Author Auto gen by simple-dao-codegen 2022-1-5 15:46:43
  */
 @Schema(description = "多租户查询对象")
 @Data
@@ -28,6 +29,12 @@ public abstract class MultiTenantReq
 
     @Schema(description = "租户ID" , hidden = true)
     @InjectVar(InjectConsts.TENANT_ID)
-    String tenantId;
+    @Eq
+    protected String tenantId;
+
+    public <T extends MultiTenantReq> T setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+        return (T) this;
+    }
 
 }

@@ -1,15 +1,14 @@
 package com.levin.oak.base.config;
 
-import cn.dev33.satoken.exception.NotLoginException;
-import cn.dev33.satoken.exception.SaTokenException;
+import static com.levin.oak.base.ModuleOption.*;
+import com.levin.oak.base.*;
+
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.exception.ServiceException;
 import com.levin.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.persistence.PersistenceException;
 import javax.servlet.ServletException;
@@ -24,8 +24,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
-import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.boot.autoconfigure.condition.*;
+import lombok.extern.slf4j.Slf4j;
+import java.text.SimpleDateFormat;
 
 /**
  * 在Spring 3.2中
@@ -41,6 +43,11 @@ public class ModuleWebControllerAdvice {
 
     @Resource
     HttpServletRequest request;
+
+    @PostConstruct
+    void init() {
+        log.info("init...");
+    }
 
 //    // 这里@ModelAttribute("loginUserInfo")标注的modelAttribute()方法表示会在Controller方法之前
 //    // 执行，返回当前登录用户的UserDetails对象
@@ -80,17 +87,6 @@ public class ModuleWebControllerAdvice {
 //        return result;
 //    }
 
-    @ExceptionHandler({NotLoginException.class,})
-    public ApiResp onNotLoginException(Exception e) {
-        return ApiResp.error(1, "未登录：" + e.getMessage())
-                .setHttpStatusCode(HttpStatus.UNAUTHORIZED.value());
-    }
-
-    @ExceptionHandler({SaTokenException.class,})
-    public ApiResp onSaTokenException(Exception e) {
-        return ApiResp.error(1, "认证异常：" + e.getMessage())
-                .setHttpStatusCode(HttpStatus.UNAUTHORIZED.value());
-    }
 
     @ExceptionHandler({AccessDeniedException.class,})
     public ApiResp onAccessDeniedException(Exception e) {
