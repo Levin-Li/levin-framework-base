@@ -22,6 +22,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.expression.BeanFactoryResolver;
 import org.springframework.core.annotation.AnnotatedElementUtils;
@@ -29,6 +30,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.Serializable;
 import java.lang.reflect.Method;
@@ -43,8 +45,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @Service(PLUGIN_PREFIX + "RbacService")
 @Slf4j
-//@ConditionalOnMissingBean(AuthService.class)
-
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacService", havingValue = "false", matchIfMissing = true)
 @ResAuthorize(ignored = true)
 public class RbacServiceImpl extends BaseService implements RbacService {
 
@@ -62,6 +63,11 @@ public class RbacServiceImpl extends BaseService implements RbacService {
     @Resource
     AuthService authService;
 
+
+    @PostConstruct
+    public void init(){
+        log.info("默认权限控制服务启用...");
+    }
 
     /**
      * 字符串模糊匹配

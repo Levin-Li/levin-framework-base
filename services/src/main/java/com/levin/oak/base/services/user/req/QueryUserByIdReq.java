@@ -34,7 +34,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
 *  ID 查询用户
-*  //Auto gen by simple-dao-codegen 2022-1-5 15:29:20
+*  //Auto gen by simple-dao-codegen 2022-1-6 10:16:39
 */
 @Schema(description = "ID 查询用户")
 @Data
@@ -65,6 +65,7 @@ private static final long serialVersionUID = -445263479L;
     /**
      * 获取缓存ID
      */
+    @Schema(description = "缓存ID-内部使用" , hidden = true)
     public final String getCacheId() {
 
         String cid = id.toString() + ""  + tenantId.toString();

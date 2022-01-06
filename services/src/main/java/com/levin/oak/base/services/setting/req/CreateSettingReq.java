@@ -32,7 +32,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增系统设置
- *  //Auto gen by simple-dao-codegen 2022-1-5 15:46:43
+ *  //Auto gen by simple-dao-codegen 2022-1-6 10:16:39
  */
 @Schema(description = "新增系统设置")
 @Data

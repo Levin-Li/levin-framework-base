@@ -11,6 +11,7 @@ import java.util.*;
 import java.util.stream.*;
 import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.*;
+import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.util.*;
 import org.springframework.beans.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -39,13 +40,14 @@ import com.levin.oak.base.*;
 /**
  *  简单接口-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-1-5 15:46:43
+ *@author auto gen by simple-dao-codegen 2022-1-6 10:16:39
  *
  */
 
 //@Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @Service(PLUGIN_PREFIX + "SimpleApiService")
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "SimpleApiService", havingValue = "false", matchIfMissing = true)
 @Slf4j
 //@Validated
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)

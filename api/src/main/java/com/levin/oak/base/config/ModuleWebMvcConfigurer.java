@@ -1,30 +1,37 @@
 package com.levin.oak.base.config;
 
-import static com.levin.oak.base.ModuleOption.*;
-import com.levin.oak.base.*;
-
+import com.levin.oak.base.interceptor.AuthorizeAnnotationInterceptor;
+import com.levin.oak.base.services.rbac.AuthService;
+import com.levin.oak.base.services.rbac.AuthServiceImpl;
+import com.levin.oak.base.services.rbac.RbacService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.util.StringUtils;
-import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.config.annotation.*;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.web.servlet.config.annotation.*;
+import javax.annotation.Resource;
+
+import static com.levin.oak.base.ModuleOption.*;
 
 @Configuration(PLUGIN_PREFIX + "ModuleWebMvcConfigurer")
 @Slf4j
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleWebMvcConfigurer", havingValue = "false", matchIfMissing = true)
 public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
+    @Resource
+    RbacService rbacService;
+
+    @Resource
+    AuthService authService;
+
+    @Value("${" + PLUGIN_PREFIX + ".enableAuthorizeInterceptor}")
+    Boolean enableAuthorizeInterceptor = null;
 
     @PostConstruct
     void init() {
-        log.info("init...");
+
     }
 
     /**
@@ -74,7 +81,18 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //        })).addPathPatterns("/**");
 
 
-//        registry.addInterceptor(new SaAnnotationInterceptor()).addPathPatterns(API_PATH + "**");
+        //如果没有强制禁用并且默认的认证服务没有被替换，或是强制启用
+        if ((enableAuthorizeInterceptor == null && authService instanceof AuthServiceImpl)
+                || Boolean.TRUE.equals(enableAuthorizeInterceptor)) {
+
+            registry.addInterceptor(new AuthorizeAnnotationInterceptor(rbacService)).addPathPatterns(API_PATH + "**");
+
+            log.info("模块认证拦截器[ {} ]已经启用 ，可以配置[{}.enableAuthorizeInterceptor]禁用", API_PATH, PLUGIN_PREFIX);
+
+        } else {
+
+            log.info("模块认证拦截器[ {} ]已经禁用 ，可以配置[{}.enableAuthorizeInterceptor]启用", API_PATH, PLUGIN_PREFIX);
+        }
 
     }
 

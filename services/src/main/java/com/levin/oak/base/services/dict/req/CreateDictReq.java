@@ -33,7 +33,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增字典
- *  //Auto gen by simple-dao-codegen 2022-1-5 15:46:44
+ *  //Auto gen by simple-dao-codegen 2022-1-6 10:16:39
  */
 @Schema(description = "新增字典")
 @Data

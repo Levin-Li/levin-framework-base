@@ -29,6 +29,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.lang.reflect.Type;
 import java.util.Collections;
@@ -74,6 +75,10 @@ public class AuthServiceImpl extends BaseService implements AuthService {
     @Resource
     PluginManager pluginManager;
 
+    @PostConstruct
+    public void init(){
+        log.info("默认认证服务启用...");
+    }
 
     /**
      * 认证，并返回token

@@ -31,7 +31,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
 *  ID 查询简单接口
-*  //Auto gen by simple-dao-codegen 2022-1-5 15:46:43
+*  //Auto gen by simple-dao-codegen 2022-1-6 10:16:39
 */
 @Schema(description = "ID 查询简单接口")
 @Data

@@ -11,6 +11,7 @@ import java.util.*;
 import java.util.stream.*;
 import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.*;
+import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.util.*;
 import org.springframework.beans.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -39,13 +40,14 @@ import com.levin.oak.base.*;
 /**
  *  工作岗位-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-1-5 15:46:44
+ *@author auto gen by simple-dao-codegen 2022-1-6 10:16:40
  *
  */
 
 //@Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @Service(PLUGIN_PREFIX + "JobPostService")
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "JobPostService", havingValue = "false", matchIfMissing = true)
 @Slf4j
 //@Validated
 @Tag(name = E_JobPost.BIZ_NAME, description = E_JobPost.BIZ_NAME + MAINTAIN_ACTION)

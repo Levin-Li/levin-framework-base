@@ -31,7 +31,7 @@ import java.util.Date;
 
 /**
 * 角色
-* @Author Auto gen by simple-dao-codegen 2022-1-5 15:46:43
+* @Author Auto gen by simple-dao-codegen 2022-1-6 10:16:39
 */
 @Schema(description ="角色")
 @Data
