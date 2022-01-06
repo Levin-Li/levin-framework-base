@@ -26,7 +26,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     @Resource
     AuthService authService;
 
-    @Value("${" + PLUGIN_PREFIX + ".enableAuthorizeInterceptor:}")
+    @Value("${" + PLUGIN_PREFIX + "enableAuthorizeInterceptor:}")
     Boolean enableAuthorizeInterceptor = null;
 
     @PostConstruct
@@ -87,11 +87,11 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
             registry.addInterceptor(new AuthorizeAnnotationInterceptor(rbacService)).addPathPatterns(API_PATH + "**");
 
-            log.info("模块认证拦截器[ {} ]已经启用 ，可以配置[{}.enableAuthorizeInterceptor]禁用", API_PATH, PLUGIN_PREFIX);
+            log.info("模块认证拦截器[ {} ]已经启用 ，可以配置[{}enableAuthorizeInterceptor]禁用", API_PATH, PLUGIN_PREFIX);
 
         } else {
 
-            log.info("模块认证拦截器[ {} ]已经禁用 ，可以配置[{}.enableAuthorizeInterceptor]启用", API_PATH, PLUGIN_PREFIX);
+            log.info("模块认证拦截器[ {} ]已经禁用 ，可以配置[{}enableAuthorizeInterceptor]启用", API_PATH, PLUGIN_PREFIX);
         }
 
     }
