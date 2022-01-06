@@ -26,12 +26,12 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     @Resource
     AuthService authService;
 
-    @Value("${" + PLUGIN_PREFIX + ".enableAuthorizeInterceptor}")
+    @Value("${" + PLUGIN_PREFIX + ".enableAuthorizeInterceptor:}")
     Boolean enableAuthorizeInterceptor = null;
 
     @PostConstruct
     void init() {
-
+        log.info("init...");
     }
 
     /**
