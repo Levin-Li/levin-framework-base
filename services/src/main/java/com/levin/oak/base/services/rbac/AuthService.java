@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 认证服务
  */
-public interface AuthService extends SimpleAuthService<UserBaseInfo> {
+public interface AuthService extends SimpleAuthService {
 
     /**
      * 是否登录

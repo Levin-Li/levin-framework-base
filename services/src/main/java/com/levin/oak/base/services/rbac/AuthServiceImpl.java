@@ -9,8 +9,6 @@ import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.RbacUtils;
 import com.levin.commons.rbac.ResPermission;
-import com.levin.commons.rbac.UserBaseInfo;
-import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.BaseService;
 import com.levin.oak.base.services.menures.MenuResService;
@@ -21,12 +19,11 @@ import com.levin.oak.base.services.user.UserService;
 import com.levin.oak.base.services.user.info.UserInfo;
 import com.levin.oak.base.services.user.req.CreateUserReq;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
@@ -76,7 +73,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
     PluginManager pluginManager;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         log.info("默认认证服务启用...");
     }
 
@@ -94,24 +91,24 @@ public class AuthServiceImpl extends BaseService implements AuthService {
         return loginByPassword(new LoginReq().setAccount(account).setPassword(password).setUa(userAgent));
     }
 
+
     /**
      * 直接认证，并返回token
      *
-     * @param userInfo
+     * @param loginId
      * @param userAgent
      * @param params
      * @return 认证成功后的token
      */
     @Override
-    public String auth(UserBaseInfo userInfo, String userAgent, Map<String, Object>... params) {
+    public String auth(String loginId, String userAgent, Map<String, Object>... params) {
 
-        if (userInfo == null
-                || userInfo.getId() == null) {
-            throw new IllegalArgumentException("userInfo is null");
-        }
+//        Assert.notNull(loginId, "loginId is null");
+
+        Assert.hasText(loginId, "loginId is empty");
 
         //默认登录
-        StpUtil.login("" + userInfo.getId(), getDeviceType(userAgent));
+        StpUtil.login(loginId, getDeviceType(userAgent));
 
         return StpUtil.getTokenValue();
     }
@@ -123,19 +120,17 @@ public class AuthServiceImpl extends BaseService implements AuthService {
 
     @Override
     public UserInfo getUserInfo() {
-        return getUserInfo(StpUtil.getTokenValue());
+        return userService.findById(Long.parseLong(getLoginUserId()));
     }
 
     @Override
-    public UserInfo getUserInfo(String token) {
+    public String getLoginIdByToken(String token) {
 
-        UserInfo info = userService.findById(Long.parseLong("" + StpUtil.getLoginIdByToken(token)));
+        Assert.hasText(token, "token is empty");
 
-        if (info == null) {
-            throw new AccessDeniedException("token invalid");
-        }
+        Object loginIdByToken = StpUtil.getLoginIdByToken(token);
 
-        return info;
+        return loginIdByToken == null ? null : loginIdByToken.toString();
     }
 
     @Override
@@ -168,7 +163,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
 
         checkUserState(user);
 
-        return auth(user, req.getUa());
+        return auth(user.getId().toString(), req.getUa());
 
     }
 
