@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.rbac;
 
+import cn.dev33.satoken.exception.IdTokenInvalidException;
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import com.google.gson.Gson;
@@ -128,9 +129,13 @@ public class AuthServiceImpl extends BaseService implements AuthService {
 
         Assert.hasText(token, "token is empty");
 
-        Object loginIdByToken = StpUtil.getLoginIdByToken(token);
+        Object loginId = StpUtil.getLoginIdByToken(token);
 
-        return loginIdByToken == null ? null : loginIdByToken.toString();
+        if (loginId == null || !StringUtils.hasText(loginId.toString())) {
+            throw new IdTokenInvalidException("token:" + token);
+        }
+
+        return loginId.toString();
     }
 
     @Override
