@@ -10,6 +10,7 @@ import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.RbacUtils;
 import com.levin.commons.rbac.ResPermission;
+import com.levin.commons.utils.JsonStrArrayUtils;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.BaseService;
 import com.levin.oak.base.services.menures.MenuResService;
@@ -50,13 +51,13 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Service(PLUGIN_PREFIX + "DefaultAuthService")
 public class AuthServiceImpl extends BaseService implements AuthService {
 
-    static final Gson gson = new Gson();
-
-    static final Type resPermissionListType = new TypeToken<List<ResPermission>>() {
-    }.getType();
-
-    static final Type listStrType = new TypeToken<List<String>>() {
-    }.getType();
+//    static final Gson gson = new Gson();
+//
+//    static final Type resPermissionListType = new TypeToken<List<ResPermission>>() {
+//    }.getType();
+//
+//    static final Type listStrType = new TypeToken<List<String>>() {
+//    }.getType();
 
     @Resource
     ApplicationContext context;
@@ -75,7 +76,11 @@ public class AuthServiceImpl extends BaseService implements AuthService {
 
     @PostConstruct
     public void init() {
+
         log.info("默认认证服务启用...");
+
+        initData();
+
     }
 
     /**
@@ -225,7 +230,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
                 .parallelStream()
                 .filter(StringUtils::hasText)
                 //JSON 转换
-                .flatMap(json -> ((List<String>) gson.fromJson(json, listStrType)).stream())
+                .flatMap(json -> (JsonStrArrayUtils.<String>parse(json,null,null)).stream())
 //                .map(json -> (List<ResPermission>) gson.fromJson(json, resPermissionListType))
                 .filter(StringUtils::hasText)
                 .collect(Collectors.toList());
@@ -243,12 +248,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
 
         checkUserState(user);
 
-        return StringUtils.hasText(user.getRoles()) ?
-                gson.<List<String>>fromJson(user.getRoles(), listStrType)
-                        .parallelStream()
-                        .filter(StringUtils::hasText)
-                        .collect(Collectors.toList())
-                : Collections.emptyList();
+        return JsonStrArrayUtils.parse(user.getRoles(),null,null);
     }
 
 
@@ -346,7 +346,9 @@ public class AuthServiceImpl extends BaseService implements AuthService {
                     .setCode("SA")
                     .setName("超级管理员")
                     .setOrgDataScope(Role.OrgDataScope.All)
-                    .setPermissions(gson.toJson(permissions)));
+                    .setPermissions(JsonStrArrayUtils.iterableToStrArrayJson(permissions)));
+
+//            JsonStrArrayUtils.toStrArrayJson()
 
             permissions.clear();
 
@@ -361,7 +363,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
                     .setCode("test")
                     .setName("测试员")
                     .setOrgDataScope(Role.OrgDataScope.MySelf)
-                    .setPermissions(gson.toJson(permissions)));
+                    .setPermissions(JsonStrArrayUtils.iterableToStrArrayJson(permissions)));
         }
 
 
@@ -381,7 +383,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
                     .setPassword(encryptPassword("123456"))
                     .setName("超级管理员")
                     .setStaffNo("0000")
-                    .setRoles(gson.toJson(roleList))
+                    .setRoles(JsonStrArrayUtils.iterableToStrArrayJson(roleList))
 
             );
 
@@ -393,7 +395,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
                     .setPassword(encryptPassword("123456"))
                     .setName("测试帐号")
                     .setStaffNo("9999")
-                    .setRoles(gson.toJson(roleList))
+                    .setRoles(JsonStrArrayUtils.iterableToStrArrayJson(roleList))
 
             );
         }

@@ -9,6 +9,7 @@ import com.levin.commons.service.domain.Identifiable;
 import com.levin.commons.service.support.ContextHolder;
 import com.levin.commons.utils.ClassUtils;
 import com.levin.commons.utils.ExpressionUtils;
+import com.levin.commons.utils.JsonStrArrayUtils;
 import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.entities.E_MenuRes;
 import com.levin.oak.base.entities.MenuRes;
@@ -59,13 +60,12 @@ public class RbacServiceImpl extends BaseService implements RbacService {
     @Resource
     PluginManager pluginManager;
 
-
     @Resource
     AuthService authService;
 
 
     @PostConstruct
-    public void init(){
+    public void init() {
         log.info("默认权限控制服务启用...");
     }
 
@@ -307,7 +307,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
                 MenuResInfo info = entry.getValue();
                 //获取菜单要求的权限
                 List<String> requirePermissions = !StringUtils.hasText(info.getRequireAuthorizations()) ? Collections.emptyList()
-                        : Stream.of(info.getRequireAuthorizations().split("[,;]")).filter(StringUtils::hasText).collect(Collectors.toList());
+                        : JsonStrArrayUtils.parse(info.getRequireAuthorizations(), StringUtils::hasText, (txt) -> txt);
 
                 if (requirePermissions.isEmpty()
                         || requirePermissions.parallelStream().allMatch(requirePermission -> this.isAuthorized(requirePermission, roleList, permissionList))) {
@@ -375,7 +375,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
 
                     BeanUtils.copyProperties(res, resInfo, ResInfo.Fields.actionList);
 
-                    String prefix = String.join(getDelimiter(), "" + res.getDomain(), "" + res.getType(), "" + res.getId());
+                    String prefix = String.join(getDelimiter(), res.getDomain().toString(), res.getType().toString(), res.getId().toString());
 
                     //第四层循环 资源操作
                     for (Res.Action action : new ArrayList<Res.Action>(res.getActionList())) {
@@ -394,6 +394,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
                         }
                     }
 
+                    //如果没有内容，不加入
                     if (!resInfo.getActionList().isEmpty()) {
                         typeInfo.getResList().add(resInfo);
                     }

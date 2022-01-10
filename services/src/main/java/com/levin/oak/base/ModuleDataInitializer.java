@@ -47,8 +47,7 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-
-    private ApplicationContext applicationContext;
+    ApplicationContext applicationContext;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -62,6 +61,7 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
         if (event.getApplicationContext() == applicationContext) {
             initData();
         }
+
     }
 
     void initData() {

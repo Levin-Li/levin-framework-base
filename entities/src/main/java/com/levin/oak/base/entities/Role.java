@@ -65,7 +65,7 @@ public class Role
     @Column(nullable = false)
     protected OrgDataScope orgDataScope;
 
-    @Schema(description = "指定的部门列表", title = "半角逗号隔开")
+    @Schema(description = "指定的部门列表", title = "Json数组")
     @Lob
     protected String assignedOrgIdList;
 

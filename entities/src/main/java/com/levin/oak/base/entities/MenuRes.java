@@ -53,7 +53,7 @@ public class MenuRes
     @Column( length = 64)
     String domain;
 
-    @Schema(description = "需要的授权，权限或角色用逗号隔开")
+    @Schema(description = "需要的授权，权限或角色，json数组")
     @Column(length = 1800)
     String requireAuthorizations;
 

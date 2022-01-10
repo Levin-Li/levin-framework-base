@@ -123,7 +123,7 @@ public class User
     @Schema(description = "性别")
     Sex sex;
 
-    @Schema(description = "帐号标签", title = "半角逗号隔开")
+    @Schema(description = "帐号标签json array", title = "json数组")
     @Column(length = 1800)
     String tags;
 
@@ -148,7 +148,7 @@ public class User
     @Column(length = 128)
     String jobPostCode;
 
-    @Schema(description = "角色列表", title = "Json")
+    @Schema(description = "角色列表json数组", title = "json数组")
     @Column(length = 1800)
     String roles;
 
