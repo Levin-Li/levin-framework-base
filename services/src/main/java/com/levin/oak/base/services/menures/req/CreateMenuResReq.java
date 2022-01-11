@@ -35,7 +35,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增菜单
- *  //Auto gen by simple-dao-codegen 2022-1-6 10:16:40
+ *  //Auto gen by simple-dao-codegen 2022-1-11 16:42:29
  */
 @Schema(description = "新增菜单")
 @Data
@@ -58,7 +58,7 @@ public class CreateMenuResReq extends MultiTenantReq {
     private String domain;
 
 
-    @Schema(description = "需要的授权，权限或角色用逗号隔开" )
+    @Schema(description = "需要的授权，权限或角色，json数组" )
     @Size(max = 1800)
     private String requireAuthorizations;
 

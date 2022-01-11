@@ -28,7 +28,7 @@ import java.util.Date;
 
 /**
 * 调度日志
-* @Author Auto gen by simple-dao-codegen 2022-1-6 10:16:39
+* @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
 */
 @Schema(description ="调度日志")
 @Data

@@ -34,7 +34,7 @@ import java.util.Date;
 
 /**
 * 机构
-* @Author Auto gen by simple-dao-codegen 2022-1-6 10:16:40
+* @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
 */
 @Schema(description ="机构")
 @Data

@@ -31,7 +31,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
 *  ID 查询系统设置
-*  //Auto gen by simple-dao-codegen 2022-1-6 10:16:39
+*  //Auto gen by simple-dao-codegen 2022-1-11 16:42:29
 */
 @Schema(description = "ID 查询系统设置")
 @Data

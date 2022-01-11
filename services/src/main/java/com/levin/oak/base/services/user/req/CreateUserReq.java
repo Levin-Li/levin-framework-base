@@ -35,7 +35,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增用户
- *  //Auto gen by simple-dao-codegen 2022-1-6 10:16:39
+ *  //Auto gen by simple-dao-codegen 2022-1-11 16:42:29
  */
 @Schema(description = "新增用户")
 @Data
@@ -91,7 +91,7 @@ public class CreateUserReq extends MultiTenantReq {
     private Sex sex;
 
 
-    @Schema(description = "帐号标签" )
+    @Schema(description = "帐号标签json array" )
     @Size(max = 1800)
     private String tags;
 
@@ -119,7 +119,7 @@ public class CreateUserReq extends MultiTenantReq {
     private String jobPostCode;
 
 
-    @Schema(description = "角色列表" )
+    @Schema(description = "角色列表json数组" )
     @Size(max = 1800)
     private String roles;
 

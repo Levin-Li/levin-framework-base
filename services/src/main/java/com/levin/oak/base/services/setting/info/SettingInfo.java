@@ -29,7 +29,7 @@ import java.util.Date;
 
 /**
 * 系统设置
-* @Author Auto gen by simple-dao-codegen 2022-1-6 10:16:39
+* @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
 */
 @Schema(description ="系统设置")
 @Data

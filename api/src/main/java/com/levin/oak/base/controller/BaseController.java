@@ -19,12 +19,15 @@ import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
 import javax.validation.constraints.*;
 
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.*;
+
 import com.levin.oak.base.*;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2022-1-5 15:29:19
+//Auto gen by simple-dao-codegen 2022-1-11 16:42:29
 
 
 /**
@@ -65,4 +68,10 @@ public abstract class BaseController {
 
         return (T) selfProxy;
     }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+       // binder.registerCustomEditor(Date.class,new CustomDateEditor(new SimpleDateFormat("MM-dd-yyyy"),false));
+    }
+
 }

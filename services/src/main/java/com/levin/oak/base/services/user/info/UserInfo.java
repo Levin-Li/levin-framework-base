@@ -1,7 +1,6 @@
 package com.levin.oak.base.services.user.info;
 
 
-import com.levin.commons.rbac.UserBaseInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.*;
@@ -32,7 +31,7 @@ import com.levin.oak.base.entities.Org;
 
 /**
 * 用户
-* @Author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
+* @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
 */
 @Schema(description ="用户")
 @Data
@@ -41,7 +40,7 @@ import com.levin.oak.base.entities.Org;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"org",})
 @FieldNameConstants
-public class UserInfo implements UserBaseInfo, Serializable {
+public class UserInfo implements Serializable {
 
    private static final long serialVersionUID = -445263479L;
 
@@ -49,6 +48,11 @@ public class UserInfo implements UserBaseInfo, Serializable {
    @NotNull
    @Schema(description = "id")
    private Long id;
+
+
+   @Size(max = 64)
+   @Schema(description = "租户ID")
+   private String tenantId;
 
 
    @Size(max = 64)
@@ -90,7 +94,7 @@ public class UserInfo implements UserBaseInfo, Serializable {
 
 
    @Size(max = 1800)
-   @Schema(description = "帐号标签")
+   @Schema(description = "帐号标签json array")
    private String tags;
 
 
@@ -118,12 +122,16 @@ public class UserInfo implements UserBaseInfo, Serializable {
 
 
    @Size(max = 1800)
-   @Schema(description = "角色列表")
+   @Schema(description = "角色列表json数组")
    private String roles;
 
 
    @Schema(description = "角色列表")
    private List<String> roleList;
+
+
+   @Schema(description = "所属部门ID")
+   private Long orgId;
 
 
    //@Fetch //默认不加载，请通过查询对象控制

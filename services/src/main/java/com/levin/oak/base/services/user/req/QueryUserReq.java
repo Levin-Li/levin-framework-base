@@ -14,6 +14,8 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
 
+import org.springframework.format.annotation.*;
+
 import javax.validation.constraints.*;
 import javax.annotation.*;
 
@@ -38,7 +40,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询用户
- *  @Author Auto gen by simple-dao-codegen 2022-1-6 10:16:39
+ *  @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
  */
 @Schema(description = "查询用户")
 @Data
@@ -92,7 +94,7 @@ public class QueryUserReq extends MultiTenantReq{
     private Sex sex;
 
 
-    @Schema(description = "帐号标签")
+    @Schema(description = "帐号标签json array")
     private String tags;
 
 
@@ -100,6 +102,7 @@ public class QueryUserReq extends MultiTenantReq{
     private Category category;
 
 
+    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于过期时间")
     @Gte
     private Date gteExpiredDate;
@@ -122,7 +125,7 @@ public class QueryUserReq extends MultiTenantReq{
     private String jobPostCode;
 
 
-    @Schema(description = "角色列表")
+    @Schema(description = "角色列表json数组")
     private String roles;
 
 
@@ -147,6 +150,7 @@ public class QueryUserReq extends MultiTenantReq{
     private String creator;
 
 
+    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于创建时间")
     @Gte
     private Date gteCreateTime;
@@ -157,6 +161,7 @@ public class QueryUserReq extends MultiTenantReq{
 
 
 
+    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于更新时间")
     @Gte
     private Date gteLastUpdateTime;

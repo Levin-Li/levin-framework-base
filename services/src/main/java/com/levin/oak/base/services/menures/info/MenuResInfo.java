@@ -32,7 +32,7 @@ import java.util.Date;
 
 /**
 * 菜单
-* @Author Auto gen by simple-dao-codegen 2022-1-6 10:16:40
+* @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
 */
 @Schema(description ="菜单")
 @Data
@@ -62,7 +62,7 @@ public class MenuResInfo implements Serializable {
 
 
    @Size(max = 1800)
-   @Schema(description = "需要的授权，权限或角色用逗号隔开")
+   @Schema(description = "需要的授权，权限或角色，json数组")
    private String requireAuthorizations;
 
 

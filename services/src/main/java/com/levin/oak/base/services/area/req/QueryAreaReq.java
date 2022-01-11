@@ -14,6 +14,8 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
 
+import org.springframework.format.annotation.*;
+
 import javax.validation.constraints.*;
 import javax.annotation.*;
 
@@ -38,7 +40,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询区域
- *  @Author Auto gen by simple-dao-codegen 2022-1-6 10:16:40
+ *  @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
  */
 @Schema(description = "查询区域")
 @Data
@@ -90,6 +92,7 @@ public class QueryAreaReq extends BaseReq{
     private String creator;
 
 
+    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于创建时间")
     @Gte
     private Date gteCreateTime;
@@ -100,6 +103,7 @@ public class QueryAreaReq extends BaseReq{
 
 
 
+    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于更新时间")
     @Gte
     private Date gteLastUpdateTime;

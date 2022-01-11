@@ -31,7 +31,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增简单页面
- *  //Auto gen by simple-dao-codegen 2022-1-6 10:16:40
+ *  //Auto gen by simple-dao-codegen 2022-1-11 16:42:29
  */
 @Schema(description = "新增简单页面")
 @Data

@@ -34,7 +34,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  更新简单接口
- *  Auto gen by simple-dao-codegen 2022-1-6 10:16:39
+ *  Auto gen by simple-dao-codegen 2022-1-11 16:42:29
  */
 @Schema(description = "更新简单接口")
 @Data
