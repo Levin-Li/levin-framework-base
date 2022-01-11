@@ -34,7 +34,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  删除用户
- *  //Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  //Auto gen by simple-dao-codegen 2022-1-11 16:49:28
  */
 @Schema(description = "删除用户")
 @Data

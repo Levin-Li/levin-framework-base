@@ -1,6 +1,7 @@
 package com.levin.oak.base.services.user.info;
 
 
+import com.levin.commons.rbac.UserBaseInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.*;
@@ -31,7 +32,7 @@ import com.levin.oak.base.entities.Org;
 
 /**
 * 用户
-* @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+* @Author Auto gen by simple-dao-codegen 2022-1-11 16:49:27
 */
 @Schema(description ="用户")
 @Data
@@ -40,7 +41,7 @@ import com.levin.oak.base.entities.Org;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"org",})
 @FieldNameConstants
-public class UserInfo implements Serializable {
+public class UserInfo implements Serializable, UserBaseInfo {
 
    private static final long serialVersionUID = -445263479L;
 

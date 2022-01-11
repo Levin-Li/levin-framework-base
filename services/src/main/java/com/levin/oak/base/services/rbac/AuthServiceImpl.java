@@ -124,6 +124,8 @@ public class AuthServiceImpl extends BaseService implements AuthService {
         return StpUtil.isLogin();
     }
 
+
+
     @Override
     public UserInfo getUserInfo() {
         return userService.findById(Long.parseLong(getLoginUserId()));
