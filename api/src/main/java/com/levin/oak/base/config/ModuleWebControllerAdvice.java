@@ -1,6 +1,9 @@
 package com.levin.oak.base.config;
 
 import static com.levin.oak.base.ModuleOption.*;
+
+import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.SaTokenException;
 import com.levin.oak.base.*;
 
 import com.levin.commons.service.domain.ApiResp;
@@ -21,6 +24,7 @@ import javax.annotation.Resource;
 import javax.persistence.PersistenceException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
@@ -43,6 +47,9 @@ public class ModuleWebControllerAdvice {
 
     @Resource
     HttpServletRequest request;
+
+    @Resource
+    HttpServletResponse response;
 
     @PostConstruct
     void init() {
@@ -87,9 +94,27 @@ public class ModuleWebControllerAdvice {
 //        return result;
 //    }
 
+    @ExceptionHandler({NotLoginException.class,})
+    public ApiResp onNotLoginException(Exception e) {
+
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+
+        return ApiResp.error(1, "未登录：" + e.getMessage())
+                .setHttpStatusCode(HttpStatus.UNAUTHORIZED.value());
+    }
+
+    @ExceptionHandler({SaTokenException.class,})
+    public ApiResp onSaTokenException(Exception e) {
+
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+
+        return ApiResp.error(1, "认证异常：" + e.getMessage())
+                .setHttpStatusCode(HttpStatus.UNAUTHORIZED.value());
+    }
 
     @ExceptionHandler({AccessDeniedException.class,})
     public ApiResp onAccessDeniedException(Exception e) {
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
         return ApiResp.error(2, "访问异常：" + e.getMessage())
                 .setHttpStatusCode(HttpStatus.UNAUTHORIZED.value());
     }
