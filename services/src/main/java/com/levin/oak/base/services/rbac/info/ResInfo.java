@@ -20,8 +20,10 @@ import java.util.List;
 @FieldNameConstants
 public class ResInfo extends IdentifiableObject {
 
+    @Schema(description = "资源域")
     String domain;
 
+    @Schema(description = "资源类型")
     String type;
 
     final List<ActionInfo> actionList = new LinkedList<>();

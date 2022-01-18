@@ -1,8 +1,6 @@
 package com.levin.oak.base.services.rbac.req;
 
 import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.C;
-import com.levin.commons.dao.annotation.CList;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.Ignore;
 import com.levin.commons.dao.annotation.logic.OR;
@@ -16,6 +14,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 ////////////////////////////////////
@@ -43,15 +42,15 @@ public class LoginReq implements ServiceReq {
 
     @Schema(description = "登录名/手机号/邮箱")
     @OR(autoClose = true)
-    @CList({@C(E_User.loginName)
-            , @C(E_User.telephone)
-            , @C(E_User.email)})
-    @NotNull
+    @Eq(E_User.loginName)
+    @Eq(E_User.telephone)
+    @Eq(E_User.email)
+    @NotBlank
     private String account;
 
     @Schema(description = "登录密码")
     @Eq(require = true)
-    @NotNull
+    @NotBlank
     private String password;
 
     @Schema(description = "租户ID", hidden = true)
