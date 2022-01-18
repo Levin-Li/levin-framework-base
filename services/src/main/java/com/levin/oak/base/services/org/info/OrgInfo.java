@@ -34,7 +34,7 @@ import java.util.Date;
 
 /**
 * 机构
-* @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+* @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
 */
 @Schema(description ="机构")
 @Data
@@ -82,7 +82,7 @@ public class OrgInfo implements Serializable {
    private String industries;
 
 
-   @NotNull
+   @NotBlank
    @Size(max = 64)
    @Schema(description = "区域编码")
    private String areaCode;
@@ -98,7 +98,7 @@ public class OrgInfo implements Serializable {
    private String level;
 
 
-   @NotNull
+   @NotBlank
    @Size(max = 128)
    @Schema(description = "机构类别")
    private String category;
@@ -152,10 +152,15 @@ public class OrgInfo implements Serializable {
    private String idPath;
 
 
-   @NotNull
+   @NotBlank
    @Size(max = 512)
    @Schema(description = "名称")
    private String name;
+
+
+   @Size(max = 512)
+   @Schema(description = "拼音名称-拼音首字母")
+   private String pinyinName;
 
 
    @Size(max = 128)

@@ -37,7 +37,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增机构
- *  //Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
  */
 @Schema(description = "新增机构")
 @Data
@@ -80,7 +80,7 @@ public class CreateOrgReq extends MultiTenantReq {
 
 
     @Schema(description = "区域编码" , required = true)
-    @NotNull
+    @NotBlank
     @Size(max = 64)
     private String areaCode;
 
@@ -92,7 +92,7 @@ public class CreateOrgReq extends MultiTenantReq {
 
 
     @Schema(description = "机构类别" , required = true)
-    @NotNull
+    @NotBlank
     @Size(max = 128)
     private String category;
 
@@ -138,9 +138,14 @@ public class CreateOrgReq extends MultiTenantReq {
 
 
     @Schema(description = "名称" , required = true)
-    @NotNull
+    @NotBlank
     @Size(max = 512)
     private String name;
+
+
+    @Schema(description = "拼音名称-拼音首字母" )
+    @Size(max = 512)
+    private String pinyinName;
 
 
     @Schema(description = "创建者" )

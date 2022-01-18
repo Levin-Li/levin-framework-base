@@ -34,7 +34,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  更新系统设置
- *  Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  Auto gen by simple-dao-codegen 2022-1-18 13:59:49
  */
 @Schema(description = "更新系统设置")
 @Data
@@ -57,6 +57,7 @@ public class UpdateSettingReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
+    //@NotBlank
     //@Size(max = 64)
     @Schema(description = "分类名称")
     private String categoryName;
@@ -65,6 +66,7 @@ public class UpdateSettingReq extends MultiTenantReq {
     @Schema(description = "分组名称")
     private String groupName;
 
+    //@NotBlank
     //@Size(max = 64)
     @Schema(description = "编码")
     private String code;
@@ -86,9 +88,14 @@ public class UpdateSettingReq extends MultiTenantReq {
     @Schema(description = "系统子域")
     private String domain;
 
+    //@NotBlank
     //@Size(max = 512)
     @Schema(description = "名称")
     private String name;
+
+    //@Size(max = 512)
+    @Schema(description = "拼音名称-拼音首字母")
+    private String pinyinName;
 
     @Schema(description = "更新时间")
     private Date lastUpdateTime;

@@ -32,7 +32,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增访问日志
- *  //Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
  */
 @Schema(description = "新增访问日志")
 @Data
@@ -67,7 +67,7 @@ public class CreateAccessLogReq extends MultiTenantReq {
 
 
     @Schema(description = "标题" , required = true)
-    @NotNull
+    @NotBlank
     private String title;
 
 

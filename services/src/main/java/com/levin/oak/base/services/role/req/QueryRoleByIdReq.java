@@ -33,7 +33,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
 *  ID 查询角色
-*  //Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
 */
 @Schema(description = "ID 查询角色")
 @Data
@@ -56,23 +56,7 @@ private static final long serialVersionUID = -445356492L;
     @Eq(require = true)
     @NotNull
     protected Long id;
-
-    //public QueryRoleByIdReq(Long id) {
-    //    this.id = id;
-    //}
-
-    /**
-     * 获取缓存ID
-     */
-    @Schema(description = "缓存ID-内部使用" , hidden = true)
-    public final String getCacheId() {
-
-        String cid = id.toString() + ""  + tenantId.toString();
-
-        return cid.trim().length() > 0 ? cid : null;
-
-    }
-
+    
 
     @PostConstruct
     public void preQuery() {

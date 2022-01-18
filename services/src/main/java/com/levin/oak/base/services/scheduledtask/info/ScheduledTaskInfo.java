@@ -28,7 +28,7 @@ import com.levin.commons.service.domain.InjectVar;
 
 /**
 * 调度任务
-* @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+* @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
 */
 @Schema(description ="调度任务")
 @Data
@@ -47,19 +47,19 @@ public class ScheduledTaskInfo implements Serializable {
    private Long id;
 
 
-   @NotNull
+   @NotBlank
    @Size(max = 64)
    @Schema(description = "任务分类")
    private String category;
 
 
-   @NotNull
+   @NotBlank
    @Size(max = 64)
    @Schema(description = "任务组")
    private String groupName;
 
 
-   @NotNull
+   @NotBlank
    @Schema(description = "调度表达式")
    private String cron;
 
@@ -97,10 +97,15 @@ public class ScheduledTaskInfo implements Serializable {
    private String domain;
 
 
-   @NotNull
+   @NotBlank
    @Size(max = 512)
    @Schema(description = "名称")
    private String name;
+
+
+   @Size(max = 512)
+   @Schema(description = "拼音名称-拼音首字母")
+   private String pinyinName;
 
 
    @Size(max = 128)

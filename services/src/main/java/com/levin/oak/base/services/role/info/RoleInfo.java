@@ -31,7 +31,7 @@ import java.util.Date;
 
 /**
 * 角色
-* @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+* @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
 */
 @Schema(description ="角色")
 @Data
@@ -50,7 +50,7 @@ public class RoleInfo implements Serializable {
    private Long id;
 
 
-   @NotNull
+   @NotBlank
    @Schema(description = "编码")
    private String code;
 
@@ -87,10 +87,15 @@ public class RoleInfo implements Serializable {
    private String domain;
 
 
-   @NotNull
+   @NotBlank
    @Size(max = 512)
    @Schema(description = "名称")
    private String name;
+
+
+   @Size(max = 512)
+   @Schema(description = "拼音名称-拼音首字母")
+   private String pinyinName;
 
 
    @Size(max = 128)

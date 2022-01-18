@@ -31,7 +31,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增简单页面
- *  //Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:50
  */
 @Schema(description = "新增简单页面")
 @Data
@@ -50,19 +50,19 @@ public class CreateSimplePageReq extends MultiTenantReq {
 
 
     @Schema(description = "分类名称" , required = true)
-    @NotNull
+    @NotBlank
     @Size(max = 64)
     private String category;
 
 
     @Schema(description = "分组名称" , required = true)
-    @NotNull
+    @NotBlank
     @Size(max = 64)
     private String groupName;
 
 
     @Schema(description = "访问路径" , required = true)
-    @NotNull
+    @NotBlank
     private String path;
 
 
@@ -76,9 +76,14 @@ public class CreateSimplePageReq extends MultiTenantReq {
 
 
     @Schema(description = "名称" , required = true)
-    @NotNull
+    @NotBlank
     @Size(max = 512)
     private String name;
+
+
+    @Schema(description = "拼音名称-拼音首字母" )
+    @Size(max = 512)
+    private String pinyinName;
 
 
     @Schema(description = "创建者" )

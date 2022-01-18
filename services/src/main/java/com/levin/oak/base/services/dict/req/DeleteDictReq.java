@@ -32,7 +32,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  删除字典
- *  //Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
  */
 @Schema(description = "删除字典")
 @Data

@@ -28,7 +28,7 @@ import java.util.Date;
 
 /**
 * 调度日志
-* @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+* @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
 */
 @Schema(description ="调度日志")
 @Data
@@ -53,14 +53,14 @@ public class ScheduledLogInfo implements Serializable {
    private String tenantId;
 
 
-   @NotNull
+   @NotBlank
    @InjectVar
    @Size(max = 64)
    @Schema(description = "归属组织")
    private String orgId;
 
 
-   @NotNull
+   @NotBlank
    @Size(max = 64)
    @Schema(description = "任务ID")
    private String taskId;

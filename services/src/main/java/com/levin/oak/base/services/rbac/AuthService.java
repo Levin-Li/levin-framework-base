@@ -30,7 +30,7 @@ public interface AuthService extends SimpleAuthService {
      *
      * @return
      */
-    UserBaseInfo getUserInfo();
+    <U extends UserBaseInfo> U getUserInfo();
 
     /**
      * 获取用户的权限列表

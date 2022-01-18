@@ -31,7 +31,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增国际化资源
- *  //Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:50
  */
 @Schema(description = "新增国际化资源")
 @Data
@@ -50,19 +50,19 @@ public class CreateI18nResReq extends MultiTenantReq {
 
 
     @Schema(description = "分类" , required = true)
-    @NotNull
+    @NotBlank
     @Size(max = 64)
     private String category;
 
 
     @Schema(description = "语言" , required = true)
-    @NotNull
+    @NotBlank
     @Size(max = 32)
     private String lang;
 
 
     @Schema(description = "标签" , required = true)
-    @NotNull
+    @NotBlank
     @Size(max = 768)
     private String label;
 
@@ -73,9 +73,14 @@ public class CreateI18nResReq extends MultiTenantReq {
 
 
     @Schema(description = "名称" , required = true)
-    @NotNull
+    @NotBlank
     @Size(max = 512)
     private String name;
+
+
+    @Schema(description = "拼音名称-拼音首字母" )
+    @Size(max = 512)
+    private String pinyinName;
 
 
     @Schema(description = "创建者" )

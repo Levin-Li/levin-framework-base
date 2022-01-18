@@ -36,7 +36,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询简单表单
- *  @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:30
+ *  @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:50
  */
 @Schema(description = "查询简单表单")
 @Data
@@ -84,6 +84,10 @@ public class QuerySimpleFormReq extends MultiTenantReq{
 
     @Schema(description = "名称")
     private String name;
+
+
+    @Schema(description = "拼音名称-拼音首字母")
+    private String pinyinName;
 
 
     @Schema(description = "创建者")

@@ -35,7 +35,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  新增区域
- *  //Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:50
  */
 @Schema(description = "新增区域")
 @Data
@@ -70,9 +70,14 @@ public class CreateAreaReq extends BaseReq {
 
 
     @Schema(description = "名称" , required = true)
-    @NotNull
+    @NotBlank
     @Size(max = 512)
     private String name;
+
+
+    @Schema(description = "拼音名称-拼音首字母" )
+    @Size(max = 512)
+    private String pinyinName;
 
 
     @Schema(description = "创建者" )

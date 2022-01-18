@@ -107,7 +107,7 @@ public class AccessLog
     protected String exceptionInfo;
 
     @Schema(description = "用户代理")
-    @Column( length = 512)
+    @Column(length = 512)
     protected String userAgent;
 
     @Schema(description = "设备名称/操作系统")
@@ -115,7 +115,7 @@ public class AccessLog
     protected String deviceName;
 
     @Schema(description = "浏览器名称")
-    @Column( length = 64)
+    @Column(length = 64)
     protected String browserName;
 
     @Schema(description = "执行时间(ms)")

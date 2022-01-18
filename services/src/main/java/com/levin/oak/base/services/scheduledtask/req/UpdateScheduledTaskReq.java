@@ -33,7 +33,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  更新调度任务
- *  Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  Auto gen by simple-dao-codegen 2022-1-18 13:59:49
  */
 @Schema(description = "更新调度任务")
 @Data
@@ -56,14 +56,17 @@ public class UpdateScheduledTaskReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
+    //@NotBlank
     //@Size(max = 64)
     @Schema(description = "任务分类")
     private String category;
 
+    //@NotBlank
     //@Size(max = 64)
     @Schema(description = "任务组")
     private String groupName;
 
+    //@NotBlank
     @Schema(description = "调度表达式")
     private String cron;
 
@@ -83,9 +86,14 @@ public class UpdateScheduledTaskReq extends MultiTenantReq {
     @Schema(description = "系统子域")
     private String domain;
 
+    //@NotBlank
     //@Size(max = 512)
     @Schema(description = "名称")
     private String name;
+
+    //@Size(max = 512)
+    @Schema(description = "拼音名称-拼音首字母")
+    private String pinyinName;
 
     @Schema(description = "更新时间")
     private Date lastUpdateTime;

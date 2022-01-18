@@ -28,7 +28,7 @@ import java.util.Date;
 
 /**
 * 简单表单
-* @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:30
+* @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:50
 */
 @Schema(description ="简单表单")
 @Data
@@ -51,19 +51,19 @@ public class SimpleFormInfo implements Serializable {
    private Long id;
 
 
-   @NotNull
+   @NotBlank
    @Size(max = 64)
    @Schema(description = "分类名称")
    private String category;
 
 
-   @NotNull
+   @NotBlank
    @Size(max = 64)
    @Schema(description = "分组名称")
    private String groupName;
 
 
-   @NotNull
+   @NotBlank
    @Schema(description = "访问路径")
    private String path;
 
@@ -89,10 +89,15 @@ public class SimpleFormInfo implements Serializable {
    private String domain;
 
 
-   @NotNull
+   @NotBlank
    @Size(max = 512)
    @Schema(description = "名称")
    private String name;
+
+
+   @Size(max = 512)
+   @Schema(description = "拼音名称-拼音首字母")
+   private String pinyinName;
 
 
    @Size(max = 128)

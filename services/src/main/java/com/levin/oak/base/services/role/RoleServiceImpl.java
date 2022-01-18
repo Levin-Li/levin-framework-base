@@ -3,6 +3,8 @@ package com.levin.oak.base.services.role;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
+
+
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.support.*;
 import com.levin.commons.service.domain.*;
@@ -29,6 +31,7 @@ import com.levin.oak.base.services.role.req.*;
 import com.levin.oak.base.services.role.info.*;
 
 import com.levin.oak.base.*;
+import com.levin.oak.base.services.*;
 
 
 ////////////////////////////////////
@@ -42,7 +45,7 @@ import com.levin.oak.base.*;
 /**
  *  角色-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *@author auto gen by simple-dao-codegen 2022-1-18 13:59:49
  *
  */
 
@@ -54,10 +57,14 @@ import com.levin.oak.base.*;
 //@Validated
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_Role.SIMPLE_CLASS_NAME})
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl extends BaseService implements RoleService {
 
     @Autowired
     private SimpleDao simpleDao;
+
+    protected RoleService getSelfProxy(){
+        return getSelfProxy(RoleService.class);
+    }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Override
@@ -84,7 +91,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     @Override
-    @Cacheable(condition = "#req.getCacheId() != null", unless = "#result == null ", key = E_Role.CACHE_KEY_PREFIX + "#req.getCacheId()")
+    //只更新缓存
+    @CachePut(unless = "#result == null" , condition = "#req.id != null" , key = E_Role.CACHE_KEY_PREFIX + "#req.id")
     public RoleInfo findById(QueryRoleByIdReq req) {
         return simpleDao.findOneByQueryObj(req);
     }
@@ -99,15 +107,18 @@ public class RoleServiceImpl implements RoleService {
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = Exception.class)
     @Override
-    @CacheEvict(condition = "#reqList != null && #reqList.size() > 0", allEntries = true)
+    //@Caching(evict = {
+        //@CacheEvict(condition = "#reqList != null && #reqList.size() > 0", allEntries = true)
+    //})
     public List<Integer> batchUpdate(List<UpdateRoleReq> reqList){
-        return reqList.stream().map(this::update).collect(Collectors.toList());
+        //@Todo 优化批量提交
+        return reqList.stream().map(req -> getSelfProxy().update(req)).collect(Collectors.toList());
     }
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     @Caching(evict = {
-         //尽量不用调用批量删除，会导致缓存清空
+        //尽量不用调用批量删除，会导致缓存清空
         @CacheEvict(condition = "#req.id != null", key = E_Role.CACHE_KEY_PREFIX + "#req.id"),
         @CacheEvict(condition = "#req.idList != null && #req.idList.length > 0", allEntries = true),
     })                    
@@ -126,4 +137,5 @@ public class RoleServiceImpl implements RoleService {
     public RoleInfo findOne(QueryRoleReq req){
         return simpleDao.findOneByQueryObj(req);
     }
+
 }

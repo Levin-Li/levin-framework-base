@@ -33,7 +33,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  更新调度日志
- *  Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  Auto gen by simple-dao-codegen 2022-1-18 13:59:49
  */
 @Schema(description = "更新调度日志")
 @Data
@@ -56,6 +56,7 @@ public class UpdateScheduledLogReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
+    //@NotBlank
     //@Size(max = 64)
     @Schema(description = "任务ID")
     private String taskId;

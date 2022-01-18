@@ -32,7 +32,7 @@ import java.util.Date;
 
 /**
 * 菜单
-* @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+* @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:50
 */
 @Schema(description ="菜单")
 @Data
@@ -112,10 +112,15 @@ public class MenuResInfo implements Serializable {
    private String idPath;
 
 
-   @NotNull
+   @NotBlank
    @Size(max = 512)
    @Schema(description = "名称")
    private String name;
+
+
+   @Size(max = 512)
+   @Schema(description = "拼音名称-拼音首字母")
+   private String pinyinName;
 
 
    @Size(max = 128)

@@ -28,7 +28,7 @@ import java.util.Date;
 
 /**
 * 访问日志
-* @Author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+* @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
 */
 @Schema(description ="访问日志")
 @Data
@@ -68,7 +68,7 @@ public class AccessLogInfo implements Serializable {
    private Date createTime;
 
 
-   @NotNull
+   @NotBlank
    @Schema(description = "标题")
    private String title;
 

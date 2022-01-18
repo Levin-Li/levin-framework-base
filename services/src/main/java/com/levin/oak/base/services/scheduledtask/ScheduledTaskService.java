@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  调度任务-服务接口
- *  @author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  @author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
  */
 @Tag(name = E_ScheduledTask.BIZ_NAME, description = E_ScheduledTask.BIZ_NAME + MAINTAIN_ACTION)
 public interface ScheduledTaskService {

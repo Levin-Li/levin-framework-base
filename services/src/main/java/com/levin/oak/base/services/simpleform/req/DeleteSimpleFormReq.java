@@ -30,7 +30,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  删除简单表单
- *  //Auto gen by simple-dao-codegen 2022-1-11 16:42:30
+ *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:50
  */
 @Schema(description = "删除简单表单")
 @Data

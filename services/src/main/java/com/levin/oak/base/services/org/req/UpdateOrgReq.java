@@ -39,7 +39,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  更新机构
- *  Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  Auto gen by simple-dao-codegen 2022-1-18 13:59:49
  */
 @Schema(description = "更新机构")
 @Data
@@ -79,6 +79,7 @@ public class UpdateOrgReq extends MultiTenantReq {
     @Schema(description = "所属行业")
     private String industries;
 
+    //@NotBlank
     //@Size(max = 64)
     @Schema(description = "区域编码")
     private String areaCode;
@@ -87,6 +88,7 @@ public class UpdateOrgReq extends MultiTenantReq {
     @Schema(description = "机构级别")
     private String level;
 
+    //@NotBlank
     //@Size(max = 128)
     @Schema(description = "机构类别")
     private String category;
@@ -120,9 +122,14 @@ public class UpdateOrgReq extends MultiTenantReq {
     @Schema(description = "id路径， 使用|包围，如|1|3|15|")
     private String idPath;
 
+    //@NotBlank
     //@Size(max = 512)
     @Schema(description = "名称")
     private String name;
+
+    //@Size(max = 512)
+    @Schema(description = "拼音名称-拼音首字母")
+    private String pinyinName;
 
     @Schema(description = "更新时间")
     private Date lastUpdateTime;

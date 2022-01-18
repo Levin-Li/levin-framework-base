@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  简单页面-服务接口
- *  @author Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  @author Auto gen by simple-dao-codegen 2022-1-18 13:59:50
  */
 @Tag(name = E_SimplePage.BIZ_NAME, description = E_SimplePage.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimplePageService {

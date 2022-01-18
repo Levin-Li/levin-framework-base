@@ -37,7 +37,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  更新菜单
- *  Auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *  Auto gen by simple-dao-codegen 2022-1-18 13:59:50
  */
 @Schema(description = "更新菜单")
 @Data
@@ -95,9 +95,14 @@ public class UpdateMenuResReq extends MultiTenantReq {
     @Schema(description = "id路径， 使用|包围，如|1|3|15|")
     private String idPath;
 
+    //@NotBlank
     //@Size(max = 512)
     @Schema(description = "名称")
     private String name;
+
+    //@Size(max = 512)
+    @Schema(description = "拼音名称-拼音首字母")
+    private String pinyinName;
 
     @Schema(description = "更新时间")
     private Date lastUpdateTime;

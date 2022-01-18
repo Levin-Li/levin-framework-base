@@ -3,6 +3,8 @@ package com.levin.oak.base.services.area;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
+
+
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.support.*;
 import com.levin.commons.service.domain.*;
@@ -29,6 +31,7 @@ import com.levin.oak.base.services.area.req.*;
 import com.levin.oak.base.services.area.info.*;
 
 import com.levin.oak.base.*;
+import com.levin.oak.base.services.*;
 
 
 ////////////////////////////////////
@@ -43,7 +46,7 @@ import com.levin.oak.base.*;
 /**
  *  区域-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-1-11 16:42:29
+ *@author auto gen by simple-dao-codegen 2022-1-18 13:59:50
  *
  */
 
@@ -55,10 +58,14 @@ import com.levin.oak.base.*;
 //@Validated
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_Area.SIMPLE_CLASS_NAME})
-public class AreaServiceImpl implements AreaService {
+public class AreaServiceImpl extends BaseService implements AreaService {
 
     @Autowired
     private SimpleDao simpleDao;
+
+    protected AreaService getSelfProxy(){
+        return getSelfProxy(AreaService.class);
+    }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Override
@@ -85,7 +92,8 @@ public class AreaServiceImpl implements AreaService {
 
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     @Override
-    @Cacheable(condition = "#req.getCacheId() != null", unless = "#result == null ", key = E_Area.CACHE_KEY_PREFIX + "#req.getCacheId()")
+    //只更新缓存
+    @CachePut(unless = "#result == null" , condition = "#req.code != null" , key = E_Area.CACHE_KEY_PREFIX + "#req.code")
     public AreaInfo findById(QueryAreaByIdReq req) {
         return simpleDao.findOneByQueryObj(req);
     }
@@ -100,15 +108,18 @@ public class AreaServiceImpl implements AreaService {
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = Exception.class)
     @Override
-    @CacheEvict(condition = "#reqList != null && #reqList.size() > 0", allEntries = true)
+    //@Caching(evict = {
+        //@CacheEvict(condition = "#reqList != null && #reqList.size() > 0", allEntries = true)
+    //})
     public List<Integer> batchUpdate(List<UpdateAreaReq> reqList){
-        return reqList.stream().map(this::update).collect(Collectors.toList());
+        //@Todo 优化批量提交
+        return reqList.stream().map(req -> getSelfProxy().update(req)).collect(Collectors.toList());
     }
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     @Caching(evict = {
-         //尽量不用调用批量删除，会导致缓存清空
+        //尽量不用调用批量删除，会导致缓存清空
         @CacheEvict(condition = "#req.code != null", key = E_Area.CACHE_KEY_PREFIX + "#req.code"),
         @CacheEvict(condition = "#req.codeList != null && #req.codeList.length > 0", allEntries = true),
     })                    
@@ -127,4 +138,5 @@ public class AreaServiceImpl implements AreaService {
     public AreaInfo findOne(QueryAreaReq req){
         return simpleDao.findOneByQueryObj(req);
     }
+
 }
