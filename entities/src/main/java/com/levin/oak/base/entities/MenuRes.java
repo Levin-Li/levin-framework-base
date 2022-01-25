@@ -1,5 +1,6 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
@@ -46,7 +47,7 @@ public class MenuRes
     Long id;
 
     @Schema(description = "租户ID")
-    @InjectVar
+
     String tenantId;
 
     @Schema(description = "子域")
@@ -73,6 +74,7 @@ public class MenuRes
     String icon;
 
     @Schema(description = "路径/链接")
+    @Contains
     String path;
 
     @Schema(description = "参数")

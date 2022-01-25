@@ -1,8 +1,8 @@
 package com.levin.oak.base.entities;
 
-import com.levin.commons.dao.domain.Identifiable;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
+import com.levin.commons.service.domain.Identifiable;
 import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -34,12 +34,12 @@ public class ScheduledLog
     Long id;
 
     @Schema(description = "租户ID")
-    @InjectVar
+
     @Column(length = 64)
     String tenantId;
 
     @Schema(description = "归属组织", required = true)
-    @InjectVar
+
     @Column(nullable = false, length = 64)
     String orgId;
 

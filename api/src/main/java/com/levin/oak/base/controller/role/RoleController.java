@@ -1,5 +1,6 @@
 package com.levin.oak.base.controller.role;
 
+import com.levin.commons.dao.SimpleDao;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -54,6 +55,9 @@ public class RoleController extends BaseController{
 
     @Autowired
     RoleService roleService;
+
+    @Autowired
+    SimpleDao simpleDao;
 
     /**
      * 分页查找

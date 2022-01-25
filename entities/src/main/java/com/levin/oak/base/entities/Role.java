@@ -1,5 +1,6 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.rbac.ResPermission;
 import com.levin.commons.rbac.RoleObject;
@@ -56,6 +57,7 @@ public class Role
 
     @Schema(description = "编码")
     @Column(nullable = false)
+    @Contains
     protected String code;
 
     @Schema(description = "图标")
@@ -78,6 +80,7 @@ public class Role
     protected List<ResPermission> permissionList;
 
     @Override
+    @PrePersist
     public void prePersist() {
 
         super.prePersist();

@@ -3,8 +3,6 @@ package com.levin.oak.base.services.rbac;
 import cn.dev33.satoken.exception.IdTokenInvalidException;
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.AuthorizationException;
@@ -23,6 +21,8 @@ import com.levin.oak.base.services.user.req.CreateUserReq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -30,7 +30,6 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,7 +48,9 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 //@ConditionalOnMissingBean(AuthService.class)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", havingValue = "false", matchIfMissing = true)
 @Service(PLUGIN_PREFIX + "DefaultAuthService")
-public class AuthServiceImpl extends BaseService implements AuthService {
+public class AuthServiceImpl extends BaseService
+        implements AuthService,
+        ApplicationListener<ContextRefreshedEvent> {
 
 //    static final Gson gson = new Gson();
 //
@@ -79,9 +80,25 @@ public class AuthServiceImpl extends BaseService implements AuthService {
 
         log.info("默认认证服务启用...");
 
-        initData();
+        //
+    }
+
+    /**
+     * Handle an application event.
+     *
+     * @param event the event to respond to
+     */
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+
+        log.info("On ContextRefreshedEvent " + event);
+
+        if (event.getApplicationContext() == this.context) {
+            initData();
+        }
 
     }
+
 
     /**
      * 认证，并返回token
@@ -123,7 +140,6 @@ public class AuthServiceImpl extends BaseService implements AuthService {
     public boolean isLogin() {
         return StpUtil.isLogin();
     }
-
 
 
     @Override
@@ -232,7 +248,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
                 .parallelStream()
                 .filter(StringUtils::hasText)
                 //JSON 转换
-                .flatMap(json -> (JsonStrArrayUtils.<String>parse(json,null,null)).stream())
+                .flatMap(json -> (JsonStrArrayUtils.<String>parse(json, null, null)).stream())
 //                .map(json -> (List<ResPermission>) gson.fromJson(json, resPermissionListType))
                 .filter(StringUtils::hasText)
                 .collect(Collectors.toList());
@@ -250,7 +266,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
 
         checkUserState(user);
 
-        return JsonStrArrayUtils.parse(user.getRoles(),null,null);
+        return JsonStrArrayUtils.parse(user.getRoles(), null, null);
     }
 
 
@@ -288,6 +304,8 @@ public class AuthServiceImpl extends BaseService implements AuthService {
      */
     public void initData() {
 
+        log.info("初始化用户数据和菜单数据");
+
         initUser();
 
         initMenu();
@@ -318,7 +336,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
                     .parallelStream().forEach(menuItem -> {
                 //创建菜单
                 log.info("创建插件[ {} ]的默认菜单[ {} --> {}]", plugin.getId(), menuItem.getName(), menuItem.getPath());
-                simpleDao.create(simpleDao.copyProperties(menuItem, new MenuRes().setParentId(pluginRootMenu.getId()),
+                simpleDao.create(simpleDao.copy(menuItem, new MenuRes().setParentId(pluginRootMenu.getId()),
                         1, E_MenuRes.parentId, E_MenuRes.children, E_MenuRes.parent));
             });
 

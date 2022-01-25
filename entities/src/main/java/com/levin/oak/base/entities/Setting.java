@@ -1,5 +1,6 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -60,6 +61,7 @@ public class Setting
 
     @Schema(description = "分组名称")
     @Column(length = 64)
+    @Contains
     protected String groupName;
 
     @Schema(description = "编码")

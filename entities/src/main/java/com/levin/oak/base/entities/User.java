@@ -1,5 +1,6 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
@@ -103,6 +104,7 @@ public class User
 
     @Schema(description = "手机号")
     @Column(length = 20)
+    @Contains
     String telephone;
 
     @Schema(description = "邮箱")
@@ -111,10 +113,12 @@ public class User
 
     @Schema(description = "名称")
     @Column(length = 64)
+    @Contains
     String name;
 
     @Schema(description = "昵称")
     @Column(length = 32)
+    @Contains
     String nickname;
 
     @Schema(description = "头像")
@@ -142,6 +146,7 @@ public class User
 
     @Schema(description = "工号")
     @Column(length = 32)
+    @Contains
     String staffNo;
 
     @Schema(description = "岗位职级")

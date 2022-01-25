@@ -1,5 +1,6 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -47,6 +48,7 @@ public class ScheduledTask
 
     @Schema(description = "任务组")
     @Column(nullable = false,length = 64)
+    @Contains
     String groupName;
 
     @Schema(description = "调度表达式")

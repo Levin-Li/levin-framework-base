@@ -1,6 +1,7 @@
 package com.levin.oak.base.entities;
 
 
+import com.levin.commons.dao.annotation.Contains;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,6 +29,7 @@ public abstract class SimpleEntity
 
     @Schema(description = "分组名称")
     @Column(nullable = false,length = 64)
+    @Contains
     protected String groupName;
 
     @Schema(description = "访问路径")

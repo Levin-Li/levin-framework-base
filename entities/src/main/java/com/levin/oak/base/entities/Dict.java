@@ -1,7 +1,10 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.DefaultJsonConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,15 +25,15 @@ import java.util.List;
 @Table(
 
         indexes = {
-                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-                @Index(columnList = AbstractBaseEntityObject.Fields.enable),
-                @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
-                @Index(columnList = AbstractBaseEntityObject.Fields.creator),
-
-                @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = E_Dict.code),
-                @Index(columnList = E_Dict.type),
-                @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
+//                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
+//                @Index(columnList = AbstractBaseEntityObject.Fields.enable),
+//                @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
+//                @Index(columnList = AbstractBaseEntityObject.Fields.creator),
+//
+//                @Index(columnList = AbstractNamedEntityObject.Fields.name),
+//                @Index(columnList = E_Dict.code),
+//                @Index(columnList = E_Dict.type),
+//                @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
         }
 //        ,
 //        uniqueConstraints = {
@@ -81,10 +84,12 @@ public class Dict
 
     @Schema(description = "编码")
     @Column(nullable = false,length = 64)
+    @Contains
     protected String code;
 
     @Schema(description = "编码项", title = "Json 存储")
     @Lob
+    @InjectVar(converter = DefaultJsonConverter.class)
     protected String items;
 
     @Transient

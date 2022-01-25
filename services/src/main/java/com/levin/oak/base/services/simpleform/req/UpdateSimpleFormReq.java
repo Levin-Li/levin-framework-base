@@ -67,6 +67,7 @@ public class UpdateSimpleFormReq extends MultiTenantReq {
     //@NotBlank
     //@Size(max = 64)
     @Schema(description = "分组名称")
+//    @Api(queryDto.class)
     private String groupName;
 
     //@NotBlank

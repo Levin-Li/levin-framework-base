@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.rbac.info;
 
-import com.levin.commons.rbac.IdentifiableObject;
+import com.levin.commons.rbac.DefaultSimpleIdentifiableObject;
 import com.levin.commons.rbac.Res;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -18,7 +18,7 @@ import java.util.List;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-public class ResTypeInfo  extends IdentifiableObject {
+public class ResTypeInfo  extends DefaultSimpleIdentifiableObject {
 
     final List<ResInfo> resList = new LinkedList<>();
 

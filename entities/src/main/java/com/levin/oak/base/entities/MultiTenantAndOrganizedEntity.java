@@ -19,7 +19,6 @@ public abstract class MultiTenantAndOrganizedEntity
         implements OrganizedObject {
 
     @Schema(description = "机构ID")
-    @InjectVar
     @Column( length = 64)
     protected String orgId;
 

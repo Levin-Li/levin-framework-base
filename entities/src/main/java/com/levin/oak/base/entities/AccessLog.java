@@ -1,8 +1,9 @@
 package com.levin.oak.base.entities;
 
 
-import com.levin.commons.dao.domain.Identifiable;
+import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
+import com.levin.commons.service.domain.Identifiable;
 import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -31,18 +32,18 @@ import java.util.Date;
 @Schema(description = "访问日志")
 public class AccessLog
         implements
-        MultiTenantObject, Identifiable {
+        MultiTenantObject  {
 
     @Id
     @GeneratedValue
     protected Long id;
 
     @Schema(description = "租户ID")
-    @InjectVar
+
     protected String tenantId;
 
     @Schema(description = "请求的域名")
-    @InjectVar
+
     @Column(length = 64)
     protected String domain;
 
@@ -69,14 +70,17 @@ public class AccessLog
     protected String diffModifyData;
 
     @Schema(description = "业务主键")
+    @Contains
     protected String bizKey;
 
     @Schema(description = "业务类型")
+    @Contains
     protected String bizType;
 
     ////////////////////////////////////
 
     @Schema(description = "请求URI")
+    @Contains
     protected String requestUri;
 
     @Schema(description = "请求方法")
@@ -93,6 +97,7 @@ public class AccessLog
 
     @Schema(description = "操作IP地址")
     @Column(length = 64)
+    @Contains
     protected String remoteAddr;
 
     @Schema(description = "服务器地址")

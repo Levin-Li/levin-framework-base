@@ -1,11 +1,11 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.StatefulObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.dao.domain.support.AbstractTreeObject;
-import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -90,11 +90,12 @@ public class Org
     protected Long id;
 
     @Schema(description = "租户ID")
-    @InjectVar
+
     protected String tenantId;
 
     @Schema(description = "编码", title = "对于公司是统一信用码")
     @Column(length = 128)
+    @Contains
     protected String code;
 
     @Schema(description = "图标")
@@ -114,6 +115,7 @@ public class Org
 
     @Schema(description = "区域编码")
     @Column(nullable = false, length = 64)
+    @Contains
     protected String areaCode;
 
     @Schema(description = "所属区域")
@@ -137,10 +139,12 @@ public class Org
 
     @Schema(description = "联系人")
     @Column(length = 64)
+    @Contains
     protected String contacts;
 
     @Schema(description = "联系电话")
     @Column(length = 20)
+    @Contains
     protected String phones;
 
     @Schema(description = "联系邮箱")
@@ -148,6 +152,7 @@ public class Org
     protected String emails;
 
     @Schema(description = "联系地址")
+    @Contains
     protected String address;
 
     @Schema(description = "邮政编码")
@@ -155,6 +160,7 @@ public class Org
     protected String zipCode;
 
     @Override
+    @PrePersist
     public void prePersist() {
 
         super.prePersist();

@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.rbac.info;
 
-import com.levin.commons.rbac.IdentifiableObject;
+import com.levin.commons.rbac.DefaultSimpleIdentifiableObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -18,7 +18,7 @@ import java.util.List;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-public class ResInfo extends IdentifiableObject {
+public class ResInfo extends DefaultSimpleIdentifiableObject {
 
     @Schema(description = "资源域")
     String domain;

@@ -1,5 +1,6 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -53,6 +54,7 @@ public class I18nRes
 
     @Schema(description = "标签")
     @Column(nullable = false, length = 768)
+    @Contains
     String label;
 
 

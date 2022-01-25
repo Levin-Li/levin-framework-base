@@ -21,7 +21,6 @@ public abstract class MultiTenantNamedEntity
         implements MultiTenantObject {
 
     @Schema(description = "租户ID")
-    @InjectVar
     @Column( length = 64)
     protected String tenantId;
 

@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.StartsWith;
 import com.levin.commons.dao.domain.TreeObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
@@ -48,6 +50,7 @@ public class Area
     @Schema(description = "编码")
     @Id
     @Column( length = 64)
+    @StartsWith
     protected String code;
 
     @Schema(description = "图标")
