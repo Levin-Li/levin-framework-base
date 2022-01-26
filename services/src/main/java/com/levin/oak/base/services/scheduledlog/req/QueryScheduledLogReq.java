@@ -36,7 +36,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询调度日志
- *  @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "查询调度日志")
 @Data
@@ -47,8 +47,7 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS
-, resultClass = ScheduledLogInfo.class)
+@TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS, resultClass = ScheduledLogInfo.class)
 public class QueryScheduledLogReq extends MultiTenantReq{
 
     private static final long serialVersionUID = 1319130901L;
@@ -63,11 +62,11 @@ public class QueryScheduledLogReq extends MultiTenantReq{
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于创建时间")
+    @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteCreateTime;
 
-    @Schema(description = "小于等于创建时间")
+    @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteCreateTime;
 

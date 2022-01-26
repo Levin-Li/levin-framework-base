@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.setting.req;
+package com.levin.oak.base.services.simpleapi.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -19,21 +19,22 @@ import javax.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
-
-import com.levin.oak.base.entities.Setting;
+import com.levin.oak.base.services.simpleapi.info.*;
+import com.levin.oak.base.entities.SimpleApi;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.Setting.*;
-    import java.util.Date;
+import com.levin.oak.base.entities.SimpleApi.*;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  ID 查询系统设置
-*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+*  简单接口 主键通用请求
+*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
-@Schema(description = "ID 查询系统设置")
+
+@Schema(description = "简单接口 主键通用请求")
 @Data
 
     @AllArgsConstructor
@@ -44,10 +45,10 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = Setting.class, alias = E_Setting.ALIAS)
-public class QuerySettingByIdReq extends MultiTenantReq {
+@TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS, resultClass = SimpleApiInfo.class)
+public class SimpleApiIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = 147875794L;
+private static final long serialVersionUID = 1021385738L;
 
 
     @Schema(description = "id" , required = true)

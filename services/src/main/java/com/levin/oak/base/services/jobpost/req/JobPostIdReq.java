@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.simpleform.req;
+package com.levin.oak.base.services.jobpost.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -19,20 +19,22 @@ import javax.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
-
-import com.levin.oak.base.entities.SimpleForm;
+import com.levin.oak.base.services.jobpost.info.*;
+import com.levin.oak.base.entities.JobPost;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import java.util.Date;
+import com.levin.oak.base.entities.JobPost.*;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  ID 查询简单表单
-*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:50
+*  工作岗位 主键通用请求
+*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
-@Schema(description = "ID 查询简单表单")
+
+@Schema(description = "工作岗位 主键通用请求")
 @Data
 
     @AllArgsConstructor
@@ -43,10 +45,10 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = SimpleForm.class, alias = E_SimpleForm.ALIAS)
-public class QuerySimpleFormByIdReq extends MultiTenantReq {
+@TargetOption(entityClass = JobPost.class, alias = E_JobPost.ALIAS, resultClass = JobPostInfo.class)
+public class JobPostIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = 1598335188L;
+private static final long serialVersionUID = 1018878847L;
 
 
     @Schema(description = "id" , required = true)

@@ -31,13 +31,12 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  查询访问日志
- *  @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "查询访问日志")
 @Data
@@ -48,8 +47,7 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS
-, resultClass = AccessLogInfo.class)
+@TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS, resultClass = AccessLogInfo.class)
 public class QueryAccessLogReq extends MultiTenantReq{
 
     private static final long serialVersionUID = 1030736962L;
@@ -68,11 +66,11 @@ public class QueryAccessLogReq extends MultiTenantReq{
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于创建时间")
+    @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteCreateTime;
 
-    @Schema(description = "小于等于创建时间")
+    @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteCreateTime;
 
@@ -93,13 +91,25 @@ public class QueryAccessLogReq extends MultiTenantReq{
     @Schema(description = "业务主键")
     private String bizKey;
 
+    @Schema(description = "模糊匹配 - 业务主键")
+    @Contains
+    private String containsBizKey;
+
 
     @Schema(description = "业务类型")
     private String bizType;
 
+    @Schema(description = "模糊匹配 - 业务类型")
+    @Contains
+    private String containsBizType;
+
 
     @Schema(description = "请求URI")
     private String requestUri;
+
+    @Schema(description = "模糊匹配 - 请求URI")
+    @Contains
+    private String containsRequestUri;
 
 
     @Schema(description = "请求方法")
@@ -116,6 +126,10 @@ public class QueryAccessLogReq extends MultiTenantReq{
 
     @Schema(description = "操作IP地址")
     private String remoteAddr;
+
+    @Schema(description = "模糊匹配 - 操作IP地址")
+    @Contains
+    private String containsRemoteAddr;
 
 
     @Schema(description = "服务器地址")

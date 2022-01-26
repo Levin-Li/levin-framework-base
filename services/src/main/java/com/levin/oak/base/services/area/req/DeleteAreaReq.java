@@ -25,21 +25,21 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.Area;
-    import com.levin.oak.base.services.area.info.*;
-    import java.util.Set;
-    import com.levin.oak.base.entities.Area.*;
-    import java.util.Date;
+import com.levin.oak.base.entities.Area;
+import com.levin.oak.base.services.area.info.*;
+import java.util.Set;
+import com.levin.oak.base.entities.Area.*;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  删除区域
- *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:50
+ *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "删除区域")
 @Data
 
-@AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
@@ -52,24 +52,21 @@ public class DeleteAreaReq extends BaseReq {
 
     private static final long serialVersionUID = -445860277L;
 
-    @OR
-    @Schema(description = "编码" , hidden = true)
-    private String code;
 
-    @END
     @Schema(description = "编码集合")
-    @In(E_Area.code)
-    @Validator(expr = "code != null || ( codeList != null &&  codeList.length > 0)" , promptInfo = "删除区域必须指定ID")
+    @In(value = E_Area.code, require = true)
+    @NotEmpty
     private String[] codeList;
-
-
-    public DeleteAreaReq(String code) {
-        this.code = code;
-    }
 
     public DeleteAreaReq(String... codeList) {
         this.codeList = codeList;
     }
+
+    public DeleteAreaReq setCodeList(String... codeList) {
+        this.codeList = codeList;
+        return this;
+    }
+
 
     @PostConstruct
     public void preDelete() {

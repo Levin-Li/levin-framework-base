@@ -19,6 +19,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -42,10 +43,11 @@ import java.util.stream.Stream;
 
 //@EnableSwagger2
 
-@Configuration(PLUGIN_PREFIX + "ModuleSwaggerConfigurer")
 @Slf4j
+@Configuration(PLUGIN_PREFIX + "ModuleSwaggerConfigurer")
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleSwaggerConfigurer", matchIfMissing = true)
+
 @ConditionalOnClass({Docket.class})
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleSwaggerConfigurer", havingValue = "false", matchIfMissing = true)
 public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
 
     /**

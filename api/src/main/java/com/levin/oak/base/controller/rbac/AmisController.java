@@ -42,7 +42,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "AmisController")
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "AmisController", havingValue = "false", matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "AmisController",  matchIfMissing = true)
 @RequestMapping(API_PATH + "rbac")
 @Tag(name = "权限认证", description = "权限管理")
 @Slf4j

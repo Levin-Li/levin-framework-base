@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.org.req;
+package com.levin.oak.base.services.simplepage.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -19,26 +19,21 @@ import javax.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
-
-import com.levin.oak.base.entities.Org;
+import com.levin.oak.base.services.simplepage.info.*;
+import com.levin.oak.base.entities.SimplePage;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.Org.*;
-    import com.levin.oak.base.entities.Area;
-    import com.levin.oak.base.services.area.info.*;
-    import com.levin.oak.base.services.org.info.*;
-    import com.levin.oak.base.entities.Org;
-    import java.util.Set;
-    import java.util.Date;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  ID 查询机构
-*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+*  简单页面 主键通用请求
+*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
-@Schema(description = "ID 查询机构")
+
+@Schema(description = "简单页面 主键通用请求")
 @Data
 
     @AllArgsConstructor
@@ -49,10 +44,10 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = Org.class, alias = E_Org.ALIAS)
-public class QueryOrgByIdReq extends MultiTenantReq {
+@TargetOption(entityClass = SimplePage.class, alias = E_SimplePage.ALIAS, resultClass = SimplePageInfo.class)
+public class SimplePageIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = -1399842458L;
+private static final long serialVersionUID = 1598619295L;
 
 
     @Schema(description = "id" , required = true)

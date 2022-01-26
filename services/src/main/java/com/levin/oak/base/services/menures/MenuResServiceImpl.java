@@ -23,6 +23,8 @@ import org.springframework.stereotype.Service;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
+import org.springframework.dao.*;
+import javax.persistence.PersistenceException;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.MenuRes;
@@ -36,24 +38,24 @@ import com.levin.oak.base.services.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.rbac.MenuItem.*;
-    import com.levin.oak.base.entities.MenuRes;
-    import com.levin.oak.base.services.menures.info.*;
-    import java.util.Set;
-    import java.util.Date;
+import com.levin.commons.rbac.MenuItem.*;
+import com.levin.oak.base.entities.MenuRes;
+import com.levin.oak.base.services.menures.info.*;
+import java.util.Set;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  菜单-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-1-18 13:59:50
+ *@author auto gen by simple-dao-codegen 2022-1-26 17:07:15
  *
  */
 
 //@Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @Service(PLUGIN_PREFIX + "MenuResService")
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "MenuResService", havingValue = "false", matchIfMissing = true)
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "MenuResService", matchIfMissing = true)
 @Slf4j
 //@Validated
 @Tag(name = E_MenuRes.BIZ_NAME, description = E_MenuRes.BIZ_NAME + MAINTAIN_ACTION)
@@ -75,7 +77,7 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
     public List<Long> batchCreate(List<CreateMenuResReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
@@ -86,31 +88,40 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
     @Cacheable(sync = false, condition = "#id != null", unless = "#result == null ", key = E_MenuRes.CACHE_KEY_PREFIX + "#id")
     public MenuResInfo findById(Long id) {
-        Assert.notNull(id, BIZ_NAME + " id 不能为空");
-        return simpleDao.findOneByQueryObj(new QueryMenuResReq().setId(id));
+        return findById(new MenuResIdReq().setId(id));
     }
 
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     @Override
     //只更新缓存
     @CachePut(unless = "#result == null" , condition = "#req.id != null" , key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
-    public MenuResInfo findById(QueryMenuResByIdReq req) {
+    public MenuResInfo findById(MenuResIdReq req) {
+
+        Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
+
         return simpleDao.findOneByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
-    @CacheEvict(condition = "#req.id != null", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")    
+    @CacheEvict(condition = "#req.id != null", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
+    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public int update(UpdateMenuResReq req) {
-        return simpleDao.updateByQueryObj(req);
+
+        Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
+
+        int n = simpleDao.updateByQueryObj(req);
+
+        if(n > 1){
+            throw new DaoSecurityException("非法的" + UPDATE_ACTION +"操作");
+        }
+
+        return n;
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    //@Caching(evict = {
-        //@CacheEvict(condition = "#reqList != null && #reqList.size() > 0", allEntries = true)
-    //})
     public List<Integer> batchUpdate(List<UpdateMenuResReq> reqList){
         //@Todo 优化批量提交
         return reqList.stream().map(req -> getSelfProxy().update(req)).collect(Collectors.toList());
@@ -118,13 +129,30 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
-    @Caching(evict = {
-        //尽量不用调用批量删除，会导致缓存清空
-        @CacheEvict(condition = "#req.id != null", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id"),
-        @CacheEvict(condition = "#req.idList != null && #req.idList.length > 0", allEntries = true),
-    })                    
-    public int delete(DeleteMenuResReq req) {
-        return simpleDao.deleteByQueryObj(req);
+    @CacheEvict(condition = "#req.id != null", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
+    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    public int delete(MenuResIdReq req) {
+
+        Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
+
+        int n = simpleDao.deleteByQueryObj(req);
+
+        if(n > 1){
+            throw new DaoSecurityException("非法的" + DELETE_ACTION +"操作");
+        }
+
+        return n;
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Override
+    public List<Integer> batchDelete(DeleteMenuResReq req){
+        //@Todo 优化批量提交
+        return Stream.of(req.getIdList())
+            .map(id -> simpleDao.copy(req, new MenuResIdReq().setId(id)))
+            .map(idReq -> getSelfProxy().delete((MenuResIdReq)idReq))
+            .collect(Collectors.toList());
     }
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)

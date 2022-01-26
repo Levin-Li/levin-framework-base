@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.scheduledlog.req;
+package com.levin.oak.base.services.user.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -19,20 +19,25 @@ import javax.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
-
-import com.levin.oak.base.entities.ScheduledLog;
+import com.levin.oak.base.services.user.info.*;
+import com.levin.oak.base.entities.User;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import java.util.Date;
+import com.levin.oak.base.entities.User.*;
+import java.util.Date;
+import java.util.List;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
-*  ID 查询调度日志
-*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+*  用户 主键通用请求
+*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
-@Schema(description = "ID 查询调度日志")
+
+@Schema(description = "用户 主键通用请求")
 @Data
 
     @AllArgsConstructor
@@ -43,10 +48,10 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS)
-public class QueryScheduledLogByIdReq extends MultiTenantReq {
+@TargetOption(entityClass = User.class, alias = E_User.ALIAS, resultClass = UserInfo.class)
+public class UserIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = 1319130901L;
+private static final long serialVersionUID = -445263479L;
 
 
     @Schema(description = "id" , required = true)

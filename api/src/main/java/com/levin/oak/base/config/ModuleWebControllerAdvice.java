@@ -42,7 +42,7 @@ import java.text.SimpleDateFormat;
 @Component(PLUGIN_PREFIX + "ModuleWebControllerAdvice")
 //@ConditionalOnMissingBean(name = {PLUGIN_PREFIX + "ModuleWebControllerAdvice"})
 @RestControllerAdvice(PACKAGE_NAME)
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleWebControllerAdvice", havingValue = "false", matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleWebControllerAdvice",  matchIfMissing = true)
 public class ModuleWebControllerAdvice {
 
     @Resource

@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  工作岗位-服务接口
- *  @author Auto gen by simple-dao-codegen 2022-1-18 13:59:50
+ *  @author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Tag(name = E_JobPost.BIZ_NAME, description = E_JobPost.BIZ_NAME + MAINTAIN_ACTION)
 public interface JobPostService {
@@ -38,17 +38,19 @@ public interface JobPostService {
     JobPostInfo findById(Long id);
 
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    JobPostInfo findById(QueryJobPostByIdReq req);
+    JobPostInfo findById(JobPostIdReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     int update(UpdateJobPostReq req);
 
-    //尽量不用调用批量删除，会导致缓存清空
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     List<Integer> batchUpdate(List<UpdateJobPostReq> reqList);
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    int delete(DeleteJobPostReq req);
+    int delete(JobPostIdReq req);
+
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    List<Integer> batchDelete(DeleteJobPostReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<JobPostInfo> query(QueryJobPostReq req , Paging paging);

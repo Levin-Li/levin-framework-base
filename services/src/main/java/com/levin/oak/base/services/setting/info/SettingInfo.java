@@ -23,13 +23,12 @@ import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
 import com.levin.oak.base.entities.Setting.*;
-import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
 * 系统设置
-* @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+* @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
 @Schema(description ="系统设置")
 @Data
@@ -83,7 +82,6 @@ public class SettingInfo implements Serializable {
    private String inputPlaceholder;
 
 
-   @InjectVar
    @Size(max = 64)
    @Schema(description = "租户ID")
    private String tenantId;
@@ -95,13 +93,13 @@ public class SettingInfo implements Serializable {
 
 
    @NotBlank
-   @Size(max = 512)
+   @Size(max = 128)
    @Schema(description = "名称")
    private String name;
 
 
-   @Size(max = 512)
-   @Schema(description = "拼音名称-拼音首字母")
+   @Size(max = 128)
+   @Schema(description = "拼音，格式：全拼(简拼)")
    private String pinyinName;
 
 

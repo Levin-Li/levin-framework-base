@@ -1,5 +1,6 @@
 package com.levin.oak.base.controller.rbac;
 
+import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.rbac.UserBaseInfo;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.controller.BaseController;
@@ -19,8 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-import static com.levin.oak.base.ModuleOption.API_PATH;
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.TYPE_NAME;
 
 
 // POST: 创建一个新的资源，如用户资源，部门资源
@@ -36,7 +37,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "AuthController")
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "AuthController", havingValue = "false", matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "AuthController", matchIfMissing = true)
 @RequestMapping(API_PATH + "rbac")
 @Tag(name = "授权管理", description = "授权管理")
 @Slf4j
@@ -60,6 +61,7 @@ public class RbacController extends BaseController {
      */
     @PostMapping("login")
     @Operation(tags = {"授权管理"}, summary = "用户登录")
+    @ResAuthorize(domain = ID, type = TYPE_NAME, ignored = true)
     public ApiResp<String> login(LoginReq req, @RequestHeader(value = "user-agent", required = false) String ua) {
         return ApiResp.ok(authService.auth(req.getAccount(), req.getPassword(), ua));
     }

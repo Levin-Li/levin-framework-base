@@ -40,7 +40,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询用户
- *  @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "查询用户")
 @Data
@@ -51,8 +51,7 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = User.class, alias = E_User.ALIAS
-, resultClass = UserInfo.class)
+@TargetOption(entityClass = User.class, alias = E_User.ALIAS, resultClass = UserInfo.class)
 public class QueryUserReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -445263479L;
@@ -73,6 +72,10 @@ public class QueryUserReq extends MultiTenantReq{
     @Schema(description = "手机号")
     private String telephone;
 
+    @Schema(description = "模糊匹配 - 手机号")
+    @Contains
+    private String containsTelephone;
+
 
     @Schema(description = "邮箱")
     private String email;
@@ -81,9 +84,17 @@ public class QueryUserReq extends MultiTenantReq{
     @Schema(description = "名称")
     private String name;
 
+    @Schema(description = "模糊匹配 - 名称")
+    @Contains
+    private String containsName;
+
 
     @Schema(description = "昵称")
     private String nickname;
+
+    @Schema(description = "模糊匹配 - 昵称")
+    @Contains
+    private String containsNickname;
 
 
     @Schema(description = "头像")
@@ -103,11 +114,11 @@ public class QueryUserReq extends MultiTenantReq{
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于过期时间")
+    @Schema(description = "大于等于过期时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteExpiredDate;
 
-    @Schema(description = "小于等于过期时间")
+    @Schema(description = "小于等于过期时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteExpiredDate;
 
@@ -119,6 +130,10 @@ public class QueryUserReq extends MultiTenantReq{
 
     @Schema(description = "工号")
     private String staffNo;
+
+    @Schema(description = "模糊匹配 - 工号")
+    @Contains
+    private String containsStaffNo;
 
 
     @Schema(description = "岗位职级")
@@ -151,22 +166,22 @@ public class QueryUserReq extends MultiTenantReq{
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于创建时间")
+    @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteCreateTime;
 
-    @Schema(description = "小于等于创建时间")
+    @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteCreateTime;
 
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于更新时间")
+    @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteLastUpdateTime;
 
-    @Schema(description = "小于等于更新时间")
+    @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteLastUpdateTime;
 

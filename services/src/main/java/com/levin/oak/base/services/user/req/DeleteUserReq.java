@@ -25,21 +25,21 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.User.*;
-    import java.util.Date;
-    import java.util.List;
-    import com.levin.oak.base.services.org.info.*;
-    import com.levin.oak.base.entities.Org;
+import com.levin.oak.base.entities.User.*;
+import java.util.Date;
+import java.util.List;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
  *  删除用户
- *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "删除用户")
 @Data
 
-@AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
@@ -52,24 +52,21 @@ public class DeleteUserReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445263479L;
 
-    @OR
-    @Schema(description = "id" , hidden = true)
-    private Long id;
 
-    @END
     @Schema(description = "id集合")
-    @In(E_User.id)
-    @Validator(expr = "id != null || ( idList != null &&  idList.length > 0)" , promptInfo = "删除用户必须指定ID")
+    @In(value = E_User.id, require = true)
+    @NotEmpty
     private Long[] idList;
-
-
-    public DeleteUserReq(Long id) {
-        this.id = id;
-    }
 
     public DeleteUserReq(Long... idList) {
         this.idList = idList;
     }
+
+    public DeleteUserReq setIdList(Long... idList) {
+        this.idList = idList;
+        return this;
+    }
+
 
     @PostConstruct
     public void preDelete() {

@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  简单表单-服务接口
- *  @author Auto gen by simple-dao-codegen 2022-1-18 13:59:50
+ *  @author Auto gen by simple-dao-codegen 2022-1-26 17:07:15
  */
 @Tag(name = E_SimpleForm.BIZ_NAME, description = E_SimpleForm.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimpleFormService {
@@ -38,17 +38,19 @@ public interface SimpleFormService {
     SimpleFormInfo findById(Long id);
 
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    SimpleFormInfo findById(QuerySimpleFormByIdReq req);
+    SimpleFormInfo findById(SimpleFormIdReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     int update(UpdateSimpleFormReq req);
 
-    //尽量不用调用批量删除，会导致缓存清空
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     List<Integer> batchUpdate(List<UpdateSimpleFormReq> reqList);
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    int delete(DeleteSimpleFormReq req);
+    int delete(SimpleFormIdReq req);
+
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    List<Integer> batchDelete(DeleteSimpleFormReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<SimpleFormInfo> query(QuerySimpleFormReq req , Paging paging);

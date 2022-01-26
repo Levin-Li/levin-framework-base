@@ -27,13 +27,13 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import java.util.Date;
+import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  更新简单表单
- *  Auto gen by simple-dao-codegen 2022-1-18 13:59:50
+ *  Auto gen by simple-dao-codegen 2022-1-26 17:07:15
  */
 @Schema(description = "更新简单表单")
 @Data
@@ -67,7 +67,6 @@ public class UpdateSimpleFormReq extends MultiTenantReq {
     //@NotBlank
     //@Size(max = 64)
     @Schema(description = "分组名称")
-//    @Api(queryDto.class)
     private String groupName;
 
     //@NotBlank
@@ -82,12 +81,12 @@ public class UpdateSimpleFormReq extends MultiTenantReq {
     private String domain;
 
     //@NotBlank
-    //@Size(max = 512)
+    //@Size(max = 128)
     @Schema(description = "名称")
     private String name;
 
-    //@Size(max = 512)
-    @Schema(description = "拼音名称-拼音首字母")
+    //@Size(max = 128)
+    @Schema(description = "拼音，格式：全拼(简拼)")
     private String pinyinName;
 
     @Schema(description = "更新时间")

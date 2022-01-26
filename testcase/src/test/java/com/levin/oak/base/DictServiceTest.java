@@ -12,6 +12,7 @@ import com.levin.oak.base.services.dict.info.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.Dict.*;
+import com.levin.commons.service.domain.InjectVar;
 import java.util.List;
 ////////////////////////////////////
 
@@ -58,7 +59,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  字典测试
  *
- *  @author auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
  *
  */
 
@@ -96,9 +97,13 @@ public class DictServiceTest {
 
             // req.setItems("编码项_1");//编码项 
 
+            // req.setTenantId("这是文本64");//租户ID 
+
             // req.setDomain("这是文本64");//系统子域 
 
-            // req.setName("这是文本512");//名称 必填
+            // req.setName("这是文本128");//名称 必填
+
+            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -127,8 +132,10 @@ public class DictServiceTest {
         // req.setType(Type.System);//类型
         // req.setCode("这是文本64");//编码
         // req.setItems("编码项_1");//编码项
+        // req.setTenantId("这是文本64");//租户ID
         // req.setDomain("这是文本64");//系统子域
-        // req.setName("这是文本512");//名称
+        // req.setName("这是文本128");//名称
+        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -153,8 +160,10 @@ public class DictServiceTest {
            // req.setType(Type.System);//类型 必填
            // req.setCode("这是文本64");//编码 必填
            // req.setItems("编码项_1");//编码项 
+           // req.setTenantId("这是文本64");//租户ID 
            // req.setDomain("这是文本64");//系统子域 
-           // req.setName("这是文本512");//名称 必填
+           // req.setName("这是文本128");//名称 必填
+           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填
@@ -170,7 +179,7 @@ public class DictServiceTest {
     @Test
     public void deleteDictTest() {
 
-        DeleteDictReq req = new DeleteDictReq();
+        DictIdReq req = new DictIdReq();
 
         req.setId(id);
 

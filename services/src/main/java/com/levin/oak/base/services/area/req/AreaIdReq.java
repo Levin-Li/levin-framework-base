@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.dict.req;
+package com.levin.oak.base.services.area.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -19,22 +19,25 @@ import javax.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
-
-import com.levin.oak.base.entities.Dict;
+import com.levin.oak.base.services.area.info.*;
+import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.Dict.*;
-    import java.util.List;
-    import java.util.Date;
+import com.levin.oak.base.entities.Area;
+import com.levin.oak.base.services.area.info.*;
+import java.util.Set;
+import com.levin.oak.base.entities.Area.*;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  ID 查询字典
-*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+*  区域 主键通用请求
+*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
-@Schema(description = "ID 查询字典")
+
+@Schema(description = "区域 主键通用请求")
 @Data
 
     @AllArgsConstructor
@@ -45,16 +48,16 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = Dict.class, alias = E_Dict.ALIAS)
-public class QueryDictByIdReq extends MultiTenantReq {
+@TargetOption(entityClass = Area.class, alias = E_Area.ALIAS, resultClass = AreaInfo.class)
+public class AreaIdReq extends BaseReq {
 
-private static final long serialVersionUID = -445779596L;
+private static final long serialVersionUID = -445860277L;
 
 
-    @Schema(description = "id" , required = true)
+    @Schema(description = "编码" , required = true)
     @Eq(require = true)
     @NotNull
-    protected Long id;
+    protected String code;
     
 
     @PostConstruct

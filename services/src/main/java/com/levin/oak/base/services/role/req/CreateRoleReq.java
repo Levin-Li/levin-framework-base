@@ -25,16 +25,16 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.Role.*;
-    import java.util.List;
-    import com.levin.commons.rbac.ResPermission;
-    import java.util.Date;
+import com.levin.oak.base.entities.Role.*;
+import java.util.List;
+import com.levin.commons.rbac.ResPermission;
+import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  新增角色
- *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "新增角色")
 @Data
@@ -82,12 +82,12 @@ public class CreateRoleReq extends MultiTenantReq {
 
     @Schema(description = "名称" , required = true)
     @NotBlank
-    @Size(max = 512)
+    @Size(max = 128)
     private String name;
 
 
-    @Schema(description = "拼音名称-拼音首字母" )
-    @Size(max = 512)
+    @Schema(description = "拼音，格式：全拼(简拼)" )
+    @Size(max = 128)
     private String pinyinName;
 
 

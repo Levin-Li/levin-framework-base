@@ -25,18 +25,17 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.domain.InjectVar;
-    import java.util.Date;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  删除访问日志
- *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "删除访问日志")
 @Data
 
-@AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
@@ -49,24 +48,21 @@ public class DeleteAccessLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1030736962L;
 
-    @OR
-    @Schema(description = "id" , hidden = true)
-    private Long id;
 
-    @END
     @Schema(description = "id集合")
-    @In(E_AccessLog.id)
-    @Validator(expr = "id != null || ( idList != null &&  idList.length > 0)" , promptInfo = "删除访问日志必须指定ID")
+    @In(value = E_AccessLog.id, require = true)
+    @NotEmpty
     private Long[] idList;
-
-
-    public DeleteAccessLogReq(Long id) {
-        this.id = id;
-    }
 
     public DeleteAccessLogReq(Long... idList) {
         this.idList = idList;
     }
+
+    public DeleteAccessLogReq setIdList(Long... idList) {
+        this.idList = idList;
+        return this;
+    }
+
 
     @PostConstruct
     public void preDelete() {

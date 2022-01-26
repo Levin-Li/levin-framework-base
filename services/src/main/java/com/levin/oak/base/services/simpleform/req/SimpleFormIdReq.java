@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.scheduledtask.req;
+package com.levin.oak.base.services.simpleform.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -19,20 +19,21 @@ import javax.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
-
-import com.levin.oak.base.entities.ScheduledTask;
+import com.levin.oak.base.services.simpleform.info.*;
+import com.levin.oak.base.entities.SimpleForm;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import java.util.Date;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  ID 查询调度任务
-*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+*  简单表单 主键通用请求
+*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:15
 */
-@Schema(description = "ID 查询调度任务")
+
+@Schema(description = "简单表单 主键通用请求")
 @Data
 
     @AllArgsConstructor
@@ -43,10 +44,10 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = ScheduledTask.class, alias = E_ScheduledTask.ALIAS)
-public class QueryScheduledTaskByIdReq extends MultiTenantReq {
+@TargetOption(entityClass = SimpleForm.class, alias = E_SimpleForm.ALIAS, resultClass = SimpleFormInfo.class)
+public class SimpleFormIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = -2056389676L;
+private static final long serialVersionUID = 1598335188L;
 
 
     @Schema(description = "id" , required = true)

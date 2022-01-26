@@ -36,9 +36,9 @@ import com.levin.oak.base.entities.SimplePage;
 import com.levin.oak.base.entities.MenuRes;
 import com.levin.oak.base.entities.SimpleForm;
 
-@Component(PLUGIN_PREFIX + "ModuleDataInitializer")
 @Slf4j
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleDataInitializer", havingValue = "false", matchIfMissing = true)
+@Component(PLUGIN_PREFIX + "ModuleDataInitializer")
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleDataInitializer", matchIfMissing = true)
 public class ModuleDataInitializer implements ApplicationContextAware, ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
@@ -47,7 +47,8 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    ApplicationContext applicationContext;
+
+    private ApplicationContext applicationContext;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -61,7 +62,6 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
         if (event.getApplicationContext() == applicationContext) {
             initData();
         }
-
     }
 
     void initData() {

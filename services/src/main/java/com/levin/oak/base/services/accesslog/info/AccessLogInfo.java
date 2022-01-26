@@ -22,13 +22,12 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
-import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
 * 访问日志
-* @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+* @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
 @Schema(description ="访问日志")
 @Data
@@ -47,12 +46,10 @@ public class AccessLogInfo implements Serializable {
    private Long id;
 
 
-   @InjectVar
    @Schema(description = "租户ID")
    private String tenantId;
 
 
-   @InjectVar
    @Size(max = 64)
    @Schema(description = "请求的域名")
    private String domain;

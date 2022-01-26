@@ -26,7 +26,7 @@ import com.levin.oak.base.services.org.info.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+//Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -41,12 +41,15 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "OrgController")
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "OrgController", havingValue = "false", matchIfMissing = true)
 @RequestMapping(API_PATH + "org")
+
+@Slf4j
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "OrgController", matchIfMissing = true)
+
 //默认需要权限访问
 //@ResAuthorize(domain = ID, type = TYPE_NAME)
 @Tag(name = E_Org.BIZ_NAME, description = E_Org.BIZ_NAME + MAINTAIN_ACTION)
-@Slf4j
+
 @Valid
 public class OrgController extends BaseController{
 
@@ -97,13 +100,12 @@ public class OrgController extends BaseController{
     *
     * @param req QueryOrgByIdReq
     */
-    @GetMapping("/retrieve")
+    @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    public ApiResp<OrgInfo> retrieve(@NotNull QueryOrgByIdReq req) {
+    public ApiResp<OrgInfo> retrieve(@NotNull OrgIdReq req) {
 
          return ApiResp.ok(orgService.findById(req));
 
-         //return ApiResp.ok(orgService.findById(id));
      }
 
     /**
@@ -111,14 +113,13 @@ public class OrgController extends BaseController{
     *
     * @param id Long
     */
-    @GetMapping("/{id}")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    public ApiResp<OrgInfo> retrieve(@PathVariable @NotNull Long id) {
+    //@GetMapping("/{id}")
+    //@Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    //public ApiResp<OrgInfo> retrieve(@PathVariable @NotNull Long id) {
 
-         return getSelfProxy(getClass()).retrieve(new QueryOrgByIdReq().setId(id));
+    //     return getSelfProxy(getClass()).retrieve(new OrgIdReq().setId(id));
 
-         //return ApiResp.ok(orgService.findById(id));
-     }
+    // }
 
 
     /**
@@ -142,13 +143,28 @@ public class OrgController extends BaseController{
 
     /**
      * 删除
-     * @param id Long
+     * @param req OrgIdReq
      */
-    @DeleteMapping({"/{id}"})
+    @DeleteMapping({""})
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
-        return getSelfProxy(getClass()).batchDelete(new DeleteOrgReq().setId(id));
+    public ApiResp<Integer> delete(@NotNull OrgIdReq req) {
+        return ApiResp.ok(orgService.delete(req));
     }
+
+     // /**
+     // * 删除
+     // * @param id Long
+     // */
+     // @DeleteMapping({"/{id}"})
+     // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+     // public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
+     //
+     //     List<Integer> ns = getSelfProxy(getClass())
+     //         .batchDelete(new DeleteOrgReq().setIdList(id))
+     //         .getData();
+     //
+     //         return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+     //         }
 
     /**
      * 批量删除
@@ -156,13 +172,8 @@ public class OrgController extends BaseController{
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<Integer> batchDelete(@NotNull DeleteOrgReq req) {
-
-        //new DeleteOrgReq().setIdList(idList)
-
-        int n = orgService.delete(req);
-
-        return  n > 0 ? ApiResp.ok(n) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-    }  
+    public ApiResp<List<Integer>> batchDelete(@NotNull DeleteOrgReq req) {
+        return ApiResp.ok(orgService.batchDelete(req));
+    }
 
 }

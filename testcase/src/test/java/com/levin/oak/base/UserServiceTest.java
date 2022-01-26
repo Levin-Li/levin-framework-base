@@ -61,7 +61,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  用户测试
  *
- *  @author auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
  *
  */
 
@@ -93,6 +93,8 @@ public class UserServiceTest {
 
         CreateUserReq req = new CreateUserReq();
 
+            // req.setTenantId("这是文本64");//租户ID 
+
             // req.setLoginName("这是文本64");//登录名 
 
             // req.setPassword("这是文本256");//登录密码 
@@ -109,7 +111,7 @@ public class UserServiceTest {
 
             // req.setSex(Sex.Man);//性别 
 
-            // req.setTags("这是文本1800");//帐号标签 
+            // req.setTags("这是文本1800");//帐号标签json array 
 
             // req.setCategory(Category.Staff);//帐号类型 
 
@@ -121,7 +123,9 @@ public class UserServiceTest {
 
             // req.setJobPostCode("这是文本128");//岗位职级 
 
-            // req.setRoles("这是文本1800");//角色列表 
+            // req.setRoles("这是文本1800");//角色列表json数组 
+
+            // req.setOrgId(null);//所属部门ID 
 
             // req.setWxOpenId("这是文本128");//微信 OpendId 
 
@@ -151,6 +155,7 @@ public class UserServiceTest {
         QueryUserReq req = new QueryUserReq();
 
         // req.setId(null);//id
+        // req.setTenantId("这是文本64");//租户ID
         // req.setLoginName("这是文本64");//登录名
         // req.setPassword("这是文本256");//登录密码
         // req.setTelephone("这是文本20");//手机号
@@ -159,15 +164,16 @@ public class UserServiceTest {
         // req.setNickname("这是文本32");//昵称
         // req.setAvatar("头像_1");//头像
         // req.setSex(Sex.Man);//性别
-        // req.setTags("这是文本1800");//帐号标签
+        // req.setTags("这是文本1800");//帐号标签json array
         // req.setCategory(Category.Staff);//帐号类型
         // req.setGteExpiredDate(DateUtils.getZoneHour(new Date()));//最小过期时间
         // req.setLteExpiredDate(DateUtils.getEndHour(new Date()));//最大过期时间
         // req.setState(State.Normal);//帐号状态
         // req.setStaffNo("这是文本32");//工号
         // req.setJobPostCode("这是文本128");//岗位职级
-        // req.setRoles("这是文本1800");//角色列表
+        // req.setRoles("这是文本1800");//角色列表json数组
         // req.setRoleList(null);//角色列表
+        // req.setOrgId(null);//所属部门ID
         // req.setLoadOrg(true);//加载所属部门
         // req.setWxOpenId("这是文本128");//微信 OpendId
         // req.setAliOpenId("这是文本128");//阿里 OpendId
@@ -192,6 +198,7 @@ public class UserServiceTest {
          req.setId(id);
 
 
+           // req.setTenantId("这是文本64");//租户ID 
            // req.setLoginName("这是文本64");//登录名 
            // req.setPassword("这是文本256");//登录密码 
            // req.setTelephone("这是文本20");//手机号 
@@ -200,13 +207,14 @@ public class UserServiceTest {
            // req.setNickname("这是文本32");//昵称 
            // req.setAvatar("头像_1");//头像 
            // req.setSex(Sex.Man);//性别 
-           // req.setTags("这是文本1800");//帐号标签 
+           // req.setTags("这是文本1800");//帐号标签json array 
            // req.setCategory(Category.Staff);//帐号类型 
            // req.setExpiredDate(new Date());//过期时间 
            // req.setState(State.Normal);//帐号状态 必填
            // req.setStaffNo("这是文本32");//工号 
            // req.setJobPostCode("这是文本128");//岗位职级 
-           // req.setRoles("这是文本1800");//角色列表 
+           // req.setRoles("这是文本1800");//角色列表json数组 
+           // req.setOrgId(null);//所属部门ID 
            // req.setWxOpenId("这是文本128");//微信 OpendId 
            // req.setAliOpenId("这是文本128");//阿里 OpendId 
            // req.setOrderCode(1);//排序代码 
@@ -224,7 +232,7 @@ public class UserServiceTest {
     @Test
     public void deleteUserTest() {
 
-        DeleteUserReq req = new DeleteUserReq();
+        UserIdReq req = new UserIdReq();
 
         req.setId(id);
 

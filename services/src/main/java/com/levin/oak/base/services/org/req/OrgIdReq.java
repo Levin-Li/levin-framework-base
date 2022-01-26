@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.accesslog.req;
+package com.levin.oak.base.services.org.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -19,21 +19,27 @@ import javax.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
-
-import com.levin.oak.base.entities.AccessLog;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.oak.base.entities.Org;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.domain.InjectVar;
-    import java.util.Date;
+import com.levin.oak.base.entities.Org.*;
+import com.levin.oak.base.entities.Area;
+import com.levin.oak.base.services.area.info.*;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.oak.base.entities.Org;
+import java.util.Set;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  ID 查询访问日志
-*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+*  机构 主键通用请求
+*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
-@Schema(description = "ID 查询访问日志")
+
+@Schema(description = "机构 主键通用请求")
 @Data
 
     @AllArgsConstructor
@@ -44,10 +50,10 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS)
-public class QueryAccessLogByIdReq extends MultiTenantReq {
+@TargetOption(entityClass = Org.class, alias = E_Org.ALIAS, resultClass = OrgInfo.class)
+public class OrgIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = 1030736962L;
+private static final long serialVersionUID = -1399842458L;
 
 
     @Schema(description = "id" , required = true)

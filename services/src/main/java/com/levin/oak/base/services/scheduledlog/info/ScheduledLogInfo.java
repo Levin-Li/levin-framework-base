@@ -22,13 +22,12 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
-import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
 * 调度日志
-* @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+* @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
 @Schema(description ="调度日志")
 @Data
@@ -47,14 +46,12 @@ public class ScheduledLogInfo implements Serializable {
    private Long id;
 
 
-   @InjectVar
    @Size(max = 64)
    @Schema(description = "租户ID")
    private String tenantId;
 
 
    @NotBlank
-   @InjectVar
    @Size(max = 64)
    @Schema(description = "归属组织")
    private String orgId;

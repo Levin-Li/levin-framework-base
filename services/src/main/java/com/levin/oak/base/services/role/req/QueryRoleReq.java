@@ -39,7 +39,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询角色
- *  @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "查询角色")
 @Data
@@ -50,8 +50,7 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = Role.class, alias = E_Role.ALIAS
-, resultClass = RoleInfo.class)
+@TargetOption(entityClass = Role.class, alias = E_Role.ALIAS, resultClass = RoleInfo.class)
 public class QueryRoleReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -445356492L;
@@ -63,6 +62,10 @@ public class QueryRoleReq extends MultiTenantReq{
 
     @Schema(description = "编码")
     private String code;
+
+    @Schema(description = "模糊匹配 - 编码")
+    @Contains
+    private String containsCode;
 
 
     @Schema(description = "图标")
@@ -90,9 +93,17 @@ public class QueryRoleReq extends MultiTenantReq{
     @Schema(description = "名称")
     private String name;
 
+    @Schema(description = "模糊匹配 - 名称")
+    @Contains
+    private String containsName;
 
-    @Schema(description = "拼音名称-拼音首字母")
+
+    @Schema(description = "拼音，格式：全拼(简拼)")
     private String pinyinName;
+
+    @Schema(description = "模糊匹配 - 拼音，格式：全拼(简拼)")
+    @Contains
+    private String containsPinyinName;
 
 
     @Schema(description = "创建者")
@@ -100,22 +111,22 @@ public class QueryRoleReq extends MultiTenantReq{
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于创建时间")
+    @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteCreateTime;
 
-    @Schema(description = "小于等于创建时间")
+    @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteCreateTime;
 
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于更新时间")
+    @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteLastUpdateTime;
 
-    @Schema(description = "小于等于更新时间")
+    @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteLastUpdateTime;
 

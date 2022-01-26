@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.user.req;
+package com.levin.oak.base.services.role.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -19,24 +19,24 @@ import javax.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
-
-import com.levin.oak.base.entities.User;
+import com.levin.oak.base.services.role.info.*;
+import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.User.*;
-    import java.util.Date;
-    import java.util.List;
-    import com.levin.oak.base.services.org.info.*;
-    import com.levin.oak.base.entities.Org;
+import com.levin.oak.base.entities.Role.*;
+import java.util.List;
+import com.levin.commons.rbac.ResPermission;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  ID 查询用户
-*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+*  角色 主键通用请求
+*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
-@Schema(description = "ID 查询用户")
+
+@Schema(description = "角色 主键通用请求")
 @Data
 
     @AllArgsConstructor
@@ -47,10 +47,10 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = User.class, alias = E_User.ALIAS)
-public class QueryUserByIdReq extends MultiTenantReq {
+@TargetOption(entityClass = Role.class, alias = E_Role.ALIAS, resultClass = RoleInfo.class)
+public class RoleIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = -445263479L;
+private static final long serialVersionUID = -445356492L;
 
 
     @Schema(description = "id" , required = true)

@@ -82,6 +82,12 @@ logging:
 swagger:
   enabled: true
 
+plugin:
+  com:
+    levin:
+      oak:
+        base:
+#          AreaService: false
 
 # Sa-Token配置
 sa-token:

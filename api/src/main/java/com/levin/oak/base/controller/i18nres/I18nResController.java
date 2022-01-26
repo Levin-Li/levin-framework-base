@@ -26,7 +26,7 @@ import com.levin.oak.base.services.i18nres.info.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2022-1-18 13:59:50
+//Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -41,12 +41,15 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "I18nResController")
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "I18nResController", havingValue = "false", matchIfMissing = true)
 @RequestMapping(API_PATH + "i18nres")
+
+@Slf4j
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "I18nResController", matchIfMissing = true)
+
 //默认需要权限访问
 //@ResAuthorize(domain = ID, type = TYPE_NAME)
 @Tag(name = E_I18nRes.BIZ_NAME, description = E_I18nRes.BIZ_NAME + MAINTAIN_ACTION)
-@Slf4j
+
 @Valid
 public class I18nResController extends BaseController{
 
@@ -97,13 +100,12 @@ public class I18nResController extends BaseController{
     *
     * @param req QueryI18nResByIdReq
     */
-    @GetMapping("/retrieve")
+    @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    public ApiResp<I18nResInfo> retrieve(@NotNull QueryI18nResByIdReq req) {
+    public ApiResp<I18nResInfo> retrieve(@NotNull I18nResIdReq req) {
 
          return ApiResp.ok(i18nResService.findById(req));
 
-         //return ApiResp.ok(i18nResService.findById(id));
      }
 
     /**
@@ -111,14 +113,13 @@ public class I18nResController extends BaseController{
     *
     * @param id Long
     */
-    @GetMapping("/{id}")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    public ApiResp<I18nResInfo> retrieve(@PathVariable @NotNull Long id) {
+    //@GetMapping("/{id}")
+    //@Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    //public ApiResp<I18nResInfo> retrieve(@PathVariable @NotNull Long id) {
 
-         return getSelfProxy(getClass()).retrieve(new QueryI18nResByIdReq().setId(id));
+    //     return getSelfProxy(getClass()).retrieve(new I18nResIdReq().setId(id));
 
-         //return ApiResp.ok(i18nResService.findById(id));
-     }
+    // }
 
 
     /**
@@ -142,13 +143,28 @@ public class I18nResController extends BaseController{
 
     /**
      * 删除
-     * @param id Long
+     * @param req I18nResIdReq
      */
-    @DeleteMapping({"/{id}"})
+    @DeleteMapping({""})
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
-        return getSelfProxy(getClass()).batchDelete(new DeleteI18nResReq().setId(id));
+    public ApiResp<Integer> delete(@NotNull I18nResIdReq req) {
+        return ApiResp.ok(i18nResService.delete(req));
     }
+
+     // /**
+     // * 删除
+     // * @param id Long
+     // */
+     // @DeleteMapping({"/{id}"})
+     // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+     // public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
+     //
+     //     List<Integer> ns = getSelfProxy(getClass())
+     //         .batchDelete(new DeleteI18nResReq().setIdList(id))
+     //         .getData();
+     //
+     //         return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+     //         }
 
     /**
      * 批量删除
@@ -156,13 +172,8 @@ public class I18nResController extends BaseController{
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<Integer> batchDelete(@NotNull DeleteI18nResReq req) {
-
-        //new DeleteI18nResReq().setIdList(idList)
-
-        int n = i18nResService.delete(req);
-
-        return  n > 0 ? ApiResp.ok(n) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-    }  
+    public ApiResp<List<Integer>> batchDelete(@NotNull DeleteI18nResReq req) {
+        return ApiResp.ok(i18nResService.batchDelete(req));
+    }
 
 }

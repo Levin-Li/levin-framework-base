@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.jobpost.req;
+package com.levin.oak.base.services.accesslog.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -19,21 +19,21 @@ import javax.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
-
-import com.levin.oak.base.entities.JobPost;
+import com.levin.oak.base.services.accesslog.info.*;
+import com.levin.oak.base.entities.AccessLog;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.JobPost.*;
-    import java.util.Date;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  ID 查询工作岗位
-*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:50
+*  访问日志 主键通用请求
+*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
-@Schema(description = "ID 查询工作岗位")
+
+@Schema(description = "访问日志 主键通用请求")
 @Data
 
     @AllArgsConstructor
@@ -44,10 +44,10 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = JobPost.class, alias = E_JobPost.ALIAS)
-public class QueryJobPostByIdReq extends MultiTenantReq {
+@TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS, resultClass = AccessLogInfo.class)
+public class AccessLogIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = 1018878847L;
+private static final long serialVersionUID = 1030736962L;
 
 
     @Schema(description = "id" , required = true)

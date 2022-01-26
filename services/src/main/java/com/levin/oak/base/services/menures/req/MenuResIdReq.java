@@ -19,24 +19,25 @@ import javax.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
-
+import com.levin.oak.base.services.menures.info.*;
 import com.levin.oak.base.entities.MenuRes;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.rbac.MenuItem.*;
-    import com.levin.oak.base.entities.MenuRes;
-    import com.levin.oak.base.services.menures.info.*;
-    import java.util.Set;
-    import java.util.Date;
+import com.levin.commons.rbac.MenuItem.*;
+import com.levin.oak.base.entities.MenuRes;
+import com.levin.oak.base.services.menures.info.*;
+import java.util.Set;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  ID 查询菜单
-*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:50
+*  菜单 主键通用请求
+*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:15
 */
-@Schema(description = "ID 查询菜单")
+
+@Schema(description = "菜单 主键通用请求")
 @Data
 
     @AllArgsConstructor
@@ -47,8 +48,8 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = MenuRes.class, alias = E_MenuRes.ALIAS)
-public class QueryMenuResByIdReq extends MultiTenantReq {
+@TargetOption(entityClass = MenuRes.class, alias = E_MenuRes.ALIAS, resultClass = MenuResInfo.class)
+public class MenuResIdReq extends MultiTenantReq {
 
 private static final long serialVersionUID = -887712701L;
 

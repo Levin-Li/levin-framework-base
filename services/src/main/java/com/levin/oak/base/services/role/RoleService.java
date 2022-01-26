@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  角色-服务接口
- *  @author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  @author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)
 public interface RoleService {
@@ -38,17 +38,19 @@ public interface RoleService {
     RoleInfo findById(Long id);
 
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    RoleInfo findById(QueryRoleByIdReq req);
+    RoleInfo findById(RoleIdReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     int update(UpdateRoleReq req);
 
-    //尽量不用调用批量删除，会导致缓存清空
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     List<Integer> batchUpdate(List<UpdateRoleReq> reqList);
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    int delete(DeleteRoleReq req);
+    int delete(RoleIdReq req);
+
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    List<Integer> batchDelete(DeleteRoleReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<RoleInfo> query(QueryRoleReq req , Paging paging);

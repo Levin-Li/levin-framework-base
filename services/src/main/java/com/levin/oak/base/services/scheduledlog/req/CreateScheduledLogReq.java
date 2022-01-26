@@ -25,13 +25,13 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import java.util.Date;
+import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  新增调度日志
- *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "新增调度日志")
 @Data

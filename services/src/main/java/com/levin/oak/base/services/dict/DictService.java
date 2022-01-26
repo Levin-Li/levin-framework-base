@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  字典-服务接口
- *  @author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  @author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Tag(name = E_Dict.BIZ_NAME, description = E_Dict.BIZ_NAME + MAINTAIN_ACTION)
 public interface DictService {
@@ -38,17 +38,19 @@ public interface DictService {
     DictInfo findById(Long id);
 
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    DictInfo findById(QueryDictByIdReq req);
+    DictInfo findById(DictIdReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     int update(UpdateDictReq req);
 
-    //尽量不用调用批量删除，会导致缓存清空
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     List<Integer> batchUpdate(List<UpdateDictReq> reqList);
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    int delete(DeleteDictReq req);
+    int delete(DictIdReq req);
+
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    List<Integer> batchDelete(DeleteDictReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<DictInfo> query(QueryDictReq req , Paging paging);

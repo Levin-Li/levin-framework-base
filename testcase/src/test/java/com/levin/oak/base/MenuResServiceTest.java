@@ -60,7 +60,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  菜单测试
  *
- *  @author auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
  *
  */
 
@@ -92,9 +92,11 @@ public class MenuResServiceTest {
 
         CreateMenuResReq req = new CreateMenuResReq();
 
+            // req.setTenantId("租户ID_1");//租户ID 
+
             // req.setDomain("这是文本64");//子域 
 
-            // req.setRequireAuthorizations("这是文本1800");//需要的授权，权限或角色用逗号隔开 
+            // req.setRequireAuthorizations("这是文本1800");//需要的授权，权限或角色，json数组 
 
             // req.setAlwaysShow(true);//无权限时是否展示 必填
 
@@ -112,7 +114,9 @@ public class MenuResServiceTest {
 
             // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
 
-            // req.setName("这是文本512");//名称 必填
+            // req.setName("这是文本128");//名称 必填
+
+            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -138,8 +142,9 @@ public class MenuResServiceTest {
         QueryMenuResReq req = new QueryMenuResReq();
 
         // req.setId(null);//id
+        // req.setTenantId("租户ID_1");//租户ID
         // req.setDomain("这是文本64");//子域
-        // req.setRequireAuthorizations("这是文本1800");//需要的授权，权限或角色用逗号隔开
+        // req.setRequireAuthorizations("这是文本1800");//需要的授权，权限或角色，json数组
         // req.setAlwaysShow(true);//无权限时是否展示
         // req.setTarget("这是文本64");//目标
         // req.setActionType(ActionType.Default);//打开方式
@@ -150,7 +155,8 @@ public class MenuResServiceTest {
         // req.setLoadParent(true);//加载父对象
         // req.setLoadChildren(true);//加载子节点
         // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15|
-        // req.setName("这是文本512");//名称
+        // req.setName("这是文本128");//名称
+        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -172,8 +178,9 @@ public class MenuResServiceTest {
          req.setId(id);
 
 
+           // req.setTenantId("租户ID_1");//租户ID 
            // req.setDomain("这是文本64");//子域 
-           // req.setRequireAuthorizations("这是文本1800");//需要的授权，权限或角色用逗号隔开 
+           // req.setRequireAuthorizations("这是文本1800");//需要的授权，权限或角色，json数组 
            // req.setAlwaysShow(true);//无权限时是否展示 必填
            // req.setTarget("这是文本64");//目标 
            // req.setActionType(ActionType.Default);//打开方式 
@@ -182,7 +189,8 @@ public class MenuResServiceTest {
            // req.setParams("这是文本1800");//参数 
            // req.setParentId(null);//父ID 
            // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
-           // req.setName("这是文本512");//名称 必填
+           // req.setName("这是文本128");//名称 必填
+           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填
@@ -198,7 +206,7 @@ public class MenuResServiceTest {
     @Test
     public void deleteMenuResTest() {
 
-        DeleteMenuResReq req = new DeleteMenuResReq();
+        MenuResIdReq req = new MenuResIdReq();
 
         req.setId(id);
 

@@ -32,7 +32,7 @@ import com.levin.oak.base.entities.Org;
 
 /**
 * 用户
-* @Author Auto gen by simple-dao-codegen 2022-1-11 16:49:27
+* @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
 @Schema(description ="用户")
 @Data
@@ -41,7 +41,7 @@ import com.levin.oak.base.entities.Org;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"org",})
 @FieldNameConstants
-public class UserInfo implements Serializable, UserBaseInfo {
+public class UserInfo implements UserBaseInfo, Serializable {
 
    private static final long serialVersionUID = -445263479L;
 

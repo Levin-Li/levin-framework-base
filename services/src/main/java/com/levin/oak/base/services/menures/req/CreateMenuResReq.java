@@ -25,17 +25,17 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.rbac.MenuItem.*;
-    import com.levin.oak.base.entities.MenuRes;
-    import com.levin.oak.base.services.menures.info.*;
-    import java.util.Set;
-    import java.util.Date;
+import com.levin.commons.rbac.MenuItem.*;
+import com.levin.oak.base.entities.MenuRes;
+import com.levin.oak.base.services.menures.info.*;
+import java.util.Set;
+import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  新增菜单
- *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:50
+ *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:15
  */
 @Schema(description = "新增菜单")
 @Data
@@ -103,12 +103,12 @@ public class CreateMenuResReq extends MultiTenantReq {
 
     @Schema(description = "名称" , required = true)
     @NotBlank
-    @Size(max = 512)
+    @Size(max = 128)
     private String name;
 
 
-    @Schema(description = "拼音名称-拼音首字母" )
-    @Size(max = 512)
+    @Schema(description = "拼音，格式：全拼(简拼)" )
+    @Size(max = 128)
     private String pinyinName;
 
 

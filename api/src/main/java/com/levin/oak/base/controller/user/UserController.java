@@ -26,7 +26,7 @@ import com.levin.oak.base.services.user.info.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+//Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -41,12 +41,15 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "UserController")
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "UserController", havingValue = "false", matchIfMissing = true)
 @RequestMapping(API_PATH + "user")
+
+@Slf4j
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "UserController", matchIfMissing = true)
+
 //默认需要权限访问
 //@ResAuthorize(domain = ID, type = TYPE_NAME)
 @Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
-@Slf4j
+
 @Valid
 public class UserController extends BaseController{
 
@@ -97,13 +100,12 @@ public class UserController extends BaseController{
     *
     * @param req QueryUserByIdReq
     */
-    @GetMapping("/retrieve")
+    @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    public ApiResp<UserInfo> retrieve(@NotNull QueryUserByIdReq req) {
+    public ApiResp<UserInfo> retrieve(@NotNull UserIdReq req) {
 
          return ApiResp.ok(userService.findById(req));
 
-         //return ApiResp.ok(userService.findById(id));
      }
 
     /**
@@ -111,14 +113,13 @@ public class UserController extends BaseController{
     *
     * @param id Long
     */
-    @GetMapping("/{id}")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    public ApiResp<UserInfo> retrieve(@PathVariable @NotNull Long id) {
+    //@GetMapping("/{id}")
+    //@Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    //public ApiResp<UserInfo> retrieve(@PathVariable @NotNull Long id) {
 
-         return getSelfProxy(getClass()).retrieve(new QueryUserByIdReq().setId(id));
+    //     return getSelfProxy(getClass()).retrieve(new UserIdReq().setId(id));
 
-         //return ApiResp.ok(userService.findById(id));
-     }
+    // }
 
 
     /**
@@ -142,13 +143,28 @@ public class UserController extends BaseController{
 
     /**
      * 删除
-     * @param id Long
+     * @param req UserIdReq
      */
-    @DeleteMapping({"/{id}"})
+    @DeleteMapping({""})
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
-        return getSelfProxy(getClass()).batchDelete(new DeleteUserReq().setId(id));
+    public ApiResp<Integer> delete(@NotNull UserIdReq req) {
+        return ApiResp.ok(userService.delete(req));
     }
+
+     // /**
+     // * 删除
+     // * @param id Long
+     // */
+     // @DeleteMapping({"/{id}"})
+     // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+     // public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
+     //
+     //     List<Integer> ns = getSelfProxy(getClass())
+     //         .batchDelete(new DeleteUserReq().setIdList(id))
+     //         .getData();
+     //
+     //         return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+     //         }
 
     /**
      * 批量删除
@@ -156,13 +172,8 @@ public class UserController extends BaseController{
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<Integer> batchDelete(@NotNull DeleteUserReq req) {
-
-        //new DeleteUserReq().setIdList(idList)
-
-        int n = userService.delete(req);
-
-        return  n > 0 ? ApiResp.ok(n) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-    }  
+    public ApiResp<List<Integer>> batchDelete(@NotNull DeleteUserReq req) {
+        return ApiResp.ok(userService.batchDelete(req));
+    }
 
 }

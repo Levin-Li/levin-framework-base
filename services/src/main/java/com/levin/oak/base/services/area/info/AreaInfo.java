@@ -31,7 +31,7 @@ import java.util.Date;
 
 /**
 * 区域
-* @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:50
+* @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
 @Schema(description ="区域")
 @Data
@@ -76,13 +76,13 @@ public class AreaInfo implements Serializable {
 
 
    @NotBlank
-   @Size(max = 512)
+   @Size(max = 128)
    @Schema(description = "名称")
    private String name;
 
 
-   @Size(max = 512)
-   @Schema(description = "拼音名称-拼音首字母")
+   @Size(max = 128)
+   @Schema(description = "拼音，格式：全拼(简拼)")
    private String pinyinName;
 
 

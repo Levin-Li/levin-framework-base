@@ -36,7 +36,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询调度任务
- *  @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "查询调度任务")
 @Data
@@ -47,8 +47,7 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = ScheduledTask.class, alias = E_ScheduledTask.ALIAS
-, resultClass = ScheduledTaskInfo.class)
+@TargetOption(entityClass = ScheduledTask.class, alias = E_ScheduledTask.ALIAS, resultClass = ScheduledTaskInfo.class)
 public class QueryScheduledTaskReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -2056389676L;
@@ -65,6 +64,10 @@ public class QueryScheduledTaskReq extends MultiTenantReq{
     @Schema(description = "任务组")
     private String groupName;
 
+    @Schema(description = "模糊匹配 - 任务组")
+    @Contains
+    private String containsGroupName;
+
 
     @Schema(description = "调度表达式")
     private String cron;
@@ -79,22 +82,22 @@ public class QueryScheduledTaskReq extends MultiTenantReq{
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于最后一次时间")
+    @Schema(description = "大于等于最后一次时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteLastInvokedTime;
 
-    @Schema(description = "小于等于最后一次时间")
+    @Schema(description = "小于等于最后一次时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteLastInvokedTime;
 
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于下一次时间")
+    @Schema(description = "大于等于下一次时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteNextInvokeTime;
 
-    @Schema(description = "小于等于下一次时间")
+    @Schema(description = "小于等于下一次时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteNextInvokeTime;
 
@@ -107,9 +110,17 @@ public class QueryScheduledTaskReq extends MultiTenantReq{
     @Schema(description = "名称")
     private String name;
 
+    @Schema(description = "模糊匹配 - 名称")
+    @Contains
+    private String containsName;
 
-    @Schema(description = "拼音名称-拼音首字母")
+
+    @Schema(description = "拼音，格式：全拼(简拼)")
     private String pinyinName;
+
+    @Schema(description = "模糊匹配 - 拼音，格式：全拼(简拼)")
+    @Contains
+    private String containsPinyinName;
 
 
     @Schema(description = "创建者")
@@ -117,22 +128,22 @@ public class QueryScheduledTaskReq extends MultiTenantReq{
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于创建时间")
+    @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteCreateTime;
 
-    @Schema(description = "小于等于创建时间")
+    @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteCreateTime;
 
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于更新时间")
+    @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteLastUpdateTime;
 
-    @Schema(description = "小于等于更新时间")
+    @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteLastUpdateTime;
 

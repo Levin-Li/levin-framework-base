@@ -25,23 +25,23 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.Org.*;
-    import com.levin.oak.base.entities.Area;
-    import com.levin.oak.base.services.area.info.*;
-    import com.levin.oak.base.services.org.info.*;
-    import com.levin.oak.base.entities.Org;
-    import java.util.Set;
-    import java.util.Date;
+import com.levin.oak.base.entities.Org.*;
+import com.levin.oak.base.entities.Area;
+import com.levin.oak.base.services.area.info.*;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.oak.base.entities.Org;
+import java.util.Set;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  删除机构
- *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "删除机构")
 @Data
 
-@AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
@@ -54,24 +54,21 @@ public class DeleteOrgReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -1399842458L;
 
-    @OR
-    @Schema(description = "id" , hidden = true)
-    private Long id;
 
-    @END
     @Schema(description = "id集合")
-    @In(E_Org.id)
-    @Validator(expr = "id != null || ( idList != null &&  idList.length > 0)" , promptInfo = "删除机构必须指定ID")
+    @In(value = E_Org.id, require = true)
+    @NotEmpty
     private Long[] idList;
-
-
-    public DeleteOrgReq(Long id) {
-        this.id = id;
-    }
 
     public DeleteOrgReq(Long... idList) {
         this.idList = idList;
     }
+
+    public DeleteOrgReq setIdList(Long... idList) {
+        this.idList = idList;
+        return this;
+    }
+
 
     @PostConstruct
     public void preDelete() {

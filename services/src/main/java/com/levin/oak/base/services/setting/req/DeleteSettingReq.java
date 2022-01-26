@@ -25,18 +25,18 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.Setting.*;
-    import java.util.Date;
+import com.levin.oak.base.entities.Setting.*;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  删除系统设置
- *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "删除系统设置")
 @Data
 
-@AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
@@ -49,24 +49,21 @@ public class DeleteSettingReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 147875794L;
 
-    @OR
-    @Schema(description = "id" , hidden = true)
-    private Long id;
 
-    @END
     @Schema(description = "id集合")
-    @In(E_Setting.id)
-    @Validator(expr = "id != null || ( idList != null &&  idList.length > 0)" , promptInfo = "删除系统设置必须指定ID")
+    @In(value = E_Setting.id, require = true)
+    @NotEmpty
     private Long[] idList;
-
-
-    public DeleteSettingReq(Long id) {
-        this.id = id;
-    }
 
     public DeleteSettingReq(Long... idList) {
         this.idList = idList;
     }
+
+    public DeleteSettingReq setIdList(Long... idList) {
+        this.idList = idList;
+        return this;
+    }
+
 
     @PostConstruct
     public void preDelete() {

@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.simplepage.req;
+package com.levin.oak.base.services.i18nres.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -19,20 +19,21 @@ import javax.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
-
-import com.levin.oak.base.entities.SimplePage;
+import com.levin.oak.base.services.i18nres.info.*;
+import com.levin.oak.base.entities.I18nRes;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import java.util.Date;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  ID 查询简单页面
-*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:50
+*  国际化资源 主键通用请求
+*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
-@Schema(description = "ID 查询简单页面")
+
+@Schema(description = "国际化资源 主键通用请求")
 @Data
 
     @AllArgsConstructor
@@ -43,10 +44,10 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = SimplePage.class, alias = E_SimplePage.ALIAS)
-public class QuerySimplePageByIdReq extends MultiTenantReq {
+@TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS, resultClass = I18nResInfo.class)
+public class I18nResIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = 1598619295L;
+private static final long serialVersionUID = -1681554652L;
 
 
     @Schema(description = "id" , required = true)

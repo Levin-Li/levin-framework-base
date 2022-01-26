@@ -42,7 +42,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询机构
- *  @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "查询机构")
 @Data
@@ -53,8 +53,7 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = Org.class, alias = E_Org.ALIAS
-, resultClass = OrgInfo.class)
+@TargetOption(entityClass = Org.class, alias = E_Org.ALIAS, resultClass = OrgInfo.class)
 public class QueryOrgReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -1399842458L;
@@ -66,6 +65,10 @@ public class QueryOrgReq extends MultiTenantReq{
 
     @Schema(description = "编码")
     private String code;
+
+    @Schema(description = "模糊匹配 - 编码")
+    @Contains
+    private String containsCode;
 
 
     @Schema(description = "图标")
@@ -86,6 +89,10 @@ public class QueryOrgReq extends MultiTenantReq{
 
     @Schema(description = "区域编码")
     private String areaCode;
+
+    @Schema(description = "模糊匹配 - 区域编码")
+    @Contains
+    private String containsAreaCode;
 
 
     @Schema(description = "是否加载所属区域")
@@ -108,9 +115,17 @@ public class QueryOrgReq extends MultiTenantReq{
     @Schema(description = "联系人")
     private String contacts;
 
+    @Schema(description = "模糊匹配 - 联系人")
+    @Contains
+    private String containsContacts;
+
 
     @Schema(description = "联系电话")
     private String phones;
+
+    @Schema(description = "模糊匹配 - 联系电话")
+    @Contains
+    private String containsPhones;
 
 
     @Schema(description = "联系邮箱")
@@ -119,6 +134,10 @@ public class QueryOrgReq extends MultiTenantReq{
 
     @Schema(description = "联系地址")
     private String address;
+
+    @Schema(description = "模糊匹配 - 联系地址")
+    @Contains
+    private String containsAddress;
 
 
     @Schema(description = "邮政编码")
@@ -146,9 +165,17 @@ public class QueryOrgReq extends MultiTenantReq{
     @Schema(description = "名称")
     private String name;
 
+    @Schema(description = "模糊匹配 - 名称")
+    @Contains
+    private String containsName;
 
-    @Schema(description = "拼音名称-拼音首字母")
+
+    @Schema(description = "拼音，格式：全拼(简拼)")
     private String pinyinName;
+
+    @Schema(description = "模糊匹配 - 拼音，格式：全拼(简拼)")
+    @Contains
+    private String containsPinyinName;
 
 
     @Schema(description = "创建者")
@@ -156,22 +183,22 @@ public class QueryOrgReq extends MultiTenantReq{
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于创建时间")
+    @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteCreateTime;
 
-    @Schema(description = "小于等于创建时间")
+    @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteCreateTime;
 
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于更新时间")
+    @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteLastUpdateTime;
 
-    @Schema(description = "小于等于更新时间")
+    @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteLastUpdateTime;
 

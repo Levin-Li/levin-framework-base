@@ -57,7 +57,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  系统设置测试
  *
- *  @author auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
  *
  */
 
@@ -103,9 +103,13 @@ public class SettingServiceTest {
 
             // req.setInputPlaceholder("这是文本64");//输入占位提示 
 
+            // req.setTenantId("这是文本64");//租户ID 
+
             // req.setDomain("这是文本64");//系统子域 
 
-            // req.setName("这是文本512");//名称 必填
+            // req.setName("这是文本128");//名称 必填
+
+            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -138,8 +142,10 @@ public class SettingServiceTest {
         // req.setValue("值_1");//值
         // req.setNullable(true);//值是否可空
         // req.setInputPlaceholder("这是文本64");//输入占位提示
+        // req.setTenantId("这是文本64");//租户ID
         // req.setDomain("这是文本64");//系统子域
-        // req.setName("这是文本512");//名称
+        // req.setName("这是文本128");//名称
+        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -168,8 +174,10 @@ public class SettingServiceTest {
            // req.setValue("值_1");//值 
            // req.setNullable(true);//值是否可空 
            // req.setInputPlaceholder("这是文本64");//输入占位提示 
+           // req.setTenantId("这是文本64");//租户ID 
            // req.setDomain("这是文本64");//系统子域 
-           // req.setName("这是文本512");//名称 必填
+           // req.setName("这是文本128");//名称 必填
+           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填
@@ -185,7 +193,7 @@ public class SettingServiceTest {
     @Test
     public void deleteSettingTest() {
 
-        DeleteSettingReq req = new DeleteSettingReq();
+        SettingIdReq req = new SettingIdReq();
 
         req.setId(id);
 

@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  国际化资源测试
  *
- *  @author auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
  *
  */
 
@@ -94,9 +94,13 @@ public class I18nResServiceTest {
 
             // req.setLabel("这是文本768");//标签 必填
 
+            // req.setTenantId("这是文本64");//租户ID 
+
             // req.setDomain("这是文本64");//系统子域 
 
-            // req.setName("这是文本512");//名称 必填
+            // req.setName("这是文本128");//名称 必填
+
+            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -125,8 +129,10 @@ public class I18nResServiceTest {
         // req.setCategory("这是文本64");//分类
         // req.setLang("这是文本32");//语言
         // req.setLabel("这是文本768");//标签
+        // req.setTenantId("这是文本64");//租户ID
         // req.setDomain("这是文本64");//系统子域
-        // req.setName("这是文本512");//名称
+        // req.setName("这是文本128");//名称
+        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -151,8 +157,10 @@ public class I18nResServiceTest {
            // req.setCategory("这是文本64");//分类 必填
            // req.setLang("这是文本32");//语言 必填
            // req.setLabel("这是文本768");//标签 必填
+           // req.setTenantId("这是文本64");//租户ID 
            // req.setDomain("这是文本64");//系统子域 
-           // req.setName("这是文本512");//名称 必填
+           // req.setName("这是文本128");//名称 必填
+           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填
@@ -168,7 +176,7 @@ public class I18nResServiceTest {
     @Test
     public void deleteI18nResTest() {
 
-        DeleteI18nResReq req = new DeleteI18nResReq();
+        I18nResIdReq req = new I18nResIdReq();
 
         req.setId(id);
 

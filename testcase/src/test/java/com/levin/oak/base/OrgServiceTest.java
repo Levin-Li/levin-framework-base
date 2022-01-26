@@ -62,7 +62,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  机构测试
  *
- *  @author auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
  *
  */
 
@@ -93,6 +93,8 @@ public class OrgServiceTest {
     public void createOrgTest() {
 
         CreateOrgReq req = new CreateOrgReq();
+
+            // req.setTenantId("租户ID_1");//租户ID 
 
             // req.setCode("这是文本128");//编码 
 
@@ -126,7 +128,9 @@ public class OrgServiceTest {
 
             // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
 
-            // req.setName("这是文本512");//名称 必填
+            // req.setName("这是文本128");//名称 必填
+
+            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -152,6 +156,7 @@ public class OrgServiceTest {
         QueryOrgReq req = new QueryOrgReq();
 
         // req.setId(null);//id
+        // req.setTenantId("租户ID_1");//租户ID
         // req.setCode("这是文本128");//编码
         // req.setIcon("图标_1");//图标
         // req.setState(State.Normal);//状态
@@ -171,7 +176,8 @@ public class OrgServiceTest {
         // req.setLoadParent(true);//加载父对象
         // req.setLoadChildren(true);//加载子节点
         // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15|
-        // req.setName("这是文本512");//名称
+        // req.setName("这是文本128");//名称
+        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -193,6 +199,7 @@ public class OrgServiceTest {
          req.setId(id);
 
 
+           // req.setTenantId("租户ID_1");//租户ID 
            // req.setCode("这是文本128");//编码 
            // req.setIcon("图标_1");//图标 
            // req.setState(State.Normal);//状态 必填
@@ -209,7 +216,8 @@ public class OrgServiceTest {
            // req.setZipCode("这是文本32");//邮政编码 
            // req.setParentId(null);//父ID 
            // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
-           // req.setName("这是文本512");//名称 必填
+           // req.setName("这是文本128");//名称 必填
+           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填
@@ -225,7 +233,7 @@ public class OrgServiceTest {
     @Test
     public void deleteOrgTest() {
 
-        DeleteOrgReq req = new DeleteOrgReq();
+        OrgIdReq req = new OrgIdReq();
 
         req.setId(id);
 

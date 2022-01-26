@@ -60,7 +60,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  区域测试
  *
- *  @author auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
  *
  */
 
@@ -98,7 +98,9 @@ public class AreaServiceTest {
 
             // req.setType(Type.Nation);//类型 必填
 
-            // req.setName("这是文本512");//名称 必填
+            // req.setName("这是文本128");//名称 必填
+
+            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -129,7 +131,8 @@ public class AreaServiceTest {
         // req.setLoadParent(true);//加载父区域
         // req.setLoadChildren(true);//加载子区域
         // req.setType(Type.Nation);//类型
-        // req.setName("这是文本512");//名称
+        // req.setName("这是文本128");//名称
+        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -154,7 +157,8 @@ public class AreaServiceTest {
            // req.setIcon("图标_1");//图标 
            // req.setParentCode("这是文本64");//父区域ID 
            // req.setType(Type.Nation);//类型 必填
-           // req.setName("这是文本512");//名称 必填
+           // req.setName("这是文本128");//名称 必填
+           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填
@@ -170,7 +174,7 @@ public class AreaServiceTest {
     @Test
     public void deleteAreaTest() {
 
-        DeleteAreaReq req = new DeleteAreaReq();
+        AreaIdReq req = new AreaIdReq();
 
         req.setCode(code);
 

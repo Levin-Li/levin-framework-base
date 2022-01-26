@@ -46,7 +46,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @Service(PLUGIN_PREFIX + "RbacService")
 @Slf4j
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacService", havingValue = "false", matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacService",  matchIfMissing = true)
 @ResAuthorize(ignored = true)
 public class RbacServiceImpl extends BaseService implements RbacService {
 

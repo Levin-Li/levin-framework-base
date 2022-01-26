@@ -11,7 +11,6 @@ import com.levin.oak.base.services.accesslog.info.*;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -57,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  访问日志测试
  *
- *  @author auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
  *
  */
 
@@ -88,6 +87,8 @@ public class AccessLogServiceTest {
     public void createAccessLogTest() {
 
         CreateAccessLogReq req = new CreateAccessLogReq();
+
+            // req.setTenantId("租户ID_1");//租户ID 
 
             // req.setDomain("这是文本64");//请求的域名 
 
@@ -143,6 +144,7 @@ public class AccessLogServiceTest {
         QueryAccessLogReq req = new QueryAccessLogReq();
 
         // req.setId(null);//id
+        // req.setTenantId("租户ID_1");//租户ID
         // req.setDomain("这是文本64");//请求的域名
         // req.setVisitor("这是文本64");//访问者
         // req.setTitle("标题_1");//标题
@@ -178,6 +180,7 @@ public class AccessLogServiceTest {
          req.setId(id);
 
 
+           // req.setTenantId("租户ID_1");//租户ID 
            // req.setDomain("这是文本64");//请求的域名 
            // req.setVisitor("这是文本64");//访问者 
            // req.setTitle("标题_1");//标题 必填
@@ -208,7 +211,7 @@ public class AccessLogServiceTest {
     @Test
     public void deleteAccessLogTest() {
 
-        DeleteAccessLogReq req = new DeleteAccessLogReq();
+        AccessLogIdReq req = new AccessLogIdReq();
 
         req.setId(id);
 

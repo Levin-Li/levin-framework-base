@@ -17,7 +17,7 @@ import static com.levin.oak.base.ModuleOption.*;
 
 @Configuration(PLUGIN_PREFIX + "ModuleWebMvcConfigurer")
 @Slf4j
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleWebMvcConfigurer", havingValue = "false", matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleWebMvcConfigurer",  matchIfMissing = true)
 public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
     @Resource

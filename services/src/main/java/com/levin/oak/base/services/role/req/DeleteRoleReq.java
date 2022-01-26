@@ -25,20 +25,20 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.Role.*;
-    import java.util.List;
-    import com.levin.commons.rbac.ResPermission;
-    import java.util.Date;
+import com.levin.oak.base.entities.Role.*;
+import java.util.List;
+import com.levin.commons.rbac.ResPermission;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  删除角色
- *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "删除角色")
 @Data
 
-@AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
@@ -51,24 +51,21 @@ public class DeleteRoleReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445356492L;
 
-    @OR
-    @Schema(description = "id" , hidden = true)
-    private Long id;
 
-    @END
     @Schema(description = "id集合")
-    @In(E_Role.id)
-    @Validator(expr = "id != null || ( idList != null &&  idList.length > 0)" , promptInfo = "删除角色必须指定ID")
+    @In(value = E_Role.id, require = true)
+    @NotEmpty
     private Long[] idList;
-
-
-    public DeleteRoleReq(Long id) {
-        this.id = id;
-    }
 
     public DeleteRoleReq(Long... idList) {
         this.idList = idList;
     }
+
+    public DeleteRoleReq setIdList(Long... idList) {
+        this.idList = idList;
+        return this;
+    }
+
 
     @PostConstruct
     public void preDelete() {

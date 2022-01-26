@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.role.req;
+package com.levin.oak.base.services.scheduledtask.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -19,23 +19,21 @@ import javax.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
-
-import com.levin.oak.base.entities.Role;
+import com.levin.oak.base.services.scheduledtask.info.*;
+import com.levin.oak.base.entities.ScheduledTask;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.Role.*;
-    import java.util.List;
-    import com.levin.commons.rbac.ResPermission;
-    import java.util.Date;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  ID 查询角色
-*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+*  调度任务 主键通用请求
+*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
-@Schema(description = "ID 查询角色")
+
+@Schema(description = "调度任务 主键通用请求")
 @Data
 
     @AllArgsConstructor
@@ -46,10 +44,10 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = Role.class, alias = E_Role.ALIAS)
-public class QueryRoleByIdReq extends MultiTenantReq {
+@TargetOption(entityClass = ScheduledTask.class, alias = E_ScheduledTask.ALIAS, resultClass = ScheduledTaskInfo.class)
+public class ScheduledTaskIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = -445356492L;
+private static final long serialVersionUID = -2056389676L;
 
 
     @Schema(description = "id" , required = true)

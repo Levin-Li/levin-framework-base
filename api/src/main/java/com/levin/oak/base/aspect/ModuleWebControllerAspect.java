@@ -30,9 +30,9 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Aspect
-@Component(PLUGIN_PREFIX + "ModuleWebControllerAspect")
 @Slf4j
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleWebControllerAspect", havingValue = "false", matchIfMissing = true)
+@Component(PLUGIN_PREFIX + "ModuleWebControllerAspect")
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleWebControllerAspect", matchIfMissing = true)
 public class ModuleWebControllerAspect {
 
 

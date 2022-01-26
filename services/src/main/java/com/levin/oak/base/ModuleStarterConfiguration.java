@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 
-//Auto gen by simple-dao-codegen 2022-1-5 13:46:42
+//Auto gen by simple-dao-codegen 2022-1-25 23:59:26
 
 @Configuration(PLUGIN_PREFIX + "ModuleStarterConfiguration")
 @Slf4j
@@ -27,6 +27,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @ComponentScan({PACKAGE_NAME})
 
 @ProxyBeanScan(basePackages = {PACKAGE_NAME} , scanType = EntityRepository.class , factoryBeanClass = RepositoryFactoryBean.class)
+
 public class ModuleStarterConfiguration {
 
     @Autowired

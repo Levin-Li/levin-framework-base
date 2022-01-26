@@ -25,18 +25,18 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.JobPost.*;
-    import java.util.Date;
+import com.levin.oak.base.entities.JobPost.*;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  删除工作岗位
- *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:50
+ *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "删除工作岗位")
 @Data
 
-@AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
@@ -49,24 +49,21 @@ public class DeleteJobPostReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1018878847L;
 
-    @OR
-    @Schema(description = "id" , hidden = true)
-    private Long id;
 
-    @END
     @Schema(description = "id集合")
-    @In(E_JobPost.id)
-    @Validator(expr = "id != null || ( idList != null &&  idList.length > 0)" , promptInfo = "删除工作岗位必须指定ID")
+    @In(value = E_JobPost.id, require = true)
+    @NotEmpty
     private Long[] idList;
-
-
-    public DeleteJobPostReq(Long id) {
-        this.id = id;
-    }
 
     public DeleteJobPostReq(Long... idList) {
         this.idList = idList;
     }
+
+    public DeleteJobPostReq setIdList(Long... idList) {
+        this.idList = idList;
+        return this;
+    }
+
 
     @PostConstruct
     public void preDelete() {

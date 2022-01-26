@@ -23,14 +23,14 @@ import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
 import com.levin.oak.base.entities.Dict.*;
-import java.util.List;
 import com.levin.commons.service.domain.InjectVar;
+import java.util.List;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
 * 字典
-* @Author Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+* @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
 @Schema(description ="字典")
 @Data
@@ -60,6 +60,7 @@ public class DictInfo implements Serializable {
    private String code;
 
 
+   @InjectVar
    @Schema(description = "编码项")
    private String items;
 
@@ -68,7 +69,6 @@ public class DictInfo implements Serializable {
    private List<Item> itemList;
 
 
-   @InjectVar
    @Size(max = 64)
    @Schema(description = "租户ID")
    private String tenantId;
@@ -80,13 +80,13 @@ public class DictInfo implements Serializable {
 
 
    @NotBlank
-   @Size(max = 512)
+   @Size(max = 128)
    @Schema(description = "名称")
    private String name;
 
 
-   @Size(max = 512)
-   @Schema(description = "拼音名称-拼音首字母")
+   @Size(max = 128)
+   @Schema(description = "拼音，格式：全拼(简拼)")
    private String pinyinName;
 
 

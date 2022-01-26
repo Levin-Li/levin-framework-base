@@ -20,7 +20,7 @@ import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
 
-//Auto gen by simple-dao-codegen 2022-1-5 13:46:42
+//Auto gen by simple-dao-codegen 2022-1-25 23:59:26
 //模块插件
 
 @Slf4j
@@ -66,7 +66,7 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
                 }
             }
 
-            return (Collection<R>) pluginResList.parallelStream()
+            return (Collection<R>) pluginResList.stream()
                     .filter(res -> resType.equals(res.getType()))
                     .collect(Collectors.toList());
         }

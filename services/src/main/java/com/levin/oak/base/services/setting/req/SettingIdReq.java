@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.i18nres.req;
+package com.levin.oak.base.services.setting.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -19,20 +19,22 @@ import javax.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
-
-import com.levin.oak.base.entities.I18nRes;
+import com.levin.oak.base.services.setting.info.*;
+import com.levin.oak.base.entities.Setting;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import java.util.Date;
+import com.levin.oak.base.entities.Setting.*;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  ID 查询国际化资源
-*  //Auto gen by simple-dao-codegen 2022-1-18 13:59:50
+*  系统设置 主键通用请求
+*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
 */
-@Schema(description = "ID 查询国际化资源")
+
+@Schema(description = "系统设置 主键通用请求")
 @Data
 
     @AllArgsConstructor
@@ -43,10 +45,10 @@ import com.levin.oak.base.services.commons.req.*;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS)
-public class QueryI18nResByIdReq extends MultiTenantReq {
+@TargetOption(entityClass = Setting.class, alias = E_Setting.ALIAS, resultClass = SettingInfo.class)
+public class SettingIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = -1681554652L;
+private static final long serialVersionUID = 147875794L;
 
 
     @Schema(description = "id" , required = true)

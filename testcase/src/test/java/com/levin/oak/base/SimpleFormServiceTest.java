@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  简单表单测试
  *
- *  @author auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
  *
  */
 
@@ -98,9 +98,15 @@ public class SimpleFormServiceTest {
 
             // req.setContent("内容_1");//内容 
 
+            // req.setOrgId("这是文本64");//机构ID 
+
+            // req.setTenantId("这是文本64");//租户ID 
+
             // req.setDomain("这是文本64");//系统子域 
 
-            // req.setName("这是文本512");//名称 必填
+            // req.setName("这是文本128");//名称 必填
+
+            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -131,8 +137,11 @@ public class SimpleFormServiceTest {
         // req.setGroupName("这是文本64");//分组名称
         // req.setPath("访问路径_1");//访问路径
         // req.setContent("内容_1");//内容
+        // req.setOrgId("这是文本64");//机构ID
+        // req.setTenantId("这是文本64");//租户ID
         // req.setDomain("这是文本64");//系统子域
-        // req.setName("这是文本512");//名称
+        // req.setName("这是文本128");//名称
+        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -159,8 +168,11 @@ public class SimpleFormServiceTest {
            // req.setGroupName("这是文本64");//分组名称 必填
            // req.setPath("访问路径_1");//访问路径 必填
            // req.setContent("内容_1");//内容 
+           // req.setOrgId("这是文本64");//机构ID 
+           // req.setTenantId("这是文本64");//租户ID 
            // req.setDomain("这是文本64");//系统子域 
-           // req.setName("这是文本512");//名称 必填
+           // req.setName("这是文本128");//名称 必填
+           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填
@@ -176,7 +188,7 @@ public class SimpleFormServiceTest {
     @Test
     public void deleteSimpleFormTest() {
 
-        DeleteSimpleFormReq req = new DeleteSimpleFormReq();
+        SimpleFormIdReq req = new SimpleFormIdReq();
 
         req.setId(id);
 

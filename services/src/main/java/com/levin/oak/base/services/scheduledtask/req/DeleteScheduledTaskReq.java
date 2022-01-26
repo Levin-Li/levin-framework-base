@@ -25,17 +25,17 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-    import java.util.Date;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  删除调度任务
- *  //Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "删除调度任务")
 @Data
 
-@AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
@@ -48,24 +48,21 @@ public class DeleteScheduledTaskReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -2056389676L;
 
-    @OR
-    @Schema(description = "id" , hidden = true)
-    private Long id;
 
-    @END
     @Schema(description = "id集合")
-    @In(E_ScheduledTask.id)
-    @Validator(expr = "id != null || ( idList != null &&  idList.length > 0)" , promptInfo = "删除调度任务必须指定ID")
+    @In(value = E_ScheduledTask.id, require = true)
+    @NotEmpty
     private Long[] idList;
-
-
-    public DeleteScheduledTaskReq(Long id) {
-        this.id = id;
-    }
 
     public DeleteScheduledTaskReq(Long... idList) {
         this.idList = idList;
     }
+
+    public DeleteScheduledTaskReq setIdList(Long... idList) {
+        this.idList = idList;
+        return this;
+    }
+
 
     @PostConstruct
     public void preDelete() {

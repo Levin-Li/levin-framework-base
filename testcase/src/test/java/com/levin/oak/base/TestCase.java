@@ -73,7 +73,7 @@ import com.levin.oak.base.controller.simpleform.SimpleFormController;
 //@DataNeo4jTest //测试对Neo4j的操作
 /**
  *  测试类
- *  @author Auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author Auto gen by simple-dao-codegen 2022-1-26 16:51:43
  */
 public class TestCase {
 

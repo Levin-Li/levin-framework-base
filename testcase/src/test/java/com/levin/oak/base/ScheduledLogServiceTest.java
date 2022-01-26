@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  调度日志测试
  *
- *  @author auto gen by simple-dao-codegen 2021-12-18 11:15:49
+ *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
  *
  */
 
@@ -88,6 +88,10 @@ public class ScheduledLogServiceTest {
 
         CreateScheduledLogReq req = new CreateScheduledLogReq();
 
+            // req.setTenantId("这是文本64");//租户ID 
+
+            // req.setOrgId("这是文本64");//归属组织 必填
+
             // req.setTaskId("这是文本64");//任务ID 必填
 
             // req.setInvokeCycle("这是文本256");//执行周期 
@@ -112,6 +116,8 @@ public class ScheduledLogServiceTest {
         QueryScheduledLogReq req = new QueryScheduledLogReq();
 
         // req.setId(null);//id
+        // req.setTenantId("这是文本64");//租户ID
+        // req.setOrgId("这是文本64");//归属组织
         // req.setTaskId("这是文本64");//任务ID
         // req.setInvokeCycle("这是文本256");//执行周期
         // req.setIsError(true);//是否错误
@@ -132,6 +138,8 @@ public class ScheduledLogServiceTest {
          req.setId(id);
 
 
+           // req.setTenantId("这是文本64");//租户ID 
+           // req.setOrgId("这是文本64");//归属组织 必填
            // req.setTaskId("这是文本64");//任务ID 必填
            // req.setInvokeCycle("这是文本256");//执行周期 
            // req.setIsError(true);//是否错误 
@@ -147,7 +155,7 @@ public class ScheduledLogServiceTest {
     @Test
     public void deleteScheduledLogTest() {
 
-        DeleteScheduledLogReq req = new DeleteScheduledLogReq();
+        ScheduledLogIdReq req = new ScheduledLogIdReq();
 
         req.setId(id);
 

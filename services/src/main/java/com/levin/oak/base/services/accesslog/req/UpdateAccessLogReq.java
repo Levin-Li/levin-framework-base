@@ -27,14 +27,13 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.domain.InjectVar;
-    import java.util.Date;
+import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  更新访问日志
- *  Auto gen by simple-dao-codegen 2022-1-18 13:59:49
+ *  Auto gen by simple-dao-codegen 2022-1-26 17:07:14
  */
 @Schema(description = "更新访问日志")
 @Data
@@ -57,7 +56,6 @@ public class UpdateAccessLogReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
-    //@InjectVar
     //@Size(max = 64)
     @Schema(description = "请求的域名")
     private String domain;

@@ -20,9 +20,9 @@ import java.util.*;
 /**
  * 模块变量解析器配置
  */
-@Configuration(PLUGIN_PREFIX + "ModuleVariableResolverConfigurer")
 @Slf4j
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleVariableResolverConfigurer", havingValue = "false", matchIfMissing = true)
+@Configuration(PLUGIN_PREFIX + "ModuleVariableResolverConfigurer")
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleVariableResolverConfigurer", matchIfMissing = true)
 public class ModuleVariableResolverConfigurer
         implements VariableResolverConfigurer {
 
