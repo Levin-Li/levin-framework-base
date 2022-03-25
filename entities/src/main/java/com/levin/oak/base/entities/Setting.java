@@ -39,7 +39,7 @@ import javax.persistence.*;
 //        }
 )
 public class Setting
-        extends MultiTenantNamedEntity  {
+        extends MultiTenantNamedEntity {
 
     public enum ValueType {
         @Schema(description = "文本")
@@ -50,13 +50,17 @@ public class Setting
         Digit,
         @Schema(description = "图片")
         Image,
+        @Schema(description = "视频")
+        Video,
+        @Schema(description = "文件")
+        File,
     }
 
     @Id
     protected Long id;
 
     @Schema(description = "分类名称")
-    @Column(nullable = false,length = 64)
+    @Column(nullable = false, length = 64)
     protected String categoryName;
 
     @Schema(description = "分组名称")
@@ -65,7 +69,7 @@ public class Setting
     protected String groupName;
 
     @Schema(description = "编码")
-    @Column(nullable = false,length = 64)
+    @Column(nullable = false, length = 64)
     protected String code;
 
     @Schema(description = "值类型")

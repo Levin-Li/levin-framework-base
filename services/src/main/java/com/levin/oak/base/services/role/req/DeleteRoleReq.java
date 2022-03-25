@@ -27,13 +27,14 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.oak.base.entities.Role.*;
 import java.util.List;
-import com.levin.commons.rbac.ResPermission;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  删除角色
- *  //Auto gen by simple-dao-codegen 2022-3-25 13:28:14
+ *  //Auto gen by simple-dao-codegen 2022-3-25 17:01:35
  */
 @Schema(description = "删除角色")
 @Data

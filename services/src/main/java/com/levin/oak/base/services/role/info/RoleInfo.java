@@ -24,13 +24,14 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 import com.levin.oak.base.entities.Role.*;
 import java.util.List;
-import com.levin.commons.rbac.ResPermission;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
 * 角色
-* @Author Auto gen by simple-dao-codegen 2022-3-25 13:28:14
+* @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:35
 */
 @Schema(description ="角色")
 @Data
@@ -63,16 +64,14 @@ public class RoleInfo implements Serializable {
    private OrgDataScope orgDataScope;
 
 
+   @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
    @Schema(description = "指定的部门列表")
-   private String assignedOrgIdList;
+   private List<String> assignedOrgIdList;
 
 
-   @Schema(description = "资源权限")
-   private String permissions;
-
-
+   @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
    @Schema(description = "资源权限列表")
-   private List<ResPermission> permissionList;
+   private List<String> permissionList;
 
 
    @Size(max = 64)

@@ -24,11 +24,11 @@ public abstract class SimpleEntity
     protected Long id;
 
     @Schema(description = "分类名称")
-    @Column(nullable = false,length = 64)
+    @Column(nullable = false, length = 64)
     protected String category;
 
     @Schema(description = "分组名称")
-    @Column(nullable = false,length = 64)
+    @Column(nullable = false, length = 64)
     @Contains
     protected String groupName;
 

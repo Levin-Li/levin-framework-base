@@ -39,7 +39,7 @@ import javax.persistence.*;
 )
 
 public class JobPost
-        extends MultiTenantNamedEntity  {
+        extends MultiTenantNamedEntity {
 
     public enum Type {
         @Schema(description = "管理岗")
@@ -55,7 +55,7 @@ public class JobPost
     protected Long id;
 
     @Schema(description = "编码")
-    @Column(nullable = false,length = 64)
+    @Column(nullable = false, length = 64)
     @Contains
     protected String code;
 

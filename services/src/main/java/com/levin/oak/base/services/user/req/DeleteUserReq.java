@@ -26,15 +26,16 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.User.*;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
-import java.util.List;
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
  *  删除用户
- *  //Auto gen by simple-dao-codegen 2022-3-25 13:28:15
+ *  //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
 @Schema(description = "删除用户")
 @Data

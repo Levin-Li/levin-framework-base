@@ -1,7 +1,6 @@
 package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.domain.OrganizedObject;
-import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -19,7 +18,7 @@ public abstract class MultiTenantAndOrganizedEntity
         implements OrganizedObject {
 
     @Schema(description = "机构ID")
-    @Column( length = 64)
+    @Column(length = 64)
     protected String orgId;
 
 }

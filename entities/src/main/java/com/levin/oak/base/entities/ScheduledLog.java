@@ -3,7 +3,6 @@ package com.levin.oak.base.entities;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.service.domain.Identifiable;
-import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

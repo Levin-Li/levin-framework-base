@@ -40,7 +40,6 @@ import javax.persistence.*;
 )
 public class SimpleApi extends SimpleEntity {
 
-
     public enum Language {
         Groovy,
         Spel,

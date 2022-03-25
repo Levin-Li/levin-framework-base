@@ -45,7 +45,7 @@ import java.util.Date;
 /**
  *  系统设置-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-3-25 13:28:14
+ *@author auto gen by simple-dao-codegen 2022-3-25 17:01:36
  *
  */
 

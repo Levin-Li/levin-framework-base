@@ -28,7 +28,7 @@ import java.util.Date;
 
 /**
 * 简单接口
-* @Author Auto gen by simple-dao-codegen 2022-3-25 13:28:14
+* @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:35
 */
 @Schema(description ="简单接口")
 @Data

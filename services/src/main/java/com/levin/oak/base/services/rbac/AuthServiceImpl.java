@@ -46,7 +46,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Slf4j
 @Order
 //@ConditionalOnMissingBean(AuthService.class)
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService",  matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", matchIfMissing = true)
 @Service(PLUGIN_PREFIX + "DefaultAuthService")
 public class AuthServiceImpl extends BaseService
         implements AuthService,
@@ -241,7 +241,7 @@ public class AuthServiceImpl extends BaseService
         checkUserState(user);
 
         return simpleDao.selectFrom(Role.class)
-                .select(E_Role.permissions)
+                .select(E_Role.permissionList)
                 .eq(E_Role.enable, true)
                 .in(E_Role.code, roleList)
                 .find(String.class)
@@ -266,7 +266,7 @@ public class AuthServiceImpl extends BaseService
 
         checkUserState(user);
 
-        return JsonStrArrayUtils.parse(user.getRoles(), null, null);
+        return user.getRoleList();// JsonStrArrayUtils.parse(user.getRoleList(), null, null);
     }
 
 
@@ -319,14 +319,14 @@ public class AuthServiceImpl extends BaseService
         for (Plugin plugin : pluginManager.getInstalledPlugins()) {
 
             MenuRes menu = simpleDao.selectFrom(MenuRes.class)
-                    .eq(E_MenuRes.domain, plugin.getId())
+                    .eq(E_MenuRes.subSystem, plugin.getId())
                     .isNull(E_Role.tenantId).findOne();
 
             if (menu != null) {
                 continue;
             }
 
-            MenuRes pluginRootMenu = simpleDao.create(new MenuRes().setDomain(plugin.getId())
+            MenuRes pluginRootMenu = simpleDao.create(new MenuRes().setSubSystem(plugin.getId())
                     .setName(plugin.getName())
                     .setEnable(plugin.isEnable())
                     .setOrderCode(plugin.getOrderCode())
@@ -366,7 +366,7 @@ public class AuthServiceImpl extends BaseService
                     .setCode("SA")
                     .setName("超级管理员")
                     .setOrgDataScope(Role.OrgDataScope.All)
-                    .setPermissions(JsonStrArrayUtils.iterableToStrArrayJson(permissions)));
+                    .setPermissionList(permissions));
 
 //            JsonStrArrayUtils.toStrArrayJson()
 
@@ -390,7 +390,7 @@ public class AuthServiceImpl extends BaseService
                     .setCode("test")
                     .setName("测试员")
                     .setOrgDataScope(Role.OrgDataScope.MySelf)
-                    .setPermissions(JsonStrArrayUtils.iterableToStrArrayJson(permissions)));
+                    .setPermissionList(permissions));
         }
 
 
@@ -410,7 +410,7 @@ public class AuthServiceImpl extends BaseService
                     .setPassword(encryptPassword("123456"))
                     .setName("超级管理员")
                     .setStaffNo("0000")
-                    .setRoles(JsonStrArrayUtils.iterableToStrArrayJson(roleList))
+                    .setRoleList(roleList)
 
             );
 
@@ -422,7 +422,7 @@ public class AuthServiceImpl extends BaseService
                     .setPassword(encryptPassword("123456"))
                     .setName("测试帐号")
                     .setStaffNo("9999")
-                    .setRoles(JsonStrArrayUtils.iterableToStrArrayJson(roleList))
+                    .setRoleList(roleList)
 
             );
         }

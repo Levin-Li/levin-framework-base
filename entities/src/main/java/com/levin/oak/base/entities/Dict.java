@@ -1,7 +1,6 @@
 package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.annotation.Contains;
-import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.DefaultJsonConverter;
@@ -21,7 +20,7 @@ import java.util.List;
 @FieldNameConstants
 @Schema(description = "字典")
 
-@Entity( name = EntityConst.PREFIX + "Dict")
+@Entity(name = EntityConst.PREFIX + "Dict")
 @Table(
 
         indexes = {
@@ -83,17 +82,13 @@ public class Dict
     protected Type type;
 
     @Schema(description = "编码")
-    @Column(nullable = false,length = 64)
+    @Column(nullable = false, length = 64)
     @Contains
     protected String code;
 
     @Schema(description = "编码项", title = "Json 存储")
     @Lob
-    @InjectVar(converter = DefaultJsonConverter.class)
-    protected String items;
-
-    @Transient
-    @Schema(description = "编码项", title = "Json 存储")
-    protected List<Item> itemList;
+    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {Item.class}, converter = DefaultJsonConverter.class)
+    protected String itemList;
 
 }

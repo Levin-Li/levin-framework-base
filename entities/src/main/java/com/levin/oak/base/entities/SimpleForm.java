@@ -8,7 +8,10 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
 
 @Entity(name = EntityConst.PREFIX + "SimpleForm")
 @Data

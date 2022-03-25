@@ -3,8 +3,6 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
-import com.levin.commons.service.domain.Identifiable;
-import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,7 +30,7 @@ import java.util.Date;
 @Schema(description = "访问日志")
 public class AccessLog
         implements
-        MultiTenantObject  {
+        MultiTenantObject {
 
     @Id
     @GeneratedValue

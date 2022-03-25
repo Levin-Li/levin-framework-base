@@ -5,6 +5,8 @@ import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.rbac.UserObject;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,8 +16,6 @@ import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
-
 
 
 @Data
@@ -53,7 +53,7 @@ import java.util.List;
 )
 public class User
         extends AbstractBaseEntityObject
-        implements OrganizedObject, UserObject, MultiTenantObject {
+        implements OrganizedObject,  MultiTenantObject {
 
     public enum State {
         @Schema(description = "正常")
@@ -91,7 +91,7 @@ public class User
     Long id;
 
     @Schema(description = "租户ID")
-            @Column(length = 64)
+    @Column(length = 64)
     String tenantId;
 
     @Schema(description = "登录名")
@@ -127,9 +127,11 @@ public class User
     @Schema(description = "性别")
     Sex sex;
 
-    @Schema(description = "帐号标签json array", title = "json数组")
+    @Schema(description = "标签列表", title = "json数组")
     @Column(length = 1800)
-    String tags;
+    @Contains
+    @InjectVar(domain = "dao", expectTypeDesc = "List<String>", converter = PrimitiveArrayJsonConverter.class)
+    String tagList;
 
     ////////////////////////////////////////////////////////////////////
 
@@ -153,13 +155,11 @@ public class User
     @Column(length = 128)
     String jobPostCode;
 
-    @Schema(description = "角色列表json数组", title = "json数组")
+    @Schema(description = "角色列表", title = "json数组")
     @Column(length = 1800)
-    String roles;
-
-    @Transient
-    @Schema(description = "角色列表")
-    List<String> roleList;
+    @Contains
+    @InjectVar(domain = "dao", expectTypeDesc = "List<String>", converter = PrimitiveArrayJsonConverter.class)
+    String roleList;
 
     ///////////////////////////////////////////////////////////////////////
     @Schema(description = "所属部门ID")

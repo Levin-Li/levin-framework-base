@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.user.req;
 
+import com.levin.commons.service.support.JsonStrLikeConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import com.levin.commons.dao.annotation.Ignore;
 
@@ -33,15 +34,16 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.oak.base.entities.User.*;
+    import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+    import com.levin.commons.service.domain.InjectVar;
     import java.util.Date;
-    import java.util.List;
     import com.levin.oak.base.services.org.info.*;
     import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
  *  查询用户
- *  @Author Auto gen by simple-dao-codegen 2022-3-25 13:28:15
+ *  @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
 @Schema(description = "查询用户")
 @Data
@@ -130,17 +132,15 @@ public class QueryUserReq extends MultiTenantReq{
     @Schema(description = "性别")
     private Sex sex;
 
-
-    //@Size(max = 1800)
-
-    @Schema(description = "帐号标签json array")
-    private String tags;
-
+    @Schema(description = "模糊匹配 - 标签列表")
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class)
+    @Contains
+    @OR(autoClose = true)
+    private List<String> containsTagList;
 
 
     @Schema(description = "帐号类型")
     private Category category;
-
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
@@ -176,15 +176,11 @@ public class QueryUserReq extends MultiTenantReq{
     private String jobPostCode;
 
 
-    //@Size(max = 1800)
-
-    @Schema(description = "角色列表json数组")
-    private String roles;
-
-
-
-    @Schema(description = "角色列表")
-    private List<String> roleList;
+    @Schema(description = "模糊匹配 - 角色列表")
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class)
+    @Contains
+    @OR(autoClose = true)
+    private List<String> containsRoleList;
 
 
 

@@ -37,7 +37,7 @@ import java.util.Date;
 
 /**
  *  更新菜单
- *  Auto gen by simple-dao-codegen 2022-3-25 13:28:15
+ *  Auto gen by simple-dao-codegen 2022-3-25 17:01:37
  */
 @Schema(description = "更新菜单")
 @Data
@@ -60,9 +60,9 @@ public class UpdateMenuResReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
-    @Size(max = 64)
-    @Schema(description = "子域")
-    private String domain;
+    @Size(max = 128)
+    @Schema(description = "子系统")
+    private String subSystem;
 
     @Size(max = 1800)
     @Schema(description = "需要的授权，权限或角色，json数组")

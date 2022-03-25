@@ -31,7 +31,7 @@ import java.util.Date;
 
 /**
 * 菜单
-* @Author Auto gen by simple-dao-codegen 2022-3-25 13:28:15
+* @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:37
 */
 @Schema(description ="菜单")
 @Data
@@ -54,9 +54,9 @@ public class MenuResInfo implements Serializable {
    private String tenantId;
 
 
-   @Size(max = 64)
-   @Schema(description = "子域")
-   private String domain;
+   @Size(max = 128)
+   @Schema(description = "子系统")
+   private String subSystem;
 
 
    @Size(max = 1800)

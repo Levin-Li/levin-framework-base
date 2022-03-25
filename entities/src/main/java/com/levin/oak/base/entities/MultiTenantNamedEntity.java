@@ -2,10 +2,8 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
-import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
@@ -21,10 +19,10 @@ public abstract class MultiTenantNamedEntity
         implements MultiTenantObject {
 
     @Schema(description = "租户ID")
-    @Column( length = 64)
+    @Column(length = 64)
     protected String tenantId;
 
     @Schema(description = "系统子域")
-    @Column( length = 64)
+    @Column(length = 64)
     protected String domain;
 }

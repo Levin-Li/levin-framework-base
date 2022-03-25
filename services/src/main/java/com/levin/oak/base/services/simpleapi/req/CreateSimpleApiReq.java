@@ -32,7 +32,7 @@ import java.util.Date;
 
 /**
  *  新增简单接口
- *  //Auto gen by simple-dao-codegen 2022-3-25 13:28:14
+ *  //Auto gen by simple-dao-codegen 2022-3-25 17:01:35
  */
 @Schema(description = "新增简单接口")
 @Data

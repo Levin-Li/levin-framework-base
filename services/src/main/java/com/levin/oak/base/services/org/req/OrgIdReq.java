@@ -36,7 +36,7 @@ import java.util.Date;
 
 /**
 *  机构 主键通用请求
-*  //Auto gen by simple-dao-codegen 2022-3-25 13:28:15
+*  //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
 */
 
 @Schema(description = "机构 主键通用请求")

@@ -26,16 +26,16 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.Dict.*;
+import java.util.List;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.levin.commons.service.domain.InjectVar;
-import java.util.List;
 import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  新增字典
- *  //Auto gen by simple-dao-codegen 2022-3-25 13:28:14
+ *  //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
 @Schema(description = "新增字典")
 @Data
@@ -66,8 +66,7 @@ public class CreateDictReq extends MultiTenantReq {
 
     @Schema(description = "编码项" )
     //@InjectVar(domain = "dao", converter = DefaultJsonConverter.class)
-    private String items;
-
+    private List<Item> itemList;
 
 
     @Schema(description = "系统子域" )

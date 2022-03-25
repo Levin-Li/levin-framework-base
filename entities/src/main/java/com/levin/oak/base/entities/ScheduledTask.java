@@ -43,11 +43,11 @@ public class ScheduledTask
     Long id;
 
     @Schema(description = "任务分类")
-    @Column(nullable = false,length = 64)
+    @Column(nullable = false, length = 64)
     String category;
 
     @Schema(description = "任务组")
-    @Column(nullable = false,length = 64)
+    @Column(nullable = false, length = 64)
     @Contains
     String groupName;
 

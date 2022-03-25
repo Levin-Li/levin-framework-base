@@ -10,14 +10,14 @@
     <parent>
         <groupId>com.levin.oak.base</groupId>
         <artifactId>framework-base</artifactId>
-<!--        <version>1.0.0-SNAPSHOT</version>-->
+        <!--        <version>1.0.0-SNAPSHOT</version>-->
         <version>${revision}</version>
     </parent>
 
-<!--    //Auto gen by simple-dao-codegen Mon Oct 18 14:12:00 CST 2021-->
+    <!--    //Auto gen by simple-dao-codegen Mon Oct 18 14:12:00 CST 2021-->
 
-<!--    <groupId>${project.groupId}</groupId> -->
-<!--    <version>${project.version}</version> -->
+    <!--    <groupId>${project.groupId}</groupId> -->
+    <!--    <version>${project.version}</version> -->
 
     <artifactId>framework-base-entities</artifactId>
 
@@ -41,6 +41,18 @@
         <dependency>
             <groupId>${levin.service-support.groupId}</groupId>
             <artifactId>service-support</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
             <scope>provided</scope>
         </dependency>
 

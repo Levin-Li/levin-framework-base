@@ -28,8 +28,9 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.User.*;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
-import java.util.List;
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
@@ -37,7 +38,7 @@ import com.levin.oak.base.entities.Org;
 
 /**
  *  更新用户
- *  Auto gen by simple-dao-codegen 2022-3-25 13:28:15
+ *  Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
 @Schema(description = "更新用户")
 @Data
@@ -91,8 +92,9 @@ public class UpdateUserReq extends MultiTenantReq {
     private Sex sex;
 
     @Size(max = 1800)
-    @Schema(description = "帐号标签json array")
-    private String tags;
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
+    @Schema(description = "标签列表")
+    private List<String> tagList;
 
     @Schema(description = "帐号类型")
     private Category category;
@@ -112,9 +114,7 @@ public class UpdateUserReq extends MultiTenantReq {
     private String jobPostCode;
 
     @Size(max = 1800)
-    @Schema(description = "角色列表json数组")
-    private String roles;
-
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
     @Schema(description = "角色列表")
     private List<String> roleList;
 
