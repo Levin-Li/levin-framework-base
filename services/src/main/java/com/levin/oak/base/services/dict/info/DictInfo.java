@@ -23,6 +23,7 @@ import com.levin.oak.base.entities.*;
 
 ////////////////////////////////////
 import com.levin.oak.base.entities.Dict.*;
+import com.levin.commons.service.support.DefaultJsonConverter;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.List;
 import java.util.Date;
@@ -30,7 +31,7 @@ import java.util.Date;
 
 /**
 * 字典
-* @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+* @Author Auto gen by simple-dao-codegen 2022-3-25 13:28:14
 */
 @Schema(description ="字典")
 @Data
@@ -60,7 +61,7 @@ public class DictInfo implements Serializable {
    private String code;
 
 
-   @InjectVar
+   @InjectVar(domain = "dao", converter = DefaultJsonConverter.class)
    @Schema(description = "编码项")
    private String items;
 

@@ -26,7 +26,7 @@ import java.util.*;
 
 /**
  *  基本查询对象
- *  @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:13
+ *  @Author Auto gen by simple-dao-codegen 2022-3-25 13:28:13
  */
 @Schema(description = "基本查询对象")
 @Data

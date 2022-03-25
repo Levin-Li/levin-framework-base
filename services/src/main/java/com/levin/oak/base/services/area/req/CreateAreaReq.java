@@ -35,7 +35,7 @@ import java.util.Date;
 
 /**
  *  新增区域
- *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  //Auto gen by simple-dao-codegen 2022-3-25 13:28:15
  */
 @Schema(description = "新增区域")
 @Data
@@ -58,35 +58,35 @@ public class CreateAreaReq extends BaseReq {
 
 
     @Schema(description = "父区域ID" )
-    @Size(max = 64)
+    //@Size(max = 64)
     private String parentCode;
 
 
 
 
     @Schema(description = "类型" , required = true)
-    @NotNull
+    //@NotNull
     private Type type;
 
 
     @Schema(description = "名称" , required = true)
-    @NotBlank
-    @Size(max = 128)
+    //@NotBlank
+    //@Size(max = 128)
     private String name;
 
 
     @Schema(description = "拼音，格式：全拼(简拼)" )
-    @Size(max = 128)
+    //@Size(max = 128)
     private String pinyinName;
 
 
     @Schema(description = "创建者" )
-    @Size(max = 128)
+    //@Size(max = 128)
     private String creator;
 
 
     @Schema(description = "创建时间" , required = true)
-    @NotNull
+    //@NotNull
     private Date createTime;
 
 
@@ -99,17 +99,17 @@ public class CreateAreaReq extends BaseReq {
 
 
     @Schema(description = "是否允许" , required = true)
-    @NotNull
+    //@NotNull
     private Boolean enable;
 
 
     @Schema(description = "是否可编辑" , required = true)
-    @NotNull
+    //@NotNull
     private Boolean editable;
 
 
     @Schema(description = "备注" )
-    @Size(max = 512)
+    //@Size(max = 512)
     private String remark;
 
 

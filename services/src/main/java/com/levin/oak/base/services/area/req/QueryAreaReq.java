@@ -1,6 +1,7 @@
 package com.levin.oak.base.services.area.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
 
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.annotation.*;
@@ -40,7 +41,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询区域
- *  @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  @Author Auto gen by simple-dao-codegen 2022-3-25 13:28:15
  */
 @Schema(description = "查询区域")
 @Data
@@ -56,6 +57,18 @@ public class QueryAreaReq extends BaseReq{
 
     private static final long serialVersionUID = -445860277L;
 
+    @Ignore
+    @Schema(description = "排序字段")
+    private String orderBy;
+
+    //@Ignore
+    @Schema(description = "排序方向-desc asc")
+    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
+    private OrderBy.Type orderDir;
+
+
+    //@NotBlank
+    //@Size(max = 64)
 
     @Schema(description = "编码")
     private String code;
@@ -65,12 +78,16 @@ public class QueryAreaReq extends BaseReq{
     private String startsWithCode;
 
 
+
     @Schema(description = "图标")
     private String icon;
 
 
+    //@Size(max = 64)
+
     @Schema(description = "父区域ID")
     private String parentCode;
+
 
 
     @Schema(description = "是否加载父区域")
@@ -78,14 +95,20 @@ public class QueryAreaReq extends BaseReq{
     private Boolean loadParent;
 
 
+
     @Schema(description = "是否加载子区域")
     @Fetch(attrs = E_Area.children, condition = "#_val == true")
     private Boolean loadChildren;
 
 
+    //@NotNull
+
     @Schema(description = "类型")
     private Type type;
 
+
+    //@NotBlank
+    //@Size(max = 128)
 
     @Schema(description = "名称")
     private String name;
@@ -95,6 +118,8 @@ public class QueryAreaReq extends BaseReq{
     private String containsName;
 
 
+    //@Size(max = 128)
+
     @Schema(description = "拼音，格式：全拼(简拼)")
     private String pinyinName;
 
@@ -103,9 +128,13 @@ public class QueryAreaReq extends BaseReq{
     private String containsPinyinName;
 
 
+    //@Size(max = 128)
+
     @Schema(description = "创建者")
     private String creator;
 
+
+    //@NotNull
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
@@ -115,6 +144,7 @@ public class QueryAreaReq extends BaseReq{
     @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteCreateTime;
+
 
 
 
@@ -129,17 +159,24 @@ public class QueryAreaReq extends BaseReq{
 
 
 
+
     @Schema(description = "排序代码")
     private Integer orderCode;
 
+
+    //@NotNull
 
     @Schema(description = "是否允许")
     private Boolean enable;
 
 
+    //@NotNull
+
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
+
+    //@Size(max = 512)
 
     @Schema(description = "备注")
     private String remark;

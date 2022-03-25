@@ -39,6 +39,7 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.Dict.*;
+import com.levin.commons.service.support.DefaultJsonConverter;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.List;
 import java.util.Date;
@@ -47,7 +48,7 @@ import java.util.Date;
 /**
  *  字典-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *@author auto gen by simple-dao-codegen 2022-3-25 13:28:14
  *
  */
 

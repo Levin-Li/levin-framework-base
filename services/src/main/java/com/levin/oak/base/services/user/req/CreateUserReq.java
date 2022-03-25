@@ -35,7 +35,7 @@ import com.levin.oak.base.entities.Org;
 
 /**
  *  新增用户
- *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  //Auto gen by simple-dao-codegen 2022-3-25 13:28:15
  */
 @Schema(description = "新增用户")
 @Data
@@ -54,32 +54,32 @@ public class CreateUserReq extends MultiTenantReq {
 
 
     @Schema(description = "登录名" )
-    @Size(max = 64)
+    //@Size(max = 64)
     private String loginName;
 
 
     @Schema(description = "登录密码" )
-    @Size(max = 256)
+    //@Size(max = 256)
     private String password;
 
 
     @Schema(description = "手机号" )
-    @Size(max = 20)
+    //@Size(max = 20)
     private String telephone;
 
 
     @Schema(description = "邮箱" )
-    @Size(max = 32)
+    //@Size(max = 32)
     private String email;
 
 
     @Schema(description = "名称" )
-    @Size(max = 64)
+    //@Size(max = 64)
     private String name;
 
 
     @Schema(description = "昵称" )
-    @Size(max = 32)
+    //@Size(max = 32)
     private String nickname;
 
 
@@ -92,7 +92,7 @@ public class CreateUserReq extends MultiTenantReq {
 
 
     @Schema(description = "帐号标签json array" )
-    @Size(max = 1800)
+    //@Size(max = 1800)
     private String tags;
 
 
@@ -105,22 +105,22 @@ public class CreateUserReq extends MultiTenantReq {
 
 
     @Schema(description = "帐号状态" , required = true)
-    @NotNull
+    //@NotNull
     private State state;
 
 
     @Schema(description = "工号" )
-    @Size(max = 32)
+    //@Size(max = 32)
     private String staffNo;
 
 
     @Schema(description = "岗位职级" )
-    @Size(max = 128)
+    //@Size(max = 128)
     private String jobPostCode;
 
 
     @Schema(description = "角色列表json数组" )
-    @Size(max = 1800)
+    //@Size(max = 1800)
     private String roles;
 
 
@@ -130,22 +130,22 @@ public class CreateUserReq extends MultiTenantReq {
 
 
     @Schema(description = "微信 OpendId" )
-    @Size(max = 128)
+    //@Size(max = 128)
     private String wxOpenId;
 
 
     @Schema(description = "阿里 OpendId" )
-    @Size(max = 128)
+    //@Size(max = 128)
     private String aliOpenId;
 
 
     @Schema(description = "创建者" )
-    @Size(max = 128)
+    //@Size(max = 128)
     private String creator;
 
 
     @Schema(description = "创建时间" , required = true)
-    @NotNull
+    //@NotNull
     private Date createTime;
 
 
@@ -158,17 +158,17 @@ public class CreateUserReq extends MultiTenantReq {
 
 
     @Schema(description = "是否允许" , required = true)
-    @NotNull
+    //@NotNull
     private Boolean enable;
 
 
     @Schema(description = "是否可编辑" , required = true)
-    @NotNull
+    //@NotNull
     private Boolean editable;
 
 
     @Schema(description = "备注" )
-    @Size(max = 512)
+    //@Size(max = 512)
     private String remark;
 
 

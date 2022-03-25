@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  机构-服务接口
- *  @author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  @author Auto gen by simple-dao-codegen 2022-3-25 13:28:15
  */
 @Tag(name = E_Org.BIZ_NAME, description = E_Org.BIZ_NAME + MAINTAIN_ACTION)
 public interface OrgService {

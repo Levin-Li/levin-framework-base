@@ -34,7 +34,7 @@ import java.util.Date;
 
 /**
  *  删除菜单
- *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:15
+ *  //Auto gen by simple-dao-codegen 2022-3-25 13:28:15
  */
 @Schema(description = "删除菜单")
 @Data

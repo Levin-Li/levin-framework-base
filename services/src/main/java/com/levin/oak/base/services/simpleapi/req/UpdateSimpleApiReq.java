@@ -34,7 +34,7 @@ import java.util.Date;
 
 /**
  *  更新简单接口
- *  Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  Auto gen by simple-dao-codegen 2022-3-25 13:28:14
  */
 @Schema(description = "更新简单接口")
 @Data
@@ -57,40 +57,40 @@ public class UpdateSimpleApiReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
-    //@Size(max = 16)
+    @Size(max = 16)
     @Schema(description = "http方法")
     private String methods;
 
     @Schema(description = "脚本语言")
     private Language language;
 
-    //@NotBlank
-    //@Size(max = 64)
+    @NotBlank
+    @Size(max = 64)
     @Schema(description = "分类名称")
     private String category;
 
-    //@NotBlank
-    //@Size(max = 64)
+    @NotBlank
+    @Size(max = 64)
     @Schema(description = "分组名称")
     private String groupName;
 
-    //@NotBlank
+    @NotBlank
     @Schema(description = "访问路径")
     private String path;
 
     @Schema(description = "内容")
     private String content;
 
-    //@Size(max = 64)
+    @Size(max = 64)
     @Schema(description = "系统子域")
     private String domain;
 
-    //@NotBlank
-    //@Size(max = 128)
+    @NotBlank
+    @Size(max = 128)
     @Schema(description = "名称")
     private String name;
 
-    //@Size(max = 128)
+    @Size(max = 128)
     @Schema(description = "拼音，格式：全拼(简拼)")
     private String pinyinName;
 
@@ -106,7 +106,7 @@ public class UpdateSimpleApiReq extends MultiTenantReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 512)
+    @Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

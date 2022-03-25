@@ -1,6 +1,7 @@
 package com.levin.oak.base.services.dict.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
 
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.annotation.*;
@@ -32,6 +33,7 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
     import com.levin.oak.base.entities.Dict.*;
+    import com.levin.commons.service.support.DefaultJsonConverter;
     import com.levin.commons.service.domain.InjectVar;
     import java.util.List;
     import java.util.Date;
@@ -39,7 +41,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询字典
- *  @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  @Author Auto gen by simple-dao-codegen 2022-3-25 13:28:14
  */
 @Schema(description = "查询字典")
 @Data
@@ -55,14 +57,30 @@ public class QueryDictReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -445779596L;
 
+    @Ignore
+    @Schema(description = "排序字段")
+    private String orderBy;
+
+    //@Ignore
+    @Schema(description = "排序方向-desc asc")
+    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
+    private OrderBy.Type orderDir;
+
+
+    //@NotNull
 
     @Schema(description = "id")
     private Long id;
 
 
+    //@NotNull
+
     @Schema(description = "类型")
     private Type type;
 
+
+    //@NotBlank
+    //@Size(max = 64)
 
     @Schema(description = "编码")
     private String code;
@@ -72,15 +90,23 @@ public class QueryDictReq extends MultiTenantReq{
     private String containsCode;
 
 
+    //@InjectVar(domain = "dao", converter = DefaultJsonConverter.class)
+
     @Schema(description = "编码项")
     private String items;
 
 
 
 
+
+    //@Size(max = 64)
+
     @Schema(description = "系统子域")
     private String domain;
 
+
+    //@NotBlank
+    //@Size(max = 128)
 
     @Schema(description = "名称")
     private String name;
@@ -90,6 +116,8 @@ public class QueryDictReq extends MultiTenantReq{
     private String containsName;
 
 
+    //@Size(max = 128)
+
     @Schema(description = "拼音，格式：全拼(简拼)")
     private String pinyinName;
 
@@ -98,9 +126,13 @@ public class QueryDictReq extends MultiTenantReq{
     private String containsPinyinName;
 
 
+    //@Size(max = 128)
+
     @Schema(description = "创建者")
     private String creator;
 
+
+    //@NotNull
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
@@ -110,6 +142,7 @@ public class QueryDictReq extends MultiTenantReq{
     @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteCreateTime;
+
 
 
 
@@ -124,17 +157,24 @@ public class QueryDictReq extends MultiTenantReq{
 
 
 
+
     @Schema(description = "排序代码")
     private Integer orderCode;
 
+
+    //@NotNull
 
     @Schema(description = "是否允许")
     private Boolean enable;
 
 
+    //@NotNull
+
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
+
+    //@Size(max = 512)
 
     @Schema(description = "备注")
     private String remark;

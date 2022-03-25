@@ -37,7 +37,7 @@ import java.util.Date;
 
 /**
  *  更新菜单
- *  Auto gen by simple-dao-codegen 2022-1-26 17:07:15
+ *  Auto gen by simple-dao-codegen 2022-3-25 13:28:15
  */
 @Schema(description = "更新菜单")
 @Data
@@ -60,18 +60,18 @@ public class UpdateMenuResReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
-    //@Size(max = 64)
+    @Size(max = 64)
     @Schema(description = "子域")
     private String domain;
 
-    //@Size(max = 1800)
+    @Size(max = 1800)
     @Schema(description = "需要的授权，权限或角色，json数组")
     private String requireAuthorizations;
 
     @Schema(description = "无权限时是否展示")
     private Boolean alwaysShow;
 
-    //@Size(max = 64)
+    @Size(max = 64)
     @Schema(description = "目标")
     private String target;
 
@@ -84,23 +84,23 @@ public class UpdateMenuResReq extends MultiTenantReq {
     @Schema(description = "路径/链接")
     private String path;
 
-    //@Size(max = 1800)
+    @Size(max = 1800)
     @Schema(description = "参数")
     private String params;
 
     @Schema(description = "父ID")
     private Long parentId;
 
-    //@Size(max = 1800)
+    @Size(max = 1800)
     @Schema(description = "id路径， 使用|包围，如|1|3|15|")
     private String idPath;
 
-    //@NotBlank
-    //@Size(max = 128)
+    @NotBlank
+    @Size(max = 128)
     @Schema(description = "名称")
     private String name;
 
-    //@Size(max = 128)
+    @Size(max = 128)
     @Schema(description = "拼音，格式：全拼(简拼)")
     private String pinyinName;
 
@@ -116,7 +116,7 @@ public class UpdateMenuResReq extends MultiTenantReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 512)
+    @Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

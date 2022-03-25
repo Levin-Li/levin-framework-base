@@ -37,7 +37,7 @@ import java.util.Date;
 
 /**
  *  更新区域
- *  Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  Auto gen by simple-dao-codegen 2022-3-25 13:28:15
  */
 @Schema(description = "更新区域")
 @Data
@@ -63,19 +63,19 @@ public class UpdateAreaReq extends BaseReq {
     @Schema(description = "图标")
     private String icon;
 
-    //@Size(max = 64)
+    @Size(max = 64)
     @Schema(description = "父区域ID")
     private String parentCode;
 
     @Schema(description = "类型")
     private Type type;
 
-    //@NotBlank
-    //@Size(max = 128)
+    @NotBlank
+    @Size(max = 128)
     @Schema(description = "名称")
     private String name;
 
-    //@Size(max = 128)
+    @Size(max = 128)
     @Schema(description = "拼音，格式：全拼(简拼)")
     private String pinyinName;
 
@@ -91,7 +91,7 @@ public class UpdateAreaReq extends BaseReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 512)
+    @Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

@@ -33,7 +33,7 @@ import java.util.Date;
 
 /**
  *  更新调度日志
- *  Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  Auto gen by simple-dao-codegen 2022-3-25 13:28:14
  */
 @Schema(description = "更新调度日志")
 @Data
@@ -56,12 +56,12 @@ public class UpdateScheduledLogReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
-    //@NotBlank
-    //@Size(max = 64)
+    @NotBlank
+    @Size(max = 64)
     @Schema(description = "任务ID")
     private String taskId;
 
-    //@Size(max = 256)
+    @Size(max = 256)
     @Schema(description = "执行周期")
     private String invokeCycle;
 

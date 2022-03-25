@@ -13,12 +13,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,12 +41,12 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "AmisController")
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "AmisController",  matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "AmisController", matchIfMissing = true)
 @RequestMapping(API_PATH + "rbac")
 @Tag(name = "权限认证", description = "权限管理")
 @Slf4j
 @Valid
-public class AmisController  extends BaseController {
+public class AmisController extends BaseController {
 
     @Autowired
     RoleService roleService;
@@ -79,7 +78,8 @@ public class AmisController  extends BaseController {
 
         if (authorizedMenuList != null) {
             resp.getData().put(AmisMenu.DATA_KEY,
-                    authorizedMenuList.parallelStream().map(this::convert).collect(Collectors.toList()));
+                    authorizedMenuList.parallelStream().map(this::convert).collect(Collectors.toList())
+            );
         }
 
         return resp;
@@ -97,7 +97,7 @@ public class AmisController  extends BaseController {
         AmisMenu amisMenu = new AmisMenu().setLabel(item.getName())
                 .setIcon(item.getIcon())
                 //固定加上index
-                .setUrl((item.getPath() + "/index").replace("//", "/"));
+                .setUrl((nullSafe(item.getPath(), item.getDomain()) + "/index").replace("//", "/"));
 
         if (MenuItem.ActionType.Redirect.equals(item.getActionType())) {
             amisMenu.setRedirect(item.getParams());
@@ -105,11 +105,12 @@ public class AmisController  extends BaseController {
             amisMenu.setLink(item.getParams());
         } else {
             //固定参数
-            amisMenu.setSchemaApi(amisMenu.getUrl() + "?AmisUI=true");
+            amisMenu.setSchemaApi(amisMenu.getUrl().replace("/api/", "/amis-ui/"));
         }
 
         //转换子菜单
-        if (item.getChildren() != null && !item.getChildren().isEmpty()) {
+        if (item.getChildren() != null
+                && !item.getChildren().isEmpty()) {
 
             amisMenu.setChildren(new ArrayList<>(item.getChildren().size()));
 
@@ -120,6 +121,10 @@ public class AmisController  extends BaseController {
         }
 
         return amisMenu;
+    }
+
+    String nullSafe(String value, String defaultValue) {
+        return StringUtils.hasText(value) ? value : defaultValue;
     }
 
 }

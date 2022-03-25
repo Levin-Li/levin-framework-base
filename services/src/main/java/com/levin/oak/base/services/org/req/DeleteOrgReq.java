@@ -36,7 +36,7 @@ import java.util.Date;
 
 /**
  *  删除机构
- *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  //Auto gen by simple-dao-codegen 2022-3-25 13:28:15
  */
 @Schema(description = "删除机构")
 @Data

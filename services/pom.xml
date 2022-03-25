@@ -34,6 +34,11 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>enjoy</artifactId>
+        </dependency>
+
+        <dependency>
             <artifactId>framework-base-entities</artifactId>
             <groupId>${project.groupId}</groupId>
             <version>${project.version}</version>
@@ -52,16 +57,16 @@
         </dependency>
 
         <!-- Sa-Token 整合 Redis （使用jackson序列化方式） -->
-<!--        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-dao-redis-jackson</artifactId>
-        </dependency>-->
+        <!--        <dependency>
+                    <groupId>cn.dev33</groupId>
+                    <artifactId>sa-token-dao-redis-jackson</artifactId>
+                </dependency>-->
 
         <!-- Sa-Token-Quick-Login 插件 -->
-<!--        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-quick-login</artifactId>
-        </dependency>-->
+        <!--        <dependency>
+                    <groupId>cn.dev33</groupId>
+                    <artifactId>sa-token-quick-login</artifactId>
+                </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -76,11 +81,11 @@
             <scope>provided</scope>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-security</artifactId>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-security</artifactId>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
 
 
         <dependency>

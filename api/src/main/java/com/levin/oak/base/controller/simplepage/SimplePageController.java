@@ -26,7 +26,7 @@ import com.levin.oak.base.services.simplepage.info.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+//Auto gen by simple-dao-codegen 2022-3-25 13:28:15
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -159,12 +159,12 @@ public class SimplePageController extends BaseController{
      // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
      // public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
      //
-     //     List<Integer> ns = getSelfProxy(getClass())
-     //         .batchDelete(new DeleteSimplePageReq().setIdList(id))
-     //         .getData();
-     //
-     //         return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-     //         }
+     //   List<Integer> ns = getSelfProxy(getClass())
+     //       .batchDelete(new DeleteSimplePageReq().setIdList(id))
+     //       .getData();
+     //   
+     //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+     //  }
 
     /**
      * 批量删除

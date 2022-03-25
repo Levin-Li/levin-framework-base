@@ -34,7 +34,7 @@ import java.util.Date;
 
 /**
  *  更新工作岗位
- *  Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  Auto gen by simple-dao-codegen 2022-3-25 13:28:15
  */
 @Schema(description = "更新工作岗位")
 @Data
@@ -57,24 +57,24 @@ public class UpdateJobPostReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
-    //@NotBlank
-    //@Size(max = 64)
+    @NotBlank
+    @Size(max = 64)
     @Schema(description = "编码")
     private String code;
 
     @Schema(description = "类型")
     private Type type;
 
-    //@Size(max = 64)
+    @Size(max = 64)
     @Schema(description = "系统子域")
     private String domain;
 
-    //@NotBlank
-    //@Size(max = 128)
+    @NotBlank
+    @Size(max = 128)
     @Schema(description = "名称")
     private String name;
 
-    //@Size(max = 128)
+    @Size(max = 128)
     @Schema(description = "拼音，格式：全拼(简拼)")
     private String pinyinName;
 
@@ -90,7 +90,7 @@ public class UpdateJobPostReq extends MultiTenantReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 512)
+    @Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

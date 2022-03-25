@@ -1,6 +1,7 @@
 package com.levin.oak.base.services.scheduledlog.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
 
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.annotation.*;
@@ -36,7 +37,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询调度日志
- *  @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  @Author Auto gen by simple-dao-codegen 2022-3-25 13:28:14
  */
 @Schema(description = "查询调度日志")
 @Data
@@ -52,14 +53,30 @@ public class QueryScheduledLogReq extends MultiTenantReq{
 
     private static final long serialVersionUID = 1319130901L;
 
+    @Ignore
+    @Schema(description = "排序字段")
+    private String orderBy;
+
+    //@Ignore
+    @Schema(description = "排序方向-desc asc")
+    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
+    private OrderBy.Type orderDir;
+
+
+    //@NotNull
 
     @Schema(description = "id")
     private Long id;
 
 
+    //@NotBlank
+    //@Size(max = 64)
+
     @Schema(description = "任务ID")
     private String taskId;
 
+
+    //@NotNull
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
@@ -72,12 +89,16 @@ public class QueryScheduledLogReq extends MultiTenantReq{
 
 
 
+    //@Size(max = 256)
+
     @Schema(description = "执行周期")
     private String invokeCycle;
 
 
+
     @Schema(description = "是否错误")
     private Boolean isError;
+
 
 
     @Schema(description = "执行结果")

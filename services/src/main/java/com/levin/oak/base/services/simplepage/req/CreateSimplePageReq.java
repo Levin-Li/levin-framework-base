@@ -31,7 +31,7 @@ import java.util.Date;
 
 /**
  *  新增简单页面
- *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  //Auto gen by simple-dao-codegen 2022-3-25 13:28:15
  */
 @Schema(description = "新增简单页面")
 @Data
@@ -50,19 +50,19 @@ public class CreateSimplePageReq extends MultiTenantReq {
 
 
     @Schema(description = "分类名称" , required = true)
-    @NotBlank
-    @Size(max = 64)
+    //@NotBlank
+    //@Size(max = 64)
     private String category;
 
 
     @Schema(description = "分组名称" , required = true)
-    @NotBlank
-    @Size(max = 64)
+    //@NotBlank
+    //@Size(max = 64)
     private String groupName;
 
 
     @Schema(description = "访问路径" , required = true)
-    @NotBlank
+    //@NotBlank
     private String path;
 
 
@@ -71,28 +71,28 @@ public class CreateSimplePageReq extends MultiTenantReq {
 
 
     @Schema(description = "系统子域" )
-    @Size(max = 64)
+    //@Size(max = 64)
     private String domain;
 
 
     @Schema(description = "名称" , required = true)
-    @NotBlank
-    @Size(max = 128)
+    //@NotBlank
+    //@Size(max = 128)
     private String name;
 
 
     @Schema(description = "拼音，格式：全拼(简拼)" )
-    @Size(max = 128)
+    //@Size(max = 128)
     private String pinyinName;
 
 
     @Schema(description = "创建者" )
-    @Size(max = 128)
+    //@Size(max = 128)
     private String creator;
 
 
     @Schema(description = "创建时间" , required = true)
-    @NotNull
+    //@NotNull
     private Date createTime;
 
 
@@ -105,17 +105,17 @@ public class CreateSimplePageReq extends MultiTenantReq {
 
 
     @Schema(description = "是否允许" , required = true)
-    @NotNull
+    //@NotNull
     private Boolean enable;
 
 
     @Schema(description = "是否可编辑" , required = true)
-    @NotNull
+    //@NotNull
     private Boolean editable;
 
 
     @Schema(description = "备注" )
-    @Size(max = 512)
+    //@Size(max = 512)
     private String remark;
 
 

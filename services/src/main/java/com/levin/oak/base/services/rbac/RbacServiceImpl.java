@@ -283,6 +283,8 @@ public class RbacServiceImpl extends BaseService implements RbacService {
                 continue;
             }
 
+            menu.setParent(null);
+
             MenuResInfo parent = cacheMap2.get(parentId);
 
             if (parent.getChildren() == null) {

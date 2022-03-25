@@ -34,7 +34,7 @@ import java.util.Date;
 
 /**
 *  菜单 主键通用请求
-*  //Auto gen by simple-dao-codegen 2022-1-26 17:07:15
+*  //Auto gen by simple-dao-codegen 2022-3-25 13:28:15
 */
 
 @Schema(description = "菜单 主键通用请求")

@@ -39,6 +39,7 @@
         <maven.source.skip>true</maven.source.skip>
 
         <sa-token.version>1.27.0</sa-token.version>
+        <jfinal-enjoy.version>4.9.16</jfinal-enjoy.version>
 
         <maven-source-plugin.attach>true</maven-source-plugin.attach>
         <maven-jar-plugin.addMavenDescriptor>false</maven-jar-plugin.addMavenDescriptor>
@@ -216,6 +217,12 @@
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-spring-boot-starter</artifactId>
                 <version>${sa-token.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.jfinal</groupId>
+                <artifactId>enjoy</artifactId>
+                <version>${jfinal-enjoy.version}</version>
             </dependency>
 
         </dependencies>

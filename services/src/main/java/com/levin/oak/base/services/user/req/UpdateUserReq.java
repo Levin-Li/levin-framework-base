@@ -37,7 +37,7 @@ import com.levin.oak.base.entities.Org;
 
 /**
  *  更新用户
- *  Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  Auto gen by simple-dao-codegen 2022-3-25 13:28:15
  */
 @Schema(description = "更新用户")
 @Data
@@ -60,27 +60,27 @@ public class UpdateUserReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
-    //@Size(max = 64)
+    @Size(max = 64)
     @Schema(description = "登录名")
     private String loginName;
 
-    //@Size(max = 256)
+    @Size(max = 256)
     @Schema(description = "登录密码")
     private String password;
 
-    //@Size(max = 20)
+    @Size(max = 20)
     @Schema(description = "手机号")
     private String telephone;
 
-    //@Size(max = 32)
+    @Size(max = 32)
     @Schema(description = "邮箱")
     private String email;
 
-    //@Size(max = 64)
+    @Size(max = 64)
     @Schema(description = "名称")
     private String name;
 
-    //@Size(max = 32)
+    @Size(max = 32)
     @Schema(description = "昵称")
     private String nickname;
 
@@ -90,7 +90,7 @@ public class UpdateUserReq extends MultiTenantReq {
     @Schema(description = "性别")
     private Sex sex;
 
-    //@Size(max = 1800)
+    @Size(max = 1800)
     @Schema(description = "帐号标签json array")
     private String tags;
 
@@ -103,26 +103,26 @@ public class UpdateUserReq extends MultiTenantReq {
     @Schema(description = "帐号状态")
     private State state;
 
-    //@Size(max = 32)
+    @Size(max = 32)
     @Schema(description = "工号")
     private String staffNo;
 
-    //@Size(max = 128)
+    @Size(max = 128)
     @Schema(description = "岗位职级")
     private String jobPostCode;
 
-    //@Size(max = 1800)
+    @Size(max = 1800)
     @Schema(description = "角色列表json数组")
     private String roles;
 
     @Schema(description = "角色列表")
     private List<String> roleList;
 
-    //@Size(max = 128)
+    @Size(max = 128)
     @Schema(description = "微信 OpendId")
     private String wxOpenId;
 
-    //@Size(max = 128)
+    @Size(max = 128)
     @Schema(description = "阿里 OpendId")
     private String aliOpenId;
 
@@ -138,7 +138,7 @@ public class UpdateUserReq extends MultiTenantReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 512)
+    @Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

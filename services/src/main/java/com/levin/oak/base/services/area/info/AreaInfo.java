@@ -31,7 +31,7 @@ import java.util.Date;
 
 /**
 * 区域
-* @Author Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+* @Author Auto gen by simple-dao-codegen 2022-3-25 13:28:15
 */
 @Schema(description ="区域")
 @Data

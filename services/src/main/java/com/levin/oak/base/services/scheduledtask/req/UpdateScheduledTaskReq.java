@@ -33,7 +33,7 @@ import java.util.Date;
 
 /**
  *  更新调度任务
- *  Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  Auto gen by simple-dao-codegen 2022-3-25 13:28:15
  */
 @Schema(description = "更新调度任务")
 @Data
@@ -56,17 +56,17 @@ public class UpdateScheduledTaskReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
-    //@NotBlank
-    //@Size(max = 64)
+    @NotBlank
+    @Size(max = 64)
     @Schema(description = "任务分类")
     private String category;
 
-    //@NotBlank
-    //@Size(max = 64)
+    @NotBlank
+    @Size(max = 64)
     @Schema(description = "任务组")
     private String groupName;
 
-    //@NotBlank
+    @NotBlank
     @Schema(description = "调度表达式")
     private String cron;
 
@@ -82,16 +82,16 @@ public class UpdateScheduledTaskReq extends MultiTenantReq {
     @Schema(description = "下一次时间")
     private Date nextInvokeTime;
 
-    //@Size(max = 64)
+    @Size(max = 64)
     @Schema(description = "系统子域")
     private String domain;
 
-    //@NotBlank
-    //@Size(max = 128)
+    @NotBlank
+    @Size(max = 128)
     @Schema(description = "名称")
     private String name;
 
-    //@Size(max = 128)
+    @Size(max = 128)
     @Schema(description = "拼音，格式：全拼(简拼)")
     private String pinyinName;
 
@@ -107,7 +107,7 @@ public class UpdateScheduledTaskReq extends MultiTenantReq {
     @Schema(description = "是否可编辑")
     private Boolean editable;
 
-    //@Size(max = 512)
+    @Size(max = 512)
     @Schema(description = "备注")
     private String remark;
 

@@ -31,7 +31,7 @@ import java.util.Date;
 
 /**
  *  新增访问日志
- *  //Auto gen by simple-dao-codegen 2022-1-26 17:07:14
+ *  //Auto gen by simple-dao-codegen 2022-3-25 13:28:15
  */
 @Schema(description = "新增访问日志")
 @Data
@@ -50,27 +50,27 @@ public class CreateAccessLogReq extends MultiTenantReq {
 
 
     @Schema(description = "请求的域名" )
-    @Size(max = 64)
+    //@Size(max = 64)
     private String domain;
 
 
     @Schema(description = "访问者" )
-    @Size(max = 64)
+    //@Size(max = 64)
     private String visitor;
 
 
     @Schema(description = "创建时间" , required = true)
-    @NotNull
+    //@NotNull
     private Date createTime;
 
 
     @Schema(description = "标题" , required = true)
-    @NotBlank
+    //@NotBlank
     private String title;
 
 
     @Schema(description = "日志类型" )
-    @Size(max = 64)
+    //@Size(max = 64)
     private String logType;
 
 
@@ -91,12 +91,12 @@ public class CreateAccessLogReq extends MultiTenantReq {
 
 
     @Schema(description = "请求方法" )
-    @Size(max = 32)
+    //@Size(max = 32)
     private String requestMethod;
 
 
     @Schema(description = "请求参数" )
-    @Size(max = 768)
+    //@Size(max = 768)
     private String requestParams;
 
 
@@ -105,12 +105,12 @@ public class CreateAccessLogReq extends MultiTenantReq {
 
 
     @Schema(description = "操作IP地址" )
-    @Size(max = 64)
+    //@Size(max = 64)
     private String remoteAddr;
 
 
     @Schema(description = "服务器地址" )
-    @Size(max = 64)
+    //@Size(max = 64)
     private String serverAddr;
 
 
@@ -123,17 +123,17 @@ public class CreateAccessLogReq extends MultiTenantReq {
 
 
     @Schema(description = "用户代理" )
-    @Size(max = 512)
+    //@Size(max = 512)
     private String userAgent;
 
 
     @Schema(description = "设备名称/操作系统" )
-    @Size(max = 128)
+    //@Size(max = 128)
     private String deviceName;
 
 
     @Schema(description = "浏览器名称" )
-    @Size(max = 64)
+    //@Size(max = 64)
     private String browserName;
 
 
