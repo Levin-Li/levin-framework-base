@@ -124,7 +124,7 @@ public class BizTenantServiceImpl
 
         Assert.isTrue(StringUtils.hasText(tenantId), "租户Id不能为空");
 
-        return checkStatus(tenantService.findById(Long.parseLong(tenantId)));
+        return checkStatus(tenantService.findById(tenantId));
     }
 
 
