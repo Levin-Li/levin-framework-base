@@ -32,12 +32,10 @@ import java.util.List;
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
         }
 
-//        ,
-//
-//        uniqueConstraints = {
-//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Role.code}),
-//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_MultiTenantNamedEntity.name}),
-//        }
+        ,uniqueConstraints = {
+                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Role.code}),
+                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_MultiTenantNamedEntity.name}),
+        }
 )
 public class Role
         extends MultiTenantNamedEntity {

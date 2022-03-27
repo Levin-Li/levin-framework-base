@@ -8,6 +8,7 @@ import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.domain.ServiceReq;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
 import com.levin.oak.base.services.user.info.UserInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -36,7 +37,7 @@ import javax.validation.constraints.NotNull;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS, resultClass = UserInfo.class)
-public class LoginReq implements ServiceReq {
+public class LoginReq  extends MultiTenantReq implements ServiceReq {
 
     private static final long serialVersionUID = -445263479L;
 

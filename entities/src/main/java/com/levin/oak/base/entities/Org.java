@@ -40,11 +40,10 @@ import javax.persistence.*;
                 @Index(columnList = E_Org.state),
                 @Index(columnList = E_Org.level),
         }
-//        ,
-//        uniqueConstraints = {
-//                @UniqueConstraint(columnNames = {E_Org.tenantId, E_Org.code}),
-//                @UniqueConstraint(columnNames = {E_Org.tenantId, E_Org.name}),
-//        }
+        ,
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {E_Org.tenantId, E_Org.name}),
+        }
 )
 
 //关于 JPA 继承模型

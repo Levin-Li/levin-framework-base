@@ -46,7 +46,6 @@ public class MenuRes
     Long id;
 
     @Schema(description = "租户ID")
-
     String tenantId;
 
     @Schema(description = "子系统")

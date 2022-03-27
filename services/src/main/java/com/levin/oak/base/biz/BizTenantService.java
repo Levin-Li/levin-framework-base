@@ -65,7 +65,7 @@ public interface BizTenantService {
     TenantInfo getTenantInfo(String tenantId);
 
     /**
-     * 获取用户的租户ID
+     * 获取租户
      *
      * @return
      */
