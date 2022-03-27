@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.tenant.req;
 
+import com.levin.commons.service.support.JsonStrLikeConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import com.levin.commons.dao.annotation.Ignore;
 
@@ -125,12 +126,9 @@ public class QueryTenantReq extends BaseReq{
     private String contractPhone;
 
 
-    //@InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
-
-    @Schema(description = "域名列表")
-    private List<String> domainList;
-
     @Schema(description = "模糊匹配 - 域名列表")
+    @OR(autoClose = true)
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class)
     @Contains
     private List<String> containsDomainList;
 

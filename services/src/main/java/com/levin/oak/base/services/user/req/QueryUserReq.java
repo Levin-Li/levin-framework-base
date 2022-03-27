@@ -175,13 +175,11 @@ public class QueryUserReq extends MultiTenantReq{
     @Schema(description = "岗位职级")
     private String jobPostCode;
 
-
     @Schema(description = "模糊匹配 - 角色列表")
+    @OR(autoClose = true)
     @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class)
     @Contains
-    @OR(autoClose = true)
     private List<String> containsRoleList;
-
 
 
     @Schema(description = "是否加载所属部门")

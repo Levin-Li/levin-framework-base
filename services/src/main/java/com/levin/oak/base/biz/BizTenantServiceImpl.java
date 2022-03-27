@@ -9,13 +9,23 @@ import com.levin.oak.base.entities.Tenant;
 import com.levin.oak.base.services.tenant.TenantService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.services.tenant.req.QueryTenantReq;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
+
+@Service(PLUGIN_PREFIX + "BizTenantService")
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizTenantService", matchIfMissing = true)
+@Slf4j
+//@Validated
+@Tag(name = E_Tenant.BIZ_NAME, description = E_Tenant.BIZ_NAME + MAINTAIN_ACTION)
 public class BizTenantServiceImpl
         implements BizTenantService {
 

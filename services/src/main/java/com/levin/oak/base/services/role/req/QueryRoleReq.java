@@ -1,47 +1,37 @@
 package com.levin.oak.base.services.role.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.Gte;
 import com.levin.commons.dao.annotation.Ignore;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-
-import com.levin.oak.base.services.role.info.*;
+import com.levin.commons.dao.annotation.Lte;
+import com.levin.commons.dao.annotation.logic.OR;
+import com.levin.commons.dao.annotation.order.OrderBy;
+import com.levin.commons.dao.annotation.order.SimpleOrderBy;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.JsonStrLikeConverter;
+import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.Role;
+import com.levin.oak.base.entities.Role.OrgDataScope;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import com.levin.oak.base.services.role.info.RoleInfo;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import java.util.Date;
+import java.util.List;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.Role.*;
-    import java.util.List;
-    import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-    import com.levin.commons.service.domain.InjectVar;
-    import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  查询角色
- *  @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:35
+ * 查询角色
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:35
  */
 @Schema(description = "查询角色")
 @Data
@@ -53,7 +43,7 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Role.class, alias = E_Role.ALIAS, resultClass = RoleInfo.class)
-public class QueryRoleReq extends MultiTenantReq{
+public class QueryRoleReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445356492L;
 
@@ -83,7 +73,6 @@ public class QueryRoleReq extends MultiTenantReq{
     private String containsCode;
 
 
-
     @Schema(description = "图标")
     private String icon;
 
@@ -94,17 +83,17 @@ public class QueryRoleReq extends MultiTenantReq{
     private OrgDataScope orgDataScope;
 
 
-    //@InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
-
-    @Schema(description = "指定的部门列表")
-    private List<String> assignedOrgIdList;
-
-
-    //@InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
-
-    @Schema(description = "资源权限列表")
-    private List<String> permissionList;
-
+//    @Schema(description = "指定的部门列表")
+//    @OR(autoClose = true)
+//    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class)
+//    @Contains
+//    private List<String> assignedOrgIdList;
+//
+//    @Schema(description = "资源权限列表")
+//    @OR(autoClose = true)
+//    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class)
+//    @Contains
+//    private List<String> permissionList;
 
     //@Size(max = 64)
 
@@ -151,8 +140,6 @@ public class QueryRoleReq extends MultiTenantReq{
     private Date lteCreateTime;
 
 
-
-
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
@@ -161,8 +148,6 @@ public class QueryRoleReq extends MultiTenantReq{
     @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteLastUpdateTime;
-
-
 
 
     @Schema(description = "排序代码")
