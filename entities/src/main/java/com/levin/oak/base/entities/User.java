@@ -130,7 +130,7 @@ public class User
     @Schema(description = "标签列表", title = "json数组")
     @Column(length = 1800)
     @Contains
-    @InjectVar(domain = "dao", expectTypeDesc = "List<String>", converter = PrimitiveArrayJsonConverter.class)
+    @InjectVar(domain = "dao", expectTypeDesc = "List<String>", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     String tagList;
 
     ////////////////////////////////////////////////////////////////////
@@ -158,7 +158,7 @@ public class User
     @Schema(description = "角色列表", title = "json数组")
     @Column(length = 1800)
     @Contains
-    @InjectVar(domain = "dao", expectTypeDesc = "List<String>", converter = PrimitiveArrayJsonConverter.class)
+    @InjectVar(domain = "dao", expectTypeDesc = "List<String>", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     String roleList;
 
     ///////////////////////////////////////////////////////////////////////

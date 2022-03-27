@@ -98,7 +98,7 @@ public class Tenant extends AbstractNamedEntityObject {
     ////////////////////////////////////////////////
     @Schema(description = "域名列表")
     @Contains
-    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {String.class}, converter = PrimitiveArrayJsonConverter.class)
+    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {String.class}, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     String domainList;
 
     @Schema(description = "appId")

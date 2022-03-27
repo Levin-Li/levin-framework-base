@@ -2,7 +2,6 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
-import com.levin.commons.rbac.RoleObject;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
@@ -69,12 +68,12 @@ public class Role
 
     @Schema(description = "指定的部门列表", title = "Json数组")
     @Lob
-    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {String.class}, converter = PrimitiveArrayJsonConverter.class)
+    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {String.class}, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     protected String assignedOrgIdList;
 
     @Schema(description = "资源权限列表", title = "Json数组")
     @Lob
-    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {String.class}, converter = PrimitiveArrayJsonConverter.class)
+    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {String.class}, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     protected String permissionList;
 
     @Override

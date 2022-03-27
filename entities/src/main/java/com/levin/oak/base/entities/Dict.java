@@ -88,7 +88,7 @@ public class Dict
 
     @Schema(description = "编码项", title = "Json 存储")
     @Lob
-    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {Item.class}, converter = DefaultJsonConverter.class)
+    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {Item.class}, converter = DefaultJsonConverter.class, isRequired = "false")
     protected String itemList;
 
 }
