@@ -3,9 +3,7 @@ package com.levin.oak.base.biz;
 import cn.hutool.core.lang.Assert;
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.service.exception.ServiceException;
-import com.levin.commons.utils.JsonStrArrayUtils;
 import com.levin.oak.base.entities.E_Tenant;
-import com.levin.oak.base.entities.Tenant;
 import com.levin.oak.base.services.tenant.TenantService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.services.tenant.req.QueryTenantReq;
@@ -16,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -69,9 +68,15 @@ public class BizTenantServiceImpl
     @Override
     public TenantInfo setCurrentTenantByDomain(String domain) {
 
-        TenantInfo tenantInfo = simpleDao.selectFrom(Tenant.class)
-                .contains(E_Tenant.domainList, JsonStrArrayUtils.getLikeQueryStr(domain))
-                .findOne(TenantInfo.class);
+        Assert.notBlank(domain, () -> new IllegalArgumentException("domain is blank"));
+
+        setCurrentDomain(domain);
+
+//        TenantInfo tenantInfo = simpleDao.selectFrom(Tenant.class)
+//                .contains(E_Tenant.domainList, JsonStrArrayUtils.getLikeQueryStr(domain))
+//                .findOne(TenantInfo.class);
+
+        TenantInfo tenantInfo = tenantService.findOne(new QueryTenantReq().setContainsDomainList(Arrays.asList(domain)));
 
         tenantInfo = checkStatus(tenantInfo);
 

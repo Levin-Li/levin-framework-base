@@ -62,13 +62,15 @@ public class InjectVarServiceImpl implements InjectVarService {
     @Override
     public List<Map<String, ?>> getInjectVars() {
 
+        TenantInfo tenantInfo = bizTenantService.getCurrentTenant();
+
         //如果当前没有域名
-        if (!StringUtils.hasText(bizTenantService.getCurrentDomain())) {
+        if (tenantInfo == null) {
             //设置当前登录的域名
             bizTenantService.setCurrentTenantByDomain(httpServletRequest.getServerName());
         }
 
-        TenantInfo tenantInfo = bizTenantService.getCurrentTenant();
+        tenantInfo = bizTenantService.getCurrentTenant();
 
         MapUtils.Builder<String, Object> builder = MapUtils.putFirst(InjectConsts.TENANT, tenantInfo);
 
@@ -101,7 +103,10 @@ public class InjectVarServiceImpl implements InjectVarService {
                     .put(InjectConsts.USER, userInfo)
                     .put(InjectConsts.ORG_ID, userInfo.getOrgId());
 
-        }else {
+        } else {
+
+            //匿名用户
+
 
         }
 
