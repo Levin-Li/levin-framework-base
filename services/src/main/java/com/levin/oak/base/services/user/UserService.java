@@ -43,6 +43,9 @@ public interface UserService {
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     int update(UpdateUserReq req);
 
+    @Operation(tags = {BIZ_NAME}, summary = "修改密码")
+    int update(UpdateUserPwdReq req);
+
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     List<Integer> batchUpdate(List<UpdateUserReq> reqList);
 

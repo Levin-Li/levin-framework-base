@@ -1,49 +1,40 @@
 package com.levin.oak.base.services.user.req;
 
-import com.levin.commons.service.support.JsonStrLikeConverter;
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.Gte;
 import com.levin.commons.dao.annotation.Ignore;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-
-import com.levin.oak.base.services.user.info.*;
+import com.levin.commons.dao.annotation.Lte;
+import com.levin.commons.dao.annotation.logic.OR;
+import com.levin.commons.dao.annotation.misc.Fetch;
+import com.levin.commons.dao.annotation.order.OrderBy;
+import com.levin.commons.dao.annotation.order.SimpleOrderBy;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.JsonStrLikeConverter;
+import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
+import com.levin.oak.base.entities.User.Category;
+import com.levin.oak.base.entities.User.Sex;
+import com.levin.oak.base.entities.User.State;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import com.levin.oak.base.services.user.info.UserInfo;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import java.util.Date;
+import java.util.List;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.User.*;
-    import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-    import com.levin.commons.service.domain.InjectVar;
-    import java.util.Date;
-    import com.levin.oak.base.services.org.info.*;
-    import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
- *  查询用户
- *  @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ * 查询用户
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
 @Schema(description = "查询用户")
 @Data
@@ -55,7 +46,7 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS, resultClass = UserInfo.class)
-public class QueryUserReq extends MultiTenantReq{
+public class QueryUserReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445263479L;
 
@@ -123,17 +114,15 @@ public class QueryUserReq extends MultiTenantReq{
     private String containsNickname;
 
 
-
     @Schema(description = "头像")
     private String avatar;
-
 
 
     @Schema(description = "性别")
     private Sex sex;
 
     @Schema(description = "模糊匹配 - 标签列表")
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class)
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Contains
     @OR(autoClose = true)
     private List<String> containsTagList;
@@ -151,7 +140,6 @@ public class QueryUserReq extends MultiTenantReq{
     @Schema(description = "小于等于过期时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteExpiredDate;
-
 
 
     //@NotNull
@@ -177,7 +165,7 @@ public class QueryUserReq extends MultiTenantReq{
 
     @Schema(description = "模糊匹配 - 角色列表")
     @OR(autoClose = true)
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class)
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Contains
     private List<String> containsRoleList;
 
@@ -217,8 +205,6 @@ public class QueryUserReq extends MultiTenantReq{
     private Date lteCreateTime;
 
 
-
-
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
@@ -227,8 +213,6 @@ public class QueryUserReq extends MultiTenantReq{
     @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteLastUpdateTime;
-
-
 
 
     @Schema(description = "排序代码")

@@ -7,17 +7,16 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 /**
  * 域名拦截器
  */
 public class DomainInterceptor implements HandlerInterceptor {
 
-    Supplier<Consumer<String>> supplier;
+    Consumer<String> consumer;
 
-    public DomainInterceptor(Supplier<Consumer<String>> supplier) {
-        this.supplier = supplier;
+    public DomainInterceptor(Consumer<String> consumer) {
+        this.consumer = consumer;
     }
 
     @Override
@@ -42,15 +41,8 @@ public class DomainInterceptor implements HandlerInterceptor {
 
     protected void onDomain(String domain) {
 
-        if (supplier != null) {
-
-            Consumer<String> consumer = supplier.get();
-
-            if (consumer != null) {
-                consumer.accept(domain);
-            } else {
-
-            }
+        if (consumer != null) {
+            consumer.accept(domain);
         } else {
 
         }

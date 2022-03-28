@@ -16,7 +16,6 @@ import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 ////////////////////////////////////
 //自动导入列表
@@ -37,7 +36,7 @@ import javax.validation.constraints.NotNull;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS, resultClass = UserInfo.class)
-public class LoginReq  extends MultiTenantReq implements ServiceReq {
+public class LoginReq extends MultiTenantReq implements ServiceReq {
 
     private static final long serialVersionUID = -445263479L;
 

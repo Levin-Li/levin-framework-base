@@ -15,6 +15,10 @@ import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.rbac.req.LoginReq;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.role.req.CreateRoleReq;
+import com.levin.oak.base.services.tenant.TenantService;
+import com.levin.oak.base.services.tenant.info.TenantInfo;
+import com.levin.oak.base.services.tenant.req.CreateTenantReq;
+import com.levin.oak.base.services.tenant.req.QueryTenantReq;
 import com.levin.oak.base.services.user.UserService;
 import com.levin.oak.base.services.user.info.UserInfo;
 import com.levin.oak.base.services.user.req.CreateUserReq;
@@ -30,10 +34,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -74,6 +75,9 @@ public class AuthServiceImpl extends BaseService
 
     @Resource
     PluginManager pluginManager;
+
+    @Resource
+    TenantService tenantService;
 
     @PostConstruct
     public void init() {
@@ -272,6 +276,11 @@ public class AuthServiceImpl extends BaseService
 
     @Override
     public String encryptPassword(String pwd) {
+
+        if (!StringUtils.hasText(pwd)) {
+            return null;
+        }
+
         return SaSecureUtil.sha1(pwd);
     }
 
@@ -346,6 +355,23 @@ public class AuthServiceImpl extends BaseService
 
     private void initUser() {
 
+
+        QueryTenantReq req = new QueryTenantReq().setContainsDomainList(Arrays.asList("127.0.0.1"));
+
+        TenantInfo tenantInfo = tenantService.findOne(req);
+
+        if (tenantInfo == null) {
+            String id = tenantService.create(new CreateTenantReq()
+                    .setName("默认租户")
+                    .setRemark("支持本地地址")
+                    .setDomainList(Arrays.asList("127.0.0.1", "localhost"))
+            );
+
+            tenantInfo = tenantService.findById(id);
+
+//            tenantInfo = tenantService.findOne(req);
+        }
+
         Role role = simpleDao.selectFrom(Role.class)
                 .eq(E_Role.code, "SA")
                 .isNull(E_Role.tenantId)
@@ -365,6 +391,7 @@ public class AuthServiceImpl extends BaseService
             roleService.create(new CreateRoleReq()
                     .setCode("SA")
                     .setName("超级管理员")
+                    .setEditable(false)
                     .setOrgDataScope(Role.OrgDataScope.All)
                     .setPermissionList(permissions));
 
@@ -411,7 +438,6 @@ public class AuthServiceImpl extends BaseService
                     .setName("超级管理员")
                     .setStaffNo("0000")
                     .setRoleList(roleList)
-
             );
 
             roleList.clear();
@@ -423,7 +449,6 @@ public class AuthServiceImpl extends BaseService
                     .setName("测试帐号")
                     .setStaffNo("9999")
                     .setRoleList(roleList)
-
             );
         }
     }

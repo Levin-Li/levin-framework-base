@@ -1,47 +1,36 @@
 package com.levin.oak.base.services.tenant.req;
 
-import com.levin.commons.service.support.JsonStrLikeConverter;
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.Gte;
 import com.levin.commons.dao.annotation.Ignore;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-
-import com.levin.oak.base.services.tenant.info.*;
+import com.levin.commons.dao.annotation.Lte;
+import com.levin.commons.dao.annotation.logic.OR;
+import com.levin.commons.dao.annotation.order.OrderBy;
+import com.levin.commons.dao.annotation.order.SimpleOrderBy;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.JsonStrLikeConverter;
+import com.levin.oak.base.entities.E_Tenant;
 import com.levin.oak.base.entities.Tenant;
+import com.levin.oak.base.services.commons.req.BaseReq;
+import com.levin.oak.base.services.tenant.info.TenantInfo;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import java.util.Date;
+import java.util.List;
 
 ////////////////////////////////////
 //自动导入列表
-    import java.util.Date;
-    import java.util.List;
-    import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-    import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 /**
- *  查询租户
- *  @Author Auto gen by simple-dao-codegen 2022-3-25 18:38:00
+ * 查询租户
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-3-25 18:38:00
  */
 @Schema(description = "查询租户")
 @Data
@@ -53,7 +42,7 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Tenant.class, alias = E_Tenant.ALIAS, resultClass = TenantInfo.class)
-public class QueryTenantReq extends BaseReq{
+public class QueryTenantReq extends BaseReq {
 
     private static final long serialVersionUID = 1557223144L;
 
@@ -73,10 +62,8 @@ public class QueryTenantReq extends BaseReq{
     private String id;
 
 
-
     @Schema(description = "租户头像")
     private String logo;
-
 
 
     @Schema(description = "企业信用编码")
@@ -89,20 +76,16 @@ public class QueryTenantReq extends BaseReq{
     private String tenantKey;
 
 
-
     @Schema(description = "帐号余额")
     private Double balance;
-
 
 
     @Schema(description = "总坐席数")
     private Integer licenseCnt;
 
 
-
     @Schema(description = "剩余坐席数")
     private Integer remainingLicenseCnt;
-
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
@@ -115,11 +98,8 @@ public class QueryTenantReq extends BaseReq{
     private Date lteLicenseExpire;
 
 
-
-
     @Schema(description = "联系人")
     private String contractPerson;
-
 
 
     @Schema(description = "联系电话")
@@ -128,7 +108,7 @@ public class QueryTenantReq extends BaseReq{
 
     @Schema(description = "模糊匹配 - 域名列表")
     @OR(autoClose = true)
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class)
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Contains
     private List<String> containsDomainList;
 
@@ -143,7 +123,6 @@ public class QueryTenantReq extends BaseReq{
 
     @Schema(description = "appSecret")
     private String appSecret;
-
 
 
     @Schema(description = "EncryptKey")
@@ -189,8 +168,6 @@ public class QueryTenantReq extends BaseReq{
     private Date lteCreateTime;
 
 
-
-
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
@@ -199,8 +176,6 @@ public class QueryTenantReq extends BaseReq{
     @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteLastUpdateTime;
-
-
 
 
     @Schema(description = "排序代码")

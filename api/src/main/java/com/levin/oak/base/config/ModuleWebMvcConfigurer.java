@@ -1,6 +1,8 @@
 package com.levin.oak.base.config;
 
+import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.interceptor.AuthorizeAnnotationInterceptor;
+import com.levin.oak.base.interceptor.DomainInterceptor;
 import com.levin.oak.base.services.rbac.AuthService;
 import com.levin.oak.base.services.rbac.AuthServiceImpl;
 import com.levin.oak.base.services.rbac.RbacService;
@@ -17,7 +19,7 @@ import static com.levin.oak.base.ModuleOption.*;
 
 @Configuration(PLUGIN_PREFIX + "ModuleWebMvcConfigurer")
 @Slf4j
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleWebMvcConfigurer",  matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleWebMvcConfigurer", matchIfMissing = true)
 public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
     @Resource
@@ -25,6 +27,9 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
     @Resource
     AuthService authService;
+
+    @Resource
+    BizTenantService bizTenantService;
 
     @Value("${" + PLUGIN_PREFIX + "enableAuthorizeInterceptor:}")
     Boolean enableAuthorizeInterceptor = null;
@@ -84,6 +89,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         //如果没有强制禁用并且默认的认证服务没有被替换，或是强制启用
         if ((enableAuthorizeInterceptor == null && authService instanceof AuthServiceImpl)
                 || Boolean.TRUE.equals(enableAuthorizeInterceptor)) {
+
+            registry.addInterceptor(new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain))).addPathPatterns(API_PATH + "**");
 
             registry.addInterceptor(new AuthorizeAnnotationInterceptor(rbacService)).addPathPatterns(API_PATH + "**");
 

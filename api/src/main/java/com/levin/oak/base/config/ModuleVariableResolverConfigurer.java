@@ -1,20 +1,20 @@
 package com.levin.oak.base.config;
 
-import static com.levin.oak.base.ModuleOption.*;
-
-import com.levin.oak.base.*;
 import com.levin.commons.service.support.*;
-import com.levin.commons.utils.*;
+import com.levin.oak.base.biz.InjectVarService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.context.annotation.*;
-import org.springframework.core.annotation.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.servlet.http.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
 /**
@@ -26,8 +26,12 @@ import java.util.*;
 public class ModuleVariableResolverConfigurer
         implements VariableResolverConfigurer {
 
+//    @Resource
+//    VariableInjector variableInjector;
+
+
     @Resource
-    VariableInjector variableInjector;
+    InjectVarService injectVarService;
 
     @PostConstruct
     void init() {
@@ -108,6 +112,8 @@ public class ModuleVariableResolverConfigurer
 
         //@todo 增加本模块的动态变量
 
-        return Collections.emptyList();
+        return injectVarService.getInjectVars();
+
+        //  return Collections.emptyList();
     }
 }

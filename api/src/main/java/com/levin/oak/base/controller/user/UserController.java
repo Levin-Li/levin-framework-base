@@ -1,27 +1,24 @@
 package com.levin.oak.base.controller.user;
 
+import com.levin.commons.dao.support.PagingData;
+import com.levin.commons.dao.support.SimplePaging;
+import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.controller.BaseController;
+import com.levin.oak.base.entities.E_User;
+import com.levin.oak.base.services.user.UserService;
+import com.levin.oak.base.services.user.info.UserInfo;
+import com.levin.oak.base.services.user.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.util.*;
-import javax.validation.*;
-import java.util.*;
 
-import javax.servlet.http.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import javax.validation.constraints.*;
-
-import com.levin.oak.base.controller.*;
-import com.levin.oak.base.*;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.user.*;
-import com.levin.oak.base.services.user.req.*;
-import com.levin.oak.base.services.user.info.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
@@ -51,7 +48,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class UserController extends BaseController{
+public class UserController extends BaseController {
 
     private static final String BIZ_NAME = E_User.BIZ_NAME;
 
@@ -61,13 +58,13 @@ public class UserController extends BaseController{
     /**
      * 分页查找
      *
-     * @param req  QueryUserReq
-     * @return  ApiResp<PagingData<UserInfo>>
+     * @param req QueryUserReq
+     * @return ApiResp<PagingData < UserInfo>>
      */
     @GetMapping("/query")
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    public ApiResp<PagingData<UserInfo>> query(QueryUserReq req , SimplePaging paging) {
-        return ApiResp.ok(userService.query(req,paging));
+    public ApiResp<PagingData<UserInfo>> query(QueryUserReq req, SimplePaging paging) {
+        return ApiResp.ok(userService.query(req, paging));
     }
 
     /**
@@ -96,23 +93,23 @@ public class UserController extends BaseController{
 
 
     /**
-    * 查看详情
-    *
-    * @param req QueryUserByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QueryUserByIdReq
+     */
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     public ApiResp<UserInfo> retrieve(@NotNull UserIdReq req) {
 
-         return ApiResp.ok(userService.findById(req));
+        return ApiResp.ok(userService.findById(req));
 
-     }
+    }
 
     /**
-    * 查看详情
-    *
-    * @param id Long
-    */
+     * 查看详情
+     *
+     * @param id Long
+     */
     //@GetMapping("/{id}")
     //@Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     //public ApiResp<UserInfo> retrieve(@PathVariable @NotNull Long id) {
@@ -124,25 +121,40 @@ public class UserController extends BaseController{
 
     /**
      * 更新
+     *
      * @param req UpdateUserReq
      */
-     @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-     public ApiResp<Void> update(@RequestBody UpdateUserReq req) {
-         return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
+    @PutMapping({""})
+    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    public ApiResp<Void> update(@RequestBody UpdateUserReq req) {
+        return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
+    }
+
+
+    /**
+     * 修改密码
+     *
+     * @param req UpdateUserReq
+     */
+    @PutMapping({"updatePwd"})
+    @Operation(tags = {BIZ_NAME}, summary = "修改密码")
+    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
+    public ApiResp<Void> updatePwd(@RequestBody UpdateUserPwdReq req) {
+        return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error("修改密码失败");
     }
 
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-     public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateUserReq> reqList) {
+    @PutMapping("/batchUpdate")
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
+    public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateUserReq> reqList) {
         return ApiResp.ok(userService.batchUpdate(reqList));
     }
 
     /**
      * 删除
+     *
      * @param req UserIdReq
      */
     @DeleteMapping({""})
@@ -151,23 +163,24 @@ public class UserController extends BaseController{
         return ApiResp.ok(userService.delete(req));
     }
 
-     // /**
-     // * 删除
-     // * @param id Long
-     // */
-     // @DeleteMapping({"/{id}"})
-     // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-     // public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
-     //
-     //   List<Integer> ns = getSelfProxy(getClass())
-     //       .batchDelete(new DeleteUserReq().setIdList(id))
-     //       .getData();
-     //   
-     //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-     //  }
+    // /**
+    // * 删除
+    // * @param id Long
+    // */
+    // @DeleteMapping({"/{id}"})
+    // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    // public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
+    //
+    //   List<Integer> ns = getSelfProxy(getClass())
+    //       .batchDelete(new DeleteUserReq().setIdList(id))
+    //       .getData();
+    //
+    //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+    //  }
 
     /**
      * 批量删除
+     *
      * @param req DeleteUserReq
      */
     @DeleteMapping({"/batchDelete"})

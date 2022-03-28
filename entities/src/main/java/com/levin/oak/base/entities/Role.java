@@ -40,6 +40,9 @@ import java.util.List;
 public class Role
         extends MultiTenantNamedEntity {
 
+
+
+
     public enum OrgDataScope implements EnumDesc {
         @Schema(description = "所有部门") All,
         @Schema(description = "指定部门") Assigned,
