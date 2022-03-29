@@ -47,9 +47,9 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 //@ConditionalOnMissingBean(AuthService.class)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", matchIfMissing = true)
 @Service(PLUGIN_PREFIX + "DefaultAuthService")
-public class AuthServiceImpl extends BaseService
-        implements AuthService,
-        ApplicationListener<ContextRefreshedEvent> {
+public class AuthServiceImpl
+        extends BaseService
+        implements AuthService, ApplicationListener<ContextRefreshedEvent> {
 
 //    static final Gson gson = new Gson();
 //
