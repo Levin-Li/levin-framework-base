@@ -1,10 +1,11 @@
 package com.levin.oak.base.services.rbac;
 
+import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.SimpleAuthService;
+import com.levin.oak.base.services.user.info.UserInfo;
 
 import java.util.List;
-
 
 /**
  * 认证服务
@@ -38,6 +39,14 @@ public interface AuthService extends SimpleAuthService {
      * @return
      */
     <U extends RbacUserInfo<String>> U getUserInfo(Object loginId);
+
+    /**
+     * 审计用户
+     *
+     * @param user
+     * @throws AuthorizationException
+     */
+    void auditUser(UserInfo user) throws AuthorizationException;
 
     /**
      * 获取用户的权限列表

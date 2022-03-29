@@ -202,14 +202,20 @@ public class AuthServiceImpl extends BaseService
 
         UserInfo user = simpleDao.findOneByQueryObj(req);
 
-        checkUserState(user);
+        auditUser(user);
 
         return auth(user.getId().toString(), req.getUa());
 
     }
 
-
-    private void checkUserState(UserInfo user) throws AuthorizationException {
+    /**
+     * 审计用户
+     *
+     * @param user
+     * @throws AuthorizationException
+     */
+    @Override
+    public void auditUser(UserInfo user) throws AuthorizationException {
 
         if (user == null) {
             throw new AuthorizationException("401", "1帐号或密码错误");
@@ -231,7 +237,7 @@ public class AuthServiceImpl extends BaseService
 
         //如果是无租户用户，必须是 SA 角色的用户
         if (!StringUtils.hasText(user.getTenantId())) {
-            Assert.notEmpty(user.getRoleList(), "非法用户");
+            Assert.notEmpty(user.getRoleList(), "非法的无租户用户");
             Assert.isTrue(user.getRoleList().contains(RbacRoleObject.SA_ROLE), "非法的无租户用户");
         }
 
@@ -258,7 +264,7 @@ public class AuthServiceImpl extends BaseService
 
         UserInfo userInfo = (UserInfo) getUserInfo(loginId);
 
-        checkUserState(userInfo);
+        auditUser(userInfo);
 
         return new ArrayList<>(
 
@@ -291,7 +297,7 @@ public class AuthServiceImpl extends BaseService
 
         UserInfo user = userService.findById(Long.parseLong(loginId.toString()));
 
-        checkUserState(user);
+        auditUser(user);
 
         return user.getRoleList();// JsonStrArrayUtils.parse(user.getRoleList(), null, null);
     }

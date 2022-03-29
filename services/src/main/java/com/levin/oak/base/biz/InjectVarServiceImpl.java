@@ -7,7 +7,6 @@ import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.services.rbac.AuthService;
-import com.levin.oak.base.services.tenant.TenantService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.services.user.info.UserInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +39,7 @@ public class InjectVarServiceImpl implements InjectVarService {
 
         @Override
         public String getEmail() {
-            return null;
+            return "anonymous@163.com";
         }
 
         @Override
@@ -50,7 +49,7 @@ public class InjectVarServiceImpl implements InjectVarService {
 
         @Override
         public String getAvatar() {
-            return null;
+            return "anonymous";
         }
 
         @Override
@@ -76,9 +75,6 @@ public class InjectVarServiceImpl implements InjectVarService {
 
     @Resource
     AuthService baseAuthService;
-
-    @Resource
-    TenantService tenantService;
 
     @Resource
     Environment environment;
@@ -113,8 +109,7 @@ public class InjectVarServiceImpl implements InjectVarService {
 
         //如果当前没有域名
         if (tenantInfo == null) {
-            //设置当前登录的域名
-            tenantInfo = bizTenantService.setCurrentTenantByDomain(httpServletRequest.getServerName());
+            tenantInfo = bizTenantService.getTenantByDomain(httpServletRequest.getServerName());
         }
 
         MapUtils.Builder<String, Object> builder = MapUtils.putFirst(InjectConsts.TENANT, tenantInfo);
@@ -128,7 +123,7 @@ public class InjectVarServiceImpl implements InjectVarService {
             //加载用户租户信息
             if (StringUtils.hasText(userInfo.getTenantId())) {
 
-                TenantInfo tenantInfo2 = tenantService.findById(userInfo.getTenantId());
+                TenantInfo tenantInfo2 = bizTenantService.getTenantInfo(userInfo.getTenantId());
 
                 if (tenantInfo2 != null) {
 
@@ -140,6 +135,7 @@ public class InjectVarServiceImpl implements InjectVarService {
                     }
 
                     tenantInfo = tenantInfo2;
+
                 }
             }
 
@@ -147,6 +143,7 @@ public class InjectVarServiceImpl implements InjectVarService {
                     .put(InjectConsts.USER_NAME, userInfo.getName())
                     .put(InjectConsts.USER, userInfo)
                     .put(InjectConsts.ORG_ID, userInfo.getOrgId());
+
 
         } else {
             //匿名用户
@@ -158,7 +155,6 @@ public class InjectVarServiceImpl implements InjectVarService {
             builder.put(InjectConsts.TENANT, tenantInfo)
                     .put(InjectConsts.TENANT_ID, tenantInfo.getId());
         }
-
 
         return Arrays.asList(builder.build());
     }

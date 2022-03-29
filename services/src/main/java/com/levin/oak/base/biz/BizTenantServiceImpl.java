@@ -34,7 +34,6 @@ public class BizTenantServiceImpl
     @Resource
     TenantService tenantService;
 
-
     final static ThreadLocal<TenantInfo> domainTenant = new ThreadLocal<>();
     final static ThreadLocal<String> domains = new ThreadLocal<>();
 
@@ -72,15 +71,7 @@ public class BizTenantServiceImpl
 
         setCurrentDomain(domain);
 
-//        TenantInfo tenantInfo = simpleDao.selectFrom(Tenant.class)
-//                .contains(E_Tenant.domainList, JsonStrArrayUtils.getLikeQueryStr(domain))
-//                .findOne(TenantInfo.class);
-
-        TenantInfo tenantInfo = tenantService.findOne(new QueryTenantReq().setContainsDomainList(Arrays.asList(domain)));
-
-        if (tenantInfo != null) {
-            tenantInfo = checkStatus(tenantInfo);
-        }
+        TenantInfo tenantInfo = getTenantByDomain(domain);
 
         domainTenant.set(tenantInfo);
 
@@ -96,7 +87,7 @@ public class BizTenantServiceImpl
     @Override
     public TenantInfo getCurrentTenant() {
 
-        TenantInfo tenantInfo = checkStatus(domainTenant.get());
+        TenantInfo tenantInfo = auditTenant(domainTenant.get());
 
         return tenantInfo;
     }
@@ -121,7 +112,7 @@ public class BizTenantServiceImpl
      * @return
      */
     @Override
-    public TenantInfo checkStatus(TenantInfo tenantInfo) {
+    public TenantInfo auditTenant(TenantInfo tenantInfo) {
 
         //
         if (tenantInfo == null) {
@@ -146,9 +137,24 @@ public class BizTenantServiceImpl
 
         Assert.isTrue(StringUtils.hasText(tenantId), "租户Id不能为空");
 
-        return checkStatus(tenantService.findById(tenantId));
+        return auditTenant(tenantService.findById(tenantId));
     }
 
+    /**
+     * 获取租户
+     *
+     * @param domain
+     * @return
+     */
+    @Override
+    public TenantInfo getTenantByDomain(String domain) {
+
+        Assert.notBlank(domain, () -> new IllegalArgumentException("domain is blank"));
+
+        TenantInfo tenantInfo = tenantService.findOne(new QueryTenantReq().setContainsDomainList(Arrays.asList(domain)));
+
+        return auditTenant(tenantInfo);
+    }
 
     /**
      * 获取用户的租户ID
@@ -163,11 +169,7 @@ public class BizTenantServiceImpl
 
         TenantInfo tenantInfo = tenantService.findOne(new QueryTenantReq().setTenantKey(tenantKey));
 
-        if (tenantInfo != null) {
-            return checkStatus(tenantInfo);
-        }
-
-        return checkStatus(tenantInfo);
+        return auditTenant(tenantInfo);
     }
 
 }

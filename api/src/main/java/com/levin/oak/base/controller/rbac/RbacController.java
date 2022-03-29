@@ -4,6 +4,7 @@ import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.rbac.AuthService;
@@ -11,6 +12,7 @@ import com.levin.oak.base.services.rbac.RbacService;
 import com.levin.oak.base.services.rbac.info.ModuleInfo;
 import com.levin.oak.base.services.rbac.req.LoginReq;
 import com.levin.oak.base.services.role.RoleService;
+import com.levin.oak.base.services.tenant.info.TenantInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -56,6 +58,9 @@ public class RbacController extends BaseController {
     @Autowired
     AuthService authService;
 
+    @Autowired
+    BizTenantService bizTenantService;
+
     /**
      * 登录
      *
@@ -74,6 +79,15 @@ public class RbacController extends BaseController {
     @Operation(tags = {"授权管理"}, summary = "用户信息")
     public ApiResp<RbacUserInfo<String>> getUserInfo() {
         return ApiResp.ok(authService.getUserInfo());
+    }
+
+    /**
+     * 获取域名对应的租户信息
+     */
+    @GetMapping("tenantInfo")
+    @Operation(tags = {"授权管理"}, summary = "获取域名对应的租户信息")
+    public ApiResp<TenantInfo> getTenantInfo() {
+        return ApiResp.ok(bizTenantService.getCurrentTenant());
     }
 
     /**
