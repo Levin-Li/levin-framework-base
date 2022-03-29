@@ -76,7 +76,7 @@ public class AppErrorLogController extends BaseController{
      * @param req CreateAppErrorLogEvt
      * @return ApiResp
      */
-    @PostMapping
+//    @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     public ApiResp<Long> create(@RequestBody CreateAppErrorLogReq req) {
         return ApiResp.ok(appErrorLogService.create(req));
@@ -88,7 +88,7 @@ public class AppErrorLogController extends BaseController{
      * @param reqList List<CreateAppErrorLogEvt>
      * @return ApiResp
      */
-    @PostMapping("/batchCreate")
+//    @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateAppErrorLogReq> reqList) {
         return ApiResp.ok(appErrorLogService.batchCreate(reqList));
@@ -126,7 +126,7 @@ public class AppErrorLogController extends BaseController{
      * 更新
      * @param req UpdateAppErrorLogReq
      */
-     @PutMapping({""})
+//     @PutMapping({""})
      @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
      public ApiResp<Void> update(@RequestBody UpdateAppErrorLogReq req) {
          return appErrorLogService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
@@ -135,7 +135,7 @@ public class AppErrorLogController extends BaseController{
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
+//     @PutMapping("/batchUpdate")
      @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
      public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateAppErrorLogReq> reqList) {
         return ApiResp.ok(appErrorLogService.batchUpdate(reqList));

@@ -76,7 +76,7 @@ public class AccessLogController extends BaseController{
      * @param req CreateAccessLogEvt
      * @return ApiResp
      */
-    @PostMapping
+//    @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     public ApiResp<Long> create(@RequestBody CreateAccessLogReq req) {
         return ApiResp.ok(accessLogService.create(req));
@@ -88,7 +88,7 @@ public class AccessLogController extends BaseController{
      * @param reqList List<CreateAccessLogEvt>
      * @return ApiResp
      */
-    @PostMapping("/batchCreate")
+//    @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateAccessLogReq> reqList) {
         return ApiResp.ok(accessLogService.batchCreate(reqList));
@@ -126,7 +126,7 @@ public class AccessLogController extends BaseController{
      * 更新
      * @param req UpdateAccessLogReq
      */
-     @PutMapping({""})
+//     @PutMapping({""})
      @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
      public ApiResp<Void> update(@RequestBody UpdateAccessLogReq req) {
          return accessLogService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
@@ -135,7 +135,7 @@ public class AccessLogController extends BaseController{
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
+//     @PutMapping("/batchUpdate")
      @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
      public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateAccessLogReq> reqList) {
         return ApiResp.ok(accessLogService.batchUpdate(reqList));
