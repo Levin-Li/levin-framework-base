@@ -1,5 +1,6 @@
 # levin-framework-base
 
+多租户，插件式Levin框架中的基础模块。
 
 1、支持多租户
    支持类：BizTenantService，可重写实现
