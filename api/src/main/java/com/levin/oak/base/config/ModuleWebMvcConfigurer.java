@@ -1,11 +1,10 @@
 package com.levin.oak.base.config;
 
 import com.levin.oak.base.biz.BizTenantService;
+import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.interceptor.AuthorizeAnnotationInterceptor;
 import com.levin.oak.base.interceptor.DomainInterceptor;
-import com.levin.oak.base.biz.rbac.AuthService;
-import com.levin.oak.base.biz.rbac.AuthServiceImpl;
-import com.levin.oak.base.biz.rbac.RbacService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -87,8 +86,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
 
         //如果没有强制禁用并且默认的认证服务没有被替换，或是强制启用
-        if ((enableAuthorizeInterceptor == null && authService instanceof AuthServiceImpl)
-                || Boolean.TRUE.equals(enableAuthorizeInterceptor)) {
+        if (enableAuthorizeInterceptor == null || Boolean.TRUE.equals(enableAuthorizeInterceptor)) {
 
             registry.addInterceptor(new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain))).addPathPatterns(API_PATH + "**");
 
@@ -96,10 +94,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
             log.info("模块认证拦截器[ {} ]已经启用 ，可以配置[{}enableAuthorizeInterceptor]禁用", API_PATH, PLUGIN_PREFIX);
 
-        } else {
-
-            log.info("模块认证拦截器[ {} ]已经禁用 ，可以配置[{}enableAuthorizeInterceptor]启用", API_PATH, PLUGIN_PREFIX);
         }
+
 
     }
 
