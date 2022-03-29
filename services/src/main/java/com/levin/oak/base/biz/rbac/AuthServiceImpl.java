@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.rbac;
+package com.levin.oak.base.biz.rbac;
 
 import cn.dev33.satoken.exception.IdTokenInvalidException;
 import cn.dev33.satoken.secure.SaSecureUtil;
@@ -10,7 +10,7 @@ import com.levin.commons.utils.JsonStrArrayUtils;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.BaseService;
 import com.levin.oak.base.services.menures.MenuResService;
-import com.levin.oak.base.services.rbac.req.LoginReq;
+import com.levin.oak.base.biz.rbac.req.LoginReq;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.role.req.CreateRoleReq;
 import com.levin.oak.base.services.tenant.TenantService;

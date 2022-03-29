@@ -1,9 +1,8 @@
-package com.levin.oak.base.services.rbac.req;
+package com.levin.oak.base.biz.rbac.req;
 
 import com.levin.commons.dao.TargetOption;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.Ignore;
-import com.levin.commons.dao.annotation.IsNotNull;
 import com.levin.commons.dao.annotation.IsNull;
 import com.levin.commons.dao.annotation.logic.OR;
 import com.levin.commons.service.domain.InjectVar;

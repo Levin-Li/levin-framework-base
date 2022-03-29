@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.rbac;
+package com.levin.oak.base.biz.rbac;
 
 import cn.dev33.satoken.SaManager;
 import cn.dev33.satoken.stp.StpInterface;

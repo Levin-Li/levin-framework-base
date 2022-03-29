@@ -6,7 +6,7 @@ import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.utils.MapUtils;
-import com.levin.oak.base.services.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.services.user.info.UserInfo;
 import lombok.extern.slf4j.Slf4j;

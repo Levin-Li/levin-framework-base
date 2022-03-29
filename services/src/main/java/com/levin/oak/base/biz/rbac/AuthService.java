@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.rbac;
+package com.levin.oak.base.biz.rbac;
 
 import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.RbacUserInfo;

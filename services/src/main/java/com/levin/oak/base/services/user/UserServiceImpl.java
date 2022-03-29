@@ -8,7 +8,7 @@ import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
 import com.levin.oak.base.services.BaseService;
-import com.levin.oak.base.services.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.services.user.info.UserInfo;
 import com.levin.oak.base.services.user.req.*;
 import io.swagger.v3.oas.annotations.Operation;

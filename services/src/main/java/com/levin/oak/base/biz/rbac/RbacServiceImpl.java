@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.rbac;
+package com.levin.oak.base.biz.rbac;
 
 
 import com.levin.commons.dao.annotation.order.OrderBy;
@@ -15,10 +15,10 @@ import com.levin.oak.base.entities.E_MenuRes;
 import com.levin.oak.base.entities.MenuRes;
 import com.levin.oak.base.services.BaseService;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
-import com.levin.oak.base.services.rbac.info.ActionInfo;
-import com.levin.oak.base.services.rbac.info.ModuleInfo;
-import com.levin.oak.base.services.rbac.info.ResInfo;
-import com.levin.oak.base.services.rbac.info.ResTypeInfo;
+import com.levin.oak.base.biz.rbac.info.ActionInfo;
+import com.levin.oak.base.biz.rbac.info.ModuleInfo;
+import com.levin.oak.base.biz.rbac.info.ResInfo;
+import com.levin.oak.base.biz.rbac.info.ResTypeInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;

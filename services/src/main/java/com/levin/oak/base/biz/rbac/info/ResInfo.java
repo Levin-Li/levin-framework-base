@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.rbac.info;
+package com.levin.oak.base.biz.rbac.info;
 
 import com.levin.commons.rbac.DefaultSimpleIdentifiableObject;
 import io.swagger.v3.oas.annotations.media.Schema;

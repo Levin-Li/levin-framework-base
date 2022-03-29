@@ -1,6 +1,6 @@
 package com.levin.oak.base.interceptor;
 
-import com.levin.oak.base.services.rbac.RbacService;
+import com.levin.oak.base.biz.rbac.RbacService;
 import org.springframework.util.Assert;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;

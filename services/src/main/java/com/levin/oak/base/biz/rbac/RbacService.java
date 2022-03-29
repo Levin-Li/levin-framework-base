@@ -1,18 +1,14 @@
-package com.levin.oak.base.services.rbac;
+package com.levin.oak.base.biz.rbac;
 
 import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.Permission;
-import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
-import com.levin.oak.base.services.rbac.info.ModuleInfo;
-import org.springframework.cache.annotation.CacheConfig;
+import com.levin.oak.base.biz.rbac.info.ModuleInfo;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.lang.reflect.Method;
 import java.util.List;
-
-@CacheConfig(cacheNames = {E_User.CLASS_NAME})
 
 /**
  *
