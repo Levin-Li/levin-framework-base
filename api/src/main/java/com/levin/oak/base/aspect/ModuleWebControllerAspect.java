@@ -67,7 +67,6 @@ public class ModuleWebControllerAspect {
         this.enableHttpLog.set(enableLog);
 
         //只找出本模块的解析器
-
         List<List<VariableResolver>> resolvers = SpringContextHolder.findBeanByBeanName(context, ResolvableType.forClassWithGenerics(Iterable.class, VariableResolver.class).getType(), PLUGIN_PREFIX);
 
         resolvers.forEach(moduleResolverList::addAll);

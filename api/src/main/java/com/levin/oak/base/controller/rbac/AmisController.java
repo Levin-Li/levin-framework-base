@@ -43,7 +43,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @RestController(PLUGIN_PREFIX + "AmisController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "AmisController", matchIfMissing = true)
 @RequestMapping(API_PATH + "rbac")
-@Tag(name = "权限认证", description = "权限管理")
+@Tag(name = "授权管理", description = "授权管理")
 @Slf4j
 @Valid
 public class AmisController extends BaseController {
@@ -63,7 +63,7 @@ public class AmisController extends BaseController {
      * @return ApiResp
      */
     @GetMapping("amisAppMenuList")
-    @Operation(tags = {"权限认证"}, summary = "获取Amis菜单列表")
+    @Operation(tags = {"授权管理"}, summary = "获取Amis菜单列表")
     public AmisResp getAmisAppMenuList(boolean isShowNotPermissionMenu) {
 
         AmisResp resp = AmisResp.builder().build();

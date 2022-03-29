@@ -1,27 +1,25 @@
 package com.levin.oak.base.controller.area;
 
+import com.levin.commons.dao.support.PagingData;
+import com.levin.commons.dao.support.SimplePaging;
+import com.levin.commons.rbac.RbacRoleObject;
+import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.controller.BaseController;
+import com.levin.oak.base.entities.E_Area;
+import com.levin.oak.base.services.area.AreaService;
+import com.levin.oak.base.services.area.info.AreaInfo;
+import com.levin.oak.base.services.area.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.util.*;
-import javax.validation.*;
-import java.util.*;
 
-import javax.servlet.http.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import javax.validation.constraints.*;
-
-import com.levin.oak.base.controller.*;
-import com.levin.oak.base.*;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.area.*;
-import com.levin.oak.base.services.area.req.*;
-import com.levin.oak.base.services.area.info.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
@@ -47,11 +45,11 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AreaController", matchIfMissing = true)
 
 //默认需要权限访问
-//@ResAuthorize(domain = ID, type = TYPE_NAME)
+@ResAuthorize(domain = ID, type = TYPE_NAME, anyRoles = {RbacRoleObject.SA_ROLE})
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class AreaController extends BaseController{
+public class AreaController extends BaseController {
 
     private static final String BIZ_NAME = E_Area.BIZ_NAME;
 
@@ -61,13 +59,13 @@ public class AreaController extends BaseController{
     /**
      * 分页查找
      *
-     * @param req  QueryAreaReq
-     * @return  ApiResp<PagingData<AreaInfo>>
+     * @param req QueryAreaReq
+     * @return ApiResp<PagingData < AreaInfo>>
      */
     @GetMapping("/query")
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    public ApiResp<PagingData<AreaInfo>> query(QueryAreaReq req , SimplePaging paging) {
-        return ApiResp.ok(areaService.query(req,paging));
+    public ApiResp<PagingData<AreaInfo>> query(QueryAreaReq req, SimplePaging paging) {
+        return ApiResp.ok(areaService.query(req, paging));
     }
 
     /**
@@ -96,23 +94,23 @@ public class AreaController extends BaseController{
 
 
     /**
-    * 查看详情
-    *
-    * @param req QueryAreaByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QueryAreaByIdReq
+     */
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     public ApiResp<AreaInfo> retrieve(@NotNull AreaIdReq req) {
 
-         return ApiResp.ok(areaService.findById(req));
+        return ApiResp.ok(areaService.findById(req));
 
-     }
+    }
 
     /**
-    * 查看详情
-    *
-    * @param code String
-    */
+     * 查看详情
+     *
+     * @param code String
+     */
     //@GetMapping("/{code}")
     //@Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     //public ApiResp<AreaInfo> retrieve(@PathVariable @NotNull String code) {
@@ -124,25 +122,27 @@ public class AreaController extends BaseController{
 
     /**
      * 更新
+     *
      * @param req UpdateAreaReq
      */
-     @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-     public ApiResp<Void> update(@RequestBody UpdateAreaReq req) {
-         return areaService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
+    @PutMapping({""})
+    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    public ApiResp<Void> update(@RequestBody UpdateAreaReq req) {
+        return areaService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
     }
 
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-     public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateAreaReq> reqList) {
+    @PutMapping("/batchUpdate")
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
+    public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateAreaReq> reqList) {
         return ApiResp.ok(areaService.batchUpdate(reqList));
     }
 
     /**
      * 删除
+     *
      * @param req AreaIdReq
      */
     @DeleteMapping({""})
@@ -151,23 +151,24 @@ public class AreaController extends BaseController{
         return ApiResp.ok(areaService.delete(req));
     }
 
-     // /**
-     // * 删除
-     // * @param code String
-     // */
-     // @DeleteMapping({"/{code}"})
-     // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-     // public ApiResp<Integer> delete(@PathVariable @NotNull String code) {
-     //
-     //   List<Integer> ns = getSelfProxy(getClass())
-     //       .batchDelete(new DeleteAreaReq().setCodeList(code))
-     //       .getData();
-     //   
-     //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-     //  }
+    // /**
+    // * 删除
+    // * @param code String
+    // */
+    // @DeleteMapping({"/{code}"})
+    // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    // public ApiResp<Integer> delete(@PathVariable @NotNull String code) {
+    //
+    //   List<Integer> ns = getSelfProxy(getClass())
+    //       .batchDelete(new DeleteAreaReq().setCodeList(code))
+    //       .getData();
+    //
+    //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+    //  }
 
     /**
      * 批量删除
+     *
      * @param req DeleteAreaReq
      */
     @DeleteMapping({"/batchDelete"})

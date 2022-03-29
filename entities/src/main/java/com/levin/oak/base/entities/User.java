@@ -4,7 +4,6 @@ import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
-import com.levin.commons.rbac.UserObject;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import io.swagger.v3.oas.annotations.media.Schema;

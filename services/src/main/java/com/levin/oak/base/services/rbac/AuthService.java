@@ -1,7 +1,7 @@
 package com.levin.oak.base.services.rbac;
 
+import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.SimpleAuthService;
-import com.levin.commons.rbac.UserBaseInfo;
 
 import java.util.List;
 
@@ -30,7 +30,14 @@ public interface AuthService extends SimpleAuthService {
      *
      * @return
      */
-    <U extends UserBaseInfo> U getUserInfo();
+    <U extends RbacUserInfo<String>> U getUserInfo();
+
+    /**
+     * 获取用户信息
+     *
+     * @return
+     */
+    <U extends RbacUserInfo<String>> U getUserInfo(Object loginId);
 
     /**
      * 获取用户的权限列表
@@ -47,7 +54,6 @@ public interface AuthService extends SimpleAuthService {
      * @return
      */
     List<String> getRoleList(Object loginId);
-
 
     /**
      * 用户登出

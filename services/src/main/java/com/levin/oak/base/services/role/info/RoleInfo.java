@@ -64,12 +64,12 @@ public class RoleInfo implements Serializable {
    private OrgDataScope orgDataScope;
 
 
-   @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
+   @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
    @Schema(description = "指定的部门列表")
    private List<String> assignedOrgIdList;
 
 
-   @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
+   @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
    @Schema(description = "资源权限列表")
    private List<String> permissionList;
 

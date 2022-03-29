@@ -2,6 +2,7 @@ package com.levin.oak.base.biz;
 
 
 import com.levin.commons.dao.SimpleDao;
+import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.utils.MapUtils;
@@ -19,8 +20,8 @@ import org.springframework.util.StringUtils;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,48 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "InjectVarService", matchIfMissing = true)
 @Slf4j
 public class InjectVarServiceImpl implements InjectVarService {
+
+    public static final RbacUserInfo anonymous = new RbacUserInfo() {
+        @Override
+        public String getNickname() {
+            return "anonymous";
+        }
+
+        @Override
+        public String getEmail() {
+            return null;
+        }
+
+        @Override
+        public String getTelephone() {
+            return null;
+        }
+
+        @Override
+        public String getAvatar() {
+            return null;
+        }
+
+        @Override
+        public boolean isSuperAdmin() {
+            return false;
+        }
+
+        @Override
+        public String getName() {
+            return "anonymous";
+        }
+
+        @Override
+        public String getTenantId() {
+            return null;
+        }
+
+        @Override
+        public <ID extends Serializable> ID getId() {
+            return null;
+        }
+    };
 
     @Resource
     AuthService baseAuthService;
@@ -52,7 +95,7 @@ public class InjectVarServiceImpl implements InjectVarService {
     @Resource
     HttpServletRequest httpServletRequest;
 
-    final List<Map<String, ?>> defaultCtx = Collections.emptyList();
+//    final List<Map<String, ?>> defaultCtx = Collections.emptyList();
 
     @PostConstruct
     public void init() {
@@ -62,15 +105,17 @@ public class InjectVarServiceImpl implements InjectVarService {
     @Override
     public List<Map<String, ?>> getInjectVars() {
 
+        if (log.isDebugEnabled()) {
+            log.debug("getInjectVars...");
+        }
+
         TenantInfo tenantInfo = bizTenantService.getCurrentTenant();
 
         //如果当前没有域名
         if (tenantInfo == null) {
             //设置当前登录的域名
-            bizTenantService.setCurrentTenantByDomain(httpServletRequest.getServerName());
+            tenantInfo = bizTenantService.setCurrentTenantByDomain(httpServletRequest.getServerName());
         }
-
-        tenantInfo = bizTenantService.getCurrentTenant();
 
         MapUtils.Builder<String, Object> builder = MapUtils.putFirst(InjectConsts.TENANT, tenantInfo);
 
@@ -104,10 +149,8 @@ public class InjectVarServiceImpl implements InjectVarService {
                     .put(InjectConsts.ORG_ID, userInfo.getOrgId());
 
         } else {
-
             //匿名用户
-
-
+            builder.put(InjectConsts.USER, anonymous);
         }
 
         //租户信息
@@ -115,6 +158,7 @@ public class InjectVarServiceImpl implements InjectVarService {
             builder.put(InjectConsts.TENANT, tenantInfo)
                     .put(InjectConsts.TENANT_ID, tenantInfo.getId());
         }
+
 
         return Arrays.asList(builder.build());
     }

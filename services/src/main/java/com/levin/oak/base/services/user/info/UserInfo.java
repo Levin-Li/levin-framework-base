@@ -1,8 +1,8 @@
 package com.levin.oak.base.services.user.info;
 
 
-import com.levin.commons.rbac.RoleObject;
-import com.levin.commons.rbac.UserBaseInfo;
+import com.levin.commons.rbac.RbacRoleObject;
+import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.User.Category;
@@ -39,7 +39,7 @@ import java.util.List;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"org",})
 @FieldNameConstants
-public class UserInfo implements UserBaseInfo, Serializable {
+public class UserInfo implements RbacUserInfo<String>, Serializable {
 
     private static final long serialVersionUID = -445263479L;
 
@@ -93,7 +93,7 @@ public class UserInfo implements UserBaseInfo, Serializable {
 
 
     @Size(max = 1800)
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Schema(description = "标签列表")
     private List<String> tagList;
 
@@ -122,7 +122,7 @@ public class UserInfo implements UserBaseInfo, Serializable {
 
 
     @Size(max = 1800)
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Schema(description = "角色列表")
     private List<String> roleList;
 
@@ -180,6 +180,6 @@ public class UserInfo implements UserBaseInfo, Serializable {
 
     @Override
     public boolean isSuperAdmin() {
-        return roleList != null && roleList.contains(RoleObject.SA_ROLE);
+        return roleList != null && roleList.contains(RbacRoleObject.SA_ROLE);
     }
 }

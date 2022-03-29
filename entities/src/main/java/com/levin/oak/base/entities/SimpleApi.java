@@ -15,7 +15,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "简单接口")
+@Schema(description = "简单动态接口")
 
 @Table(
         indexes = {
@@ -58,9 +58,8 @@ public class SimpleApi extends SimpleEntity {
     @Override
     @PrePersist
     public void prePersist() {
-
         super.prePersist();
-
     }
+
 
 }

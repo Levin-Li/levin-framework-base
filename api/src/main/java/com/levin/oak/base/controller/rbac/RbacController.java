@@ -1,7 +1,7 @@
 package com.levin.oak.base.controller.rbac;
 
+import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.ResAuthorize;
-import com.levin.commons.rbac.UserBaseInfo;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
@@ -63,13 +63,14 @@ public class RbacController extends BaseController {
     @Operation(tags = {"授权管理"}, summary = "用户登录")
     @ResAuthorize(domain = ID, type = TYPE_NAME, ignored = true)
     public ApiResp<String> login(LoginReq req, @RequestHeader(value = "user-agent", required = false) String ua) {
-        return ApiResp.ok(authService.auth(req.getAccount(), req.getPassword(), ua));
+
+        return ApiResp.ok(authService.auth(req.getTenantId(), req.getAccount(), req.getPassword(), ua));
     }
 
 
     @PostMapping("userInfo")
     @Operation(tags = {"授权管理"}, summary = "用户信息")
-    public ApiResp<UserBaseInfo> getUserInfo() {
+    public ApiResp<RbacUserInfo<String>> getUserInfo() {
         return ApiResp.ok(authService.getUserInfo());
     }
 

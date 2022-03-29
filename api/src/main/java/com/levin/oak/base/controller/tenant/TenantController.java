@@ -1,28 +1,25 @@
 package com.levin.oak.base.controller.tenant;
 
+import com.levin.commons.dao.support.PagingData;
+import com.levin.commons.dao.support.SimplePaging;
+import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.controller.BaseController;
+import com.levin.oak.base.entities.E_Tenant;
+import com.levin.oak.base.services.tenant.TenantService;
+import com.levin.oak.base.services.tenant.info.TenantInfo;
+import com.levin.oak.base.services.tenant.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.util.*;
-import javax.validation.*;
-import java.util.*;
 
-import javax.servlet.http.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import javax.validation.constraints.*;
-
-import com.levin.oak.base.controller.*;
-import com.levin.oak.base.*;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.tenant.*;
-import com.levin.oak.base.services.tenant.req.*;
-import com.levin.oak.base.services.tenant.info.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
@@ -48,11 +45,11 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "TenantController", matchIfMissing = true)
 
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = TYPE_NAME, isAndMode = true, anyRoles = {"SA"})
+@ResAuthorize(domain = ID, type = TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
 @Tag(name = E_Tenant.BIZ_NAME, description = E_Tenant.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class TenantController extends BaseController{
+public class TenantController extends BaseController {
 
     private static final String BIZ_NAME = E_Tenant.BIZ_NAME;
 
@@ -62,13 +59,13 @@ public class TenantController extends BaseController{
     /**
      * 分页查找
      *
-     * @param req  QueryTenantReq
-     * @return  ApiResp<PagingData<TenantInfo>>
+     * @param req QueryTenantReq
+     * @return ApiResp<PagingData < TenantInfo>>
      */
     @GetMapping("/query")
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    public ApiResp<PagingData<TenantInfo>> query(QueryTenantReq req , SimplePaging paging) {
-        return ApiResp.ok(tenantService.query(req,paging));
+    public ApiResp<PagingData<TenantInfo>> query(QueryTenantReq req, SimplePaging paging) {
+        return ApiResp.ok(tenantService.query(req, paging));
     }
 
     /**
@@ -97,23 +94,23 @@ public class TenantController extends BaseController{
 
 
     /**
-    * 查看详情
-    *
-    * @param req QueryTenantByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QueryTenantByIdReq
+     */
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     public ApiResp<TenantInfo> retrieve(@NotNull TenantIdReq req) {
 
-         return ApiResp.ok(tenantService.findById(req));
+        return ApiResp.ok(tenantService.findById(req));
 
-     }
+    }
 
     /**
-    * 查看详情
-    *
-    * @param id String
-    */
+     * 查看详情
+     *
+     * @param id String
+     */
     //@GetMapping("/{id}")
     //@Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     //public ApiResp<TenantInfo> retrieve(@PathVariable @NotNull String id) {
@@ -125,25 +122,27 @@ public class TenantController extends BaseController{
 
     /**
      * 更新
+     *
      * @param req UpdateTenantReq
      */
-     @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-     public ApiResp<Void> update(@RequestBody UpdateTenantReq req) {
-         return tenantService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
+    @PutMapping({""})
+    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    public ApiResp<Void> update(@RequestBody UpdateTenantReq req) {
+        return tenantService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
     }
 
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-     public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateTenantReq> reqList) {
+    @PutMapping("/batchUpdate")
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
+    public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateTenantReq> reqList) {
         return ApiResp.ok(tenantService.batchUpdate(reqList));
     }
 
     /**
      * 删除
+     *
      * @param req TenantIdReq
      */
     @DeleteMapping({""})
@@ -152,23 +151,24 @@ public class TenantController extends BaseController{
         return ApiResp.ok(tenantService.delete(req));
     }
 
-     // /**
-     // * 删除
-     // * @param id String
-     // */
-     // @DeleteMapping({"/{id}"})
-     // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-     // public ApiResp<Integer> delete(@PathVariable @NotNull String id) {
-     //
-     //   List<Integer> ns = getSelfProxy(getClass())
-     //       .batchDelete(new DeleteTenantReq().setIdList(id))
-     //       .getData();
-     //   
-     //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-     //  }
+    // /**
+    // * 删除
+    // * @param id String
+    // */
+    // @DeleteMapping({"/{id}"})
+    // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    // public ApiResp<Integer> delete(@PathVariable @NotNull String id) {
+    //
+    //   List<Integer> ns = getSelfProxy(getClass())
+    //       .batchDelete(new DeleteTenantReq().setIdList(id))
+    //       .getData();
+    //
+    //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
+    //  }
 
     /**
      * 批量删除
+     *
      * @param req DeleteTenantReq
      */
     @DeleteMapping({"/batchDelete"})

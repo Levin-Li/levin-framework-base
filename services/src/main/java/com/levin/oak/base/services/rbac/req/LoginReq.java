@@ -3,12 +3,13 @@ package com.levin.oak.base.services.rbac.req;
 import com.levin.commons.dao.TargetOption;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.Ignore;
+import com.levin.commons.dao.annotation.IsNotNull;
+import com.levin.commons.dao.annotation.IsNull;
 import com.levin.commons.dao.annotation.logic.OR;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.domain.ServiceReq;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
 import com.levin.oak.base.services.user.info.UserInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -36,7 +37,7 @@ import javax.validation.constraints.NotBlank;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS, resultClass = UserInfo.class)
-public class LoginReq extends MultiTenantReq implements ServiceReq {
+public class LoginReq implements ServiceReq {
 
     private static final long serialVersionUID = -445263479L;
 
@@ -55,6 +56,9 @@ public class LoginReq extends MultiTenantReq implements ServiceReq {
 
     @Schema(description = "租户ID", hidden = true)
     @InjectVar(isRequired = "false")
+    @OR(autoClose = true)
+    @IsNull
+    @Eq
     private String tenantId;
 
 //    @Schema(description = "验证码")

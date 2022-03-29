@@ -86,7 +86,7 @@ public class TenantInfo implements Serializable {
    private String contractPhone;
 
 
-   @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
+   @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
    @Schema(description = "域名列表")
    private List<String> domainList;
 

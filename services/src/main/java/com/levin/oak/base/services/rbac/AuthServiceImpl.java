@@ -5,9 +5,7 @@ import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
-import com.levin.commons.rbac.AuthorizationException;
-import com.levin.commons.rbac.RbacUtils;
-import com.levin.commons.rbac.ResPermission;
+import com.levin.commons.rbac.*;
 import com.levin.commons.utils.JsonStrArrayUtils;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.BaseService;
@@ -16,9 +14,6 @@ import com.levin.oak.base.services.rbac.req.LoginReq;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.role.req.CreateRoleReq;
 import com.levin.oak.base.services.tenant.TenantService;
-import com.levin.oak.base.services.tenant.info.TenantInfo;
-import com.levin.oak.base.services.tenant.req.CreateTenantReq;
-import com.levin.oak.base.services.tenant.req.QueryTenantReq;
 import com.levin.oak.base.services.user.UserService;
 import com.levin.oak.base.services.user.info.UserInfo;
 import com.levin.oak.base.services.user.req.CreateUserReq;
@@ -34,7 +29,10 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -114,8 +112,8 @@ public class AuthServiceImpl extends BaseService
      * @return 认证成功后的token
      */
     @Override
-    public String auth(String account, String password, String userAgent, Map<String, Object>... params) {
-        return loginByPassword(new LoginReq().setAccount(account).setPassword(password).setUa(userAgent));
+    public String auth(String tenantId, String account, String password, String userAgent, Map<String, Object>... params) {
+        return loginByPassword(new LoginReq().setTenantId(tenantId).setAccount(account).setPassword(password).setUa(userAgent));
     }
 
 
@@ -147,8 +145,19 @@ public class AuthServiceImpl extends BaseService
 
 
     @Override
-    public UserInfo getUserInfo() {
-        return userService.findById(Long.parseLong(getLoginUserId()));
+    public RbacUserInfo<String> getUserInfo() {
+        return getUserInfo(getLoginUserId());
+    }
+
+    /**
+     * 获取当前登录用户信息
+     *
+     * @param loginId
+     * @return
+     */
+    @Override
+    public RbacUserInfo<String> getUserInfo(Object loginId) {
+        return userService.findById(Long.parseLong(loginId.toString()));
     }
 
     @Override
@@ -219,6 +228,13 @@ public class AuthServiceImpl extends BaseService
                 && user.getExpiredDate().getTime() < System.currentTimeMillis()) {
             throw new AuthorizationException("401", "3帐号已过期");
         }
+
+        //如果是无租户用户，必须是 SA 角色的用户
+        if (!StringUtils.hasText(user.getTenantId())) {
+            Assert.notEmpty(user.getRoleList(), "非法用户");
+            Assert.isTrue(user.getRoleList().contains(RbacRoleObject.SA_ROLE), "非法的无租户用户");
+        }
+
     }
 
     @Override
@@ -355,22 +371,21 @@ public class AuthServiceImpl extends BaseService
 
     private void initUser() {
 
-
-        QueryTenantReq req = new QueryTenantReq().setContainsDomainList(Arrays.asList("127.0.0.1"));
-
-        TenantInfo tenantInfo = tenantService.findOne(req);
-
-        if (tenantInfo == null) {
-            String id = tenantService.create(new CreateTenantReq()
-                    .setName("默认租户")
-                    .setRemark("支持本地地址")
-                    .setDomainList(Arrays.asList("127.0.0.1", "localhost"))
-            );
-
-            tenantInfo = tenantService.findById(id);
-
-//            tenantInfo = tenantService.findOne(req);
-        }
+//        QueryTenantReq req = new QueryTenantReq().setContainsDomainList(Arrays.asList("127.0.0.1"));
+//
+//        TenantInfo tenantInfo = tenantService.findOne(req);
+//
+//        if (tenantInfo == null) {
+//            String id = tenantService.create(new CreateTenantReq()
+//                    .setName("默认租户")
+//                    .setRemark("支持本地地址")
+//                    .setDomainList(Arrays.asList("127.0.0.1", "localhost"))
+//            );
+//
+//            tenantInfo = tenantService.findById(id);
+//
+////            tenantInfo = tenantService.findOne(req);
+//        }
 
         Role role = simpleDao.selectFrom(Role.class)
                 .eq(E_Role.code, "SA")

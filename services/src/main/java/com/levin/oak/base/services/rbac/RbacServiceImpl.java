@@ -29,6 +29,7 @@ import org.springframework.context.expression.BeanFactoryResolver;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
@@ -46,7 +47,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @Service(PLUGIN_PREFIX + "RbacService")
 @Slf4j
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacService",  matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacService", matchIfMissing = true)
 @ResAuthorize(ignored = true)
 public class RbacServiceImpl extends BaseService implements RbacService {
 
@@ -258,9 +259,15 @@ public class RbacServiceImpl extends BaseService implements RbacService {
     @Override
     public List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, Object userId) {
 
-        //1、找出所有的菜单
+        RbacUserInfo<String> userInfo = authService.getUserInfo(userId);
+
+        Assert.notNull(userInfo, "无效的用户标识");
+
+        //1、找出所有的菜单 包括公共菜单和租户自有菜单
         List<MenuResInfo> menuRes = simpleDao.selectFrom(MenuRes.class)
                 .eq(E_MenuRes.enable, true)
+                //
+                .isNullOrEq(E_MenuRes.tenantId, userInfo.getTenantId())
                 .orderBy(OrderBy.Type.Asc, E_MenuRes.orderCode)
                 .find(MenuResInfo.class);
 

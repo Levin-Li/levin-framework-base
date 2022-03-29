@@ -78,7 +78,9 @@ public class BizTenantServiceImpl
 
         TenantInfo tenantInfo = tenantService.findOne(new QueryTenantReq().setContainsDomainList(Arrays.asList(domain)));
 
-        tenantInfo = checkStatus(tenantInfo);
+        if (tenantInfo != null) {
+            tenantInfo = checkStatus(tenantInfo);
+        }
 
         domainTenant.set(tenantInfo);
 
@@ -120,6 +122,11 @@ public class BizTenantServiceImpl
      */
     @Override
     public TenantInfo checkStatus(TenantInfo tenantInfo) {
+
+        //
+        if (tenantInfo == null) {
+            return tenantInfo;
+        }
 
         Assert.notNull(tenantInfo, () -> new ServiceException("NullObject", "租户不存在"));
 
