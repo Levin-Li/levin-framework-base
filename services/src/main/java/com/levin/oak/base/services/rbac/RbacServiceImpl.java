@@ -266,7 +266,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         //1、找出所有的菜单 包括公共菜单和租户自有菜单
         List<MenuResInfo> menuRes = simpleDao.selectFrom(MenuRes.class)
                 .eq(E_MenuRes.enable, true)
-                //
+                //公共菜单和租户自有菜单
                 .isNullOrEq(E_MenuRes.tenantId, userInfo.getTenantId())
                 .orderBy(OrderBy.Type.Asc, E_MenuRes.orderCode)
                 .find(MenuResInfo.class);

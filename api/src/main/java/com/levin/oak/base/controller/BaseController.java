@@ -27,7 +27,7 @@ import com.levin.oak.base.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2022-3-25 17:01:35
+//Auto gen by simple-dao-codegen 2022-3-29 16:19:50
 
 
 /**
@@ -38,6 +38,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 //默认需要权限访问
 @ResAuthorize(domain = ID, type = TYPE_NAME)
+@MenuResTag(domain = ID)
 public abstract class BaseController {
 
     @Resource

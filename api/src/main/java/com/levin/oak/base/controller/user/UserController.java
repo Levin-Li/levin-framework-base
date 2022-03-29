@@ -64,7 +64,15 @@ public class UserController extends BaseController {
     @GetMapping("/query")
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     public ApiResp<PagingData<UserInfo>> query(QueryUserReq req, SimplePaging paging) {
-        return ApiResp.ok(userService.query(req, paging));
+
+        PagingData<UserInfo> pagingData = userService.query(req, paging);
+
+        //清楚密码
+        if (pagingData.getItems() != null) {
+            pagingData.getItems().forEach(userInfo -> userInfo.setPassword(null));
+        }
+
+        return ApiResp.ok(pagingData);
     }
 
     /**
@@ -101,7 +109,7 @@ public class UserController extends BaseController {
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     public ApiResp<UserInfo> retrieve(@NotNull UserIdReq req) {
 
-        return ApiResp.ok(userService.findById(req));
+        return ApiResp.ok(userService.findById(req).setPassword(null));
 
     }
 

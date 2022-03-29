@@ -157,7 +157,7 @@ public class AuthServiceImpl extends BaseService
      */
     @Override
     public RbacUserInfo<String> getUserInfo(Object loginId) {
-        return userService.findById(Long.parseLong(loginId.toString()));
+        return userService.findById(Long.parseLong(loginId.toString())).setPassword(null);
     }
 
     @Override
@@ -260,21 +260,25 @@ public class AuthServiceImpl extends BaseService
 
         checkUserState(userInfo);
 
-        return simpleDao.selectFrom(Role.class)
-                .select(E_Role.permissionList)
-                .eq(E_Role.enable, true)
-                .in(E_Role.code, roleList)
-                //
-                .isNullOrEq(E_MenuRes.tenantId, userInfo.getTenantId())
+        return new ArrayList<>(
 
-                .find(String.class)
-                .parallelStream()
-                .filter(StringUtils::hasText)
-                //JSON 转换
-                .flatMap(json -> (JsonStrArrayUtils.<String>parse(json, null, null)).stream())
+                //获取指定用户的权限列表
+                simpleDao.selectFrom(Role.class)
+                        .select(E_Role.permissionList)
+                        .eq(E_Role.enable, true)
+                        .in(E_Role.code, roleList)
+                        //公共角色和自有角色
+                        .isNullOrEq(E_MenuRes.tenantId, userInfo.getTenantId())
+
+                        .find(String.class)
+                        .parallelStream()
+                        .filter(StringUtils::hasText)
+                        //JSON 转换
+                        .flatMap(json -> (JsonStrArrayUtils.<String>parse(json, null, null)).stream())
 //                .map(json -> (List<ResPermission>) gson.fromJson(json, resPermissionListType))
-                .filter(StringUtils::hasText)
-                .collect(Collectors.toList());
+                        .filter(StringUtils::hasText)
+                        .collect(Collectors.toSet())
+        );
 
     }
 

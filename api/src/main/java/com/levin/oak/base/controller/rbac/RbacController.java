@@ -1,5 +1,6 @@
 package com.levin.oak.base.controller.rbac;
 
+import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
@@ -43,6 +44,7 @@ import static com.levin.oak.base.entities.EntityConst.TYPE_NAME;
 @Slf4j
 @Valid
 @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
+@MenuResTag(false)
 public class RbacController extends BaseController {
 
     @Autowired

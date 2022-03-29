@@ -1,6 +1,7 @@
 package com.levin.oak.base.controller.rbac;
 
 import com.levin.commons.rbac.MenuItem;
+import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.AmisMenu;
@@ -47,6 +48,7 @@ import static com.levin.oak.base.entities.EntityConst.TYPE_NAME;
 @Tag(name = "授权管理", description = "授权管理")
 @Slf4j
 @Valid
+@MenuResTag(false)
 public class AmisController extends BaseController {
 
     @Autowired
