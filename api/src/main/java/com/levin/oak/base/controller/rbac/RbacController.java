@@ -42,6 +42,7 @@ import static com.levin.oak.base.entities.EntityConst.TYPE_NAME;
 @Tag(name = "授权管理", description = "授权管理")
 @Slf4j
 @Valid
+@ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
 public class RbacController extends BaseController {
 
     @Autowired
@@ -63,7 +64,6 @@ public class RbacController extends BaseController {
     @Operation(tags = {"授权管理"}, summary = "用户登录")
     @ResAuthorize(domain = ID, type = TYPE_NAME, ignored = true)
     public ApiResp<String> login(LoginReq req, @RequestHeader(value = "user-agent", required = false) String ua) {
-
         return ApiResp.ok(authService.auth(req.getTenantId(), req.getAccount(), req.getPassword(), ua));
     }
 

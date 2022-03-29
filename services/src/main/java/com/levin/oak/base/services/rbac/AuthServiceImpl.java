@@ -256,14 +256,17 @@ public class AuthServiceImpl extends BaseService
             return Collections.emptyList();
         }
 
-        UserInfo user = userService.findById(Long.parseLong(loginId.toString()));
+        UserInfo userInfo = (UserInfo) getUserInfo(loginId);
 
-        checkUserState(user);
+        checkUserState(userInfo);
 
         return simpleDao.selectFrom(Role.class)
                 .select(E_Role.permissionList)
                 .eq(E_Role.enable, true)
                 .in(E_Role.code, roleList)
+                //
+                .isNullOrEq(E_MenuRes.tenantId, userInfo.getTenantId())
+
                 .find(String.class)
                 .parallelStream()
                 .filter(StringUtils::hasText)
@@ -430,7 +433,7 @@ public class AuthServiceImpl extends BaseService
 
             roleService.create(new CreateRoleReq()
                     .setCode("test")
-                    .setName("测试员")
+                    .setName("只读测试员")
                     .setOrgDataScope(Role.OrgDataScope.MySelf)
                     .setPermissionList(permissions));
         }
@@ -448,7 +451,7 @@ public class AuthServiceImpl extends BaseService
             roleList.add("SA");
 
             userService.create(new CreateUserReq()
-                    .setLoginName("admin")
+                    .setLoginName("sa")
                     .setPassword(encryptPassword("123456"))
                     .setName("超级管理员")
                     .setStaffNo("0000")
@@ -461,12 +464,13 @@ public class AuthServiceImpl extends BaseService
             userService.create(new CreateUserReq()
                     .setLoginName("test")
                     .setPassword(encryptPassword("123456"))
-                    .setName("测试帐号")
+                    .setName("只读测试员")
                     .setStaffNo("9999")
                     .setRoleList(roleList)
                     .setTenantId(tenantInfo.getId())
 
             );
+
         }
     }
 

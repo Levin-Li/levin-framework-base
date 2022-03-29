@@ -1,6 +1,7 @@
 package com.levin.oak.base.controller.rbac;
 
 import com.levin.commons.rbac.MenuItem;
+import com.levin.commons.rbac.ResAuthorize;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.AmisMenu;
 import com.levin.oak.base.controller.rbac.dto.AmisResp;
@@ -24,8 +25,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.levin.oak.base.ModuleOption.API_PATH;
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.TYPE_NAME;
 
 
 // POST: 创建一个新的资源，如用户资源，部门资源
@@ -63,6 +64,7 @@ public class AmisController extends BaseController {
      * @return ApiResp
      */
     @GetMapping("amisAppMenuList")
+    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
     @Operation(tags = {"授权管理"}, summary = "获取Amis菜单列表")
     public AmisResp getAmisAppMenuList(boolean isShowNotPermissionMenu) {
 
