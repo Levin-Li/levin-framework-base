@@ -41,14 +41,6 @@ public interface AuthService extends SimpleAuthService {
     <U extends RbacUserInfo<String>> U getUserInfo(Object loginId);
 
     /**
-     * 审计用户
-     *
-     * @param user
-     * @throws AuthorizationException
-     */
-    void auditUser(UserInfo user) throws AuthorizationException;
-
-    /**
      * 获取用户的权限列表
      *
      * @param loginId 如果为空，则默认为当前用户

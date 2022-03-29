@@ -150,10 +150,16 @@ public class InjectVarServiceImpl implements InjectVarService {
             builder.put(InjectConsts.USER, anonymous);
         }
 
+        if (httpServletRequest != null) {
+
+        }
+
         //租户信息
         if (tenantInfo != null) {
             builder.put(InjectConsts.TENANT, tenantInfo)
                     .put(InjectConsts.TENANT_ID, tenantInfo.getId());
+        }else {
+            builder.put(InjectConsts.URL_SERVERNAME,  httpServletRequest.getServerName());
         }
 
         return Arrays.asList(builder.build());

@@ -26,9 +26,11 @@ import java.util.List;
 
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.simpleapi.SimpleApiService;
+import com.levin.oak.base.services.tenant.TenantService;
 import com.levin.oak.base.services.scheduledlog.ScheduledLogService;
 import com.levin.oak.base.services.setting.SettingService;
 import com.levin.oak.base.services.dict.DictService;
+import com.levin.oak.base.services.apperrorlog.AppErrorLogService;
 import com.levin.oak.base.services.user.UserService;
 import com.levin.oak.base.services.accesslog.AccessLogService;
 import com.levin.oak.base.services.scheduledtask.ScheduledTaskService;
@@ -42,9 +44,11 @@ import com.levin.oak.base.services.simpleform.SimpleFormService;
 
 import com.levin.oak.base.controller.role.RoleController;
 import com.levin.oak.base.controller.simpleapi.SimpleApiController;
+import com.levin.oak.base.controller.tenant.TenantController;
 import com.levin.oak.base.controller.scheduledlog.ScheduledLogController;
 import com.levin.oak.base.controller.setting.SettingController;
 import com.levin.oak.base.controller.dict.DictController;
+import com.levin.oak.base.controller.apperrorlog.AppErrorLogController;
 import com.levin.oak.base.controller.user.UserController;
 import com.levin.oak.base.controller.accesslog.AccessLogController;
 import com.levin.oak.base.controller.scheduledtask.ScheduledTaskController;
@@ -73,7 +77,7 @@ import com.levin.oak.base.controller.simpleform.SimpleFormController;
 //@DataNeo4jTest //测试对Neo4j的操作
 /**
  *  测试类
- *  @author Auto gen by simple-dao-codegen 2022-1-26 16:51:43
+ *  @author Auto gen by simple-dao-codegen 2022-3-29 23:06:04
  */
 public class TestCase {
 

@@ -1,20 +1,20 @@
 package com.levin.oak.base.config;
 
+import static com.levin.oak.base.ModuleOption.*;
+
+import com.levin.oak.base.*;
 import com.levin.commons.service.support.*;
-import com.levin.oak.base.biz.InjectVarService;
+import com.levin.commons.utils.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.context.annotation.*;
+import org.springframework.core.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import javax.servlet.http.*;
+import java.util.*;
 
 
 /**
@@ -26,12 +26,11 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 public class ModuleVariableResolverConfigurer
         implements VariableResolverConfigurer {
 
-//    @Resource
-//    VariableInjector variableInjector;
-
-
     @Resource
-    InjectVarService injectVarService;
+    VariableInjector variableInjector;
+
+//    @Resource
+//    InjectVarService injectVarService;
 
     @PostConstruct
     void init() {
@@ -81,11 +80,10 @@ public class ModuleVariableResolverConfigurer
      *
      * @return HttpRequestInfoResolver
      */
-    @Bean(PLUGIN_PREFIX + "HttpRequestInfoResolver")
+    @Bean(HTTP_REQUEST_INFO_RESOLVER)
     @Order(1)
     HttpRequestInfoResolver moduleHttpRequestInfoResolver() {
-        return new HttpRequestInfoResolver() {
-        };
+        return new HttpRequestInfoResolver();
     }
 
     /**
@@ -112,8 +110,9 @@ public class ModuleVariableResolverConfigurer
 
         //@todo 增加本模块的动态变量
 
-        return injectVarService.getInjectVars();
+        // 使用注入服务
+        //  return injectVarService.getInjectVars();
 
-        //  return Collections.emptyList();
+        return Collections.emptyList();
     }
 }

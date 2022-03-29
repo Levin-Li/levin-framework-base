@@ -84,4 +84,10 @@ public class Area
         return code;
     }
 
+    @Override
+    @PrePersist
+    public void prePersist() {
+        super.prePersist();
+    }
+
 }

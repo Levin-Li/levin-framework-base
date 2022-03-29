@@ -64,4 +64,9 @@ public class JobPost
     @Enumerated
     protected Type type;
 
+    @Override
+    @PrePersist
+    public void prePersist() {
+        super.prePersist();
+    }
 }

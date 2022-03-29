@@ -60,7 +60,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  菜单测试
  *
- *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
+ *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
  *
  */
 
@@ -94,7 +94,7 @@ public class MenuResServiceTest {
 
             // req.setTenantId("租户ID_1");//租户ID 
 
-            // req.setDomain("这是文本64");//子域 
+            // req.setSubSystem("这是文本128");//子系统 
 
             // req.setRequireAuthorizations("这是文本1800");//需要的授权，权限或角色，json数组 
 
@@ -143,7 +143,7 @@ public class MenuResServiceTest {
 
         // req.setId(null);//id
         // req.setTenantId("租户ID_1");//租户ID
-        // req.setDomain("这是文本64");//子域
+        // req.setSubSystem("这是文本128");//子系统
         // req.setRequireAuthorizations("这是文本1800");//需要的授权，权限或角色，json数组
         // req.setAlwaysShow(true);//无权限时是否展示
         // req.setTarget("这是文本64");//目标
@@ -179,7 +179,7 @@ public class MenuResServiceTest {
 
 
            // req.setTenantId("租户ID_1");//租户ID 
-           // req.setDomain("这是文本64");//子域 
+           // req.setSubSystem("这是文本128");//子系统 
            // req.setRequireAuthorizations("这是文本1800");//需要的授权，权限或角色，json数组 
            // req.setAlwaysShow(true);//无权限时是否展示 必填
            // req.setTarget("这是文本64");//目标 

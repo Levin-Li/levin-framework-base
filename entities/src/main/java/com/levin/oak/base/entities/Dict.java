@@ -91,4 +91,10 @@ public class Dict
     @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {Item.class}, converter = DefaultJsonConverter.class, isRequired = "false")
     protected String itemList;
 
+    @Override
+    @PrePersist
+    public void prePersist() {
+        super.prePersist();
+    }
+
 }

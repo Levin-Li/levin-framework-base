@@ -12,8 +12,9 @@ import com.levin.oak.base.services.dict.info.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.Dict.*;
-import com.levin.commons.service.domain.InjectVar;
 import java.util.List;
+import com.levin.commons.service.support.DefaultJsonConverter;
+import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -59,7 +60,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  字典测试
  *
- *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
+ *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
  *
  */
 
@@ -95,7 +96,7 @@ public class DictServiceTest {
 
             // req.setCode("这是文本64");//编码 必填
 
-            // req.setItems("编码项_1");//编码项 
+            // req.setItemList("编码项_1");//编码项 
 
             // req.setTenantId("这是文本64");//租户ID 
 
@@ -131,7 +132,7 @@ public class DictServiceTest {
         // req.setId(null);//id
         // req.setType(Type.System);//类型
         // req.setCode("这是文本64");//编码
-        // req.setItems("编码项_1");//编码项
+        // req.setItemList("编码项_1");//编码项
         // req.setTenantId("这是文本64");//租户ID
         // req.setDomain("这是文本64");//系统子域
         // req.setName("这是文本128");//名称
@@ -159,7 +160,7 @@ public class DictServiceTest {
 
            // req.setType(Type.System);//类型 必填
            // req.setCode("这是文本64");//编码 必填
-           // req.setItems("编码项_1");//编码项 
+           // req.setItemList("编码项_1");//编码项 
            // req.setTenantId("这是文本64");//租户ID 
            // req.setDomain("这是文本64");//系统子域 
            // req.setName("这是文本128");//名称 必填

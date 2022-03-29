@@ -35,7 +35,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleWebControllerAspect", matchIfMissing = true)
 public class ModuleWebControllerAspect {
 
-
     @Resource
     ApplicationContext context;
 
@@ -51,6 +50,10 @@ public class ModuleWebControllerAspect {
     @Resource
     HttpServletResponse response;
 
+    @Resource(name = HTTP_REQUEST_INFO_RESOLVER)
+    HttpRequestInfoResolver httpRequestInfoResolver;
+
+
     @Value("${" + PLUGIN_PREFIX + "logHttp:true}")
     boolean enableLog;
 
@@ -65,6 +68,9 @@ public class ModuleWebControllerAspect {
     void init() {
 
         this.enableHttpLog.set(enableLog);
+
+        //增加 HttpRequestInfoResolver
+        moduleResolverList.add(httpRequestInfoResolver);
 
         //只找出本模块的解析器
         List<List<VariableResolver>> resolvers = SpringContextHolder.findBeanByBeanName(context, ResolvableType.forClassWithGenerics(Iterable.class, VariableResolver.class).getType(), PLUGIN_PREFIX);

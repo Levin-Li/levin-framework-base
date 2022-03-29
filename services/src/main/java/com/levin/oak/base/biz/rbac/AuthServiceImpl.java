@@ -214,7 +214,7 @@ public class AuthServiceImpl extends BaseService
      * @param user
      * @throws AuthorizationException
      */
-    @Override
+//    @Override
     public void auditUser(UserInfo user) throws AuthorizationException {
 
         if (user == null) {

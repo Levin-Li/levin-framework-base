@@ -37,11 +37,9 @@ public class AccessLog
     protected Long id;
 
     @Schema(description = "租户ID")
-
     protected String tenantId;
 
     @Schema(description = "请求的域名")
-
     @Column(length = 64)
     protected String domain;
 
@@ -94,7 +92,7 @@ public class AccessLog
     protected String responseData;
 
     @Schema(description = "操作IP地址")
-    @Column(length = 64)
+    @Column(length = 128)
     @Contains
     protected String remoteAddr;
 
@@ -124,4 +122,10 @@ public class AccessLog
     @Schema(description = "执行时间(ms)")
     protected Long executeTime;
 
+    @PrePersist
+    public void prePersist() {
+        if (createTime == null) {
+            createTime = new Date();
+        }
+    }
 }

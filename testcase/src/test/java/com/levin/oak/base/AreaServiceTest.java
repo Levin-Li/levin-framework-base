@@ -60,7 +60,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  区域测试
  *
- *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
+ *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
  *
  */
 

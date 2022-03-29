@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  访问日志测试
  *
- *  @author auto gen by simple-dao-codegen 2022-1-26 17:15:35
+ *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
  *
  */
 
@@ -112,7 +112,7 @@ public class AccessLogServiceTest {
 
             // req.setResponseData("响应数据_1");//响应数据 
 
-            // req.setRemoteAddr("这是文本64");//操作IP地址 
+            // req.setRemoteAddr("这是文本128");//操作IP地址 
 
             // req.setServerAddr("这是文本64");//服务器地址 
 
@@ -156,7 +156,7 @@ public class AccessLogServiceTest {
         // req.setRequestMethod("这是文本32");//请求方法
         // req.setRequestParams("这是文本768");//请求参数
         // req.setResponseData("响应数据_1");//响应数据
-        // req.setRemoteAddr("这是文本64");//操作IP地址
+        // req.setRemoteAddr("这是文本128");//操作IP地址
         // req.setServerAddr("这是文本64");//服务器地址
         // req.setIsException(true);//是否有异常
         // req.setExceptionInfo("异常信息_1");//异常信息
@@ -192,7 +192,7 @@ public class AccessLogServiceTest {
            // req.setRequestMethod("这是文本32");//请求方法 
            // req.setRequestParams("这是文本768");//请求参数 
            // req.setResponseData("响应数据_1");//响应数据 
-           // req.setRemoteAddr("这是文本64");//操作IP地址 
+           // req.setRemoteAddr("这是文本128");//操作IP地址 
            // req.setServerAddr("这是文本64");//服务器地址 
            // req.setIsException(true);//是否有异常 
            // req.setExceptionInfo("异常信息_1");//异常信息 

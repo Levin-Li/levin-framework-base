@@ -5,7 +5,7 @@ package com.levin.oak.base;
  * <p>
  * eg.
  * <p>
- * //Auto gen by simple-dao-codegen 2022-1-25 23:59:26
+ * //Auto gen by simple-dao-codegen 2022-3-29 23:06:45
  */
 public interface ModuleOption {
 
@@ -70,5 +70,12 @@ public interface ModuleOption {
      * 注意路径必须以 / 结尾
      */
     String H5_UI_PATH = BASE_PATH + "h5/";
+
+    /**
+     *
+     * 注意路径必须以 / 结尾
+     */
+    String HTTP_REQUEST_INFO_RESOLVER = PLUGIN_PREFIX + "HttpRequestInfoResolver";
+
 
 }
