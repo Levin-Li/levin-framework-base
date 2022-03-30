@@ -8,6 +8,7 @@ import com.levin.commons.utils.ExceptionUtils;
 import com.levin.commons.utils.IPAddrUtils;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.controller.accesslog.AccessLogController;
 import com.levin.oak.base.services.accesslog.AccessLogService;
 import com.levin.oak.base.services.accesslog.req.CreateAccessLogReq;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
@@ -192,12 +193,17 @@ public class ModuleWebControllerAspect {
             return joinPoint.proceed(joinPoint.getArgs());
         }
 
+        String className = joinPoint.getSignature().getDeclaringTypeName();
+
         if (disablePackages != null) {
-            String className = joinPoint.getSignature().getDeclaringTypeName();
             if (disablePackages.stream().anyMatch(pkg -> className.startsWith(pkg))) {
                 return joinPoint.proceed(joinPoint.getArgs());
             }
         }
+
+        //得到其方法签名
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+        Method method = methodSignature.getMethod();
 
         LinkedHashMap<String, String> headerMap = new LinkedHashMap<>();
 
@@ -250,11 +256,17 @@ public class ModuleWebControllerAspect {
                     .setExecuteTime(execTime)
                     .setIsException(ex != null)
                     .setExceptionInfo(ex != null ? ExceptionUtils.getPrintInfo(ex) : null)
-                    .setResponseData(result != null ? gson.toJson(result) : null)
                     .setUserAgent(headerMap.get("user-agent"))
                     .setTenantId(tenantInfo != null ? tenantInfo.getId() : null);
 
+            if (AccessLogController.class.getName().contentEquals(className)) {
+                req.setResponseData("忽略对于访问日志查询的结果记录");
+            } else {
+                req.setResponseData(result != null ? gson.toJson(result) : null);
+            }
+
             asyncHandler.addTask(req);
+
         }
 
         //如果这里不返回result，则目标对象实际返回值会被置为null
