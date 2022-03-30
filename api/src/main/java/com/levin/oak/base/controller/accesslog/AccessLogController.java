@@ -172,7 +172,7 @@ public class AccessLogController extends BaseController{
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<List<Integer>> batchDelete(@NotNull DeleteAccessLogReq req) {
+    public ApiResp<Integer> batchDelete(@NotNull DeleteAccessLogReq req) {
         return ApiResp.ok(accessLogService.batchDelete(req));
     }
 

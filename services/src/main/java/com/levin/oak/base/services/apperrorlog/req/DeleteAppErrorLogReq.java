@@ -47,7 +47,6 @@ public class DeleteAppErrorLogReq extends MultiTenantReq {
 
     @Schema(description = "id集合")
     @In(value = E_AppErrorLog.id)
-    @NotEmpty
     private Long[] idList;
 
     @Schema(description = "模块ID")

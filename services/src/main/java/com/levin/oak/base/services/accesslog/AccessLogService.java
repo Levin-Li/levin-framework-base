@@ -50,7 +50,7 @@ public interface AccessLogService {
     int delete(AccessLogIdReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    List<Integer> batchDelete(DeleteAccessLogReq req);
+    Integer batchDelete(DeleteAccessLogReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<AccessLogInfo> query(QueryAccessLogReq req , Paging paging);

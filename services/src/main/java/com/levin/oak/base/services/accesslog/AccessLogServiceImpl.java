@@ -143,12 +143,14 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Integer> batchDelete(DeleteAccessLogReq req){
+    public Integer batchDelete(DeleteAccessLogReq req){
         //@Todo 优化批量提交
-        return Stream.of(req.getIdList())
-            .map(id -> simpleDao.copy(req, new AccessLogIdReq().setId(id)))
-            .map(idReq -> getSelfProxy().delete((AccessLogIdReq)idReq))
-            .collect(Collectors.toList());
+//        return Stream.of(req.getIdList())
+//            .map(id -> simpleDao.copy(req, new AccessLogIdReq().setId(id)))
+//            .map(idReq -> getSelfProxy().delete((AccessLogIdReq)idReq))
+//            .collect(Collectors.toList());
+
+       return simpleDao.deleteByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
