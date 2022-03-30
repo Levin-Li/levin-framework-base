@@ -5,7 +5,7 @@ package com.levin.oak.base;
  * <p>
  * eg.
  * <p>
- * //Auto gen by simple-dao-codegen 2022-3-29 23:06:45
+ * //Auto gen by simple-dao-codegen 2022-3-30 13:50:50
  */
 public interface ModuleOption {
 
@@ -19,6 +19,10 @@ public interface ModuleOption {
      */
     String ID = PACKAGE_NAME;
 
+    /**
+     * module name
+     */
+    String NAME = "系统管理";
 
     /**
      * module prefix

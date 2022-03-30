@@ -20,7 +20,7 @@ import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
 
-//Auto gen by simple-dao-codegen 2022-1-25 23:59:26
+//Auto gen by simple-dao-codegen 2022-3-30 13:50:50
 //模块插件
 
 @Slf4j
@@ -113,12 +113,12 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
 
     @Override
     public String getId() {
-        return pid;
+        return ModuleOption.ID;
     }
 
     @Override
     public String getName() {
-        return "插件" + pid;
+        return ModuleOption.NAME;
     }
 
 

@@ -47,7 +47,7 @@ public class AppErrorLog implements MultiTenantObject {
     protected Date occurTime;
 
     @Schema(description = "标题")
-    @Column(nullable = false, length = 1000)
+    @Column(nullable = false, length = 768)
     @Contains
     protected String title;
 
