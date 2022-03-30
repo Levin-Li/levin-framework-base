@@ -84,8 +84,11 @@ public class ModuleWebControllerAspect {
     @Value("${" + PLUGIN_PREFIX + "logHttp:true}")
     boolean enableLog;
 
-    @Value("${" + PLUGIN_PREFIX + "log.disablePackages:}")
-    List<String> disablePackages;
+    @Value("${" + PLUGIN_PREFIX + "log.ignorePackages:}")
+    List<String> ignorePackages;
+
+    @Value("${" + PLUGIN_PREFIX + "log.ignoreKeywords:}")
+    List<String> ignoreKeywords;
 
     final AtomicBoolean enableHttpLog = new AtomicBoolean(false);
 
@@ -193,15 +196,14 @@ public class ModuleWebControllerAspect {
             return joinPoint.proceed(joinPoint.getArgs());
         }
 
-        String className = joinPoint.getSignature().getDeclaringTypeName();
+        final String className = joinPoint.getSignature().getDeclaringTypeName();
 
-        if (disablePackages != null) {
-            if (disablePackages.stream().anyMatch(pkg -> className.startsWith(pkg))) {
+        //忽略指定的包名
+        if (this.ignorePackages != null) {
+            if (ignorePackages.stream().anyMatch(pkg -> className.startsWith(pkg))) {
                 return joinPoint.proceed(joinPoint.getArgs());
             }
         }
-
-        boolean isAccessLogController = AccessLogController.class.getName().contentEquals(className);
 
         //得到其方法签名
 //        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
@@ -210,15 +212,26 @@ public class ModuleWebControllerAspect {
         LinkedHashMap<String, String> headerMap = new LinkedHashMap<>();
         LinkedHashMap<String, Object> paramMap = new LinkedHashMap<>();
 
-        String requestName = getRequestInfo(joinPoint, headerMap, paramMap, true);
+        final String title = getRequestInfo(joinPoint, headerMap, paramMap, true);
+
+        //检查忽略的关键字
+        if (this.ignoreKeywords != null) {
+            if (ignoreKeywords.stream().anyMatch(keyword -> title.contains(keyword))) {
+                return joinPoint.proceed(joinPoint.getArgs());
+            }
+        }
 
         if (log.isDebugEnabled()) {
-            log.debug("*** " + requestName + " *** URL: {}?{}, headers:{}, 控制器方法参数：{}"
+            log.debug("*** " + title + " *** URL: {}?{}, headers:{}, 控制器方法参数：{}"
                     , request.getRequestURL(), request.getQueryString()
                     , headerMap, paramMap);
         }
 
-        long st = System.currentTimeMillis();
+        //////////////////////////////////////////////////////////////////////////////////////////
+
+        final boolean isAccessLogController = AccessLogController.class.getName().contentEquals(className);
+
+        final long st = System.currentTimeMillis();
 
         //动态修改其参数
         //注意，如果调用joinPoint.proceed()方法，则修改的参数值不会生效，必须调用joinPoint.proceed(Object[] args)
@@ -233,10 +246,10 @@ public class ModuleWebControllerAspect {
             ex = e;
         } finally {
 
-            long execTime = System.currentTimeMillis() - st;
+            final long execTime = System.currentTimeMillis() - st;
 
             if (log.isDebugEnabled()) {
-                log.debug("*** " + requestName + " *** URL: {}?{}, 执行耗时：{}ms, 发生异常：{} , 响应结果:{}"
+                log.debug("*** " + title + " *** URL: {}?{}, 执行耗时：{}ms, 发生异常：{} , 响应结果:{}"
                         , request.getRequestURL(), request.getQueryString(),
                         execTime, ex != null, isAccessLogController ? "忽略结果" : result);
             }
@@ -245,7 +258,7 @@ public class ModuleWebControllerAspect {
 
             CreateAccessLogReq req = new CreateAccessLogReq()
                     .setCreateTime(new Date())
-                    .setTitle(requestName)
+                    .setTitle(title)
                     .setVisitor(authService.isLogin() ? (authService.getUserInfo().getName() + "(" + authService.getUserInfo().getId() + ")") : null)
                     .setDomain(request.getServerName())
                     .setRemoteAddr(IPAddrUtils.try2GetUserRealIPAddr(request))
