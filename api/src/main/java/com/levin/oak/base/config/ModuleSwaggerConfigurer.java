@@ -79,7 +79,6 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
                 .build();
     }
 
-
     /**
      * 解决 swagger3   swagger-ui.html 404无法访问的问题
      */
