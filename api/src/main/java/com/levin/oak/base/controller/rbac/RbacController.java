@@ -5,12 +5,12 @@ import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.biz.BizTenantService;
-import com.levin.oak.base.controller.BaseController;
-import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.biz.rbac.info.ModuleInfo;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
+import com.levin.oak.base.controller.BaseController;
+import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import io.swagger.v3.oas.annotations.Operation;
@@ -74,7 +74,6 @@ public class RbacController extends BaseController {
         return ApiResp.ok(authService.auth(req.getTenantId(), req.getAccount(), req.getPassword(), ua));
     }
 
-
     @PostMapping("userInfo")
     @Operation(tags = {"授权管理"}, summary = "用户信息")
     public ApiResp<RbacUserInfo<String>> getUserInfo() {
@@ -123,5 +122,7 @@ public class RbacController extends BaseController {
     public ApiResp<List<MenuResInfo>> getAuthorizedMenuList(boolean isShowNotPermissionMenu) {
         return ApiResp.ok(rbacService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId()));
     }
+
+
 
 }

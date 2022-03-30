@@ -55,7 +55,7 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
 
     @Bean(PLUGIN_PREFIX + "Docket")
     //默认激活的 profile
-    @Profile({"dev", "test", "local"})
+//    @Profile({"local", "dev", "test"})
     public Docket docket() {
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
