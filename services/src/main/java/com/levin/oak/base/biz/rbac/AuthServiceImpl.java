@@ -451,7 +451,7 @@ public class AuthServiceImpl
 
         User user = simpleDao.selectFrom(User.class)
                 .isNull(E_User.tenantId)
-                .eq(E_User.loginName, "admin")
+                .eq(E_User.loginName, "sa")
                 .findOne();
 
         if (user == null) {
