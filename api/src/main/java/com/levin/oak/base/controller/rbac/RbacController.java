@@ -13,6 +13,8 @@ import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
+import com.levin.oak.base.services.user.UserService;
+import com.levin.oak.base.services.user.req.UpdateUserPwdReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -49,16 +52,19 @@ import static com.levin.oak.base.entities.EntityConst.TYPE_NAME;
 @MenuResTag(false)
 public class RbacController extends BaseController {
 
-    @Autowired
+    @Resource
     RoleService roleService;
 
-    @Autowired
+    @Resource
+    UserService userService;
+
+    @Resource
     RbacService rbacService;
 
-    @Autowired
+    @Resource
     AuthService authService;
 
-    @Autowired
+    @Resource
     BizTenantService bizTenantService;
 
     /**
@@ -87,6 +93,23 @@ public class RbacController extends BaseController {
     @Operation(tags = {"授权管理"}, summary = "获取域名对应的租户信息")
     public ApiResp<TenantInfo> getTenantInfo() {
         return ApiResp.ok(bizTenantService.getCurrentTenant());
+    }
+
+
+    /**
+     * 修改密码
+     *
+     * @param req UpdateUserReq
+     */
+    @PutMapping({"updatePwd"})
+    @Operation(tags = {"授权管理"}, summary = "修改密码")
+    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
+    public ApiResp<Void> updatePwd(@RequestBody UpdateUserPwdReq req) {
+
+//        req.setOldPassword(authService.encryptPassword(req.getOldPassword()))
+//                .setPassword(authService.encryptPassword(req.getPassword()));
+
+        return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error("修改密码失败");
     }
 
     /**

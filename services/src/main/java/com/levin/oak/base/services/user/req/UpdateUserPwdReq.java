@@ -27,7 +27,7 @@ import javax.validation.constraints.Size;
  * 更新用户
  * Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
-@Schema(description = "更新用户")
+@Schema(description = "修改密码")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

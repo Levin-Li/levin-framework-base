@@ -514,7 +514,7 @@ public class AuthServiceImpl
                 .setLoginName("test")
                 .setPassword(encryptPassword("123456"))
                 .setName("只读测试员")
-                .setStaffNo("9999")
+                .setStaffNo("8888")
                 .setRoleList(roleList)
                 .setTenantId(tenantInfo.getId())
 

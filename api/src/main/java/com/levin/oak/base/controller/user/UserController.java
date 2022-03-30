@@ -141,23 +141,6 @@ public class UserController extends BaseController {
         return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
     }
 
-
-    /**
-     * 修改密码
-     *
-     * @param req UpdateUserReq
-     */
-    @PutMapping({"updatePwd"})
-    @Operation(tags = {BIZ_NAME}, summary = "修改密码")
-    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
-    public ApiResp<Void> updatePwd(@RequestBody UpdateUserPwdReq req) {
-
-        req.setOldPassword(authService.encryptPassword(req.getOldPassword()))
-                .setPassword(authService.encryptPassword(req.getPassword()));
-
-        return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error("修改密码失败");
-    }
-
     /**
      * 批量更新
      */

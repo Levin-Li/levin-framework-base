@@ -116,13 +116,15 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
+    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public int update(UpdateUserPwdReq req) {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         Assert.hasText(req.getOldPassword(), "旧密码不能为空");
         Assert.hasText(req.getPassword(), "新密码不能为空");
 
-        req.setOldPassword(authService.encryptPassword(req.getOldPassword()));
+        req.setOldPassword(authService.encryptPassword(req.getOldPassword()))
+                .setPassword(authService.encryptPassword(req.getPassword()));
 
         int n = simpleDao.updateByQueryObj(req);
 
