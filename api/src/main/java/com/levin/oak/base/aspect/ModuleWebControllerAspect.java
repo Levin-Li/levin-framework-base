@@ -251,7 +251,7 @@ public class ModuleWebControllerAspect {
             if (log.isDebugEnabled()) {
                 log.debug("*** " + title + " *** URL: {}?{}, 执行耗时：{}ms, 发生异常：{} , 响应结果:{}"
                         , request.getRequestURL(), request.getQueryString(),
-                        execTime, ex != null, isAccessLogController ? "忽略结果" : result);
+                        execTime, ex != null, isAccessLogController ? "忽略对于访问日志控制器的访问结果" : result);
             }
 
             TenantInfo tenantInfo = bizTenantService.getCurrentTenant();
@@ -274,7 +274,7 @@ public class ModuleWebControllerAspect {
                     .setTenantId(tenantInfo != null ? tenantInfo.getId() : null);
 
             if (isAccessLogController) {
-                req.setResponseData("忽略对于访问日志查询的结果记录");
+                req.setResponseData("忽略对于访问日志控制器的访问结果");
             } else {
                 req.setResponseData(result != null ? gson.toJson(result) : null);
             }
