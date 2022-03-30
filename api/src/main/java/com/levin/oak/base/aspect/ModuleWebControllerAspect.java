@@ -201,12 +201,13 @@ public class ModuleWebControllerAspect {
             }
         }
 
+        boolean isAccessLogController = AccessLogController.class.getName().contentEquals(className);
+
         //得到其方法签名
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        Method method = methodSignature.getMethod();
+//        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+//        Method method = methodSignature.getMethod();
 
         LinkedHashMap<String, String> headerMap = new LinkedHashMap<>();
-
         LinkedHashMap<String, Object> paramMap = new LinkedHashMap<>();
 
         String requestName = getRequestInfo(joinPoint, headerMap, paramMap, true);
@@ -237,7 +238,7 @@ public class ModuleWebControllerAspect {
             if (log.isDebugEnabled()) {
                 log.debug("*** " + requestName + " *** URL: {}?{}, 执行耗时：{}ms, 发生异常：{} , 响应结果:{}"
                         , request.getRequestURL(), request.getQueryString(),
-                        execTime, ex != null, result);
+                        execTime, ex != null, isAccessLogController ? "忽略结果" : result);
             }
 
             TenantInfo tenantInfo = bizTenantService.getCurrentTenant();
@@ -259,14 +260,13 @@ public class ModuleWebControllerAspect {
                     .setUserAgent(headerMap.get("user-agent"))
                     .setTenantId(tenantInfo != null ? tenantInfo.getId() : null);
 
-            if (AccessLogController.class.getName().contentEquals(className)) {
+            if (isAccessLogController) {
                 req.setResponseData("忽略对于访问日志查询的结果记录");
             } else {
                 req.setResponseData(result != null ? gson.toJson(result) : null);
             }
 
             asyncHandler.addTask(req);
-
         }
 
         //如果这里不返回result，则目标对象实际返回值会被置为null
