@@ -45,7 +45,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AreaController", matchIfMissing = true)
 
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = TYPE_NAME, anyRoles = {RbacRoleObject.SA_ROLE})
+@ResAuthorize(domain = ID, type = TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
@@ -62,6 +62,7 @@ public class AreaController extends BaseController {
      * @param req QueryAreaReq
      * @return ApiResp<PagingData < AreaInfo>>
      */
+    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
     @GetMapping("/query")
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     public ApiResp<PagingData<AreaInfo>> query(QueryAreaReq req, SimplePaging paging) {
@@ -98,12 +99,11 @@ public class AreaController extends BaseController {
      *
      * @param req QueryAreaByIdReq
      */
+    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     public ApiResp<AreaInfo> retrieve(@NotNull AreaIdReq req) {
-
         return ApiResp.ok(areaService.findById(req));
-
     }
 
     /**
