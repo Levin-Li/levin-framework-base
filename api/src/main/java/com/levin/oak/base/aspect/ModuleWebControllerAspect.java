@@ -92,7 +92,6 @@ public class ModuleWebControllerAspect {
 
     final AtomicBoolean enableHttpLog = new AtomicBoolean(false);
 
-
     /**
      * 存储本模块的变量解析器
      */
@@ -102,6 +101,16 @@ public class ModuleWebControllerAspect {
     void init() {
 
         this.enableHttpLog.set(enableLog);
+
+        if (this.ignorePackages == null
+                || this.ignoreKeywords == null
+                || this.ignoreKeywords.isEmpty()
+                || this.ignorePackages.isEmpty()) {
+
+            log.info("*** 友情提示：可以配置[ {} ] 和 [ {} ] 忽略mvc控制器的访问日志记录。"
+                    , PLUGIN_PREFIX + "log.ignorePackages", PLUGIN_PREFIX + "log.ignoreKeywords"
+            );
+        }
 
         //设置处理器
         this.asyncHandler
@@ -199,10 +208,9 @@ public class ModuleWebControllerAspect {
         final String className = joinPoint.getSignature().getDeclaringTypeName();
 
         //忽略指定的包名
-        if (this.ignorePackages != null) {
-            if (ignorePackages.stream().anyMatch(pkg -> className.startsWith(pkg))) {
-                return joinPoint.proceed(joinPoint.getArgs());
-            }
+        if (this.ignorePackages != null
+                && ignorePackages.stream().anyMatch(pkg -> className.startsWith(pkg))) {
+            return joinPoint.proceed(joinPoint.getArgs());
         }
 
         //得到其方法签名
@@ -215,11 +223,11 @@ public class ModuleWebControllerAspect {
         final String title = getRequestInfo(joinPoint, headerMap, paramMap, true);
 
         //检查忽略的关键字
-        if (this.ignoreKeywords != null) {
-            if (ignoreKeywords.stream().anyMatch(keyword -> title.contains(keyword))) {
-                return joinPoint.proceed(joinPoint.getArgs());
-            }
+        if (this.ignoreKeywords != null
+                && ignoreKeywords.stream().anyMatch(keyword -> title.contains(keyword))) {
+            return joinPoint.proceed(joinPoint.getArgs());
         }
+
 
         if (log.isDebugEnabled()) {
             log.debug("*** " + title + " *** URL: {}?{}, headers:{}, 控制器方法参数：{}"
