@@ -40,6 +40,7 @@ public class AccessLog
     protected String tenantId;
 
     @Schema(description = "请求的域名")
+    @Contains
     protected String domain;
 
     @Schema(description = "访问者")
@@ -53,6 +54,7 @@ public class AccessLog
 
     @Schema(description = "标题")
     @Column(nullable = false)
+    @Contains
     protected String title;
 
     @Schema(description = "日志类型")

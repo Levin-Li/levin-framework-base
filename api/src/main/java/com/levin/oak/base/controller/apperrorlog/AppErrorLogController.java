@@ -172,7 +172,7 @@ public class AppErrorLogController extends BaseController{
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<List<Integer>> batchDelete(@NotNull DeleteAppErrorLogReq req) {
+    public ApiResp<Integer> batchDelete(@NotNull DeleteAppErrorLogReq req) {
         return ApiResp.ok(appErrorLogService.batchDelete(req));
     }
 

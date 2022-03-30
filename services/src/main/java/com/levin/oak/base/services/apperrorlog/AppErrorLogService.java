@@ -56,7 +56,7 @@ public interface AppErrorLogService {
     int delete(AppErrorLogIdReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    List<Integer> batchDelete(DeleteAppErrorLogReq req);
+     Integer batchDelete(DeleteAppErrorLogReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<AppErrorLogInfo> query(QueryAppErrorLogReq req , Paging paging);

@@ -64,23 +64,14 @@ public class QueryAccessLogReq extends MultiTenantReq{
 
 
     //@NotNull
-
     @Schema(description = "id")
     private Long id;
-
-
 
     @Schema(description = "请求的域名")
     private String domain;
 
-
-    //@Size(max = 64)
-
     @Schema(description = "访问者")
     private String visitor;
-
-
-    //@NotNull
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
@@ -92,12 +83,12 @@ public class QueryAccessLogReq extends MultiTenantReq{
     private Date lteCreateTime;
 
 
-
-    //@NotBlank
-
     @Schema(description = "标题")
     private String title;
 
+    @Schema(description = "模糊匹配 - 标题")
+    @Contains
+    private String containsTitle;
 
     //@Size(max = 64)
 
@@ -105,10 +96,8 @@ public class QueryAccessLogReq extends MultiTenantReq{
     private String logType;
 
 
-
     @Schema(description = "差异修改数据")
     private String diffModifyData;
-
 
 
     @Schema(description = "业务主键")
@@ -119,14 +108,12 @@ public class QueryAccessLogReq extends MultiTenantReq{
     private String containsBizKey;
 
 
-
     @Schema(description = "业务类型")
     private String bizType;
 
     @Schema(description = "模糊匹配 - 业务类型")
     @Contains
     private String containsBizType;
-
 
 
     @Schema(description = "请求URI")
@@ -200,7 +187,6 @@ public class QueryAccessLogReq extends MultiTenantReq{
 
     @Schema(description = "浏览器名称")
     private String browserName;
-
 
 
     @Schema(description = "执行时间(ms)")

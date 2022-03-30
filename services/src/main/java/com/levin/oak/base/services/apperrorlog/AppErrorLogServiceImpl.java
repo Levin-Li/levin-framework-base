@@ -143,12 +143,14 @@ public class AppErrorLogServiceImpl extends BaseService implements AppErrorLogSe
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Integer> batchDelete(DeleteAppErrorLogReq req){
+    public  Integer batchDelete(DeleteAppErrorLogReq req){
         //@Todo 优化批量提交
-        return Stream.of(req.getIdList())
-            .map(id -> simpleDao.copy(req, new AppErrorLogIdReq().setId(id)))
-            .map(idReq -> getSelfProxy().delete((AppErrorLogIdReq)idReq))
-            .collect(Collectors.toList());
+//        return Stream.of(req.getIdList())
+//            .map(id -> simpleDao.copy(req, new AppErrorLogIdReq().setId(id)))
+//            .map(idReq -> getSelfProxy().delete((AppErrorLogIdReq)idReq))
+//            .collect(Collectors.toList());
+
+        return simpleDao.deleteByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
