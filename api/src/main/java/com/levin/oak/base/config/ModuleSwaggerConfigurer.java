@@ -1,25 +1,13 @@
 package com.levin.oak.base.config;
 
-import static com.levin.oak.base.ModuleOption.*;
-import com.levin.oak.base.*;
-
-
+import com.levin.oak.base.ModuleOption;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -33,6 +21,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 import javax.annotation.PostConstruct;
 import java.util.stream.Stream;
+
+import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 //import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -55,6 +46,8 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
     @Value("${swagger.enabled:true}")
     private boolean enabled;
 
+    private static final String GROUP_NAME = ModuleOption.NAME + "-" + ModuleOption.ID;
+
     @PostConstruct
     void init() {
         log.info("init...");
@@ -67,7 +60,7 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
                 .enable(enabled)
-                .groupName(ModuleOption.NAME + "-" + ModuleOption.ID)
+                .groupName(GROUP_NAME)
                 .select()
                 //apis： 添加swagger接口提取范围
                 .apis(RequestHandlerSelectors.basePackage(PACKAGE_NAME))
@@ -79,8 +72,8 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("插件[" + ModuleOption.ID +"]接口文档")
-                .description("插件[" + ModuleOption.ID + "]接口文档")
+                .title("插件[" + GROUP_NAME + "]接口文档")
+                .description("插件[" + GROUP_NAME + "]接口文档")
                 .contact(new Contact("Levin", "https://github.com/Levin-Li/simple-dao", "99668980@qq.com"))
                 .version(ModuleOption.VERSION)
                 .build();
