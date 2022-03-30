@@ -62,8 +62,8 @@ public class Tenant extends AbstractNamedEntityObject {
 
     @Schema(description = "ID")
     @Id
-    @GenericGenerator(name = "system_uuid", strategy = "uuid")
-    @GeneratedValue(generator = "system_uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(generator = "uuid")
     String id;
 
     @Schema(description = "租户头像")
