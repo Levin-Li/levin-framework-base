@@ -209,7 +209,7 @@ public class ModuleWebControllerAspect {
 
         //忽略指定的包名
         if (this.ignorePackages != null
-                && ignorePackages.stream().anyMatch(pkg -> className.startsWith(pkg))) {
+                && ignorePackages.stream().filter(StringUtils::hasText).anyMatch(pkg -> className.startsWith(pkg))) {
             return joinPoint.proceed(joinPoint.getArgs());
         }
 
@@ -224,7 +224,7 @@ public class ModuleWebControllerAspect {
 
         //检查忽略的关键字
         if (this.ignoreKeywords != null
-                && ignoreKeywords.stream().anyMatch(keyword -> title.contains(keyword))) {
+                && ignoreKeywords.stream().filter(StringUtils::hasText).anyMatch(keyword -> title.contains(keyword))) {
             return joinPoint.proceed(joinPoint.getArgs());
         }
 
