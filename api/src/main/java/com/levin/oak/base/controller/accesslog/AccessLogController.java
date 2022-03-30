@@ -1,5 +1,7 @@
 package com.levin.oak.base.controller.accesslog;
 
+import com.levin.commons.rbac.RbacRoleObject;
+import com.levin.commons.rbac.ResAuthorize;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -145,6 +147,7 @@ public class AccessLogController extends BaseController{
      * 删除
      * @param req AccessLogIdReq
      */
+    @ResAuthorize(domain = ID, type = TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
     @DeleteMapping({""})
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     public ApiResp<Integer> delete(@NotNull AccessLogIdReq req) {
@@ -170,6 +173,7 @@ public class AccessLogController extends BaseController{
      * 批量删除
      * @param req DeleteAccessLogReq
      */
+    @ResAuthorize(domain = ID, type = TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
     @DeleteMapping({"/batchDelete"})
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
     public ApiResp<Integer> batchDelete(@NotNull DeleteAccessLogReq req) {

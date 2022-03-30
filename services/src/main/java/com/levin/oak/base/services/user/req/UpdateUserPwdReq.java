@@ -14,6 +14,7 @@ import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -50,13 +51,14 @@ public class UpdateUserPwdReq extends MultiTenantReq {
 
     @Size(max = 256)
     @Schema(description = "旧密码")
+    @NotBlank
     @Eq(require = true, value = E_User.password)
     private String oldPassword;
 
     @Size(max = 256)
     @Schema(description = "新密码")
+    @NotBlank
     private String password;
-
 
     public UpdateUserPwdReq(Long id) {
         this.id = id;
@@ -65,6 +67,7 @@ public class UpdateUserPwdReq extends MultiTenantReq {
     @PostConstruct
     public void preUpdate() {
         //@todo 更新之前初始化数据
+
 
     }
 

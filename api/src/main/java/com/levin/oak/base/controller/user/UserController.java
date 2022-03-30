@@ -4,6 +4,7 @@ import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.services.user.UserService;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -54,6 +56,9 @@ public class UserController extends BaseController {
 
     @Autowired
     UserService userService;
+
+    @Resource
+    AuthService authService;
 
     /**
      * 分页查找
@@ -108,9 +113,7 @@ public class UserController extends BaseController {
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     public ApiResp<UserInfo> retrieve(@NotNull UserIdReq req) {
-
         return ApiResp.ok(userService.findById(req).setPassword(null));
-
     }
 
     /**
@@ -148,6 +151,10 @@ public class UserController extends BaseController {
     @Operation(tags = {BIZ_NAME}, summary = "修改密码")
     @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
     public ApiResp<Void> updatePwd(@RequestBody UpdateUserPwdReq req) {
+
+        req.setOldPassword(authService.encryptPassword(req.getOldPassword()))
+                .setPassword(authService.encryptPassword(req.getPassword()));
+
         return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error("修改密码失败");
     }
 

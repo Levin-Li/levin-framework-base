@@ -7,10 +7,10 @@ import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.*;
 import com.levin.commons.utils.JsonStrArrayUtils;
+import com.levin.oak.base.biz.rbac.req.LoginReq;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.BaseService;
 import com.levin.oak.base.services.menures.MenuResService;
-import com.levin.oak.base.biz.rbac.req.LoginReq;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.role.req.CreateRoleReq;
 import com.levin.oak.base.services.tenant.TenantService;
@@ -423,7 +423,25 @@ public class AuthServiceImpl
                     .setOrgDataScope(Role.OrgDataScope.All)
                     .setPermissionList(permissions));
 
-//            JsonStrArrayUtils.toStrArrayJson()
+            ///////////////////////////////////////////////////
+
+            permissions.clear();
+
+            permissions.add(new ResPermission()
+                    .setDomain("*")
+                    .setType(EntityConst.TYPE_NAME)
+                    .setRes("*")
+                    .setAction("*")
+                    .toString());
+
+            roleService.create(new CreateRoleReq()
+                    .setCode("ADMIN")
+                    .setName("租户管理员")
+                    .setEditable(false)
+                    .setOrgDataScope(Role.OrgDataScope.All)
+                    .setPermissionList(permissions));
+
+            ///////////////////////////////////////////////////
 
             permissions.clear();
 
@@ -442,10 +460,12 @@ public class AuthServiceImpl
                     .toString());
 
             roleService.create(new CreateRoleReq()
-                    .setCode("test")
+                    .setCode("TEST")
                     .setName("只读测试员")
                     .setOrgDataScope(Role.OrgDataScope.MySelf)
                     .setPermissionList(permissions));
+
+            ///////////////////////////////////////////////////
         }
 
 
@@ -454,34 +474,54 @@ public class AuthServiceImpl
                 .eq(E_User.loginName, "sa")
                 .findOne();
 
-        if (user == null) {
-
-            List<String> roleList = new LinkedList<>();
-
-            roleList.add("SA");
-
-            userService.create(new CreateUserReq()
-                    .setLoginName("sa")
-                    .setPassword(encryptPassword("123456"))
-                    .setName("超级管理员")
-                    .setStaffNo("0000")
-                    .setRoleList(roleList)
-            );
-
-            roleList.clear();
-            roleList.add("test");
-
-            userService.create(new CreateUserReq()
-                    .setLoginName("test")
-                    .setPassword(encryptPassword("123456"))
-                    .setName("只读测试员")
-                    .setStaffNo("9999")
-                    .setRoleList(roleList)
-                    .setTenantId(tenantInfo.getId())
-
-            );
-
+        if (user != null) {
+            return;
         }
+
+        List<String> roleList = new LinkedList<>();
+
+        roleList.add("SA");
+
+        userService.create(new CreateUserReq()
+                .setLoginName("sa")
+                .setPassword(encryptPassword("123456"))
+                .setName("超级管理员")
+                .setStaffNo("0000")
+                .setRoleList(roleList)
+        );
+
+        ///////////////////////////////////////////////////
+
+        roleList.clear();
+        roleList.add("ADMIN");
+
+        userService.create(new CreateUserReq()
+                .setLoginName("admin")
+                .setPassword(encryptPassword("123456"))
+                .setName("租户管理员")
+                .setStaffNo("9999")
+                .setRoleList(roleList)
+                .setTenantId(tenantInfo.getId())
+
+        );
+
+        ///////////////////////////////////////////////////
+
+        roleList.clear();
+        roleList.add("test");
+
+        userService.create(new CreateUserReq()
+                .setLoginName("test")
+                .setPassword(encryptPassword("123456"))
+                .setName("只读测试员")
+                .setStaffNo("9999")
+                .setRoleList(roleList)
+                .setTenantId(tenantInfo.getId())
+
+        );
+
+        ///////////////////////////////////////////////////
+
     }
 
 }
