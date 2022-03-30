@@ -40,7 +40,6 @@ public class AccessLog
     protected String tenantId;
 
     @Schema(description = "请求的域名")
-    @Column(length = 64)
     protected String domain;
 
     @Schema(description = "访问者")
@@ -84,8 +83,12 @@ public class AccessLog
     protected String requestMethod;
 
     @Schema(description = "请求参数")
-    @Column(length = 768)
+    @Lob
     protected String requestParams;
+
+    @Lob
+    @Schema(description = "头部信息")
+    protected String headInfo;
 
     @Lob
     @Schema(description = "响应数据")
@@ -108,7 +111,7 @@ public class AccessLog
     protected String exceptionInfo;
 
     @Schema(description = "用户代理")
-    @Column(length = 512)
+    @Column(length = 768)
     protected String userAgent;
 
     @Schema(description = "设备名称/操作系统")

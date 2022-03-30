@@ -5,6 +5,7 @@ import static com.levin.oak.base.ModuleOption.*;
 import com.levin.oak.base.*;
 import com.levin.commons.service.support.*;
 import com.levin.commons.utils.*;
+import com.levin.oak.base.biz.InjectVarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
@@ -26,11 +27,11 @@ import java.util.*;
 public class ModuleVariableResolverConfigurer
         implements VariableResolverConfigurer {
 
-    @Resource
-    VariableInjector variableInjector;
-
 //    @Resource
-//    InjectVarService injectVarService;
+//    VariableInjector variableInjector;
+
+    @Resource
+    InjectVarService injectVarService;
 
     @PostConstruct
     void init() {
@@ -111,8 +112,8 @@ public class ModuleVariableResolverConfigurer
         //@todo 增加本模块的动态变量
 
         // 使用注入服务
-        //  return injectVarService.getInjectVars();
+          return injectVarService.getInjectVars();
 
-        return Collections.emptyList();
+//        return Collections.emptyList();
     }
 }

@@ -31,7 +31,7 @@ import java.util.Date;
 
 /**
  *  新增访问日志
- *  //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *  //Auto gen by simple-dao-codegen 2022-3-30 8:44:20
  */
 @Schema(description = "新增访问日志")
 @Data
@@ -50,7 +50,6 @@ public class CreateAccessLogReq extends MultiTenantReq {
 
 
     @Schema(description = "请求的域名" )
-    //@Size(max = 64)
     private String domain;
 
 
@@ -96,8 +95,11 @@ public class CreateAccessLogReq extends MultiTenantReq {
 
 
     @Schema(description = "请求参数" )
-    //@Size(max = 768)
     private String requestParams;
+
+
+    @Schema(description = "头部信息" )
+    private String headInfo;
 
 
     @Schema(description = "响应数据" )
@@ -105,7 +107,7 @@ public class CreateAccessLogReq extends MultiTenantReq {
 
 
     @Schema(description = "操作IP地址" )
-    //@Size(max = 64)
+    //@Size(max = 128)
     private String remoteAddr;
 
 
@@ -123,7 +125,7 @@ public class CreateAccessLogReq extends MultiTenantReq {
 
 
     @Schema(description = "用户代理" )
-    //@Size(max = 512)
+    //@Size(max = 768)
     private String userAgent;
 
 

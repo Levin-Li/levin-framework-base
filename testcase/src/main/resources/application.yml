@@ -87,7 +87,8 @@ plugin:
     levin:
       oak:
         base:
-#          AreaService: false
+          log:
+            disablePackages: org.apache,com.test,cn.xx
 
 # Sa-Token配置
 sa-token:

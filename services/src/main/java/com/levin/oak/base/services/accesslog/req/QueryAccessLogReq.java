@@ -37,7 +37,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询访问日志
- *  @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *  @Author Auto gen by simple-dao-codegen 2022-3-30 8:44:20
  */
 @Schema(description = "查询访问日志")
 @Data
@@ -69,7 +69,6 @@ public class QueryAccessLogReq extends MultiTenantReq{
     private Long id;
 
 
-    //@Size(max = 64)
 
     @Schema(description = "请求的域名")
     private String domain;
@@ -144,10 +143,14 @@ public class QueryAccessLogReq extends MultiTenantReq{
     private String requestMethod;
 
 
-    //@Size(max = 768)
 
     @Schema(description = "请求参数")
     private String requestParams;
+
+
+
+    @Schema(description = "头部信息")
+    private String headInfo;
 
 
 
@@ -155,7 +158,7 @@ public class QueryAccessLogReq extends MultiTenantReq{
     private String responseData;
 
 
-    //@Size(max = 64)
+    //@Size(max = 128)
 
     @Schema(description = "操作IP地址")
     private String remoteAddr;
@@ -181,7 +184,7 @@ public class QueryAccessLogReq extends MultiTenantReq{
     private String exceptionInfo;
 
 
-    //@Size(max = 512)
+    //@Size(max = 768)
 
     @Schema(description = "用户代理")
     private String userAgent;

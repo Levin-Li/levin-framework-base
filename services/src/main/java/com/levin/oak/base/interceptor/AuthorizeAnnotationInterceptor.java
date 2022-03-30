@@ -5,6 +5,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +31,11 @@ public class AuthorizeAnnotationInterceptor implements HandlerInterceptor {
         this.supplier = supplier;
     }
 
+    @PostConstruct
+    public void init() {
+
+    }
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
@@ -50,5 +56,15 @@ public class AuthorizeAnnotationInterceptor implements HandlerInterceptor {
 
         return true;
     }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+
+//        if (!(handler instanceof HandlerMethod)) {
+//            return;
+//        }
+
+    }
+
 
 }

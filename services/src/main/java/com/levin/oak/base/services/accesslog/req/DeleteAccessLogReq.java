@@ -38,7 +38,7 @@ import java.util.Date;
 //@AllArgsConstructor
 
 @NoArgsConstructor
-@Builder
+//@Builder
 //@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
@@ -48,11 +48,39 @@ public class DeleteAccessLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1030736962L;
 
-
     @Schema(description = "id集合")
-    @In(value = E_AccessLog.id, require = true)
+    @In(value = E_AccessLog.id)
     @NotEmpty
     private Long[] idList;
+
+
+    @Schema(description = "请求的域名")
+    private String domain;
+
+
+    //@Size(max = 64)
+
+    @Schema(description = "访问者")
+    private String visitor;
+
+
+    //@NotNull
+
+    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
+    @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Gte
+    private Date gteCreateTime;
+
+    @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Lte
+    private Date lteCreateTime;
+
+    //@NotBlank
+
+    @Schema(description = "标题")
+    private String title;
+
+
 
     public DeleteAccessLogReq(Long... idList) {
         this.idList = idList;

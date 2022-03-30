@@ -13,6 +13,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  *  启动类
@@ -21,6 +22,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 @Slf4j
 @EnableCaching
+@EnableScheduling
+@EnableAsync
 public class Application {
 
 
