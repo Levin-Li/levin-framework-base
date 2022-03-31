@@ -19,7 +19,7 @@ public interface EntityConst {
     /**
      *
      */
-    String TYPE_NAME = "数据";
+    String TYPE_NAME = "实体数据";
 
     /**
      *
