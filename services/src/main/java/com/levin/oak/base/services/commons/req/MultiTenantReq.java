@@ -41,7 +41,7 @@ public abstract class MultiTenantReq
      *
      * @return
      */
-    protected boolean isContainsPublicData() {
+    public boolean isContainsPublicData() {
         return false;
     }
 

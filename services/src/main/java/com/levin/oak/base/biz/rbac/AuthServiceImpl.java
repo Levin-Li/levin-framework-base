@@ -195,12 +195,10 @@ public class AuthServiceImpl
             throw new AuthorizationException("401", "请输入正确的帐号或密码");
         }
 
-        //密码加密
-        req.setPassword(encryptPassword(req.getPassword()));
-
-//        String deviceType = getDeviceType(req.getUa());
-
-        UserInfo user = simpleDao.findOneByQueryObj(req);
+        UserInfo user = simpleDao.findOneByQueryObj(
+                //密码加密
+                req.setPassword(encryptPassword(req.getPassword()))
+        );
 
         auditUser(user);
 
@@ -237,8 +235,7 @@ public class AuthServiceImpl
 
         //如果是无租户用户，必须是 SA 角色的用户
         if (!StringUtils.hasText(user.getTenantId())) {
-            Assert.notEmpty(user.getRoleList(), "非法的无租户用户");
-            Assert.isTrue(user.getRoleList().contains(RbacRoleObject.SA_ROLE), "非法的无租户用户");
+            Assert.isTrue(user.isSuperAdmin(), "非法的无租户用户");
         }
 
     }

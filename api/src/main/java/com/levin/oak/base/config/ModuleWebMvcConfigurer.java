@@ -97,7 +97,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
             registry.addInterceptor(new AuthorizeAnnotationInterceptor(rbacService))
                     .addPathPatterns("/**");
 
-            log.info("*** 模块认证全局拦截器[ {} ]已经启用 ，可以配置[{}enableGlobalAuthorizeInterceptor]禁用", "/", PLUGIN_PREFIX);
+            log.info("*** 友情提示 *** 模块认证全局拦截器[ {} ]已经启用 ，可以配置[{}enableGlobalAuthorizeInterceptor]禁用", "/", PLUGIN_PREFIX);
 
         } else if (enableAuthorizeInterceptor == null
                 || Boolean.TRUE.equals(enableAuthorizeInterceptor)) {
@@ -108,7 +108,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
             registry.addInterceptor(new AuthorizeAnnotationInterceptor(rbacService))
                     .addPathPatterns(API_PATH + "**");
 
-            log.info("*** 模块认证拦截器[ {} ]已经启用 ，可以配置[{}enableAuthorizeInterceptor]禁用", API_PATH, PLUGIN_PREFIX);
+            log.info("*** 友情提示 *** 模块认证拦截器[ {} ]已经启用 ，可以配置[{}enableAuthorizeInterceptor]禁用", API_PATH, PLUGIN_PREFIX);
         }
 
     }
