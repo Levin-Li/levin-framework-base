@@ -103,9 +103,7 @@ public class RoleController extends BaseController{
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     public ApiResp<RoleInfo> retrieve(@NotNull RoleIdReq req) {
-
          return ApiResp.ok(roleService.findById(req));
-
      }
 
     /**

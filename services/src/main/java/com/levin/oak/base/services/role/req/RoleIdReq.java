@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.role.req;
 
+import com.levin.commons.dao.annotation.Ignore;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -53,12 +54,25 @@ public class RoleIdReq extends MultiTenantReq {
 
 private static final long serialVersionUID = -445356492L;
 
-
     @Schema(description = "id" , required = true)
     @Eq(require = true)
     @NotNull
     protected Long id;
-    
+
+    @Schema(description = "是否包含公共数据", hidden = true)
+    @Ignore
+    private boolean isContainsPublicData = false;
+
+    /**
+     * 是否为公共数据
+     *
+     * @return
+     */
+    @Override
+    protected boolean isContainsPublicData() {
+        //允许查询公共的角色
+        return isContainsPublicData;
+    }
 
     @PostConstruct
     public void preQuery() {

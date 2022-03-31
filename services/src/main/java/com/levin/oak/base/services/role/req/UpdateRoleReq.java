@@ -60,9 +60,10 @@ public class UpdateRoleReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
-    @NotBlank
-    @Schema(description = "编码")
-    private String code;
+     //编码不允许修改
+//    @NotBlank
+//    @Schema(description = "编码")
+//    private String code;
 
     @Schema(description = "图标")
     private String icon;

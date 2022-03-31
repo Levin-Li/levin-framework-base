@@ -20,6 +20,9 @@
    AuthorizeAnnotationInterceptor 基于注解的访问鉴权控制器拦截
    
    
+   系统中 角色 和 菜单 有公共数据，租户可以使用公共数据。
+   
+   
 4、支持Amis前端
       
       

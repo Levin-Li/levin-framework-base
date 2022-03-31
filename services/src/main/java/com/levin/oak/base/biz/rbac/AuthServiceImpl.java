@@ -416,7 +416,7 @@ public class AuthServiceImpl
                     .setAction("*")
                     .toString());
 
-            roleService.create(new CreateRoleReq()
+            simpleDao.create(new CreateRoleReq()
                     .setCode("SA")
                     .setName("超级管理员")
                     .setEditable(false)
@@ -434,7 +434,7 @@ public class AuthServiceImpl
                     .setAction("*")
                     .toString());
 
-            roleService.create(new CreateRoleReq()
+            simpleDao.create(new CreateRoleReq()
                     .setCode("ADMIN")
                     .setName("租户管理员")
                     .setEditable(false)
@@ -459,7 +459,7 @@ public class AuthServiceImpl
                     .setAction(EntityConst.VIEW_DETAIL_ACTION + "*")
                     .toString());
 
-            roleService.create(new CreateRoleReq()
+            simpleDao.create(new CreateRoleReq()
                     .setCode("TEST")
                     .setName("只读测试员")
                     .setOrgDataScope(Role.OrgDataScope.MySelf)

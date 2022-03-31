@@ -57,6 +57,21 @@ public class QueryMenuResReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -887712701L;
 
+    @Schema(description = "是否包含公共数据", hidden = true)
+    @Ignore
+    private boolean isContainsPublicData = true;
+
+    /**
+     * 是否为公共数据
+     *
+     * @return
+     */
+    @Override
+    protected boolean isContainsPublicData() {
+        //允许查询公共的角色
+        return isContainsPublicData;
+    }
+
     @Ignore
     @Schema(description = "排序字段")
     private String orderBy;

@@ -5,11 +5,8 @@ import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.annotation.Gte;
 import com.levin.commons.dao.annotation.Ignore;
 import com.levin.commons.dao.annotation.Lte;
-import com.levin.commons.dao.annotation.logic.OR;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.dao.annotation.order.SimpleOrderBy;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.JsonStrLikeConverter;
 import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.entities.Role.OrgDataScope;
@@ -22,7 +19,6 @@ import lombok.experimental.FieldNameConstants;
 
 import javax.annotation.PostConstruct;
 import java.util.Date;
-import java.util.List;
 
 ////////////////////////////////////
 //自动导入列表
@@ -46,6 +42,21 @@ import java.util.List;
 public class QueryRoleReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445356492L;
+
+    @Schema(description = "是否包含公共数据", hidden = true)
+    @Ignore
+    private boolean isContainsPublicData = true;
+
+    /**
+     * 是否为公共数据
+     *
+     * @return
+     */
+    @Override
+    protected boolean isContainsPublicData() {
+        //允许查询公共的角色
+        return isContainsPublicData;
+    }
 
     @Ignore
     @Schema(description = "排序字段")
