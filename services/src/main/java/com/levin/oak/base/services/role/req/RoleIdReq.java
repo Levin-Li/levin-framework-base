@@ -69,7 +69,7 @@ private static final long serialVersionUID = -445356492L;
      * @return
      */
     @Override
-    protected boolean isContainsPublicData() {
+    public boolean isContainsPublicData() {
         //允许查询公共的角色
         return isContainsPublicData;
     }
