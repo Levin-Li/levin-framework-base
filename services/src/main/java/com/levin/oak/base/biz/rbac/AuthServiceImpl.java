@@ -77,6 +77,8 @@ public class AuthServiceImpl
     @Resource
     TenantService tenantService;
 
+    public final String salt = getClass().getPackage().getName();
+
     @PostConstruct
     public void init() {
 
@@ -302,7 +304,6 @@ public class AuthServiceImpl
         return user.getRoleList();// JsonStrArrayUtils.parse(user.getRoleList(), null, null);
     }
 
-
     @Override
     public String encryptPassword(String pwd) {
 
@@ -401,7 +402,7 @@ public class AuthServiceImpl
         }
 
         Role role = simpleDao.selectFrom(Role.class)
-                .eq(E_Role.code, "SA")
+                .eq(E_Role.code, RbacRoleObject.SA_ROLE)
                 .isNull(E_Role.tenantId)
                 .findOne();
 
@@ -417,7 +418,7 @@ public class AuthServiceImpl
                     .toString());
 
             simpleDao.create(new CreateRoleReq()
-                    .setCode("SA")
+                    .setCode(RbacRoleObject.SA_ROLE)
                     .setName("超级管理员")
                     .setEditable(false)
                     .setOrgDataScope(Role.OrgDataScope.All)
@@ -435,7 +436,7 @@ public class AuthServiceImpl
                     .toString());
 
             simpleDao.create(new CreateRoleReq()
-                    .setCode("ADMIN")
+                    .setCode(RbacRoleObject.ADMIN_ROLE)
                     .setName("租户管理员")
                     .setEditable(false)
                     .setOrgDataScope(Role.OrgDataScope.All)
@@ -480,7 +481,7 @@ public class AuthServiceImpl
 
         List<String> roleList = new LinkedList<>();
 
-        roleList.add("SA");
+        roleList.add(RbacRoleObject.SA_ROLE);
 
         userService.create(new CreateUserReq()
                 .setLoginName("sa")
@@ -493,12 +494,12 @@ public class AuthServiceImpl
         ///////////////////////////////////////////////////
 
         roleList.clear();
-        roleList.add("ADMIN");
+        roleList.add(RbacRoleObject.ADMIN_ROLE);
 
         userService.create(new CreateUserReq()
                 .setLoginName("admin")
                 .setPassword(encryptPassword("123456"))
-                .setName("租户管理员")
+                .setName("管理员")
                 .setStaffNo("9999")
                 .setRoleList(roleList)
                 .setTenantId(tenantInfo.getId())

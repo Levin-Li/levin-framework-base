@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.role.req;
 
+import com.levin.commons.rbac.RbacRoleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -52,11 +53,15 @@ public class DeleteRoleReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445356492L;
 
-
     @Schema(description = "id集合")
     @In(value = E_Role.id, require = true)
     @NotEmpty
     private Long[] idList;
+
+    //不允许删除SA角色
+    @Schema(description = "无需设置", hidden = true)
+    @NotEq(require = true)
+    private final String notEqCode = RbacRoleObject.SA_ROLE;
 
     public DeleteRoleReq(Long... idList) {
         this.idList = idList;
@@ -66,7 +71,6 @@ public class DeleteRoleReq extends MultiTenantReq {
         this.idList = idList;
         return this;
     }
-
 
     @PostConstruct
     public void preDelete() {

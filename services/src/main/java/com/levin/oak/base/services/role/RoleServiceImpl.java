@@ -24,6 +24,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.PersistenceException;
 import java.util.List;
@@ -64,7 +65,8 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Override
     public Long create(CreateRoleReq req) {
         //不允许创建SA角色
-        Assert.isTrue(!RbacRoleObject.SA_ROLE.equalsIgnoreCase(req.getCode()), "不允许创建编码为SA的角色");
+        Assert.isTrue(!RbacRoleObject.SA_ROLE.equalsIgnoreCase(StringUtils.trimAllWhitespace(req.getCode())),
+                "角色编码[" + RbacRoleObject.SA_ROLE + "]已经被系统使用");
         Role entity = simpleDao.create(req);
         return entity.getId();
     }

@@ -68,7 +68,6 @@ public class UpdateUserPwdReq extends MultiTenantReq {
     public void preUpdate() {
         //@todo 更新之前初始化数据
 
-
     }
 
 }

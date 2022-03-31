@@ -4,11 +4,12 @@ import com.levin.commons.dao.DaoSecurityException;
 import com.levin.commons.dao.Paging;
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.dao.support.PagingData;
+import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.oak.base.ModuleOption;
+import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
 import com.levin.oak.base.services.BaseService;
-import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.services.user.info.UserInfo;
 import com.levin.oak.base.services.user.req.*;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,6 +25,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.persistence.PersistenceException;
@@ -57,7 +59,6 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Autowired
     private SimpleDao simpleDao;
 
-
     @Resource
     AuthService authService;
 
@@ -68,8 +69,28 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Override
     public Long create(CreateUserReq req) {
+
+        checkSARole(req.getRoleList(), null);
+
         User entity = simpleDao.create(req);
+
         return entity.getId();
+    }
+
+
+    protected void checkSARole(List<String> roleList, String errorInfo) {
+
+        //如果有超级角色，需要检查当前用户，是否是超管
+        if (roleList != null
+                && roleList.stream().map(StringUtils::trimAllWhitespace)
+                .anyMatch(name -> RbacRoleObject.SA_ROLE.equalsIgnoreCase(name))) {
+
+            if (errorInfo == null) {
+                errorInfo = "当前用户未拥有超管角色";
+            }
+
+            Assert.isTrue(authService.getUserInfo().isSuperAdmin(), errorInfo);
+        }
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
@@ -105,6 +126,8 @@ public class UserServiceImpl extends BaseService implements UserService {
     public int update(UpdateUserReq req) {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
+
+        checkSARole(req.getRoleList(), null);
 
         int n = simpleDao.updateByQueryObj(req);
 

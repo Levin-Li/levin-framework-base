@@ -1,9 +1,7 @@
 package com.levin.oak.base.biz.rbac;
 
-import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.SimpleAuthService;
-import com.levin.oak.base.services.user.info.UserInfo;
 
 import java.util.List;
 

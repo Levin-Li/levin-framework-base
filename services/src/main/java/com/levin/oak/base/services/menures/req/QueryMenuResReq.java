@@ -67,7 +67,7 @@ public class QueryMenuResReq extends MultiTenantReq{
      * @return
      */
     @Override
-    protected boolean isContainsPublicData() {
+    public boolean isContainsPublicData() {
         //允许查询公共的角色
         return isContainsPublicData;
     }
@@ -216,9 +216,7 @@ public class QueryMenuResReq extends MultiTenantReq{
     @Schema(description = "排序代码")
     private Integer orderCode;
 
-
     //@NotNull
-
     @Schema(description = "是否允许")
     private Boolean enable;
 

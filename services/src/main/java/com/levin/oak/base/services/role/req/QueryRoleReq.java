@@ -1,12 +1,10 @@
 package com.levin.oak.base.services.role.req;
 
 import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Contains;
-import com.levin.commons.dao.annotation.Gte;
-import com.levin.commons.dao.annotation.Ignore;
-import com.levin.commons.dao.annotation.Lte;
+import com.levin.commons.dao.annotation.*;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.dao.annotation.order.SimpleOrderBy;
+import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.entities.Role.OrgDataScope;
@@ -53,10 +51,15 @@ public class QueryRoleReq extends MultiTenantReq {
      * @return
      */
     @Override
-    protected boolean isContainsPublicData() {
+    public boolean isContainsPublicData() {
         //允许查询公共的角色
         return isContainsPublicData;
     }
+
+    //不允许查询出 SA 角色
+    @Schema(description = "无需设置", hidden = true)
+    @NotEq(require = true)
+    private final String notEqCode = RbacRoleObject.SA_ROLE;
 
     @Ignore
     @Schema(description = "排序字段")
