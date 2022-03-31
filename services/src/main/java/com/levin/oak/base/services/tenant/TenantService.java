@@ -57,4 +57,6 @@ public interface TenantService {
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     TenantInfo findOne(QueryTenantReq req);
+
+      boolean clearCache(Long id);
 }
