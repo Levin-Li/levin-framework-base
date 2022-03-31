@@ -274,7 +274,10 @@ public class AuthServiceImpl
                         .eq(E_Role.enable, true)
                         .in(E_Role.code, roleList)
                         //公共角色和自有角色
-                        .isNullOrEq(E_MenuRes.tenantId, userInfo.getTenantId())
+                        .or()
+                        .isNull(E_MenuRes.tenantId)
+                        .eq(E_MenuRes.tenantId, userInfo.getTenantId())
+                        .end()
 
                         .find(String.class)
                         .parallelStream()

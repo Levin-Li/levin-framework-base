@@ -11,14 +11,16 @@ import com.levin.commons.utils.ClassUtils;
 import com.levin.commons.utils.ExpressionUtils;
 import com.levin.commons.utils.JsonStrArrayUtils;
 import com.levin.commons.utils.MapUtils;
-import com.levin.oak.base.entities.E_MenuRes;
-import com.levin.oak.base.entities.MenuRes;
-import com.levin.oak.base.services.BaseService;
-import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.biz.rbac.info.ActionInfo;
 import com.levin.oak.base.biz.rbac.info.ModuleInfo;
 import com.levin.oak.base.biz.rbac.info.ResInfo;
 import com.levin.oak.base.biz.rbac.info.ResTypeInfo;
+import com.levin.oak.base.entities.E_MenuRes;
+import com.levin.oak.base.entities.MenuRes;
+import com.levin.oak.base.services.BaseService;
+import com.levin.oak.base.services.menures.MenuResService;
+import com.levin.oak.base.services.menures.info.MenuResInfo;
+import com.levin.oak.base.services.menures.req.QueryMenuResReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -64,6 +66,8 @@ public class RbacServiceImpl extends BaseService implements RbacService {
     @Resource
     AuthService authService;
 
+    @Resource
+    MenuResService menuResService;
 
     @PostConstruct
     public void init() {
@@ -264,12 +268,21 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         Assert.notNull(userInfo, "无效的用户标识");
 
         //1、找出所有的菜单 包括公共菜单和租户自有菜单
-        List<MenuResInfo> menuRes = simpleDao.selectFrom(MenuRes.class)
-                .eq(E_MenuRes.enable, true)
-                //公共菜单和租户自有菜单
-                .isNullOrEq(E_MenuRes.tenantId, userInfo.getTenantId())
-                .orderBy(OrderBy.Type.Asc, E_MenuRes.orderCode)
-                .find(MenuResInfo.class);
+//        List<MenuResInfo> menuRes = simpleDao.selectFrom(MenuRes.class)
+//                .eq(E_MenuRes.enable, true)
+//                //公共菜单和租户自有菜单
+//                .isNullOrEq(E_MenuRes.tenantId, userInfo.getTenantId())
+//                .orderBy(OrderBy.Type.Asc, E_MenuRes.orderCode)
+//                .find(MenuResInfo.class);
+
+        List<MenuResInfo> menuRes = simpleDao.findByQueryObj(
+                new QueryMenuResReq()
+                        .setEnable(true)
+                        .setContainsPublicData(true)
+                        .setOrderBy(E_MenuRes.orderCode)
+                        .setOrderDir(OrderBy.Type.Asc)
+                        .setTenantId(userInfo.getTenantId())
+        );
 
         final Map<Long, MenuResInfo> cacheMap = new LinkedHashMap<>();
 
