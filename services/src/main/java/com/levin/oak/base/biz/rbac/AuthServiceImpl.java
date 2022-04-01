@@ -98,7 +98,7 @@ public class AuthServiceImpl
         log.info("On ContextRefreshedEvent " + event);
 
         if (event.getApplicationContext() == this.context) {
-            initData();
+
         }
 
     }
@@ -341,6 +341,7 @@ public class AuthServiceImpl
     /**
      * 初始化数据
      */
+    @Override
     public void initData() {
 
         log.info("初始化用户数据和菜单数据");

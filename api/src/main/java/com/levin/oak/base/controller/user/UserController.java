@@ -2,6 +2,7 @@ package com.levin.oak.base.controller.user;
 
 import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.dao.support.SimplePaging;
+import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.biz.rbac.AuthService;
@@ -15,6 +16,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -80,6 +83,21 @@ public class UserController extends BaseController {
         return ApiResp.ok(pagingData);
     }
 
+    protected void checkSARole(List<String> roleList, String errorInfo) {
+
+        //如果有超级角色，需要检查当前用户，是否是超管
+        if (roleList != null
+                && roleList.stream().map(StringUtils::trimAllWhitespace)
+                .anyMatch(name -> RbacRoleObject.SA_ROLE.equalsIgnoreCase(name))) {
+
+            if (errorInfo == null) {
+                errorInfo = "当前用户未拥有超管角色";
+            }
+
+            Assert.isTrue(authService.getUserInfo().isSuperAdmin(), errorInfo);
+        }
+    }
+
     /**
      * 新增
      *
@@ -89,6 +107,7 @@ public class UserController extends BaseController {
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     public ApiResp<Long> create(@RequestBody CreateUserReq req) {
+        checkSARole(req.getRoleList(), null);
         return ApiResp.ok(userService.create(req));
     }
 
@@ -101,6 +120,9 @@ public class UserController extends BaseController {
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateUserReq> reqList) {
+
+        reqList.forEach(req -> checkSARole(req.getRoleList(),null));
+
         return ApiResp.ok(userService.batchCreate(reqList));
     }
 
@@ -138,6 +160,7 @@ public class UserController extends BaseController {
     @PutMapping({""})
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     public ApiResp<Void> update(@RequestBody UpdateUserReq req) {
+        checkSARole(req.getRoleList(), null);
         return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
     }
 
@@ -147,6 +170,7 @@ public class UserController extends BaseController {
     @PutMapping("/batchUpdate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateUserReq> reqList) {
+        reqList.forEach(req -> checkSARole(req.getRoleList(),null));
         return ApiResp.ok(userService.batchUpdate(reqList));
     }
 

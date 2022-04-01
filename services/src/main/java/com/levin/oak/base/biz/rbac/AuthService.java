@@ -11,6 +11,12 @@ import java.util.List;
 public interface AuthService extends SimpleAuthService {
 
     /**
+     * 初始化数据
+     */
+    default void initData() {
+    }
+
+    /**
      * 是否登录
      *
      * @return

@@ -70,28 +70,27 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public Long create(CreateUserReq req) {
 
-        checkSARole(req.getRoleList(), null);
+//        checkSARole(req.getRoleList(), null);
 
         User entity = simpleDao.create(req);
 
         return entity.getId();
     }
 
-
-    protected void checkSARole(List<String> roleList, String errorInfo) {
-
-        //如果有超级角色，需要检查当前用户，是否是超管
-        if (roleList != null
-                && roleList.stream().map(StringUtils::trimAllWhitespace)
-                .anyMatch(name -> RbacRoleObject.SA_ROLE.equalsIgnoreCase(name))) {
-
-            if (errorInfo == null) {
-                errorInfo = "当前用户未拥有超管角色";
-            }
-
-            Assert.isTrue(authService.getUserInfo().isSuperAdmin(), errorInfo);
-        }
-    }
+//    protected void checkSARole(List<String> roleList, String errorInfo) {
+//
+//        //如果有超级角色，需要检查当前用户，是否是超管
+//        if (roleList != null
+//                && roleList.stream().map(StringUtils::trimAllWhitespace)
+//                .anyMatch(name -> RbacRoleObject.SA_ROLE.equalsIgnoreCase(name))) {
+//
+//            if (errorInfo == null) {
+//                errorInfo = "当前用户未拥有超管角色";
+//            }
+//
+//            Assert.isTrue(authService.getUserInfo().isSuperAdmin(), errorInfo);
+//        }
+//    }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
@@ -127,7 +126,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
 
-        checkSARole(req.getRoleList(), null);
+//        checkSARole(req.getRoleList(), null);
 
         int n = simpleDao.updateByQueryObj(req);
 
