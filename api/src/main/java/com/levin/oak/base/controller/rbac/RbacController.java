@@ -146,5 +146,4 @@ public class RbacController extends BaseController {
         return ApiResp.ok(rbacService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId()));
     }
 
-
 }

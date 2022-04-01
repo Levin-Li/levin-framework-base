@@ -103,9 +103,7 @@ public class DictController extends BaseController{
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     public ApiResp<DictInfo> retrieve(@NotNull DictIdReq req) {
-
          return ApiResp.ok(dictService.findById(req));
-
      }
 
     /**
