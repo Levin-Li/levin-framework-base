@@ -27,10 +27,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
-* 简单接口
-* @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:35
+* 简单动态接口
+* @Author Auto gen by simple-dao-codegen 2022-4-1 17:40:26
 */
-@Schema(description ="简单接口")
+@Schema(description ="简单动态接口")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
@@ -43,97 +43,97 @@ public class SimpleApiInfo implements Serializable {
 
 
    @Size(max = 16)
-   @Schema(description = "http方法")
+   @Schema(description = "http方法" )
    private String methods;
 
 
    @NotNull
-   @Schema(description = "脚本语言")
+   @Schema(description = "脚本语言" , required = true)
    private Language language;
 
 
    @NotNull
-   @Schema(description = "id")
+   @Schema(description = "id" , required = true)
    private Long id;
 
 
    @NotBlank
    @Size(max = 64)
-   @Schema(description = "分类名称")
+   @Schema(description = "分类名称" , required = true)
    private String category;
 
 
    @NotBlank
    @Size(max = 64)
-   @Schema(description = "分组名称")
+   @Schema(description = "分组名称" , required = true)
    private String groupName;
 
 
    @NotBlank
-   @Schema(description = "访问路径")
+   @Schema(description = "访问路径" , required = true)
    private String path;
 
 
-   @Schema(description = "内容")
+   @Schema(description = "内容" )
    private String content;
 
 
    @Size(max = 64)
-   @Schema(description = "机构ID")
+   @Schema(description = "机构ID" )
    private String orgId;
 
 
    @Size(max = 64)
-   @Schema(description = "租户ID")
+   @Schema(description = "租户ID" )
    private String tenantId;
 
 
    @Size(max = 64)
-   @Schema(description = "系统子域")
+   @Schema(description = "系统子域" )
    private String domain;
 
 
    @NotBlank
    @Size(max = 128)
-   @Schema(description = "名称")
+   @Schema(description = "名称" , required = true)
    private String name;
 
 
    @Size(max = 128)
-   @Schema(description = "拼音，格式：全拼(简拼)")
+   @Schema(description = "拼音，格式：全拼(简拼)" )
    private String pinyinName;
 
 
    @Size(max = 128)
-   @Schema(description = "创建者")
+   @Schema(description = "创建者" )
    private String creator;
 
 
    @NotNull
-   @Schema(description = "创建时间")
+   @Schema(description = "创建时间" , required = true)
    private Date createTime;
 
 
-   @Schema(description = "更新时间")
+   @Schema(description = "更新时间" )
    private Date lastUpdateTime;
 
 
-   @Schema(description = "排序代码")
+   @Schema(description = "排序代码" )
    private Integer orderCode;
 
 
    @NotNull
-   @Schema(description = "是否允许")
+   @Schema(description = "是否允许" , required = true)
    private Boolean enable;
 
 
    @NotNull
-   @Schema(description = "是否可编辑")
+   @Schema(description = "是否可编辑" , required = true)
    private Boolean editable;
 
 
    @Size(max = 512)
-   @Schema(description = "备注")
+   @Schema(description = "备注" )
    private String remark;
 
 
