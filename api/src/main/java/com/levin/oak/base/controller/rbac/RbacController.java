@@ -119,7 +119,7 @@ public class RbacController extends BaseController {
      */
     @GetMapping("logout")
     @Operation(tags = {"授权管理"}, summary = "用户登出")
-    public ApiResp logout() {
+    public ApiResp<Void> logout() {
         authService.logout();
         return ApiResp.ok();
     }
