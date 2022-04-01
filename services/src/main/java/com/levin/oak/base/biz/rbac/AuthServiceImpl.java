@@ -483,7 +483,7 @@ public class AuthServiceImpl
 
         roleList.add(RbacRoleObject.SA_ROLE);
 
-        userService.create(new CreateUserReq()
+        simpleDao.create(new CreateUserReq()
                 .setLoginName("sa")
                 .setPassword(encryptPassword("123456"))
                 .setName("超级管理员")
@@ -496,7 +496,7 @@ public class AuthServiceImpl
         roleList.clear();
         roleList.add(RbacRoleObject.ADMIN_ROLE);
 
-        userService.create(new CreateUserReq()
+        simpleDao.create(new CreateUserReq()
                 .setLoginName("admin")
                 .setPassword(encryptPassword("123456"))
                 .setName("管理员")
@@ -511,7 +511,7 @@ public class AuthServiceImpl
         roleList.clear();
         roleList.add("test");
 
-        userService.create(new CreateUserReq()
+        simpleDao.create(new CreateUserReq()
                 .setLoginName("test")
                 .setPassword(encryptPassword("123456"))
                 .setName("只读测试员")
