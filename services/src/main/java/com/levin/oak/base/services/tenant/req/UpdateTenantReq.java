@@ -72,10 +72,10 @@ public class UpdateTenantReq extends BaseReq {
     @Schema(description = "帐号余额")
     private Double balance;
 
-    @Schema(description = "总坐席数")
+    @Schema(description = "总许可数")
     private Integer licenseCnt;
 
-    @Schema(description = "剩余坐席数")
+    @Schema(description = "剩余许可数")
     private Integer remainingLicenseCnt;
 
     @Schema(description = "到期时间")

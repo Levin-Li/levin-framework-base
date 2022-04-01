@@ -22,7 +22,7 @@ import java.util.Date;
 //自动导入列表
 ////////////////////////////////////
 
-@Schema(description = "租户许可变更请求")
+@Schema(description = "租户剩余许可数变更请求")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,7 +43,7 @@ public class TenantLicenseReq extends BaseReq {
     @Eq(require = true)
     private String id;
 
-    @Schema(description = "剩余坐席数")
+    @Schema(description = "剩余许可数")
     @Update(paramExpr = "${_name} + ${_val}", require = true)
     //更新后的
     @Where(paramExpr = E_Tenant.licenseCnt + " >= ( ${_name} + ${_val} ) AND ( ${_name} + ${_val} ) >=0 ", require = true)

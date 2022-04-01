@@ -79,10 +79,10 @@ public class Tenant extends AbstractNamedEntityObject {
     @Schema(description = "帐号余额")
     Double balance;
 
-    @Schema(description = "总坐席数")
+    @Schema(description = "总许可数")
     Integer licenseCnt;
 
-    @Schema(description = "剩余坐席数")
+    @Schema(description = "剩余许可数")
     Integer remainingLicenseCnt;
 
     @Schema(description = "到期时间")

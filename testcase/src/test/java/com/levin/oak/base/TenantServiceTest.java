@@ -100,9 +100,9 @@ public class TenantServiceTest {
 
             // req.setBalance(0.1d);//帐号余额 
 
-            // req.setLicenseCnt(1);//总坐席数 
+            // req.setLicenseCnt(1);//总许可数
 
-            // req.setRemainingLicenseCnt(1);//剩余坐席数 
+            // req.setRemainingLicenseCnt(1);//剩余许可数
 
             // req.setLicenseExpire(new Date());//到期时间 
 
@@ -150,8 +150,8 @@ public class TenantServiceTest {
         // req.setCode("企业信用编码_1");//企业信用编码
         // req.setTenantKey("租户编码_1");//租户编码
         // req.setBalance(0.1d);//帐号余额
-        // req.setLicenseCnt(1);//总坐席数
-        // req.setRemainingLicenseCnt(1);//剩余坐席数
+        // req.setLicenseCnt(1);//总许可数
+        // req.setRemainingLicenseCnt(1);//剩余许可数
         // req.setGteLicenseExpire(DateUtils.getZoneHour(new Date()));//最小到期时间
         // req.setLteLicenseExpire(DateUtils.getEndHour(new Date()));//最大到期时间
         // req.setContractPerson("联系人_1");//联系人
@@ -187,8 +187,8 @@ public class TenantServiceTest {
            // req.setCode("企业信用编码_1");//企业信用编码 
            // req.setTenantKey("租户编码_1");//租户编码 必填
            // req.setBalance(0.1d);//帐号余额 
-           // req.setLicenseCnt(1);//总坐席数 
-           // req.setRemainingLicenseCnt(1);//剩余坐席数 
+           // req.setLicenseCnt(1);//总许可数
+           // req.setRemainingLicenseCnt(1);//剩余许可数
            // req.setLicenseExpire(new Date());//到期时间 
            // req.setContractPerson("联系人_1");//联系人 
            // req.setContractPhone("联系电话_1");//联系电话 
