@@ -109,6 +109,12 @@ public class TenantServiceImpl extends BaseService implements TenantService {
         return n;
     }
 
+    @Override
+    @CacheEvict(condition = "#req.id != null && #req.id.trim().length() > 0", key = E_Tenant.CACHE_KEY_PREFIX + "#req.id")
+    public int update(TenantLicenseReq req) {
+        return simpleDao.updateByQueryObj(req);
+    }
+
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
@@ -157,9 +163,14 @@ public class TenantServiceImpl extends BaseService implements TenantService {
         return simpleDao.findOneByQueryObj(req);
     }
 
+    /**
+     * 清除缓存
+     *
+     * @param key
+     */
     @Override
-    @CacheEvict(condition = "#id != null", key = E_Tenant.CACHE_KEY_PREFIX + "#id")
-    public boolean clearCache(Long id) {
-        return true;
+    @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_Tenant.CACHE_KEY_PREFIX + "#key")
+    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION)
+    public void clearCache(Object key) {
     }
 }

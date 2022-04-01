@@ -29,6 +29,10 @@ public interface EntityConst {
     /**
      *
      */
+    String CLEAR_CACHE_ACTION = "清除缓存";
+    /**
+     *
+     */
     String CREATE_ACTION = "新增";
     String BATCH_CREATE_ACTION = "批量新增";
 

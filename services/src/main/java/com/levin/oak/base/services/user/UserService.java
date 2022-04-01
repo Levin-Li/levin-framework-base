@@ -60,4 +60,10 @@ public interface UserService {
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     UserInfo findOne(QueryUserReq req);
+
+    /**
+     * 清除缓存
+     */
+    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
+    void clearCache(Object key);
 }

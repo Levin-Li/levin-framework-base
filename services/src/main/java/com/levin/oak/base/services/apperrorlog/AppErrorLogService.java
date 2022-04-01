@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  应用错误日志-服务接口
- *  @author Auto gen by simple-dao-codegen 2022-3-29 22:58:02
+ *  @author Auto gen by simple-dao-codegen 2022-4-1 15:18:14
  */
 @Tag(name = E_AppErrorLog.BIZ_NAME, description = E_AppErrorLog.BIZ_NAME + MAINTAIN_ACTION)
 public interface AppErrorLogService {
@@ -35,13 +35,13 @@ public interface AppErrorLogService {
     List<Long> batchCreate(List<CreateAppErrorLogReq> reqList);
 
     /**
-     * 通过主键查找记录，一般建议的服务内部调用，不要的控制器中调用
+     * 通过主键查找记录，建议在服务内部调用，不要在控制器中调用
      */
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     AppErrorLogInfo findById(Long id);
 
     /**
-    * 通过主键查找记录，同时可能注入其它条件，防止数据安全
+    * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性
     */
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     AppErrorLogInfo findById(AppErrorLogIdReq req);
@@ -56,11 +56,18 @@ public interface AppErrorLogService {
     int delete(AppErrorLogIdReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-     Integer batchDelete(DeleteAppErrorLogReq req);
+    Integer batchDelete(DeleteAppErrorLogReq req);
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<AppErrorLogInfo> query(QueryAppErrorLogReq req , Paging paging);
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     AppErrorLogInfo findOne(QueryAppErrorLogReq req);
+
+    /**
+    * 清除缓存
+    */
+    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
+    void clearCache(Object key);
+
 }

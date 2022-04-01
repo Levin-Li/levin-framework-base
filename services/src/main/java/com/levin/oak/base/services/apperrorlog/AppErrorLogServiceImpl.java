@@ -44,7 +44,7 @@ import java.util.Date;
 /**
  *  应用错误日志-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-3-29 22:58:02
+ *@author auto gen by simple-dao-codegen 2022-4-1 15:32:02
  *
  */
 
@@ -163,6 +163,12 @@ public class AppErrorLogServiceImpl extends BaseService implements AppErrorLogSe
     @Override
     public AppErrorLogInfo findOne(QueryAppErrorLogReq req){
         return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Override
+    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_AppErrorLog.CACHE_KEY_PREFIX + "#key")
+    public void clearCache(Object key) {
     }
 
 }

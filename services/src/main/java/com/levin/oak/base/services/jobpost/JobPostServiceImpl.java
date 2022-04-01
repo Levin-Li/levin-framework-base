@@ -45,7 +45,7 @@ import java.util.Date;
 /**
  *  工作岗位-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *@author auto gen by simple-dao-codegen 2022-4-1 15:32:03
  *
  */
 
@@ -162,6 +162,12 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Override
     public JobPostInfo findOne(QueryJobPostReq req){
         return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Override
+    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_JobPost.CACHE_KEY_PREFIX + "#key")
+    public void clearCache(Object key) {
     }
 
 }

@@ -43,9 +43,9 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  简单接口-服务实现
+ *  简单动态接口-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-3-25 17:01:35
+ *@author auto gen by simple-dao-codegen 2022-4-1 15:32:02
  *
  */
 
@@ -162,6 +162,12 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
     @Override
     public SimpleApiInfo findOne(QuerySimpleApiReq req){
         return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Override
+    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_SimpleApi.CACHE_KEY_PREFIX + "#key")
+    public void clearCache(Object key) {
     }
 
 }

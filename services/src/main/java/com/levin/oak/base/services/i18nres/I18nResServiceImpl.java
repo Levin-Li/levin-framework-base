@@ -44,7 +44,7 @@ import java.util.Date;
 /**
  *  国际化资源-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *@author auto gen by simple-dao-codegen 2022-4-1 15:32:03
  *
  */
 
@@ -161,6 +161,12 @@ public class I18nResServiceImpl extends BaseService implements I18nResService {
     @Override
     public I18nResInfo findOne(QueryI18nResReq req){
         return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Override
+    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_I18nRes.CACHE_KEY_PREFIX + "#key")
+    public void clearCache(Object key) {
     }
 
 }

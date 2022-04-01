@@ -206,4 +206,15 @@ public class UserServiceImpl extends BaseService implements UserService {
         return simpleDao.findOneByQueryObj(req);
     }
 
+
+    /**
+     * 清除缓存
+     *
+     * @param key
+     */
+    @Override
+    @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_User.CACHE_KEY_PREFIX + "#key")
+    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION)
+    public void clearCache(Object key) {
+    }
 }

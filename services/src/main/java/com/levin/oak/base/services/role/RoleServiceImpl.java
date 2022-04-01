@@ -6,6 +6,7 @@ import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.oak.base.ModuleOption;
+import com.levin.oak.base.entities.E_Org;
 import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.services.BaseService;
@@ -161,6 +162,13 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Override
     public RoleInfo findOne(QueryRoleReq req) {
         return simpleDao.findOneByQueryObj(req);
+    }
+
+
+    @Override
+    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_Role.CACHE_KEY_PREFIX + "#key")
+    public void clearCache(Object key) {
     }
 
 }
