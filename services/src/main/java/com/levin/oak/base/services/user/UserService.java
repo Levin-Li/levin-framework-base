@@ -62,6 +62,15 @@ public interface UserService {
     UserInfo findById(@NotNull UserIdReq req);
 
     /**
+     * 修改密码
+     *
+     * @param req
+     * @return
+     */
+    @Operation(tags = {BIZ_NAME}, summary = "修改密码")
+    int update(UpdateUserPwdReq req);
+
+    /**
      * 更新记录，并返回更新记录数
      *
      * @param req
@@ -124,13 +133,5 @@ public interface UserService {
     @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
 
-    /**
-     * 修改密码
-     *
-     * @param req
-     * @return
-     */
-    @Operation(tags = {BIZ_NAME}, summary = "修改密码")
-    int update(UpdateUserPwdReq req);
 
 }

@@ -95,6 +95,21 @@ public class UserServiceImpl extends BaseService implements UserService {
         return simpleDao.findOneByQueryObj(req);
     }
 
+    @Override
+    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    public int update(UpdateUserPwdReq req) {
+
+        Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
+        Assert.hasText(req.getOldPassword(), "旧密码不能为空");
+        Assert.hasText(req.getPassword(), "新密码不能为空");
+
+        req.setOldPassword(authService.encryptPassword(req.getOldPassword()))
+                .setPassword(authService.encryptPassword(req.getPassword()));
+
+        return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
+
+    }
+
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
     @CacheEvict(condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
@@ -157,21 +172,6 @@ public class UserServiceImpl extends BaseService implements UserService {
         return simpleDao.findOneByQueryObj(req);
     }
 
-
-    @Override
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
-    public int update(UpdateUserPwdReq req) {
-
-        Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-        Assert.hasText(req.getOldPassword(), "旧密码不能为空");
-        Assert.hasText(req.getPassword(), "新密码不能为空");
-
-        req.setOldPassword(authService.encryptPassword(req.getOldPassword()))
-                .setPassword(authService.encryptPassword(req.getPassword()));
-
-        return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
-
-    }
 
     @Override
     @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")

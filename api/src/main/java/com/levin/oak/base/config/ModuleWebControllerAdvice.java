@@ -1,7 +1,11 @@
 package com.levin.oak.base.config;
 
+import static com.levin.oak.base.ModuleOption.*;
+
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.exception.SaTokenException;
+import com.levin.oak.base.*;
+
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.commons.service.domain.ServiceResp;
 import com.levin.commons.service.exception.AccessDeniedException;
@@ -9,28 +13,31 @@ import com.levin.commons.service.exception.ServiceException;
 import com.levin.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.persistence.PersistenceException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
+import java.net.ConnectException;
 import java.net.SocketException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
-import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.boot.autoconfigure.condition.*;
+import lombok.extern.slf4j.Slf4j;
+import java.text.SimpleDateFormat;
 
 /**
  * 在Spring 3.2中
@@ -54,11 +61,9 @@ public class ModuleWebControllerAdvice {
         log.info("init...");
     }
 
-
     /**
      * // @InitBinder标注的initBinder()方法表示注册一个Date类型的类型转换器，用于将类似这样的2019-06-10
      * // 日期格式的字符串转换成Date对象
-     *
      * @param binder
      */
     @InitBinder
@@ -102,7 +107,6 @@ public class ModuleWebControllerAdvice {
 //        return result;
 //    }
 
-
     @ExceptionHandler({NotLoginException.class,})
     public ApiResp onNotLoginException(Exception e) {
 
@@ -121,13 +125,22 @@ public class ModuleWebControllerAdvice {
                 , "认证异常：" + e.getMessage());
     }
 
+    @ExceptionHandler({AccessDeniedException.class,})
+    public ApiResp onAccessDeniedException(Exception e) {
+
+        response.setStatus(HttpStatus.FORBIDDEN.value());
+
+        return ApiResp.error(ServiceResp.ErrorType.AuthenticationError.getBaseErrorCode()
+                , e.getMessage());
+    }
+
     @ExceptionHandler({MethodArgumentNotValidException.class, IllegalArgumentException.class, MissingServletRequestParameterException.class})
     public ApiResp onParameterException(Exception e) {
 
         log.error("请求参数异常," + request.getRequestURL(), e);
 
         return (ApiResp) ApiResp.error(ServiceResp.ErrorType.BizError.getBaseErrorCode()
-                , e.getMessage())
+                ,   e.getMessage())
                 .setDetailMsg(ExceptionUtils.getAllCauseInfo(e, " -> "));
     }
 
@@ -146,17 +159,13 @@ public class ModuleWebControllerAdvice {
 
     @ExceptionHandler(ServiceException.class)
     public ApiResp onServiceException(Exception e) {
+
+        response.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
+
         return (ApiResp) ApiResp.error(ServiceResp.ErrorType.SystemInnerError.getBaseErrorCode()
                 , e.getMessage())
                 .setDetailMsg(ExceptionUtils.getAllCauseInfo(e, " -> "));
     }
-
-    @ExceptionHandler({AccessDeniedException.class,})
-    public ApiResp onAccessDeniedException(Exception e) {
-        return ApiResp.error(ServiceResp.ErrorType.AuthenticationError.getBaseErrorCode()
-                , e.getMessage());
-    }
-
 
     @ExceptionHandler({PersistenceException.class, SQLException.class})
     public ApiResp onPersistenceException(Exception e) {
@@ -180,6 +189,8 @@ public class ModuleWebControllerAdvice {
 
         log.error("发生 Web异常:" + request.getRequestURL(), e);
 
+        response.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
+
         return (ApiResp) ApiResp.error(ServiceResp.ErrorType.SystemInnerError.getBaseErrorCode()
                 , e.getMessage())
                 .setDetailMsg(ExceptionUtils.getPrintInfo(e));
@@ -192,11 +203,16 @@ public class ModuleWebControllerAdvice {
         log.error("发生异常:" + request.getRequestURL(), e);
 
         //网络异常
-        if (ExceptionUtils.getCauseByTypes(e, SocketException.class) != null) {
+        if(ExceptionUtils.getCauseByTypes(e,SocketException.class) != null){
+
+            response.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
+
             return (ApiResp) ApiResp.error(ServiceResp.ErrorType.ResourceError.getBaseErrorCode()
                     , e.getMessage())
                     .setDetailMsg(ExceptionUtils.getPrintInfo(e));
         }
+
+        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 
         return (ApiResp) ApiResp.error(ServiceResp.ErrorType.UnknownError.getBaseErrorCode()
                 , e.getMessage())
