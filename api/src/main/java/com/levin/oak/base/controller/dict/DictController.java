@@ -26,7 +26,7 @@ import com.levin.oak.base.services.dict.info.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+//Auto gen by simple-dao-codegen 2022-4-2 19:44:58
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -41,7 +41,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "DictController")
-@RequestMapping(API_PATH + "dict")
+//@RequestMapping(API_PATH + "dict")
+@RequestMapping(API_PATH + "Dict")
 
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "DictController", matchIfMissing = true)
@@ -65,7 +66,7 @@ public class DictController extends BaseController{
      * @return  ApiResp<PagingData<DictInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<DictInfo>> query(QueryDictReq req , SimplePaging paging) {
         return ApiResp.ok(dictService.query(req,paging));
     }
@@ -77,7 +78,7 @@ public class DictController extends BaseController{
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Long> create(@RequestBody CreateDictReq req) {
         return ApiResp.ok(dictService.create(req));
     }
@@ -89,11 +90,10 @@ public class DictController extends BaseController{
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateDictReq> reqList) {
         return ApiResp.ok(dictService.batchCreate(reqList));
     }
-
 
     /**
     * 查看详情
@@ -101,42 +101,28 @@ public class DictController extends BaseController{
     * @param req QueryDictByIdReq
     */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<DictInfo> retrieve(@NotNull DictIdReq req) {
          return ApiResp.ok(dictService.findById(req));
      }
-
-    /**
-    * 查看详情
-    *
-    * @param id Long
-    */
-    //@GetMapping("/{id}")
-    //@Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    //public ApiResp<DictInfo> retrieve(@PathVariable @NotNull Long id) {
-
-    //     return getSelfProxy(getClass()).retrieve(new DictIdReq().setId(id));
-
-    // }
-
 
     /**
      * 更新
      * @param req UpdateDictReq
      */
      @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-     public ApiResp<Void> update(@RequestBody UpdateDictReq req) {
-         return dictService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
+     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> update(@RequestBody UpdateDictReq req) {
+         return ApiResp.ok(checkResult(dictService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
      @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-     public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateDictReq> reqList) {
-        return ApiResp.ok(dictService.batchUpdate(reqList));
+     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateDictReq> reqList) {
+        return ApiResp.ok(checkResult(dictService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
@@ -144,34 +130,29 @@ public class DictController extends BaseController{
      * @param req DictIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull DictIdReq req) {
-        return ApiResp.ok(dictService.delete(req));
+        return ApiResp.ok(checkResult(dictService.delete(req), DELETE_ACTION));
     }
-
-     // /**
-     // * 删除
-     // * @param id Long
-     // */
-     // @DeleteMapping({"/{id}"})
-     // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-     // public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
-     //
-     //   List<Integer> ns = getSelfProxy(getClass())
-     //       .batchDelete(new DeleteDictReq().setIdList(id))
-     //       .getData();
-     //   
-     //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-     //  }
 
     /**
      * 批量删除
      * @param req DeleteDictReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<List<Integer>> batchDelete(@NotNull DeleteDictReq req) {
-        return ApiResp.ok(dictService.batchDelete(req));
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchDelete(@NotNull DeleteDictReq req) {
+        return ApiResp.ok(checkResult(dictService.batchDelete(req), BATCH_DELETE_ACTION));
     }
 
+    /**
+     * 检查结果
+     * @param n
+     * @param action
+     * @return
+     */
+    protected int checkResult(int n, String action) {
+        Assert.isTrue(n > 0, action + BIZ_NAME + "失败");
+        return n;
+    }
 }

@@ -38,6 +38,8 @@ import com.levin.oak.base.services.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
@@ -48,7 +50,7 @@ import java.util.Date;
 /**
  *  区域-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-4-1 15:32:03
+ *@author auto gen by simple-dao-codegen 2022-4-2 19:44:59
  *
  */
 
@@ -96,9 +98,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     //只更新缓存
     @CachePut(unless = "#result == null" , condition = "#req.code != null" , key = E_Area.CACHE_KEY_PREFIX + "#req.code")
     public AreaInfo findById(AreaIdReq req) {
-
         Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
-
         return simpleDao.findOneByQueryObj(req);
     }
 
@@ -110,21 +110,19 @@ public class AreaServiceImpl extends BaseService implements AreaService {
 
         Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
 
-        int n = simpleDao.updateByQueryObj(req);
-
-        if(n > 1){
-            throw new DaoSecurityException("非法的" + UPDATE_ACTION +"操作");
-        }
-
-        return n;
+        return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Integer> batchUpdate(List<UpdateAreaReq> reqList){
+    public int batchUpdate(List<UpdateAreaReq> reqList){
         //@Todo 优化批量提交
-        return reqList.stream().map(req -> getSelfProxy().update(req)).collect(Collectors.toList());
+        int sum = reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n).sum();
+
+        //Assert.isTrue(sum > 0, BATCH_UPDATE_ACTION + BIZ_NAME + "失败");
+
+        return sum;
     }
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
@@ -135,24 +133,23 @@ public class AreaServiceImpl extends BaseService implements AreaService {
 
         Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
 
-        int n = simpleDao.deleteByQueryObj(req);
-
-        if(n > 1){
-            throw new DaoSecurityException("非法的" + DELETE_ACTION +"操作");
-        }
-
-        return n;
+       return checkResult(simpleDao.deleteByQueryObj(req), DELETE_ACTION);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Integer> batchDelete(DeleteAreaReq req){
+    public int batchDelete(DeleteAreaReq req){
         //@Todo 优化批量提交
-        return Stream.of(req.getCodeList())
+        int sum = Stream.of(req.getCodeList())
             .map(code -> simpleDao.copy(req, new AreaIdReq().setCode(code)))
-            .map(idReq -> getSelfProxy().delete((AreaIdReq)idReq))
-            .collect(Collectors.toList());
+            .map(idReq -> getSelfProxy().delete(idReq))
+            .mapToInt(n -> n)
+            .sum();
+
+        //Assert.isTrue(sum > 0, BATCH_DELETE_ACTION + BIZ_NAME + "失败");
+
+        return sum;
     }
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
@@ -173,4 +170,10 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     public void clearCache(Object key) {
     }
 
+    protected int checkResult(int n, String action) {
+        if (n > 1) {
+            throw new DaoSecurityException("非法的" + action + "操作");
+        }
+        return n;
+    }
 }

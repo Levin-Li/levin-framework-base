@@ -39,7 +39,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 租户-服务实现
  *
- * @author auto gen by simple-dao-codegen 2022-3-25 18:38:00
+ * @author auto gen by simple-dao-codegen 2022-4-2 19:50:05
  */
 
 //@Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
@@ -86,9 +86,7 @@ public class TenantServiceImpl extends BaseService implements TenantService {
     //只更新缓存
     @CachePut(unless = "#result == null", condition = "#req.id != null", key = E_Tenant.CACHE_KEY_PREFIX + "#req.id")
     public TenantInfo findById(TenantIdReq req) {
-
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
         return simpleDao.findOneByQueryObj(req);
     }
 
@@ -100,27 +98,26 @@ public class TenantServiceImpl extends BaseService implements TenantService {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
 
-        int n = simpleDao.updateByQueryObj(req);
-
-        if (n > 1) {
-            throw new DaoSecurityException("非法的" + UPDATE_ACTION + "操作");
-        }
-
-        return n;
+        return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
     }
+
 
     @Override
     @CacheEvict(condition = "#req.id != null && #req.id.trim().length() > 0", key = E_Tenant.CACHE_KEY_PREFIX + "#req.id")
+    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public int update(TenantLicenseReq req) {
-        return simpleDao.updateByQueryObj(req);
+        return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
     }
+
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Integer> batchUpdate(List<UpdateTenantReq> reqList) {
+    public int batchUpdate(List<UpdateTenantReq> reqList) {
         //@Todo 优化批量提交
-        return reqList.stream().map(req -> getSelfProxy().update(req)).collect(Collectors.toList());
+        int sum = reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n).sum();
+
+        return sum;
     }
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
@@ -131,24 +128,21 @@ public class TenantServiceImpl extends BaseService implements TenantService {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
 
-        int n = simpleDao.deleteByQueryObj(req);
-
-        if (n > 1) {
-            throw new DaoSecurityException("非法的" + DELETE_ACTION + "操作");
-        }
-
-        return n;
+        return checkResult(simpleDao.deleteByQueryObj(req), DELETE_ACTION);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Integer> batchDelete(DeleteTenantReq req) {
+    public int batchDelete(DeleteTenantReq req) {
         //@Todo 优化批量提交
-        return Stream.of(req.getIdList())
+        int sum = Stream.of(req.getIdList())
                 .map(id -> simpleDao.copy(req, new TenantIdReq().setId(id)))
-                .map(idReq -> getSelfProxy().delete((TenantIdReq) idReq))
-                .collect(Collectors.toList());
+                .map(idReq -> getSelfProxy().delete(idReq))
+                .mapToInt(n -> n)
+                .sum();
+
+        return sum;
     }
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
@@ -163,14 +157,16 @@ public class TenantServiceImpl extends BaseService implements TenantService {
         return simpleDao.findOneByQueryObj(req);
     }
 
-    /**
-     * 清除缓存
-     *
-     * @param key
-     */
     @Override
+    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_Tenant.CACHE_KEY_PREFIX + "#key")
-    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION)
     public void clearCache(Object key) {
+    }
+
+    protected int checkResult(int n, String action) {
+        if (n > 1) {
+            throw new DaoSecurityException("非法的" + action + "操作");
+        }
+        return n;
     }
 }

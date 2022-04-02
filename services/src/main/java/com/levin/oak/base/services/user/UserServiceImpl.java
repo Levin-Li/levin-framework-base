@@ -4,7 +4,6 @@ import com.levin.commons.dao.DaoSecurityException;
 import com.levin.commons.dao.Paging;
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.dao.support.PagingData;
-import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.entities.E_User;
@@ -25,7 +24,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.persistence.PersistenceException;
@@ -43,7 +41,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 用户-服务实现
  *
- * @author auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ * @author auto gen by simple-dao-codegen 2022-4-2 19:50:05
  */
 
 //@Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
@@ -69,28 +67,9 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Override
     public Long create(CreateUserReq req) {
-
-//        checkSARole(req.getRoleList(), null);
-
         User entity = simpleDao.create(req);
-
         return entity.getId();
     }
-
-//    protected void checkSARole(List<String> roleList, String errorInfo) {
-//
-//        //如果有超级角色，需要检查当前用户，是否是超管
-//        if (roleList != null
-//                && roleList.stream().map(StringUtils::trimAllWhitespace)
-//                .anyMatch(name -> RbacRoleObject.SA_ROLE.equalsIgnoreCase(name))) {
-//
-//            if (errorInfo == null) {
-//                errorInfo = "当前用户未拥有超管角色";
-//            }
-//
-//            Assert.isTrue(authService.getUserInfo().isSuperAdmin(), errorInfo);
-//        }
-//    }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
@@ -112,9 +91,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     //只更新缓存
     @CachePut(unless = "#result == null", condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
     public UserInfo findById(UserIdReq req) {
-
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
         return simpleDao.findOneByQueryObj(req);
     }
 
@@ -126,43 +103,19 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
 
-//        checkSARole(req.getRoleList(), null);
-
-        int n = simpleDao.updateByQueryObj(req);
-
-        if (n > 1) {
-            throw new DaoSecurityException("非法的" + UPDATE_ACTION + "操作");
-        }
-
-        return n;
-    }
-
-    @Override
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
-    public int update(UpdateUserPwdReq req) {
-
-        Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-        Assert.hasText(req.getOldPassword(), "旧密码不能为空");
-        Assert.hasText(req.getPassword(), "新密码不能为空");
-
-        req.setOldPassword(authService.encryptPassword(req.getOldPassword()))
-                .setPassword(authService.encryptPassword(req.getPassword()));
-
-        int n = simpleDao.updateByQueryObj(req);
-
-        if (n > 1) {
-            throw new DaoSecurityException("非法的" + UPDATE_ACTION + "操作");
-        }
-
-        return n;
+        return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Integer> batchUpdate(List<UpdateUserReq> reqList) {
+    public int batchUpdate(List<UpdateUserReq> reqList) {
         //@Todo 优化批量提交
-        return reqList.stream().map(req -> getSelfProxy().update(req)).collect(Collectors.toList());
+        int sum = reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n).sum();
+
+        //Assert.isTrue(sum > 0, BATCH_UPDATE_ACTION + BIZ_NAME + "失败");
+
+        return sum;
     }
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
@@ -173,24 +126,23 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
 
-        int n = simpleDao.deleteByQueryObj(req);
-
-        if (n > 1) {
-            throw new DaoSecurityException("非法的" + DELETE_ACTION + "操作");
-        }
-
-        return n;
+        return checkResult(simpleDao.deleteByQueryObj(req), DELETE_ACTION);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Integer> batchDelete(DeleteUserReq req) {
+    public int batchDelete(DeleteUserReq req) {
         //@Todo 优化批量提交
-        return Stream.of(req.getIdList())
+        int sum = Stream.of(req.getIdList())
                 .map(id -> simpleDao.copy(req, new UserIdReq().setId(id)))
-                .map(idReq -> getSelfProxy().delete((UserIdReq) idReq))
-                .collect(Collectors.toList());
+                .map(idReq -> getSelfProxy().delete(idReq))
+                .mapToInt(n -> n)
+                .sum();
+
+        //Assert.isTrue(sum > 0, BATCH_DELETE_ACTION + BIZ_NAME + "失败");
+
+        return sum;
     }
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
@@ -206,14 +158,31 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
 
-    /**
-     * 清除缓存
-     *
-     * @param key
-     */
     @Override
+    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    public int update(UpdateUserPwdReq req) {
+
+        Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
+        Assert.hasText(req.getOldPassword(), "旧密码不能为空");
+        Assert.hasText(req.getPassword(), "新密码不能为空");
+
+        req.setOldPassword(authService.encryptPassword(req.getOldPassword()))
+                .setPassword(authService.encryptPassword(req.getPassword()));
+
+        return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
+
+    }
+
+    @Override
+    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_User.CACHE_KEY_PREFIX + "#key")
-    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION)
     public void clearCache(Object key) {
+    }
+
+    protected int checkResult(int n, String action) {
+        if (n > 1) {
+            throw new DaoSecurityException("非法的" + action + "操作");
+        }
+        return n;
     }
 }

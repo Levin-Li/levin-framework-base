@@ -26,7 +26,7 @@ import com.levin.oak.base.services.simpleform.info.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2022-3-25 17:01:37
+//Auto gen by simple-dao-codegen 2022-4-2 19:44:59
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -41,7 +41,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "SimpleFormController")
-@RequestMapping(API_PATH + "simpleform")
+//@RequestMapping(API_PATH + "simpleform")
+@RequestMapping(API_PATH + "SimpleForm")
 
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimpleFormController", matchIfMissing = true)
@@ -65,7 +66,7 @@ public class SimpleFormController extends BaseController{
      * @return  ApiResp<PagingData<SimpleFormInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<SimpleFormInfo>> query(QuerySimpleFormReq req , SimplePaging paging) {
         return ApiResp.ok(simpleFormService.query(req,paging));
     }
@@ -77,7 +78,7 @@ public class SimpleFormController extends BaseController{
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Long> create(@RequestBody CreateSimpleFormReq req) {
         return ApiResp.ok(simpleFormService.create(req));
     }
@@ -89,11 +90,10 @@ public class SimpleFormController extends BaseController{
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateSimpleFormReq> reqList) {
         return ApiResp.ok(simpleFormService.batchCreate(reqList));
     }
-
 
     /**
     * 查看详情
@@ -101,44 +101,28 @@ public class SimpleFormController extends BaseController{
     * @param req QuerySimpleFormByIdReq
     */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<SimpleFormInfo> retrieve(@NotNull SimpleFormIdReq req) {
-
          return ApiResp.ok(simpleFormService.findById(req));
-
      }
-
-    /**
-    * 查看详情
-    *
-    * @param id Long
-    */
-    //@GetMapping("/{id}")
-    //@Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    //public ApiResp<SimpleFormInfo> retrieve(@PathVariable @NotNull Long id) {
-
-    //     return getSelfProxy(getClass()).retrieve(new SimpleFormIdReq().setId(id));
-
-    // }
-
 
     /**
      * 更新
      * @param req UpdateSimpleFormReq
      */
      @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-     public ApiResp<Void> update(@RequestBody UpdateSimpleFormReq req) {
-         return simpleFormService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
+     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> update(@RequestBody UpdateSimpleFormReq req) {
+         return ApiResp.ok(checkResult(simpleFormService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
      @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-     public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateSimpleFormReq> reqList) {
-        return ApiResp.ok(simpleFormService.batchUpdate(reqList));
+     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateSimpleFormReq> reqList) {
+        return ApiResp.ok(checkResult(simpleFormService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
@@ -146,34 +130,29 @@ public class SimpleFormController extends BaseController{
      * @param req SimpleFormIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull SimpleFormIdReq req) {
-        return ApiResp.ok(simpleFormService.delete(req));
+        return ApiResp.ok(checkResult(simpleFormService.delete(req), DELETE_ACTION));
     }
-
-     // /**
-     // * 删除
-     // * @param id Long
-     // */
-     // @DeleteMapping({"/{id}"})
-     // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-     // public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
-     //
-     //   List<Integer> ns = getSelfProxy(getClass())
-     //       .batchDelete(new DeleteSimpleFormReq().setIdList(id))
-     //       .getData();
-     //   
-     //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-     //  }
 
     /**
      * 批量删除
      * @param req DeleteSimpleFormReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<List<Integer>> batchDelete(@NotNull DeleteSimpleFormReq req) {
-        return ApiResp.ok(simpleFormService.batchDelete(req));
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchDelete(@NotNull DeleteSimpleFormReq req) {
+        return ApiResp.ok(checkResult(simpleFormService.batchDelete(req), BATCH_DELETE_ACTION));
     }
 
+    /**
+     * 检查结果
+     * @param n
+     * @param action
+     * @return
+     */
+    protected int checkResult(int n, String action) {
+        Assert.isTrue(n > 0, action + BIZ_NAME + "失败");
+        return n;
+    }
 }

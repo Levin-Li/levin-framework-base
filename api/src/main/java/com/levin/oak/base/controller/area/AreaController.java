@@ -1,30 +1,34 @@
 package com.levin.oak.base.controller.area;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.ResAuthorize;
-import com.levin.commons.service.domain.ApiResp;
-import com.levin.oak.base.controller.BaseController;
-import com.levin.oak.base.entities.E_Area;
-import com.levin.oak.base.services.area.AreaService;
-import com.levin.oak.base.services.area.info.AreaInfo;
-import com.levin.oak.base.services.area.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.util.*;
+import javax.validation.*;
+import java.util.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.List;
+import javax.servlet.http.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.support.*;
+import javax.validation.constraints.*;
+
+import com.levin.oak.base.controller.*;
+import com.levin.oak.base.*;
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.area.*;
+import com.levin.oak.base.services.area.req.*;
+import com.levin.oak.base.services.area.info.*;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+//Auto gen by simple-dao-codegen 2022-4-2 19:44:59
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -39,7 +43,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "AreaController")
-@RequestMapping(API_PATH + "area")
+//@RequestMapping(API_PATH + "area")
+@RequestMapping(API_PATH + "Area")
 
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AreaController", matchIfMissing = true)
@@ -49,7 +54,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class AreaController extends BaseController {
+public class AreaController extends BaseController{
 
     private static final String BIZ_NAME = E_Area.BIZ_NAME;
 
@@ -59,14 +64,14 @@ public class AreaController extends BaseController {
     /**
      * 分页查找
      *
-     * @param req QueryAreaReq
-     * @return ApiResp<PagingData < AreaInfo>>
+     * @param req  QueryAreaReq
+     * @return  ApiResp<PagingData<AreaInfo>>
      */
-    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    public ApiResp<PagingData<AreaInfo>> query(QueryAreaReq req, SimplePaging paging) {
-        return ApiResp.ok(areaService.query(req, paging));
+    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    public ApiResp<PagingData<AreaInfo>> query(QueryAreaReq req , SimplePaging paging) {
+        return ApiResp.ok(areaService.query(req,paging));
     }
 
     /**
@@ -76,7 +81,7 @@ public class AreaController extends BaseController {
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<String> create(@RequestBody CreateAreaReq req) {
         return ApiResp.ok(areaService.create(req));
     }
@@ -88,93 +93,70 @@ public class AreaController extends BaseController {
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateAreaReq> reqList) {
         return ApiResp.ok(areaService.batchCreate(reqList));
     }
 
-
     /**
-     * 查看详情
-     *
-     * @param req QueryAreaByIdReq
-     */
-    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
+    * 查看详情
+    *
+    * @param req QueryAreaByIdReq
+    */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<AreaInfo> retrieve(@NotNull AreaIdReq req) {
-        return ApiResp.ok(areaService.findById(req));
-    }
-
-    /**
-     * 查看详情
-     *
-     * @param code String
-     */
-    //@GetMapping("/{code}")
-    //@Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    //public ApiResp<AreaInfo> retrieve(@PathVariable @NotNull String code) {
-
-    //     return getSelfProxy(getClass()).retrieve(new AreaIdReq().setCode(code));
-
-    // }
-
+         return ApiResp.ok(areaService.findById(req));
+     }
 
     /**
      * 更新
-     *
      * @param req UpdateAreaReq
      */
-    @PutMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    public ApiResp<Void> update(@RequestBody UpdateAreaReq req) {
-        return areaService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
+     @PutMapping({""})
+     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> update(@RequestBody UpdateAreaReq req) {
+         return ApiResp.ok(checkResult(areaService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
-    @PutMapping("/batchUpdate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateAreaReq> reqList) {
-        return ApiResp.ok(areaService.batchUpdate(reqList));
+     @PutMapping("/batchUpdate")
+     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAreaReq> reqList) {
+        return ApiResp.ok(checkResult(areaService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
      * 删除
-     *
      * @param req AreaIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull AreaIdReq req) {
-        return ApiResp.ok(areaService.delete(req));
+        return ApiResp.ok(checkResult(areaService.delete(req), DELETE_ACTION));
     }
-
-    // /**
-    // * 删除
-    // * @param code String
-    // */
-    // @DeleteMapping({"/{code}"})
-    // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    // public ApiResp<Integer> delete(@PathVariable @NotNull String code) {
-    //
-    //   List<Integer> ns = getSelfProxy(getClass())
-    //       .batchDelete(new DeleteAreaReq().setCodeList(code))
-    //       .getData();
-    //
-    //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-    //  }
 
     /**
      * 批量删除
-     *
      * @param req DeleteAreaReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<List<Integer>> batchDelete(@NotNull DeleteAreaReq req) {
-        return ApiResp.ok(areaService.batchDelete(req));
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchDelete(@NotNull DeleteAreaReq req) {
+        return ApiResp.ok(checkResult(areaService.batchDelete(req), BATCH_DELETE_ACTION));
     }
 
+    /**
+     * 检查结果
+     * @param n
+     * @param action
+     * @return
+     */
+    protected int checkResult(int n, String action) {
+        Assert.isTrue(n > 0, action + BIZ_NAME + "失败");
+        return n;
+    }
 }

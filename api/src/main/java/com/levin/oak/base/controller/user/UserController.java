@@ -1,34 +1,36 @@
 package com.levin.oak.base.controller.user;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.rbac.RbacRoleObject;
-import com.levin.commons.rbac.ResAuthorize;
-import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.biz.rbac.AuthService;
-import com.levin.oak.base.controller.BaseController;
-import com.levin.oak.base.entities.E_User;
-import com.levin.oak.base.services.user.UserService;
-import com.levin.oak.base.services.user.info.UserInfo;
-import com.levin.oak.base.services.user.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.util.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.List;
+import javax.validation.*;
+import java.util.*;
+
+import javax.servlet.http.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.support.*;
+import javax.validation.constraints.*;
+
+import com.levin.oak.base.controller.*;
+import com.levin.oak.base.*;
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.user.*;
+import com.levin.oak.base.services.user.req.*;
+import com.levin.oak.base.services.user.info.*;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+//Auto gen by simple-dao-codegen 2022-4-2 20:07:02
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -43,7 +45,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "UserController")
-@RequestMapping(API_PATH + "user")
+//@RequestMapping(API_PATH + "user")
+@RequestMapping(API_PATH + "User")
 
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "UserController", matchIfMissing = true)
@@ -53,11 +56,11 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class UserController extends BaseController {
+public class UserController extends BaseController{
 
     private static final String BIZ_NAME = E_User.BIZ_NAME;
 
-    @Autowired
+    @Resource
     UserService userService;
 
     @Resource
@@ -120,95 +123,71 @@ public class UserController extends BaseController {
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateUserReq> reqList) {
-
         reqList.forEach(req -> checkSARole(req.getRoleList(),null));
-
         return ApiResp.ok(userService.batchCreate(reqList));
     }
 
 
     /**
-     * 查看详情
-     *
-     * @param req QueryUserByIdReq
-     */
+    * 查看详情
+    *
+    * @param req QueryUserByIdReq
+    */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<UserInfo> retrieve(@NotNull UserIdReq req) {
-        return ApiResp.ok(userService.findById(req).setPassword(null));
-    }
-
-    /**
-     * 查看详情
-     *
-     * @param id Long
-     */
-    //@GetMapping("/{id}")
-    //@Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    //public ApiResp<UserInfo> retrieve(@PathVariable @NotNull Long id) {
-
-    //     return getSelfProxy(getClass()).retrieve(new UserIdReq().setId(id));
-
-    // }
-
+         return ApiResp.ok(userService.findById(req));
+     }
 
     /**
      * 更新
-     *
      * @param req UpdateUserReq
      */
-    @PutMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    public ApiResp<Void> update(@RequestBody UpdateUserReq req) {
-        checkSARole(req.getRoleList(), null);
-        return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
+     @PutMapping({""})
+     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> update(@RequestBody UpdateUserReq req) {
+         checkSARole(req.getRoleList(), null);
+         return ApiResp.ok(checkResult(userService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
-    @PutMapping("/batchUpdate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateUserReq> reqList) {
-        reqList.forEach(req -> checkSARole(req.getRoleList(),null));
-        return ApiResp.ok(userService.batchUpdate(reqList));
+     @PutMapping("/batchUpdate")
+     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateUserReq> reqList) {
+         reqList.forEach(req -> checkSARole(req.getRoleList(),null));
+        return ApiResp.ok(checkResult(userService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
      * 删除
-     *
      * @param req UserIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull UserIdReq req) {
-        return ApiResp.ok(userService.delete(req));
+        return ApiResp.ok(checkResult(userService.delete(req), DELETE_ACTION));
     }
-
-    // /**
-    // * 删除
-    // * @param id Long
-    // */
-    // @DeleteMapping({"/{id}"})
-    // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    // public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
-    //
-    //   List<Integer> ns = getSelfProxy(getClass())
-    //       .batchDelete(new DeleteUserReq().setIdList(id))
-    //       .getData();
-    //
-    //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-    //  }
 
     /**
      * 批量删除
-     *
      * @param req DeleteUserReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<List<Integer>> batchDelete(@NotNull DeleteUserReq req) {
-        return ApiResp.ok(userService.batchDelete(req));
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchDelete(@NotNull DeleteUserReq req) {
+        return ApiResp.ok(checkResult(userService.batchDelete(req), BATCH_DELETE_ACTION));
     }
 
+    /**
+     * 检查结果
+     * @param n
+     * @param action
+     * @return
+     */
+    protected int checkResult(int n, String action) {
+        Assert.isTrue(n > 0, action + BIZ_NAME + "失败");
+        return n;
+    }
 }

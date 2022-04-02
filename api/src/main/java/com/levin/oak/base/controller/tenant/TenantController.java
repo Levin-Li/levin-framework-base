@@ -1,31 +1,34 @@
 package com.levin.oak.base.controller.tenant;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.ResAuthorize;
-import com.levin.commons.service.domain.ApiResp;
-import com.levin.oak.base.biz.BizTenantService;
-import com.levin.oak.base.controller.BaseController;
-import com.levin.oak.base.entities.E_Tenant;
-import com.levin.oak.base.services.tenant.TenantService;
-import com.levin.oak.base.services.tenant.info.TenantInfo;
-import com.levin.oak.base.services.tenant.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.util.*;
+import javax.validation.*;
+import java.util.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.List;
+import javax.servlet.http.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.support.*;
+import javax.validation.constraints.*;
+
+import com.levin.oak.base.controller.*;
+import com.levin.oak.base.*;
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.tenant.*;
+import com.levin.oak.base.services.tenant.req.*;
+import com.levin.oak.base.services.tenant.info.*;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2022-3-25 18:38:46
+//Auto gen by simple-dao-codegen 2022-4-2 19:44:58
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -40,17 +43,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "TenantController")
-@RequestMapping(API_PATH + "tenant")
+//@RequestMapping(API_PATH + "tenant")
+@RequestMapping(API_PATH + "Tenant")
 
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "TenantController", matchIfMissing = true)
 
 //默认需要权限访问
+
 @ResAuthorize(domain = ID, type = TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
 @Tag(name = E_Tenant.BIZ_NAME, description = E_Tenant.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class TenantController extends BaseController {
+public class TenantController extends BaseController{
 
     private static final String BIZ_NAME = E_Tenant.BIZ_NAME;
 
@@ -60,13 +65,13 @@ public class TenantController extends BaseController {
     /**
      * 分页查找
      *
-     * @param req QueryTenantReq
-     * @return ApiResp<PagingData < TenantInfo>>
+     * @param req  QueryTenantReq
+     * @return  ApiResp<PagingData<TenantInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    public ApiResp<PagingData<TenantInfo>> query(QueryTenantReq req, SimplePaging paging) {
-        return ApiResp.ok(tenantService.query(req, paging));
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    public ApiResp<PagingData<TenantInfo>> query(QueryTenantReq req , SimplePaging paging) {
+        return ApiResp.ok(tenantService.query(req,paging));
     }
 
     /**
@@ -76,7 +81,7 @@ public class TenantController extends BaseController {
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<String> create(@RequestBody CreateTenantReq req) {
         return ApiResp.ok(tenantService.create(req));
     }
@@ -88,94 +93,69 @@ public class TenantController extends BaseController {
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateTenantReq> reqList) {
         return ApiResp.ok(tenantService.batchCreate(reqList));
     }
 
-
     /**
-     * 查看详情
-     *
-     * @param req QueryTenantByIdReq
-     */
+    * 查看详情
+    *
+    * @param req QueryTenantByIdReq
+    */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<TenantInfo> retrieve(@NotNull TenantIdReq req) {
-
-        return ApiResp.ok(tenantService.findById(req));
-
-    }
-
-    /**
-     * 查看详情
-     *
-     * @param id String
-     */
-    //@GetMapping("/{id}")
-    //@Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    //public ApiResp<TenantInfo> retrieve(@PathVariable @NotNull String id) {
-
-    //     return getSelfProxy(getClass()).retrieve(new TenantIdReq().setId(id));
-
-    // }
-
+         return ApiResp.ok(tenantService.findById(req));
+     }
 
     /**
      * 更新
-     *
      * @param req UpdateTenantReq
      */
-    @PutMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    public ApiResp<Void> update(@RequestBody UpdateTenantReq req) {
-        return tenantService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
+     @PutMapping({""})
+     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> update(@RequestBody UpdateTenantReq req) {
+         return ApiResp.ok(checkResult(tenantService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
-    @PutMapping("/batchUpdate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateTenantReq> reqList) {
-        return ApiResp.ok(tenantService.batchUpdate(reqList));
+     @PutMapping("/batchUpdate")
+     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateTenantReq> reqList) {
+        return ApiResp.ok(checkResult(tenantService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
      * 删除
-     *
      * @param req TenantIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull TenantIdReq req) {
-        return ApiResp.ok(tenantService.delete(req));
+        return ApiResp.ok(checkResult(tenantService.delete(req), DELETE_ACTION));
     }
-
-    // /**
-    // * 删除
-    // * @param id String
-    // */
-    // @DeleteMapping({"/{id}"})
-    // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    // public ApiResp<Integer> delete(@PathVariable @NotNull String id) {
-    //
-    //   List<Integer> ns = getSelfProxy(getClass())
-    //       .batchDelete(new DeleteTenantReq().setIdList(id))
-    //       .getData();
-    //
-    //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-    //  }
 
     /**
      * 批量删除
-     *
      * @param req DeleteTenantReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    public ApiResp<List<Integer>> batchDelete(@NotNull DeleteTenantReq req) {
-        return ApiResp.ok(tenantService.batchDelete(req));
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchDelete(@NotNull DeleteTenantReq req) {
+        return ApiResp.ok(checkResult(tenantService.batchDelete(req), BATCH_DELETE_ACTION));
     }
 
+    /**
+     * 检查结果
+     * @param n
+     * @param action
+     * @return
+     */
+    protected int checkResult(int n, String action) {
+        Assert.isTrue(n > 0, action + BIZ_NAME + "失败");
+        return n;
+    }
 }

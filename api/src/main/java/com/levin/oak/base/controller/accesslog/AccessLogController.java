@@ -1,30 +1,32 @@
 package com.levin.oak.base.controller.accesslog;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.commons.dao.support.SimplePaging;
-import com.levin.commons.rbac.RbacRoleObject;
-import com.levin.commons.rbac.ResAuthorize;
-import com.levin.commons.service.domain.ApiResp;
-import com.levin.oak.base.controller.BaseController;
-import com.levin.oak.base.entities.E_AccessLog;
-import com.levin.oak.base.services.accesslog.AccessLogService;
-import com.levin.oak.base.services.accesslog.info.AccessLogInfo;
-import com.levin.oak.base.services.accesslog.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.util.*;
+import javax.validation.*;
+import java.util.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.List;
+import javax.servlet.http.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.support.*;
+import javax.validation.constraints.*;
+
+import com.levin.oak.base.controller.*;
+import com.levin.oak.base.*;
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.accesslog.*;
+import com.levin.oak.base.services.accesslog.req.*;
+import com.levin.oak.base.services.accesslog.info.*;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+//Auto gen by simple-dao-codegen 2022-4-2 19:44:59
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -39,7 +41,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "AccessLogController")
-@RequestMapping(API_PATH + "accesslog")
+//@RequestMapping(API_PATH + "accesslog")
+@RequestMapping(API_PATH + "AccessLog")
 
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AccessLogController", matchIfMissing = true)
@@ -49,7 +52,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Tag(name = E_AccessLog.BIZ_NAME, description = E_AccessLog.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class AccessLogController extends BaseController {
+public class AccessLogController extends BaseController{
 
     private static final String BIZ_NAME = E_AccessLog.BIZ_NAME;
 
@@ -59,13 +62,13 @@ public class AccessLogController extends BaseController {
     /**
      * 分页查找
      *
-     * @param req QueryAccessLogReq
-     * @return ApiResp<PagingData < AccessLogInfo>>
+     * @param req  QueryAccessLogReq
+     * @return  ApiResp<PagingData<AccessLogInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    public ApiResp<PagingData<AccessLogInfo>> query(QueryAccessLogReq req, SimplePaging paging) {
-        return ApiResp.ok(accessLogService.query(req, paging));
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    public ApiResp<PagingData<AccessLogInfo>> query(QueryAccessLogReq req , SimplePaging paging) {
+        return ApiResp.ok(accessLogService.query(req,paging));
     }
 
     /**
@@ -75,7 +78,7 @@ public class AccessLogController extends BaseController {
      * @return ApiResp
      */
 //    @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Long> create(@RequestBody CreateAccessLogReq req) {
         return ApiResp.ok(accessLogService.create(req));
     }
@@ -87,96 +90,69 @@ public class AccessLogController extends BaseController {
      * @return ApiResp
      */
 //    @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateAccessLogReq> reqList) {
         return ApiResp.ok(accessLogService.batchCreate(reqList));
     }
 
-
     /**
-     * 查看详情
-     *
-     * @param req QueryAccessLogByIdReq
-     */
+    * 查看详情
+    *
+    * @param req QueryAccessLogByIdReq
+    */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<AccessLogInfo> retrieve(@NotNull AccessLogIdReq req) {
-
-        return ApiResp.ok(accessLogService.findById(req));
-
-    }
-
-    /**
-     * 查看详情
-     *
-     * @param id Long
-     */
-    //@GetMapping("/{id}")
-    //@Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    //public ApiResp<AccessLogInfo> retrieve(@PathVariable @NotNull Long id) {
-
-    //     return getSelfProxy(getClass()).retrieve(new AccessLogIdReq().setId(id));
-
-    // }
-
+         return ApiResp.ok(accessLogService.findById(req));
+     }
 
     /**
      * 更新
-     *
      * @param req UpdateAccessLogReq
      */
 //     @PutMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    public ApiResp<Void> update(@RequestBody UpdateAccessLogReq req) {
-        return accessLogService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
+     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> update(@RequestBody UpdateAccessLogReq req) {
+         return ApiResp.ok(checkResult(accessLogService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
 //     @PutMapping("/batchUpdate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateAccessLogReq> reqList) {
-        return ApiResp.ok(accessLogService.batchUpdate(reqList));
+     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAccessLogReq> reqList) {
+        return ApiResp.ok(checkResult(accessLogService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
      * 删除
-     *
      * @param req AccessLogIdReq
      */
-    @ResAuthorize(domain = ID, type = TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull AccessLogIdReq req) {
-        return ApiResp.ok(accessLogService.delete(req));
+        return ApiResp.ok(checkResult(accessLogService.delete(req), DELETE_ACTION));
     }
-
-    // /**
-    // * 删除
-    // * @param id Long
-    // */
-    // @DeleteMapping({"/{id}"})
-    // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-    // public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
-    //
-    //   List<Integer> ns = getSelfProxy(getClass())
-    //       .batchDelete(new DeleteAccessLogReq().setIdList(id))
-    //       .getData();
-    //
-    //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-    //  }
 
     /**
      * 批量删除
-     *
      * @param req DeleteAccessLogReq
      */
-    @ResAuthorize(domain = ID, type = TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + BIZ_NAME)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteAccessLogReq req) {
-        return ApiResp.ok(accessLogService.batchDelete(req));
+        return ApiResp.ok(checkResult(accessLogService.batchDelete(req), BATCH_DELETE_ACTION));
     }
 
+    /**
+     * 检查结果
+     * @param n
+     * @param action
+     * @return
+     */
+    protected int checkResult(int n, String action) {
+        Assert.isTrue(n > 0, action + BIZ_NAME + "失败");
+        return n;
+    }
 }

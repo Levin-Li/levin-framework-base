@@ -116,9 +116,9 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Integer> batchUpdate(List<UpdateRoleReq> reqList) {
+    public int batchUpdate(List<UpdateRoleReq> reqList) {
         //@Todo 优化批量提交
-        return reqList.stream().map(req -> getSelfProxy().update(req)).collect(Collectors.toList());
+        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n).sum();
     }
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
@@ -144,12 +144,12 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Integer> batchDelete(DeleteRoleReq req) {
+    public int batchDelete(DeleteRoleReq req) {
         //@Todo 优化批量提交
         return Stream.of(req.getIdList())
                 .map(id -> simpleDao.copy(req, new RoleIdReq().setId(id)))
                 .map(idReq -> getSelfProxy().delete((RoleIdReq) idReq))
-                .collect(Collectors.toList());
+                .mapToInt(n -> n).sum();
     }
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)

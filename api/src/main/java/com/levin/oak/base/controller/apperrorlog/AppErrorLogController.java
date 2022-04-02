@@ -1,7 +1,5 @@
 package com.levin.oak.base.controller.apperrorlog;
 
-import com.levin.commons.rbac.RbacRoleObject;
-import com.levin.commons.rbac.ResAuthorize;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +26,7 @@ import com.levin.oak.base.services.apperrorlog.info.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2022-3-29 22:58:02
+//Auto gen by simple-dao-codegen 2022-4-2 19:44:58
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -43,7 +41,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "AppErrorLogController")
-@RequestMapping(API_PATH + "apperrorlog")
+//@RequestMapping(API_PATH + "apperrorlog")
+@RequestMapping(API_PATH + "AppErrorLog")
 
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppErrorLogController", matchIfMissing = true)
@@ -67,7 +66,7 @@ public class AppErrorLogController extends BaseController{
      * @return  ApiResp<PagingData<AppErrorLogInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<AppErrorLogInfo>> query(QueryAppErrorLogReq req , SimplePaging paging) {
         return ApiResp.ok(appErrorLogService.query(req,paging));
     }
@@ -79,7 +78,7 @@ public class AppErrorLogController extends BaseController{
      * @return ApiResp
      */
 //    @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Long> create(@RequestBody CreateAppErrorLogReq req) {
         return ApiResp.ok(appErrorLogService.create(req));
     }
@@ -91,11 +90,10 @@ public class AppErrorLogController extends BaseController{
      * @return ApiResp
      */
 //    @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateAppErrorLogReq> reqList) {
         return ApiResp.ok(appErrorLogService.batchCreate(reqList));
     }
-
 
     /**
     * 查看详情
@@ -103,81 +101,58 @@ public class AppErrorLogController extends BaseController{
     * @param req QueryAppErrorLogByIdReq
     */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<AppErrorLogInfo> retrieve(@NotNull AppErrorLogIdReq req) {
-
          return ApiResp.ok(appErrorLogService.findById(req));
-
      }
-
-    /**
-    * 查看详情
-    *
-    * @param id Long
-    */
-    //@GetMapping("/{id}")
-    //@Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    //public ApiResp<AppErrorLogInfo> retrieve(@PathVariable @NotNull Long id) {
-
-    //     return getSelfProxy(getClass()).retrieve(new AppErrorLogIdReq().setId(id));
-
-    // }
-
 
     /**
      * 更新
      * @param req UpdateAppErrorLogReq
      */
 //     @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-     public ApiResp<Void> update(@RequestBody UpdateAppErrorLogReq req) {
-         return appErrorLogService.update(req) > 0 ? ApiResp.ok() : ApiResp.error(UPDATE_ACTION + BIZ_NAME + "失败");
+     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> update(@RequestBody UpdateAppErrorLogReq req) {
+         return ApiResp.ok(checkResult(appErrorLogService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
 //     @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-     public ApiResp<List<Integer>> batchUpdate(@RequestBody List<UpdateAppErrorLogReq> reqList) {
-        return ApiResp.ok(appErrorLogService.batchUpdate(reqList));
+     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAppErrorLogReq> reqList) {
+        return ApiResp.ok(checkResult(appErrorLogService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
      * 删除
      * @param req AppErrorLogIdReq
      */
-    @ResAuthorize(domain = ID, type = TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull AppErrorLogIdReq req) {
-        return ApiResp.ok(appErrorLogService.delete(req));
+        return ApiResp.ok(checkResult(appErrorLogService.delete(req), DELETE_ACTION));
     }
-
-     // /**
-     // * 删除
-     // * @param id Long
-     // */
-     // @DeleteMapping({"/{id}"})
-     // @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
-     // public ApiResp<Integer> delete(@PathVariable @NotNull Long id) {
-     //
-     //   List<Integer> ns = getSelfProxy(getClass())
-     //       .batchDelete(new DeleteAppErrorLogReq().setIdList(id))
-     //       .getData();
-     //   
-     //       return ns != null && !ns.isEmpty() ? ApiResp.ok(ns.get(0)) : ApiResp.error(DELETE_ACTION + BIZ_NAME + "失败");
-     //  }
 
     /**
      * 批量删除
      * @param req DeleteAppErrorLogReq
      */
-    @ResAuthorize(domain = ID, type = TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteAppErrorLogReq req) {
-        return ApiResp.ok(appErrorLogService.batchDelete(req));
+        return ApiResp.ok(checkResult(appErrorLogService.batchDelete(req), BATCH_DELETE_ACTION));
     }
 
+    /**
+     * 检查结果
+     * @param n
+     * @param action
+     * @return
+     */
+    protected int checkResult(int n, String action) {
+        Assert.isTrue(n > 0, action + BIZ_NAME + "失败");
+        return n;
+    }
 }
