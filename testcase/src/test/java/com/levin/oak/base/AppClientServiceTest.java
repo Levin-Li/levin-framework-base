@@ -55,10 +55,12 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Resource;
+
 /**
  *  应用接入测试
  *
- *  @author auto gen by simple-dao-codegen 2022-4-3 0:55:05
+ *  @author auto gen by simple-dao-codegen 2022-4-3 1:34:17
  *
  */
 
