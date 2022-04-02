@@ -27,9 +27,6 @@ import java.util.UUID;
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
                 @Index(columnList = MultiTenantNamedEntity.Fields.domain),
-                @Index(columnList = MultiTenantAndOrganizedEntity.Fields.orgId),
-
-                @Index(columnList = E_AppClient.appId),
         }
 
 //        ,
