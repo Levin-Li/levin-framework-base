@@ -25,6 +25,8 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Org.*;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
@@ -37,7 +39,7 @@ import java.util.Date;
 
 /**
  *  新增机构
- *  //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *  //Auto gen by simple-dao-codegen 2022-4-2 13:49:52
  */
 @Schema(description = "新增机构")
 @Data
@@ -54,129 +56,106 @@ public class CreateOrgReq extends MultiTenantReq {
     private static final long serialVersionUID = -1399842458L;
 
 
-
-    @Schema(description = "编码" )
-    //@Size(max = 128)
+    @Schema(description = "编码"  )
+    @Size(max = 128)
     private String code;
 
-
-    @Schema(description = "图标" )
+    @Schema(description = "图标"  )
     private String icon;
 
-
-    @Schema(description = "状态" , required = true)
-    //@NotNull
+    @Schema(description = "状态"  , required = true)
+    @NotNull
     private State state;
 
-
-    @Schema(description = "类型" , required = true)
-    //@NotNull
+    @Schema(description = "类型"  , required = true)
+    @NotNull
     private Type type;
 
-
-    @Schema(description = "所属行业" )
-    //@Size(max = 64)
+    @Schema(description = "所属行业"  )
+    @Size(max = 64)
     private String industries;
 
-
-    @Schema(description = "区域编码" , required = true)
-    //@NotBlank
-    //@Size(max = 64)
+    @Schema(description = "区域编码"  , required = true)
+    @NotBlank
+    @Size(max = 64)
     private String areaCode;
 
 
-
-    @Schema(description = "机构级别" )
-    //@Size(max = 128)
+    @Schema(description = "机构级别"  )
+    @Size(max = 128)
     private String level;
 
-
-    @Schema(description = "机构类别" , required = true)
-    //@NotBlank
-    //@Size(max = 128)
+    @Schema(description = "机构类别"  , required = true)
+    @NotBlank
+    @Size(max = 128)
     private String category;
 
-
-    @Schema(description = "是否外部机构" , required = true)
-    //@NotNull
+    @Schema(description = "是否外部机构"  , required = true)
+    @NotNull
     private Boolean isExternal;
 
-
-    @Schema(description = "联系人" )
-    //@Size(max = 64)
+    @Schema(description = "联系人"  )
+    @Size(max = 64)
     private String contacts;
 
-
-    @Schema(description = "联系电话" )
-    //@Size(max = 20)
+    @Schema(description = "联系电话"  )
+    @Size(max = 20)
     private String phones;
 
-
-    @Schema(description = "联系邮箱" )
-    //@Size(max = 32)
+    @Schema(description = "联系邮箱"  )
+    @Size(max = 32)
     private String emails;
 
-
-    @Schema(description = "联系地址" )
+    @Schema(description = "联系地址"  )
     private String address;
 
-
-    @Schema(description = "邮政编码" )
-    //@Size(max = 32)
+    @Schema(description = "邮政编码"  )
+    @Size(max = 32)
     private String zipCode;
 
-
-    @Schema(description = "父ID" )
+    @Schema(description = "父ID"  )
     private Long parentId;
 
 
 
-
-    @Schema(description = "id路径， 使用|包围，如|1|3|15|" )
-    //@Size(max = 1800)
+    @Schema(description = "id路径， 使用|包围，如|1|3|15|"  )
+    @Size(max = 1800)
     private String idPath;
 
-
-    @Schema(description = "名称" , required = true)
-    //@NotBlank
-    //@Size(max = 128)
+    @Schema(description = "名称"  , required = true)
+    @NotBlank
+    @Size(max = 128)
     private String name;
 
-
-    @Schema(description = "拼音，格式：全拼(简拼)" )
-    //@Size(max = 128)
+    @Schema(description = "拼音，格式：全拼(简拼)"  )
+    @Size(max = 128)
     private String pinyinName;
 
-
-    @Schema(description = "创建者" )
+    @Schema(description = "创建者" , hidden = true )
+    //@InjectVar()
     //@Size(max = 128)
+    @InjectVar(InjectConsts.USER_ID)
     private String creator;
 
-
-    @Schema(description = "创建时间" , required = true)
+    @Schema(description = "创建时间" , hidden = true )
     //@NotNull
     private Date createTime;
 
-
-    @Schema(description = "更新时间" )
+    @Schema(description = "更新时间" , hidden = true )
     private Date lastUpdateTime;
 
-
-    @Schema(description = "排序代码" )
+    @Schema(description = "排序代码" , hidden = true )
     private Integer orderCode;
 
-
-    @Schema(description = "是否允许" , required = true)
+    @Schema(description = "是否允许" , hidden = true )
     //@NotNull
     private Boolean enable;
 
-
-    @Schema(description = "是否可编辑" , required = true)
+    @Schema(description = "是否可编辑" , hidden = true )
     //@NotNull
     private Boolean editable;
 
-
-    @Schema(description = "备注" )
+    @Schema(description = "备注")
     //@Size(max = 512)
     private String remark;
 

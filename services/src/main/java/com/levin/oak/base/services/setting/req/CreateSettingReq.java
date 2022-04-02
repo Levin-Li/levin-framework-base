@@ -25,6 +25,8 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Setting.*;
 import java.util.Date;
 ////////////////////////////////////
@@ -32,7 +34,7 @@ import java.util.Date;
 
 /**
  *  新增系统设置
- *  //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *  //Auto gen by simple-dao-codegen 2022-4-2 13:49:52
  */
 @Schema(description = "新增系统设置")
 @Data
@@ -49,87 +51,72 @@ public class CreateSettingReq extends MultiTenantReq {
     private static final long serialVersionUID = 147875794L;
 
 
-
-    @Schema(description = "分类名称" , required = true)
-    //@NotBlank
-    //@Size(max = 64)
+    @Schema(description = "分类名称"  , required = true)
+    @NotBlank
+    @Size(max = 64)
     private String categoryName;
 
-
-    @Schema(description = "分组名称" )
-    //@Size(max = 64)
+    @Schema(description = "分组名称"  )
+    @Size(max = 64)
     private String groupName;
 
-
-    @Schema(description = "编码" , required = true)
-    //@NotBlank
-    //@Size(max = 64)
+    @Schema(description = "编码"  , required = true)
+    @NotBlank
+    @Size(max = 64)
     private String code;
 
-
-    @Schema(description = "值类型" , required = true)
-    //@NotNull
+    @Schema(description = "值类型"  , required = true)
+    @NotNull
     private ValueType valueType;
 
-
-    @Schema(description = "值" )
+    @Schema(description = "值"  )
     private String value;
 
-
-    @Schema(description = "值是否可空" )
+    @Schema(description = "值是否可空"  )
     private Boolean nullable;
 
-
-    @Schema(description = "输入占位提示" )
-    //@Size(max = 64)
+    @Schema(description = "输入占位提示"  )
+    @Size(max = 64)
     private String inputPlaceholder;
 
-
-    @Schema(description = "系统子域" )
-    //@Size(max = 64)
+    @Schema(description = "系统子域"  )
+    @Size(max = 64)
     private String domain;
 
-
-    @Schema(description = "名称" , required = true)
-    //@NotBlank
-    //@Size(max = 128)
+    @Schema(description = "名称"  , required = true)
+    @NotBlank
+    @Size(max = 128)
     private String name;
 
-
-    @Schema(description = "拼音，格式：全拼(简拼)" )
-    //@Size(max = 128)
+    @Schema(description = "拼音，格式：全拼(简拼)"  )
+    @Size(max = 128)
     private String pinyinName;
 
-
-    @Schema(description = "创建者" )
+    @Schema(description = "创建者" , hidden = true )
+    //@InjectVar()
     //@Size(max = 128)
+    @InjectVar(InjectConsts.USER_ID)
     private String creator;
 
-
-    @Schema(description = "创建时间" , required = true)
+    @Schema(description = "创建时间" , hidden = true )
     //@NotNull
     private Date createTime;
 
-
-    @Schema(description = "更新时间" )
+    @Schema(description = "更新时间" , hidden = true )
     private Date lastUpdateTime;
 
-
-    @Schema(description = "排序代码" )
+    @Schema(description = "排序代码" , hidden = true )
     private Integer orderCode;
 
-
-    @Schema(description = "是否允许" , required = true)
+    @Schema(description = "是否允许" , hidden = true )
     //@NotNull
     private Boolean enable;
 
-
-    @Schema(description = "是否可编辑" , required = true)
+    @Schema(description = "是否可编辑" , hidden = true )
     //@NotNull
     private Boolean editable;
 
-
-    @Schema(description = "备注" )
+    @Schema(description = "备注")
     //@Size(max = 512)
     private String remark;
 

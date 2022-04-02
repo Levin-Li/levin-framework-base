@@ -25,13 +25,15 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  新增应用错误日志
- *  //Auto gen by simple-dao-codegen 2022-3-29 22:58:02
+ *  //Auto gen by simple-dao-codegen 2022-4-2 13:49:52
  */
 @Schema(description = "新增应用错误日志")
 @Data
@@ -48,32 +50,26 @@ public class CreateAppErrorLogReq extends MultiTenantReq {
     private static final long serialVersionUID = 1594864095L;
 
 
-
-    @Schema(description = "模块ID" )
-    //@Size(max = 64)
+    @Schema(description = "模块ID"  )
+    @Size(max = 64)
     private String moduleId;
 
-
-    @Schema(description = "发生时间" , required = true)
-    //@NotNull
+    @Schema(description = "发生时间"  , required = true)
+    @NotNull
     private Date occurTime;
 
-
-    @Schema(description = "标题" , required = true)
-    //@NotBlank
-    //@Size(max = 1000)
+    @Schema(description = "标题"  , required = true)
+    @NotBlank
+    @Size(max = 768)
     private String title;
 
-
-    @Schema(description = "错误级别" )
+    @Schema(description = "错误级别"  )
     private String errorLevel;
 
-
-    @Schema(description = "根异常类型" )
+    @Schema(description = "根异常类型"  )
     private String rootExceptionType;
 
-
-    @Schema(description = "完整异常堆栈" )
+    @Schema(description = "完整异常堆栈"  )
     private String exceptionFullInfo;
 
 

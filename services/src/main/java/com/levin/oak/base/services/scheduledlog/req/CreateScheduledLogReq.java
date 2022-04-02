@@ -25,13 +25,15 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  新增调度日志
- *  //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *  //Auto gen by simple-dao-codegen 2022-4-2 13:49:52
  */
 @Schema(description = "新增调度日志")
 @Data
@@ -48,28 +50,23 @@ public class CreateScheduledLogReq extends MultiTenantReq {
     private static final long serialVersionUID = 1319130901L;
 
 
-
-    @Schema(description = "任务ID" , required = true)
-    //@NotBlank
-    //@Size(max = 64)
+    @Schema(description = "任务ID"  , required = true)
+    @NotBlank
+    @Size(max = 64)
     private String taskId;
 
-
-    @Schema(description = "创建时间" , required = true)
-    //@NotNull
+    @Schema(description = "创建时间"  , required = true)
+    @NotNull
     private Date createTime;
 
-
-    @Schema(description = "执行周期" )
-    //@Size(max = 256)
+    @Schema(description = "执行周期"  )
+    @Size(max = 256)
     private String invokeCycle;
 
-
-    @Schema(description = "是否错误" )
+    @Schema(description = "是否错误"  )
     private Boolean isError;
 
-
-    @Schema(description = "执行结果" )
+    @Schema(description = "执行结果"  )
     private String invokeResult;
 
 
