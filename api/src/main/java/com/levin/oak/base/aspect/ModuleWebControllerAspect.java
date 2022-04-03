@@ -24,9 +24,12 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.ResolvableType;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
@@ -87,10 +90,18 @@ public class ModuleWebControllerAspect {
     @Value("${" + PLUGIN_PREFIX + "log.ignorePackages:}")
     List<String> ignorePackages;
 
+    @Value("${" + PLUGIN_PREFIX + "log.ignorePaths:}")
+    List<String> ignorePaths;
+
     @Value("${" + PLUGIN_PREFIX + "log.ignoreKeywords:}")
     List<String> ignoreKeywords;
 
+    @Resource
+    ServerProperties serverProperties;
+
     final AtomicBoolean enableHttpLog = new AtomicBoolean(false);
+
+    private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     /**
      * 存储本模块的变量解析器
@@ -104,11 +115,15 @@ public class ModuleWebControllerAspect {
 
         if (this.ignorePackages == null
                 || this.ignoreKeywords == null
+                || this.ignorePaths == null
                 || this.ignoreKeywords.isEmpty()
+                || this.ignorePaths.isEmpty()
                 || this.ignorePackages.isEmpty()) {
 
-            log.info("*** 友情提示：可以配置[ {} ] 和 [ {} ] 忽略mvc控制器的访问日志记录。"
-                    , PLUGIN_PREFIX + "log.ignorePackages", PLUGIN_PREFIX + "log.ignoreKeywords"
+            log.info("*** 友情提示：可以配置[ {} ] 、 [ {} ] 和 [ {} ] 忽略mvc控制器的访问日志记录。"
+                    , PLUGIN_PREFIX + "log.ignorePackages"
+                    , PLUGIN_PREFIX + "log.ignorePaths"
+                    , PLUGIN_PREFIX + "log.ignoreKeywords"
             );
         }
 
@@ -201,7 +216,19 @@ public class ModuleWebControllerAspect {
 //    @Around("modulePackagePointcut() && controllerPointcut() && requestMappingPointcut()")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        if (!enableHttpLog.get() || !log.isDebugEnabled()) {
+        final String requestURI = request.getRequestURI();
+        // /rbac/error
+
+        if (!enableHttpLog.get()
+                || !log.isDebugEnabled() ||
+                requestURI.contentEquals(serverProperties.getServlet().getContextPath() + "/error")) {
+            return joinPoint.proceed(joinPoint.getArgs());
+        }
+
+        //忽略指定的包名
+        if (this.ignorePaths != null
+                && ignorePaths.stream().filter(StringUtils::hasText)
+                .anyMatch(pattern -> antPathMatcher.match(pattern, requestURI))) {
             return joinPoint.proceed(joinPoint.getArgs());
         }
 
@@ -272,7 +299,7 @@ public class ModuleWebControllerAspect {
                     .setRemoteAddr(IPAddrUtils.try2GetUserRealIPAddr(request))
                     .setServerAddr(request.getLocalAddr())
                     .setRequestMethod(request.getMethod())
-                    .setRequestUri(request.getRequestURI() + "?" + request.getQueryString())
+                    .setRequestUri(requestURI + "?" + request.getQueryString())
                     .setRequestParams(gson.toJson(paramMap))
                     .setHeadInfo(gson.toJson(headerMap))
                     .setExecuteTime(execTime)

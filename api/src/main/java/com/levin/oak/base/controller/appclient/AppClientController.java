@@ -1,30 +1,27 @@
 package com.levin.oak.base.controller.appclient;
 
+import com.levin.commons.dao.support.PagingData;
+import com.levin.commons.dao.support.SimplePaging;
+import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.controller.BaseController;
+import com.levin.oak.base.entities.E_AppClient;
+import com.levin.oak.base.services.appclient.AppClientService;
+import com.levin.oak.base.services.appclient.info.AppClientInfo;
+import com.levin.oak.base.services.appclient.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.util.*;
-import javax.validation.*;
-import java.util.*;
-import javax.annotation.*;
 
-import javax.servlet.http.*;
+import javax.annotation.Resource;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import javax.validation.constraints.*;
-
-import com.levin.oak.base.controller.*;
-import com.levin.oak.base.*;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.appclient.*;
-import com.levin.oak.base.services.appclient.req.*;
-import com.levin.oak.base.services.appclient.info.*;
-
-import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.ModuleOption.API_PATH;
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 //Auto gen by simple-dao-codegen 2022-4-3 0:55:04
@@ -53,7 +50,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Tag(name = E_AppClient.BIZ_NAME, description = E_AppClient.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class AppClientController extends BaseController{
+public class AppClientController extends BaseController {
 
     private static final String BIZ_NAME = E_AppClient.BIZ_NAME;
 
@@ -61,15 +58,35 @@ public class AppClientController extends BaseController{
     AppClientService appClientService;
 
     /**
+     * 信息脱敏
+     *
+     * @param info
+     * @return
+     */
+    AppClientInfo desensitize(AppClientInfo info) {
+        if (info != null) {
+            // info.setAppSecret(null);
+        }
+        return info;
+    }
+
+    /**
      * 分页查找
      *
-     * @param req  QueryAppClientReq
-     * @return  ApiResp<PagingData<AppClientInfo>>
+     * @param req QueryAppClientReq
+     * @return ApiResp<PagingData < AppClientInfo>>
      */
     @GetMapping("/query")
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<AppClientInfo>> query(QueryAppClientReq req , SimplePaging paging) {
-        return ApiResp.ok(appClientService.query(req,paging));
+    public ApiResp<PagingData<AppClientInfo>> query(QueryAppClientReq req, SimplePaging paging) {
+
+        PagingData<AppClientInfo> pagingData = appClientService.query(req, paging);
+
+        if (pagingData.getItems() != null) {
+            pagingData.getItems().forEach(this::desensitize);
+        }
+
+        return ApiResp.ok(pagingData);
     }
 
     /**
@@ -97,37 +114,40 @@ public class AppClientController extends BaseController{
     }
 
     /**
-    * 查看详情
-    *
-    * @param req QueryAppClientByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QueryAppClientByIdReq
+     */
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<AppClientInfo> retrieve(@NotNull AppClientIdReq req) {
-         return ApiResp.ok(appClientService.findById(req));
-     }
+        return ApiResp.ok(desensitize(appClientService.findById(req)));
+    }
+
 
     /**
      * 更新
+     *
      * @param req UpdateAppClientReq
      */
-     @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> update(@RequestBody UpdateAppClientReq req) {
-         return ApiResp.ok(checkResult(appClientService.update(req), UPDATE_ACTION));
+    @PutMapping({""})
+    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> update(@RequestBody UpdateAppClientReq req) {
+        return ApiResp.ok(checkResult(appClientService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAppClientReq> reqList) {
+    @PutMapping("/batchUpdate")
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAppClientReq> reqList) {
         return ApiResp.ok(checkResult(appClientService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
      * 删除
+     *
      * @param req AppClientIdReq
      */
     @DeleteMapping({""})
@@ -138,6 +158,7 @@ public class AppClientController extends BaseController{
 
     /**
      * 批量删除
+     *
      * @param req DeleteAppClientReq
      */
     @DeleteMapping({"/batchDelete"})
@@ -148,6 +169,7 @@ public class AppClientController extends BaseController{
 
     /**
      * 检查结果
+     *
      * @param n
      * @param action
      * @return

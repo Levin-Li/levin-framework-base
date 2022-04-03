@@ -1,7 +1,6 @@
 package com.levin.oak.base.config;
 
 import com.levin.oak.base.biz.BizTenantService;
-import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.interceptor.AuthorizeAnnotationInterceptor;
 import com.levin.oak.base.interceptor.DomainInterceptor;
@@ -9,10 +8,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.function.Consumer;
 
 import static com.levin.oak.base.ModuleOption.*;
 
@@ -25,9 +28,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     RbacService rbacService;
 
     @Resource
-    AuthService authService;
-
-    @Resource
     BizTenantService bizTenantService;
 
     @Value("${" + PLUGIN_PREFIX + "enableAuthorizeInterceptor:}")
@@ -36,9 +36,27 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     @Value("${" + PLUGIN_PREFIX + "enableGlobalAuthorizeInterceptor:}")
     Boolean enableGlobalAuthorizeInterceptor = null;
 
+    @Value("${springfox.documentation.swagger-ui.base-url:}")
+    private String swaggerUiBaseUrl;
+
+    @Value("${springfox.documentation.open-api.v3.path:}")
+    private String openApiPath;
+
     @PostConstruct
     void init() {
+
         log.info("init...");
+
+        Assert.isTrue(
+                StringUtils.hasText(swaggerUiBaseUrl)
+                        && !swaggerUiBaseUrl.replace("/", "").trim().isEmpty(),
+                "swagger 基本路径[springfox.documentation.swagger-ui.base-url]必须配置，并且不允许为根路径，建议配置为：swagger");
+
+        Assert.isTrue(
+                StringUtils.hasText(openApiPath)
+                        && !openApiPath.replace("/", "").trim().isEmpty(),
+                "openApiPath 基本路径[springfox.documentation.open-api.v3.path]必须配置，并且不允许为根路径，建议配置为：open-api/v3/api-docs");
+
     }
 
     /**
@@ -87,26 +105,33 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //            SaRouter.match("/comment/**", r -> StpUtil.checkPermission("comment"));
 //        })).addPathPatterns("/**");
 
+        final HandlerInterceptor[] handlerInterceptors = {
+                new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)),
+                new AuthorizeAnnotationInterceptor(rbacService),
+        };
+
+        final Consumer<String> addInterceptor = (path) -> {
+            for (HandlerInterceptor handlerInterceptor : handlerInterceptors) {
+                registry.addInterceptor(handlerInterceptor)
+                        .excludePathPatterns("/error")
+                        .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
+                        .excludePathPatterns("/" + openApiPath)
+                        .addPathPatterns(path)
+                ;
+            }
+        };
 
         if (enableGlobalAuthorizeInterceptor == null
                 || Boolean.TRUE.equals(enableGlobalAuthorizeInterceptor)) {
 
-            registry.addInterceptor(new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)))
-                    .addPathPatterns("/**");
-
-            registry.addInterceptor(new AuthorizeAnnotationInterceptor(rbacService))
-                    .addPathPatterns("/**");
+            addInterceptor.accept("/**");
 
             log.info("*** 友情提示 *** 模块认证全局拦截器[ {} ]已经启用 ，可以配置[{}enableGlobalAuthorizeInterceptor]禁用", "/", PLUGIN_PREFIX);
 
         } else if (enableAuthorizeInterceptor == null
                 || Boolean.TRUE.equals(enableAuthorizeInterceptor)) {
 
-            registry.addInterceptor(new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)))
-                    .addPathPatterns(API_PATH + "**");
-
-            registry.addInterceptor(new AuthorizeAnnotationInterceptor(rbacService))
-                    .addPathPatterns(API_PATH + "**");
+            addInterceptor.accept(API_PATH + "**");
 
             log.info("*** 友情提示 *** 模块认证拦截器[ {} ]已经启用 ，可以配置[{}enableAuthorizeInterceptor]禁用", API_PATH, PLUGIN_PREFIX);
         }

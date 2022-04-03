@@ -1,30 +1,16 @@
 package com.levin.oak.base.config;
 
-import static com.levin.oak.base.ModuleOption.*;
-import com.levin.oak.base.*;
-
-
 import com.levin.commons.service.domain.SignatureReq;
+import com.levin.oak.base.ModuleOption;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -42,7 +28,9 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
-import javax.annotation.*;
+
+import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 //import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 //Swagger3
@@ -57,6 +45,8 @@ import javax.annotation.*;
 @ConditionalOnClass({Docket.class})
 public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
 
+    public static final String[] SWAGGER_UI_MAPPING_PATHS = {};
+
     /**
      * tokenName Authorization
      */
@@ -68,6 +58,7 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
      */
     @Value("${swagger.enabled:true}")
     private boolean enabled;
+
 
     private static final String GROUP_NAME = ModuleOption.NAME + "-" + ModuleOption.ID;
 
@@ -107,18 +98,21 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
             parameters.add(newParameter(tokenName, "鉴权token，从登录接口获取"));
         }
 
+
         parameters.add(newParameter(SignatureReq.Fields.appId, "应用ID"));
 //        parameters.add(newParameter(SignatureReq.Fields.appSecret, "应用密钥"));
         parameters.add(newParameter(SignatureReq.Fields.channelCode, "渠道编码"));
 //        parameters.add(newParameter(SignatureReq.Fields.nonceStr, "随机字符串"));
+
 //        parameters.add(newParameter(SignatureReq.Fields.timeStamp, "整数时间戳（秒）", true, ScalarType.LONG));
+
         parameters.add(newParameter(SignatureReq.Fields.sign, "签名，验签规则:md5(Utf8(应用ID +  渠道编码 + 应用密钥 + 当前时间毫秒数/(45 * 1000) ))"));
 
         return parameters;
     }
 
     private RequestParameter newParameter(String name, String description) {
-        return newParameter(name, description, true, null);
+        return newParameter(name, description, false, null);
     }
 
     /**
@@ -136,7 +130,6 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
                 .required(required)
                 .in(ParameterType.HEADER)
                 .query(q -> q.model(m -> m.scalarModel(scalarType == null ? ScalarType.STRING : scalarType)))
-                .required(required)
                 .build();
     }
 
@@ -159,7 +152,7 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        Stream.of("/**/swagger-ui/**/*", "/**/springfox-swagger-ui/**/*")
+        Stream.of(SWAGGER_UI_MAPPING_PATHS)
                 .filter(p -> !registry.hasMappingForPattern(p))
                 .forEachOrdered(pathPattern ->
                         registry.addResourceHandler(pathPattern)

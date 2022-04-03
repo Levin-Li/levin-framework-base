@@ -1,33 +1,30 @@
 package com.levin.oak.base.controller.user;
 
+import com.levin.commons.dao.support.PagingData;
+import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.rbac.RbacRoleObject;
+import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.controller.BaseController;
+import com.levin.oak.base.entities.E_User;
+import com.levin.oak.base.services.user.UserService;
+import com.levin.oak.base.services.user.info.UserInfo;
+import com.levin.oak.base.services.user.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.util.*;
 
 import javax.annotation.Resource;
-import javax.validation.*;
-import java.util.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
-import javax.servlet.http.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import javax.validation.constraints.*;
-
-import com.levin.oak.base.controller.*;
-import com.levin.oak.base.*;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.user.*;
-import com.levin.oak.base.services.user.req.*;
-import com.levin.oak.base.services.user.info.*;
-
-import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.ModuleOption.API_PATH;
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 //Auto gen by simple-dao-codegen 2022-4-2 20:07:02
@@ -56,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class UserController extends BaseController{
+public class UserController extends BaseController {
 
     private static final String BIZ_NAME = E_User.BIZ_NAME;
 
@@ -65,6 +62,39 @@ public class UserController extends BaseController{
 
     @Resource
     AuthService authService;
+
+    /**
+     * 信息脱敏
+     *
+     * @param info
+     * @return
+     */
+    UserInfo desensitize(UserInfo info) {
+        if (info != null) {
+            info.setPassword(null);
+        }
+        return info;
+    }
+
+    /**
+     * 检查是否有超管角色
+     *
+     * @param roleList
+     * @param errorInfo
+     */
+    protected void checkSARole(List<String> roleList, String errorInfo) {
+        //如果有超级角色，需要检查当前用户，是否是超管
+        if (roleList != null
+                && roleList.stream().map(StringUtils::trimAllWhitespace)
+                .anyMatch(name -> RbacRoleObject.SA_ROLE.equalsIgnoreCase(name))) {
+
+            if (errorInfo == null) {
+                errorInfo = "当前用户未拥有超管角色";
+            }
+
+            Assert.isTrue(authService.getUserInfo().isSuperAdmin(), errorInfo);
+        }
+    }
 
     /**
      * 分页查找
@@ -80,26 +110,12 @@ public class UserController extends BaseController{
 
         //清楚密码
         if (pagingData.getItems() != null) {
-            pagingData.getItems().forEach(userInfo -> userInfo.setPassword(null));
+            pagingData.getItems().forEach(this::desensitize);
         }
 
         return ApiResp.ok(pagingData);
     }
 
-    protected void checkSARole(List<String> roleList, String errorInfo) {
-
-        //如果有超级角色，需要检查当前用户，是否是超管
-        if (roleList != null
-                && roleList.stream().map(StringUtils::trimAllWhitespace)
-                .anyMatch(name -> RbacRoleObject.SA_ROLE.equalsIgnoreCase(name))) {
-
-            if (errorInfo == null) {
-                errorInfo = "当前用户未拥有超管角色";
-            }
-
-            Assert.isTrue(authService.getUserInfo().isSuperAdmin(), errorInfo);
-        }
-    }
 
     /**
      * 新增
@@ -123,45 +139,47 @@ public class UserController extends BaseController{
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateUserReq> reqList) {
-        reqList.forEach(req -> checkSARole(req.getRoleList(),null));
+        reqList.forEach(req -> checkSARole(req.getRoleList(), null));
         return ApiResp.ok(userService.batchCreate(reqList));
     }
 
 
     /**
-    * 查看详情
-    *
-    * @param req QueryUserByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QueryUserByIdReq
+     */
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<UserInfo> retrieve(@NotNull UserIdReq req) {
-         return ApiResp.ok(userService.findById(req));
-     }
+        return ApiResp.ok(desensitize(userService.findById(req)));
+    }
 
     /**
      * 更新
+     *
      * @param req UpdateUserReq
      */
-     @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> update(@RequestBody UpdateUserReq req) {
-         checkSARole(req.getRoleList(), null);
-         return ApiResp.ok(checkResult(userService.update(req), UPDATE_ACTION));
+    @PutMapping({""})
+    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> update(@RequestBody UpdateUserReq req) {
+        checkSARole(req.getRoleList(), null);
+        return ApiResp.ok(checkResult(userService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateUserReq> reqList) {
-         reqList.forEach(req -> checkSARole(req.getRoleList(),null));
+    @PutMapping("/batchUpdate")
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateUserReq> reqList) {
+        reqList.forEach(req -> checkSARole(req.getRoleList(), null));
         return ApiResp.ok(checkResult(userService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
      * 删除
+     *
      * @param req UserIdReq
      */
     @DeleteMapping({""})
@@ -172,6 +190,7 @@ public class UserController extends BaseController{
 
     /**
      * 批量删除
+     *
      * @param req DeleteUserReq
      */
     @DeleteMapping({"/batchDelete"})
@@ -182,6 +201,7 @@ public class UserController extends BaseController{
 
     /**
      * 检查结果
+     *
      * @param n
      * @param action
      * @return

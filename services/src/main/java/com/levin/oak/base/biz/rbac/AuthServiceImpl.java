@@ -10,6 +10,7 @@ import com.levin.commons.utils.JsonStrArrayUtils;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.BaseService;
+import com.levin.oak.base.services.appclient.req.CreateAppClientReq;
 import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.role.req.CreateRoleReq;
@@ -400,6 +401,18 @@ public class AuthServiceImpl
             tenantInfo = tenantService.findById(id);
 
 //            tenantInfo = tenantService.findOne(req);
+        }
+
+        long count = simpleDao.selectFrom(AppClient.class)
+                .select(E_AppClient.appId)
+                .eq(E_AppClient.tenantId, tenantInfo.getId())
+                .count();
+
+        if (count < 1) {
+            simpleDao.create(new CreateAppClientReq()
+                    .setName("默认应用")
+                    .setTenantId(tenantInfo.getId())
+            );
         }
 
         Role role = simpleDao.selectFrom(Role.class)

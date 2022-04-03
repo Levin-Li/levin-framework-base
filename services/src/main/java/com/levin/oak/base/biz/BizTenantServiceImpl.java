@@ -2,8 +2,13 @@ package com.levin.oak.base.biz;
 
 import cn.hutool.core.lang.Assert;
 import com.levin.commons.dao.SimpleDao;
+import com.levin.commons.service.domain.SignatureReq;
 import com.levin.commons.service.exception.ServiceException;
+import com.levin.commons.utils.SignUtils;
 import com.levin.oak.base.entities.E_Tenant;
+import com.levin.oak.base.services.appclient.AppClientService;
+import com.levin.oak.base.services.appclient.info.AppClientInfo;
+import com.levin.oak.base.services.appclient.req.QueryAppClientReq;
 import com.levin.oak.base.services.tenant.TenantService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.services.tenant.req.QueryTenantReq;
@@ -14,6 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,6 +40,15 @@ public class BizTenantServiceImpl
 
     @Resource
     TenantService tenantService;
+
+    @Resource
+    HttpServletRequest request;
+
+    @Resource
+    HttpServletResponse response;
+
+    @Resource
+    AppClientService appClientService;
 
     final static ThreadLocal<TenantInfo> domainTenant = new ThreadLocal<>();
     final static ThreadLocal<String> domains = new ThreadLocal<>();
@@ -74,6 +90,48 @@ public class BizTenantServiceImpl
         TenantInfo tenantInfo = getTenantByDomain(domain);
 
         domainTenant.set(tenantInfo);
+
+        checkTenantAppSign(tenantInfo);
+
+        return tenantInfo;
+    }
+
+
+    /**
+     * 检查当前租户应用签名
+     */
+    protected TenantInfo checkTenantAppSign(TenantInfo tenantInfo) {
+
+        if (tenantInfo == null) {
+            return tenantInfo;
+        }
+
+        String url = request.getRequestURL().toString();
+
+        log.debug("签名验证 url:{}", url);
+
+        String appId = request.getHeader(SignatureReq.Fields.appId);
+        String channelCode = request.getHeader(SignatureReq.Fields.channelCode);
+        String sign = request.getHeader(SignatureReq.Fields.sign);
+
+        Assert.notBlank(appId, "应用ID不能为空");
+        Assert.notBlank(channelCode, "渠道编码不能为空");
+        Assert.notBlank(sign, "应用签名不能为空");
+
+//        签名，验签规则:md5(Utf8(应用ID +  渠道编码 + 应用密钥 + 当前时间毫秒数/(45 * 1000) ))
+
+        AppClientInfo clientInfo = appClientService.findOne(
+                new QueryAppClientReq()
+                        .setAppId(appId.trim())
+                        .setEnable(true)
+                        .setTenantId(tenantInfo.getId())
+        );
+
+        Assert.notNull(clientInfo, "非法的应用ID-{}", appId);
+
+        String newSign = SignUtils.md5Utf8Text(clientInfo.getAppId() + channelCode + clientInfo.getAppSecret() + System.currentTimeMillis() / (45 * 1000));
+
+        Assert.isTrue(sign.equals(newSign), "签名验证失败");
 
         return tenantInfo;
     }

@@ -1,7 +1,7 @@
 #Auto gen by simple-dao-codegen 2021-10-28 9:46:17
 server:
   servlet:
-    context-path: /rabc
+    context-path: /rbac
 
 spring:
   application:
@@ -107,3 +107,10 @@ sa-token:
   # 是否输出操作日志
   is-log: true
 
+springfox:
+  documentation:
+    swagger-ui:
+      base-url: /swagger
+    open-api:
+      v3:
+        path: /open-api/v3/api-docs

@@ -72,8 +72,4 @@ public class LoginReq implements ServiceReq {
     @Ignore
     private String clientType;
 
-    @Schema(description = "签名串")
-    @Ignore
-    private String sign;
-
 }
