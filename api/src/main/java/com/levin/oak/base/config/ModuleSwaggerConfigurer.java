@@ -98,7 +98,6 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
             parameters.add(newParameter(tokenName, "鉴权token，从登录接口获取"));
         }
 
-
         parameters.add(newParameter(SignatureReq.Fields.appId, "应用ID"));
 //        parameters.add(newParameter(SignatureReq.Fields.appSecret, "应用密钥"));
         parameters.add(newParameter(SignatureReq.Fields.channelCode, "渠道编码"));
@@ -112,7 +111,7 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
     }
 
     private RequestParameter newParameter(String name, String description) {
-        return newParameter(name, description, false, null);
+        return newParameter(name, description, true, null);
     }
 
     /**
