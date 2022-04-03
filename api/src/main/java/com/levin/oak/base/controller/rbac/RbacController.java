@@ -18,7 +18,6 @@ import com.levin.oak.base.services.user.req.UpdateUserPwdReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.*;
 
@@ -76,8 +75,8 @@ public class RbacController extends BaseController {
     @PostMapping("login")
     @Operation(tags = {"授权管理"}, summary = "用户登录")
     @ResAuthorize(domain = ID, type = TYPE_NAME, ignored = true)
-    public ApiResp<String> login(LoginReq req, @RequestHeader(value = "user-agent", required = false) String ua) {
-        return ApiResp.ok(authService.auth(req.getTenantId(), req.getAccount(), req.getPassword(), ua));
+    public ApiResp<String> login(@RequestBody LoginReq req) {
+        return ApiResp.ok(authService.auth(req.getTenantId(), req.getAccount(), req.getPassword(), req.getUa()));
     }
 
     @PostMapping("userInfo")
