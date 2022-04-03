@@ -27,8 +27,8 @@ import java.util.*;
 public class ModuleVariableResolverConfigurer
         implements VariableResolverConfigurer {
 
-//    @Resource
-//    VariableInjector variableInjector;
+    @Resource
+    VariableInjector variableInjector;
 
     @Resource
     InjectVarService injectVarService;
