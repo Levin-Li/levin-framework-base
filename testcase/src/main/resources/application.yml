@@ -114,5 +114,3 @@ springfox:
     open-api:
       v3:
         path: /open-api/v3/api-docs
-
-    enabled: true
