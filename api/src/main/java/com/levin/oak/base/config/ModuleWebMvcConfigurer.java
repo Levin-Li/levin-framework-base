@@ -115,6 +115,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                         .excludePathPatterns("/error")
                         .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
                         .excludePathPatterns("/" + openApiPath)
+                        .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
                         .addPathPatterns(path)
                 ;
             }
