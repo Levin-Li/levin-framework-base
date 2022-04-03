@@ -322,6 +322,10 @@ public class AuthServiceImpl
 //        2. http://whatsmyua.com/
 //        3. http://www.useragentstring.com/
 
+        if (ua == null) {
+            return "Unknown";
+        }
+
         if (ua.contains("Android ")
                 || ua.contains("iPhone;")
                 || ua.contains("iOS ")
@@ -336,7 +340,6 @@ public class AuthServiceImpl
         }
 
         return "Unknown";
-
     }
 
     /**

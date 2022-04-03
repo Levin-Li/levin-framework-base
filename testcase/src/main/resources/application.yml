@@ -92,7 +92,7 @@ plugin:
             disablePackages: org.apache,com.test,cn.xx
 
           BizTenantService:
-            enableApiSign: true
+            enableApiSign: false
 
 # Sa-Token配置
 sa-token:
