@@ -14,10 +14,12 @@ import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.services.tenant.req.QueryTenantReq;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,8 +52,16 @@ public class BizTenantServiceImpl
     @Resource
     AppClientService appClientService;
 
+    @Value("${" + PLUGIN_PREFIX + "BizTenantService.enableApiSign:true}")
+    Boolean enableApiSign = true;
+
+
     final static ThreadLocal<TenantInfo> domainTenant = new ThreadLocal<>();
     final static ThreadLocal<String> domains = new ThreadLocal<>();
+
+    @PostConstruct
+    void init() {
+    }
 
     /**
      * 获取当前域名
@@ -91,7 +101,12 @@ public class BizTenantServiceImpl
 
         domainTenant.set(tenantInfo);
 
-        checkTenantAppSign(tenantInfo);
+        if (enableApiSign == null || enableApiSign) {
+
+            log.info("*** 友情提示 *** 全局租户API签名验证已经启用 ，可以配置[{}BizTenantService.enableApiSign = false]禁用", PLUGIN_PREFIX);
+
+            checkTenantAppSign(tenantInfo);
+        }
 
         return tenantInfo;
     }
