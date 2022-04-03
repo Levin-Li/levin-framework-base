@@ -111,10 +111,13 @@ sa-token:
   # 是否输出操作日志
   is-log: true
 
-springfox2:
-  documentation:
-    swagger-ui:
-      base-url: /swagger
-    open-api:
-      v3:
-        path: /open-api/v3/api-docs
+
+com:
+  levin:
+    oak:
+      enable-api-sign: true
+      access-log:
+        enable: false
+        name: this
+
+

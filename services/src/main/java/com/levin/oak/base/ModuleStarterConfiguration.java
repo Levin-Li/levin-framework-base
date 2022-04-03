@@ -3,10 +3,12 @@ package com.levin.oak.base;
 import com.levin.commons.dao.repository.RepositoryFactoryBean;
 import com.levin.commons.dao.repository.annotation.EntityRepository;
 import com.levin.commons.service.proxy.ProxyBeanScan;
+import com.levin.oak.base.autoconfigure.FrameworkBaseProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.task.TaskSchedulingProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +34,8 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @ProxyBeanScan(basePackages = {PACKAGE_NAME}, scanType = EntityRepository.class, factoryBeanClass = RepositoryFactoryBean.class)
 
+@EnableConfigurationProperties({FrameworkBaseProperties.class})
+
 public class ModuleStarterConfiguration {
 
     @Resource
@@ -43,6 +47,7 @@ public class ModuleStarterConfiguration {
     @Bean
     @ConditionalOnMissingBean
     ScheduledExecutorService scheduledExecutorService() {
+
         return new ScheduledThreadPoolExecutor(taskSchedulingProperties.getPool().getSize());
     }
 

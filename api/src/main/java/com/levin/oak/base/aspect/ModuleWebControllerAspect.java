@@ -6,6 +6,7 @@ import com.levin.commons.service.support.*;
 import com.levin.commons.utils.AsyncHandler;
 import com.levin.commons.utils.ExceptionUtils;
 import com.levin.commons.utils.IPAddrUtils;
+import com.levin.oak.base.autoconfigure.FrameworkBaseProperties;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.controller.accesslog.AccessLogController;
@@ -83,6 +84,9 @@ public class ModuleWebControllerAspect {
     final AsyncHandler<CreateAccessLogReq> asyncHandler = new AsyncHandler<>();
 
     static final Gson gson = new Gson();
+
+    @Resource
+    FrameworkBaseProperties frameworkBaseProperties;
 
     @Value("${" + PLUGIN_PREFIX + "logHttp:true}")
     boolean enableLog;

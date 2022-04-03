@@ -7,6 +7,7 @@ import com.levin.oak.base.interceptor.DomainInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.*;
@@ -27,6 +28,9 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
     @Resource
     BizTenantService bizTenantService;
+
+    @Resource
+    ServerProperties serverProperties;
 
     @Value("${" + PLUGIN_PREFIX + "enableAuthorizeInterceptor:true}")
     boolean enableAuthorizeInterceptor;
@@ -111,7 +115,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         final Consumer<String> addInterceptor = (path) -> {
             for (HandlerInterceptor handlerInterceptor : handlerInterceptors) {
                 registry.addInterceptor(handlerInterceptor)
-                        .excludePathPatterns("/error")
+                        .excludePathPatterns(serverProperties.getError().getPath())
                         .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
                         .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
                         .excludePathPatterns("/" + openApiPath)
