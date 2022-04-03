@@ -41,6 +41,7 @@ public abstract class MultiTenantReq
      *
      * @return
      */
+    @Schema(description = "请求是否包含公共数据", hidden = true)
     public boolean isContainsPublicData() {
         return false;
     }
