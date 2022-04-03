@@ -120,7 +120,7 @@ public class ModuleWebControllerAspect {
                 || this.ignorePaths.isEmpty()
                 || this.ignorePackages.isEmpty()) {
 
-            log.info("*** 友情提示：可以配置[ {} ] 、 [ {} ] 和 [ {} ] 忽略mvc控制器的访问日志记录。"
+            log.info("*** 友情提示 *** 可以配置[ {} ] 、 [ {} ] 和 [ {} ] 忽略mvc控制器的访问日志记录。"
                     , PLUGIN_PREFIX + "log.ignorePackages"
                     , PLUGIN_PREFIX + "log.ignorePaths"
                     , PLUGIN_PREFIX + "log.ignoreKeywords"
