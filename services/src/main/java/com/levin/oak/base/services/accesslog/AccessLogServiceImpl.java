@@ -137,15 +137,15 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
     @Override
     public int batchDelete(DeleteAccessLogReq req){
         //@Todo 优化批量提交
-        int sum = Stream.of(req.getIdList())
-            .map(id -> simpleDao.copy(req, new AccessLogIdReq().setId(id)))
-            .map(idReq -> getSelfProxy().delete(idReq))
-            .mapToInt(n -> n)
-            .sum();
+//        int sum = Stream.of(req.getIdList())
+//            .map(id -> simpleDao.copy(req, new AccessLogIdReq().setId(id)))
+//            .map(idReq -> getSelfProxy().delete(idReq))
+//            .mapToInt(n -> n)
+//            .sum();
 
         //Assert.isTrue(sum > 0, BATCH_DELETE_ACTION + BIZ_NAME + "失败");
 
-        return sum;
+        return simpleDao.deleteByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
