@@ -52,8 +52,8 @@ public class BizTenantServiceImpl
     @Resource
     AppClientService appClientService;
 
-    @Value("${" + PLUGIN_PREFIX + "BizTenantService.enableApiSign:true}")
-    Boolean enableApiSign = true;
+    @Value("${" + PLUGIN_PREFIX + "BizTenantService.enableApiSign:false}")
+    Boolean enableApiSign = false;
 
 
     final static ThreadLocal<TenantInfo> domainTenant = new ThreadLocal<>();
@@ -61,6 +61,11 @@ public class BizTenantServiceImpl
 
     @PostConstruct
     void init() {
+
+        enableApiSign = Boolean.TRUE.equals(enableApiSign);
+
+        log.info("*** 友情提示 *** 全局API签名验证已经{} ，可以配置[{}BizTenantService.enableApiSign = {}] {}"
+                , enableApiSign ? "启用" : "禁用", PLUGIN_PREFIX, !enableApiSign, enableApiSign ? "禁用" : "启用");
     }
 
     /**
@@ -101,10 +106,7 @@ public class BizTenantServiceImpl
 
         domainTenant.set(tenantInfo);
 
-        if (enableApiSign == null || enableApiSign) {
-
-            log.info("*** 友情提示 *** 全局租户API签名验证已经启用 ，可以配置[{}BizTenantService.enableApiSign = false]禁用", PLUGIN_PREFIX);
-
+        if (Boolean.TRUE.equals(enableApiSign)) {
             checkTenantAppSign(tenantInfo);
         }
 

@@ -47,6 +47,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         log.info("init...");
 
+
+
         Assert.isTrue(
                 StringUtils.hasText(swaggerUiBaseUrl)
                         && !swaggerUiBaseUrl.replace("/", "").trim().isEmpty(),
