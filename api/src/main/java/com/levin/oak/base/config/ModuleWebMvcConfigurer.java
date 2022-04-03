@@ -36,10 +36,10 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     @Value("${" + PLUGIN_PREFIX + "enableGlobalAuthorizeInterceptor:true}")
     boolean enableGlobalAuthorizeInterceptor;
 
-    @Value("${springfox.documentation.swagger-ui.base-url:}")
+    @Value("${springfox.documentation.swagger-ui.base-url:/swagger-ui}")
     private String swaggerUiBaseUrl;
 
-    @Value("${springfox.documentation.open-api.v3.path:}")
+    @Value("${springfox.documentation.open-api.v3.path:/v3/api-docs}")
     private String openApiPath;
 
     @PostConstruct
@@ -47,15 +47,16 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         log.info("init...");
 
-        Assert.isTrue(
-                StringUtils.hasText(swaggerUiBaseUrl)
-                        && !swaggerUiBaseUrl.replace("/", "").trim().isEmpty(),
-                "swagger 基本路径[springfox.documentation.swagger-ui.base-url]必须配置，并且不允许为根路径，建议配置为：swagger");
+//        Assert.isTrue(
+//                StringUtils.hasText(swaggerUiBaseUrl)
+//                        && !swaggerUiBaseUrl.replace("/", "").trim().isEmpty(),
+//                "swagger 基本路径[springfox.documentation.swagger-ui.base-url]必须配置，并且不允许为根路径，建议配置为：swagger");
+//
+//        Assert.isTrue(
+//                StringUtils.hasText(openApiPath)
+//                        && !openApiPath.replace("/", "").trim().isEmpty(),
+//                "openApiPath 基本路径[springfox.documentation.open-api.v3.path]必须配置，并且不允许为根路径，建议配置为：open-api/v3/api-docs");
 
-        Assert.isTrue(
-                StringUtils.hasText(openApiPath)
-                        && !openApiPath.replace("/", "").trim().isEmpty(),
-                "openApiPath 基本路径[springfox.documentation.open-api.v3.path]必须配置，并且不允许为根路径，建议配置为：open-api/v3/api-docs");
     }
 
     /**
@@ -113,9 +114,9 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
             for (HandlerInterceptor handlerInterceptor : handlerInterceptors) {
                 registry.addInterceptor(handlerInterceptor)
                         .excludePathPatterns("/error")
+                        .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
                         .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
                         .excludePathPatterns("/" + openApiPath)
-                        .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
                         .addPathPatterns(path)
                 ;
             }
