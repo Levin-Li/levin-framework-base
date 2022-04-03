@@ -30,11 +30,11 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     @Resource
     BizTenantService bizTenantService;
 
-    @Value("${" + PLUGIN_PREFIX + "enableAuthorizeInterceptor:}")
-    Boolean enableAuthorizeInterceptor = null;
+    @Value("${" + PLUGIN_PREFIX + "enableAuthorizeInterceptor:true}")
+    boolean enableAuthorizeInterceptor;
 
-    @Value("${" + PLUGIN_PREFIX + "enableGlobalAuthorizeInterceptor:}")
-    Boolean enableGlobalAuthorizeInterceptor = null;
+    @Value("${" + PLUGIN_PREFIX + "enableGlobalAuthorizeInterceptor:true}")
+    boolean enableGlobalAuthorizeInterceptor;
 
     @Value("${springfox.documentation.swagger-ui.base-url:}")
     private String swaggerUiBaseUrl;
@@ -47,8 +47,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         log.info("init...");
 
-
-
         Assert.isTrue(
                 StringUtils.hasText(swaggerUiBaseUrl)
                         && !swaggerUiBaseUrl.replace("/", "").trim().isEmpty(),
@@ -58,7 +56,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                 StringUtils.hasText(openApiPath)
                         && !openApiPath.replace("/", "").trim().isEmpty(),
                 "openApiPath 基本路径[springfox.documentation.open-api.v3.path]必须配置，并且不允许为根路径，建议配置为：open-api/v3/api-docs");
-
     }
 
     /**
@@ -123,15 +120,13 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
             }
         };
 
-        if (enableGlobalAuthorizeInterceptor == null
-                || Boolean.TRUE.equals(enableGlobalAuthorizeInterceptor)) {
+        if (enableGlobalAuthorizeInterceptor) {
 
             addInterceptor.accept("/**");
 
             log.info("*** 友情提示 *** 模块认证全局拦截器[ {} ]已经启用 ，可以配置[{}enableGlobalAuthorizeInterceptor]禁用", "/", PLUGIN_PREFIX);
 
-        } else if (enableAuthorizeInterceptor == null
-                || Boolean.TRUE.equals(enableAuthorizeInterceptor)) {
+        } else if (enableAuthorizeInterceptor) {
 
             addInterceptor.accept(API_PATH + "**");
 

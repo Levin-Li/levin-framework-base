@@ -87,8 +87,12 @@ plugin:
     levin:
       oak:
         base:
+
           log:
             disablePackages: org.apache,com.test,cn.xx
+
+          BizTenantService:
+            enableApiSign: true
 
 # Sa-Token配置
 sa-token:
