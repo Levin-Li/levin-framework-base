@@ -2,6 +2,7 @@ package com.levin.oak.base.config;
 
 import com.levin.commons.service.domain.SignatureReq;
 import com.levin.oak.base.ModuleOption;
+import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -25,6 +26,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -59,8 +61,8 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
     @Value("${swagger.enabled:true}")
     private boolean enabled;
 
-    @Value("${" + PLUGIN_PREFIX + "BizTenantService.enableApiSign:false}")
-    boolean enableApiSign = false;
+    @Resource
+    FrameworkProperties frameworkProperties;
 
     private static final String GROUP_NAME = ModuleOption.NAME + "-" + ModuleOption.ID;
 
@@ -100,7 +102,7 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
             parameters.add(newParameter(tokenName, "鉴权token，从登录接口获取"));
         }
 
-        if (enableApiSign) {
+        if (frameworkProperties.getSign().isEnable()) {
             parameters.add(newParameter(SignatureReq.Fields.appId, "应用ID"));
 //        parameters.add(newParameter(SignatureReq.Fields.appSecret, "应用密钥"));
             parameters.add(newParameter(SignatureReq.Fields.channelCode, "渠道编码"));

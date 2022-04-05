@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class AuthorizeAnnotationInterceptor implements HandlerInterceptor {
@@ -18,28 +19,33 @@ public class AuthorizeAnnotationInterceptor implements HandlerInterceptor {
 
     Supplier<RbacService> supplier;
 
-    public AuthorizeAnnotationInterceptor() {
-    }
+    Predicate<String> classNameFilter;
 
-    public AuthorizeAnnotationInterceptor(RbacService rbacService) {
+    public AuthorizeAnnotationInterceptor(RbacService rbacService, Predicate<String> classNameFilter) {
         Assert.notNull(rbacService, "rbacService is null");
         this.rbacService = rbacService;
+        this.classNameFilter = classNameFilter;
     }
 
-    public AuthorizeAnnotationInterceptor(Supplier<RbacService> supplier) {
+    public AuthorizeAnnotationInterceptor(Supplier<RbacService> supplier, Predicate<String> classNameFilter) {
         Assert.notNull(supplier, "supplier is null");
         this.supplier = supplier;
+        this.classNameFilter = classNameFilter;
     }
 
     @PostConstruct
     public void init() {
-
     }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         if (!(handler instanceof HandlerMethod)) {
+            return true;
+        }
+
+        if (classNameFilter != null
+                && !classNameFilter.test(((HandlerMethod) handler).getBeanType().getName())) {
             return true;
         }
 

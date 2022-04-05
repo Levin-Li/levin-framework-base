@@ -3,7 +3,7 @@ package com.levin.oak.base;
 import com.levin.commons.dao.repository.RepositoryFactoryBean;
 import com.levin.commons.dao.repository.annotation.EntityRepository;
 import com.levin.commons.service.proxy.ProxyBeanScan;
-import com.levin.oak.base.autoconfigure.FrameworkBaseProperties;
+import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -34,7 +34,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @ProxyBeanScan(basePackages = {PACKAGE_NAME}, scanType = EntityRepository.class, factoryBeanClass = RepositoryFactoryBean.class)
 
-@EnableConfigurationProperties({FrameworkBaseProperties.class})
+@EnableConfigurationProperties({FrameworkProperties.class})
 
 public class ModuleStarterConfiguration {
 

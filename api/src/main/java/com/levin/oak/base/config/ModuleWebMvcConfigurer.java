@@ -1,5 +1,6 @@
 package com.levin.oak.base.config;
 
+import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.interceptor.AuthorizeAnnotationInterceptor;
@@ -32,11 +33,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     @Resource
     ServerProperties serverProperties;
 
-    @Value("${" + PLUGIN_PREFIX + "enableAuthorizeInterceptor:true}")
-    boolean enableAuthorizeInterceptor;
-
-    @Value("${" + PLUGIN_PREFIX + "enableGlobalAuthorizeInterceptor:true}")
-    boolean enableGlobalAuthorizeInterceptor;
+    @Resource
+    FrameworkProperties frameworkProperties;
 
     @Value("${springfox.documentation.swagger-ui.base-url:/swagger-ui}")
     private String swaggerUiBaseUrl;
@@ -48,6 +46,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     void init() {
 
         log.info("init...");
+
+        frameworkProperties.getAcl().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
 //        Assert.isTrue(
 //                StringUtils.hasText(swaggerUiBaseUrl)
@@ -108,8 +108,12 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //        })).addPathPatterns("/**");
 
         final HandlerInterceptor[] handlerInterceptors = {
-                new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)),
-                new AuthorizeAnnotationInterceptor(rbacService),
+
+                new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)
+                        , (className) -> frameworkProperties.getAcl().isPackageMatched(className)),
+
+                new AuthorizeAnnotationInterceptor(rbacService
+                        , (className) -> frameworkProperties.getAcl().isPackageMatched(className)),
         };
 
         final Consumer<String> addInterceptor = (path) -> {
@@ -119,22 +123,14 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                         .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
                         .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
                         .excludePathPatterns("/" + openApiPath)
+                        .excludePathPatterns(frameworkProperties.getAcl().getExcludePathPatterns())
                         .addPathPatterns(path)
                 ;
             }
         };
 
-        if (enableGlobalAuthorizeInterceptor) {
-
+        if (frameworkProperties.getAcl().isEnable()) {
             addInterceptor.accept("/**");
-
-            log.info("*** 友情提示 *** 模块认证全局拦截器[ {} ]已经启用 ，可以配置[{}enableGlobalAuthorizeInterceptor]禁用", "/", PLUGIN_PREFIX);
-
-        } else if (enableAuthorizeInterceptor) {
-
-            addInterceptor.accept(API_PATH + "**");
-
-            log.info("*** 友情提示 *** 模块认证拦截器[ {} ]已经启用 ，可以配置[{}enableAuthorizeInterceptor]禁用", API_PATH, PLUGIN_PREFIX);
         }
 
     }

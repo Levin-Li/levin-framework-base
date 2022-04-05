@@ -6,7 +6,7 @@ import com.levin.commons.service.support.*;
 import com.levin.commons.utils.AsyncHandler;
 import com.levin.commons.utils.ExceptionUtils;
 import com.levin.commons.utils.IPAddrUtils;
-import com.levin.oak.base.autoconfigure.FrameworkBaseProperties;
+import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.controller.accesslog.AccessLogController;
@@ -23,14 +23,11 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.ResolvableType;
-import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
@@ -40,7 +37,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.levin.oak.base.ModuleOption.HTTP_REQUEST_INFO_RESOLVER;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -86,26 +82,10 @@ public class ModuleWebControllerAspect {
     static final Gson gson = new Gson();
 
     @Resource
-    FrameworkBaseProperties frameworkBaseProperties;
-
-    @Value("${" + PLUGIN_PREFIX + "logHttp:true}")
-    boolean enableLog;
-
-    @Value("${" + PLUGIN_PREFIX + "log.ignorePackages:}")
-    List<String> ignorePackages;
-
-    @Value("${" + PLUGIN_PREFIX + "log.ignorePaths:}")
-    List<String> ignorePaths;
-
-    @Value("${" + PLUGIN_PREFIX + "log.ignoreKeywords:}")
-    List<String> ignoreKeywords;
+    FrameworkProperties frameworkProperties;
 
     @Resource
     ServerProperties serverProperties;
-
-    final AtomicBoolean enableHttpLog = new AtomicBoolean(false);
-
-    private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     /**
      * 存储本模块的变量解析器
@@ -115,21 +95,7 @@ public class ModuleWebControllerAspect {
     @PostConstruct
     void init() {
 
-        this.enableHttpLog.set(enableLog);
-
-        if (this.ignorePackages == null
-                || this.ignoreKeywords == null
-                || this.ignorePaths == null
-                || this.ignoreKeywords.isEmpty()
-                || this.ignorePaths.isEmpty()
-                || this.ignorePackages.isEmpty()) {
-
-            log.info("*** 友情提示 *** 可以配置[ {} ] 、 [ {} ] 和 [ {} ] 忽略mvc控制器的访问日志记录。"
-                    , PLUGIN_PREFIX + "log.ignorePackages"
-                    , PLUGIN_PREFIX + "log.ignorePaths"
-                    , PLUGIN_PREFIX + "log.ignoreKeywords"
-            );
-        }
+        frameworkProperties.getLog().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
         //设置处理器
         this.asyncHandler
@@ -193,11 +159,6 @@ public class ModuleWebControllerAspect {
             log.debug("开始为方法 {} 注入变量...", joinPoint.getSignature());
         }
 
-        String headerValue = request.getHeader(PLUGIN_PREFIX + "logHttp");
-        if (StringUtils.hasText(headerValue)) {
-            enableHttpLog.set(Boolean.TRUE.toString().equalsIgnoreCase(headerValue));
-        }
-
         Optional.ofNullable(joinPoint.getArgs()).ifPresent(args -> {
             Arrays.stream(args)
                     .filter(Objects::nonNull)
@@ -221,26 +182,9 @@ public class ModuleWebControllerAspect {
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
 
         final String requestURI = request.getRequestURI();
-        // /rbac/error
-
-        if (!enableHttpLog.get()
-                || !log.isDebugEnabled() ||
-                requestURI.contentEquals(serverProperties.getServlet().getContextPath() + "/error")) {
-            return joinPoint.proceed(joinPoint.getArgs());
-        }
-
-        //忽略指定的包名
-        if (this.ignorePaths != null
-                && ignorePaths.stream().filter(StringUtils::hasText)
-                .anyMatch(pattern -> antPathMatcher.match(pattern, requestURI))) {
-            return joinPoint.proceed(joinPoint.getArgs());
-        }
-
         final String className = joinPoint.getSignature().getDeclaringTypeName();
 
-        //忽略指定的包名
-        if (this.ignorePackages != null
-                && ignorePackages.stream().filter(StringUtils::hasText).anyMatch(pkg -> className.startsWith(pkg))) {
+        if (!frameworkProperties.getLog().isMatched(className, requestURI)) {
             return joinPoint.proceed(joinPoint.getArgs());
         }
 
@@ -252,13 +196,6 @@ public class ModuleWebControllerAspect {
         LinkedHashMap<String, Object> paramMap = new LinkedHashMap<>();
 
         final String title = getRequestInfo(joinPoint, headerMap, paramMap, true);
-
-        //检查忽略的关键字
-        if (this.ignoreKeywords != null
-                && ignoreKeywords.stream().filter(StringUtils::hasText).anyMatch(keyword -> title.contains(keyword))) {
-            return joinPoint.proceed(joinPoint.getArgs());
-        }
-
 
         if (log.isDebugEnabled()) {
             log.debug("*** " + title + " *** URL: {}?{}, headers:{}, 控制器方法参数：{}"
@@ -401,8 +338,6 @@ public class ModuleWebControllerAspect {
                     }
                 }
             }
-
-
         }
 
         if (headerMap != null) {
