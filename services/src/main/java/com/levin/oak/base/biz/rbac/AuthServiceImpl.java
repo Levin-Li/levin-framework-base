@@ -78,8 +78,6 @@ public class AuthServiceImpl
     @Resource
     TenantService tenantService;
 
-    public final String salt = getClass().getPackage().getName();
-
     @PostConstruct
     public void init() {
 
@@ -160,7 +158,7 @@ public class AuthServiceImpl
      */
     @Override
     public RbacUserInfo<String> getUserInfo(Object loginId) {
-        return userService.findById(Long.parseLong(loginId.toString())).setPassword(null);
+        return auditUser(userService.findById(Long.parseLong(loginId.toString())).setPassword(null));
     }
 
     @Override
@@ -195,7 +193,7 @@ public class AuthServiceImpl
 
         if (!StringUtils.hasText(req.getAccount())
                 || !StringUtils.hasText(req.getPassword())) {
-            throw new AuthorizationException("401", "请输入正确的帐号或密码");
+            throw new AuthorizationException("account", "请输入正确的帐号或密码");
         }
 
         UserInfo user = simpleDao.findOneByQueryObj(
@@ -213,27 +211,24 @@ public class AuthServiceImpl
      * 审计用户
      *
      * @param user
+     * @return
      * @throws AuthorizationException
      */
 //    @Override
-    public void auditUser(UserInfo user) throws AuthorizationException {
+    public UserInfo auditUser(UserInfo user) throws AuthorizationException {
 
         if (user == null) {
-            throw new AuthorizationException("401", "1帐号或密码错误");
+            throw new IllegalArgumentException("1帐号或密码错误");
         }
-
-//        if (!SaSecureUtil.sha1(req.getPassword()).equals(user.getPassword())) {
-//            return ApiResp.error("2帐号或密码错误");
-//        }
 
         if (!user.getEnable()
                 || !User.State.Normal.equals(user.getState())) {
-            throw new AuthorizationException("401", "2帐号状态异常");
+            throw new IllegalArgumentException("2帐号状态异常");
         }
 
         if (user.getExpiredDate() != null
                 && user.getExpiredDate().getTime() < System.currentTimeMillis()) {
-            throw new AuthorizationException("401", "3帐号已过期");
+            throw new IllegalArgumentException("3帐号已过期");
         }
 
         //如果是无租户用户，必须是 SA 角色的用户
@@ -241,6 +236,7 @@ public class AuthServiceImpl
             Assert.isTrue(user.isSuperAdmin(), "非法的无租户用户");
         }
 
+        return user;
     }
 
     @Override

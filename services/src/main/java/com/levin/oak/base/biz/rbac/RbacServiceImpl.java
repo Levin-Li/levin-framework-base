@@ -16,7 +16,6 @@ import com.levin.oak.base.biz.rbac.info.ModuleInfo;
 import com.levin.oak.base.biz.rbac.info.ResInfo;
 import com.levin.oak.base.biz.rbac.info.ResTypeInfo;
 import com.levin.oak.base.entities.E_MenuRes;
-import com.levin.oak.base.entities.MenuRes;
 import com.levin.oak.base.services.BaseService;
 import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
@@ -183,7 +182,6 @@ public class RbacServiceImpl extends BaseService implements RbacService {
             return;
         }
 
-        boolean isLogin = authService.isLogin();
 
         Class<?> controllerClass = method.getDeclaringClass();// AopProxyUtils.ultimateTargetClass(method.getDeclaringClass());
 
@@ -232,8 +230,8 @@ public class RbacServiceImpl extends BaseService implements RbacService {
             return;
         }
 
-        if (!isLogin) {
-            throw new AuthorizationException("not login", "未登录");
+        if (authService.getUserInfo() == null) {
+            throw new AuthorizationException("NotLogin", "未登录");
         }
 
         if (resAuthorize.onlyRequireAuthenticated()) {
@@ -245,12 +243,12 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         boolean ok = isAuthorized(
                 String.join(getDelimiter(), resAuthorize.domain(), resAuthorize.type(), resAuthorize.res()),
                 SimpleResAction.newAction(resAuthorize),
-                isLogin ? authService.getRoleList(authService.getLoginUserId()) : Collections.emptyList(),
-                isLogin ? authService.getPermissionList(authService.getLoginUserId()) : Collections.emptyList()
+                authService.getRoleList(authService.getLoginUserId()),
+                authService.getPermissionList(authService.getLoginUserId())
         );
 
         if (!ok) {
-            throw new AuthorizationException("AuthorizationException", "无法访问未授权的资源");
+            throw new AuthorizationException("UnAuthorization", "无法访问未授权的资源");
         }
     }
 
