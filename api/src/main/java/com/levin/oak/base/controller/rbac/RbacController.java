@@ -47,7 +47,7 @@ import static com.levin.oak.base.entities.EntityConst.TYPE_NAME;
 @Tag(name = "授权管理", description = "授权管理")
 @Slf4j
 @Valid
-@ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
+@ResAuthorize(domain = ID, type = "系统", onlyRequireAuthenticated = true)
 @MenuResTag(false)
 public class RbacController extends BaseController {
 
@@ -66,6 +66,8 @@ public class RbacController extends BaseController {
     @Resource
     BizTenantService bizTenantService;
 
+    public static final String SYS_TYPE_NAME ="系统";
+
     /**
      * 登录
      *
@@ -74,7 +76,7 @@ public class RbacController extends BaseController {
      */
     @PostMapping("login")
     @Operation(tags = {"授权管理"}, summary = "用户登录")
-    @ResAuthorize(domain = ID, type = TYPE_NAME, ignored = true)
+    @ResAuthorize(domain = ID, type = SYS_TYPE_NAME, ignored = true)
     public ApiResp<String> login(@RequestBody LoginReq req) {
         return ApiResp.ok(authService.auth(req.getTenantId(), req.getAccount(), req.getPassword(), req.getUa()));
     }
@@ -102,7 +104,7 @@ public class RbacController extends BaseController {
      */
     @PutMapping({"updatePwd"})
     @Operation(tags = {"授权管理"}, summary = "修改密码")
-    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
+    @ResAuthorize(domain = ID, type = SYS_TYPE_NAME, onlyRequireAuthenticated = true)
     public ApiResp<Void> updatePwd(@RequestBody UpdateUserPwdReq req) {
 
 //        req.setOldPassword(authService.encryptPassword(req.getOldPassword()))

@@ -6,6 +6,7 @@ import com.levin.commons.rbac.ResAuthorize;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.AmisMenu;
 import com.levin.oak.base.controller.rbac.dto.AmisResp;
+import com.levin.oak.base.entities.E_MenuRes;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
@@ -66,7 +67,7 @@ public class AmisController extends BaseController {
      * @return ApiResp
      */
     @GetMapping("amisAppMenuList")
-    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
+    @ResAuthorize(domain = ID, type = "系统", onlyRequireAuthenticated = true)
     @Operation(tags = {"授权管理"}, summary = "获取Amis菜单列表")
     public AmisResp getAmisAppMenuList(boolean isShowNotPermissionMenu) {
 
