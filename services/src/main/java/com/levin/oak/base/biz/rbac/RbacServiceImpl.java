@@ -316,33 +316,31 @@ public class RbacServiceImpl extends BaseService implements RbacService {
 
         ///////////////////////////////////////////////////////////////////////////
 
-        if (userId != null) {
+        //过滤出有权限的菜单，或是设置为enable = false
 
-            //过滤出有权限的菜单，或是设置为enable = false
+        List<String> roleList = authService.getRoleList(userId);
+        List<String> permissionList = authService.getPermissionList(userId);
 
-            List<String> roleList = authService.getRoleList(userId);
-            List<String> permissionList = authService.getPermissionList(userId);
+        for (Map.Entry<Long, MenuResInfo> entry : cacheMap2.entrySet()) {
+            //
+            MenuResInfo info = entry.getValue();
+            //获取菜单要求的权限
+            List<String> requirePermissions = !StringUtils.hasText(info.getRequireAuthorizations()) ? Collections.emptyList()
+                    : JsonStrArrayUtils.parse(info.getRequireAuthorizations(), StringUtils::hasText, (txt) -> txt);
 
-            for (Map.Entry<Long, MenuResInfo> entry : cacheMap2.entrySet()) {
-                //
-                MenuResInfo info = entry.getValue();
-                //获取菜单要求的权限
-                List<String> requirePermissions = !StringUtils.hasText(info.getRequireAuthorizations()) ? Collections.emptyList()
-                        : JsonStrArrayUtils.parse(info.getRequireAuthorizations(), StringUtils::hasText, (txt) -> txt);
-
-                if (requirePermissions.isEmpty()
-                        || requirePermissions.parallelStream().allMatch(requirePermission -> this.isAuthorized(requirePermission, roleList, permissionList))) {
-                    //如果没有要求权限，或是权限都满足，要求显示菜单
-                    info.setEnable(true);
-                } else if (isShowNotPermissionMenu || Boolean.TRUE.equals(info.getAlwaysShow())) {
-                    //菜单显示，但被禁用
-                    info.setEnable(false);
-                } else {
-                    //如果没有权限
-                    cacheMap.remove(entry.getKey());
-                }
+            if (requirePermissions.isEmpty()
+                    || requirePermissions.parallelStream().allMatch(requirePermission -> this.isAuthorized(requirePermission, roleList, permissionList))) {
+                //如果没有要求权限，或是权限都满足，要求显示菜单
+                info.setEnable(true);
+            } else if (isShowNotPermissionMenu || Boolean.TRUE.equals(info.getAlwaysShow())) {
+                //菜单显示，但被禁用
+                info.setEnable(false);
+            } else {
+                //如果没有权限
+                cacheMap.remove(entry.getKey());
             }
         }
+
 
         return cacheMap.values().parallelStream()
                 .filter(m -> m.getParentId() == null)
@@ -361,8 +359,8 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         //
         boolean hasUser = userId != null && (!(userId instanceof CharSequence) || StringUtils.hasText(userId.toString()));
 
-        List<String> roleList = hasUser ? authService.getRoleList(userId) : null;
-        List<String> permissionList = hasUser ? authService.getPermissionList(userId) : null;
+        List<String> roleList = hasUser ? authService.getRoleList(userId) : Collections.emptyList();
+        List<String> permissionList = hasUser ? authService.getPermissionList(userId) : Collections.emptyList();
 
         //返回结果
         List<ModuleInfo> result = new LinkedList<>();
