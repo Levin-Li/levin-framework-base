@@ -68,7 +68,7 @@ public class AreaController extends BaseController{
      * @return  ApiResp<PagingData<AreaInfo>>
      */
     @GetMapping("/query")
-    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
+    @ResAuthorize(onlyRequireAuthenticated = true)
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<AreaInfo>> query(QueryAreaReq req , SimplePaging paging) {
         return ApiResp.ok(areaService.query(req,paging));
@@ -104,7 +104,7 @@ public class AreaController extends BaseController{
     * @param req QueryAreaByIdReq
     */
     @GetMapping("")
-    @ResAuthorize(domain = ID, type = TYPE_NAME, onlyRequireAuthenticated = true)
+    @ResAuthorize(onlyRequireAuthenticated = true)
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<AreaInfo> retrieve(@NotNull AreaIdReq req) {
          return ApiResp.ok(areaService.findById(req));

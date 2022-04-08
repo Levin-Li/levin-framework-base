@@ -9,6 +9,7 @@ package com.levin.oak.base;
  */
 public interface ModuleOption {
 
+
     /**
      * module package name
      */
@@ -76,7 +77,6 @@ public interface ModuleOption {
     String H5_UI_PATH = BASE_PATH + "h5/";
 
     /**
-     *
      * 注意路径必须以 / 结尾
      */
     String HTTP_REQUEST_INFO_RESOLVER = PLUGIN_PREFIX + "HttpRequestInfoResolver";

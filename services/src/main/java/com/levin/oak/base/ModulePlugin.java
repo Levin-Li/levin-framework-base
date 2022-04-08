@@ -1,24 +1,30 @@
 package com.levin.oak.base;
 
-import static com.levin.oak.base.ModuleOption.*;
-import com.levin.oak.base.entities.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.*;
-import com.levin.commons.rbac.*;
-import com.levin.commons.dao.repository.*;
-import com.levin.commons.plugin.*;
-
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
-import org.springframework.context.*;
-import org.springframework.util.*;
-
+import com.levin.commons.dao.SimpleDao;
+import com.levin.commons.plugin.Plugin;
+import com.levin.commons.plugin.PluginException;
+import com.levin.commons.plugin.PluginManager;
+import com.levin.commons.plugin.PluginManagerAware;
+import com.levin.commons.rbac.MenuItem;
+import com.levin.commons.rbac.RbacUtils;
+import com.levin.commons.rbac.Res;
+import com.levin.commons.rbac.ResLoader;
+import com.levin.commons.service.domain.SimpleIdentifiable;
+import com.levin.oak.base.entities.EntityConst;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+import org.springframework.util.LinkedMultiValueMap;
 
-import javax.annotation.*;
-import java.util.*;
-import java.util.stream.*;
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 //Auto gen by simple-dao-codegen 2022-3-30 13:50:50
 //模块插件
@@ -33,16 +39,14 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
     @Autowired
     SimpleDao simpleDao;
 
-    final String pid = ModuleOption.ID;
-
     private PluginManager pluginManager;
 
 
     private final ResLoader resLoader = new ResLoader() {
 
-        final List<SimpleIdentifiable> types = new LinkedList<>();
+        final List<SimpleIdentifiable> types = new ArrayList<>();
 
-        final List<Res> pluginResList = new LinkedList<>();
+        final LinkedMultiValueMap<String, Res> resMap = new LinkedMultiValueMap<>();
 
         @Override
         public List<SimpleIdentifiable> getResTypes() {
@@ -54,27 +58,21 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
             return types;
         }
 
-
         @Override
-        public <R extends Res> Collection<R> getResItems(String resType, int loadDeep) {
+        public <R extends Res> List<R> getResItems(String resType, int loadDeep) {
 
             Assert.hasText(resType, "资源类型没有指定");
 
-            synchronized (pluginResList) {
-                if (pluginResList.isEmpty()) {
-                    pluginResList.addAll(RbacUtils.loadResFromSpringCtx(context, getId(), resType));
-                }
+            if (!resMap.containsKey(resType)) {
+                resMap.put(resType, RbacUtils.loadResFromSpringCtx(context, getId(), resType));
             }
 
-            return (Collection<R>) pluginResList.stream()
-                    .filter(res -> resType.equals(res.getType()))
-                    .collect(Collectors.toList());
+            return (List<R>) resMap.get(resType);
         }
 
         @Override
         public <R extends Res> Collection<R> getSubItems(String resType, String resId, int loadDeep) {
-
-            return null;
+            throw new UnsupportedOperationException("getSubItems");
         }
 
     };
@@ -92,9 +90,9 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
 
     @Override
     public boolean onEvent(Object... objects) {
-       //log.debug(getDescription() + " onEvent " + Arrays.asList(objects));
+        //log.debug(getDescription() + " onEvent " + Arrays.asList(objects));
         //@todo
-       return false;
+        return false;
     }
 
     @Override
@@ -104,7 +102,7 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
 
     @PostConstruct
     public void init() {
-       log.info("plugin init...");
+        log.info("plugin init...");
     }
 
     @Override

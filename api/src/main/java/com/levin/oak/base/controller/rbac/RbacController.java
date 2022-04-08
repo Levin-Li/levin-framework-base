@@ -10,6 +10,8 @@ import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.biz.rbac.info.ModuleInfo;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
 import com.levin.oak.base.controller.BaseController;
+import com.levin.oak.base.controller.rbac.dto.LoginInfo;
+import com.levin.oak.base.entities.EntityConst;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
@@ -26,7 +28,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
-import static com.levin.oak.base.entities.EntityConst.TYPE_NAME;
 
 
 // POST: 创建一个新的资源，如用户资源，部门资源
@@ -47,7 +48,7 @@ import static com.levin.oak.base.entities.EntityConst.TYPE_NAME;
 @Tag(name = "授权管理", description = "授权管理")
 @Slf4j
 @Valid
-@ResAuthorize(domain = ID, type = "系统", onlyRequireAuthenticated = true)
+@ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME, onlyRequireAuthenticated = true)
 @MenuResTag(false)
 public class RbacController extends BaseController {
 
@@ -66,8 +67,6 @@ public class RbacController extends BaseController {
     @Resource
     BizTenantService bizTenantService;
 
-    public static final String SYS_TYPE_NAME ="系统";
-
     /**
      * 登录
      *
@@ -76,41 +75,16 @@ public class RbacController extends BaseController {
      */
     @PostMapping("login")
     @Operation(tags = {"授权管理"}, summary = "用户登录")
-    @ResAuthorize(domain = ID, type = SYS_TYPE_NAME, ignored = true)
-    public ApiResp<String> login(@RequestBody LoginReq req) {
-        return ApiResp.ok(authService.auth(req.getTenantId(), req.getAccount(), req.getPassword(), req.getUa()));
-    }
+    @ResAuthorize(ignored = true)
+    public ApiResp<LoginInfo> login(@RequestBody LoginReq req) {
 
-    @PostMapping("userInfo")
-    @Operation(tags = {"授权管理"}, summary = "用户信息")
-    public ApiResp<RbacUserInfo<String>> getUserInfo() {
-        return ApiResp.ok(authService.getUserInfo());
-    }
+        String accessToken = authService.auth(req.getTenantId(), req.getAccount(), req.getPassword(), req.getUa());
 
-    /**
-     * 获取域名对应的租户信息
-     */
-    @GetMapping("tenantInfo")
-    @Operation(tags = {"授权管理"}, summary = "获取域名对应的租户信息")
-    public ApiResp<TenantInfo> getTenantInfo() {
-        return ApiResp.ok(bizTenantService.getCurrentTenant());
-    }
+        return ApiResp.ok(new LoginInfo()
+                .setAccessToken(accessToken)
+                .setUserInfo(authService.getUserInfo())
+        );
 
-
-    /**
-     * 修改密码
-     *
-     * @param req UpdateUserReq
-     */
-    @PutMapping({"updatePwd"})
-    @Operation(tags = {"授权管理"}, summary = "修改密码")
-    @ResAuthorize(domain = ID, type = SYS_TYPE_NAME, onlyRequireAuthenticated = true)
-    public ApiResp<Void> updatePwd(@RequestBody UpdateUserPwdReq req) {
-
-//        req.setOldPassword(authService.encryptPassword(req.getOldPassword()))
-//                .setPassword(authService.encryptPassword(req.getPassword()));
-
-        return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error("修改密码失败");
     }
 
     /**
@@ -123,6 +97,37 @@ public class RbacController extends BaseController {
     public ApiResp<Void> logout() {
         authService.logout();
         return ApiResp.ok();
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @return
+     */
+    @PostMapping("userInfo")
+    @Operation(tags = {"授权管理"}, summary = "用户信息")
+    public ApiResp<RbacUserInfo<String>> getUserInfo() {
+        return ApiResp.ok(authService.getUserInfo());
+    }
+
+    /**
+     * 获取域名对应的租户信息
+     */
+    @GetMapping("tenantInfo")
+    @Operation(tags = {"授权管理"}, summary = "获取租户信息")
+    public ApiResp<TenantInfo> getTenantInfo() {
+        return ApiResp.ok(bizTenantService.getTenantInfo(authService.getUserInfo().getTenantId()));
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param req UpdateUserReq
+     */
+    @PutMapping({"updatePwd"})
+    @Operation(tags = {"授权管理"}, summary = "修改密码")
+    public ApiResp<Void> updatePwd(@RequestBody UpdateUserPwdReq req) {
+        return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error("修改密码失败");
     }
 
     /**
@@ -142,7 +147,7 @@ public class RbacController extends BaseController {
      * @return ApiResp
      */
     @GetMapping("authorizedMenuList")
-    @Operation(tags = {"授权管理"}, summary = "获取菜单列表")
+    @Operation(tags = {"授权管理"}, summary = "获取授权的菜单列表")
     public ApiResp<List<MenuResInfo>> getAuthorizedMenuList(boolean isShowNotPermissionMenu) {
         return ApiResp.ok(rbacService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId()));
     }

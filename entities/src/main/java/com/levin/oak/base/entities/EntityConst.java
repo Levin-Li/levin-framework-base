@@ -24,6 +24,11 @@ public interface EntityConst {
     /**
      *
      */
+    String SYS_TYPE_NAME = "系统通用";
+
+    /**
+     *
+     */
     String MAINTAIN_ACTION = "管理";
 
     /**

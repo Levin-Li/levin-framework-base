@@ -1,6 +1,7 @@
 package com.levin.oak.base.biz.rbac;
 
 import cn.dev33.satoken.exception.IdTokenInvalidException;
+import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import com.levin.commons.plugin.Plugin;
@@ -241,7 +242,14 @@ public class AuthServiceImpl
 
     @Override
     public <T> T getLoginUserId() {
-        return (T) StpUtil.getLoginId();
+
+        Object loginId = StpUtil.getLoginId();
+
+        if (loginId == null) {
+            throw NotLoginException.newInstance("user", "未登录");
+        }
+
+        return (T) loginId;
     }
 
 
@@ -444,6 +452,13 @@ public class AuthServiceImpl
             permissions.add(new ResPermission()
                     .setDomain("*")
                     .setType(EntityConst.TYPE_NAME)
+                    .setRes("*")
+                    .setAction("*")
+                    .toString());
+
+            permissions.add(new ResPermission()
+                    .setDomain("*")
+                    .setType(EntityConst.SYS_TYPE_NAME)
                     .setRes("*")
                     .setAction("*")
                     .toString());

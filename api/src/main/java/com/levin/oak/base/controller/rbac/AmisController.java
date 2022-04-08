@@ -3,16 +3,15 @@ package com.levin.oak.base.controller.rbac;
 import com.levin.commons.rbac.MenuItem;
 import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
+import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.AmisMenu;
 import com.levin.oak.base.controller.rbac.dto.AmisResp;
-import com.levin.oak.base.entities.E_MenuRes;
+import com.levin.oak.base.entities.EntityConst;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
-import com.levin.oak.base.biz.rbac.AuthService;
-import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.services.role.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -28,7 +27,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.levin.oak.base.ModuleOption.*;
-import static com.levin.oak.base.entities.EntityConst.TYPE_NAME;
 
 
 // POST: 创建一个新的资源，如用户资源，部门资源
@@ -46,10 +44,10 @@ import static com.levin.oak.base.entities.EntityConst.TYPE_NAME;
 @RestController(PLUGIN_PREFIX + "AmisController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "AmisController", matchIfMissing = true)
 @RequestMapping(API_PATH + "rbac")
-@Tag(name = "授权管理", description = "授权管理")
 @Slf4j
 @Valid
 @MenuResTag(false)
+@ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME, onlyRequireAuthenticated = true)
 public class AmisController extends BaseController {
 
     @Autowired
@@ -67,17 +65,12 @@ public class AmisController extends BaseController {
      * @return ApiResp
      */
     @GetMapping("amisAppMenuList")
-    @ResAuthorize(domain = ID, type = "系统", onlyRequireAuthenticated = true)
     @Operation(tags = {"授权管理"}, summary = "获取Amis菜单列表")
     public AmisResp getAmisAppMenuList(boolean isShowNotPermissionMenu) {
 
         AmisResp resp = AmisResp.builder().build();
 
         resp.getData().put(AmisMenu.DATA_KEY, Collections.emptyList());
-
-        if (!authService.isLogin()) {
-            return resp.setStatus(9).setMsg("未登录");
-        }
 
         List<MenuResInfo> authorizedMenuList = rbacService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId());
 

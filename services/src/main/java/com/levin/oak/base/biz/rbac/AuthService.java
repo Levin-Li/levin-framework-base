@@ -25,6 +25,8 @@ public interface AuthService extends SimpleAuthService {
 
     /**
      * 获取登录用户ID
+     * <p>
+     * 必须返回数据，如果用户没有登录，必须抛出异常
      *
      * @return
      */

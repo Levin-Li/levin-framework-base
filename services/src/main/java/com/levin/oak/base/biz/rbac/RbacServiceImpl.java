@@ -248,7 +248,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         );
 
         if (!ok) {
-            throw new AuthorizationException("UnAuthorization", "无法访问未授权的资源");
+            throw new AuthorizationException("UnAuthorization", "未授权的操作");
         }
     }
 
