@@ -182,7 +182,6 @@ public class RbacServiceImpl extends BaseService implements RbacService {
             return;
         }
 
-
         Class<?> controllerClass = method.getDeclaringClass();// AopProxyUtils.ultimateTargetClass(method.getDeclaringClass());
 
         ///////////////////////////////获取 res 和 action 用于权限验证 //////////////////////////////////////////
@@ -260,6 +259,8 @@ public class RbacServiceImpl extends BaseService implements RbacService {
      */
     @Override
     public List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, Object userId) {
+
+        Assert.notNull(userId, "无效的用户标识");
 
         RbacUserInfo<String> userInfo = authService.getUserInfo(userId);
 
@@ -357,12 +358,14 @@ public class RbacServiceImpl extends BaseService implements RbacService {
     @Override
     public List<ModuleInfo> getAuthorizedResList(Object userId) {
 
-        boolean hasUser = userId != null;
-
-        List<ModuleInfo> result = new LinkedList<>();
+        //
+        boolean hasUser = userId != null && (!(userId instanceof CharSequence) || StringUtils.hasText(userId.toString()));
 
         List<String> roleList = hasUser ? authService.getRoleList(userId) : null;
         List<String> permissionList = hasUser ? authService.getPermissionList(userId) : null;
+
+        //返回结果
+        List<ModuleInfo> result = new LinkedList<>();
 
         //第一层循环 插件
         for (Plugin plugin : pluginManager.getInstalledPlugins()) {

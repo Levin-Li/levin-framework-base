@@ -256,9 +256,11 @@ public class AuthServiceImpl
     @Override
     public List<String> getPermissionList(Object loginId) {
 
-        if (loginId == null) {
-            loginId = getLoginUserId();
-        }
+        Assert.notNull(loginId,"loginId is null");
+
+//        if (loginId == null) {
+//            loginId = getLoginUserId();
+//        }
 
         List<String> roleList = getRoleList(loginId);
 
@@ -298,9 +300,11 @@ public class AuthServiceImpl
     @Override
     public List<String> getRoleList(Object loginId) {
 
-        if (loginId == null) {
-            loginId = getLoginUserId();
-        }
+        Assert.notNull(loginId,"loginId is null");
+
+//        if (loginId == null) {
+//            loginId = getLoginUserId();
+//        }
 
         UserInfo user = userService.findById(Long.parseLong(loginId.toString()));
 
