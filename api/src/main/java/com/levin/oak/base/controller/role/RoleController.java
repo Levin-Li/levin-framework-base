@@ -1,5 +1,7 @@
 package com.levin.oak.base.controller.role;
 
+import com.levin.commons.rbac.RbacRoleObject;
+import com.levin.commons.rbac.ResAuthorize;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +50,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "RoleController", matchIfMissing = true)
 
 //默认需要权限访问
-//@ResAuthorize(domain = ID, type = TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid

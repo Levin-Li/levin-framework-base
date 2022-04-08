@@ -458,7 +458,7 @@ public class AuthServiceImpl
 
             permissions.add(new ResPermission()
                     .setDomain("*")
-                    .setType(EntityConst.SYS_TYPE_NAME)
+                    .setType(EntityConst.COMMON_TYPE_NAME)
                     .setRes("*")
                     .setAction("*")
                     .toString());

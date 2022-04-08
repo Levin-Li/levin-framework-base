@@ -51,7 +51,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 //默认需要权限访问
 
-@ResAuthorize(domain = ID, type = TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
 @Tag(name = E_Tenant.BIZ_NAME, description = E_Tenant.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid

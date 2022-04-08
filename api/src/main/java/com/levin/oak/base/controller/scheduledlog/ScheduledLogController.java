@@ -1,27 +1,26 @@
 package com.levin.oak.base.controller.scheduledlog;
 
+import com.levin.commons.dao.support.PagingData;
+import com.levin.commons.dao.support.SimplePaging;
+import com.levin.commons.rbac.RbacRoleObject;
+import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.controller.BaseController;
+import com.levin.oak.base.entities.E_ScheduledLog;
+import com.levin.oak.base.services.scheduledlog.ScheduledLogService;
+import com.levin.oak.base.services.scheduledlog.info.ScheduledLogInfo;
+import com.levin.oak.base.services.scheduledlog.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.util.*;
-import javax.validation.*;
-import java.util.*;
 
-import javax.servlet.http.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import javax.validation.constraints.*;
-
-import com.levin.oak.base.controller.*;
-import com.levin.oak.base.*;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.scheduledlog.*;
-import com.levin.oak.base.services.scheduledlog.req.*;
-import com.levin.oak.base.services.scheduledlog.info.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
@@ -48,11 +47,11 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ScheduledLogController", matchIfMissing = true)
 
 //默认需要权限访问
-//@ResAuthorize(domain = ID, type = TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
 @Tag(name = E_ScheduledLog.BIZ_NAME, description = E_ScheduledLog.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class ScheduledLogController extends BaseController{
+public class ScheduledLogController extends BaseController {
 
     private static final String BIZ_NAME = E_ScheduledLog.BIZ_NAME;
 
@@ -62,13 +61,13 @@ public class ScheduledLogController extends BaseController{
     /**
      * 分页查找
      *
-     * @param req  QueryScheduledLogReq
-     * @return  ApiResp<PagingData<ScheduledLogInfo>>
+     * @param req QueryScheduledLogReq
+     * @return ApiResp<PagingData < ScheduledLogInfo>>
      */
     @GetMapping("/query")
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<ScheduledLogInfo>> query(QueryScheduledLogReq req , SimplePaging paging) {
-        return ApiResp.ok(scheduledLogService.query(req,paging));
+    public ApiResp<PagingData<ScheduledLogInfo>> query(QueryScheduledLogReq req, SimplePaging paging) {
+        return ApiResp.ok(scheduledLogService.query(req, paging));
     }
 
     /**
@@ -96,37 +95,39 @@ public class ScheduledLogController extends BaseController{
     }
 
     /**
-    * 查看详情
-    *
-    * @param req QueryScheduledLogByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QueryScheduledLogByIdReq
+     */
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<ScheduledLogInfo> retrieve(@NotNull ScheduledLogIdReq req) {
-         return ApiResp.ok(scheduledLogService.findById(req));
-     }
+        return ApiResp.ok(scheduledLogService.findById(req));
+    }
 
     /**
      * 更新
+     *
      * @param req UpdateScheduledLogReq
      */
-     @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> update(@RequestBody UpdateScheduledLogReq req) {
-         return ApiResp.ok(checkResult(scheduledLogService.update(req), UPDATE_ACTION));
+    @PutMapping({""})
+    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> update(@RequestBody UpdateScheduledLogReq req) {
+        return ApiResp.ok(checkResult(scheduledLogService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateScheduledLogReq> reqList) {
+    @PutMapping("/batchUpdate")
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateScheduledLogReq> reqList) {
         return ApiResp.ok(checkResult(scheduledLogService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
      * 删除
+     *
      * @param req ScheduledLogIdReq
      */
     @DeleteMapping({""})
@@ -137,6 +138,7 @@ public class ScheduledLogController extends BaseController{
 
     /**
      * 批量删除
+     *
      * @param req DeleteScheduledLogReq
      */
     @DeleteMapping({"/batchDelete"})
@@ -147,6 +149,7 @@ public class ScheduledLogController extends BaseController{
 
     /**
      * 检查结果
+     *
      * @param n
      * @param action
      * @return

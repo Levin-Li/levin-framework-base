@@ -1,27 +1,26 @@
 package com.levin.oak.base.controller.apperrorlog;
 
+import com.levin.commons.dao.support.PagingData;
+import com.levin.commons.dao.support.SimplePaging;
+import com.levin.commons.rbac.RbacRoleObject;
+import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.controller.BaseController;
+import com.levin.oak.base.entities.E_AppErrorLog;
+import com.levin.oak.base.services.apperrorlog.AppErrorLogService;
+import com.levin.oak.base.services.apperrorlog.info.AppErrorLogInfo;
+import com.levin.oak.base.services.apperrorlog.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.util.*;
-import javax.validation.*;
-import java.util.*;
 
-import javax.servlet.http.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import javax.validation.constraints.*;
-
-import com.levin.oak.base.controller.*;
-import com.levin.oak.base.*;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.apperrorlog.*;
-import com.levin.oak.base.services.apperrorlog.req.*;
-import com.levin.oak.base.services.apperrorlog.info.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
@@ -48,11 +47,11 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppErrorLogController", matchIfMissing = true)
 
 //默认需要权限访问
-//@ResAuthorize(domain = ID, type = TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME, isAndMode = true, anyRoles = RbacRoleObject.SA_ROLE)
 @Tag(name = E_AppErrorLog.BIZ_NAME, description = E_AppErrorLog.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class AppErrorLogController extends BaseController{
+public class AppErrorLogController extends BaseController {
 
     private static final String BIZ_NAME = E_AppErrorLog.BIZ_NAME;
 
@@ -62,13 +61,13 @@ public class AppErrorLogController extends BaseController{
     /**
      * 分页查找
      *
-     * @param req  QueryAppErrorLogReq
-     * @return  ApiResp<PagingData<AppErrorLogInfo>>
+     * @param req QueryAppErrorLogReq
+     * @return ApiResp<PagingData < AppErrorLogInfo>>
      */
     @GetMapping("/query")
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<AppErrorLogInfo>> query(QueryAppErrorLogReq req , SimplePaging paging) {
-        return ApiResp.ok(appErrorLogService.query(req,paging));
+    public ApiResp<PagingData<AppErrorLogInfo>> query(QueryAppErrorLogReq req, SimplePaging paging) {
+        return ApiResp.ok(appErrorLogService.query(req, paging));
     }
 
     /**
@@ -96,37 +95,39 @@ public class AppErrorLogController extends BaseController{
     }
 
     /**
-    * 查看详情
-    *
-    * @param req QueryAppErrorLogByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QueryAppErrorLogByIdReq
+     */
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<AppErrorLogInfo> retrieve(@NotNull AppErrorLogIdReq req) {
-         return ApiResp.ok(appErrorLogService.findById(req));
-     }
+        return ApiResp.ok(appErrorLogService.findById(req));
+    }
 
     /**
      * 更新
+     *
      * @param req UpdateAppErrorLogReq
      */
 //     @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> update(@RequestBody UpdateAppErrorLogReq req) {
-         return ApiResp.ok(checkResult(appErrorLogService.update(req), UPDATE_ACTION));
+    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> update(@RequestBody UpdateAppErrorLogReq req) {
+        return ApiResp.ok(checkResult(appErrorLogService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
 //     @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAppErrorLogReq> reqList) {
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAppErrorLogReq> reqList) {
         return ApiResp.ok(checkResult(appErrorLogService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
      * 删除
+     *
      * @param req AppErrorLogIdReq
      */
     @DeleteMapping({""})
@@ -137,6 +138,7 @@ public class AppErrorLogController extends BaseController{
 
     /**
      * 批量删除
+     *
      * @param req DeleteAppErrorLogReq
      */
     @DeleteMapping({"/batchDelete"})
@@ -147,6 +149,7 @@ public class AppErrorLogController extends BaseController{
 
     /**
      * 检查结果
+     *
      * @param n
      * @param action
      * @return

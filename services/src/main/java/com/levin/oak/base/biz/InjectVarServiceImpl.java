@@ -6,6 +6,7 @@ import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.utils.MapUtils;
+import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.services.user.info.UserInfo;
@@ -91,6 +92,9 @@ public class InjectVarServiceImpl implements InjectVarService {
     @Resource
     HttpServletRequest httpServletRequest;
 
+    @Resource
+    FrameworkProperties frameworkProperties;
+
 //    final List<Map<String, ?>> defaultCtx = Collections.emptyList();
 
     @PostConstruct
@@ -108,7 +112,8 @@ public class InjectVarServiceImpl implements InjectVarService {
         TenantInfo tenantInfo = bizTenantService.getCurrentTenant();
 
         //如果当前没有域名
-        if (tenantInfo == null) {
+        if (tenantInfo == null
+                && frameworkProperties.getDomain().isEnable()) {
             tenantInfo = bizTenantService.getTenantByDomain(httpServletRequest.getServerName());
         }
 

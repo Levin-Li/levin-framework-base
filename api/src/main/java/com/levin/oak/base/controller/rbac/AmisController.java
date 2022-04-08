@@ -47,7 +47,7 @@ import static com.levin.oak.base.ModuleOption.*;
 @Slf4j
 @Valid
 @MenuResTag(false)
-@ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME, onlyRequireAuthenticated = true)
+@ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME, onlyRequireAuthenticated = true)
 public class AmisController extends BaseController {
 
     @Autowired

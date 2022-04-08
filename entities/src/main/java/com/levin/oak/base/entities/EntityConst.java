@@ -22,9 +22,14 @@ public interface EntityConst {
     String TYPE_NAME = "实体数据";
 
     /**
-     *
+     * 通用功能，通常登录就可使用
      */
-    String SYS_TYPE_NAME = "系统通用";
+    String COMMON_TYPE_NAME = "系统通用";
+
+    /**
+     * 需要有管理员角色
+     */
+    String SYS_TYPE_NAME = "系统管理";
 
     /**
      *

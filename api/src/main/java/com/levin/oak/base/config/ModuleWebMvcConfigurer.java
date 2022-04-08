@@ -15,7 +15,6 @@ import org.springframework.web.servlet.config.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.function.Consumer;
 
 import static com.levin.oak.base.ModuleOption.*;
 
@@ -107,30 +106,33 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //            SaRouter.match("/comment/**", r -> StpUtil.checkPermission("comment"));
 //        })).addPathPatterns("/**");
 
-        final HandlerInterceptor[] handlerInterceptors = {
 
-                new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)
-                        , (className) -> frameworkProperties.getAcl().isPackageMatched(className)),
+        if (frameworkProperties.getDomain().isEnable()) {
 
-                new AuthorizeAnnotationInterceptor(rbacService
-                        , (className) -> frameworkProperties.getAcl().isPackageMatched(className)),
-        };
+            HandlerInterceptor handlerInterceptor = new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)
+                    , (className) -> frameworkProperties.getDomain().isPackageMatched(className));
 
-        final Consumer<String> addInterceptor = (path) -> {
-            for (HandlerInterceptor handlerInterceptor : handlerInterceptors) {
-                registry.addInterceptor(handlerInterceptor)
-                        .excludePathPatterns(serverProperties.getError().getPath())
-                        .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
-                        .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
-                        .excludePathPatterns("/" + openApiPath)
-                        .excludePathPatterns(frameworkProperties.getAcl().getExcludePathPatterns())
-                        .addPathPatterns(path)
-                ;
-            }
-        };
+            registry.addInterceptor(handlerInterceptor)
+                    .excludePathPatterns(serverProperties.getError().getPath())
+                    .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
+                    .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
+                    .excludePathPatterns("/" + openApiPath)
+                    .excludePathPatterns(frameworkProperties.getDomain().getExcludePathPatterns())
+                    .addPathPatterns("/**");
+        }
 
         if (frameworkProperties.getAcl().isEnable()) {
-            addInterceptor.accept("/**");
+
+            HandlerInterceptor handlerInterceptor = new AuthorizeAnnotationInterceptor(rbacService
+                    , (className) -> frameworkProperties.getAcl().isPackageMatched(className));
+
+            registry.addInterceptor(handlerInterceptor)
+                    .excludePathPatterns(serverProperties.getError().getPath())
+                    .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
+                    .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
+                    .excludePathPatterns("/" + openApiPath)
+                    .excludePathPatterns(frameworkProperties.getAcl().getExcludePathPatterns())
+                    .addPathPatterns("/**");
         }
 
     }

@@ -2,6 +2,7 @@ package com.levin.oak.base.controller.appclient;
 
 import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.dao.support.SimplePaging;
+import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.entities.E_AppClient;
@@ -20,8 +21,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-import static com.levin.oak.base.ModuleOption.API_PATH;
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 //Auto gen by simple-dao-codegen 2022-4-3 0:55:04
@@ -46,7 +46,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppClientController", matchIfMissing = true)
 
 //默认需要权限访问
-//@ResAuthorize(domain = ID, type = TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
 @Tag(name = E_AppClient.BIZ_NAME, description = E_AppClient.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid

@@ -48,7 +48,7 @@ import static com.levin.oak.base.ModuleOption.*;
 @Tag(name = "授权管理", description = "授权管理")
 @Slf4j
 @Valid
-@ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME, onlyRequireAuthenticated = true)
+@ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME, onlyRequireAuthenticated = true)
 @MenuResTag(false)
 public class RbacController extends BaseController {
 
