@@ -1,21 +1,18 @@
 package com.levin.oak.base.controller.simpleapi;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.entities.E_SimpleApi;
 import com.levin.oak.base.services.simpleapi.SimpleApiService;
 import com.levin.oak.base.services.simpleapi.info.SimpleApiInfo;
-import com.levin.oak.base.services.simpleapi.req.QuerySimpleApiReq;
 import com.levin.oak.base.services.simpleapi.req.SimpleApiIdReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +20,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import static com.levin.oak.base.ModuleOption.*;
-import static com.levin.oak.base.entities.EntityConst.*;
+import static com.levin.oak.base.entities.EntityConst.SYS_TYPE_NAME;
+import static com.levin.oak.base.entities.EntityConst.VIEW_DETAIL_ACTION;
 
 //Auto gen by simple-dao-codegen 2022-4-2 19:44:58
 
@@ -59,27 +57,18 @@ public class SimpleApiBizController extends BaseController {
     SimpleApiService simpleApiService;
 
     /**
-     * 分页查找
-     *
-     * @param req QuerySimpleApiReq
-     * @return ApiResp<PagingData < SimpleApiInfo>>
-     */
-    @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<SimpleApiInfo>> query(QuerySimpleApiReq req, SimplePaging paging) {
-        return ApiResp.ok(simpleApiService.query(req, paging));
-    }
-
-
-    /**
      * 查看详情
      *
      * @param req QuerySimpleApiByIdReq
      */
-    @GetMapping("")
+    @PostMapping("/service")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
-    public ApiResp<SimpleApiInfo> retrieve(@NotNull SimpleApiIdReq req) {
-        return ApiResp.ok(simpleApiService.findById(req));
+    public ApiResp<?> service(@NotNull SimpleApiIdReq req) {
+
+        SimpleApiInfo info = simpleApiService.findById(req);
+        //执行脚本
+
+        return ApiResp.ok(info);
     }
 
 }

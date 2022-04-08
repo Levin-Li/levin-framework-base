@@ -60,6 +60,10 @@ public class UpdateMenuResReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition ="!#user.isSuperAdmin()")
+    final boolean eqEditable = true;
+
     @Size(max = 128)
     @Schema(description = "子系统")
     private String subSystem;

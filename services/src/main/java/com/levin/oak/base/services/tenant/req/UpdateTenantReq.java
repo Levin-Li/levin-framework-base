@@ -59,6 +59,10 @@ public class UpdateTenantReq extends BaseReq {
     @Eq(require = true)
     private String id;
 
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition ="!#user.isSuperAdmin()")
+    final boolean eqEditable = true;
+
     @Schema(description = "租户头像")
     private String logo;
 

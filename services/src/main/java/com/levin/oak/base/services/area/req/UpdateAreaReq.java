@@ -60,6 +60,10 @@ public class UpdateAreaReq extends BaseReq {
     @Eq(require = true)
     private String code;
 
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition ="!#user.isSuperAdmin()")
+    final boolean eqEditable = true;
+
     @Schema(description = "图标")
     private String icon;
 

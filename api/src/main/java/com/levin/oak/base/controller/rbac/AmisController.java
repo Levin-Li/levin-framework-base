@@ -12,6 +12,7 @@ import com.levin.oak.base.entities.EntityConst;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -41,6 +42,7 @@ import static com.levin.oak.base.ModuleOption.*;
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
+@Tag(name = "授权管理", description = "授权管理")
 @RestController(PLUGIN_PREFIX + "AmisController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "AmisController", matchIfMissing = true)
 @RequestMapping(API_PATH + "rbac")

@@ -62,6 +62,10 @@ public class UpdateOrgReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition ="!#user.isSuperAdmin()")
+    final boolean eqEditable = true;
+
     @Size(max = 128)
     @Schema(description = "编码")
     private String code;

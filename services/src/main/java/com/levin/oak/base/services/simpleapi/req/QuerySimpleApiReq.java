@@ -156,8 +156,6 @@ public class QuerySimpleApiReq extends MultiTenantReq{
     private Date lteCreateTime;
 
 
-
-
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte

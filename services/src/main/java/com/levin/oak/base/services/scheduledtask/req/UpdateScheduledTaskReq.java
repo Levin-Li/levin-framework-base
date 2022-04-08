@@ -56,6 +56,10 @@ public class UpdateScheduledTaskReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition ="!#user.isSuperAdmin()")
+    final boolean eqEditable = true;
+
     @NotBlank
     @Size(max = 64)
     @Schema(description = "任务分类")

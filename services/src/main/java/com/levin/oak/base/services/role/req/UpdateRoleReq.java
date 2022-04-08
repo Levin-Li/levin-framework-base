@@ -60,6 +60,10 @@ public class UpdateRoleReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition ="!#user.isSuperAdmin()")
+    final boolean eqEditable = true;
+
      //编码不允许修改
 //    @NotBlank
 //    @Schema(description = "编码")

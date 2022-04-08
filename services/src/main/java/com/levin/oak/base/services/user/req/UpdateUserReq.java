@@ -61,6 +61,10 @@ public class UpdateUserReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition ="!#user.isSuperAdmin()")
+    final boolean eqEditable = true;
+
     @Size(max = 64)
     @Schema(description = "登录名")
     private String loginName;

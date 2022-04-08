@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.*;
 
@@ -45,6 +46,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     void init() {
 
         log.info("init...");
+
+        frameworkProperties.getDomain().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
         frameworkProperties.getAcl().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
@@ -118,7 +121,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
                     .excludePathPatterns("/" + openApiPath)
                     .excludePathPatterns(frameworkProperties.getDomain().getExcludePathPatterns())
-                    .addPathPatterns("/**");
+                    .addPathPatterns("/**")
+                    .order(Ordered.HIGHEST_PRECEDENCE);
         }
 
         if (frameworkProperties.getAcl().isEnable()) {
@@ -132,7 +136,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
                     .excludePathPatterns("/" + openApiPath)
                     .excludePathPatterns(frameworkProperties.getAcl().getExcludePathPatterns())
-                    .addPathPatterns("/**");
+                    .addPathPatterns("/**")
+                    .order(Ordered.HIGHEST_PRECEDENCE);
         }
 
     }

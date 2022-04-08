@@ -1,6 +1,5 @@
 package com.levin.oak.base.controller.rbac.dto;
 
-import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.oak.base.services.user.info.UserInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;

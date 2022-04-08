@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -28,6 +29,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -64,6 +66,9 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
     @Resource
     FrameworkProperties frameworkProperties;
 
+    @Resource
+    Environment environment;
+
     private static final String GROUP_NAME = ModuleOption.NAME + "-" + ModuleOption.ID;
 
     @PostConstruct
@@ -99,7 +104,8 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
         List<RequestParameter> parameters = new ArrayList<>();
 
         if (StringUtils.hasText(tokenName)) {
-            parameters.add(newParameter(tokenName, "鉴权token，从登录接口获取"));
+            parameters.add(newParameter(tokenName, "鉴权token，从登录接口获取",
+                    Arrays.stream(environment.getActiveProfiles()).anyMatch(env -> env.contains("prod")), null));
         }
 
         if (frameworkProperties.getSign().isEnable()) {

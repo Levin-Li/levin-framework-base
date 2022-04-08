@@ -56,6 +56,10 @@ public class UpdateSimpleFormReq extends MultiTenantReq {
     @Eq(require = true)
     private Long id;
 
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition ="!#user.isSuperAdmin()")
+    final boolean eqEditable = true;
+
     @Schema(description = "提交地址")
     private String commitApi;
 

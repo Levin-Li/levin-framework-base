@@ -1,6 +1,7 @@
 package com.levin.oak.base.biz;
 
 
+import com.levin.commons.dao.DaoContext;
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.exception.AccessDeniedException;
@@ -160,7 +161,12 @@ public class InjectVarServiceImpl implements InjectVarService {
                     .put(InjectConsts.TENANT_ID, tenantInfo.getId());
         }
 
-        return Arrays.asList(builder.build());
+        final Map<String, Object> ctx = builder.build();
+
+        //设置当前DAO的变量
+        DaoContext.threadContext.putAll(ctx);
+
+        return Arrays.asList(ctx);
     }
 
 }

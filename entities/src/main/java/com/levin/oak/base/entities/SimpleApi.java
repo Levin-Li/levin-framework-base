@@ -16,7 +16,6 @@ import javax.persistence.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @Schema(description = "简单动态接口")
-
 @Table(
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
