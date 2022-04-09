@@ -489,6 +489,13 @@ public class AuthServiceImpl
                     .setDomain("*")
                     .setType(EntityConst.TYPE_NAME)
                     .setRes("*")
+                    .setAction(EntityConst.STAT_ACTION + "*")
+                    .toString());
+
+            permissions.add(new ResPermission()
+                    .setDomain("*")
+                    .setType(EntityConst.TYPE_NAME)
+                    .setRes("*")
                     .setAction(EntityConst.VIEW_DETAIL_ACTION + "*")
                     .toString());
 

@@ -51,6 +51,8 @@ public interface EntityConst {
      */
     String QUERY_ACTION = "查询";
 
+    String STAT_ACTION = "统计";
+
     /**
      *
      */
