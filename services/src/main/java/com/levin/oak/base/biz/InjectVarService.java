@@ -8,13 +8,14 @@ import java.util.Map;
  */
 public interface InjectVarService {
 
-    String TENANT_BIND_DOMAIN_ENABLE ="tenantBindDomainEnable";
+    String INJECT_VAR_CACHE_KEY = InjectVarService.class.getName() + ".INJECT_VAR_CACHE_KEY";
 
+    String TENANT_BIND_DOMAIN_ENABLE = "tenantBindDomainEnable";
 
     /**
      *
      */
-    void clearThreadCache();
+    void clearCache();
 
     /**
      * 获取默认常规的注入变量

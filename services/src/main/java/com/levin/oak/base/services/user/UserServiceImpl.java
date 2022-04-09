@@ -5,7 +5,9 @@ import com.levin.commons.dao.Paging;
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.dao.support.PagingData;
 import com.levin.oak.base.ModuleOption;
+import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.req.LoginReq;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
 import com.levin.oak.base.services.BaseService;
@@ -60,6 +62,9 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Resource
     AuthService authService;
 
+    @Resource
+    FrameworkProperties frameworkProperties;
+
     protected UserService getSelfProxy() {
         return getSelfProxy(UserService.class);
     }
@@ -67,6 +72,12 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Override
     public Long create(CreateUserReq req) {
+
+        //如果没有按域名区分，那么要求所有的登录名称唯一
+        if (!frameworkProperties.getTenantBindDomain().isEnable()) {
+          //  simpleDao.findOneByQueryObj(new LoginReq().setAccount());
+        }
+
         User entity = simpleDao.create(req);
         return entity.getId();
     }

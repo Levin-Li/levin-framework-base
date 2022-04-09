@@ -96,8 +96,6 @@ public class InjectVarServiceImpl implements InjectVarService {
     @Resource
     FrameworkProperties frameworkProperties;
 
-//    final List<Map<String, ?>> defaultCtx = Collections.emptyList();
-
     @PostConstruct
     public void init() {
         log.info("Http请求变量注入服务启用...");
@@ -107,8 +105,8 @@ public class InjectVarServiceImpl implements InjectVarService {
      *
      */
     @Override
-    public void clearThreadCache() {
-
+    public void clearCache() {
+        httpServletRequest.removeAttribute(INJECT_VAR_CACHE_KEY);
     }
 
     @Override
@@ -118,15 +116,21 @@ public class InjectVarServiceImpl implements InjectVarService {
             log.debug("getInjectVars...");
         }
 
+        //缓存在请求中
+        List<Map<String, ?>> result = (List<Map<String, ?>>) httpServletRequest.getAttribute(INJECT_VAR_CACHE_KEY);
+
+        if (result != null) {
+            return result;
+        }
+
         TenantInfo tenantInfo = bizTenantService.getCurrentTenant();
 
         //如果当前没有域名
-        if (tenantInfo == null
-                && frameworkProperties.getTenantBindDomain().isEnable()) {
+        if (tenantInfo == null && frameworkProperties.getTenantBindDomain().isEnable()) {
             tenantInfo = bizTenantService.getTenantByDomain(httpServletRequest.getServerName());
         }
 
-        MapUtils.Builder<String, Object> builder = MapUtils.putFirst("tenantBindDomainEnable",frameworkProperties.getTenantBindDomain().isEnable());
+        MapUtils.Builder<String, Object> builder = MapUtils.putFirst("tenantBindDomainEnable", frameworkProperties.getTenantBindDomain().isEnable());
 
         //当前登录用户
         if (baseAuthService.isLogin()) {
@@ -149,7 +153,6 @@ public class InjectVarServiceImpl implements InjectVarService {
                     }
 
                     tenantInfo = tenantInfo2;
-
                 }
             }
 
@@ -171,10 +174,15 @@ public class InjectVarServiceImpl implements InjectVarService {
 
         final Map<String, Object> ctx = builder.build();
 
-        //设置当前DAO的变量
+        //设置注入变量到Dao上下文中
         DaoContext.threadContext.putAll(ctx);
 
-        return Arrays.asList(ctx);
+        result = Arrays.asList(ctx);
+
+        //缓存到请求对象重
+        httpServletRequest.setAttribute(INJECT_VAR_CACHE_KEY, result);
+
+        return result;
     }
 
 }

@@ -180,10 +180,20 @@ public class ModuleWebControllerAspect {
 //    @Around("modulePackagePointcut() && controllerPointcut() && requestMappingPointcut()")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        final String requestURI = request.getRequestURI();
+        String contextPath = serverProperties.getServlet().getContextPath() + "/";
+
+        contextPath = contextPath.replace("//", "/");
+
+        String path = request.getRequestURI().replace("//", "/");
+
+        if (path.startsWith(contextPath)) {
+            path = path.substring(contextPath.length() - 1);
+        }
+
         final String className = joinPoint.getSignature().getDeclaringTypeName();
 
-        if (!frameworkProperties.getLog().isMatched(className, requestURI)) {
+        if (path.equals(serverProperties.getError().getPath())
+                || !frameworkProperties.getLog().isMatched(className, path)) {
             return joinPoint.proceed(joinPoint.getArgs());
         }
 
@@ -239,7 +249,7 @@ public class ModuleWebControllerAspect {
                     .setRemoteAddr(IPAddrUtils.try2GetUserRealIPAddr(request))
                     .setServerAddr(request.getLocalAddr())
                     .setRequestMethod(request.getMethod())
-                    .setRequestUri(requestURI + "?" + request.getQueryString())
+                    .setRequestUri(request.getRequestURI() + "?" + request.getQueryString())
                     .setRequestParams(gson.toJson(paramMap))
                     .setHeadInfo(gson.toJson(headerMap))
                     .setExecuteTime(execTime)

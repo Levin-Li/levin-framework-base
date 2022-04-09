@@ -256,7 +256,7 @@ public class AuthServiceImpl
     @Override
     public List<String> getPermissionList(Object loginId) {
 
-        Assert.notNull(loginId,"loginId is null");
+        Assert.notNull(loginId, "loginId is null");
 
 //        if (loginId == null) {
 //            loginId = getLoginUserId();
@@ -300,7 +300,7 @@ public class AuthServiceImpl
     @Override
     public List<String> getRoleList(Object loginId) {
 
-        Assert.notNull(loginId,"loginId is null");
+        Assert.notNull(loginId, "loginId is null");
 
 //        if (loginId == null) {
 //            loginId = getLoginUserId();

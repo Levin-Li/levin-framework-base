@@ -51,12 +51,10 @@ public class DomainInterceptor implements HandlerInterceptor {
 
 
     protected void onDomain(String domain) {
-
         if (consumer != null) {
             consumer.accept(domain);
         } else {
 
         }
-
     }
 }

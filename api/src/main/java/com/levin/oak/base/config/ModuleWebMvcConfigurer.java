@@ -2,6 +2,7 @@ package com.levin.oak.base.config;
 
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
+import com.levin.oak.base.biz.InjectVarService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.interceptor.AuthorizeAnnotationInterceptor;
 import com.levin.oak.base.interceptor.DomainInterceptor;
@@ -29,6 +30,9 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
     @Resource
     BizTenantService bizTenantService;
+
+    @Resource
+    InjectVarService injectVarService;
 
     @Resource
     ServerProperties serverProperties;
@@ -82,6 +86,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         registry.addResourceHandler(H5_UI_PATH + "**")
                 .addResourceLocations("classpath:public" + H5_UI_PATH);
+
     }
 
     @Override
@@ -110,6 +115,11 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //        })).addPathPatterns("/**");
 
 
+        //清除缓存
+        registry.addInterceptor(new DomainInterceptor((domain) -> injectVarService.clearCache(), (className) -> true))
+                .addPathPatterns("/**")
+                .order(Ordered.HIGHEST_PRECEDENCE + 1000);
+
         if (frameworkProperties.getTenantBindDomain().isEnable()) {
 
             HandlerInterceptor handlerInterceptor = new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)
@@ -122,7 +132,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     .excludePathPatterns("/" + openApiPath)
                     .excludePathPatterns(frameworkProperties.getTenantBindDomain().getExcludePathPatterns())
                     .addPathPatterns("/**")
-                    .order(Ordered.HIGHEST_PRECEDENCE);
+                    .order(Ordered.HIGHEST_PRECEDENCE + 2000);
         }
 
         if (frameworkProperties.getAcl().isEnable()) {
@@ -137,10 +147,11 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     .excludePathPatterns("/" + openApiPath)
                     .excludePathPatterns(frameworkProperties.getAcl().getExcludePathPatterns())
                     .addPathPatterns("/**")
-                    .order(Ordered.HIGHEST_PRECEDENCE);
+                    .order(Ordered.HIGHEST_PRECEDENCE + 3000);
         }
 
     }
+
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {

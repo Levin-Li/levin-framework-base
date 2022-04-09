@@ -90,6 +90,10 @@ plugin:
           framework:
             sign:
               enable: false
+            tenant-bind-domain:
+              enable: false
+            log:
+              exclude-path-patterns: /error,/swagger-resources/**,/swagger-ui/**,/v3/api-docs
 
 # Sa-Token配置
 sa-token:
