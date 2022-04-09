@@ -469,7 +469,7 @@ public class AuthServiceImpl
 
             simpleDao.create(new CreateRoleReq()
                     .setCode(RbacRoleObject.ADMIN_ROLE)
-                    .setName("租户管理员")
+                    .setName("管理员")
                     .setEditable(false)
                     .setOrgDataScope(Role.OrgDataScope.All)
                     .setPermissionList(permissions));
@@ -526,6 +526,7 @@ public class AuthServiceImpl
                 .setLoginName("sa")
                 .setPassword(encryptPassword("123456"))
                 .setName("超级管理员")
+                .setEditable(false)
                 .setStaffNo("0000")
                 .setRoleList(roleList)
         );
