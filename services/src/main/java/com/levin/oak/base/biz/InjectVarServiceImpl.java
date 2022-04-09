@@ -103,6 +103,14 @@ public class InjectVarServiceImpl implements InjectVarService {
         log.info("Http请求变量注入服务启用...");
     }
 
+    /**
+     *
+     */
+    @Override
+    public void clearThreadCache() {
+
+    }
+
     @Override
     public List<Map<String, ?>> getInjectVars() {
 
@@ -162,8 +170,6 @@ public class InjectVarServiceImpl implements InjectVarService {
         }
 
         final Map<String, Object> ctx = builder.build();
-
-
 
         //设置当前DAO的变量
         DaoContext.threadContext.putAll(ctx);

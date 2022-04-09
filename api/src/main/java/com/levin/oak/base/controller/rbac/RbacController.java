@@ -84,7 +84,6 @@ public class RbacController extends BaseController {
                 .setAccessToken(accessToken)
                 .setUserInfo(authService.getUserInfo())
         );
-
     }
 
     /**
