@@ -118,7 +118,7 @@ public class InjectVarServiceImpl implements InjectVarService {
             tenantInfo = bizTenantService.getTenantByDomain(httpServletRequest.getServerName());
         }
 
-        MapUtils.Builder<String, Object> builder = MapUtils.putFirst(InjectConsts.TENANT, tenantInfo);
+        MapUtils.Builder<String, Object> builder = MapUtils.put();
 
         //当前登录用户
         if (baseAuthService.isLogin()) {
@@ -162,6 +162,8 @@ public class InjectVarServiceImpl implements InjectVarService {
         }
 
         final Map<String, Object> ctx = builder.build();
+
+
 
         //设置当前DAO的变量
         DaoContext.threadContext.putAll(ctx);
