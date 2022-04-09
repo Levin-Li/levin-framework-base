@@ -39,7 +39,7 @@ public class FrameworkProperties implements Serializable {
      * 访问控制
      */
     @NestedConfigurationProperty
-    private final Cfg domain = new Cfg("domain", "域名鉴权控制", "域名鉴权控制");
+    private final Cfg tenantDomain = new Cfg("tenantDomain", "租户域名鉴权控制", "租户域名鉴权控制");
 
     /**
      * 访问日志记录

@@ -1,21 +1,23 @@
 package com.levin.oak.base.config;
 
-import static com.levin.oak.base.ModuleOption.*;
-
-import com.levin.oak.base.*;
 import com.levin.commons.service.support.*;
-import com.levin.commons.utils.*;
 import com.levin.oak.base.biz.InjectVarService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.context.annotation.*;
-import org.springframework.core.annotation.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.servlet.http.*;
-import java.util.*;
+import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import static com.levin.oak.base.ModuleOption.HTTP_REQUEST_INFO_RESOLVER;
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
 /**
@@ -32,6 +34,9 @@ public class ModuleVariableResolverConfigurer
 
     @Resource
     InjectVarService injectVarService;
+
+    @Resource
+    Environment environment;
 
     @PostConstruct
     void init() {
@@ -56,6 +61,24 @@ public class ModuleVariableResolverConfigurer
         //全局动态变量，每次请求都会执行
 
         vrm.add(VariableInjector.newSupportSpelAndGroovyResolvers(this::getGlobalContextVars));
+
+        vrm.add(new VariableResolver() {
+            @Override
+            public <T> ValueHolder<T> resolve(String key, T originalValue, boolean throwExWhenNotFound, boolean isRequireNotNull, Type... expectTypes) throws VariableNotFoundException {
+
+                if (!key.trim().startsWith("env:")) {
+                    return ValueHolder.notValue();
+                }
+
+                key = key.substring(4);
+
+                return (ValueHolder<T>) new ValueHolder<>()
+                        .setValue(environment.getProperty(key))
+                        .setName(key)
+                        .setHasValue(environment.containsProperty(key));
+            }
+        });
+
     }
 
 
@@ -112,7 +135,7 @@ public class ModuleVariableResolverConfigurer
         //@todo 增加本模块的动态变量
 
         // 使用注入服务
-          return injectVarService.getInjectVars();
+        return injectVarService.getInjectVars();
 
 //        return Collections.emptyList();
     }
