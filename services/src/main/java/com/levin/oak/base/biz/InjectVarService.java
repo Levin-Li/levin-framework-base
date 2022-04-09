@@ -8,6 +8,8 @@ import java.util.Map;
  */
 public interface InjectVarService {
 
+    String TENANT_BIND_DOMAIN_ENABLE ="tenantBindDomainEnable";
+
     /**
      * 获取默认常规的注入变量
      *

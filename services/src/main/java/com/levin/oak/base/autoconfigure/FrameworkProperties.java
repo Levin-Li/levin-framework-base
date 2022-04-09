@@ -36,10 +36,10 @@ public class FrameworkProperties implements Serializable {
     private final Cfg acl = new Cfg("acl", "访问鉴权控制", "访问鉴权控制");
 
     /**
-     * 访问控制
+     * 租户绑定域名
      */
     @NestedConfigurationProperty
-    private final Cfg tenantDomain = new Cfg("tenantDomain", "租户域名鉴权控制", "租户域名鉴权控制");
+    private final Cfg tenantBindDomain = new Cfg("tenantBindDomain", "租户域名鉴权控制", "租户域名鉴权控制");
 
     /**
      * 访问日志记录

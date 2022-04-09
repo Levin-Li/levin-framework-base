@@ -47,7 +47,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         log.info("init...");
 
-        frameworkProperties.getTenantDomain().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
+        frameworkProperties.getTenantBindDomain().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
         frameworkProperties.getAcl().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
@@ -110,17 +110,17 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //        })).addPathPatterns("/**");
 
 
-        if (frameworkProperties.getTenantDomain().isEnable()) {
+        if (frameworkProperties.getTenantBindDomain().isEnable()) {
 
             HandlerInterceptor handlerInterceptor = new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)
-                    , (className) -> frameworkProperties.getTenantDomain().isPackageMatched(className));
+                    , (className) -> frameworkProperties.getTenantBindDomain().isPackageMatched(className));
 
             registry.addInterceptor(handlerInterceptor)
                     .excludePathPatterns(serverProperties.getError().getPath())
                     .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
                     .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
                     .excludePathPatterns("/" + openApiPath)
-                    .excludePathPatterns(frameworkProperties.getTenantDomain().getExcludePathPatterns())
+                    .excludePathPatterns(frameworkProperties.getTenantBindDomain().getExcludePathPatterns())
                     .addPathPatterns("/**")
                     .order(Ordered.HIGHEST_PRECEDENCE);
         }

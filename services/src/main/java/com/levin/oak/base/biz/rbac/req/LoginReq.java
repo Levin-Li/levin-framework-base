@@ -57,7 +57,8 @@ public class LoginReq implements ServiceReq {
     @Schema(description = "租户ID", hidden = true)
     @InjectVar(isRequired = "false")
     @OR(autoClose = true)
-    @IsNull(condition = "#TenantDomainEnable")
+    //租户绑定域名启用时，可以
+    @IsNull(condition = "#tenantBindDomainEnable")
     @Eq
     private String tenantId;
 

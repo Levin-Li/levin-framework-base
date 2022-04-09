@@ -114,11 +114,11 @@ public class InjectVarServiceImpl implements InjectVarService {
 
         //如果当前没有域名
         if (tenantInfo == null
-                && frameworkProperties.getTenantDomain().isEnable()) {
+                && frameworkProperties.getTenantBindDomain().isEnable()) {
             tenantInfo = bizTenantService.getTenantByDomain(httpServletRequest.getServerName());
         }
 
-        MapUtils.Builder<String, Object> builder = MapUtils.putFirst("TenantDomainEnable",frameworkProperties.getTenantDomain().isEnable());
+        MapUtils.Builder<String, Object> builder = MapUtils.putFirst("TenantDomainEnable",frameworkProperties.getTenantBindDomain().isEnable());
 
         //当前登录用户
         if (baseAuthService.isLogin()) {
