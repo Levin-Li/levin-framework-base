@@ -273,7 +273,6 @@ public class AuthServiceImpl
         auditUser(userInfo);
 
         return new ArrayList<>(
-
                 //获取指定用户的权限列表
                 simpleDao.selectFrom(Role.class)
                         .select(E_Role.permissionList)
@@ -463,6 +462,13 @@ public class AuthServiceImpl
             permissions.add(new ResPermission()
                     .setDomain("*")
                     .setType(EntityConst.COMMON_TYPE_NAME)
+                    .setRes("*")
+                    .setAction("*")
+                    .toString());
+
+            permissions.add(new ResPermission()
+                    .setDomain("*")
+                    .setType(EntityConst.SYS_TYPE_NAME)
                     .setRes("*")
                     .setAction("*")
                     .toString());

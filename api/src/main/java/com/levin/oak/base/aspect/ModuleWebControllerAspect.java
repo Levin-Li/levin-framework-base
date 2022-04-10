@@ -285,11 +285,10 @@ public class ModuleWebControllerAspect {
                     //只记录JSON
                     req.setResponseData(gson.toJson(result));
                 } else {
-                    req.setResponseData("未知内容2");
+                    req.setResponseData("忽略类型-" + contentType);
                 }
-
             } else {
-                req.setResponseData("未知内容1");
+                req.setResponseData(result != null ? gson.toJson(result) : null);
             }
 
             asyncHandler.addTask(req);
