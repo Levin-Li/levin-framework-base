@@ -186,12 +186,14 @@ public class ModuleWebControllerAspect {
 
         String path = request.getRequestURI().replace("//", "/");
 
+        //去除应用路径
         if (path.startsWith(contextPath)) {
             path = path.substring(contextPath.length() - 1);
         }
 
         final String className = joinPoint.getSignature().getDeclaringTypeName();
 
+        //去除应用路径后，进行匹配
         if (path.equals(serverProperties.getError().getPath())
                 || !frameworkProperties.getLog().isMatched(className, path)) {
             return joinPoint.proceed(joinPoint.getArgs());

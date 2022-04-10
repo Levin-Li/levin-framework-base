@@ -112,10 +112,6 @@ public class InjectVarServiceImpl implements InjectVarService {
     @Override
     public List<Map<String, ?>> getInjectVars() {
 
-        if (log.isDebugEnabled()) {
-            log.debug("getInjectVars...");
-        }
-
         //缓存在请求中
         List<Map<String, ?>> result = (List<Map<String, ?>>) httpServletRequest.getAttribute(INJECT_VAR_CACHE_KEY);
 
@@ -181,6 +177,10 @@ public class InjectVarServiceImpl implements InjectVarService {
 
         //缓存到请求对象重
         httpServletRequest.setAttribute(INJECT_VAR_CACHE_KEY, result);
+
+        if (log.isTraceEnabled()) {
+            log.trace("getInjectVars ok");
+        }
 
         return result;
     }
