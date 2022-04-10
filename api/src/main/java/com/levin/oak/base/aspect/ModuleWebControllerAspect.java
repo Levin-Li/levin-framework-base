@@ -26,6 +26,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.ResolvableType;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -39,6 +41,7 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import static com.levin.oak.base.ModuleOption.HTTP_REQUEST_INFO_RESOLVER;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @Aspect
 @Slf4j
@@ -243,10 +246,23 @@ public class ModuleWebControllerAspect {
 
             TenantInfo tenantInfo = bizTenantService.getCurrentTenant();
 
+            String tenantInfoId = null;
+
+            if (tenantInfo != null) {
+                tenantInfoId = tenantInfo.getId();
+            }
+
+            String visitor = null;
+
+            if (authService.isLogin()) {
+                tenantInfoId = authService.getUserInfo().getTenantId();
+                visitor = authService.getUserInfo().getName() + "(" + authService.getLoginUserId() + ")";
+            }
+
             CreateAccessLogReq req = new CreateAccessLogReq()
                     .setCreateTime(new Date())
                     .setTitle(title)
-                    .setVisitor(authService.isLogin() ? (authService.getUserInfo().getName() + "(" + authService.getUserInfo().getId() + ")") : null)
+                    .setVisitor(visitor)
                     .setDomain(request.getServerName())
                     .setRemoteAddr(IPAddrUtils.try2GetUserRealIPAddr(request))
                     .setServerAddr(request.getLocalAddr())
@@ -258,12 +274,22 @@ public class ModuleWebControllerAspect {
                     .setIsException(ex != null)
                     .setExceptionInfo(ex != null ? ExceptionUtils.getPrintInfo(ex) : null)
                     .setUserAgent(headerMap.get("user-agent"))
-                    .setTenantId(tenantInfo != null ? tenantInfo.getId() : null);
+                    .setTenantId(tenantInfoId);
 
             if (isAccessLogController) {
                 req.setResponseData("忽略对于访问日志控制器的访问结果");
+            } else if (result instanceof HttpEntity) {
+                MediaType contentType = ((HttpEntity) result).getHeaders().getContentType();
+                if (contentType != null
+                        && contentType.isCompatibleWith(APPLICATION_JSON)) {
+                    //只记录JSON
+                    req.setResponseData(gson.toJson(result));
+                } else {
+                    req.setResponseData("未知内容2");
+                }
+
             } else {
-                req.setResponseData(result != null ? gson.toJson(result) : null);
+                req.setResponseData("未知内容1");
             }
 
             asyncHandler.addTask(req);

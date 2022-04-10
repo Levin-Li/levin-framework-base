@@ -71,6 +71,7 @@ public class InjectVarServiceImpl implements InjectVarService {
 
         @Override
         public <ID extends Serializable> ID getId() {
+            //throw new IllegalStateException("anonymous user");
             return null;
         }
     };
@@ -155,6 +156,7 @@ public class InjectVarServiceImpl implements InjectVarService {
             builder.put(InjectConsts.USER_ID, userInfo.getId())
                     .put(InjectConsts.USER_NAME, userInfo.getName())
                     .put(InjectConsts.USER, userInfo)
+                    .put(InjectConsts.ORG, userInfo.getOrg())
                     .put(InjectConsts.ORG_ID, userInfo.getOrgId());
 
         } else {

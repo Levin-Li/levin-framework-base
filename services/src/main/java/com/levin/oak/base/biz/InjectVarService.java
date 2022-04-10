@@ -10,8 +10,6 @@ public interface InjectVarService {
 
     String INJECT_VAR_CACHE_KEY = InjectVarService.class.getName() + ".INJECT_VAR_CACHE_KEY";
 
-    String TENANT_BIND_DOMAIN_ENABLE = "tenantBindDomainEnable";
-
     /**
      *
      */
