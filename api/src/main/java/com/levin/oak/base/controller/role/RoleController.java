@@ -1,29 +1,28 @@
 package com.levin.oak.base.controller.role;
 
-import com.levin.commons.rbac.RbacRoleObject;
+import com.levin.commons.dao.support.PagingData;
+import com.levin.commons.dao.support.SimplePaging;
+import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.RbacService;
+import com.levin.oak.base.controller.BaseController;
+import com.levin.oak.base.entities.E_Role;
+import com.levin.oak.base.services.role.RoleService;
+import com.levin.oak.base.services.role.info.RoleInfo;
+import com.levin.oak.base.services.role.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.util.*;
-import javax.validation.*;
-import java.util.*;
 
-import javax.servlet.http.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import javax.validation.constraints.*;
-
-import com.levin.oak.base.controller.*;
-import com.levin.oak.base.*;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.role.*;
-import com.levin.oak.base.services.role.req.*;
-import com.levin.oak.base.services.role.info.*;
+import javax.annotation.Resource;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
@@ -54,23 +53,29 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class RoleController extends BaseController{
+public class RoleController extends BaseController {
 
     private static final String BIZ_NAME = E_Role.BIZ_NAME;
 
-    @Autowired
+    @Resource
     RoleService roleService;
+
+    @Resource
+    AuthService authService;
+
+    @Resource
+    RbacService rbacService;
 
     /**
      * 分页查找
      *
-     * @param req  QueryRoleReq
-     * @return  ApiResp<PagingData<RoleInfo>>
+     * @param req QueryRoleReq
+     * @return ApiResp<PagingData < RoleInfo>>
      */
     @GetMapping("/query")
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<RoleInfo>> query(QueryRoleReq req , SimplePaging paging) {
-        return ApiResp.ok(roleService.query(req,paging));
+    public ApiResp<PagingData<RoleInfo>> query(QueryRoleReq req, SimplePaging paging) {
+        return ApiResp.ok(roleService.query(req, paging));
     }
 
     /**
@@ -82,6 +87,7 @@ public class RoleController extends BaseController{
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Long> create(@RequestBody CreateRoleReq req) {
+        checkPermissions(req.getPermissionList());
         return ApiResp.ok(roleService.create(req));
     }
 
@@ -94,41 +100,46 @@ public class RoleController extends BaseController{
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateRoleReq> reqList) {
+        reqList.stream().forEach(req -> checkPermissions(req.getPermissionList()));
         return ApiResp.ok(roleService.batchCreate(reqList));
     }
 
     /**
-    * 查看详情
-    *
-    * @param req QueryRoleByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QueryRoleByIdReq
+     */
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<RoleInfo> retrieve(@NotNull RoleIdReq req) {
-         return ApiResp.ok(roleService.findById(req));
-     }
+        return ApiResp.ok(roleService.findById(req));
+    }
 
     /**
      * 更新
+     *
      * @param req UpdateRoleReq
      */
-     @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> update(@RequestBody UpdateRoleReq req) {
-         return ApiResp.ok(checkResult(roleService.update(req), UPDATE_ACTION));
+    @PutMapping({""})
+    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> update(@RequestBody UpdateRoleReq req) {
+        checkPermissions(req.getPermissionList());
+        return ApiResp.ok(checkResult(roleService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateRoleReq> reqList) {
+    @PutMapping("/batchUpdate")
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateRoleReq> reqList) {
+        reqList.stream().forEach(req -> checkPermissions(req.getPermissionList()));
         return ApiResp.ok(checkResult(roleService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
      * 删除
+     *
      * @param req RoleIdReq
      */
     @DeleteMapping({""})
@@ -139,6 +150,7 @@ public class RoleController extends BaseController{
 
     /**
      * 批量删除
+     *
      * @param req DeleteRoleReq
      */
     @DeleteMapping({"/batchDelete"})
@@ -148,7 +160,25 @@ public class RoleController extends BaseController{
     }
 
     /**
+     * 检查当前用户是否有权限使用指定的权限
+     *
+     * @param permissionList
+     */
+    protected void checkPermissions(List<String> permissionList) {
+
+        Object loginUserId = authService.getLoginUserId();
+
+        boolean isAuthorized = rbacService.isAuthorized(authService.getRoleList(loginUserId), authService.getPermissionList(loginUserId), permissionList);
+
+        if (!isAuthorized) {
+            throw new AuthorizationException("role", "非法引用未授权的权限");
+        }
+
+    }
+
+    /**
      * 检查结果
+     *
      * @param n
      * @param action
      * @return

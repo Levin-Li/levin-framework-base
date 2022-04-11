@@ -9,7 +9,9 @@ import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.NotNull;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Rbac 基本服务
@@ -28,6 +30,41 @@ public interface RbacService {
     default String getDelimiter() {
         return Permission.DELIMITER;
     }
+
+    /**
+     * 获取认证上下文
+     *
+     * @return
+     */
+    default Map<String, Object> getAuthorizeContext() {
+        return Collections.emptyMap();
+    }
+
+    /**
+     * 授权验证，是否可以访问指定资源
+     * <p>
+     * 关键方法
+     *
+     * @param ownerRoleList         已经拥有的角色列表
+     * @param ownerPermissionList   已经拥有的权限列表
+     * @param requirePermissionList 请求的权限
+     * @return 是否可以访问指定资源
+     */
+    default boolean isAuthorized(List<String> ownerRoleList, List<String> ownerPermissionList, List<String> requirePermissionList) {
+        return requirePermissionList.stream().allMatch(rp -> isAuthorized(ownerRoleList, ownerPermissionList, rp));
+    }
+
+    /**
+     * 授权验证，是否可以访问指定资源
+     * <p>
+     * 关键方法
+     *
+     * @param requirePermission   请求的权限
+     * @param ownerRoleList       已经拥有的角色列表
+     * @param ownerPermissionList 已经拥有的权限列表
+     * @return 是否可以访问指定资源
+     */
+    boolean isAuthorized(List<String> ownerRoleList, List<String> ownerPermissionList, String requirePermission);
 
     /**
      * 检查当前用户的方法调用授权

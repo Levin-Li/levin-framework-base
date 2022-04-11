@@ -118,7 +118,6 @@ public class UserServiceImpl extends BaseService implements UserService {
                 .setPassword(authService.encryptPassword(req.getPassword()));
 
         return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
-
     }
 
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)

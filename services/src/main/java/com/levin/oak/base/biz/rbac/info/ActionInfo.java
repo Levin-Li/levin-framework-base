@@ -8,12 +8,17 @@ import lombok.experimental.FieldNameConstants;
 
 @Schema(description = "资源类型")
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "id")
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-public class ActionInfo extends DefaultSimpleIdentifiableObject {
+public class ActionInfo
+        extends DefaultSimpleIdentifiableObject {
+
+    @Schema(description = "完整表达式")
+    String permissionExpr;
 
 }

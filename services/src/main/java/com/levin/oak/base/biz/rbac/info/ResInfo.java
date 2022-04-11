@@ -1,6 +1,7 @@
 package com.levin.oak.base.biz.rbac.info;
 
 import com.levin.commons.rbac.DefaultSimpleIdentifiableObject;
+import com.levin.commons.rbac.Res;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -26,6 +27,7 @@ public class ResInfo extends DefaultSimpleIdentifiableObject {
     @Schema(description = "资源类型")
     String type;
 
+//    final List<Res.Action> actionList = new LinkedList<>();
     final List<ActionInfo> actionList = new LinkedList<>();
 
 }
