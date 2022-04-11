@@ -87,7 +87,7 @@ public class RoleController extends BaseController {
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Long> create(@RequestBody CreateRoleReq req) {
-        checkPermissions(req.getPermissionList());
+        checkPermissions(req.getCode(), req.getPermissionList());
         return ApiResp.ok(roleService.create(req));
     }
 
@@ -100,7 +100,7 @@ public class RoleController extends BaseController {
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateRoleReq> reqList) {
-        reqList.stream().forEach(req -> checkPermissions(req.getPermissionList()));
+        reqList.stream().forEach(req -> checkPermissions(req.getCode(), req.getPermissionList()));
         return ApiResp.ok(roleService.batchCreate(reqList));
     }
 
@@ -123,7 +123,7 @@ public class RoleController extends BaseController {
     @PutMapping({""})
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> update(@RequestBody UpdateRoleReq req) {
-        checkPermissions(req.getPermissionList());
+        checkPermissions(null, req.getPermissionList());
         return ApiResp.ok(checkResult(roleService.update(req), UPDATE_ACTION));
     }
 
@@ -133,7 +133,7 @@ public class RoleController extends BaseController {
     @PutMapping("/batchUpdate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateRoleReq> reqList) {
-        reqList.stream().forEach(req -> checkPermissions(req.getPermissionList()));
+        reqList.stream().forEach(req -> checkPermissions(null, req.getPermissionList()));
         return ApiResp.ok(checkResult(roleService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
@@ -164,7 +164,9 @@ public class RoleController extends BaseController {
      *
      * @param permissionList
      */
-    protected void checkPermissions(List<String> permissionList) {
+    protected void checkPermissions(String roleCode, List<String> permissionList) {
+
+        Assert.isTrue(roleCode == null || roleCode.startsWith("R_"), "角色Code必须以 R_ 开头");
 
         Object loginUserId = authService.getLoginUserId();
 
