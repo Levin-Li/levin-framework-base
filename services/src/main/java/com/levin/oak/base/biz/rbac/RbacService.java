@@ -6,12 +6,15 @@ import com.levin.oak.base.biz.rbac.info.ModuleInfo;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 /**
  * Rbac 基本服务
@@ -41,6 +44,51 @@ public interface RbacService {
     }
 
     /**
+     * 当前用户是否能给目标用户分配指定的角色
+     *
+     * @param targetUserId
+     * @param requireRoleCodeList
+     * @param matchErrorConsumer  匹配错误回调 参数1为请求的角色，参数2为没有匹配的权限
+     * @return
+     */
+    default boolean canAssignRole(Object targetUserId, List<String> requireRoleCodeList
+            , BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer) {
+        return requireRoleCodeList.stream().filter(StringUtils::hasText)
+                .allMatch(requireRoleCode -> canAssignRole(targetUserId, requireRoleCode, matchErrorConsumer));
+    }
+
+    /**
+     * 当前用户是否能给目标用户分配指定的角色
+     *
+     * @param targetUserId
+     * @param requireRoleCode
+     * @param matchErrorConsumer 匹配错误回调 参数1为请求的角色，参数2为没有匹配的权限
+     * @return
+     */
+    boolean canAssignRole(Object targetUserId, String requireRoleCode
+            , BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer);
+
+    /**
+     * 当前用户是否 拥有指定的权限列表
+     *
+     * @param matchErrorConsumer
+     * @param requirePermissionList
+     * @return
+     */
+    default boolean isAuthorized(BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer, String... requirePermissionList) {
+        return isAuthorized(Arrays.asList(requirePermissionList), matchErrorConsumer);
+    }
+
+    /**
+     * 当前用户是否 拥有指定的权限列表
+     *
+     * @param requirePermissionList
+     * @param matchErrorConsumer
+     * @return
+     */
+    boolean isAuthorized(List<String> requirePermissionList, BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer);
+
+    /**
      * 授权验证，是否可以访问指定资源
      * <p>
      * 关键方法
@@ -48,10 +96,13 @@ public interface RbacService {
      * @param ownerRoleList         已经拥有的角色列表
      * @param ownerPermissionList   已经拥有的权限列表
      * @param requirePermissionList 请求的权限
+     * @param matchErrorConsumer    匹配错误回调 参数1为请求的权限，参数2为错误原因
      * @return 是否可以访问指定资源
      */
-    default boolean isAuthorized(List<String> ownerRoleList, List<String> ownerPermissionList, List<String> requirePermissionList) {
-        return requirePermissionList.stream().allMatch(rp -> isAuthorized(ownerRoleList, ownerPermissionList, rp));
+    default boolean isAuthorized(List<String> ownerRoleList, List<String> ownerPermissionList, List<String> requirePermissionList
+            , BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer) {
+        return requirePermissionList.stream()
+                .allMatch(rp -> isAuthorized(ownerRoleList, ownerPermissionList, rp, matchErrorConsumer));
     }
 
     /**
@@ -62,9 +113,11 @@ public interface RbacService {
      * @param requirePermission   请求的权限
      * @param ownerRoleList       已经拥有的角色列表
      * @param ownerPermissionList 已经拥有的权限列表
+     * @param matchErrorConsumer  匹配错误回调 参数1为请求的权限，参数2为错误原因
      * @return 是否可以访问指定资源
      */
-    boolean isAuthorized(List<String> ownerRoleList, List<String> ownerPermissionList, String requirePermission);
+    boolean isAuthorized(List<String> ownerRoleList, List<String> ownerPermissionList, String requirePermission
+            , BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer);
 
     /**
      * 检查当前用户的方法调用授权

@@ -48,7 +48,7 @@ public class PluginManagerController extends BaseController {
      * @return
      */
     @GetMapping("/list")
-    @Operation(tags = "插件", summary = "获取插件列表", description = "获取插件列表")
+    @Operation(tags = "插件管理", summary = "获取插件列表", description = "获取插件列表")
     public ApiResp<List<Plugin>> list() {
         return ApiResp.ok(pluginManager.getInstalledPlugins());
     }

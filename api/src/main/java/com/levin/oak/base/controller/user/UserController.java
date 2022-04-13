@@ -3,9 +3,10 @@ package com.levin.oak.base.controller.user;
 import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.rbac.AuthorizationException;
-import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.biz.BizRoleService;
 import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.services.user.UserService;
@@ -16,7 +17,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -64,6 +64,12 @@ public class UserController extends BaseController {
     @Resource
     AuthService authService;
 
+    @Resource
+    RbacService rbacService;
+
+    @Resource
+    BizRoleService bizRoleService;
+
     /**
      * 信息脱敏
      *
@@ -82,25 +88,18 @@ public class UserController extends BaseController {
      * <p>
      * 保证当前用户分配的给其它用户的角色必须是自己已经拥有的角色
      *
+     * @param targetUserId
      * @param roleList
-     * @param errorInfo
      */
-    protected void checkUserRole(List<String> roleList, String errorInfo) {
+    protected void checkCurrentUserCreateOrUpdateUserRole(Long targetUserId, List<String> roleList) {
 
-        //如果是超级管理员，可以分配任何角色
-        RbacUserInfo<String> userInfo = authService.getUserInfo();
+        boolean ok = rbacService.canAssignRole(targetUserId, roleList, (roleCode, info) -> {
+            throw new AuthorizationException("role-" + roleCode, "分配角色(" + roleCode + ")失败，请检查是否拥有角色所需的权限," + info);
+        });
 
-        if (userInfo.isSuperAdmin()) {
-            return;
+        if (!ok) {
+            throw new AuthorizationException("role", "分配角色失败，请检查是否拥有角色所需的权限");
         }
-
-        //如果有超级角色，需要检查当前用户，是否是超管
-        if (roleList != null
-                && roleList.stream().map(StringUtils::trimAllWhitespace)
-                .noneMatch(role -> userInfo.getRoleList().contains(role))) {
-            throw new AuthorizationException("role", "无权操作的角色");
-        }
-
     }
 
     /**
@@ -133,7 +132,7 @@ public class UserController extends BaseController {
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     public ApiResp<Long> create(@RequestBody CreateUserReq req) {
-        checkUserRole(req.getRoleList(), null);
+        checkCurrentUserCreateOrUpdateUserRole(null, req.getRoleList());
         return ApiResp.ok(userService.create(req));
     }
 
@@ -146,7 +145,7 @@ public class UserController extends BaseController {
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateUserReq> reqList) {
-        reqList.forEach(req -> checkUserRole(req.getRoleList(), null));
+        reqList.forEach(req -> checkCurrentUserCreateOrUpdateUserRole(null, req.getRoleList()));
         return ApiResp.ok(userService.batchCreate(reqList));
     }
 
@@ -170,7 +169,7 @@ public class UserController extends BaseController {
     @PutMapping({""})
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> update(@RequestBody UpdateUserReq req) {
-        checkUserRole(req.getRoleList(), null);
+        checkCurrentUserCreateOrUpdateUserRole(req.getId(), req.getRoleList());
         return ApiResp.ok(checkResult(userService.update(req), UPDATE_ACTION));
     }
 
@@ -180,7 +179,7 @@ public class UserController extends BaseController {
     @PutMapping("/batchUpdate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateUserReq> reqList) {
-        reqList.forEach(req -> checkUserRole(req.getRoleList(), null));
+        reqList.forEach(req -> checkCurrentUserCreateOrUpdateUserRole(req.getId(), req.getRoleList()));
         return ApiResp.ok(checkResult(userService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 

@@ -7,7 +7,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.*;
-import com.levin.commons.utils.JsonStrArrayUtils;
+import com.levin.oak.base.biz.BizRoleService;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.BaseService;
@@ -35,7 +35,6 @@ import org.springframework.util.StringUtils;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
@@ -69,6 +68,9 @@ public class AuthServiceImpl
 
     @Resource
     RoleService roleService;
+
+    @Resource
+    BizRoleService bizRoleService;
 
     @Resource
     MenuResService menuResService;
@@ -272,28 +274,7 @@ public class AuthServiceImpl
 
         auditUser(userInfo);
 
-        return new ArrayList<>(
-                //获取指定用户的权限列表
-                simpleDao.selectFrom(Role.class)
-                        .select(E_Role.permissionList)
-                        .eq(E_Role.enable, true)
-                        .in(E_Role.code, roleList)
-                        //公共角色和自有角色
-                        .or()
-                        .isNull(E_MenuRes.tenantId)
-                        .eq(E_MenuRes.tenantId, userInfo.getTenantId())
-                        .end()
-
-                        .find(String.class)
-                        .parallelStream()
-                        .filter(StringUtils::hasText)
-                        //JSON 转换
-                        .flatMap(json -> (JsonStrArrayUtils.<String>parse(json, null, null)).stream())
-//                .map(json -> (List<ResPermission>) gson.fromJson(json, resPermissionListType))
-                        .filter(StringUtils::hasText)
-                        .collect(Collectors.toSet())
-        );
-
+        return bizRoleService.getRolePermissionList(userInfo.getTenantId(), userInfo.getRoleList());
     }
 
     @Override
@@ -506,7 +487,7 @@ public class AuthServiceImpl
                     .toString());
 
             simpleDao.create(new CreateRoleReq()
-                    .setCode("TEST")
+                    .setCode("R_TEST")
                     .setName("只读测试员")
                     .setOrgDataScope(Role.OrgDataScope.MySelf)
                     .setPermissionList(permissions));

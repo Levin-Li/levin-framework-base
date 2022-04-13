@@ -6,7 +6,6 @@ import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.oak.base.ModuleOption;
-import com.levin.oak.base.entities.E_Org;
 import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.services.BaseService;
@@ -65,10 +64,18 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Override
     public Long create(CreateRoleReq req) {
+
         //不允许创建SA角色
         Assert.isTrue(!RbacRoleObject.SA_ROLE.equalsIgnoreCase(StringUtils.trimAllWhitespace(req.getCode())),
                 "角色编码[" + RbacRoleObject.SA_ROLE + "]已经被系统使用");
+
+        long cnt = simpleDao.countByQueryObj(new QueryRoleReq().setCode(req.getCode()).setTenantId(req.getTenantId()));
+
+        //
+        Assert.isTrue(cnt < 1, "角色编码" + req.getCode() + "已经存在");
+
         Role entity = simpleDao.create(req);
+
         return entity.getId();
     }
 

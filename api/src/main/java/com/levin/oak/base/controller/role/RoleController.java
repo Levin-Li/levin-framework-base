@@ -3,6 +3,7 @@ package com.levin.oak.base.controller.role;
 import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.rbac.AuthorizationException;
+import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.biz.rbac.AuthService;
@@ -17,12 +18,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
@@ -75,7 +78,21 @@ public class RoleController extends BaseController {
     @GetMapping("/query")
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<RoleInfo>> query(QueryRoleReq req, SimplePaging paging) {
-        return ApiResp.ok(roleService.query(req, paging));
+
+        PagingData<RoleInfo> pagingData = roleService.query(req, paging);
+
+        //只过滤出当前用户完全拥有权限的角色
+        if (pagingData.getItems() != null) {
+            //@todo 只过滤出当前用户完全拥有权限的角色
+            pagingData.setItems(
+                    pagingData.getItems().stream()
+                            .filter(roleInfo -> rbacService.canAssignRole(null, roleInfo.getCode(), null))
+                            .collect(Collectors.toList())
+            );
+
+        }
+
+        return ApiResp.ok(pagingData);
     }
 
     /**
@@ -87,7 +104,7 @@ public class RoleController extends BaseController {
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Long> create(@RequestBody CreateRoleReq req) {
-        checkPermissions(req.getCode(), req.getPermissionList());
+        checkCurrentUserCreateOrUpdateRolePermissions(req.getCode(), req.getPermissionList());
         return ApiResp.ok(roleService.create(req));
     }
 
@@ -100,7 +117,7 @@ public class RoleController extends BaseController {
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateRoleReq> reqList) {
-        reqList.stream().forEach(req -> checkPermissions(req.getCode(), req.getPermissionList()));
+        reqList.stream().forEach(req -> checkCurrentUserCreateOrUpdateRolePermissions(req.getCode(), req.getPermissionList()));
         return ApiResp.ok(roleService.batchCreate(reqList));
     }
 
@@ -123,7 +140,7 @@ public class RoleController extends BaseController {
     @PutMapping({""})
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> update(@RequestBody UpdateRoleReq req) {
-        checkPermissions(null, req.getPermissionList());
+        checkCurrentUserCreateOrUpdateRolePermissions(null, req.getPermissionList());
         return ApiResp.ok(checkResult(roleService.update(req), UPDATE_ACTION));
     }
 
@@ -133,7 +150,7 @@ public class RoleController extends BaseController {
     @PutMapping("/batchUpdate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateRoleReq> reqList) {
-        reqList.stream().forEach(req -> checkPermissions(null, req.getPermissionList()));
+        reqList.stream().forEach(req -> checkCurrentUserCreateOrUpdateRolePermissions(null, req.getPermissionList()));
         return ApiResp.ok(checkResult(roleService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
@@ -164,16 +181,27 @@ public class RoleController extends BaseController {
      *
      * @param permissionList
      */
-    protected void checkPermissions(String roleCode, List<String> permissionList) {
+    protected void checkCurrentUserCreateOrUpdateRolePermissions(String roleCode, List<String> permissionList) {
 
-        Assert.isTrue(roleCode == null || roleCode.startsWith("R_"), "角色Code必须以 R_ 开头");
+        Assert.isTrue(roleCode == null || roleCode.startsWith("R_"), "角色编码必须以 R_ 开头");
+        Assert.isTrue(roleCode == null || !roleCode.equals(RbacRoleObject.SA_ROLE), "角色编码 R_SA 不可使用");
 
-        Object loginUserId = authService.getLoginUserId();
+        if (StringUtils.hasText(roleCode)) {
+            //@todo 检查角色编码是否已经存在
+        }
 
-        boolean isAuthorized = rbacService.isAuthorized(authService.getRoleList(loginUserId), authService.getPermissionList(loginUserId), permissionList);
+        if (permissionList == null || permissionList.isEmpty()) {
+            return;
+        }
+
+//        Object loginUserId = authService.getLoginUserId();
+
+        boolean isAuthorized = rbacService.isAuthorized(permissionList, (rp, info) -> {
+            throw new AuthorizationException("role-" + roleCode, "未授权的资源：" + rp);
+        });
 
         if (!isAuthorized) {
-            throw new AuthorizationException("role", "非法引用未授权的权限");
+            throw new AuthorizationException("role-" + roleCode, "角色非法使用未授权的资源");
         }
 
     }

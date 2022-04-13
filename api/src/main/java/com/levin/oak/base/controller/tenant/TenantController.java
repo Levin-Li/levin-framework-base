@@ -1,29 +1,26 @@
 package com.levin.oak.base.controller.tenant;
 
+import com.levin.commons.dao.support.PagingData;
+import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.controller.BaseController;
+import com.levin.oak.base.entities.E_Tenant;
+import com.levin.oak.base.services.tenant.TenantService;
+import com.levin.oak.base.services.tenant.info.TenantInfo;
+import com.levin.oak.base.services.tenant.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.util.*;
-import javax.validation.*;
-import java.util.*;
 
-import javax.servlet.http.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import javax.validation.constraints.*;
-
-import com.levin.oak.base.controller.*;
-import com.levin.oak.base.*;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.tenant.*;
-import com.levin.oak.base.services.tenant.req.*;
-import com.levin.oak.base.services.tenant.info.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
@@ -51,11 +48,11 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 //默认需要权限访问
 
-@ResAuthorize(domain = ID, type = SYS_TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
+@ResAuthorize(domain = ID, type = "平台" + TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
 @Tag(name = E_Tenant.BIZ_NAME, description = E_Tenant.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class TenantController extends BaseController{
+public class TenantController extends BaseController {
 
     private static final String BIZ_NAME = E_Tenant.BIZ_NAME;
 
@@ -65,13 +62,13 @@ public class TenantController extends BaseController{
     /**
      * 分页查找
      *
-     * @param req  QueryTenantReq
-     * @return  ApiResp<PagingData<TenantInfo>>
+     * @param req QueryTenantReq
+     * @return ApiResp<PagingData < TenantInfo>>
      */
     @GetMapping("/query")
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<TenantInfo>> query(QueryTenantReq req , SimplePaging paging) {
-        return ApiResp.ok(tenantService.query(req,paging));
+    public ApiResp<PagingData<TenantInfo>> query(QueryTenantReq req, SimplePaging paging) {
+        return ApiResp.ok(tenantService.query(req, paging));
     }
 
     /**
@@ -99,37 +96,39 @@ public class TenantController extends BaseController{
     }
 
     /**
-    * 查看详情
-    *
-    * @param req QueryTenantByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QueryTenantByIdReq
+     */
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<TenantInfo> retrieve(@NotNull TenantIdReq req) {
-         return ApiResp.ok(tenantService.findById(req));
-     }
+        return ApiResp.ok(tenantService.findById(req));
+    }
 
     /**
      * 更新
+     *
      * @param req UpdateTenantReq
      */
-     @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> update(@RequestBody UpdateTenantReq req) {
-         return ApiResp.ok(checkResult(tenantService.update(req), UPDATE_ACTION));
+    @PutMapping({""})
+    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> update(@RequestBody UpdateTenantReq req) {
+        return ApiResp.ok(checkResult(tenantService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateTenantReq> reqList) {
+    @PutMapping("/batchUpdate")
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateTenantReq> reqList) {
         return ApiResp.ok(checkResult(tenantService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
      * 删除
+     *
      * @param req TenantIdReq
      */
     @DeleteMapping({""})
@@ -140,6 +139,7 @@ public class TenantController extends BaseController{
 
     /**
      * 批量删除
+     *
      * @param req DeleteTenantReq
      */
     @DeleteMapping({"/batchDelete"})
@@ -150,6 +150,7 @@ public class TenantController extends BaseController{
 
     /**
      * 检查结果
+     *
      * @param n
      * @param action
      * @return
