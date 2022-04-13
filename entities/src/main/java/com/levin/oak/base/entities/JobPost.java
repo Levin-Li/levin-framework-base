@@ -30,12 +30,11 @@ import javax.persistence.*;
                 @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
         }
 
-//        ,
-//
-//        uniqueConstraints = {
-//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_JobPost.code}),
-//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_MultiTenantNamedEntity.name}),
-//        }
+        ,
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_JobPost.code}),
+                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_MultiTenantNamedEntity.name}),
+        }
 )
 
 public class JobPost

@@ -42,7 +42,8 @@ import javax.persistence.*;
         }
         ,
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {E_Org.tenantId, E_Org.name}),
+                @UniqueConstraint(columnNames = {E_Org.tenantId, E_Org.parentId, E_Org.name}),
+                @UniqueConstraint(columnNames = {E_Org.tenantId, E_Org.parentId, E_Org.code}),
         }
 )
 
@@ -89,7 +90,6 @@ public class Org
     protected Long id;
 
     @Schema(description = "租户ID")
-
     protected String tenantId;
 
     @Schema(description = "编码", title = "对于公司是统一信用码")

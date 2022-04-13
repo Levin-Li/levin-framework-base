@@ -32,11 +32,12 @@ import javax.persistence.*;
                 @Index(columnList = E_Setting.groupName),
         }
 
-//        ,
-//
-//        uniqueConstraints = {
-//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Setting.code}),
-//        }
+        //如果同一个租户下重复的设置项目
+        ,
+
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Setting.code}),
+        }
 )
 public class Setting
         extends MultiTenantNamedEntity {

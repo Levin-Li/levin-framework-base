@@ -49,7 +49,6 @@ import java.util.UUID;
         @Index(columnList = E_Tenant.encryptKey),
         @Index(columnList = E_Tenant.appId),
 }
-
         ,
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {

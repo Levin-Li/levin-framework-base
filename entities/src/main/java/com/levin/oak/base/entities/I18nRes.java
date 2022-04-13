@@ -28,12 +28,13 @@ import javax.persistence.*;
                 @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
                 @Index(columnList = E_I18nRes.category),
                 @Index(columnList = E_I18nRes.lang),
+                @Index(columnList = E_I18nRes.label),
         }
-//        ,
-//        uniqueConstraints = {
+        ,
+        uniqueConstraints = {
 //                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Dict.code}),
-//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_MultiTenantNamedEntity.name}),
-//        }
+//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_I18nRes.label}),
+        }
 )
 public class I18nRes
         extends MultiTenantNamedEntity {
@@ -56,7 +57,6 @@ public class I18nRes
     @Column(nullable = false, length = 768)
     @Contains
     String label;
-
 
     @Override
     @PrePersist
