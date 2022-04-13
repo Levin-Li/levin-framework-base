@@ -529,29 +529,39 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         //清除临时
         cacheMap2.clear();
 
-        //清除没有权限的菜单
-        cacheMap.forEach((k, v) -> clearTree(cacheMap, v.getChildren()));
 
         return cacheMap.values().parallelStream()
+                .filter(Objects::nonNull)
                 .filter(m -> m.getParentId() == null)
                 .filter(m -> m.getChildren() != null && !m.getChildren().isEmpty())
+                .map(m -> clearTree(cacheMap, m))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 
-    private void clearTree(Map<Long, MenuResInfo> cacheMap, Collection<MenuResInfo> children) {
+    /**
+     * 清除没有权限的菜单
+     *
+     * @param cacheMap
+     * @param menuResInfo
+     * @return
+     */
+    private MenuResInfo clearTree(Map<Long, MenuResInfo> cacheMap, MenuResInfo menuResInfo) {
 
-        if (children == null) {
-            return;
+        if (menuResInfo == null || menuResInfo.getChildren() == null) {
+            return menuResInfo;
         }
 
-        for (MenuResInfo child : new ArrayList<>(children)) {
+        for (MenuResInfo child : new ArrayList<>(menuResInfo.getChildren())) {
 
             if (!cacheMap.containsKey(child.getId())) {
-                children.remove(child);
+                menuResInfo.getChildren().remove(child);
             }
 
-            clearTree(cacheMap, child.getChildren());
+            clearTree(cacheMap, child);
         }
+
+        return menuResInfo;
     }
 
     /**
