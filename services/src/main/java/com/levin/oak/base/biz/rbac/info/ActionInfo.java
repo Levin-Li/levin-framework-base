@@ -12,7 +12,7 @@ import lombok.experimental.FieldNameConstants;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "id")
-@ToString
+
 @Accessors(chain = true)
 @FieldNameConstants
 public class ActionInfo
@@ -21,4 +21,8 @@ public class ActionInfo
     @Schema(description = "完整表达式")
     String permissionExpr;
 
+    @Override
+    public String toString() {
+        return permissionExpr;
+    }
 }
