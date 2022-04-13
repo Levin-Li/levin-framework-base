@@ -500,9 +500,6 @@ public class RbacServiceImpl extends BaseService implements RbacService {
             parent.getChildren().add(menu);
         }
 
-        //清除临时
-        cacheMap2.clear();
-
         ///////////////////////////////////////////////////////////////////////////
         //过滤出有权限的菜单，或是设置为enable = false
 
@@ -528,6 +525,9 @@ public class RbacServiceImpl extends BaseService implements RbacService {
                 MenuResInfo menuResInfo = cacheMap.remove(entry.getKey());
             }
         }
+
+        //清除临时
+        cacheMap2.clear();
 
         //清除没有权限的菜单
         cacheMap.forEach((k, v) -> clearTree(cacheMap, v.getChildren()));
