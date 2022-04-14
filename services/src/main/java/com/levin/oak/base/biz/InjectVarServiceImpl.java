@@ -153,6 +153,11 @@ public class InjectVarServiceImpl implements InjectVarService {
                 }
             }
 
+            //除了超管，其它用户必须要归属于指定的租户
+            if (!userInfo.isSuperAdmin() && tenantInfo == null) {
+                throw new AccessDeniedException("非法的无租户用户");
+            }
+
             builder.put(InjectConsts.USER_ID, userInfo.getId())
                     .put(InjectConsts.USER_NAME, userInfo.getName())
                     .put(InjectConsts.USER, userInfo)

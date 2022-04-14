@@ -4,6 +4,7 @@ import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizRoleService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
@@ -69,6 +70,9 @@ public class UserController extends BaseController {
 
     @Resource
     BizRoleService bizRoleService;
+
+    @Resource
+    FrameworkProperties frameworkProperties;
 
     /**
      * 信息脱敏

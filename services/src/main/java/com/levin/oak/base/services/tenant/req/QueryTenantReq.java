@@ -207,6 +207,8 @@ public class QueryTenantReq extends BaseReq {
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据
+
+
     }
 
 }

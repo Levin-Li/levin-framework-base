@@ -5,6 +5,7 @@ import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.Ignore;
 import com.levin.commons.dao.annotation.IsNull;
 import com.levin.commons.dao.annotation.logic.OR;
+import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.domain.ServiceReq;
 import com.levin.commons.service.support.InjectConsts;
@@ -41,18 +42,19 @@ public class LoginReq implements ServiceReq {
 
     private static final long serialVersionUID = -445263479L;
 
-    @Schema(description = "登录名/手机号/邮箱")
+    @Schema(description = "登录名/手机号/邮箱", required = true)
+    @NotBlank
     @OR(autoClose = true)
     @Eq(E_User.loginName)
     @Eq(E_User.telephone)
     @Eq(E_User.email)
-    @NotBlank
-    private String account;
+    @OrderBy(E_User.id)//排序
+    protected String account;
 
-    @Schema(description = "登录密码")
-    @Eq(require = true)
+    @Schema(description = "登录密码", required = true)
     @NotBlank
-    private String password;
+    @Eq(require = true)
+    protected String password;
 
     @Schema(description = "租户ID", hidden = true)
     @InjectVar(isRequired = "false")
@@ -60,7 +62,7 @@ public class LoginReq implements ServiceReq {
     @OR(autoClose = true, condition = "#tenantBindDomainEnable")
     @IsNull
     @Eq
-    private String tenantId;
+    protected String tenantId;
 
 //    @Schema(description = "验证码")
 //    @Ignore
@@ -69,10 +71,10 @@ public class LoginReq implements ServiceReq {
     @Schema(description = "客户端类型", hidden = true)
     @Ignore
     @InjectVar(InjectConsts.USER_AGENT)
-    private String ua;
+    protected String ua;
 
     @Schema(description = "客户端类型", hidden = true)
     @Ignore
-    private String clientType;
+    protected String clientType;
 
 }

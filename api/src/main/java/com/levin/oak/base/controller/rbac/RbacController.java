@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -83,6 +84,27 @@ public class RbacController extends BaseController {
         return ApiResp.ok(new LoginInfo()
                 .setAccessToken(accessToken)
                 .setUserInfo(authService.getUserInfo())
+        );
+    }
+
+    @PostMapping("{tenantId}/login")
+    @Operation(tags = {"授权管理"}, summary = "用户登录-租户登录入口")
+    @ResAuthorize(ignored = true)
+    public ApiResp<LoginInfo> loginByTenantId(String account, String password, @PathVariable String tenantId, @RequestHeader(value = "user-agent") String ua) {
+
+        Assert.hasText(account, "帐号不能为空");
+        Assert.hasText(password, "密码不能为空");
+        Assert.hasText(tenantId, "租户不能为空");
+
+        TenantInfo tenantInfo = bizTenantService.getTenantInfo(tenantId);
+
+        Assert.notNull(tenantInfo, "租户不存在");
+
+        return login(new LoginReq()
+                .setAccount(account)
+                .setPassword(password)
+                .setUa(ua)
+                .setTenantId(tenantId)
         );
     }
 

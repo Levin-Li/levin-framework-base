@@ -4,9 +4,11 @@ import cn.dev33.satoken.exception.IdTokenInvalidException;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
+import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.*;
+import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizRoleService;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
 import com.levin.oak.base.entities.*;
@@ -80,6 +82,10 @@ public class AuthServiceImpl
 
     @Resource
     TenantService tenantService;
+
+
+    @Resource
+    FrameworkProperties frameworkProperties;
 
     @PostConstruct
     public void init() {
@@ -378,11 +384,17 @@ public class AuthServiceImpl
 
     private void initUser() {
 
-        QueryTenantReq req = new QueryTenantReq().setContainsDomainList(Arrays.asList("127.0.0.1"));
+        QueryTenantReq req = new QueryTenantReq().setOrderBy(E_Tenant.id).setOrderDir(OrderBy.Type.Asc);
+
+        //如果允许域名
+        if (frameworkProperties.getTenantBindDomain().isEnable()) {
+            req.setContainsDomainList(Arrays.asList("127.0.0.1"));
+        }
 
         TenantInfo tenantInfo = tenantService.findOne(req);
 
         if (tenantInfo == null) {
+
             String id = tenantService.create(new CreateTenantReq()
                     .setName("默认租户")
                     .setRemark("支持本地地址")
