@@ -45,14 +45,14 @@ import java.util.Date;
 
         ,
         uniqueConstraints = {
+
                 @UniqueConstraint(columnNames = {E_User.tenantId, E_User.telephone}),
-                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.loginName}),
                 @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
         }
 )
 public class User
         extends AbstractBaseEntityObject
-        implements OrganizedObject,  MultiTenantObject {
+        implements OrganizedObject, MultiTenantObject {
 
     public enum State {
         @Schema(description = "正常")
@@ -93,20 +93,16 @@ public class User
     @Column(length = 64)
     String tenantId;
 
-    @Schema(description = "登录名")
-    @Column(length = 64)
-    String loginName;
-
     @Schema(description = "登录密码")
     @Column(length = 256)
     String password;
 
-    @Schema(description = "手机号")
+    @Schema(description = "手机号-可做为登录帐号")
     @Column(length = 20)
     @Contains
     String telephone;
 
-    @Schema(description = "邮箱")
+    @Schema(description = "邮箱-可做为登录帐号")
     @Column(length = 32)
     String email;
 

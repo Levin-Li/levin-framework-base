@@ -65,10 +65,6 @@ public class UpdateUserReq extends MultiTenantReq {
     @Eq(condition ="!#user.isSuperAdmin()")
     final boolean eqEditable = true;
 
-    @Size(max = 64)
-    @Schema(description = "登录名")
-    private String loginName;
-
     @Size(max = 256)
     @Schema(description = "登录密码")
     private String password;

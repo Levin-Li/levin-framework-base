@@ -66,12 +66,6 @@ public class QueryUserReq extends MultiTenantReq {
     private Long id;
 
 
-    //@Size(max = 64)
-
-    @Schema(description = "登录名")
-    private String loginName;
-
-
     //@Size(max = 256)
 
     @Schema(description = "登录密码")
@@ -79,7 +73,6 @@ public class QueryUserReq extends MultiTenantReq {
 
 
     //@Size(max = 20)
-
     @Schema(description = "手机号")
     private String telephone;
 

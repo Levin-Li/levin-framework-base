@@ -70,10 +70,6 @@ public class StatUserReq extends MultiTenantReq{
     @Schema(description = "id")
      Long id;
 
-    //@Size(max = 64)
-
-    @Schema(description = "登录名")
-     String loginName;
 
     //@Size(max = 256)
 

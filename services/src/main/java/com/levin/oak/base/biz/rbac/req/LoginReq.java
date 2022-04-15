@@ -45,7 +45,6 @@ public class LoginReq implements ServiceReq {
     @Schema(description = "登录名/手机号/邮箱", required = true)
     @NotBlank
     @OR(autoClose = true)
-    @Eq(E_User.loginName)
     @Eq(E_User.telephone)
     @Eq(E_User.email)
     @OrderBy(E_User.id)//排序

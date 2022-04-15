@@ -54,10 +54,6 @@ public class CreateUserReq extends MultiTenantReq {
     private static final long serialVersionUID = -445263479L;
 
 
-    @Schema(description = "登录名"  )
-    @Size(max = 64)
-    private String loginName;
-
     @Schema(description = "登录密码"  )
     @Size(max = 256)
     private String password;

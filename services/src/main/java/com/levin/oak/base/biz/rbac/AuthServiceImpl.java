@@ -200,11 +200,10 @@ public class AuthServiceImpl
 
     public String loginByPassword(LoginReq req) {
 
-        if (!StringUtils.hasText(req.getAccount())
-                || !StringUtils.hasText(req.getPassword())) {
-            throw new AuthorizationException("account", "请输入正确的帐号或密码");
-        }
+        Assert.hasText(req.getAccount(), "请输入登录帐号");
+        Assert.hasText(req.getPassword(), "请输入密码");
 
+        //存在多个用户的情况
         UserInfo user = simpleDao.findOneByQueryObj(
                 //密码加密
                 req.setPassword(encryptPassword(req.getPassword()))
@@ -213,7 +212,6 @@ public class AuthServiceImpl
         auditUser(user);
 
         return auth(user.getId().toString(), req.getUa());
-
     }
 
     /**
@@ -227,7 +225,7 @@ public class AuthServiceImpl
     public UserInfo auditUser(UserInfo user) throws AuthorizationException {
 
         if (user == null) {
-            throw new IllegalArgumentException("1帐号或密码错误");
+            throw new IllegalArgumentException("1帐号不存在");
         }
 
         if (!user.getEnable()
@@ -522,7 +520,7 @@ public class AuthServiceImpl
         roleList.add(RbacRoleObject.SA_ROLE);
 
         simpleDao.create(new CreateUserReq()
-                .setLoginName("sa")
+                .setEmail("sa")
                 .setPassword(encryptPassword("123456"))
                 .setName("超级管理员")
                 .setEditable(false)
@@ -536,7 +534,7 @@ public class AuthServiceImpl
         roleList.add(RbacRoleObject.ADMIN_ROLE);
 
         simpleDao.create(new CreateUserReq()
-                .setLoginName("admin")
+                .setEmail("admin")
                 .setPassword(encryptPassword("123456"))
                 .setName("管理员")
                 .setStaffNo("9999")
@@ -551,7 +549,7 @@ public class AuthServiceImpl
         roleList.add("test");
 
         simpleDao.create(new CreateUserReq()
-                .setLoginName("test")
+                .setEmail("test")
                 .setPassword(encryptPassword("123456"))
                 .setName("只读测试员")
                 .setStaffNo("8888")
