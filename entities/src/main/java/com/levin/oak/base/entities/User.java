@@ -33,7 +33,6 @@ import java.util.Date;
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
                 @Index(columnList = E_User.tenantId),
                 @Index(columnList = E_User.staffNo),
-                @Index(columnList = E_User.loginName),
                 @Index(columnList = E_User.telephone),
                 @Index(columnList = E_User.email),
                 @Index(columnList = E_User.state),

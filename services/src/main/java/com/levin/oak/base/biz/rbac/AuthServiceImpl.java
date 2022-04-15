@@ -508,7 +508,7 @@ public class AuthServiceImpl
 
         User user = simpleDao.selectFrom(User.class)
                 .isNull(E_User.tenantId)
-                .eq(E_User.loginName, "sa")
+                .eq(E_User.email, "sa")
                 .findOne();
 
         if (user != null) {
@@ -521,6 +521,7 @@ public class AuthServiceImpl
 
         simpleDao.create(new CreateUserReq()
                 .setEmail("sa")
+                .setTelephone("18895279527")
                 .setPassword(encryptPassword("123456"))
                 .setName("超级管理员")
                 .setEditable(false)
@@ -540,7 +541,6 @@ public class AuthServiceImpl
                 .setStaffNo("9999")
                 .setRoleList(roleList)
                 .setTenantId(tenantInfo.getId())
-
         );
 
         ///////////////////////////////////////////////////
