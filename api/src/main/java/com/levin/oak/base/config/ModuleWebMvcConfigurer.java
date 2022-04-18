@@ -17,6 +17,8 @@ import org.springframework.web.servlet.config.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
 
@@ -114,16 +116,18 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //            SaRouter.match("/comment/**", r -> StpUtil.checkPermission("comment"));
 //        })).addPathPatterns("/**");
 
-
         //清除缓存
         registry.addInterceptor(new DomainInterceptor((domain) -> injectVarService.clearCache(), (className) -> true))
                 .addPathPatterns("/**")
                 .order(Ordered.HIGHEST_PRECEDENCE + 1000);
 
+
         if (frameworkProperties.getTenantBindDomain().isEnable()) {
 
             HandlerInterceptor handlerInterceptor = new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)
                     , (className) -> frameworkProperties.getTenantBindDomain().isPackageMatched(className));
+
+            List<String> includePathPatterns = frameworkProperties.getTenantBindDomain().getIncludePathPatterns();
 
             registry.addInterceptor(handlerInterceptor)
                     .excludePathPatterns(serverProperties.getError().getPath())
@@ -131,7 +135,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
                     .excludePathPatterns("/" + openApiPath)
                     .excludePathPatterns(frameworkProperties.getTenantBindDomain().getExcludePathPatterns())
-                    .addPathPatterns("/**")
+                    .addPathPatterns(includePathPatterns.isEmpty() ? Arrays.asList("/**") : includePathPatterns)
                     .order(Ordered.HIGHEST_PRECEDENCE + 2000);
         }
 
@@ -140,13 +144,15 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
             HandlerInterceptor handlerInterceptor = new AuthorizeAnnotationInterceptor(rbacService
                     , (className) -> frameworkProperties.getAcl().isPackageMatched(className));
 
+            List<String> includePathPatterns = frameworkProperties.getAcl().getIncludePathPatterns();
+
             registry.addInterceptor(handlerInterceptor)
                     .excludePathPatterns(serverProperties.getError().getPath())
                     .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
                     .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
                     .excludePathPatterns("/" + openApiPath)
                     .excludePathPatterns(frameworkProperties.getAcl().getExcludePathPatterns())
-                    .addPathPatterns("/**")
+                    .addPathPatterns(includePathPatterns.isEmpty() ? Arrays.asList("/**") : includePathPatterns)
                     .order(Ordered.HIGHEST_PRECEDENCE + 3000);
         }
 
