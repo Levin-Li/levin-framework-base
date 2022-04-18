@@ -171,17 +171,6 @@ public class ModuleSwaggerConfigurer implements ModelPropertyBuilderPlugin, WebM
         }
 
         BeanPropertyDefinition pd = definition.get();
-
-        Annotation[] annotations = {};
-
-        if (pd.hasGetter()) {
-            annotations = pd.getGetter().getAnnotated().getDeclaredAnnotations();
-        } else if (pd.hasField()) {
-            annotations = pd.getField().getAnnotated().getAnnotations();
-        } else {
-            return;
-        }
-
         //
 
         final Class<?> enumType = pd.getRawPrimaryType();
@@ -202,6 +191,18 @@ public class ModuleSwaggerConfigurer implements ModelPropertyBuilderPlugin, WebM
             specificationBuilder.enumerationFacet(builder -> {
                 builder.allowedValues(allowableListValues);
             });
+        }
+
+        /////////////////////////////////////////////////////////////////////
+
+        Annotation[] annotations = {};
+
+        if (pd.hasGetter()) {
+            annotations = pd.getGetter().getAnnotated().getDeclaredAnnotations();
+        } else if (pd.hasField()) {
+            annotations = pd.getField().getAnnotated().getAnnotations();
+        } else {
+            return;
         }
 
         Optional<Annotation> optionalAnnotation = Arrays.stream(annotations).filter(annotation -> annotation instanceof Schema).findFirst();
