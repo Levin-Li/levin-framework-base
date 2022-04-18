@@ -180,7 +180,7 @@ public class ModuleSwaggerConfigurer implements ModelPropertyBuilderPlugin, WebM
         ) {
 
             final List<String> displayValues = Arrays.stream((Enum[]) enumType.getEnumConstants())
-                    .map(e -> e.name() + " -- " + ((EnumDesc) e).getDesc() + " ")
+                    .map(e -> e.name() + " -- " + ((EnumDesc) e).getDesc() + "")
                     .collect(Collectors.toList());
 
             final AllowableListValues allowableListValues = new AllowableListValues(displayValues, enumType.getTypeName());
