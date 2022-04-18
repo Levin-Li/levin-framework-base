@@ -5,6 +5,7 @@ import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.SignatureReq;
 import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -15,10 +16,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.builders.RequestParameterBuilder;
+import springfox.documentation.builders.*;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.schema.ScalarType;
 import springfox.documentation.service.*;
@@ -29,10 +27,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.lang.annotation.Annotation;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -71,6 +67,9 @@ public class ModuleSwaggerConfigurer implements ModelPropertyBuilderPlugin, WebM
 
     @Resource
     Environment environment;
+
+
+    private final WeakHashMap<String, ?> tempCache = new WeakHashMap<>();
 
     private static final String GROUP_NAME = ModuleOption.NAME + "-" + ModuleOption.ID;
 
@@ -171,24 +170,51 @@ public class ModuleSwaggerConfigurer implements ModelPropertyBuilderPlugin, WebM
             return;
         }
 
-        final Class<?> enumType = definition.get().getRawPrimaryType();
+        BeanPropertyDefinition pd = definition.get();
+
+        Annotation[] annotations = {};
+
+        if (pd.hasGetter()) {
+            annotations = pd.getGetter().getAnnotated().getDeclaredAnnotations();
+        } else if (pd.hasField()) {
+            annotations = pd.getField().getAnnotated().getAnnotations();
+        } else {
+            return;
+        }
+
+        //
+
+        final Class<?> enumType = pd.getRawPrimaryType();
+
+        final PropertySpecificationBuilder specificationBuilder = context.getSpecificationBuilder();
 
         //过滤得到目标类型
         if (enumType.isEnum()
                 && EnumDesc.class.isAssignableFrom(enumType)
-              //  && enumType.getName().startsWith(PACKAGE_NAME)
+            //  && enumType.getName().startsWith(PACKAGE_NAME)
         ) {
-
             final List<String> displayValues = Arrays.stream((Enum[]) enumType.getEnumConstants())
                     .map(e -> e.name() + " -- " + ((EnumDesc) e).getDesc() + "")
                     .collect(Collectors.toList());
 
             final AllowableListValues allowableListValues = new AllowableListValues(displayValues, enumType.getTypeName());
 
-            context.getSpecificationBuilder().enumerationFacet(builder -> {
+            specificationBuilder.enumerationFacet(builder -> {
                 builder.allowedValues(allowableListValues);
             });
         }
+
+        Optional<Annotation> optionalAnnotation = Arrays.stream(annotations).filter(annotation -> annotation instanceof Schema).findFirst();
+
+        if (optionalAnnotation.isPresent()) {
+            Schema schema = (Schema) optionalAnnotation.get();
+            if (!schema.title().trim().equals(schema.description().trim())) {
+                //加强描述
+                final String desc = (StringUtils.hasText(schema.title()) ? schema.title() + ", " : "") + schema.description();
+                specificationBuilder.description(desc);
+            }
+        }
+
     }
 
     @Override
