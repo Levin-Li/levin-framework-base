@@ -1,5 +1,7 @@
 package com.levin.oak.base.config;
 
+import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
+import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.SignatureReq;
 import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
@@ -19,11 +21,10 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.RequestParameterBuilder;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.schema.ScalarType;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.service.ParameterType;
-import springfox.documentation.service.RequestParameter;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.schema.ModelPropertyBuilderPlugin;
+import springfox.documentation.spi.schema.contexts.ModelPropertyContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
 import javax.annotation.PostConstruct;
@@ -31,6 +32,8 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
@@ -47,7 +50,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleSwaggerConfigurer", matchIfMissing = true)
 
 @ConditionalOnClass({Docket.class})
-public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
+public class ModuleSwaggerConfigurer implements ModelPropertyBuilderPlugin, WebMvcConfigurer {
 
     public static final String[] SWAGGER_UI_MAPPING_PATHS = {};
 
@@ -157,6 +160,42 @@ public class ModuleSwaggerConfigurer implements WebMvcConfigurer {
                 .version(ModuleOption.VERSION)
                 .build();
     }
+
+
+    @Override
+    public void apply(ModelPropertyContext context) {
+
+        Optional<BeanPropertyDefinition> definition = context.getBeanPropertyDefinition();
+
+        if (!definition.isPresent()) {
+            return;
+        }
+
+        final Class<?> enumType = definition.get().getRawPrimaryType();
+
+        //过滤得到目标类型
+        if (enumType.isEnum()
+                && EnumDesc.class.isAssignableFrom(enumType)
+              //  && enumType.getName().startsWith(PACKAGE_NAME)
+        ) {
+
+            final List<String> displayValues = Arrays.stream((Enum[]) enumType.getEnumConstants())
+                    .map(e -> e.name() + " -- " + ((EnumDesc) e).getDesc() + " ")
+                    .collect(Collectors.toList());
+
+            final AllowableListValues allowableListValues = new AllowableListValues(displayValues, enumType.getTypeName());
+
+            context.getSpecificationBuilder().enumerationFacet(builder -> {
+                builder.allowedValues(allowableListValues);
+            });
+        }
+    }
+
+    @Override
+    public boolean supports(DocumentationType documentationType) {
+        return true;
+    }
+
 
     /**
      * 解决 swagger3   swagger-ui.html 404无法访问的问题
