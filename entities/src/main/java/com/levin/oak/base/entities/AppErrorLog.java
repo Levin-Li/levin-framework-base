@@ -28,6 +28,7 @@ import java.util.Date;
         @Index(columnList = E_AppErrorLog.rootExceptionType),
 })
 @Schema(description = "应用错误日志")
+@Deprecated //一般不建议使用
 public class AppErrorLog implements MultiTenantObject {
 
     @Id
