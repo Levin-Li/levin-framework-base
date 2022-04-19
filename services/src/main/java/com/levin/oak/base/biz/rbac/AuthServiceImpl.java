@@ -252,7 +252,7 @@ public class AuthServiceImpl
         Object loginId = StpUtil.getLoginId();
 
         if (loginId == null) {
-            throw NotLoginException.newInstance("user", "未登录");
+            throw NotLoginException.newInstance("user", NotLoginException.NOT_TOKEN);
         }
 
         return (T) loginId;
