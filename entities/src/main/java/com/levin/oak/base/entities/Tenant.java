@@ -34,7 +34,7 @@ import java.util.UUID;
 @Schema(description = "租户")
 
 //6、必须建立索引
-@Entity(name = EntityConst.PREFIX + "DefaultTenant")
+@Entity(name = EntityConst.PREFIX + "Tenant")
 
 //7、必须建立索引
 @Table(indexes = {
