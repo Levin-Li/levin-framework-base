@@ -197,10 +197,10 @@ public class ModuleSwaggerConfigurer implements ModelPropertyBuilderPlugin, WebM
 
         Annotation[] annotations = {};
 
-        if (pd.hasGetter()) {
-            annotations = pd.getGetter().getAnnotated().getDeclaredAnnotations();
-        } else if (pd.hasField()) {
+        if (pd.hasField()) {
             annotations = pd.getField().getAnnotated().getAnnotations();
+        } else if (pd.hasGetter()) {
+            annotations = pd.getGetter().getAnnotated().getDeclaredAnnotations();
         } else {
             return;
         }

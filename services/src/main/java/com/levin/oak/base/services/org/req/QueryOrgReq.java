@@ -1,49 +1,35 @@
 package com.levin.oak.base.services.org.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.Gte;
 import com.levin.commons.dao.annotation.Ignore;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-
-import com.levin.oak.base.services.org.info.*;
+import com.levin.commons.dao.annotation.Lte;
+import com.levin.commons.dao.annotation.misc.Fetch;
+import com.levin.commons.dao.annotation.order.OrderBy;
+import com.levin.commons.dao.annotation.order.SimpleOrderBy;
+import com.levin.oak.base.entities.E_Org;
 import com.levin.oak.base.entities.Org;
+import com.levin.oak.base.entities.Org.State;
+import com.levin.oak.base.entities.Org.Type;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import com.levin.oak.base.services.org.info.OrgInfo;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import java.util.Date;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.Org.*;
-    import com.levin.oak.base.entities.Area;
-    import com.levin.oak.base.services.area.info.*;
-    import com.levin.oak.base.services.org.info.*;
-    import com.levin.oak.base.entities.Org;
-    import java.util.Set;
-    import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  查询机构
- *  @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ * 查询机构
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
 @Schema(description = "查询机构")
 @Data
@@ -55,7 +41,7 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Org.class, alias = E_Org.ALIAS, resultClass = OrgInfo.class)
-public class QueryOrgReq extends MultiTenantReq{
+public class QueryOrgReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -1399842458L;
 
@@ -83,7 +69,6 @@ public class QueryOrgReq extends MultiTenantReq{
     @Schema(description = "模糊匹配 - 编码")
     @Contains
     private String containsCode;
-
 
 
     @Schema(description = "图标")
@@ -117,7 +102,6 @@ public class QueryOrgReq extends MultiTenantReq{
     @Schema(description = "模糊匹配 - 区域编码")
     @Contains
     private String containsAreaCode;
-
 
 
     @Schema(description = "是否加载所属区域")
@@ -170,7 +154,6 @@ public class QueryOrgReq extends MultiTenantReq{
     private String emails;
 
 
-
     @Schema(description = "联系地址")
     private String address;
 
@@ -185,16 +168,13 @@ public class QueryOrgReq extends MultiTenantReq{
     private String zipCode;
 
 
-
     @Schema(description = "父ID")
     private Long parentId;
-
 
 
     @Schema(description = "是否加载父对象")
     @Fetch(attrs = E_Org.parent, condition = "#_val == true")
     private Boolean loadParent;
-
 
 
     @Schema(description = "是否加载子节点")
@@ -247,8 +227,6 @@ public class QueryOrgReq extends MultiTenantReq{
     private Date lteCreateTime;
 
 
-
-
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
@@ -257,8 +235,6 @@ public class QueryOrgReq extends MultiTenantReq{
     @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteLastUpdateTime;
-
-
 
 
     @Schema(description = "排序代码")

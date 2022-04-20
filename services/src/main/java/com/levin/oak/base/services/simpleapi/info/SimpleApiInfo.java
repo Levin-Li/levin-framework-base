@@ -1,36 +1,31 @@
 package com.levin.oak.base.services.simpleapi.info;
 
 
+import com.levin.oak.base.entities.SimpleApi.Language;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
-import javax.validation.constraints.*;
 
 /////////////////////////////////////////////////////
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.oak.base.entities.*;
-
 ////////////////////////////////////
-import com.levin.oak.base.entities.SimpleApi.*;
-import java.util.Date;
 ////////////////////////////////////
 
 /**
-* 简单动态接口
-* @Author Auto gen by simple-dao-codegen 2022-4-1 17:40:26
-*/
-@Schema(description ="简单动态接口")
+ * 简单动态接口
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-4-1 17:40:26
+ */
+@Schema(description = "简单动态接口")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
@@ -39,102 +34,102 @@ import java.util.Date;
 @FieldNameConstants
 public class SimpleApiInfo implements Serializable {
 
-   private static final long serialVersionUID = 1021385738L;
+    private static final long serialVersionUID = 1021385738L;
 
 
-   @Size(max = 16)
-   @Schema(description = "http方法" )
-   private String methods;
+    @Size(max = 16)
+    @Schema(description = "http方法")
+    private String methods;
 
 
-   @NotNull
-   @Schema(description = "脚本语言" , required = true)
-   private Language language;
+    @NotNull
+    @Schema(description = "脚本语言", required = true)
+    private Language language;
 
 
-   @NotNull
-   @Schema(description = "id" , required = true)
-   private Long id;
+    @NotNull
+    @Schema(description = "id", required = true)
+    private Long id;
 
 
-   @NotBlank
-   @Size(max = 64)
-   @Schema(description = "分类名称" , required = true)
-   private String category;
+    @NotBlank
+    @Size(max = 64)
+    @Schema(description = "分类名称", required = true)
+    private String category;
 
 
-   @NotBlank
-   @Size(max = 64)
-   @Schema(description = "分组名称" , required = true)
-   private String groupName;
+    @NotBlank
+    @Size(max = 64)
+    @Schema(description = "分组名称", required = true)
+    private String groupName;
 
 
-   @NotBlank
-   @Schema(description = "访问路径" , required = true)
-   private String path;
+    @NotBlank
+    @Schema(description = "访问路径", required = true)
+    private String path;
 
 
-   @Schema(description = "内容" )
-   private String content;
+    @Schema(description = "内容")
+    private String content;
 
 
-   @Size(max = 64)
-   @Schema(description = "机构ID" )
-   private String orgId;
+    @Size(max = 64)
+    @Schema(description = "机构ID")
+    private String orgId;
 
 
-   @Size(max = 64)
-   @Schema(description = "租户ID" )
-   private String tenantId;
+    @Size(max = 64)
+    @Schema(description = "租户ID")
+    private String tenantId;
 
 
-   @Size(max = 64)
-   @Schema(description = "系统子域" )
-   private String domain;
+    @Size(max = 64)
+    @Schema(description = "系统子域")
+    private String domain;
 
 
-   @NotBlank
-   @Size(max = 128)
-   @Schema(description = "名称" , required = true)
-   private String name;
+    @NotBlank
+    @Size(max = 128)
+    @Schema(description = "名称", required = true)
+    private String name;
 
 
-   @Size(max = 128)
-   @Schema(description = "拼音，格式：全拼(简拼)" )
-   private String pinyinName;
+    @Size(max = 128)
+    @Schema(description = "拼音，格式：全拼(简拼)")
+    private String pinyinName;
 
 
-   @Size(max = 128)
-   @Schema(description = "创建者" )
-   private String creator;
+    @Size(max = 128)
+    @Schema(description = "创建者")
+    private String creator;
 
 
-   @NotNull
-   @Schema(description = "创建时间" , required = true)
-   private Date createTime;
+    @NotNull
+    @Schema(description = "创建时间", required = true)
+    private Date createTime;
 
 
-   @Schema(description = "更新时间" )
-   private Date lastUpdateTime;
+    @Schema(description = "更新时间")
+    private Date lastUpdateTime;
 
 
-   @Schema(description = "排序代码" )
-   private Integer orderCode;
+    @Schema(description = "排序代码")
+    private Integer orderCode;
 
 
-   @NotNull
-   @Schema(description = "是否允许" , required = true)
-   private Boolean enable;
+    @NotNull
+    @Schema(description = "是否允许", required = true)
+    private Boolean enable;
 
 
-   @NotNull
-   @Schema(description = "是否可编辑" , required = true)
-   private Boolean editable;
+    @NotNull
+    @Schema(description = "是否可编辑", required = true)
+    private Boolean editable;
 
 
-   @Size(max = 512)
-   @Schema(description = "备注" )
-   private String remark;
+    @Size(max = 512)
+    @Schema(description = "备注")
+    private String remark;
 
 
 }

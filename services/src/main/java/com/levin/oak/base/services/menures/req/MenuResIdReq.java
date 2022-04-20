@@ -1,46 +1,32 @@
 package com.levin.oak.base.services.menures.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-
-import com.levin.commons.service.domain.*;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import javax.annotation.*;
-import javax.validation.constraints.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-import com.levin.oak.base.services.menures.info.*;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Eq;
+import com.levin.oak.base.entities.E_MenuRes;
 import com.levin.oak.base.entities.MenuRes;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import com.levin.oak.base.services.menures.info.MenuResInfo;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
+
+import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotNull;
+
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.rbac.MenuItem.*;
-import com.levin.oak.base.entities.MenuRes;
-import com.levin.oak.base.services.menures.info.*;
-import java.util.Set;
-import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  菜单 主键通用请求
-*  //Auto gen by simple-dao-codegen 2022-3-25 17:01:37
-*/
+ * 菜单 主键通用请求
+ * //Auto gen by simple-dao-codegen 2022-3-25 17:01:37
+ */
 
 @Schema(description = "菜单 主键通用请求")
 @Data
 
-    @AllArgsConstructor
+@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
@@ -51,14 +37,14 @@ import java.util.Date;
 @TargetOption(entityClass = MenuRes.class, alias = E_MenuRes.ALIAS, resultClass = MenuResInfo.class)
 public class MenuResIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = -887712701L;
+    private static final long serialVersionUID = -887712701L;
 
 
-    @Schema(description = "id" , required = true)
+    @Schema(description = "id", required = true)
     @Eq(require = true)
     @NotNull
     protected Long id;
-    
+
 
     @PostConstruct
     public void preQuery() {

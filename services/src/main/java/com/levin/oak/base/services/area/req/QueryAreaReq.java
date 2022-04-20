@@ -1,47 +1,31 @@
 package com.levin.oak.base.services.area.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import com.levin.commons.dao.annotation.Ignore;
-
-import com.levin.commons.dao.*;
+import com.levin.commons.dao.TargetOption;
 import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-
-import com.levin.oak.base.services.area.info.*;
+import com.levin.commons.dao.annotation.misc.Fetch;
+import com.levin.commons.dao.annotation.order.OrderBy;
+import com.levin.commons.dao.annotation.order.SimpleOrderBy;
 import com.levin.oak.base.entities.Area;
+import com.levin.oak.base.entities.Area.Type;
+import com.levin.oak.base.entities.E_Area;
+import com.levin.oak.base.services.area.info.AreaInfo;
+import com.levin.oak.base.services.commons.req.BaseReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import java.util.Date;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.Area;
-    import com.levin.oak.base.services.area.info.*;
-    import java.util.Set;
-    import com.levin.oak.base.entities.Area.*;
-    import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  查询区域
- *  @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ * 查询区域
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
 @Schema(description = "查询区域")
 @Data
@@ -53,7 +37,7 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Area.class, alias = E_Area.ALIAS, resultClass = AreaInfo.class)
-public class QueryAreaReq extends BaseReq{
+public class QueryAreaReq extends BaseReq {
 
     private static final long serialVersionUID = -445860277L;
 
@@ -78,7 +62,6 @@ public class QueryAreaReq extends BaseReq{
     private String startsWithCode;
 
 
-
     @Schema(description = "图标")
     private String icon;
 
@@ -89,11 +72,9 @@ public class QueryAreaReq extends BaseReq{
     private String parentCode;
 
 
-
     @Schema(description = "是否加载父区域")
     @Fetch(attrs = E_Area.parent, condition = "#_val == true")
     private Boolean loadParent;
-
 
 
     @Schema(description = "是否加载子区域")
@@ -146,8 +127,6 @@ public class QueryAreaReq extends BaseReq{
     private Date lteCreateTime;
 
 
-
-
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
@@ -156,8 +135,6 @@ public class QueryAreaReq extends BaseReq{
     @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteLastUpdateTime;
-
-
 
 
     @Schema(description = "排序代码")

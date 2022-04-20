@@ -1,41 +1,30 @@
 package com.levin.oak.base.services.appclientfile.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-
-import com.levin.commons.service.domain.*;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Eq;
+import com.levin.commons.dao.annotation.update.Update;
 import com.levin.oak.base.entities.AppClientFile;
-import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.E_AppClientFile;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import java.util.Date;
 ////////////////////////////////////
 
 
 /**
- *  更新客户端文件
- *  Auto gen by simple-dao-codegen 2022-4-20 10:49:23
+ * 更新客户端文件
+ * Auto gen by simple-dao-codegen 2022-4-20 10:49:23
  */
 @Schema(description = "更新客户端文件")
 @Data
@@ -53,13 +42,13 @@ public class UpdateAppClientFileReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -1155395350L;
 
-    @Schema(description = "id" , required = true)
+    @Schema(description = "id", required = true)
     @NotNull
     @Eq(require = true)
     Long id;
 
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition = "!#user.isSuperAdmin()")
     final boolean eqEditable = true;
 
 
@@ -111,11 +100,12 @@ public class UpdateAppClientFileReq extends MultiTenantReq {
     public UpdateAppClientFileReq(Long id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preUpdate() {
         //@todo 更新之前初始化数据
 
-        if(getLastUpdateTime() == null){
+        if (getLastUpdateTime() == null) {
             setLastUpdateTime(new Date());
         }
     }

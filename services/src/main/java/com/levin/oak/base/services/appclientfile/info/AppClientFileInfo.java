@@ -1,37 +1,31 @@
 package com.levin.oak.base.services.appclientfile.info;
 
 
+import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
-import javax.validation.constraints.*;
 
 /////////////////////////////////////////////////////
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.oak.base.entities.*;
-
 ////////////////////////////////////
-import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import java.util.Date;
 ////////////////////////////////////
 
 /**
-* 客户端文件
-* @Author Auto gen by simple-dao-codegen 2022-4-20 10:49:23
-*/
-@Schema(description ="客户端文件")
+ * 客户端文件
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-4-20 10:49:23
+ */
+@Schema(description = "客户端文件")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor

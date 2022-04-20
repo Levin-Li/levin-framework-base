@@ -1,39 +1,30 @@
 package com.levin.oak.base.services.apperrorlog.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-
-import com.levin.commons.service.domain.*;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Eq;
+import com.levin.commons.dao.annotation.update.Update;
 import com.levin.oak.base.entities.AppErrorLog;
-import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.E_AppErrorLog;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 ////////////////////////////////////
 //自动导入列表
-import java.util.Date;
 ////////////////////////////////////
 
 
 /**
- *  更新应用错误日志
- *  Auto gen by simple-dao-codegen 2022-3-29 22:58:02
+ * 更新应用错误日志
+ * Auto gen by simple-dao-codegen 2022-3-29 22:58:02
  */
 @Schema(description = "更新应用错误日志")
 @Data
@@ -51,7 +42,7 @@ public class UpdateAppErrorLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1594864095L;
 
-    @Schema(description = "id" , required = true)
+    @Schema(description = "id", required = true)
     @NotNull
     @Eq(require = true)
     private Long id;
@@ -81,6 +72,7 @@ public class UpdateAppErrorLogReq extends MultiTenantReq {
     public UpdateAppErrorLogReq(Long id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preUpdate() {
         //@todo 更新之前初始化数据

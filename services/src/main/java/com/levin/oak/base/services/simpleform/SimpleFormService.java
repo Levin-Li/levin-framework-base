@@ -1,28 +1,24 @@
 package com.levin.oak.base.services.simpleform;
 
 
-import io.swagger.v3.oas.annotations.*;
-import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.cache.annotation.*;
-import java.util.*;
-import javax.validation.constraints.*;
-
-import com.levin.commons.dao.support.*;
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.*;
-
-import com.levin.oak.base.entities.*;
+import com.levin.commons.dao.Paging;
+import com.levin.commons.dao.support.PagingData;
+import com.levin.oak.base.entities.E_SimpleForm;
+import com.levin.oak.base.services.simpleform.info.SimpleFormInfo;
 import com.levin.oak.base.services.simpleform.req.*;
-import com.levin.oak.base.services.simpleform.info.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
-import com.levin.oak.base.*;
-import com.levin.oak.base.entities.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+
 import static com.levin.oak.base.entities.EntityConst.*;
 
 
 /**
- *  简单表单-服务接口
- *  @author Auto gen by simple-dao-codegen 2022-4-2 19:44:59
+ * 简单表单-服务接口
+ *
+ * @author Auto gen by simple-dao-codegen 2022-4-2 19:44:59
  */
 @Tag(name = E_SimpleForm.BIZ_NAME, description = E_SimpleForm.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimpleFormService {
@@ -31,6 +27,7 @@ public interface SimpleFormService {
 
     /**
      * 创建记录，返回主键ID
+     *
      * @param req
      * @return pkId 主键ID
      */
@@ -39,6 +36,7 @@ public interface SimpleFormService {
 
     /**
      * 创建记录，返回主键ID列表
+     *
      * @param reqList
      * @return pkId 主键ID列表
      */
@@ -47,6 +45,7 @@ public interface SimpleFormService {
 
     /**
      * 通过主键查找记录，建议在服务内部调用，不要在控制器中调用
+     *
      * @param id 主键ID
      * @return data 数据详情
      */
@@ -54,10 +53,11 @@ public interface SimpleFormService {
     SimpleFormInfo findById(@NotNull Long id);
 
     /**
-    * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性
-    * @param req
-    * @return data 数据详情
-    */
+     * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性
+     *
+     * @param req
+     * @return data 数据详情
+     */
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     SimpleFormInfo findById(@NotNull SimpleFormIdReq req);
 
@@ -81,6 +81,7 @@ public interface SimpleFormService {
 
     /**
      * 删除记录，并返回删除记录数
+     *
      * @param req
      * @return num 删除记录数
      */
@@ -89,6 +90,7 @@ public interface SimpleFormService {
 
     /**
      * 批量删除记录，并返回删除记录数
+     *
      * @param req
      * @return num 删除记录数
      */
@@ -103,7 +105,7 @@ public interface SimpleFormService {
      * @return pagingData 分页数据
      */
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    PagingData<SimpleFormInfo> query(@NotNull QuerySimpleFormReq req , Paging paging);
+    PagingData<SimpleFormInfo> query(@NotNull QuerySimpleFormReq req, Paging paging);
 
     /**
      * 查询并返回第一条数据
@@ -115,10 +117,11 @@ public interface SimpleFormService {
     SimpleFormInfo findOne(@NotNull QuerySimpleFormReq req);
 
     /**
-    * 清除缓存
-    * @param key 缓存Key
-    */
-    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
+     * 清除缓存
+     *
+     * @param key 缓存Key
+     */
+    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
 
 }

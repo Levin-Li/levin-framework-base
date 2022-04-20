@@ -1,44 +1,35 @@
 package com.levin.oak.base.services.user.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-
-import com.levin.commons.service.domain.*;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Eq;
+import com.levin.commons.dao.annotation.update.Update;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
-import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.User.Category;
+import com.levin.oak.base.entities.User.Sex;
+import com.levin.oak.base.entities.User.State;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
+import java.util.List;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.oak.base.entities.User.*;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import com.levin.commons.service.domain.InjectVar;
-import java.util.Date;
-import com.levin.oak.base.services.org.info.*;
-import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 
 /**
- *  更新用户
- *  Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ * 更新用户
+ * Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
 @Schema(description = "更新用户")
 @Data
@@ -56,13 +47,13 @@ public class UpdateUserReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445263479L;
 
-    @Schema(description = "id" , required = true)
+    @Schema(description = "id", required = true)
     @NotNull
     @Eq(require = true)
     private Long id;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
+    @Eq(condition = "!#user.isSuperAdmin()")
     final boolean eqEditable = true;
 
     @Size(max = 256)
@@ -146,11 +137,12 @@ public class UpdateUserReq extends MultiTenantReq {
     public UpdateUserReq(Long id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preUpdate() {
         //@todo 更新之前初始化数据
 
-        if(getLastUpdateTime() == null){
+        if (getLastUpdateTime() == null) {
             setLastUpdateTime(new Date());
         }
     }

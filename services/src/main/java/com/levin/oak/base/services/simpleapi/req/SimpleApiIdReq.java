@@ -1,43 +1,32 @@
 package com.levin.oak.base.services.simpleapi.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-
-import com.levin.commons.service.domain.*;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import javax.annotation.*;
-import javax.validation.constraints.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-import com.levin.oak.base.services.simpleapi.info.*;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Eq;
+import com.levin.oak.base.entities.E_SimpleApi;
 import com.levin.oak.base.entities.SimpleApi;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import com.levin.oak.base.services.simpleapi.info.SimpleApiInfo;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
+
+import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotNull;
+
 ////////////////////////////////////
 //自动导入列表
-import com.levin.oak.base.entities.SimpleApi.*;
-import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  简单接口 主键通用请求
-*  //Auto gen by simple-dao-codegen 2022-3-25 17:01:35
-*/
+ * 简单接口 主键通用请求
+ * //Auto gen by simple-dao-codegen 2022-3-25 17:01:35
+ */
 
 @Schema(description = "简单接口 主键通用请求")
 @Data
 
-    @AllArgsConstructor
+@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
@@ -48,14 +37,14 @@ import java.util.Date;
 @TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS, resultClass = SimpleApiInfo.class)
 public class SimpleApiIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = 1021385738L;
+    private static final long serialVersionUID = 1021385738L;
 
 
-    @Schema(description = "id" , required = true)
+    @Schema(description = "id", required = true)
     @Eq(require = true)
     @NotNull
     protected Long id;
-    
+
 
     @PostConstruct
     public void preQuery() {

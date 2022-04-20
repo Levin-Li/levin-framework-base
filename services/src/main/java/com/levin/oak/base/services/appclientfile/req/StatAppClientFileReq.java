@@ -1,46 +1,30 @@
 package com.levin.oak.base.services.appclientfile.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import com.levin.commons.dao.annotation.Ignore;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-import java.io.Serializable;
-
-import com.levin.oak.base.services.appclientfile.info.*;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.Gte;
+import com.levin.commons.dao.annotation.Lte;
+import com.levin.commons.dao.annotation.stat.Count;
 import com.levin.oak.base.entities.AppClientFile;
+import com.levin.oak.base.entities.E_AppClientFile;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import java.io.Serializable;
+import java.util.Date;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  统计客户端文件
- *  @Author Auto gen by simple-dao-codegen 2022-4-20 10:49:23
+ * 统计客户端文件
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-4-20 10:49:23
  */
 @Schema(description = "统计客户端文件")
 @Data
@@ -52,11 +36,11 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppClientFile.class, alias = E_AppClientFile.ALIAS,
-     //连接统计
-    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
-    resultClass = StatAppClientFileReq.Result.class
+        //连接统计
+        //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
+        resultClass = StatAppClientFileReq.Result.class
 )
-public class StatAppClientFileReq extends MultiTenantReq{
+public class StatAppClientFileReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -1155395350L;
 
@@ -125,7 +109,6 @@ public class StatAppClientFileReq extends MultiTenantReq{
     Date lteCreateTime;
 
 
-
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
@@ -134,7 +117,6 @@ public class StatAppClientFileReq extends MultiTenantReq{
     @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     Date lteLastUpdateTime;
-
 
 
     @Schema(description = "排序代码")
@@ -173,7 +155,7 @@ public class StatAppClientFileReq extends MultiTenantReq{
 
     @PostConstruct
     public void preStat() {
-    //@todo 统计之前初始化数据
+        //@todo 统计之前初始化数据
     }
 
     @Schema(description = "客户端文件统计结果")

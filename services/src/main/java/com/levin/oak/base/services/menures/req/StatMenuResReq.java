@@ -1,50 +1,31 @@
 package com.levin.oak.base.services.menures.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import com.levin.commons.dao.annotation.Ignore;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-import java.io.Serializable;
-
-import com.levin.oak.base.services.menures.info.*;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.Gte;
+import com.levin.commons.dao.annotation.Lte;
+import com.levin.commons.dao.annotation.stat.Count;
+import com.levin.commons.rbac.MenuItem.ActionType;
+import com.levin.oak.base.entities.E_MenuRes;
 import com.levin.oak.base.entities.MenuRes;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import java.io.Serializable;
+import java.util.Date;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import com.levin.commons.rbac.MenuItem.*;
-    import com.levin.oak.base.entities.MenuRes;
-    import com.levin.oak.base.services.menures.info.*;
-    import java.util.Set;
-    import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  统计菜单
- *  @Author Auto gen by simple-dao-codegen 2022-4-9 16:45:00
+ * 统计菜单
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-4-9 16:45:00
  */
 @Schema(description = "统计菜单")
 @Data
@@ -56,11 +37,11 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = MenuRes.class, alias = E_MenuRes.ALIAS,
-     //连接统计
-    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
-    resultClass = StatMenuResReq.Result.class
+        //连接统计
+        //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
+        resultClass = StatMenuResReq.Result.class
 )
-public class StatMenuResReq extends MultiTenantReq{
+public class StatMenuResReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -887712701L;
 
@@ -68,125 +49,120 @@ public class StatMenuResReq extends MultiTenantReq{
     //@NotNull
 
     @Schema(description = "id")
-     Long id;
+    Long id;
 
     //@Size(max = 128)
 
     @Schema(description = "子系统")
-     String domain;
+    String domain;
 
     //@Size(max = 1800)
 
     @Schema(description = "需要的授权，权限或角色，json数组")
-     String requireAuthorizations;
+    String requireAuthorizations;
 
     //@NotNull
 
     @Schema(description = "无权限时是否展示")
-     Boolean alwaysShow;
+    Boolean alwaysShow;
 
     //@Size(max = 64)
 
     @Schema(description = "目标")
-     String target;
+    String target;
 
 
     @Schema(description = "打开方式")
-     ActionType actionType;
+    ActionType actionType;
 
 
     @Schema(description = "图标")
-     String icon;
+    String icon;
 
 
     @Schema(description = "路径/链接")
-     String path;
+    String path;
     @Schema(description = "模糊匹配 - 路径/链接")
     @Contains
-     String containsPath;
+    String containsPath;
 
     //@Size(max = 1800)
 
     @Schema(description = "参数")
-     String params;
+    String params;
 
 
     @Schema(description = "父ID")
-     Long parentId;
-
-
-
+    Long parentId;
 
 
     //@Size(max = 1800)
 
     @Schema(description = "id路径， 使用|包围，如|1|3|15|")
-     String idPath;
+    String idPath;
 
     //@NotBlank
     //@Size(max = 128)
 
     @Schema(description = "名称")
-     String name;
+    String name;
     @Schema(description = "模糊匹配 - 名称")
     @Contains
-     String containsName;
+    String containsName;
 
     //@Size(max = 128)
 
     @Schema(description = "拼音，格式：全拼(简拼)")
-     String pinyinName;
+    String pinyinName;
     @Schema(description = "模糊匹配 - 拼音，格式：全拼(简拼)")
     @Contains
-     String containsPinyinName;
+    String containsPinyinName;
 
     //@InjectVar()
     //@Size(max = 128)
 
     @Schema(description = "创建者")
-     String creator;
+    String creator;
 
     //@NotNull
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
-     Date gteCreateTime;
+    Date gteCreateTime;
 
     @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
-     Date lteCreateTime;
-
+    Date lteCreateTime;
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
-     Date gteLastUpdateTime;
+    Date gteLastUpdateTime;
 
     @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
-     Date lteLastUpdateTime;
-
+    Date lteLastUpdateTime;
 
 
     @Schema(description = "排序代码")
-     Integer orderCode;
+    Integer orderCode;
 
     //@NotNull
 
     @Schema(description = "是否允许")
-     Boolean enable;
+    Boolean enable;
 
     //@NotNull
 
     @Schema(description = "是否可编辑")
-     Boolean editable;
+    Boolean editable;
 
     //@Size(max = 512)
 
     @Schema(description = "备注")
-     String remark;
+    String remark;
 
     public StatMenuResReq(Long id) {
         this.id = id;
@@ -206,7 +182,7 @@ public class StatMenuResReq extends MultiTenantReq{
 
     @PostConstruct
     public void preStat() {
-    //@todo 统计之前初始化数据
+        //@todo 统计之前初始化数据
     }
 
     @Schema(description = "菜单统计结果")

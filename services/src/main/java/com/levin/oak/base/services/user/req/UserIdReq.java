@@ -1,47 +1,32 @@
 package com.levin.oak.base.services.user.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-
-import com.levin.commons.service.domain.*;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import javax.annotation.*;
-import javax.validation.constraints.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-import com.levin.oak.base.services.user.info.*;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Eq;
+import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import com.levin.oak.base.services.user.info.UserInfo;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
+
+import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotNull;
+
 ////////////////////////////////////
 //自动导入列表
-import com.levin.oak.base.entities.User.*;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import com.levin.commons.service.domain.InjectVar;
-import java.util.Date;
-import com.levin.oak.base.services.org.info.*;
-import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
-*  用户 主键通用请求
-*  //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
-*/
+ * 用户 主键通用请求
+ * //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ */
 
 @Schema(description = "用户 主键通用请求")
 @Data
 
-    @AllArgsConstructor
+@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
@@ -52,14 +37,14 @@ import com.levin.oak.base.entities.Org;
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS, resultClass = UserInfo.class)
 public class UserIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = -445263479L;
+    private static final long serialVersionUID = -445263479L;
 
 
-    @Schema(description = "id" , required = true)
+    @Schema(description = "id", required = true)
     @Eq(require = true)
     @NotNull
     protected Long id;
-    
+
 
     @PostConstruct
     public void preQuery() {

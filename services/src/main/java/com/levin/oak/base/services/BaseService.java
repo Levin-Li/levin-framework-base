@@ -1,32 +1,13 @@
 package com.levin.oak.base.services;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import com.levin.commons.dao.SimpleDao;
+import com.levin.oak.base.ModuleOption;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.util.*;
-import javax.validation.*;
-import java.util.*;
-import javax.annotation.*;
+import org.springframework.context.ApplicationContext;
+
+import javax.annotation.Resource;
 
 //import javax.servlet.http.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import javax.validation.constraints.*;
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.support.*;
-import com.levin.commons.service.domain.*;
-
-import io.swagger.v3.oas.annotations.*;
-
-import com.levin.oak.base.*;
-
-import static com.levin.oak.base.ModuleOption.*;
-import static com.levin.oak.base.entities.EntityConst.*;
 
 //Auto gen by simple-dao-codegen 2022-3-25 17:01:35
 

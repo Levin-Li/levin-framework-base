@@ -48,7 +48,7 @@ public class UpdateAppClientReq extends MultiTenantReq {
     private Long id;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
+    @Eq(condition = "!#user.isSuperAdmin()")
     final boolean eqEditable = true;
 
     @NotBlank

@@ -9,7 +9,6 @@ import com.levin.oak.base.entities.AppErrorLog;
 import com.levin.oak.base.entities.E_AppErrorLog;
 import com.levin.oak.base.services.commons.req.MultiTenantReq;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -17,7 +16,6 @@ import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.List;
 

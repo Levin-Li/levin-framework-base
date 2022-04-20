@@ -1,41 +1,31 @@
 package com.levin.oak.base.services.role.req;
 
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Eq;
+import com.levin.commons.dao.annotation.In;
+import com.levin.commons.dao.annotation.NotEq;
 import com.levin.commons.rbac.RbacRoleObject;
-import io.swagger.v3.oas.annotations.media.Schema;
-
-import com.levin.commons.service.domain.*;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import javax.annotation.*;
-import javax.validation.constraints.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-
+import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.Role;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
+
+import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotEmpty;
+
 ////////////////////////////////////
 //自动导入列表
-import com.levin.oak.base.entities.Role.*;
-import java.util.List;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import com.levin.commons.service.domain.InjectVar;
-import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  删除角色
- *  //Auto gen by simple-dao-codegen 2022-3-25 17:01:35
+ * 删除角色
+ * //Auto gen by simple-dao-codegen 2022-3-25 17:01:35
  */
 @Schema(description = "删除角色")
 @Data
@@ -59,7 +49,7 @@ public class DeleteRoleReq extends MultiTenantReq {
     private Long[] idList;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
+    @Eq(condition = "!#user.isSuperAdmin()")
     final boolean eqEditable = true;
 
     //不允许删除SA角色

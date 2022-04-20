@@ -1,50 +1,34 @@
 package com.levin.oak.base.services.user.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import com.levin.commons.dao.annotation.Ignore;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-import java.io.Serializable;
-
-import com.levin.oak.base.services.user.info.*;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.Gte;
+import com.levin.commons.dao.annotation.Lte;
+import com.levin.commons.dao.annotation.stat.Count;
+import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
+import com.levin.oak.base.entities.User.Category;
+import com.levin.oak.base.entities.User.Sex;
+import com.levin.oak.base.entities.User.State;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import com.levin.oak.base.entities.User.*;
-    import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-    import java.util.Date;
-    import com.levin.oak.base.services.org.info.*;
-    import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
- *  统计用户
- *  @Author Auto gen by simple-dao-codegen 2022-4-9 16:44:59
+ * 统计用户
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-4-9 16:44:59
  */
 @Schema(description = "统计用户")
 @Data
@@ -56,11 +40,11 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS,
-     //连接统计
-    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
-    resultClass = StatUserReq.Result.class
+        //连接统计
+        //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
+        resultClass = StatUserReq.Result.class
 )
-public class StatUserReq extends MultiTenantReq{
+public class StatUserReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445263479L;
 
@@ -68,161 +52,160 @@ public class StatUserReq extends MultiTenantReq{
     //@NotNull
 
     @Schema(description = "id")
-     Long id;
+    Long id;
 
 
     //@Size(max = 256)
 
     @Schema(description = "登录密码")
-     String password;
+    String password;
 
     //@Size(max = 20)
 
     @Schema(description = "手机号")
-     String telephone;
+    String telephone;
     @Schema(description = "模糊匹配 - 手机号")
     @Contains
-     String containsTelephone;
+    String containsTelephone;
 
     //@Size(max = 32)
 
     @Schema(description = "邮箱")
-     String email;
+    String email;
 
     //@Size(max = 64)
 
     @Schema(description = "名称")
-     String name;
+    String name;
     @Schema(description = "模糊匹配 - 名称")
     @Contains
-     String containsName;
+    String containsName;
 
     //@Size(max = 32)
 
     @Schema(description = "昵称")
-     String nickname;
+    String nickname;
     @Schema(description = "模糊匹配 - 昵称")
     @Contains
-     String containsNickname;
+    String containsNickname;
 
 
     @Schema(description = "头像")
-     String avatar;
+    String avatar;
 
 
     @Schema(description = "性别")
-     Sex sex;
+    Sex sex;
 
     //@Size(max = 1800)
     //@InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
 
     @Schema(description = "标签列表")
-     List<String> tagList;
+    List<String> tagList;
+
     @Schema(description = "模糊匹配 - 标签列表")
     @Contains
-     List<String> containsTagList;
+    List<String> containsTagList;
 
 
     @Schema(description = "帐号类型")
-     Category category;
+    Category category;
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于过期时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
-     Date gteExpiredDate;
+    Date gteExpiredDate;
 
     @Schema(description = "小于等于过期时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
-     Date lteExpiredDate;
+    Date lteExpiredDate;
 
 
     //@NotNull
 
     @Schema(description = "帐号状态")
-     State state;
+    State state;
 
     //@Size(max = 32)
 
     @Schema(description = "工号")
-     String staffNo;
+    String staffNo;
     @Schema(description = "模糊匹配 - 工号")
     @Contains
-     String containsStaffNo;
+    String containsStaffNo;
 
     //@Size(max = 128)
 
     @Schema(description = "岗位职级")
-     String jobPostCode;
+    String jobPostCode;
 
     //@Size(max = 1800)
     //@InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
 
     @Schema(description = "角色列表")
-     List<String> roleList;
+    List<String> roleList;
+
     @Schema(description = "模糊匹配 - 角色列表")
     @Contains
-     List<String> containsRoleList;
-
+    List<String> containsRoleList;
 
 
     //@Size(max = 128)
 
     @Schema(description = "微信 OpendId")
-     String wxOpenId;
+    String wxOpenId;
 
     //@Size(max = 128)
 
     @Schema(description = "阿里 OpendId")
-     String aliOpenId;
+    String aliOpenId;
 
     //@InjectVar()
     //@Size(max = 128)
 
     @Schema(description = "创建者")
-     String creator;
+    String creator;
 
     //@NotNull
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
-     Date gteCreateTime;
+    Date gteCreateTime;
 
     @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
-     Date lteCreateTime;
-
+    Date lteCreateTime;
 
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
-     Date gteLastUpdateTime;
+    Date gteLastUpdateTime;
 
     @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
-     Date lteLastUpdateTime;
-
+    Date lteLastUpdateTime;
 
 
     @Schema(description = "排序代码")
-     Integer orderCode;
+    Integer orderCode;
 
     //@NotNull
 
     @Schema(description = "是否允许")
-     Boolean enable;
+    Boolean enable;
 
     //@NotNull
 
     @Schema(description = "是否可编辑")
-     Boolean editable;
+    Boolean editable;
 
     //@Size(max = 512)
 
     @Schema(description = "备注")
-     String remark;
+    String remark;
 
     public StatUserReq(Long id) {
         this.id = id;
@@ -242,7 +225,7 @@ public class StatUserReq extends MultiTenantReq{
 
     @PostConstruct
     public void preStat() {
-    //@todo 统计之前初始化数据
+        //@todo 统计之前初始化数据
     }
 
     @Schema(description = "用户统计结果")

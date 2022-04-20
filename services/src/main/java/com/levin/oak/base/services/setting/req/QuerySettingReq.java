@@ -1,44 +1,33 @@
 package com.levin.oak.base.services.setting.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.Gte;
 import com.levin.commons.dao.annotation.Ignore;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-
-import com.levin.oak.base.services.setting.info.*;
+import com.levin.commons.dao.annotation.Lte;
+import com.levin.commons.dao.annotation.order.OrderBy;
+import com.levin.commons.dao.annotation.order.SimpleOrderBy;
+import com.levin.oak.base.entities.E_Setting;
 import com.levin.oak.base.entities.Setting;
+import com.levin.oak.base.entities.Setting.ValueType;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import com.levin.oak.base.services.setting.info.SettingInfo;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import java.util.Date;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.oak.base.entities.Setting.*;
-    import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  查询系统设置
- *  @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ * 查询系统设置
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
 @Schema(description = "查询系统设置")
 @Data
@@ -50,7 +39,7 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Setting.class, alias = E_Setting.ALIAS, resultClass = SettingInfo.class)
-public class QuerySettingReq extends MultiTenantReq{
+public class QuerySettingReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 147875794L;
 
@@ -100,10 +89,8 @@ public class QuerySettingReq extends MultiTenantReq{
     private ValueType valueType;
 
 
-
     @Schema(description = "值")
     private String value;
-
 
 
     @Schema(description = "值是否可空")
@@ -161,8 +148,6 @@ public class QuerySettingReq extends MultiTenantReq{
     private Date lteCreateTime;
 
 
-
-
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
@@ -171,8 +156,6 @@ public class QuerySettingReq extends MultiTenantReq{
     @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteLastUpdateTime;
-
-
 
 
     @Schema(description = "排序代码")

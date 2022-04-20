@@ -1,46 +1,30 @@
 package com.levin.oak.base.services.apperrorlog.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import com.levin.commons.dao.annotation.Ignore;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-import java.io.Serializable;
-
-import com.levin.oak.base.services.apperrorlog.info.*;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.Gte;
+import com.levin.commons.dao.annotation.Lte;
+import com.levin.commons.dao.annotation.stat.Count;
 import com.levin.oak.base.entities.AppErrorLog;
+import com.levin.oak.base.entities.E_AppErrorLog;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import java.io.Serializable;
+import java.util.Date;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  统计应用错误日志
- *  @Author Auto gen by simple-dao-codegen 2022-4-9 16:44:59
+ * 统计应用错误日志
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-4-9 16:44:59
  */
 @Schema(description = "统计应用错误日志")
 @Data
@@ -52,11 +36,11 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppErrorLog.class, alias = E_AppErrorLog.ALIAS,
-     //连接统计
-    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
-    resultClass = StatAppErrorLogReq.Result.class
+        //连接统计
+        //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
+        resultClass = StatAppErrorLogReq.Result.class
 )
-public class StatAppErrorLogReq extends MultiTenantReq{
+public class StatAppErrorLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1594864095L;
 
@@ -64,48 +48,48 @@ public class StatAppErrorLogReq extends MultiTenantReq{
     //@NotNull
 
     @Schema(description = "id")
-     Long id;
+    Long id;
 
     //@Size(max = 64)
 
     @Schema(description = "模块ID")
-     String moduleId;
+    String moduleId;
 
     //@NotNull
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
-     Date gteOccurTime;
+    Date gteOccurTime;
 
     @Schema(description = "小于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
-     Date lteOccurTime;
+    Date lteOccurTime;
 
 
     //@NotBlank
     //@Size(max = 768)
 
     @Schema(description = "标题")
-     String title;
+    String title;
     @Schema(description = "模糊匹配 - 标题")
     @Contains
-     String containsTitle;
+    String containsTitle;
 
 
     @Schema(description = "错误级别")
-     String errorLevel;
+    String errorLevel;
 
 
     @Schema(description = "根异常类型")
-     String rootExceptionType;
+    String rootExceptionType;
     @Schema(description = "模糊匹配 - 根异常类型")
     @Contains
-     String containsRootExceptionType;
+    String containsRootExceptionType;
 
 
     @Schema(description = "完整异常堆栈")
-     String exceptionFullInfo;
+    String exceptionFullInfo;
 
     public StatAppErrorLogReq(Long id) {
         this.id = id;
@@ -125,7 +109,7 @@ public class StatAppErrorLogReq extends MultiTenantReq{
 
     @PostConstruct
     public void preStat() {
-    //@todo 统计之前初始化数据
+        //@todo 统计之前初始化数据
     }
 
     @Schema(description = "应用错误日志统计结果")

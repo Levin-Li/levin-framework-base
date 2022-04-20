@@ -1,46 +1,29 @@
 package com.levin.oak.base.services.scheduledlog.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import com.levin.commons.dao.annotation.Ignore;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-import java.io.Serializable;
-
-import com.levin.oak.base.services.scheduledlog.info.*;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Gte;
+import com.levin.commons.dao.annotation.Lte;
+import com.levin.commons.dao.annotation.stat.Count;
+import com.levin.oak.base.entities.E_ScheduledLog;
 import com.levin.oak.base.entities.ScheduledLog;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import java.io.Serializable;
+import java.util.Date;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  统计调度日志
- *  @Author Auto gen by simple-dao-codegen 2022-4-9 16:44:59
+ * 统计调度日志
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-4-9 16:44:59
  */
 @Schema(description = "统计调度日志")
 @Data
@@ -52,11 +35,11 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS,
-     //连接统计
-    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
-    resultClass = StatScheduledLogReq.Result.class
+        //连接统计
+        //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
+        resultClass = StatScheduledLogReq.Result.class
 )
-public class StatScheduledLogReq extends MultiTenantReq{
+public class StatScheduledLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1319130901L;
 
@@ -64,38 +47,38 @@ public class StatScheduledLogReq extends MultiTenantReq{
     //@NotNull
 
     @Schema(description = "id")
-     Long id;
+    Long id;
 
     //@NotBlank
     //@Size(max = 64)
 
     @Schema(description = "任务ID")
-     String taskId;
+    String taskId;
 
     //@NotNull
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
-     Date gteCreateTime;
+    Date gteCreateTime;
 
     @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
-     Date lteCreateTime;
+    Date lteCreateTime;
 
 
     //@Size(max = 256)
 
     @Schema(description = "执行周期")
-     String invokeCycle;
+    String invokeCycle;
 
 
     @Schema(description = "是否错误")
-     Boolean isError;
+    Boolean isError;
 
 
     @Schema(description = "执行结果")
-     String invokeResult;
+    String invokeResult;
 
     public StatScheduledLogReq(Long id) {
         this.id = id;
@@ -115,7 +98,7 @@ public class StatScheduledLogReq extends MultiTenantReq{
 
     @PostConstruct
     public void preStat() {
-    //@todo 统计之前初始化数据
+        //@todo 统计之前初始化数据
     }
 
     @Schema(description = "调度日志统计结果")

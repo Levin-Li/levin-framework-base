@@ -1,57 +1,45 @@
 package com.levin.oak.base.services.menures;
 
-import static com.levin.oak.base.ModuleOption.*;
-import static com.levin.oak.base.entities.EntityConst.*;
-
-
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.support.*;
-import com.levin.commons.service.domain.*;
-
-import java.util.*;
-import java.util.stream.*;
-import org.springframework.cache.annotation.*;
-import org.springframework.transaction.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.util.*;
-import org.springframework.beans.BeanUtils;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import io.swagger.v3.oas.annotations.*;
-import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
-import javax.persistence.PersistenceException;
-
-import com.levin.oak.base.entities.*;
+import com.levin.commons.dao.DaoSecurityException;
+import com.levin.commons.dao.Paging;
+import com.levin.commons.dao.SimpleDao;
+import com.levin.commons.dao.support.PagingData;
+import com.levin.oak.base.ModuleOption;
+import com.levin.oak.base.entities.E_MenuRes;
 import com.levin.oak.base.entities.MenuRes;
-
+import com.levin.oak.base.services.BaseService;
+import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.menures.req.*;
-import com.levin.oak.base.services.menures.info.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
-import com.levin.oak.base.*;
-import com.levin.oak.base.services.*;
+import javax.persistence.PersistenceException;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import static com.levin.oak.base.entities.EntityConst.*;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.rbac.MenuItem.*;
-import com.levin.oak.base.entities.MenuRes;
-import com.levin.oak.base.services.menures.info.*;
-import java.util.Set;
-import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  菜单-服务实现
+ * 菜单-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-4-2 19:44:59
- *
+ * @author auto gen by simple-dao-codegen 2022-4-2 19:44:59
  */
 
 //@Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
@@ -67,13 +55,13 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     @Autowired
     private SimpleDao simpleDao;
 
-    protected MenuResService getSelfProxy(){
+    protected MenuResService getSelfProxy() {
         return getSelfProxy(MenuResService.class);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Override
-    public Long create(CreateMenuResReq req){
+    public Long create(CreateMenuResReq req) {
         MenuRes entity = simpleDao.create(req);
         return entity.getId();
     }
@@ -81,7 +69,7 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Long> batchCreate(List<CreateMenuResReq> reqList){
+    public List<Long> batchCreate(List<CreateMenuResReq> reqList) {
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
@@ -96,7 +84,7 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     @Override
     //只更新缓存
-    @CachePut(unless = "#result == null" , condition = "#req.id != null" , key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
+    @CachePut(unless = "#result == null", condition = "#req.id != null", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
     public MenuResInfo findById(MenuResIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findOneByQueryObj(req);
@@ -116,7 +104,7 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public int batchUpdate(List<UpdateMenuResReq> reqList){
+    public int batchUpdate(List<UpdateMenuResReq> reqList) {
         //@Todo 优化批量提交
         int sum = reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n).sum();
 
@@ -133,19 +121,19 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
 
-       return checkResult(simpleDao.deleteByQueryObj(req), DELETE_ACTION);
+        return checkResult(simpleDao.deleteByQueryObj(req), DELETE_ACTION);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public int batchDelete(DeleteMenuResReq req){
+    public int batchDelete(DeleteMenuResReq req) {
         //@Todo 优化批量提交
         int sum = Stream.of(req.getIdList())
-            .map(id -> simpleDao.copy(req, new MenuResIdReq().setId(id)))
-            .map(idReq -> getSelfProxy().delete(idReq))
-            .mapToInt(n -> n)
-            .sum();
+                .map(id -> simpleDao.copy(req, new MenuResIdReq().setId(id)))
+                .map(idReq -> getSelfProxy().delete(idReq))
+                .mapToInt(n -> n)
+                .sum();
 
         //Assert.isTrue(sum > 0, BATCH_DELETE_ACTION + BIZ_NAME + "失败");
 
@@ -160,7 +148,7 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     @Override
-    public MenuResInfo findOne(QueryMenuResReq req){
+    public MenuResInfo findOne(QueryMenuResReq req) {
         return simpleDao.findOneByQueryObj(req);
     }
 

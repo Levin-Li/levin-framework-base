@@ -1,43 +1,32 @@
 package com.levin.oak.base.services.accesslog.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.Gte;
 import com.levin.commons.dao.annotation.Ignore;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-
-import com.levin.oak.base.services.accesslog.info.*;
+import com.levin.commons.dao.annotation.Lte;
+import com.levin.commons.dao.annotation.order.OrderBy;
+import com.levin.commons.dao.annotation.order.SimpleOrderBy;
 import com.levin.oak.base.entities.AccessLog;
+import com.levin.oak.base.entities.E_AccessLog;
+import com.levin.oak.base.services.accesslog.info.AccessLogInfo;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import java.util.Date;
 
 ////////////////////////////////////
 //自动导入列表
-    import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  查询访问日志
- *  @Author Auto gen by simple-dao-codegen 2022-3-30 8:44:20
+ * 查询访问日志
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-3-30 8:44:20
  */
 @Schema(description = "查询访问日志")
 @Data
@@ -49,7 +38,7 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS, resultClass = AccessLogInfo.class)
-public class QueryAccessLogReq extends MultiTenantReq{
+public class QueryAccessLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1030736962L;
 
@@ -130,15 +119,12 @@ public class QueryAccessLogReq extends MultiTenantReq{
     private String requestMethod;
 
 
-
     @Schema(description = "请求参数")
     private String requestParams;
 
 
-
     @Schema(description = "头部信息")
     private String headInfo;
-
 
 
     @Schema(description = "响应数据")
@@ -161,10 +147,8 @@ public class QueryAccessLogReq extends MultiTenantReq{
     private String serverAddr;
 
 
-
     @Schema(description = "是否有异常")
     private Boolean isException;
-
 
 
     @Schema(description = "异常信息")

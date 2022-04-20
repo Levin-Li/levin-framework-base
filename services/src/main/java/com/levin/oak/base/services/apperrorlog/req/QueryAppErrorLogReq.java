@@ -1,43 +1,32 @@
 package com.levin.oak.base.services.apperrorlog.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.Gte;
 import com.levin.commons.dao.annotation.Ignore;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
-import javax.annotation.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-
-import com.levin.oak.base.services.apperrorlog.info.*;
+import com.levin.commons.dao.annotation.Lte;
+import com.levin.commons.dao.annotation.order.OrderBy;
+import com.levin.commons.dao.annotation.order.SimpleOrderBy;
 import com.levin.oak.base.entities.AppErrorLog;
+import com.levin.oak.base.entities.E_AppErrorLog;
+import com.levin.oak.base.services.apperrorlog.info.AppErrorLogInfo;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import javax.annotation.PostConstruct;
+import java.util.Date;
 
 ////////////////////////////////////
 //自动导入列表
-    import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  查询应用错误日志
- *  @Author Auto gen by simple-dao-codegen 2022-3-29 22:58:02
+ * 查询应用错误日志
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-3-29 22:58:02
  */
 @Schema(description = "查询应用错误日志")
 @Data
@@ -49,7 +38,7 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppErrorLog.class, alias = E_AppErrorLog.ALIAS, resultClass = AppErrorLogInfo.class)
-public class QueryAppErrorLogReq extends MultiTenantReq{
+public class QueryAppErrorLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1594864095L;
 
@@ -87,7 +76,6 @@ public class QueryAppErrorLogReq extends MultiTenantReq{
     private Date lteOccurTime;
 
 
-
     //@NotBlank
     //@Size(max = 1000)
 
@@ -99,10 +87,8 @@ public class QueryAppErrorLogReq extends MultiTenantReq{
     private String containsTitle;
 
 
-
     @Schema(description = "错误级别")
     private String errorLevel;
-
 
 
     @Schema(description = "根异常类型")
@@ -111,7 +97,6 @@ public class QueryAppErrorLogReq extends MultiTenantReq{
     @Schema(description = "模糊匹配 - 根异常类型")
     @Contains
     private String containsRootExceptionType;
-
 
 
     @Schema(description = "完整异常堆栈")

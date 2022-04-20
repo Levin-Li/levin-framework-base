@@ -1,38 +1,28 @@
 package com.levin.oak.base.services.appclient.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-
-import com.levin.commons.service.domain.*;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
-import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
-
-import javax.annotation.*;
-import javax.validation.constraints.*;
-
-import lombok.*;
-import lombok.experimental.*;
-import java.util.*;
-
+import com.levin.commons.dao.TargetOption;
+import com.levin.commons.dao.annotation.In;
 import com.levin.oak.base.entities.AppClient;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.*;
+import com.levin.oak.base.entities.E_AppClient;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
+
+import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotEmpty;
+
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  删除应用接入
- *  //Auto gen by simple-dao-codegen 2022-4-3 0:55:04
+ * 删除应用接入
+ * //Auto gen by simple-dao-codegen 2022-4-3 0:55:04
  */
 @Schema(description = "删除应用接入")
 @Data
