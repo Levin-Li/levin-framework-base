@@ -28,7 +28,7 @@ import javax.persistence.*;
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = AbstractTreeObject.Fields.parentId),
-                @Index(columnList = E_MenuRes.subSystem),
+                @Index(columnList = E_MenuRes.domain),
                 @Index(columnList = E_MenuRes.actionType),
                 @Index(columnList = E_MenuRes.tenantId),
         }
@@ -50,7 +50,7 @@ public class MenuRes
 
     @Schema(description = "子系统")
     @Column(length = 128)
-    String subSystem;
+    String domain;
 
     @Schema(description = "需要的授权，权限或角色，json数组")
     @Column(length = 1800)

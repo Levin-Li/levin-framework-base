@@ -91,7 +91,7 @@ public class QueryMenuResReq extends MultiTenantReq{
     //@Size(max = 128)
 
     @Schema(description = "子系统")
-    private String subSystem;
+    private String domain;
 
 
     //@Size(max = 1800)

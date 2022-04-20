@@ -362,7 +362,7 @@ public class AuthServiceImpl
                 continue;
             }
 
-            MenuRes pluginRootMenu = simpleDao.create(new MenuRes().setSubSystem(plugin.getId())
+            MenuRes pluginRootMenu = simpleDao.create(new MenuRes().setDomain(plugin.getId())
                     .setName(plugin.getName())
                     .setEnable(plugin.isEnable())
                     .setOrderCode(plugin.getOrderCode())

@@ -33,7 +33,7 @@ public abstract class MultiTenantReq
     )
     @OR(autoClose = true)
     @Eq
-    @IsNull(condition = "#_this.isContainsPublicData()") //如果是公共数据，允许包括非该租户的数据
+    @IsNull(condition = "#_this.isContainsPublicData()",desc = "如果是公共数据，允许包括非该租户的数据") //如果是公共数据，允许包括非该租户的数据
     protected String tenantId;
 
     /**

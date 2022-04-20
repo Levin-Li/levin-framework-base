@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.menures.req;
+package com.levin.oak.base.services.appclientfile.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -20,26 +20,24 @@ import lombok.*;
 import lombok.experimental.*;
 import java.util.*;
 
-import com.levin.oak.base.entities.MenuRes;
+import com.levin.oak.base.entities.AppClientFile;
 import com.levin.oak.base.entities.*;
 
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.rbac.MenuItem.*;
-import com.levin.oak.base.entities.MenuRes;
-import com.levin.oak.base.services.menures.info.*;
-import java.util.Set;
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
 
 /**
- *  更新菜单
- *  Auto gen by simple-dao-codegen 2022-3-25 17:01:37
+ *  更新客户端文件
+ *  Auto gen by simple-dao-codegen 2022-4-20 10:49:23
  */
-@Schema(description = "更新菜单")
+@Schema(description = "更新客户端文件")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -48,84 +46,69 @@ import java.util.Date;
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = MenuRes.class, alias = E_MenuRes.ALIAS)
+@TargetOption(entityClass = AppClientFile.class, alias = E_AppClientFile.ALIAS)
 //默认更新注解
 @Update
-public class UpdateMenuResReq extends MultiTenantReq {
+public class UpdateAppClientFileReq extends MultiTenantReq {
 
-    private static final long serialVersionUID = -887712701L;
+    private static final long serialVersionUID = -1155395350L;
 
     @Schema(description = "id" , required = true)
     @NotNull
     @Eq(require = true)
-    private Long id;
+    Long id;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition ="!#user.isSuperAdmin()")
     final boolean eqEditable = true;
 
-    @Size(max = 128)
-    @Schema(description = "子系统")
-    private String domain;
-
-    @Size(max = 1800)
-    @Schema(description = "需要的授权，权限或角色，json数组")
-    private String requireAuthorizations;
-
-    @Schema(description = "无权限时是否展示")
-    private Boolean alwaysShow;
 
     @Size(max = 64)
-    @Schema(description = "目标")
-    private String target;
+    @Schema(description = "客户端类型")
+    String clientType;
 
-    @Schema(description = "打开方式")
-    private ActionType actionType;
+    @Size(max = 64)
+    @Schema(description = "文件类型")
+    String mimeType;
 
-    @Schema(description = "图标")
-    private String icon;
+    @NotBlank
+    @Schema(description = "文件路径")
+    String path;
 
-    @Schema(description = "路径/链接")
-    private String path;
+    @Schema(description = "文件内容")
+    String content;
 
-    @Size(max = 1800)
-    @Schema(description = "参数")
-    private String params;
-
-    @Schema(description = "父ID")
-    private Long parentId;
-
-    @Size(max = 1800)
-    @Schema(description = "id路径， 使用|包围，如|1|3|15|")
-    private String idPath;
+    @Size(max = 128)
+    @Schema(description = "系统子域")
+    String domain;
 
     @NotBlank
     @Size(max = 128)
     @Schema(description = "名称")
-    private String name;
+    String name;
 
     @Size(max = 128)
     @Schema(description = "拼音，格式：全拼(简拼)")
-    private String pinyinName;
+    String pinyinName;
 
     @Schema(description = "更新时间")
-    private Date lastUpdateTime;
+    Date lastUpdateTime;
 
     @Schema(description = "排序代码")
-    private Integer orderCode;
+    Integer orderCode;
 
     @Schema(description = "是否允许")
-    private Boolean enable;
+    Boolean enable;
 
     @Schema(description = "是否可编辑")
-    private Boolean editable;
+    Boolean editable;
 
     @Size(max = 512)
     @Schema(description = "备注")
-    private String remark;
+    String remark;
 
 
-    public UpdateMenuResReq(Long id) {
+    public UpdateAppClientFileReq(Long id) {
         this.id = id;
     }
     @PostConstruct
