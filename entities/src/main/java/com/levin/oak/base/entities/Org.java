@@ -6,6 +6,7 @@ import com.levin.commons.dao.domain.StatefulObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.dao.domain.support.AbstractTreeObject;
+import com.levin.commons.service.domain.EnumDesc;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -63,7 +64,7 @@ public class Org
         extends AbstractTreeObject<Long, Org>
         implements MultiTenantObject, StatefulObject {
 
-    public enum State {
+    public enum State   implements EnumDesc {
         @Schema(description = "正常")
         Normal,
         @Schema(description = "冻结")
@@ -72,7 +73,7 @@ public class Org
         Cancellation,
     }
 
-    public enum Type {
+    public enum Type   implements EnumDesc {
         @Schema(description = "公司/独立法人")
         LegalPerson,
         @Schema(description = "分公司/分支机构")

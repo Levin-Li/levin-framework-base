@@ -4,6 +4,7 @@ import com.levin.commons.dao.annotation.StartsWith;
 import com.levin.commons.dao.domain.TreeObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
+import com.levin.commons.service.domain.EnumDesc;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,7 +32,7 @@ public class Area
         implements
         TreeObject<Area, Area> {
 
-    public enum Type {
+    public enum Type   implements EnumDesc {
         @Schema(description = "国家")
         Nation,
         @Schema(description = "省份、直辖市")

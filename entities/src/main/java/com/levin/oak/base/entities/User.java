@@ -4,6 +4,7 @@ import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
+import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -53,7 +54,7 @@ public class User
         extends AbstractBaseEntityObject
         implements OrganizedObject, MultiTenantObject {
 
-    public enum State {
+    public enum State implements EnumDesc {
         @Schema(description = "正常")
         Normal,
         @Schema(description = "冻结")
@@ -62,14 +63,14 @@ public class User
         Cancellation,
     }
 
-    public enum Sex {
+    public enum Sex  implements EnumDesc {
         @Schema(description = "男")
         Man,
         @Schema(description = "女")
         Women,
     }
 
-    public enum Category {
+    public enum Category  implements EnumDesc {
         @Schema(description = "正式员工")
         Staff,
         @Schema(description = "外包员工")

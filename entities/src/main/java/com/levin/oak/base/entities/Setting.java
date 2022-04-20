@@ -3,6 +3,7 @@ package com.levin.oak.base.entities;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
+import com.levin.commons.service.domain.EnumDesc;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -42,7 +43,7 @@ import javax.persistence.*;
 public class Setting
         extends MultiTenantNamedEntity {
 
-    public enum ValueType {
+    public enum ValueType   implements EnumDesc {
         @Schema(description = "文本")
         Text,
         @Schema(description = "Json")

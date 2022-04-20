@@ -3,6 +3,7 @@ package com.levin.oak.base.entities;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
+import com.levin.commons.service.domain.EnumDesc;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -40,7 +41,7 @@ import javax.persistence.*;
 public class JobPost
         extends MultiTenantNamedEntity {
 
-    public enum Type {
+    public enum Type   implements EnumDesc {
         @Schema(description = "管理岗")
         Manager,
         @Schema(description = "专业岗")
