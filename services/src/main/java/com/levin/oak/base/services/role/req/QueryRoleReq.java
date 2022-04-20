@@ -45,16 +45,6 @@ public class QueryRoleReq extends MultiTenantReq {
     @Ignore
     private boolean isContainsPublicData = true;
 
-    /**
-     * 是否为公共数据
-     *
-     * @return
-     */
-    @Override
-    public boolean isContainsPublicData() {
-        //允许查询公共的角色
-        return isContainsPublicData;
-    }
 
     //不允许查询出 SA 角色
     @Schema(description = "无需设置", hidden = true)

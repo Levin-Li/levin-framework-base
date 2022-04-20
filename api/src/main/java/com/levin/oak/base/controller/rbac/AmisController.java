@@ -97,7 +97,7 @@ public class AmisController extends BaseController {
         AmisMenu amisMenu = new AmisMenu().setLabel(item.getName())
                 .setIcon(item.getIcon())
                 //固定加上index
-                .setUrl((nullSafe(item.getPath(), item.getSubSystem()) + "/index").replace("//", "/"));
+                .setUrl((nullSafe(item.getPath(), item.getDomain()) + "/index").replace("//", "/"));
 
         if (MenuItem.ActionType.Redirect.equals(item.getActionType())) {
             amisMenu.setRedirect(item.getParams());

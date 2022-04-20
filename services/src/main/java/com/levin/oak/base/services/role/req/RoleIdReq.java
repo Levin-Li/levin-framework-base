@@ -63,17 +63,6 @@ private static final long serialVersionUID = -445356492L;
     @Ignore
     private boolean isContainsPublicData = false;
 
-    /**
-     * 是否为公共数据
-     *
-     * @return
-     */
-    @Override
-    public boolean isContainsPublicData() {
-        //允许查询公共的角色
-        return isContainsPublicData;
-    }
-
     @PostConstruct
     public void preQuery() {
         //@todo ID 查询之前初始化数据

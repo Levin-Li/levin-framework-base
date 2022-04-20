@@ -355,7 +355,7 @@ public class AuthServiceImpl
         for (Plugin plugin : pluginManager.getInstalledPlugins()) {
 
             MenuRes menu = simpleDao.selectFrom(MenuRes.class)
-                    .eq(E_MenuRes.subSystem, plugin.getId())
+                    .eq(E_MenuRes.domain, plugin.getId())
                     .isNull(E_Role.tenantId).findOne();
 
             if (menu != null) {

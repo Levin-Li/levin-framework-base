@@ -61,17 +61,6 @@ public class QueryMenuResReq extends MultiTenantReq{
     @Ignore
     private boolean isContainsPublicData = true;
 
-    /**
-     * 是否为公共数据
-     *
-     * @return
-     */
-    @Override
-    public boolean isContainsPublicData() {
-        //允许查询公共的角色
-        return isContainsPublicData;
-    }
-
     @Ignore
     @Schema(description = "排序字段")
     private String orderBy;
