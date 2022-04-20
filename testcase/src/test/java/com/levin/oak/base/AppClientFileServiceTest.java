@@ -55,6 +55,8 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Resource;
+
 /**
  *  客户端文件测试
  *

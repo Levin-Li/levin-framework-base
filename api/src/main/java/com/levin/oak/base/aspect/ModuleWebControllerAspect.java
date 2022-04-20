@@ -264,7 +264,7 @@ public class ModuleWebControllerAspect {
                     .setTitle(title)
                     .setVisitor(visitor)
                     .setDomain(request.getServerName())
-                    .setRemoteAddr(IPAddrUtils.try2GetUserRealIPAddr(request))
+                    .setRemoteAddr(IPAddrUtils.try2GetUserRealIPAddr(request,false))
                     .setServerAddr(request.getLocalAddr())
                     .setRequestMethod(request.getMethod())
                     .setRequestUri(request.getRequestURI() + "?" + request.getQueryString())
