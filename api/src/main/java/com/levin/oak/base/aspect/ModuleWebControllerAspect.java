@@ -1,6 +1,8 @@
 package com.levin.oak.base.aspect;
 
 import com.google.gson.Gson;
+import com.levin.commons.plugin.Plugin;
+import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.service.domain.Desc;
 import com.levin.commons.service.support.*;
 import com.levin.commons.utils.ExceptionUtils;
@@ -17,6 +19,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -24,11 +27,13 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.ResolvableType;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
@@ -38,11 +43,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.function.Supplier;
 
 import static com.levin.oak.base.ModuleOption.HTTP_REQUEST_INFO_RESOLVER;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
+/**
+ * 支持全局的模块拦截
+ * <p>
+ * 控制器请求对象的变量注入和日志记录
+ */
 @Aspect
 @Slf4j
 @Component(PLUGIN_PREFIX + "ModuleWebControllerAspect")
@@ -50,7 +61,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 public class ModuleWebControllerAspect {
 
     @Resource
-    ApplicationContext context;
+    GenericApplicationContext context;
 
     @Resource
     VariableInjector variableInjector;
@@ -79,25 +90,30 @@ public class ModuleWebControllerAspect {
     @Resource
     BizTenantService bizTenantService;
 
-    final AsyncHandler<CreateAccessLogReq> asyncHandler = new AsyncHandler<>();
-
-    static final Gson gson = new Gson();
-
     @Resource
     FrameworkProperties frameworkProperties;
 
     @Resource
     ServerProperties serverProperties;
 
+    @Resource
+    PluginManager pluginManager;
+
+
+    final AsyncHandler<CreateAccessLogReq> asyncHandler = new AsyncHandler<>();
+
+    //全局，线程安全变量
+    private static final Gson gson = new Gson();
+
     /**
-     * 存储本模块的变量解析器
+     * 存储模块的变量解析器
      */
-    private List<VariableResolver> moduleResolverList = new ArrayList<>(7);
+    private MultiValueMap<String, VariableResolver> moduleResolverMap = new LinkedMultiValueMap<>();
 
     @PostConstruct
     void init() {
-
-        frameworkProperties.getLog().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
+        //
+        this.frameworkProperties.getLog().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
         //设置处理器
         this.asyncHandler
@@ -105,19 +121,16 @@ public class ModuleWebControllerAspect {
                 .setDefaultScheduler(scheduledExecutorService)
                 .setTaskDelay(1500)
                 .setSyncTaskExecutor(req ->
-                        scheduledExecutorService.submit(() -> accessLogService.create(req))
+                        scheduledExecutorService.submit(() -> {
+
+                            accessLogService.create(req);
+
+                        })
                 );
-
-        //增加 HttpRequestInfoResolver
-        moduleResolverList.add(httpRequestInfoResolver);
-
-        //只找出本模块的解析器
-        List<List<VariableResolver>> resolvers = SpringContextHolder.findBeanByBeanName(context, ResolvableType.forClassWithGenerics(Iterable.class, VariableResolver.class).getType(), PLUGIN_PREFIX);
-
-        resolvers.forEach(moduleResolverList::addAll);
 
         log.info("init...");
     }
+
 
     /**
      * 模块包
@@ -149,27 +162,102 @@ public class ModuleWebControllerAspect {
 
 
     /**
+     * 获取模块的变量解析器
+     *
+     * @param joinPoint
+     * @return
+     */
+    private List<VariableResolver> getModuleResolverList(JoinPoint joinPoint) {
+
+        Signature signature = joinPoint.getSignature();
+
+        final String className = signature.getDeclaringTypeName();
+
+        Plugin plugin = pluginManager.getInstalledPlugins()
+                .stream()
+                .filter(plugin1 -> className.startsWith(plugin1.getPackageName() + "."))
+                .findFirst()
+                .orElse(null);
+
+        if (plugin == null) {
+            return Collections.emptyList();
+        }
+
+        final String packageName = plugin.getPackageName();
+
+        if (!moduleResolverMap.containsKey(packageName)) {
+            //放入一个空
+            moduleResolverMap.addAll(packageName, Collections.emptyList());
+
+            //按bean名查找
+            SpringContextHolder.<List<VariableResolver>>findBeanByBeanName(context
+                    , ResolvableType.forClassWithGenerics(Iterable.class, VariableResolver.class).getType()
+                    , packageName)
+                    .forEach(list -> moduleResolverMap.addAll(packageName, list));
+
+            //按bean名查找
+            SpringContextHolder.<VariableResolver>findBeanByBeanName(context
+                    , ResolvableType.forClass(VariableResolver.class).getType()
+                    , packageName)
+                    .forEach(v -> moduleResolverMap.add(packageName, v));
+
+            //按包名查找
+//            SpringContextHolder.<VariableResolver>findBeanByPkgName(context
+//                    , ResolvableType.forClass(VariableResolver.class).getType()
+//                    , packageName)
+//                    .forEach(v -> moduleResolverMap.add(packageName, v));
+        }
+
+        return moduleResolverMap.getOrDefault(packageName, Collections.emptyList());
+
+    }
+
+    /**
      * 变量注入
      *
      * @param joinPoint
      * @throws Throwable
      */
-    @Before("modulePackagePointcut() && controllerPointcut() && requestMappingPointcut()")
+//    @Before("modulePackagePointcut() && controllerPointcut() && requestMappingPointcut()")
+    @Before("controllerPointcut() && requestMappingPointcut()")
     public void injectVar(JoinPoint joinPoint) {
 
-        if (log.isDebugEnabled()) {
-            log.debug("开始为方法 {} 注入变量...", joinPoint.getSignature());
+        final String path = getRequestPath();
+
+        Signature signature = joinPoint.getSignature();
+
+        final String className = signature.getDeclaringTypeName();
+
+        if (className.startsWith("springfox.")) {
+            return;
         }
 
-        Optional.ofNullable(joinPoint.getArgs()).ifPresent(args -> {
-            Arrays.stream(args)
-                    .filter(Objects::nonNull)
-                    .forEachOrdered(arg -> {
-                        variableInjector.injectByVariableResolvers(arg
-                                , () -> moduleResolverList
-                                , () -> variableResolverManager.getVariableResolvers());
-                    });
-        });
+        //去除应用路径后，进行匹配
+        if (path.equals(serverProperties.getError().getPath())
+                || !frameworkProperties.getInject().isMatched(className, path)) {
+            return;
+        }
+
+        if (log.isDebugEnabled()) {
+            log.debug("开始为方法 {} 注入变量...", signature);
+        }
+
+        //模块
+        final Supplier<List<VariableResolver>> moduleResolverList = () -> getModuleResolverList(joinPoint);
+
+        //http
+        final Supplier<List<VariableResolver>> httpResolver = () -> Arrays.asList(httpRequestInfoResolver);
+
+        //全局
+        final Supplier<List<VariableResolver>> globalResolver = () -> variableResolverManager.getVariableResolvers();
+
+        Optional.ofNullable(joinPoint.getArgs()).ifPresent(args ->
+                Arrays.stream(args)
+                        .filter(Objects::nonNull)
+                        .forEachOrdered(arg ->
+                                variableInjector.injectByVariableResolvers(arg, moduleResolverList, httpResolver, globalResolver)
+                        )
+        );
 
     }
 
@@ -183,16 +271,7 @@ public class ModuleWebControllerAspect {
 //    @Around("modulePackagePointcut() && controllerPointcut() && requestMappingPointcut()")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        String contextPath = serverProperties.getServlet().getContextPath() + "/";
-
-        contextPath = contextPath.replace("//", "/");
-
-        String path = request.getRequestURI().replace("//", "/");
-
-        //去除应用路径
-        if (path.startsWith(contextPath)) {
-            path = path.substring(contextPath.length() - 1);
-        }
+        final String path = getRequestPath();
 
         final String className = joinPoint.getSignature().getDeclaringTypeName();
 
@@ -264,7 +343,7 @@ public class ModuleWebControllerAspect {
                     .setTitle(title)
                     .setVisitor(visitor)
                     .setDomain(request.getServerName())
-                    .setRemoteAddr(IPAddrUtils.try2GetUserRealIPAddr(request,false))
+                    .setRemoteAddr(IPAddrUtils.try2GetUserRealIPAddr(request, false))
                     .setServerAddr(request.getLocalAddr())
                     .setRequestMethod(request.getMethod())
                     .setRequestUri(request.getRequestURI() + "?" + request.getQueryString())
@@ -300,6 +379,23 @@ public class ModuleWebControllerAspect {
         }
 
         return result;
+    }
+
+    private String getRequestPath() {
+
+        String contextPath = serverProperties.getServlet().getContextPath() + "/";
+
+        contextPath = contextPath.replace("//", "/");
+
+        String path = request.getRequestURI().replace("//", "/");
+
+        //去除应用路径
+        if (path.startsWith(contextPath)) {
+            path = path.substring(contextPath.length() - 1);
+        }
+
+        return path;
+
     }
 
     /**

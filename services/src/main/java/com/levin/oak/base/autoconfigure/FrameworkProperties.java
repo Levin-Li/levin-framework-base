@@ -26,8 +26,8 @@ public class FrameworkProperties implements Serializable {
     /**
      * 请求变量注入
      */
-//    @NestedConfigurationProperty
-//    private final Cfg inject = new Cfg("inject", "InjectVar注解变量注入", "Http请求对象[InjectVar]注解变量注入");
+    @NestedConfigurationProperty
+    private final Cfg inject = new Cfg("inject", "InjectVar注解变量注入", "Http请求对象[InjectVar]注解变量注入");
 
     /**
      * 签名配置

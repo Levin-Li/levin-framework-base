@@ -1,5 +1,6 @@
 package com.levin.oak.base.config;
 
+import com.levin.commons.plugin.PluginManager;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.InjectVarService;
@@ -42,11 +43,15 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     @Resource
     FrameworkProperties frameworkProperties;
 
+    @Resource
+    PluginManager pluginManager;
+
     @Value("${springfox.documentation.swagger-ui.base-url:/swagger-ui}")
     private String swaggerUiBaseUrl;
 
     @Value("${springfox.documentation.open-api.v3.path:/v3/api-docs}")
     private String openApiPath;
+
 
     @PostConstruct
     void init() {
@@ -56,16 +61,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         frameworkProperties.getTenantBindDomain().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
         frameworkProperties.getAcl().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
-
-//        Assert.isTrue(
-//                StringUtils.hasText(swaggerUiBaseUrl)
-//                        && !swaggerUiBaseUrl.replace("/", "").trim().isEmpty(),
-//                "swagger 基本路径[springfox.documentation.swagger-ui.base-url]必须配置，并且不允许为根路径，建议配置为：swagger");
-//
-//        Assert.isTrue(
-//                StringUtils.hasText(openApiPath)
-//                        && !openApiPath.replace("/", "").trim().isEmpty(),
-//                "openApiPath 基本路径[springfox.documentation.open-api.v3.path]必须配置，并且不允许为根路径，建议配置为：open-api/v3/api-docs");
 
     }
 

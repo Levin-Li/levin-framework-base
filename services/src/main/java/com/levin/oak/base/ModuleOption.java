@@ -9,7 +9,6 @@ package com.levin.oak.base;
  */
 public interface ModuleOption {
 
-
     /**
      * module package name
      */
@@ -80,6 +79,5 @@ public interface ModuleOption {
      * 注意路径必须以 / 结尾
      */
     String HTTP_REQUEST_INFO_RESOLVER = PLUGIN_PREFIX + "HttpRequestInfoResolver";
-
 
 }

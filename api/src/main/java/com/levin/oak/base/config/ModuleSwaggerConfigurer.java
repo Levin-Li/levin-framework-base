@@ -1,18 +1,38 @@
 package com.levin.oak.base.config;
 
 import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
+import com.levin.commons.plugin.Plugin;
+import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.SignatureReq;
 import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanClassLoaderAware;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -28,12 +48,16 @@ import springfox.documentation.spring.web.plugins.Docket;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.lang.annotation.Annotation;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import static org.springframework.beans.factory.support.AbstractBeanDefinition.DEPENDENCY_CHECK_OBJECTS;
 //import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 //Swagger3
@@ -43,10 +67,21 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @Slf4j
 @Configuration(PLUGIN_PREFIX + "ModuleSwaggerConfigurer")
+//@Component(PLUGIN_PREFIX + "ModuleSwaggerConfigurer")
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleSwaggerConfigurer", matchIfMissing = true)
-
+//@AutoConfigureAfter({Plugin.class, PluginManager.class})
 @ConditionalOnClass({Docket.class})
-public class ModuleSwaggerConfigurer implements ModelPropertyBuilderPlugin, WebMvcConfigurer {
+public class ModuleSwaggerConfigurer
+        implements
+        ModelPropertyBuilderPlugin,
+        WebMvcConfigurer,
+        ApplicationContextAware,
+//        BeanFactoryPostProcessor,
+        ResourceLoaderAware,
+        BeanClassLoaderAware,
+        EnvironmentAware,
+//        BeanDefinitionRegistryPostProcessor,
+        ApplicationListener<ContextRefreshedEvent> {
 
     public static final String[] SWAGGER_UI_MAPPING_PATHS = {};
 
@@ -66,17 +101,193 @@ public class ModuleSwaggerConfigurer implements ModelPropertyBuilderPlugin, WebM
     FrameworkProperties frameworkProperties;
 
     @Resource
+    PluginManager pluginManager;
+
+    ApplicationContext context;
+
+    ResourceLoader resourceLoader;
+
+    ClassLoader beanClassLoader;
+
+    @Resource
     Environment environment;
-
-
-    private final WeakHashMap<String, ?> tempCache = new WeakHashMap<>();
 
     private static final String GROUP_NAME = ModuleOption.NAME + "-" + ModuleOption.ID;
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.context = applicationContext;
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
+
+    @Override
+    public void setResourceLoader(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
+
+    @Override
+    public void setBeanClassLoader(ClassLoader classLoader) {
+        this.beanClassLoader = classLoader;
+    }
+
+    /**
+     * Handle an application event.
+     *
+     * @param event the event to respond to
+     */
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+
+        log.debug("onApplicationEvent ContextRefreshedEvent..." + event.getApplicationContext());
+
+        if (event.getApplicationContext() instanceof GenericApplicationContext) {
+
+            if (context == null) {
+                context = (GenericApplicationContext) event.getApplicationContext();
+            }
+        }
+    }
+
     @PostConstruct
     void init() {
-        log.info("init...");
+        log.info(" ModuleSwaggerConfigurer init...");
     }
+
+//    @Override
+    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+
+        for (String beanName : registry.getBeanDefinitionNames()) {
+
+            BeanDefinition bd = registry.getBeanDefinition(beanName);
+
+            if (bd == null || !StringUtils.hasText(bd.getBeanClassName())) {
+                continue;
+            }
+
+            String beanClassName = bd.getBeanClassName();
+
+            Class beanClass = null;
+
+            try {
+                beanClass = this.resourceLoader.getClassLoader().loadClass(beanClassName);
+            } catch (ClassNotFoundException e) {
+                continue;
+            }
+
+            if (!Plugin.class.isAssignableFrom(beanClass)) {
+                continue;
+            }
+//
+            final Supplier<Docket> docketSupplier = () -> newPluginDocket(context.getBean(beanName, Plugin.class));
+
+            RootBeanDefinition beanDefinition = (RootBeanDefinition) BeanDefinitionBuilder.rootBeanDefinition(DocketFactoryBean.class)
+                    .addDependsOn(beanName)
+                    .setDependencyCheck(DEPENDENCY_CHECK_OBJECTS)
+                    .addPropertyValue("supplier", docketSupplier)
+                    .setLazyInit(false)
+                    .getBeanDefinition();
+
+            beanDefinition.setTargetType(Docket.class);
+
+            registry.registerBeanDefinition(beanName.concat("Docket"), beanDefinition);
+        }
+
+//
+//        for (String beanName : registry.getBeanDefinitionNames()) {
+//            if (beanName.startsWith("springfox.")) {
+//                registry.getBeanDefinition(beanName).setLazyInit(true);
+//            }
+//        }
+
+    }
+
+//    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+
+        if (context == null && beanFactory instanceof ApplicationContext) {
+            context = (ApplicationContext) beanFactory;
+        }
+
+        //beanFactory.getBeanDefinition("").setLazyInit(true);
+
+        // 可以修改应用程序上下文的内部bean工厂。所有的bean定义都将被加载，但是还没有bean被实例化,允许重写或添加属性。
+
+//        beanFactory.getBeanProvider(Plugin.class).orderedStream().forEach(plugin -> {
+//            log.info("Register Plugin {}-{} Swagger Docket Bean...", plugin.getId(), plugin.getName());
+//        });
+
+    }
+
+
+    @Data
+    public static class DocketFactoryBean
+            implements FactoryBean<Docket>, BeanFactoryAware {
+
+        Supplier<Docket> supplier;
+
+        BeanFactory beanFactory;
+
+        @Override
+        public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+            this.beanFactory = beanFactory;
+        }
+
+        @Override
+        public boolean isSingleton() {
+            return false;
+        }
+
+        @Override
+        public Docket getObject() throws Exception {
+            return supplier.get();
+        }
+
+        @Override
+        public Class<?> getObjectType() {
+            return Docket.class;
+        }
+    }
+
+    /**
+     * @param plugin
+     * @return
+     */
+    private Docket newPluginDocket(Plugin plugin) {
+        return new Docket(DocumentationType.OAS_30)
+                .apiInfo(apiInfo(plugin))
+                .enable(enabled)
+                .groupName(plugin.getName() + "-" + plugin.getId())
+                .select()
+                //apis： 添加swagger接口提取范围
+                .apis(RequestHandlerSelectors.basePackage(plugin.getPackageName()))
+                //.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+//                .paths(path -> path.startsWith(API_PATH))
+                .paths(PathSelectors.any())
+                .build()
+                .globalRequestParameters(getGlobalRequestParameters());
+    }
+
+    /**
+     * api 信息
+     *
+     * @return
+     */
+    private static ApiInfo apiInfo(Plugin plugin) {
+
+        String name = plugin.getName() + "-" + plugin.getId();
+
+        return new ApiInfoBuilder()
+                .title("插件[" + name + "]接口文档")
+                .description("插件[" + name + "]接口文档")
+                .contact(new Contact("Levin", "https://github.com/Levin-Li/simple-dao", "99668980@qq.com"))
+                .version(plugin.getVersion())
+                .build();
+    }
+
 
     @Bean(PLUGIN_PREFIX + "Docket")
     //默认激活的 profile
@@ -88,13 +299,28 @@ public class ModuleSwaggerConfigurer implements ModelPropertyBuilderPlugin, WebM
                 .groupName(GROUP_NAME)
                 .select()
                 //apis： 添加swagger接口提取范围
-                .apis(RequestHandlerSelectors.basePackage(PACKAGE_NAME))
+                .apis(RequestHandlerSelectors.basePackage(ModuleOption.PACKAGE_NAME))
                 //.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
 //                .paths(path -> path.startsWith(API_PATH))
                 .paths(PathSelectors.any())
                 .build()
                 .globalRequestParameters(getGlobalRequestParameters());
     }
+
+    /**
+     * api 信息
+     *
+     * @return
+     */
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("插件[" + GROUP_NAME + "]接口文档")
+                .description("插件[" + GROUP_NAME + "]接口文档")
+                .contact(new Contact("Levin", "https://github.com/Levin-Li/simple-dao", "99668980@qq.com"))
+                .version(ModuleOption.VERSION)
+                .build();
+    }
+
 
     /**
      * 生成全局通用参数
@@ -108,6 +334,10 @@ public class ModuleSwaggerConfigurer implements ModelPropertyBuilderPlugin, WebM
         if (StringUtils.hasText(tokenName)) {
             parameters.add(newParameter(tokenName, "鉴权token，从登录接口获取",
                     Arrays.stream(environment.getActiveProfiles()).anyMatch(env -> env.contains("prod")), null));
+        }
+
+        if (frameworkProperties == null) {
+            frameworkProperties = context.getBean(FrameworkProperties.class);
         }
 
         if (frameworkProperties.getSign().isEnable()) {
@@ -143,20 +373,6 @@ public class ModuleSwaggerConfigurer implements ModelPropertyBuilderPlugin, WebM
                 .required(required)
                 .in(ParameterType.HEADER)
                 .query(q -> q.model(m -> m.scalarModel(scalarType == null ? ScalarType.STRING : scalarType)))
-                .build();
-    }
-
-    /**
-     * api 信息
-     *
-     * @return
-     */
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("插件[" + GROUP_NAME + "]接口文档")
-                .description("插件[" + GROUP_NAME + "]接口文档")
-                .contact(new Contact("Levin", "https://github.com/Levin-Li/simple-dao", "99668980@qq.com"))
-                .version(ModuleOption.VERSION)
                 .build();
     }
 

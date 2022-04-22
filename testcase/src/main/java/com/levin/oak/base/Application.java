@@ -27,17 +27,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class Application {
 
     public static void main(String[] args) {
-
         SpringApplication.run(Application.class, args);
-
     }
 
-    @Autowired
-    Environment environment;
-
-
     @Bean
-    PluginManager pluginManager() {
+    static PluginManager pluginManager() {
 
         return new PluginManagerImpl() {
             @Override
@@ -49,7 +43,7 @@ public class Application {
     }
 
     @Bean
-    VariableResolverConfigurer variableResolverConfigurer() {
+    static VariableResolverConfigurer variableResolverConfigurer() {
         return variableResolverManager -> {
 
             //加入全局变量

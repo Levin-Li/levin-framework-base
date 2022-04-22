@@ -1,7 +1,6 @@
 package com.levin.oak.base.biz.rbac.info;
 
 import com.levin.commons.rbac.DefaultSimpleIdentifiableObject;
-import com.levin.commons.rbac.Res;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.Accessors;

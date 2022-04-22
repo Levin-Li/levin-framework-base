@@ -12,11 +12,13 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.annotation.PostConstruct;
@@ -29,7 +31,6 @@ import java.net.SocketException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
-import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 /**
@@ -40,7 +41,9 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Slf4j
 @Component(PLUGIN_PREFIX + "ModuleWebControllerAdvice")
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleWebControllerAdvice", matchIfMissing = true)
-@RestControllerAdvice(PACKAGE_NAME)
+//@RestControllerAdvice(PACKAGE_NAME)
+//过滤所有的控制器
+@RestControllerAdvice(annotations = {Controller.class, RestController.class})
 public class ModuleWebControllerAdvice {
 
     @Resource
