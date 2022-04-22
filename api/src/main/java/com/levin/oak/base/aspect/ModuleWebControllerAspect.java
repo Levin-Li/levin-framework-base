@@ -192,13 +192,13 @@ public class ModuleWebControllerAspect {
             //按bean名查找
             SpringContextHolder.<List<VariableResolver>>findBeanByBeanName(context
                     , ResolvableType.forClassWithGenerics(Iterable.class, VariableResolver.class).getType()
-                    , "plugin." + packageName)
+                    , "plugin." + packageName, packageName)
                     .forEach(list -> moduleResolverMap.addAll(packageName, list));
 
             //按bean名查找
             SpringContextHolder.<VariableResolver>findBeanByBeanName(context
                     , ResolvableType.forClass(VariableResolver.class).getType()
-                    , "plugin." + packageName)
+                    , "plugin." + packageName, packageName)
                     .forEach(v -> moduleResolverMap.add(packageName, v));
 
             //按包名查找
