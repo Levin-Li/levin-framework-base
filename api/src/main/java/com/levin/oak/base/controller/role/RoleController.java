@@ -203,7 +203,6 @@ public class RoleController extends BaseController {
         if (!isAuthorized) {
             throw new AuthorizationException("role-" + roleCode, "角色非法使用未授权的资源");
         }
-
     }
 
     /**

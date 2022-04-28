@@ -20,9 +20,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.beans.factory.support.RootBeanDefinition;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.*;
@@ -32,7 +30,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -47,6 +44,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -96,6 +95,12 @@ public class ModuleSwaggerConfigurer
      */
     @Value("${swagger.enabled:true}")
     private boolean enabled;
+
+    /**
+     * swagger 枚举值和描述之间的分隔符
+     */
+    @Value("${swagger.enumDelimiter:}")
+    private String enumDelimiter;
 
     @Resource
     FrameworkProperties frameworkProperties;
@@ -154,10 +159,16 @@ public class ModuleSwaggerConfigurer
 
     @PostConstruct
     void init() {
+
         log.info(" ModuleSwaggerConfigurer init...");
+
+        if (!StringUtils.hasText(enumDelimiter)) {
+            enumDelimiter = "--";
+        }
+
     }
 
-//    @Override
+    //    @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 
         for (String beanName : registry.getBeanDefinitionNames()) {
@@ -205,7 +216,7 @@ public class ModuleSwaggerConfigurer
 
     }
 
-//    @Override
+    //    @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 
         if (context == null && beanFactory instanceof ApplicationContext) {
@@ -398,8 +409,13 @@ public class ModuleSwaggerConfigurer
                 && EnumDesc.class.isAssignableFrom(enumType)
             //  && enumType.getName().startsWith(PACKAGE_NAME)
         ) {
+            Enumerated enumerated = pd.hasField() ? pd.getField().getAnnotation(Enumerated.class)
+                    : (pd.hasGetter() ? pd.getGetter().getAnnotation(Enumerated.class) : pd.getSetter().getAnnotation(Enumerated.class));
+
+            boolean isIndex = enumerated == null || EnumType.ORDINAL.ordinal() == enumerated.value().ordinal();
+
             final List<String> displayValues = Arrays.stream((Enum[]) enumType.getEnumConstants())
-                    .map(e -> e.name() + " -- " + ((EnumDesc) e).getDesc() + "")
+                    .map(e -> (isIndex ? e.ordinal() : e.name()) + enumDelimiter + ((EnumDesc) e).getDesc() + "")
                     .collect(Collectors.toList());
 
             final AllowableListValues allowableListValues = new AllowableListValues(displayValues, enumType.getTypeName());
