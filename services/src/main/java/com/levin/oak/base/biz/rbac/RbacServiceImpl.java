@@ -474,8 +474,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         final Map<Long, MenuResInfo> cacheMap = new LinkedHashMap<>();
 
         //2、放入Map
-        menuRes.stream()
-                .forEachOrdered(m -> cacheMap.put(m.getId(), m));
+        menuRes.forEach(m -> cacheMap.put(m.getId(), m));
 
         final Map<Long, MenuResInfo> cacheMap2 = new LinkedHashMap<>(cacheMap);
 
@@ -495,7 +494,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
             MenuResInfo parent = cacheMap2.get(parentId);
 
             if (parent.getChildren() == null) {
-                parent.setChildren(new HashSet<>());
+                parent.setChildren(new LinkedHashSet<>());
             }
 
             //设置关系
@@ -530,7 +529,6 @@ public class RbacServiceImpl extends BaseService implements RbacService {
 
         //清除临时
         cacheMap2.clear();
-
 
         return cacheMap.values().stream()
                 .filter(Objects::nonNull)

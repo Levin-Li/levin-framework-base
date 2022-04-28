@@ -37,7 +37,6 @@ public class MenuResInfo implements Serializable {
 
     private static final long serialVersionUID = -887712701L;
 
-
     @NotNull
     @Schema(description = "id", required = true)
     private Long id;
