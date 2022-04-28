@@ -474,7 +474,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         final Map<Long, MenuResInfo> cacheMap = new LinkedHashMap<>();
 
         //2、放入Map
-        menuRes.parallelStream()
+        menuRes.stream()
                 .forEachOrdered(m -> cacheMap.put(m.getId(), m));
 
         final Map<Long, MenuResInfo> cacheMap2 = new LinkedHashMap<>(cacheMap);
@@ -516,7 +516,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
                     : JsonStrArrayUtils.parse(info.getRequireAuthorizations(), StringUtils::hasText, (txt) -> txt);
 
             if (requirePermissions.isEmpty()
-                    || requirePermissions.parallelStream().allMatch(requirePermission -> this.isAuthorized(roleList, permissionList, requirePermission, null))) {
+                    || requirePermissions.stream().allMatch(requirePermission -> this.isAuthorized(roleList, permissionList, requirePermission, null))) {
                 //如果没有要求权限，或是权限都满足，要求显示菜单
                 info.setEnable(true);
             } else if (isShowNotPermissionMenu && Boolean.TRUE.equals(info.getAlwaysShow())) {
@@ -532,7 +532,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         cacheMap2.clear();
 
 
-        return cacheMap.values().parallelStream()
+        return cacheMap.values().stream()
                 .filter(Objects::nonNull)
                 .filter(m -> m.getParentId() == null)
                 .filter(m -> m.getChildren() != null && !m.getChildren().isEmpty())
