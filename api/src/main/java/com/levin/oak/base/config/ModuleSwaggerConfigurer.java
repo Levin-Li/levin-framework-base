@@ -412,7 +412,7 @@ public class ModuleSwaggerConfigurer
             Enumerated enumerated = pd.hasField() ? pd.getField().getAnnotation(Enumerated.class)
                     : (pd.hasGetter() ? pd.getGetter().getAnnotation(Enumerated.class) : pd.getSetter().getAnnotation(Enumerated.class));
 
-            boolean isIndex = enumerated == null || EnumType.ORDINAL.ordinal() == enumerated.value().ordinal();
+            boolean isIndex = false;//enumerated == null || EnumType.ORDINAL.ordinal() == enumerated.value().ordinal();
 
             final List<String> displayValues = Arrays.stream((Enum[]) enumType.getEnumConstants())
                     .map(e -> (isIndex ? e.ordinal() : e.name()) + enumDelimiter + ((EnumDesc) e).getDesc() + "")
