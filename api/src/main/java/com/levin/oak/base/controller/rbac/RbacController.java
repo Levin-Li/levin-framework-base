@@ -21,11 +21,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
@@ -68,6 +70,20 @@ public class RbacController extends BaseController {
     @Resource
     BizTenantService bizTenantService;
 
+
+    /**
+     * 登录
+     *
+     * @param req
+     * @return ApiResp
+     */
+    @PostMapping(value = "login", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(tags = {"授权管理"}, summary = "用户登录")
+    @ResAuthorize(ignored = true)
+    public ApiResp<LoginInfo> login2(@RequestBody LoginReq req) {
+        return login(req);
+    }
+
     /**
      * 登录
      *
@@ -77,10 +93,8 @@ public class RbacController extends BaseController {
     @PostMapping("login")
     @Operation(tags = {"授权管理"}, summary = "用户登录")
     @ResAuthorize(ignored = true)
-    public ApiResp<LoginInfo> login(@RequestBody LoginReq req) {
-
+    public ApiResp<LoginInfo> login(@NotNull LoginReq req) {
         String accessToken = authService.auth(req.getTenantId(), req.getAccount(), req.getPassword(), req.getUa());
-
         return ApiResp.ok(new LoginInfo()
                 .setAccessToken(accessToken)
                 .setUserInfo(authService.getUserInfo())

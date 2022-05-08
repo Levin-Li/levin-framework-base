@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.util.*;
@@ -134,6 +135,16 @@ public class I18nResController extends BaseController{
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull I18nResIdReq req) {
         return ApiResp.ok(checkResult(i18nResService.delete(req), DELETE_ACTION));
+    }
+
+    /**
+     * 删除
+     * @param req I18nResIdReq
+     */
+    @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> delete2(@RequestBody I18nResIdReq req) {
+        return delete(req);
     }
 
     /**
