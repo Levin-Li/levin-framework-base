@@ -43,6 +43,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static com.levin.oak.base.ModuleOption.HTTP_REQUEST_INFO_RESOLVER;
@@ -251,14 +252,18 @@ public class ModuleWebControllerAspect {
         //全局
         final Supplier<List<VariableResolver>> globalResolver = () -> variableResolverManager.getVariableResolvers();
 
-        Optional.ofNullable(joinPoint.getArgs()).ifPresent(args ->
-                Arrays.stream(args)
-                        .filter(Objects::nonNull)
-                        .forEachOrdered(arg ->
-                                variableInjector.injectByVariableResolvers(arg, moduleResolverList, httpResolver, globalResolver)
-                        )
-        );
+        final Consumer<Object> injector = (arg) -> variableInjector.injectByVariableResolvers(arg, moduleResolverList, httpResolver, globalResolver);
 
+        Optional.ofNullable(joinPoint.getArgs()).ifPresent(args ->
+                Arrays.stream(args).filter(Objects::nonNull).forEachOrdered(arg -> {
+                    //支持第一级是集合对象的参数
+                    if (arg instanceof Collection) {
+                        ((Collection) arg).stream().filter(Objects::nonNull).forEachOrdered(injector);
+                    } else {
+                        injector.accept(arg);
+                    }
+                })
+        );
     }
 
 
