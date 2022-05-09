@@ -252,7 +252,7 @@ public class ModuleWebControllerAspect {
         //全局
         final Supplier<List<VariableResolver>> globalResolver = () -> variableResolverManager.getVariableResolvers();
 
-        final Consumer<Object> injector = (arg) -> variableInjector.injectByVariableResolvers(arg, moduleResolverList, httpResolver, globalResolver);
+        final Consumer<Object> injector = (bean) -> variableInjector.injectByVariableResolvers(bean, moduleResolverList, httpResolver, globalResolver);
 
         Optional.ofNullable(joinPoint.getArgs()).ifPresent(args ->
                 Arrays.stream(args).filter(Objects::nonNull).forEachOrdered(arg -> {
