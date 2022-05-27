@@ -124,6 +124,26 @@
             <scope>provided</scope>
         </dependency>
 
+<!--        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+            <version>1.6.2</version>
+        </dependency>-->
+
+        <!--        https://gitee.com/ramostear/Happy-Captcha?_from=gitee_search-->
+        <dependency>
+            <groupId>com.ramostear</groupId>
+            <artifactId>Happy-Captcha</artifactId>
+            <version>1.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.16.7</version>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 

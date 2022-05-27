@@ -23,6 +23,10 @@ public abstract class SimpleEntity
     @GeneratedValue
     protected Long id;
 
+    @Schema(description = "类型")
+    @Column(nullable = false, length = 64)
+    protected String type;
+
     @Schema(description = "分类名称")
     @Column(nullable = false, length = 64)
     protected String category;
@@ -31,6 +35,9 @@ public abstract class SimpleEntity
     @Column(nullable = false, length = 64)
     @Contains
     protected String groupName;
+
+    @Schema(description = "图标")
+    protected String icon;
 
     @Schema(description = "访问路径")
     @Column(nullable = false)

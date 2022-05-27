@@ -2,29 +2,36 @@ package com.levin.oak.base.services.simpleform.info;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import lombok.*;
+import lombok.experimental.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
+import javax.validation.constraints.*;
 
 /////////////////////////////////////////////////////
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.oak.base.entities.*;
+
 ////////////////////////////////////
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 简单表单
- *
- * @Author Auto gen by simple-dao-codegen 2022-4-1 17:40:27
- */
-@Schema(description = "简单表单")
+* 简单表单
+* @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:01
+*/
+@Schema(description ="简单表单")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
@@ -37,92 +44,100 @@ public class SimpleFormInfo implements Serializable {
 
 
     @Schema(description = "提交地址")
-    private String commitApi;
+    String commitApi;
 
 
     @NotNull
     @Schema(description = "id", required = true)
-    private Long id;
+    Long id;
+
+
+    @NotBlank
+    @Size(max = 64)
+    @Schema(description = "类型", required = true)
+    String type;
 
 
     @NotBlank
     @Size(max = 64)
     @Schema(description = "分类名称", required = true)
-    private String category;
+    String category;
 
 
     @NotBlank
     @Size(max = 64)
     @Schema(description = "分组名称", required = true)
-    private String groupName;
+    String groupName;
 
 
     @NotBlank
     @Schema(description = "访问路径", required = true)
-    private String path;
+    String path;
 
 
     @Schema(description = "内容")
-    private String content;
+    String content;
 
 
-    @Size(max = 64)
+    @Size(max = 128)
     @Schema(description = "机构ID")
-    private String orgId;
+    String orgId;
 
 
-    @Size(max = 64)
+    @InjectVar()
+    @Size(max = 128)
     @Schema(description = "租户ID")
-    private String tenantId;
+    String tenantId;
 
 
-    @Size(max = 64)
+    @Size(max = 128)
     @Schema(description = "系统子域")
-    private String domain;
+    String domain;
 
 
     @NotBlank
     @Size(max = 128)
     @Schema(description = "名称", required = true)
-    private String name;
+    String name;
 
 
     @Size(max = 128)
     @Schema(description = "拼音，格式：全拼(简拼)")
-    private String pinyinName;
+    String pinyinName;
 
 
+    @InjectVar()
     @Size(max = 128)
     @Schema(description = "创建者")
-    private String creator;
+    String creator;
 
 
     @NotNull
     @Schema(description = "创建时间", required = true)
-    private Date createTime;
+    Date createTime;
 
 
     @Schema(description = "更新时间")
-    private Date lastUpdateTime;
+    Date lastUpdateTime;
 
 
     @Schema(description = "排序代码")
-    private Integer orderCode;
+    Integer orderCode;
 
 
     @NotNull
     @Schema(description = "是否允许", required = true)
-    private Boolean enable;
+    Boolean enable;
 
 
     @NotNull
     @Schema(description = "是否可编辑", required = true)
-    private Boolean editable;
+    Boolean editable;
 
 
     @Size(max = 512)
     @Schema(description = "备注")
-    private String remark;
+    String remark;
 
 
 }

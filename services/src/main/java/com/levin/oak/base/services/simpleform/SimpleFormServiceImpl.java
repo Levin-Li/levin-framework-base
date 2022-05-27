@@ -1,45 +1,59 @@
 package com.levin.oak.base.services.simpleform;
 
-import com.levin.commons.dao.DaoSecurityException;
-import com.levin.commons.dao.Paging;
-import com.levin.commons.dao.SimpleDao;
-import com.levin.commons.dao.support.PagingData;
-import com.levin.oak.base.ModuleOption;
-import com.levin.oak.base.entities.E_SimpleForm;
-import com.levin.oak.base.entities.SimpleForm;
-import com.levin.oak.base.services.BaseService;
-import com.levin.oak.base.services.simpleform.info.SimpleFormInfo;
-import com.levin.oak.base.services.simpleform.req.*;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.*;
+
+
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.domain.*;
+
+import javax.annotation.*;
+import java.util.*;
+import java.util.stream.*;
+import org.springframework.cache.annotation.*;
+import org.springframework.transaction.annotation.*;
+import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.util.StringUtils;
+import org.springframework.beans.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
+
+import io.swagger.v3.oas.annotations.*;
+import io.swagger.v3.oas.annotations.tags.*;
+import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import cn.hutool.core.lang.*;
+import javax.persistence.EntityExistsException;
+import javax.persistence.PersistenceException;
 
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
-import static com.levin.oak.base.entities.EntityConst.*;
+
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.SimpleForm;
+
+import com.levin.oak.base.services.simpleform.req.*;
+import com.levin.oak.base.services.simpleform.info.*;
+
+import com.levin.oak.base.*;
+import com.levin.oak.base.services.*;
+
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 简单表单-服务实现
+ *  简单表单-服务实现
  *
- * @author auto gen by simple-dao-codegen 2022-4-2 19:44:59
+ *@author auto gen by simple-dao-codegen 2022-5-23 10:30:01
+ *
  */
 
 //@Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
@@ -52,16 +66,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_SimpleForm.SIMPLE_CLASS_NAME})
 public class SimpleFormServiceImpl extends BaseService implements SimpleFormService {
 
-    @Autowired
+    @Resource
     private SimpleDao simpleDao;
 
-    protected SimpleFormService getSelfProxy() {
+    protected SimpleFormService getSelfProxy(){
         return getSelfProxy(SimpleFormService.class);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public Long create(CreateSimpleFormReq req) {
+    public Long create(CreateSimpleFormReq req){
         SimpleForm entity = simpleDao.create(req);
         return entity.getId();
     }
@@ -69,7 +84,7 @@ public class SimpleFormServiceImpl extends BaseService implements SimpleFormServ
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Long> batchCreate(List<CreateSimpleFormReq> reqList) {
+    public List<Long> batchCreate(List<CreateSimpleFormReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
@@ -84,7 +99,7 @@ public class SimpleFormServiceImpl extends BaseService implements SimpleFormServ
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     @Override
     //只更新缓存
-    @CachePut(unless = "#result == null", condition = "#req.id != null", key = E_SimpleForm.CACHE_KEY_PREFIX + "#req.id")
+    @CachePut(unless = "#result == null" , condition = "#req.id != null" , key = E_SimpleForm.CACHE_KEY_PREFIX + "#req.id")
     public SimpleFormInfo findById(SimpleFormIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findOneByQueryObj(req);
@@ -95,22 +110,16 @@ public class SimpleFormServiceImpl extends BaseService implements SimpleFormServ
     @CacheEvict(condition = "#req.id != null", key = E_SimpleForm.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public int update(UpdateSimpleFormReq req) {
-
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
         return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public int batchUpdate(List<UpdateSimpleFormReq> reqList) {
+    public int batchUpdate(List<UpdateSimpleFormReq> reqList){
         //@Todo 优化批量提交
-        int sum = reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n).sum();
-
-        //Assert.isTrue(sum > 0, BATCH_UPDATE_ACTION + BIZ_NAME + "失败");
-
-        return sum;
+        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n).sum();
     }
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
@@ -118,26 +127,20 @@ public class SimpleFormServiceImpl extends BaseService implements SimpleFormServ
     @CacheEvict(condition = "#req.id != null", key = E_SimpleForm.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public int delete(SimpleFormIdReq req) {
-
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
         return checkResult(simpleDao.deleteByQueryObj(req), DELETE_ACTION);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public int batchDelete(DeleteSimpleFormReq req) {
+    public int batchDelete(DeleteSimpleFormReq req){
         //@Todo 优化批量提交
-        int sum = Stream.of(req.getIdList())
-                .map(id -> simpleDao.copy(req, new SimpleFormIdReq().setId(id)))
-                .map(idReq -> getSelfProxy().delete(idReq))
-                .mapToInt(n -> n)
-                .sum();
-
-        //Assert.isTrue(sum > 0, BATCH_DELETE_ACTION + BIZ_NAME + "失败");
-
-        return sum;
+        return Stream.of(req.getIdList())
+            .map(id -> simpleDao.copy(req, new SimpleFormIdReq().setId(id)))
+            .map(idReq -> getSelfProxy().delete(idReq))
+            .mapToInt(n -> n)
+            .sum();
     }
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
@@ -146,9 +149,22 @@ public class SimpleFormServiceImpl extends BaseService implements SimpleFormServ
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
+    /**
+     * 简单统计
+     *
+     * @param req
+     * @param paging 分页设置，可空
+     * @return pagingData 分页数据
+     */
+    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    @Override
+    public PagingData<StatSimpleFormReq.Result> stat(StatSimpleFormReq req , Paging paging){
+        return simpleDao.findPagingDataByQueryObj(req, paging);
+    }
+
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     @Override
-    public SimpleFormInfo findOne(QuerySimpleFormReq req) {
+    public SimpleFormInfo findOne(QuerySimpleFormReq req){
         return simpleDao.findOneByQueryObj(req);
     }
 

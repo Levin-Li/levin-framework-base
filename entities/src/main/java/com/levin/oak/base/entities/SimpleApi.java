@@ -26,10 +26,11 @@ import javax.persistence.*;
                 @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
                 @Index(columnList = MultiTenantNamedEntity.Fields.domain),
                 @Index(columnList = MultiTenantAndOrganizedEntity.Fields.orgId),
+
+                @Index(columnList = SimpleEntity.Fields.type),
                 @Index(columnList = SimpleEntity.Fields.path),
                 @Index(columnList = SimpleEntity.Fields.category),
                 @Index(columnList = SimpleEntity.Fields.groupName),
-
                 @Index(columnList = E_SimpleApi.language),
 
         }

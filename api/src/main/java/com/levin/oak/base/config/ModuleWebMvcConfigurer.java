@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.*;
 
@@ -78,13 +79,39 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         //注意每个资源路径后面的路径加 / !!! 重要的事情说三遍
         //注意每个资源路径后面的路径加 / !!! 重要的事情说三遍
 
-        registry.addResourceHandler(ADMIN_UI_PATH + "**")
-                .addResourceLocations("classpath:public" + ADMIN_UI_PATH);
+        //registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
-        registry.addResourceHandler(H5_UI_PATH + "**")
-                .addResourceLocations("classpath:public" + H5_UI_PATH);
+        if (StringUtils.hasText(frameworkProperties.getAdminPath())) {
+            registry.addResourceHandler((frameworkProperties.getAdminPath() + "/**").replace("//", "/"))
+                    .addResourceLocations("classpath:/templates" + ADMIN_UI_PATH);
+        }
 
     }
+
+    /**
+     * 视图配置
+     *
+     * @param registry
+     */
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        //增加 JSP 支持
+//         registry.jsp("/WEB-INF/jsp/", ".jsp");
+
+        if (StringUtils.hasText(frameworkProperties.getAdminPath())) {
+          //  registry.freeMarker();
+        }
+
+    }
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        // configurer.enable();
+        // configurer.enable("defaultServletName");
+
+        // 此时会注册一个默认的Handler：DefaultServletHttpRequestHandler，这个Handler也是用来处理静态文件的，它会尝试映射/。当DispatcherServelt映射/时（/ 和/ 是有区别的），并且没有找到合适的Handler来处理请求时，就会交给DefaultServletHttpRequestHandler 来处理。注意：这里的静态资源是放置在web根目录下，而非WEB-INF 下。
+    }
+
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -153,26 +180,5 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
     }
 
-
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        // configurer.enable();
-        // configurer.enable("defaultServletName");
-
-        // 此时会注册一个默认的Handler：DefaultServletHttpRequestHandler，这个Handler也是用来处理静态文件的，它会尝试映射/。当DispatcherServelt映射/时（/ 和/ 是有区别的），并且没有找到合适的Handler来处理请求时，就会交给DefaultServletHttpRequestHandler 来处理。注意：这里的静态资源是放置在web根目录下，而非WEB-INF 下。
-    }
-
-
-    /**
-     * 视图配置
-     *
-     * @param registry
-     */
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-
-        //增加 JSP 支持
-        // registry.jsp("/WEB-INF/jsp/", ".jsp");
-    }
 
 }

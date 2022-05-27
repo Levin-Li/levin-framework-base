@@ -26,6 +26,10 @@ public class AmisMenu implements Serializable {
     @NotNull
     String label;//
 
+    @Schema(description = "菜单层级")
+    @NotNull
+    int deepLevel = -1;//
+
     @Schema(description = "菜单图标")
     String icon;// 菜单图标，比如：fa fa-file.
 
@@ -58,5 +62,9 @@ public class AmisMenu implements Serializable {
 
     @Schema(description = "子菜单")
     List<AmisMenu> children;
+
+    public boolean hasChildren() {
+        return children != null && !children.isEmpty();
+    }
 
 }

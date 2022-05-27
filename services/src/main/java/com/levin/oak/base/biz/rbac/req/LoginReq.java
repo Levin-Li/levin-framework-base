@@ -63,9 +63,9 @@ public class LoginReq implements ServiceReq {
     @Eq
     protected String tenantId;
 
-//    @Schema(description = "验证码")
-//    @Ignore
-//    private String verificationCode;
+    @Schema(description = "图片/短信验证码")
+    @Ignore
+    private String verificationCode;
 
     @Schema(description = "客户端类型", hidden = true)
     @Ignore

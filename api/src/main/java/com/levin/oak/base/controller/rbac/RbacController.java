@@ -4,7 +4,9 @@ import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
+import com.levin.oak.base.biz.CaptchaService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.biz.rbac.info.ModuleInfo;
@@ -29,6 +31,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Map;
 
 import static com.levin.oak.base.ModuleOption.*;
 
@@ -70,6 +73,18 @@ public class RbacController extends BaseController {
     @Resource
     BizTenantService bizTenantService;
 
+    @Resource
+    CaptchaService captchaService;
+
+    @Resource
+    FrameworkProperties frameworkProperties;
+
+    @GetMapping("/captcha")
+    @Operation(tags = {"授权管理"}, summary = "获取验图片证码")
+    @ResAuthorize(ignored = true)
+    public void genCaptcha(Map<String, Object> params) {
+        captchaService.genCode(super.httpRequest, super.httpResponse, params);
+    }
 
     /**
      * 登录
@@ -94,7 +109,14 @@ public class RbacController extends BaseController {
     @Operation(tags = {"授权管理"}, summary = "用户登录")
     @ResAuthorize(ignored = true)
     public ApiResp<LoginInfo> login(@NotNull LoginReq req) {
+
+        if (frameworkProperties.isEnableCaptcha()) {
+            Assert.hasText(req.getVerificationCode(), "验证码不能为空");
+            Assert.isTrue(captchaService.verification(httpRequest, req.getVerificationCode(), null), "图片验证码错误");
+        }
+
         String accessToken = authService.auth(req.getTenantId(), req.getAccount(), req.getPassword(), req.getUa());
+
         return ApiResp.ok(new LoginInfo()
                 .setAccessToken(accessToken)
                 .setUserInfo(authService.getUserInfo())
@@ -114,11 +136,12 @@ public class RbacController extends BaseController {
 
         Assert.notNull(tenantInfo, "租户不存在");
 
-        return login(new LoginReq()
-                .setAccount(account)
-                .setPassword(password)
-                .setUa(ua)
-                .setTenantId(tenantId)
+        return login(
+                new LoginReq()
+                        .setAccount(account)
+                        .setPassword(password)
+                        .setUa(ua)
+                        .setTenantId(tenantId)
         );
     }
 

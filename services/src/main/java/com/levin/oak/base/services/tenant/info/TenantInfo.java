@@ -48,6 +48,14 @@ public class TenantInfo implements Serializable {
     private String logo;
 
 
+    @Schema(description = "系统名称")
+    private String sysName;
+
+
+    @Schema(description = "系统Logo")
+    private String sysLogo;
+
+
     @Schema(description = "企业信用编码")
     private String code;
 

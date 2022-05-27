@@ -65,7 +65,14 @@ public class Tenant extends AbstractNamedEntityObject {
     @GeneratedValue(generator = "uuid")
     String id;
 
-    @Schema(description = "租户头像")
+    @Schema(description = "系统名称")
+    @Column(length = 128)
+    String sysName;
+
+    @Schema(description = "系统Logo")
+    String sysLogo;
+
+    @Schema(description = "租户Logo")
     String logo;
 
     @Schema(description = "企业信用编码")

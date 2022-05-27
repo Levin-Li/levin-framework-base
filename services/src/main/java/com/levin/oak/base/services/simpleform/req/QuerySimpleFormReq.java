@@ -1,32 +1,45 @@
 package com.levin.oak.base.services.simpleform.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Contains;
-import com.levin.commons.dao.annotation.Gte;
-import com.levin.commons.dao.annotation.Ignore;
-import com.levin.commons.dao.annotation.Lte;
-import com.levin.commons.dao.annotation.order.OrderBy;
-import com.levin.commons.dao.annotation.order.SimpleOrderBy;
-import com.levin.oak.base.entities.E_SimpleForm;
-import com.levin.oak.base.entities.SimpleForm;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import com.levin.oak.base.services.simpleform.info.SimpleFormInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import com.levin.commons.dao.annotation.Ignore;
 
-import javax.annotation.PostConstruct;
-import java.util.Date;
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.support.*;
+
+import org.springframework.format.annotation.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
+import com.levin.oak.base.services.simpleform.info.*;
+import com.levin.oak.base.entities.SimpleForm;
+
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+    import com.levin.commons.service.support.InjectConsts;
+    import com.levin.commons.service.domain.InjectVar;
+    import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 查询简单表单
- *
- * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:37
+ *  查询简单表单
+ *  @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:01
  */
 @Schema(description = "查询简单表单")
 @Data
@@ -38,134 +51,117 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimpleForm.class, alias = E_SimpleForm.ALIAS, resultClass = SimpleFormInfo.class)
-public class QuerySimpleFormReq extends MultiTenantReq {
+public class QuerySimpleFormReq extends MultiTenantReq{
 
     private static final long serialVersionUID = 1598335188L;
 
     @Ignore
     @Schema(description = "排序字段")
-    private String orderBy;
+    String orderBy;
 
     //@Ignore
     @Schema(description = "排序方向-desc asc")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
-    private OrderBy.Type orderDir;
+    OrderBy.Type orderDir;
 
 
     @Schema(description = "提交地址")
-    private String commitApi;
-
+    String commitApi;
 
     //@NotNull
-
     @Schema(description = "id")
-    private Long id;
-
+    Long id;
 
     //@NotBlank
     //@Size(max = 64)
+    @Schema(description = "类型")
+    String type;
 
+    //@NotBlank
+    //@Size(max = 64)
     @Schema(description = "分类名称")
-    private String category;
-
+    String category;
 
     //@NotBlank
     //@Size(max = 64)
-
     @Schema(description = "分组名称")
-    private String groupName;
-
+    String groupName;
     @Schema(description = "模糊匹配 - 分组名称")
     @Contains
-    private String containsGroupName;
-
+    String containsGroupName;
 
     //@NotBlank
-
     @Schema(description = "访问路径")
-    private String path;
-
+    String path;
 
     @Schema(description = "内容")
-    private String content;
+    String content;
 
-
-    //@Size(max = 64)
-
+    //@Size(max = 128)
     @Schema(description = "系统子域")
-    private String domain;
-
+    String domain;
 
     //@NotBlank
     //@Size(max = 128)
-
     @Schema(description = "名称")
-    private String name;
-
+    String name;
     @Schema(description = "模糊匹配 - 名称")
     @Contains
-    private String containsName;
-
+    String containsName;
 
     //@Size(max = 128)
-
     @Schema(description = "拼音，格式：全拼(简拼)")
-    private String pinyinName;
-
+    String pinyinName;
     @Schema(description = "模糊匹配 - 拼音，格式：全拼(简拼)")
     @Contains
-    private String containsPinyinName;
+    String containsPinyinName;
 
-
+    //@InjectVar()
     //@Size(max = 128)
-
     @Schema(description = "创建者")
-    private String creator;
-
+    String creator;
 
     //@NotNull
-
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
-    private Date gteCreateTime;
+    Date gteCreateTime;
 
     @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
-    private Date lteCreateTime;
+    Date lteCreateTime;
 
+    @Schema(description = "创建时间-日期范围，格式：yyyyMMdd-yyyyMMdd，大于等于且小余等于")
+    @Between(paramDelimiter = "-", patterns = {"yyyyMMdd"})
+    String betweenCreateTime;
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
     @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
-    private Date gteLastUpdateTime;
+    Date gteLastUpdateTime;
 
     @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
-    private Date lteLastUpdateTime;
+    Date lteLastUpdateTime;
 
+    @Schema(description = "更新时间-日期范围，格式：yyyyMMdd-yyyyMMdd，大于等于且小余等于")
+    @Between(paramDelimiter = "-", patterns = {"yyyyMMdd"})
+    String betweenLastUpdateTime;
 
     @Schema(description = "排序代码")
-    private Integer orderCode;
-
+    Integer orderCode;
 
     //@NotNull
-
     @Schema(description = "是否允许")
-    private Boolean enable;
-
+    Boolean enable;
 
     //@NotNull
-
     @Schema(description = "是否可编辑")
-    private Boolean editable;
-
+    Boolean editable;
 
     //@Size(max = 512)
-
     @Schema(description = "备注")
-    private String remark;
-
+    String remark;
 
     public QuerySimpleFormReq(Long id) {
         this.id = id;

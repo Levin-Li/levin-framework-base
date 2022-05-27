@@ -44,6 +44,13 @@ public class CreateTenantReq extends BaseReq {
     private static final long serialVersionUID = 1557223144L;
 
 
+    @Schema(description = "系统名称")
+    private String sysName;
+
+
+    @Schema(description = "系统Logo")
+    private String sysLogo;
+
     @Schema(description = "租户头像")
     private String logo;
 

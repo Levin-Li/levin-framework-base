@@ -1,8 +1,12 @@
 package com.levin.oak.base.controller.rbac;
 
+import cn.hutool.cache.CacheUtil;
+import cn.hutool.cache.impl.LRUCache;
+import cn.hutool.core.io.NioUtil;
 import com.levin.commons.rbac.MenuItem;
 import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
+import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.controller.BaseController;
@@ -11,20 +15,30 @@ import com.levin.oak.base.controller.rbac.dto.AmisResp;
 import com.levin.oak.base.entities.EntityConst;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
+import com.levin.oak.base.services.simplepage.SimplePageService;
+import com.levin.oak.base.services.simplepage.info.SimplePageInfo;
+import com.levin.oak.base.services.simplepage.req.QuerySimplePageReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static com.levin.oak.base.ModuleOption.*;
@@ -42,47 +56,165 @@ import static com.levin.oak.base.ModuleOption.*;
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-@Tag(name = "授权管理", description = "授权管理")
+@Tag(name = "Amis支持", description = "Amis服务")
 @RestController(PLUGIN_PREFIX + "AmisController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "AmisController", matchIfMissing = true)
-@RequestMapping(API_PATH + "rbac")
+@RequestMapping(API_PATH + "amis")
 @Slf4j
 @Valid
 @MenuResTag(false)
 @ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME, onlyRequireAuthenticated = true)
 public class AmisController extends BaseController {
 
-    @Autowired
+    @Resource
     RoleService roleService;
 
-    @Autowired
+    @Resource
     RbacService rbacService;
 
-    @Autowired
+    @Resource
     AuthService authService;
+
+    @Resource
+    ResourceLoader resourceLoader;
+
+    @Resource
+    ServerProperties serverProperties;
+
+    @Resource
+    FrameworkProperties frameworkProperties;
+
+    @Resource
+    SimplePageService simplePageService;
+
+
+    final LRUCache<String, String> lruCache = CacheUtil.newLRUCache(10 * 1000, 5 * 60 * 1000);
 
     /**
      * 获取菜单列表
      *
      * @return ApiResp
      */
-    @GetMapping("amisAppMenuList")
-    @Operation(tags = {"授权管理"}, summary = "获取Amis菜单列表")
+    @GetMapping("appMenuList")
+    @Operation(tags = {"Amis支持"}, summary = "获取Amis菜单列表")
     public AmisResp getAmisAppMenuList(boolean isShowNotPermissionMenu) {
 
         AmisResp resp = AmisResp.builder().build();
 
         resp.getData().put(AmisMenu.DATA_KEY, Collections.emptyList());
 
+        //获取页面地址
+        String basePath = serverProperties.getServlet().getContextPath() + API_PATH + "amis/page";
+
         List<MenuResInfo> authorizedMenuList = rbacService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId());
 
         if (authorizedMenuList != null) {
-            resp.getData().put(AmisMenu.DATA_KEY,
-                    authorizedMenuList.parallelStream().map(this::convert).collect(Collectors.toList())
-            );
+
+            final AtomicInteger maxDeep = new AtomicInteger();
+            final List<AmisMenu> rootMenuList = new ArrayList<>(3);
+
+            List<AmisMenu> amisMenuList = authorizedMenuList.stream()
+                    .map(item -> convert(item, basePath, 1, maxDeep, rootMenuList))
+                    .collect(Collectors.toList());
+
+            //如果层级小于3级
+            if (frameworkProperties.isAutoAddAmisMenuRootNode()
+                    && maxDeep.get() < 3) {
+
+                AmisMenu amisMenu = new AmisMenu()
+                        .setLabel("")
+                        .setChildren(amisMenuList);
+
+                amisMenuList = new ArrayList<>(2);
+                amisMenuList.add(amisMenu);
+            }
+
+            if (rootMenuList.isEmpty()) {
+                amisMenuList.add(
+                        new AmisMenu()
+                                .setLabel("首页")
+                                .setUrl("/")
+                                .setRedirect(getDefaultIndex(amisMenuList))
+                                .setDefaultPage(true)
+                );
+
+            } else if (rootMenuList.size() > 1) {
+                log.warn("菜单中有多于1个的根菜单: "
+                        + rootMenuList.stream().map(AmisMenu::getLabel).collect(Collectors.toList()));
+            }
+
+            //设置默认图标
+            amisMenuList.forEach(item -> setDefaultIcon(item, 1));
+
+            resp.getData().put(AmisMenu.DATA_KEY, amisMenuList);
         }
 
         return resp;
+    }
+
+    private String getDefaultIndex(List<AmisMenu> amisMenuList) {
+
+        //获取第二级菜单
+        return amisMenuList.stream()
+                .filter(AmisMenu::hasChildren)
+                .flatMap(m -> m.getChildren().stream())
+                .filter(m -> StringUtils.hasText(m.getUrl()))
+                .findFirst()
+                .map(AmisMenu::getUrl)
+                .orElse(null);
+    }
+
+    /**
+     * 获取菜单列表
+     *
+     * @return ApiResp
+     */
+    @GetMapping("page")
+    @Operation(tags = {"Amis支持"}, summary = "获取Amis页面-5分钟刷新")
+    public String page(String url, String type, String category) {
+
+        final String key = String.join("|", type, category, url);
+
+        String result = lruCache.get(key);
+
+        if (result != null) {
+            return result;
+        }
+
+        SimplePageInfo one = simplePageService.findOne(new QuerySimplePageReq()
+                .setType(type)
+                .setCategory(category)
+                .setPath(url));
+
+        //如果是被禁用
+        if (one != null && !Boolean.TRUE.equals(one.getEnable())) {
+            httpResponse.setStatus(HttpStatus.FORBIDDEN.value());
+            return null;
+        }
+
+        if (one != null
+                && StringUtils.hasText(one.getContent())) {
+            result = one.getContent();
+        } else {
+            //读取本地文件
+            org.springframework.core.io.Resource resource = resourceLoader.getResource("classpath:/templates/" + url + ".json");
+            if (resource != null
+                    && resource.isReadable()) {
+                try {
+                    result = NioUtil.read(resource.readableChannel(), Charset.forName("utf-8"));
+                } catch (Exception e) {
+                    log.warn("Read resource error" + url + "", e);
+                }
+            }
+        }
+
+        if (StringUtils.hasText(result)) {
+            lruCache.put(key, result);
+        } else {
+            httpResponse.setStatus(HttpStatus.NOT_FOUND.value());
+        }
+
+        return result;
     }
 
 
@@ -90,22 +222,52 @@ public class AmisController extends BaseController {
      * 递归转换菜单
      *
      * @param item
+     * @param basePath
+     * @param deep
+     * @param rootMenuList url 为 / 的菜单节点
      * @return
      */
-    AmisMenu convert(MenuResInfo item) {
+    @SneakyThrows
+    AmisMenu convert(MenuResInfo item, String basePath, int deep, AtomicInteger maxDeep, List<AmisMenu> rootMenuList) {
+
+        if (deep < 1) {
+            deep = 1;
+        }
+
+        if (deep > maxDeep.get()) {
+            maxDeep.set(deep);
+        }
 
         AmisMenu amisMenu = new AmisMenu().setLabel(item.getName())
-                .setIcon(item.getIcon())
-                //固定加上index
-                .setUrl((nullSafe(item.getPath(), item.getDomain()) + "/index").replace("//", "/"));
+                .setIcon(item.getIcon());
 
-        if (MenuItem.ActionType.Redirect.equals(item.getActionType())) {
-            amisMenu.setRedirect(item.getParams());
-        } else if (MenuItem.ActionType.NewWindow.equals(item.getActionType())) {
-            amisMenu.setLink(item.getParams());
-        } else {
-            //固定参数
-            amisMenu.setSchemaApi(amisMenu.getUrl().replace("/api/", "/amis-ui/"));
+        if (StringUtils.hasText(item.getPath())) {
+
+            amisMenu.setUrl(item.getPath());
+
+            String params = item.getParams();
+            if (!StringUtils.hasText(params)) {
+                params = item.getPath();
+            }
+
+            if (MenuItem.ActionType.Redirect.equals(item.getActionType())) {
+                amisMenu.setRedirect(params);
+            } else if (MenuItem.ActionType.Rewrite.equals(item.getActionType())) {
+                amisMenu.setRewrite(params);
+            } else if (MenuItem.ActionType.NewWindow.equals(item.getActionType())) {
+                amisMenu.setLink(params);
+            } else if (MenuItem.ActionType.Jsonp.equals(item.getActionType())) {
+                amisMenu.setSchemaApi("jsonp:" + basePath + "?type=jsonp&url=" + URLEncoder.encode(item.getPath(), "utf-8"));
+            } else {
+                //固定参数
+                amisMenu.setSchemaApi(basePath + "?type=json&url=" + URLEncoder.encode(item.getPath(), "utf-8"));
+            }
+        }
+
+        //是否是根菜单
+        if (StringUtils.hasText(amisMenu.getUrl())
+                && "/".equalsIgnoreCase(amisMenu.getUrl().trim())) {
+            rootMenuList.add(amisMenu);
         }
 
         //转换子菜单
@@ -116,15 +278,42 @@ public class AmisController extends BaseController {
 
             for (MenuResInfo child : item.getChildren()) {
                 //递归转换
-                amisMenu.getChildren().add(convert(child));
+                amisMenu.getChildren().add(convert(child, basePath, deep + 1, maxDeep, rootMenuList));
             }
         }
 
         return amisMenu;
     }
 
-    String nullSafe(String value, String defaultValue) {
-        return StringUtils.hasText(value) ? value : defaultValue;
+
+    /**
+     * 设置默认图标
+     *
+     * @param item
+     * @param deep
+     */
+    void setDefaultIcon(AmisMenu item, int deep) {
+
+        if (deep < 1) {
+            deep = 1;
+        }
+
+        item.setDeepLevel(deep);
+
+        boolean hasChildren = item.hasChildren();
+
+        if (!StringUtils.hasText(item.getIcon()) && deep >= 2) {
+            //如果是叶子节点
+            item.setIcon(hasChildren ? "fa fa-cube" : "fa fa-list");
+        }
+
+        if (hasChildren) {
+            for (AmisMenu child : item.getChildren()) {
+                //递归转换
+                setDefaultIcon(child, deep + 1);
+            }
+        }
     }
+
 
 }

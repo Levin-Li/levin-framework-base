@@ -52,6 +52,13 @@ public class StatTenantReq extends BaseReq {
     String id;
 
 
+    @Schema(description = "系统名称")
+    private String sysName;
+
+
+    @Schema(description = "系统Logo")
+    private String sysLogo;
+
     @Schema(description = "租户头像")
     String logo;
 

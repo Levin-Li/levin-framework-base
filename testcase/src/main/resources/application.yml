@@ -72,6 +72,16 @@ spring:
       pool:
         size: 30
 
+  redis:
+    host: 127.0.0.1
+
+  cache:
+    type: redis
+
+  freemarker:
+    cache: false
+
+
 #日志配置
 logging:
   level:
@@ -94,6 +104,9 @@ plugin:
               enable: false
             log:
               exclude-path-patterns: /error,/swagger-resources/**,/swagger-ui/**,/v3/api-docs
+            enable-captcha: true
+            adminPath: /
+            sysName: XX管理系统
 
 # Sa-Token配置
 sa-token:

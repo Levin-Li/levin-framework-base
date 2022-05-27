@@ -4,6 +4,7 @@ import cn.dev33.satoken.exception.IdTokenInvalidException;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.io.NioUtil;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
@@ -26,18 +27,22 @@ import com.levin.oak.base.services.user.info.UserInfo;
 import com.levin.oak.base.services.user.req.CreateUserReq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.nio.charset.Charset;
 import java.util.*;
 
+import static com.levin.oak.base.ModuleOption.ADMIN_UI_PATH;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
@@ -83,9 +88,14 @@ public class AuthServiceImpl
     @Resource
     TenantService tenantService;
 
+    @Resource
+    ServerProperties serverProperties;
 
     @Resource
     FrameworkProperties frameworkProperties;
+
+    @Resource
+    ResourceLoader resourceLoader;
 
     @PostConstruct
     public void init() {
@@ -352,32 +362,84 @@ public class AuthServiceImpl
      */
     private void initMenu() {
 
+      //  final String defaultIcon = "fa fa-list";// (serverProperties.getServlet().getContextPath() + "/" + frameworkProperties.getAdminPath() + "/img/menu-256.png").replace("//", "/");
+
         for (Plugin plugin : pluginManager.getInstalledPlugins()) {
 
             MenuRes menu = simpleDao.selectFrom(MenuRes.class)
                     .eq(E_MenuRes.domain, plugin.getId())
-                    .isNull(E_Role.tenantId).findOne();
+                    .isNull(E_Role.tenantId)
+                    .findOne();
 
             if (menu != null) {
                 continue;
             }
 
-            MenuRes pluginRootMenu = simpleDao.create(new MenuRes().setDomain(plugin.getId())
+            MenuRes pluginRootMenu = simpleDao.create(new MenuRes()
+                    .setPath(plugin.getPackageName() + "/" + plugin.getVersion() + "/admin/Index")
+//                    .setIcon(defaultIcon)
+                    .setDomain(plugin.getPackageName())
                     .setName(plugin.getName())
                     .setEnable(plugin.isEnable())
                     .setOrderCode(plugin.getOrderCode())
                     .setRemark(plugin.getRemark()));
 
-            RbacUtils.getMenuItemByController(context, plugin.getId(), EntityConst.QUERY_ACTION)
+            RbacUtils.getMenuItemByController(context, plugin.getPackageName(), EntityConst.QUERY_ACTION)
                     .parallelStream().forEach(menuItem -> {
+
+                final String path = menuItem.getPath().replace("/api/", "/admin/");
                 //创建菜单
-                log.info("创建插件[ {} ]的默认菜单[ {} --> {}]", plugin.getId(), menuItem.getName(), menuItem.getPath());
-                simpleDao.create(simpleDao.copy(menuItem, new MenuRes().setParentId(pluginRootMenu.getId()),
-                        1, E_MenuRes.parentId, E_MenuRes.children, E_MenuRes.parent));
+                log.info("创建插件[ {} ]的默认菜单[ {} --> {}]", plugin.getId(), menuItem.getName(), path);
+
+                simpleDao.create(
+                        simpleDao.copy(menuItem,
+                                new MenuRes()
+                                        .setPath(path)
+//                                        .setIcon(defaultIcon)
+                                        .setParentId(pluginRootMenu.getId()),
+                                1,
+                                E_MenuRes.parentId,
+                                E_MenuRes.children,
+                                E_MenuRes.icon,
+                                E_MenuRes.parent,
+                                E_MenuRes.path)
+                );
+
+                //创建默认页面
+                log.info("创建插件[ {} ]的默认页面[ {} --> {}]", plugin.getId(), menuItem.getName(), path);
+                simpleDao.create(new SimplePage()
+                        .setType("json")
+                        .setCategory("amis")
+                        .setGroupName("管理后台页面|" + plugin.getName())
+                        .setPath(path)
+//                        .setIcon(defaultIcon)
+                        .setContent(readResource(path))
+                        .setDomain(plugin.getPackageName())
+                        .setName(menuItem.getName())
+                        .setRemark("Amis默认页面")
+                );
+
             });
 
         }
 
+    }
+
+
+    private String readResource(String url) {
+
+        org.springframework.core.io.Resource resource = resourceLoader.getResource("classpath:/templates/" + url + ".json");
+
+        if (resource != null
+                && resource.isReadable()) {
+            try {
+                return NioUtil.read(resource.readableChannel(), Charset.forName("utf-8"));
+            } catch (Exception e) {
+                log.warn("Read " + url + " error", e);
+            }
+        }
+
+        return null;
     }
 
     private void initUser() {

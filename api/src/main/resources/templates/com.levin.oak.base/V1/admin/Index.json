@@ -1,0 +1,17 @@
+{
+  "type": "page",
+  "title": "模块介绍",
+  "body": [
+    {
+      "type": "tpl",
+      "tpl": "<p style=\"text-align: center;\">&nbsp;</p>\n<p style=\"text-align: center;\">&nbsp;</p>\n<p style=\"text-align: center;\">&nbsp;</p>\n<p style=\"text-align: center;\"><strong>模块介绍</strong></p>",
+      "inline": false,
+      "id": "u:4c103482509e"
+    }
+  ],
+  "messages": {
+  },
+  "style": {
+  },
+  "subTitle": "..."
+}

@@ -24,6 +24,41 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 public class FrameworkProperties implements Serializable {
 
     /**
+     * 是否允许图片验证码
+     */
+    private boolean enableCaptcha = false;
+
+    /**
+     *
+     */
+    private int captchaCodeLen = 4;
+
+    /**
+     * admin 路径
+     */
+    private String adminPath = null;
+
+    /**
+     * admin 首页 amis 模板，不需要包含模板根路径
+     */
+    private String adminIndexTemplate = null;
+
+    /**
+     * admin 登录页面模板，不需要包含模板根路径
+     */
+    private String adminLoginTemplate = null;
+
+    /**
+     * 是否为菜单增加一个根节点，显示更好看
+     */
+    private boolean autoAddAmisMenuRootNode = true;
+
+    /**
+     * 系统名称
+     */
+    private String sysName = "";
+
+    /**
      * 请求变量注入
      */
     @NestedConfigurationProperty
