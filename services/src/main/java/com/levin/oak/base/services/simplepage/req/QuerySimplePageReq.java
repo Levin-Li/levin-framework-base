@@ -55,6 +55,10 @@ public class QuerySimplePageReq extends MultiTenantReq{
 
     private static final long serialVersionUID = 1598619295L;
 
+    @Schema(description = "是否包含公共数据", hidden = true)
+    @Ignore
+    private boolean isContainsPublicData = true;
+
     @Ignore
     @Schema(description = "排序字段")
     String orderBy;

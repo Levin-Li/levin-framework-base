@@ -70,6 +70,9 @@ public class SimplePageInfo implements Serializable {
     @Schema(description = "访问路径", required = true)
     String path;
 
+    @Size(max = 1800)
+    @Schema(description = "需要的授权，权限或角色，json数组")
+    String requireAuthorizations;
 
     @Schema(description = "内容")
     String content;
@@ -120,7 +123,6 @@ public class SimplePageInfo implements Serializable {
     @Schema(description = "排序代码")
     Integer orderCode;
 
-
     @NotNull
     @Schema(description = "是否允许", required = true)
     Boolean enable;
@@ -134,6 +136,5 @@ public class SimplePageInfo implements Serializable {
     @Size(max = 512)
     @Schema(description = "备注")
     String remark;
-
 
 }

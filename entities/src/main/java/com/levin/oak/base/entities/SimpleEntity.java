@@ -2,6 +2,8 @@ package com.levin.oak.base.entities;
 
 
 import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,6 +11,7 @@ import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
+import java.util.List;
 
 @MappedSuperclass
 @Data
@@ -42,6 +45,11 @@ public abstract class SimpleEntity
     @Schema(description = "访问路径")
     @Column(nullable = false)
     protected String path;
+
+    @Schema(description = "需要的权限或角色，json数组")
+    @Column(length = 1800)
+//    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {String.class}, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    protected String requireAuthorizations;
 
     @Schema(description = "内容")
     @Lob

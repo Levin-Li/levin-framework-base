@@ -8,6 +8,7 @@ import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.CaptchaService;
 import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.RbacResService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.biz.rbac.info.ModuleInfo;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
@@ -65,7 +66,7 @@ public class RbacController extends BaseController {
     UserService userService;
 
     @Resource
-    RbacService rbacService;
+    RbacResService rbacResService;
 
     @Resource
     AuthService authService;
@@ -196,7 +197,7 @@ public class RbacController extends BaseController {
     @GetMapping("authorizedResList")
     @Operation(tags = {"授权管理"}, summary = "获取可分配的权限资源")
     public ApiResp<List<ModuleInfo>> getAuthorizedResList() {
-        return ApiResp.ok(rbacService.getAuthorizedResList(authService.getLoginUserId()));
+        return ApiResp.ok(rbacResService.getAuthorizedResList(authService.getLoginUserId()));
     }
 
     /**
@@ -207,7 +208,7 @@ public class RbacController extends BaseController {
     @GetMapping("authorizedMenuList")
     @Operation(tags = {"授权管理"}, summary = "获取授权的菜单列表")
     public ApiResp<List<MenuResInfo>> getAuthorizedMenuList(boolean isShowNotPermissionMenu) {
-        return ApiResp.ok(rbacService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId()));
+        return ApiResp.ok(rbacResService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId()));
     }
 
 }

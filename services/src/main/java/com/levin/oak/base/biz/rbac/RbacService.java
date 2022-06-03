@@ -2,19 +2,16 @@ package com.levin.oak.base.biz.rbac;
 
 import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.Permission;
-import com.levin.oak.base.biz.rbac.info.ModuleInfo;
-import com.levin.oak.base.services.menures.info.MenuResInfo;
 import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
-import javax.validation.constraints.NotNull;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
 /**
  * Rbac 基本服务
@@ -30,7 +27,7 @@ public interface RbacService {
      *
      * @return
      */
-    default String getDelimiter() {
+    default String getPermissionDelimiter() {
         return Permission.DELIMITER;
     }
 
@@ -41,7 +38,7 @@ public interface RbacService {
      * @return
      */
     default boolean isPermission(String requirePermission) {
-        return requirePermission.contains(getDelimiter());
+        return requirePermission.contains(getPermissionDelimiter());
     }
 
     /**
@@ -92,37 +89,48 @@ public interface RbacService {
      * 当前用户是否 拥有指定的权限列表
      *
      * @param matchErrorConsumer
+     * @param isRequireAllPermission 是否要求匹配所有的权限
      * @param requirePermissionList
      * @return
      */
-    default boolean isAuthorized(BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer, String... requirePermissionList) {
-        return isAuthorized(Arrays.asList(requirePermissionList), matchErrorConsumer);
+    default boolean isAuthorized(BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer,
+                                 boolean isRequireAllPermission, String... requirePermissionList) {
+        return isAuthorized(isRequireAllPermission, Arrays.asList(requirePermissionList), matchErrorConsumer);
     }
 
     /**
      * 当前用户是否 拥有指定的权限列表
      *
-     * @param requirePermissionList 权限列表可以包括角色，如果
+     * @param isRequireAllPermission 是否要求匹配所有的权限
+     * @param requirePermissionList  权限列表可以包括角色，如果
      * @param matchErrorConsumer
      * @return
      */
-    boolean isAuthorized(List<String> requirePermissionList, BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer);
+    boolean isAuthorized(boolean isRequireAllPermission, List<String> requirePermissionList,
+                         BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer);
 
     /**
      * 授权验证，是否可以访问指定资源
      * <p>
      * 关键方法
      *
-     * @param ownerRoleList         已经拥有的角色列表
-     * @param ownerPermissionList   已经拥有的权限列表
-     * @param requirePermissionList 请求的权限
-     * @param matchErrorConsumer    匹配错误回调 参数1为请求的权限，参数2为错误原因
+     * @param ownerRoleList          已经拥有的角色列表
+     * @param ownerPermissionList    已经拥有的权限列表
+     * @param isRequireAllPermission 是否要求匹配所有的权限
+     * @param requirePermissionList  请求的权限
+     * @param matchErrorConsumer     匹配错误回调 参数1为请求的权限，参数2为错误原因
      * @return 是否可以访问指定资源
      */
-    default boolean isAuthorized(List<String> ownerRoleList, List<String> ownerPermissionList, List<String> requirePermissionList
-            , BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer) {
-        return requirePermissionList.stream()
-                .allMatch(rp -> isAuthorized(ownerRoleList, ownerPermissionList, rp, matchErrorConsumer));
+    default boolean isAuthorized(List<String> ownerRoleList, List<String> ownerPermissionList,
+                                 boolean isRequireAllPermission, List<String> requirePermissionList,
+                                 BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer) {
+
+        Predicate<String> predicate = rp -> isAuthorized(ownerRoleList, ownerPermissionList, rp, matchErrorConsumer);
+
+        //是否要求匹配所有权限
+        return isRequireAllPermission ?
+                requirePermissionList.stream().allMatch(predicate)
+                : requirePermissionList.stream().anyMatch(predicate);
     }
 
     /**
@@ -145,21 +153,5 @@ public interface RbacService {
      * @param method 控制器或是服务的方法
      */
     void checkAuthorize(@NonNull Method method) throws AuthorizationException;
-
-    /**
-     * 获取指定用户的授权菜单列表
-     *
-     * @param userId 不允许为空
-     * @return
-     */
-    List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, @NotNull Object userId);
-
-    /**
-     * 获取资源授权清单
-     *
-     * @param userId 为null返回所有的资源授权清单
-     * @return
-     */
-    List<ModuleInfo> getAuthorizedResList(@Nullable Object userId);
 
 }

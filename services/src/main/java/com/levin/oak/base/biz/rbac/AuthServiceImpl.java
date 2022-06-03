@@ -417,6 +417,9 @@ public class AuthServiceImpl
                                 .setCategory("amis")
                                 .setGroupName("管理后台页面|" + plugin.getName())
                                 .setPath(path)
+                                //设置访问需要的权限
+                                .setRequireAuthorizations(menuItem.getRequireAuthorizations())
+
 //                        .setIcon(defaultIcon)
                                 .setContent(readResource(path))
                                 .setDomain(plugin.getPackageName())

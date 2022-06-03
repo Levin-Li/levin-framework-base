@@ -196,7 +196,7 @@ public class RoleController extends BaseController {
 
 //        Object loginUserId = authService.getLoginUserId();
 
-        boolean isAuthorized = rbacService.isAuthorized(permissionList, (rp, info) -> {
+        boolean isAuthorized = rbacService.isAuthorized(true, permissionList, (rp, info) -> {
             throw new AuthorizationException("role-" + roleCode, "未授权的资源：" + rp);
         });
 

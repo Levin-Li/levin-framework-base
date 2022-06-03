@@ -3,16 +3,24 @@ package com.levin.oak.base.controller.admin;
 import cn.hutool.cache.CacheUtil;
 import cn.hutool.cache.impl.LRUCache;
 import cn.hutool.core.io.NioUtil;
+import com.levin.commons.dao.SimpleDao;
+import com.levin.commons.dao.annotation.order.OrderBy;
+import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.MenuItem;
 import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.utils.JsonStrArrayUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.RbacResService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.AmisMenu;
 import com.levin.oak.base.controller.rbac.dto.AmisResp;
+import com.levin.oak.base.entities.E_SimplePage;
 import com.levin.oak.base.entities.EntityConst;
+import com.levin.oak.base.services.commons.req.TenantShareReq;
+import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.simplepage.SimplePageService;
@@ -26,6 +34,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,7 +82,13 @@ public class AmisController extends BaseController {
     RbacService rbacService;
 
     @Resource
+    RbacResService rbacResService;
+
+    @Resource
     AuthService authService;
+
+    @Resource
+    MenuResService menuResService;
 
     @Resource
     ResourceLoader resourceLoader;
@@ -86,6 +101,9 @@ public class AmisController extends BaseController {
 
     @Resource
     SimplePageService simplePageService;
+
+    @Resource
+    SimpleDao simpleDao;
 
 
     final LRUCache<String, String> lruCache = CacheUtil.newLRUCache(10 * 1000, 5 * 60 * 1000);
@@ -106,7 +124,7 @@ public class AmisController extends BaseController {
         //获取页面地址
         String basePath = serverProperties.getServlet().getContextPath() + API_PATH + "amis/page";
 
-        List<MenuResInfo> authorizedMenuList = rbacService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId());
+        List<MenuResInfo> authorizedMenuList = rbacResService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId());
 
         if (authorizedMenuList != null) {
 
@@ -171,7 +189,9 @@ public class AmisController extends BaseController {
      */
     @GetMapping("page")
     @Operation(tags = {"Amis支持"}, summary = "获取Amis页面-5分钟刷新")
-    public String page(String url, String type, String category) {
+    public String page(String url, String type, String category, TenantShareReq shareReq) {
+
+        Assert.hasText(url, "url必须指定");
 
         final String key = String.join("|", type, category, url);
 
@@ -181,15 +201,34 @@ public class AmisController extends BaseController {
             return result;
         }
 
+        //页面信息 @todo 按租户过滤
         SimplePageInfo one = simplePageService.findOne(new QuerySimplePageReq()
                 .setType(type)
                 .setCategory(category)
-                .setPath(url));
+                .setContainsPublicData(shareReq.isContainsPublicData())
+                .setPath(url)
+                .setOrderBy(E_SimplePage.tenantId)
+                .setOrderDir(OrderBy.Type.Asc)
+                .setTenantId(shareReq.getTenantId()));
 
         //如果是被禁用
         if (one != null && !Boolean.TRUE.equals(one.getEnable())) {
             httpResponse.setStatus(HttpStatus.FORBIDDEN.value());
             return null;
+        }
+
+        //j
+        if (one != null && StringUtils.hasText(one.getRequireAuthorizations())) {
+
+            List<String> requirePermissionList = JsonStrArrayUtils.parse(one.getRequireAuthorizations(), StringUtils::hasText, (txt) -> txt);
+
+            boolean isAuthorized = rbacService.isAuthorized(true, requirePermissionList, (rp, info) -> {
+                throw new AuthorizationException("page-" + url, "未授权的资源：" + rp);
+            });
+
+            if (!isAuthorized) {
+                throw new AuthorizationException("page-" + url, "使用未授权的资源");
+            }
         }
 
         if (one != null

@@ -181,11 +181,12 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     .order(Ordered.HIGHEST_PRECEDENCE + 3000);
         }
 
-        //资源拦截器
-        registry.addInterceptor(resourceAuthorizeInterceptor())
-                .addPathPatterns(frameworkProperties.getAdminPath() + "/**")
-                .order(Ordered.HIGHEST_PRECEDENCE + 4000);
-
+        if (StringUtils.hasText(frameworkProperties.getAdminPath())) {
+            //资源拦截器
+            registry.addInterceptor(resourceAuthorizeInterceptor())
+                    .addPathPatterns(frameworkProperties.getAdminPath() + "/**")
+                    .order(Ordered.HIGHEST_PRECEDENCE + 4000);
+        }
     }
 
     /**

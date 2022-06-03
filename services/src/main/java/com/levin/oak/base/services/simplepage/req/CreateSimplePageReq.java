@@ -69,6 +69,10 @@ public class CreateSimplePageReq extends MultiTenantReq {
     @NotBlank
     String path;
 
+    @Size(max = 1800)
+    @Schema(description = "需要的授权，权限或角色，json数组")
+    String requireAuthorizations;
+
     @Schema(description = "内容"  )
     String content;
 
