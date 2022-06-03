@@ -3,12 +3,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
+    <meta charset="utf-8"/>
+    <#--    <meta name="renderer" content="webkit">-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
     <title>${appName}管理后台登录</title>
     <link href="css/index.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/jquery.particleground.min.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/toastr.min.css">
+    <script src="js/toastr.min.js"></script>
+
+<#--    toastr.success('Hello world!', 'Toastr fun!'); /success 、 error、info、warning 第二个参数为标题可以省略-->
+
+<#--    //关闭警告框-->
+<#--    toastr.clear([toast]);-->
+
+<#--    //获取当前警告框-->
+<#--    toastr.active();-->
+
+<#--    //刷新警告框 第二个参数为超时时间-->
+<#--    toastr.refreshTimer(toast, 5000);-->
+
 </head>
 
 <body style="overflow: hidden">
@@ -28,38 +44,42 @@
                 <form name="userLoginActionForm" id="userLoginActionForm" method="POST" action="" target="_parent">
                     <div class="logo_window_L" style="margin: 0 auto;float: inherit;">
                         <span class="logo-form-title">用户登录</span>
+
                         <div class="register_form2">
-                            <input class="user-name" id="username" name="account" type="text" value="用户名" maxlength="20"
-                                   onfocus="userInter('F','username',this);" onblur="userInter('B','username',this)">
+                            <input placeholder="用户名" class="user-name"
+                                   id="account" type="text" maxlength="20"/>
                         </div>
+
                         <div class="register_form2" style="position:relative;height:50px">
-                            <input class="user-pass" type="text" id="p_t" name="p_t" value="密码" onfocus="hide_pw()"
-                                   style="z-index:2;position:absolute;">
-                            <input class="user-pass" type="password" id="userpwd" name="password" maxlength="32"
-                                   onblur="check_pw();" style="z-index:1;position:absolute;">
+                            <input placeholder="密码" class="user-pass" type="password"
+                                   id="password" maxlength="32"/>
                         </div>
+
                         <div class="register_form3">
-                            <input id="validatecode" name="verificationCode" type="text" placeholder="验证码" maxlength="6"
-                                   onfocus="check_yzm(1)" onblur="check_yzm(2);">
-                            <a href="javaScript:getVcode2()" title="点击，换一张！">
-                                <img id="vcodesrc" name="vcodesrc" border="0" width="120" height="40" alt="点击，换一张！">
+                            <input placeholder="图片验证码" id="verificationCode" type="text" maxlength="6"/>
+                            <a href="javaScript:updateCode()" title="点击，换一张！">
+                                <img id="codeImg" border="0" width="120" height="40" alt="点击，换一张！">
                             </a>
                         </div>
+
                         <!--<div class="no_pwd">
                             <a href="/get_password_new.php" target="_blank">忘记密码？</a>
                         </div>-->
+
                         <div class="button_a">
-                            <a class="login-btn" style="margin: 0 auto;display: block;" id="login_bt" name="login_bt"
-                               onclick="logincheck()">登录</a>
+                            <a class="login-btn" style="margin: 0 auto;display: block;" id="login_btn"
+                               onclick="doLogin()">登 录</a>
                         </div>
+
                     </div>
 
-                    <input type="hidden" id="is_cs" name="is_cs" value="0">
-                    <input type="hidden" id="is_get" name="is_get" value="1">
-                    <input type="hidden" id="show_msg" name="show_msg" value="">
-                    <input type="hidden" id="jz" name="jz" value="0">
-                    <input type="hidden" id="no_new" name="no_new" value="0">
-                    <input type="hidden" id="gobuy" name="gobuy" value="0">
+                    <#--                    <input type="hidden" id="is_cs" name="is_cs" value="0">-->
+                    <#--                    <input type="hidden" id="is_get" name="is_get" value="1">-->
+                    <#--                    <input type="hidden" id="show_msg" name="show_msg" value="">-->
+                    <#--                    <input type="hidden" id="jz" name="jz" value="0">-->
+                    <#--                    <input type="hidden" id="no_new" name="no_new" value="0">-->
+                    <#--                    <input type="hidden" id="gobuy" name="gobuy" value="0">-->
+
                 </form>
             </div>
         </div>
@@ -67,6 +87,7 @@
 </div>
 <div class="windows_bg"></div>
 <script>
+
     $(function () {
         var canvasBg = $('#canvasBg');
         if (canvasBg.length) {
@@ -77,46 +98,41 @@
         }
     });
 
-    function aa() {
-        var e = window.screen.width;
-        e >= 1366 ?
-            (1366 === e && $(".Guide_con1").addClass("wrapper_1366"))
-            : (e >= 1280 ? $(".Guide_con1").addClass("wrapper_1280") : $(".Guide_con1").addClass("wrapper_1024"))
+    function toast_simple(mess){
+        var str='<div class="mess"><span></span></div>';
+        $("body").append(str);
+        $(".mess").fadeIn().find("span").html(mess);
+        setTimeout(function(){
+            $(".mess").fadeOut();
+        },2000)
     }
 
-    function userInter(e, a, t) {
-        "username" === a
-        && ("F" === e ? ("用户名" === t.value   && (t.value = ""))
-                : "B" === e  && "" === t.value  && (t.value = "用户名")
-        )
+    function error(msg) {
+        toastr.error(msg,'错误');
     }
 
-    function check_yzm(e) {
-        var a = $("#validatecode").val();
-        1 === e && ("验证码" === a && $("#validatecode").val(""), $("#vcodesrc").show());
-        2 === e && "" === a && $("#validatecode").val("验证码");
+    function toast(msg) {
+        //toastr.success('Hello world!', 'Toastr fun!'); /success 、 error、info、warning 第二个参数为标题可以省略
+        toastr.info(msg,'提示');
     }
 
-    function hide_pw() {
-        $("#p_t").hide();
-        $("#userpwd").focus();
-    }
+    function checkInput(inputView, prompt) {
 
-    function check_pw() {
-        $("#userpwd").val() === "" && $("#p_t").show()
-    }
+        if ((typeof inputView) === "string") {
+            inputView = $(inputView)
+        }
 
-    function checkInput(input,errInfo,placeholder,callback) {
+        if (inputView.val().trim() === "") {
 
-        if($.trim(input.val()).length === 0
-            || placeholder === input.val()){
+            let placeholder = "" + inputView.attr('placeholder');
 
-            alert(errInfo);
+            if (!placeholder.startsWith("请输入")) {
+                placeholder = placeholder + "不能为空！";
+            }
 
-            if(callback)
-                callback();
-            else
-                input.focus();
+            error(prompt || placeholder);
+
+            inputView.focus();
 
             return false
         }
@@ -124,17 +140,11 @@
         return true
     }
 
-    function logincheck() {
-
-        return checkInput($("#username"),"用户名不能为空！","用户名")
-            && checkInput($("#userpwd"),"密码不能为空！","",hide_pw)
-            && checkInput($("#validatecode"),"请填写验证码！","验证码")
+    function doLogin() {
+        return checkInput("#account")
+            && checkInput("#password")
+            && checkInput("#verificationCode")
             && login();
-
-        // return "" == $.trim(e.val()) || "用户名" == e.val() ? (alert("用户名不能为空！"), e.focus(), !1)
-        //     : "" == a.val() ? (hide_pw(), alert("用户密码不能为空！"), !1)
-        //         : "" == t.val() || "验证码" == t.val() ? (alert("请填写验证码！"), t.focus(), !1)
-        //             : login()
     }
 
     function login() {
@@ -143,55 +153,69 @@
             return
         }
 
-        var e = $("#username"),
-            loginBtn = $("#login_bt"),
-            a = $("#userpwd"),
-            t = $("#validatecode");
+        var account = $("#account").val();
+        var password = $("#password").val();
+
+        var verificationCodeView = $("#verificationCode");
+        var verificationCode = verificationCodeView.val();
+
+        // loginBtn = $("#login_btn");
 
         window.isLogining = true;
 
         $.ajax({
             url: "${loginApi}",
             type: "POST",
-            data: {account: e.val(), password: a.val(), verificationCode: t.val()},
+            data: {account, password, verificationCode},
             error: function (xhr, status, error) {
                 window.isLogining = false;
-                alert(error)
+                error(error)
                 console.log(error)
             },
             success: function (result) {
-                window.isLogining = false;
+
                 if (result.successful) {
                     location.reload()
                 } else if (result.msg) {
                     if (result.msg.indexOf("验证码") !== -1) {
-                        t.val('');//清空内容
-                        getVcode2()
-                        t.focus()
+                        verificationCodeView.val('');//清空内容
+                        updateCode();
+                        verificationCodeView.focus();
                     }
-                    alert(result.msg)
+                    error(result.msg);
                 } else {
-                    alert("发生未知错误")
+                    error("发生未知错误");
                 }
 
-                console.log(result)
+                window.isLogining = false;
+
+                console.log(result);
             }
         });
     }
 
-    function getVcode2() {
-        document.getElementById("vcodesrc").src = "${captchaApi}?" + (new Date()).getTime()
+    function updateCode() {
+        document.getElementById("codeImg").src = "${captchaApi}?" + (new Date()).getTime();
+    }
+
+    function autoSize() {
+
+        var width = window.screen.width;
+
+        width >= 1366 ?
+            (1366 === width && $(".Guide_con1").addClass("wrapper_1366"))
+            : (width >= 1280 ? $(".Guide_con1").addClass("wrapper_1280") : $(".Guide_con1").addClass("wrapper_1024"))
     }
 
     $(document).ready(function () {
-        $("#username,#userpwd,#validatecode").keydown(function (e) {
+        $("#account,#password,#verificationCode").keydown(function (e) {
             if (13 === e.keyCode)
-                return logincheck(), !1
+                return doLogin(), !1
         });
 
     }), $(function () {
-        aa();
-        getVcode2();
+        autoSize();
+        updateCode();
         var e = $(window).height();
         $(window).height();
         $(".frame_register").css("height", e)
