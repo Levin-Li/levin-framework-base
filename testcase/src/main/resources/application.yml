@@ -2,6 +2,9 @@
 server:
   servlet:
     context-path: /rbac
+  compression:
+    enabled: true
+    min-response-size: 10KB
 
 spring:
   application:
@@ -79,9 +82,7 @@ spring:
     type: redis
 
   freemarker:
-    cache: false
-    template-loader-path: classpath:/templates/
-
+    cache: true
 
 #日志配置
 logging:

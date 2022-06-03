@@ -41,6 +41,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.nio.charset.Charset;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
@@ -363,6 +364,8 @@ public class AuthServiceImpl
 
         //  final String defaultIcon = "fa fa-list";// (serverProperties.getServlet().getContextPath() + "/" + frameworkProperties.getAdminPath() + "/img/menu-256.png").replace("//", "/");
 
+        final AtomicInteger index = new AtomicInteger();
+
         for (Plugin plugin : pluginManager.getInstalledPlugins()) {
 
             MenuRes menu = simpleDao.selectFrom(MenuRes.class)
@@ -388,7 +391,7 @@ public class AuthServiceImpl
 
                 final String path = menuItem.getPath().replace("/api/", "/admin/");
                 //创建菜单
-                log.info("创建插件[ {} ]的默认菜单[ {} --> {}]", plugin.getId(), menuItem.getName(), path);
+                log.info("创建菜单{} - 插件[ {} ][ {} --> {}]", index.incrementAndGet(), plugin.getId(), menuItem.getName(), path);
 
                 simpleDao.create(
                         simpleDao.copy(menuItem,
@@ -405,7 +408,7 @@ public class AuthServiceImpl
                 );
 
                 //创建默认页面
-                log.info("创建插件[ {} ]的默认页面[ {} --> {}]", plugin.getId(), menuItem.getName(), path);
+                log.info("创建页面{} - 插件[ {} ][ {} --> {}]", index.get(), plugin.getId(), menuItem.getName(), path);
                 simpleDao.create(new SimplePage()
                                 .setType("json")
                                 .setCategory("amis")

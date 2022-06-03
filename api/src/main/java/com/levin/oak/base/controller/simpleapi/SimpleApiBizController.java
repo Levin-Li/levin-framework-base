@@ -1,5 +1,6 @@
 package com.levin.oak.base.controller.simpleapi;
 
+import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.controller.BaseController;
@@ -47,7 +48,7 @@ import static com.levin.oak.base.entities.EntityConst.VIEW_DETAIL_ACTION;
 //默认需要权限访问
 @ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + "服务")
-
+@MenuResTag(false)
 @Valid
 public class SimpleApiBizController extends BaseController {
 
