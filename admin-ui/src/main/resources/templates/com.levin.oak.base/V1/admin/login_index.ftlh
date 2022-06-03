@@ -14,16 +14,16 @@
     <link rel="stylesheet" type="text/css" href="css/toastr.min.css">
     <script src="js/toastr.min.js"></script>
 
-<#--    toastr.success('Hello world!', 'Toastr fun!'); /success 、 error、info、warning 第二个参数为标题可以省略-->
+    <#--    toastr.success('Hello world!', 'Toastr fun!'); /success 、 error、info、warning 第二个参数为标题可以省略-->
 
-<#--    //关闭警告框-->
-<#--    toastr.clear([toast]);-->
+    <#--    //关闭警告框-->
+    <#--    toastr.clear([toast]);-->
 
-<#--    //获取当前警告框-->
-<#--    toastr.active();-->
+    <#--    //获取当前警告框-->
+    <#--    toastr.active();-->
 
-<#--    //刷新警告框 第二个参数为超时时间-->
-<#--    toastr.refreshTimer(toast, 5000);-->
+    <#--    //刷新警告框 第二个参数为超时时间-->
+    <#--    toastr.refreshTimer(toast, 5000);-->
 
 </head>
 
@@ -98,22 +98,22 @@
         }
     });
 
-    function toast_simple(mess){
-        var str='<div class="mess"><span></span></div>';
+    function toast_simple(mess) {
+        var str = '<div class="mess"><span></span></div>';
         $("body").append(str);
         $(".mess").fadeIn().find("span").html(mess);
-        setTimeout(function(){
+        setTimeout(function () {
             $(".mess").fadeOut();
-        },2000)
+        }, 2000)
     }
 
     function error(msg) {
-        toastr.error(msg,'错误');
+        toastr.error(msg, '错误');
     }
 
     function toast(msg) {
         //toastr.success('Hello world!', 'Toastr fun!'); /success 、 error、info、warning 第二个参数为标题可以省略
-        toastr.info(msg,'提示');
+        toastr.info(msg, '提示');
     }
 
     function checkInput(inputView, prompt) {

@@ -18,7 +18,7 @@ strong{font-weight:inherit;}
 .register_c{ width:100%; margin:0 auto; position:relative;}
 .logo{ width:500px; margin:0 auto; text-align:center; padding-top:50px;}
 .register_center{ width:500px; margin:0 auto; background-color:#FFF; border-radius:5px; margin-top:30px;padding-top:45px;}
-.register_tit{ margin:0 40px; margin-bottom:25px; background:url(/templates/login/2017/images/border.png) repeat-x left center; text-align:center;}
+.register_tit{ margin:0 40px; margin-bottom:25px; background:url(border.png) repeat-x left center; text-align:center;}
 .register_tit em{ display:inline; font-size:16px; color:#555; background-color:#FFF;padding:0 20px;}
 .register_form ,.register_form1{ width:312px; margin:0 auto; margin-bottom:10px;}
 .register_form input{ width:302px; height:38px; line-height:38px; border:1px solid #dbdbdb; border-radius:5px;padding-left:10px; font-size:14px; color:#999}
@@ -28,7 +28,7 @@ strong{font-weight:inherit;}
 .register_form1 p{ width:104px; height:40px; overflow:hidden; display:block; border:1px solid #dbdbdb;}
 .ok_button{ display:block; width:160px; height:40px; line-height:40px; text-align:center; color:#f8f8f8; font-size:16px; background-color:#0099ff; margin:0 auto; margin-top:30px; border-radius:25px;}
 .ok_text{ display:block; margin:0 auto; text-align:center; font-size:14px; color:#0099ff; margin-top:11px;}
-.promptly{ margin:0 40px; background:url(/templates/login/2017/images/border.png) repeat-x left top;padding:16px 0; margin-top:22px;}
+.promptly{ margin:0 40px; background:url(border.png) repeat-x left top;padding:16px 0; margin-top:22px;}
 .promptly a{ display:block; margin:0 auto; text-align:center; font-size:14px; color:#0099ff;}
 
 
@@ -36,7 +36,7 @@ strong{font-weight:inherit;}
 .logo_window{ width:100%;position: relative;margin: 0 auto; z-index: 10;}
 .logo_window1{ width:856px; height:400px; margin:0 auto; overflow:hidden; margin-top:50px;}
 .logo_window_L{ width:491px; height:400px; background-color:#FFF; border-radius:5px 0px 0px 5px; float:left; overflow:hidden}
-.logo_window_R{ width:365px; height:400px; background:url(/templates/login/2017/images/bg.png); overflow:hidden; border-radius:0px 5px 5px 0px;}
+.logo_window_R{ width:365px; height:400px; background:url(bg.png); overflow:hidden; border-radius:0px 5px 5px 0px;}
 .logo_window_L .logo-form-title{ display:block;width:380px; margin:0 auto; font-size:24px; color:#444;padding-top:40px;padding-bottom:20px;}
 .register_form2 ,.register_form3{ width:380px; margin:0 auto; margin-bottom:10px;}
 .register_form2 input.user-name,.register_form2 input.user-pass{ width:368px; height:38px; line-height:38px; border:1px solid #dbdbdb; border-radius:5px;padding-left:10px; font-size:14px; color:#999}
@@ -64,7 +64,7 @@ strong{font-weight:inherit;}
 .gonggao_c ul{width:304px;}
 .gonggao_c ul li{width:304px;}
 .gonggao_c ul li a{ display:block;width:304px; overflow:hidden}
-.gonggao_c ul li a em{ display:block; width:242px; height:30px;padding-left:8px; line-height:30px;font-size:14px; color:#cccccc; float:left; background:url(/templates/login/2017/images/li.jpg) no-repeat left center;}
+.gonggao_c ul li a em{ display:block; width:242px; height:30px;padding-left:8px; line-height:30px;font-size:14px; color:#cccccc; float:left; background:url(li.jpg) no-repeat left center;}
 .gonggao_c ul li a strong{ display:block; height:30px; line-height:30px;font-size:14px; color:#999; overflow:hidden; text-align:right}
 
 
