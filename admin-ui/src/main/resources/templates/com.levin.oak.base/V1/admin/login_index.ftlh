@@ -80,33 +80,61 @@
     function aa() {
         var e = window.screen.width;
         e >= 1366 ?
-            (1366 == e && $(".Guide_con1").addClass("wrapper_1366"))
+            (1366 === e && $(".Guide_con1").addClass("wrapper_1366"))
             : (e >= 1280 ? $(".Guide_con1").addClass("wrapper_1280") : $(".Guide_con1").addClass("wrapper_1024"))
     }
 
     function userInter(e, a, t) {
-        "username" == a && ("F" == e ? "用户名" == t.value && (t.value = "") : "B" == e && "" == t.value && (t.value = "用户名"))
+        "username" === a
+        && ("F" === e ? ("用户名" === t.value   && (t.value = ""))
+                : "B" === e  && "" === t.value  && (t.value = "用户名")
+        )
     }
 
     function check_yzm(e) {
         var a = $("#validatecode").val();
-        1 == e && ("验证码" == a && $("#validatecode").val(""), $("#vcodesrc").show()), 2 == e && "" == a && $("#validatecode").val("验证码")
+        1 === e && ("验证码" === a && $("#validatecode").val(""), $("#vcodesrc").show());
+        2 === e && "" === a && $("#validatecode").val("验证码");
     }
 
     function hide_pw() {
-        $("#p_t").hide(), $("#userpwd").focus()
+        $("#p_t").hide();
+        $("#userpwd").focus();
     }
 
     function check_pw() {
-        var e = $("#userpwd").val();
-        "" == e && $("#p_t").show()
+        $("#userpwd").val() === "" && $("#p_t").show()
+    }
+
+    function checkInput(input,errInfo,placeholder,callback) {
+
+        if($.trim(input.val()).length === 0
+            || placeholder === input.val()){
+
+            alert(errInfo);
+
+            if(callback)
+                callback();
+            else
+                input.focus();
+
+            return false
+        }
+
+        return true
     }
 
     function logincheck() {
-        var e = $("#username"),
-            a = $("#userpwd"),
-            t = $("#validatecode");
-        return "" == $.trim(e.val()) || "用户名" == e.val() ? (alert("用户名不能为空！"), e.focus(), !1) : "" == a.val() ? (hide_pw(), alert("用户密码不能为空！"), !1) : "" == t.val() || "验证码" == t.val() ? (alert("请填写验证码！"), t.focus(), !1) : login()
+
+        return checkInput($("#username"),"用户名不能为空！","用户名")
+            && checkInput($("#userpwd"),"密码不能为空！","",hide_pw)
+            && checkInput($("#validatecode"),"请填写验证码！","验证码")
+            && login();
+
+        // return "" == $.trim(e.val()) || "用户名" == e.val() ? (alert("用户名不能为空！"), e.focus(), !1)
+        //     : "" == a.val() ? (hide_pw(), alert("用户密码不能为空！"), !1)
+        //         : "" == t.val() || "验证码" == t.val() ? (alert("请填写验证码！"), t.focus(), !1)
+        //             : login()
     }
 
     function login() {
@@ -137,9 +165,9 @@
                     location.reload()
                 } else if (result.msg) {
                     if (result.msg.indexOf("验证码") !== -1) {
+                        t.val('');//清空内容
                         getVcode2()
                         t.focus()
-                        t.attr("value", '');//清空内容
                     }
                     alert(result.msg)
                 } else {
@@ -156,10 +184,11 @@
     }
 
     $(document).ready(function () {
-        $("#userpwd,#validatecode").keydown(function (e) {
-            if (13 == e.keyCode)
+        $("#username,#userpwd,#validatecode").keydown(function (e) {
+            if (13 === e.keyCode)
                 return logincheck(), !1
-        })
+        });
+
     }), $(function () {
         aa();
         getVcode2();

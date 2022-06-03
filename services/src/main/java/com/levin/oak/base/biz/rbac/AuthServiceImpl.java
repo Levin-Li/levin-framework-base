@@ -389,9 +389,11 @@ public class AuthServiceImpl
             RbacUtils.getMenuItemByController(context, plugin.getPackageName(), EntityConst.QUERY_ACTION)
                     .parallelStream().forEach(menuItem -> {
 
+                final int no = index.incrementAndGet();
+
                 final String path = menuItem.getPath().replace("/api/", "/admin/");
                 //创建菜单
-                log.info("创建菜单{} - 插件[ {} ][ {} --> {}]", index.incrementAndGet(), plugin.getId(), menuItem.getName(), path);
+                log.info("创建菜单{} - 插件[ {} ][ {} --> {}]", no, plugin.getId(), menuItem.getName(), path);
 
                 simpleDao.create(
                         simpleDao.copy(menuItem,
@@ -408,7 +410,8 @@ public class AuthServiceImpl
                 );
 
                 //创建默认页面
-                log.info("创建页面{} - 插件[ {} ][ {} --> {}]", index.get(), plugin.getId(), menuItem.getName(), path);
+                log.info("创建页面{} - 插件[ {} ][ {} --> {}]", no, plugin.getId(), menuItem.getName(), path);
+
                 simpleDao.create(new SimplePage()
                                 .setType("json")
                                 .setCategory("amis")
