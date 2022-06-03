@@ -1,0 +1,442 @@
+
+
+/* reset */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+ol,ul{list-style:none;margin:0px;padding:0px;}
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+table{border-collapse:collapse;border-spacing:0;}
+/* start editing from here */
+a{text-decoration:none;}
+.txt-rt{text-align:right;}/* text align right */
+.txt-lt{text-align:left;}/* text align left */
+.txt-center{text-align:center;}/* text align center */
+.float-rt{float:right;}/* float right */
+.float-lt{float:left;}/* float left */
+.clear{clear:both;}/* clear float */
+.pos-relative{position:relative;}/* Position Relative */
+.pos-absolute{position:absolute;}/* Position Absolute */
+.vertical-base{	vertical-align:baseline;}/* vertical align baseline */
+.vertical-top{	vertical-align:top;}/* vertical align top */
+nav.vertical ul li{	display:block;}/* vertical menu */
+nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
+img{max-width:100%;}
+/*end reset*/
+
+body {
+font-family:Verdana;
+padding:0;
+margin:0;
+background:#d24663;
+
+ 'Lato', sans-serif !important;
+}
+
+h1,h2,h3,h4,h5,h6{
+	 'Salsa', cursive;
+	margin:0;			   
+}	
+p{
+	margin:0;
+}
+ul{
+	margin:0;
+	padding:0;
+}
+label{
+	margin:0;
+}
+/*-- main --*/
+.content{
+	padding:80px 0;
+}
+.content h1{
+	margin-bottom:50px;
+	text-align:center;
+	font-size:45px;
+	 'Salsa', cursive;
+	color:#fff;	
+}
+.main {
+    width: 60%;
+    margin: 0 auto 0 auto;
+	background:url("../images/pic3.jpg") no-repeat 0px 0px;
+	background-size:cover;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+	-moz-background-size: cover;
+	min-height:416px;
+    position: relative;	
+   box-shadow: 9px 10px 9px #5A1120;
+  -o-box-shadow: 9px 10px 9px #5A1120;
+  -moz-box-shadow: 9px 10px 9px #5A1120;
+  -webkit-box-shadow: 9px 10px 9px #5A1120;
+}
+.hotel-left {
+	float:left;
+    width: 35%;
+    background: rgba(1, 10, 19, 0.69);
+    padding: 3em 3em 0;
+    height: 368px;
+}
+.hotel-right{
+	float:left;
+	text-align:center;
+	width: 53%;
+}
+.hotel-right h3 {
+    color: #fdb515;
+    font-size: 28px;
+    margin-top: 70px;
+}
+.hotel-right h3 span{
+	display:block;
+	margin-top:8px;
+}
+.pay_form form input[type="text"] ,.pay_form form input[type="password"]{
+    width: 85%;
+    padding: 0.7em 2.7em 0.7em 0.7em;
+    font-size: 14px;
+    border: none;
+    border-bottom: 2px solid #e6e6e6;
+    outline: none;
+    color: #ccc;
+    margin-bottom: 40px;
+}
+.pay_form form input.logo {
+    background: url("../images/logo.png") no-repeat 97% center #fff;
+    background-size: 4.5% !important;
+}
+.pay_form form input.key {
+    background: url("../images/key.png") no-repeat 97% center #fff;
+    background-size: 4.5% !important;
+}
+.pay_form form input[type="submit"] {
+    background: #fdb515;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 14px 0;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    width: 37%;
+    cursor: pointer;
+    border-radius: 50px;
+    margin-bottom:30px;
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+	-ms-transition:0.5s all;
+}
+.pay_form form input[type="submit"]:hover{
+	background:#d24663;
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+	-ms-transition:0.5s all;
+}
+.hotel-left a {
+    text-decoration: none;
+    color: #fdb515;
+    font-size: 14px;
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+	-ms-transition:0.5s all;
+}
+.hotel-left a:hover{
+	color:#fff;
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+	-ms-transition:0.5s all;
+}
+.login-right{
+	float:right;
+}
+.pay_form h2 {
+    color: #fdb515;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+p.footer {
+    text-align: center;
+    margin-top: 70px;
+    color: #fff;
+    font-size: 15px;
+}
+p.footer a{
+	text-decoration:none;
+	color:#fdb515;
+}
+p.footer a:hover{
+color:#fff;
+}
+.hotel-right p {
+    font-size:22px;
+    margin-top: 8em;
+    color: #fdb515;
+}
+.alert-close,.alert-close1,.alert-close2,.alert-close4,.alert-close6{
+	background: url("../images/into.png") no-repeat 0px 0px;
+	cursor: pointer;
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    right: 7px;
+    top: 11px;
+	-webkit-transition: color 0.2s ease-in-out;
+	-moz-transition: color 0.2s ease-in-out;
+	-o-transition: color 0.2s ease-in-out;
+	transition: color 0.2s ease-in-out;
+	z-index: 1;
+}
+/*-- responsive media queries --*/
+@media (max-width: 1440px){
+	
+}
+@media (max-width: 1366px){
+	.hotel-right p {
+		font-size: 19px;
+	}	
+}
+@media (max-width: 1280px){
+	.hotel-left {
+		width: 34%;
+	}	
+}
+@media (max-width: 1080px){
+	.main {
+		width: 69%;
+	}	
+}
+@media (max-width: 1024px){
+	.main {
+		width: 74%;
+	}	
+}
+@media (max-width: 991px){
+	.main {
+		width: 76%;
+	}	
+}
+@media (max-width: 800px){
+	.main {
+		width: 86%;
+	}	
+	.hotel-left {
+		width: 37%;
+		padding: 2em 2em 0;
+		height: 368px;
+	}
+	.main {
+		min-height: 400px;
+	}
+	.content h1 {
+		font-size: 38px;
+	}
+	.pay_form form input[type="text"], .pay_form form input[type="password"] {
+      width: 80%;
+	}
+	.pay_form form input[type="submit"] {
+    padding: 10px 0;
+    font-size: 16px;
+    outline: none;
+    width: 42%;
+	}
+	.hotel-right p {
+		font-size: 17px;
+	}
+}
+@media (max-width: 768px){
+	.content {
+		padding: 150px 0;
+	}
+	.content h1 {
+		margin-bottom: 70px;
+	}	
+}
+@media (max-width: 736px){
+	.content {
+		padding: 100px 0;
+	}
+	.hotel-right {
+		width: 52%;
+	}
+	.hotel-right p {
+		font-size: 16px;
+		margin-top: 11em;
+	}
+}
+@media (max-width: 667px){
+	.main {
+		width: 90%;
+	}
+	.pay_form form input[type="submit"] {
+		padding: 10px 0;
+	}
+	.pay_form form input.logo,.pay_form form input.key {
+		background-size: 5.5% !important;
+	}
+}
+@media (max-width: 640px){
+	.content {
+		padding: 65px 0;
+	}
+	.content h1 {
+		font-size: 32px;
+	}
+	.hotel-right h3 {
+		font-size: 22px;
+	}	
+	.pay_form h2 {
+		font-size: 24px;
+		margin-bottom: 15px;
+	}
+	.content h1 {
+		margin-bottom: 50px;
+	}
+	.hotel-left {
+		width: 40%;
+		padding: 1em 1em 0;
+		height: 310px;
+	}
+	.hotel-right p {
+		font-size: 17px;
+		margin-top: 7em;
+	}
+	.main {
+		min-height: 326px;
+	}
+	.pay_form form input.logo, .pay_form form input.key {
+		background-size: 6.5% !important;
+	}
+}
+@media (max-width: 600px){
+	.pay_form form input[type="text"], .pay_form form input[type="password"] {
+    width: 73%;
+}
+}
+@media (max-width: 568px){
+	
+}
+@media (max-width: 480px){
+	.content h1 {
+		font-size: 29px;
+	}
+	.hotel-right p {
+		font-size: 14px;
+		margin-top: 9em;
+	}
+	.hotel-right h3 {
+		font-size: 19px;
+	}
+	.pay_form form input[type="submit"] {
+		width: 46%;
+	}
+	p.footer {
+		margin-top: 50px;
+		font-size: 13px;
+	}	
+}
+@media (max-width: 414px){
+	.hotel-left {
+		width: 91%;
+	}	
+	.pay_form form input[type="submit"] {
+		width: 32%;
+	}
+	.hotel-right {
+		width: 100%;
+	}
+	.hotel-right h3 {
+		margin-top: 35px;
+	}
+	.hotel-right p {
+		margin-top: 4em;
+	}
+	.main {
+		min-height: 526px;
+	}
+	.pay_form form input[type="text"], .pay_form form input[type="password"] {
+		margin-bottom: 30px;
+	}
+	p.footer {
+		line-height: 1.8em;
+	}
+	.hotel-left {
+		height: 290px;
+	}
+	.content h1 {
+		font-size: 25px;
+	}
+	.main {
+		min-height: 510px;
+	}
+	.main {
+		background: url("../images/pic3.jpg") no-repeat -473px 3px;
+		background-size: 289% !important;
+	}
+	.pay_form form input[type="text"], .pay_form form input[type="password"] {
+		width: 85%;
+	}
+}
+@media (max-width: 384px){
+	p.footer {
+		line-height: 1.8em;
+		width: 90%;
+		margin: 50px auto 0;
+	}
+	.main {
+		min-height: 505px;
+	}
+	.main {
+		background: url("../images/pic3.jpg") no-repeat -473px 55px;
+		background-size: 289% !important;
+	}
+	.pay_form form input[type="text"], .pay_form form input[type="password"] {
+		width: 84%;
+	}
+}
+@media (max-width: 375px){
+	.pay_form form input[type="text"], .pay_form form input[type="password"] {
+		width: 83%;
+	}
+}
+@media (max-width: 320px){
+	.content h1 {
+		font-size: 22px;
+	}
+	.pay_form h2 {
+		font-size: 22px;
+		margin-bottom: 22px;
+	}
+	.pay_form form input[type="submit"] {
+		padding: 8px 0;
+	}
+	.hotel-left {
+		width: 88.5%;
+	}
+	.content h1 {
+		margin-bottom: 30px;
+	}
+	.content {
+		padding: 50px 0;
+	}
+	p.footer {
+		margin: 40px auto 0;
+	}
+	.main {
+		background: url("../images/pic3.jpg") no-repeat -359px 140px;
+		background-size: 289% !important;
+	}	
+	.pay_form form input[type="text"], .pay_form form input[type="password"] {
+		width: 80%;
+	}
+}

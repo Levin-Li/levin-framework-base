@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+		<title>新闻后台登录模板</title>
+
+		<meta name="keywords" content="新闻后台模板"/>
+		
+		<meta name="description" content="最全的新闻后台登录模板网站http://cn.inspinia.cn"/>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<link href="css/style.css"  rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="css/jquery-ui.css"  />
+<script src="js/jquery-1.12.0.min.js" ></script>
+</head>
+<body>
+	<div class="main">
+		<h1>Employee Application Form</h1>
+		<div class="w3_agile_main_grids">
+			<div class="agileits_w3layouts_main_grid">
+				<form id="upload" action="#" method="post" enctype="multipart/form-data">
+					<div class="agile_main_grid_left">
+						<div class="w3_agileits_main_grid_left_grid">
+							<h3>Register Here :</h3>
+							<input type="email" name="Email" placeholder="Email" required="">
+							<input type="password" name="Password" id="password1" placeholder="Password" required="">
+							<input type="password" name="Confirm Password" id="password2" placeholder="Confirm Password" required="">
+							<select id="w3_agileits_select" class="w3layouts_select" onchange="change_country(this.value)" required="">
+								<option value="">Security Questions</option>
+								<option value="">Question1</option>
+								<option value="">Question2</option> 
+								<option value="">Question3</option>							
+							</select>
+							<textarea name="Message" placeholder="Address..." required=""></textarea>
+						</div>
+						<div class="w3_agileits_qualifications">
+							<h3>Qualifications :</h3>
+							<select id="w3_agileits_select2" class="w3layouts_select" onchange="change_country(this.value)" required="">
+								<option value="">Select University</option>
+								<option value="">University1</option>
+								<option value="">University2</option> 
+								<option value="">University3</option>		
+								<option value="">University4</option>
+								<option value="">Other</option>							
+							</select>
+							<select class="w3layouts_select" onchange="change_country(this.value)" required="">
+								<option value="">Highest Qualification</option>
+								<option value="">Bachelors Degree</option>
+								<option value="">Other</option>							
+							</select>
+							<select class="w3layouts_select" onchange="change_country(this.value)" required="">
+								<option value="">Grade Points</option>
+								<option value="">A</option>
+								<option value="">B</option>	
+								<option value="">C</option>									
+							</select>
+						</div>
+					</div>
+					<div class="agile_main_grid_left">
+						<h3>Your Details :</h3>
+						<input type="text" name="First Name" placeholder="First Name" required="">
+						<input type="text" name="Last Name" placeholder="Last Name" required="">
+						<div class="agileits_main_grid_left_l_grids">
+							<div class="w3_agileits_main_grid_left_l">
+								<h2>Relocation Required <span class="wthree_color">*</span></h2>
+							</div>
+							<div class="w3_agileits_main_grid_left_r">
+								<div class="agileinfo_radio_button">
+									<label class="radio"><input type="radio" name="radio" checked=""><i></i>YES</label>
+								</div>
+								<div class="agileinfo_radio_button">
+									<label class="radio"><input type="radio" name="radio"><i></i>No</label>
+								</div>
+								<div class="clear"> </div>
+							</div>
+							<div class="clear"> </div>
+						</div>
+						<select id="w3_agileits_select1" class="w3layouts_select" onchange="change_country(this.value)" required="">
+							<option value="">Country</option>
+							<option value="">America</option>
+							<option value="">Bhutan</option> 
+							<option value="">China</option>		
+							<option value="">Europe</option>
+							<option value="">Other</option>							
+						</select>
+						<input type="text" name="Phone Number" placeholder="Phone Number" required="">
+						<input class="date" id="datepicker" type="text" value="dd-mm-yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'dd-mm-yyyy';}" required="" >
+						<div class="w3layouts_file_upload">
+							<div class="w3_agileinfo_file">
+								<input type="file" id="fileselect" name="fileselect[]" multiple="multiple" required="" />
+								<h4>OR</h4>
+								<div id="filedrag">drag and drop files here</div>
+							</div>
+							<div id="messages">
+								<h4>Status Messages</h4>
+							</div>
+						</div>
+					</div>
+					<div class="clear"> </div>
+					<input type="submit" value="Submit Application">
+				</form>
+			</div>
+		</div>
+		<div class="agileits_copyright">
+			<p>© 2017 Employee Application Form. All rights reserved | Design by <a href="https://shop585798004.taobao.com/" target="_blank">前端ui</a></p>
+		</div>
+	</div>
+	<script src="js/filedrag.js" ></script>
+	<script type="text/javascript">
+		window.onload = function () {
+			document.getElementById("password1").onchange = validatePassword;
+			document.getElementById("password2").onchange = validatePassword;
+		}
+		function validatePassword(){
+			var pass2=document.getElementById("password2").value;
+			var pass1=document.getElementById("password1").value;
+			if(pass1!=pass2)
+				document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+			else
+				document.getElementById("password2").setCustomValidity('');	 
+				//empty string means no validation error
+		}
+	</script>
+	<!-- start-date-piker-->
+		<script src="js/jquery-ui.js" ></script>
+		<script>
+			$(function() {
+			$( "#datepicker" ).datepicker();
+			});
+		</script>
+	<!-- //End-date-piker -->
+</body>
+</html>

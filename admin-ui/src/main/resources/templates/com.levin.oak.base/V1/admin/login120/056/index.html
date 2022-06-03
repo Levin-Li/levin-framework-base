@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>登录模板源码</title>
+
+	<meta name="keywords" content="登录模板源码"/>
+	
+	<meta name="description" content="最全的登录模板源码下载网站http://cn.inspinia.cn"/>
+<!-- Meta-Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //Meta-Tags -->
+
+<!-- Custom-Style-Sheet -->
+<link rel="stylesheet" href="css/bootstrap.css" 	type="text/css" media="all">
+<link rel="stylesheet" href="css/validify.css" 	type="text/css" media="all">
+<link rel="stylesheet" href="css/style.css" 		type="text/css" media="all">
+<!-- //Custom-Style-Sheet -->
+
+
+<!-- Style -->
+<style type="text/css">
+	@-webkit-keyframes AnimationName {
+		0%{background-position:15% 0%}
+		50%{background-position:86% 100%}
+		100%{background-position:15% 0%}
+	}
+
+	@-moz-keyframes AnimationName {
+		0%{background-position:15% 0%}
+		50%{background-position:86% 100%}
+		100%{background-position:15% 0%}
+	}
+
+	@keyframes AnimationName { 
+		0%{background-position:15% 0%}
+		50%{background-position:86% 100%}
+		100%{background-position:15% 0%}
+	}
+
+	.textbox {
+		margin: 20px 0;
+		padding: 15px 20px;
+		color: #fff;
+		background-color: rgba(0, 0, 0, .25);
+		border: 1px solid #CCC;
+		border-radius: 0;
+		box-shadow: none !important;
+		transition: all .2s linear;
+	}
+
+	.btn-osx, button[disabled] {
+		padding: 5px 10px;
+		color: #fff;
+		background-color: rgba(0, 0, 0, .1)!important;
+		border: 1px solid rgba(255, 255, 255, .2);
+		box-shadow: none !important;
+		transition: all .2s linear;
+		border-radius: 50%;
+		font-size: 20px;
+	}
+
+	.btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+		color: #FFF;
+		opacity: 1;
+		border-color: #FFF!important;
+	}
+
+	@media screen and (max-width: 640px) {
+		.textbox {
+			margin: 20px 0;
+			padding: 12px;
+			font-size: 13px;
+		}
+	}
+
+</style>
+<!-- //Style -->
+
+</head>
+<!-- //Head -->
+
+
+
+	<!-- Body -->
+	<body>
+
+		<h1>VALID LOGIN FORM</h1>
+
+		<div class="containerw3layouts-agileits">
+
+			<form action="#" method="post" id="demo" novalidate>
+				<div class="form-group agileits-w3layouts">
+					<input type="email" class="form-control agileinfo textbox" name="email" required placeholder="Email">
+				</div>
+				<div class="form-group w3-agile password">
+					<input type="password" class="form-control w3-agileits textbox" required placeholder="Password">
+				</div>
+				<div class="form-group w3-agile submit">
+					<button class="btn btn-default btn-osx w3-agileits btn-lg" disabled type="submit"><i class="fa agileinfo fa-arrow-circle-right"></i></button>
+				</div>
+				<div class="alert agileits-w3layouts alert-success hidden" role="alert">Login Successful!</div>
+			</form>
+
+		</div>
+
+		<div class="w3lsfooteragileits">
+			<p> &copy; 2016 Valid Login Form. All Rights Reserved | Design by <a href="https://shop585798004.taobao.com/" target="_blank">前端ui</a></p>
+		</div>
+
+
+
+		<!-- Necessary-JavaScript-Files-&-Links -->
+
+			<!-- Default-JavaScript --><script type="text/javascript" src="js/jquery.min.js" ></script>
+			<script src="js/validify.js" ></script>
+			<script>
+				$("#demo").validify({
+					onSubmit: function (e, $this) {
+						$this.find('.alert').removeClass('hidden')
+					},
+					onFormSuccess: function (form) {
+						console.log("Form is valid now!")
+					},
+					onFormFail: function (form) {
+						console.log("Form is not valid :(")
+					}
+				});
+			</script>
+
+		<!-- //Necessary-JavaScript-Files-&-Links -->
+
+
+
+	</body>
+	<!-- //Body -->
+
+
+
+</html>

@@ -188,23 +188,23 @@ public class RbacServiceImpl extends BaseService implements RbacService {
 
         RbacUserInfo<String> userInfo = authService.getUserInfo();
 
-        //如果是超级管理员，可以分配任何角色
+        //1、如果是超级管理员，可以分配任何角色
         if (userInfo.isSuperAdmin()) {
             return true;
         }
 
-        //如果当前用户已经拥有这个角色
+        //2、如果当前用户已经拥有这个角色
         if (userInfo.getRoleList().contains(requireRoleCode)) {
             return true;
         }
 
-        //用户全部的权限
+        //3、用户全部的权限
         List<String> ownerPermissionList = authService.getPermissionList(userInfo.getId());
 
-        //角色的权限列表
+        //4、角色的权限列表
         List<String> requirePermissionList = bizRoleService.getRolePermissionList(userInfo.getTenantId(), requireRoleCode);
 
-        //匹配
+        //5、匹配
         return isAuthorized(userInfo.getRoleList(), ownerPermissionList, requirePermissionList
                 , (rp, info) -> Optional.ofNullable(matchErrorConsumer).orElse(emptyConsumer).accept(requireRoleCode, rp + " " + info)
         );
@@ -249,7 +249,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         Assert.hasText(requirePermission, "检查的权限表达式为空");
 
         //如果是角色，不是权限
-        if (!requirePermission.contains(getDelimiter())) {
+        if (isRole(requirePermission)) {
             return ownerRoleList.contains(requirePermission);
         }
 
@@ -259,7 +259,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         boolean isPattern = requirePermission.contains("*");
 
         if (isPattern) {
-            //获取匹配的权限清单
+            //如果包含通配权限，要拆解出权限清单
             actionMap = getMatchActions(requirePermission);
         } else {
             Res.Action action = getAction(requirePermission);

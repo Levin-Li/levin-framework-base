@@ -42,12 +42,9 @@ import java.util.Date;
                 @Index(columnList = E_User.wxOpenId),
                 @Index(columnList = E_User.aliOpenId),
         }
-
         ,
         uniqueConstraints = {
-
-                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.telephone}),
-                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
+                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.telephone, E_User.email}),
         }
 )
 public class User
@@ -63,14 +60,14 @@ public class User
         Cancellation,
     }
 
-    public enum Sex  implements EnumDesc {
+    public enum Sex implements EnumDesc {
         @Schema(description = "男")
         Man,
         @Schema(description = "女")
         Women,
     }
 
-    public enum Category  implements EnumDesc {
+    public enum Category implements EnumDesc {
         @Schema(description = "正式员工")
         Staff,
         @Schema(description = "外包员工")

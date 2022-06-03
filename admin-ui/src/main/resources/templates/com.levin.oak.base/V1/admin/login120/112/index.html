@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>商家后台登录模板</title>
+
+	<meta name="keywords" content="商家后台登录模板"/>
+	
+	<meta name="description" content="最全的商家后台登录模板网站http://cn.inspinia.cn"/>
+	<link href="css/style.css"  rel='stylesheet' type='text/css'/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+			<script src="js/jquery.min.js" ></script>
+			<script>$(document).ready(function(c) {
+			$('.alert-close').on('click', function(c){
+				$('.main-agile').fadeOut('slow', function(c){
+					$('.main-agile').remove();
+				});
+			});	  
+		});
+		</script>
+		<script src="js/easy-responsive-tabs.js" ></script>
+<script>
+$(document).ready(function () {
+$('#horizontalTab').easyResponsiveTabs({
+type: 'default', //Types: default, vertical, accordion           
+width: 'auto', //auto or any width like 600px
+fit: true,   // 100% fit in a container
+closed: 'accordion', // Start closed if in accordion view
+activate: function(event) { // Callback function if tab is switched
+var $tab = $(this);
+var $info = $('#tabInfo');
+var $name = $('span', $info);
+$name.text($tab.text());
+$info.show();
+}
+});
+$('#verticalTab').easyResponsiveTabs({
+type: 'vertical',
+width: 'auto',
+fit: true
+});
+});
+</script>
+</head>
+<body>
+	<h1>Simple Multitudinal Forms</h1>
+		<div class="main-agile">
+			<div class="alert-close"> </div>
+			<div class="content-wthree">
+				<div id="horizontalTab">
+					<ul class="resp-tabs-list">
+					<li>Sign in</li>
+					<li>Sign Up</li>
+					<li>Reset Password</li>
+					<li>Login Options</li>
+					</ul>
+					<div class="resp-tabs-container">
+					<div class="tab1">
+						<!-- Form -->
+							<form action="#" method="post">
+							<div class="fields">
+								<p>User Name</p>
+								<input type="text" name="Firstname" placeholder="" required="" />
+							</div>
+							<div class="fields">
+								<p>Password</p>
+								<input type="password" Name="Password" placeholder="" required="">
+							</div>
+								<ul>
+									<li>
+										<input type="checkbox" id="brand" value="">
+										<label for="brand"><span></span>Remember Me</label>
+									</li>
+								</ul>
+								<input type="submit" value="SIGN IN">
+							</form>
+							<!-- //Form -->
+							<div class="clear"></div>
+					</div>
+					
+					<div class="tab2">
+					<div class="register">
+
+							<form action="#" method="post">
+								<div class="fields">
+									<p>First Name</p>
+									<input type="text" name="Firstname" placeholder="" required="" />
+								</div>
+								<div class="fields">
+									<p>Last Name</p>
+									<input type="text" name="Laststname" placeholder="" required="" />
+								</div>
+								<div class="fields">
+									<p>Email</p>
+									<input type="email" name="Email" placeholder="" required="" />
+								</div>
+								<div class="fields">
+									<p>Password</p>
+									<input type="password" Name="Password" placeholder="" required="">
+								</div>
+								<div class="fields">
+									<p>Confirm Password</p>
+									<input type="password" Name="Password" class="lessgap" placeholder=" " required="">
+								</div>
+								<div class="clear"></div>
+								<div class="fields">
+									<p>Phone Number</p>
+									<input type="text" Name="Phone Number" placeholder=" " required="">
+								</div>
+								<input type="submit" value="SIGN UP">
+							</form>
+							</div>
+					</div>
+					<div class="tab3">
+						<div class="reset">
+								<form action="#" method="post">
+								<div class="fields">
+									<p>Email</p>
+									<input type="email" Name="Email" placeholder=" " required="">
+								</div>
+									<p class="or">(Or)</p>
+								<div class="fields">
+									<p>Phone Number</p>
+									<input type="text" Name="Phone Number" placeholder=" " required="">
+								</div>
+									<input type="submit" value="RESET MY PASSWORD">
+								</form>
+							</div>
+					</div>
+					<div class="tab4">
+					<div class="main">
+								<ul>
+									<li>
+										<a href="#" class="hvr-grow"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+									</li>
+									<li>
+										<a href="#" class="hvr-grow"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+									</li>
+									<li>
+										<a href="#" class="hvr-grow"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+									</li>
+									<li>
+										<a href="#" class="hvr-grow"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+									</li>
+									<li>
+										<a href="#" class="hvr-grow"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+									</li>
+									<li>
+										<a href="#" class="hvr-grow"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+									</li>
+								</ul>
+					</div>
+					</div>
+					</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-w3l">
+		<p class="agileinfo"> &copy; 2017 Simple Multitudinal Forms. All Rights Reserved | Design by <a href="https://shop585798004.taobao.com/" target="_blank">前端ui</a></p>
+	</div>
+</body>
+</html>

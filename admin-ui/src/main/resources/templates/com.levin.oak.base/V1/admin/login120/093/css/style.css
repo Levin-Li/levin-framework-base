@@ -1,0 +1,505 @@
+
+/*--reset--*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+ol,ul{list-style:none;margin:0px;padding:0px;}
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+table{border-collapse:collapse;border-spacing:0;}
+/*--start editing from here--*/
+a{text-decoration:none;}
+.txt-rt{text-align:right;}/* text align right */
+.txt-lt{text-align:left;}/* text align left */
+.txt-center{text-align:center;}/* text align center */
+.float-rt{float:right;}/* float right */
+.float-lt{float:left;}/* float left */
+.clear{clear:both;}/* clear float */
+.pos-relative{position:relative;}/* Position Relative */
+.pos-absolute{position:absolute;}/* Position Absolute */
+.vertical-base{	vertical-align:baseline;}/* vertical align baseline */
+.vertical-top{	vertical-align:top;}/* vertical align top */
+nav.vertical ul li{	display:block;}/* vertical menu */
+nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
+img{max-width:100%;}
+/*--end reset--*/
+body {
+font-family:Verdana;
+	
+    background:#f88a83;
+    background-attachment: fixed;
+}
+h1 {
+    font-size: 3em;
+    text-align: center;
+    color: #fff;
+    font-weight: 100;
+}
+/*-- main --*/
+.main-agile {
+    padding: 2em 0 0;
+} 
+/*-- Styling the forms --*/ 
+#w3ls_form {
+    z-index: 1;
+    -moz-perspective: 800px;
+    -webkit-perspective: 800px;
+    -o-perspective: 800px;
+    -ms-perspective: 800px;
+    perspective: 800px;
+}
+.signin-form {
+    width: 30%;
+    height:590px;
+    margin: 2em auto;
+    position: relative;
+}
+#w3ls_form form {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -moz-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-transition: 0.8s;
+    -webkit-transition: 0.8s;
+    -o-transition: 0.8s;
+    transition: 0.8s;
+    background: #FFFFFF;
+    padding: 2em;
+    -webkit-appearance: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+} 
+ 
+#signin{ 
+	z-index:100;
+}
+#signup{ 
+	z-index:1;
+	opacity:0;
+	/* Rotating the sign up password form by default */
+	-moz-transform:rotateY(180deg);
+	-webkit-transform:rotateY(180deg); 
+	-o-transform:rotateY(180deg);
+	-ms-transform:rotateY(180deg);
+	transform:rotateY(180deg);
+} 
+#w3ls_form.flipped #signin{ 
+	opacity:0; 
+	/**
+	 * Rotating the sign in form when the
+	 * flipped class is added to the container
+	 */ 
+	-moz-transform:rotateY(-180deg);
+	-webkit-transform:rotateY(-180deg); 
+	-o-transform:rotateY(-180deg);
+	-ms-transform:rotateY(-180deg);
+	transform:rotateY(-180deg);
+} 
+#w3ls_form.flipped #signup{
+	
+	opacity:1; 
+	/* Rotating the sign up div into view */
+	-moz-transform:rotateY(0deg);
+	-webkit-transform:rotateY(0deg);
+	-o-transform:rotateY(0deg);
+	-ms-transform:rotateY(0deg); 
+	transform:rotateY(0deg);
+}
+/*-- //Styling the forms --*/  
+/*-- sign in-form --*/
+.signin-form h2, .signin-form h3 {
+	font-size: 2em;
+    color: #212121;
+    text-align: center;
+    margin: 1em 0 1em;
+    font-weight: 100;
+}
+.signin-form input[type="text"], .signin-form input[type="password"] {
+    outline: none;
+    font-size: .9em;
+    color: #999999;
+    padding: 1em 1em;
+    margin: 0;
+    width: 92.5%;
+    border: solid 1px #e2eaef;
+    -webkit-appearance: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    display: block;
+    background: none;
+}
+.signin-form input[type="text"]{
+	margin:0 0 1em 0;
+}
+/*-- checkbox --*/
+.signin-form input[type="checkbox"] {
+    display: none;
+}
+.signin-form input[type="checkbox"]+label {
+	position: relative;
+    padding-left: 1.8em;
+    border: none;
+    outline: none;
+    font-size: .9em;
+    color: #999999;
+    cursor: pointer;
+    display: inline-block;
+    margin: 2em 0;
+}
+.signin-form input[type="checkbox"]+label span:first-child {
+    width: 14px;
+    height: 14px;
+    border: 2px solid #C8C8C8;
+    position: absolute;
+    left: 0;
+	top: 3px;
+}
+.signin-form input[type="checkbox"]:checked+label span:first-child:before {
+    content: "";
+    background: url("../images/tick.png")no-repeat;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    font-size: 10px;
+    width: 10px;
+    height: 10px;
+}
+/*-- //checkbox --*/
+.signin-form input[type="submit"] {
+    font-size: 1em;
+    color: #fff;
+    background: #f88a83;
+    border: 3px solid #f88a83;
+    outline: none;
+    cursor: pointer;
+    padding: .6em 1em;
+    -webkit-appearance: none;
+    width: 100%;
+    -webkit-appearance: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+	transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+.signin-form input[type="submit"]:hover {
+    background: #009ffb;
+    border: 3px solid #009ffb;
+    color: #FFFFFF;
+}
+/*-- //sign in-form --*/ 
+/*-- Buttons & Links --*/ 
+#signin .flipLink,
+#signup .flipLink{
+	display:block;
+}  
+.ribbon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    width: 22px;
+    height: 0px
+}
+.ribbon a {
+    font-size: 16px;
+    color: #009ffb;
+    text-align: center;
+    width: 77px;
+    display: block;
+    position: absolute;
+    top: 19px;
+    right: 6px;
+}
+#signup .ribbon {  
+	right:inherit;
+	left: 0;
+}
+#signup .ribbon a { 
+    right: inherit;
+    left: 6px;
+}
+/*-- //Buttons & Links --*/ 
+/*-- sign in-bottom --*/
+.signin-agileits-bottom p {
+    text-align: center;
+    margin: 2.5em 0;
+}
+.signin-agileits-bottom p a {
+    color: #009ffb;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    transition: 0.5s all;
+}
+.signin-agileits-bottom p a:hover {
+    color: #f88a83;
+}
+.social-text{
+	float:left;
+	width:50%;
+}
+.social-text p{
+    color: #999999;
+    margin: 1em 0 0 1em;
+    font-size: .9em;
+}
+.social-icons{
+	float:left;
+	width:50%;
+}
+.social-icons ul {
+    padding: 0;
+    margin: 0;
+}
+.social-icons ul li {
+    display: inline-block;
+    margin: 0 .5em 0 0;
+}
+.social-icons ul li a {
+    color: #FFFFFF;
+    text-align: center;
+}
+.social-icons ul li a i.fa.fa-facebook, .social-icons ul li a i.fa.fa-twitter, .social-icons ul li a i.fa.fa-rss{
+    height: 40px;
+    width: 40px;
+    border: solid 2px #dfe8ee;
+    line-height: 38px;
+    background: #dfe8ee;
+    border-radius: 30px;
+    color: #FFFFFF;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+.social-icons ul li a i.fa.fa-facebook:hover {
+	border: solid 2px #3b5998;
+	background:#3b5998;
+    color: #FFFFFF;
+}
+.social-icons ul li a i.fa.fa-twitter:hover{
+	border: solid 2px #55acee;
+	background:#55acee;
+	color: #FFFFFF;
+}
+.social-icons ul li a i.fa.fa-rss:hover{
+	border: solid 2px #f26522;
+	background:#f26522;
+	color: #FFFFFF;
+}
+/*-- //sign in-bottom --*/
+/*-- copyright --*/
+.copyright { 
+    text-align: center;
+	margin:2em 0 0;
+}
+.copyright p {
+	font-size: .9em;
+    color: #fff;
+}
+.copyright p a{
+    color: #ffffff;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    transition: 0.5s all;
+}
+.copyright p a:hover{
+    color: #fff;	
+}
+/*-- //copyright --*/
+/*-- responsive-design --*/
+@media(max-width:1440px){
+.signin-form {
+    width: 33%;
+    height: 605px; 
+}
+.copyright { 
+    margin: 2em 0;
+}
+}
+@media(max-width:1366px){
+.signin-form {
+    width: 36%;
+    height: 605px;
+}
+} 
+@media(max-width:1080px){
+.signin-form {
+    width: 44%; 
+}
+}
+@media(max-width:1024px){
+.signin-form {
+    width: 47%;
+}
+} 
+@media(max-width:800px){
+h1 {
+    font-size: 2.5em; 
+}
+.main-agile {
+    padding: 1em 0 0;
+}
+.signin-form {
+    width: 60%;
+    margin: 1em auto;
+}
+} 
+@media(max-width:736px){
+.signin-form {
+    width: 67%; 
+	height: 570px;
+}
+#w3ls_form form { 
+    padding: 1.5em 2em; 
+	height: 88%;
+}
+}
+@media(max-width:667px){
+.signin-form {
+    width: 71%;
+    height: 560px;
+}
+.social-icons ul li span.icons { 
+    height: 41px; 
+}
+}
+@media(max-width:640px){
+.signin-form {
+    width: 72%; 
+}
+}
+@media(max-width:600px){
+h1 {
+    font-size: 2.2em;
+}
+.signin-form {
+    width: 80%;
+}  
+}
+@media(max-width:568px){  
+#w3ls_form form {
+    padding: 1.5em; 
+	width: 88%;
+}
+.signin-form {
+    width: 84%;
+	height: 540px;
+}
+}
+@media(max-width:480px){ 
+.signin-form input[type="text"], .signin-form input[type="password"] {
+	width: 90.5%; 
+	font-size: 0.9em;
+}
+.social-icons {
+    text-align: center;
+}
+#w3ls_form form {
+    padding: 1em 1.5em; 
+	height: 92%;
+}
+.signin-form h2, .signin-form h3 {
+    font-size: 1.8em; 
+}
+.signin-form p {
+    font-size: 0.9em; 
+}
+.signin-form input[type="checkbox"]+label { 
+    font-size: 0.9em; 
+}
+.signin-form input[type="submit"] {
+    font-size: 0.9em;
+}
+.signin-form { 
+    height: 508px;
+}
+.copyright p {
+    font-size: 0.9em; 
+    padding: 0 1em;
+}
+}
+@media(max-width:414px){
+h1 {
+    font-size: 1.8em;
+}
+.signin-form h2, .signin-form h3 {
+    font-size: 1.6em;
+}
+#w3ls_form form { 
+    width: 83%;
+}
+.social-text {
+    float: none;
+    width: 100%;
+    text-align: center;
+    margin: 0 0 1em 0;
+}
+.social-icons {
+    float: none;
+    width: 100%;
+}
+.signin-form {
+    height: 485px;
+}
+#w3ls_form form {
+    height: 98%;
+}
+.social-text p {
+    margin: 1em 0 0 0em;
+}
+.signin-agileits-bottom p {
+    margin: 1.5em 0;
+}
+} 
+@media(max-width:320px){
+h1 {
+    font-size: 1.6em;
+}
+.signin-form h2, .signin-form h3 {
+    font-size: 1.4em;
+}
+#w3ls_form form {
+    width: 79%;
+    padding: 0.7em 1.5em;
+	height: 93%;
+}
+.signin-form {
+    width: 90%; 
+	height: 470px;
+}
+.signin-form input[type="text"], .signin-form input[type="password"] { 
+	font-size: 0.85em;
+    width: 86.5%; 
+}
+.copyright {
+    margin: 0 0 2em;
+} 
+}
+/*-- //responsive-design --*/

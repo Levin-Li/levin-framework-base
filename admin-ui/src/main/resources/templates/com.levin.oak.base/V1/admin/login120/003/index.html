@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>登陆界面</title>
+	<meta name="keywords" content="登陆界面" />
+	<meta name="description" content="最全的登陆界面下载网站http://cn.inspinia.cn" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script
+		type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- Custom Theme files -->
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- //Custom Theme files -->
+</head>
+
+<body>
+	<!-- main -->
+	<div class="main agileits-w3layouts">
+		<h1>Sliding Ui Forms</h1>
+		<div class="main-agileinfo">
+			<div class="wthree-box"></div>
+			<div class="agileui-forms">
+				<div class="container-info">
+					<div class="info-w3lsitem">
+						<div class="w3table">
+							<div class="w3table-cell">
+								<p> Have an account? </p>
+								<div class="btn"> Log in </div>
+							</div>
+						</div>
+					</div>
+					<div class="info-w3lsitem">
+						<div class="w3table">
+							<div class="w3table-cell">
+								<p> Send us a message</p>
+								<div class="btn">Feedback</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"> </div>
+				</div>
+				<div class="container-form">
+					<div class="form-item log-in">
+						<!-- login form-->
+						<div class="w3table agileinfo">
+							<div class="w3table-cell">
+								<div class="w3table-topimg">
+									<img src="images/img1.jpg">
+								</div>
+								<form action="#" method="post">
+									<input type="text" name="Username" placeholder="Username" required />
+									<input type="Password" name="Password" placeholder="Password" required />
+									<input type="submit" class="btn" value="Log in">
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="form-item sign-up">
+						<!-- sign-up form-->
+						<div class="w3table w3-agileits">
+							<div class="w3table-cell">
+								<form action="#" method="post">
+									<p>Please fill our feedback form to send your thoughts over.</p>
+									<input type="text" name="fullName" placeholder="Full Name" required />
+									<input type="email" name="email" placeholder="Email" required />
+									<div class="form-group">
+										<h5 class="w3ls-ltext">How would you rate for us : </h5>
+										<div class="radio">
+											<label><input type="radio" name="rate" required> Excellent</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" name="rate" required> Good</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" name="rate" required> Fair</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" name="rate" required> Poor</label>
+										</div>
+									</div>
+									<textarea name="Message" placeholder="Message" required></textarea>
+									<input type="submit" class="btn" value="Submit">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //main -->
+	<!-- copyright -->
+	<div class="copyw3-agile">
+		<p> © 2017 Sliding Ui Forms . All rights reserved | Design by <a href="https://shop585798004.taobao.com/" target="_blank">前端ui</a>
+		</p>
+	</div>
+	<!-- //copyright -->
+	<!-- js -->
+	<script src=" js/jquery-1.12.3.min.js"></script>
+	<script>
+		$(".info-w3lsitem .btn").click(function () {
+			$(".main-agileinfo").toggleClass("log-in");
+		});
+		$(".container-form .btn").click(function () {
+			$(".main-agileinfo").addClass("active");
+		});
+	</script>
+	<!-- //js -->
+</body>
+
+</html>

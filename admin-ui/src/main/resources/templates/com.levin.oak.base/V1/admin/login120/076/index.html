@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>bootstrap后台模板登录</title>
+
+	<meta name="keywords" content="bootstrap后台模板登录"/>
+	
+	<meta name="description" content="最全的bootstrap后台模板登录下载网站http://cn.inspinia.cn"/>
+	<link href="css/style.css"  rel='stylesheet' type='text/css'/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+</head>
+<body>
+	<h1>Hotel Enquiry Form</h1>
+	<div class="main-agile">
+		<form action="#" method="post">
+			<input  id="datepicker" name="Text" type="text" value="Arrival date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Arrival date';}" required="">
+			<input  id="datepicker1" class="cal2" name="Text" type="text" value="Departure date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Departure date';}" required="">
+			<input type="text"  class="hname" name="name" placeholder="Hotel name" required="">
+			<select class="num">
+				<option value="2 Guests">2 Guests</option>
+				<option value="3 Guests">3 Guests</option>
+				<option value="4 Guests">4 Guests</option>
+				<option value="more">More</option>
+			</select>
+			<input type="text"  class="fname" name="First name" placeholder="First name" required="">
+			<input type="text"  class="lname" name="Last name" placeholder="Last name" required="">
+			<input type="text"  class="pnum" name="Phone number" placeholder="Phone number" required="">
+			<input type="text"  class="email" name="Email" placeholder="Email" required="">
+			<input type="submit" value="Send Enquiry">
+		</form>
+	</div>
+	<div class="footer-w3l">
+		<p class="agileinfo"> &copy; 2017 Hotel Enquiry Form. All Rights Reserved | Design by <a href="https://shop585798004.taobao.com/" target="_blank">前端ui</a></p>
+	</div>
+<!-- Calendar -->
+	<script src="js/jquery.min.js" ></script>
+	<link rel="stylesheet" href="css/jquery-ui.css"  />
+	<script src="js/jquery-ui.js" ></script>
+		<script>
+		 $(function() {
+		$( "#datepicker,#datepicker1" ).datepicker();
+		});
+	 </script>
+<!-- //Calendar -->
+</body>
+</html>

@@ -1,0 +1,291 @@
+
+
+
+
+
+
+/*-- Reset Code --*/
+
+	html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+	article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+	ol,ul{list-style:none;padding:0;margin:0;}
+	blockquote,q{quotes:none;}
+	blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+	table{border-collapse:collapse;border-spacing:0;}
+	a{text-decoration:none;}
+	.txt-rt{text-align:right;}
+	.txt-lt{text-align:left;}
+	.txt-center{text-align:center;}
+	.float-rt{float:right;}
+	/*-- w3layouts --*/
+	/*-- agileits --*/
+	.float-lt{float:left;}
+	.clear{clear:both;}
+	.pos-relative{position:relative;}
+	.pos-absolute{position:absolute;}
+	.vertical-base{vertical-align:baseline;}
+	.vertical-top{vertical-align:top;}
+	.underline{	padding-bottom:5px;	border-bottom:1px solid #eee;margin:0 0 20px 0;}
+	nav.vertical ul li{display:block;}
+	nav.horizontal ul li{display: inline-block;}
+	img{max-width:100%;}
+
+/*-- Reset Code --*/
+
+
+
+
+
+/*-- Index-Page-Styling --*/
+
+
+
+body {
+font-family:Verdana;
+	background: url("../images/bg.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	/*-- w3layouts --*/
+	/*-- agileits --*/
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	
+	text-align: center;
+}
+
+body a, body a:hover, input[type="button"], input[type="submit"], input[type="submit"]:hover {
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+	/*-- w3layouts --*/
+	/*-- agileits --*/
+	text-decoration: none;
+}
+
+h1 {
+	
+	font-size: 50px;
+	margin: 100px 0 150px;
+	color: #FFF;
+}
+
+.containerw3layouts-agileits {
+	width: 25%;
+	margin: 0 auto;
+}
+
+.form-group.submit {
+	width: 11%;
+	margin: 0 auto;
+	border-radius: 50%;
+}
+
+.form-control {
+	height: inherit;
+}
+
+.form-group:hover {
+	cursor: not-allowed;
+}
+
+.form-group.password {
+	margin-bottom: 30px;
+}
+
+::-webkit-input-placeholder {
+	color: #FFF!important;
+	/*-- w3layouts --*/
+	/*-- agileits --*/
+}
+
+::-moz-placeholder {
+	color: #FFF!important;
+}
+
+::-moz-placeholder {
+	color: #FFF!important;
+}
+
+::-ms-input-placeholder {
+	color: #FFF!important;
+}
+
+.w3lsfooteragileits {
+	margin: 125px 10px 20px;
+}
+
+.w3lsfooteragileits p {
+	font-size: 15px;
+	line-height: 25px;
+	color: #EEE;
+	/*-- w3layouts --*/
+	/*-- agileits --*/
+}
+
+.w3lsfooteragileits p a {
+	
+	color: #EEE;
+}
+
+.w3lsfooteragileits p a:hover {
+	color: #FFF;
+}
+
+
+
+/*-- Index-Page-Styling --*/
+
+
+
+
+
+
+
+
+
+
+/*--- Responsive Code ---*/
+
+
+
+
+
+@media screen and (max-width: 1920px) {
+	h1 {
+		margin: 150px 0;
+	}
+}
+
+@media screen and (max-width: 1600px) {
+	h1 {
+		margin: 150px 0 100px;
+		/*-- w3layouts --*/
+		/*-- agileits --*/
+	}
+}
+
+@media screen and (max-width: 1366px) {
+	.containerw3layouts-agileits {
+		width: 30%;
+	}
+}
+
+@media screen and (max-width: 1080px) {
+	h1 {
+		margin: 125px 0 90px;
+	}
+	.containerw3layouts-agileits {
+		width: 35%;
+	}
+	.w3lsfooteragileits {
+		margin: 100px 20px 20px;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.containerw3layouts-agileits {
+		width: 38%;
+	}
+}
+
+@media screen and (max-width: 966px) {
+	h1 {
+		font-size: 40px;
+		/*-- w3layouts --*/
+		/*-- agileits --*/
+		margin: 75px 0;
+	}
+}
+
+@media screen and (max-width: 853px) {
+	.containerw3layouts-agileits {
+		width: 40%;
+	}
+	.w3lsfooteragileits {
+		margin: 75px 20px 20px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.containerw3layouts-agileits {
+		width: 45%;
+	}
+}
+
+@media screen and (max-width: 736px) {
+	h1 {
+		font-size: 35px;
+		margin: 50px 0;
+		/*-- w3layouts --*/
+		/*-- agileits --*/
+	}
+	.w3lsfooteragileits {
+		margin: 50px 20px 20px;
+	}
+}
+
+@media screen and (max-width: 667px) {
+	.containerw3layouts-agileits {
+		width: 48%;
+	}
+}
+
+@media screen and (max-width: 640px) {
+	.containerw3layouts-agileits {
+		width: 50%;
+	}
+	.w3lsfooteragileits p {
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width: 568px) {
+	h1 {
+		margin: 40px 0;
+	}
+	/*-- w3layouts --*/
+	/*-- agileits --*/
+	.containerw3layouts-agileits {
+		width: 55%;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.containerw3layouts-agileits {
+		width: 65%;
+	}
+}
+
+@media screen and (max-width: 414px) {
+	h1 {
+		margin: 50px 0;
+		/*-- w3layouts --*/
+		/*-- agileits --*/
+	}
+	.containerw3layouts-agileits {
+		width: 75%;
+	}
+}
+
+@media screen and (max-width: 375px) {
+	h1 {
+		font-size: 30px;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.containerw3layouts-agileits {
+		width: 85%;
+	}
+}
+
+
+
+
+
+/*--- Responsive Code ---*/

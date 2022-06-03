@@ -1,0 +1,12 @@
+POST http://huimachat.h5h5h5.cn/api/vd/site/getqmbdata
+Content-Type: application/json
+
+{
+  "content": "976598b430c1cc50b5186b291844a5d8e9d9b108a55422e1b65b0b61addbced863477fd8b7ab6daae9cc9c37706d8ba42198263701356d802c34547f987c510a5dc237f6a43b5e16871d7ecfdbc5f16fbac57cc6bcb6ed6920175e8b386b664770cbd29327221b911dbd5fd034f0be0028fc4030a28e6bf4d1de7073af65d9d1962a52d77ec9170d70fb0ddded1e7fa947c905ad0975364d5d9bbcd9053587825de61071d5551f0b8ace4d0cda5f9b7a627815389a24c88f69fff0ce35ac687fd3e06cb7181e8720652f4b140293f6a3b9e42b58fe486a2d95f45b9fb571076250ebec28c79cde3476d4a0d2775841cad7f43accc019384ec846523d82af24b4",
+  "thirdId": 100,
+  "type": 1
+}
+
+###
+
+# npx create-react-app amis-ui-editor --template typescript

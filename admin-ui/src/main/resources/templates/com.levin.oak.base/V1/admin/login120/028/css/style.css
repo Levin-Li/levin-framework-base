@@ -1,0 +1,378 @@
+
+h4, h5, h6,
+h1, h2, h3 {margin: 0;}
+ul, ol {margin: 0;}
+p {margin: 0;}
+html, body {
+font-family:Verdana;
+ 
+   font-size: 100%;
+       background: url("../images/b.jpg")no-repeat;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  text-decoration: none;
+}
+/*--element start here--*/
+.signin {
+    width: 50%;
+    margin: 0 auto;
+    padding: 5em 0em 0em 0em;
+}
+.signin h1 {
+    font-size: 2.5em;
+    color:#F47721;
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+.signin-left h2 {
+    font-size: 4em;
+    color: #fff;
+    text-align: center;
+    padding-top: 2.3em;
+     'Tangerine', cursive;
+}
+.signin-left {
+    float:right;
+    width:50%;
+    background: url("../images/img1.jpg")no-repeat;
+    min-height: 352px;
+    background-size: cover;
+}
+.signin-right {
+    float:left;
+    width:50%;
+    background: #20B5CD;
+}
+.model {
+    padding:2em 1.5em;
+}
+span.checkbox1 {
+    float: left;
+    width: 50%;
+}
+.sigin-main {
+    box-shadow: 1px 0px 3px 1px rgba(255, 255, 255, 0.17);
+}
+.forgot {
+    float: right;
+}
+.remember {
+    margin: 1em 0em;
+}
+.signin-right h3 {
+    font-size: 2em;
+    color:#Fff;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+}
+.signin-right p {
+    font-size: 1em;
+    color: #fff;
+    line-height: 1.5em;
+}
+.signin-right h6{
+	font-size: 1em;
+    color: #fff;
+    font-weight: 400;
+    margin-top: 0.2em;
+}
+.signin-right h6 a{
+	 color: #fff;
+}
+.signin-right h6 a:hover{
+	color: #f47721;
+}
+.signin-right input[type="text"] {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #ccc;
+    padding: 0.6em 1em;
+    width: 91%;
+    outline: none;
+    margin-top: 1em;
+    border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -o-border-radius: 25px;
+   border:none;
+   box-shadow: 1px 1px 1px 1px rgba(115, 113, 113, 0.47);
+}
+.signin-right input[type="password"] {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #ccc;
+    padding: 0.6em 1em;
+    width: 91%;
+    outline: none;
+    margin-top: 1em;
+    border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -o-border-radius: 25px;
+    border:none;
+    box-shadow: 1px 1px 1px 1px rgba(115, 113, 113, 0.47);
+}
+.signin-right input[type="submit"] {
+    font-size: 0.9em;
+    color: #fff;
+    background: #f47721;
+    border: 0px;
+    padding: 0.6em 1em;
+    border-radius: 18px;
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px 1px rgba(115, 113, 113, 0.47);
+}
+.signin-right input[type="submit"]:hover {
+    background: #222;
+    transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+}
+/*--cheek box--*/
+.remember-top{
+ float:left;
+}
+.checkbox {
+	margin-bottom: 4px;
+	font-size: 1.2em;
+	line-height: 27px;
+	cursor: pointer;
+}
+.checkbox {
+  position: relative;
+  font-size: 0.95em;
+  font-weight: normal;
+  color: #fff;
+  padding: 0em 0.5em 0em 2.5em;
+}
+.checkbox i {
+    position: absolute;
+    bottom: 0px;
+    left: 10px;
+    display: block;
+    width: 18px;
+    height: 18px;
+    outline: none;
+    background: #fff;
+    box-shadow: 1px 1px 1px 1px rgba(115, 113, 113, 0.47);
+}
+.checkbox input + i:after {
+	content: '';
+	background: url("../images/tic2.png") no-repeat 5px 5px;
+	top: -1px;
+	left: -1px;
+	width: 15px;
+	height: 15px;
+	font: normal 12px/16px FontAwesome;
+	text-align: center;
+}
+.checkbox input + i:after {
+	position: absolute;
+	opacity: 0;
+	transition: opacity 0.1s;
+	-o-transition: opacity 0.1s;
+	-ms-transition: opacity 0.1s;
+	-moz-transition: opacity 0.1s;
+	-webkit-transition: opacity 0.1s;
+}
+.checkbox input {
+	position: absolute;
+	left: -9999px;
+}
+.checkbox input:checked + i:after {
+	opacity: 1;
+}
+/*---*/
+.clear{
+	clear:both;
+}
+/*---copyrights--*/
+.copy-right {
+    margin: 9em 0em 2em 0em;
+}
+.copy-right p {
+    text-align: center;
+    font-size:1em;
+    color:#fff;
+    line-height: 1.5em;
+
+}
+.copy-right p a{
+  color:#fff;
+}
+.copy-right p a:hover{
+	 color:#20B5CD;
+	 transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+}
+/*--media quiries start here--*/
+@media(max-width:1600px){
+	
+}
+@media(max-width:1440px){
+
+}
+@media(max-width:1366px){
+.signin-right input[type="text"] {
+    width: 90%;	
+}
+.signin-right input[type="password"] {
+    width: 90%;
+}
+}
+@media(max-width:1280px){
+.signin-right p {
+    font-size: 0.95em;	
+}
+.signin-left {
+    min-height: 351px;
+}
+.checkbox {
+    padding: 0em 0.5em 0em 1.5em;
+}
+.checkbox i {
+    left: 0px;
+}
+.signin-left {
+    min-height: 348px;
+}
+.signin-right input[type="text"] {
+    width: 89%;
+}
+.signin-right input[type="password"] {
+    width: 89%;
+}
+}
+@media(max-width:1024px){
+.signin {
+    width: 65%;
+}
+}
+@media(max-width:768px){
+.signin {
+    width: 93%;
+}	
+}
+@media(max-width:667px){
+.signin-right p {
+    font-size: 0.875em;
+}
+.signin-left {
+    min-height: 346px;
+}	
+.checkbox {
+    font-size: 0.9em;
+}
+.signin-right h6 {
+    font-size: 0.8em;
+}
+}
+@media(max-width:640px){
+.signin {
+    width: 98%;
+}	
+.signin-right p {
+    font-size: 0.8em;
+}
+.signin-left {
+    min-height: 342px;
+}
+}
+@media(max-width:480px){
+.signin-right {
+    float: none;
+    width: 100%;	
+}
+.signin-left {
+    float: none;
+    width: 100%;
+}
+.signin-left {
+    min-height: 300px;
+}
+.signin-left h2 {
+    font-size: 3.5em;
+    padding-top: 2.2em;
+}
+.signin {
+    padding: 2em 0em 0em 0em;
+}
+.signin h1 {
+    font-size: 1.8em;
+    margin-bottom: 0.8em;
+}
+.signin-right h3 {
+    font-size: 1.7em;
+}
+.signin-right input[type="text"] {
+    width: 92.5%;
+}
+.signin-right input[type="password"] {
+    width: 92.5%;
+}
+.copy-right {
+    margin: 3em 0em 2em 0em;
+}
+.copy-right p {
+    font-size: 0.85em;
+}
+}
+@media(max-width:414px){
+.signin-right input[type="text"] {
+    width: 90.5%;	
+}
+.signin-right input[type="password"] {
+    width: 90.5%;
+}
+}
+@media(max-width:320px){
+.signin-left {
+    min-height: 215px;
+}
+.signin-left h2 {
+    font-size: 2.5em;
+    padding-top: 2.2em;
+}
+.model {
+    padding: 1.5em 1.5em;
+}
+.signin-right h3 {
+    font-size: 1.2em;
+    margin-bottom: 0.2em;
+}
+.signin-right input[type="text"] {
+    width: 87.5%;
+    font-size: 0.8em;
+}
+.signin-right input[type="password"] {
+    width: 87.5%;
+    font-size: 0.8em;
+}
+.signin-right h6 {
+    margin-top: 0.4em;	
+}
+.copy-right {
+    margin: 1.5em 0em 1.5em 0em;
+}
+.copy-right p {
+    font-size: 0.8em;
+}
+.signin h1 {
+    font-size: 1.4em;
+}
+.signin {
+    padding: 1em 0em 0em 0em;
+}
+}

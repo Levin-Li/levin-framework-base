@@ -35,6 +35,26 @@ public interface RbacService {
     }
 
     /**
+     * 是否是权限
+     *
+     * @param requirePermission
+     * @return
+     */
+    default boolean isPermission(String requirePermission) {
+        return requirePermission.contains(getDelimiter());
+    }
+
+    /**
+     * 是否是角色
+     *
+     * @param requirePermission
+     * @return
+     */
+    default boolean isRole(String requirePermission) {
+        return !isPermission(requirePermission);
+    }
+
+    /**
      * 获取认证上下文
      *
      * @return
@@ -82,7 +102,7 @@ public interface RbacService {
     /**
      * 当前用户是否 拥有指定的权限列表
      *
-     * @param requirePermissionList
+     * @param requirePermissionList 权限列表可以包括角色，如果
      * @param matchErrorConsumer
      * @return
      */

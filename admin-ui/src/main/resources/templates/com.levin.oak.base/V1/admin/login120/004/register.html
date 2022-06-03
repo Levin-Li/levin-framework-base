@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>网站注册</title>
+
+<meta name="keywords" content="网站注册"/>
+
+<meta name="description" content="最全的网站注册下载网站http://cn.inspinia.cn"/>
+<link rel="stylesheet" type="text/css" href="css/component.css"  />
+<style type="text/css">
+  .login_bg
+        {
+			position:absolute;
+			top: 0; width:100%; height:100%;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-size: cover;
+        }
+    </style>
+    <script type="text/javascript">
+    	$(function(){
+			$("button").click(function(){
+			if($("#signup_email").val()==""||$("#signup_password").val()==""||$("#signup_confirm_password").val()==""||$("#signup_username").val()=="")
+			{
+				$.messager.alert('Waring!','email password and username mustn\'t be empty!');
+				
+			}
+			else
+			{
+				if($("#signup_password").val()!=$("#signup_confirm_password").val())
+				{
+						$.messager.alert('Waring','Your password is not same!');
+						$("#signup_password").val("");
+						$("#signup_confirm_password").val("");
+				}
+				else
+				{
+					$("#sign_form").submit();
+				}
+			}
+		});
+	});
+    </script>
+</head>
+<body>
+    <div id="login_bg" class ="login_bg" style="background-image:url(images/u3.jpg);"></div>
+    <div class="login_header">
+    	<span></span>
+    </div>
+    
+    <div class="container">
+    	<div class="form_header">
+        	<h1 id="logo">Register</h1>
+			<h2 id="subheading">To follow me,just sign up</h2>
+        </div>
+        	<div class="signup_forms" class="signup_forms">
+            	<div id="signup_forms_container" class="signup_forms_container">
+                    	<form class="signup_form_form" id="sign_form" method="post" action="/login/004/userRegister.jsp">
+                        	<div class="signup_account" id="signup_account">
+                            	<div class="form_user">	
+        							<input type="text" name="email" placeholder="Email" id="signup_email">
+                                </div>
+                                <div class="form_username">
+           							<input type="text" name="username" placeholder="Username" id="signup_username">
+        						</div>
+                                <div class="form_password">
+           							<input type="password" name="password" placeholder="Password" id="signup_password">
+        						</div>
+        						<div class="form_confirm_password">
+           							<input type="password"  placeholder="Confirm the password" id="signup_confirm_password">
+        						</div>
+                            </div>
+                             </div>
+                				<button type="button" id="signup_forms_submit" ><span style="font-size:16px;"><strong>Sign up</strong></span></button>
+           	   				 </div>
+                        </form> 
+               
+    </div>
+    
+    <div class="footer">
+    	<div class="footer_signup_link">
+        	<a class="signup_link" href="index.html" >Log in</a>
+           <a href="/login/index.html'"  target="_blank" class="link unnamed_1">index</a>
+            <a href="/login/index.html'"  target="_blank" class="link unnamed_2">Contact</a>
+        </div>
+        <div class="design_show">
+        	<div class="designer_info">
+					<a href="https://shop585798004.taobao.com/" target="_blank">
+                <a href="#" target="_blank" class="face"><img id="face" src="images/face.jpg"  alt="designed by RayZhang"/></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>注册登录模板</title>
+
+	<meta name="keywords" content="注册登录模板"/>
+	
+	<meta name="description" content="最全的注册登录模板下载网站http://cn.inspinia.cn"/>
+<!-- for-mobile-apps -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<!-- //for-mobile-apps -->
+<link rel="stylesheet" href="css/j-forms.css" >
+<link href="css/style.css"  rel="stylesheet" type="text/css" media="all" />
+</head>
+<body>
+
+
+
+<div class="content">
+		<h1>Personal Profile form widget</h1>
+		<div class="main w3l">
+			<div class="im-g">
+				<img src="images/img1.jpg"  alt="">
+			</div>
+			<form class="contact-forms wthree">
+				<!-- end /.header-->
+
+					<!-- start name -->
+					<div class="first-line agileits">
+						<div class="span6 main-row">
+							<div class="input">
+								
+								<input type="text" id="first_name" name="first_name" placeholder="First name" required="">
+							</div>
+						</div>
+						<div class="span6 main-row">
+							<div class="input">
+								
+								<input type="text" id="last_name" name="last_name" placeholder="Last name" required="">
+								
+							</div>
+						</div>
+					</div>
+					<!-- end name -->
+
+					<!-- start email phone -->
+					<div class="first-line agileits">
+						<div class="span6 main-row">
+							<div class="input">
+								
+								<input type="email" placeholder="Email" id="email" name="email" required="">
+							</div>
+						</div>
+						<div class="span6 main-row">
+							<div class="input">
+								
+								<input type="text" placeholder="Phone" id="phone" name="phone" required="">
+							</div>
+						</div>
+					</div>
+				<div class="main-row">
+						<label class="input select">
+							<select name="position">
+								<option value="none" selected disabled="">Gender</option>
+								<option value="male">Male</option>
+								<option value="female"> Female</option>
+							</select>
+							<i></i>
+						</label>
+					</div>
+
+					<!-- start country -->
+					<div class="main-row">
+						<label class="input select">
+							<select name="country">
+								<option value="none" selected="" disabled="">Select country</option>
+								
+								<option value="Australia">Australia</option>
+								<option value="China">China</option>
+								<option value="New Jersey">New Jersey</option>
+								<option value="Spain">Spain</option>
+								<option value="Switzerland">Switzerland</option>
+							</select>
+							<i></i>
+						</label>
+					</div>
+					<!-- end country -->
+					<!-- start position -->
+					<div class="main-row">
+						<label class="input select">
+							<select name="position">
+								<option value="none" selected disabled="">Choose position</option>
+								<option value="student">Student</option>
+								<option value="employee"> Employee</option>
+								<option value="business"> Business</option>
+							</select>
+							<i></i>
+						</label>
+					</div>
+					<!-- end position -->
+					<!-- start city post code -->
+					<div class="first-line agileits">
+						<div class="span8 main-row">
+							<div class="input">
+								
+								<input type="text" id="city" placeholder="City" name="city" required="">
+							</div>
+						</div>
+						
+					</div>
+					<!-- end city post code -->
+
+					<!-- start address -->
+					<div class="main-row">
+						<div class="input">
+							
+							<input type="text" id="address" placeholder="Address" name="address" required="">
+						</div>
+					</div>
+					<!-- end address -->
+
+
+					
+
+					<!-- start message -->
+					<div class="main-row">
+						<div class="input">
+							<textarea placeholder="Additional info" spellcheck="false" name="message"></textarea>
+								<span class="tooltip tooltip-right-top">Key Skills</span>
+						</div>
+					</div>
+					<!-- end message -->
+
+					<!-- start files -->
+					
+						
+						
+					
+					<!-- end files -->
+
+			
+				<!-- end /.content -->
+
+				<div class="footer">
+					<button type="submit" class="primary-btn">Send</button>
+					<button type="reset" class="secondary-btn">Reset</button>
+				</div>
+				<!-- end /.footer -->
+
+			</form>
+		</div>
+		<p class="copy_rights">&copy; 2016 Personal Profile Form Widget. All Rights Reserved | Design by  <a href="https://shop585798004.taobao.com/" target="_blank">前端ui</a></p>
+</div>
+		<!-- Scripts -->
+		<script src="js/jquery.1.11.1.min.js" ></script>
+
+		<!--[if lt IE 10]>
+				<script src="j-folder/js/jquery.placeholder.min.js" ></script>
+			<![endif]-->
+
+		<script>
+			$(document).ready(function(){
+
+				// Phone masking
+				$('#phone').mask('(999) 999-9999', {placeholder:'x'});
+
+				// Post code masking
+				$('#post').mask('999-9999', {placeholder:'x'});
+
+			});
+		</script>
+</body>
+</html>

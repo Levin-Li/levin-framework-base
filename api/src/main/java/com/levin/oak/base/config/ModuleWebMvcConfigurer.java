@@ -5,12 +5,14 @@ import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.InjectVarService;
 import com.levin.oak.base.biz.rbac.RbacService;
-import com.levin.oak.base.interceptor.AuthorizeAnnotationInterceptor;
+import com.levin.oak.base.interceptor.ControllerAuthorizeInterceptor;
 import com.levin.oak.base.interceptor.DomainInterceptor;
+import com.levin.oak.base.interceptor.ResourceAuthorizeInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.util.StringUtils;
@@ -61,7 +63,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         frameworkProperties.getTenantBindDomain().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
-        frameworkProperties.getAcl().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
+        frameworkProperties.getControllerAcl().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
+
 
     }
 
@@ -99,7 +102,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //         registry.jsp("/WEB-INF/jsp/", ".jsp");
 
         if (StringUtils.hasText(frameworkProperties.getAdminPath())) {
-          //  registry.freeMarker();
+            //  registry.freeMarker();
         }
 
     }
@@ -161,24 +164,37 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     .order(Ordered.HIGHEST_PRECEDENCE + 2000);
         }
 
-        if (frameworkProperties.getAcl().isEnable()) {
+        if (frameworkProperties.getControllerAcl().isEnable()) {
 
-            HandlerInterceptor handlerInterceptor = new AuthorizeAnnotationInterceptor(rbacService
-                    , (className) -> frameworkProperties.getAcl().isPackageMatched(className));
+            HandlerInterceptor handlerInterceptor = new ControllerAuthorizeInterceptor(rbacService
+                    , (className) -> frameworkProperties.getControllerAcl().isPackageMatched(className));
 
-            List<String> includePathPatterns = frameworkProperties.getAcl().getIncludePathPatterns();
+            List<String> includePathPatterns = frameworkProperties.getControllerAcl().getIncludePathPatterns();
 
             registry.addInterceptor(handlerInterceptor)
                     .excludePathPatterns(serverProperties.getError().getPath())
                     .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
                     .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
                     .excludePathPatterns("/" + openApiPath)
-                    .excludePathPatterns(frameworkProperties.getAcl().getExcludePathPatterns())
+                    .excludePathPatterns(frameworkProperties.getControllerAcl().getExcludePathPatterns())
                     .addPathPatterns(includePathPatterns.isEmpty() ? Arrays.asList("/**") : includePathPatterns)
                     .order(Ordered.HIGHEST_PRECEDENCE + 3000);
         }
 
+        //资源拦截器
+        registry.addInterceptor(resourceAuthorizeInterceptor())
+                .addPathPatterns(frameworkProperties.getAdminPath() + "/**")
+                .order(Ordered.HIGHEST_PRECEDENCE + 4000);
+
     }
 
-
+    /**
+     * 资源拦截器
+     *
+     * @return
+     */
+    @Bean
+    public ResourceAuthorizeInterceptor resourceAuthorizeInterceptor() {
+        return new ResourceAuthorizeInterceptor();
+    }
 }

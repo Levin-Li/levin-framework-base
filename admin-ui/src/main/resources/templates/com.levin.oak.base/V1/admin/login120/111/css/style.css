@@ -1,0 +1,642 @@
+/*--- reset code ---*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
+	margin:0;
+	padding:0;
+	border:0;
+	font-size:100%;
+	font:inherit;
+	vertical-align:baseline;
+}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+ol,ul {
+	list-style:none;
+	margin:0px;
+	padding:0px;
+}
+blockquote,q {
+	quotes:none;
+}
+blockquote:before,blockquote:after,q:before,q:after {
+	content:'';
+	content:none;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+
+/* start editing from here */
+a {
+	text-decoration:none;
+}
+.txt-rt {
+	text-align:right;
+}/* text align right */
+.txt-lt {
+	text-align:left;
+}/* text align left */
+.txt-center {
+	text-align:center;
+/*-- W3Layouts --*/	
+}/* text align center */
+.float-rt {
+	float:right;
+}/* float right */
+.float-lt {
+	float:left;
+}/* float left */
+.clear {
+	clear:both;
+}/* clear float */
+.pos-relative {
+	position:relative;
+}/* Position Relative */
+.pos-absolute {
+	position:absolute;
+}/* Position Absolute */
+.vertical-base {	
+	vertical-align:baseline;
+}/* vertical align baseline */
+.vertical-top {	
+	vertical-align:top;
+}/* vertical align top */
+nav.vertical ul li {	
+	display:block;
+}/* vertical menu */
+nav.horizontal ul li {	
+	display: inline-block;
+}/* horizontal menu */
+img {
+	max-width:100%;
+}
+
+/*--- end reset code ---*/
+body {
+font-family:Verdana;
+	background:url("../images/banner.jpg") no-repeat;
+	background-position:center;
+	background-attachment:fixed;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;
+	-moz-background-size:100% 100%;
+	-o-background-size:100% 100%;
+	-ms-background-size:100% 100%;
+	 'Raleway', sans-serif;
+}
+h1.w3layouts {
+    text-align:center;
+    font-size: 50px;
+    font-weight: 300;
+    color: #fff;
+    padding: 25px 0;
+    text-transform: uppercase;
+     'Roboto Condensed', sans-serif;
+}
+.content-w3ls {
+    width: 70%;
+    margin: 0 auto;
+	background-color: rgba(59, 87, 91, 0.57);
+}
+.content-w3ls .content1-agile,.content-w3ls .content2-agile {
+	width:50%;
+	float:left;
+}
+.info-w3l {
+    padding: 30px 40px;
+}
+h2.wthree {
+    font-size: 25px;
+    font-weight: normal;
+    color: #fff;
+    text-align: CENTER;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+	 'Roboto Condensed', sans-serif;
+}
+input#username,input#email,textarea#message {
+	display:block;
+	font-size:17px;
+	font-weight:normal;
+	color:#fff;
+	text-align:center;
+	background-color: rgba(0, 41, 38, 0.35);
+	border:1px solid rgba(255,255,255,0.5);
+	margin-bottom:20px;
+	 'Raleway', sans-serif;
+	outline:none;
+	transition:all 0.5s ease-in-out;
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	-ms-transition:all 0.5s ease-in-out;
+}
+input#username:focus,input#email:focus,textarea#message:focus {
+	background-color:rgba(0,0,0,0.5);
+	border:1px solid #fff;
+}
+input#username,input#email {
+	height:45px;
+	width:90.1%;
+	padding: 0 25px;
+}
+textarea#message {
+	height:135px;
+	width:94%;
+	padding:15px;
+}
+input::-webkit-input-placeholder {
+color: #fff !important;
+}
+ 
+input:-moz-placeholder { /* Firefox 18- */
+color: #fff !important;  
+}
+ 
+input::-moz-placeholder {  /* Firefox 19+ */
+color: #fff !important;  
+}
+ 
+input:-ms-input-placeholder {  
+color: #fff !important;  
+}
+textarea::-webkit-input-placeholder {
+color: #fff !important;
+}
+ 
+textarea::-moz-placeholder { /* Firefox 18- */
+color: #fff !important;  
+}
+ 
+textarea::-moz-placeholder {  /* Firefox 19+ */
+color: #fff !important;  
+}
+ 
+textarea::-ms-input-placeholder {  
+color: #fff !important;  
+}
+input.sign-in {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    font-weight: normal;
+    color: #fff;
+	display: block;
+    background-color:#e74c3c;
+    border-color:#e74c3c;
+	 'Roboto Condensed', sans-serif;
+	transition:all 0.5s ease-in-out;
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	-ms-transition:all 0.5s ease-in-out;
+	outline:none;
+	cursor:pointer;
+}
+input.sign-in:hover {
+    background-color:#2ecc71;
+    border-color:#2ecc71;
+	color: #fff;
+}
+.content-w3ls .content2-agile {
+	background:url("../images/content.jpg") no-repeat;
+	background-position:center;
+	background-size:cover;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	-o-background-size:cover;
+	-ms-background-size:cover;
+	min-height:640px;
+}
+p.agileinfo {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 300;
+    color: #fff;
+    padding: 20px 0;
+    text-transform: uppercase;
+	 'Roboto Condensed', sans-serif;
+	position:relative;
+}
+p.agileinfo:before {
+	position: absolute;
+    content: '';
+    background-color: #fff;
+    width: 44%;
+    height: 1px;
+    left: 0;
+    top: 38px;
+}
+p.agileinfo:after {
+	position:absolute;
+	content:'';
+	background-color:#fff;
+	width:44%;
+	height:1px;
+	right:0;
+	top:38px;
+}
+p.agileinfo:after {
+	
+}
+ul.social-w3-agileits {
+    list-style: none;
+	text-align:center;
+}
+ul.social-w3-agileits li {
+	display:inline-block;
+}
+ul.social-w3-agileits li a i.fa {
+	width:45px;
+	height:45px;
+	text-align:center;
+	line-height:45px;
+	color:#fff;
+	border:1px solid #fff;
+	transition:all 0.7s ease-in-out;
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	-ms-transition:all 0.5s ease-in-out;
+}
+ul.social-w3-agileits li a i.fa.fa-facebook:hover {
+	background-color:#3b5998;
+	color:#fff;
+}
+ul.social-w3-agileits li a i.fa.fa-youtube:hover {
+	background-color:#cd201f;
+	color:#fff;
+}
+ul.social-w3-agileits li a i.fa.fa-twitter:hover {
+	background-color:#1da1f2;
+	color:#fff;
+}
+ul.social-w3-agileits li a i.fa.fa-google-plus:hover {
+	background-color:#dd4b39;
+	color:#fff;
+}
+ul.social-w3-agileits li a i.fa.fa-linkedin:hover {
+	background-color:#0077b5;
+	color:#fff;
+}
+ul.social-w3-agileits li a i.fa:hover {
+	border-radius:50%;
+	-webkit-border-radius:50%;
+	-moz-border-radius:50%;
+	-o-border-radius:50%;
+	-ms-border-radius:50%;
+}
+ul.social-w3-agileits li a i.fa:hover {
+    -webkit-animation: spin 0.7s linear infinite;
+	animation: spin 0.7s linear infinite;
+	-moz-animation: spin 0.7s linear infinite;
+	-o-animation: spin 0.7s linear infinite;
+	-ms-animation: spin 0.7s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+p.copyright-agileits {
+    font-size: 17px;
+    font-weight: normal;
+    color: #fff;
+    text-align: center;
+    padding: 40px 10px;
+}
+p.copyright-agileits a {
+	color:#e74c3c;
+}
+p.copyright-agileits a:hover {
+	color:#2ecc71;
+}
+
+/*-- responsive design --*/
+@media (max-width:1600px) {
+	.content-w3ls .content2-agile {
+		min-height:609px;
+	}
+}
+
+@media (max-width:1440px) {
+textarea#message {
+	width:93%;	
+}
+input#username, input#email {
+	width:88.2%;
+}
+}
+
+@media (max-width:1366px) {
+input#username, input#email {
+    width: 88.5%;
+}
+.content-w3ls {
+    width: 75%;
+}
+}
+
+@media (max-width: 1280px) {
+textarea#message {
+    width: 92.5%;
+}
+input#username, input#email {
+    width: 87.5%;
+}
+textarea#message {
+    height: 120px;
+}
+}
+
+@media (max-width: 1080px) {
+textarea#message {
+    width: 91%;
+}
+h1.w3layouts {
+	font-size: 45px;
+}
+.info-w3l {
+    padding: 25px 30px;
+}
+.content-w3ls .content2-agile {
+    min-height: 584px;
+}
+h2.wthree {
+    font-size: 23px;
+	padding-bottom:15px;
+}
+input#username, input#email {
+    height: 40px;
+	width: 85%;
+}
+input#username, input#email, textarea#message {
+	font-size:15px;
+}
+p.copyright-agileits {
+    font-size: 14px;
+}
+}
+
+@media (max-width: 1024px) {
+.content-w3ls {
+    width: 90%;
+}
+textarea#message {
+    width: 92%;
+}
+input#username, input#email {
+	width:87%;
+}
+}
+
+@media (max-width: 991px) {
+input#username, input#email {
+    width: 86.7%;
+}
+}
+
+@media (max-width: 900px) {
+textarea#message {
+    width: 91%;
+}
+input.sign-in {
+	height: 45px;
+}
+input#username, input#email {
+    width: 85%;
+}
+}
+
+@media (max-width: 800px) {
+h1.w3layouts {
+    font-size: 40px;
+}
+input#username, input#email {
+    width: 83%;
+}
+textarea#message {
+    width: 90%;
+}
+}
+
+@media (max-width: 768px) {
+.content-w3ls {
+    width: 65%;
+}	
+.content-w3ls .content1-agile, .content-w3ls .content2-agile {
+    width: 100%;
+    float: left;
+}
+input#username, input#email {
+    width: 78.2%;
+    margin: 0 auto 15px;
+}
+textarea#message {
+    width:83%;
+    margin: 0 auto 20px;
+	height:100px;
+}
+input.sign-in {
+    height: 40px;
+	font-size:17px;
+	margin:0 auto;
+	width:90%;
+}
+.content-w3ls .content2-agile {
+    min-height: 360px;
+}
+p.agileinfo:before {
+	left: 23px;
+	width: 36%;
+}
+p.agileinfo:after {
+	right: 23px;
+	width: 36%;
+}
+}
+
+@media (max-width: 667px) {
+.content-w3ls .content2-agile {
+    min-height: 300px;
+}
+h1.w3layouts {
+    font-size: 36px;
+}
+input#username, input#email {
+    width: 77%;
+}
+}
+
+@media (max-width: 640px) {
+input#username, input#email {
+    width: 77.5%;
+}
+}
+
+@media (max-width: 568px) {
+h1.w3layouts {
+    font-size: 33px;
+}
+}
+
+@media (max-width: 480px) {
+.content-w3ls {
+    width: 75%;
+}
+h1.w3layouts {
+    font-size: 30px;
+}
+input#username, input#email {
+    width: 77.5%;
+    margin: 0 auto 15px;
+}
+textarea#message {
+    width: 84.5%;
+    margin: 0 auto 20px;
+    height: 100px;
+}
+input.sign-in {
+    height: 40px;
+    font-size: 17px;
+    margin: 0 auto;
+    width: 95%;
+}
+p.agileinfo {
+	font-size:25px;
+}
+p.agileinfo:before {
+    left: 9px;
+    width: 38%;
+	top:35px;
+}
+p.agileinfo:after {
+    right: 9px;
+    width: 38%;
+	top:35px;
+}
+p.copyright-agileits {
+	padding: 20px 10px;
+    line-height: 30px;
+}
+}
+
+@media (max-width: 414px) {
+h1.w3layouts {
+    font-size: 30px;
+    padding: 20px 0;
+}
+.content-w3ls {
+    width: 85%;
+}
+.info-w3l {
+    padding: 20px 0px;
+}
+input#username, input#email {
+    width: 70%;
+    margin: 0 auto 15px;
+}
+textarea#message {
+    width: 76%;
+    margin: 0 auto 15px;
+    height: 100px;
+}
+input.sign-in {
+    height: 40px;
+    font-size: 17px;
+    margin: 0 auto;
+    width: 85.5%;
+}
+p.agileinfo {
+    font-size: 23px;
+}
+p.agileinfo:before {
+    left: 25px;
+    width: 35%;
+    top: 35px;
+}
+p.agileinfo:after {
+    right: 25px;
+    width: 35%;
+    top: 35px;
+}
+.content-w3ls .content2-agile {
+    min-height: 250px;
+}
+}
+
+@media (max-width: 384px) {
+h1.w3layouts {
+    font-size: 27px;
+    padding: 20px 0;
+}
+input#username, input#email {
+    width: 69.5%;
+}
+}
+
+@media (max-width: 375px) {
+h2.wthree {
+    font-size: 20px;
+    padding-bottom: 10px;
+    font-weight: 300;
+}
+input#username, input#email {
+    width: 70%;
+}
+}
+
+@media (max-width: 320px) {
+h1.w3layouts {
+    font-size: 24px;
+    padding: 20px 0;
+}
+.content-w3ls {
+    width: 90%;
+}
+input#username, input#email, textarea#message {
+    font-size: 14px;
+}
+input#username, input#email {
+    width: 68.5%;
+    margin: 0 auto 10px;
+}
+input.sign-in {
+    height: 40px;
+    font-size: 16px;
+    margin: 0 auto;
+    width: 88%;
+}
+p.agileinfo {
+    font-size: 20px;
+	padding:15px 0;
+}
+p.agileinfo:before {
+    left: 18px;
+    width: 35%;
+    top: 27px;
+}
+p.agileinfo:after {
+    right: 18px;
+    width: 35%;
+    top: 27px;
+}
+ul.social-w3-agileits li a i.fa {
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+    line-height: 40px;
+}
+.content-w3ls .content2-agile {
+    min-height: 200px;
+}
+p.copyright-agileits {
+    font-size: 13px;
+}
+}
+/*-- /responsive design --*/

@@ -46,9 +46,11 @@
 
     </properties>
 
-
     <modules>
+
         <module>testcase</module>
+
+        <module>admin-ui</module>
 
         <module>api</module>
 

@@ -80,6 +80,7 @@ spring:
 
   freemarker:
     cache: false
+    template-loader-path: classpath:/templates/
 
 
 #日志配置

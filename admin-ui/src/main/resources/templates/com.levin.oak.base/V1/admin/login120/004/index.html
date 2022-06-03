@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>网站登录</title>
+
+<meta name="keywords" content="网站登录"/>
+
+<meta name="description" content="最全的网站登录下载网站http://cn.inspinia.cn"/>
+<link rel="stylesheet" type="text/css" href="css/component.css"  />
+	<script type="text/javascript">
+		
+		$(function(){
+			$("button").click(function(){
+			if($("#signup_email").val()==""||$("#signup_password").val()=="")
+			{
+				$.messager.alert('警告','账号和密码不能为�?');
+				 
+			}
+			else
+			{
+				$("#sign_form").submit();
+			}
+		});
+	});
+    </script>
+</head>
+<body>
+<div class="demo-2">
+	<div class="">
+		<div id="large-header" class="large-header">
+			<canvas id="demo-canvas"></canvas>
+			
+		</div>
+	</div>
+</div>
+<div class="container">
+    <div class="login_header">
+    	<span></span>
+    </div>
+    
+    
+    	<div class="form_header">
+        	<h1 id="logo">Login</h1>
+			<h2 id="subheading">To explore and discover</h2>
+        </div>
+        <div class="signup_forms">
+            	<div id="signup_forms_container" class="signup_forms_container">
+                    	<form class="signup_form_form" id="sign_form" method="post" action="/login/004/checklogin.jsp">
+                        	<div class="signup_account" id="signup_account">
+                            	<div class="form_user"><input type="text" name="email" placeholder="Email" id="signup_email"></div>
+                                <div class="form_password"><input type="password" name="password" placeholder="Password" id="signup_password"></div>
+                            </div>
+                          
+               					 <button type="button" id="signup_forms_submit"><span><strong>Log in</strong></span></button>
+            				
+                        </form> 
+                  		   
+    			</div>
+
+          </div>
+    <div class="footer">
+    	<div class="footer_signup_link">
+        	<a class="signup_link" href="register.html" >Sign up</a>
+            <a href="/login/index.html'"  target="_blank" class="link unnamed_1">index</a>
+            <a href="/login/index.html'"  target="_blank" class="link unnamed_2">Contact</a>
+        </div>
+        <div class="design_show">
+        	<div class="designer_info">
+					<a href="https://shop585798004.taobao.com/" target="_blank">
+					Designed by Class 2 Software 11 <strong style="font-family:'微软雅黑'">前端ui</strong></a>
+                <a href="#" target="_blank" class="face"><img id="face" src="images/face.jpg"  alt="designed by RayZhang"/></a>
+            </div>
+        </div>
+    </div>
+    
+  
+    <script src="js/demo-2.js" ></script>
+</body>
+</html>

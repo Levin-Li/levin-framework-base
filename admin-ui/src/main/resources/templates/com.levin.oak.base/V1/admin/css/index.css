@@ -1,0 +1,71 @@
+@charset "utf-8";
+body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,form,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+ol,ul{list-style:none;}
+input,textarea,select{font-family:Verdana,arial, sans-serif;font-size:inherit;font-weight:inherit;*font-size:100%;}
+html{_background-image:url(about:blank);_background-attachment:fixed; _overflow-x:hidden; min-height:100%;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+body{font-family:"微软雅黑","Arial","宋体"; font-size: 12px; color:#000;}
+a{text-decoration:none;}
+em{ font-style:normal}
+strong{font-weight:inherit;}
+/*************注册页面******************/
+.frame_register{ width:100%; overflow:hidden; position: relative; z-index: 3;}
+.main_register{ width:100%; position:relative; overflow:hidden}
+.register_bg{ position:absolute; left:0; right:0; margin:0 auto; text-align:center; overflow:hidden; z-index:1;}
+.register_bg img{min-width: 100%; min-height: 100%;}
+.register_c{ width:100%; margin:0 auto; position:relative;}
+.logo{ width:500px; margin:0 auto; text-align:center; padding-top:50px;}
+.register_center{ width:500px; margin:0 auto; background-color:#FFF; border-radius:5px; margin-top:30px;padding-top:45px;}
+.register_tit{ margin:0 40px; margin-bottom:25px; background:url(/templates/login/2017/images/border.png) repeat-x left center; text-align:center;}
+.register_tit em{ display:inline; font-size:16px; color:#555; background-color:#FFF;padding:0 20px;}
+.register_form ,.register_form1{ width:312px; margin:0 auto; margin-bottom:10px;}
+.register_form input{ width:302px; height:38px; line-height:38px; border:1px solid #dbdbdb; border-radius:5px;padding-left:10px; font-size:14px; color:#999}
+.register_form em{ display:block; font-size:14px; color:#ff4242; margin-top:3px;}
+.register_form1{ overflow:hidden}
+.register_form1 input{ width:184px; height:38px; line-height:38px; border:1px solid #dbdbdb; border-radius:5px;padding-left:10px; font-size:14px; color:#999; float:left; margin-right:10px;}
+.register_form1 p{ width:104px; height:40px; overflow:hidden; display:block; border:1px solid #dbdbdb;}
+.ok_button{ display:block; width:160px; height:40px; line-height:40px; text-align:center; color:#f8f8f8; font-size:16px; background-color:#0099ff; margin:0 auto; margin-top:30px; border-radius:25px;}
+.ok_text{ display:block; margin:0 auto; text-align:center; font-size:14px; color:#0099ff; margin-top:11px;}
+.promptly{ margin:0 40px; background:url(/templates/login/2017/images/border.png) repeat-x left top;padding:16px 0; margin-top:22px;}
+.promptly a{ display:block; margin:0 auto; text-align:center; font-size:14px; color:#0099ff;}
+
+
+/*************登录******************/
+.logo_window{ width:100%;position: relative;margin: 0 auto; z-index: 10;}
+.logo_window1{ width:856px; height:400px; margin:0 auto; overflow:hidden; margin-top:50px;}
+.logo_window_L{ width:491px; height:400px; background-color:#FFF; border-radius:5px 0px 0px 5px; float:left; overflow:hidden}
+.logo_window_R{ width:365px; height:400px; background:url(/templates/login/2017/images/bg.png); overflow:hidden; border-radius:0px 5px 5px 0px;}
+.logo_window_L .logo-form-title{ display:block;width:380px; margin:0 auto; font-size:24px; color:#444;padding-top:40px;padding-bottom:20px;}
+.register_form2 ,.register_form3{ width:380px; margin:0 auto; margin-bottom:10px;}
+.register_form2 input.user-name,.register_form2 input.user-pass{ width:368px; height:38px; line-height:38px; border:1px solid #dbdbdb; border-radius:5px;padding-left:10px; font-size:14px; color:#999}
+.register_form2 em{ display:block; font-size:14px; color:#ff4242; margin-top:3px;}
+.register_form2 .z-admin{line-height: 14px; padding-top: 5px; display: inline-block; color:#999;}
+.register_form2 .z-admin input{width: 14px; height: 14px; vertical-align:top; margin: 0; padding: 0;}
+.register_form3{ overflow:hidden;}
+.register_form3 input{ width:256px; height:38px; line-height:38px; border:1px solid #dbdbdb; border-radius:5px;padding-left:10px; font-size:14px; color:#999; float:left; margin-right:10px;overflow:hidden}
+.register_form3 a{ width:98px; height:40px; float:left; border:1px solid #dbdbdb;}
+.register_form3 a img{width: 100%;}
+.no_pwd{ display:block; width:380px; margin:0 auto; text-align:right; }
+.no_pwd a{font-size:14px; color:#2aaaff;}
+.button_a{ width:380px; margin:0 auto;padding-top:20px; overflow:hidden font-size:0;}
+.button_a a{display:inline-block; font-size:16px; text-align:center; border-radius:25px;}
+.button_a a.login-btn{width:160px; height:40px; line-height:40px; background-color:#0099ff; color:#f8f8f8; margin-right: 60px;}
+.button_a a.reg-btn{width:148px; height:38px; line-height:38px; border:1px solid #0099ff; color:#0099ff;}
+.window_weixin{ width:304px; margin:0 auto; overflow:hidden; border-bottom:1px solid #5B595A;padding-bottom:30px; padding-top:54px;}
+.window_weixin span{ display:block; width:105px; height:105px; border:1px solid #EFEFF0; background-color:#FFF; float:left; margin-right:20px;}
+.window_weixin p{ display:block; font-size:16px; color:#FFF; line-height:107px; height:107px; overflow:hidden}
+.gonggao{width:304px; margin:0 auto;}
+.gonggao_tit{ overflow:hidden;padding-top:25px;}
+.gonggao_tit span{ display:block; float:left; height:18px; line-height:18px; font-size:16px; color:#FFF; border-left:4px solid #0099ff;padding-left:5px;}
+.gonggao_tit a{ display:block; float:right; height:18px; line-height:18px; font-size:14px; color:#FFF;}
+.gonggao_c{width:304px; margin:0 auto; overflow:hidden; padding-top:15px;}
+.gonggao_c ul{width:304px;}
+.gonggao_c ul li{width:304px;}
+.gonggao_c ul li a{ display:block;width:304px; overflow:hidden}
+.gonggao_c ul li a em{ display:block; width:242px; height:30px;padding-left:8px; line-height:30px;font-size:14px; color:#cccccc; float:left; background:url(/templates/login/2017/images/li.jpg) no-repeat left center;}
+.gonggao_c ul li a strong{ display:block; height:30px; line-height:30px;font-size:14px; color:#999; overflow:hidden; text-align:right}
+
+
+.canvas_bg{position: absolute; z-index: 1; left:0;top: 0; right:0;bottom:0; opacity: .2;}

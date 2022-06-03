@@ -39,15 +39,15 @@ public class AreaIdReq extends BaseReq {
 
     private static final long serialVersionUID = -445860277L;
 
-
     @Schema(description = "编码", required = true)
     @Eq(require = true)
     @NotNull
     protected String code;
 
-
     @PostConstruct
     public void preQuery() {
         //@todo ID 查询之前初始化数据
+
     }
+
 }

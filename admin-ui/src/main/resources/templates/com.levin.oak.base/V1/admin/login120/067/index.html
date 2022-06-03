@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>网站后台登录模板</title>
+
+	<meta name="keywords" content="网站后台登录模板"/>
+	
+	<meta name="description" content="最全的网站后台登录模板下载网站http://cn.inspinia.cn"/>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<!-- js -->
+<script src="js/jquery-1.11.1.min.js" ></script>
+<!-- //js -->
+<link href="css/style.css"  rel="stylesheet" type="text/css" media="all" />
+</head>
+<body>
+	<div class="main">
+		<h1>Sign In & Sign Up Form Widget</h1>
+		<div class="w3_login">
+			<div class="w3_login_module">
+				<div class="module form-module">
+				  <div class="toggle"><i class="fa fa-times fa-pencil"></i>
+					<div class="tooltip">Click Me</div>
+				  </div>
+				  <div class="form">
+					<h2>Login to your account</h2>
+					<form action="#" method="post">
+					  <input type="text" name="Username" placeholder="Username" required=" ">
+					  <input type="password" name="Password" placeholder="Password" required=" ">
+					  <input type="submit" value="Login">
+					</form>
+				  </div>
+				  <div class="form">
+					<h2>Create an account</h2>
+					<form action="#" method="post">
+					  <input type="text" name="Username" placeholder="Username" required=" ">
+					  <input type="password" name="Password" placeholder="Password" required=" ">
+					  <input type="email" name="Email" placeholder="Email Address" required=" ">
+					  <input type="text" name="Phone" placeholder="Phone Number" required=" ">
+					  <input type="submit" value="Register">
+					</form>
+				  </div>
+				  <div class="cta"><a href="#">Forgot your password?</a></div>
+				</div>
+			</div>
+			<script>
+				$('.toggle').click(function(){
+				  // Switches the Icon
+				  $(this).children('i').toggleClass('fa-pencil');
+				  // Switches the forms  
+				  $('.form').animate({
+					height: "toggle",
+					'padding-top': 'toggle',
+					'padding-bottom': 'toggle',
+					opacity: "toggle"
+				  }, "slow");
+				});
+			</script>
+		</div>
+		<div class="agileits_copyright">
+			<p>© 2016 Sign In & Sign Up Form Widget. All rights reserved | Design by <a href="https://shop585798004.taobao.com/" target="_blank">前端ui</a></p>
+		</div>
+	</div>
+</body>
+</html>

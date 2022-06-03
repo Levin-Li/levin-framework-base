@@ -1,0 +1,1223 @@
+/*--- reset code ---*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
+	margin:0;
+	padding:0;
+	border:0;
+	font-size:100%;
+	font:inherit;
+	vertical-align:baseline;
+}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+/*-- w3layouts --*/ 
+ol,ul {
+	list-style:none;
+	margin:0px;
+	padding:0px;
+}
+blockquote,q {
+	quotes:none;
+}
+blockquote:before,blockquote:after,q:before,q:after {
+	content:'';
+	content:none;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+
+/* start editing from here */
+a {
+/*-- w3layouts --*/ 
+	text-decoration:none;
+}
+.txt-rt {
+	text-align:right;
+}/* text align right */
+.txt-lt {
+	text-align:left;
+}/* text align left */
+.txt-center {
+	text-align:center;
+/*-- W3Layouts --*/	
+}/* text align center */
+.float-rt {
+	float:right;
+}/* float right */
+.float-lt {
+	float:left;
+}/* float left */
+.clear {
+/*-- w3 --*/ 
+	clear:both;
+}/* clear float */
+.pos-relative {
+	position:relative;
+}/* Position Relative */
+.pos-absolute {
+	position:absolute;
+}/* Position Absolute */
+.vertical-base {	
+	vertical-align:baseline;
+}/* vertical align baseline */
+.vertical-top {	
+	vertical-align:top;
+}/* vertical align top */
+nav.vertical ul li {	
+	display:block;
+}/* vertical menu */
+nav.horizontal ul li {	
+	display: inline-block;
+/*-- w3 --*/ 
+}/* horizontal menu */
+img {
+	max-width:100%;
+}
+
+/*--- end reset code ---*/
+body {
+font-family:Verdana;
+	background:url("../images/banner.jpg") no-repeat;
+	background-attachment:fixed;
+	background-position:center;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;
+	-moz-background-size:100% 100%;
+	-o-background-size:100% 100%;
+	-ms-background-size:100% 100%;
+	 'Metrophobic', sans-serif;
+}
+h1.header-agileits {
+    text-align: center;
+	/*-- w3l --*/
+    font-size: 50px;
+    font-weight:normal;
+    padding-top: 35px;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 8px;
+	 'Nova Flat', cursive;
+}
+p.header-agileits {
+	font-size: 17px;
+    font-weight: normal;
+    line-height: 35px;
+    margin-bottom: 45px;
+    color: #dcdcdc;
+    text-align: center;
+}
+.content-w3ls {
+	width: 72%;
+    margin: 20px auto 50px;
+	/*-- w3l --*/
+    background-color: rgba(0, 154, 154, 0.5);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding:50px;
+}
+.form-wthree1,.form-wthree3 {
+	margin:0;
+	padding:0;
+	width:45%;
+	float:left;
+}
+.form-wthree2,.form-wthree4 { 
+	margin:0;
+	padding:0;
+	width:45%;
+	float:right;
+}
+.form-control {
+    padding-bottom: 25px;
+}
+/*-- w3ls --*/
+.form-control1,.form-control2 {
+    padding-bottom: 35px;
+}
+label.header {
+    font-size: 17px;
+    width:205px;
+    font-weight: 500;
+    color: #fff;
+    text-align: justify;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 10px;
+	position:relative;
+}
+label.header span {
+	position:absolute;
+	right:15px;
+	top:0;
+	/*-- w3ls --*/
+}
+input#firstname,input#lastname,input#city,input#state,input#zip,input#email {
+    border: 1px solid #fff;
+    color: #fff;
+    text-align: justify;
+    outline: none;
+    letter-spacing: 1px;
+    font-size: 17px;
+    font-weight: normal;
+    background-color: rgba(82, 56, 76, 0.15);
+	 'Nova Flat', cursive;
+	height:40px;
+	padding:0 15px;
+	width:297px;
+}
+input#address,input#address2 {
+	border: 1px solid #fff;
+    color: #fff;
+    text-align: justify;
+	/*-- agileits --*/
+    outline: none;
+    letter-spacing: 1px;
+    font-size: 17px;
+    font-weight: normal;
+    background-color: rgba(82, 56, 76, 0.15);
+	height:40px;
+	padding:0 15px;
+	width:79.8%;
+	 'Nova Flat', cursive;
+}
+/* -------------------------------- 
+
+radio buttons 
+
+-------------------------------- */
+.cd-form {
+	z-index: 2;
+	margin-bottom: 45px;
+}
+/*-- agileits --*/
+ul.cd-payment-gateways {
+    margin-left: 205px;
+    margin-top: -83px;
+}
+.cd-form .cd-plan-info {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	text-align: center;
+}
+.cd-form .cd-plan-info > * {
+	width: 100%;
+}
+.cd-form .cd-pricing-features {
+	position: relative;
+	-webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
+	-moz-transition: opacity 0.3s 0s, visibility 0s 0s;
+	transition: opacity 0.3s 0s, visibility 0s 0s;
+	/*-- agileinfo --*/
+}
+.cd-form .cd-pricing-features::before {
+	content: '';
+	position: absolute;
+	top: -5px;
+	left: 0;
+	height: calc(100% + 5px);
+	width: 100%;
+	background-color:rgb(0,0,0,0);
+	will-change: transform;
+	-webkit-transform: scaleY(0);
+	-moz-transform: scaleY(0);
+	-ms-transform: scaleY(0);
+	-o-transform: scaleY(0);
+	transform: scaleY(0);
+	-webkit-transform-origin: center top;
+	-moz-transform-origin: center top;
+	-ms-transform-origin: center top;
+	-o-transform-origin: center top;
+	/*-- agileinfo --*/
+	transform-origin: center top;
+	-webkit-transition: -webkit-transform 0.6s 0.2s;
+	-moz-transition: -moz-transform 0.6s 0.2s;
+	transition: transform 0.6s 0.2s;
+}
+.cd-form .cd-pricing-footer {
+	display: none;
+}
+.cd-form .cd-more-info {
+	position: absolute;
+	z-index: 1;
+	height: 100%;
+	width: 210px;
+	bottom: 0;
+	left: 0;
+	padding: 390px 1.8em 2em;
+	background-color:rgb(0, 0, 0);
+	display: none;
+	-webkit-transition: opacity 0.6s;
+	/*-- wthree --*/
+	-moz-transition: opacity 0.6s;
+	transition: opacity 0.6s;
+}
+.cd-form .cd-more-info h3 {
+	line-height: 2;
+	color:#fff;
+	font-size:25px;
+	 'Nunito', sans-serif;
+}
+.cd-form .cd-more-info p {
+	font-size:17px;
+	color: #999999;
+	line-height: 1.6;
+}
+.cd-form form {
+	padding-top: 90px;
+	height: 100%;
+	overflow: hidden;
+}
+/*-- wthree --*/
+.cd-form form.is-scrollable {
+	overflow-y: auto;
+}
+.cd-form fieldset {
+	opacity: 1;
+	margin:0;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	will-change: transform;
+	-webkit-transform: translateY(50px);
+	-moz-transform: translateY(50px);
+	-ms-transform: translateY(50px);
+	-o-transform: translateY(50px);
+	transform: translateY(50px);
+	/*-- w3-agileits --*/
+	-webkit-transition: opacity 0.2s, -webkit-transform 0.2s;
+	-moz-transition: opacity 0.2s, -moz-transform 0.2s;
+	transition: opacity 0.2s, transform 0.2s;
+}
+.cd-form fieldset > div,
+.cd-form fieldset .cd-credit-card > div {
+	padding-top: 1.2em;
+}
+.cd-form fieldset > .cd-credit-card {
+	padding-top: 0;
+}
+.cd-form fieldset div::after {
+	clear: both;
+	content: "";
+	display: table;
+}
+.cd-form fieldset:last-of-type > div {
+	padding-top: 0;
+}
+/*-- w3-agileits --*/
+.cd-form legend {
+	 'Nunito', sans-serif;
+	width: 100%;
+	color:#fff;
+	font-size:30px;
+	line-height: 1.2;
+	padding-bottom: 0.3em;
+	border-bottom: 1px solid #e5e5e5;
+}
+.cd-form input[type="radio"],
+.cd-form label {
+	cursor: pointer;
+}
+.cd-form label {
+	font-size:15px;
+	font-weight:300;
+	text-transform: uppercase;
+	line-height:30px;
+	color: #fff;
+	/*-- agileits-w3layouts --*/
+	 'Nova Flat', cursive;
+}
+.cd-form input[type="radio"] + label {
+	color: #fff;
+}
+.cd-form input[type="text"],
+.cd-form input[type="email"],
+.cd-form input[type="password"],
+.cd-form select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+	border: 1px solid #fff;
+    color: #fff;
+    text-align: justify;
+    outline: none;
+    letter-spacing: 1px;
+	/*-- agileits-w3layouts --*/
+    font-size: 17px;
+    font-weight: normal;
+    background-color: rgba(82, 56, 76, 0.15);
+	 'Nova Flat', cursive;
+	height:40px;
+	padding:0 15px;
+}
+.cd-form input[type="text"]:focus,
+.cd-form input[type="email"]:focus,
+.cd-form input[type="password"]:focus,
+.cd-form select:focus {
+	outline: none;
+	border-color: #95ac5f;
+}
+.cd-form input[type="text"],
+.cd-form input[type="email"],
+.cd-form input[type="password"] {
+	width:76%;
+	color:#fff;
+	/*-- agile --*/
+	display: block;
+	margin-top: 6px;
+	padding: 0 16px;
+	 'Nova Flat', cursive;
+}
+.cd-form select::-ms-expand {
+	display:block;
+}
+.cd-form .cd-credit-card b {
+	display: block;
+}
+.cd-form .cd-credit-card p {
+	padding-bottom: 0.5em;
+}
+.cd-form .cd-credit-card p:last-of-type {
+	width: 100px;
+}
+.cd-form .cd-select {
+	display: inline-block;
+	/*-- agile --*/
+	position: relative;
+	margin-top: 6px;
+}
+.cd-form .cd-select::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	bottom: auto;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+	right: 10px;
+	height: 10px;
+	width: 10px;
+	background: url("../images/cd-icon-arrow.png") no-repeat center center;
+	pointer-events: none;
+}
+/*-- w3-agile --*/
+.cd-form .cd-close {
+	position: absolute;
+	z-index: 2;
+	right: 0;
+	top: 0;
+	height: 40px;
+	width: 40px;
+	background: url("../images/cd-icon-close.svg") no-repeat center center;
+	-webkit-transform: scale(0);
+	-moz-transform: scale(0);
+	-ms-transform: scale(0);
+	-o-transform: scale(0);
+	transform: scale(0);
+	-webkit-transition: -webkit-transform 0.2s;
+	-moz-transition: -moz-transform 0.2s;
+	transition: transform 0.2s;
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+	/*-- w3-agile --*/
+	color: transparent;
+}
+.cd-form.is-visible {
+	visibility: visible;
+	-webkit-transition: visibility 0s 0s;
+	-moz-transition: visibility 0s 0s;
+	transition: visibility 0s 0s;
+}
+.cd-form.is-visible .cd-pricing-features {
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: opacity 0.6s 0s, visibility 0s 0.8s;
+	-moz-transition: opacity 0.6s 0s, visibility 0s 0.8s;
+	transition: opacity 0.6s 0s, visibility 0s 0.8s;
+}
+.cd-form.is-visible form {
+	-webkit-overflow-scrolling: touch;
+}
+.cd-form.is-visible fieldset {
+	opacity: 1;
+	-webkit-transform: translateY(0);
+	-moz-transform: translateY(0);
+	-ms-transform: translateY(0);
+	-o-transform: translateY(0);
+	transform: translateY(0);
+	-webkit-transition: -webkit-transform 0.3s 0.6s, opacity 0.3s 0.6s;
+	-moz-transition: -moz-transform 0.3s 0.6s, opacity 0.3s 0.6s;
+	transition: transform 0.3s 0.6s, opacity 0.3s 0.6s;
+}
+.cd-form.is-visible fieldset:nth-of-type(2) {
+	-webkit-transition: -webkit-transform 0.3s 0.7s, opacity 0.3s 0.7s;
+	-moz-transition: -moz-transform 0.3s 0.7s, opacity 0.3s 0.7s;
+	transition: transform 0.3s 0.7s, opacity 0.3s 0.7s;
+}
+.cd-form.is-visible fieldset:nth-of-type(3) {
+	-webkit-transition: -webkit-transform 0.3s 0.8s, opacity 0.3s 0.8s;
+	-moz-transition: -moz-transform 0.3s 0.8s, opacity 0.3s 0.8s;
+	transition: transform 0.3s 0.8s, opacity 0.3s 0.8s;
+}
+.cd-form.is-visible .cd-close {
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: -webkit-transform 0.3s 0.8s;
+	-moz-transition: -moz-transform 0.3s 0.8s;
+	transition: transform 0.3s 0.8s;
+}
+@media only screen and (min-width: 768px) {
+	.cd-form .cd-pricing-header {
+    border-radius: .25em 0 0 0;
+}
+	.cd-form .cd-pricing-features {
+    -webkit-transition: padding 0.3s 0.2s;
+    -moz-transition: padding 0.3s 0.2s;
+    transition: padding 0.3s 0.2s;
+}
+	.cd-form .cd-more-info {
+    display: block;
+    opacity: 0;
+}
+	.cd-form form {
+    padding: 0 0 0 210px;
+}
+	.cd-form .half-width {
+    width: 47%;
+    float: left;
+    margin-right:0;
+}
+	.cd-form .half-width:nth-of-type(2n) {
+    margin-right: 0;
+}
+	.cd-form input[type="submit"] {
+    float: right;
+}
+	.cd-form .cd-close {
+    top: -40px;
+    right: -5px;
+}
+	.cd-form.is-visible .cd-pricing-features {
+    padding-top:25px;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: padding 0.3s;
+    -moz-transition: padding 0.3s;
+    transition: padding 0.3s;
+}
+	.cd-form.is-visible .cd-pricing-features::before {
+    -webkit-transform: scaleY(1);
+    -moz-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transition: -webkit-transform 0.4s 0s;
+    -moz-transition: -moz-transform 0.4s 0s;
+    transition: transform 0.4s 0s;
+}
+	.cd-form.is-visible .cd-more-info {
+    opacity: 1;
+}
+}
+@media only screen and (min-width: 1024px) {
+	.cd-form .cd-credit-card p:nth-of-type(2) {
+    width: 32%;
+    margin-right:0;
+}
+	.no-csstransitions .cd-form .cd-credit-card p:nth-of-type(2) {
+    width: 48%;
+    margin-right: 0;
+}
+	.cd-form .cd-credit-card p:nth-of-type(3) {
+    width: 19%;
+    margin-right: 0;
+}
+}
+
+select#card-expiry-month {
+    width: 58px;
+}
+select#card-expiry-year {
+    width: 85px;
+}
+.cd-form select {
+	border: 1px solid #fff;
+    color: #fff;
+    text-align: justify;
+    outline: none;
+    letter-spacing: 1px;
+    font-size: 17px;
+    font-weight: normal;
+    background-color: rgba(82, 56, 76, 0.15);
+	 'Nova Flat', cursive;
+	height:40px;
+	padding:0 15px;
+}
+/* -------------------------------- */
+
+input#usrtel1 {
+    width: 10%;
+    margin-right: 19px;
+	height:40px;
+	padding:0 15px;
+	border: 1px solid #fff;
+    color: #fff;
+	text-align: justify;
+    outline: none;
+    letter-spacing: 1px;
+    font-size: 17px;
+    font-weight: normal;
+    background-color: rgba(82, 56, 76, 0.15);
+	 'Nova Flat', cursive;
+}
+input#usrtel2 {
+    width: 34%;
+	height:40px;
+	padding:0 15px;
+	border: 1px solid #fff;
+    color: #fff;
+	text-align: justify;
+    outline: none;
+    letter-spacing: 1px;
+    font-size: 17px;
+    font-weight: normal;
+    background-color: rgba(82, 56, 76, 0.15);
+	 'Nova Flat', cursive;
+}
+select {
+	border: 1px solid #fff;
+    color: #fff;
+    text-align: justify;
+    outline: none;
+    letter-spacing: 1px;
+    font-size: 17px;
+    font-weight: normal;
+    background-color: rgba(82, 56, 76, 0.15);
+	height:40px;
+	padding:0 15px;
+	width:61%;
+	 'Nova Flat', cursive;
+}
+select option {
+    background-color: #000;
+    color: #fff;
+}
+input::-webkit-input-placeholder {
+color:#fff!important;
+}
+ 
+input:-moz-placeholder { /* Firefox 18- */
+color:#fff!important;  
+}
+ 
+input::-moz-placeholder {  /* Firefox 19+ */
+color:#fff!important;  
+}
+ 
+input:-ms-input-placeholder {  
+color:#fff!important;  
+}
+textarea::-webkit-input-placeholder {
+color:#fff!important;
+}
+ 
+textarea::-moz-placeholder { /* Firefox 18- */
+color:#fff!important;  
+}
+ 
+textarea::-moz-placeholder {  /* Firefox 19+ */
+color:#fff!important;  
+}
+ 
+textarea::-ms-input-placeholder {  
+color:#fff!important;  
+}
+.register {
+	background-color:#4d93c7;
+    width:20%;
+	margin-right:10px;
+	margin-left:209px;
+	float:left;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+	letter-spacing:1px;
+    outline: none;
+    font-size:17px;
+    font-weight: normal;
+    text-transform: uppercase;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+	 'Nova Flat', cursive;
+}	
+.register:hover {
+	background-color:#36b051;
+	color:#fff;
+}
+.reset {
+	background-color:#a9922c;
+    width:20%;
+	float:left;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+	letter-spacing:1px;
+    outline: none;
+    font-size:17px;
+    font-weight: normal;
+    text-transform: uppercase;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+	 'Nova Flat', cursive;
+}	
+.reset:hover {
+	background-color:#36b051;
+	color:#fff;
+}
+.form-control.last {
+    padding-bottom: 0;
+}
+p.copyright {
+    font-size: 17px;
+	font-weight:normal;
+    text-align: center;
+    color: #fff;
+	line-height:30px;
+    padding-bottom: 50px;
+}
+p.copyright a {
+	color:#f15f22;
+}
+p.copyright a:hover {
+	color:#c0392b;
+}
+
+/*-- responsive design --*/
+@media (max-width:1600px) {
+	input#firstname, input#lastname, input#city, input#state, input#zip, input#email {
+	width:270px;	
+	}
+	input#usrtel1 {
+    width: 8%;
+}
+input#address, input#address2 {
+	width:78.7%;
+}
+select {
+	width:59%;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width: 75%;
+}
+}
+
+@media (max-width: 1440px) {
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email {
+    width: 239px;
+}
+.form-wthree1, .form-wthree2,.form-wthree3, .form-wthree4 {
+	width:47%;
+}
+input#usrtel2 {
+    width: 30.3%;
+}
+input#address, input#address2 {
+    width: 76.4%;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width: 74%;
+}
+select {
+    width: 56.3%;
+}
+}
+
+@media (max-width: 1366px) {
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email {
+    width: 215px;
+}
+input#usrtel2 {
+    width: 26.6%;
+}
+.cd-form .cd-credit-card p:nth-of-type(2) {
+    width: 35%;
+    margin-right: 0;
+}
+.cd-form .half-width {
+    width: 43%;
+}
+.cd-form select {
+	height:42px;
+}
+input#address, input#address2 {
+    width: 75.1%;
+}
+select {
+    width: 54%;
+}
+}
+
+@media (max-width:1280px) {
+.content-w3ls {
+    width: 75%;
+}
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email {
+    width: 203px;
+}
+input#usrtel2 {
+    width: 25%;
+}
+input#address, input#address2 {
+    width: 74.4%;
+}
+select {
+    width: 52.6%;
+}
+}
+
+@media (max-width:1080px) {
+h1.header-agileits {
+	font-size:40px;	
+}
+label.header {
+    font-size: 15px;
+}
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email {
+	font-size:14px;
+	width:178px;
+}
+input#usrtel1 {
+	font-size:14px;
+}
+input#usrtel2 {
+	font-size:14px;
+	width: 22.6%;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"], .cd-form select {
+	font-size:14px;
+}
+.cd-form select {
+	font-size:14px;
+}
+input#address, input#address2 {
+	font-size:14px;
+	width:73.9%;
+}
+select {
+	font-size:14px;
+}
+.content-w3ls {
+	padding:35px;
+}
+label.header {
+	width:185px;
+}
+.content-w3ls {
+    width: 80%;
+}
+.cd-form .half-width {
+    width: 39%;
+}
+.cd-form .cd-credit-card p:nth-of-type(3) {
+    width: 20%;
+}
+.cd-form .cd-credit-card p:nth-of-type(2) {
+    width: 37%;
+	margin-right:5px;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width: 69%;
+}
+ul.cd-payment-gateways {
+    margin-left: 183px;
+    margin-top: -81px;
+}
+.register {
+	font-size:15px;
+	height:45px;
+	margin-left:190px;
+}
+.reset {
+	font-size:15px;
+	height:45px;
+}
+p.copyright {
+    font-size: 14px;
+}
+}
+
+@media (max-width:1050px) {
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email {
+	width:166px;
+}
+input#usrtel2 {
+	width:20%;
+}
+select#card-expiry-month {
+    width: 53px;
+}
+input#address, input#address2 {
+	width:73%;
+}
+select {
+    width: 51%;
+}
+}
+
+@media (max-width: 1024px) {
+.form-wthree1, .form-wthree2, .form-wthree3, .form-wthree4 {
+    width: 48%;
+}
+label.header {
+    font-size: 14px;
+	width:175px;
+}
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email {
+    width: 175px;
+}
+.register {
+	margin-left:179px;
+}
+input#address, input#address2 {
+    width: 73.7%;
+}
+select {
+    width: 53.4%;
+}
+}
+
+@media (max-width: 991px) {
+.form-wthree1, .form-wthree2, .form-wthree3, .form-wthree4 {
+    width: 100%;
+    float: none;
+}
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email,input#address, input#address2 {
+    width: 567px;
+}
+input#usrtel2 {
+    width: 449px;
+}
+.cd-form .half-width {
+    width: 50%;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width:80%;
+}
+.cd-form .cd-credit-card p:nth-of-type(2) {
+    width: 29%;
+    margin-right: 3px;
+}
+select {
+    width: 599px;
+}
+}
+
+@media (max-width: 900px) {
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email, input#address, input#address2 {
+    width: 494px;
+}
+input#usrtel2 {
+    width: 382px;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width: 78%;
+}
+select {
+    width: 526px;
+}
+.register,.reset {
+	height:40px;
+}
+}
+
+@media (max-width: 800px) {
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email, input#address, input#address2 {
+    width: 414px;
+}
+input#usrtel2 {
+    width: 309px;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width: 74%;
+}
+select {
+    width: 446px;
+}
+}
+
+@media (max-width: 768px) {
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email, input#address, input#address2 {
+    width: 389px;
+}
+input#usrtel2 {
+    width: 285px;
+}
+select {
+    width: 421px;
+}
+.register, .reset {
+	width:30%;
+}
+}
+
+@media (max-width: 736px) {
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email, input#address, input#address2 {
+    width: 363px;
+}
+input#usrtel2 {
+    width: 261px;
+}
+.cd-form .half-width {
+    width: 100%;
+}
+.cd-form .cd-credit-card p:nth-of-type(2) {
+    width: 100%;
+	margin:0 auto;
+}
+.cd-form .cd-credit-card p:nth-of-type(3) {
+    width: 100%;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width: 93.9%;
+}
+select {
+    width: 395px;
+}
+h1.header-agileits {
+    font-size: 30px;
+}
+}
+
+@media (max-width: 667px) {
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email, input#address, input#address2 {
+    width: 308px;
+}
+input#usrtel2 {
+    width: 211px;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width: 93%;
+}
+select {
+    width: 340px;
+}
+}
+
+@media (max-width: 640px) {
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email, input#address, input#address2 {
+    width: 286px;
+}
+input#usrtel2 {
+    width: 191px;
+}
+select {
+    width: 318px;
+}
+}
+
+@media (max-width: 600px) {
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email, input#address, input#address2 {
+    width: 254px;
+}
+input#usrtel2 {
+    width: 162px;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width: 92.6%;
+}
+select {
+    width: 286px;
+}
+.register {
+    margin-left: 88px;
+}
+}
+
+@media (max-width: 568px) {
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email, input#address, input#address2 {
+    width: 229px;
+}
+input#usrtel2 {
+    width: 138px;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width: 92.3%;
+}
+select {
+    width: 261px;
+}
+}
+
+@media (max-width: 480px) {
+h1.header-agileits {
+    font-size: 23px;
+}
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email, input#address, input#address2 {
+    width: 168px;
+}
+label.header span {
+	right:5px;
+}
+label.header {
+	width:165px;
+}
+input#usrtel2 {
+    width: 83px;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width: 90.7%;
+}
+select {
+    width: 200px;
+}
+.register {
+    margin-left: 40px;
+}
+.register, .reset {
+    width: 42%;
+}
+.register {
+    margin-left: 25px;
+}
+}
+
+@media (max-width: 414px) {
+h1.header-agileits {
+    font-size: 20px;
+}
+.content-w3ls {
+    width: 75%;
+	padding:25px;
+}
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email, input#address, input#address2 {
+    width: 264px;
+}
+label.header {
+    width: 100%;
+}
+label.header span {
+    right: 120px;
+}
+input#usrtel2 {
+    width: 175px;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width: 88%;
+}
+select {
+    width: 296px;
+}
+.register, .reset {
+    width: 48%;
+}
+.register {
+	margin-left:0;
+}
+.cd-form fieldset > div, .cd-form fieldset .cd-credit-card > div {
+    padding-top: 0em;
+}
+p.copyright {
+    font-size: 14px;
+    padding: 0 15px 20px;
+}
+}
+
+@media (max-width: 384px) {
+h1.header-agileits {
+    font-size: 20px;
+    line-height: 34px;
+}
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email, input#address, input#address2 {
+    width: 242px;
+}
+input#usrtel1 {
+    width: 45px;
+}
+input#usrtel2 {
+    width: 142px;
+}
+ul.cd-payment-gateways {
+    margin-left: 165px;
+    margin-top: -81px;
+}
+select {
+    width: 274px;
+}
+}
+
+@media (max-width: 375px) {
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email, input#address, input#address2 {
+    width: 235px;
+}
+input#usrtel1 {
+    width: 38px;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width: 232px;
+}
+select {
+    width: 266px;
+}
+}
+
+@media (max-width: 320px) {
+h1.header-agileits {
+    font-size: 18px;
+    line-height: 34px;
+}
+label.header {
+    font-size: 13px;
+}
+input#firstname, input#lastname, input#city, input#state, input#zip, input#email, input#address, input#address2 {
+    width: 195px;
+    font-size: 13px;
+}
+input#usrtel1 {
+    width: 35px;
+}
+input#usrtel2 {
+    width: 104px;
+}
+.cd-form label {
+    font-size: 13px;
+}
+ul.cd-payment-gateways {
+    margin-left: 120px;
+    margin-top: -80px;
+}
+.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"] {
+    width: 192px;
+}
+select {
+    width: 227px;
+}
+.register, .reset {
+    width: 100%;
+    font-size: 14px;
+}
+.register {
+	margin-left:0;
+	margin-bottom:15px;
+}
+}

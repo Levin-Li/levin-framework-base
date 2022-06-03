@@ -1,0 +1,220 @@
+.creditly-wrapper {
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    font-size: 14px;
+    color: white;
+}
+.creditly-wrapper .credit-card-wrapper {
+    padding: 30px 30px;
+}
+.creditly-wrapper input.has-error {
+  outline: none;
+  border-color: #ff7076;
+  border-top-color: #ff5c61;
+	border:1px solid #ff7076;
+}
+.creditly-wrapper .form-control {
+	display: block;
+    width: 96%;
+    padding: 15px 10px;
+    font-size: 14px;
+    color: #212121;
+    background: #fff;
+    border:1px solid #fff;
+    margin-bottom: 25px;
+}
+.creditly-wrapper .form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+}
+.creditly-wrapper label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color:#fff;
+    font-size:1.2em;
+}
+.creditly-wrapper .form-group {
+  width: 100%;
+  display: table;
+}
+input.number.credit-card-number.form-control {
+    background:url("../images/visa.png") no-repeat 32.8em .9em #fff;
+}
+.creditly-wrapper .card-type {
+  margin-top: 10px;
+}
+.creditly-card-form .submit {
+  overflow: hidden;
+  display: inline-block;
+  visibility: visible!important;
+  -webkit-font-smoothing: antialiased;
+  border: none;
+  padding: 1px;
+  text-decoration: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.creditly-card-form .submit span {
+    display: block;
+    position: relative;
+    padding: 10px 50px;
+    background: #FFA600;
+    font-size: 1.3em;
+    color: #fff;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    text-transform: uppercase;
+}
+.creditly-card-form .submit span:hover{
+	background: #fff;
+    color: #212121;
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+	-ms-transition:0.5s all;
+}
+@media (max-width:1440px){
+	.creditly-wrapper .form-control {
+		width: 95.5%;
+	}
+}
+@media (max-width:1366px){
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 31.8em .9em #fff;
+	}
+}
+@media (max-width: 1280px){
+	.creditly-wrapper .form-control {
+		width: 95%;
+	}
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 28.8em .9em #fff;
+	}
+}
+@media (max-width: 1080px){
+	.creditly-wrapper .credit-card-wrapper {
+		padding: 0;
+	}
+}
+@media (max-width: 800px){
+	.creditly-wrapper .form-control {
+		width: 94%;
+	}
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 24.8em .9em #fff;
+	}
+}
+@media (max-width: 768px){
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 23.8em .9em #fff;
+	}
+}
+@media (max-width: 736px){
+	.creditly-wrapper .form-control {
+		width: 93.5%;
+	}
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 21.8em .9em #fff;
+	}
+}
+@media (max-width: 667px){
+	.creditly-wrapper .form-control {
+		width: 93%;
+	}
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 19.5em .9em #fff;
+	}
+}
+@media (max-width: 640px){
+	.creditly-wrapper .form-control {
+		width: 94.7%;
+	}
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 27.5em .9em #fff;
+	}
+}
+@media (max-width: 600px){
+	.creditly-wrapper .form-control {
+		width: 94.5%;
+	}
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 25.5em .9em #fff;
+	}
+}
+@media (max-width: 568px){
+	.creditly-wrapper .form-control {
+		width: 94%;
+	}
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 23.5em .9em #fff;
+	}
+	.creditly-wrapper label {
+		font-size: 1.1em;
+	}
+}
+@media (max-width: 480px){
+	.creditly-wrapper .form-control {
+		padding: 12px;
+		width: 92%;
+	}
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 21em .9em #fff;
+	}
+	.creditly-card-form .submit span {
+		font-size: 1.2em;
+	}
+}
+@media (max-width: 414px){
+	.creditly-wrapper .form-control {
+		width: 90.5%;
+	}
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 17em .9em #fff;
+	}
+}
+@media (max-width: 384px){
+	.creditly-wrapper .form-control {
+		padding: 10px;
+	}
+	.creditly-card-form .submit span {
+		font-size: 1em;
+	}
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 16em .7em #fff;
+	}
+}
+@media (max-width: 375px){
+	.creditly-wrapper label {
+		font-size: 1em;
+	}
+	.creditly-wrapper .form-control {
+		width: 91.5%;
+		margin-bottom: 15px;
+	}
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 16.5em .7em #fff;
+	}
+}
+@media (max-width: 320px){
+	.creditly-wrapper .form-control {
+		width: 90%;
+		font-size: 13px;
+	}
+	input.number.credit-card-number.form-control {
+		background: url("../images/visa.png") no-repeat 14em .7em #fff;
+	}
+}

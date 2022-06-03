@@ -1,0 +1,1007 @@
+
+/* start editing from here */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+ol,ul{list-style:none;margin:0;padding:0;}
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+table{border-collapse:collapse;border-spacing:0;}
+/* start editing from here */
+a{text-decoration:none;}
+.txt-rt{text-align:right;}/* text align right */
+.txt-lt{text-align:left;}/* text align left */
+.txt-center{text-align:center;}/* text align center */
+.float-rt{float:right;}/* float right */
+.float-lt{float:left;}/* float left */
+.clear{clear:both;}/* clear float */
+.pos-relative{position:relative;}/* Position Relative */
+.pos-absolute{position:absolute;}/* Position Absolute */
+.vertical-base{	vertical-align:baseline;}/* vertical align baseline */
+.vertical-top{	vertical-align:top;}/* vertical align top */
+.underline{	padding-bottom:5px;	border-bottom: 1px solid #eee; margin:0 0 20px 0;}/* Add 5px bottom padding and a underline */
+nav.vertical ul li{	display:block;}/* vertical menu */
+nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
+img{max-width:100%;}
+/*end reset*/
+ 
+ 
+/*-- main-section --*/ 
+body {
+font-family:Verdana;
+    background: #284da5;
+	 'Cabin', sans-serif;
+	font-size: 100%;
+}
+h1 {
+    font-size: 4em;
+    color: #fff;
+    text-align: center;
+    margin-top: 1em;
+	text-transform:capitalize;
+	letter-spacing:7px;
+	 'Playball', cursive;
+}
+.logo-top h2 {
+    font-size: 2.4em;
+    color: #fff;
+    text-align: center;
+     'Playball', cursive;
+}
+.logo-bottom {
+    margin-top: 8.5%;
+}
+.head {
+    width: 50%;
+    margin: 4% auto 0;
+    background: #fff;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+}
+.logo {
+    width: 45%;
+    float: right;
+    background: url("../images/pic3.jpg") no-repeat;
+    padding: 2em 0;
+}
+/*-- agileinfo --*/
+.logo-top img {
+    border-radius: 50%;
+    margin: 0 auto;
+    text-align: right;
+    width: 42%;
+    margin-left: 26%;
+}
+.login {
+    width: 55%;
+    float: left;
+    padding: 4% 0;
+	background:#fff;
+}
+.login input[type="text"], .login input[type="password"], .login input[type="email"] {
+    outline: none;
+    font-size: 16px;
+    color: #969696;
+    padding: 20px 50px 10px 0px;
+    margin: 0;
+    width: 85%;
+    border: none;
+     'Cabin', sans-serif;
+    border-bottom: 2px solid #cecfd3;
+    -webkit-appearance: none;
+}
+span i {
+    color: #fff;
+    position: absolute;
+    background: #284da5;
+    padding: 6px 8px;
+}
+.ic1{
+    top: 18px;
+    right: 32px;
+}
+.ic2 {
+    top: 69px;
+    right: 32px;
+}
+.ic3 {
+    top: 12%;
+    right: 8%;
+}
+.ic4 {
+    top: 45%;
+    right: 8%;
+}
+/*-- agile --*/
+
+.ic5 {
+    top: 78%;
+    right: 8%;
+}
+.login-top {
+    padding: 0px 25px;
+    margin-top: 3%;
+	position:relative;
+}
+.submit{
+	float:left;
+}
+.login-bottom ul{
+	padding:0;
+	float:right;
+}
+.login-bottom ul li{
+	display:inline-block;
+	vertical-align: middle;
+	margin-left: 3px;
+}
+.login-bottom ul li p{
+	color:#898a8e;
+	font-size:15px;
+}
+.login-bottom {
+    text-align: center;
+    transform: translateY(-50%);
+}
+.login-bottom .link {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 2px;
+    transition: .5s;
+    color: #D7D0BE;
+    margin-left: 3px;
+    margin-right: 3px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2),
+	0 1px 0 rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+}
+.login-bottom .link span {
+	display: block;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+/*-- agileits-w3layouts --*/
+
+.login-bottom .link:hover {
+    color: white;
+    transform: translateX(0px) rotate(360deg);
+}
+.login-bottom .link.google-plus {
+	background-color: tomato;
+	color: white;
+}
+.login-bottom .link.twitter {
+  background-color: #00ACEE;
+  color: white;
+}
+.login-bottom .link.facebook {
+  background-color: #3B5998;
+  color: white;
+}
+.login-bottom ul li span:hover{
+	transition: 0.5s all ease;
+	-webkit-transition: 0.5s all ease;
+	-moz-transition: 0.5s all ease;
+	-o-transition: 0.5s all ease;
+	-ms-transition: 0.5s all ease;
+	opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+.login-bottom ul li span.fb{
+	background-position:0px 0px;
+}
+.login-bottom ul li span.twit{
+	background-position:-34px 0px;
+}
+.login-bottom ul li span.google{
+	background-position:-68px 0px;
+}
+.bottom-w3l {
+    margin-top: 4em;
+}
+.submit input[type="submit"] {
+    font-size: 13px;
+    color: #284da5;
+    background: #fff;
+    border: 2px solid #284da5;
+    outline: none;
+    cursor: pointer;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -o-border-radius: 20px;
+    -ms-border-radius: 20px;
+    padding: 7px 19px;
+     'Cabin', sans-serif;
+}
+.submit input[type="submit"]:hover{
+	background:#284da5;
+	color:#fff;
+	transition: 0.5s all ease;
+	-webkit-transition: 0.5s all ease;
+	-moz-transition: 0.5s all ease;
+	-o-transition: 0.5s all ease;
+	-ms-transition: 0.5s all ease;
+}
+/* radios and checkboxes */
+.row1{
+	outline:none;
+	padding: 20px;
+	overflow: auto;
+	height: 200px;
+}
+.sky-form.col.col-4 ul {
+	padding: 0;
+	list-style: none;
+}
+.sky-form h4{
+	margin-top: 10px;
+	background: #ECECEC;
+	padding: 10px 20px;
+	color: #333333;
+	text-transform: uppercase;
+	margin-bottom: 0;
+	font-size:16px;
+}
+.sky-form  {
+	margin-bottom: 20px;
+}
+.sky-form .label {
+	display: block;
+	margin-bottom: 6px;
+	line-height: 19px;
+}
+.sky-form .label.col {
+	margin: 0;
+	padding-top: 10px;
+}
+
+.sky-form .input,
+.sky-form .select,
+.sky-form .textarea,
+.sky-form .radio,
+.sky-form .checkbox,
+.sky-form .toggle,
+.sky-form .button {
+	position: relative;
+	display: block;
+}
+/* selects */
+.sky-form .select i {
+	position: absolute;
+	top: 14px;
+	right: 14px;
+	width: 1px;
+	height: 11px;
+	background: #fff;
+	box-shadow: 0 0 0 12px #fff;
+}
+.sky-form .select i:after,
+.sky-form .select i:before {
+	content: '';
+	position: absolute;
+	right: 0;
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent;
+}
+/*-- wthree --*/
+.sky-form .select i:after {
+	bottom: 0;
+	border-top: 4px solid #404040;
+}
+.sky-form .select i:before {
+	top: 0;
+	border-bottom: 4px solid #404040;
+}
+.sky-form .select-multiple select {
+	height: auto;
+}
+/* radios and checkboxes */
+.sky-form .radio {
+	outline:none;
+	border:none;
+	margin-bottom: 7px;
+	padding-left: 22px;
+	font-size: 16px;
+	line-height: 27px;
+	color: #fff;
+	cursor: pointer;
+	margin-top: 0;
+}
+.sky-form .radio:last-child,
+.sky-form .checkbox:last-child {
+	margin-bottom: 0;
+}
+.sky-form .radio input,
+.sky-form .checkbox input {
+	position: absolute;
+	left: -9999px;
+}
+.sky-form .radio i{
+    position: absolute;
+    top: 6px;
+    left: 0;
+    display: block;
+    width: 10px;
+    height: 10px;
+    outline: none;
+    border-width: 2px;
+    border-style: solid;
+}
+.sky-form .radio i {
+	border-radius: 50%;
+}
+.sky-form .radio input + i:after{
+	position: absolute;
+	opacity: 0;
+	transition: opacity 0.1s;
+	-o-transition: opacity 0.1s;
+	-ms-transition: opacity 0.1s;
+	-moz-transition: opacity 0.1s;
+	-webkit-transition: opacity 0.1s;
+}
+.sky-form .radio input + i:after {
+    content: '';
+    top: 3px;
+    left: 3px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+}
+.sky-form .checkbox input + i:after {
+	content: '';
+	top: 3px;
+	left: 2px;
+	width: 10px;
+	height: 7px;
+	background: url("../images/tick.png") no-repeat;
+	text-align: center;
+}
+.sky-form .radio input:checked + i:after,
+.sky-form .checkbox input:checked + i:after {
+	opacity: 1;
+}
+.sky-form .inline-group {
+	margin: 0 -30px -4px 0;
+}
+.sky-form .inline-group:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+.sky-form .inline-group .radio{
+	float: left;
+	margin-right: 30px;
+}
+.sky-form .inline-group .radio:last-child{
+	margin-bottom: 4px;
+}
+/* icons */
+
+.sky-form [class^="icon-"] {
+   'Cabin', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+}
+/* normal state */
+.sky-form .input input,
+.sky-form .select select,
+.sky-form .textarea textarea,
+.sky-form .radio i,
+.sky-form .checkbox i,
+.sky-form .toggle i,
+.sky-form .icon-append,
+.sky-form .icon-prepend {
+	border-color: #fff;
+	transition: border-color 0.3s;
+	-o-transition: border-color 0.3s;
+	-ms-transition: border-color 0.3s;
+	-moz-transition: border-color 0.3s;
+	-webkit-transition: border-color 0.3s;
+}
+.sky-form .toggle i:before {
+	background-color: #fff;	
+}
+/* hover state */
+.sky-form .input:hover input,
+.sky-form .select:hover select,
+.sky-form .textarea:hover textarea,
+.sky-form .radio:hover i,
+.sky-form .checkbox:hover i,
+.sky-form .toggle:hover i {
+	border-color: #fff;
+}
+.sky-form .button:hover {
+	opacity: 1;
+}
+/* focus state */
+.sky-form .input input:focus,
+.sky-form .select select:focus,
+.sky-form .textarea textarea:focus,
+.sky-form .radio input:focus + i,
+.sky-form .checkbox input:focus + i,
+.sky-form .toggle input:focus + i {
+	border-color: #fff;
+}
+/* checked state */
+.sky-form .radio input + i:after {
+	background-color: #fff;	
+}
+.sky-form .checkbox input + i:after {
+	color: #fff;
+}
+.sky-form .radio input:checked + i,
+.sky-form .checkbox input:checked + i,
+.sky-form .toggle input:checked + i {
+	border-color: #fff;
+}
+/* error state */
+.sky-form .state-error input,
+.sky-form .state-error select,
+.sky-form .state-error textarea,
+.sky-form .radio.state-error i,
+.sky-form .checkbox.state-error i,
+.sky-form .toggle.state-error i {
+	background: #fff;
+}
+/* success state */
+.sky-form .state-success input,
+.sky-form .state-success select,
+.sky-form .state-success textarea,
+.sky-form .radio.state-success i,
+.sky-form .checkbox.state-success i,
+.sky-form .toggle.state-success i {
+	background: #fff;
+}
+/* disabled state */
+.sky-form .input.state-disabled input,
+.sky-form .select.state-disabled,
+.sky-form .textarea.state-disabled,
+.sky-form .radio.state-disabled,
+.sky-form .checkbox.state-disabled,
+.sky-form .toggle.state-disabled,
+.sky-form .button.state-disabled {
+	cursor: default;
+	opacity: 0.5;
+}
+.sky-form .input.state-disabled:hover input,
+.sky-form .select.state-disabled:hover select,
+.sky-form .textarea.state-disabled:hover textarea,
+.sky-form .radio.state-disabled:hover i,
+.sky-form .checkbox.state-disabled:hover i,
+.sky-form .toggle.state-disabled:hover i {
+	border-color: #e5e5e5;
+}
+.sky-form {
+    margin-left: 16%;
+}
+/******** SAP ************/
+.sap_tabs{
+	clear:both;
+}
+.tab_box{
+	background:#fd926d;
+	padding: 2em;
+}
+.top1{
+	margin-top: 2%;
+}
+.resp-tabs-list {
+    list-style: none;
+    padding-left: 19px;
+    text-align: left;
+}
+.resp-tab-item {
+    color: #aaaeaf;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 1px 0px 8px 0px;
+    display: inline-block;
+    margin: 0;
+    text-align: center;
+    list-style: none;
+    outline: none;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    margin: 0 5px;
+}
+/*-- wthree --*/
+.resp-tab-active {
+    text-shadow: none;
+    color: #284da5;;
+}
+.resp-tabs-container {
+	padding: 0px;
+	background-color: #fff;
+	clear: left;
+}
+h2.resp-accordion {
+	cursor: pointer;
+	padding: 5px;
+	display: none;
+}
+.resp-tab-content {
+	display: none;
+}
+.resp-content-active, .resp-accordion-active {
+   display: block;
+}
+.resp-tab-item label{
+	margin-right:8px;
+}
+/*-- //main-section --*/ 
+
+/*-- copyright --*/ 
+.footer {
+    text-align: center;
+    margin-top: 5%;
+}
+.footer p{
+	font-size:1em;
+	color:#fff;
+	letter-spacing: 2px;
+}
+
+.footer p a{
+	color:#fff;
+}
+.footer p a:hover{
+	text-decoration:none;
+	color:#44c7f4;
+	-webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+/*-- //copyright --*/ 
+
+/*--Responsive-start-here--*/
+
+@media(max-width:1440px){
+.account ul span {
+    margin-left: 22px;
+}
+.account ul {
+    width: 19%;
+}
+.account ul {
+    width: 21%;
+}
+.head {
+    margin: 3% auto 0;
+}
+.footer {
+    margin-top: 4%;
+    margin-bottom: 3em;
+}
+.bottom-w3l {
+    margin-top: 3.5em;
+}
+}
+
+@media(max-width:1366px){
+.logo-top h1 {
+    font-size: 2.25em;
+}
+.login input[type="text"], .login input[type="password"], .login input[type="email"] {
+    width: 83%;
+}
+}
+
+@media(max-width:1280px){
+.logo-top h1 {
+    font-size: 2.05em;
+}
+.login input[type="text"], .login input[type="password"], .login input[type="email"] {
+    font-size: 15px;
+    padding: 18px 44px 10px 10px;
+}
+.login-bottom ul li {
+    margin-left: 9px;
+}
+.sky-form {
+    margin-left: 10%;
+}
+.sky-form .radio {
+    font-size: 15px;
+}
+.account ul {
+    width: 23%;
+}
+.head {
+    width: 58%;
+}
+span i {
+    padding: 5px 7px;
+}
+.ic2 {
+    top: 66px;
+}
+}
+@media(max-width:1080px){
+.head {
+    width: 68%;
+}
+h1 {
+    font-size: 3.5em;
+}
+}
+@media(max-width:1024px){
+.head {
+    width: 68%;
+}
+h1 {
+    font-size: 3.8em;
+}
+.logo-top h2 {
+    font-size: 2.2em;
+}
+.ic1, .ic2  {
+    right: 30px;
+}
+.login-bottom .link {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+}
+@media(max-width:991px){
+.head {
+    width: 71%;
+	margin: 2% auto 0;
+}
+h1 {
+    font-size: 3.6em;
+	margin-top: 0.7em;
+    letter-spacing: 6px;
+}
+.footer {
+    margin-bottom: 2em;
+}
+}
+@media(max-width:800px){
+.head {
+    width: 82%;
+	margin: 3% auto 0;
+}
+.submit input[type="submit"] {
+    padding: 7px 14px;
+}
+.login-bottom ul li {
+    margin-left: 3px;
+}
+.login-bottom .link {
+    width: 28px;
+    height: 28px;
+}
+.login input[type="text"], .login input[type="password"], .login input[type="email"] {
+    padding: 18px 41px 10px 10px;
+}
+.footer {
+    margin-top: 5%;
+}
+}
+@media(max-width:768px){
+h1 {
+    font-size: 3.5em;
+    margin-top: 1.5em;
+}
+.head {
+    width: 86%;
+    margin: 7% auto 0;
+}
+.footer {
+    margin-top: 10%;
+}
+.logo-top h2 {
+    font-size: 2.1em;
+}
+}
+@media(max-width:736px){
+h1 {
+    margin-top: 0.7em;
+}
+.head {
+    margin: 4% auto 0;
+	width: 88%;
+}
+.footer {
+    margin-top: 6%;
+}
+.ic1, .ic2 {
+    right: 28px;
+}
+}
+@media(max-width:667px){
+h1 {
+    font-size: 3.3em;
+	margin-top: 0.8em;
+}
+.submit input[type="submit"] {
+    padding: 6px 12px;
+}
+.login-bottom ul li {
+    margin-left: 1px;
+}
+.head {
+    width: 93%;
+	margin: 5% auto 0;
+}
+.login-bottom .link {
+    width: 27px;
+    height: 27px;
+}
+.login input[type="text"], .login input[type="password"], .login input[type="email"] {
+    padding: 18px 39px 10px 9px;
+}
+}
+@media(max-width:640px){
+.head {
+    width: 95%;
+}
+h1 {
+    font-size: 3.1em;
+	letter-spacing: 5px;
+}
+.logo-top h2 {
+    font-size: 1.9em;
+}
+.footer {
+    margin-top: 8%;
+}
+.ic1, .ic2 {
+    right: 27px;
+}
+.ic5 {
+    top: 79%;
+}
+}
+@media(max-width:600px){
+.head {
+    width: 83%;
+	margin: 3% auto 0;
+}
+.logo {
+    width: 100%;
+}
+.login {
+    width: 100%;
+}
+.logo-top img {
+    width: 35%;
+    margin-left: 33%;
+}
+.logo-top h2 {
+    font-size: 2.3em;
+    margin-top: 3px;
+}
+.sky-form {
+    margin-left: 23%;
+}
+.logo-bottom {
+    margin-top: 7%;
+}
+.sky-form .radio {
+    font-size: 16px;
+}
+.login {
+    padding: 8% 0 12%;
+}
+.login input[type="text"], .login input[type="password"], .login input[type="email"] {
+    width: 89%;
+}
+.bottom-w3l {
+    margin-top: 4.5em;
+}
+.submit input[type="submit"] {
+    padding: 7px 14px;
+}
+.login-bottom ul li {
+    margin-left: 11px;
+}
+.login-bottom .link {
+    width: 31px;
+    height: 31px;
+}
+.login-bottom .link {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.ic3 {
+    right: 6%;
+}
+.ic5 {
+    right: 6%;
+}
+.footer p {
+    letter-spacing: 1px;
+}
+h1 {
+    font-size: 3em;
+	margin-top: 0.6em;
+}
+.footer {
+    margin-top: 5%;
+    margin-bottom: 2.5em;
+}
+}
+@media(max-width:568px){
+.footer p {
+    font-size: 0.9em;
+}
+.logo-top h2 {
+    font-size: 2.1em;
+}
+}
+@media(max-width:480px){
+h1 {
+    font-size: 2.5em;
+    letter-spacing: 4px;
+	margin-top: 0.4em;
+}
+.logo-top h2 {
+    font-size: 2em;
+}
+.logo {
+    padding: 1.6em 0;
+}
+.sky-form .radio {
+    font-size: 15px;
+}
+.sky-form {
+    margin-left: 21%;
+}
+.login input[type="text"], .login input[type="password"], .login input[type="email"] {
+    width: 87%;
+}
+.ic1, .ic2 {
+    right: 23px;
+}
+.login-bottom ul li {
+    margin-left: 5px;
+}
+.footer p {
+    line-height: 2em;
+}
+.footer {
+    margin-bottom: 1.6em;
+}
+}
+@media(max-width:414px){
+h1 {
+    font-size: 2.3em;
+    letter-spacing: 3px;
+	margin-top: 0.5em;
+}
+.logo-top h2 {
+    font-size: 1.7em;
+}
+.sky-form {
+    margin-left: 18%;
+}
+.logo-bottom {
+    margin-top: 6%;
+}
+.resp-tab-item {
+    font-size: 17px;
+}
+.login input[type="text"], .login input[type="password"], .login input[type="email"] {
+    font-size: 14px;
+	width: 85%;
+}
+.submit input[type="submit"] {
+    padding: 6px 12px;
+}
+.login-bottom ul li p {
+    font-size: 14px;
+}
+.login-bottom .link {
+    width: 28px;
+    height: 28px;
+}
+.login-bottom .link {
+    margin-left: 1px;
+    margin-right: 1px;
+}
+.login-bottom ul li {
+    margin-left: 2px;
+}
+.footer p {
+    letter-spacing: 0px;
+}
+.head {
+    width: 86%;
+}
+}
+@media(max-width:384px){
+.head {
+    width: 89%;
+}
+.login-bottom .link {
+    width: 26px;
+    height: 26px;
+	font-size: 15px;
+}
+.bottom-w3l {
+    margin-top: 3.5em;
+}
+.login {
+    padding: 8% 0 15%;
+}
+h1 {
+    font-size: 2.2em;
+}
+.sky-form {
+    margin-left: 17%;
+}
+}
+@media(max-width:375px){
+.ic1, .ic2 {
+    right: 20px;
+}
+.login input[type="text"], .login input[type="password"], .login input[type="email"] {
+    padding: 18px 40px 10px 9px;
+}
+.submit input[type="submit"] {
+    padding: 6px 10px;
+}
+}
+@media(max-width:320px){
+h1 {
+    font-size: 1.8em;
+}
+.logo-top h2 {
+    font-size: 1.5em;
+	margin-top: 0px;
+}
+.sky-form .radio {
+    font-size: 14px;
+}
+.sky-form .radio {
+    margin-bottom: 3px;
+}
+.sky-form {
+    margin-left: 13%;
+}
+.login input[type="text"], .login input[type="password"], .login input[type="email"] {
+    width: 83%;
+}
+.ic1, .ic2 {
+    right: 16px;
+}
+.login-bottom ul {
+    width: 100%;
+    margin-top: 1.5em;
+}
+.footer {
+    margin-bottom: 1em;
+}
+.bottom-w3l {
+    margin-top: 2em;
+}
+.head {
+    width: 90%;
+}
+.submit {
+    width: 100%;
+    text-align: center;
+}
+.submit input[type="submit"] {
+    padding: 5px 16px;
+}
+}
+/*--Responsive-end-here--*/

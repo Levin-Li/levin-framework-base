@@ -1,0 +1,233 @@
+
+/* reset */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+ol,ul{list-style:none;margin:0px;padding:0px;}
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+table{border-collapse:collapse;border-spacing:0;}
+/* start editing from here */
+a{text-decoration:none;}
+.txt-rt{text-align:right;}/* text align right */
+.txt-lt{text-align:left;}/* text align left */
+.txt-center{text-align:center;}/* text align center */
+.float-rt{float:right;}/* float right */
+.float-lt{float:left;}/* float left */
+.clear{clear:both;}/* clear float */
+.pos-relative{position:relative;}/* Position Relative */
+.pos-absolute{position:absolute;}/* Position Absolute */
+.vertical-base{	vertical-align:baseline;}/* vertical align baseline */
+.vertical-top{	vertical-align:top;}/* vertical align top */
+nav.vertical ul li{	display:block;}/* vertical menu */
+nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
+img{max-width:100%;}
+/*end reset*/
+body {
+font-family:Verdana;
+	background: url("../images/bg.jpg") no-repeat 0px 0px;
+	background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+	 'Alegreya Sans', sans-serif;
+}
+h1{
+	font-size:50px;
+	margin-top:45px;
+	text-align:center;
+	color:#fff;
+}
+.main-agile {
+    width: 45%;
+    margin: 65px auto 50px auto;
+    text-align: center;
+    padding: 40px;
+    border: 1px solid #fff;
+    border-style: dotted;
+    background: rgba(154, 142, 142, 0.16);
+}
+.main-agile input[type="text"],select{
+	border:none;
+	padding:10px;
+	outline:none;
+	border-bottom:1px solid #fff;
+	background:transparent;
+	width:44%;
+	margin-bottom:60px;
+	color:#fff;
+	font-size:14px;
+}
+select{
+	width:47%;
+}
+input.cal2,input.lname,input.email,select{
+	margin-left:5%;
+}
+ ::-webkit-input-placeholder{
+	color:#FFF !important;
+}
+select option{
+	color:#000;
+}
+
+input[type="submit"] {
+    color: #fff;
+    background: #9f5418;
+    border: none;
+    outline: none;
+    padding: 10px 65px;
+    font-size: 14px;
+	cursor:pointer;
+	transition:.5s ease-in;
+	-webkit-transition:.5s ease-in;
+	-moz-transition:.5s ease-in;
+	-o-transition:.5s ease-in;
+	-ms-transition:.5s ease-in;
+}
+input[type="submit"]:hover{
+	background: #bc4500;
+}
+.footer-w3l p{
+    text-align: center;
+    color: #fff;
+	font-size:15px;
+	letter-spacing:1px;
+	width:90%;
+	margin:0 auto 20px auto;
+	line-height:26px;
+}
+.footer-w3l p a{
+	color:#fff;
+	transition:.5s ease-in;
+	-webkit-transition:.5s ease-in;
+	-moz-transition:.5s ease-in;
+	-o-transition:.5s ease-in;
+	-ms-transition:.5s ease-in;
+}
+.footer-w3l p a:hover{
+	text-decoration:underline;
+}
+/*--- Responsive Code ---*/
+@media screen and (max-width: 1366px){
+	.main-agile {
+		width: 46%;
+	}
+}
+@media screen and (max-width: 1280px){
+	.main-agile {
+		margin: 50px auto 50px auto;
+		width: 50%;
+	}
+}
+@media screen and (max-width: 1080px){
+	.main-agile {
+		padding:35px;	
+		width:59%;		
+	}
+}
+@media screen and (max-width: 1024px){
+	.main-agile {
+		width:61%;		
+	}
+}
+@media screen and (max-width: 991px){
+	h1 {
+		font-size: 45px;
+		margin-top: 40px;
+	}
+	.main-agile {
+		margin: 45px auto 45px auto;
+		width:64%;
+	}
+}
+@media screen and (max-width: 966px){
+	.main-agile {
+		width: 65%;
+	}
+}
+@media screen and (max-width: 900px){
+	.main-agile {
+		width: 69%;
+		padding:30px;
+	}
+}
+@media screen and (max-width: 800px){
+	.main-agile input[type="text"]{
+		width: 43%;
+	}
+}
+@media screen and (max-width: 736px){
+	.main-agile input[type="text"], select {
+		margin-bottom: 50px;
+	}
+	input[type="submit"] {
+		padding: 10px 50px;
+	}
+}
+@media screen and (max-width: 667px){
+	.main-agile input[type="text"]{
+		width: 42%;
+	}
+}
+@media screen and (max-width: 640px){
+	h1 {
+		font-size: 40px;
+		margin-top: 35px;
+	}
+	.main-agile {
+		padding: 25px;
+		margin: 40px auto 40px auto;
+	}
+}
+@media screen and (max-width: 568px){
+	.main-agile {
+		width: 71%;
+		padding: 30px;
+	}
+}
+@media screen and (max-width: 480px){
+	.main-agile {
+		padding: 20px;
+		margin: 35px auto 35px auto;
+		width: 75%;
+	}
+	.main-agile input[type="text"] {
+		width: 41%;
+	}
+	input[type="submit"] {
+		padding: 10px 35px;
+	}
+	
+}
+@media screen and (max-width: 414px){
+	h1 {
+		font-size: 35px;
+		margin-top: 25px;
+	}
+	.main-agile input[type="text"] {
+		width: 92%;
+	}
+	select {
+		width: 98%;
+	}
+	input.cal2, input.lname, input.email, select {
+		margin-left: 0%;
+	}
+}
+@media screen and (max-width: 320px){
+	h1 {
+		font-size: 30px;
+		margin-top: 20px;
+	}
+	.main-agile {
+		width: 65%;
+		padding: 15px;
+		margin: 30px auto 30px auto;
+	}
+	input[type="submit"] {
+		padding: 8px 25px;
+	}
+	.main-agile input[type="text"], select {
+		margin-bottom: 30px;
+	}
+
+}

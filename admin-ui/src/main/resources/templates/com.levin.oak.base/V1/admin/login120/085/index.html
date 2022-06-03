@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+	<title>html网页登录模板</title>
+
+	<meta name="keywords" content="html网页登录模板"/>
+	
+	<meta name="description" content="最全的html网页登录模板下载网站http://cn.inspinia.cn"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- css -->
+<link href="css/style.css"  rel='stylesheet' type='text/css' media="all" />
+<!-- /css -->
+</head>
+<body>
+<h1 class="header-w3ls w3layouts w3 w3l agileinfo wthree w3-agileits">Casual Signup Form</h1>
+<div class="content-w3ls">
+	<div class="agileits1">
+		<div class="w3-agileits">
+			<h3>Please Register Your Details</h3>
+			<form action="#" method="post">
+				<div class="form-control"> 
+					<label class="header">Company Name :</label>
+					<input type="text" id="companyname" name="companyname" placeholder="Enter Your Company Name" title="Please enter your Company Name" required>
+					<div class="clear"></div>
+				</div>
+			
+				<div class="form-control">
+					<label class="header">Your Name :</label>
+					<input type="text" id="name" name="name" placeholder="Enter Your Name" title="Please enter your Name" required>
+					<div class="clear"></div>
+				</div>
+
+				<div class="form-control">	
+					<label class="header">Email Address :</label>
+					<input type="email" id="email" name="email" placeholder="mail@example.com" title="Please enter a valid email" required>
+					<div class="clear"></div>
+				</div>
+			
+				<div class="form-control">
+					<label class="header">Mobile Number :</label>
+					<input type="tel" id="usrtel" name="usrtel" placeholder="Your Phone Number" title="Please enter Your Phone Number" required>
+					<div class="clear"></div>
+				</div>
+			
+				<div class="form-control">	
+					<label class="header">Your Password :</label>
+					<input type="password" class="lock" name="password" placeholder="Enter Your Password" id="password1" required>
+					<div class="clear"></div>
+				</div>
+
+				<div class="form-control">		
+					<label class="header">Confirm Password :</label>
+					<input type="password" class="lock" name="confirm-password" placeholder="Re-Enter Your Password" id="password2" required>
+					<div class="clear"></div>
+				</div>														
+				<input type="submit" class="register" value="Register">
+			</form>
+			<script type="text/javascript">
+				window.onload = function () {
+					document.getElementById("password1").onchange = validatePassword;
+					document.getElementById("password2").onchange = validatePassword;
+				}
+				function validatePassword(){
+					var pass2=document.getElementById("password2").value;
+					var pass1=document.getElementById("password1").value;
+					if(pass1!=pass2)
+						document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+					else
+						document.getElementById("password2").setCustomValidity('');	 
+						//empty string means no validation error
+				}
+			</script>
+		</div>
+	</div>	
+	<div class="agileits2">
+
+	</div>
+	<div class="clear"></div>
+</div>	
+<p class="copyright w3layouts w3 w3l agileits-w3layouts agile w3-agile">© 2017 Casual Signup Form. All Rights Reserved | Design by <a href="https://shop585798004.taobao.com/" target="_blank">前端ui</a></p>
+</body>
+</html>

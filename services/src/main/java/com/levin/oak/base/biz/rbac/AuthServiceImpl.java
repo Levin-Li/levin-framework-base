@@ -42,7 +42,6 @@ import javax.annotation.Resource;
 import java.nio.charset.Charset;
 import java.util.*;
 
-import static com.levin.oak.base.ModuleOption.ADMIN_UI_PATH;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
@@ -304,7 +303,7 @@ public class AuthServiceImpl
 
         auditUser(user);
 
-        return user.getRoleList();// JsonStrArrayUtils.parse(user.getRoleList(), null, null);
+        return Collections.unmodifiableList(user.getRoleList());// JsonStrArrayUtils.parse(user.getRoleList(), null, null);
     }
 
     @Override
@@ -362,7 +361,7 @@ public class AuthServiceImpl
      */
     private void initMenu() {
 
-      //  final String defaultIcon = "fa fa-list";// (serverProperties.getServlet().getContextPath() + "/" + frameworkProperties.getAdminPath() + "/img/menu-256.png").replace("//", "/");
+        //  final String defaultIcon = "fa fa-list";// (serverProperties.getServlet().getContextPath() + "/" + frameworkProperties.getAdminPath() + "/img/menu-256.png").replace("//", "/");
 
         for (Plugin plugin : pluginManager.getInstalledPlugins()) {
 
@@ -408,23 +407,20 @@ public class AuthServiceImpl
                 //创建默认页面
                 log.info("创建插件[ {} ]的默认页面[ {} --> {}]", plugin.getId(), menuItem.getName(), path);
                 simpleDao.create(new SimplePage()
-                        .setType("json")
-                        .setCategory("amis")
-                        .setGroupName("管理后台页面|" + plugin.getName())
-                        .setPath(path)
+                                .setType("json")
+                                .setCategory("amis")
+                                .setGroupName("管理后台页面|" + plugin.getName())
+                                .setPath(path)
 //                        .setIcon(defaultIcon)
-                        .setContent(readResource(path))
-                        .setDomain(plugin.getPackageName())
-                        .setName(menuItem.getName())
-                        .setRemark("Amis默认页面")
+                                .setContent(readResource(path))
+                                .setDomain(plugin.getPackageName())
+                                .setName(menuItem.getName())
+                                .setRemark("Amis默认页面")
                 );
 
             });
-
         }
-
     }
-
 
     private String readResource(String url) {
 

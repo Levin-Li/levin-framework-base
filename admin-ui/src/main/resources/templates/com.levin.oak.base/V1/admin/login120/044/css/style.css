@@ -1,0 +1,584 @@
+
+/*-- reset --*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+ol,ul{list-style:none;margin:0px;padding:0px;}
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+table{border-collapse:collapse;border-spacing:0;}
+/*-- start editing from here --*/
+a{text-decoration:none;}
+.txt-rt{text-align:right;}/* text align right */
+.txt-lt{text-align:left;}/* text align left */
+.txt-center{text-align:center;}/* text align center */
+.float-rt{float:right;}/* float right */
+.float-lt{float:left;}/* float left */
+.clear{clear:both;}/* clear float */
+.pos-relative{position:relative;}/* Position Relative */
+.pos-absolute{position:absolute;}/* Position Absolute */
+.vertical-base{	vertical-align:baseline;}/* vertical align baseline */
+.vertical-top{	vertical-align:top;}/* vertical align top */
+nav.vertical ul li{	display:block;}/* vertical menu */
+nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
+img{max-width:100%;}
+/*-- end reset --*/
+body {
+font-family:Verdana;
+    
+    background:#40e0d0; 
+    background-attachment: fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+    background-size: cover;
+}
+h1 {
+    font-size: 2.8em;
+    text-align: center;
+    color: #000;
+    font-weight: 100;
+}
+.login-form h2 ,.login-form h3{
+    font-size: 4em;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 0.8em;
+     'Athiti', sans-serif;
+    line-height: 0.7em;
+}
+/*-- main --*/
+.main {
+    padding: 2em 0 0;
+}
+.login-form {
+    width: 27%;
+    margin: 2.5em auto 3em;
+    background: url("../images/1.jpg")no-repeat center 0px;
+    background-size: cover;
+	-webkit-box-shadow: 3px 3px 6px  rgba(28, 43, 61,0.3); 
+	-moz-box-shadow: 3px 3px 6px  rgba(28, 43, 61,0.3);  
+	-o-box-shadow: 3px 3px 6px  rgba(28, 43, 61,0.3);
+	-ms-box-shadow: 3px 3px 6px rgba(28, 43, 61,0.3);
+    box-shadow: 3px 3px 6px rgba(28, 43, 61,0.3);
+}
+.agile-row {
+    padding: 3em;
+    background-color: rgba(0, 0, 0, 0.55);
+}
+.input-row {
+    padding: 1em 1.5em;
+    border: 1px solid #c7c7c7;
+	-webkit-border-radius: 15px; 
+	-moz-border-radius: 15px;  
+	-o-border-radius: 15px;
+	-ms-border-radius: 15px;
+    border-radius: 15px;
+}
+.login-form input[type="text"], .login-form input[type="password"] {
+    outline: none;
+    font-size: 1em;
+    color: #fff;
+    padding: 0.6em 1em .8em 2em;
+    margin: 0;
+    width: 83.6%;
+    border: none;
+    -webkit-appearance: none;
+    display: block;
+    background: transparent;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	-ms-border-radius: 3px;
+    border-radius: 3px;
+	 'Athiti', sans-serif;
+}
+.login-form input[type="text"].user {
+    background: url("../images/1.png")no-repeat 2px 13px;
+    display: block;
+    border-bottom: 1px solid #c7c7c7;
+}
+.login-form input[type="password"].password{
+	background: url("../images/2.png")no-repeat 2px 13px;
+    display: block;
+	margin-top:0.3em;
+}
+.login-form input[type="text"].email {
+    background: url("../images/3.png")no-repeat 2px 13px;
+    display: block;
+    border-bottom: 1px solid #c7c7c7; 
+}
+.login-form p {
+    font-size: 1em;
+    color: #fff;
+    margin: 1em 0 .5em;
+}
+/*-- checkbox --*/
+.agileits-row2 {
+    margin: 1.5em 0;
+}
+.login-agileits-top input[type="checkbox"] {
+    display: none;
+}
+.login-agileits-top input[type="checkbox"]+label {
+    position: relative;
+    padding-left: 1.8em;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #fff;
+    cursor: pointer;
+    display: -webkit-inline-box; 
+}
+.login-agileits-top input[type="checkbox"]+label span:first-child {
+    width: 14px;
+    height: 14px;
+    border: 2px solid #C8C8C8;
+    position: absolute;
+    left: 0;
+    top: 3px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px; 
+	-o-border-radius: 4px;
+	-ms-border-radius: 4px;
+    border-radius: 4px;
+}
+.login-agileits-top input[type="checkbox"]:checked+label span:first-child:before {
+    content: "";
+    background: url("../images/tick.png")no-repeat;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    font-size: 10px;
+    width: 10px;
+    height: 10px;
+}
+/*-- //checkbox --*/
+.login-form input[type="submit"] {
+    font-size: 1em;
+    color: #fff;
+    background: #FFC107;
+    border: 3px solid #FFC107;
+    outline: none;
+    cursor: pointer;
+    padding: .6em 1em;
+    -webkit-appearance: none;
+    width: 100%;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+    border-radius: 8px;
+}
+.login-form input[type="submit"]:hover {
+    background: transparent;
+    color: #FFC107;
+    border-color:#FFC107 ;
+    transition: 0.5s all ;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+.login-agileits-bottom { 
+    text-align: center;
+    padding: 0 1em; 
+}
+.login-agileits-bottom p {
+    margin: 1.5em 0 0;
+    text-align: center;
+    padding: 1em 0 0;
+}
+.login-agileits-bottom p.w3ls-line {
+    border-top: 1px solid #7b7b7b;
+    padding-top: 2em;
+}
+.login-agileits-bottom p.w3ls-line a{
+	color:#FFC107;
+	margin-left: 5px;
+}
+.login-agileits-bottom p.w3ls-line a:hover{
+	color:#fff;
+}
+.login-agileits-bottom p a{
+    color: #fff;
+	-webkit-transition:.5s all;
+	-moz-transition:.5s all;
+	-o-transition:.5s all;
+	-ms-transition:.5s all;
+	transition:.5s all;
+}
+.login-agileits-bottom p a:hover {
+    color: #FFC107;
+}
+.login-form .login-agileits-top.sign-up input[type="submit"] {
+    margin-bottom: 2.1em;
+}
+.login-form input[type="text"]::-webkit-input-placeholder{ 
+	font-size: 1em; 
+	 'Athiti', sans-serif;
+}
+::-webkit-input-placeholder {
+   color: #fff; 
+    'Athiti', sans-serif; 
+} 
+:-moz-placeholder { /* Firefox 18- */
+   color: #fff;
+    'Athiti', sans-serif;
+} 
+::-moz-placeholder {  /* Firefox 19+ */
+	color: #fff; 
+	 'Athiti', sans-serif;
+} 
+:-ms-input-placeholder {  
+   color: #fff; 
+    'Athiti', sans-serif;
+} 
+.login-form.login-form-two {
+    background: url("../images/2.jpg")no-repeat center 0px;
+    background-size: cover;
+}
+/*-- //main --*/ 
+/*-- copyright --*/
+.copyright {
+    margin: 2em 0;
+    text-align: center;
+}
+.copyright p {
+    font-size: 1em;
+    color: #000;
+	line-height:1.8em;
+}
+.copyright p a{
+    color: #000; 
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+	transition: 0.5s all;
+}
+.copyright p a:hover{
+    color: #c109c1;	
+}
+/*-- //copyright --*/
+/*-- login-two --*/
+.login-form.login-form-two input[type="submit"] {
+    background: #800080;
+    border-color: #800080;
+}
+.login-form.login-form-two input[type="submit"]:hover{
+    background: transparent; 
+	color:#800080;
+}
+.agileits-bottom-two p {
+    text-align: center;
+    margin: 2em 0 1em;
+}
+.agileits-bottom-two p a {
+    color: #fff;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+	transition: 0.5s all;
+}
+.agileits-bottom-two p a:hover {
+    color: #ce0fce;
+}
+.social-icons ul li {
+    background-color: #3b5998;
+}
+.social-icons ul li a {
+	display:block;
+}
+.social-icons  ul li a span {
+    padding: 0.1em 0.6em;
+    vertical-align: middle;
+    color: #fff;
+	font-size:1em;
+}
+.social-icons  ul li a span.text {
+    padding-left: 2em;
+}
+.social-icons ul li span.icons {
+    background: url("../images/i1.png")no-repeat #2E4A84 center;
+    width: 55px;
+    height: 45px;
+    display: inline-block;
+}
+.social-icons ul li.twt{
+    background-color:#55acee;
+	margin-top: 1em;
+}
+.social-icons ul li.twt span.icons {
+    background: url("../images/i2.png")no-repeat #4D9CD8 center;
+} 
+.social-icons ul li a:hover span.icons {
+    transform: rotatey(360deg);
+	-webkit-transform: rotatey(360deg);
+	-o-transform: rotatey(360deg);
+	-moz-transform: rotatey(360deg);
+	-ms-transform: rotatey(360deg);
+	-webkit-transition:.5s all;
+	-moz-transition:.5s all;
+	-o-transition:.5s all;
+	-ms-transition:.5s all;
+	transition:.5s all;
+}
+/*-- //login-two --*/
+.login-form.login-form-three {
+    background: url("../images/3.jpg")no-repeat center 0px;
+    background-size: cover;
+}
+.login-form.login-form-three input[type="submit"] {
+    background: #ca255e;
+    border-color: #ca255e;
+}
+.login-form.login-form-three input[type="submit"]:hover{
+    background: transparent; 
+	color:#ca255e; 
+}
+.login-form.login-form-three p.w3ls-line a {
+    color: #ca255e;
+}
+.login-form.login-form-three .login-agileits-bottom p a:hover {
+    color: #ca255e;
+}
+.login-form.login-form-three p.w3ls-line a:hover {
+    color: #fff;
+}
+/*-- responsive-design --*/ 
+@media(max-width:1366px){
+.login-form {
+    width: 32%; 
+}
+}
+@media(max-width:1280px){
+.agile-row {
+    padding: 2.5em; 
+}
+.login-form {
+    width: 33%;
+}
+}
+@media(max-width:1080px){
+.agile-row {
+    padding: 2.3em;
+}
+.login-form {
+    width: 40%;
+}
+.login-form h2, .login-form h3 {
+    font-size: 3.8em; 
+}
+h1 {
+    font-size: 2.6em; 
+}
+}
+@media(max-width:1024px){
+h1 {
+    font-size: 2.4em;
+}
+.login-form { 
+    margin: 2em auto; 
+}
+}
+@media(max-width:991px){
+h1 {
+    font-size: 2.3em;
+}
+.agile-row {
+    padding: 2em;
+}
+.login-form {
+    width: 43%;
+}
+.login-agileits-bottom p.w3ls-line { 
+    padding-top: 1.5em;
+}
+.login-form h2, .login-form h3 {
+    font-size: 3.6em;
+}
+.social-icons ul li a span.text {
+    padding-left: 3em;
+}
+.social-icons ul li a span {
+    padding: 0 0.6em; 
+}
+.login-agileits-bottom p {
+    margin: 1em 0 0; 
+}
+}
+@media(max-width:900px){
+.login-form {
+    width: 50%;
+}
+}
+@media(max-width:800px){
+.login-form {
+    width: 51%;
+}
+.login-form h2, .login-form h3 {
+    font-size: 3.3em;
+}
+}
+@media(max-width:768px){
+.login-form {
+    width: 53%;
+}
+}
+@media (max-width: 736px){
+.login-form {
+    width: 56%;
+}
+}
+@media(max-width:667px){
+.agile-row {
+    padding: 1.6em;
+}
+.login-form {
+    width: 62%;
+}
+.login-form input[type="submit"] { 
+    padding: .5em 1em; 
+}
+}
+@media(max-width:600px){
+.main {
+    padding: 1.5em 0 0;
+}
+h1 {
+    font-size: 2em;
+}
+.login-form {
+    margin: 1.5em auto;
+}
+.login-form h2, .login-form h3 {
+    font-size: 3em;
+	margin-bottom: 0.6em;
+}
+.login-agileits-bottom p.w3ls-line {
+    padding-top: 1em;
+}
+.login-form p {
+    font-size: 0.9em; 
+}
+}
+@media(max-width:568px){
+.login-form {
+    width: 66%;
+}
+}
+@media(max-width:480px){
+.main {
+    padding: 1em 0 0;
+}
+h1 {
+    font-size: 1.7em;
+}
+.login-form h2, .login-form h3 {
+    font-size: 2.5em;
+    margin-bottom: 0.6em;
+}
+.login-form {
+    width: 78%;
+}
+.copyright p {
+    font-size: 0.9em; 
+}
+}
+@media(max-width:414px){
+.login-agileits-top input[type="checkbox"]+label { 
+    font-size: 0.9em; 
+}
+.login-agileits-top input[type="checkbox"]+label span:first-child { 
+    top: 1px; 
+}
+.login-agileits-bottom { 
+    padding: 0;
+}
+.login-form input[type="submit"] {
+    font-size: 0.9em; 
+}
+.login-form {
+    width: 80%;
+}
+.social-icons ul li a span.text {
+    padding-left: 1.8em;
+    font-size: 0.9em;
+}
+.copyright p { 
+    padding: 0 1em;
+}
+}
+@media(max-width:384px){
+.social-icons ul li a span.text {
+    padding: 0 0 0 1em; 
+}
+.social-icons ul li span.icons { 
+    width: 40px; 
+}
+.login-form p {
+    font-size: 0.87em;
+}
+}
+@media(max-width:375px){
+.agile-row {
+    padding: 1.4em;
+}
+.input-row {
+    padding: 0.8em 1.2em; 
+}
+.login-form input[type="text"], .login-form input[type="password"] {  
+    width: 75.6%; 
+}
+}
+@media(max-width:320px){
+.login-form {
+    width: 89%;
+}
+h1 {
+    font-size: 1.5em;
+}
+.login-form {
+    margin: 1em auto;
+}
+.login-form h2, .login-form h3 {
+    font-size: 2.2em; 
+}
+.agile-row {
+    padding: 1.2em 1em;
+}
+.input-row {
+    padding: 0.6em 1em;
+}
+.login-agileits-top input[type="checkbox"]+label span:first-child {
+    top: 0px;
+}
+.login-form input[type="submit"] { 
+    border-width: 1px; 
+}
+.login-agileits-top input[type="checkbox"]+label {
+    font-size: 0.87em;
+}
+.login-form p {
+    font-size: 0.8em;
+}
+.social-icons ul li a span.text {
+    padding: 0 0 0 1.2em;
+    font-size: 0.8em;
+}
+.social-icons ul li span.icons {
+    width: 26px;
+}
+.agileits-bottom-two p { 
+    margin: 1em 0 0.8em;
+}
+.social-icons ul li span.icons { 
+    height: 40px;
+}
+.agileits-row2 {
+    margin: 1em 0;
+}
+}
+/*-- //responsive-design --*/

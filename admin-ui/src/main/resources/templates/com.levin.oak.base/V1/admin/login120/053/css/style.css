@@ -1,0 +1,432 @@
+
+
+
+
+/*-- Reset Code --*/
+
+	html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+	article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+	ol,ul{list-style:none;padding:0;margin:0;}
+	blockquote,q{quotes:none;}
+	blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+	table{border-collapse:collapse;border-spacing:0;}
+	/* start editing from here */
+	a{text-decoration:none;}
+	.txt-rt{text-align:right;}/* text align right */
+	.txt-lt{text-align:left;}/* text align left */
+	.txt-center{text-align:center;}/* text align center */
+	.float-rt{float:right;}/* float right */
+	.float-lt{float:left;}/* float left */
+	.clear{clear:both;}/* clear float */
+	.pos-relative{position:relative;}/* Position Relative */
+	.pos-absolute{position:absolute;}/* Position Absolute */
+	.vertical-base{	vertical-align:baseline;}/* vertical align baseline */
+	.vertical-top{	vertical-align:top;}/* vertical align top */
+	.underline{	padding-bottom:5px;	border-bottom: 1px solid #eee; margin:0 0 20px 0;}/* Add 5px bottom padding and a underline */
+	nav.vertical ul li{	display:block;}/* vertical menu */
+	nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
+	img{max-width:100%;}
+	/*img[width],img[height]{width:auto;height:auto;} wordpress hack to reset the attributes (while making responsive) */
+
+/*-- Reset Code --*/
+
+
+
+/*-- Index-Page-Styling --*/
+
+body {
+font-family:Verdana;
+    background-color: #3c5561;
+    color: #FFF;
+    
+    text-align: center;
+}
+
+body a {
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    text-decoration: none;
+}
+
+input[type="button"], input[type="submit"] {
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+
+h1 {
+    font-size: 40px;
+    margin: 50px auto;
+    letter-spacing: 3px;
+}
+
+.container {
+    width: 40%;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    color: #000;
+     'Raleway', sans-serif;
+    text-align: left;
+    padding: 30px;
+}
+
+h2 {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.container p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.social-icons {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #AAA;
+    margin-bottom: 20px;
+}
+
+.social-icons ul li {
+    float: left;
+    width: 33%;
+    background-color:#3b5998;
+}
+
+li.twt {
+    margin: 0 2px;
+}
+
+.social-icons ul li a {
+    display:block;
+}
+
+.social-icons ul li a span {
+    vertical-align: middle;
+    color: #fff;
+    font-size:1em;
+}
+
+.social-icons ul li a span.text {
+    padding-left: 1em;
+}
+
+.social-icons ul li span.icons {
+    background: url("../images/i1.png")no-repeat #2E4A84 center;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+}
+
+.social-icons ul li.twt{
+    background-color:#55acee;
+}
+
+.social-icons ul li.twt span.icons {
+    background: url("../images/i2.png")no-repeat #4D9CD8 center;
+}
+
+.social-icons ul li.ggp{
+    background-color:#dc4e41;
+}
+
+.social-icons ul li.ggp span.icons {
+    background: url("../images/i3.png")no-repeat #D64639 center;
+}
+
+.social-icons ul li.pin{
+    background-color:#bd081c;
+}
+
+.social-icons ul li.pin span.icons {
+    background: url("../images/i4.png")no-repeat #AB0518 center;
+}
+
+.social-icons ul li a:hover span.icons {
+    transform: rotatey(360deg);
+    -webkit-transform: rotatey(360deg);
+    -o-transform: rotatey(360deg);
+    -moz-transform: rotatey(360deg);
+    -ms-transform: rotatey(360deg);
+    transition: .5s all;
+}
+
+.contact input[type="text"], .contact input[type="email"], .contact input[type="password"] {
+    width: 94.5%;
+    padding: 10px;
+    margin: 10px 0;
+    outline: none;
+    color: #000;
+    font-weight: 500;
+    
+}
+
+.contact textarea {
+    height: 100px;
+}
+
+.contact ::-webkit-input-placeholder {
+    color: #666;
+}
+
+.contact ::-moz-placeholder {
+    color: #666;
+}
+
+.contact ::-moz-placeholder {
+    color: #666;
+}
+
+.contact ::-ms-input-placeholder {
+    color: #666;
+}
+
+.send-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.send-button input[type="submit"] {
+    padding: 10px 0;
+    width: 60%;
+    
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    color: #FFF;
+    background-color: #2196F3;
+    cursor: pointer;
+}
+
+.send-button input[type="submit"]:hover {
+    background-color: #055d54;
+}
+
+.footer {
+    margin: 50px 20px 30px;
+}
+
+.footer p a {
+    color: #FFF;
+}
+
+.footer p {
+    line-height: 30px;
+}
+
+.footer p a:hover {
+    color: #F96D6E;
+}
+
+/*-- Index-Page-Styling --*/
+
+
+
+
+
+/*--- Responsive Code ---*/
+
+@media screen and (max-width: 1920px) {
+    h1 {
+        margin: 75px auto;
+    }
+    .container {
+        width: 25%;
+    }
+    .footer {
+        margin-top: 75px;
+    }
+}
+
+@media screen and (max-width: 1680px) {
+    .container {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    h1 {
+        margin: 50px auto;
+    }
+    .footer {
+        margin-top: 50px;
+    }
+}
+
+@media screen and (max-width: 1367px) {
+    .container {
+        width: 35%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 966px) {
+    h1 {
+        letter-spacing: 2px;
+    }
+}
+
+@media screen and (max-width: 853px) {
+    .container {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        width: 55%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 736px) {
+    h1 {
+        letter-spacing: 0;
+    }
+}
+
+@media screen and (max-width: 667px) {
+    .container {
+        width: 65%;
+    }
+}
+
+@media screen and (max-width: 603px) {
+    h1 {
+        font-size: 35px;
+    }
+    .container {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 568px) {
+    .container {
+        width: 75%;
+    }
+    h1 {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 533px) {
+    h1 {
+        font-size: 30px;
+    }
+    .container {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        margin: 40px 0;
+    }
+    .container {
+        width: 85%;
+        padding: 20px;
+    }
+    .social-icons ul li {
+        width: 32.9%;
+    }
+    .social-icons ul li a span.text {
+        padding-left: 10px;
+        font-size: 14px;
+    }
+    h2 {
+        font-size: 25px;
+    }
+    .contact input[type="text"], .contact input[type="email"], .contact input[type="password"] {
+        width: 93%;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    h1 {
+        margin: 30px 0;
+    }
+    .social-icons ul li span.icons {
+        width: 30px;
+        height: 30px;
+    }
+    .contact label {
+        font-size: 13px;
+    }
+    .contact input[type="text"], .contact input[type="email"], .contact input[type="password"] {
+        width: 91.5%;
+        font-size: 12px;
+        margin: 5px 0 15px;
+    }
+    .footer p {
+        line-height: 25px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 384px) {
+    h1 {
+        font-size: 25px;
+        line-height: 35px;
+    }
+    .container {
+        width: 90%;
+        padding: 20px 10px;
+    }
+    .container p {
+        font-size: 16px;
+        margin-bottom: 15px;
+        line-height: 22px;
+    }
+    .social-icons ul li a span.text {
+        padding-left: 6px;
+        font-size: 13px;
+    }
+    .social-icons {
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+    h2 {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .social-icons ul li {
+        width: 32.8%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .social-icons ul li a span.text {
+        padding-left: 2px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .social-icons ul li span.icons {
+        width: 25px;
+    }
+    .send-button input[type="submit"] {
+        width: 75%;
+        font-size: 16px;
+    }
+}
+
+/*--- Responsive Code ---*/

@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>静态网页登录模板下载</title>
+
+	<meta name="keywords" content="静态网页登录模板下载"/>
+	
+	<meta name="description" content="最全的静态网页登录模板下载网站http://cn.inspinia.cn"/>
+<!-- custom-theme -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //custom-theme -->
+<!-- js -->
+<script src="js/jquery.min.js" ></script>
+<!-- //js --> 
+<link href="css/style.css"  rel="stylesheet" type="text/css" media="all" />
+
+</head>
+<body>
+	<div class="main">
+		<h1>Splendid Contact Form</h1>
+		<div class="w3_agile_main_grids">
+			<div class="agile_contact_form">
+				<div class="agileits_w3layouts_contact">
+					<h2>Help Desk</h2>
+					<p>Donec ut lobortis elit. Nullam tincidunt vehicula lorem maximus commodo
+						varius orci arcu, sed congue tellus varius quis.</p>
+					<form action="#" method="post">
+						<span class="input input--jiro">
+							<input class="input__field input__field--jiro" type="text" id="input-10" name="Name" placeholder="Your Name" required=""/>
+							<label class="input__label input__label--jiro" for="input-10">
+								<span class="input__label-content input__label-content--jiro">Your Name</span>
+							</label>
+						</span>
+						<span class="input input--jiro">
+							<input class="input__field input__field--jiro" type="email" id="input-11" name="Email" placeholder="Your Email Address" required=""/>
+							<label class="input__label input__label--jiro" for="input-11">
+								<span class="input__label-content input__label-content--jiro">Your Email</span>
+							</label>
+						</span>
+						<select id="w3_agileits_select" class="w3layouts_select" onchange="change_country(this.value)" class="frm-field required sect">
+							<option value="null">Account Problems</option>
+							<option value="null">Account1</option>
+							<option value="null">Account2</option> 
+							<option value="null">Account3</option>					
+							<option value="null">More</option>								
+						</select>
+						<span class="input input--jiro">
+							<input class="input__field input__field--jiro" type="text" id="input-12" name="Company" placeholder="Company" required=""/>
+							<label class="input__label input__label--jiro" for="input-12">
+								<span class="input__label-content input__label-content--jiro">Company</span>
+							</label>
+						</span>
+						<textarea name="Message" placeholder="Message..." required=""></textarea>
+						<div class="wthree_submit">
+							<input type="submit" value="Submit">
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="agileinfo_map">
+				<iframe src="../../../../www.google.com/maps/fi000002.1!3m3!1m2!1s0x1771a69f6499f945"  style="border:0"></iframe>
+				<div class="agileits_pos">
+					<div class="w3ls_contact_info">
+						<h3>Contact Info</h3>
+						<ul class="w3_contact_list">
+							<li><label>Email</label> <span>:</span> <a href="mailto:info@helpdest.com">info@helpdest.com</a></li>
+							<li><label>Phone</label> <span>:</span> +(000) 133 345 343</li>
+							<li><label>Address</label> <span>:</span> <i>F2323 Diamond Street, Kampala E344, Uganda.</i></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="clear"> </div>
+		</div>
+		<div class="agileits_copyright w3l_copy">
+			<p>© 2017 Splendid Contact Form. All rights reserved | Design by <a href="https://shop585798004.taobao.com/" target="_blank">前端ui</a></p>
+		</div>
+	</div>
+	<script src="js/classie.js" ></script>
+	<script>
+		(function() {
+			// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+			if (!String.prototype.trim) {
+				(function() {
+					// Make sure we trim BOM and NBSP
+					var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+					String.prototype.trim = function() {
+						return this.replace(rtrim, '');
+					};
+				})();
+			}
+
+			[].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+				// in case the input is already filled..
+				if( inputEl.value.trim() !== '' ) {
+					classie.add( inputEl.parentNode, 'input--filled' );
+				}
+
+				// events:
+				inputEl.addEventListener( 'focus', onInputFocus );
+				inputEl.addEventListener( 'blur', onInputBlur );
+			} );
+
+			function onInputFocus( ev ) {
+				classie.add( ev.target.parentNode, 'input--filled' );
+			}
+
+			function onInputBlur( ev ) {
+				if( ev.target.value.trim() === '' ) {
+					classie.remove( ev.target.parentNode, 'input--filled' );
+				}
+			}
+		})();
+	</script>
+</body>
+</html>

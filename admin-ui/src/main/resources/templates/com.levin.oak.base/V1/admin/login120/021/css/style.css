@@ -1,0 +1,253 @@
+
+/* reset */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+ol,ul{list-style:none;margin:0px;padding:0px;}
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+table{border-collapse:collapse;border-spacing:0;}
+/* start editing from here */
+a{text-decoration:none;}
+.txt-rt{text-align:right;}/* text align right */
+.txt-lt{text-align:left;}/* text align left */
+.txt-center{text-align:center;}/* text align center */
+.float-rt{float:right;}/* float right */
+.float-lt{float:left;}/* float left */
+.clear{clear:both;}/* clear float */
+.pos-relative{position:relative;}/* Position Relative */
+.pos-absolute{position:absolute;}/* Position Absolute */
+.vertical-base{	vertical-align:baseline;}/* vertical align baseline */
+.vertical-top{	vertical-align:top;}/* vertical align top */
+nav.vertical ul li{	display:block;}/* vertical menu */
+nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
+img{max-width:100%;}
+/*end reset*/
+body {
+font-family:Verdana;
+   background:url("../images/bg.jpg")no-repeat 0px 0px;
+	text-align: center;
+	background-size:cover;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	-o-background-size:cover;
+}
+.wrap{
+	margin: 0 auto;
+	width: 90%;
+}
+body a,form li,input[type="submit"],input[type="text"],.sixth-login input[type="submit"],.third-login input[type="submit"]{
+	transition: 0.1s all;
+	-webkit-transition: 0.1s all;
+	-moz-transition: 0.1s all;
+	-o-transition: 0.1s all;
+}
+h1 { 'Marvel', sans-serif;
+	  color: #FFFFFF;
+	  font-size: 3em;
+	  font-weight: 600;
+	  padding-top: 1em;
+}
+h2 { 'Marvel', sans-serif;
+  text-align: center;
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 300;
+  background: #76bad7;
+  padding: 15px;
+  border-bottom: none;
+}
+.avtar img {
+  width: 100%;
+}
+.form-info {
+	   padding: 2em 1em 3em 1em;
+}
+.registration {
+  background: #fff;
+  width: 27%;
+  margin: 2% auto 0;
+}
+input.text {
+  outline: none;
+  background: none;
+  color: #989898;
+  width: 94%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid#76bad7;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 100;
+  margin-bottom: 1em;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	-o-border-radius: 50px;
+}
+input[type="password"]{
+	  outline: none;
+	  background: none;
+	  color:#989898;
+	  width: 94%;
+	  padding: 10px;
+	  border: none;
+	  font-size: 1em;
+	  font-weight: 100;
+  border-bottom: 1px solid#76bad7;
+   font-style: italic;
+         border-radius: 50px;
+    -webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	-o-border-radius: 50px;
+}
+input[type="submit"] {
+  outline: none;
+  background: none;
+  color: #989898;
+  width: 98%;
+  padding: 15px;
+  border: none;
+  font-size: 1.3em;
+  font-weight: 100;
+  border-bottom: 1px solid#76bad7;
+  font-style: italic;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -o-border-radius: 50px;
+  margin-top: 1.3em;
+  cursor: pointer;
+}
+input[type="submit"]:hover {
+	background: #76bad7;
+	color:#fff;
+	  	transition: 1s all;
+	-webkit-transition: 1s all;
+	-moz-transition: 1s all;
+	-o-transition: 1s all;
+	color:#fff;
+	    border-radius: 50px;
+    -webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	-o-border-radius: 50px;
+}
+/*--copyrights--*/
+.copy-rights {
+  padding: 4em 0;
+}
+.copy-rights p {
+	color:#fff;
+}
+.copy-rights p a {
+	color:#fff;
+}
+.copy-rights p a:hover {
+	color:#4fd0db;
+}
+/*--/copyrights--*/
+/*--start-responsive-design--*/
+@media (max-width:1440px){
+	input[type="submit"] {
+	  padding: 14px;
+	}
+}
+@media (max-width:1366px){
+}
+@media (max-width:1280px){
+	.registration {
+	  background: #fff;
+	  width: 33%;
+	}
+}
+@media (max-width:1024px){
+	.registration {
+	  width: 34%;
+	    margin: 4% auto 0;
+	}
+	input.text {
+	    margin-bottom: 1em;
+	}
+	input[type="submit"] {
+	   width: 100%;
+	  margin: 1em 0 .5em 0;
+	}
+	.copy-rights {
+	  padding: 3em 0 3em;
+	}
+	h1 { 'Marvel', sans-serif;
+	  font-size: 2em;
+	  padding-top: .5em;
+	}
+	body {
+font-family:Verdana;
+	  min-height: 675px;
+	   background: url("../images/bg.jpg")no-repeat -328px -165px;
+	}
+	h1 {
+	  padding-top: 1.5em;
+	}
+}
+@media (max-width:768px){
+	body {
+font-family:Verdana;
+	  min-height: 929px;
+	    background: url("../images/bg.jpg")no-repeat -319px 0px;
+	}
+	h1 {
+	   padding-top: 3em;
+	}
+	.registration {
+	  width: 50%;
+	    margin: 5% auto 0;
+	}
+	.copy-rights {
+	  padding: 4em 0 1em;
+	}
+	.avtar img {
+	  height: 190px;
+	}
+}
+@media (max-width:640px){
+	.registration {
+	  width: 70%;
+	}
+}
+@media (max-width:480px){
+
+}
+@media (max-width:320px){
+	h1 {
+	   padding-top: 1.5em;
+	  font-size: 1.7em;
+	}
+	.registration {
+	  width: 92%;
+	}
+	.avtar img {
+	    height: 170px;
+	  background-size: 35%;
+	}
+	.form-info {
+	     margin: 0;
+	         padding: 2em .7em 2em .7em;
+	}
+	input.text {
+	  padding: 6px;
+ 		 margin-bottom: 1em;
+	}
+	body {
+font-family:Verdana;
+	  min-height: 434px;
+	}
+	.copy-rights {
+	       padding: 1em 0 2em;
+	}
+	input[type="submit"] {
+	  padding: 10px;
+	  margin: .8em 0 .5em 0;
+	  font-size: 1.1em;
+	}
+	h2 {
+	  padding: 12px;
+	}
+}

@@ -159,9 +159,9 @@ public class RoleController extends BaseController {
      *
      * @param req RoleIdReq
      */
-    @DeleteMapping({""})
+    @DeleteMapping({"", "{id}"})
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Integer> delete(@NotNull RoleIdReq req) {
+    public ApiResp<Integer> delete(RoleIdReq req, @PathVariable(required = false) Long id) {
         return ApiResp.ok(checkResult(roleService.delete(req), DELETE_ACTION));
     }
 

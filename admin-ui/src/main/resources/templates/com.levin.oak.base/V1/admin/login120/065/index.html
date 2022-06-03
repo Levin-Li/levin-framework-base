@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>登录页面html源码</title>
+
+	<meta name="keywords" content="登录页面html源码"/>
+	
+	<meta name="description" content="最全的登录页面html源码下载网站http://cn.inspinia.cn"/>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<!-- js -->
+<script type="text/javascript" src="js/creditly.js" ></script>
+<script src="js/jquery.min.js" ></script>
+<script type="text/javascript">
+    $(function() {
+      var creditly = Creditly.initialize(
+          '.creditly-wrapper .expiration-month-and-year',
+          '.creditly-wrapper .credit-card-number',
+          '.creditly-wrapper .security-code',
+          '.creditly-wrapper .card-type');
+
+      $(".creditly-card-form .submit").click(function(e) {
+        e.preventDefault();
+        var output = creditly.validate();
+        if (output) {
+          // Your validated credit card output
+          console.log(output);
+        }
+      });
+    });
+</script>
+<!-- //js -->
+<link href="css/style.css"  rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="css/creditly.css"  type="text/css" media="all" />
+</head>
+<body>
+	<div class="main">
+		<h1>Grocery Payment Widget</h1>
+		<div class="agileits_main_grid w3layouts_main w3_main_grid">
+			<div class="agileits_main_grid_right agileits_w3layouts_grid_right">
+				<h2>Spices</h2>
+				<p>$99/-</p>
+			</div>
+			<div class="agileits_main_grid_left w3l_main w3ls_main_grid_left">
+				<div class="agileits_main_grid_left1 agileits_main_grid_left1">
+					<form action="#" method="post" class="creditly-card-form agileinfo_form">
+						<section class="creditly-wrapper wthree, w3_agileits_wrapper">
+							<div class="credit-card-wrapper">
+								<div class="first-row form-group">
+									<div class="controls">
+										<label class="control-label">Card Number</label>
+										<input class="number credit-card-number form-control" type="text" name="number"
+													  inputmode="numeric" autocomplete="cc-number" autocompletetype="cc-number" x-autocompletetype="cc-number"
+													  placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;">
+									</div>
+									<div class="controls">
+										<label class="control-label">CVV</label>
+										<input class="security-code form-control"Â·
+													  inputmode="numeric"
+													  type="text" name="security-code"
+													  placeholder="&#149;&#149;&#149;">
+									</div>
+								</div>
+								<div class="second-row form-group">
+									<div class="controls">
+										<label class="control-label">Name on Card</label>
+										<input class="billing-address-name form-control" type="text" name="name" placeholder="John Smith">
+									</div>
+									<div class="controls">
+										<label class="control-label">Expiration</label>
+										<input class="expiration-month-and-year form-control" type="text" name="expiration-month-and-year" placeholder="MM / YY">
+									</div>
+								</div>
+								<button class="submit"><span>Pay</span></button>
+							</div>
+						</section>
+						
+					</form>
+				</div>
+			</div>
+			<div class="clear"> </div>
+		</div>
+		<div class="agileits_copyright agile_copy">
+			<p class="w3_agile_right">© 2016 Grocery Payment Widget. All rights reserved | Design by <a href="https://shop585798004.taobao.com/" target="_blank">前端ui</a></p>
+		</div>
+	</div>
+</body>
+</html>

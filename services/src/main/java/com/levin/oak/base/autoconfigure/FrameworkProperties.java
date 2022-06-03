@@ -11,8 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Consumer;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -71,10 +76,16 @@ public class FrameworkProperties implements Serializable {
     private final Cfg sign = new Cfg("sign", "接口签名验证", "接口签名验证");
 
     /**
-     * 访问控制
+     * 控制器访问控制
      */
     @NestedConfigurationProperty
-    private final Cfg acl = new Cfg("acl", "访问鉴权控制", "访问鉴权控制");
+    private final Cfg controllerAcl = new Cfg("controller", "控制器访问鉴权控制", "控制器访问鉴权控制");
+
+    /**
+     * 资源访问控制
+     */
+    @NestedConfigurationProperty
+    private List<ResCfg> resourcesAcl = Collections.emptyList();
 
     /**
      * 租户绑定域名
@@ -97,6 +108,45 @@ public class FrameworkProperties implements Serializable {
     }
 
     /**
+     * 资源配置
+     */
+    @Data
+    @Accessors(chain = true)
+    @FieldNameConstants
+    public static class ResCfg {
+
+        protected final AntPathMatcher antPathMatcher = new AntPathMatcher();
+
+        protected boolean enable = true;
+
+        protected boolean onlyRequireAuthenticated;
+
+        protected boolean andMode = true;
+
+        //需要的角色列表
+        protected List<String> requiredRoles = Collections.emptyList();
+
+        //需要的权限列表
+        protected List<String> requiredPermissions = Collections.emptyList();
+
+        protected List<String> excludePathPatterns = Collections.emptyList();
+
+        protected List<String> includePathPatterns = Collections.emptyList();
+
+        public ResCfg() {
+        }
+
+        public boolean isPathMatched(String path) {
+            return this.enable && this.excludePathPatterns.stream().filter(StringUtils::hasText).noneMatch((p) -> {
+                return this.antPathMatcher.match(p, path);
+            }) && (this.includePathPatterns.stream().noneMatch(StringUtils::hasText) || this.includePathPatterns.stream().filter(StringUtils::hasText).anyMatch((p) -> {
+                return this.antPathMatcher.match(p, path);
+            }));
+        }
+
+    }
+
+    /**
      * 匹配控制
      */
 //    @Data
@@ -104,8 +154,18 @@ public class FrameworkProperties implements Serializable {
     @FieldNameConstants
     public static class Cfg extends MatchConfig {
 
+        /**
+         * 所有的配置
+         */
+        private static final List<Cfg> allCfg = new ArrayList<>(10);
+
+        public static void fireAllFriendlyTip(boolean tip, Consumer<String> consumer) {
+            allCfg.forEach(cfg -> cfg.friendlyTip(tip, consumer));
+        }
+
         protected Cfg(String key, String name, String description) {
             super(key, name, description);
+            allCfg.add(this);
         }
 
         /**

@@ -1,0 +1,491 @@
+/*--- reset code ---*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
+	margin:0;
+	padding:0;
+	border:0;
+	font-size:100%;
+	font:inherit;
+	vertical-align:baseline;
+}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+ol,ul {
+	list-style:none;
+	margin:0px;
+	padding:0px;
+}
+blockquote,q {
+	quotes:none;
+}
+blockquote:before,blockquote:after,q:before,q:after {
+	content:'';
+	content:none;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+
+/* start editing from here */
+a {
+	text-decoration:none;
+}
+.txt-rt {
+	text-align:right;
+}/* text align right */
+.txt-lt {
+	text-align:left;
+}/* text align left */
+.txt-center {
+	text-align:center;
+/*-- W3Layouts --*/	
+}/* text align center */
+.float-rt {
+	float:right;
+}/* float right */
+.float-lt {
+	float:left;
+}/* float left */
+.clear {
+	clear:both;
+}/* clear float */
+.pos-relative {
+	position:relative;
+}/* Position Relative */
+.pos-absolute {
+	position:absolute;
+}/* Position Absolute */
+.vertical-base {	
+	vertical-align:baseline;
+}/* vertical align baseline */
+.vertical-top {	
+	vertical-align:top;
+}/* vertical align top */
+nav.vertical ul li {	
+	display:block;
+}/* vertical menu */
+nav.horizontal ul li {	
+	display: inline-block;
+}/* horizontal menu */
+img {
+	max-width:100%;
+}
+
+/*--- end reset code ---*/
+
+body {
+font-family:Verdana;
+	background:url("../images/banner.jpg") no-repeat;
+	background-position:center;
+	background-attachment:fixed;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;
+	-moz-background-size:100% 100%;
+	-o-background-size:100% 100%;
+	-ms-background-size:100% 100%;
+	 'Didact Gothic', sans-serif;
+}
+.content-w3ls {
+	width:70%;
+	margin:0 auto;
+	background:url("../images/content.jpg") no-repeat;
+	background-position:center;
+	background-attachment:fixed;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;
+	-moz-background-size:100% 100%;
+	-o-background-size:100% 100%;
+	-ms-background-size:100% 100%;
+}
+.agileits1,.agileits2 {
+	width:50%;
+	float:left;
+}
+.agileits2 {
+	background:url("../images/agile.jpg") no-repeat;
+	background-position:center;
+	background-size:cover;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	-o-background-size:cover;
+	-ms-background-size:cover;
+	padding-bottom:51%;
+}
+.w3-agileits {
+	padding:40px 40px;
+}
+h1.header-w3ls {
+    text-align: center;
+    font-size: 50px;
+    font-weight: normal;
+    padding: 35px 0;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 8px;
+}
+h3 {
+    font-size: 30px;
+    font-weight: 300;
+    color: #000;
+    padding-bottom: 30px;
+}
+label.header {
+    width: 180px;
+	float:left;
+    font-size:17px;
+	line-height: 45px;
+    font-weight: 300;
+    color: #000;
+    display: inline-block;
+}
+input#companyname,input#name,input#email,input#usrtel,input#password1,input#password2 {
+	height:45px;
+	width:280px;
+	float:right;
+	background:#212219;
+	color:#fff;
+	font-size:17px;
+	font-weight:normal;
+	border:1px solid #212219;
+	padding: 0 20px;
+	 'Didact Gothic', sans-serif;
+	border-radius:4px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	-o-border-radius:4px;
+	-ms-border-radius:4px;
+}
+.form-control {
+    padding-bottom: 20px;
+}
+input.register {
+    width: 100%;
+    height: 45px;
+	font-size:20px;
+	font-weight:normal;
+	color:#fff;
+	border:1px solid #2ecc71;
+	background-color:#2ecc71;
+	line-height:1px;
+	cursor:pointer;
+	border-radius:4px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	-o-border-radius:4px;
+	-ms-border-radius:4px;
+	text-align:center;
+	text-transform:uppercase;
+	 'Didact Gothic', sans-serif;
+	transition:all 0.5s ease-in-out;
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	-ms-transition:all 0.5s ease-in-out;
+}
+input.register:hover {
+	border:1px solid #27ae60;
+	background-color:#27ae60;
+	color:#fff;
+}
+p.copyright {
+    font-size: 16px;
+	line-height:30px;
+    text-align: center;
+    color: #fff;
+    padding: 30px 10px;
+}
+p.copyright a {
+	color:#f15f22;
+}
+p.copyright a:hover {
+	color:#36b051;
+}
+
+input::-webkit-input-placeholder {
+color:#fff!important;
+}
+ 
+input:-moz-placeholder { /* Firefox 18- */
+color:#fff!important;  
+}
+ 
+input::-moz-placeholder {  /* Firefox 19+ */
+color:#fff!important;  
+}
+ 
+input:-ms-input-placeholder {  
+color:#fff!important;  
+}
+
+/*-- responsive design --*/
+@media (max-width:1600px) {
+	input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+	width:252px;	
+	}
+	.agileits2 {
+	padding-bottom:54%;	
+	}
+}
+
+@media (max-width:1440px) {
+label.header {
+    width: 148px;
+}
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+    width: 226px;
+}
+.agileits2 {
+    padding-bottom: 60%;
+}
+}
+
+@media (max-width:1366px) {
+.content-w3ls {
+    width: 75%;
+}
+}
+
+@media (max-width: 1280px) {
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+    width: 202px;
+}
+.agileits2 {
+    padding-bottom: 63%;
+}
+}
+
+@media (max-width: 1080px) {
+h1.header-w3ls {
+	font-size:40px;
+	padding:30px 0;	
+}
+h3 {
+    font-size: 25px;
+}
+.content-w3ls {
+    width: 85%;
+}
+label.header {
+    width: 148px;
+	font-size:16px;
+} 
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+	font-size:15px;
+	width: 190px;
+	padding:0 15px;
+}
+.agileits2 {
+    padding-bottom: 65%;
+}
+}
+
+@media (max-width: 1050px) {
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+    font-size: 15px;
+    width: 178px;
+    padding: 0 15px;
+}
+}
+
+@media (max-width: 1024px) {
+.w3-agileits {
+    padding: 40px 30px;
+}
+.agileits2 {
+    padding-bottom: 69%;
+}
+p.copyright {
+    font-size: 14px;
+}
+}
+
+@media (max-width: 991px) {
+.content-w3ls {
+    width: 90%;
+}
+}
+
+@media (max-width: 900px) {
+label.header {
+    width: 140px;
+    font-size: 16px;
+}
+.agileits1 {
+    width: 55%;
+}
+.agileits2 {
+    width: 45%;
+	padding-bottom:75%;
+}
+input.register {
+	font-size:17px;
+}
+}
+
+@media (max-width: 800px) {
+.w3-agileits {
+    padding: 30px 20px;
+}
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+    font-size: 15px;
+    width: 175px;
+    padding: 0 15px;
+}
+.agileits2 {
+    width: 45%;
+    padding-bottom: 81%;
+}
+}
+
+@media (max-width: 768px) {
+.w3-agileits {
+    padding: 30px 10px;
+}
+.agileits2 {
+    width: 45%;
+    padding-bottom: 83%;
+}
+}
+
+@media (max-width: 768px) {
+.agileits1,.agileits2 {
+    width: 100%;
+}
+.content-w3ls {
+    width: 75%;
+}
+.w3-agileits {
+    padding: 30px 25px;
+}
+label.header {
+    width: 150px;
+    font-size: 16px;
+}
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+    font-size: 15px;
+    width: 300px;
+    padding: 0 15px;
+}
+}
+
+@media (max-width: 667px) {
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+    font-size: 15px;
+    width: 255px;
+    padding: 0 15px;
+}
+}
+
+@media (max-width: 640px) {
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+    font-size: 15px;
+    width: 235px;
+    padding: 0 15px;
+}
+}
+
+@media (max-width: 600px) {
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+    font-size: 15px;
+    width: 200px;
+    padding: 0 15px;
+}
+}
+
+@media (max-width: 568px) {
+.content-w3ls {
+    width: 80%;
+}
+h3 {
+    font-size: 20px;
+	padding-bottom:20px;
+}
+}
+
+@media (max-width: 480px) {
+h1.header-w3ls {
+    font-size: 35px;
+    padding: 30px 0;
+	letter-spacing:4px;
+}
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+    font-size: 15px;
+    width: 289px;
+    padding: 0 15px;
+}
+}
+
+@media (max-width: 414px) {
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+    font-size: 15px;
+    width: 235px;
+    padding: 0 15px;
+}
+h3 {
+    font-size: 20px;
+    padding-bottom: 5px;
+}
+.form-control {
+    padding-bottom: 10px;
+}
+}
+
+@media (max-width: 384px) {
+h1.header-w3ls {
+    font-size: 30px;
+    padding: 25px 0;
+    letter-spacing: 4px;
+}
+.content-w3ls {
+    width: 85%;
+}
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+    font-size: 15px;
+    width: 229px;
+    padding: 0 15px;
+}
+}
+
+@media (max-width: 375px) {
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+    font-size: 15px;
+    width: 222px;
+    padding: 0 15px;
+}
+}
+
+@media (max-width: 320px) {
+h1.header-w3ls {
+    font-size: 25px;
+    padding: 20px 0;
+    letter-spacing: 4px;
+}
+h3 {
+    font-size: 17px;
+    padding-bottom: 5px;
+}
+label.header {
+    width: 150px;
+    font-size: 15px;
+	line-height: 30px;
+}
+input#companyname, input#name, input#email, input#usrtel, input#password1, input#password2 {
+    font-size: 14px;
+    width: 175px;
+    padding: 0 15px;
+	height:40px;
+}
+input.register {
+    font-size: 15px;
+	height:40px;
+}
+}
+
+
+
+
+
+
+
+/*-- /responsive design --*/
