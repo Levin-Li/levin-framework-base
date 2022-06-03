@@ -1,0 +1,5 @@
+:root {
+    /*参考css/amis_properties.scss 文件*/
+    --Layout-aside-width: 16rem;
+    /*--Layout-aside-width: #{px2rem(200px)};*/
+}

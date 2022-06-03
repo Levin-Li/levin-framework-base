@@ -10,21 +10,22 @@
     />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
-    <link
-            rel="stylesheet"
-            title="default"
-            href="https://unpkg.com/amis@beta/sdk/sdk.css"
-<#--            href="https://unpkg.com/amis@beta/sdk/antd.css"-->
+    <link rel="stylesheet"
+          title="default"
+          href="https://unpkg.com/amis@beta/sdk/sdk.css"
+            <#--            href="https://unpkg.com/amis@beta/sdk/antd.css"-->
     />
 
-    <link
-            rel="stylesheet"
-            href="https://unpkg.com/amis@beta/sdk/helper.css"
+    <link rel="stylesheet"
+          href="https://unpkg.com/amis@beta/sdk/helper.css"
     />
+
+    <link rel="stylesheet" type="text/css" href="css/amis.css">
 
     <script src="https://unpkg.com/amis@beta/sdk/sdk.js"></script>
     <script src="https://unpkg.com/vue@2"></script>
     <script src="https://unpkg.com/history@4.10.1/umd/history.js"></script>
+
     <style>
         html,
         body,
@@ -34,6 +35,10 @@
             height: 100%;
             margin: 0;
             padding: 0;
+        }
+        :root{
+            /*左侧菜单栏宽度*/
+            --Layout-aside-width: 15rem;
         }
     </style>
 </head>
@@ -64,9 +69,9 @@
                 className: 'w-full',
                 tpl: '<div class="flex justify-between"><div>顶部区域左侧</div><div>顶部区域右侧</div></div>'
             },
-         //   footer: '<div class="p-2 text-center bg-light">底部区域</div>',
-         //   asideBefore: '<div class="p-2 text-center">菜单前面区域</div>',
-           asideAfter: '<div class="p-2 text-center"> </div>',
+            //   footer: '<div class="p-2 text-center bg-light">底部区域</div>',
+            //   asideBefore: '<div class="p-2 text-center">菜单前面区域</div>',
+            asideAfter: '<div class="p-2 text-center"> </div>',
         };
 
         function normalizeLink(to, location = history.location) {
