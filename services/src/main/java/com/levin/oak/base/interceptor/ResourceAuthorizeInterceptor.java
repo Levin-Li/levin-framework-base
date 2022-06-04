@@ -1,5 +1,6 @@
 package com.levin.oak.base.interceptor;
 
+import com.levin.commons.rbac.AuthorizationException;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
@@ -29,7 +30,6 @@ public class ResourceAuthorizeInterceptor
 
     @Resource
     FrameworkProperties frameworkProperties;
-
 
     @PostConstruct
     public void init() {
@@ -64,20 +64,16 @@ public class ResourceAuthorizeInterceptor
 //        request.getContextPath():/bzbs
 //        request.getServletPath():/system/login.jsp
 
-
         //检查权限
 
         //去除上下文路径
         String path = request.getRequestURI().substring(getLen(request.getContextPath()));
 
-//        frameworkProperties.getResourcesAcl()
-//                .stream()
-//                .filter(resCfg -> resCfg.isEnable() && resCfg.isPathMatched(path))
-//                .filter(resCfg -> {
-//
-//                });
+        return frameworkProperties.getResourcesAcl()
+                .stream()
+                .filter(resCfg -> resCfg.isEnable() && resCfg.isPathMatched(path))
+                .allMatch(this::isAuthorized);
 
-        return true;
     }
 
     protected boolean isAuthorized(FrameworkProperties.ResCfg resCfg) {
@@ -87,20 +83,23 @@ public class ResourceAuthorizeInterceptor
         }
 
         if (!authService.isLogin()) {
-            return false;
+            throw new AuthorizationException("UnAuthorization", "未登录");
+           // return false;
         }
 
         if (resCfg.isOnlyRequireAuthenticated()) {
             return true;
         }
 
-//        Object loginUserId = authService.getLoginUserId();
-//        rbacService.isAuthorized(authService.getRoleList(loginUserId)
-//                ,authService.getPermissionList(loginUserId)
-//                ,resCfg.getRequiredPermissions())
+        boolean ok = rbacService.isAuthorized(resCfg.isAndMode(), resCfg.getRequiredPermissions(), (rp, info) -> {
+            throw new AuthorizationException("res-" + rp, "未授权的资源：" + info);
+        });
 
-        return false;
+        if (!ok) {
+            throw new AuthorizationException("UnAuthorization", "未授权的操作");
+        }
 
+        return ok;
     }
 
     private int getLen(String txt) {

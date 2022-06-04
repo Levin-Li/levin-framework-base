@@ -9,6 +9,7 @@ import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.*;
+import com.levin.commons.service.support.ContextHolder;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizRoleService;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
@@ -97,6 +98,11 @@ public class AuthServiceImpl
     @Resource
     ResourceLoader resourceLoader;
 
+    /**
+     * 用户权限的线程级别缓存
+     */
+    final ContextHolder<Object, List<String>> permissionListThreadCache = ContextHolder.buildThreadContext(false, true);
+
     @PostConstruct
     public void init() {
 
@@ -118,7 +124,6 @@ public class AuthServiceImpl
         if (event.getApplicationContext() == this.context) {
 
         }
-
     }
 
 
@@ -274,21 +279,22 @@ public class AuthServiceImpl
 
         Assert.notNull(loginId, "loginId is null");
 
-//        if (loginId == null) {
-//            loginId = getLoginUserId();
-//        }
+        return permissionListThreadCache.getAndAutoPut("P-" + loginId, null,
+                () -> {
+                    List<String> roleList = getRoleList(loginId);
 
-        List<String> roleList = getRoleList(loginId);
+                    if (roleList == null || roleList.isEmpty()) {
+                        return Collections.emptyList();
+                    }
 
-        if (roleList == null || roleList.isEmpty()) {
-            return Collections.emptyList();
-        }
+                    UserInfo userInfo = (UserInfo) getUserInfo(loginId);
 
-        UserInfo userInfo = (UserInfo) getUserInfo(loginId);
+                    auditUser(userInfo);
 
-        auditUser(userInfo);
+                    return bizRoleService.getRolePermissionList(userInfo.getTenantId(), userInfo.getRoleList());
+                }
 
-        return bizRoleService.getRolePermissionList(userInfo.getTenantId(), userInfo.getRoleList());
+        );
     }
 
     @Override
@@ -296,15 +302,10 @@ public class AuthServiceImpl
 
         Assert.notNull(loginId, "loginId is null");
 
-//        if (loginId == null) {
-//            loginId = getLoginUserId();
-//        }
-
-        UserInfo user = userService.findById(Long.parseLong(loginId.toString()));
-
-        auditUser(user);
-
-        return Collections.unmodifiableList(user.getRoleList());// JsonStrArrayUtils.parse(user.getRoleList(), null, null);
+        return permissionListThreadCache.getAndAutoPut("R-" + loginId, null,
+                // // JsonStrArrayUtils.parse(user.getRoleList(), null, null);
+                () -> Collections.unmodifiableList(auditUser(userService.findById(Long.parseLong(loginId.toString()))).getRoleList())
+        );
     }
 
     @Override
@@ -355,6 +356,11 @@ public class AuthServiceImpl
         initUser();
 
         initMenu();
+    }
+
+    @Override
+    public void clearThreadCacheData() {
+        permissionListThreadCache.clear();
     }
 
     /**

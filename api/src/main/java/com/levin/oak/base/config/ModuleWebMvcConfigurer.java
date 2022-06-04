@@ -4,6 +4,7 @@ import com.levin.commons.plugin.PluginManager;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.InjectVarService;
+import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.interceptor.ControllerAuthorizeInterceptor;
 import com.levin.oak.base.interceptor.DomainInterceptor;
@@ -21,6 +22,8 @@ import org.springframework.web.servlet.config.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,6 +36,9 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
     @Resource
     RbacService rbacService;
+
+    @Resource
+    AuthService authService;
 
     @Resource
     BizTenantService bizTenantService;
@@ -141,16 +147,26 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //            SaRouter.match("/comment/**", r -> StpUtil.checkPermission("comment"));
 //        })).addPathPatterns("/**");
 
-        //清除缓存
-        registry.addInterceptor(new DomainInterceptor((domain) -> injectVarService.clearCache(), (className) -> true))
-                .addPathPatterns("/**")
-                .order(Ordered.HIGHEST_PRECEDENCE + 1000);
-
+        //线程级别用户权限清楚
+        registry.addInterceptor(new HandlerInterceptor() {
+            @Override
+            public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+                //清楚缓存数据
+                authService.clearThreadCacheData();
+            }
+        }).addPathPatterns("/**")
+                .order(Ordered.HIGHEST_PRECEDENCE);
 
         if (frameworkProperties.getTenantBindDomain().isEnable()) {
 
             HandlerInterceptor handlerInterceptor = new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)
-                    , (className) -> frameworkProperties.getTenantBindDomain().isPackageMatched(className));
+                    , (className) -> frameworkProperties.getTenantBindDomain().isPackageMatched(className)) {
+                @Override
+                public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+                    super.afterCompletion(request, response, handler, ex);
+                    injectVarService.clearCache();
+                }
+            };
 
             List<String> includePathPatterns = frameworkProperties.getTenantBindDomain().getIncludePathPatterns();
 
@@ -161,7 +177,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     .excludePathPatterns("/" + openApiPath)
                     .excludePathPatterns(frameworkProperties.getTenantBindDomain().getExcludePathPatterns())
                     .addPathPatterns(includePathPatterns.isEmpty() ? Arrays.asList("/**") : includePathPatterns)
-                    .order(Ordered.HIGHEST_PRECEDENCE + 2000);
+                    .order(Ordered.HIGHEST_PRECEDENCE + 1000);
         }
 
         if (frameworkProperties.getControllerAcl().isEnable()) {
@@ -184,10 +200,11 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         if (StringUtils.hasText(frameworkProperties.getAdminPath())) {
             //资源拦截器
             registry.addInterceptor(resourceAuthorizeInterceptor())
-                    .addPathPatterns(frameworkProperties.getAdminPath() + "/**")
+                    .addPathPatterns((frameworkProperties.getAdminPath() + "/**").replace("//", "/"))
                     .order(Ordered.HIGHEST_PRECEDENCE + 4000);
         }
     }
+
 
     /**
      * 资源拦截器

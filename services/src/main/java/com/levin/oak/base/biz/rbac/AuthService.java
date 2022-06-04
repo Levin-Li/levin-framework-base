@@ -3,6 +3,7 @@ package com.levin.oak.base.biz.rbac;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.SimpleAuthService;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -15,6 +16,11 @@ public interface AuthService extends SimpleAuthService {
      */
     default void initData() {
     }
+
+    /**
+     * 清楚线程缓存数据
+     */
+    void clearThreadCacheData();
 
     /**
      * 是否登录
@@ -49,18 +55,18 @@ public interface AuthService extends SimpleAuthService {
     /**
      * 获取用户的权限列表
      *
-     * @param loginId 如果为空，则默认为当前用户
+     * @param loginId
      * @return
      */
-    List<String> getPermissionList(Object loginId);
+    List<String> getPermissionList(@NotNull Object loginId);
 
     /**
      * 获取用户的角色列表
      *
-     * @param loginId 如果为空，则默认为当前用户
+     * @param loginId
      * @return
      */
-    List<String> getRoleList(Object loginId);
+    List<String> getRoleList(@NotNull Object loginId);
 
     /**
      * 用户登出

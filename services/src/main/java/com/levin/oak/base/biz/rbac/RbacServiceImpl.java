@@ -235,7 +235,14 @@ public class RbacServiceImpl extends BaseService implements RbacService {
 
         //如果是角色，不是权限
         if (isRole(requirePermission)) {
-            return ownerRoleList.contains(requirePermission);
+
+            boolean found = ownerRoleList.contains(requirePermission);
+
+            if (!found) {
+                Optional.ofNullable(matchErrorConsumer).orElse(emptyConsumer).accept(requirePermission, "role not found");
+            }
+
+            return found;
         }
 
         Map<String, Res.Action> actionMap = new LinkedHashMap<>(1);

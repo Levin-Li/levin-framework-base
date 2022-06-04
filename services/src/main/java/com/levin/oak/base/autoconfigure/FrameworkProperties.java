@@ -58,6 +58,8 @@ public class FrameworkProperties implements Serializable {
      */
     private boolean autoAddAmisMenuRootNode = true;
 
+
+
     /**
      * 系统名称
      */
@@ -119,14 +121,13 @@ public class FrameworkProperties implements Serializable {
 
         protected boolean enable = true;
 
-        protected boolean onlyRequireAuthenticated;
+        protected boolean onlyRequireAuthenticated = false;
 
         protected boolean andMode = true;
 
-        //需要的角色列表
-        protected List<String> requiredRoles = Collections.emptyList();
-
-        //需要的权限列表
+        /**
+         * 需要的权限列表，包括角色
+         */
         protected List<String> requiredPermissions = Collections.emptyList();
 
         protected List<String> excludePathPatterns = Collections.emptyList();

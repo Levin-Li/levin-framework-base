@@ -107,6 +107,14 @@ plugin:
             enable-captcha: true
             adminPath: /
             sysName: XX管理系统
+            resourcesAcl:
+              - enable: true
+                requiredPermissions: "R_ADMIN"
+                includePathPatterns: "${plugin.com.levin.oak.base.framework.adminPath}/editor/**"
+
+
+
+
 
 # Sa-Token配置
 sa-token:

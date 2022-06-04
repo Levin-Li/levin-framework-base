@@ -28,7 +28,9 @@ import com.levin.oak.base.services.simplepage.info.SimplePageInfo;
 import com.levin.oak.base.services.simplepage.req.QuerySimplePageReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Data;
 import lombok.SneakyThrows;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -106,7 +108,15 @@ public class AmisController extends BaseController {
     SimpleDao simpleDao;
 
 
-    final LRUCache<String, String> lruCache = CacheUtil.newLRUCache(10 * 1000, 5 * 60 * 1000);
+    final LRUCache<String, Page> lruCache = CacheUtil.newLRUCache(10 * 1000, 5 * 60 * 1000);
+
+    @Data
+    @Accessors(chain = true, fluent = true)
+    static class Page {
+        String url;
+        String content;
+        List<String> requirePermissionList;
+    }
 
     /**
      * 获取菜单列表
@@ -182,6 +192,36 @@ public class AmisController extends BaseController {
                 .orElse(null);
     }
 
+
+    private void checkAuthorize(Page page) {
+
+        if (page.requirePermissionList == null
+                || page.requirePermissionList.isEmpty()) {
+            return;
+        }
+
+        boolean isAuthorized = rbacService.isAuthorized(true, page.requirePermissionList, (rp, info) -> {
+            throw new AuthorizationException("page-" + page.url, "未授权的资源：" + rp);
+        });
+
+        if (!isAuthorized) {
+            throw new AuthorizationException("page-" + page.url, "使用未授权的资源");
+        }
+
+    }
+
+    private String getContent(Page page) {
+
+        if (StringUtils.hasText(page.content)) {
+            //检查权限
+            checkAuthorize(page);
+        } else {
+            httpResponse.setStatus(HttpStatus.NOT_FOUND.value());
+        }
+
+        return page.content();
+    }
+
     /**
      * 获取菜单列表
      *
@@ -195,11 +235,13 @@ public class AmisController extends BaseController {
 
         final String key = String.join("|", type, category, url);
 
-        String result = lruCache.get(key);
+        Page page = lruCache.get(key);
 
-        if (result != null) {
-            return result;
+        if (page != null) {
+            return getContent(page);
         }
+
+        page = new Page().url(url);
 
         //页面信息 @todo 按租户过滤
         SimplePageInfo one = simplePageService.findOne(new QuerySimplePageReq()
@@ -219,41 +261,29 @@ public class AmisController extends BaseController {
 
         //j
         if (one != null && StringUtils.hasText(one.getRequireAuthorizations())) {
-
-            List<String> requirePermissionList = JsonStrArrayUtils.parse(one.getRequireAuthorizations(), StringUtils::hasText, (txt) -> txt);
-
-            boolean isAuthorized = rbacService.isAuthorized(true, requirePermissionList, (rp, info) -> {
-                throw new AuthorizationException("page-" + url, "未授权的资源：" + rp);
-            });
-
-            if (!isAuthorized) {
-                throw new AuthorizationException("page-" + url, "使用未授权的资源");
-            }
+            page.requirePermissionList = JsonStrArrayUtils.parse(one.getRequireAuthorizations(), StringUtils::hasText, (txt) -> txt);
         }
 
         if (one != null
                 && StringUtils.hasText(one.getContent())) {
-            result = one.getContent();
+            page.content = one.getContent();
         } else {
             //读取本地文件
             org.springframework.core.io.Resource resource = resourceLoader.getResource("classpath:/templates/" + url + ".json");
             if (resource != null
                     && resource.isReadable()) {
                 try {
-                    result = NioUtil.read(resource.readableChannel(), Charset.forName("utf-8"));
+                    page.content = NioUtil.read(resource.readableChannel(), Charset.forName("utf-8"));
                 } catch (Exception e) {
                     log.warn("Read resource error" + url + "", e);
                 }
             }
         }
 
-        if (StringUtils.hasText(result)) {
-            lruCache.put(key, result);
-        } else {
-            httpResponse.setStatus(HttpStatus.NOT_FOUND.value());
-        }
+        //有无内容都放入缓存，缓存时间5分钟
+        lruCache.put(key, page);
 
-        return result;
+        return getContent(page);
     }
 
 
@@ -333,6 +363,11 @@ public class AmisController extends BaseController {
      */
     void setDefaultIcon(AmisMenu item, int deep) {
 
+
+        //图标库
+        //https://fontawesome.com/
+
+
         if (deep < 1) {
             deep = 1;
         }
@@ -343,8 +378,10 @@ public class AmisController extends BaseController {
 
         if (!StringUtils.hasText(item.getIcon()) && deep >= 2) {
             //如果是叶子节点
-            item.setIcon(hasChildren ? "fa fa-cube" : "fa fa-list");
+            item.setIcon(hasChildren ? "fa fa-cube" : "fal fa-bars");
         }
+
+//        <i class="fal fa-bars"></i>
 
         if (hasChildren) {
             for (AmisMenu child : item.getChildren()) {

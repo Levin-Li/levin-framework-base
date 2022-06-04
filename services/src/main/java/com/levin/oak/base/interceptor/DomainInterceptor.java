@@ -53,8 +53,12 @@ public class DomainInterceptor implements HandlerInterceptor {
     protected void onDomain(String domain) {
         if (consumer != null) {
             consumer.accept(domain);
-        } else {
-
         }
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+
+
     }
 }
