@@ -1,31 +1,20 @@
 package com.levin.oak.base.controller;
 
-import com.levin.commons.rbac.*;
-import io.swagger.v3.oas.annotations.*;
-import io.swagger.v3.oas.annotations.tags.*;
+import com.levin.commons.rbac.MenuResTag;
+import com.levin.commons.rbac.ResAuthorize;
+import com.levin.oak.base.ModuleOption;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.context.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.util.*;
-import javax.validation.*;
-import java.util.*;
-import javax.annotation.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
-import javax.servlet.http.*;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import javax.validation.constraints.*;
-
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.*;
-
-import com.levin.oak.base.*;
-
-import static com.levin.oak.base.ModuleOption.*;
-import static com.levin.oak.base.entities.EntityConst.*;
+import static com.levin.oak.base.ModuleOption.ID;
+import static com.levin.oak.base.entities.EntityConst.TYPE_NAME;
 
 //Auto gen by simple-dao-codegen 2022-3-29 16:19:50
 
@@ -70,9 +59,15 @@ public abstract class BaseController {
         return (T) selfProxy;
     }
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder){
-       // binder.registerCustomEditor(Date.class,new CustomDateEditor(new SimpleDateFormat("MM-dd-yyyy"),false));
+    /**
+     * @return
+     */
+    protected String getContextPath() {
+        return httpRequest.getServletContext().getContextPath();
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        // binder.registerCustomEditor(Date.class,new CustomDateEditor(new SimpleDateFormat("MM-dd-yyyy"),false));
+    }
 }

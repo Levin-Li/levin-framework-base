@@ -1,12 +1,16 @@
 package com.levin.oak.base.controller.admin;
 
 import com.levin.commons.rbac.MenuResTag;
+import com.levin.commons.rbac.ResAuthorize;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
+import com.levin.oak.base.controller.BaseController;
+import com.levin.oak.base.entities.EntityConst;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +55,7 @@ import static com.levin.oak.base.ModuleOption.*;
 @Slf4j
 @Valid
 @MenuResTag(false)
-public class IndexController {
+public class IndexController extends BaseController {
 
     @Resource
     HttpServletRequest httpRequest;
@@ -92,9 +96,9 @@ public class IndexController {
     @RequestMapping
     public String index(Model modelMap) throws IOException {
 
-        String basePath = serverProperties.getServlet().getContextPath() + API_PATH;
+        String basePath = getContextPath() + API_PATH;
 
-        final String adminBasePath = (serverProperties.getServlet().getContextPath() + "/" + frameworkProperties.getAdminPath()).replace("//", "/");
+        final String adminBasePath = (getContextPath() + "/" + frameworkProperties.getAdminPath()).replace("//", "/");
 
         modelMap.addAttribute("appPath", adminBasePath);
         modelMap.addAttribute("appName", frameworkProperties.getSysName());
@@ -154,8 +158,8 @@ public class IndexController {
      */
     @SneakyThrows
     @RequestMapping("editor")
-//    @Operation(tags = {"UI编辑"}, summary = "页面编辑")
-//    @ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME, onlyRequireAuthenticated = true)
+    @Operation(tags = {"UI编辑"}, summary = "页面编辑")
+    @ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME)
     public String editor(Model modelMap) {
 
         //        request.getRequestURL():http://localhost:8080/bzbs/system/login.jsp

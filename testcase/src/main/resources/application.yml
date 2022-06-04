@@ -1,7 +1,7 @@
 #Auto gen by simple-dao-codegen 2021-10-28 9:46:17
 server:
   servlet:
-    context-path: /rbac
+    context-path: /
   compression:
     enabled: true
     min-response-size: 10KB
