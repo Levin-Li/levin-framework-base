@@ -38,8 +38,8 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -123,7 +123,7 @@ public class AmisController extends BaseController {
      *
      * @return ApiResp
      */
-    @GetMapping("appMenuList")
+    @RequestMapping(value = "appMenuList", method = {RequestMethod.GET, RequestMethod.POST})
     @Operation(tags = {"Amis支持"}, summary = "获取Amis菜单列表")
     public AmisResp getAmisAppMenuList(boolean isShowNotPermissionMenu) {
 
@@ -227,7 +227,7 @@ public class AmisController extends BaseController {
      *
      * @return ApiResp
      */
-    @GetMapping("page")
+    @RequestMapping(value = "page", method = {RequestMethod.GET, RequestMethod.POST})
     @Operation(tags = {"Amis支持"}, summary = "获取Amis页面-5分钟刷新")
     public String page(String url, String type, String category, TenantShareReq shareReq) {
 

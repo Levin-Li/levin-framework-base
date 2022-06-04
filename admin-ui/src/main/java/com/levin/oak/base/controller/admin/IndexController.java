@@ -23,6 +23,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -47,7 +48,7 @@ import static com.levin.oak.base.ModuleOption.*;
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-@Tag(name = "授权管理", description = "Admin管理视图")
+@Tag(name = "Admin管理视图", description = "Admin管理视图")
 @Controller(PLUGIN_PREFIX + "IndexController")
 @ConditionalOnClass(FreeMarkerAutoConfiguration.class)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "IndexController", matchIfMissing = true)
@@ -55,6 +56,7 @@ import static com.levin.oak.base.ModuleOption.*;
 @Slf4j
 @Valid
 @MenuResTag(false)
+@ResAuthorize(ignored = true)
 public class IndexController extends BaseController {
 
     @Resource
@@ -93,7 +95,8 @@ public class IndexController extends BaseController {
      * @return ApiResp
      */
     @SneakyThrows
-    @RequestMapping
+    @GetMapping
+    @Operation(tags = "Admin管理视图", summary = "首页", description = "首页")
     public String index(Model modelMap) throws IOException {
 
         String basePath = getContextPath() + API_PATH;
@@ -157,8 +160,8 @@ public class IndexController extends BaseController {
      * @return ApiResp
      */
     @SneakyThrows
-    @RequestMapping("editor")
-    @Operation(tags = {"UI编辑"}, summary = "页面编辑")
+    @GetMapping("editor")
+    @Operation(tags = {"Admin管理视图"}, summary = "首页", description = "页面编辑")
     @ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME)
     public String editor(Model modelMap) {
 
