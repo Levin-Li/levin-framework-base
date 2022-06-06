@@ -118,7 +118,7 @@ public class IndexController extends BaseController {
 
         //设置默认图标
         if (!StringUtils.hasText((CharSequence) modelMap.getAttribute("appLogo"))) {
-            modelMap.addAttribute("appLogo", adminBasePath + "/img/default_logo.png");
+            modelMap.addAttribute("appLogo", (adminBasePath + "/img/default_logo.png").replace("//","/"));
         }
 
         if (authService.isLogin()) {
@@ -161,7 +161,7 @@ public class IndexController extends BaseController {
      */
     @SneakyThrows
     @GetMapping("editor")
-    @Operation(tags = {"Admin管理视图"}, summary = "首页", description = "页面编辑")
+    @Operation(tags = {"Admin管理视图"}, summary = "页面编辑", description = "页面编辑")
     @ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME)
     public String editor(Model modelMap) {
 

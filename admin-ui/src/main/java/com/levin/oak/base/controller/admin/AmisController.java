@@ -14,6 +14,7 @@ import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacResService;
 import com.levin.oak.base.biz.rbac.RbacService;
+import com.levin.oak.base.codegen.UiCodeGen;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.AmisMenu;
 import com.levin.oak.base.controller.rbac.dto.AmisResp;
@@ -106,6 +107,9 @@ public class AmisController extends BaseController {
 
     @Resource
     SimpleDao simpleDao;
+
+    @Resource
+    UiCodeGen uiCodeGen;
 
 
     final LRUCache<String, Page> lruCache = CacheUtil.newLRUCache(10 * 1000, 5 * 60 * 1000);

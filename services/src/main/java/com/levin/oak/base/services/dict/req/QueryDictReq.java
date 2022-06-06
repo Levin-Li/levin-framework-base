@@ -43,6 +43,10 @@ public class QueryDictReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445779596L;
 
+    @Schema(description = "是否包含公共数据", hidden = true)
+    @Ignore
+    private boolean isContainsPublicData = true;
+
     @Ignore
     @Schema(description = "排序字段")
     private String orderBy;
@@ -51,7 +55,6 @@ public class QueryDictReq extends MultiTenantReq {
     @Schema(description = "排序方向-desc asc")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
     private OrderBy.Type orderDir;
-
 
     //@NotNull
 

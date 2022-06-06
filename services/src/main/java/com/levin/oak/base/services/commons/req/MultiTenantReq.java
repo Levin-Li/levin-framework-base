@@ -3,6 +3,7 @@ package com.levin.oak.base.services.commons.req;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.IsNull;
 import com.levin.commons.dao.annotation.logic.OR;
+import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConsts;
@@ -33,6 +34,7 @@ public abstract class MultiTenantReq
     @OR(autoClose = true)
     @Eq
     @IsNull(condition = "#_this.isContainsPublicData()", desc = "如果是公共数据，允许包括非该租户的数据") //如果是公共数据，允许包括非该租户的数据
+    @OrderBy(order = -1, condition = "#_this.isContainsPublicData()", desc = "包含公共数据时，要确保本租户的数据在前，数据库的默认规则是降序时，NULL值在后")
     protected String tenantId;
 
     /**

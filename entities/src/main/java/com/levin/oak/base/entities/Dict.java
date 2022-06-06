@@ -48,11 +48,13 @@ public class Dict
 
     private static final long serialVersionUID = -123456789L;
 
-    public enum Type   implements EnumDesc {
+    public enum Type implements EnumDesc {
+
         @Schema(description = "系统")
         System,
         @Schema(description = "自定义")
         Custom,
+
     }
 
     @Data
@@ -84,7 +86,7 @@ public class Dict
     protected Type type;
 
     @Schema(description = "编码")
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 256)
     @Contains
     protected String code;
 

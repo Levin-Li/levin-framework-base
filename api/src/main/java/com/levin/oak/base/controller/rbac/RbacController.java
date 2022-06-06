@@ -49,8 +49,8 @@ import static com.levin.oak.base.ModuleOption.*;
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-@RestController(PLUGIN_PREFIX + "AuthController")
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "AuthController", matchIfMissing = true)
+@RestController(PLUGIN_PREFIX + "RbacController")
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacController", matchIfMissing = true)
 @RequestMapping(API_PATH + "rbac")
 @Tag(name = "授权管理", description = "授权管理")
 @Slf4j

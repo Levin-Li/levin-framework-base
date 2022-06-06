@@ -92,6 +92,9 @@ logging:
 swagger:
   enabled: true
 
+#admin路径，不包含 context-path
+adminPath: /
+
 plugin:
   com:
     levin:
@@ -103,18 +106,14 @@ plugin:
             tenant-bind-domain:
               enable: false
             log:
-              exclude-path-patterns: /error,/swagger-resources/**,/swagger-ui/**,/v3/api-docs
+              exclude-path-patterns: /**/amis/page,/error,/swagger-resources/**,/swagger-ui/**,/v3/api-docs
             enable-captcha: true
-            adminPath: /
+            adminPath: "${adminPath}"
             sysName: XX管理系统
             resourcesAcl:
               - enable: true
                 requiredPermissions: "R_ADMIN"
-                includePathPatterns: "${plugin.com.levin.oak.base.framework.adminPath}/editor/**"
-
-
-
-
+                includePathPatterns: "${adminPath}/editor/**"
 
 # Sa-Token配置
 sa-token:
