@@ -272,7 +272,11 @@ public class AmisController extends BaseController {
                 .eq(E_SimpleEntity.path, path)
                 .isNullOrEq(E_SimpleEntity.tenantId, shareReq.getTenantId())
                 //排序,本租户优先
-                .orderBy(new Case().when(E_SimpleEntity.tenantId + " IS NULL", "0").elseExpr("1").toString("(", ") Desc"))
+                .orderBy(new Case()
+                        .when(E_SimpleEntity.tenantId + " IS NULL", "0")
+                        .elseExpr("1")
+                        .toString("(", ") Desc")
+                )
                 .findOne(Page.class);
 
         //如果是被禁用
