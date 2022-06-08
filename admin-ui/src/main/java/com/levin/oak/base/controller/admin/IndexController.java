@@ -1,5 +1,6 @@
 package com.levin.oak.base.controller.admin;
 
+import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
@@ -8,7 +9,12 @@ import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.entities.EntityConst;
+import com.levin.oak.base.entities.Setting;
 import com.levin.oak.base.services.role.RoleService;
+import com.levin.oak.base.services.setting.SettingService;
+import com.levin.oak.base.services.setting.info.SettingInfo;
+import com.levin.oak.base.services.setting.req.CreateSettingReq;
+import com.levin.oak.base.services.setting.req.QuerySettingReq;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,6 +32,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -89,15 +96,52 @@ public class IndexController extends BaseController {
     @Resource
     FrameworkProperties frameworkProperties;
 
+    @Resource
+    SettingService settingService;
+
+    @PostConstruct
+    public void init() {
+
+    }
+
+
     /**
      * 首页
+     * <p>
+     * admin 页面入口
+     * <p>
+     * <p>
+     * 同一个入口支持以下
+     * <p>
+     * 1、支持重新登录，通过参数处理
+     * <p>
+     * 2、未登录时选择登录模板
+     * <p>
+     * 3、登录成功后选择amis模板
+     * <p>
+     * 4、支持重系统配置中获取 amis 主题样式
      *
      * @return ApiResp
      */
     @SneakyThrows
-    @GetMapping
+    @GetMapping({""})
     @Operation(tags = "Admin管理视图", summary = "首页", description = "首页")
     public String index(Model modelMap) throws IOException {
+
+        //重新登录
+        if ("relogin".equalsIgnoreCase(httpRequest.getParameter("action"))) {
+
+            if (authService.isLogin()) {
+                authService.logout();
+            }
+
+            //request.getRequestURL():http://localhost:8080/bzbs/system/login.jsp
+//        request.getRequestURI():/bzbs/system/login.jsp
+//        request.getContextPath():/bzbs
+//        request.getServletPath():/system/login.jsp
+
+            return "redirect:" + httpRequest.getRequestURI();
+        }
 
         String basePath = getContextPath() + API_PATH;
 
@@ -116,9 +160,54 @@ public class IndexController extends BaseController {
 
         }
 
+        final String tenantId = tenantInfo != null ? tenantInfo.getId() : null;
+
+        final String cssCode = ADMIN_UI_PATH + "Amis.RootCss";
+
+        PagingData<SettingInfo> pagingData = settingService.query(new QuerySettingReq()
+                .setCode(cssCode)
+                .setContainsPublicData(true)
+                .setTenantId(tenantId), null);
+
+        if (!pagingData.isEmpty()) {
+
+            StringBuilder css = new StringBuilder();
+
+            pagingData.getItems().forEach(settingInfo -> {
+                if (StringUtils.hasText(settingInfo.getValue())) {
+                    css.append(settingInfo.getValue())
+                            .append('\n');
+                }
+            });
+
+            modelMap.addAttribute("amisRootCss", css.toString());
+
+        } else {
+
+            //创建默认配置
+            settingService.create(new CreateSettingReq()
+                    .setCategoryName("系统界面")
+                    .setGroupName("基础样式")
+                    .setCode(cssCode)
+                    .setInputPlaceholder("amisRootCss")
+                    .setName("amisRootCss")
+                    .setValueType(Setting.ValueType.Css)
+                    .setNullable(true)
+                    .setValue("/*amis root css*/\n" +
+                            "--Layout-aside-width: 15rem;\n")
+                    .setTenantId(tenantId)
+            );
+
+            modelMap.addAttribute("amisRootCss", "");
+        }
+
+        if (authService.isLogin()) {
+            modelMap.addAttribute("user", authService.getUserInfo());
+        }
+
         //设置默认图标
         if (!StringUtils.hasText((CharSequence) modelMap.getAttribute("appLogo"))) {
-            modelMap.addAttribute("appLogo", (adminBasePath + "/img/default_logo.png").replace("//","/"));
+            modelMap.addAttribute("appLogo", (adminBasePath + "/img/default_logo.png").replace("//", "/"));
         }
 
         if (authService.isLogin()) {
@@ -148,6 +237,7 @@ public class IndexController extends BaseController {
             return "redirect:" + redirectUrl;
         }
 
+
         return ADMIN_UI_PATH + (authService.isLogin() ?
                 nullSafe(frameworkProperties.getAdminIndexTemplate(), "amis_index")
                 : nullSafe(frameworkProperties.getAdminLoginTemplate(), "login_index")
@@ -155,7 +245,7 @@ public class IndexController extends BaseController {
     }
 
     /**
-     * 首页
+     * 页面编辑器入口
      *
      * @return ApiResp
      */

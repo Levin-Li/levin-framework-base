@@ -44,6 +44,11 @@ public class Setting
         extends MultiTenantNamedEntity {
 
     public enum ValueType   implements EnumDesc {
+
+        @Schema(description = "CSS")
+        Css,
+        @Schema(description = "JS")
+        Js,
         @Schema(description = "文本")
         Text,
         @Schema(description = "Json")
@@ -59,6 +64,7 @@ public class Setting
     }
 
     @Id
+    @GeneratedValue
     protected Long id;
 
     @Schema(description = "分类名称")

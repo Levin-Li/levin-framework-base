@@ -58,8 +58,6 @@ public class FrameworkProperties implements Serializable {
      */
     private boolean autoAddAmisMenuRootNode = true;
 
-
-
     /**
      * 系统名称
      */

@@ -2,14 +2,14 @@ package com.levin.oak.base.controller.admin;
 
 import cn.hutool.cache.CacheUtil;
 import cn.hutool.cache.impl.LRUCache;
-import cn.hutool.core.io.NioUtil;
+import com.levin.commons.dao.Case;
 import com.levin.commons.dao.SimpleDao;
-import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.MenuItem;
 import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
-import com.levin.commons.utils.JsonStrArrayUtils;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacResService;
@@ -18,15 +18,13 @@ import com.levin.oak.base.codegen.UiCodeGen;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.AmisMenu;
 import com.levin.oak.base.controller.rbac.dto.AmisResp;
-import com.levin.oak.base.entities.E_SimplePage;
-import com.levin.oak.base.entities.EntityConst;
+import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.commons.req.TenantShareReq;
 import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.simplepage.SimplePageService;
-import com.levin.oak.base.services.simplepage.info.SimplePageInfo;
-import com.levin.oak.base.services.simplepage.req.QuerySimplePageReq;
+import com.levin.oak.base.utils.AmisUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Data;
@@ -39,6 +37,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,7 +45,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -115,11 +113,17 @@ public class AmisController extends BaseController {
     final LRUCache<String, Page> lruCache = CacheUtil.newLRUCache(10 * 1000, 5 * 60 * 1000);
 
     @Data
-    @Accessors(chain = true, fluent = true)
+    @Accessors(chain = true)
     static class Page {
-        String url;
+
+        Boolean enable;
+
+        String path;
+
         String content;
-        List<String> requirePermissionList;
+
+        @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+        List<String> requireAuthorizations;
     }
 
     /**
@@ -199,45 +203,47 @@ public class AmisController extends BaseController {
 
     private void checkAuthorize(Page page) {
 
-        if (page.requirePermissionList == null
-                || page.requirePermissionList.isEmpty()) {
+        if (page.requireAuthorizations == null
+                || page.requireAuthorizations.isEmpty()) {
             return;
         }
 
-        boolean isAuthorized = rbacService.isAuthorized(true, page.requirePermissionList, (rp, info) -> {
-            throw new AuthorizationException("page-" + page.url, "未授权的资源：" + rp);
+        boolean isAuthorized = rbacService.isAuthorized(true, page.requireAuthorizations, (rp, info) -> {
+            throw new AuthorizationException("ui-" + page.getPath(), "未授权的ui资源：" + rp);
         });
 
         if (!isAuthorized) {
-            throw new AuthorizationException("page-" + page.url, "使用未授权的资源");
+            throw new AuthorizationException("ui-" + page.getPath(), "使用未授权的ui资源");
         }
 
     }
 
     private String getContent(Page page) {
 
-        if (StringUtils.hasText(page.content)) {
+        if (StringUtils.hasText(page.getContent())) {
             //检查权限
             checkAuthorize(page);
         } else {
             httpResponse.setStatus(HttpStatus.NOT_FOUND.value());
         }
 
-        return page.content();
+        return page.getContent();
     }
 
     /**
-     * 获取菜单列表
+     * 从数据或是本地资源中获取amis页面内容
+     * <p>
+     * 同时会检查当前用户是否有这个权限
      *
      * @return ApiResp
      */
-    @RequestMapping(value = "page", method = {RequestMethod.GET, RequestMethod.POST})
-    @Operation(tags = {"Amis支持"}, summary = "获取Amis页面-5分钟刷新")
-    public String page(String url, String type, String category, TenantShareReq shareReq) {
+    @RequestMapping(value = "{uiType}", method = {RequestMethod.GET, RequestMethod.POST})
+    @Operation(tags = {"Amis支持"}, summary = "获取Amis UI界面-5分钟刷新")
+    public String getUiContent(@PathVariable String uiType, String path, String type, String category, TenantShareReq shareReq) {
 
-        Assert.hasText(url, "url必须指定");
+        Assert.hasText(path, "path 必须指定");
 
-        final String key = String.join("|", type, category, url);
+        final String key = String.join("|", uiType, type, category, path);
 
         Page page = lruCache.get(key);
 
@@ -245,43 +251,44 @@ public class AmisController extends BaseController {
             return getContent(page);
         }
 
-        page = new Page().url(url);
+//         page = new Page().setPath(path);
 
         //页面信息 @todo 按租户过滤
-        SimplePageInfo one = simplePageService.findOne(new QuerySimplePageReq()
-                .setType(type)
-                .setCategory(category)
-                .setContainsPublicData(shareReq.isContainsPublicData())
-                .setPath(url)
-                .setOrderBy(E_SimplePage.tenantId)
-                .setOrderDir(OrderBy.Type.Asc)
-                .setTenantId(shareReq.getTenantId()));
+//        SimplePageInfo page = simplePageService.findOne(new QuerySimplePageReq()
+//                .setType(type)
+//                .setCategory(category)
+//                .setContainsPublicData(shareReq.isContainsPublicData())
+//                .setPath(path)
+//                .setOrderBy(E_SimplePage.tenantId)
+//                .setOrderDir(OrderBy.Type.Asc)
+//                .setTenantId(shareReq.getTenantId()));
+
+
+        final Class<? extends SimpleEntity> aClass = "page".equalsIgnoreCase(uiType) ? SimplePage.class : SimpleForm.class;
+
+        page = simpleDao.selectFrom(aClass)
+                .eq(E_SimpleEntity.type, type)
+                .eq(E_SimpleEntity.category, category)
+                .eq(E_SimpleEntity.path, path)
+                .isNullOrEq(E_SimpleEntity.tenantId, shareReq.getTenantId())
+                //排序,本租户优先
+                .orderBy(new Case().when(E_SimpleEntity.tenantId + " IS NULL", "0").elseExpr("1").toString("(", ") Desc"))
+                .findOne(Page.class);
 
         //如果是被禁用
-        if (one != null && !Boolean.TRUE.equals(one.getEnable())) {
+        if (page != null && !Boolean.TRUE.equals(page.getEnable())) {
             httpResponse.setStatus(HttpStatus.FORBIDDEN.value());
             return null;
         }
 
-        //j
-        if (one != null && StringUtils.hasText(one.getRequireAuthorizations())) {
-            page.requirePermissionList = JsonStrArrayUtils.parse(one.getRequireAuthorizations(), StringUtils::hasText, (txt) -> txt);
+        //如果没有查到记录
+        if (page == null) {
+            page = new Page().setPath(path);
         }
 
-        if (one != null
-                && StringUtils.hasText(one.getContent())) {
-            page.content = one.getContent();
-        } else {
+        if (!StringUtils.hasText(page.getContent())) {
             //读取本地文件
-            org.springframework.core.io.Resource resource = resourceLoader.getResource("classpath:/templates/" + url + ".json");
-            if (resource != null
-                    && resource.isReadable()) {
-                try {
-                    page.content = NioUtil.read(resource.readableChannel(), Charset.forName("utf-8"));
-                } catch (Exception e) {
-                    log.warn("Read resource error" + url + "", e);
-                }
-            }
+            page.content = AmisUtils.readAdminClassPathResource(path);
         }
 
         //有无内容都放入缓存，缓存时间5分钟
@@ -289,7 +296,6 @@ public class AmisController extends BaseController {
 
         return getContent(page);
     }
-
 
     /**
      * 递归转换菜单
@@ -330,10 +336,10 @@ public class AmisController extends BaseController {
             } else if (MenuItem.ActionType.NewWindow.equals(item.getActionType())) {
                 amisMenu.setLink(params);
             } else if (MenuItem.ActionType.Jsonp.equals(item.getActionType())) {
-                amisMenu.setSchemaApi("jsonp:" + basePath + "?type=jsonp&url=" + URLEncoder.encode(item.getPath(), "utf-8"));
+                amisMenu.setSchemaApi("jsonp:" + basePath + "?type=jsonp&path=" + URLEncoder.encode(item.getPath(), "utf-8"));
             } else {
                 //固定参数
-                amisMenu.setSchemaApi(basePath + "?type=json&url=" + URLEncoder.encode(item.getPath(), "utf-8"));
+                amisMenu.setSchemaApi(basePath + "?type=json&path=" + URLEncoder.encode(item.getPath(), "utf-8"));
             }
         }
 
@@ -367,10 +373,8 @@ public class AmisController extends BaseController {
      */
     void setDefaultIcon(AmisMenu item, int deep) {
 
-
         //图标库
         //https://fontawesome.com/
-
 
         if (deep < 1) {
             deep = 1;
@@ -382,10 +386,10 @@ public class AmisController extends BaseController {
 
         if (!StringUtils.hasText(item.getIcon()) && deep >= 2) {
             //如果是叶子节点
-            item.setIcon(hasChildren ? "fa fa-cube" : "fal fa-bars");
+            //图标库
+            //https://fontawesome.com/
+            item.setIcon(hasChildren ? "fa fa-cube" : "fa fa-bars");
         }
-
-//        <i class="fal fa-bars"></i>
 
         if (hasChildren) {
             for (AmisMenu child : item.getChildren()) {
@@ -394,6 +398,5 @@ public class AmisController extends BaseController {
             }
         }
     }
-
 
 }

@@ -109,7 +109,7 @@ plugin:
               exclude-path-patterns: /**/amis/page,/error,/swagger-resources/**,/swagger-ui/**,/v3/api-docs
             enable-captcha: true
             adminPath: "${adminPath}"
-            sysName: XX管理系统
+            sysName: 后台管理系统
             resourcesAcl:
               - enable: true
                 requiredPermissions: "R_ADMIN"

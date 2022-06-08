@@ -65,6 +65,8 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Override
     public Long create(CreateRoleReq req) {
 
+        checkRoleCode(req.getCode());
+
         //不允许创建SA角色
         Assert.isTrue(!RbacRoleObject.SA_ROLE.equalsIgnoreCase(StringUtils.trimAllWhitespace(req.getCode())),
                 "角色编码[" + RbacRoleObject.SA_ROLE + "]已经被系统使用");
@@ -77,6 +79,11 @@ public class RoleServiceImpl extends BaseService implements RoleService {
         Role entity = simpleDao.create(req);
 
         return entity.getId();
+    }
+
+    private void checkRoleCode(String code) {
+        Assert.hasText(code, "角色编码不能为空");
+        Assert.isTrue(code.startsWith("R_"), "角色编码必须以 R_ 开头");
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)

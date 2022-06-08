@@ -4,7 +4,6 @@ import cn.dev33.satoken.exception.IdTokenInvalidException;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.io.NioUtil;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
@@ -26,6 +25,7 @@ import com.levin.oak.base.services.tenant.req.QueryTenantReq;
 import com.levin.oak.base.services.user.UserService;
 import com.levin.oak.base.services.user.info.UserInfo;
 import com.levin.oak.base.services.user.req.CreateUserReq;
+import com.levin.oak.base.utils.AmisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -40,7 +40,6 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -427,7 +426,7 @@ public class AuthServiceImpl
                                 .setRequireAuthorizations(menuItem.getRequireAuthorizations())
 
 //                        .setIcon(defaultIcon)
-                                .setContent(readResource(path))
+                                .setContent(AmisUtils.readAdminClassPathResource(path))
                                 .setDomain(plugin.getPackageName())
                                 .setName(menuItem.getName())
                                 .setRemark("Amis默认页面")
@@ -437,21 +436,6 @@ public class AuthServiceImpl
         }
     }
 
-    private String readResource(String url) {
-
-        org.springframework.core.io.Resource resource = resourceLoader.getResource("classpath:/templates/" + url + ".json");
-
-        if (resource != null
-                && resource.isReadable()) {
-            try {
-                return NioUtil.read(resource.readableChannel(), Charset.forName("utf-8"));
-            } catch (Exception e) {
-                log.warn("Read " + url + " error", e);
-            }
-        }
-
-        return null;
-    }
 
     private void initUser() {
 

@@ -39,7 +39,14 @@
 
         <!-----注册页面---->
         <div class="logo_window" style="height: 948px;">
-            <div class="logo"></div>
+
+            <div class="logo_bar">
+                <img src="${appLogo}" alt=""/>
+                <div class="title_bar">
+                    <h1>${appName}</h1>
+                </div>
+            </div>
+
             <div class="logo_window1">
                 <form name="userLoginActionForm" id="userLoginActionForm" method="POST" action="" target="_parent">
                     <div class="logo_window_L" style="margin: 0 auto;float: inherit;">
@@ -82,6 +89,9 @@
 
                 </form>
             </div>
+
+            <h3 class="info_bar">版权所有@Copyright 2022</h3>
+
         </div>
     </div>
 </div>

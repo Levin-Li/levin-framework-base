@@ -12,19 +12,27 @@
 
     <link rel="stylesheet"
           title="default"
-          href="https://unpkg.com/amis@beta/sdk/sdk.css"
-            <#--            href="https://unpkg.com/amis@beta/sdk/antd.css"-->
+          href="amis@beta/sdk/sdk.css"
+<#--             href="https://unpkg.com/amis@beta/sdk/antd.css"-->
     />
 
     <link rel="stylesheet"
-          href="https://unpkg.com/amis@beta/sdk/helper.css"
+          href="amis@beta/sdk/helper.css"
+<#--          href="https://unpkg.com/amis@beta/sdk/helper.css"-->
     />
 
     <link rel="stylesheet" type="text/css" href="css/amis.css">
 
-    <script src="https://unpkg.com/amis@beta/sdk/sdk.js"></script>
-    <script src="https://unpkg.com/vue@2"></script>
-    <script src="https://unpkg.com/history@4.10.1/umd/history.js"></script>
+<#--    <script src="https://unpkg.com/amis@beta/sdk/sdk.js"></script>-->
+    <script src="amis@beta/sdk/sdk.js"></script>
+
+<#--    <script src="https://unpkg.com/vue@2"></script>-->
+
+    <script src="vue/dist/vue.min.js"></script>
+
+<#--    <script src="https://unpkg.com/history@4.10.1/umd/history.js"></script>-->
+    <script src="history@4.10.1/umd/history.production.min.js"></script>
+
 
     <style>
         html,
@@ -36,9 +44,12 @@
             margin: 0;
             padding: 0;
         }
-        :root{
+
+        :root {
             /*左侧菜单栏宽度*/
             --Layout-aside-width: 15rem;
+            /*--Avatar-width:1.6rem;*/
+        ${amisRootCss}
         }
     </style>
 </head>
@@ -58,17 +69,82 @@
         // const history = History.createBrowserHistory();
         const history = History.createHashHistory();
 
+        window._amisLib = amisLib;
+        //window._amisEmbed = amis;
+
+        window._adminLogout = function () {
+            amisLib.confirm("确定要退出？", "提示", "确定")
+                .then((ok) => {
+                    if (ok) {
+                        window.location = location.protocol + "//" + location.host + location.pathname + "?action=relogin";
+                    }
+                })
+        }
+
         const app = {
             type: 'app',
             brandName: '${appName}',
             logo: '${appLogo}',
             api: '${appMenuApi}',
+
             header: {
                 type: 'tpl',
                 inline: false,
                 className: 'w-full',
-                tpl: '<div class="flex justify-between"><div>顶部区域左侧</div><div>顶部区域右侧</div></div>'
+                tpl: '<div class="flex justify-between">' +
+                    '<div>'
+                    //左侧
+                    + '欢迎使用'
+                    + '</div>' +
+                    /////////////////////////////////////////////////////////////
+                    '<div>' +
+                    //右侧
+                    '<i class="m-1 fa fa-user"> </i>' +
+                    '<span class="w-24 overflow-hidden">${user.name}</span>' +
+                    '<i class="m-1 fa fa-sign-out" onclick = "_adminLogout()"> </i>' +
+                    '</div>' +
+                    '</div>'
             },
+
+            header: {
+                type: "grid",
+                className: "w-full text-md",
+                columns: [
+                    {
+                        type: "flex",
+                        justify: "flex-start",
+                        items: [{
+                            type: "tpl",
+                            tpl: '<span class="">欢迎使用</span>'
+                        }]
+                    },
+                    {
+                        type: "flex",
+                        justify: "flex-end",
+                        items: [
+                            // {
+                            //     type: "avatar",
+                            //     size: "small",
+                            //     badge: {
+                            //         mode: "text",
+                            //         text: 0
+                            //     }
+                            // },
+
+                            {
+                                type: "tpl",
+                                tpl: '<i class="m-1 fa fa-user"></i><span class="w-24 overflow-hidden">${user.name}</span>'
+                            },
+                            {
+                                type: "tpl",
+                                tpl: '<i class="ml-3 mr-4 fa fa-sign-out" onclick = "_adminLogout()"></i>'
+                            },
+                            ]
+                    }
+                ]
+
+            },
+
             //   footer: '<div class="p-2 text-center bg-light">底部区域</div>',
             //   asideBefore: '<div class="p-2 text-center">菜单前面区域</div>',
             asideAfter: '<div class="p-2 text-center"> </div>',

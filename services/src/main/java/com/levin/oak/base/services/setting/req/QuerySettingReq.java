@@ -43,6 +43,10 @@ public class QuerySettingReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 147875794L;
 
+    @Schema(description = "是否包含公共数据", hidden = true)
+    @Ignore
+    private boolean isContainsPublicData = true;
+
     @Ignore
     @Schema(description = "排序字段")
     private String orderBy;
