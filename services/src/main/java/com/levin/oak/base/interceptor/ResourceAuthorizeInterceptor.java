@@ -2,6 +2,7 @@ package com.levin.oak.base.interceptor;
 
 import com.levin.commons.rbac.AuthorizationException;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
+import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import lombok.Data;
@@ -30,6 +31,9 @@ public class ResourceAuthorizeInterceptor
 
     @Resource
     FrameworkProperties frameworkProperties;
+
+    @Resource
+    BizTenantService bizTenantService;
 
     @PostConstruct
     public void init() {
@@ -90,6 +94,8 @@ public class ResourceAuthorizeInterceptor
         if (resCfg.isOnlyRequireAuthenticated()) {
             return true;
         }
+
+        bizTenantService.checkAndGetCurrentUserTenant();
 
         boolean ok = rbacService.isAuthorized(resCfg.isAndMode(), resCfg.getRequiredPermissions(), (rp, info) -> {
             throw new AuthorizationException("res-" + rp, "未授权的资源：" + info);

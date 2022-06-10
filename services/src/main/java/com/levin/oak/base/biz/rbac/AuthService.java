@@ -18,7 +18,7 @@ public interface AuthService extends SimpleAuthService {
     }
 
     /**
-     * 清楚线程缓存数据
+     * 清除线程缓存数据
      */
     void clearThreadCacheData();
 

@@ -6,6 +6,7 @@ import com.levin.commons.dao.annotation.logic.OR;
 import com.levin.commons.dao.annotation.misc.Case;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.dao.domain.MultiTenantObject;
+import com.levin.commons.dao.domain.support.E_AbstractMultiTenantObject;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConsts;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -36,8 +37,9 @@ public abstract class MultiTenantReq
     @Eq
     @IsNull(condition = "#_this.isContainsPublicData()", desc = "如果是公共数据，允许包括非该租户的数据") //如果是公共数据，允许包括非该租户的数据
     @OrderBy(order = -1, condition = "#_this.isContainsPublicData()", type = OrderBy.Type.Desc,
-            cases = @Case(whenOptions = @Case.When(whenExpr = "NULL", thenExpr = "0"), elseExpr = "1"),
-            desc = "包含公共数据时，要确保本租户的数据在前，数据库的默认规则是降序时，NULL值在后")
+            cases = @Case(column = "", whenOptions =
+            @Case.When(whenExpr = E_AbstractMultiTenantObject.tenantId + " IS NULL", thenExpr = "0"), elseExpr = "1"),
+            desc = "注解的作用是包含公共数据时，让本租户的数据在前")
     protected String tenantId;
 
     /**

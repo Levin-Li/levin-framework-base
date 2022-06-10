@@ -40,7 +40,10 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -292,7 +295,6 @@ public class AuthServiceImpl
 
                     return bizRoleService.getRolePermissionList(userInfo.getTenantId(), userInfo.getRoleList());
                 }
-
         );
     }
 
@@ -451,7 +453,7 @@ public class AuthServiceImpl
         if (tenantInfo == null) {
 
             String id = tenantService.create(new CreateTenantReq()
-                    .setName("默认租户")
+                    .setName("测试租户")
                     .setRemark("支持本地地址")
                     .setDomainList(Arrays.asList("127.0.0.1", "localhost"))
             );
@@ -480,143 +482,106 @@ public class AuthServiceImpl
 
         if (role == null) {
 
-            List<String> permissions = new LinkedList<>();
-
-            permissions.add(new ResPermission()
-                    .setDomain("*")
-                    .setType("*")
-                    .setRes("*")
-                    .setAction("*")
-                    .toString());
-
             simpleDao.create(new CreateRoleReq()
                     .setCode(RbacRoleObject.SA_ROLE)
                     .setName("超级管理员")
                     .setEditable(false)
                     .setOrgDataScope(Role.OrgDataScope.All)
-                    .setPermissionList(permissions));
+                    .setPermissionList(Arrays.asList(
+                            new ResPermission()
+                                    .setDomain("*")
+                                    .setType("*")
+                                    .setRes("*")
+                                    .setAction("*")
+                                    .toString()
+                            )
+                    )
+            );
 
-            ///////////////////////////////////////////////////
+        }
+        ///////////////////////////////////////////////////
 
-            permissions.clear();
+        role = simpleDao.selectFrom(Role.class)
+                .eq(E_Role.code, RbacRoleObject.ADMIN_ROLE)
+                .eq(E_User.tenantId, tenantInfo.getId())
+                .findOne();
 
-            permissions.add(new ResPermission()
-                    .setDomain("*")
-                    .setType(EntityConst.TYPE_NAME)
-                    .setRes("*")
-                    .setAction("*")
-                    .toString());
+        if (role == null) {
 
-            permissions.add(new ResPermission()
-                    .setDomain("*")
-                    .setType(EntityConst.COMMON_TYPE_NAME)
-                    .setRes("*")
-                    .setAction("*")
-                    .toString());
+            simpleDao.create(
+                    new CreateRoleReq()
+                            .setCode(RbacRoleObject.ADMIN_ROLE)
+                            .setName("管理员")
+                            .setEditable(false)
+                            .setOrgDataScope(Role.OrgDataScope.All)
+                            .setPermissionList(Arrays.asList(
 
-            permissions.add(new ResPermission()
-                    .setDomain("*")
-                    .setType(EntityConst.SYS_TYPE_NAME)
-                    .setRes("*")
-                    .setAction("*")
-                    .toString());
+                                    new ResPermission()
+                                            .setDomain("*")
+                                            .setType(EntityConst.TYPE_NAME)
+                                            .setRes("*")
+                                            .setAction("*")
+                                            .toString(),
 
-            simpleDao.create(new CreateRoleReq()
-                    .setCode(RbacRoleObject.ADMIN_ROLE)
-                    .setName("管理员")
-                    .setEditable(false)
-                    .setOrgDataScope(Role.OrgDataScope.All)
-                    .setPermissionList(permissions));
+                                    new ResPermission()
+                                            .setDomain("*")
+                                            .setType(EntityConst.COMMON_TYPE_NAME)
+                                            .setRes("*")
+                                            .setAction("*")
+                                            .toString(),
 
-            ///////////////////////////////////////////////////
-
-            permissions.clear();
-
-            permissions.add(new ResPermission()
-                    .setDomain("*")
-                    .setType(EntityConst.TYPE_NAME)
-                    .setRes("*")
-                    .setAction(EntityConst.QUERY_ACTION + "*")
-                    .toString());
-
-            permissions.add(new ResPermission()
-                    .setDomain("*")
-                    .setType(EntityConst.TYPE_NAME)
-                    .setRes("*")
-                    .setAction(EntityConst.STAT_ACTION + "*")
-                    .toString());
-
-            permissions.add(new ResPermission()
-                    .setDomain("*")
-                    .setType(EntityConst.TYPE_NAME)
-                    .setRes("*")
-                    .setAction(EntityConst.VIEW_DETAIL_ACTION + "*")
-                    .toString());
-
-            simpleDao.create(new CreateRoleReq()
-                    .setCode("R_TEST")
-                    .setName("只读测试员")
-                    .setOrgDataScope(Role.OrgDataScope.MySelf)
-                    .setPermissionList(permissions));
-
-            ///////////////////////////////////////////////////
+                                    new ResPermission()
+                                            .setDomain("*")
+                                            .setType(EntityConst.SYS_TYPE_NAME)
+                                            .setRes("*")
+                                            .setAction("*")
+                                            .toString()
+                            ))
+                            .setTenantId(tenantInfo.getId())
+            );
         }
 
+        ///////////////////////////////////////////////////
 
         User user = simpleDao.selectFrom(User.class)
                 .isNull(E_User.tenantId)
                 .eq(E_User.email, "sa")
                 .findOne();
 
-        if (user != null) {
-            return;
+        if (user == null) {
+            simpleDao.create(
+                    new CreateUserReq()
+                            .setEmail("sa")
+                            .setTelephone("18895279527")
+                            .setPassword(encryptPassword("123456"))
+                            .setName("超级管理员")
+                            .setEditable(false)
+                            .setStaffNo("0000")
+                            .setRoleList(Arrays.asList(RbacRoleObject.SA_ROLE))
+            );
         }
 
-        List<String> roleList = new LinkedList<>();
+        /////////////////////////////////////////////////////////////
 
-        roleList.add(RbacRoleObject.SA_ROLE);
+        user = simpleDao.selectFrom(User.class)
+                .eq(E_User.tenantId, tenantInfo.getId())
+                //   .eq(E_User.email, "admin")
+                .findOne();
 
-        simpleDao.create(new CreateUserReq()
-                .setEmail("sa")
-                .setTelephone("18895279527")
-                .setPassword(encryptPassword("123456"))
-                .setName("超级管理员")
-                .setEditable(false)
-                .setStaffNo("0000")
-                .setRoleList(roleList)
-        );
-
-        ///////////////////////////////////////////////////
-
-        roleList.clear();
-        roleList.add(RbacRoleObject.ADMIN_ROLE);
-
-        simpleDao.create(new CreateUserReq()
-                .setEmail("admin")
-                .setPassword(encryptPassword("123456"))
-                .setName("管理员")
-                .setStaffNo("9999")
-                .setRoleList(roleList)
-                .setTenantId(tenantInfo.getId())
-        );
-
-        ///////////////////////////////////////////////////
-
-        roleList.clear();
-        roleList.add("test");
-
-        simpleDao.create(new CreateUserReq()
-                .setEmail("test")
-                .setPassword(encryptPassword("123456"))
-                .setName("只读测试员")
-                .setStaffNo("8888")
-                .setRoleList(roleList)
-                .setTenantId(tenantInfo.getId())
-
-        );
+        if (user == null) {
+            simpleDao.create(new CreateUserReq()
+                    .setEmail("admin")
+                    .setPassword(encryptPassword("123456"))
+                    .setName("管理员")
+                    .setStaffNo("9999")
+                    .setRoleList(Arrays.asList(RbacRoleObject.ADMIN_ROLE))
+                    .setTenantId(tenantInfo.getId())
+            );
+        }
 
         ///////////////////////////////////////////////////
 
     }
+
 
 }

@@ -144,7 +144,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
 
         //关键逻辑
-        req.setContainsPublicData(false);
+        //req.setContainsPublicData(false);
 
         int n = simpleDao.deleteByQueryObj(req);
 

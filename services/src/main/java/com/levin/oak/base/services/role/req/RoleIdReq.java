@@ -45,10 +45,6 @@ public class RoleIdReq extends MultiTenantReq {
     @NotNull
     protected Long id;
 
-    @Schema(description = "是否包含公共数据", hidden = true)
-    @Ignore
-    private boolean isContainsPublicData = false;
-
     @PostConstruct
     public void preQuery() {
         //@todo ID 查询之前初始化数据

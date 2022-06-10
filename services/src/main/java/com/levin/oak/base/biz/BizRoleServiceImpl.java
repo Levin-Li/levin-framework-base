@@ -1,6 +1,8 @@
 package com.levin.oak.base.biz;
 
 import com.levin.commons.dao.SimpleDao;
+import com.levin.commons.dao.annotation.Eq;
+import com.levin.commons.dao.annotation.IsNull;
 import com.levin.commons.utils.JsonStrArrayUtils;
 import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.Role;
@@ -41,14 +43,12 @@ public class BizRoleServiceImpl implements BizRoleService {
         return new ArrayList<>(
                 //获取指定用户的权限列表
                 simpleDao.selectFrom(Role.class)
-                        .select(E_Role.permissionList)
+                        .select("distinct " + E_Role.permissionList)
                         .eq(E_Role.enable, true)
                         .in(E_Role.code, roleCodeList)
-                        //公共角色和自有角色
-                        .or()
-                        .isNull(E_Role.tenantId)
-                        .eq(E_Role.tenantId, tenantId)
-                        .end()
+                        //公共角色和自有角色，只能二选一
+                        .appendByAnnotations(StringUtils.hasText(tenantId), E_Role.tenantId, tenantId, Eq.class)
+                        .appendByAnnotations(tenantId == null, E_Role.tenantId, null, IsNull.class)
                         .find(String.class)
                         .parallelStream()
                         .filter(StringUtils::hasText)

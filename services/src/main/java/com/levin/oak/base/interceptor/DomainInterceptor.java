@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
- * 域名拦截器
+ * 控制器方法域名拦截器
  */
 public class DomainInterceptor implements HandlerInterceptor {
 
@@ -58,7 +58,6 @@ public class DomainInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-
 
     }
 }

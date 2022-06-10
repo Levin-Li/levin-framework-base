@@ -45,7 +45,6 @@ public class CreateRoleReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445356492L;
 
-
     @Schema(description = "编码", required = true)
     @NotBlank
     private String code;

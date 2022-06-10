@@ -6,7 +6,8 @@
     <meta charset="utf-8"/>
     <#--    <meta name="renderer" content="webkit">-->
     <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-    <title>${appName}管理后台登录</title>
+    <title>${appName}登录</title>
+    <link type="image/x-icon" rel="shortcut icon" href="${appLogo}" />
     <link href="css/index.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/jquery.particleground.min.js" type="text/javascript"></script>

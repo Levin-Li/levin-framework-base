@@ -4,6 +4,7 @@ import cn.hutool.cache.CacheUtil;
 import cn.hutool.cache.impl.LRUCache;
 import com.levin.commons.dao.Case;
 import com.levin.commons.dao.SimpleDao;
+import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.MenuItem;
 import com.levin.commons.rbac.MenuResTag;
@@ -19,7 +20,7 @@ import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.AmisMenu;
 import com.levin.oak.base.controller.rbac.dto.AmisResp;
 import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.TenantShareReq;
+import com.levin.oak.base.services.commons.req.CommonReq;
 import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
@@ -239,7 +240,7 @@ public class AmisController extends BaseController {
      */
     @RequestMapping(value = "{uiType}", method = {RequestMethod.GET, RequestMethod.POST})
     @Operation(tags = {"Amis支持"}, summary = "获取Amis UI界面-5分钟刷新")
-    public String getUiContent(@PathVariable String uiType, String path, String type, String category, TenantShareReq shareReq) {
+    public String getUiContent(@PathVariable String uiType, String path, String type, String category, CommonReq shareReq) {
 
         Assert.hasText(path, "path 必须指定");
 
@@ -263,19 +264,19 @@ public class AmisController extends BaseController {
 //                .setOrderDir(OrderBy.Type.Asc)
 //                .setTenantId(shareReq.getTenantId()));
 
-
         final Class<? extends SimpleEntity> aClass = "page".equalsIgnoreCase(uiType) ? SimplePage.class : SimpleForm.class;
 
         page = simpleDao.selectFrom(aClass)
+                //  .disableEmptyValueFilter()
                 .eq(E_SimpleEntity.type, type)
                 .eq(E_SimpleEntity.category, category)
                 .eq(E_SimpleEntity.path, path)
                 .isNullOrEq(E_SimpleEntity.tenantId, shareReq.getTenantId())
                 //排序,本租户优先
-                .orderBy(new Case()
+                .orderBy(OrderBy.Type.Desc, new Case()
                         .when(E_SimpleEntity.tenantId + " IS NULL", "0")
                         .elseExpr("1")
-                        .toString("(", ") Desc")
+                        .toString("(", ")")
                 )
                 .findOne(Page.class);
 

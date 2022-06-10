@@ -68,7 +68,6 @@ public class QuerySimplePageReq extends MultiTenantReq{
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
     OrderBy.Type orderDir;
 
-
     //@NotNull
     @Schema(description = "id")
     Long id;

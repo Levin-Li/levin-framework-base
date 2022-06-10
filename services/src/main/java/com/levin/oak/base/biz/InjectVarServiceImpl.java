@@ -4,7 +4,6 @@ package com.levin.oak.base.biz;
 import com.levin.commons.dao.DaoContext;
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.rbac.RbacUserInfo;
-import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
@@ -16,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -120,12 +118,7 @@ public class InjectVarServiceImpl implements InjectVarService {
             return result;
         }
 
-        TenantInfo tenantInfo = bizTenantService.getCurrentTenant();
-
-        //如果当前没有域名
-        if (tenantInfo == null && frameworkProperties.getTenantBindDomain().isEnable()) {
-            tenantInfo = bizTenantService.getTenantByDomain(httpServletRequest.getServerName());
-        }
+        TenantInfo tenantInfo = bizTenantService.checkAndGetCurrentUserTenant();
 
         MapUtils.Builder<String, Object> builder = MapUtils.putFirst("tenantBindDomainEnable", frameworkProperties.getTenantBindDomain().isEnable());
 
@@ -134,30 +127,6 @@ public class InjectVarServiceImpl implements InjectVarService {
             //暂时兼容
             //获取登录信息
             UserInfo userInfo = baseAuthService.getUserInfo();
-
-            //加载用户租户信息
-            if (StringUtils.hasText(userInfo.getTenantId())) {
-
-                TenantInfo tenantInfo2 = bizTenantService.getTenantInfo(userInfo.getTenantId());
-
-                if (tenantInfo2 != null) {
-
-                    if (tenantInfo != null
-                            && !tenantInfo.getId().contentEquals(tenantInfo2.getId())) {
-
-                        //如果用户的租户和域名的租户不匹配，则抛出异常
-                        throw new AccessDeniedException("当前用户归属的租户和当前访问的域名不匹配");
-                    }
-
-                    tenantInfo = tenantInfo2;
-                }
-            }
-
-            //除了超管，其它用户必须要归属于指定的租户
-            if (!userInfo.isSuperAdmin() && tenantInfo == null) {
-                throw new AccessDeniedException("非法的无租户用户");
-            }
-
             builder.put(InjectConsts.USER_ID, userInfo.getId())
                     .put(InjectConsts.USER_NAME, userInfo.getName())
                     .put(InjectConsts.USER, userInfo)

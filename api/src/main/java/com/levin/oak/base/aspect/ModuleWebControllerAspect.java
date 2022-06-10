@@ -7,6 +7,7 @@ import com.levin.commons.service.domain.Desc;
 import com.levin.commons.service.support.*;
 import com.levin.commons.utils.ExceptionUtils;
 import com.levin.commons.utils.IPAddrUtils;
+import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.rbac.AuthService;
@@ -43,7 +44,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static com.levin.oak.base.ModuleOption.HTTP_REQUEST_INFO_RESOLVER;
@@ -163,7 +163,7 @@ public class ModuleWebControllerAspect {
 
 
     /**
-     * 获取模块的变量解析器
+     * 获取JoinPoint所在模块的变量解析器
      *
      * @param joinPoint
      * @return
@@ -174,6 +174,7 @@ public class ModuleWebControllerAspect {
 
         final String className = signature.getDeclaringTypeName();
 
+        //获取当前插件
         Plugin plugin = pluginManager.getInstalledPlugins()
                 .stream()
                 .filter(plugin1 -> className.startsWith(plugin1.getPackageName() + "."))
@@ -187,16 +188,17 @@ public class ModuleWebControllerAspect {
         final String packageName = plugin.getPackageName();
 
         if (!moduleResolverMap.containsKey(packageName)) {
+
             //放入一个空
             moduleResolverMap.addAll(packageName, Collections.emptyList());
 
-            //按bean名查找
+            //按bean名查找 List<VariableResolver> bean
             SpringContextHolder.<List<VariableResolver>>findBeanByBeanName(context
                     , ResolvableType.forClassWithGenerics(Iterable.class, VariableResolver.class).getType()
                     , "plugin." + packageName, packageName)
                     .forEach(list -> moduleResolverMap.addAll(packageName, list));
 
-            //按bean名查找
+            //按bean名查找 VariableResolver bean
             SpringContextHolder.<VariableResolver>findBeanByBeanName(context
                     , ResolvableType.forClass(VariableResolver.class).getType()
                     , "plugin." + packageName, packageName)
@@ -243,25 +245,42 @@ public class ModuleWebControllerAspect {
             log.debug("开始为方法 {} 注入变量...", signature);
         }
 
-        //模块
+        //模块变量
         final Supplier<List<VariableResolver>> moduleResolverList = () -> getModuleResolverList(joinPoint);
 
-        //http
+        //http请求变量
         final Supplier<List<VariableResolver>> httpResolver = () -> Arrays.asList(httpRequestInfoResolver);
 
-        //全局
+        //全局变量
         final Supplier<List<VariableResolver>> globalResolver = () -> variableResolverManager.getVariableResolvers();
 
-        final Consumer<Object> injector = (bean) -> variableInjector.injectByVariableResolvers(bean, moduleResolverList, httpResolver, globalResolver);
+//        final Consumer<Object> injector = (bean) -> variableInjector.injectByVariableResolvers(bean, moduleResolverList, httpResolver, globalResolver);
 
         Optional.ofNullable(joinPoint.getArgs()).ifPresent(args ->
+
+                //对方法参数进行迭代
                 Arrays.stream(args).filter(Objects::nonNull).forEachOrdered(arg -> {
-                    //支持第一级是集合对象的参数
-                    if (arg instanceof Collection) {
-                        ((Collection) arg).stream().filter(Objects::nonNull).forEachOrdered(injector);
-                    } else {
-                        injector.accept(arg);
-                    }
+
+                    //如果参数本身是一个集合，支持第一级是集合对象的参数
+                    Collection<?> params = (arg instanceof Collection) ? ((Collection<?>) arg) : Arrays.asList(arg);
+
+                    params.stream()
+                            .filter(Objects::nonNull)
+                            .forEachOrdered(param -> {
+
+                                variableInjector.injectByVariableResolvers(param,
+
+                                        //参数对象 param，做为 _this 变量
+                                        () -> VariableInjector.newSupportSpelAndGroovyResolvers(() -> Arrays.asList(MapUtils.put("_this", param).build())),
+
+                                        //模块参数
+                                        moduleResolverList,
+                                        //Http参数
+                                        httpResolver,
+                                        //全局参数
+                                        globalResolver);
+                            });
+
                 })
         );
     }

@@ -3,9 +3,11 @@ package com.levin.oak.base.biz;
 import cn.hutool.core.lang.Assert;
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.service.domain.SignatureReq;
+import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.exception.ServiceException;
 import com.levin.commons.utils.SignUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
+import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.entities.E_Tenant;
 import com.levin.oak.base.services.appclient.AppClientService;
 import com.levin.oak.base.services.appclient.info.AppClientInfo;
@@ -13,9 +15,9 @@ import com.levin.oak.base.services.appclient.req.QueryAppClientReq;
 import com.levin.oak.base.services.tenant.TenantService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.services.tenant.req.QueryTenantReq;
+import com.levin.oak.base.services.user.info.UserInfo;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -25,7 +27,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
@@ -40,6 +44,9 @@ public class BizTenantServiceImpl
 
     @Resource
     SimpleDao simpleDao;
+
+    @Resource
+    AuthService authService;
 
     @Resource
     TenantService tenantService;
@@ -57,14 +64,75 @@ public class BizTenantServiceImpl
     FrameworkProperties frameworkProperties;
 
 
-    final static ThreadLocal<TenantInfo> domainTenant = new ThreadLocal<>();
-    final static ThreadLocal<String> domains = new ThreadLocal<>();
+    final static ThreadLocal<TenantInfo> currentTenant = new ThreadLocal<>();
+
+    final static ThreadLocal<String> currentDomain = new ThreadLocal<>();
 
     @PostConstruct
     void init() {
+        frameworkProperties.getSign().friendlyTip(log.isInfoEnabled(), info -> log.info(info));
+    }
 
-        frameworkProperties.getSign().friendlyTip(log.isInfoEnabled(),info -> log.info(info));
+    private static <T> T getData(T main, Predicate<T> filter, Supplier<T>... supplier) {
 
+        if (filter == null) {
+            filter = Objects::nonNull;
+        }
+
+        return filter.test(main) ? main :
+                Arrays.stream(supplier)
+                        .map(Supplier::get)
+                        .filter(filter)
+                        .findFirst()
+                        .orElse(null);
+    }
+
+
+    @Override
+    public TenantInfo checkAndGetCurrentUserTenant() {
+
+        //获取当前租户
+        TenantInfo tenantInfo = getCurrentTenant();
+
+        final String domain = getData(getCurrentDomain(), StringUtils::hasText, () -> request.getServerName());
+
+        //如果当前没有域名，获取域名关联的租户
+        if (tenantInfo == null && frameworkProperties.getTenantBindDomain().isEnable()) {
+            tenantInfo = setCurrentTenantByDomain(domain);
+            log.warn("当前请求的域名[ {} ]未关联租户", domain);
+        }
+
+        //当前登录用户
+        if (authService.isLogin()) {
+            //暂时兼容
+            //获取登录信息
+            UserInfo userInfo = authService.getUserInfo();
+
+            //加载用户租户信息
+            if (StringUtils.hasText(userInfo.getTenantId())) {
+
+                TenantInfo tenantInfo2 = getTenantInfo(userInfo.getTenantId());
+
+                if (tenantInfo2 != null) {
+
+                    if (tenantInfo != null
+                            && !tenantInfo.getId().contentEquals(tenantInfo2.getId())) {
+
+                        //如果用户的租户和域名的租户不匹配，则抛出异常
+                        throw new AccessDeniedException("当前用户归属的租户和当前访问的域名不匹配");
+                    }
+
+                    tenantInfo = tenantInfo2;
+                }
+            }
+
+            //除了超管，其它用户必须要归属于指定的租户
+            if (!userInfo.isSuperAdmin() && tenantInfo == null) {
+                throw new AccessDeniedException("非法的无租户用户");
+            }
+        }
+
+        return tenantInfo;
     }
 
     /**
@@ -75,7 +143,7 @@ public class BizTenantServiceImpl
      */
     @Override
     public void setCurrentDomain(String domain) {
-        domains.set(domain);
+        currentDomain.set(domain);
     }
 
     /**
@@ -85,7 +153,7 @@ public class BizTenantServiceImpl
      */
     @Override
     public String getCurrentDomain() {
-        return domains.get();
+        return currentDomain.get();
     }
 
     /**
@@ -103,7 +171,7 @@ public class BizTenantServiceImpl
 
         TenantInfo tenantInfo = getTenantByDomain(domain);
 
-        domainTenant.set(tenantInfo);
+        setCurrentTenant(tenantInfo);
 
         if (frameworkProperties.getSign().isEnable()) {
             checkTenantAppSign(tenantInfo);
@@ -112,6 +180,11 @@ public class BizTenantServiceImpl
         return tenantInfo;
     }
 
+    @Override
+    public TenantInfo setCurrentTenant(TenantInfo tenantInfo) {
+        currentTenant.set(tenantInfo);
+        return tenantInfo;
+    }
 
     /**
      * 检查当前租户应用签名
@@ -161,22 +234,9 @@ public class BizTenantServiceImpl
     @Override
     public TenantInfo getCurrentTenant() {
 
-        TenantInfo tenantInfo = auditTenant(domainTenant.get());
+        TenantInfo tenantInfo = auditTenant(currentTenant.get());
 
         return tenantInfo;
-    }
-
-
-    /**
-     * @param tenantInfo
-     * @return
-     */
-    @Override
-    public String getDomain(TenantInfo tenantInfo) {
-
-        List<String> list = tenantInfo.getDomainList(); //JsonStrArrayUtils.parse(tenantInfo.getDomainList(), StringUtils::hasText, null);
-
-        return list.get(0);
     }
 
     /**

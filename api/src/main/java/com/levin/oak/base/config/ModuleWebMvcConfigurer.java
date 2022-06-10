@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.util.StringUtils;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.*;
 
@@ -132,6 +133,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                 .allowedOrigins("*");
     }
 
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
@@ -147,12 +149,21 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //            SaRouter.match("/comment/**", r -> StpUtil.checkPermission("comment"));
 //        })).addPathPatterns("/**");
 
-        //线程级别用户权限清楚
+        //线程级别用户权限清除
         registry.addInterceptor(new HandlerInterceptor() {
+            @Override
+            public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+                //清楚缓存数据
+                authService.clearThreadCacheData();
+                injectVarService.clearCache();
+                return true;
+            }
+
             @Override
             public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
                 //清楚缓存数据
                 authService.clearThreadCacheData();
+                injectVarService.clearCache();
             }
         }).addPathPatterns("/**")
                 .order(Ordered.HIGHEST_PRECEDENCE);
@@ -164,7 +175,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                 @Override
                 public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
                     super.afterCompletion(request, response, handler, ex);
-                    injectVarService.clearCache();
                 }
             };
 
@@ -178,6 +188,22 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     .excludePathPatterns(frameworkProperties.getTenantBindDomain().getExcludePathPatterns())
                     .addPathPatterns(includePathPatterns.isEmpty() ? Arrays.asList("/**") : includePathPatterns)
                     .order(Ordered.HIGHEST_PRECEDENCE + 1000);
+        }
+
+        {
+            //检查租户信息
+            registry.addInterceptor(new HandlerInterceptor() {
+                @Override
+                public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+                    if ((handler instanceof HandlerMethod)) {
+                        bizTenantService.checkAndGetCurrentUserTenant();
+                    }
+
+                    return true;
+                }
+            }).addPathPatterns("/**")
+                    .order(Ordered.HIGHEST_PRECEDENCE + 2000);
         }
 
         if (frameworkProperties.getControllerAcl().isEnable()) {

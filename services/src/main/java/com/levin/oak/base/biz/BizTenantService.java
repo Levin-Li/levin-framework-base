@@ -2,6 +2,7 @@ package com.levin.oak.base.biz;
 
 
 import com.levin.oak.base.services.tenant.info.TenantInfo;
+import org.springframework.lang.Nullable;
 
 /**
  * 租户-服务接口
@@ -9,11 +10,27 @@ import com.levin.oak.base.services.tenant.info.TenantInfo;
 public interface BizTenantService {
 
     /**
+     * 检查和比对当前域名和用户的租户是否正确
+     *
+     * @return nullable
+     */
+    @Nullable
+    TenantInfo checkAndGetCurrentUserTenant();
+
+    /**
      * 获取当前的租户信息
      *
      * @return
      */
     TenantInfo setCurrentTenantByDomain(String domain);
+
+
+    /**
+     * 获取当前的租户信息
+     *
+     * @return
+     */
+    TenantInfo setCurrentTenant(TenantInfo tenantInfo);
 
     /**
      * 获取当前域名
@@ -35,14 +52,6 @@ public interface BizTenantService {
      * @return
      */
     TenantInfo getCurrentTenant();
-
-
-    /**
-     * @param tenantInfo
-     * @return
-     */
-    String getDomain(TenantInfo tenantInfo);
-
 
     /**
      * 检查租户状态

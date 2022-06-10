@@ -45,7 +45,6 @@ public class StatRoleReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445356492L;
 
-
     //@NotNull
 
     @Schema(description = "id")

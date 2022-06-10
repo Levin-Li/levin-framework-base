@@ -171,6 +171,8 @@ public class RbacServiceImpl extends BaseService implements RbacService {
     @Override
     public boolean canAssignRole(Object targetUserId, String requireRoleCode, BiConsumer<String, String> matchErrorConsumer) {
 
+       // Assert.isTrue(authService.isLogin(), "用户未登录");
+
         RbacUserInfo<String> userInfo = authService.getUserInfo();
 
         //1、如果是超级管理员，可以分配任何角色
@@ -204,6 +206,8 @@ public class RbacServiceImpl extends BaseService implements RbacService {
      */
     @Override
     public boolean isAuthorized(boolean isRequireAllPermission, List<String> requirePermissionList, BiConsumer<String, String> matchErrorConsumer) {
+
+        //Assert.isTrue(authService.isLogin(), "用户未登录");
 
         RbacUserInfo<String> userInfo = authService.getUserInfo();
 

@@ -1,25 +1,31 @@
 package com.levin.oak.base.controller.tenant;
 
+import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
+import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.entities.E_Tenant;
+import com.levin.oak.base.entities.E_User;
+import com.levin.oak.base.entities.User;
 import com.levin.oak.base.services.tenant.TenantService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.services.tenant.req.*;
+import com.levin.oak.base.services.user.req.CreateUserReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
@@ -56,8 +62,14 @@ public class TenantController extends BaseController {
 
     private static final String BIZ_NAME = E_Tenant.BIZ_NAME;
 
-    @Autowired
+    @Resource
     TenantService tenantService;
+
+    @Resource
+    SimpleDao simpleDao;
+
+    @Resource
+    AuthService authService;
 
     /**
      * 分页查找
@@ -80,7 +92,24 @@ public class TenantController extends BaseController {
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<String> create(@RequestBody CreateTenantReq req) {
-        return ApiResp.ok(tenantService.create(req));
+
+        String tenantId = tenantService.create(req);
+
+        //创建租户后，自动创建租户用户
+        if (simpleDao.selectFrom(User.class)
+                .eq(E_User.tenantId, tenantId)
+                .count() < 1) {
+            simpleDao.create(new CreateUserReq()
+                    .setEmail("admin")
+                    .setPassword(authService.encryptPassword("123456"))
+                    .setName("管理员")
+                    .setStaffNo("0000")
+                    .setRoleList(Arrays.asList(RbacRoleObject.ADMIN_ROLE))
+                    .setTenantId(tenantId)
+            );
+        }
+
+        return ApiResp.ok(tenantId);
     }
 
     /**

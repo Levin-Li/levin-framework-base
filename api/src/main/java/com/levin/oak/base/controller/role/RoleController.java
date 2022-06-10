@@ -183,8 +183,10 @@ public class RoleController extends BaseController {
      */
     protected void checkCurrentUserCreateOrUpdateRolePermissions(String roleCode, List<String> permissionList) {
 
-        Assert.isTrue(roleCode == null || roleCode.startsWith("R_"), "角色编码必须以 R_ 开头");
-        Assert.isTrue(roleCode == null || !roleCode.equals(RbacRoleObject.SA_ROLE), "角色编码 R_SA 不可使用");
+        Assert.hasText(roleCode, "角色编码不能为空");
+
+        Assert.isTrue(roleCode.startsWith("R_"), "角色编码必须以 R_ 开头");
+        Assert.isTrue(!roleCode.equals(RbacRoleObject.SA_ROLE), "角色编码 R_SA 不可使用");
 
         if (StringUtils.hasText(roleCode)) {
             //@todo 检查角色编码是否已经存在
