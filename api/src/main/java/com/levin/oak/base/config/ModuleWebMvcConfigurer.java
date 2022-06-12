@@ -72,7 +72,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         frameworkProperties.getControllerAcl().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
-
     }
 
     /**
@@ -229,8 +228,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     .addPathPatterns((frameworkProperties.getAdminPath() + "/**").replace("//", "/"))
                     .order(Ordered.HIGHEST_PRECEDENCE + 4000);
         }
-    }
 
+    }
 
     /**
      * 资源拦截器

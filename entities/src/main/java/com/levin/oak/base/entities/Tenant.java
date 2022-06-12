@@ -76,6 +76,7 @@ public class Tenant extends AbstractNamedEntityObject {
     String logo;
 
     @Schema(description = "企业信用编码")
+    @Column(length = 128)
     String code;
 
     @Schema(description = "租户编码")
@@ -96,9 +97,11 @@ public class Tenant extends AbstractNamedEntityObject {
     Date licenseExpire;
 
     @Schema(description = "联系人")
+    @Column(length = 32)
     String contractPerson;
 
     @Schema(description = "联系电话")
+    @Column(length = 32)
     String contractPhone;
 
     ////////////////////////////////////////////////
@@ -112,10 +115,11 @@ public class Tenant extends AbstractNamedEntityObject {
     String appId;
 
     @Schema(description = "appSecret")
-    @Column(length = 256)
+    @Column(length = 128)
     String appSecret;
 
-    @Schema(description = "EncryptKey")
+    @Schema(description = "encryptKey")
+    @Column(length = 128)
     String encryptKey;
 
     @PrePersist

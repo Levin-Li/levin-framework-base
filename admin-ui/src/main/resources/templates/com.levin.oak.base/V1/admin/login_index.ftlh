@@ -118,7 +118,7 @@
         }, 2000)
     }
 
-    function error(msg) {
+    function showError(msg) {
         toastr.error(msg, '错误');
     }
 
@@ -141,7 +141,7 @@
                 placeholder = placeholder + "不能为空！";
             }
 
-            error(prompt || placeholder);
+            showError(prompt || placeholder);
 
             inputView.focus();
 
@@ -180,7 +180,7 @@
             data: {account, password, verificationCode},
             error: function (xhr, status, error) {
                 window.isLogining = false;
-                error(error)
+                showError(error)
                 console.log(error)
             },
             success: function (result) {
@@ -193,9 +193,9 @@
                         updateCode();
                         verificationCodeView.focus();
                     }
-                    error(result.msg);
+                    showError(result.msg);
                 } else {
-                    error("发生未知错误");
+                    showError("发生未知错误");
                 }
 
                 window.isLogining = false;

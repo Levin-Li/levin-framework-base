@@ -20,8 +20,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -109,10 +107,10 @@ public class InjectVarServiceImpl implements InjectVarService {
     }
 
     @Override
-    public List<Map<String, ?>> getInjectVars() {
+    public Map<String, ?> getInjectVars() {
 
         //缓存在请求中
-        List<Map<String, ?>> result = (List<Map<String, ?>>) httpServletRequest.getAttribute(INJECT_VAR_CACHE_KEY);
+        Map<String, ?> result = (Map<String, ?>) httpServletRequest.getAttribute(INJECT_VAR_CACHE_KEY);
 
         if (result != null) {
             return result;
@@ -146,10 +144,10 @@ public class InjectVarServiceImpl implements InjectVarService {
 
         final Map<String, Object> ctx = builder.build();
 
+        result = ctx;
+
         //设置注入变量到Dao上下文中
         DaoContext.threadContext.putAll(ctx);
-
-        result = Arrays.asList(ctx);
 
         //缓存到请求对象重
         httpServletRequest.setAttribute(INJECT_VAR_CACHE_KEY, result);

@@ -3,6 +3,7 @@ package com.levin.oak.base.config;
 import com.levin.commons.service.support.*;
 import com.levin.oak.base.biz.InjectVarService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static com.levin.oak.base.ModuleOption.HTTP_REQUEST_INFO_RESOLVER;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
@@ -56,31 +56,34 @@ public class ModuleVariableResolverConfigurer
 
         //静态变量
         // @todo 加入全局的静态变量
-        //vrm.add(MapUtils.putFirst("静态变量", "静态变量").build());
 
         //全局动态变量，每次请求都会执行
+        vrm.add(VariableInjector.newResolverByMap(this::getGlobalContextVars));
 
-        vrm.add(VariableInjector.newSupportSpelAndGroovyResolvers(this::getGlobalContextVars));
+        vrm.add(
+                new VariableResolver() {
+                    @Override
+                    public boolean isSupported(String name) {
+                        return name.startsWith("env:");
+                    }
 
-        vrm.add(new VariableResolver() {
-            @Override
-            public <T> ValueHolder<T> resolve(String key, T originalValue, boolean throwExWhenNotFound, boolean isRequireNotNull, Type... expectTypes) throws VariableNotFoundException {
+                    @Override
+                    public <T> ValueHolder<T> resolve(String key, T originalValue, boolean throwExWhenNotFound, boolean isRequireNotNull, Type... expectTypes) throws VariableNotFoundException {
 
-                if (!key.trim().startsWith("env:")) {
-                    return ValueHolder.notValue();
+                        if (!key.trim().startsWith("env:")) {
+                            return ValueHolder.notValue();
+                        }
+
+                        key = key.substring(4);
+
+                        return (ValueHolder<T>) new ValueHolder<>()
+                                .setValue(environment.getProperty(key))
+                                .setName(key)
+                                .setHasValue(environment.containsProperty(key));
+                    }
                 }
-
-                key = key.substring(4);
-
-                return (ValueHolder<T>) new ValueHolder<>()
-                        .setValue(environment.getProperty(key))
-                        .setName(key)
-                        .setHasValue(environment.containsProperty(key));
-            }
-        });
-
+        );
     }
-
 
     /**
      * 全局的环境变量
@@ -90,53 +93,38 @@ public class ModuleVariableResolverConfigurer
     protected List<Map<String, ?>> getGlobalContextVars() {
 
         //每次请求都会获取的变量
-
         //@todo 增加全局的动态变量
-
-        //return Arrays.asList(MapUtils.putFirst(InjectConsts.ORG_ID, "123456789").build());
-
         return Collections.emptyList();
     }
 
-
-    /**
-     * 模块级别 http 请求变量解析器
-     *
-     * @return HttpRequestInfoResolver
-     */
-    @Bean(HTTP_REQUEST_INFO_RESOLVER)
+    @Bean(PLUGIN_PREFIX + "DefaultHttpRequestInfoResolver")
     @Order(1)
-    HttpRequestInfoResolver moduleHttpRequestInfoResolver() {
+    @ConditionalOnMissingBean(HttpRequestInfoResolver.class)
+    HttpRequestInfoResolver httpRequestInfoResolver() {
         return new HttpRequestInfoResolver();
     }
 
     /**
      * 模块级别请求变量解析器
+     * 模块前缀 PLUGIN_PREFIX 会被识别为模块级别的变量解析器
      *
      * @return VariableResolver
      */
-    @Bean(PLUGIN_PREFIX + "DefaultModuleVariableResolverList")
+    @Bean(PLUGIN_PREFIX + "DefaultModuleVariableResolver")
     @Order(2)
-    List<VariableResolver> defaultModuleVariableResolver() {
-        return VariableInjector.newSupportSpelAndGroovyResolvers(this::getModuleContextVars);
+    VariableResolver defaultModuleVariableResolver() {
+        return VariableInjector.newResolverByMap(this::getModuleContextVars);
     }
 
     /**
      * 模块级别的环境变量，仅对本模块生效
-     *
-     * @return vars
-     * @see com.levin.oak.base.aspect.ModuleWebControllerAspect#injectVar
      */
     protected List<Map<String, ?>> getModuleContextVars() {
 
         //每次请求都会获取的变量
-        //return Arrays.asList(MapUtils.putFirst(InjectConsts.ORG_ID, "123456789").build());
-
         //@todo 增加本模块的动态变量
 
-        // 使用注入服务
-        return injectVarService.getInjectVars();
-
-//        return Collections.emptyList();
+        return Collections.emptyList();
     }
+
 }

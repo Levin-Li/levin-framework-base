@@ -293,7 +293,7 @@ public class AuthServiceImpl
 
                     auditUser(userInfo);
 
-                    return bizRoleService.getRolePermissionList(userInfo.getTenantId(), userInfo.getRoleList());
+                    return bizRoleService.getRolePermissionList(userInfo.getTenantId(), roleList);
                 }
         );
     }
@@ -513,6 +513,7 @@ public class AuthServiceImpl
                             .setCode(RbacRoleObject.ADMIN_ROLE)
                             .setName("管理员")
                             .setEditable(false)
+
                             .setOrgDataScope(Role.OrgDataScope.All)
                             .setPermissionList(Arrays.asList(
 
@@ -539,6 +540,11 @@ public class AuthServiceImpl
                             ))
                             .setTenantId(tenantInfo.getId())
             );
+
+//            role = simpleDao.selectFrom(Role.class)
+//                    .eq(E_Role.code, RbacRoleObject.ADMIN_ROLE)
+//                    .eq(E_User.tenantId, tenantInfo.getId())
+//                    .findOne();
         }
 
         ///////////////////////////////////////////////////

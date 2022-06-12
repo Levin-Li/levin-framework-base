@@ -50,7 +50,7 @@ public class BizRoleServiceImpl implements BizRoleService {
                         .appendByAnnotations(StringUtils.hasText(tenantId), E_Role.tenantId, tenantId, Eq.class)
                         .appendByAnnotations(tenantId == null, E_Role.tenantId, null, IsNull.class)
                         .find(String.class)
-                        .parallelStream()
+                        .stream()
                         .filter(StringUtils::hasText)
                         //JSON 转换
                         .flatMap(json -> (JsonStrArrayUtils.<String>parse(json, null, null)).stream())

@@ -7,7 +7,7 @@
    支持租户设置自定义域名：DomainInterceptor 
   
 2、支持控制器变量注入
-   支持类：InjectVarService，可重写实现   
+   支持类：InjectVarService，可重写实现。每个控制器的请求参数都会自动注入。   
    
 3、支持RBAC，支持严密的安全拦截
 

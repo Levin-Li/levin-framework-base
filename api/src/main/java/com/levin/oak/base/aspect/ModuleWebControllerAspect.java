@@ -10,6 +10,7 @@ import com.levin.commons.utils.IPAddrUtils;
 import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
+import com.levin.oak.base.biz.InjectVarService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.controller.accesslog.AccessLogController;
 import com.levin.oak.base.services.accesslog.AccessLogService;
@@ -44,9 +45,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.function.Supplier;
 
-import static com.levin.oak.base.ModuleOption.HTTP_REQUEST_INFO_RESOLVER;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
@@ -76,9 +75,6 @@ public class ModuleWebControllerAspect {
     @Resource
     HttpServletResponse response;
 
-    @Resource(name = HTTP_REQUEST_INFO_RESOLVER)
-    HttpRequestInfoResolver httpRequestInfoResolver;
-
     @Resource
     ScheduledExecutorService scheduledExecutorService;
 
@@ -87,6 +83,9 @@ public class ModuleWebControllerAspect {
 
     @Resource
     AuthService authService;
+
+    @Resource
+    InjectVarService injectVarService;
 
     @Resource
     BizTenantService bizTenantService;
@@ -192,6 +191,8 @@ public class ModuleWebControllerAspect {
             //放入一个空
             moduleResolverMap.addAll(packageName, Collections.emptyList());
 
+//            Supplier<List<Map<String, ?>>>
+
             //按bean名查找 List<VariableResolver> bean
             SpringContextHolder.<List<VariableResolver>>findBeanByBeanName(context
                     , ResolvableType.forClassWithGenerics(Iterable.class, VariableResolver.class).getType()
@@ -245,16 +246,12 @@ public class ModuleWebControllerAspect {
             log.debug("开始为方法 {} 注入变量...", signature);
         }
 
-        //模块变量
-        final Supplier<List<VariableResolver>> moduleResolverList = () -> getModuleResolverList(joinPoint);
+        final List<VariableResolver> variableResolverList = new ArrayList<>();
 
-        //http请求变量
-        final Supplier<List<VariableResolver>> httpResolver = () -> Arrays.asList(httpRequestInfoResolver);
+        final Map<String, ?> injectVars = injectVarService.getInjectVars();
 
-        //全局变量
-        final Supplier<List<VariableResolver>> globalResolver = () -> variableResolverManager.getVariableResolvers();
-
-//        final Consumer<Object> injector = (bean) -> variableInjector.injectByVariableResolvers(bean, moduleResolverList, httpResolver, globalResolver);
+        variableResolverList.addAll(getModuleResolverList(joinPoint));
+        variableResolverList.addAll(variableResolverManager.getVariableResolvers());
 
         Optional.ofNullable(joinPoint.getArgs()).ifPresent(args ->
 
@@ -268,17 +265,13 @@ public class ModuleWebControllerAspect {
                             .filter(Objects::nonNull)
                             .forEachOrdered(param -> {
 
-                                variableInjector.injectByVariableResolvers(param,
+                                ArrayList<VariableResolver> tempList = new ArrayList<>(variableResolverList.size() + 1);
 
-                                        //参数对象 param，做为 _this 变量
-                                        () -> VariableInjector.newSupportSpelAndGroovyResolvers(() -> Arrays.asList(MapUtils.put("_this", param).build())),
+                                tempList.add(VariableInjector.newResolverByMap(MapUtils.put("_this", param).build(), injectVars));
 
-                                        //模块参数
-                                        moduleResolverList,
-                                        //Http参数
-                                        httpResolver,
-                                        //全局参数
-                                        globalResolver);
+                                tempList.addAll(variableResolverList);
+
+                                variableInjector.injectByVariableResolvers(param, tempList);
                             });
 
                 })
