@@ -46,7 +46,7 @@ public class DeleteRoleReq extends MultiTenantReq {
     @Schema(description = "id集合")
     @In(value = E_Role.id, require = true)
     @NotEmpty
-    private Long[] idList;
+    private String[] idList;
 
     @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#user.isSuperAdmin()")
@@ -57,11 +57,11 @@ public class DeleteRoleReq extends MultiTenantReq {
     @NotEq(require = true)
     private final String notEqCode = RbacRoleObject.SA_ROLE;
 
-    public DeleteRoleReq(Long... idList) {
+    public DeleteRoleReq(String... idList) {
         this.idList = idList;
     }
 
-    public DeleteRoleReq setIdList(Long... idList) {
+    public DeleteRoleReq setIdList(String... idList) {
         this.idList = idList;
         return this;
     }

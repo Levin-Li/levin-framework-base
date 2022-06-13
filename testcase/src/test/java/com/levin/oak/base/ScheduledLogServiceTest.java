@@ -11,6 +11,8 @@ import com.levin.oak.base.services.scheduledlog.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -56,7 +58,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  调度日志测试
  *
- *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
+ *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
  *
  */
 
@@ -69,7 +71,7 @@ import org.slf4j.LoggerFactory;
 public class ScheduledLogServiceTest {
 
 
-    @Autowired
+    @Resource
     private ScheduledLogService scheduledLogService;
 
     private Long id;
@@ -94,7 +96,7 @@ public class ScheduledLogServiceTest {
 
             // req.setTaskId("这是文本64");//任务ID 必填
 
-            // req.setInvokeCycle("这是文本256");//执行周期 
+            // req.setInvokeCycle("这是文本128");//执行周期 
 
             // req.setIsError(true);//是否错误 
 
@@ -119,7 +121,7 @@ public class ScheduledLogServiceTest {
         // req.setTenantId("这是文本64");//租户ID
         // req.setOrgId("这是文本64");//归属组织
         // req.setTaskId("这是文本64");//任务ID
-        // req.setInvokeCycle("这是文本256");//执行周期
+        // req.setInvokeCycle("这是文本128");//执行周期
         // req.setIsError(true);//是否错误
         // req.setInvokeResult("执行结果_1");//执行结果
 
@@ -141,7 +143,7 @@ public class ScheduledLogServiceTest {
            // req.setTenantId("这是文本64");//租户ID 
            // req.setOrgId("这是文本64");//归属组织 必填
            // req.setTaskId("这是文本64");//任务ID 必填
-           // req.setInvokeCycle("这是文本256");//执行周期 
+           // req.setInvokeCycle("这是文本128");//执行周期 
            // req.setIsError(true);//是否错误 
            // req.setInvokeResult("执行结果_1");//执行结果 
 

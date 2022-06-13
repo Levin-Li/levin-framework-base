@@ -58,10 +58,9 @@ import java.util.UUID;
 
 public class Tenant extends AbstractNamedEntityObject {
 
-
     @Schema(description = "ID")
     @Id
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+//    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @GeneratedValue(generator = "uuid")
     String id;
 

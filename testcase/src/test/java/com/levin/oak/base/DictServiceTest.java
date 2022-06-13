@@ -11,10 +11,12 @@ import com.levin.oak.base.services.dict.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Dict.*;
 import java.util.List;
 import com.levin.commons.service.support.DefaultJsonConverter;
-import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -60,7 +62,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  字典测试
  *
- *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
+ *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
  *
  */
 
@@ -73,7 +75,7 @@ import org.slf4j.LoggerFactory;
 public class DictServiceTest {
 
 
-    @Autowired
+    @Resource
     private DictService dictService;
 
     private Long id;
@@ -94,17 +96,17 @@ public class DictServiceTest {
 
             // req.setType(Type.System);//类型 必填
 
-            // req.setCode("这是文本64");//编码 必填
+            // req.setCode("这是文本256");//编码 必填
 
             // req.setItemList("编码项_1");//编码项 
 
-            // req.setTenantId("这是文本64");//租户ID 
+            // req.setTenantId("这是文本128");//租户ID 
 
-            // req.setDomain("这是文本64");//系统子域 
+            // req.setDomain("这是文本128");//系统域 
 
             // req.setName("这是文本128");//名称 必填
 
-            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+            // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -131,12 +133,12 @@ public class DictServiceTest {
 
         // req.setId(null);//id
         // req.setType(Type.System);//类型
-        // req.setCode("这是文本64");//编码
+        // req.setCode("这是文本256");//编码
         // req.setItemList("编码项_1");//编码项
-        // req.setTenantId("这是文本64");//租户ID
-        // req.setDomain("这是文本64");//系统子域
+        // req.setTenantId("这是文本128");//租户ID
+        // req.setDomain("这是文本128");//系统域
         // req.setName("这是文本128");//名称
-        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
+        // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼]
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -159,12 +161,12 @@ public class DictServiceTest {
 
 
            // req.setType(Type.System);//类型 必填
-           // req.setCode("这是文本64");//编码 必填
+           // req.setCode("这是文本256");//编码 必填
            // req.setItemList("编码项_1");//编码项 
-           // req.setTenantId("这是文本64");//租户ID 
-           // req.setDomain("这是文本64");//系统子域 
+           // req.setTenantId("这是文本128");//租户ID 
+           // req.setDomain("这是文本128");//系统域 
            // req.setName("这是文本128");//名称 必填
-           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+           // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

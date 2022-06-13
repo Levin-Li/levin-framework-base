@@ -32,7 +32,7 @@ public interface UserService {
      * @return pkId 主键ID
      */
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    Long create(@NotNull CreateUserReq req);
+    String create(@NotNull CreateUserReq req);
 
     /**
      * 创建记录，返回主键ID列表
@@ -41,7 +41,7 @@ public interface UserService {
      * @return pkId 主键ID列表
      */
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    List<Long> batchCreate(@NotNull List<CreateUserReq> reqList);
+    List<String> batchCreate(@NotNull List<CreateUserReq> reqList);
 
     /**
      * 通过主键查找记录，建议在服务内部调用，不要在控制器中调用
@@ -50,7 +50,7 @@ public interface UserService {
      * @return data 数据详情
      */
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    UserInfo findById(@NotNull Long id);
+    UserInfo findById(@NotNull String id);
 
     /**
      * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性

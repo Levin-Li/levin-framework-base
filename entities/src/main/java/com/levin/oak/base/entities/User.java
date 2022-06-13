@@ -14,6 +14,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -45,8 +46,8 @@ import java.util.Date;
         }
         ,
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.telephone}),
-                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
+//                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.telephone}),
+//                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
         }
 )
 public class User
@@ -85,8 +86,9 @@ public class User
     }
 
     @Id
-    @GeneratedValue
-    Long id;
+//    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(generator = "uuid")
+    String id;
 
     @Schema(description = "租户ID")
     @Column(length = 64)

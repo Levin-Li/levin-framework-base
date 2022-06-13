@@ -11,10 +11,11 @@ import com.levin.oak.base.services.tenant.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 import java.util.List;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -60,7 +61,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  租户测试
  *
- *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
+ *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
  *
  */
 
@@ -73,7 +74,7 @@ import org.slf4j.LoggerFactory;
 public class TenantServiceTest {
 
 
-    @Autowired
+    @Resource
     private TenantService tenantService;
 
     private String id;
@@ -92,35 +93,39 @@ public class TenantServiceTest {
 
         CreateTenantReq req = new CreateTenantReq();
 
-            // req.setLogo("租户头像_1");//租户头像 
+            // req.setSysName("这是文本128");//系统名称 
 
-            // req.setCode("企业信用编码_1");//企业信用编码 
+            // req.setSysLogo("系统Logo_1");//系统Logo 
+
+            // req.setLogo("租户Logo_1");//租户Logo 
+
+            // req.setCode("这是文本128");//企业信用编码 
 
             // req.setTenantKey("租户编码_1");//租户编码 必填
 
             // req.setBalance(0.1d);//帐号余额 
 
-            // req.setLicenseCnt(1);//总许可数
+            // req.setLicenseCnt(1);//总许可数 
 
-            // req.setRemainingLicenseCnt(1);//剩余许可数
+            // req.setRemainingLicenseCnt(1);//剩余许可数 
 
             // req.setLicenseExpire(new Date());//到期时间 
 
-            // req.setContractPerson("联系人_1");//联系人 
+            // req.setContractPerson("这是文本32");//联系人 
 
-            // req.setContractPhone("联系电话_1");//联系电话 
+            // req.setContractPhone("这是文本32");//联系电话 
 
             // req.setDomainList("域名列表_1");//域名列表 
 
             // req.setAppId("这是文本32");//appId 
 
-            // req.setAppSecret("这是文本256");//appSecret 
+            // req.setAppSecret("这是文本128");//appSecret 
 
-            // req.setEncryptKey("EncryptKey_1");//EncryptKey 
+            // req.setEncryptKey("这是文本128");//encryptKey 
 
             // req.setName("这是文本128");//名称 必填
 
-            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+            // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -146,22 +151,24 @@ public class TenantServiceTest {
         QueryTenantReq req = new QueryTenantReq();
 
         // req.setId(null);//ID
-        // req.setLogo("租户头像_1");//租户头像
-        // req.setCode("企业信用编码_1");//企业信用编码
+        // req.setSysName("这是文本128");//系统名称
+        // req.setSysLogo("系统Logo_1");//系统Logo
+        // req.setLogo("租户Logo_1");//租户Logo
+        // req.setCode("这是文本128");//企业信用编码
         // req.setTenantKey("租户编码_1");//租户编码
         // req.setBalance(0.1d);//帐号余额
         // req.setLicenseCnt(1);//总许可数
         // req.setRemainingLicenseCnt(1);//剩余许可数
         // req.setGteLicenseExpire(DateUtils.getZoneHour(new Date()));//最小到期时间
         // req.setLteLicenseExpire(DateUtils.getEndHour(new Date()));//最大到期时间
-        // req.setContractPerson("联系人_1");//联系人
-        // req.setContractPhone("联系电话_1");//联系电话
+        // req.setContractPerson("这是文本32");//联系人
+        // req.setContractPhone("这是文本32");//联系电话
         // req.setDomainList("域名列表_1");//域名列表
         // req.setAppId("这是文本32");//appId
-        // req.setAppSecret("这是文本256");//appSecret
-        // req.setEncryptKey("EncryptKey_1");//EncryptKey
+        // req.setAppSecret("这是文本128");//appSecret
+        // req.setEncryptKey("这是文本128");//encryptKey
         // req.setName("这是文本128");//名称
-        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
+        // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼]
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -183,21 +190,23 @@ public class TenantServiceTest {
          req.setId(id);
 
 
-           // req.setLogo("租户头像_1");//租户头像 
-           // req.setCode("企业信用编码_1");//企业信用编码 
+           // req.setSysName("这是文本128");//系统名称 
+           // req.setSysLogo("系统Logo_1");//系统Logo 
+           // req.setLogo("租户Logo_1");//租户Logo 
+           // req.setCode("这是文本128");//企业信用编码 
            // req.setTenantKey("租户编码_1");//租户编码 必填
            // req.setBalance(0.1d);//帐号余额 
-           // req.setLicenseCnt(1);//总许可数
-           // req.setRemainingLicenseCnt(1);//剩余许可数
+           // req.setLicenseCnt(1);//总许可数 
+           // req.setRemainingLicenseCnt(1);//剩余许可数 
            // req.setLicenseExpire(new Date());//到期时间 
-           // req.setContractPerson("联系人_1");//联系人 
-           // req.setContractPhone("联系电话_1");//联系电话 
+           // req.setContractPerson("这是文本32");//联系人 
+           // req.setContractPhone("这是文本32");//联系电话 
            // req.setDomainList("域名列表_1");//域名列表 
            // req.setAppId("这是文本32");//appId 
-           // req.setAppSecret("这是文本256");//appSecret 
-           // req.setEncryptKey("EncryptKey_1");//EncryptKey 
+           // req.setAppSecret("这是文本128");//appSecret 
+           // req.setEncryptKey("这是文本128");//encryptKey 
            // req.setName("这是文本128");//名称 必填
-           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+           // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

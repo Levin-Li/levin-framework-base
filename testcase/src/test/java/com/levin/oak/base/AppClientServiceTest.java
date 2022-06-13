@@ -13,6 +13,8 @@ import com.levin.oak.base.services.appclient.info.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -55,12 +57,10 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Resource;
-
 /**
  *  应用接入测试
  *
- *  @author auto gen by simple-dao-codegen 2022-4-3 1:34:17
+ *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
  *
  */
 
@@ -98,11 +98,11 @@ public class AppClientServiceTest {
 
             // req.setTenantId("这是文本128");//租户ID 
 
-            // req.setDomain("这是文本128");//系统子域 
+            // req.setDomain("这是文本128");//系统域 
 
             // req.setName("这是文本128");//名称 必填
 
-            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+            // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -131,9 +131,9 @@ public class AppClientServiceTest {
         // req.setAppId(null);//应用ID
         // req.setAppSecret("这是文本128");//应用密钥
         // req.setTenantId("这是文本128");//租户ID
-        // req.setDomain("这是文本128");//系统子域
+        // req.setDomain("这是文本128");//系统域
         // req.setName("这是文本128");//名称
-        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
+        // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼]
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -158,9 +158,9 @@ public class AppClientServiceTest {
            // req.setAppId("这是文本128");//应用ID 必填
            // req.setAppSecret("这是文本128");//应用密钥 必填
            // req.setTenantId("这是文本128");//租户ID 
-           // req.setDomain("这是文本128");//系统子域 
+           // req.setDomain("这是文本128");//系统域 
            // req.setName("这是文本128");//名称 必填
-           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+           // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

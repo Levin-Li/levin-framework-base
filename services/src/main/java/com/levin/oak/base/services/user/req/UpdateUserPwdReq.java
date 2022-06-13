@@ -47,7 +47,7 @@ public class UpdateUserPwdReq extends MultiTenantReq {
     @NotNull
     @Eq(require = true)
     @InjectVar(InjectConsts.USER_ID)
-    private Long id;
+    private String id;
 
     @Size(max = 256)
     @Schema(description = "旧密码")
@@ -60,7 +60,7 @@ public class UpdateUserPwdReq extends MultiTenantReq {
     @NotBlank
     private String password;
 
-    public UpdateUserPwdReq(Long id) {
+    public UpdateUserPwdReq(String id) {
         this.id = id;
     }
 

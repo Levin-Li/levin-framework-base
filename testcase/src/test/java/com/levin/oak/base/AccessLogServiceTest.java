@@ -11,6 +11,8 @@ import com.levin.oak.base.services.accesslog.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -56,7 +58,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  访问日志测试
  *
- *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
+ *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
  *
  */
 
@@ -69,7 +71,7 @@ import org.slf4j.LoggerFactory;
 public class AccessLogServiceTest {
 
 
-    @Autowired
+    @Resource
     private AccessLogService accessLogService;
 
     private Long id;
@@ -90,7 +92,7 @@ public class AccessLogServiceTest {
 
             // req.setTenantId("租户ID_1");//租户ID 
 
-            // req.setDomain("这是文本64");//请求的域名 
+            // req.setDomain("请求的域名_1");//请求的域名 
 
             // req.setVisitor("这是文本64");//访问者 
 
@@ -108,7 +110,9 @@ public class AccessLogServiceTest {
 
             // req.setRequestMethod("这是文本32");//请求方法 
 
-            // req.setRequestParams("这是文本768");//请求参数 
+            // req.setRequestParams("请求参数_1");//请求参数 
+
+            // req.setHeadInfo("头部信息_1");//头部信息 
 
             // req.setResponseData("响应数据_1");//响应数据 
 
@@ -120,7 +124,7 @@ public class AccessLogServiceTest {
 
             // req.setExceptionInfo("异常信息_1");//异常信息 
 
-            // req.setUserAgent("这是文本512");//用户代理 
+            // req.setUserAgent("这是文本768");//用户代理 
 
             // req.setDeviceName("这是文本128");//设备名称/操作系统 
 
@@ -145,7 +149,7 @@ public class AccessLogServiceTest {
 
         // req.setId(null);//id
         // req.setTenantId("租户ID_1");//租户ID
-        // req.setDomain("这是文本64");//请求的域名
+        // req.setDomain("请求的域名_1");//请求的域名
         // req.setVisitor("这是文本64");//访问者
         // req.setTitle("标题_1");//标题
         // req.setLogType("这是文本64");//日志类型
@@ -154,13 +158,14 @@ public class AccessLogServiceTest {
         // req.setBizType("业务类型_1");//业务类型
         // req.setRequestUri("请求URI_1");//请求URI
         // req.setRequestMethod("这是文本32");//请求方法
-        // req.setRequestParams("这是文本768");//请求参数
+        // req.setRequestParams("请求参数_1");//请求参数
+        // req.setHeadInfo("头部信息_1");//头部信息
         // req.setResponseData("响应数据_1");//响应数据
         // req.setRemoteAddr("这是文本128");//操作IP地址
         // req.setServerAddr("这是文本64");//服务器地址
         // req.setIsException(true);//是否有异常
         // req.setExceptionInfo("异常信息_1");//异常信息
-        // req.setUserAgent("这是文本512");//用户代理
+        // req.setUserAgent("这是文本768");//用户代理
         // req.setDeviceName("这是文本128");//设备名称/操作系统
         // req.setBrowserName("这是文本64");//浏览器名称
         // req.setExecuteTime(1L);//执行时间(ms)
@@ -181,7 +186,7 @@ public class AccessLogServiceTest {
 
 
            // req.setTenantId("租户ID_1");//租户ID 
-           // req.setDomain("这是文本64");//请求的域名 
+           // req.setDomain("请求的域名_1");//请求的域名 
            // req.setVisitor("这是文本64");//访问者 
            // req.setTitle("标题_1");//标题 必填
            // req.setLogType("这是文本64");//日志类型 
@@ -190,13 +195,14 @@ public class AccessLogServiceTest {
            // req.setBizType("业务类型_1");//业务类型 
            // req.setRequestUri("请求URI_1");//请求URI 
            // req.setRequestMethod("这是文本32");//请求方法 
-           // req.setRequestParams("这是文本768");//请求参数 
+           // req.setRequestParams("请求参数_1");//请求参数 
+           // req.setHeadInfo("头部信息_1");//头部信息 
            // req.setResponseData("响应数据_1");//响应数据 
            // req.setRemoteAddr("这是文本128");//操作IP地址 
            // req.setServerAddr("这是文本64");//服务器地址 
            // req.setIsException(true);//是否有异常 
            // req.setExceptionInfo("异常信息_1");//异常信息 
-           // req.setUserAgent("这是文本512");//用户代理 
+           // req.setUserAgent("这是文本768");//用户代理 
            // req.setDeviceName("这是文本128");//设备名称/操作系统 
            // req.setBrowserName("这是文本64");//浏览器名称 
            // req.setExecuteTime(1L);//执行时间(ms) 

@@ -11,6 +11,10 @@ import com.levin.oak.base.services.i18nres.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -56,7 +60,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  国际化资源测试
  *
- *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
+ *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
  *
  */
 
@@ -69,7 +73,7 @@ import org.slf4j.LoggerFactory;
 public class I18nResServiceTest {
 
 
-    @Autowired
+    @Resource
     private I18nResService i18nResService;
 
     private Long id;
@@ -94,13 +98,13 @@ public class I18nResServiceTest {
 
             // req.setLabel("这是文本768");//标签 必填
 
-            // req.setTenantId("这是文本64");//租户ID 
+            // req.setTenantId("这是文本128");//租户ID 
 
-            // req.setDomain("这是文本64");//系统子域 
+            // req.setDomain("这是文本128");//系统域 
 
             // req.setName("这是文本128");//名称 必填
 
-            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+            // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -129,10 +133,10 @@ public class I18nResServiceTest {
         // req.setCategory("这是文本64");//分类
         // req.setLang("这是文本32");//语言
         // req.setLabel("这是文本768");//标签
-        // req.setTenantId("这是文本64");//租户ID
-        // req.setDomain("这是文本64");//系统子域
+        // req.setTenantId("这是文本128");//租户ID
+        // req.setDomain("这是文本128");//系统域
         // req.setName("这是文本128");//名称
-        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
+        // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼]
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -157,10 +161,10 @@ public class I18nResServiceTest {
            // req.setCategory("这是文本64");//分类 必填
            // req.setLang("这是文本32");//语言 必填
            // req.setLabel("这是文本768");//标签 必填
-           // req.setTenantId("这是文本64");//租户ID 
-           // req.setDomain("这是文本64");//系统子域 
+           // req.setTenantId("这是文本128");//租户ID 
+           // req.setDomain("这是文本128");//系统域 
            // req.setName("这是文本128");//名称 必填
-           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+           // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

@@ -51,8 +51,9 @@ public class Role
     }
 
     @Id
-    @GeneratedValue
-    protected Long id;
+//    @GeneratedValue
+    @GeneratedValue(generator = "uuid")
+    protected String id;
 
     @Schema(description = "编码")
     @Column(nullable = false)

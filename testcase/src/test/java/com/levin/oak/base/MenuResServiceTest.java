@@ -11,10 +11,14 @@ import com.levin.oak.base.services.menures.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.rbac.MenuItem.*;
 import com.levin.oak.base.entities.MenuRes;
 import com.levin.oak.base.services.menures.info.*;
 import java.util.Set;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -60,7 +64,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  菜单测试
  *
- *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
+ *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
  *
  */
 
@@ -73,7 +77,7 @@ import org.slf4j.LoggerFactory;
 public class MenuResServiceTest {
 
 
-    @Autowired
+    @Resource
     private MenuResService menuResService;
 
     private Long id;
@@ -94,7 +98,7 @@ public class MenuResServiceTest {
 
             // req.setTenantId("租户ID_1");//租户ID 
 
-            // req.setSubSystem("这是文本128");//子系统 
+            // req.setDomain("这是文本128");//子系统 
 
             // req.setRequireAuthorizations("这是文本1800");//需要的授权，权限或角色，json数组 
 
@@ -116,7 +120,7 @@ public class MenuResServiceTest {
 
             // req.setName("这是文本128");//名称 必填
 
-            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+            // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -143,7 +147,7 @@ public class MenuResServiceTest {
 
         // req.setId(null);//id
         // req.setTenantId("租户ID_1");//租户ID
-        // req.setSubSystem("这是文本128");//子系统
+        // req.setDomain("这是文本128");//子系统
         // req.setRequireAuthorizations("这是文本1800");//需要的授权，权限或角色，json数组
         // req.setAlwaysShow(true);//无权限时是否展示
         // req.setTarget("这是文本64");//目标
@@ -156,7 +160,7 @@ public class MenuResServiceTest {
         // req.setLoadChildren(true);//加载子节点
         // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15|
         // req.setName("这是文本128");//名称
-        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
+        // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼]
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -179,7 +183,7 @@ public class MenuResServiceTest {
 
 
            // req.setTenantId("租户ID_1");//租户ID 
-           // req.setSubSystem("这是文本128");//子系统 
+           // req.setDomain("这是文本128");//子系统 
            // req.setRequireAuthorizations("这是文本1800");//需要的授权，权限或角色，json数组 
            // req.setAlwaysShow(true);//无权限时是否展示 必填
            // req.setTarget("这是文本64");//目标 
@@ -190,7 +194,7 @@ public class MenuResServiceTest {
            // req.setParentId(null);//父ID 
            // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
            // req.setName("这是文本128");//名称 必填
-           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+           // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

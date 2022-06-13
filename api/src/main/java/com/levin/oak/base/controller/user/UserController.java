@@ -95,7 +95,7 @@ public class UserController extends BaseController {
      * @param targetUserId
      * @param roleList
      */
-    protected void checkCurrentUserCreateOrUpdateUserRole(Long targetUserId, List<String> roleList) {
+    protected void checkCurrentUserCreateOrUpdateUserRole(String targetUserId, List<String> roleList) {
 
         boolean ok = rbacService.canAssignRole(targetUserId, roleList, (roleCode, info) -> {
             throw new AuthorizationException("role-" + roleCode, "分配角色(" + roleCode + ")失败，请检查是否拥有角色所需的权限," + info);
@@ -135,7 +135,7 @@ public class UserController extends BaseController {
      */
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    public ApiResp<Long> create(@RequestBody CreateUserReq req) {
+    public ApiResp<String> create(@RequestBody CreateUserReq req) {
         checkCurrentUserCreateOrUpdateUserRole(null, req.getRoleList());
         return ApiResp.ok(userService.create(req));
     }
@@ -148,7 +148,7 @@ public class UserController extends BaseController {
      */
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateUserReq> reqList) {
+    public ApiResp<List<String>> batchCreate(@RequestBody List<CreateUserReq> reqList) {
         reqList.forEach(req -> checkCurrentUserCreateOrUpdateUserRole(null, req.getRoleList()));
         return ApiResp.ok(userService.batchCreate(reqList));
     }

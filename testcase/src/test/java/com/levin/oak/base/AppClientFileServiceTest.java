@@ -13,6 +13,8 @@ import com.levin.oak.base.services.appclientfile.info.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -55,12 +57,10 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Resource;
-
 /**
  *  客户端文件测试
  *
- *  @author auto gen by simple-dao-codegen 2022-4-20 10:38:56
+ *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
  *
  */
 
@@ -96,15 +96,17 @@ public class AppClientFileServiceTest {
 
             // req.setMimeType("这是文本64");//文件类型 
 
+            // req.setPath("文件路径_1");//文件路径 必填
+
             // req.setContent("文件内容_1");//文件内容 
 
             // req.setTenantId("这是文本128");//租户ID 
 
-            // req.setDomain("这是文本128");//系统子域 
+            // req.setDomain("这是文本128");//系统域 
 
             // req.setName("这是文本128");//名称 必填
 
-            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+            // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -132,11 +134,12 @@ public class AppClientFileServiceTest {
         // req.setId(null);//id
         // req.setClientType("这是文本64");//客户端类型
         // req.setMimeType("这是文本64");//文件类型
+        // req.setPath("文件路径_1");//文件路径
         // req.setContent("文件内容_1");//文件内容
         // req.setTenantId("这是文本128");//租户ID
-        // req.setDomain("这是文本128");//系统子域
+        // req.setDomain("这是文本128");//系统域
         // req.setName("这是文本128");//名称
-        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
+        // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼]
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -160,11 +163,12 @@ public class AppClientFileServiceTest {
 
            // req.setClientType("这是文本64");//客户端类型 
            // req.setMimeType("这是文本64");//文件类型 
+           // req.setPath("文件路径_1");//文件路径 必填
            // req.setContent("文件内容_1");//文件内容 
            // req.setTenantId("这是文本128");//租户ID 
-           // req.setDomain("这是文本128");//系统子域 
+           // req.setDomain("这是文本128");//系统域 
            // req.setName("这是文本128");//名称 必填
-           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+           // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

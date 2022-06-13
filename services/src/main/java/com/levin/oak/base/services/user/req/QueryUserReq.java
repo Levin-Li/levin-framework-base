@@ -63,7 +63,7 @@ public class QueryUserReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    private Long id;
+    private String id;
 
 
     //@Size(max = 256)
@@ -230,7 +230,7 @@ public class QueryUserReq extends MultiTenantReq {
     private String remark;
 
 
-    public QueryUserReq(Long id) {
+    public QueryUserReq(String id) {
         this.id = id;
     }
 

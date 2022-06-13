@@ -11,6 +11,8 @@ import com.levin.oak.base.services.apperrorlog.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 ////////////////////////////////////
 
@@ -57,7 +59,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  应用错误日志测试
  *
- *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
+ *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
  *
  */
 
@@ -70,7 +72,7 @@ import org.slf4j.LoggerFactory;
 public class AppErrorLogServiceTest {
 
 
-    @Autowired
+    @Resource
     private AppErrorLogService appErrorLogService;
 
     private Long id;
@@ -95,7 +97,7 @@ public class AppErrorLogServiceTest {
 
             // req.setOccurTime(new Date());//发生时间 必填
 
-            // req.setTitle("这是文本1000");//标题 必填
+            // req.setTitle("这是文本768");//标题 必填
 
             // req.setErrorLevel("错误级别_1");//错误级别 
 
@@ -123,7 +125,7 @@ public class AppErrorLogServiceTest {
         // req.setModuleId("这是文本64");//模块ID
         // req.setGteOccurTime(DateUtils.getZoneHour(new Date()));//最小发生时间
         // req.setLteOccurTime(DateUtils.getEndHour(new Date()));//最大发生时间
-        // req.setTitle("这是文本1000");//标题
+        // req.setTitle("这是文本768");//标题
         // req.setErrorLevel("错误级别_1");//错误级别
         // req.setRootExceptionType("根异常类型_1");//根异常类型
         // req.setExceptionFullInfo("完整异常堆栈_1");//完整异常堆栈
@@ -146,7 +148,7 @@ public class AppErrorLogServiceTest {
            // req.setTenantId("租户ID_1");//租户ID 
            // req.setModuleId("这是文本64");//模块ID 
            // req.setOccurTime(new Date());//发生时间 必填
-           // req.setTitle("这是文本1000");//标题 必填
+           // req.setTitle("这是文本768");//标题 必填
            // req.setErrorLevel("错误级别_1");//错误级别 
            // req.setRootExceptionType("根异常类型_1");//根异常类型 
            // req.setExceptionFullInfo("完整异常堆栈_1");//完整异常堆栈 

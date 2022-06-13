@@ -42,7 +42,7 @@ public class OrgInfo implements Serializable {
 
     @NotNull
     @Schema(description = "id", required = true)
-    private Long id;
+    private String id;
 
 
     @Schema(description = "租户ID")
@@ -125,7 +125,7 @@ public class OrgInfo implements Serializable {
 
 
     @Schema(description = "父ID")
-    private Long parentId;
+    private String parentId;
 
 
     //@Fetch //默认不加载，请通过查询对象控制

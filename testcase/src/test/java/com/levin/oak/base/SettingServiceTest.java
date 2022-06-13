@@ -11,7 +11,11 @@ import com.levin.oak.base.services.setting.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Setting.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -57,7 +61,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  系统设置测试
  *
- *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
+ *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
  *
  */
 
@@ -70,7 +74,7 @@ import org.slf4j.LoggerFactory;
 public class SettingServiceTest {
 
 
-    @Autowired
+    @Resource
     private SettingService settingService;
 
     private Long id;
@@ -95,7 +99,7 @@ public class SettingServiceTest {
 
             // req.setCode("这是文本64");//编码 必填
 
-            // req.setValueType(ValueType.Text);//值类型 必填
+            // req.setValueType(ValueType.Css);//值类型 必填
 
             // req.setValue("值_1");//值 
 
@@ -103,13 +107,13 @@ public class SettingServiceTest {
 
             // req.setInputPlaceholder("这是文本64");//输入占位提示 
 
-            // req.setTenantId("这是文本64");//租户ID 
+            // req.setTenantId("这是文本128");//租户ID 
 
-            // req.setDomain("这是文本64");//系统子域 
+            // req.setDomain("这是文本128");//系统域 
 
             // req.setName("这是文本128");//名称 必填
 
-            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+            // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -138,14 +142,14 @@ public class SettingServiceTest {
         // req.setCategoryName("这是文本64");//分类名称
         // req.setGroupName("这是文本64");//分组名称
         // req.setCode("这是文本64");//编码
-        // req.setValueType(ValueType.Text);//值类型
+        // req.setValueType(ValueType.Css);//值类型
         // req.setValue("值_1");//值
         // req.setNullable(true);//值是否可空
         // req.setInputPlaceholder("这是文本64");//输入占位提示
-        // req.setTenantId("这是文本64");//租户ID
-        // req.setDomain("这是文本64");//系统子域
+        // req.setTenantId("这是文本128");//租户ID
+        // req.setDomain("这是文本128");//系统域
         // req.setName("这是文本128");//名称
-        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
+        // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼]
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -170,14 +174,14 @@ public class SettingServiceTest {
            // req.setCategoryName("这是文本64");//分类名称 必填
            // req.setGroupName("这是文本64");//分组名称 
            // req.setCode("这是文本64");//编码 必填
-           // req.setValueType(ValueType.Text);//值类型 必填
+           // req.setValueType(ValueType.Css);//值类型 必填
            // req.setValue("值_1");//值 
            // req.setNullable(true);//值是否可空 
            // req.setInputPlaceholder("这是文本64");//输入占位提示 
-           // req.setTenantId("这是文本64");//租户ID 
-           // req.setDomain("这是文本64");//系统子域 
+           // req.setTenantId("这是文本128");//租户ID 
+           // req.setDomain("这是文本128");//系统域 
            // req.setName("这是文本128");//名称 必填
-           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+           // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

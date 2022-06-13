@@ -184,7 +184,7 @@ public class AuthServiceImpl
      */
     @Override
     public RbacUserInfo<String> getUserInfo(Object loginId) {
-        return auditUser(userService.findById(Long.parseLong(loginId.toString())).setPassword(null));
+        return auditUser(userService.findById(loginId.toString()).setPassword(null));
     }
 
     @Override
@@ -305,7 +305,7 @@ public class AuthServiceImpl
 
         return permissionListThreadCache.getAndAutoPut("R-" + loginId, null,
                 // // JsonStrArrayUtils.parse(user.getRoleList(), null, null);
-                () -> Collections.unmodifiableList(auditUser(userService.findById(Long.parseLong(loginId.toString()))).getRoleList())
+                () -> Collections.unmodifiableList(auditUser(userService.findById(loginId.toString())).getRoleList())
         );
     }
 

@@ -50,7 +50,7 @@ public class StatOrgReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    Long id;
+    String id;
 
     //@Size(max = 128)
 
@@ -140,7 +140,7 @@ public class StatOrgReq extends MultiTenantReq {
 
 
     @Schema(description = "父ID")
-    Long parentId;
+    String parentId;
 
 
     //@Size(max = 1800)
@@ -211,7 +211,7 @@ public class StatOrgReq extends MultiTenantReq {
     @Schema(description = "备注")
     String remark;
 
-    public StatOrgReq(Long id) {
+    public StatOrgReq(String id) {
         this.id = id;
     }
 

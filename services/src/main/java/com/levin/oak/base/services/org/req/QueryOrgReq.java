@@ -58,7 +58,7 @@ public class QueryOrgReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    private Long id;
+    private String id;
 
 
     //@Size(max = 128)
@@ -169,7 +169,7 @@ public class QueryOrgReq extends MultiTenantReq {
 
 
     @Schema(description = "父ID")
-    private Long parentId;
+    private String parentId;
 
 
     @Schema(description = "是否加载父对象")
@@ -259,7 +259,7 @@ public class QueryOrgReq extends MultiTenantReq {
     private String remark;
 
 
-    public QueryOrgReq(Long id) {
+    public QueryOrgReq(String id) {
         this.id = id;
     }
 

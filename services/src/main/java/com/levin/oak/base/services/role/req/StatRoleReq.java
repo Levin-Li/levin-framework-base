@@ -48,7 +48,7 @@ public class StatRoleReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    Long id;
+    String id;
 
     //@NotBlank
 
@@ -145,7 +145,7 @@ public class StatRoleReq extends MultiTenantReq {
     @Schema(description = "备注")
     String remark;
 
-    public StatRoleReq(Long id) {
+    public StatRoleReq(String id) {
         this.id = id;
     }
 

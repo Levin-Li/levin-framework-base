@@ -11,10 +11,11 @@ import com.levin.oak.base.services.role.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Role.*;
 import java.util.List;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -60,7 +61,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  角色测试
  *
- *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
+ *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
  *
  */
 
@@ -73,10 +74,10 @@ import org.slf4j.LoggerFactory;
 public class RoleServiceTest {
 
 
-    @Autowired
+    @Resource
     private RoleService roleService;
 
-    private Long id;
+    private String id;
 
     @Before
     public void before() throws Exception {
@@ -102,13 +103,13 @@ public class RoleServiceTest {
 
             // req.setPermissionList("资源权限列表_1");//资源权限列表 
 
-            // req.setTenantId("这是文本64");//租户ID 
+            // req.setTenantId("这是文本128");//租户ID 
 
-            // req.setDomain("这是文本64");//系统子域 
+            // req.setDomain("这是文本128");//系统域 
 
             // req.setName("这是文本128");//名称 必填
 
-            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+            // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -119,7 +120,7 @@ public class RoleServiceTest {
             // req.setRemark("这是文本512");//备注 
 
 
-       Long id  = roleService.create(req);
+       String id  = roleService.create(req);
 
         log.debug("新增角色->" + id);
 
@@ -139,10 +140,10 @@ public class RoleServiceTest {
         // req.setOrgDataScope(OrgDataScope.All);//部门数据权限
         // req.setAssignedOrgIdList("指定的部门列表_1");//指定的部门列表
         // req.setPermissionList("资源权限列表_1");//资源权限列表
-        // req.setTenantId("这是文本64");//租户ID
-        // req.setDomain("这是文本64");//系统子域
+        // req.setTenantId("这是文本128");//租户ID
+        // req.setDomain("这是文本128");//系统域
         // req.setName("这是文本128");//名称
-        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
+        // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼]
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -169,10 +170,10 @@ public class RoleServiceTest {
            // req.setOrgDataScope(OrgDataScope.All);//部门数据权限 必填
            // req.setAssignedOrgIdList("指定的部门列表_1");//指定的部门列表 
            // req.setPermissionList("资源权限列表_1");//资源权限列表 
-           // req.setTenantId("这是文本64");//租户ID 
-           // req.setDomain("这是文本64");//系统子域 
+           // req.setTenantId("这是文本128");//租户ID 
+           // req.setDomain("这是文本128");//系统域 
            // req.setName("这是文本128");//名称 必填
-           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+           // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

@@ -42,7 +42,7 @@ public class RoleInfo implements Serializable {
 
     @NotNull
     @Schema(description = "id")
-    private Long id;
+    private String id;
 
 
     @NotBlank

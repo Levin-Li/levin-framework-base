@@ -63,7 +63,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Override
-    public Long create(CreateRoleReq req) {
+    public String create(CreateRoleReq req) {
 
         checkRoleCode(req.getCode());
 
@@ -89,7 +89,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Long> batchCreate(List<CreateRoleReq> reqList) {
+    public List<String> batchCreate(List<CreateRoleReq> reqList) {
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
@@ -97,7 +97,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Override
     //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
     @Cacheable(sync = false, condition = "#id != null", unless = "#result == null ", key = E_Role.CACHE_KEY_PREFIX + "#id")
-    public RoleInfo findById(Long id) {
+    public RoleInfo findById(String id) {
         return findById(new RoleIdReq().setId(id));
     }
 

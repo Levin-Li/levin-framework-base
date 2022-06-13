@@ -44,13 +44,13 @@ public class DeleteOrgReq extends MultiTenantReq {
     @Schema(description = "id集合")
     @In(value = E_Org.id, require = true)
     @NotEmpty
-    private Long[] idList;
+    private String[] idList;
 
-    public DeleteOrgReq(Long... idList) {
+    public DeleteOrgReq(String... idList) {
         this.idList = idList;
     }
 
-    public DeleteOrgReq setIdList(Long... idList) {
+    public DeleteOrgReq setIdList(String... idList) {
         this.idList = idList;
         return this;
     }

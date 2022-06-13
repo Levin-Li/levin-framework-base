@@ -46,7 +46,7 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
 
     @NotNull
     @Schema(description = "id")
-    private Long id;
+    private String id;
 
 
     @Size(max = 64)
@@ -128,7 +128,7 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
 
 
     @Schema(description = "所属部门ID")
-    private Long orgId;
+    private String orgId;
 
 
     //@Fetch //默认不加载，请通过查询对象控制

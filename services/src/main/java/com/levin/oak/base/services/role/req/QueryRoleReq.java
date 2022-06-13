@@ -60,7 +60,7 @@ public class QueryRoleReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    private Long id;
+    private String id;
 
 
     //@NotBlank
@@ -172,7 +172,7 @@ public class QueryRoleReq extends MultiTenantReq {
     private String remark;
 
 
-    public QueryRoleReq(Long id) {
+    public QueryRoleReq(String id) {
         this.id = id;
     }
 

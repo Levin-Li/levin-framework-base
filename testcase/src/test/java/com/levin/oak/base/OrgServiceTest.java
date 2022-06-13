@@ -11,12 +11,16 @@ import com.levin.oak.base.services.org.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Org.*;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 import java.util.Set;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -62,7 +66,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  机构测试
  *
- *  @author auto gen by simple-dao-codegen 2022-3-29 23:06:04
+ *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
  *
  */
 
@@ -75,10 +79,10 @@ import org.slf4j.LoggerFactory;
 public class OrgServiceTest {
 
 
-    @Autowired
+    @Resource
     private OrgService orgService;
 
-    private Long id;
+    private String id;
 
     @Before
     public void before() throws Exception {
@@ -130,7 +134,7 @@ public class OrgServiceTest {
 
             // req.setName("这是文本128");//名称 必填
 
-            // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+            // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
 
             // req.setOrderCode(1);//排序代码 
 
@@ -141,7 +145,7 @@ public class OrgServiceTest {
             // req.setRemark("这是文本512");//备注 
 
 
-       Long id  = orgService.create(req);
+       String id  = orgService.create(req);
 
         log.debug("新增机构->" + id);
 
@@ -177,7 +181,7 @@ public class OrgServiceTest {
         // req.setLoadChildren(true);//加载子节点
         // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15|
         // req.setName("这是文本128");//名称
-        // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼)
+        // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼]
         // req.setCreator("这是文本128");//创建者
         // req.setOrderCode(1);//排序代码
         // req.setEnable(true);//是否允许
@@ -217,7 +221,7 @@ public class OrgServiceTest {
            // req.setParentId(null);//父ID 
            // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
            // req.setName("这是文本128");//名称 必填
-           // req.setPinyinName("这是文本128");//拼音，格式：全拼(简拼) 
+           // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 
            // req.setOrderCode(1);//排序代码 
            // req.setEnable(true);//是否允许 必填
            // req.setEditable(true);//是否可编辑 必填

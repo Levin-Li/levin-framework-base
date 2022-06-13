@@ -103,7 +103,7 @@ public class RoleController extends BaseController {
      */
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Long> create(@RequestBody CreateRoleReq req) {
+    public ApiResp<String> create(@RequestBody CreateRoleReq req) {
         checkCurrentUserCreateOrUpdateRolePermissions(req.getCode(), req.getPermissionList());
         return ApiResp.ok(roleService.create(req));
     }
@@ -116,7 +116,7 @@ public class RoleController extends BaseController {
      */
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateRoleReq> reqList) {
+    public ApiResp<List<String>> batchCreate(@RequestBody List<CreateRoleReq> reqList) {
         reqList.stream().forEach(req -> checkCurrentUserCreateOrUpdateRolePermissions(req.getCode(), req.getPermissionList()));
         return ApiResp.ok(roleService.batchCreate(reqList));
     }
@@ -161,7 +161,7 @@ public class RoleController extends BaseController {
      */
     @DeleteMapping({"", "{id}"})
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Integer> delete(RoleIdReq req, @PathVariable(required = false) Long id) {
+    public ApiResp<Integer> delete(RoleIdReq req, @PathVariable(required = false) String id) {
         return ApiResp.ok(checkResult(roleService.delete(req), DELETE_ACTION));
     }
 

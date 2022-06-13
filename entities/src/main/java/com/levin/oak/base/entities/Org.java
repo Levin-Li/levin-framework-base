@@ -87,8 +87,10 @@ public class Org
     }
 
     @Id
-    @GeneratedValue
-    protected Long id;
+//    @GeneratedValue
+    //    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(generator = "uuid")
+    protected String id;
 
     @Schema(description = "租户ID")
     protected String tenantId;
