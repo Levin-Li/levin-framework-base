@@ -2,6 +2,8 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
+import com.levin.commons.dao.domain.support.AbstractNamedMultiTenantObject;
+import com.levin.commons.dao.domain.support.E_AbstractNamedMultiTenantObject;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
@@ -26,19 +28,19 @@ import java.util.List;
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
                 @Index(columnList = AbstractBaseEntityObject.Fields.enable),
                 @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
-                @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
-                @Index(columnList = E_MultiTenantNamedEntity.name),
+                @Index(columnList = AbstractNamedMultiTenantObject.Fields.tenantId),
+                @Index(columnList = E_AbstractNamedMultiTenantObject.name),
                 @Index(columnList = E_Role.code),
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
         }
 
         ,uniqueConstraints = {
-                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Role.code}),
-                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_MultiTenantNamedEntity.name}),
+                @UniqueConstraint(columnNames = {AbstractNamedMultiTenantObject.Fields.tenantId, E_Role.code}),
+                @UniqueConstraint(columnNames = {AbstractNamedMultiTenantObject.Fields.tenantId, E_AbstractNamedMultiTenantObject.name}),
         }
 )
 public class Role
-        extends MultiTenantNamedEntity {
+        extends AbstractNamedMultiTenantObject {
 
     public enum OrgDataScope implements EnumDesc {
         @Schema(description = "所有部门") All,

@@ -70,7 +70,7 @@ public class ModuleVariableResolverConfigurer
                     @Override
                     public <T> ValueHolder<T> resolve(String key, T originalValue, boolean throwExWhenNotFound, boolean isRequireNotNull, Type... expectTypes) throws VariableNotFoundException {
 
-                        if (!key.trim().startsWith("env:")) {
+                        if (!isSupported(key)) {
                             return ValueHolder.notValue();
                         }
 

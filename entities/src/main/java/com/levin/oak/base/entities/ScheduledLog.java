@@ -52,7 +52,7 @@ public class ScheduledLog
     Date createTime;
 
     @Schema(description = "执行周期")
-    @Column(length = 256)
+    @Column(length = 128)
     String invokeCycle;
 
     @Schema(description = "是否错误")

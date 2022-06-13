@@ -3,6 +3,7 @@ package com.levin.oak.base.entities;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
+import com.levin.commons.dao.domain.support.AbstractNamedMultiTenantObject;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.DefaultJsonConverter;
@@ -34,17 +35,17 @@ import java.util.List;
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = E_Dict.code),
                 @Index(columnList = E_Dict.type),
-                @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
+                @Index(columnList = AbstractNamedMultiTenantObject.Fields.tenantId),
         }
         ,
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Dict.code}),
-//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_MultiTenantNamedEntity.name}),
+                @UniqueConstraint(columnNames = {AbstractNamedMultiTenantObject.Fields.tenantId, E_Dict.code}),
+//                @UniqueConstraint(columnNames = {AbstractNamedMultiTenantObject.Fields.tenantId, E_AbstractNamedMultiTenantObject.name}),
         }
 )
 
 public class Dict
-        extends MultiTenantNamedEntity {
+        extends AbstractNamedMultiTenantObject {
 
     private static final long serialVersionUID = -123456789L;
 

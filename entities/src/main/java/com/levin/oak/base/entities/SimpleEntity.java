@@ -2,8 +2,6 @@ package com.levin.oak.base.entities;
 
 
 import com.levin.commons.dao.annotation.Contains;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,7 +9,6 @@ import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
-import java.util.List;
 
 @MappedSuperclass
 @Data
@@ -20,7 +17,7 @@ import java.util.List;
 @FieldNameConstants
 @Schema(description = "抽象实体")
 public abstract class SimpleEntity
-        extends MultiTenantAndOrganizedEntity {
+        extends TenantOrganizedEntity {
 
     @Id
     @GeneratedValue

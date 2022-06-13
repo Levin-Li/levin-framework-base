@@ -3,6 +3,7 @@ package com.levin.oak.base.entities;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
+import com.levin.commons.dao.domain.StatefulObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.InjectVar;
@@ -38,18 +39,19 @@ import java.util.Date;
                 @Index(columnList = E_User.email),
                 @Index(columnList = E_User.state),
                 @Index(columnList = E_User.name),
-//                @Index(columnList = E_User.orgId),
+                @Index(columnList = E_User.orgId),
                 @Index(columnList = E_User.wxOpenId),
                 @Index(columnList = E_User.aliOpenId),
         }
         ,
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.telephone, E_User.email}),
+                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.telephone}),
+                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
         }
 )
 public class User
-        extends AbstractBaseEntityObject
-        implements OrganizedObject, MultiTenantObject {
+        extends TenantOrganizedEntity
+        implements OrganizedObject, MultiTenantObject, StatefulObject {
 
     public enum State implements EnumDesc {
         @Schema(description = "正常")
@@ -90,10 +92,6 @@ public class User
     @Column(length = 64)
     String tenantId;
 
-    @Schema(description = "登录密码")
-    @Column(length = 256)
-    String password;
-
     @Schema(description = "手机号-可做为登录帐号")
     @Column(length = 20)
     @Contains
@@ -103,10 +101,9 @@ public class User
     @Column(length = 32)
     String email;
 
-    @Schema(description = "名称")
-    @Column(length = 64)
-    @Contains
-    String name;
+    @Schema(description = "登录密码")
+    @Column(length = 256)
+    String password;
 
     @Schema(description = "昵称")
     @Column(length = 32)
@@ -119,7 +116,7 @@ public class User
     @Schema(description = "性别")
     Sex sex;
 
-    @Schema(description = "标签列表", title = "json数组")
+    @Schema(description = "标签列表（json数组）", title = "标签列表")
     @Column(length = 1800)
     @Contains
     @InjectVar(domain = "dao", expectTypeDesc = "List<String>", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
@@ -147,15 +144,13 @@ public class User
     @Column(length = 128)
     String jobPostCode;
 
-    @Schema(description = "角色列表", title = "json数组")
+    @Schema(description = "角色列表(Json数组)", title = "角色列表")
     @Column(length = 1800)
     @Contains
     @InjectVar(domain = "dao", expectTypeDesc = "List<String>", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     String roleList;
 
     ///////////////////////////////////////////////////////////////////////
-    @Schema(description = "所属部门ID")
-    Long orgId;
 
     @Schema(description = "所属部门")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -165,11 +160,11 @@ public class User
     //////////////////////////////////////////////////////////////////////
 
     @Schema(description = "微信 OpendId")
-    @Column(length = 128)
+    @Column(length = 64)
     String wxOpenId;
 
     @Schema(description = "阿里 OpendId")
-    @Column(length = 128)
+    @Column(length = 64)
     String aliOpenId;
 
     @Override

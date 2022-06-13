@@ -2,6 +2,7 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
+import com.levin.commons.dao.domain.support.AbstractNamedMultiTenantObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,9 +24,9 @@ import javax.persistence.*;
                 @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = MultiTenantNamedEntity.Fields.tenantId),
-                @Index(columnList = MultiTenantNamedEntity.Fields.domain),
-                @Index(columnList = MultiTenantAndOrganizedEntity.Fields.orgId),
+                @Index(columnList = AbstractNamedMultiTenantObject.Fields.tenantId),
+                @Index(columnList = AbstractNamedMultiTenantObject.Fields.domain),
+                @Index(columnList = TenantOrganizedEntity.Fields.orgId),
 
                 @Index(columnList = SimpleEntity.Fields.type),
                 @Index(columnList = SimpleEntity.Fields.path),
@@ -38,7 +39,7 @@ import javax.persistence.*;
 //        ,
 //
 //        uniqueConstraints = {
-//                @UniqueConstraint(columnNames = {MultiTenantNamedEntity.Fields.tenantId, E_Setting.code}),
+//                @UniqueConstraint(columnNames = {AbstractNamedMultiTenantObject.Fields.tenantId, E_Setting.code}),
 //        }
 )
 public class SimpleApi extends SimpleEntity {
