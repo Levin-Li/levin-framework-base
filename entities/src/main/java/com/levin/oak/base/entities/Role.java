@@ -52,7 +52,7 @@ public class Role
 
     @Id
 //    @GeneratedValue
-    @GeneratedValue(generator = "hex_uuid")
+    @GeneratedValue(generator = "default_uuid")
     @Column(length = 128)
     protected String id;
 

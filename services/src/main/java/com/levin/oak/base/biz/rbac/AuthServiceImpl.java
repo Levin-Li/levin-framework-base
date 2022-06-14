@@ -420,7 +420,7 @@ public class AuthServiceImpl
                 log.info("创建页面{} - 插件[ {} ][ {} --> {}]", no, plugin.getId(), menuItem.getName(), path);
 
                 simpleDao.create(new SimplePage()
-                                .setType(SimplePage.Type.json)
+                                .setType(SimplePage.Type.json.name())
                                 .setCategory("amis")
                                 .setGroupName("管理后台页面|" + plugin.getName())
                                 .setPath(path)

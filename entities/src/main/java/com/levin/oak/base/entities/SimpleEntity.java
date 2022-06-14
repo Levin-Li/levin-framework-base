@@ -21,13 +21,13 @@ public abstract class SimpleEntity
 
     @Id
 //    @GeneratedValue
-    @GeneratedValue(generator = "hex_uuid")
+    @GeneratedValue(generator = "default_uuid")
     @Column(length = 128)
     protected String id;
 
-//    @Schema(description = "类型")
-//    @Column(nullable = false, length = 128)
-//    protected String type;
+    @Schema(description = "类型")
+    @Column(nullable = false, length = 128)
+    protected String type;
 
     @Schema(description = "分类名称")
     @Column(nullable = false, length = 128)

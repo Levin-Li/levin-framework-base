@@ -60,7 +60,7 @@ public class Tenant extends AbstractNamedEntityObject {
 
     @Schema(description = "ID")
     @Id
-    @GeneratedValue(generator = "hex_uuid")
+    @GeneratedValue(generator = "default_uuid")
     @Column(length = 128)
     String id;
 
