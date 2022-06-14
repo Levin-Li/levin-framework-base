@@ -40,7 +40,7 @@ public class AppClient extends AbstractNamedMultiTenantObject {
 
     @Id
 //    @GeneratedValue
-    @GeneratedValue(generator = "default_uuid")
+    @GeneratedValue(generator = "default_id")
     @Column(length = 128)
     protected String id;
 

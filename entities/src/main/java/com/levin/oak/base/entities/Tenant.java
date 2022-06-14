@@ -10,7 +10,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -37,30 +36,30 @@ import java.util.UUID;
 @Entity(name = EntityConst.PREFIX + "Tenant")
 
 //7、必须建立索引
-@Table(indexes = {
-        @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-        @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
-        @Index(columnList = AbstractBaseEntityObject.Fields.enable),
-        @Index(columnList = AbstractNamedEntityObject.Fields.name),
-        @Index(columnList = E_Tenant.code),
-        @Index(columnList = E_Tenant.tenantKey),
-        @Index(columnList = E_Tenant.licenseExpire),
-        @Index(columnList = E_Tenant.remainingLicenseCnt),
-        @Index(columnList = E_Tenant.encryptKey),
-        @Index(columnList = E_Tenant.appId),
-}
+@Table(
+        indexes = {
+                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
+                @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
+                @Index(columnList = AbstractBaseEntityObject.Fields.enable),
+                @Index(columnList = AbstractNamedEntityObject.Fields.name),
+                @Index(columnList = E_Tenant.code),
+                @Index(columnList = E_Tenant.tenantKey),
+                @Index(columnList = E_Tenant.licenseExpire),
+                @Index(columnList = E_Tenant.remainingLicenseCnt),
+                @Index(columnList = E_Tenant.encryptKey),
+                @Index(columnList = E_Tenant.appId),
+        }
         ,
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {
-                        E_Tenant.tenantKey
-                })}
+                @UniqueConstraint(columnNames = {E_Tenant.tenantKey})
+        }
 )
 
 public class Tenant extends AbstractNamedEntityObject {
 
     @Schema(description = "ID")
     @Id
-    @GeneratedValue(generator = "default_uuid")
+    @GeneratedValue(generator = "default_id")
     @Column(length = 128)
     String id;
 

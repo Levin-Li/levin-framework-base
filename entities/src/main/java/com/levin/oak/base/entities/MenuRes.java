@@ -42,7 +42,7 @@ public class MenuRes
         implements MenuItem<MenuRes, MenuRes>, MultiTenantObject {
 
     @Id
-    @GeneratedValue(generator = "default_uuid")
+    @GeneratedValue(generator = "default_id")
     @Column(length = 128)
     protected String id;
 

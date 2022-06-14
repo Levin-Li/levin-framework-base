@@ -20,13 +20,15 @@ import java.util.Set;
 @Accessors(chain = true)
 @FieldNameConstants
 @Schema(description = "区域")
-@Table(indexes = {
-        @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-        @Index(columnList = AbstractNamedEntityObject.Fields.name),
-        @Index(columnList = E_Area.code),
-        @Index(columnList = E_Area.parentCode),
-        @Index(columnList = E_Area.type),
-})
+@Table(
+        indexes = {
+                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
+                @Index(columnList = AbstractNamedEntityObject.Fields.name),
+                @Index(columnList = E_Area.code),
+                @Index(columnList = E_Area.parentCode),
+                @Index(columnList = E_Area.type),
+        }
+)
 public class Area
         extends AbstractNamedEntityObject
         implements

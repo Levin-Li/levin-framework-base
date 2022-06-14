@@ -25,23 +25,25 @@ import java.util.Date;
 @Schema(description = "调度任务")
 
 @Entity(name = EntityConst.PREFIX + "ScheduledTask")
-@Table(indexes = {
-        @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-        @Index(columnList = AbstractBaseEntityObject.Fields.enable),
-        @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
-        @Index(columnList = AbstractBaseEntityObject.Fields.creator),
-        @Index(columnList = AbstractNamedEntityObject.Fields.name),
-        @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-        @Index(columnList = AbstractNamedMultiTenantObject.Fields.tenantId),
-        @Index(columnList = TenantOrganizedEntity.Fields.orgId),
-        @Index(columnList = E_ScheduledTask.groupName),
-})
+@Table(
+        indexes = {
+                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
+                @Index(columnList = AbstractBaseEntityObject.Fields.enable),
+                @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
+                @Index(columnList = AbstractBaseEntityObject.Fields.creator),
+                @Index(columnList = AbstractNamedEntityObject.Fields.name),
+                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
+                @Index(columnList = AbstractNamedMultiTenantObject.Fields.tenantId),
+                @Index(columnList = TenantOrganizedEntity.Fields.orgId),
+                @Index(columnList = E_ScheduledTask.groupName),
+        }
+)
 public class ScheduledTask
         extends TenantOrganizedEntity {
 
     @Id
 //    @GeneratedValue
-    @GeneratedValue(generator = "default_uuid")
+    @GeneratedValue(generator = "default_id")
     @Column(length = 128)
     protected String id;
 

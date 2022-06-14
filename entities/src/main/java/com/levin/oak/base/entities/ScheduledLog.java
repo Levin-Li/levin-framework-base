@@ -19,12 +19,14 @@ import java.util.Date;
 @FieldNameConstants
 @Schema(description = "调度日志")
 
-@Table(indexes = {
-        @Index(columnList = E_ScheduledLog.tenantId),
-        @Index(columnList = E_ScheduledLog.orgId),
-        @Index(columnList = E_ScheduledLog.taskId),
-        @Index(columnList = E_ScheduledLog.invokeCycle),
-})
+@Table(
+        indexes = {
+                @Index(columnList = E_ScheduledLog.tenantId),
+                @Index(columnList = E_ScheduledLog.orgId),
+                @Index(columnList = E_ScheduledLog.taskId),
+                @Index(columnList = E_ScheduledLog.invokeCycle),
+        }
+)
 public class ScheduledLog
         implements MultiTenantObject, Identifiable, OrganizedObject {
 

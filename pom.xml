@@ -58,6 +58,8 @@
 
         <module>entities</module>
 
+        <module>uid-generator</module>
+
     </modules>
 
     <repositories>

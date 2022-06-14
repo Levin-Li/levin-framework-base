@@ -19,14 +19,16 @@ import java.util.Date;
 
 @Entity(name = EntityConst.PREFIX + "AccessLog")
 
-@Table(indexes = {
-        @Index(columnList = E_AccessLog.tenantId),
-        @Index(columnList = E_AccessLog.createTime),
-        @Index(columnList = E_AccessLog.visitor),
-        @Index(columnList = E_AccessLog.requestUri),
-        @Index(columnList = E_AccessLog.title),
-        @Index(columnList = E_AccessLog.bizType),
-})
+@Table(
+        indexes = {
+                @Index(columnList = E_AccessLog.tenantId),
+                @Index(columnList = E_AccessLog.createTime),
+                @Index(columnList = E_AccessLog.visitor),
+                @Index(columnList = E_AccessLog.requestUri),
+                @Index(columnList = E_AccessLog.title),
+                @Index(columnList = E_AccessLog.bizType),
+        }
+)
 @Schema(description = "访问日志")
 public class AccessLog
         implements
