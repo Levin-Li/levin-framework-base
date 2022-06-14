@@ -41,23 +41,25 @@ import javax.persistence.*;
 public class AppClientFile extends AbstractNamedMultiTenantObject {
 
     @Id
-    @GeneratedValue
-    Long id;
+//    @GeneratedValue
+    @GeneratedValue(generator = "hex_uuid")
+    @Column(length = 128)
+    protected String id;
 
     @Schema(description = "客户端类型")
     @Column(length = 64)
-    String clientType;
+    protected String clientType;
 
     @Schema(description = "文件类型")
-    @Column(length = 64)
-    String mimeType;
+    @Column(length = 128)
+    protected String mimeType;
 
     @Schema(description = "文件路径")
     @Column(nullable = false)
-    String path;
+    protected String path;
 
     @Schema(description = "文件内容")
     @Lob
-    String content;
+    protected String content;
 
 }

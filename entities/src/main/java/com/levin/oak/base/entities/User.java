@@ -14,7 +14,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -46,8 +45,8 @@ import java.util.Date;
         }
         ,
         uniqueConstraints = {
-//                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.telephone}),
-//                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
+                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.telephone}),
+                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
         }
 )
 public class User
@@ -86,12 +85,12 @@ public class User
     }
 
     @Id
-//    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    @GeneratedValue(generator = "uuid")
+    @GeneratedValue(generator = "hex_uuid")
+    @Column(length = 128)
     String id;
 
     @Schema(description = "租户ID")
-    @Column(length = 64)
+    @Column(length = 128)
     String tenantId;
 
     @Schema(description = "手机号-可做为登录帐号")
@@ -116,6 +115,8 @@ public class User
     String avatar;
 
     @Schema(description = "性别")
+    @Column(length = 8)
+    @Enumerated(EnumType.STRING)
     Sex sex;
 
     @Schema(description = "标签列表（json数组）", title = "标签列表")
@@ -127,6 +128,8 @@ public class User
     ////////////////////////////////////////////////////////////////////
 
     @Schema(description = "帐号类型")
+    @Column(length = 64)
+    @Enumerated(EnumType.STRING)
     Category category;
 
     @Schema(description = "过期时间")
@@ -134,7 +137,8 @@ public class User
     Date expiredDate;
 
     @Schema(description = "帐号状态")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 32)
+    @Enumerated(EnumType.STRING)
     State state;
 
     @Schema(description = "工号")

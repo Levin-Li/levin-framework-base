@@ -34,10 +34,10 @@ import java.util.List;
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
         }
 
-        ,uniqueConstraints = {
-                @UniqueConstraint(columnNames = {AbstractNamedMultiTenantObject.Fields.tenantId, E_Role.code}),
-                @UniqueConstraint(columnNames = {AbstractNamedMultiTenantObject.Fields.tenantId, E_AbstractNamedMultiTenantObject.name}),
-        }
+        , uniqueConstraints = {
+        @UniqueConstraint(columnNames = {AbstractNamedMultiTenantObject.Fields.tenantId, E_Role.code}),
+        @UniqueConstraint(columnNames = {AbstractNamedMultiTenantObject.Fields.tenantId, E_AbstractNamedMultiTenantObject.name}),
+}
 )
 public class Role
         extends AbstractNamedMultiTenantObject {
@@ -52,11 +52,12 @@ public class Role
 
     @Id
 //    @GeneratedValue
-    @GeneratedValue(generator = "uuid")
+    @GeneratedValue(generator = "hex_uuid")
+    @Column(length = 128)
     protected String id;
 
     @Schema(description = "编码")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 128)
     @Contains
     protected String code;
 
@@ -64,7 +65,8 @@ public class Role
     protected String icon;
 
     @Schema(description = "部门数据权限")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 64)
+    @Enumerated(EnumType.STRING)
     protected OrgDataScope orgDataScope;
 
     @Schema(description = "指定的部门列表", title = "Json数组")

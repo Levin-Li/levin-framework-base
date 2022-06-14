@@ -78,12 +78,14 @@ public class Dict
     }
 
     @Id
-    @GeneratedValue
-    protected Long id;
+//    @GeneratedValue
+    @GeneratedValue(generator = "hex_uuid")
+    @Column(length = 128)
+    protected String id;
 
     @Schema(description = "类型")
-    @Column(nullable = false)
-    @Enumerated
+    @Column(nullable = false,length = 64)
+    @Enumerated(EnumType.STRING)
     protected Type type;
 
     @Schema(description = "编码")

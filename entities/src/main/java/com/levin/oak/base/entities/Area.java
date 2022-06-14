@@ -32,7 +32,7 @@ public class Area
         implements
         TreeObject<Area, Area> {
 
-    public enum Type   implements EnumDesc {
+    public enum Type implements EnumDesc {
         @Schema(description = "国家")
         Nation,
         @Schema(description = "省份、直辖市")
@@ -71,8 +71,8 @@ public class Area
     protected Set<Area> children;
 
     @Schema(description = "类型")
-    @Column(nullable = false)
-    @Enumerated
+    @Column(nullable = false, length = 64)
+    @Enumerated(EnumType.STRING)
     protected Type type;
 
     @Override

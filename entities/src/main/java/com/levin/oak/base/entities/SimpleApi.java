@@ -28,10 +28,11 @@ import javax.persistence.*;
                 @Index(columnList = AbstractNamedMultiTenantObject.Fields.domain),
                 @Index(columnList = TenantOrganizedEntity.Fields.orgId),
 
-                @Index(columnList = SimpleEntity.Fields.type),
+//                @Index(columnList = SimpleEntity.Fields.type),
                 @Index(columnList = SimpleEntity.Fields.path),
                 @Index(columnList = SimpleEntity.Fields.category),
                 @Index(columnList = SimpleEntity.Fields.groupName),
+
                 @Index(columnList = E_SimpleApi.language),
 
         }
@@ -55,7 +56,7 @@ public class SimpleApi extends SimpleEntity {
     protected String methods;
 
     @Schema(description = "脚本语言")
-    @Column(nullable = false)
+    @Column(nullable = false,length = 64)
     @Enumerated(EnumType.STRING)
     Language language;
 

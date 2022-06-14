@@ -65,8 +65,10 @@ public class Setting
     }
 
     @Id
-    @GeneratedValue
-    protected Long id;
+//    @GeneratedValue
+    @GeneratedValue(generator = "hex_uuid")
+    @Column(length = 128)
+    protected String id;
 
     @Schema(description = "分类名称")
     @Column(nullable = false, length = 64)
@@ -82,7 +84,8 @@ public class Setting
     protected String code;
 
     @Schema(description = "值类型")
-    @Column(nullable = false)
+    @Column(nullable = false,length = 64)
+    @Enumerated(EnumType.STRING)
     protected ValueType valueType;
 
     @Schema(description = "值")
@@ -93,7 +96,7 @@ public class Setting
     protected Boolean nullable;
 
     @Schema(description = "输入占位提示")
-    @Column(length = 64)
+    @Column(length = 128)
     protected String inputPlaceholder;
 
     @Override

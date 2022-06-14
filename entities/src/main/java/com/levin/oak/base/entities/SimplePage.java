@@ -10,10 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity(name = EntityConst.PREFIX + "SimplePage")
 @Data
@@ -32,7 +29,7 @@ import javax.persistence.Table;
                 @Index(columnList = AbstractNamedMultiTenantObject.Fields.tenantId),
                 @Index(columnList = AbstractNamedMultiTenantObject.Fields.domain),
                 @Index(columnList = TenantOrganizedEntity.Fields.orgId),
-                @Index(columnList = SimpleEntity.Fields.type),
+                @Index(columnList = E_SimplePage.type),
                 @Index(columnList = SimpleEntity.Fields.path),
                 @Index(columnList = SimpleEntity.Fields.category),
                 @Index(columnList = SimpleEntity.Fields.groupName),
@@ -56,6 +53,11 @@ public class SimplePage extends SimpleEntity {
         @Schema(description = "Groovy") groovy,
         @Schema(description = "Freemark") ftlh,
     }
+
+    @Schema(description = "类型")
+    @Column(nullable = false, length = 128)
+    @Enumerated(EnumType.STRING)
+    protected Type type;
 
     @Override
     @PrePersist

@@ -31,7 +31,7 @@ import javax.persistence.Table;
                 @Index(columnList = AbstractNamedMultiTenantObject.Fields.tenantId),
                 @Index(columnList = AbstractNamedMultiTenantObject.Fields.domain),
                 @Index(columnList = TenantOrganizedEntity.Fields.orgId),
-                @Index(columnList = SimpleEntity.Fields.type),
+//                @Index(columnList = SimpleEntity.Fields.type),
                 @Index(columnList = SimpleEntity.Fields.path),
                 @Index(columnList = SimpleEntity.Fields.category),
                 @Index(columnList = SimpleEntity.Fields.groupName),

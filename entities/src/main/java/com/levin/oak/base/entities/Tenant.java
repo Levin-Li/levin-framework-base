@@ -60,8 +60,8 @@ public class Tenant extends AbstractNamedEntityObject {
 
     @Schema(description = "ID")
     @Id
-//    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    @GeneratedValue(generator = "uuid")
+    @GeneratedValue(generator = "hex_uuid")
+    @Column(length = 128)
     String id;
 
     @Schema(description = "系统名称")
@@ -107,10 +107,11 @@ public class Tenant extends AbstractNamedEntityObject {
     @Schema(description = "域名列表")
     @Contains
     @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {String.class}, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @Column(length = 1200)
     String domainList;
 
     @Schema(description = "appId")
-    @Column(length = 32)
+    @Column(length = 128)
     String appId;
 
     @Schema(description = "appSecret")

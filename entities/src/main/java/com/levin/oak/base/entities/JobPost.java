@@ -43,7 +43,8 @@ import javax.persistence.*;
 public class JobPost
         extends AbstractNamedMultiTenantObject {
 
-    public enum Type   implements EnumDesc {
+    @Schema(description = "职位类型")
+    public enum Type implements EnumDesc {
         @Schema(description = "管理岗")
         Manager,
         @Schema(description = "专业岗")
@@ -53,8 +54,10 @@ public class JobPost
     }
 
     @Id
-    @GeneratedValue
-    protected Long id;
+//    @GeneratedValue
+    @GeneratedValue(generator = "hex_uuid")
+    @Column(length = 128)
+    protected String id;
 
     @Schema(description = "编码")
     @Column(nullable = false, length = 64)
@@ -62,8 +65,8 @@ public class JobPost
     protected String code;
 
     @Schema(description = "类型")
-    @Column(nullable = false)
-    @Enumerated
+    @Column(nullable = false, length = 64)
+    @Enumerated(EnumType.STRING)
     protected Type type;
 
     @Override

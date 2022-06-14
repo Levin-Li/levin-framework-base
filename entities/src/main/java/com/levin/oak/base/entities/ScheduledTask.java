@@ -40,15 +40,17 @@ public class ScheduledTask
         extends TenantOrganizedEntity {
 
     @Id
-    @GeneratedValue
-    Long id;
+//    @GeneratedValue
+    @GeneratedValue(generator = "hex_uuid")
+    @Column(length = 128)
+    protected String id;
 
     @Schema(description = "任务分类")
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 128)
     String category;
 
     @Schema(description = "任务组")
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 128)
     @Contains
     String groupName;
 

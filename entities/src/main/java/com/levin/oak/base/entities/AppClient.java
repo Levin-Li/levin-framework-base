@@ -39,16 +39,18 @@ import java.util.UUID;
 public class AppClient extends AbstractNamedMultiTenantObject {
 
     @Id
-    @GeneratedValue
-    protected Long id;
+//    @GeneratedValue
+    @GeneratedValue(generator = "hex_uuid")
+    @Column(length = 128)
+    protected String id;
 
     @Schema(description = "应用ID")
     @Column(unique = true, nullable = false, length = 128)
-    String appId;
+    protected String appId;
 
     @Schema(description = "应用密钥")
     @Column(nullable = false, length = 128)
-    String appSecret;
+    protected String appSecret;
 
     @Override
     @PrePersist

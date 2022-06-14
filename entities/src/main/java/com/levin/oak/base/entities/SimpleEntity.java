@@ -20,19 +20,21 @@ public abstract class SimpleEntity
         extends TenantOrganizedEntity {
 
     @Id
-    @GeneratedValue
-    protected Long id;
+//    @GeneratedValue
+    @GeneratedValue(generator = "hex_uuid")
+    @Column(length = 128)
+    protected String id;
 
-    @Schema(description = "类型")
-    @Column(nullable = false, length = 64)
-    protected String type;
+//    @Schema(description = "类型")
+//    @Column(nullable = false, length = 128)
+//    protected String type;
 
     @Schema(description = "分类名称")
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 128)
     protected String category;
 
     @Schema(description = "分组名称")
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 128)
     @Contains
     protected String groupName;
 

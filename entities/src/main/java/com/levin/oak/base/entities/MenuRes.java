@@ -6,8 +6,6 @@ import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.dao.domain.support.AbstractTreeObject;
 import com.levin.commons.rbac.MenuItem;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,7 +13,6 @@ import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity(name = EntityConst.PREFIX + "MenuRes")
 @Data
@@ -30,7 +27,7 @@ import java.util.List;
                 @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = AbstractTreeObject.Fields.parentId),
+                @Index(columnList = E_MenuRes.parentId),
                 @Index(columnList = E_MenuRes.domain),
                 @Index(columnList = E_MenuRes.actionType),
                 @Index(columnList = E_MenuRes.tenantId),
@@ -41,14 +38,20 @@ import java.util.List;
 //        }
 )
 public class MenuRes
-        extends AbstractTreeObject<Long, MenuRes>
+        extends AbstractTreeObject<String, MenuRes>
         implements MenuItem<MenuRes, MenuRes>, MultiTenantObject {
 
     @Id
-    @GeneratedValue
-    Long id;
+    @GeneratedValue(generator = "hex_uuid")
+    @Column(length = 128)
+    protected String id;
+
+    @Schema(description = "父ID")
+    @Column(length = 128)
+    String parentId;
 
     @Schema(description = "租户ID")
+    @Column(length = 128)
     String tenantId;
 
     @Schema(description = "子系统")
@@ -70,6 +73,7 @@ public class MenuRes
 
     @Schema(description = "打开方式")
     @Enumerated(EnumType.STRING)
+    @Column(length = 64)
     MenuItem.ActionType actionType;
 
     @Schema(description = "图标")

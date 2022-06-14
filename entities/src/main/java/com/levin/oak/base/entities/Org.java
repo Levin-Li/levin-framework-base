@@ -30,9 +30,10 @@ import javax.persistence.*;
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
 
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = AbstractTreeObject.Fields.parentId),
+//                @Index(columnList = AbstractTreeObject.Fields.parentId),
 //                @Index(columnList = AbstractTreeObject.Fields.idPath),
 
+                @Index(columnList = E_Org.parentId),
                 @Index(columnList = E_Org.code),
                 @Index(columnList = E_Org.areaCode),
                 @Index(columnList = E_Org.tenantId),
@@ -61,10 +62,10 @@ import javax.persistence.*;
 
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Org
-        extends AbstractTreeObject<Long, Org>
+        extends AbstractTreeObject<String, Org>
         implements MultiTenantObject, StatefulObject {
 
-    public enum State   implements EnumDesc {
+    public enum State implements EnumDesc {
         @Schema(description = "正常")
         Normal,
         @Schema(description = "冻结")
@@ -73,7 +74,7 @@ public class Org
         Cancellation,
     }
 
-    public enum Type   implements EnumDesc {
+    public enum Type implements EnumDesc {
         @Schema(description = "公司/独立法人")
         LegalPerson,
         @Schema(description = "分公司/分支机构")
@@ -88,11 +89,16 @@ public class Org
 
     @Id
 //    @GeneratedValue
-    //    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    @GeneratedValue(generator = "uuid")
+    @GeneratedValue(generator = "hex_uuid")
+    @Column(length = 128)
     protected String id;
 
+    @Schema(description = "父ID")
+    @Column(length = 128)
+    protected String parentId;
+
     @Schema(description = "租户ID")
+    @Column(length = 128)
     protected String tenantId;
 
     @Schema(description = "编码", title = "对于公司是统一信用码")
@@ -104,11 +110,13 @@ public class Org
     protected String icon;
 
     @Schema(description = "状态")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 32)
+    @Enumerated(EnumType.STRING)
     protected State state;
 
     @Schema(description = "类型")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 64)
+    @Enumerated(EnumType.STRING)
     protected Type type;
 
     @Schema(description = "所属行业")
@@ -170,7 +178,6 @@ public class Org
         if (state == null) {
             state = State.Normal;
         }
-
     }
 
 }

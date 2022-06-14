@@ -1,61 +1,26 @@
 package com.levin.oak.base;
 
-import static com.levin.oak.base.ModuleOption.*;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.entities.AppClient;
-
-import com.levin.oak.base.services.appclient.*;
-import com.levin.oak.base.services.appclient.req.*;
-import com.levin.oak.base.services.appclient.info.*;
-
+import com.levin.commons.dao.support.PagingData;
+import com.levin.oak.base.services.appclient.AppClientService;
+import com.levin.oak.base.services.appclient.info.AppClientInfo;
+import com.levin.oak.base.services.appclient.req.AppClientIdReq;
+import com.levin.oak.base.services.appclient.req.CreateAppClientReq;
+import com.levin.oak.base.services.appclient.req.QueryAppClientReq;
+import com.levin.oak.base.services.appclient.req.UpdateAppClientReq;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import java.util.List;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.support.*;
-import com.levin.commons.service.domain.*;
-
-import org.springframework.util.*;
-import java.util.Date;
-import org.springframework.beans.BeanUtils;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-
-
-import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
-
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
-import org.junit.jupiter.api.Assertions;
 //import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Date;
-
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.annotation.Resource;
 
 /**
  *  应用接入测试
