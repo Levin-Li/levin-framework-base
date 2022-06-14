@@ -90,15 +90,15 @@ public class RbacResServiceImpl extends BaseService implements RbacResService {
                         .setTenantId(userInfo.getTenantId())
         );
 
-        final Map<Long, MenuResInfo> cacheMap = new LinkedHashMap<>();
+        final Map<String, MenuResInfo> cacheMap = new LinkedHashMap<>();
 
         //2、放入Map
         menuRes.forEach(m -> cacheMap.put(m.getId(), m));
 
-        final Map<Long, MenuResInfo> cacheMap2 = new LinkedHashMap<>(cacheMap);
+        final Map<String, MenuResInfo> cacheMap2 = new LinkedHashMap<>(cacheMap);
 
         //3、构建菜单层级
-        for (Map.Entry<Long, MenuResInfo> entry : cacheMap.entrySet()) {
+        for (Map.Entry<String, MenuResInfo> entry : cacheMap.entrySet()) {
 
             MenuResInfo menu = entry.getValue();
 
@@ -126,7 +126,7 @@ public class RbacResServiceImpl extends BaseService implements RbacResService {
         List<String> roleList = authService.getRoleList(userId);
         List<String> permissionList = authService.getPermissionList(userId);
 
-        for (Map.Entry<Long, MenuResInfo> entry : cacheMap2.entrySet()) {
+        for (Map.Entry<String, MenuResInfo> entry : cacheMap2.entrySet()) {
             //
             MenuResInfo info = entry.getValue();
             //获取菜单要求的权限
@@ -165,7 +165,7 @@ public class RbacResServiceImpl extends BaseService implements RbacResService {
      * @param menuResInfo
      * @return
      */
-    private MenuResInfo clearTree(Map<Long, MenuResInfo> cacheMap, MenuResInfo menuResInfo) {
+    private MenuResInfo clearTree(Map<String, MenuResInfo> cacheMap, MenuResInfo menuResInfo) {
 
         if (menuResInfo == null || menuResInfo.getChildren() == null) {
             return menuResInfo;
