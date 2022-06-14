@@ -56,7 +56,7 @@ public class QueryJobPostReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    private Long id;
+    private String id;
 
 
     //@NotBlank
@@ -153,7 +153,7 @@ public class QueryJobPostReq extends MultiTenantReq {
     private String remark;
 
 
-    public QueryJobPostReq(Long id) {
+    public QueryJobPostReq(String id) {
         this.id = id;
     }
 

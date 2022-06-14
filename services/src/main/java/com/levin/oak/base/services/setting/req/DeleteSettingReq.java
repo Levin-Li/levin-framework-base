@@ -44,13 +44,13 @@ public class DeleteSettingReq extends MultiTenantReq {
     @Schema(description = "id集合")
     @In(value = E_Setting.id, require = true)
     @NotEmpty
-    private Long[] idList;
+    private String[] idList;
 
-    public DeleteSettingReq(Long... idList) {
+    public DeleteSettingReq(String... idList) {
         this.idList = idList;
     }
 
-    public DeleteSettingReq setIdList(Long... idList) {
+    public DeleteSettingReq setIdList(String... idList) {
         this.idList = idList;
         return this;
     }

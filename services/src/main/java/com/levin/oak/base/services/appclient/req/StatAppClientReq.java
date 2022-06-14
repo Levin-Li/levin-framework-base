@@ -48,7 +48,7 @@ public class StatAppClientReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    Long id;
+    String id;
 
     //@NotBlank
     //@Size(max = 128)
@@ -130,7 +130,7 @@ public class StatAppClientReq extends MultiTenantReq {
     @Schema(description = "备注")
     String remark;
 
-    public StatAppClientReq(Long id) {
+    public StatAppClientReq(String id) {
         this.id = id;
     }
 

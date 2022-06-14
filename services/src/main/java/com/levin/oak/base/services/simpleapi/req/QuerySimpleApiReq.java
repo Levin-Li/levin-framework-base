@@ -80,7 +80,7 @@ public class QuerySimpleApiReq extends MultiTenantReq{
 
     //@NotNull
     @Schema(description = "id")
-    Long id;
+    String id;
 
     //@NotBlank
     //@Size(max = 64)
@@ -173,7 +173,7 @@ public class QuerySimpleApiReq extends MultiTenantReq{
     @Schema(description = "备注")
     String remark;
 
-    public QuerySimpleApiReq(Long id) {
+    public QuerySimpleApiReq(String id) {
         this.id = id;
     }
 

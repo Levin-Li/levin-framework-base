@@ -50,7 +50,7 @@ public class UpdateDictReq extends MultiTenantReq {
     @Schema(description = "id", required = true)
     @NotNull
     @Eq(require = true)
-    private Long id;
+    private String id;
 
     @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#user.isSuperAdmin()")
@@ -98,7 +98,7 @@ public class UpdateDictReq extends MultiTenantReq {
     private String remark;
 
 
-    public UpdateDictReq(Long id) {
+    public UpdateDictReq(String id) {
         this.id = id;
     }
 

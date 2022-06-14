@@ -43,7 +43,7 @@ public class DictInfo implements Serializable {
 
     @NotNull
     @Schema(description = "id", required = true)
-    private Long id;
+    private String id;
 
 
     @NotNull

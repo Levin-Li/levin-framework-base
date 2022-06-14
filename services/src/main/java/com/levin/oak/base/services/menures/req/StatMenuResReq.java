@@ -49,7 +49,7 @@ public class StatMenuResReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    Long id;
+    String id;
 
     //@Size(max = 128)
 
@@ -93,7 +93,7 @@ public class StatMenuResReq extends MultiTenantReq {
 
 
     @Schema(description = "父ID")
-    Long parentId;
+    String parentId;
 
 
     //@Size(max = 1800)
@@ -164,7 +164,7 @@ public class StatMenuResReq extends MultiTenantReq {
     @Schema(description = "备注")
     String remark;
 
-    public StatMenuResReq(Long id) {
+    public StatMenuResReq(String id) {
         this.id = id;
     }
 

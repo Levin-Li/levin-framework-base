@@ -74,7 +74,7 @@ public class CreateMenuResReq extends MultiTenantReq {
     private String params;
 
     @Schema(description = "父ID")
-    private Long parentId;
+    private String parentId;
 
 
     @Schema(description = "id路径， 使用|包围，如|1|3|15|")

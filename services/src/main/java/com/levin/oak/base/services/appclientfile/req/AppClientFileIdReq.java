@@ -43,7 +43,7 @@ public class AppClientFileIdReq extends MultiTenantReq {
     @Schema(description = "id", required = true)
     @Eq(require = true)
     @NotNull
-    protected Long id;
+    protected String id;
 
 
     @PostConstruct

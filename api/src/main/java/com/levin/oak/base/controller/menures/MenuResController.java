@@ -80,7 +80,7 @@ public class MenuResController extends BaseController{
      */
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Long> create(@RequestBody CreateMenuResReq req) {
+    public ApiResp<String> create(@RequestBody CreateMenuResReq req) {
         return ApiResp.ok(menuResService.create(req));
     }
 
@@ -92,7 +92,7 @@ public class MenuResController extends BaseController{
      */
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateMenuResReq> reqList) {
+    public ApiResp<List<String>> batchCreate(@RequestBody List<CreateMenuResReq> reqList) {
         return ApiResp.ok(menuResService.batchCreate(reqList));
     }
 

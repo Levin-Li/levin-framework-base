@@ -49,7 +49,7 @@ public class StatDictReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    Long id;
+    String id;
 
     //@NotNull
 
@@ -139,7 +139,7 @@ public class StatDictReq extends MultiTenantReq {
     @Schema(description = "备注")
     String remark;
 
-    public StatDictReq(Long id) {
+    public StatDictReq(String id) {
         this.id = id;
     }
 

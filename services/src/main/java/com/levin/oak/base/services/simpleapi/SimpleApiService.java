@@ -35,7 +35,7 @@ public interface SimpleApiService {
      * @return pkId 主键ID
      */
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    Long create(@NotNull CreateSimpleApiReq req);
+    String create(@NotNull CreateSimpleApiReq req);
 
     /**
      * 创建记录，返回主键ID列表
@@ -43,7 +43,7 @@ public interface SimpleApiService {
      * @return pkId 主键ID列表
      */
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    List<Long> batchCreate(@NotNull List<CreateSimpleApiReq> reqList);
+    List<String> batchCreate(@NotNull List<CreateSimpleApiReq> reqList);
 
     /**
      * 通过主键查找记录，建议在服务内部调用，不要在控制器中调用
@@ -51,7 +51,7 @@ public interface SimpleApiService {
      * @return data 数据详情
      */
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    SimpleApiInfo findById(@NotNull Long id);
+    SimpleApiInfo findById(@NotNull String id);
 
     /**
     * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性

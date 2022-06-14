@@ -48,7 +48,7 @@ public class StatScheduledTaskReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    Long id;
+    String id;
 
     //@NotBlank
     //@Size(max = 64)
@@ -167,7 +167,7 @@ public class StatScheduledTaskReq extends MultiTenantReq {
     @Schema(description = "备注")
     String remark;
 
-    public StatScheduledTaskReq(Long id) {
+    public StatScheduledTaskReq(String id) {
         this.id = id;
     }
 

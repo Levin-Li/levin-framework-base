@@ -59,7 +59,7 @@ public class QueryDictReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    private Long id;
+    private String id;
 
 
     //@NotNull
@@ -162,7 +162,7 @@ public class QueryDictReq extends MultiTenantReq {
     private String remark;
 
 
-    public QueryDictReq(Long id) {
+    public QueryDictReq(String id) {
         this.id = id;
     }
 

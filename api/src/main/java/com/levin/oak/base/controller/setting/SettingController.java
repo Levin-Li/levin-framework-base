@@ -81,7 +81,7 @@ public class SettingController extends BaseController{
      */
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Long> create(@RequestBody CreateSettingReq req) {
+    public ApiResp<String> create(@RequestBody CreateSettingReq req) {
         return ApiResp.ok(settingService.create(req));
     }
 
@@ -93,7 +93,7 @@ public class SettingController extends BaseController{
      */
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateSettingReq> reqList) {
+    public ApiResp<List<String>> batchCreate(@RequestBody List<CreateSettingReq> reqList) {
         return ApiResp.ok(settingService.batchCreate(reqList));
     }
 

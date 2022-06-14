@@ -61,7 +61,7 @@ public class QueryMenuResReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    private Long id;
+    private String id;
 
 
     //@Size(max = 128)
@@ -111,7 +111,7 @@ public class QueryMenuResReq extends MultiTenantReq {
 
 
     @Schema(description = "父ID")
-    private Long parentId;
+    private String parentId;
 
 
     @Schema(description = "是否加载父对象")
@@ -199,7 +199,7 @@ public class QueryMenuResReq extends MultiTenantReq {
     private String remark;
 
 
-    public QueryMenuResReq(Long id) {
+    public QueryMenuResReq(String id) {
         this.id = id;
     }
 

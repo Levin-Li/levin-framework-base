@@ -72,7 +72,7 @@ public class StatSimpleApiReq extends MultiTenantReq{
 
     //@NotNull
     @Schema(description = "id")
-    Long id;
+    String id;
 
     //@NotBlank
     //@Size(max = 64)
@@ -165,7 +165,7 @@ public class StatSimpleApiReq extends MultiTenantReq{
     @Schema(description = "备注")
     String remark;
 
-    public StatSimpleApiReq(Long id) {
+    public StatSimpleApiReq(String id) {
         this.id = id;
     }
 

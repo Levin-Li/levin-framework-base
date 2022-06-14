@@ -81,7 +81,7 @@ public class SimpleFormController extends BaseController{
      */
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Long> create(@RequestBody CreateSimpleFormReq req) {
+    public ApiResp<String> create(@RequestBody CreateSimpleFormReq req) {
         return ApiResp.ok(simpleFormService.create(req));
     }
 
@@ -93,7 +93,7 @@ public class SimpleFormController extends BaseController{
      */
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateSimpleFormReq> reqList) {
+    public ApiResp<List<String>> batchCreate(@RequestBody List<CreateSimpleFormReq> reqList) {
         return ApiResp.ok(simpleFormService.batchCreate(reqList));
     }
 

@@ -54,13 +54,13 @@ public class DeleteSimplePageReq extends MultiTenantReq {
     @Schema(description = "id集合")
     @In(value = E_SimplePage.id, require = true)
     @NotEmpty
-    private Long[] idList;
+    private String[] idList;
 
-    public DeleteSimplePageReq(Long... idList) {
+    public DeleteSimplePageReq(String... idList) {
         this.idList = idList;
     }
 
-    public DeleteSimplePageReq setIdList(Long... idList) {
+    public DeleteSimplePageReq setIdList(String... idList) {
         this.idList = idList;
         return this;
     }

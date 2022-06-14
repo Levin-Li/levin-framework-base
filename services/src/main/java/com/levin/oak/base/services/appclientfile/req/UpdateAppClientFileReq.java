@@ -45,7 +45,7 @@ public class UpdateAppClientFileReq extends MultiTenantReq {
     @Schema(description = "id", required = true)
     @NotNull
     @Eq(require = true)
-    Long id;
+    String id;
 
     @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#user.isSuperAdmin()")
@@ -97,7 +97,7 @@ public class UpdateAppClientFileReq extends MultiTenantReq {
     String remark;
 
 
-    public UpdateAppClientFileReq(Long id) {
+    public UpdateAppClientFileReq(String id) {
         this.id = id;
     }
 

@@ -77,7 +77,7 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public Long create(CreateSimpleApiReq req){
+    public String create(CreateSimpleApiReq req){
         SimpleApi entity = simpleDao.create(req);
         return entity.getId();
     }
@@ -85,7 +85,7 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Long> batchCreate(List<CreateSimpleApiReq> reqList){
+    public List<String> batchCreate(List<CreateSimpleApiReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
@@ -93,7 +93,7 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
     @Override
     //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
     @Cacheable(sync = false, condition = "#id != null", unless = "#result == null ", key = E_SimpleApi.CACHE_KEY_PREFIX + "#id")
-    public SimpleApiInfo findById(Long id) {
+    public SimpleApiInfo findById(String id) {
         return findById(new SimpleApiIdReq().setId(id));
     }
 

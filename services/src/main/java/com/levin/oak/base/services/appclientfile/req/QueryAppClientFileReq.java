@@ -59,7 +59,7 @@ public class QueryAppClientFileReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    Long id;
+    String id;
 
 
     //@Size(max = 64)
@@ -162,7 +162,7 @@ public class QueryAppClientFileReq extends MultiTenantReq {
     String remark;
 
 
-    public QueryAppClientFileReq(Long id) {
+    public QueryAppClientFileReq(String id) {
         this.id = id;
     }
 

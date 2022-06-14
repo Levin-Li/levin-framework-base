@@ -45,7 +45,7 @@ public class SimplePageInfo implements Serializable {
 
     @NotNull
     @Schema(description = "id", required = true)
-    Long id;
+    String id;
 
 
     @NotBlank

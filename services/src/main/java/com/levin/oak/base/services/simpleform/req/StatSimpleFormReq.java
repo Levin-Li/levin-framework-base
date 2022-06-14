@@ -66,7 +66,7 @@ public class StatSimpleFormReq extends MultiTenantReq{
 
     //@NotNull
     @Schema(description = "id")
-    Long id;
+    String id;
 
     //@NotBlank
     //@Size(max = 64)
@@ -159,7 +159,7 @@ public class StatSimpleFormReq extends MultiTenantReq{
     @Schema(description = "备注")
     String remark;
 
-    public StatSimpleFormReq(Long id) {
+    public StatSimpleFormReq(String id) {
         this.id = id;
     }
 

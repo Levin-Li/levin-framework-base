@@ -55,13 +55,13 @@ public class DeleteSimpleApiReq extends MultiTenantReq {
     @Schema(description = "id集合")
     @In(value = E_SimpleApi.id, require = true)
     @NotEmpty
-    private Long[] idList;
+    private String[] idList;
 
-    public DeleteSimpleApiReq(Long... idList) {
+    public DeleteSimpleApiReq(String... idList) {
         this.idList = idList;
     }
 
-    public DeleteSimpleApiReq setIdList(Long... idList) {
+    public DeleteSimpleApiReq setIdList(String... idList) {
         this.idList = idList;
         return this;
     }

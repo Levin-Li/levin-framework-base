@@ -44,13 +44,13 @@ public class DeleteScheduledTaskReq extends MultiTenantReq {
     @Schema(description = "id集合")
     @In(value = E_ScheduledTask.id, require = true)
     @NotEmpty
-    private Long[] idList;
+    private String[] idList;
 
-    public DeleteScheduledTaskReq(Long... idList) {
+    public DeleteScheduledTaskReq(String... idList) {
         this.idList = idList;
     }
 
-    public DeleteScheduledTaskReq setIdList(Long... idList) {
+    public DeleteScheduledTaskReq setIdList(String... idList) {
         this.idList = idList;
         return this;
     }

@@ -44,13 +44,13 @@ public class DeleteAppClientReq extends MultiTenantReq {
     @Schema(description = "id集合")
     @In(value = E_AppClient.id, require = true)
     @NotEmpty
-    private Long[] idList;
+    private String[] idList;
 
-    public DeleteAppClientReq(Long... idList) {
+    public DeleteAppClientReq(String... idList) {
         this.idList = idList;
     }
 
-    public DeleteAppClientReq setIdList(Long... idList) {
+    public DeleteAppClientReq setIdList(String... idList) {
         this.idList = idList;
         return this;
     }

@@ -44,13 +44,13 @@ public class DeleteDictReq extends MultiTenantReq {
     @Schema(description = "id集合")
     @In(value = E_Dict.id, require = true)
     @NotEmpty
-    private Long[] idList;
+    private String[] idList;
 
-    public DeleteDictReq(Long... idList) {
+    public DeleteDictReq(String... idList) {
         this.idList = idList;
     }
 
-    public DeleteDictReq setIdList(Long... idList) {
+    public DeleteDictReq setIdList(String... idList) {
         this.idList = idList;
         return this;
     }

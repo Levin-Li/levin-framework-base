@@ -46,7 +46,7 @@ public class UpdateJobPostReq extends MultiTenantReq {
     @Schema(description = "id", required = true)
     @NotNull
     @Eq(require = true)
-    private Long id;
+    private String id;
 
     @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#user.isSuperAdmin()")
@@ -90,7 +90,7 @@ public class UpdateJobPostReq extends MultiTenantReq {
     private String remark;
 
 
-    public UpdateJobPostReq(Long id) {
+    public UpdateJobPostReq(String id) {
         this.id = id;
     }
 

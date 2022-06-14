@@ -54,13 +54,13 @@ public class DeleteSimpleFormReq extends MultiTenantReq {
     @Schema(description = "id集合")
     @In(value = E_SimpleForm.id, require = true)
     @NotEmpty
-    private Long[] idList;
+    private String[] idList;
 
-    public DeleteSimpleFormReq(Long... idList) {
+    public DeleteSimpleFormReq(String... idList) {
         this.idList = idList;
     }
 
-    public DeleteSimpleFormReq setIdList(Long... idList) {
+    public DeleteSimpleFormReq setIdList(String... idList) {
         this.idList = idList;
         return this;
     }

@@ -81,7 +81,7 @@ public class ScheduledTaskController extends BaseController{
      */
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Long> create(@RequestBody CreateScheduledTaskReq req) {
+    public ApiResp<String> create(@RequestBody CreateScheduledTaskReq req) {
         return ApiResp.ok(scheduledTaskService.create(req));
     }
 
@@ -93,7 +93,7 @@ public class ScheduledTaskController extends BaseController{
      */
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateScheduledTaskReq> reqList) {
+    public ApiResp<List<String>> batchCreate(@RequestBody List<CreateScheduledTaskReq> reqList) {
         return ApiResp.ok(scheduledTaskService.batchCreate(reqList));
     }
 

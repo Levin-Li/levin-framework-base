@@ -61,7 +61,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Override
-    public Long create(CreateJobPostReq req) {
+    public String create(CreateJobPostReq req) {
         JobPost entity = simpleDao.create(req);
         return entity.getId();
     }
@@ -69,7 +69,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Long> batchCreate(List<CreateJobPostReq> reqList) {
+    public List<String> batchCreate(List<CreateJobPostReq> reqList) {
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
@@ -77,7 +77,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Override
     //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
     @Cacheable(sync = false, condition = "#id != null", unless = "#result == null ", key = E_JobPost.CACHE_KEY_PREFIX + "#id")
-    public JobPostInfo findById(Long id) {
+    public JobPostInfo findById(String id) {
         return findById(new JobPostIdReq().setId(id));
     }
 

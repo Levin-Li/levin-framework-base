@@ -56,7 +56,7 @@ private static final long serialVersionUID = 1021385738L;
     @Schema(description = "id" , required = true)
     @Eq(require = true)
     @NotNull
-    protected Long id;
+    protected String id;
     
 
     @PostConstruct

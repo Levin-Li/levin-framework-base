@@ -70,7 +70,7 @@ public class QuerySimplePageReq extends MultiTenantReq{
 
     //@NotNull
     @Schema(description = "id")
-    Long id;
+    String id;
 
     //@NotBlank
     //@Size(max = 64)
@@ -163,7 +163,7 @@ public class QuerySimplePageReq extends MultiTenantReq{
     @Schema(description = "备注")
     String remark;
 
-    public QuerySimplePageReq(Long id) {
+    public QuerySimplePageReq(String id) {
         this.id = id;
     }
 

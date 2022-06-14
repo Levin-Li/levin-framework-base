@@ -39,7 +39,7 @@ public class AppClientFileInfo implements Serializable {
 
     @NotNull
     @Schema(description = "id", required = true)
-    Long id;
+    String id;
 
 
     @Size(max = 64)

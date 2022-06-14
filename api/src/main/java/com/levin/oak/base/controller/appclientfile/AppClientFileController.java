@@ -92,7 +92,7 @@ public class AppClientFileController extends BaseController{
      */
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Long> create(@RequestBody CreateAppClientFileReq req) {
+    public ApiResp<String> create(@RequestBody CreateAppClientFileReq req) {
         return ApiResp.ok(appClientFileService.create(req));
     }
 
@@ -104,7 +104,7 @@ public class AppClientFileController extends BaseController{
      */
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateAppClientFileReq> reqList) {
+    public ApiResp<List<String>> batchCreate(@RequestBody List<CreateAppClientFileReq> reqList) {
         return ApiResp.ok(appClientFileService.batchCreate(reqList));
     }
 

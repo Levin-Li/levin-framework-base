@@ -48,7 +48,7 @@ public class StatAppClientFileReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    Long id;
+    String id;
 
     //@Size(max = 64)
 
@@ -137,7 +137,7 @@ public class StatAppClientFileReq extends MultiTenantReq {
     @Schema(description = "备注")
     String remark;
 
-    public StatAppClientFileReq(Long id) {
+    public StatAppClientFileReq(String id) {
         this.id = id;
     }
 

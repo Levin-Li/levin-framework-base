@@ -80,7 +80,7 @@ public class DictController extends BaseController{
      */
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Long> create(@RequestBody CreateDictReq req) {
+    public ApiResp<String> create(@RequestBody CreateDictReq req) {
         return ApiResp.ok(dictService.create(req));
     }
 
@@ -92,7 +92,7 @@ public class DictController extends BaseController{
      */
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateDictReq> reqList) {
+    public ApiResp<List<String>> batchCreate(@RequestBody List<CreateDictReq> reqList) {
         return ApiResp.ok(dictService.batchCreate(reqList));
     }
 

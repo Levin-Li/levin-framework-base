@@ -55,7 +55,7 @@ public class QueryScheduledTaskReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    private Long id;
+    private String id;
 
 
     //@NotBlank
@@ -187,7 +187,7 @@ public class QueryScheduledTaskReq extends MultiTenantReq {
     private String remark;
 
 
-    public QueryScheduledTaskReq(Long id) {
+    public QueryScheduledTaskReq(String id) {
         this.id = id;
     }
 

@@ -97,7 +97,7 @@ public class AppClientController extends BaseController {
      */
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Long> create(@RequestBody CreateAppClientReq req) {
+    public ApiResp<String> create(@RequestBody CreateAppClientReq req) {
         return ApiResp.ok(appClientService.create(req));
     }
 
@@ -109,7 +109,7 @@ public class AppClientController extends BaseController {
      */
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateAppClientReq> reqList) {
+    public ApiResp<List<String>> batchCreate(@RequestBody List<CreateAppClientReq> reqList) {
         return ApiResp.ok(appClientService.batchCreate(reqList));
     }
 

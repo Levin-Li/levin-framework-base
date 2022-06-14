@@ -39,7 +39,7 @@ public class JobPostInfo implements Serializable {
 
     @NotNull
     @Schema(description = "id", required = true)
-    private Long id;
+    private String id;
 
 
     @NotBlank

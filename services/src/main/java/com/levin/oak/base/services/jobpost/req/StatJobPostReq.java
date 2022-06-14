@@ -49,7 +49,7 @@ public class StatJobPostReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    Long id;
+    String id;
 
     //@NotBlank
     //@Size(max = 64)
@@ -133,7 +133,7 @@ public class StatJobPostReq extends MultiTenantReq {
     @Schema(description = "备注")
     String remark;
 
-    public StatJobPostReq(Long id) {
+    public StatJobPostReq(String id) {
         this.id = id;
     }
 

@@ -57,7 +57,7 @@ public class UpdateSimpleApiReq extends MultiTenantReq {
     @Schema(description = "id" , required = true)
     @NotNull
     @Eq(require = true)
-    Long id;
+    String id;
 
     @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition ="!#user.isSuperAdmin()")
@@ -127,7 +127,7 @@ public class UpdateSimpleApiReq extends MultiTenantReq {
     String remark;
 
 
-    public UpdateSimpleApiReq(Long id) {
+    public UpdateSimpleApiReq(String id) {
         this.id = id;
     }
     @PostConstruct

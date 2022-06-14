@@ -44,13 +44,13 @@ public class DeleteMenuResReq extends MultiTenantReq {
     @Schema(description = "id集合")
     @In(value = E_MenuRes.id, require = true)
     @NotEmpty
-    private Long[] idList;
+    private String[] idList;
 
-    public DeleteMenuResReq(Long... idList) {
+    public DeleteMenuResReq(String... idList) {
         this.idList = idList;
     }
 
-    public DeleteMenuResReq setIdList(Long... idList) {
+    public DeleteMenuResReq setIdList(String... idList) {
         this.idList = idList;
         return this;
     }

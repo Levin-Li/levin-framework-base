@@ -44,13 +44,13 @@ public class DeleteJobPostReq extends MultiTenantReq {
     @Schema(description = "id集合")
     @In(value = E_JobPost.id, require = true)
     @NotEmpty
-    private Long[] idList;
+    private String[] idList;
 
-    public DeleteJobPostReq(Long... idList) {
+    public DeleteJobPostReq(String... idList) {
         this.idList = idList;
     }
 
-    public DeleteJobPostReq setIdList(Long... idList) {
+    public DeleteJobPostReq setIdList(String... idList) {
         this.idList = idList;
         return this;
     }

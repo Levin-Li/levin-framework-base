@@ -49,7 +49,7 @@ public class StatSettingReq extends MultiTenantReq {
     //@NotNull
 
     @Schema(description = "id")
-    Long id;
+    String id;
 
     //@NotBlank
     //@Size(max = 64)
@@ -157,7 +157,7 @@ public class StatSettingReq extends MultiTenantReq {
     @Schema(description = "备注")
     String remark;
 
-    public StatSettingReq(Long id) {
+    public StatSettingReq(String id) {
         this.id = id;
     }
 

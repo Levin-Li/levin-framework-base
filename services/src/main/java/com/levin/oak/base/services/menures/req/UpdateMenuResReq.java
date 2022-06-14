@@ -46,7 +46,7 @@ public class UpdateMenuResReq extends MultiTenantReq {
     @Schema(description = "id", required = true)
     @NotNull
     @Eq(require = true)
-    private Long id;
+    private String id;
 
     @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#user.isSuperAdmin()")
@@ -81,7 +81,7 @@ public class UpdateMenuResReq extends MultiTenantReq {
     private String params;
 
     @Schema(description = "父ID")
-    private Long parentId;
+    private String parentId;
 
     @Size(max = 1800)
     @Schema(description = "id路径， 使用|包围，如|1|3|15|")
@@ -113,7 +113,7 @@ public class UpdateMenuResReq extends MultiTenantReq {
     private String remark;
 
 
-    public UpdateMenuResReq(Long id) {
+    public UpdateMenuResReq(String id) {
         this.id = id;
     }
 

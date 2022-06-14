@@ -80,7 +80,7 @@ public class JobPostController extends BaseController{
      */
     @PostMapping
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Long> create(@RequestBody CreateJobPostReq req) {
+    public ApiResp<String> create(@RequestBody CreateJobPostReq req) {
         return ApiResp.ok(jobPostService.create(req));
     }
 
@@ -92,7 +92,7 @@ public class JobPostController extends BaseController{
      */
     @PostMapping("/batchCreate")
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateJobPostReq> reqList) {
+    public ApiResp<List<String>> batchCreate(@RequestBody List<CreateJobPostReq> reqList) {
         return ApiResp.ok(jobPostService.batchCreate(reqList));
     }
 
