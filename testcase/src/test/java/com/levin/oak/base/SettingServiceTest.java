@@ -1,31 +1,67 @@
 package com.levin.oak.base;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.oak.base.services.setting.SettingService;
-import com.levin.oak.base.services.setting.info.SettingInfo;
-import com.levin.oak.base.services.setting.req.CreateSettingReq;
-import com.levin.oak.base.services.setting.req.QuerySettingReq;
-import com.levin.oak.base.services.setting.req.SettingIdReq;
-import com.levin.oak.base.services.setting.req.UpdateSettingReq;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static com.levin.oak.base.ModuleOption.*;
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.Setting;
+
+import com.levin.oak.base.services.setting.*;
+import com.levin.oak.base.services.setting.req.*;
+import com.levin.oak.base.services.setting.info.*;
+
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.Setting.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
-//import org.junit.jupiter.api.Test;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.domain.*;
+
+import org.springframework.util.*;
+import java.util.Date;
+import org.springframework.beans.BeanUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Date;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  系统设置测试
  *
- *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
+ *  @author auto gen by simple-dao-codegen 2022-6-14 9:26:30
  *
  */
 
@@ -41,7 +77,7 @@ public class SettingServiceTest {
     @Resource
     private SettingService settingService;
 
-    private Long id;
+    private String id;
 
     @Before
     public void before() throws Exception {
@@ -69,7 +105,7 @@ public class SettingServiceTest {
 
             // req.setNullable(true);//值是否可空 
 
-            // req.setInputPlaceholder("这是文本64");//输入占位提示 
+            // req.setInputPlaceholder("这是文本128");//输入占位提示 
 
             // req.setTenantId("这是文本128");//租户ID 
 
@@ -88,7 +124,7 @@ public class SettingServiceTest {
             // req.setRemark("这是文本512");//备注 
 
 
-       Long id  = settingService.create(req);
+       String id  = settingService.create(req);
 
         log.debug("新增系统设置->" + id);
 
@@ -109,7 +145,7 @@ public class SettingServiceTest {
         // req.setValueType(ValueType.Css);//值类型
         // req.setValue("值_1");//值
         // req.setNullable(true);//值是否可空
-        // req.setInputPlaceholder("这是文本64");//输入占位提示
+        // req.setInputPlaceholder("这是文本128");//输入占位提示
         // req.setTenantId("这是文本128");//租户ID
         // req.setDomain("这是文本128");//系统域
         // req.setName("这是文本128");//名称
@@ -141,7 +177,7 @@ public class SettingServiceTest {
            // req.setValueType(ValueType.Css);//值类型 必填
            // req.setValue("值_1");//值 
            // req.setNullable(true);//值是否可空 
-           // req.setInputPlaceholder("这是文本64");//输入占位提示 
+           // req.setInputPlaceholder("这是文本128");//输入占位提示 
            // req.setTenantId("这是文本128");//租户ID 
            // req.setDomain("这是文本128");//系统域 
            // req.setName("这是文本128");//名称 必填

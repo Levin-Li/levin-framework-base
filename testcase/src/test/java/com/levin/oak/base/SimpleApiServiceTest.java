@@ -1,31 +1,67 @@
 package com.levin.oak.base;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.oak.base.services.simpleapi.SimpleApiService;
-import com.levin.oak.base.services.simpleapi.info.SimpleApiInfo;
-import com.levin.oak.base.services.simpleapi.req.CreateSimpleApiReq;
-import com.levin.oak.base.services.simpleapi.req.QuerySimpleApiReq;
-import com.levin.oak.base.services.simpleapi.req.SimpleApiIdReq;
-import com.levin.oak.base.services.simpleapi.req.UpdateSimpleApiReq;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static com.levin.oak.base.ModuleOption.*;
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.SimpleApi;
+
+import com.levin.oak.base.services.simpleapi.*;
+import com.levin.oak.base.services.simpleapi.req.*;
+import com.levin.oak.base.services.simpleapi.info.*;
+
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.SimpleApi.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
-//import org.junit.jupiter.api.Test;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.domain.*;
+
+import org.springframework.util.*;
+import java.util.Date;
+import org.springframework.beans.BeanUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Date;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  简单动态接口测试
  *
- *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
+ *  @author auto gen by simple-dao-codegen 2022-6-14 9:26:30
  *
  */
 
@@ -41,7 +77,7 @@ public class SimpleApiServiceTest {
     @Resource
     private SimpleApiService simpleApiService;
 
-    private Long id;
+    private String id;
 
     @Before
     public void before() throws Exception {
@@ -61,11 +97,9 @@ public class SimpleApiServiceTest {
 
             // req.setLanguage(Language.Groovy);//脚本语言 必填
 
-            // req.setType("这是文本64");//类型 必填
+            // req.setCategory("这是文本128");//分类名称 必填
 
-            // req.setCategory("这是文本64");//分类名称 必填
-
-            // req.setGroupName("这是文本64");//分组名称 必填
+            // req.setGroupName("这是文本128");//分组名称 必填
 
             // req.setIcon("图标_1");//图标 
 
@@ -94,7 +128,7 @@ public class SimpleApiServiceTest {
             // req.setRemark("这是文本512");//备注 
 
 
-       Long id  = simpleApiService.create(req);
+       String id  = simpleApiService.create(req);
 
         log.debug("新增简单动态接口->" + id);
 
@@ -111,9 +145,8 @@ public class SimpleApiServiceTest {
         // req.setMethods("这是文本16");//http方法
         // req.setLanguage(Language.Groovy);//脚本语言
         // req.setId(null);//id
-        // req.setType("这是文本64");//类型
-        // req.setCategory("这是文本64");//分类名称
-        // req.setGroupName("这是文本64");//分组名称
+        // req.setCategory("这是文本128");//分类名称
+        // req.setGroupName("这是文本128");//分组名称
         // req.setIcon("图标_1");//图标
         // req.setPath("访问路径_1");//访问路径
         // req.setRequireAuthorizations("这是文本1800");//需要的权限或角色，json数组
@@ -146,9 +179,8 @@ public class SimpleApiServiceTest {
 
            // req.setMethods("这是文本16");//http方法 
            // req.setLanguage(Language.Groovy);//脚本语言 必填
-           // req.setType("这是文本64");//类型 必填
-           // req.setCategory("这是文本64");//分类名称 必填
-           // req.setGroupName("这是文本64");//分组名称 必填
+           // req.setCategory("这是文本128");//分类名称 必填
+           // req.setGroupName("这是文本128");//分组名称 必填
            // req.setIcon("图标_1");//图标 
            // req.setPath("访问路径_1");//访问路径 必填
            // req.setRequireAuthorizations("这是文本1800");//需要的权限或角色，json数组 

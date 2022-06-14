@@ -1,31 +1,64 @@
 package com.levin.oak.base;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.oak.base.services.scheduledlog.ScheduledLogService;
-import com.levin.oak.base.services.scheduledlog.info.ScheduledLogInfo;
-import com.levin.oak.base.services.scheduledlog.req.CreateScheduledLogReq;
-import com.levin.oak.base.services.scheduledlog.req.QueryScheduledLogReq;
-import com.levin.oak.base.services.scheduledlog.req.ScheduledLogIdReq;
-import com.levin.oak.base.services.scheduledlog.req.UpdateScheduledLogReq;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static com.levin.oak.base.ModuleOption.*;
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.ScheduledLog;
+
+import com.levin.oak.base.services.scheduledlog.*;
+import com.levin.oak.base.services.scheduledlog.req.*;
+import com.levin.oak.base.services.scheduledlog.info.*;
+
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
-//import org.junit.jupiter.api.Test;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.domain.*;
+
+import org.springframework.util.*;
+import java.util.Date;
+import org.springframework.beans.BeanUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Date;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  调度日志测试
  *
- *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
+ *  @author auto gen by simple-dao-codegen 2022-6-14 9:26:30
  *
  */
 
@@ -57,7 +90,7 @@ public class ScheduledLogServiceTest {
 
         CreateScheduledLogReq req = new CreateScheduledLogReq();
 
-            // req.setTenantId("这是文本64");//租户ID 
+            // req.setTenantId("这是文本128");//租户ID 
 
             // req.setOrgId("这是文本64");//归属组织 必填
 
@@ -85,7 +118,7 @@ public class ScheduledLogServiceTest {
         QueryScheduledLogReq req = new QueryScheduledLogReq();
 
         // req.setId(null);//id
-        // req.setTenantId("这是文本64");//租户ID
+        // req.setTenantId("这是文本128");//租户ID
         // req.setOrgId("这是文本64");//归属组织
         // req.setTaskId("这是文本64");//任务ID
         // req.setInvokeCycle("这是文本128");//执行周期
@@ -107,7 +140,7 @@ public class ScheduledLogServiceTest {
          req.setId(id);
 
 
-           // req.setTenantId("这是文本64");//租户ID 
+           // req.setTenantId("这是文本128");//租户ID 
            // req.setOrgId("这是文本64");//归属组织 必填
            // req.setTaskId("这是文本64");//任务ID 必填
            // req.setInvokeCycle("这是文本128");//执行周期 

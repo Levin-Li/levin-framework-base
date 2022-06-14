@@ -1,31 +1,67 @@
 package com.levin.oak.base;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.oak.base.services.role.RoleService;
-import com.levin.oak.base.services.role.info.RoleInfo;
-import com.levin.oak.base.services.role.req.CreateRoleReq;
-import com.levin.oak.base.services.role.req.QueryRoleReq;
-import com.levin.oak.base.services.role.req.RoleIdReq;
-import com.levin.oak.base.services.role.req.UpdateRoleReq;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static com.levin.oak.base.ModuleOption.*;
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.Role;
+
+import com.levin.oak.base.services.role.*;
+import com.levin.oak.base.services.role.req.*;
+import com.levin.oak.base.services.role.info.*;
+
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.Role.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
-//import org.junit.jupiter.api.Test;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.domain.*;
+
+import org.springframework.util.*;
+import java.util.Date;
+import org.springframework.beans.BeanUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Date;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  角色测试
  *
- *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
+ *  @author auto gen by simple-dao-codegen 2022-6-14 9:26:30
  *
  */
 
@@ -57,7 +93,7 @@ public class RoleServiceTest {
 
         CreateRoleReq req = new CreateRoleReq();
 
-            // req.setCode("编码_1");//编码 必填
+            // req.setCode("这是文本128");//编码 必填
 
             // req.setIcon("图标_1");//图标 
 
@@ -99,7 +135,7 @@ public class RoleServiceTest {
         QueryRoleReq req = new QueryRoleReq();
 
         // req.setId(null);//id
-        // req.setCode("编码_1");//编码
+        // req.setCode("这是文本128");//编码
         // req.setIcon("图标_1");//图标
         // req.setOrgDataScope(OrgDataScope.All);//部门数据权限
         // req.setAssignedOrgIdList("指定的部门列表_1");//指定的部门列表
@@ -129,7 +165,7 @@ public class RoleServiceTest {
          req.setId(id);
 
 
-           // req.setCode("编码_1");//编码 必填
+           // req.setCode("这是文本128");//编码 必填
            // req.setIcon("图标_1");//图标 
            // req.setOrgDataScope(OrgDataScope.All);//部门数据权限 必填
            // req.setAssignedOrgIdList("指定的部门列表_1");//指定的部门列表 

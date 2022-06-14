@@ -1,32 +1,66 @@
 package com.levin.oak.base;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.oak.base.services.appclientfile.AppClientFileService;
-import com.levin.oak.base.services.appclientfile.info.AppClientFileInfo;
-import com.levin.oak.base.services.appclientfile.req.AppClientFileIdReq;
-import com.levin.oak.base.services.appclientfile.req.CreateAppClientFileReq;
-import com.levin.oak.base.services.appclientfile.req.QueryAppClientFileReq;
-import com.levin.oak.base.services.appclientfile.req.UpdateAppClientFileReq;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static com.levin.oak.base.ModuleOption.*;
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.AppClientFile;
+
+import com.levin.oak.base.services.appclientfile.*;
+import com.levin.oak.base.services.appclientfile.req.*;
+import com.levin.oak.base.services.appclientfile.info.*;
+
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.domain.*;
+
+import org.springframework.util.*;
+import java.util.Date;
+import org.springframework.beans.BeanUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
 //import org.junit.jupiter.api.Test;
-import javax.annotation.Resource;
-import javax.annotation.Resource;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Date;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  客户端文件测试
  *
- *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
+ *  @author auto gen by simple-dao-codegen 2022-6-14 9:26:30
  *
  */
 
@@ -42,7 +76,7 @@ public class AppClientFileServiceTest {
     @Resource
     private AppClientFileService appClientFileService;
 
-    private Long id;
+    private String id;
 
     @Before
     public void before() throws Exception {
@@ -60,7 +94,7 @@ public class AppClientFileServiceTest {
 
             // req.setClientType("这是文本64");//客户端类型 
 
-            // req.setMimeType("这是文本64");//文件类型 
+            // req.setMimeType("这是文本128");//文件类型 
 
             // req.setPath("文件路径_1");//文件路径 必填
 
@@ -83,7 +117,7 @@ public class AppClientFileServiceTest {
             // req.setRemark("这是文本512");//备注 
 
 
-       Long id  = appClientFileService.create(req);
+       String id  = appClientFileService.create(req);
 
         log.debug("新增客户端文件->" + id);
 
@@ -99,7 +133,7 @@ public class AppClientFileServiceTest {
 
         // req.setId(null);//id
         // req.setClientType("这是文本64");//客户端类型
-        // req.setMimeType("这是文本64");//文件类型
+        // req.setMimeType("这是文本128");//文件类型
         // req.setPath("文件路径_1");//文件路径
         // req.setContent("文件内容_1");//文件内容
         // req.setTenantId("这是文本128");//租户ID
@@ -128,7 +162,7 @@ public class AppClientFileServiceTest {
 
 
            // req.setClientType("这是文本64");//客户端类型 
-           // req.setMimeType("这是文本64");//文件类型 
+           // req.setMimeType("这是文本128");//文件类型 
            // req.setPath("文件路径_1");//文件路径 必填
            // req.setContent("文件内容_1");//文件内容 
            // req.setTenantId("这是文本128");//租户ID 

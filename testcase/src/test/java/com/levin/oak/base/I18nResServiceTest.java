@@ -1,31 +1,66 @@
 package com.levin.oak.base;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.oak.base.services.i18nres.I18nResService;
-import com.levin.oak.base.services.i18nres.info.I18nResInfo;
-import com.levin.oak.base.services.i18nres.req.CreateI18nResReq;
-import com.levin.oak.base.services.i18nres.req.I18nResIdReq;
-import com.levin.oak.base.services.i18nres.req.QueryI18nResReq;
-import com.levin.oak.base.services.i18nres.req.UpdateI18nResReq;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static com.levin.oak.base.ModuleOption.*;
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.I18nRes;
+
+import com.levin.oak.base.services.i18nres.*;
+import com.levin.oak.base.services.i18nres.req.*;
+import com.levin.oak.base.services.i18nres.info.*;
+
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
-//import org.junit.jupiter.api.Test;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.domain.*;
+
+import org.springframework.util.*;
+import java.util.Date;
+import org.springframework.beans.BeanUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Date;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  国际化资源测试
  *
- *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
+ *  @author auto gen by simple-dao-codegen 2022-6-14 9:26:30
  *
  */
 
@@ -57,9 +92,9 @@ public class I18nResServiceTest {
 
         CreateI18nResReq req = new CreateI18nResReq();
 
-            // req.setCategory("这是文本64");//分类 必填
+            // req.setCategory("这是文本128");//分类 必填
 
-            // req.setLang("这是文本32");//语言 必填
+            // req.setLang("这是文本64");//语言 必填
 
             // req.setLabel("这是文本768");//标签 必填
 
@@ -95,8 +130,8 @@ public class I18nResServiceTest {
         QueryI18nResReq req = new QueryI18nResReq();
 
         // req.setId(null);//id
-        // req.setCategory("这是文本64");//分类
-        // req.setLang("这是文本32");//语言
+        // req.setCategory("这是文本128");//分类
+        // req.setLang("这是文本64");//语言
         // req.setLabel("这是文本768");//标签
         // req.setTenantId("这是文本128");//租户ID
         // req.setDomain("这是文本128");//系统域
@@ -123,8 +158,8 @@ public class I18nResServiceTest {
          req.setId(id);
 
 
-           // req.setCategory("这是文本64");//分类 必填
-           // req.setLang("这是文本32");//语言 必填
+           // req.setCategory("这是文本128");//分类 必填
+           // req.setLang("这是文本64");//语言 必填
            // req.setLabel("这是文本768");//标签 必填
            // req.setTenantId("这是文本128");//租户ID 
            // req.setDomain("这是文本128");//系统域 

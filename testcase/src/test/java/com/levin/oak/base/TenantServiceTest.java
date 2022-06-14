@@ -1,31 +1,67 @@
 package com.levin.oak.base;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.oak.base.services.tenant.TenantService;
-import com.levin.oak.base.services.tenant.info.TenantInfo;
-import com.levin.oak.base.services.tenant.req.CreateTenantReq;
-import com.levin.oak.base.services.tenant.req.QueryTenantReq;
-import com.levin.oak.base.services.tenant.req.TenantIdReq;
-import com.levin.oak.base.services.tenant.req.UpdateTenantReq;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static com.levin.oak.base.ModuleOption.*;
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.Tenant;
+
+import com.levin.oak.base.services.tenant.*;
+import com.levin.oak.base.services.tenant.req.*;
+import com.levin.oak.base.services.tenant.info.*;
+
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
-//import org.junit.jupiter.api.Test;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.domain.*;
+
+import org.springframework.util.*;
+import java.util.Date;
+import org.springframework.beans.BeanUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Date;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  租户测试
  *
- *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
+ *  @author auto gen by simple-dao-codegen 2022-6-14 9:26:30
  *
  */
 
@@ -79,9 +115,9 @@ public class TenantServiceTest {
 
             // req.setContractPhone("这是文本32");//联系电话 
 
-            // req.setDomainList("域名列表_1");//域名列表 
+            // req.setDomainList("这是文本1200");//域名列表 
 
-            // req.setAppId("这是文本32");//appId 
+            // req.setAppId("这是文本128");//appId 
 
             // req.setAppSecret("这是文本128");//appSecret 
 
@@ -127,8 +163,8 @@ public class TenantServiceTest {
         // req.setLteLicenseExpire(DateUtils.getEndHour(new Date()));//最大到期时间
         // req.setContractPerson("这是文本32");//联系人
         // req.setContractPhone("这是文本32");//联系电话
-        // req.setDomainList("域名列表_1");//域名列表
-        // req.setAppId("这是文本32");//appId
+        // req.setDomainList("这是文本1200");//域名列表
+        // req.setAppId("这是文本128");//appId
         // req.setAppSecret("这是文本128");//appSecret
         // req.setEncryptKey("这是文本128");//encryptKey
         // req.setName("这是文本128");//名称
@@ -165,8 +201,8 @@ public class TenantServiceTest {
            // req.setLicenseExpire(new Date());//到期时间 
            // req.setContractPerson("这是文本32");//联系人 
            // req.setContractPhone("这是文本32");//联系电话 
-           // req.setDomainList("域名列表_1");//域名列表 
-           // req.setAppId("这是文本32");//appId 
+           // req.setDomainList("这是文本1200");//域名列表 
+           // req.setAppId("这是文本128");//appId 
            // req.setAppSecret("这是文本128");//appSecret 
            // req.setEncryptKey("这是文本128");//encryptKey 
            // req.setName("这是文本128");//名称 必填

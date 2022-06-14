@@ -1,9 +1,12 @@
 
 **/.idea
+.rdb
 .ssh
 .lock
 *.lock
 .awcache
+
+*.rdb
 
 **/node_modules
 

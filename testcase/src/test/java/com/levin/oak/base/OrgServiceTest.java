@@ -1,31 +1,72 @@
 package com.levin.oak.base;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.oak.base.services.org.OrgService;
-import com.levin.oak.base.services.org.info.OrgInfo;
-import com.levin.oak.base.services.org.req.CreateOrgReq;
-import com.levin.oak.base.services.org.req.OrgIdReq;
-import com.levin.oak.base.services.org.req.QueryOrgReq;
-import com.levin.oak.base.services.org.req.UpdateOrgReq;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static com.levin.oak.base.ModuleOption.*;
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.Org;
+
+import com.levin.oak.base.services.org.*;
+import com.levin.oak.base.services.org.req.*;
+import com.levin.oak.base.services.org.info.*;
+
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.Org.*;
+import com.levin.oak.base.entities.Area;
+import com.levin.oak.base.services.area.info.*;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.oak.base.entities.Org;
+import java.util.Set;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
-//import org.junit.jupiter.api.Test;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.domain.*;
+
+import org.springframework.util.*;
+import java.util.Date;
+import org.springframework.beans.BeanUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Date;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  机构测试
  *
- *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
+ *  @author auto gen by simple-dao-codegen 2022-6-14 9:26:30
  *
  */
 
@@ -57,7 +98,9 @@ public class OrgServiceTest {
 
         CreateOrgReq req = new CreateOrgReq();
 
-            // req.setTenantId("租户ID_1");//租户ID 
+            // req.setParentId("这是文本128");//父ID 
+
+            // req.setTenantId("这是文本128");//租户ID 
 
             // req.setCode("这是文本128");//编码 
 
@@ -86,8 +129,6 @@ public class OrgServiceTest {
             // req.setAddress("联系地址_1");//联系地址 
 
             // req.setZipCode("这是文本32");//邮政编码 
-
-            // req.setParentId(null);//父ID 
 
             // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
 
@@ -119,7 +160,8 @@ public class OrgServiceTest {
         QueryOrgReq req = new QueryOrgReq();
 
         // req.setId(null);//id
-        // req.setTenantId("租户ID_1");//租户ID
+        // req.setParentId("这是文本128");//父ID
+        // req.setTenantId("这是文本128");//租户ID
         // req.setCode("这是文本128");//编码
         // req.setIcon("图标_1");//图标
         // req.setState(State.Normal);//状态
@@ -135,7 +177,6 @@ public class OrgServiceTest {
         // req.setEmails("这是文本32");//联系邮箱
         // req.setAddress("联系地址_1");//联系地址
         // req.setZipCode("这是文本32");//邮政编码
-        // req.setParentId(null);//父ID
         // req.setLoadParent(true);//加载父对象
         // req.setLoadChildren(true);//加载子节点
         // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15|
@@ -162,7 +203,8 @@ public class OrgServiceTest {
          req.setId(id);
 
 
-           // req.setTenantId("租户ID_1");//租户ID 
+           // req.setParentId("这是文本128");//父ID 
+           // req.setTenantId("这是文本128");//租户ID 
            // req.setCode("这是文本128");//编码 
            // req.setIcon("图标_1");//图标 
            // req.setState(State.Normal);//状态 必填
@@ -177,7 +219,6 @@ public class OrgServiceTest {
            // req.setEmails("这是文本32");//联系邮箱 
            // req.setAddress("联系地址_1");//联系地址 
            // req.setZipCode("这是文本32");//邮政编码 
-           // req.setParentId(null);//父ID 
            // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
            // req.setName("这是文本128");//名称 必填
            // req.setPinyinName("这是文本128");//拼音，格式Json数组：[全拼,简拼] 

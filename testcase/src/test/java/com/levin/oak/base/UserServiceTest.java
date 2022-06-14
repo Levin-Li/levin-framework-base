@@ -1,31 +1,70 @@
 package com.levin.oak.base;
 
-import com.levin.commons.dao.support.PagingData;
-import com.levin.oak.base.services.user.UserService;
-import com.levin.oak.base.services.user.info.UserInfo;
-import com.levin.oak.base.services.user.req.CreateUserReq;
-import com.levin.oak.base.services.user.req.QueryUserReq;
-import com.levin.oak.base.services.user.req.UpdateUserReq;
-import com.levin.oak.base.services.user.req.UserIdReq;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static com.levin.oak.base.ModuleOption.*;
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.User;
+
+import com.levin.oak.base.services.user.*;
+import com.levin.oak.base.services.user.req.*;
+import com.levin.oak.base.services.user.info.*;
+
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.User.*;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.util.Date;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.oak.base.entities.Org;
+import java.util.List;
 ////////////////////////////////////
-//import org.junit.jupiter.api.Test;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.domain.*;
+
+import org.springframework.util.*;
+import java.util.Date;
+import org.springframework.beans.BeanUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Date;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  用户测试
  *
- *  @author auto gen by simple-dao-codegen 2022-6-13 19:41:50
+ *  @author auto gen by simple-dao-codegen 2022-6-14 9:26:30
  *
  */
 
@@ -57,7 +96,7 @@ public class UserServiceTest {
 
         CreateUserReq req = new CreateUserReq();
 
-            // req.setTenantId("这是文本64");//租户ID 
+            // req.setTenantId("这是文本128");//租户ID 
 
             // req.setTelephone("这是文本20");//手机号-可做为登录帐号 
 
@@ -123,7 +162,7 @@ public class UserServiceTest {
         QueryUserReq req = new QueryUserReq();
 
         // req.setId(null);//id
-        // req.setTenantId("这是文本64");//租户ID
+        // req.setTenantId("这是文本128");//租户ID
         // req.setTelephone("这是文本20");//手机号-可做为登录帐号
         // req.setEmail("这是文本32");//邮箱-可做为登录帐号
         // req.setPassword("这是文本256");//登录密码
@@ -167,7 +206,7 @@ public class UserServiceTest {
          req.setId(id);
 
 
-           // req.setTenantId("这是文本64");//租户ID 
+           // req.setTenantId("这是文本128");//租户ID 
            // req.setTelephone("这是文本20");//手机号-可做为登录帐号 
            // req.setEmail("这是文本32");//邮箱-可做为登录帐号 
            // req.setPassword("这是文本256");//登录密码 
