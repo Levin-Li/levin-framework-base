@@ -20,7 +20,7 @@ public abstract class TenantOrganizedEntity
         implements OrganizedObject {
 
     @Schema(description = "机构ID")
-    @Column(length = 128)
+    @Column(length = 64)
     protected String orgId;
 
 }

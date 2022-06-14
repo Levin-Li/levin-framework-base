@@ -20,8 +20,9 @@ public class DelegateIdGenerator implements IdentifierGenerator, Configurable {
 
     IdentifierGenerator identifierGenerator;
 
-    Properties params;
-    Type type;
+    transient Properties params;
+    transient Type type;
+    transient ServiceRegistry serviceRegistry;
 
     private IdentifierGenerator getIdentifierGenerator() {
 
@@ -33,22 +34,49 @@ public class DelegateIdGenerator implements IdentifierGenerator, Configurable {
         }
 
         if (this.identifierGenerator == null) {
-            identifierGenerator = new UUIDGenerator();
+            //配置
+            identifierGenerator = configure(new UUIDGenerator());
         }
 
         return identifierGenerator;
     }
+
+    public <T extends IdentifierGenerator> T configure(T generator) {
+
+        if (generator instanceof Configurable) {
+            ((Configurable) generator).configure(type, params, serviceRegistry);
+        }
+
+        return generator;
+    }
+
 
     @Override
     public void configure(Type type, Properties params, ServiceRegistry serviceRegistry) throws MappingException {
         this.params = new Properties();
         this.params.putAll(params);
         this.type = type;
+        this.serviceRegistry = serviceRegistry;
     }
 
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
-        return getIdentifierGenerator().generate(session, object);
+
+        Serializable id = getIdentifierGenerator().generate(session, object);
+
+        Class returnedClass = type.getReturnedClass();
+
+        if (!returnedClass.isInstance(id)) {
+            if (String.class == returnedClass) {
+                return id.toString();
+            } else if (Long.class == returnedClass) {
+                return Long.parseLong(id.toString());
+            } else if (Integer.class == returnedClass) {
+                return Integer.parseInt(id.toString());
+            }
+        }
+
+        return id;
     }
 
 }

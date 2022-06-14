@@ -59,7 +59,9 @@ import java.util.concurrent.TimeUnit;
  * @author yutianbao
  */
 
-public class DefaultUidGenerator implements UidGenerator, InitializingBean {
+public class DefaultUidGenerator
+        implements UidGenerator, InitializingBean {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultUidGenerator.class);
 
     /**
@@ -100,7 +102,6 @@ public class DefaultUidGenerator implements UidGenerator, InitializingBean {
         // initialize bits allocator
         bitsAllocator = new BitsAllocator(timeBits, workerBits, seqBits);
 
-
         if (workerIdAssigner == null) {
             workerIdAssigner = new WorkerIdAssigner() {
                 @Override
@@ -132,6 +133,7 @@ public class DefaultUidGenerator implements UidGenerator, InitializingBean {
 
     @Override
     public String parseUID(long uid) {
+
         long totalBits = BitsAllocator.TOTAL_BITS;
         long signBits = bitsAllocator.getSignBits();
         long timestampBits = bitsAllocator.getTimestampBits();

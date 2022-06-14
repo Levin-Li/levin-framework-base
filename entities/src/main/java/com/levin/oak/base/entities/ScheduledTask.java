@@ -44,7 +44,7 @@ public class ScheduledTask
     @Id
 //    @GeneratedValue
     @GeneratedValue(generator = "default_id")
-    @Column(length = 128)
+    @Column(length = 64)
     protected String id;
 
     @Schema(description = "任务分类")

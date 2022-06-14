@@ -60,7 +60,7 @@ public class Tenant extends AbstractNamedEntityObject {
     @Schema(description = "ID")
     @Id
     @GeneratedValue(generator = "default_id")
-    @Column(length = 128)
+    @Column(length = 64)
     String id;
 
     @Schema(description = "系统名称")
@@ -110,15 +110,15 @@ public class Tenant extends AbstractNamedEntityObject {
     String domainList;
 
     @Schema(description = "appId")
-    @Column(length = 128)
+    @Column(length = 64)
     String appId;
 
     @Schema(description = "appSecret")
-    @Column(length = 128)
+    @Column(length = 512)
     String appSecret;
 
     @Schema(description = "encryptKey")
-    @Column(length = 128)
+    @Column(length = 512)
     String encryptKey;
 
     @PrePersist

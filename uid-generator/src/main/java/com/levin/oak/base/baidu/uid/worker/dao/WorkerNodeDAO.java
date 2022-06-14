@@ -26,22 +26,6 @@ import org.springframework.stereotype.Repository;
  * @author yutianbao
  */
 @Repository(ModuleOption.PLUGIN_PREFIX + "WorkerNodeDAO")
-public interface WorkerNodeDAO extends JpaRepository<Long, WorkerNodeEntity> {
-
-    /**
-     * Get {@link WorkerNodeEntity} by node host
-     *
-     * @param host
-     * @param port
-     * @return
-     */
-    WorkerNodeEntity getWorkerNodeByHostPort(String host, String port);
-
-    /**
-     * Add {@link WorkerNodeEntity}
-     *
-     * @param workerNodeEntity
-     */
-    void addWorkerNode(WorkerNodeEntity workerNodeEntity);
+public interface WorkerNodeDAO extends JpaRepository<WorkerNodeEntity, Long> {
 
 }

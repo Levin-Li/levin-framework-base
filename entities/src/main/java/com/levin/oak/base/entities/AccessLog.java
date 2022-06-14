@@ -35,7 +35,8 @@ public class AccessLog
         MultiTenantObject {
 
     @Id
-    @GeneratedValue
+//    @GeneratedValue
+    @GeneratedValue(generator = "default_id")
     protected Long id;
 
     @Schema(description = "租户ID")

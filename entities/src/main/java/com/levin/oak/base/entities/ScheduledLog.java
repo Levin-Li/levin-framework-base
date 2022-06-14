@@ -35,7 +35,7 @@ public class ScheduledLog
     Long id;
 
     @Schema(description = "租户ID")
-    @Column(length = 128)
+    @Column(length = 64)
     String tenantId;
 
     @Schema(description = "归属组织", required = true)

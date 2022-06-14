@@ -67,7 +67,7 @@ public class Setting
     @Id
 //    @GeneratedValue
     @GeneratedValue(generator = "default_id")
-    @Column(length = 128)
+    @Column(length = 64)
     protected String id;
 
     @Schema(description = "分类名称")

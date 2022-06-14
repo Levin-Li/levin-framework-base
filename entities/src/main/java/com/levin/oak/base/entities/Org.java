@@ -90,19 +90,19 @@ public class Org
     @Id
 //    @GeneratedValue
     @GeneratedValue(generator = "default_id")
-    @Column(length = 128)
+    @Column(length = 64)
     protected String id;
 
     @Schema(description = "父ID")
-    @Column(length = 128)
+    @Column(length = 64)
     protected String parentId;
 
     @Schema(description = "租户ID")
-    @Column(length = 128)
+    @Column(length = 64)
     protected String tenantId;
 
     @Schema(description = "编码", title = "对于公司是统一信用码")
-    @Column(length = 128)
+    @Column(length = 64)
     @Contains
     protected String code;
 

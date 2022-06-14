@@ -53,7 +53,7 @@ public class Role
     @Id
 //    @GeneratedValue
     @GeneratedValue(generator = "default_id")
-    @Column(length = 128)
+    @Column(length = 64)
     protected String id;
 
     @Schema(description = "编码")

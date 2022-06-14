@@ -59,7 +59,7 @@ public class DisposableWorkerIdAssigner
         WorkerNodeEntity workerNodeEntity = buildWorkerNode();
 
         // add worker node for new (ignore the same IP + PORT)
-        workerNodeDAO.addWorkerNode(workerNodeEntity);
+        workerNodeDAO.save(workerNodeEntity);
 
         LOGGER.info("Add worker node:" + workerNodeEntity);
 

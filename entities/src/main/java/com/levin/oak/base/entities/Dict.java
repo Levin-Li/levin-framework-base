@@ -80,7 +80,7 @@ public class Dict
     @Id
 //    @GeneratedValue
     @GeneratedValue(generator = "default_id")
-    @Column(length = 128)
+    @Column(length = 64)
     protected String id;
 
     @Schema(description = "类型")

@@ -43,15 +43,15 @@ public class MenuRes
 
     @Id
     @GeneratedValue(generator = "default_id")
-    @Column(length = 128)
+    @Column(length = 64)
     protected String id;
 
     @Schema(description = "父ID")
-    @Column(length = 128)
+    @Column(length = 64)
     String parentId;
 
     @Schema(description = "租户ID")
-    @Column(length = 128)
+    @Column(length = 64)
     String tenantId;
 
     @Schema(description = "子系统")

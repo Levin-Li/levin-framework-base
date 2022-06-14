@@ -86,11 +86,11 @@ public class User
 
     @Id
     @GeneratedValue(generator = "default_id")
-    @Column(length = 128)
+    @Column(length = 64)
     String id;
 
     @Schema(description = "租户ID")
-    @Column(length = 128)
+    @Column(length = 64)
     String tenantId;
 
     @Schema(description = "手机号-可做为登录帐号")

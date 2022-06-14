@@ -41,15 +41,15 @@ public class AppClient extends AbstractNamedMultiTenantObject {
     @Id
 //    @GeneratedValue
     @GeneratedValue(generator = "default_id")
-    @Column(length = 128)
+    @Column(length = 64)
     protected String id;
 
     @Schema(description = "应用ID")
-    @Column(unique = true, nullable = false, length = 128)
+    @Column(unique = true, nullable = false, length = 64)
     protected String appId;
 
     @Schema(description = "应用密钥")
-    @Column(nullable = false, length = 128)
+    @Column(nullable = false, length = 512)
     protected String appSecret;
 
     @Override
