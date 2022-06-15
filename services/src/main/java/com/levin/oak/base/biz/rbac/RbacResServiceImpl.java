@@ -65,7 +65,7 @@ public class RbacResServiceImpl extends BaseService implements RbacResService {
      * @return
      */
     @Override
-    public List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, Object userId) {
+    public List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, String userId) {
 
         Assert.notNull(userId, "无效的用户标识");
 
@@ -190,7 +190,7 @@ public class RbacResServiceImpl extends BaseService implements RbacResService {
      * @return
      */
     @Override
-    public List<ModuleInfo> getAuthorizedResList(Object userId) {
+    public List<ModuleInfo> getAuthorizedResList(String userId) {
 
         //
         boolean hasUser = userId != null && (!(userId instanceof CharSequence) || StringUtils.hasText(userId.toString()));

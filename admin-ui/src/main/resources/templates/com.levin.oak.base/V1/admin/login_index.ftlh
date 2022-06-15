@@ -7,7 +7,7 @@
     <#--    <meta name="renderer" content="webkit">-->
     <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
     <title>${appName}登录</title>
-    <link type="image/x-icon" rel="shortcut icon" href="${appLogo}" />
+    <link type="image/x-icon" rel="shortcut icon" href="${appLogo}"/>
     <link href="css/index.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/jquery.particleground.min.js" type="text/javascript"></script>
@@ -54,20 +54,30 @@
                         <span class="logo-form-title">用户登录</span>
 
                         <div class="register_form2">
-                            <input placeholder="用户名" class="user-name"
+                            <input placeholder="帐号/手机号/邮箱" class="user-name" onblur="updateCode(this)"
                                    id="account" type="text" maxlength="20"/>
                         </div>
 
-                        <div class="register_form2" style="position:relative;height:50px">
-                            <input placeholder="密码" class="user-pass" type="password"
-                                   id="password" maxlength="32"/>
-                        </div>
+                        <#if !enableSmsVerificationCode>
+                            <div class="register_form2" style="position:relative;height:50px;margin-top:0.5rem;">
+                                <input placeholder="密码" class="user-pass" type="password"
+                                       id="password" maxlength="32"/>
+                            </div>
+                        </#if>
 
-                        <div class="register_form3">
-                            <input placeholder="图片验证码" id="verificationCode" type="text" maxlength="6"/>
-                            <a href="javaScript:updateCode()" title="点击，换一张！">
-                                <img id="codeImg" border="0" width="120" height="40" alt="点击，换一张！">
-                            </a>
+                        <div class="register_form3" style="margin-top:0.5rem;">
+                            <input placeholder="验证码" id="verificationCode" type="text"
+                                   style="width:250px" maxlength="${verificationCodeLen}"/>
+                            <#--   freemark 语法-->
+                            <#if enableSmsVerificationCode>
+                                <a id="smsSendBtn" class="button_btn" style="width:100px;color:#f8f8f8;"
+                                   title="点击发送验证码"
+                                   onclick="updateCode(null,true)">发送验证码</a>
+                            <#else>
+                                <a href="javaScript:updateCode()" style="line-height:40px;text-align:center;" title="点击，换一张！">
+                                    <img id="codeImg" border="0" src="img/captcha_default.png" width="100" height="40" alt="点击，换一张！">
+                                </a>
+                            </#if>
                         </div>
 
                         <!--<div class="no_pwd">
@@ -75,13 +85,13 @@
                         </div>-->
 
                         <div class="button_a">
-                            <a class="login-btn" style="margin: 0 auto;display: block;" id="login_btn"
+                            <a class="login-btn" style="margin: 0 auto;display: block;" id="login_btn" title="点击登录"
                                onclick="doLogin()">登 录</a>
                         </div>
 
                     </div>
 
-                    <#--                    <input type="hidden" id="is_cs" name="is_cs" value="0">-->
+                    <#--                                        <input type="hidden" name="is_cs" value="0">-->
                     <#--                    <input type="hidden" id="is_get" name="is_get" value="1">-->
                     <#--                    <input type="hidden" id="show_msg" name="show_msg" value="">-->
                     <#--                    <input type="hidden" id="jz" name="jz" value="0">-->
@@ -98,6 +108,12 @@
 </div>
 <div class="windows_bg"></div>
 <script>
+
+    var enableSmsVerificationCode = ${enableSmsVerificationCode?string('true', 'false')};
+
+    var verificationCodeDurationOfMinutes = ${verificationCodeDurationOfMinutes};
+
+    var verificationCodeLen = ${verificationCodeLen};
 
     $(function () {
         var canvasBg = $('#canvasBg');
@@ -148,12 +164,158 @@
             return false
         }
 
-        return true
+        return inputView.val().trim()
+    }
+
+    var oldAccount = "";
+
+    function updateCode(view , forceSendSms) {
+
+        if (view) {
+            //如果没有变化
+            if (view.value.trim() === ""
+                || oldAccount === view.value) {
+                return
+            } else {
+                console.log("new account:" + oldAccount + " --> " + view.value)
+                oldAccount = view.value;
+            }
+        }
+
+        console.log($("#smsSendBtn").text())
+
+        //如果是短信验证码
+        if (enableSmsVerificationCode) {
+            if(!forceSendSms || isSendSmsBtnDisable())
+            //如果还是禁用，直接返回
+            return;
+        }
+
+        var account = checkInput("#account");
+
+        //如果是短信验证码
+        if (account) {
+            if (enableSmsVerificationCode) {
+                sendSmsCode();
+            } else {
+                document.getElementById("codeImg").src = "${captchaApi}?account=" + account + "&t=" + (new Date()).getTime();
+            }
+        }
+    }
+
+    var stopSmsSending = false;
+
+    function sending(seconds, clear) {
+
+        if (clear) {
+            stopSmsSending = false;
+        }
+
+        // var smsSendBtn = $("#smsSendBtn");
+
+        if (seconds < 1 || stopSmsSending) {
+            console.log("sending...stoped")
+            enableSmsBtn();
+            return;
+        }
+
+        disableSmsBtn(seconds);
+
+        window.setTimeout("sending(" + (seconds - 1) + ")", 1000);
+    }
+
+    function isSendSmsBtnDisable() {
+        return $("#smsSendBtn").text() !== "发送验证码";
+    }
+
+    function enableSmsBtn(stop) {
+
+        stopSmsSending = stop
+
+        var smsSendBtn = $("#smsSendBtn")
+        smsSendBtn.text("发送验证码")
+        smsSendBtn.attr('class', "button_btn")
+    }
+
+    function disableSmsBtn(seconds) {
+        var smsSendBtn = $("#smsSendBtn")
+        smsSendBtn.text("已发送 " + seconds + "s")
+        smsSendBtn.attr('class', "button_btn_disabled")
+    }
+
+    function sendSmsCode() {
+
+        if (window.isLogining) {
+            return
+        }
+
+        console.log("1、sendSmsCode...")
+
+        sending(90, true)
+
+        var account = $("#account").val();
+
+        window.isLogining = true;
+
+        console.log("2、sendSmsCode...")
+
+        $.ajax({
+            url: "${sendSmsCodeApi}",
+            type: "GET",
+            data: {account},
+            error: function (xhr, status, error) {
+
+                window.isLogining = false;
+
+                console.log(error)
+
+                enableSmsBtn(true)
+
+                showError(error)
+
+            },
+            success: function (result) {
+
+                window.isLogining = false;
+
+                console.log(result);
+
+                if (result.successful) {
+
+                   var verificationCodeView =  $("#verificationCode");
+
+                    let data = result.data;
+
+                    if (typeof data === "string") {
+
+                        if (data.startsWith("mock:")) {
+                            //自动填充模拟的验证码
+                            verificationCodeView.val(data.substring(5));
+                        } else {
+                            toast(data)
+                        }
+                    } else {
+                        toast("短信已发送")
+                    }
+
+                    verificationCodeView.focus();
+
+                } else if (result.msg) {
+                    enableSmsBtn(true);
+                    showError(result.msg);
+                } else {
+                    enableSmsBtn(true);
+                    showError("短信发生失败2");
+                }
+
+            }
+        });
     }
 
     function doLogin() {
         return checkInput("#account")
-            && checkInput("#password")
+            //短信验证码，可以不用密码
+            && (enableSmsVerificationCode || checkInput("#password"))
             && checkInput("#verificationCode")
             && login();
     }
@@ -164,26 +326,32 @@
             return
         }
 
+        var verificationCodeType = enableSmsVerificationCode ? "sms" : "captcha";
+
         var account = $("#account").val();
-        var password = $("#password").val();
+
+        //短信验证码不要密码
+        var password = enableSmsVerificationCode ? null : $("#password").val();
 
         var verificationCodeView = $("#verificationCode");
         var verificationCode = verificationCodeView.val();
-
-        // loginBtn = $("#login_btn");
 
         window.isLogining = true;
 
         $.ajax({
             url: "${loginApi}",
             type: "POST",
-            data: {account, password, verificationCode},
+            data: {account, password, verificationCode, verificationCodeType},
             error: function (xhr, status, error) {
                 window.isLogining = false;
-                showError(error)
                 console.log(error)
+                showError(error)
             },
             success: function (result) {
+
+                window.isLogining = false;
+
+                console.log(result);
 
                 if (result.successful) {
                     location.reload()
@@ -197,17 +365,10 @@
                 } else {
                     showError("发生未知错误");
                 }
-
-                window.isLogining = false;
-
-                console.log(result);
             }
         });
     }
 
-    function updateCode() {
-        document.getElementById("codeImg").src = "${captchaApi}?" + (new Date()).getTime();
-    }
 
     function autoSize() {
 
@@ -219,14 +380,18 @@
     }
 
     $(document).ready(function () {
+
+        $("#account").focus();
+
         $("#account,#password,#verificationCode").keydown(function (e) {
             if (13 === e.keyCode)
                 return doLogin(), !1
         });
+    });
 
-    }), $(function () {
+    $(function () {
         autoSize();
-        updateCode();
+        //updateCode();
         var e = $(window).height();
         $(window).height();
         $(".frame_register").css("height", e)
@@ -239,6 +404,7 @@
             , $(".logo_window").css("height", e)
             , $(".or_div").css("height", e)
     });
+
 </script>
 
 </body>

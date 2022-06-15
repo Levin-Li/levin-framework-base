@@ -20,7 +20,7 @@ public interface RbacResService {
      * @param userId 不允许为空
      * @return
      */
-    List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, @NotNull Object userId);
+    List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, @NotNull String userId);
 
     /**
      * 获取资源授权清单
@@ -28,6 +28,6 @@ public interface RbacResService {
      * @param userId 为null返回所有的资源授权清单
      * @return
      */
-    List<ModuleInfo> getAuthorizedResList(@Nullable Object userId);
+    List<ModuleInfo> getAuthorizedResList(@Nullable String userId);
 
 }

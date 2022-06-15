@@ -6,6 +6,7 @@ import com.levin.commons.dao.annotation.Ignore;
 import com.levin.commons.dao.annotation.IsNull;
 import com.levin.commons.dao.annotation.logic.OR;
 import com.levin.commons.dao.annotation.order.OrderBy;
+import com.levin.commons.rbac.AuthReq;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.domain.ServiceReq;
 import com.levin.commons.service.support.InjectConsts;
@@ -38,9 +39,17 @@ import javax.validation.constraints.NotBlank;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS, resultClass = UserInfo.class)
-public class LoginReq implements ServiceReq {
+public class LoginReq implements AuthReq, ServiceReq {
 
     private static final long serialVersionUID = -445263479L;
+
+    @Schema(description = "租户ID", hidden = true)
+    @InjectVar(isRequired = "false")
+    //租户绑定域名启用时，可以
+//    @OR(autoClose = true, condition = "#tenantBindDomainEnable")
+    @IsNull(condition = "account == 'sa'", desc = "只有 sa 用户允许租户ID为空")
+    @Eq(condition = "account != 'sa'", desc = "只有 sa 用户允许租户ID为空")
+    protected String tenantId;
 
     @Schema(description = "登录名/手机号/邮箱", required = true)
     @NotBlank
@@ -50,22 +59,18 @@ public class LoginReq implements ServiceReq {
     @OrderBy(E_User.id)//排序
     protected String account;
 
-    @Schema(description = "登录密码", required = true)
-    @NotBlank
-    @Eq(require = true)
-    protected String password;
-
-    @Schema(description = "租户ID", hidden = true)
-    @InjectVar(isRequired = "false")
-    //租户绑定域名启用时，可以
-    @OR(autoClose = true, condition = "#tenantBindDomainEnable")
-    @IsNull
+    @Schema(title = "登录密码", description = "有短信验证码时，可以不要密码", required = true)
+//    @NotBlank
     @Eq
-    protected String tenantId;
+    protected String password;
 
     @Schema(description = "图片/短信验证码")
     @Ignore
-    private String verificationCode;
+    protected String verificationCode;
+
+    @Schema(title = "验证码类型", description = "可选择值：sms,captcha，默认是captcha")
+    @Ignore
+    protected String verificationCodeType = "captcha";
 
     @Schema(description = "客户端类型", hidden = true)
     @Ignore
@@ -75,5 +80,9 @@ public class LoginReq implements ServiceReq {
     @Schema(description = "客户端类型", hidden = true)
     @Ignore
     protected String clientType;
+
+    @Schema(description = "应用ID")
+    @Ignore
+    protected String appId;
 
 }

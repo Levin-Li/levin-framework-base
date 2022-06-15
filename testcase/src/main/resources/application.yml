@@ -105,7 +105,7 @@ plugin:
             sign:
               enable: false
             tenant-bind-domain:
-              enable: false
+              enable: true
             log:
               exclude-path-patterns: /**/amis/page,/error,/swagger-resources/**,/swagger-ui/**,/v3/api-docs
             enable-captcha: true
@@ -115,6 +115,10 @@ plugin:
               - enable: true
                 requiredPermissions: "R_ADMIN"
                 includePathPatterns: "${adminPath}/editor/**"
+            #模拟短信发送
+            enable-mock-sms-send: true
+            #禁止短信验证码
+            enable-sms-verification-code: false
 
 # Sa-Token配置
 sa-token:

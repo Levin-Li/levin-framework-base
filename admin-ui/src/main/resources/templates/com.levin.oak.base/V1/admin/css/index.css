@@ -2,6 +2,7 @@
 body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,form,td{margin:0;padding:0;}
 table{border-collapse:collapse;border-spacing:0;}
 fieldset,img{border:0;width:auto; height:auto; max-width: 100%; max-height: 100%;}
+img[src=""], img:not([src]){v:true;}
 ol,ul{list-style:none;}
 input,textarea,select{font-family:Verdana,arial, sans-serif;font-size:inherit;font-weight:inherit;*font-size:100%;}
 html{_background-image:url(about:blank);_background-attachment:fixed; _overflow-x:hidden; min-height:100%;}
@@ -60,9 +61,15 @@ strong{font-weight:inherit;}
 .register_form3 a img{width: 100%;}
 .no_pwd{ display:block; width:380px; margin:0 auto; text-align:right; }
 .no_pwd a{font-size:14px; color:#2aaaff;}
+
+.button_btn{cursor:pointer; width:160px; height:40px; line-height:40px; background-color:#0099ff; color:#f8f8f8; text-align:center; border-radius:6px; margin-right: 4px;}
+.button_btn_disabled{cursor:default; width:160px; height:40px; line-height:40px; background-color: #e5e7e8; color: #0099ff; text-align:center; border-radius:6px; margin-right: 4px;}
+
 .button_a{ width:380px; margin:0 auto;padding:2rem; overflow:hidden;}
 .button_a a{display:inline-block; font-size:16px; text-align:center; border-radius:25px;}
-.button_a a.login-btn{width:160px; height:40px; line-height:40px; background-color:#0099ff; color:#f8f8f8; margin-right: 60px;}
+
+.button_a a.login-btn{cursor:pointer;width:160px; height:40px; line-height:40px; background-color:#0099ff; color:#f8f8f8; margin-right: 60px;}
+
 .button_a a.reg-btn{width:148px; height:38px; line-height:38px; border:1px solid #0099ff; color:#0099ff;}
 .window_weixin{ width:304px; margin:0 auto; overflow:hidden; border-bottom:1px solid #5B595A;padding-bottom:30px; padding-top:54px;}
 .window_weixin span{ display:block; width:105px; height:105px; border:1px solid #EFEFF0; background-color:#FFF; float:left; margin-right:20px;}

@@ -21,7 +21,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -49,16 +48,23 @@ public class HappyCaptchaServiceImpl implements CaptchaService {
         mapCache = redissonClient.getMapCache(CACHE_NAME);
     }
 
+
     /**
-     * 生成
+     * 生成图片验证码
      *
      * @param request
      * @param response
-     * @param params
+     * @param tenantId
+     * @param appId
+     * @param account
+     * @return
      */
     @SneakyThrows
     @Override
-    public String genCode(HttpServletRequest request, HttpServletResponse response, Map<String, Object> params) {
+    public String genCode(HttpServletRequest request, HttpServletResponse response, String tenantId, String appId, String account) {
+
+        Assert.hasText(account, "帐号不能为空");
+        final String prefix = String.join("|", tenantId, appId, account);
 
         String w = request.getParameter("w");
         String h = request.getParameter("h");
@@ -73,7 +79,7 @@ public class HappyCaptchaServiceImpl implements CaptchaService {
         //
         captcha.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, (int) (captcha.getHeight() * 0.75)));
 
-        captcha.setLength(frameworkProperties.getCaptchaCodeLen());
+        captcha.setLength(frameworkProperties.getVerificationCodeLen());
 
         // captcha.setFont(Fonts.getInstance().defaultFont());
 
@@ -87,7 +93,8 @@ public class HappyCaptchaServiceImpl implements CaptchaService {
 
         captcha.render(response.getOutputStream());
 
-        mapCache.fastPut(captchaCode.toLowerCase(), System.currentTimeMillis(), 1, TimeUnit.MINUTES);
+        mapCache.fastPut(prefix + captchaCode.toLowerCase(), System.currentTimeMillis(),
+                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
         log.debug("gen code:" + captchaCode);
 
@@ -97,18 +104,20 @@ public class HappyCaptchaServiceImpl implements CaptchaService {
     /**
      * 验证
      *
-     * @param request
      * @param code
-     * @param params
      * @return
      */
     @Override
-    public boolean verification(HttpServletRequest request, String code, Map<String, Object> params) {
+    public boolean verification(String tenantId, String appId, String account, String code) {
 
+        Assert.hasText(account, "帐号不能为空");
         Assert.hasText(code, "验证码不能为空");
 
-        Long putTime = (Long) mapCache.remove(code.toLowerCase());
+        final String prefix = String.join("|", tenantId, appId, account);
+
+        Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
         //小余1分钟
-        return putTime != null && (System.currentTimeMillis() - putTime) < 60 * 1000L;
+        return putTime != null && (System.currentTimeMillis() - putTime)
+                < frameworkProperties.getVerificationCodeDurationOfMinutes() * 60 * 1000L;
     }
 }

@@ -352,7 +352,7 @@ public class ModuleWebControllerAspect {
 
             if (authService.isLogin()) {
                 tenantInfoId = authService.getUserInfo().getTenantId();
-                visitor = authService.getUserInfo().getName() + "(" + authService.getLoginUserId() + ")";
+                visitor = authService.getUserInfo().getName() + "(" + authService.getLoginId() + ")";
             }
 
             CreateAccessLogReq req = new CreateAccessLogReq()

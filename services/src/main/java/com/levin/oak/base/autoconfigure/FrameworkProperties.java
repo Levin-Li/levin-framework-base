@@ -26,17 +26,31 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Accessors(chain = true)
 @FieldNameConstants
 @ConfigurationProperties(prefix = PLUGIN_PREFIX + "framework")
-public class FrameworkProperties implements Serializable {
+public class FrameworkProperties
+        implements Serializable {
 
     /**
-     * 是否允许图片验证码
+     * 验证码长度
+     * 如果验证码长度小余1，则表示禁用验证码
      */
-    private boolean enableCaptcha = false;
+    private int verificationCodeLen = 4;
 
     /**
-     *
+     * 图片/短信验证码有效时长
      */
-    private int captchaCodeLen = 4;
+    private int verificationCodeDurationOfMinutes = 5;
+
+    /**
+     * 是否允许短信验证码
+     * 默认允许
+     */
+    private boolean enableSmsVerificationCode = true;
+
+    /**
+     * 是否允许模拟短信发生
+     * 默认禁止
+     */
+    private boolean enableMockSmsSend = false;
 
     /**
      * admin 路径
@@ -105,6 +119,10 @@ public class FrameworkProperties implements Serializable {
     @Autowired
     void setServerProperties(ObjectProvider<ServerProperties> serverProperties) {
         this.serverProperties = serverProperties.getIfUnique();
+    }
+
+    public int getVerificationCodeDurationOfMinutes() {
+        return this.verificationCodeDurationOfMinutes < 1 ? 1 : this.verificationCodeDurationOfMinutes;
     }
 
     /**

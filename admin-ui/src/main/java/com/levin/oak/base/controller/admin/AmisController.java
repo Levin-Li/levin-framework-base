@@ -143,7 +143,7 @@ public class AmisController extends BaseController {
         //获取页面地址
         String basePath = getContextPath() + API_PATH + "amis/page";
 
-        List<MenuResInfo> authorizedMenuList = rbacResService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId());
+        List<MenuResInfo> authorizedMenuList = rbacResService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginId());
 
         if (authorizedMenuList != null) {
 

@@ -9,8 +9,8 @@ import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.CaptchaService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacResService;
-import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.biz.rbac.info.ModuleInfo;
+import com.levin.oak.base.biz.rbac.req.AppClientReq;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.LoginInfo;
@@ -28,11 +28,12 @@ import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Map;
 
 import static com.levin.oak.base.ModuleOption.*;
 
@@ -80,11 +81,30 @@ public class RbacController extends BaseController {
     @Resource
     FrameworkProperties frameworkProperties;
 
+    @PostConstruct
+    public void init() {
+
+    }
+
+    //    @RequestMapping(value = "/sendSmsCode", method = {RequestMethod.GET, RequestMethod.POST})
+    @GetMapping("/sendSmsCode")
+    @Operation(tags = {"授权管理"}, summary = "发送短信证码")
+    @ResAuthorize(ignored = true)
+    public ApiResp<String> sendSmsCode(AppClientReq req, @NotBlank String account) {
+
+        Assert.notNull(req, "请求对象不能为空");
+        Assert.hasText(account, "帐号不能为空");
+
+        return ApiResp.ok(authService.sendSmsCode(req.getTenantId(), req.getAppId(), account));
+    }
+
     @GetMapping("/captcha")
     @Operation(tags = {"授权管理"}, summary = "获取验图片证码")
     @ResAuthorize(ignored = true)
-    public void genCaptcha(Map<String, Object> params) {
-        captchaService.genCode(super.httpRequest, super.httpResponse, params);
+    public void genCaptcha(@NotNull AppClientReq req, @NotBlank String account) {
+        Assert.notNull(req, "请求对象不能为空");
+        Assert.hasText(account, "帐号不能为空");
+        captchaService.genCode(super.httpRequest, super.httpResponse, req.getTenantId(), req.getAppId(), account);
     }
 
     /**
@@ -110,21 +130,13 @@ public class RbacController extends BaseController {
     @Operation(tags = {"授权管理"}, summary = "用户登录")
     @ResAuthorize(ignored = true)
     public ApiResp<LoginInfo> login(@NotNull LoginReq req) {
-
-        if (frameworkProperties.isEnableCaptcha()) {
-            Assert.hasText(req.getVerificationCode(), "验证码不能为空");
-            Assert.isTrue(captchaService.verification(httpRequest, req.getVerificationCode(), null), "图片验证码错误");
-        }
-
-        String accessToken = authService.auth(req.getTenantId(), req.getAccount(), req.getPassword(), req.getUa());
-
         return ApiResp.ok(new LoginInfo()
-                .setAccessToken(accessToken)
+                .setAccessToken(authService.auth(req))
                 .setUserInfo(authService.getUserInfo())
         );
     }
 
-    @PostMapping("{tenantId}/login")
+    //    @PostMapping("{tenantId}/login")
     @Operation(tags = {"授权管理"}, summary = "用户登录-租户登录入口")
     @ResAuthorize(ignored = true)
     public ApiResp<LoginInfo> loginByTenantId(String account, String password, @PathVariable String tenantId, @RequestHeader(value = "user-agent") String ua) {
@@ -197,7 +209,7 @@ public class RbacController extends BaseController {
     @GetMapping("authorizedResList")
     @Operation(tags = {"授权管理"}, summary = "获取可分配的权限资源")
     public ApiResp<List<ModuleInfo>> getAuthorizedResList() {
-        return ApiResp.ok(rbacResService.getAuthorizedResList(authService.getLoginUserId()));
+        return ApiResp.ok(rbacResService.getAuthorizedResList(authService.getLoginId()));
     }
 
     /**
@@ -208,7 +220,7 @@ public class RbacController extends BaseController {
     @GetMapping("authorizedMenuList")
     @Operation(tags = {"授权管理"}, summary = "获取授权的菜单列表")
     public ApiResp<List<MenuResInfo>> getAuthorizedMenuList(boolean isShowNotPermissionMenu) {
-        return ApiResp.ok(rbacResService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginUserId()));
+        return ApiResp.ok(rbacResService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginId()));
     }
 
 }

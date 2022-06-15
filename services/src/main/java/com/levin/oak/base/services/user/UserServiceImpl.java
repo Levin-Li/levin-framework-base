@@ -25,6 +25,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.persistence.PersistenceException;
@@ -72,13 +73,25 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public String create(CreateUserReq req) {
 
-        //如果没有按域名区分，那么要求所有的登录名称唯一
-        if (!frameworkProperties.getTenantBindDomain().isEnable()) {
-            //  simpleDao.findOneByQueryObj(new LoginReq().setAccount());
+        checkCreateOrUpdateAccount(req.getEmail(), req.getTelephone());
+
+        //密码加密
+        User entity = simpleDao.create(req.setPassword(encryptPwd(req.getPassword())));
+
+        return entity.getId();
+    }
+
+    private String encryptPwd(String pwd) {
+        return StringUtils.hasText(pwd) ? authService.encryptPassword(pwd) : null;
+    }
+
+    private void checkCreateOrUpdateAccount(String... accounts) {
+
+        for (String account : accounts) {
+            //不允许创建或是变更为 SA 帐号
+            Assert.isTrue(!authService.isSuperAdmin(account), "帐号已经存在");
         }
 
-        User entity = simpleDao.create(req);
-        return entity.getId();
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
@@ -113,10 +126,11 @@ public class UserServiceImpl extends BaseService implements UserService {
         Assert.hasText(req.getOldPassword(), "旧密码不能为空");
         Assert.hasText(req.getPassword(), "新密码不能为空");
 
-        req.setOldPassword(authService.encryptPassword(req.getOldPassword()))
-                .setPassword(authService.encryptPassword(req.getPassword()));
+        req.setOldPassword(encryptPwd(req.getOldPassword()))
+                .setPassword(encryptPwd(req.getPassword()));
 
         return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
+
     }
 
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
@@ -127,13 +141,18 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
 
-        return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
+        //检查帐号名称
+        checkCreateOrUpdateAccount(req.getEmail(), req.getTelephone());
+
+        //密码加密
+        return checkResult(simpleDao.updateByQueryObj(req.setPassword(encryptPwd(req.getPassword()))), UPDATE_ACTION);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
     public int batchUpdate(List<UpdateUserReq> reqList) {
+
         //@Todo 优化批量提交
         int sum = reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n).sum();
 
@@ -150,13 +169,15 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
 
-        return checkResult(simpleDao.deleteByQueryObj(req), DELETE_ACTION);
+        //不允许删除SA用户
+        return checkResult(simpleDao.deleteByQueryObj(req, notSa()), DELETE_ACTION);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
     public int batchDelete(DeleteUserReq req) {
+
         //@Todo 优化批量提交
         int sum = Stream.of(req.getIdList())
                 .map(id -> simpleDao.copy(req, new UserIdReq().setId(id)))
@@ -172,15 +193,18 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     @Override
     public PagingData<UserInfo> query(QueryUserReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(req, notSa(), paging);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     @Override
     public UserInfo findOne(QueryUserReq req) {
-        return simpleDao.findOneByQueryObj(req);
+        return simpleDao.findOneByQueryObj(req, notSa());
     }
 
+    private NotReq notSa() {
+        return new NotReq().setAccount(AuthService.SA_ACCOUNT);
+    }
 
     @Override
     @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")

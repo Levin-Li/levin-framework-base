@@ -18,10 +18,8 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -44,9 +42,7 @@ public class DefaultCaptchaServiceImpl implements CaptchaService {
     @Resource
     FrameworkProperties frameworkProperties;
 
-
     RMapCache<Object, Object> mapCache = null;
-
 
     ICaptcha iCaptcha;
 
@@ -55,28 +51,34 @@ public class DefaultCaptchaServiceImpl implements CaptchaService {
 
         mapCache = redissonClient.getMapCache(CACHE_NAME);
 
-        iCaptcha = CaptchaUtil.createCircleCaptcha(200, 100, frameworkProperties.getCaptchaCodeLen(), 20);
+        iCaptcha = CaptchaUtil.createCircleCaptcha(200, 100, frameworkProperties.getVerificationCodeLen(), 20);
 
         //首次调用比较慢
         iCaptcha.createCode();
     }
 
     /**
-     * 生成
+     * 生成图片验证码
      *
      * @param request
      * @param response
-     * @param params
+     * @param tenantId
+     * @param appId
+     * @param account
+     * @return
      */
     @SneakyThrows
     @Override
-    public String genCode(HttpServletRequest request, HttpServletResponse response, Map<String, Object> params) {
+    public String genCode(HttpServletRequest request, HttpServletResponse response, String tenantId, String appId, String account) {
+
+        Assert.hasText(account, "帐号不能为空");
+        final String prefix = String.join("|", tenantId, appId, account);
 
         String w = request.getParameter("w");
         String h = request.getParameter("h");
 
         if (StringUtils.hasText(w) && StringUtils.hasText(h)) {
-            iCaptcha = CaptchaUtil.createCircleCaptcha(Integer.parseInt(w), Integer.parseInt(h), frameworkProperties.getCaptchaCodeLen(), 20);
+            iCaptcha = CaptchaUtil.createCircleCaptcha(Integer.parseInt(w), Integer.parseInt(h), frameworkProperties.getVerificationCodeLen(), 20);
         }
 
         iCaptcha.createCode();
@@ -91,9 +93,10 @@ public class DefaultCaptchaServiceImpl implements CaptchaService {
 
         iCaptcha.write(response.getOutputStream());
 
-        mapCache.fastPut(captchaCode.toLowerCase(), System.currentTimeMillis(), 1, TimeUnit.MINUTES);
+        mapCache.fastPut(prefix + captchaCode.toLowerCase(), System.currentTimeMillis(),
+                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
-        log.debug("gen code:" + captchaCode);
+        log.debug(prefix + " gen code: " + captchaCode);
 
         return captchaCode;
     }
@@ -101,18 +104,21 @@ public class DefaultCaptchaServiceImpl implements CaptchaService {
     /**
      * 验证
      *
-     * @param request
      * @param code
-     * @param params
      * @return
      */
     @Override
-    public boolean verification(HttpServletRequest request, String code, Map<String, Object> params) {
+    public boolean verification(String tenantId, String appId, String account, String code) {
 
+        Assert.hasText(account, "帐号不能为空");
         Assert.hasText(code, "验证码不能为空");
 
-        Long putTime = (Long) mapCache.remove(code.toLowerCase());
+        final String prefix = String.join("|", tenantId, appId, account);
+
+        Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
+
         //小余1分钟
-        return putTime != null && (System.currentTimeMillis() - putTime) < 60 * 1000L;
+        return putTime != null && (System.currentTimeMillis() - putTime)
+                < frameworkProperties.getVerificationCodeDurationOfMinutes() * 60 * 1000L;
     }
 }

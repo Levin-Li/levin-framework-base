@@ -4,13 +4,17 @@ import cn.dev33.satoken.exception.IdTokenInvalidException;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.util.PhoneUtil;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.*;
 import com.levin.commons.service.support.ContextHolder;
+import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizRoleService;
+import com.levin.oak.base.biz.CaptchaService;
+import com.levin.oak.base.biz.SmsCodeService;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.BaseService;
@@ -45,6 +49,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
@@ -100,10 +105,16 @@ public class AuthServiceImpl
     @Resource
     ResourceLoader resourceLoader;
 
+    @Resource
+    CaptchaService captchaService;
+
+    @Resource
+    SmsCodeService smsCodeService;
+
     /**
      * 用户权限的线程级别缓存
      */
-    final ContextHolder<Object, List<String>> permissionListThreadCache = ContextHolder.buildThreadContext(false, true);
+    final ContextHolder<String, List<String>> permissionListThreadCache = ContextHolder.buildThreadContext(false, true);
 
     @PostConstruct
     public void init() {
@@ -128,41 +139,135 @@ public class AuthServiceImpl
         }
     }
 
+    @Override
+    public String sendSmsCode(String tenantId, String appId, String account) {
+
+        LoginReq req = new LoginReq().setAccount(account).setAppId(appId).setTenantId(tenantId);
+
+        Assert.hasText(req.getAccount(), "登录帐号不能为空");
+
+        //如果是超级帐号，必须要密码
+        boolean isSA = isSuperAdmin(req.getAccount());
+
+        if (!isSA) {
+            Assert.hasText(req.getTenantId(), "未知的租户");
+        }
+
+        UserInfo user = simpleDao.findOneByQueryObj(req.setPassword(null));
+
+        auditUser(user);
+
+        Assert.hasText(user.getTelephone(), "用户手机号未知");
+
+        Assert.isTrue(PhoneUtil.isMobile(user.getTelephone().trim()), "用户手机号错误");
+
+        String code = smsCodeService.genAndSendSmsCode(req.getTenantId(), req.getAppId(), req.getAccount(), user.getTelephone());
+
+        return code.trim().startsWith("mock:") ? code :
+                ("验证码已经发生至" + PhoneUtil.subBefore(user.getTelephone()) + "*" + PhoneUtil.subAfter(user.getTelephone()));
+
+    }
 
     /**
      * 认证，并返回token
      *
-     * @param account
-     * @param password
-     * @param userAgent
-     * @param params
      * @return 认证成功后的token
      */
     @Override
-    public String auth(String tenantId, String account, String password, String userAgent, Map<String, Object>... params) {
-        return loginByPassword(new LoginReq().setTenantId(tenantId).setAccount(account).setPassword(password).setUa(userAgent));
-    }
+    public <REQ extends AuthReq> String auth(REQ authReq, Map<String, Object>... extras) {
 
+        Assert.notNull(authReq, "认证请求对象不能为空");
+
+        LoginReq req = null;
+
+        if (authReq instanceof LoginReq) {
+            req = (LoginReq) authReq;
+        } else {
+            //拷贝对象
+            req = simpleDao.copy(authReq, new LoginReq(), 1);
+        }
+
+        Assert.hasText(req.getAccount(), "登录帐号不能为空");
+
+        //如果是超级帐号，必须要密码
+        boolean isSA = isSuperAdmin(req.getAccount());
+
+        if (!isSA) {
+            Assert.hasText(req.getTenantId(), "未知的租户");
+        }
+
+        boolean requirePwd = true;
+
+        //如果开启了验证码
+        if (frameworkProperties.getVerificationCodeLen() > 1) {
+
+            Assert.hasText(req.getVerificationCode(), "验证码不能为空");
+
+            if ("sms".equalsIgnoreCase(req.getVerificationCodeType())) {
+
+                //如果是短信验证码，可以不验证密码
+                requirePwd = false;
+
+                //验证短信
+                Assert.isTrue(smsCodeService.verification(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "短信验证码错误");
+
+            } else if ("captcha".equalsIgnoreCase(req.getVerificationCodeType())) {
+
+                //验证图片验证码
+                Assert.isTrue(captchaService.verification(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "图片验证码错误");
+            } else {
+                throw new IllegalArgumentException("不支持的验证码类型:" + req.getVerificationCodeType());
+            }
+        }
+
+        //@todo 考虑超级用户必须要密码
+        if (requirePwd) {
+            Assert.hasText(req.getPassword(), "密码不能为空");
+        }
+
+        //存在多个用户的情况
+        UserInfo user = simpleDao.findOneByQueryObj(
+                //密码加密
+                req.setPassword(encryptPassword(req.getPassword()))
+        );
+
+        auditUser(user);
+
+        return auth(user.getId(), MapUtils.putFirst("user-agent", req.getUa()).build());
+    }
 
     /**
      * 直接认证，并返回token
      *
      * @param loginId
-     * @param userAgent
      * @param params
      * @return 认证成功后的token
      */
     @Override
-    public String auth(String loginId, String userAgent, Map<String, Object>... params) {
+    public String auth(String loginId, Map<String, Object>... params) {
 
 //        Assert.notNull(loginId, "loginId is null");
 
         Assert.hasText(loginId, "loginId is empty");
 
         //默认登录
-        StpUtil.login(loginId, getDeviceType(userAgent));
+        StpUtil.login(loginId, getDeviceType(getValue("user-agent", params)));
 
         return StpUtil.getTokenValue();
+    }
+
+    /**
+     * @param key
+     * @param params
+     * @param <T>
+     * @return
+     */
+    private static <T> T getValue(String key, Map<String, Object>... params) {
+        return Stream.of(params)
+                .filter(map -> map.containsKey(key))
+                .map(map -> (T) map.get(key))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -173,7 +278,7 @@ public class AuthServiceImpl
 
     @Override
     public RbacUserInfo<String> getUserInfo() {
-        return getUserInfo(getLoginUserId());
+        return getUserInfo(getLoginId());
     }
 
     /**
@@ -183,8 +288,8 @@ public class AuthServiceImpl
      * @return
      */
     @Override
-    public RbacUserInfo<String> getUserInfo(Object loginId) {
-        return auditUser(userService.findById(loginId.toString()).setPassword(null));
+    public RbacUserInfo<String> getUserInfo(String loginId) {
+        return auditUser(userService.findById(loginId).setPassword(null));
     }
 
     @Override
@@ -192,43 +297,25 @@ public class AuthServiceImpl
 
         Assert.hasText(token, "token is empty");
 
-        Object loginId = StpUtil.getLoginIdByToken(token);
+        String loginId = (String) StpUtil.getLoginIdByToken(token);
 
-        if (loginId == null || !StringUtils.hasText(loginId.toString())) {
+        if (!StringUtils.hasText(loginId)) {
             throw new IdTokenInvalidException("token:" + token);
         }
 
-        return loginId.toString();
+        return loginId;
     }
 
     @Override
     public void invalidate(String token) {
-
         if (StringUtils.hasText(token)) {
             StpUtil.logoutByTokenValue(token);
         }
-
     }
 
     @Override
     public void logout() {
         invalidate(StpUtil.getTokenValue());
-    }
-
-    public String loginByPassword(LoginReq req) {
-
-        Assert.hasText(req.getAccount(), "请输入登录帐号");
-        Assert.hasText(req.getPassword(), "请输入密码");
-
-        //存在多个用户的情况
-        UserInfo user = simpleDao.findOneByQueryObj(
-                //密码加密
-                req.setPassword(encryptPassword(req.getPassword()))
-        );
-
-        auditUser(user);
-
-        return auth(user.getId().toString(), req.getUa());
     }
 
     /**
@@ -264,7 +351,7 @@ public class AuthServiceImpl
     }
 
     @Override
-    public <T> T getLoginUserId() {
+    public String getLoginId() {
 
         Object loginId = StpUtil.getLoginId();
 
@@ -272,12 +359,12 @@ public class AuthServiceImpl
             throw NotLoginException.newInstance("user", NotLoginException.NOT_TOKEN);
         }
 
-        return (T) loginId;
+        return (String) loginId;
     }
 
 
     @Override
-    public List<String> getPermissionList(Object loginId) {
+    public List<String> getPermissionList(String loginId) {
 
         Assert.notNull(loginId, "loginId is null");
 
@@ -299,24 +386,19 @@ public class AuthServiceImpl
     }
 
     @Override
-    public List<String> getRoleList(Object loginId) {
+    public List<String> getRoleList(String loginId) {
 
         Assert.notNull(loginId, "loginId is null");
 
         return permissionListThreadCache.getAndAutoPut("R-" + loginId, null,
                 // // JsonStrArrayUtils.parse(user.getRoleList(), null, null);
-                () -> Collections.unmodifiableList(auditUser(userService.findById(loginId.toString())).getRoleList())
+                () -> Collections.unmodifiableList(auditUser(userService.findById(loginId)).getRoleList())
         );
     }
 
     @Override
     public String encryptPassword(String pwd) {
-
-        if (!StringUtils.hasText(pwd)) {
-            return null;
-        }
-
-        return SaSecureUtil.sha1(pwd);
+        return StringUtils.hasText(pwd) ? SaSecureUtil.sha1(pwd) : null;
     }
 
     @Override
@@ -487,7 +569,7 @@ public class AuthServiceImpl
                     .setName("超级管理员")
                     .setEditable(false)
                     .setOrgDataScope(Role.OrgDataScope.All)
-                    .setPermissionList(Arrays.asList(
+                    .setPermissionList(Collections.singletonList(
                             new ResPermission()
                                     .setDomain("*")
                                     .setType("*")
@@ -551,19 +633,19 @@ public class AuthServiceImpl
 
         User user = simpleDao.selectFrom(User.class)
                 .isNull(E_User.tenantId)
-                .eq(E_User.email, "sa")
+                .eq(E_User.email, SA_ACCOUNT)
                 .findOne();
 
         if (user == null) {
             simpleDao.create(
                     new CreateUserReq()
-                            .setEmail("sa")
+                            .setEmail(SA_ACCOUNT)
                             .setTelephone("18895279527")
                             .setPassword(encryptPassword("123456"))
                             .setName("超级管理员")
                             .setEditable(false)
                             .setStaffNo("0000")
-                            .setRoleList(Arrays.asList(RbacRoleObject.SA_ROLE))
+                            .setRoleList(Collections.singletonList(RbacRoleObject.SA_ROLE))
             );
         }
 
@@ -580,7 +662,7 @@ public class AuthServiceImpl
                     .setPassword(encryptPassword("123456"))
                     .setName("管理员")
                     .setStaffNo("9999")
-                    .setRoleList(Arrays.asList(RbacRoleObject.ADMIN_ROLE))
+                    .setRoleList(Collections.singletonList(RbacRoleObject.ADMIN_ROLE))
                     .setTenantId(tenantInfo.getId())
             );
         }

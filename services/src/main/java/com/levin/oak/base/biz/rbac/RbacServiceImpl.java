@@ -425,8 +425,8 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         boolean ok = isAuthorized(
                 String.join(getPermissionDelimiter(), resAuthorize.domain(), resAuthorize.type(), resAuthorize.res()),
                 SimpleResAction.newAction(resAuthorize),
-                authService.getRoleList(authService.getLoginUserId()),
-                authService.getPermissionList(authService.getLoginUserId()),
+                authService.getRoleList(authService.getLoginId()),
+                authService.getPermissionList(authService.getLoginId()),
                 getAuthorizeContext()
         );
 

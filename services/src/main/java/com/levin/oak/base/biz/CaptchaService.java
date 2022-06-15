@@ -2,29 +2,27 @@ package com.levin.oak.base.biz;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 
 /**
  * 图片验证码服务
  */
 public interface CaptchaService {
+
     /**
      * 生成验证码
      *
      * @param request
      * @param response
-     * @param params
+     * @param account
      */
-    String genCode(HttpServletRequest request, HttpServletResponse response, Map<String, Object> params);
+    String genCode(HttpServletRequest request, HttpServletResponse response, String tenantId, String appId, String account);
 
     /**
      * 校验验证码
      *
-     * @param request
      * @param code
-     * @param params
      * @return
      */
-    boolean verification(HttpServletRequest request, String code, Map<String, Object> params);
+    boolean verification(String tenantId, String appId, String account, String code);
 
 }

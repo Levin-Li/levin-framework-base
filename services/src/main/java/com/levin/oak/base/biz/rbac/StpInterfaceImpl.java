@@ -39,12 +39,12 @@ public class StpInterfaceImpl
 
     @Override
     public List<String> getPermissionList(Object loginId, String loginType) {
-        return authService.getPermissionList(loginId);
+        return authService.getPermissionList(loginId.toString());
     }
 
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
-        return authService.getRoleList(loginId);
+        return authService.getRoleList(loginId.toString());
     }
 
 }

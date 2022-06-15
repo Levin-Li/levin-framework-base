@@ -128,6 +128,11 @@ public class IndexController extends BaseController {
     @Operation(tags = "Admin管理视图", summary = "首页", description = "首页")
     public String index(Model modelMap) throws IOException {
 
+        //验证码相关
+        modelMap.addAttribute(FrameworkProperties.Fields.enableSmsVerificationCode, frameworkProperties.isEnableSmsVerificationCode());
+        modelMap.addAttribute(FrameworkProperties.Fields.verificationCodeLen, frameworkProperties.getVerificationCodeLen());
+        modelMap.addAttribute(FrameworkProperties.Fields.verificationCodeDurationOfMinutes, frameworkProperties.getVerificationCodeDurationOfMinutes());
+
         //重新登录
         if ("relogin".equalsIgnoreCase(httpRequest.getParameter("action"))) {
 
@@ -215,7 +220,10 @@ public class IndexController extends BaseController {
         } else {
             modelMap.addAttribute("loginApi", basePath + "rbac/login");
             modelMap.addAttribute("captchaApi", basePath + "rbac/captcha");
+            modelMap.addAttribute("sendSmsCodeApi", basePath + "rbac/sendSmsCode");
         }
+
+        modelMap.addAttribute("SA_ACCOUNT", AuthService.SA_ACCOUNT);
 
         String redirectUrl = httpRequest.getParameter("r");
 
@@ -231,7 +239,7 @@ public class IndexController extends BaseController {
             }
 
             //防止死循环时，大量占用CPU
-            Thread.sleep(100);
+            Thread.sleep(50);
 
             //必须要使用前缀再重定向
             return "redirect:" + redirectUrl;

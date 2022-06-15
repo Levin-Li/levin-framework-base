@@ -81,9 +81,11 @@ public class UserController extends BaseController {
      * @return
      */
     UserInfo desensitize(UserInfo info) {
+
         if (info != null) {
             info.setPassword(null);
         }
+
         return info;
     }
 

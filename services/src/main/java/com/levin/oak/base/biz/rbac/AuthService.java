@@ -2,6 +2,7 @@ package com.levin.oak.base.biz.rbac;
 
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.SimpleAuthService;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -9,7 +10,12 @@ import java.util.List;
 /**
  * 认证服务
  */
-public interface AuthService extends SimpleAuthService {
+public interface AuthService extends SimpleAuthService<String, String> {
+
+    /**
+     * 超管帐号
+     */
+    String SA_ACCOUNT = "sa";
 
     /**
      * 初始化数据
@@ -18,9 +24,30 @@ public interface AuthService extends SimpleAuthService {
     }
 
     /**
+     * 是否超级用户帐号
+     *
+     * @param account
+     * @return
+     */
+    default boolean isSuperAdmin(String account) {
+        return SA_ACCOUNT.equalsIgnoreCase(StringUtils.trimWhitespace(account));
+    }
+
+    /**
      * 清除线程缓存数据
      */
     void clearThreadCacheData();
+
+    /**
+     * 发送短信验证码到指定帐号
+     * <p>
+     * 返回短信验证码，如果为模拟通道，返回的验证码以mock:做为前缀
+     *
+     * @param tenantId
+     * @param appId
+     * @return 短信验证码，如果为模拟通道，返回的验证码以mock:做为前缀
+     */
+    String sendSmsCode(String tenantId, String appId, String account);
 
     /**
      * 是否登录
@@ -36,7 +63,7 @@ public interface AuthService extends SimpleAuthService {
      *
      * @return
      */
-    <T> T getLoginUserId();
+    String getLoginId();
 
     /**
      * 获取当前登录用户信息
@@ -50,7 +77,7 @@ public interface AuthService extends SimpleAuthService {
      *
      * @return
      */
-    <U extends RbacUserInfo<String>> U getUserInfo(Object loginId);
+    <U extends RbacUserInfo<String>> U getUserInfo(String loginId);
 
     /**
      * 获取用户的权限列表
@@ -58,7 +85,7 @@ public interface AuthService extends SimpleAuthService {
      * @param loginId
      * @return
      */
-    List<String> getPermissionList(@NotNull Object loginId);
+    List<String> getPermissionList(@NotNull String loginId);
 
     /**
      * 获取用户的角色列表
@@ -66,7 +93,7 @@ public interface AuthService extends SimpleAuthService {
      * @param loginId
      * @return
      */
-    List<String> getRoleList(@NotNull Object loginId);
+    List<String> getRoleList(@NotNull String loginId);
 
     /**
      * 用户登出
