@@ -75,8 +75,8 @@
                                    onclick="updateCode(null,true)">发送验证码</a>
                             <#else>
                                 <a href="javaScript:updateCode()" style="line-height:40px;text-align:center;" title="点击，换一张！">
-                                    <img id="codeImg" border="0" width="100" height="40" alt="点击，换一张！">
                                     <span id="codeImgFailover">点击，换一张</span>
+                                    <img id="codeImg" border="0" width="100" height="40" alt="点击，换一张！">
                                 </a>
                             </#if>
                         </div>
@@ -200,6 +200,7 @@
                 sendSmsCode();
             } else {
                 $("#codeImgFailover").hide()
+                $("#codeImg").show()
                 document.getElementById("codeImg").src = "${captchaApi}?account=" + account + "&t=" + (new Date()).getTime();
             }
         }
@@ -382,6 +383,8 @@
     }
 
     $(document).ready(function () {
+
+        $("#codeImg").hide()
 
         $("#account").focus();
 
