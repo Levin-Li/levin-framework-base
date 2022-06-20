@@ -198,7 +198,7 @@ public class RbacController extends BaseController {
     @PutMapping({"updatePwd"})
     @Operation(tags = {"授权管理"}, summary = "修改密码")
     public ApiResp<Void> updatePwd(@RequestBody UpdateUserPwdReq req) {
-        return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error("修改密码失败");
+        return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error("修改密码失败,请确认原密码是否正确");
     }
 
     /**

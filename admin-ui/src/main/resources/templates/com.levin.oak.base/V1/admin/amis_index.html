@@ -13,24 +13,30 @@
     <link rel="stylesheet"
           title="default"
           href="amis@beta/sdk/sdk.css"
-            <#--             href="https://unpkg.com/amis@beta/sdk/antd.css"-->
+    <#-- href="https://unpkg.com/amis@beta/sdk/antd.css"-->
     />
 
     <link rel="stylesheet"
           href="amis@beta/sdk/helper.css"
-            <#--          href="https://unpkg.com/amis@beta/sdk/helper.css"-->
+    <#-- href="https://unpkg.com/amis@beta/sdk/helper.css"-->
     />
 
     <link rel="stylesheet" type="text/css" href="css/amis.css">
 
-    <#--    <script src="https://unpkg.com/amis@beta/sdk/sdk.js"></script>-->
+    <#--
+    <script src="https://unpkg.com/amis@beta/sdk/sdk.js"></script>
+    -->
     <script src="amis@beta/sdk/sdk.js"></script>
 
-    <#--    <script src="https://unpkg.com/vue@2"></script>-->
+    <#--
+    <script src="https://unpkg.com/vue@2"></script>
+    -->
 
     <script src="vue/dist/vue.min.js"></script>
 
-    <#--    <script src="https://unpkg.com/history@4.10.1/umd/history.js"></script>-->
+    <#--
+    <script src="https://unpkg.com/history@4.10.1/umd/history.js"></script>
+    -->
     <script src="history@4.10.1/umd/history.production.min.js"></script>
 
 
@@ -49,13 +55,12 @@
             /*左侧菜单栏宽度*/
             --Layout-aside-width: 15rem;
             /*--Avatar-width:1.6rem;*/
-        ${amisRootCss}
+            ${amisRootCss}
         }
     </style>
 </head>
 
 <!--  https://aisuda.bce.baidu.com/amis/zh-CN/docs/start/getting-started#sdk-->
-
 
 <body>
 <div id="root" class="app-wrapper"></div>
@@ -66,47 +71,32 @@
         let amis = amisRequire('amis/embed');
         const match = amisRequire('path-to-regexp').match;
 
-        // amisLib.addRule(
-        //     // 校验名
-        //     'notEmpty',
-        //     // 校验函数，values 是表单里所有表单项的值，可用于做联合校验；value 是当前表单项的值
-        //     (values, value) => {
-        //         return value && value.trim().length() > 0;
-        //     },
-        //     // 出错时的报错信息
-        //     '不能为空'
-        // );
+        amisLib.addRule(
+            // 校验名
+            'notEmpty',
+            // 校验函数，values 是表单里所有表单项的值，可用于做联合校验；value 是当前表单项的值
+            (values, value) => {
+                return value && value.trim().length() > 0;
+            },
+            // 出错时的报错信息
+            '不能为空'
+        );
 
         // 如果想用 browserHistory 请切换下这处代码, 其他不用变
         // const history = History.createBrowserHistory();
         const history = History.createHashHistory();
 
         window._amisLib = amisLib;
-
-        function getContextPath() {
-            let index = location.pathname.lastIndexOf("/");
-            return index === -1 ? "" : location.pathname.substring(0, index);
-        }
-
-        //假设当前页面是根路径
-        window._HOST_ROOT_URL = location.protocol + "//" + location.host;
-
-        window._CONTEXT_PATH = getContextPath();
-
-        window._APP_ROOT_URL = _HOST_ROOT_URL + _CONTEXT_PATH;
-
-        window._OAK_BASE_API = _CONTEXT_PATH + "/com.levin.oak.base/V1/api";
+        //window._amisEmbed = amis;
 
         window._adminLogout = function () {
             amisLib.confirm("确定要退出？", "提示", "确定")
                 .then((ok) => {
                     if (ok) {
-                        window.location = window._HOST_ROOT_URL + "?action=relogin";
+                        window.location = location.protocol + "//" + location.host + location.pathname + "?action=relogin";
                     }
                 })
         }
-
-        console.log("_OAK_BASE_API:" + _OAK_BASE_API)
 
         const app = {
             type: 'app',
@@ -154,7 +144,7 @@
 
                             {
                                 type: "service",
-                                schemaApi: "HEAD_"
+                                schemaApi: ""
                                 // api: '',
                             },
 
@@ -175,12 +165,11 @@
                                         "label": "修改密码",
                                         "level": "primary",
                                         "actionType": "dialog",
-                                        showErrorMsg:false,
                                         "dialog": {
                                             "title": "修改密码",
                                             "body": {
                                                 "type": "form",
-                                                "api": 'put:OAK_BASE_API/rbac/updatePwd',
+                                                "api": "post:{OAK_BASE_API}/rbac/updatePwd",
                                                 rules: [
                                                     {
                                                         //必须满足的规则
@@ -234,11 +223,29 @@
                                 ]
                             },
 
+                            // {
+                            //     type: "tpl",
+                            //     className: "ml-1",
+                            //     tpl: '<span class="font-normal" style="cursor:pointer;">超级管理员666</span>',
+                            //
+                            //     badge: {
+                            //         className: "ml-1 mr-5",
+                            //         id: "home_user_inbox",
+                            //         mode: "text",
+                            //         // animation: true,
+                            //         // size:10,
+                            //         overflowCount: 9,
+                            //         text: 22
+                            //     }
+                            // },
                             {
-                                type: "tpl",
-                                className: "ml-1",
-                                tpl: '<span class="font-normal" style="cursor:pointer;">${user.name}</span>',
-
+                                type: "action",
+                                //持：ajax、link、url、drawer、dialog、confirm、cancel、prev、next、copy、close。
+                                actionType: "link",
+                                link:"/com.levin.oak.base/V1/admin/Message",
+                                // label:"超级管理员666",
+                               // className:"text-dark",
+                                tooltip: "查看我的消息",
                                 badge: {
                                     className: "ml-1 mr-5",
                                     id: "home_user_inbox",
@@ -247,9 +254,14 @@
                                     // size:10,
                                     overflowCount: 9,
                                     text: 22
+                                },
+                                body:{
+                                    type: "tpl",
+                                    className: "ml-1",
+                                    tpl: '<span class="font-normal" style="cursor:pointer;">超级管理员666</span>',
                                 }
-                            },
 
+                            },
                             {
                                 type: "action",
                                 //持：ajax、link、url、drawer、dialog、confirm、cancel、prev、next、copy、close。
@@ -262,7 +274,7 @@
 
                                 body: {
                                     type: "icon",
-                                    icon: "ml-8 mr-4 text-lg fa fa-sign-out"
+                                    icon: "ml-6 mr-2 text-lg fa fa-sign-out"
                                 }
 
                             }
@@ -274,9 +286,8 @@
 
             //   footer: '<div class="p-2 text-center bg-light">底部区域</div>',
             //   asideBefore: '<div class="p-2 text-center">菜单前面区域</div>',
-            asideAfter: '<div class="p-2 text-center"></div>'
+            asideAfter: '<div class="p-2 text-center"> </div>',
         };
-
 
         function normalizeLink(to, location = history.location) {
 
@@ -338,8 +349,6 @@
 
             return decodeURI(pathname) === link;
         }
-
-        console.log("_APP_ROOT_URL:" + _APP_ROOT_URL)
 
         let amisInstance = amis.embed(
             '#root',
@@ -406,24 +415,12 @@
                 theme: 'cxd',
                 // theme: 'antd',
                 replaceText: {
-
-                    // window._HOST_ROOT_URL = location.protocol + "//" + location.host;
-                    // window._CONTEXT_PATH = getContextPath();
-                    // window._APP_ROOT_URL = _HOST_ROOT_URL + _CONTEXT_PATH;
-                    // window._OAK_BASE_API = _CONTEXT_PATH + "/com.levin.oak.base/V1/api";
-
                     //支持配置中的 URL 地址替换
-                    HOST: window.location.hostname,
-                    APP_ROOT_URL: window._APP_ROOT_URL,
-                    CONTEXT_PATH: window._CONTEXT_PATH,
-                    OAK_BASE_API: window._OAK_BASE_API
+                    HOST: window.location.hostname
                 }
             }
         );
 
-        console.log("_CONTEXT_PATH:" + _CONTEXT_PATH)
-
-        //
         history.listen(state => {
             amisInstance.updateProps({
                 location: state.location || state

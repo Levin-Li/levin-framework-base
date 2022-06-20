@@ -49,13 +49,13 @@ public class UpdateUserPwdReq extends MultiTenantReq {
     @InjectVar(InjectConsts.USER_ID)
     private String id;
 
-    @Size(max = 256)
+    @Size(max = 128)
     @Schema(description = "旧密码")
     @NotBlank
     @Eq(require = true, value = E_User.password)
     private String oldPassword;
 
-    @Size(max = 256)
+    @Size(max = 128)
     @Schema(description = "新密码")
     @NotBlank
     private String password;
