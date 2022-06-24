@@ -111,8 +111,6 @@ public class CreateRoleReq extends MultiTenantReq {
 
         //@todo 保存之前初始化数据
 
-
-
         if (getCreateTime() == null) {
             setCreateTime(new Date());
         }

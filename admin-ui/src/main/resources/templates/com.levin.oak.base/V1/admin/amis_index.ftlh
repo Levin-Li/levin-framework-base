@@ -49,7 +49,7 @@
             /*左侧菜单栏宽度*/
             --Layout-aside-width: 15rem;
             /*--Avatar-width:1.6rem;*/
-        ${amisRootCss}
+            ${amisRootCss}
         }
     </style>
 </head>

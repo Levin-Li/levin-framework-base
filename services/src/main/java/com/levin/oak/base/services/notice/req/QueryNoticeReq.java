@@ -71,7 +71,6 @@ public class QueryNoticeReq extends MultiTenantReq{
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
     OrderBy.Type orderDir;
 
-
     //@NotBlank
     //@Size(max = 64)
     @Schema(description = "id")
@@ -176,5 +175,4 @@ public class QueryNoticeReq extends MultiTenantReq{
     public void preQuery() {
         //@todo 查询之前初始化数据
     }
-
 }

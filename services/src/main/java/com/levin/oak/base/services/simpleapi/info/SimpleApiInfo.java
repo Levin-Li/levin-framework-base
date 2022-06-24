@@ -53,11 +53,9 @@ public class SimpleApiInfo implements Serializable {
     @Schema(description = "脚本语言", required = true)
     Language language;
 
-
     @NotNull
     @Schema(description = "id", required = true)
     String id;
-
 
     @NotBlank
     @Size(max = 64)
