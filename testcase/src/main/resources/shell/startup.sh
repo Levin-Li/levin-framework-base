@@ -12,12 +12,12 @@ shellDir=`pwd`
 appJars=`ls *.jar`
 isFound=`echo $?`
 
-if [ "$isFound" != "0" ]; then
+if [ "${isFound}" != "0" ]; then
   appJars=`ls *.war`
   isFound=`echo $?`
 fi
 
-if [ "$isFound" != "0" ]; then
+if [ "${isFound}" != "0" ]; then
    echo "***ERROR*** Spring Boot App launch file(.war or .jar) not found."
    exit 1
 fi
@@ -30,9 +30,10 @@ tempFile=`date +%s`
 
 pids=`ps -ef | grep java | grep "$shellDir" | awk '{print $2}'`
 
-content=""
+#加密参数
+encryptParams=""
 
-if [ -z $pids ]; then
+if [ -z "${pids}" ]; then
 
 #   read -p "是否需要启动密码?[y/n]" -t 7 needParam
 
@@ -46,8 +47,8 @@ if [ -z $pids ]; then
    fi
 
    #如果有文件
-   if [ -f ${tempFile} ]; then
-       content=`cat ${tempFile}`
+   if [ -f "${tempFile}" ]; then
+       encryptParams=`cat ${tempFile}`
    fi
 
    extName=`uname`
@@ -61,8 +62,8 @@ if [ -z $pids ]; then
    fi
 
    #如果文件有内容
-   if [ -n "${content}" ]; then
-       content=" -DPrintHookAgentLog=true -agentpath:third-libs/libHookAgent.${extName}=${tempFile} -XX:+DisableAttachMechanism "
+   if [ -n "${encryptParams}" ]; then
+       encryptParams=" -DPrintHookAgentLog=true -agentpath:third-libs/libHookAgent.${extName}=${tempFile} -XX:+DisableAttachMechanism "
    fi
 
    JAVA_CMD=`which ${JAVA_HOME}/bin/java`
@@ -108,7 +109,7 @@ if [ -z $pids ]; then
 
    #测试本应用的第3方库，是否存在
 
-   START_CMD="${JAVA_CMD} -server -Dwork.dir=${shellDir} ${content} -Dloader.path=config,static,resources,biz-libs,common-libs${globalAppCommonLibs},third-libs${globalAppThirdLibs} -jar ${appJars}"
+   START_CMD="${JAVA_CMD} -server -Dwork.dir=${shellDir} ${encryptParams} -Dloader.path=config,resources,biz-libs,common-libs${globalAppCommonLibs},third-libs${globalAppThirdLibs} -jar ${appJars}"
 
    echo "Startup cmd line：${START_CMD}"
 
@@ -120,20 +121,18 @@ if [ -z $pids ]; then
    echo "#INVALID_PWD:#param:$$" > ${tempFile}
 
    #删除临时文件
-   rm -fr ${tempFile}
+   rm -fr "${tempFile}"
 
-   echo "..."
-
-   pids=`ps -ef | grep java | grep "$shellDir"`
+   pList=`ps -ef | grep java | grep "$shellDir"`
 
 #  如果应用没有启动成功
-   if [ -z "${pids}" ]; then
+   if [ -z "${pList}" ]; then
      echo "***ERROR*** Spring Boot App [${appJars}] startup fail."
      tail -n 20 nohup.out
      exit 1
    fi
 
-   echo "${pids}"
+   echo "${pList}"
 
    #如果是人工交互，顺便查看启动过程
    if [ -n "${needParam}" ]; then
@@ -149,4 +148,3 @@ else
    ps -ef | grep java | grep "$shellDir"
 
 fi
-
