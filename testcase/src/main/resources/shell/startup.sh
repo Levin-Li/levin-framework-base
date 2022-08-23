@@ -122,10 +122,12 @@ if [ -z $pids ]; then
    #删除临时文件
    rm -fr ${tempFile}
 
+   echo "..."
+
    pids=`ps -ef | grep java | grep "$shellDir"`
 
 #  如果应用没有启动成功
-   if [ -z $pids ]; then
+   if [ -z "${pids}" ]; then
      echo "***ERROR*** Spring Boot App [${appJars}] startup fail."
      tail -n 20 nohup.out
      exit 1
