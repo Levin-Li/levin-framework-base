@@ -12,7 +12,7 @@
         }
 )
 //默认的uid生成器
-@GenericGenerator(name = "default_id", strategy = "com.levin.oak.base.entities.DelegateIdGenerator",
+@GenericGenerator(name = "default_id", strategy = "com.levin.commons.dao.support.DelegateIdGenerator",
         parameters = {
                 @Parameter(name = "uuid_gen_strategy_class", value = "org.hibernate.id.uuid.CustomVersionOneStrategy"),
         }
@@ -21,5 +21,8 @@
 @GenericGenerator(name = "table_gid", strategy = "org.hibernate.id.TableGenerator")
 package com.levin.oak.base.entities;
 
+
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
+
