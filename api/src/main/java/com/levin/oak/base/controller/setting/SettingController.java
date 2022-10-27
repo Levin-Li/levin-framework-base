@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.util.*;
+
 import javax.validation.*;
 import java.util.*;
 
@@ -16,6 +17,7 @@ import javax.servlet.http.*;
 
 import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
+
 import javax.validation.constraints.*;
 
 import com.levin.oak.base.controller.*;
@@ -54,7 +56,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Tag(name = E_Setting.BIZ_NAME, description = E_Setting.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
-public class SettingController extends BaseController{
+public class SettingController extends BaseController {
 
     private static final String BIZ_NAME = E_Setting.BIZ_NAME;
 
@@ -64,13 +66,13 @@ public class SettingController extends BaseController{
     /**
      * 分页查找
      *
-     * @param req  QuerySettingReq
-     * @return  ApiResp<PagingData<SettingInfo>>
+     * @param req QuerySettingReq
+     * @return ApiResp<PagingData < SettingInfo>>
      */
     @GetMapping("/query")
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<SettingInfo>> query(QuerySettingReq req , SimplePaging paging) {
-        return ApiResp.ok(settingService.query(req,paging));
+    public ApiResp<PagingData<SettingInfo>> query(QuerySettingReq req, SimplePaging paging) {
+        return ApiResp.ok(settingService.query(req, paging));
     }
 
     /**
@@ -98,37 +100,39 @@ public class SettingController extends BaseController{
     }
 
     /**
-    * 查看详情
-    *
-    * @param req QuerySettingByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QuerySettingByIdReq
+     */
     @GetMapping("")
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<SettingInfo> retrieve(@NotNull SettingIdReq req) {
-         return ApiResp.ok(settingService.findById(req));
-     }
+        return ApiResp.ok(settingService.findById(req));
+    }
 
     /**
      * 更新
+     *
      * @param req UpdateSettingReq
      */
-     @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> update(@RequestBody UpdateSettingReq req) {
-         return ApiResp.ok(checkResult(settingService.update(req), UPDATE_ACTION));
+    @PutMapping({""})
+    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> update(@RequestBody UpdateSettingReq req) {
+        return ApiResp.ok(checkResult(settingService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateSettingReq> reqList) {
+    @PutMapping("/batchUpdate")
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateSettingReq> reqList) {
         return ApiResp.ok(checkResult(settingService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
      * 删除
+     *
      * @param req SettingIdReq
      */
     @DeleteMapping({""})
@@ -139,6 +143,7 @@ public class SettingController extends BaseController{
 
     /**
      * 批量删除
+     *
      * @param req DeleteSettingReq
      */
     @DeleteMapping({"/batchDelete"})
@@ -149,6 +154,7 @@ public class SettingController extends BaseController{
 
     /**
      * 检查结果
+     *
      * @param n
      * @param action
      * @return

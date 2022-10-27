@@ -44,8 +44,9 @@ import javax.persistence.*;
 public class Setting
         extends AbstractNamedMultiTenantObject {
 
-    public enum ValueType   implements EnumDesc {
-
+    public enum ValueType  implements EnumDesc {
+        @Schema(description = "富文本")
+        Html,
         @Schema(description = "CSS")
         Css,
         @Schema(description = "JS")

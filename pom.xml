@@ -25,7 +25,7 @@
         <revision>1.1.0-SNAPSHOT</revision>
 
         <levin.simple-dao.groupId>com.levin.commons</levin.simple-dao.groupId>
-        <levin.simple-dao.version>2.3.3-SNAPSHOT</levin.simple-dao.version>
+        <levin.simple-dao.version>2.3.5-SNAPSHOT</levin.simple-dao.version>
 
 <!--        <levin.service-support.groupId>com.levin.commons</levin.service-support.groupId>-->
         <levin.service-support.groupId>com.github.Levin-Li</levin.service-support.groupId>
@@ -107,13 +107,12 @@
 
     <profiles>
 
-<!--        <profile>
+       <profile>
             <id>01-跳过测试</id>
             <properties>
                 <maven.test.skip>true</maven.test.skip>
             </properties>
         </profile>
-        -->
 
         <profile>
             <id>02-上传源代码到 Maven</id>
@@ -386,6 +385,20 @@
                     </execution>
                 </executions>
 
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.Levin-Li</groupId>
+                <artifactId>java-code-guard-plugin</artifactId>
+                <version>2.3.9</version>
+                <executions>
+                    <execution>
+                        <id>encrypt-repackage</id>
+                        <goals>
+                            <goal>encrypt-repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
