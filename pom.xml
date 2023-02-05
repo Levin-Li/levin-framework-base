@@ -457,12 +457,12 @@
             </plugin>
 
 
-            <plugin>
-                <!--   <groupId>com.github.Levin-Li</groupId> -->
+<!--            <plugin>
+                &lt;!&ndash;   <groupId>com.github.Levin-Li</groupId> &ndash;&gt;
                 <groupId>com.levin.commons</groupId>
                 <artifactId>java-code-guard-plugin</artifactId>
                 <version>2.3.10</version>
-            </plugin>
+            </plugin>-->
 
             <plugin>
 
