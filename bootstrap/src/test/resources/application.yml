@@ -1,0 +1,72 @@
+#Auto gen by simple-dao-codegen 2023-2-5 11:13:19
+
+spring:
+  application:
+    name: framework-base
+
+  #线程池配置
+  task:
+    execution:
+      pool:
+        core-size: 200
+
+    #调度器线程
+    scheduling:
+      pool:
+        size: 100
+
+  # 数据源配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid: #单独使用druid时的配置
+      initial-size: 50
+      max-active: 500
+      min-idle: 10
+      max-wait: 60000
+      min-evictable-idle-time-millis: 1800000
+      max-evictable-idle-time-millis: 1800000
+      time-between-eviction-runs-millis: 0
+      validation-query: select 1
+      validation-query-timeout: 60000
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      filters: stat,wall
+      stat-view-servlet:
+        loginUsername: admin
+        loginPassword: 123456
+        enabled: true
+        url-pattern: /druid/*
+        allow: " "
+
+  #    url: jdbc:h2:./dev.db;MODE=MySQL;
+  #    url: jdbc:h2:mem:dev.db;
+  #    username: dev
+  #    password: dev
+
+  #JPA配置
+  jpa:
+    show-sql: false
+    #    generate-ddl: false
+    #    database: H2
+    #关闭视图事务，避免jpa 出现 N + 1 查询
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+      naming:
+        #模块表名前缀映射类，重要
+        physical-strategy: com.levin.commons.dao.support.EntityNamingStrategy
+
+  #      MYSQL 配置选项
+  #      properties:
+  #        hibernate.dialect: org.hibernate.dialect.MySQL57Dialect
+  #        hibernate.id.new_generator_mappings: false
+  #        hibernate.dialect.storage_engine: innodb
+
+
+#日志配置
+logging:
+  level:
+    root: warn
+    com.levin: info
+    com.levin.oak.base: debug

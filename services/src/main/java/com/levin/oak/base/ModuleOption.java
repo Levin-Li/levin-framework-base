@@ -5,9 +5,19 @@ package com.levin.oak.base;
  * <p>
  * eg.
  * <p>
- * //Auto gen by simple-dao-codegen 2022-3-30 13:50:50
+ * //Auto gen by simple-dao-codegen 2023-2-5 11:13:19
  */
 public interface ModuleOption {
+
+    /**
+     * module name
+     */
+    String NAME = "请填写模块名称";
+
+    /**
+     * module desc
+     */
+    String DESC = "请填写模块描述";
 
     /**
      * module package name
@@ -18,11 +28,6 @@ public interface ModuleOption {
      * module id
      */
     String ID = PACKAGE_NAME;
-
-    /**
-     * module name
-     */
-    String NAME = "系统管理";
 
     /**
      * module prefix

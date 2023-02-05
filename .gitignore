@@ -3,6 +3,8 @@
 .rdb
 .ssh
 .lock
+**/.java_agent
+**/.lib
 *.lock
 .awcache
 

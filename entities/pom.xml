@@ -10,51 +10,34 @@
     <parent>
         <groupId>com.levin.oak.base</groupId>
         <artifactId>framework-base</artifactId>
-        <!--        <version>1.0.0-SNAPSHOT</version>-->
+<!--        <version>1.1.0-SNAPSHOT</version>-->
         <version>${revision}</version>
     </parent>
 
-    <!--    //Auto gen by simple-dao-codegen Mon Oct 18 14:12:00 CST 2021-->
+<!--    //Auto gen by simple-dao-codegen Sun Feb 05 11:08:33 CST 2023-->
 
-    <!--    <groupId>${project.groupId}</groupId> -->
-    <!--    <version>${project.version}</version> -->
+<!--    <groupId>${project.groupId}</groupId> -->
+<!--    <version>${project.version}</version> -->
 
     <artifactId>framework-base-entities</artifactId>
 
     <packaging>jar</packaging>
 
-
     <dependencies>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>${levin.service-support.groupId}</groupId>
-            <artifactId>service-support</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <scope>provided</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <scope>provided</scope>
         </dependency>
+
+<!--
+        <dependency>
+            <groupId>${levin.simple-dao.groupId}</groupId>
+            <artifactId>simple-dao-annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+-->
 
     </dependencies>
 

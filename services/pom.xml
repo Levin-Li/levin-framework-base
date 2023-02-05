@@ -145,6 +145,156 @@
             <scope>provided</scope>
         </dependency>
 
+
+
+        <!--     https://javen205.gitee.io/ijpay/    支付工具包 -->
+        <dependency>
+            <groupId>com.github.javen205</groupId>
+            <artifactId>IJPay-All</artifactId>
+            <version>${IJPay.version}</version>
+        </dependency>
+
+
+        <!--        https://gitee.com/egzosn/pay-java-parent-->
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-spring-boot-starter</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-ali</artifactId>
+            <version>${egzosn-pay.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-wx</artifactId>
+            <version>${egzosn-pay.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-paypal</artifactId>
+            <version>${egzosn-pay.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-union</artifactId>
+            <version>${egzosn-pay.version}</version>
+        </dependency>
+
+        <!--文件系统-->
+
+        <!-- spring-file-storage 必须要引入 -->
+        <dependency>
+            <groupId>cn.xuyanwu</groupId>
+            <artifactId>spring-file-storage</artifactId>
+            <version>0.5.0</version>
+        </dependency>
+
+        <!-- 华为云 OBS 不使用的情况下可以不引入 -->
+        <dependency>
+            <groupId>com.huaweicloud</groupId>
+            <artifactId>esdk-obs-java</artifactId>
+            <version>3.22.3.1</version>
+        </dependency>
+
+        <!-- 阿里云 OSS 不使用的情况下可以不引入 -->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>3.15.1</version>
+        </dependency>
+
+        <!-- 七牛云 Kodo 不使用的情况下可以不引入 -->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>7.11.0</version>
+        </dependency>
+
+        <!-- 腾讯云 COS 不使用的情况下可以不引入 -->
+        <dependency>
+            <groupId>com.qcloud</groupId>
+            <artifactId>cos_api</artifactId>
+            <version>5.6.98</version>
+        </dependency>
+
+        <!-- 百度云 BOS 不使用的情况下可以不引入 -->
+        <dependency>
+            <groupId>com.baidubce</groupId>
+            <artifactId>bce-java-sdk</artifactId>
+            <version>0.10.218</version>
+        </dependency>
+
+        <!-- 又拍云 USS 不使用的情况下可以不引入 -->
+        <dependency>
+            <groupId>com.upyun</groupId>
+            <artifactId>java-sdk</artifactId>
+            <version>4.2.3</version>
+        </dependency>
+
+        <!-- MinIO 不使用的情况下可以不引入 -->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>8.4.3</version>
+        </dependency>
+
+        <!-- AWS S3 不使用的情况下可以不引入 -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.12.272</version>
+        </dependency>
+
+        <!-- FTP 不使用的情况下可以不引入 -->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.8.0</version>
+        </dependency>
+
+        <!-- SFTP 不使用的情况下可以不引入 -->
+        <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+            <version>0.1.55</version>
+        </dependency>
+
+        <!--糊涂工具类扩展，如果要使用 FTP、SFTP 则必须引入，否则不用引入-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-extra</artifactId>
+            <version>5.8.5</version>
+        </dependency>
+
+        <!-- WebDAV 不使用的情况下可以不引入 -->
+        <dependency>
+            <groupId>com.github.lookfirst</groupId>
+            <artifactId>sardine</artifactId>
+            <version>5.10</version>
+        </dependency>
+
+        <!-- 谷歌云 Google Cloud Storage-->
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-storage</artifactId>
+            <version>2.14.0</version>
+        </dependency>
+
+        <dependency>
+            <!--            短信通道-->
+            <groupId>net.guerlab.sms</groupId>
+            <artifactId>guerlab-sms-server-starter</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

@@ -1,0 +1,12 @@
+#Auto gen by simple-dao-codegen 2023-2-5 11:13:19
+spring:
+  datasource:
+    #    url: jdbc:h2:./dev.db;MODE=MySQL;
+    url: jdbc:h2:mem:dev.db;
+    username: dev
+    password: dev
+
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database: H2
