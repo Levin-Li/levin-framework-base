@@ -6,6 +6,7 @@ import com.levin.commons.service.domain.ApiResp;
 import com.levin.commons.service.domain.ServiceResp;
 import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.exception.ServiceException;
+import com.levin.commons.service.exception.UnauthorizedException;
 import com.levin.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
@@ -104,7 +105,7 @@ public class ModuleWebControllerAdvice {
 //        return result;
 //    }
 
-    @ExceptionHandler({NotLoginException.class,})
+    @ExceptionHandler({NotLoginException.class, })
     public ApiResp onNotLoginException(Exception e) {
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -113,7 +114,7 @@ public class ModuleWebControllerAdvice {
                 , "未登录：" + e.getMessage());
     }
 
-    @ExceptionHandler({SaTokenException.class,})
+    @ExceptionHandler({SaTokenException.class,UnauthorizedException.class})
     public ApiResp onSaTokenException(Exception e) {
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
