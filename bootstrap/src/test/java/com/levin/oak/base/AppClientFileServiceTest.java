@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
 /**
  *  客户端文件测试
  *
- *  @author auto gen by simple-dao-codegen 2023-2-5 11:13:19
+ *  @author auto gen by simple-dao-codegen 2023-2-22 18:58:29
  *
  */
 
