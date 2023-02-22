@@ -19,10 +19,23 @@
 )
 @GenericGenerator(name = "hex_uuid", strategy = "org.hibernate.id.UUIDHexGenerator")
 @GenericGenerator(name = "table_gid", strategy = "org.hibernate.id.TableGenerator")
+
+// Hibernate 字段类型映射器
+@TypeDefs({
+        @TypeDef(
+                name = "EnumDesc",
+                defaultForType = EnumDesc.class,
+                typeClass = EnumDescType.class
+        )
+})
+
 package com.levin.oak.base.entities;
 
 
+
+import com.levin.commons.dao.support.EnumDescType;
+import com.levin.commons.service.domain.EnumDesc;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-
-
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
