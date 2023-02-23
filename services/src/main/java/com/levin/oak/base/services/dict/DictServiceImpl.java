@@ -49,7 +49,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 //@Validated
 @Tag(name = E_Dict.BIZ_NAME, description = E_Dict.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_Dict.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_Dict.SIMPLE_CLASS_NAME})
 public class DictServiceImpl extends BaseService implements DictService {
 
     @Autowired

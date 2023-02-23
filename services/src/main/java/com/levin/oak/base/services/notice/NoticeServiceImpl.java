@@ -66,7 +66,7 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 @Slf4j
 //@Validated
 @Tag(name = E_Notice.BIZ_NAME, description = E_Notice.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_Notice.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_Notice.SIMPLE_CLASS_NAME})
 public class NoticeServiceImpl extends BaseService implements NoticeService {
 
     @Autowired

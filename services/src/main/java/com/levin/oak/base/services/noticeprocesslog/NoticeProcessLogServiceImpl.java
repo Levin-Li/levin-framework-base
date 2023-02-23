@@ -63,7 +63,7 @@ import java.util.Date;
 @Slf4j
 //@Validated
 @Tag(name = E_NoticeProcessLog.BIZ_NAME, description = E_NoticeProcessLog.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_NoticeProcessLog.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_NoticeProcessLog.SIMPLE_CLASS_NAME})
 public class NoticeProcessLogServiceImpl extends BaseService implements NoticeProcessLogService {
 
     @Autowired

@@ -29,7 +29,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @ConditionalOnClass({CaptchaUtil.class, RedissonClient.class})
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "DefaultCaptchaService", matchIfMissing = true)
 @Slf4j
-@CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + "DefaultCaptchaService"})
+@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "DefaultCaptchaService"})
 public class DefaultCaptchaServiceImpl implements CaptchaService {
 
     private static final String CACHE_NAME = DefaultCaptchaServiceImpl.class.getName();

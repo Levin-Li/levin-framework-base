@@ -23,7 +23,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @ConditionalOnClass({CaptchaUtil.class, RedissonClient.class})
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SmsCodeService", matchIfMissing = true)
 @Slf4j
-@CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + "SmsCodeService"})
+@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "SmsCodeService"})
 public class SmsCodeServiceImpl
         implements SmsCodeService {
 

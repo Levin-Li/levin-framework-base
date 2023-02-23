@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 ////////////////////////////////////
@@ -49,7 +49,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 //@Validated
 @Tag(name = E_Tenant.BIZ_NAME, description = E_Tenant.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_Tenant.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = { ID + CACHE_DELIM + E_Tenant.SIMPLE_CLASS_NAME})
 public class TenantServiceImpl extends BaseService implements TenantService {
 
     @Autowired

@@ -49,7 +49,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 //@Validated
 @Tag(name = E_Org.BIZ_NAME, description = E_Org.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_Org.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_Org.SIMPLE_CLASS_NAME})
 public class OrgServiceImpl extends BaseService implements OrgService {
 
     @Autowired

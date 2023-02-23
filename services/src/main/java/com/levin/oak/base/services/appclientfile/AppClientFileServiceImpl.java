@@ -50,7 +50,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 //@Validated
 @Tag(name = E_AppClientFile.BIZ_NAME, description = E_AppClientFile.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_AppClientFile.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_AppClientFile.SIMPLE_CLASS_NAME})
 public class AppClientFileServiceImpl extends BaseService implements AppClientFileService {
 
     @Autowired

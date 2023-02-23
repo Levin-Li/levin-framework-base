@@ -35,6 +35,11 @@ public interface ModuleOption {
     String ID_PREFIX = ID + ".";
 
     /**
+     * 缓存分隔符
+     */
+    String CACHE_DELIM = ":";
+
+    /**
      * module prefix
      */
     String PLUGIN_PREFIX = "plugin." + ID_PREFIX;

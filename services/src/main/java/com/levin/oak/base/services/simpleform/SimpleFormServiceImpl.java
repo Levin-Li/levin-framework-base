@@ -63,7 +63,7 @@ import java.util.Date;
 @Slf4j
 //@Validated
 @Tag(name = E_SimpleForm.BIZ_NAME, description = E_SimpleForm.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_SimpleForm.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_SimpleForm.SIMPLE_CLASS_NAME})
 public class SimpleFormServiceImpl extends BaseService implements SimpleFormService {
 
     @Autowired
