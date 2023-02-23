@@ -1,6 +1,7 @@
 package com.levin.oak.base;
 
 import com.levin.commons.service.support.*;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.*;
@@ -32,7 +33,6 @@ import java.lang.reflect.Type;
  */
 @SpringBootApplication
 @Slf4j
-
 @EnableScheduling
 @EnableCaching
 @EnableAsync
@@ -42,7 +42,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Resource
+    @Autowired
     Environment environment;
 
 

@@ -65,7 +65,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class SimplePageServiceTest {
 
-    @Resource
+    @Autowired
     private SimplePageService simplePageService;
 
     private String id;

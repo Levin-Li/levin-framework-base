@@ -8,6 +8,7 @@ import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.Role;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -28,7 +29,7 @@ import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)
 public class BizRoleServiceImpl implements BizRoleService {
 
-    @Resource
+    @Autowired
     protected SimpleDao simpleDao;
 
     /**

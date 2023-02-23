@@ -62,6 +62,8 @@ spring:
   #        hibernate.dialect: org.hibernate.dialect.MySQL57Dialect
   #        hibernate.id.new_generator_mappings: false
   #        hibernate.dialect.storage_engine: innodb
+  main:
+    allow-circular-references: true
 
 
 #日志配置

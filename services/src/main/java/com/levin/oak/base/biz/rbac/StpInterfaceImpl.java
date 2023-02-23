@@ -3,6 +3,7 @@ package com.levin.oak.base.biz.rbac;
 import cn.dev33.satoken.SaManager;
 import cn.dev33.satoken.stp.StpInterface;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 public class StpInterfaceImpl
         implements StpInterface {
 
-    @Resource
+    @Autowired
     AuthService authService;
 
     @PostConstruct

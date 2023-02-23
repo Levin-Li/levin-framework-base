@@ -65,7 +65,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class AccessLogServiceTest {
 
-    @Resource
+    @Autowired
     private AccessLogService accessLogService;
 
     private Long id;

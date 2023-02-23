@@ -27,6 +27,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.support.GenericApplicationContext;
@@ -60,43 +61,43 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleWebControllerAspect", matchIfMissing = true)
 public class ModuleWebControllerAspect {
 
-    @Resource
+    @Autowired
     GenericApplicationContext context;
 
-    @Resource
+    @Autowired
     VariableInjector variableInjector;
 
-    @Resource
+    @Autowired
     VariableResolverManager variableResolverManager;
 
-    @Resource
+    @Autowired
     HttpServletRequest request;
 
-    @Resource
+    @Autowired
     HttpServletResponse response;
 
-    @Resource
+    @Autowired
     ScheduledExecutorService scheduledExecutorService;
 
-    @Resource
+    @Autowired
     AccessLogService accessLogService;
 
-    @Resource
+    @Autowired
     AuthService authService;
 
-    @Resource
+    @Autowired
     InjectVarService injectVarService;
 
-    @Resource
+    @Autowired
     BizTenantService bizTenantService;
 
-    @Resource
+    @Autowired
     FrameworkProperties frameworkProperties;
 
-    @Resource
+    @Autowired
     ServerProperties serverProperties;
 
-    @Resource
+    @Autowired
     PluginManager pluginManager;
 
 

@@ -31,6 +31,7 @@ import com.levin.oak.base.services.user.info.UserInfo;
 import com.levin.oak.base.services.user.req.CreateUserReq;
 import com.levin.oak.base.utils.AmisUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.ApplicationContext;
@@ -75,40 +76,40 @@ public class AuthServiceImpl
 //    static final Type listStrType = new TypeToken<List<String>>() {
 //    }.getType();
 
-    @Resource
+    @Autowired
     ApplicationContext context;
 
-    @Resource
+    @Autowired
     UserService userService;
 
-    @Resource
+    @Autowired
     RoleService roleService;
 
-    @Resource
+    @Autowired
     BizRoleService bizRoleService;
 
-    @Resource
+    @Autowired
     MenuResService menuResService;
 
-    @Resource
+    @Autowired
     PluginManager pluginManager;
 
-    @Resource
+    @Autowired
     TenantService tenantService;
 
-    @Resource
+    @Autowired
     ServerProperties serverProperties;
 
-    @Resource
+    @Autowired
     FrameworkProperties frameworkProperties;
 
-    @Resource
+    @Autowired
     ResourceLoader resourceLoader;
 
-    @Resource
+    @Autowired
     CaptchaService captchaService;
 
-    @Resource
+    @Autowired
     SmsCodeService smsCodeService;
 
     /**

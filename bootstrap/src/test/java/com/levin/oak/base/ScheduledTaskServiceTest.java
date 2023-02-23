@@ -66,7 +66,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class ScheduledTaskServiceTest {
 
-    @Resource
+    @Autowired
     private ScheduledTaskService scheduledTaskService;
 
     private String id;

@@ -70,7 +70,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class UserServiceTest {
 
-    @Resource
+    @Autowired
     private UserService userService;
 
     private String id;

@@ -69,7 +69,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class MenuResServiceTest {
 
-    @Resource
+    @Autowired
     private MenuResService menuResService;
 
     private String id;

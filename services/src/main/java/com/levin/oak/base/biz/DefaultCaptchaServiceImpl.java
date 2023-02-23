@@ -8,6 +8,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.CacheManager;
@@ -33,13 +34,13 @@ public class DefaultCaptchaServiceImpl implements CaptchaService {
 
     private static final String CACHE_NAME = DefaultCaptchaServiceImpl.class.getName();
 
-    @Resource
+    @Autowired
     CacheManager cacheManager;
 
-    @Resource
+    @Autowired
     RedissonClient redissonClient;
 
-    @Resource
+    @Autowired
     FrameworkProperties frameworkProperties;
 
     RMapCache<Object, Object> mapCache = null;

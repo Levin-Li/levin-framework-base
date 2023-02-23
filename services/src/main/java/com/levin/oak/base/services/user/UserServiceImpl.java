@@ -59,10 +59,10 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Autowired
     private SimpleDao simpleDao;
 
-    @Resource
+    @Autowired
     AuthService authService;
 
-    @Resource
+    @Autowired
     FrameworkProperties frameworkProperties;
 
     protected UserService getSelfProxy() {

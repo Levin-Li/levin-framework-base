@@ -10,6 +10,7 @@ import com.levin.oak.base.interceptor.ControllerAuthorizeInterceptor;
 import com.levin.oak.base.interceptor.DomainInterceptor;
 import com.levin.oak.base.interceptor.ResourceAuthorizeInterceptor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -35,25 +36,25 @@ import static com.levin.oak.base.ModuleOption.*;
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleWebMvcConfigurer", matchIfMissing = true)
 public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
-    @Resource
+    @Autowired
     RbacService rbacService;
 
-    @Resource
+    @Autowired
     AuthService authService;
 
-    @Resource
+    @Autowired
     BizTenantService bizTenantService;
 
-    @Resource
+    @Autowired
     InjectVarService injectVarService;
 
-    @Resource
+    @Autowired
     ServerProperties serverProperties;
 
-    @Resource
+    @Autowired
     FrameworkProperties frameworkProperties;
 
-    @Resource
+    @Autowired
     PluginManager pluginManager;
 
     @Value("${springfox.documentation.swagger-ui.base-url:/swagger-ui}")

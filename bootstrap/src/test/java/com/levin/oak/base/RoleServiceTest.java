@@ -68,7 +68,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class RoleServiceTest {
 
-    @Resource
+    @Autowired
     private RoleService roleService;
 
     private String id;

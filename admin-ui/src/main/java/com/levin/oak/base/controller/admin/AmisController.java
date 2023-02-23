@@ -32,6 +32,7 @@ import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.core.io.ResourceLoader;
@@ -77,37 +78,37 @@ import static com.levin.oak.base.ModuleOption.*;
 @ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME, onlyRequireAuthenticated = true)
 public class AmisController extends BaseController {
 
-    @Resource
+    @Autowired
     RoleService roleService;
 
-    @Resource
+    @Autowired
     RbacService rbacService;
 
-    @Resource
+    @Autowired
     RbacResService rbacResService;
 
-    @Resource
+    @Autowired
     AuthService authService;
 
-    @Resource
+    @Autowired
     MenuResService menuResService;
 
-    @Resource
+    @Autowired
     ResourceLoader resourceLoader;
 
-    @Resource
+    @Autowired
     ServerProperties serverProperties;
 
-    @Resource
+    @Autowired
     FrameworkProperties frameworkProperties;
 
-    @Resource
+    @Autowired
     SimplePageService simplePageService;
 
-    @Resource
+    @Autowired
     SimpleDao simpleDao;
 
-    @Resource
+    @Autowired
     UiCodeGen uiCodeGen;
 
 

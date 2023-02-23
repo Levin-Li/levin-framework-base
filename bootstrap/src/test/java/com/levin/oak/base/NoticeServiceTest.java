@@ -67,7 +67,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class NoticeServiceTest {
 
-    @Resource
+    @Autowired
     private NoticeService noticeService;
 
     private String id;

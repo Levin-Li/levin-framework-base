@@ -65,7 +65,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class I18nResServiceTest {
 
-    @Resource
+    @Autowired
     private I18nResService i18nResService;
 
     private Long id;

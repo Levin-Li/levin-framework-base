@@ -65,7 +65,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class AppClientServiceTest {
 
-    @Resource
+    @Autowired
     private AppClientService appClientService;
 
     private String id;

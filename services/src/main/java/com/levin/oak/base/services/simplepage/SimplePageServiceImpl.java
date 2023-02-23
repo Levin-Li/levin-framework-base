@@ -66,7 +66,7 @@ import java.util.Date;
 @CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_SimplePage.SIMPLE_CLASS_NAME})
 public class SimplePageServiceImpl extends BaseService implements SimplePageService {
 
-    @Resource
+    @Autowired
     private SimpleDao simpleDao;
 
     protected SimplePageService getSelfProxy(){

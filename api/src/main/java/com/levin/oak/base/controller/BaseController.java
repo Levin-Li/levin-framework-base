@@ -4,6 +4,7 @@ import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.oak.base.ModuleOption;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.WebDataBinder;
@@ -30,13 +31,13 @@ import static com.levin.oak.base.entities.EntityConst.TYPE_NAME;
 @MenuResTag(domain = ID)
 public abstract class BaseController {
 
-    @Resource
+    @Autowired
     protected HttpServletRequest httpRequest;
 
-    @Resource
+    @Autowired
     protected HttpServletResponse httpResponse;
 
-    @Resource
+    @Autowired
     protected ApplicationContext applicationContext;
 
     protected Object selfProxy = null;

@@ -1,6 +1,7 @@
 package com.levin.oak.base.interceptor;
 
 import com.levin.oak.base.biz.rbac.RbacService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -17,7 +18,7 @@ import java.util.function.Supplier;
  */
 public class ControllerAuthorizeInterceptor implements HandlerInterceptor {
 
-    @Resource
+    @Autowired
     RbacService rbacService;
 
     Supplier<RbacService> supplier;

@@ -21,6 +21,7 @@ import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.menures.req.QueryMenuResReq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -40,22 +41,22 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @ResAuthorize(ignored = true)
 public class RbacResServiceImpl extends BaseService implements RbacResService {
 
-    @Resource
+    @Autowired
     ApplicationContext context;
 
-    @Resource
+    @Autowired
     PluginManager pluginManager;
 
-    @Resource
+    @Autowired
     AuthService authService;
 
-    @Resource
+    @Autowired
     MenuResService menuResService;
 
-    @Resource
+    @Autowired
     BizRoleService bizRoleService;
 
-    @Resource
+    @Autowired
     RbacService rbacService;
 
     /**

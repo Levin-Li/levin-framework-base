@@ -65,7 +65,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class SimpleFormServiceTest {
 
-    @Resource
+    @Autowired
     private SimpleFormService simpleFormService;
 
     private String id;

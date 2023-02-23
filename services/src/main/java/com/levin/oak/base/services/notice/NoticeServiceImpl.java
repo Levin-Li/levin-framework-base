@@ -69,7 +69,7 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 @CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_Notice.SIMPLE_CLASS_NAME})
 public class NoticeServiceImpl extends BaseService implements NoticeService {
 
-    @Resource
+    @Autowired
     private SimpleDao simpleDao;
 
     protected NoticeService getSelfProxy(){

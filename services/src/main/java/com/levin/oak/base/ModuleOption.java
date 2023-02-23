@@ -5,7 +5,7 @@ package com.levin.oak.base;
  * <p>
  * eg.
  * <p>
- * //Auto gen by simple-dao-codegen 2023-2-5 11:13:19
+ * //Auto gen by simple-dao-codegen 2023-2-22 19:54:46
  */
 public interface ModuleOption {
 
@@ -55,6 +55,12 @@ public interface ModuleOption {
      * 注意路径必须以 / 结尾
      */
     String API_PATH = BASE_PATH + "api/";
+
+    /**
+     * websocket
+     * 注意路径必须以 / 结尾
+     */
+    String WS_PATH = BASE_PATH + "ws/";
 
     /**
      * admin api path

@@ -68,7 +68,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class TenantServiceTest {
 
-    @Resource
+    @Autowired
     private TenantService tenantService;
 
     private String id;

@@ -69,7 +69,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class AreaServiceTest {
 
-    @Resource
+    @Autowired
     private AreaService areaService;
 
     private String code;

@@ -30,13 +30,13 @@ public class AmisUiCodeGenImpl
     @Autowired
     RequestMappingHandlerMapping handlerMapping;
 
-    @Resource
+    @Autowired
     protected HttpServletRequest httpRequest;
 
-    @Resource
+    @Autowired
     protected HttpServletResponse httpResponse;
 
-    @Resource
+    @Autowired
     protected ApplicationContext applicationContext;
 
     @PostConstruct

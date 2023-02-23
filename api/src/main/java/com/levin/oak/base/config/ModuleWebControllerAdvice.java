@@ -10,6 +10,7 @@ import com.levin.commons.service.exception.UnauthorizedException;
 import com.levin.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -47,10 +48,10 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @RestControllerAdvice(annotations = {Controller.class, RestController.class})
 public class ModuleWebControllerAdvice {
 
-    @Resource
+    @Autowired
     HttpServletRequest request;
 
-    @Resource
+    @Autowired
     HttpServletResponse response;
 
     @PostConstruct

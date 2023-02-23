@@ -67,7 +67,7 @@ import java.util.Date;
 @CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_SimpleApi.SIMPLE_CLASS_NAME})
 public class SimpleApiServiceImpl extends BaseService implements SimpleApiService {
 
-    @Resource
+    @Autowired
     private SimpleDao simpleDao;
 
     protected SimpleApiService getSelfProxy(){

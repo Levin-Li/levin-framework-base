@@ -1,9 +1,7 @@
 package com.levin.oak.base.config;
 
-import static com.levin.oak.base.ModuleOption.*;
-import com.levin.oak.base.*;
-
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -12,7 +10,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
-import javax.annotation.Resource;
+import static com.levin.oak.base.ModuleOption.*;
 
 @Slf4j
 @Configuration(PLUGIN_PREFIX + "ModuleWebSocketConfigurer")
@@ -21,7 +19,7 @@ import javax.annotation.Resource;
 public class ModuleWebSocketConfigurer
         implements WebSocketMessageBrokerConfigurer {
 
-    @Resource
+    @Autowired
     TaskScheduler messageBrokerTaskScheduler;
 
     @Override

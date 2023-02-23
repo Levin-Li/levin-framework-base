@@ -7,6 +7,7 @@ import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -23,16 +24,16 @@ import javax.servlet.http.HttpServletResponse;
 public class ResourceAuthorizeInterceptor
         implements HandlerInterceptor {
 
-    @Resource
+    @Autowired
     AuthService authService;
 
-    @Resource
+    @Autowired
     RbacService rbacService;
 
-    @Resource
+    @Autowired
     FrameworkProperties frameworkProperties;
 
-    @Resource
+    @Autowired
     BizTenantService bizTenantService;
 
     @PostConstruct

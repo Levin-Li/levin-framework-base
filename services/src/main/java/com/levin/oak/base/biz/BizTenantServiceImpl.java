@@ -18,6 +18,7 @@ import com.levin.oak.base.services.tenant.req.QueryTenantReq;
 import com.levin.oak.base.services.user.info.UserInfo;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -42,25 +43,25 @@ import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 public class BizTenantServiceImpl
         implements BizTenantService {
 
-    @Resource
+    @Autowired
     SimpleDao simpleDao;
 
-    @Resource
+    @Autowired
     AuthService authService;
 
-    @Resource
+    @Autowired
     TenantService tenantService;
 
-    @Resource
+    @Autowired
     HttpServletRequest request;
 
-    @Resource
+    @Autowired
     HttpServletResponse response;
 
-    @Resource
+    @Autowired
     AppClientService appClientService;
 
-    @Resource
+    @Autowired
     FrameworkProperties frameworkProperties;
 
 

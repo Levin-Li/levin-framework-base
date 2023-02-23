@@ -14,6 +14,7 @@ import com.levin.oak.base.services.appclientfile.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -52,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_AppClientFile.SIMPLE_CLASS_NAME})
 public class AppClientFileServiceImpl extends BaseService implements AppClientFileService {
 
-    @Resource
+    @Autowired
     private SimpleDao simpleDao;
 
     protected AppClientFileService getSelfProxy() {

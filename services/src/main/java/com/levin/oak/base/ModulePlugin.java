@@ -30,7 +30,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Component(PLUGIN_PREFIX + "ModulePlugin")
 public class ModulePlugin implements Plugin, PluginManagerAware {
 
-    @Resource
+    @Autowired
     ApplicationContext context;
 
     @Autowired

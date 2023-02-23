@@ -18,6 +18,7 @@ import com.levin.oak.base.services.user.req.CreateUserReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -62,13 +63,13 @@ public class TenantController extends BaseController {
 
     private static final String BIZ_NAME = E_Tenant.BIZ_NAME;
 
-    @Resource
+    @Autowired
     TenantService tenantService;
 
-    @Resource
+    @Autowired
     SimpleDao simpleDao;
 
-    @Resource
+    @Autowired
     AuthService authService;
 
     /**

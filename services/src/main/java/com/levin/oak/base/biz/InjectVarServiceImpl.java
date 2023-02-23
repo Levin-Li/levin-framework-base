@@ -11,6 +11,7 @@ import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.services.user.info.UserInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.env.Environment;
@@ -72,25 +73,25 @@ public class InjectVarServiceImpl implements InjectVarService {
         }
     };
 
-    @Resource
+    @Autowired
     AuthService baseAuthService;
 
-    @Resource
+    @Autowired
     Environment environment;
 
     @Value("${spring.application.name:}")
     String appModuleName = "";
 
-    @Resource
+    @Autowired
     SimpleDao dao;
 
-    @Resource
+    @Autowired
     BizTenantService bizTenantService;
 
-    @Resource
+    @Autowired
     HttpServletRequest httpServletRequest;
 
-    @Resource
+    @Autowired
     FrameworkProperties frameworkProperties;
 
     @PostConstruct

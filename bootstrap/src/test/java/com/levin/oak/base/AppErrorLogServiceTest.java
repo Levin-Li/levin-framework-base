@@ -66,7 +66,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class AppErrorLogServiceTest {
 
-    @Resource
+    @Autowired
     private AppErrorLogService appErrorLogService;
 
     private Long id;

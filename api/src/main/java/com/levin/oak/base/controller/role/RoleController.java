@@ -16,6 +16,7 @@ import com.levin.oak.base.services.role.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -60,13 +61,13 @@ public class RoleController extends BaseController {
 
     private static final String BIZ_NAME = E_Role.BIZ_NAME;
 
-    @Resource
+    @Autowired
     RoleService roleService;
 
-    @Resource
+    @Autowired
     AuthService authService;
 
-    @Resource
+    @Autowired
     RbacService rbacService;
 
     /**

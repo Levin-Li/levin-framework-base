@@ -3,6 +3,7 @@ package com.levin.oak.base.controller.appclientfile;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.util.*;
@@ -56,7 +57,7 @@ public class AppClientFileController extends BaseController{
 
     private static final String BIZ_NAME = E_AppClientFile.BIZ_NAME;
 
-    @Resource
+    @Autowired
     AppClientFileService appClientFileService;
 
     /**

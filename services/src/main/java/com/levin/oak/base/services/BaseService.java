@@ -3,6 +3,7 @@ package com.levin.oak.base.services;
 import com.levin.commons.dao.SimpleDao;
 import com.levin.oak.base.ModuleOption;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import javax.annotation.Resource;
@@ -20,10 +21,10 @@ import javax.annotation.Resource;
 @Slf4j
 public abstract class BaseService {
 
-    @Resource
+    @Autowired
     protected SimpleDao simpleDao;
 
-    @Resource
+    @Autowired
     protected ApplicationContext applicationContext;
 
     protected Object selfProxy = null;

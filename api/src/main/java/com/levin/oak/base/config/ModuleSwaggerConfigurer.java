@@ -6,6 +6,7 @@ import com.levin.oak.base.*;
 import io.swagger.v3.oas.models.info.Info;
 import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.GroupedOpenApi;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -40,10 +41,10 @@ public class ModuleSwaggerConfigurer
     @Value("${swagger.enumDelimiter:}")
     private String enumDelimiter;
 
-//    @Resource
+//    @Autowired
 //    FrameworkProperties frameworkProperties;
 
-    @Resource
+    @Autowired
     Environment environment;
 
     private static final String GROUP_NAME = ModuleOption.NAME + "-" + ModuleOption.ID;

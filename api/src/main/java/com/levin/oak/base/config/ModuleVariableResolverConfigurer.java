@@ -3,6 +3,7 @@ package com.levin.oak.base.config;
 import com.levin.commons.service.support.*;
 import com.levin.oak.base.biz.InjectVarService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -29,13 +30,13 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 public class ModuleVariableResolverConfigurer
         implements VariableResolverConfigurer {
 
-    @Resource
+    @Autowired
     VariableInjector variableInjector;
 
-    @Resource
+    @Autowired
     InjectVarService injectVarService;
 
-    @Resource
+    @Autowired
     Environment environment;
 
     @PostConstruct

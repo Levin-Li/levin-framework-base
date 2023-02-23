@@ -29,7 +29,7 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @Resource
+    @Autowired
     AuthService authService;
 
     private ApplicationContext applicationContext;

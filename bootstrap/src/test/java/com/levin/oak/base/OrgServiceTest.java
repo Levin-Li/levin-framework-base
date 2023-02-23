@@ -71,7 +71,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class OrgServiceTest {
 
-    @Resource
+    @Autowired
     private OrgService orgService;
 
     private String id;

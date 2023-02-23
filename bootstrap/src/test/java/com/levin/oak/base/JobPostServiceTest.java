@@ -66,7 +66,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class JobPostServiceTest {
 
-    @Resource
+    @Autowired
     private JobPostService jobPostService;
 
     private String id;

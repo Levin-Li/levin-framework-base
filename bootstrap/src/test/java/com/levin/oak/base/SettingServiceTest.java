@@ -66,7 +66,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class SettingServiceTest {
 
-    @Resource
+    @Autowired
     private SettingService settingService;
 
     private String id;

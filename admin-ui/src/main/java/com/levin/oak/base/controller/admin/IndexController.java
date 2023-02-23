@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration;
@@ -66,37 +67,37 @@ import static com.levin.oak.base.ModuleOption.*;
 @ResAuthorize(ignored = true)
 public class IndexController extends BaseController {
 
-    @Resource
+    @Autowired
     HttpServletRequest httpRequest;
 
-    @Resource
+    @Autowired
     HttpServletResponse httpResponse;
 
-    @Resource
+    @Autowired
     ApplicationContext applicationContext;
 
-    @Resource
+    @Autowired
     RoleService roleService;
 
-    @Resource
+    @Autowired
     RbacService rbacService;
 
-    @Resource
+    @Autowired
     AuthService authService;
 
-    @Resource
+    @Autowired
     BizTenantService bizTenantService;
 
-    @Resource
+    @Autowired
     ResourceLoader resourceLoader;
 
-    @Resource
+    @Autowired
     ServerProperties serverProperties;
 
-    @Resource
+    @Autowired
     FrameworkProperties frameworkProperties;
 
-    @Resource
+    @Autowired
     SettingService settingService;
 
     @PostConstruct

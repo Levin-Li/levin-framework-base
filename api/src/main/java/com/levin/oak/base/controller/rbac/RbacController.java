@@ -23,6 +23,7 @@ import com.levin.oak.base.services.user.req.UpdateUserPwdReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
@@ -60,25 +61,25 @@ import static com.levin.oak.base.ModuleOption.*;
 @MenuResTag(false)
 public class RbacController extends BaseController {
 
-    @Resource
+    @Autowired
     RoleService roleService;
 
-    @Resource
+    @Autowired
     UserService userService;
 
-    @Resource
+    @Autowired
     RbacResService rbacResService;
 
-    @Resource
+    @Autowired
     AuthService authService;
 
-    @Resource
+    @Autowired
     BizTenantService bizTenantService;
 
-    @Resource
+    @Autowired
     CaptchaService captchaService;
 
-    @Resource
+    @Autowired
     FrameworkProperties frameworkProperties;
 
     @PostConstruct

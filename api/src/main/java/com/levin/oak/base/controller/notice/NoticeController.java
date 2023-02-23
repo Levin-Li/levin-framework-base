@@ -58,7 +58,7 @@ public class NoticeController extends BaseController{
 
     private static final String BIZ_NAME = E_Notice.BIZ_NAME;
 
-    @Resource
+    @Autowired
     NoticeService noticeService;
 
     /**

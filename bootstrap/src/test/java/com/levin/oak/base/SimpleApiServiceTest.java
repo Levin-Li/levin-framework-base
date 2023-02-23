@@ -66,7 +66,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class SimpleApiServiceTest {
 
-    @Resource
+    @Autowired
     private SimpleApiService simpleApiService;
 
     private String id;

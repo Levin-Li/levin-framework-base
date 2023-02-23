@@ -58,7 +58,7 @@ public class NoticeProcessLogController extends BaseController{
 
     private static final String BIZ_NAME = E_NoticeProcessLog.BIZ_NAME;
 
-    @Resource
+    @Autowired
     NoticeProcessLogService noticeProcessLogService;
 
     /**

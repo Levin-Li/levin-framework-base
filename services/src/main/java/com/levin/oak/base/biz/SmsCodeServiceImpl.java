@@ -29,10 +29,10 @@ public class SmsCodeServiceImpl
 
     private static final String CACHE_NAME = SmsCodeServiceImpl.class.getName();
 
-    @Resource
+    @Autowired
     RedissonClient redissonClient;
 
-    @Resource
+    @Autowired
     FrameworkProperties frameworkProperties;
 
     @Autowired(required = false)

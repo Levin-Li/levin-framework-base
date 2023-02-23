@@ -16,6 +16,7 @@ import com.levin.oak.base.services.BaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.expression.BeanFactoryResolver;
@@ -49,16 +50,16 @@ public class RbacServiceImpl extends BaseService implements RbacService {
 
     final ResAuthorize defaultResAuthorize = getClass().getAnnotation(ResAuthorize.class);
 
-    @Resource
+    @Autowired
     ApplicationContext context;
 
-    @Resource
+    @Autowired
     PluginManager pluginManager;
 
-    @Resource
+    @Autowired
     AuthService authService;
 
-    @Resource
+    @Autowired
     BizRoleService bizRoleService;
 
     final ContextHolder<String, Res.Action> actionContextHolder = ContextHolder.buildContext(true);

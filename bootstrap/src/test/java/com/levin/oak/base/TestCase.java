@@ -89,7 +89,7 @@ import com.levin.oak.base.controller.simpleform.SimpleFormController;
  */
 public class TestCase {
 
-    @Resource
+    @Autowired
     SimpleDao simpleDao;
 
     @BeforeAll

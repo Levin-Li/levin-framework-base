@@ -66,7 +66,7 @@ import java.util.Date;
 @CacheConfig(cacheNames = {ModuleOption.ID_PREFIX + E_NoticeProcessLog.SIMPLE_CLASS_NAME})
 public class NoticeProcessLogServiceImpl extends BaseService implements NoticeProcessLogService {
 
-    @Resource
+    @Autowired
     private SimpleDao simpleDao;
 
     protected NoticeProcessLogService getSelfProxy(){

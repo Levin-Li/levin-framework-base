@@ -68,7 +68,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class DictServiceTest {
 
-    @Resource
+    @Autowired
     private DictService dictService;
 
     private String id;

@@ -5,6 +5,7 @@ import com.levin.commons.dao.repository.annotation.EntityRepository;
 import com.levin.commons.service.proxy.ProxyBeanScan;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.task.TaskSchedulingProperties;
@@ -38,10 +39,10 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 public class ModuleStarterConfiguration {
 
-    @Resource
+    @Autowired
     Environment environment;
 
-    @Resource
+    @Autowired
     TaskSchedulingProperties taskSchedulingProperties;
 
     @Bean
