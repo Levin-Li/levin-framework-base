@@ -7,8 +7,8 @@ spring:
     password: dev
 
   jpa:
-    #    show-sql: true
+    show-sql: false
     generate-ddl: true
     database: mysql
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
