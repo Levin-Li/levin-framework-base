@@ -1,6 +1,9 @@
 package com.levin.oak.base;
 
 import com.levin.commons.service.support.*;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -63,6 +66,18 @@ public class Application {
         return new CorsFilter(source);
     }
 
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("OAK框架-基础模块")
+                        .version("1.0.0")
+                        .description("基础模块")
+                        .termsOfService("http://doc.xiaominfo.com")
+                        .license(new License().name("Apache 2.0")
+                                .url("http://doc.xiaominfo.com")
+                        ));
+    }
 
 //    @Bean
 //    PluginManager pluginManager() {

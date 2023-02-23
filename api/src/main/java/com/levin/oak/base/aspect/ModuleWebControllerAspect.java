@@ -129,7 +129,8 @@ public class ModuleWebControllerAspect {
                         })
                 );
 
-        log.info("init...");
+        log.info("控制器拦截器init...");
+
     }
 
 

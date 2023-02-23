@@ -9,6 +9,6 @@ spring:
   jpa:
     show-sql: false
     generate-ddl: true
-    database: mysql
+    database: MYSQL
     hibernate:
       ddl-auto: update

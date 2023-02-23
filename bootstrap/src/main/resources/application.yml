@@ -3,7 +3,6 @@
 spring:
   application:
     name: framework-base
-
   #线程池配置
   task:
     execution:
@@ -74,3 +73,16 @@ logging:
     root: warn
     com.levin: info
     com.levin.oak.base: debug
+
+plugin:
+  com:
+    levin:
+      oak:
+        base:
+          framework:
+            controller-acl:
+              exclude-path-patterns: "/v3/api-docs/**"
+            sign:
+              enable: false
+
+

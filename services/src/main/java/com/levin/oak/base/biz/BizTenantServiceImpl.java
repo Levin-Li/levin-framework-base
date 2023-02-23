@@ -174,11 +174,21 @@ public class BizTenantServiceImpl
 
         setCurrentTenant(tenantInfo);
 
-        if (frameworkProperties.getSign().isEnable()) {
-            checkTenantAppSign(tenantInfo);
+        FrameworkProperties.Cfg sign = frameworkProperties.getSign();
+        if (sign.isEnable()) {
+
+            String path = request.getRequestURI().substring(getLen(request.getContextPath()));
+
+            if (sign.isPathMatched(path)) {
+                checkTenantAppSign(tenantInfo);
+            }
         }
 
         return tenantInfo;
+    }
+
+    private int getLen(String txt) {
+        return txt == null ? 0 : txt.length();
     }
 
     @Override

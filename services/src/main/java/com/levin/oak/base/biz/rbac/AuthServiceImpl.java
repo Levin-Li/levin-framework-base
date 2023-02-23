@@ -45,10 +45,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
@@ -477,7 +474,7 @@ public class AuthServiceImpl
                     .setRemark(plugin.getRemark()));
 
             RbacUtils.getMenuItemByController(context, plugin.getPackageName(), EntityConst.QUERY_ACTION)
-                    .parallelStream().forEach(menuItem -> {
+                    .stream().filter(Objects::nonNull).forEach(menuItem -> {
 
                 final int no = index.incrementAndGet();
 
