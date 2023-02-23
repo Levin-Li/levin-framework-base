@@ -130,7 +130,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                 .allowCredentials(true)
                 .allowedHeaders("*")
                 .allowedMethods("*")
-                .allowedOrigins("*");
+                .allowedOriginPatterns("*");
     }
 
 

@@ -12,7 +12,7 @@ public interface ModuleOption {
     /**
      * module name
      */
-    String NAME = "请填写模块名称";
+    String NAME = "oak-framework基础模块";
 
     /**
      * module desc
