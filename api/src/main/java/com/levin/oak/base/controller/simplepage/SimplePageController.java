@@ -65,7 +65,7 @@ public class SimplePageController extends BaseController {
      * @return ApiResp<PagingData < SimplePageInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    @Operation( summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<SimplePageInfo>> query(QuerySimplePageReq req, SimplePaging paging) {
         return ApiResp.ok(simplePageService.query(req, paging));
     }
@@ -77,7 +77,7 @@ public class SimplePageController extends BaseController {
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<String> create(@RequestBody CreateSimplePageReq req) {
         return ApiResp.ok(simplePageService.create(req));
     }
@@ -89,7 +89,7 @@ public class SimplePageController extends BaseController {
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateSimplePageReq> reqList) {
         return ApiResp.ok(simplePageService.batchCreate(reqList));
     }
@@ -100,7 +100,7 @@ public class SimplePageController extends BaseController {
      * @param req QuerySimplePageByIdReq
      */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<SimplePageInfo> retrieve(@NotNull SimplePageIdReq req) {
         return ApiResp.ok(simplePageService.findById(req));
     }
@@ -111,7 +111,7 @@ public class SimplePageController extends BaseController {
      * @param req UpdateSimplePageReq
      */
     @PutMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> update(@RequestBody UpdateSimplePageReq req) {
         return ApiResp.ok(checkResult(simplePageService.update(req), UPDATE_ACTION));
     }
@@ -120,7 +120,7 @@ public class SimplePageController extends BaseController {
      * 批量更新
      */
     @PutMapping("/batchUpdate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateSimplePageReq> reqList) {
         return ApiResp.ok(checkResult(simplePageService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
@@ -131,7 +131,7 @@ public class SimplePageController extends BaseController {
      * @param req SimplePageIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull SimplePageIdReq req) {
         return ApiResp.ok(checkResult(simplePageService.delete(req), DELETE_ACTION));
     }
@@ -142,7 +142,7 @@ public class SimplePageController extends BaseController {
      * @param req DeleteSimplePageReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteSimplePageReq req) {
         return ApiResp.ok(checkResult(simplePageService.batchDelete(req), BATCH_DELETE_ACTION));
     }

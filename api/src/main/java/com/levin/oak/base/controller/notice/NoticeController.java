@@ -68,7 +68,7 @@ public class NoticeController extends BaseController{
      * @return  ApiResp<PagingData<NoticeInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    @Operation( summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<NoticeInfo>> query(QueryNoticeReq req, SimplePaging paging) {
         return ApiResp.ok(noticeService.query(req,paging));
     }
@@ -80,7 +80,7 @@ public class NoticeController extends BaseController{
       * @return  ApiResp<PagingData<StatNoticeReq.Result>>
       */
      //@GetMapping("/stat") //默认不开放
-     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
+     @Operation( summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
      public ApiResp<PagingData<StatNoticeReq.Result>> stat(StatNoticeReq req, SimplePaging paging) {
          return ApiResp.ok(noticeService.stat(req,paging));
      }
@@ -92,7 +92,7 @@ public class NoticeController extends BaseController{
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<String> create(@RequestBody CreateNoticeReq req) {
         return ApiResp.ok(noticeService.create(req));
     }
@@ -103,7 +103,7 @@ public class NoticeController extends BaseController{
     * @param req QueryNoticeByIdReq
     */
     @GetMapping({"","{id}"})
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<NoticeInfo> retrieve(@NotNull NoticeIdReq req, @PathVariable(required = false) String id) {
          req.setIdOnNotBlank(id);
          return ApiResp.ok(noticeService.findById(req));
@@ -114,7 +114,7 @@ public class NoticeController extends BaseController{
      * @param req UpdateNoticeReq
      */
      @PutMapping({"","{id}"})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+     @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
      public ApiResp<Integer> update(@RequestBody UpdateNoticeReq req, @PathVariable(required = false) String id) {
          req.setIdOnNotBlank(id);
          return ApiResp.ok(checkResult(noticeService.update(req), UPDATE_ACTION));
@@ -125,7 +125,7 @@ public class NoticeController extends BaseController{
      * @param req NoticeIdReq
      */
     @DeleteMapping({"","{id}"})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(NoticeIdReq req, @PathVariable(required = false) String id) {
         req.setIdOnNotBlank(id);
         return ApiResp.ok(checkResult(noticeService.delete(req), DELETE_ACTION));
@@ -136,7 +136,7 @@ public class NoticeController extends BaseController{
      * @param req NoticeIdReq
      */
     @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete2(@RequestBody NoticeIdReq req, @PathVariable(required = false) String id) {
         //req.setIdOnNotBlank(id);
         return delete(req, id);
@@ -151,7 +151,7 @@ public class NoticeController extends BaseController{
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateNoticeReq> reqList) {
         return ApiResp.ok(noticeService.batchCreate(reqList));
     }
@@ -160,7 +160,7 @@ public class NoticeController extends BaseController{
      * 批量更新
      */
      @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+     @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
      public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateNoticeReq> reqList) {
         return ApiResp.ok(checkResult(noticeService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
@@ -170,7 +170,7 @@ public class NoticeController extends BaseController{
      * @param req DeleteNoticeReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteNoticeReq req) {
         return ApiResp.ok(checkResult(noticeService.batchDelete(req), BATCH_DELETE_ACTION));
     }
@@ -180,7 +180,7 @@ public class NoticeController extends BaseController{
      * @param req @RequestBody DeleteNoticeReq
      */
     @DeleteMapping(value = {"/batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete2(@RequestBody DeleteNoticeReq req) {
         return batchDelete(req);
     }

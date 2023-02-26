@@ -97,7 +97,7 @@ public class EnumController extends BaseController {
     final Map<String, EnumInfo> enumCacheMap = new ConcurrentHashMap<>();
 
     @GetMapping("")
-    @Operation(tags = {"公共服务"}, summary = "公共枚举服务")
+    @Operation(summary = "枚举列表",description = "一次性返回所有的枚举")
     public ApiResp<Map<String, EnumInfo>> enums() {
 
         synchronized (enumCacheMap) {
@@ -116,7 +116,7 @@ public class EnumController extends BaseController {
     }
 
     @GetMapping("{enumName}")
-    @Operation(tags = {"公共服务"}, summary = "公共枚举服务")
+    @Operation(summary = "单个枚举")
     public ApiResp<EnumInfo> enums(@PathVariable String enumName) {
         return ApiResp.ok(MapUtils.getAndAutoPut(enumCacheMap, enumName, null, () -> toEnumInfo(ClassUtil.loadClass(enumName))));
     }

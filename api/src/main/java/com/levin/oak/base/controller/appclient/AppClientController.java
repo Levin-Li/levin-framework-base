@@ -78,7 +78,7 @@ public class AppClientController extends BaseController {
      * @return ApiResp<PagingData < AppClientInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    @Operation( summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<AppClientInfo>> query(QueryAppClientReq req, SimplePaging paging) {
 
         PagingData<AppClientInfo> pagingData = appClientService.query(req, paging);
@@ -97,7 +97,7 @@ public class AppClientController extends BaseController {
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<String> create(@RequestBody CreateAppClientReq req) {
         return ApiResp.ok(appClientService.create(req));
     }
@@ -109,7 +109,7 @@ public class AppClientController extends BaseController {
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateAppClientReq> reqList) {
         return ApiResp.ok(appClientService.batchCreate(reqList));
     }
@@ -120,7 +120,7 @@ public class AppClientController extends BaseController {
      * @param req QueryAppClientByIdReq
      */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<AppClientInfo> retrieve(@NotNull AppClientIdReq req) {
         return ApiResp.ok(desensitize(appClientService.findById(req)));
     }
@@ -132,7 +132,7 @@ public class AppClientController extends BaseController {
      * @param req UpdateAppClientReq
      */
     @PutMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> update(@RequestBody UpdateAppClientReq req) {
         return ApiResp.ok(checkResult(appClientService.update(req), UPDATE_ACTION));
     }
@@ -141,7 +141,7 @@ public class AppClientController extends BaseController {
      * 批量更新
      */
     @PutMapping("/batchUpdate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAppClientReq> reqList) {
         return ApiResp.ok(checkResult(appClientService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
@@ -152,7 +152,7 @@ public class AppClientController extends BaseController {
      * @param req AppClientIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull AppClientIdReq req) {
         return ApiResp.ok(checkResult(appClientService.delete(req), DELETE_ACTION));
     }
@@ -163,7 +163,7 @@ public class AppClientController extends BaseController {
      * @param req DeleteAppClientReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteAppClientReq req) {
         return ApiResp.ok(checkResult(appClientService.batchDelete(req), BATCH_DELETE_ACTION));
     }

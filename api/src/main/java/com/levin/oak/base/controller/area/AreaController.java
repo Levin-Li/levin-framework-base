@@ -69,7 +69,7 @@ public class AreaController extends BaseController{
      */
     @GetMapping("/query")
     @ResAuthorize(onlyRequireAuthenticated = true)
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    @Operation( summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<AreaInfo>> query(QueryAreaReq req , SimplePaging paging) {
         return ApiResp.ok(areaService.query(req,paging));
     }
@@ -81,7 +81,7 @@ public class AreaController extends BaseController{
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<String> create(@RequestBody CreateAreaReq req) {
         return ApiResp.ok(areaService.create(req));
     }
@@ -93,7 +93,7 @@ public class AreaController extends BaseController{
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateAreaReq> reqList) {
         return ApiResp.ok(areaService.batchCreate(reqList));
     }
@@ -105,7 +105,7 @@ public class AreaController extends BaseController{
     */
     @GetMapping("")
     @ResAuthorize(onlyRequireAuthenticated = true)
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<AreaInfo> retrieve(@NotNull AreaIdReq req) {
          return ApiResp.ok(areaService.findById(req));
      }
@@ -115,7 +115,7 @@ public class AreaController extends BaseController{
      * @param req UpdateAreaReq
      */
      @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+     @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
      public ApiResp<Integer> update(@RequestBody UpdateAreaReq req) {
          return ApiResp.ok(checkResult(areaService.update(req), UPDATE_ACTION));
     }
@@ -124,7 +124,7 @@ public class AreaController extends BaseController{
      * 批量更新
      */
      @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+     @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
      public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAreaReq> reqList) {
         return ApiResp.ok(checkResult(areaService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
@@ -134,7 +134,7 @@ public class AreaController extends BaseController{
      * @param req AreaIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull AreaIdReq req) {
         return ApiResp.ok(checkResult(areaService.delete(req), DELETE_ACTION));
     }
@@ -144,7 +144,7 @@ public class AreaController extends BaseController{
      * @param req DeleteAreaReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteAreaReq req) {
         return ApiResp.ok(checkResult(areaService.batchDelete(req), BATCH_DELETE_ACTION));
     }

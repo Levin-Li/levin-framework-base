@@ -63,7 +63,7 @@ public class SimpleApiBizController extends BaseController {
      * @param req QuerySimpleApiByIdReq
      */
     @PostMapping("/service")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<?> service(@NotNull SimpleApiIdReq req) {
 
         SimpleApiInfo info = simpleApiService.findById(req);

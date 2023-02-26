@@ -116,7 +116,7 @@ public class UserController extends BaseController {
      * @return ApiResp<PagingData < UserInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation( summary = QUERY_ACTION)
     public ApiResp<PagingData<UserInfo>> query(QueryUserReq req, SimplePaging paging) {
 
         PagingData<UserInfo> pagingData = userService.query(req, paging);
@@ -137,7 +137,7 @@ public class UserController extends BaseController {
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation( summary = CREATE_ACTION)
     public ApiResp<String> create(@RequestBody CreateUserReq req) {
         checkCurrentUserCreateOrUpdateUserRole(null, req.getRoleList());
         return ApiResp.ok(userService.create(req));
@@ -150,7 +150,7 @@ public class UserController extends BaseController {
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation( summary = BATCH_CREATE_ACTION)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateUserReq> reqList) {
         reqList.forEach(req -> checkCurrentUserCreateOrUpdateUserRole(null, req.getRoleList()));
         return ApiResp.ok(userService.batchCreate(reqList));
@@ -163,7 +163,7 @@ public class UserController extends BaseController {
      * @param req QueryUserByIdReq
      */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<UserInfo> retrieve(@NotNull UserIdReq req) {
         return ApiResp.ok(desensitize(userService.findById(req)));
     }
@@ -174,7 +174,7 @@ public class UserController extends BaseController {
      * @param req UpdateUserReq
      */
     @PutMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> update(@RequestBody UpdateUserReq req) {
         checkCurrentUserCreateOrUpdateUserRole(req.getId(), req.getRoleList());
         return ApiResp.ok(checkResult(userService.update(req), UPDATE_ACTION));
@@ -184,7 +184,7 @@ public class UserController extends BaseController {
      * 批量更新
      */
     @PutMapping("/batchUpdate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateUserReq> reqList) {
         reqList.forEach(req -> checkCurrentUserCreateOrUpdateUserRole(req.getId(), req.getRoleList()));
         return ApiResp.ok(checkResult(userService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
@@ -196,7 +196,7 @@ public class UserController extends BaseController {
      * @param req UserIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull UserIdReq req) {
         return ApiResp.ok(checkResult(userService.delete(req), DELETE_ACTION));
     }
@@ -207,7 +207,7 @@ public class UserController extends BaseController {
      * @param req DeleteUserReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteUserReq req) {
         return ApiResp.ok(checkResult(userService.batchDelete(req), BATCH_DELETE_ACTION));
     }

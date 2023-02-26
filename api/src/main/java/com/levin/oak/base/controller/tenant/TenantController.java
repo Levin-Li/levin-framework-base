@@ -79,7 +79,7 @@ public class TenantController extends BaseController {
      * @return ApiResp<PagingData < TenantInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    @Operation( summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<TenantInfo>> query(QueryTenantReq req, SimplePaging paging) {
         return ApiResp.ok(tenantService.query(req, paging));
     }
@@ -91,7 +91,7 @@ public class TenantController extends BaseController {
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<String> create(@RequestBody CreateTenantReq req) {
 
         String tenantId = tenantService.create(req);
@@ -120,7 +120,7 @@ public class TenantController extends BaseController {
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateTenantReq> reqList) {
         return ApiResp.ok(tenantService.batchCreate(reqList));
     }
@@ -131,7 +131,7 @@ public class TenantController extends BaseController {
      * @param req QueryTenantByIdReq
      */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<TenantInfo> retrieve(@NotNull TenantIdReq req) {
         return ApiResp.ok(tenantService.findById(req));
     }
@@ -142,7 +142,7 @@ public class TenantController extends BaseController {
      * @param req UpdateTenantReq
      */
     @PutMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> update(@RequestBody UpdateTenantReq req) {
         return ApiResp.ok(checkResult(tenantService.update(req), UPDATE_ACTION));
     }
@@ -151,7 +151,7 @@ public class TenantController extends BaseController {
      * 批量更新
      */
     @PutMapping("/batchUpdate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateTenantReq> reqList) {
         return ApiResp.ok(checkResult(tenantService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
@@ -162,7 +162,7 @@ public class TenantController extends BaseController {
      * @param req TenantIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull TenantIdReq req) {
         return ApiResp.ok(checkResult(tenantService.delete(req), DELETE_ACTION));
     }
@@ -173,7 +173,7 @@ public class TenantController extends BaseController {
      * @param req DeleteTenantReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteTenantReq req) {
         return ApiResp.ok(checkResult(tenantService.batchDelete(req), BATCH_DELETE_ACTION));
     }

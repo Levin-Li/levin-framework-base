@@ -68,7 +68,7 @@ public class NoticeProcessLogController extends BaseController{
      * @return  ApiResp<PagingData<NoticeProcessLogInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    @Operation( summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<NoticeProcessLogInfo>> query(QueryNoticeProcessLogReq req, SimplePaging paging) {
         return ApiResp.ok(noticeProcessLogService.query(req,paging));
     }
@@ -80,7 +80,7 @@ public class NoticeProcessLogController extends BaseController{
       * @return  ApiResp<PagingData<StatNoticeProcessLogReq.Result>>
       */
      //@GetMapping("/stat") //默认不开放
-     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
+     @Operation( summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
      public ApiResp<PagingData<StatNoticeProcessLogReq.Result>> stat(StatNoticeProcessLogReq req, SimplePaging paging) {
          return ApiResp.ok(noticeProcessLogService.stat(req,paging));
      }
@@ -92,7 +92,7 @@ public class NoticeProcessLogController extends BaseController{
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<String> create(@RequestBody CreateNoticeProcessLogReq req) {
         return ApiResp.ok(noticeProcessLogService.create(req));
     }
@@ -103,7 +103,7 @@ public class NoticeProcessLogController extends BaseController{
     * @param req QueryNoticeProcessLogByIdReq
     */
     @GetMapping({"","{id}"})
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<NoticeProcessLogInfo> retrieve(@NotNull NoticeProcessLogIdReq req, @PathVariable(required = false) String id) {
          req.setIdOnNotBlank(id);
          return ApiResp.ok(noticeProcessLogService.findById(req));
@@ -114,7 +114,7 @@ public class NoticeProcessLogController extends BaseController{
      * @param req UpdateNoticeProcessLogReq
      */
      @PutMapping({"","{id}"})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+     @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
      public ApiResp<Integer> update(@RequestBody UpdateNoticeProcessLogReq req, @PathVariable(required = false) String id) {
          req.setIdOnNotBlank(id);
          return ApiResp.ok(checkResult(noticeProcessLogService.update(req), UPDATE_ACTION));
@@ -125,7 +125,7 @@ public class NoticeProcessLogController extends BaseController{
      * @param req NoticeProcessLogIdReq
      */
     @DeleteMapping({"","{id}"})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(NoticeProcessLogIdReq req, @PathVariable(required = false) String id) {
         req.setIdOnNotBlank(id);
         return ApiResp.ok(checkResult(noticeProcessLogService.delete(req), DELETE_ACTION));
@@ -136,7 +136,7 @@ public class NoticeProcessLogController extends BaseController{
      * @param req NoticeProcessLogIdReq
      */
     @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete2(@RequestBody NoticeProcessLogIdReq req, @PathVariable(required = false) String id) {
         //req.setIdOnNotBlank(id);
         return delete(req, id);
@@ -151,7 +151,7 @@ public class NoticeProcessLogController extends BaseController{
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateNoticeProcessLogReq> reqList) {
         return ApiResp.ok(noticeProcessLogService.batchCreate(reqList));
     }
@@ -160,7 +160,7 @@ public class NoticeProcessLogController extends BaseController{
      * 批量更新
      */
      @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+     @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
      public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateNoticeProcessLogReq> reqList) {
         return ApiResp.ok(checkResult(noticeProcessLogService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
@@ -170,7 +170,7 @@ public class NoticeProcessLogController extends BaseController{
      * @param req DeleteNoticeProcessLogReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteNoticeProcessLogReq req) {
         return ApiResp.ok(checkResult(noticeProcessLogService.batchDelete(req), BATCH_DELETE_ACTION));
     }
@@ -180,7 +180,7 @@ public class NoticeProcessLogController extends BaseController{
      * @param req @RequestBody DeleteNoticeProcessLogReq
      */
     @DeleteMapping(value = {"/batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete2(@RequestBody DeleteNoticeProcessLogReq req) {
         return batchDelete(req);
     }

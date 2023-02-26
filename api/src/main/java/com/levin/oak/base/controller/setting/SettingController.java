@@ -70,7 +70,7 @@ public class SettingController extends BaseController {
      * @return ApiResp<PagingData < SettingInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    @Operation( summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<SettingInfo>> query(QuerySettingReq req, SimplePaging paging) {
         return ApiResp.ok(settingService.query(req, paging));
     }
@@ -82,7 +82,7 @@ public class SettingController extends BaseController {
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<String> create(@RequestBody CreateSettingReq req) {
         return ApiResp.ok(settingService.create(req));
     }
@@ -94,7 +94,7 @@ public class SettingController extends BaseController {
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateSettingReq> reqList) {
         return ApiResp.ok(settingService.batchCreate(reqList));
     }
@@ -105,7 +105,7 @@ public class SettingController extends BaseController {
      * @param req QuerySettingByIdReq
      */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<SettingInfo> retrieve(@NotNull SettingIdReq req) {
         return ApiResp.ok(settingService.findById(req));
     }
@@ -116,7 +116,7 @@ public class SettingController extends BaseController {
      * @param req UpdateSettingReq
      */
     @PutMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> update(@RequestBody UpdateSettingReq req) {
         return ApiResp.ok(checkResult(settingService.update(req), UPDATE_ACTION));
     }
@@ -125,7 +125,7 @@ public class SettingController extends BaseController {
      * 批量更新
      */
     @PutMapping("/batchUpdate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateSettingReq> reqList) {
         return ApiResp.ok(checkResult(settingService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
@@ -136,7 +136,7 @@ public class SettingController extends BaseController {
      * @param req SettingIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull SettingIdReq req) {
         return ApiResp.ok(checkResult(settingService.delete(req), DELETE_ACTION));
     }
@@ -147,7 +147,7 @@ public class SettingController extends BaseController {
      * @param req DeleteSettingReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteSettingReq req) {
         return ApiResp.ok(checkResult(settingService.batchDelete(req), BATCH_DELETE_ACTION));
     }

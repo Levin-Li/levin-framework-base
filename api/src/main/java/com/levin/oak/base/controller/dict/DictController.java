@@ -67,7 +67,7 @@ public class DictController extends BaseController{
      * @return  ApiResp<PagingData<DictInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    @Operation( summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<DictInfo>> query(QueryDictReq req , SimplePaging paging) {
         return ApiResp.ok(dictService.query(req,paging));
     }
@@ -79,7 +79,7 @@ public class DictController extends BaseController{
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<String> create(@RequestBody CreateDictReq req) {
         return ApiResp.ok(dictService.create(req));
     }
@@ -91,7 +91,7 @@ public class DictController extends BaseController{
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateDictReq> reqList) {
         return ApiResp.ok(dictService.batchCreate(reqList));
     }
@@ -102,7 +102,7 @@ public class DictController extends BaseController{
     * @param req QueryDictByIdReq
     */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<DictInfo> retrieve(@NotNull DictIdReq req) {
          return ApiResp.ok(dictService.findById(req));
      }
@@ -112,7 +112,7 @@ public class DictController extends BaseController{
      * @param req UpdateDictReq
      */
      @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+     @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
      public ApiResp<Integer> update(@RequestBody UpdateDictReq req) {
          return ApiResp.ok(checkResult(dictService.update(req), UPDATE_ACTION));
     }
@@ -121,7 +121,7 @@ public class DictController extends BaseController{
      * 批量更新
      */
      @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+     @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
      public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateDictReq> reqList) {
         return ApiResp.ok(checkResult(dictService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
@@ -131,7 +131,7 @@ public class DictController extends BaseController{
      * @param req DictIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull DictIdReq req) {
         return ApiResp.ok(checkResult(dictService.delete(req), DELETE_ACTION));
     }
@@ -141,7 +141,7 @@ public class DictController extends BaseController{
      * @param req DeleteDictReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteDictReq req) {
         return ApiResp.ok(checkResult(dictService.batchDelete(req), BATCH_DELETE_ACTION));
     }

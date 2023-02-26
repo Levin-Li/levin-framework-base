@@ -65,7 +65,7 @@ public class ScheduledLogController extends BaseController {
      * @return ApiResp<PagingData < ScheduledLogInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    @Operation( summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<ScheduledLogInfo>> query(QueryScheduledLogReq req, SimplePaging paging) {
         return ApiResp.ok(scheduledLogService.query(req, paging));
     }
@@ -77,7 +77,7 @@ public class ScheduledLogController extends BaseController {
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Long> create(@RequestBody CreateScheduledLogReq req) {
         return ApiResp.ok(scheduledLogService.create(req));
     }
@@ -89,7 +89,7 @@ public class ScheduledLogController extends BaseController {
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateScheduledLogReq> reqList) {
         return ApiResp.ok(scheduledLogService.batchCreate(reqList));
     }
@@ -100,7 +100,7 @@ public class ScheduledLogController extends BaseController {
      * @param req QueryScheduledLogByIdReq
      */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<ScheduledLogInfo> retrieve(@NotNull ScheduledLogIdReq req) {
         return ApiResp.ok(scheduledLogService.findById(req));
     }
@@ -111,7 +111,7 @@ public class ScheduledLogController extends BaseController {
      * @param req UpdateScheduledLogReq
      */
     @PutMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> update(@RequestBody UpdateScheduledLogReq req) {
         return ApiResp.ok(checkResult(scheduledLogService.update(req), UPDATE_ACTION));
     }
@@ -120,7 +120,7 @@ public class ScheduledLogController extends BaseController {
      * 批量更新
      */
     @PutMapping("/batchUpdate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateScheduledLogReq> reqList) {
         return ApiResp.ok(checkResult(scheduledLogService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
@@ -131,7 +131,7 @@ public class ScheduledLogController extends BaseController {
      * @param req ScheduledLogIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull ScheduledLogIdReq req) {
         return ApiResp.ok(checkResult(scheduledLogService.delete(req), DELETE_ACTION));
     }
@@ -142,7 +142,7 @@ public class ScheduledLogController extends BaseController {
      * @param req DeleteScheduledLogReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteScheduledLogReq req) {
         return ApiResp.ok(checkResult(scheduledLogService.batchDelete(req), BATCH_DELETE_ACTION));
     }

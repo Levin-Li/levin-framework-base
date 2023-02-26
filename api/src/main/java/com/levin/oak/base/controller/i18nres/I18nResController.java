@@ -68,7 +68,7 @@ public class I18nResController extends BaseController{
      * @return  ApiResp<PagingData<I18nResInfo>>
      */
     @GetMapping("/query")
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    @Operation( summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<I18nResInfo>> query(QueryI18nResReq req , SimplePaging paging) {
         return ApiResp.ok(i18nResService.query(req,paging));
     }
@@ -80,7 +80,7 @@ public class I18nResController extends BaseController{
      * @return ApiResp
      */
     @PostMapping
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Long> create(@RequestBody CreateI18nResReq req) {
         return ApiResp.ok(i18nResService.create(req));
     }
@@ -92,7 +92,7 @@ public class I18nResController extends BaseController{
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateI18nResReq> reqList) {
         return ApiResp.ok(i18nResService.batchCreate(reqList));
     }
@@ -103,7 +103,7 @@ public class I18nResController extends BaseController{
     * @param req QueryI18nResByIdReq
     */
     @GetMapping("")
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<I18nResInfo> retrieve(@NotNull I18nResIdReq req) {
          return ApiResp.ok(i18nResService.findById(req));
      }
@@ -113,7 +113,7 @@ public class I18nResController extends BaseController{
      * @param req UpdateI18nResReq
      */
      @PutMapping({""})
-     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+     @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
      public ApiResp<Integer> update(@RequestBody UpdateI18nResReq req) {
          return ApiResp.ok(checkResult(i18nResService.update(req), UPDATE_ACTION));
     }
@@ -122,7 +122,7 @@ public class I18nResController extends BaseController{
      * 批量更新
      */
      @PutMapping("/batchUpdate")
-     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+     @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
      public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateI18nResReq> reqList) {
         return ApiResp.ok(checkResult(i18nResService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
@@ -132,7 +132,7 @@ public class I18nResController extends BaseController{
      * @param req I18nResIdReq
      */
     @DeleteMapping({""})
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(@NotNull I18nResIdReq req) {
         return ApiResp.ok(checkResult(i18nResService.delete(req), DELETE_ACTION));
     }
@@ -142,7 +142,7 @@ public class I18nResController extends BaseController{
      * @param req I18nResIdReq
      */
     @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete2(@RequestBody I18nResIdReq req) {
         return delete(req);
     }
@@ -152,7 +152,7 @@ public class I18nResController extends BaseController{
      * @param req DeleteI18nResReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteI18nResReq req) {
         return ApiResp.ok(checkResult(i18nResService.batchDelete(req), BATCH_DELETE_ACTION));
     }
