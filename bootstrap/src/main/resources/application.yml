@@ -80,10 +80,12 @@ plugin:
       oak:
         base:
           framework:
+            admin-path: /
             controller-acl:
               exclude-path-patterns: "/v3/api-docs/**"
             sign:
               enable: false
             log:
               exclude-path-patterns: "/v3/api-docs/**"
+
 

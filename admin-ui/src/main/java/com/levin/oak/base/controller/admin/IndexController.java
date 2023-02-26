@@ -34,7 +34,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -102,9 +101,7 @@ public class IndexController extends BaseController {
 
     @PostConstruct
     public void init() {
-
-
-
+        log.info("默认管理后台UI启用，访问路径:" + frameworkProperties.getAdminPath());
     }
 
 

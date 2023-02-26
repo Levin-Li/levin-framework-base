@@ -27,8 +27,6 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 public class AmisUiCodeGenImpl
         implements UiCodeGen {
 
-    @Autowired
-    RequestMappingHandlerMapping handlerMapping;
 
     @Autowired
     protected HttpServletRequest httpRequest;
@@ -41,8 +39,6 @@ public class AmisUiCodeGenImpl
 
     @PostConstruct
     void init(){
-
-        this.handlerMapping.getHandlerMethods();
 
     }
 
