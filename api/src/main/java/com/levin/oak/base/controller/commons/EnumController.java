@@ -54,7 +54,7 @@ import static com.levin.oak.base.ModuleOption.*;
 @RestController(PLUGIN_PREFIX + "EnumController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "EnumController", matchIfMissing = true)
 @RequestMapping(API_PATH + "enums")
-@Tag(name = "公共枚举服务", description = "公共枚举服务")
+@Tag(name = "业务枚举类", description = "业务枚举类服务")
 @Slf4j
 @Valid
 @ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME, onlyRequireAuthenticated = true)
