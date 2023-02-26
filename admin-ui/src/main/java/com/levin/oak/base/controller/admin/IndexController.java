@@ -103,6 +103,8 @@ public class IndexController extends BaseController {
     @PostConstruct
     public void init() {
 
+
+
     }
 
 
@@ -180,8 +182,8 @@ public class IndexController extends BaseController {
             StringBuilder css = new StringBuilder();
 
             pagingData.getItems().forEach(settingInfo -> {
-                if (StringUtils.hasText(settingInfo.getValue())) {
-                    css.append(settingInfo.getValue())
+                if (StringUtils.hasText(settingInfo.getValueContent())) {
+                    css.append(settingInfo.getValueContent())
                             .append('\n');
                 }
             });
@@ -199,7 +201,7 @@ public class IndexController extends BaseController {
                     .setName("amisRootCss")
                     .setValueType(Setting.ValueType.Css)
                     .setNullable(true)
-                    .setValue("/*amis root css*/\n" +
+                    .setValueContent("/*amis root css*/\n" +
                             "--Layout-aside-width: 15rem;\n")
                     .setTenantId(tenantId)
             );

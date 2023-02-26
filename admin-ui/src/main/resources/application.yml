@@ -1,11 +1,7 @@
-
 plugin:
   com:
     levin:
       oak:
         base:
           framework:
-            resourcesAcl:
-
-
-
+            adminPath: /
