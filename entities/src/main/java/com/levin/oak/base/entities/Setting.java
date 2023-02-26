@@ -91,7 +91,7 @@ public class Setting
 
     @Schema(description = "值")
     @Lob
-    protected String value;
+    protected String valueContent;
 
     @Schema(description = "值是否可空")
     protected Boolean nullable;

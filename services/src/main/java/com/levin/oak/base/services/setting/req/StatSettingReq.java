@@ -78,7 +78,7 @@ public class StatSettingReq extends MultiTenantReq {
 
 
     @Schema(description = "值")
-    String value;
+    String valueContent;
 
 
     @Schema(description = "值是否可空")

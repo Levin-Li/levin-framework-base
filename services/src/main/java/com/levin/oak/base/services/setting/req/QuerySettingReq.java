@@ -94,7 +94,7 @@ public class QuerySettingReq extends MultiTenantReq {
 
 
     @Schema(description = "值")
-    private String value;
+    private String valueContent;
 
 
     @Schema(description = "值是否可空")

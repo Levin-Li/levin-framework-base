@@ -63,7 +63,7 @@ public class CreateSettingReq extends MultiTenantReq {
     private ValueType valueType;
 
     @Schema(description = "值")
-    private String value;
+    private String valueContent;
 
     @Schema(description = "值是否可空")
     private Boolean nullable;
