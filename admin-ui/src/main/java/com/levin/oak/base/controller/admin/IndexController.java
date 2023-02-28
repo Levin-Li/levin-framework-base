@@ -101,7 +101,7 @@ public class IndexController extends BaseController {
 
     @PostConstruct
     public void init() {
-        log.info("默认管理后台UI启用，访问路径:" + frameworkProperties.getAdminPath());
+        log.info("默认管理后台UI启用，访问路径:" + nullSafe(frameworkProperties.getAdminPath(), ADMIN_UI_PATH));
     }
 
 
@@ -125,7 +125,7 @@ public class IndexController extends BaseController {
      */
     @SneakyThrows
     @GetMapping({""})
-    @Operation(tags = "Admin管理视图", summary = "首页", description = "首页")
+    @Operation(summary = "首页", description = "首页")
     public String index(Model modelMap) throws IOException {
 
         //验证码相关
@@ -259,7 +259,7 @@ public class IndexController extends BaseController {
      */
     @SneakyThrows
     @GetMapping("editor")
-    @Operation(tags = {"Admin管理视图"}, summary = "页面编辑", description = "页面编辑")
+    @Operation(summary = "页面编辑", description = "页面编辑")
     @ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME)
     public String editor(Model modelMap) {
 

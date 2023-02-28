@@ -116,7 +116,7 @@ public class ModuleWebControllerAdvice {
     }
 
     @ExceptionHandler({SaTokenException.class,UnauthorizedException.class})
-    public ApiResp onSaTokenException(Exception e) {
+    public ApiResp onAuthorizedException(Exception e) {
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
 
