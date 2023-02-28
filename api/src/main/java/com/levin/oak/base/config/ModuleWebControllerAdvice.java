@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.persistence.PersistenceException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -106,7 +105,7 @@ public class ModuleWebControllerAdvice {
 //        return result;
 //    }
 
-    @ExceptionHandler({NotLoginException.class, })
+    @ExceptionHandler({NotLoginException.class,})
     public ApiResp onNotLoginException(Exception e) {
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -115,7 +114,7 @@ public class ModuleWebControllerAdvice {
                 , "未登录：" + e.getMessage());
     }
 
-    @ExceptionHandler({SaTokenException.class,UnauthorizedException.class})
+    @ExceptionHandler({SaTokenException.class, UnauthorizedException.class})
     public ApiResp onAuthorizedException(Exception e) {
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -142,7 +141,7 @@ public class ModuleWebControllerAdvice {
         log.error("请求参数异常," + request.getRequestURL(), e);
 
         return (ApiResp) ApiResp.error(ServiceResp.ErrorType.BizError.getBaseErrorCode()
-                , e.getMessage())
+                        , e.getMessage())
                 .setDetailMsg(ExceptionUtils.getAllCauseInfo(e, " -> "));
     }
 
@@ -155,7 +154,7 @@ public class ModuleWebControllerAdvice {
                 || e.getMessage().contains(" update ");
 
         return (ApiResp) ApiResp.error(ServiceResp.ErrorType.BizError.getBaseErrorCode()
-                , used ? "操作失败，数据已经被使用" : "名称、编码或其它唯一值已经存在")
+                        , used ? "操作失败，数据已经被使用" : "名称、编码或其它唯一值已经存在")
                 .setDetailMsg(ExceptionUtils.getRootCauseInfo(e));
     }
 
@@ -165,7 +164,7 @@ public class ModuleWebControllerAdvice {
         response.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
 
         return (ApiResp) ApiResp.error(ServiceResp.ErrorType.SystemInnerError.getBaseErrorCode()
-                , e.getMessage())
+                        , e.getMessage())
                 .setDetailMsg(ExceptionUtils.getAllCauseInfo(e, " -> "));
     }
 
@@ -181,7 +180,7 @@ public class ModuleWebControllerAdvice {
         log.error("发生数据库操作异常," + request.getRequestURL(), e);
 
         return (ApiResp) ApiResp.error(ServiceResp.ErrorType.SystemInnerError.getBaseErrorCode(),
-                "数据异常，请稍后重试")
+                        "数据异常，请稍后重试")
                 .setDetailMsg(ExceptionUtils.getRootCauseInfo(e));
     }
 
@@ -194,7 +193,7 @@ public class ModuleWebControllerAdvice {
         response.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
 
         return (ApiResp) ApiResp.error(ServiceResp.ErrorType.SystemInnerError.getBaseErrorCode()
-                , e.getMessage())
+                        , e.getMessage())
                 .setDetailMsg(ExceptionUtils.getPrintInfo(e));
     }
 
@@ -210,14 +209,14 @@ public class ModuleWebControllerAdvice {
             response.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
 
             return (ApiResp) ApiResp.error(ServiceResp.ErrorType.ResourceError.getBaseErrorCode()
-                    , e.getMessage())
+                            , e.getMessage())
                     .setDetailMsg(ExceptionUtils.getPrintInfo(e));
         }
 
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 
         return (ApiResp) ApiResp.error(ServiceResp.ErrorType.UnknownError.getBaseErrorCode()
-                , e.getMessage())
+                        , e.getMessage())
                 .setDetailMsg(ExceptionUtils.getPrintInfo(e));
     }
 }
