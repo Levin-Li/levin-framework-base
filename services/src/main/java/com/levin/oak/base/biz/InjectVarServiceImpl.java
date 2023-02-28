@@ -18,7 +18,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.Map;
@@ -123,12 +122,15 @@ public class InjectVarServiceImpl implements InjectVarService {
 
         //当前登录用户
         if (baseAuthService.isLogin()) {
+
             //暂时兼容
             //获取登录信息
             UserInfo userInfo = baseAuthService.getUserInfo();
+
             builder.put(InjectConsts.USER_ID, userInfo.getId())
                     .put(InjectConsts.USER_NAME, userInfo.getName())
                     .put(InjectConsts.USER, userInfo)
+                    .put(InjectConsts.IS_SUPER_ADMIN, userInfo.isSuperAdmin())
                     .put(InjectConsts.ORG, userInfo.getOrg())
                     .put(InjectConsts.ORG_ID, userInfo.getOrgId());
 

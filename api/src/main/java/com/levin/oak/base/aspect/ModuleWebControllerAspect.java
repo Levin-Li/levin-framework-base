@@ -123,14 +123,11 @@ public class ModuleWebControllerAspect {
                 .setTaskDelay(1500)
                 .setSyncTaskExecutor(req ->
                         scheduledExecutorService.submit(() -> {
-
                             accessLogService.create(req);
-
                         })
                 );
 
         log.info("控制器拦截器init...");
-
     }
 
 
@@ -188,9 +185,10 @@ public class ModuleWebControllerAspect {
 
         final String packageName = plugin.getPackageName();
 
+        //如果当前模块不存在解析器
         if (!moduleResolverMap.containsKey(packageName)) {
 
-            //放入一个空
+            //放入一个空，防止解析变量出现错误
             moduleResolverMap.addAll(packageName, Collections.emptyList());
 
 //            Supplier<List<Map<String, ?>>>
