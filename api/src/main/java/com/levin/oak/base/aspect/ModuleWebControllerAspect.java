@@ -27,6 +27,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -40,7 +41,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
@@ -195,14 +195,14 @@ public class ModuleWebControllerAspect {
 
             //按bean名查找 List<VariableResolver> bean
             SpringContextHolder.<List<VariableResolver>>findBeanByBeanName(context
-                    , ResolvableType.forClassWithGenerics(Iterable.class, VariableResolver.class).getType()
-                    , "plugin." + packageName, packageName)
+                            , ResolvableType.forClassWithGenerics(Iterable.class, VariableResolver.class).getType()
+                            , "plugin." + packageName, packageName)
                     .forEach(list -> moduleResolverMap.addAll(packageName, list));
 
             //按bean名查找 VariableResolver bean
             SpringContextHolder.<VariableResolver>findBeanByBeanName(context
-                    , ResolvableType.forClass(VariableResolver.class).getType()
-                    , "plugin." + packageName, packageName)
+                            , ResolvableType.forClass(VariableResolver.class).getType()
+                            , "plugin." + packageName, packageName)
                     .forEach(v -> moduleResolverMap.add(packageName, v));
 
             //按包名查找
@@ -225,6 +225,13 @@ public class ModuleWebControllerAspect {
 //    @Before("modulePackagePointcut() && controllerPointcut() && requestMappingPointcut()")
     @Before("controllerPointcut() && requestMappingPointcut()")
     public void injectVar(JoinPoint joinPoint) {
+
+        Object[] requestArgs = joinPoint.getArgs();
+        //如果没有参数,或是空参数 或是简单参数，直接返回
+        if (requestArgs == null || requestArgs.length == 0
+                || Arrays.stream(requestArgs).allMatch(arg -> arg == null || BeanUtils.isSimpleValueType(arg.getClass()))) {
+            return;
+        }
 
         final String path = getRequestPath();
 
@@ -254,10 +261,13 @@ public class ModuleWebControllerAspect {
         variableResolverList.addAll(getModuleResolverList(joinPoint));
         variableResolverList.addAll(variableResolverManager.getVariableResolvers());
 
-        Optional.ofNullable(joinPoint.getArgs()).ifPresent(args ->
-
-                //对方法参数进行迭代
-                Arrays.stream(args).filter(Objects::nonNull).forEachOrdered(arg -> {
+        //对方法参数进行迭代
+        Arrays.stream(requestArgs)
+                //不是Null的参数
+                .filter(Objects::nonNull)
+                //不是简单类型的参数
+                .filter(arg -> !BeanUtils.isSimpleValueType(arg.getClass()))
+                .forEachOrdered(arg -> {
 
                     //如果参数本身是一个集合，支持第一级是集合对象的参数
                     Collection<?> params = (arg instanceof Collection) ? ((Collection<?>) arg) : Arrays.asList(arg);
@@ -275,8 +285,8 @@ public class ModuleWebControllerAspect {
                                 variableInjector.injectByVariableResolvers(param, tempList);
                             });
 
-                })
-        );
+                });
+
     }
 
 
