@@ -110,7 +110,9 @@ plugin:
 
             resourcesAcl:
               - includePathPatterns: "/templates/com.levin.oak.base/**"
-                onlyRequireAuthenticated: true
+                denied: true
+
+            enable-mock-sms-send: true
 
 
 

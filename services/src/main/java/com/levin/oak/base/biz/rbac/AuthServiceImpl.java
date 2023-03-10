@@ -657,6 +657,7 @@ public class AuthServiceImpl
         if (user == null) {
             simpleDao.create(new CreateUserReq()
                     .setEmail("admin")
+                    .setTelephone("18095279527")
                     .setPassword(encryptPassword("123456"))
                     .setName("管理员")
                     .setStaffNo("9999")
