@@ -59,7 +59,7 @@ import static com.levin.oak.base.ModuleOption.*;
 @Controller(PLUGIN_PREFIX + "IndexController")
 @ConditionalOnClass(FreeMarkerAutoConfiguration.class)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "IndexController", matchIfMissing = true)
-@RequestMapping("${" + PLUGIN_PREFIX + "framework.adminPath" + ":" + ADMIN_UI_PATH + "}")
+@RequestMapping("${" + PLUGIN_PREFIX + "framework.admin-path" + ":" + ADMIN_UI_PATH + "}")
 @Slf4j
 @Valid
 @MenuResTag(false)

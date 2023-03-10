@@ -11,4 +11,4 @@ spring:
     generate-ddl: true
     database: MYSQL
     hibernate:
-      ddl-auto: update
+      ddl-auto: create

@@ -55,7 +55,7 @@ public class ModuleWebControllerAdvice {
 
     @PostConstruct
     void init() {
-        log.info("init...");
+        log.info("默认异常拦截器启用，匹配所有的控制器包名...");
     }
 
     /**

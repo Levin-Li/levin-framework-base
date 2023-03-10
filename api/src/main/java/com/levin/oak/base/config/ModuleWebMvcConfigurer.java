@@ -60,9 +60,11 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     @Value("${springfox.documentation.swagger-ui.base-url:/swagger-ui}")
     private String swaggerUiBaseUrl;
 
-    @Value("${springfox.documentation.open-api.v3.path:/v3/api-docs}")
-    private String openApiPath;
+    @Value("${knifeUrl:doc.html}")
+    private String knifeUrl;
 
+    @Value("${open-api.v3.path:/v3/api-docs}")
+    private String openApiPath;
 
     @PostConstruct
     void init() {
@@ -151,21 +153,21 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         //线程级别用户权限清除
         registry.addInterceptor(new HandlerInterceptor() {
-            @Override
-            public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-                //清楚缓存数据
-                authService.clearThreadCacheData();
-                injectVarService.clearCache();
-                return true;
-            }
+                    @Override
+                    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+                        //清楚缓存数据
+                        authService.clearThreadCacheData();
+                        injectVarService.clearCache();
+                        return true;
+                    }
 
-            @Override
-            public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-                //清楚缓存数据
-                authService.clearThreadCacheData();
-                injectVarService.clearCache();
-            }
-        }).addPathPatterns("/**")
+                    @Override
+                    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+                        //清楚缓存数据
+                        authService.clearThreadCacheData();
+                        injectVarService.clearCache();
+                    }
+                }).addPathPatterns("/**")
                 .order(Ordered.HIGHEST_PRECEDENCE);
 
         if (frameworkProperties.getTenantBindDomain().isEnable()) {
@@ -193,16 +195,16 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         {
             //检查租户信息
             registry.addInterceptor(new HandlerInterceptor() {
-                @Override
-                public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+                        @Override
+                        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-                    if ((handler instanceof HandlerMethod)) {
-                        bizTenantService.checkAndGetCurrentUserTenant();
-                    }
+                            if ((handler instanceof HandlerMethod)) {
+                                bizTenantService.checkAndGetCurrentUserTenant();
+                            }
 
-                    return true;
-                }
-            }).addPathPatterns("/**")
+                            return true;
+                        }
+                    }).addPathPatterns("/**")
                     .order(Ordered.HIGHEST_PRECEDENCE + 2000);
         }
 
@@ -218,6 +220,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
                     .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
                     .excludePathPatterns("/" + openApiPath)
+                    .excludePathPatterns("/" + knifeUrl)
                     .excludePathPatterns(frameworkProperties.getControllerAcl().getExcludePathPatterns())
                     .addPathPatterns(includePathPatterns.isEmpty() ? Arrays.asList("/**") : includePathPatterns)
                     .order(Ordered.HIGHEST_PRECEDENCE + 3000);

@@ -100,6 +100,8 @@ plugin:
       oak:
         base:
           framework:
+            tenant-bind-domain:
+              enable: false
             admin-path: /
             controller-acl:
               exclude-path-patterns: "/v3/api-docs/**"
