@@ -61,9 +61,9 @@ spring:
         #模块表名前缀映射类，重要
         physical-strategy: com.levin.commons.dao.support.EntityNamingStrategy
 
-  #      MYSQL 配置选项
+        #      MYSQL 配置选项
         properties:
-  #        hibernate.dialect: org.hibernate.dialect.MySQL57Dialect
+          #        hibernate.dialect: org.hibernate.dialect.MySQL57Dialect
           hibernate.id.new_generator_mappings: false
   #        hibernate.dialect.storage_engine: innodb
 
@@ -100,8 +100,6 @@ plugin:
       oak:
         base:
           framework:
-            tenant-bind-domain:
-              enable: false
             admin-path: /
             controller-acl:
               exclude-path-patterns: "/v3/api-docs/**"
@@ -109,5 +107,10 @@ plugin:
               enable: false
             log:
               exclude-path-patterns: "/v3/api-docs/**"
+
+            resourcesAcl:
+              - includePathPatterns: "/templates/com.levin.oak.base/**"
+                onlyRequireAuthenticated: true
+
 
 
