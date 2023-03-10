@@ -69,7 +69,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         return getSelfProxy(UserService.class);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(summary = CREATE_ACTION)
     @Override
     public String create(CreateUserReq req) {
 
@@ -94,22 +94,22 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
     public List<String> batchCreate(List<CreateUserReq> reqList) {
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    @Cacheable(sync = false, condition = "#id != null", unless = "#result == null ", key = E_User.CACHE_KEY_PREFIX + "#id")
+    @Cacheable(condition = "#id != null", unless = "#result == null ", key = E_User.CACHE_KEY_PREFIX + "#id")
     public UserInfo findById(String id) {
         return findById(new UserIdReq().setId(id));
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //只更新缓存
     @CachePut(unless = "#result == null", condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
@@ -133,7 +133,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    @Operation(summary = UPDATE_ACTION)
     @Override
     @CacheEvict(condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
@@ -148,7 +148,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         return checkResult(simpleDao.updateByQueryObj(req.setPassword(encryptPwd(req.getPassword()))), UPDATE_ACTION);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
+    @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
     public int batchUpdate(List<UpdateUserReq> reqList) {
@@ -161,7 +161,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         return sum;
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(summary = DELETE_ACTION)
     @Override
     @CacheEvict(condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
@@ -173,7 +173,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         return checkResult(simpleDao.deleteByQueryObj(req, notSa()), DELETE_ACTION);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
     public int batchDelete(DeleteUserReq req) {
@@ -190,13 +190,13 @@ public class UserServiceImpl extends BaseService implements UserService {
         return sum;
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
     public PagingData<UserInfo> query(QueryUserReq req, Paging paging) {
         return simpleDao.findPagingDataByQueryObj(req, notSa(), paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
     public UserInfo findOne(QueryUserReq req) {
         return simpleDao.findOneByQueryObj(req, notSa());
@@ -207,7 +207,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_User.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {
     }

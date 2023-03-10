@@ -101,7 +101,7 @@ public class StatTenantReq extends BaseReq {
     @Schema(description = "联系电话")
     String contractPhone;
 
-    //@InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    //@InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
 
     @Schema(description = "域名列表")
     List<String> domainList;

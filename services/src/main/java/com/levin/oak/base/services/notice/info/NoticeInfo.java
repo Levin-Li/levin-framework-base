@@ -24,17 +24,21 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.oak.base.entities.Notice.*;
+
 import java.util.Date;
 import java.util.List;
+
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 /**
-* 通知
-* @Author Auto gen by simple-dao-codegen 2022-6-20 16:50:11
-*/
-@Schema(description ="通知")
+ * 通知
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-6-20 16:50:11
+ */
+@Schema(description = "通知")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
@@ -98,7 +102,7 @@ public class NoticeInfo implements Serializable {
 
 
     @Size(max = 128)
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Schema(title = "拼音名称", description = "拼音，格式Json数组：[全拼,简拼]")
     List<String> pinyinName;
 

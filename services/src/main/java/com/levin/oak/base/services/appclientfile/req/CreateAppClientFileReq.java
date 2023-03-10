@@ -2,6 +2,7 @@ package com.levin.oak.base.services.appclientfile.req;
 
 import com.levin.commons.dao.TargetOption;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.AppClientFile;
 import com.levin.oak.base.entities.E_AppClientFile;
@@ -78,7 +79,7 @@ public class CreateAppClientFileReq extends MultiTenantReq {
 
     @Schema(description = "创建时间", hidden = true)
     //@NotNull
-            Date createTime;
+    Date createTime;
 
     @Schema(description = "更新时间", hidden = true)
     Date lastUpdateTime;
@@ -88,15 +89,15 @@ public class CreateAppClientFileReq extends MultiTenantReq {
 
     @Schema(description = "是否允许", hidden = true)
     //@NotNull
-            Boolean enable;
+    Boolean enable;
 
     @Schema(description = "是否可编辑", hidden = true)
     //@NotNull
-            Boolean editable;
+    Boolean editable;
 
     @Schema(description = "备注", hidden = true)
     //@Size(max = 512)
-            String remark;
+    String remark;
 
 
     @PostConstruct

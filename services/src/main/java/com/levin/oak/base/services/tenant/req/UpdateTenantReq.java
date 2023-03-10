@@ -4,6 +4,8 @@ import com.levin.commons.dao.TargetOption;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.update.Update;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
+import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.E_Tenant;
 import com.levin.oak.base.entities.Tenant;
@@ -51,7 +53,7 @@ public class UpdateTenantReq extends BaseReq {
     private String id;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#user.isSuperAdmin()")
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
 
@@ -90,7 +92,7 @@ public class UpdateTenantReq extends BaseReq {
     @Schema(description = "联系电话")
     private String contractPhone;
 
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
     @Schema(description = "域名列表")
     private List<String> domainList;
 

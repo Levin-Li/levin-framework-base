@@ -22,6 +22,7 @@ import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
+
 import java.util.*;
 import java.io.Serializable;
 
@@ -33,15 +34,18 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import com.levin.oak.base.entities.SimpleApi.*;
-    import java.util.Date;
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
+import com.levin.oak.base.entities.SimpleApi.*;
+
+import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  统计简单动态接口
- *  @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
+ * 统计简单动态接口
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
  */
 @Schema(description = "统计简单动态接口")
 @Data
@@ -53,11 +57,11 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS,
-     //连接统计
-    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
-    resultClass = StatSimpleApiReq.Result.class
+        //连接统计
+        //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
+        resultClass = StatSimpleApiReq.Result.class
 )
-public class StatSimpleApiReq extends MultiTenantReq{
+public class StatSimpleApiReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1021385738L;
 
@@ -183,7 +187,7 @@ public class StatSimpleApiReq extends MultiTenantReq{
 
     @PostConstruct
     public void preStat() {
-    //@todo 统计之前初始化数据
+        //@todo 统计之前初始化数据
     }
 
     @Schema(description = "简单动态接口统计结果")

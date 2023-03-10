@@ -49,7 +49,7 @@ public class DeleteRoleReq extends MultiTenantReq {
     private String[] idList;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#user.isSuperAdmin()")
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     //不允许删除SA角色

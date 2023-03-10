@@ -49,7 +49,7 @@ public class UpdateAreaReq extends BaseReq {
     private String code;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#user.isSuperAdmin()")
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Schema(description = "图标")

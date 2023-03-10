@@ -22,6 +22,7 @@ import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
+
 import java.util.*;
 
 import com.levin.oak.base.services.simpleapi.info.*;
@@ -32,15 +33,18 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import com.levin.oak.base.entities.SimpleApi.*;
-    import java.util.Date;
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
+import com.levin.oak.base.entities.SimpleApi.*;
+
+import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  查询简单动态接口
- *  @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
+ * 查询简单动态接口
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
  */
 @Schema(description = "查询简单动态接口")
 @Data
@@ -52,7 +56,7 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS, resultClass = SimpleApiInfo.class)
-public class QuerySimpleApiReq extends MultiTenantReq{
+public class QuerySimpleApiReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1021385738L;
 

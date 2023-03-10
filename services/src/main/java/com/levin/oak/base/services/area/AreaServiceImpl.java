@@ -59,29 +59,29 @@ public class AreaServiceImpl extends BaseService implements AreaService {
         return getSelfProxy(AreaService.class);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(summary = CREATE_ACTION)
     @Override
     public String create(CreateAreaReq req) {
         Area entity = simpleDao.create(req);
         return entity.getCode();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
     public List<String> batchCreate(List<CreateAreaReq> reqList) {
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    @Cacheable(sync = false, condition = "#code != null", unless = "#result == null ", key = E_Area.CACHE_KEY_PREFIX + "#code")
+    @Cacheable(condition = "#code != null", unless = "#result == null ", key = E_Area.CACHE_KEY_PREFIX + "#code")
     public AreaInfo findById(String code) {
         return findById(new AreaIdReq().setCode(code));
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //只更新缓存
     @CachePut(unless = "#result == null", condition = "#req.code != null", key = E_Area.CACHE_KEY_PREFIX + "#req.code")
@@ -90,7 +90,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
         return simpleDao.findOneByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    @Operation(summary = UPDATE_ACTION)
     @Override
     @CacheEvict(condition = "#req.code != null", key = E_Area.CACHE_KEY_PREFIX + "#req.code")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
@@ -101,7 +101,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
         return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
+    @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
     public int batchUpdate(List<UpdateAreaReq> reqList) {
@@ -113,7 +113,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
         return sum;
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(summary = DELETE_ACTION)
     @Override
     @CacheEvict(condition = "#req.code != null", key = E_Area.CACHE_KEY_PREFIX + "#req.code")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
@@ -124,7 +124,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
         return checkResult(simpleDao.deleteByQueryObj(req), DELETE_ACTION);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
     public int batchDelete(DeleteAreaReq req) {
@@ -140,20 +140,20 @@ public class AreaServiceImpl extends BaseService implements AreaService {
         return sum;
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
     public PagingData<AreaInfo> query(QueryAreaReq req, Paging paging) {
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
     public AreaInfo findOne(QueryAreaReq req) {
         return simpleDao.findOneByQueryObj(req);
     }
 
     @Override
-    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_Area.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {
     }

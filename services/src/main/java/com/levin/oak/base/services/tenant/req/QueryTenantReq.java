@@ -9,6 +9,7 @@ import com.levin.commons.dao.annotation.logic.OR;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.dao.annotation.order.SimpleOrderBy;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.JsonStrLikeConverter;
 import com.levin.oak.base.entities.E_Tenant;
 import com.levin.oak.base.entities.Tenant;
@@ -115,8 +116,8 @@ public class QueryTenantReq extends BaseReq {
 
     @Schema(description = "模糊匹配 - 域名列表")
     @OR(autoClose = true)
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Contains
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     private List<String> containsDomainList;
 
 

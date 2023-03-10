@@ -18,6 +18,7 @@ import javax.validation.constraints.*;
 
 import lombok.*;
 import lombok.experimental.*;
+
 import java.util.*;
 
 import com.levin.oak.base.entities.Notice;
@@ -27,15 +28,18 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.oak.base.entities.Notice.*;
+
 import java.util.Date;
 import java.util.List;
+
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 /**
- *  删除通知
- *  //Auto gen by simple-dao-codegen 2022-6-20 16:50:11
+ * 删除通知
+ * //Auto gen by simple-dao-codegen 2022-6-20 16:50:11
  */
 @Schema(description = "删除通知")
 @Data
@@ -69,8 +73,8 @@ public class DeleteNoticeReq extends MultiTenantReq {
     }
 
 
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @PostConstruct

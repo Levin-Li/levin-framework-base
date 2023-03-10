@@ -18,6 +18,7 @@ import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
+
 import java.util.*;
 
 import com.levin.oak.base.entities.NoticeProcessLog;
@@ -29,13 +30,15 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
+
 import java.util.Date;
 ////////////////////////////////////
 
 
 /**
- *  更新通知处理日志
- *  Auto gen by simple-dao-codegen 2022-6-20 16:50:12
+ * 更新通知处理日志
+ * Auto gen by simple-dao-codegen 2022-6-20 16:50:12
  */
 @Schema(description = "更新通知处理日志")
 @Data
@@ -53,11 +56,10 @@ public class UpdateNoticeProcessLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -1991983093L;
 
-    @Schema(description = "id" , required = true)
+    @Schema(description = "id", required = true)
     @NotNull
     @Eq(require = true)
     String id;
-
 
 
     @NotBlank
@@ -84,9 +86,9 @@ public class UpdateNoticeProcessLogReq extends MultiTenantReq {
         this.id = id;
     }
 
-    public UpdateNoticeProcessLogReq setIdOnNotBlank(String id){
-        if(isNotBlank(id)){
-        this.id = id;
+    public UpdateNoticeProcessLogReq setIdOnNotBlank(String id) {
+        if (isNotBlank(id)) {
+            this.id = id;
         }
         return this;
     }

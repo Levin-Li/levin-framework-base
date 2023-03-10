@@ -98,7 +98,7 @@ public class StatUserReq extends MultiTenantReq {
     Sex sex;
 
     //@Size(max = 1800)
-    //@InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    //@InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
 
     @Schema(description = "标签列表")
     List<String> tagList;
@@ -141,7 +141,7 @@ public class StatUserReq extends MultiTenantReq {
     String jobPostCode;
 
     //@Size(max = 1800)
-    //@InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    //@InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
 
     @Schema(description = "角色列表")
     List<String> roleList;

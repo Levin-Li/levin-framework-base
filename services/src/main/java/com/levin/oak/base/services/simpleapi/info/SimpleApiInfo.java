@@ -24,15 +24,18 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.oak.base.entities.SimpleApi.*;
+
 import java.util.Date;
 ////////////////////////////////////
 
 /**
-* 简单动态接口
-* @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
-*/
-@Schema(description ="简单动态接口")
+ * 简单动态接口
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
+ */
+@Schema(description = "简单动态接口")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor

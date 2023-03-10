@@ -17,6 +17,7 @@ import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 @Data
@@ -122,7 +123,7 @@ public class User
     @Schema(description = "标签列表（json数组）", title = "标签列表")
     @Column(length = 1800)
     @Contains
-    @InjectVar(domain = "dao", expectTypeDesc = "List<String>", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     String tagList;
 
     ////////////////////////////////////////////////////////////////////
@@ -153,7 +154,7 @@ public class User
     @Schema(description = "角色列表(Json数组)", title = "角色列表")
     @Column(length = 1800)
     @Contains
-    @InjectVar(domain = "dao", expectTypeDesc = "List<String>", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     String roleList;
 
     ///////////////////////////////////////////////////////////////////////

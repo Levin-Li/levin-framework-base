@@ -22,6 +22,7 @@ import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
+
 import java.util.*;
 
 import com.levin.oak.base.services.simpleform.info.*;
@@ -32,14 +33,17 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import java.util.Date;
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
+
+import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  查询简单表单
- *  @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:01
+ * 查询简单表单
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:01
  */
 @Schema(description = "查询简单表单")
 @Data
@@ -51,7 +55,7 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimpleForm.class, alias = E_SimpleForm.ALIAS, resultClass = SimpleFormInfo.class)
-public class QuerySimpleFormReq extends MultiTenantReq{
+public class QuerySimpleFormReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1598335188L;
 

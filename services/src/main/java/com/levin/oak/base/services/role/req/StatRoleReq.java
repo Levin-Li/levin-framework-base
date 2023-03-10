@@ -67,12 +67,12 @@ public class StatRoleReq extends MultiTenantReq {
     @Schema(description = "部门数据权限")
     OrgDataScope orgDataScope;
 
-    //@InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    //@InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
 
 //    @Schema(description = "指定的部门列表")
 //     List<String> assignedOrgIdList;
 
-    //@InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    //@InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
 
 //    @Schema(description = "资源权限列表")
 //     List<String> permissionList;

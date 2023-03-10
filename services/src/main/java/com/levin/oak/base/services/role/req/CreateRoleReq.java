@@ -2,6 +2,7 @@ package com.levin.oak.base.services.role.req;
 
 import com.levin.commons.dao.TargetOption;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.E_Role;
@@ -57,11 +58,11 @@ public class CreateRoleReq extends MultiTenantReq {
     private OrgDataScope orgDataScope;
 
     @Schema(description = "指定的部门列表")
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     private List<String> assignedOrgIdList;
 
     @Schema(description = "资源权限列表")
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     private List<String> permissionList;
 
     @Schema(description = "系统子域")

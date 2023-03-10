@@ -18,6 +18,7 @@ import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
+
 import java.util.*;
 
 import com.levin.oak.base.entities.SimpleApi;
@@ -29,14 +30,16 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.oak.base.entities.SimpleApi.*;
+
 import java.util.Date;
 ////////////////////////////////////
 
 
 /**
- *  更新简单动态接口
- *  Auto gen by simple-dao-codegen 2022-5-23 10:30:00
+ * 更新简单动态接口
+ * Auto gen by simple-dao-codegen 2022-5-23 10:30:00
  */
 @Schema(description = "更新简单动态接口")
 @Data
@@ -54,13 +57,13 @@ public class UpdateSimpleApiReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1021385738L;
 
-    @Schema(description = "id" , required = true)
+    @Schema(description = "id", required = true)
     @NotNull
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
 
@@ -130,11 +133,12 @@ public class UpdateSimpleApiReq extends MultiTenantReq {
     public UpdateSimpleApiReq(String id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preUpdate() {
         //@todo 更新之前初始化数据
 
-        if(getLastUpdateTime() == null){
+        if (getLastUpdateTime() == null) {
             setLastUpdateTime(new Date());
         }
     }

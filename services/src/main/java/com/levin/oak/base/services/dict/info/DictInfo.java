@@ -2,6 +2,7 @@ package com.levin.oak.base.services.dict.info;
 
 
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.levin.oak.base.entities.Dict.Item;
 import com.levin.oak.base.entities.Dict.Type;
@@ -57,7 +58,7 @@ public class DictInfo implements Serializable {
     private String code;
 
 
-    @InjectVar(domain = "dao", converter = DefaultJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = DefaultJsonConverter.class, isRequired = "false")
     @Schema(description = "编码项")
     private List<Item> itemList;
 

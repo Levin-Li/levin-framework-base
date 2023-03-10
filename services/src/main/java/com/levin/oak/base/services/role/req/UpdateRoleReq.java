@@ -4,6 +4,7 @@ import com.levin.commons.dao.TargetOption;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.update.Update;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.Role;
@@ -52,7 +53,7 @@ public class UpdateRoleReq extends MultiTenantReq {
     private String id;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#user.isSuperAdmin()")
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     //编码不允许修改
@@ -66,11 +67,11 @@ public class UpdateRoleReq extends MultiTenantReq {
     @Schema(description = "部门数据权限")
     private OrgDataScope orgDataScope;
 
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
     @Schema(description = "指定的部门列表")
     private List<String> assignedOrgIdList;
 
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
     @Schema(description = "资源权限列表")
     private List<String> permissionList;
 

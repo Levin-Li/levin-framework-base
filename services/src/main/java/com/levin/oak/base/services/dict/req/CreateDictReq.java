@@ -2,6 +2,7 @@ package com.levin.oak.base.services.dict.req;
 
 import com.levin.commons.dao.TargetOption;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.Dict;
@@ -57,7 +58,7 @@ public class CreateDictReq extends MultiTenantReq {
     private String code;
 
     @Schema(description = "编码项")
-    @InjectVar(domain = "dao", converter = DefaultJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = DefaultJsonConverter.class, isRequired = "false")
     private List<Item> itemList;
 
     @Schema(description = "系统子域")

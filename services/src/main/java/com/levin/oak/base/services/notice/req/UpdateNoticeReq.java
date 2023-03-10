@@ -18,6 +18,7 @@ import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
+
 import java.util.*;
 
 import com.levin.oak.base.entities.Notice;
@@ -29,16 +30,19 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.oak.base.entities.Notice.*;
+
 import java.util.Date;
 import java.util.List;
+
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 
 /**
- *  更新通知
- *  Auto gen by simple-dao-codegen 2022-6-20 16:50:11
+ * 更新通知
+ * Auto gen by simple-dao-codegen 2022-6-20 16:50:11
  */
 @Schema(description = "更新通知")
 @Data
@@ -56,13 +60,13 @@ public class UpdateNoticeReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1394869526L;
 
-    @Schema(description = "id" , required = true)
+    @Schema(description = "id", required = true)
     @NotNull
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
 
@@ -94,7 +98,7 @@ public class UpdateNoticeReq extends MultiTenantReq {
     String name;
 
     @Size(max = 128)
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Schema(title = "拼音名称", description = "拼音，格式Json数组：[全拼,简拼]")
     List<String> pinyinName;
 
@@ -119,9 +123,9 @@ public class UpdateNoticeReq extends MultiTenantReq {
         this.id = id;
     }
 
-    public UpdateNoticeReq setIdOnNotBlank(String id){
-        if(isNotBlank(id)){
-        this.id = id;
+    public UpdateNoticeReq setIdOnNotBlank(String id) {
+        if (isNotBlank(id)) {
+            this.id = id;
         }
         return this;
     }
@@ -130,7 +134,7 @@ public class UpdateNoticeReq extends MultiTenantReq {
     public void preUpdate() {
         //@todo 更新之前初始化数据
 
-        if(getLastUpdateTime() == null){
+        if (getLastUpdateTime() == null) {
             setLastUpdateTime(new Date());
         }
     }

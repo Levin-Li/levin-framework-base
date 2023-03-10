@@ -2,6 +2,7 @@ package com.levin.oak.base.services.jobpost.req;
 
 import com.levin.commons.dao.TargetOption;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.E_JobPost;
 import com.levin.oak.base.entities.JobPost;

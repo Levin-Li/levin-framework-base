@@ -2,6 +2,7 @@ package com.levin.oak.base.services.tenant.info;
 
 
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -89,7 +90,7 @@ public class TenantInfo implements Serializable {
     private String contractPhone;
 
 
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Schema(description = "域名列表")
     private List<String> domainList;
 

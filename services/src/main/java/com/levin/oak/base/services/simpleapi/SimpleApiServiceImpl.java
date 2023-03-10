@@ -4,7 +4,6 @@ import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 
-
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.support.*;
 import com.levin.commons.service.domain.*;
@@ -12,6 +11,7 @@ import com.levin.commons.service.domain.*;
 import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
+
 import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
@@ -27,7 +27,9 @@ import io.swagger.v3.oas.annotations.tags.*;
 import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
+
 import cn.hutool.core.lang.*;
+
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
@@ -46,15 +48,16 @@ import com.levin.oak.base.services.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.oak.base.entities.SimpleApi.*;
+
 import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  简单动态接口-服务实现
+ * 简单动态接口-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-5-23 10:30:00
- *
+ * @author auto gen by simple-dao-codegen 2022-5-23 10:30:00
  */
 
 //@Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
@@ -70,43 +73,43 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
     @Autowired
     private SimpleDao simpleDao;
 
-    protected SimpleApiService getSelfProxy(){
+    protected SimpleApiService getSelfProxy() {
         return getSelfProxy(SimpleApiService.class);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(summary = CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public String create(CreateSimpleApiReq req){
+    public String create(CreateSimpleApiReq req) {
         SimpleApi entity = simpleDao.create(req);
         return entity.getId();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<String> batchCreate(List<CreateSimpleApiReq> reqList){
+    public List<String> batchCreate(List<CreateSimpleApiReq> reqList) {
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    @Cacheable(sync = false, condition = "#id != null", unless = "#result == null ", key = E_SimpleApi.CACHE_KEY_PREFIX + "#id")
+    @Cacheable(condition = "#id != null", unless = "#result == null ", key = E_SimpleApi.CACHE_KEY_PREFIX + "#id")
     public SimpleApiInfo findById(String id) {
         return findById(new SimpleApiIdReq().setId(id));
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //只更新缓存
-    @CachePut(unless = "#result == null" , condition = "#req.id != null" , key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
+    @CachePut(unless = "#result == null", condition = "#req.id != null", key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
     public SimpleApiInfo findById(SimpleApiIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findOneByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    @Operation(summary = UPDATE_ACTION)
     @Override
     @CacheEvict(condition = "#req.id != null", key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
@@ -115,15 +118,15 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
         return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
+    @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public int batchUpdate(List<UpdateSimpleApiReq> reqList){
+    public int batchUpdate(List<UpdateSimpleApiReq> reqList) {
         //@Todo 优化批量提交
         return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n).sum();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(summary = DELETE_ACTION)
     @Override
     @CacheEvict(condition = "#req.id != null", key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
@@ -132,19 +135,19 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
         return checkResult(simpleDao.deleteByQueryObj(req), DELETE_ACTION);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public int batchDelete(DeleteSimpleApiReq req){
+    public int batchDelete(DeleteSimpleApiReq req) {
         //@Todo 优化批量提交
         return Stream.of(req.getIdList())
-            .map(id -> simpleDao.copy(req, new SimpleApiIdReq().setId(id)))
-            .map(idReq -> getSelfProxy().delete(idReq))
-            .mapToInt(n -> n)
-            .sum();
+                .map(id -> simpleDao.copy(req, new SimpleApiIdReq().setId(id)))
+                .map(idReq -> getSelfProxy().delete(idReq))
+                .mapToInt(n -> n)
+                .sum();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
     public PagingData<SimpleApiInfo> query(QuerySimpleApiReq req, Paging paging) {
         return simpleDao.findPagingDataByQueryObj(req, paging);
@@ -157,20 +160,20 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
      * @param paging 分页设置，可空
      * @return pagingData 分页数据
      */
-    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    @Operation(summary = STAT_ACTION)
     @Override
-    public PagingData<StatSimpleApiReq.Result> stat(StatSimpleApiReq req , Paging paging){
+    public PagingData<StatSimpleApiReq.Result> stat(StatSimpleApiReq req, Paging paging) {
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
-    public SimpleApiInfo findOne(QuerySimpleApiReq req){
+    public SimpleApiInfo findOne(QuerySimpleApiReq req) {
         return simpleDao.findOneByQueryObj(req);
     }
 
     @Override
-    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_SimpleApi.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {
     }

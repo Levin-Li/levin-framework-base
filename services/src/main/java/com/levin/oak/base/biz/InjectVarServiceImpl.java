@@ -3,6 +3,7 @@ package com.levin.oak.base.biz;
 
 import com.levin.commons.dao.DaoContext;
 import com.levin.commons.dao.SimpleDao;
+import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.utils.MapUtils;
@@ -118,7 +119,8 @@ public class InjectVarServiceImpl implements InjectVarService {
 
         TenantInfo tenantInfo = bizTenantService.checkAndGetCurrentUserTenant();
 
-        MapUtils.Builder<String, Object> builder = MapUtils.putFirst("tenantBindDomainEnable", frameworkProperties.getTenantBindDomain().isEnable());
+        MapUtils.Builder<String, Object> builder
+                = MapUtils.putFirst("tenantBindDomainEnable", frameworkProperties.getTenantBindDomain().isEnable());
 
         //当前登录用户
         if (baseAuthService.isLogin()) {
@@ -131,6 +133,7 @@ public class InjectVarServiceImpl implements InjectVarService {
                     .put(InjectConsts.USER_NAME, userInfo.getName())
                     .put(InjectConsts.USER, userInfo)
                     .put(InjectConsts.IS_SUPER_ADMIN, userInfo.isSuperAdmin())
+                    .put(InjectConsts.IS_TENANT_ADMIN, userInfo.getRoleList() != null && userInfo.getRoleList().contains(RbacRoleObject.ADMIN_ROLE))
                     .put(InjectConsts.ORG, userInfo.getOrg())
                     .put(InjectConsts.ORG_ID, userInfo.getOrgId());
 

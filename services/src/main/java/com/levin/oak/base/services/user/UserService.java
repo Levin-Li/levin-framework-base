@@ -31,7 +31,7 @@ public interface UserService {
      * @param req
      * @return pkId 主键ID
      */
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(summary = CREATE_ACTION)
     String create(@NotNull CreateUserReq req);
 
     /**
@@ -40,7 +40,7 @@ public interface UserService {
      * @param reqList
      * @return pkId 主键ID列表
      */
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(summary = BATCH_CREATE_ACTION)
     List<String> batchCreate(@NotNull List<CreateUserReq> reqList);
 
     /**
@@ -49,7 +49,7 @@ public interface UserService {
      * @param id 主键ID
      * @return data 数据详情
      */
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     UserInfo findById(@NotNull String id);
 
     /**
@@ -58,7 +58,7 @@ public interface UserService {
      * @param req
      * @return data 数据详情
      */
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     UserInfo findById(@NotNull UserIdReq req);
 
     /**
@@ -67,7 +67,7 @@ public interface UserService {
      * @param req
      * @return
      */
-    @Operation(tags = {BIZ_NAME}, summary = "修改密码")
+    @Operation(summary = "修改密码")
     int update(UpdateUserPwdReq req);
 
     /**
@@ -76,7 +76,7 @@ public interface UserService {
      * @param req
      * @return num 更新记录数
      */
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    @Operation(summary = UPDATE_ACTION)
     int update(@NotNull UpdateUserReq req);
 
     /**
@@ -85,7 +85,7 @@ public interface UserService {
      * @param reqList
      * @return num 更新记录数
      */
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
+    @Operation(summary = BATCH_UPDATE_ACTION)
     int batchUpdate(@NotNull List<UpdateUserReq> reqList);
 
     /**
@@ -94,7 +94,7 @@ public interface UserService {
      * @param req
      * @return num 删除记录数
      */
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(summary = DELETE_ACTION)
     int delete(@NotNull UserIdReq req);
 
     /**
@@ -103,7 +103,7 @@ public interface UserService {
      * @param req
      * @return num 删除记录数
      */
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    @Operation(summary = BATCH_DELETE_ACTION)
     int batchDelete(@NotNull DeleteUserReq req);
 
     /**
@@ -113,7 +113,7 @@ public interface UserService {
      * @param paging 分页设置，可空
      * @return pagingData 分页数据
      */
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     PagingData<UserInfo> query(@NotNull QueryUserReq req, Paging paging);
 
     /**
@@ -122,7 +122,7 @@ public interface UserService {
      * @param req
      * @return data 第一条数据
      */
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     UserInfo findOne(@NotNull QueryUserReq req);
 
     /**
@@ -130,7 +130,7 @@ public interface UserService {
      *
      * @param key 缓存Key
      */
-    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是主键ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
 
 

@@ -85,13 +85,13 @@ public class QueryRoleReq extends MultiTenantReq {
 
 //    @Schema(description = "指定的部门列表")
 //    @OR(autoClose = true)
-//    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class)
+//    @InjectVar(domain = "dao", expectBaseType = String.class, converter = JsonStrLikeConverter.class)
 //    @Contains
 //    private List<String> assignedOrgIdList;
 //
 //    @Schema(description = "资源权限列表")
 //    @OR(autoClose = true)
-//    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class)
+//    @InjectVar(domain = "dao", expectBaseType = String.class, converter = JsonStrLikeConverter.class)
 //    @Contains
 //    private List<String> permissionList;
 

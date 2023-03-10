@@ -2,6 +2,7 @@ package com.levin.oak.base.services.role.info;
 
 
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.Role.OrgDataScope;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -59,12 +60,12 @@ public class RoleInfo implements Serializable {
     private OrgDataScope orgDataScope;
 
 
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Schema(description = "指定的部门列表")
     private List<String> assignedOrgIdList;
 
 
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Schema(description = "资源权限列表")
     private List<String> permissionList;
 

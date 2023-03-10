@@ -79,7 +79,7 @@ public class QueryDictReq extends MultiTenantReq {
     private String containsCode;
 
 
-    //@InjectVar(domain = "dao", converter = DefaultJsonConverter.class)
+    //@InjectVar(domain = "dao", expectBaseType = String.class, converter = DefaultJsonConverter.class)
 
 //    @Schema(description = "编码项")
 //    private List<Item> itemList;

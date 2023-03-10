@@ -125,7 +125,7 @@ public class AmisController extends BaseController {
 
         String content;
 
-        @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+        @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
         List<String> requireAuthorizations;
     }
 

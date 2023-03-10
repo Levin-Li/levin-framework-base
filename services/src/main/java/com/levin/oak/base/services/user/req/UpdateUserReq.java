@@ -4,6 +4,7 @@ import com.levin.commons.dao.TargetOption;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.update.Update;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
@@ -53,7 +54,7 @@ public class UpdateUserReq extends MultiTenantReq {
     private String id;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#user.isSuperAdmin()")
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Size(max = 256)
@@ -83,7 +84,7 @@ public class UpdateUserReq extends MultiTenantReq {
     private Sex sex;
 
     @Size(max = 1800)
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
     @Schema(description = "标签列表")
     private List<String> tagList;
 
@@ -105,7 +106,7 @@ public class UpdateUserReq extends MultiTenantReq {
     private String jobPostCode;
 
     @Size(max = 1800)
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class)
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
     @Schema(description = "角色列表")
     private List<String> roleList;
 

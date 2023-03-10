@@ -2,6 +2,7 @@ package com.levin.oak.base.services.tenant.req;
 
 import com.levin.commons.dao.TargetOption;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.E_Tenant;
@@ -80,7 +81,7 @@ public class CreateTenantReq extends BaseReq {
     private String contractPhone;
 
     @Schema(description = "域名列表")
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     private List<String> domainList;
 
     @Schema(description = "appId")

@@ -10,6 +10,7 @@ import com.levin.commons.dao.annotation.misc.Fetch;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.dao.annotation.order.SimpleOrderBy;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.JsonStrLikeConverter;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
@@ -115,7 +116,7 @@ public class QueryUserReq extends MultiTenantReq {
     private Sex sex;
 
     @Schema(description = "模糊匹配 - 标签列表")
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = List.class, converter = JsonStrLikeConverter.class, isRequired = "false")
     @Contains
     @OR(autoClose = true)
     private List<String> containsTagList;
@@ -158,7 +159,7 @@ public class QueryUserReq extends MultiTenantReq {
 
     @Schema(description = "模糊匹配 - 角色列表")
     @OR(autoClose = true)
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = JsonStrLikeConverter.class, isRequired = "false")
     @Contains
     private List<String> containsRoleList;
 

@@ -24,14 +24,17 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
+
 import java.util.Date;
 ////////////////////////////////////
 
 /**
-* 通知处理日志
-* @Author Auto gen by simple-dao-codegen 2022-6-20 16:50:12
-*/
-@Schema(description ="通知处理日志")
+ * 通知处理日志
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-6-20 16:50:12
+ */
+@Schema(description = "通知处理日志")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor

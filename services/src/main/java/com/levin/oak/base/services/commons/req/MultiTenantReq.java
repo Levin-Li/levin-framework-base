@@ -8,6 +8,7 @@ import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.support.E_AbstractMultiTenantObject;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.InjectConsts;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -30,8 +31,8 @@ public abstract class MultiTenantReq
 
     @Schema(description = "租户ID", hidden = true)
     @InjectVar(value = InjectConsts.TENANT_ID
-            , isOverride = InjectVar.SPEL_PREFIX + "!#user.isSuperAdmin()" // 如果不是超级管理员, 那么覆盖必须的
-            , isRequired = InjectVar.SPEL_PREFIX + "!#user.isSuperAdmin()" // 如果不是超级管理员，那么值是必须的
+            , isOverride = InjectVar.SPEL_PREFIX + "!#" + InjectConsts.IS_SUPER_ADMIN // 如果不是超级管理员, 那么覆盖必须的
+            , isRequired = InjectVar.SPEL_PREFIX + "!#" + InjectConsts.IS_SUPER_ADMIN // 如果不是超级管理员，那么值是必须的
     )
     @OR(autoClose = true)
     @Eq

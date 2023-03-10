@@ -2,6 +2,7 @@ package com.levin.oak.base.services.appclient.info;
 
 
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

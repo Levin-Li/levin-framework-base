@@ -18,7 +18,9 @@ import javax.validation.constraints.*;
 
 import lombok.*;
 import lombok.experimental.*;
+
 import java.util.*;
+
 import com.levin.oak.base.services.simpleform.info.*;
 import com.levin.oak.base.entities.SimpleForm;
 import com.levin.oak.base.entities.*;
@@ -27,18 +29,20 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
+
 import java.util.Date;
 ////////////////////////////////////
 
 /**
-*  简单表单 主键通用请求
-*  //Auto gen by simple-dao-codegen 2022-5-23 10:30:01
-*/
+ * 简单表单 主键通用请求
+ * //Auto gen by simple-dao-codegen 2022-5-23 10:30:01
+ */
 
 @Schema(description = "简单表单 主键通用请求")
 @Data
 
-    @AllArgsConstructor
+@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
@@ -49,14 +53,14 @@ import java.util.Date;
 @TargetOption(entityClass = SimpleForm.class, alias = E_SimpleForm.ALIAS, resultClass = SimpleFormInfo.class)
 public class SimpleFormIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = 1598335188L;
+    private static final long serialVersionUID = 1598335188L;
 
 
-    @Schema(description = "id" , required = true)
+    @Schema(description = "id", required = true)
     @Eq(require = true)
     @NotNull
     protected String id;
-    
+
 
     @PostConstruct
     public void preQuery() {

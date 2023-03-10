@@ -18,7 +18,9 @@ import javax.validation.constraints.*;
 
 import lombok.*;
 import lombok.experimental.*;
+
 import java.util.*;
+
 import com.levin.oak.base.services.notice.info.*;
 import com.levin.oak.base.entities.Notice;
 import com.levin.oak.base.entities.*;
@@ -27,21 +29,24 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.oak.base.entities.Notice.*;
+
 import java.util.Date;
 import java.util.List;
+
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 /**
-*  通知 主键通用请求
-*  //Auto gen by simple-dao-codegen 2022-6-20 16:50:11
-*/
+ * 通知 主键通用请求
+ * //Auto gen by simple-dao-codegen 2022-6-20 16:50:11
+ */
 
 @Schema(description = "通知 主键通用请求")
 @Data
 
-    @AllArgsConstructor
+@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
@@ -52,16 +57,16 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 @TargetOption(entityClass = Notice.class, alias = E_Notice.ALIAS, resultClass = NoticeInfo.class)
 public class NoticeIdReq extends MultiTenantReq {
 
-private static final long serialVersionUID = 1394869526L;
+    private static final long serialVersionUID = 1394869526L;
 
 
-    @Schema(description = "id" , required = true)
+    @Schema(description = "id", required = true)
     @Eq(require = true)
     //@NotNull
     protected String id;
 
-    public NoticeIdReq setIdOnNotBlank(String id){
-        if(isNotBlank(id)){
+    public NoticeIdReq setIdOnNotBlank(String id) {
+        if (isNotBlank(id)) {
             this.id = id;
         }
         return this;

@@ -66,7 +66,7 @@ public class StatDictReq extends MultiTenantReq {
     @Contains
     String containsCode;
 
-    //@InjectVar(domain = "dao", converter = DefaultJsonConverter.class, isRequired = "false")
+    //@InjectVar(domain = "dao", expectBaseType = String.class, converter = DefaultJsonConverter.class, isRequired = "false")
 
 //    @Schema(description = "编码项")
 //     List<Item> itemList;

@@ -22,6 +22,7 @@ import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
+
 import java.util.*;
 
 import com.levin.oak.base.services.noticeprocesslog.info.*;
@@ -32,14 +33,17 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import java.util.Date;
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
+
+import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  查询通知处理日志
- *  @Author Auto gen by simple-dao-codegen 2022-6-20 16:50:12
+ * 查询通知处理日志
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-6-20 16:50:12
  */
 @Schema(description = "查询通知处理日志")
 @Data
@@ -51,7 +55,7 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = NoticeProcessLog.class, alias = E_NoticeProcessLog.ALIAS, resultClass = NoticeProcessLogInfo.class)
-public class QueryNoticeProcessLogReq extends MultiTenantReq{
+public class QueryNoticeProcessLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -1991983093L;
 
@@ -106,6 +110,7 @@ public class QueryNoticeProcessLogReq extends MultiTenantReq{
     public QueryNoticeProcessLogReq(String id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

@@ -24,14 +24,17 @@ import com.levin.oak.base.entities.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
+
 import java.util.Date;
 ////////////////////////////////////
 
 /**
-* 简单页面
-* @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
-*/
-@Schema(description ="简单页面")
+ * 简单页面
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
+ */
+@Schema(description = "简单页面")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor

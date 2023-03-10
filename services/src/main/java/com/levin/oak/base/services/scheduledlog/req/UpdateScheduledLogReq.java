@@ -47,7 +47,7 @@ public class UpdateScheduledLogReq extends MultiTenantReq {
     private Long id;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#user.isSuperAdmin()")
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @NotBlank

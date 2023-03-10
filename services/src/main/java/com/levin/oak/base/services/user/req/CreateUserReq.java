@@ -2,6 +2,7 @@ package com.levin.oak.base.services.user.req;
 
 import com.levin.commons.dao.TargetOption;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.E_User;
@@ -75,7 +76,7 @@ public class CreateUserReq extends MultiTenantReq {
 
     @Schema(description = "标签列表")
     @Size(max = 1800)
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     private List<String> tagList;
 
     @Schema(description = "帐号类型")
@@ -98,7 +99,7 @@ public class CreateUserReq extends MultiTenantReq {
 
     @Schema(description = "角色列表")
     @Size(max = 1800)
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     private List<String> roleList;
 
 

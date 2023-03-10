@@ -4,6 +4,7 @@ import com.levin.commons.dao.TargetOption;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.update.Update;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.levin.oak.base.entities.Dict;
 import com.levin.oak.base.entities.Dict.Item;
@@ -53,7 +54,7 @@ public class UpdateDictReq extends MultiTenantReq {
     private String id;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#user.isSuperAdmin()")
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Schema(description = "类型")
@@ -64,7 +65,7 @@ public class UpdateDictReq extends MultiTenantReq {
     @Schema(description = "编码")
     private String code;
 
-    @InjectVar(domain = "dao", converter = DefaultJsonConverter.class)
+    @InjectVar(domain = "dao", expectBaseType = String.class, converter = DefaultJsonConverter.class)
     @Schema(description = "编码项")
     private List<Item> itemList;
 

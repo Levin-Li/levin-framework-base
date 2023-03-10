@@ -18,6 +18,7 @@ import javax.validation.constraints.*;
 
 import lombok.*;
 import lombok.experimental.*;
+
 import java.util.*;
 
 import com.levin.oak.base.entities.NoticeProcessLog;
@@ -27,12 +28,14 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
+
 import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  删除通知处理日志
- *  //Auto gen by simple-dao-codegen 2022-6-20 16:50:12
+ * 删除通知处理日志
+ * //Auto gen by simple-dao-codegen 2022-6-20 16:50:12
  */
 @Schema(description = "删除通知处理日志")
 @Data
@@ -64,7 +67,6 @@ public class DeleteNoticeProcessLogReq extends MultiTenantReq {
         this.idList = idList;
         return this;
     }
-
 
 
     @PostConstruct

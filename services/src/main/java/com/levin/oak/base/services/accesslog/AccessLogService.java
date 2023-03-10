@@ -31,7 +31,7 @@ public interface AccessLogService {
      * @param req
      * @return pkId 主键ID
      */
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(summary = CREATE_ACTION)
     Long create(@NotNull CreateAccessLogReq req);
 
     /**
@@ -40,7 +40,7 @@ public interface AccessLogService {
      * @param reqList
      * @return pkId 主键ID列表
      */
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(summary = BATCH_CREATE_ACTION)
     List<Long> batchCreate(@NotNull List<CreateAccessLogReq> reqList);
 
     /**
@@ -49,7 +49,7 @@ public interface AccessLogService {
      * @param id 主键ID
      * @return data 数据详情
      */
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     AccessLogInfo findById(@NotNull Long id);
 
     /**
@@ -58,7 +58,7 @@ public interface AccessLogService {
      * @param req
      * @return data 数据详情
      */
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     AccessLogInfo findById(@NotNull AccessLogIdReq req);
 
     /**
@@ -67,7 +67,7 @@ public interface AccessLogService {
      * @param req
      * @return num 更新记录数
      */
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    @Operation(summary = UPDATE_ACTION)
     int update(@NotNull UpdateAccessLogReq req);
 
     /**
@@ -76,7 +76,7 @@ public interface AccessLogService {
      * @param reqList
      * @return num 更新记录数
      */
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
+    @Operation(summary = BATCH_UPDATE_ACTION)
     int batchUpdate(@NotNull List<UpdateAccessLogReq> reqList);
 
     /**
@@ -85,7 +85,7 @@ public interface AccessLogService {
      * @param req
      * @return num 删除记录数
      */
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(summary = DELETE_ACTION)
     int delete(@NotNull AccessLogIdReq req);
 
     /**
@@ -94,7 +94,7 @@ public interface AccessLogService {
      * @param req
      * @return num 删除记录数
      */
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    @Operation(summary = BATCH_DELETE_ACTION)
     int batchDelete(@NotNull DeleteAccessLogReq req);
 
     /**
@@ -104,7 +104,7 @@ public interface AccessLogService {
      * @param paging 分页设置，可空
      * @return pagingData 分页数据
      */
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     PagingData<AccessLogInfo> query(@NotNull QueryAccessLogReq req, Paging paging);
 
     /**
@@ -113,7 +113,7 @@ public interface AccessLogService {
      * @param req
      * @return data 第一条数据
      */
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     AccessLogInfo findOne(@NotNull QueryAccessLogReq req);
 
     /**
@@ -121,7 +121,7 @@ public interface AccessLogService {
      *
      * @param key 缓存Key
      */
-    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是主键ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
 
 }

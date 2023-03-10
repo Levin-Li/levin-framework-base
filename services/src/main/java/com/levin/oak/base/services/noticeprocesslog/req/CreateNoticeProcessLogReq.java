@@ -5,8 +5,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 /////////////////////////////////////////////////////
 import javax.validation.constraints.*;
 import javax.annotation.*;
+
 import lombok.*;
 import lombok.experimental.*;
+
 import java.util.*;
 
 ///////////////////////////////////////////////////////
@@ -27,13 +29,15 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
+
 import java.util.Date;
 ////////////////////////////////////
 
 
 /**
- *  新增通知处理日志
- *  //Auto gen by simple-dao-codegen 2022-6-20 16:50:12
+ * 新增通知处理日志
+ * //Auto gen by simple-dao-codegen 2022-6-20 16:50:12
  */
 @Schema(description = "新增通知处理日志")
 @Data
@@ -50,26 +54,26 @@ public class CreateNoticeProcessLogReq extends MultiTenantReq {
     private static final long serialVersionUID = -1991983093L;
 
 
-    @Schema(description = "用户ID"  , required = true)
+    @Schema(description = "用户ID", required = true)
     @NotBlank
     @InjectVar()
     @Size(max = 128)
     String ownerId;
 
-    @Schema(description = "消息ID"  , required = true)
+    @Schema(description = "消息ID", required = true)
     @NotBlank
     @Size(max = 128)
     String noticeId;
 
-    @Schema(description = "处理状态"  )
+    @Schema(description = "处理状态")
     @Size(max = 128)
     String status;
 
-    @Schema(description = "处理时间"  , required = true)
+    @Schema(description = "处理时间", required = true)
     @NotNull
     Date createTime;
 
-    @Schema(description = "备注"  )
+    @Schema(description = "备注")
     @Size(max = 512)
     String remark;
 
@@ -77,10 +81,10 @@ public class CreateNoticeProcessLogReq extends MultiTenantReq {
     @PostConstruct
     public void prePersist() {
 
-       //@todo 保存之前初始化数据
+        //@todo 保存之前初始化数据
 
 
-        if(getCreateTime() == null){
+        if (getCreateTime() == null) {
             setCreateTime(new Date());
         }
 

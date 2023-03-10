@@ -22,6 +22,7 @@ import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
+
 import java.util.*;
 import java.io.Serializable;
 
@@ -33,17 +34,21 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import com.levin.oak.base.entities.Notice.*;
-    import java.util.Date;
-    import java.util.List;
-    import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
+import com.levin.oak.base.entities.Notice.*;
+
+import java.util.Date;
+import java.util.List;
+
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 /**
- *  统计通知
- *  @Author Auto gen by simple-dao-codegen 2022-6-20 16:50:12
+ * 统计通知
+ *
+ * @Author Auto gen by simple-dao-codegen 2022-6-20 16:50:12
  */
 @Schema(description = "统计通知")
 @Data
@@ -55,11 +60,11 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Notice.class, alias = E_Notice.ALIAS,
-     //连接统计
-    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
-    resultClass = StatNoticeReq.Result.class
+        //连接统计
+        //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
+        resultClass = StatNoticeReq.Result.class
 )
-public class StatNoticeReq extends MultiTenantReq{
+public class StatNoticeReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1394869526L;
 
@@ -110,7 +115,7 @@ public class StatNoticeReq extends MultiTenantReq{
     String containsName;
 
     //@Size(max = 128)
-    //@InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    //@InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Schema(title = "拼音名称", description = "拼音，格式Json数组：[全拼,简拼]")
     List<String> pinyinName;
 
@@ -179,7 +184,7 @@ public class StatNoticeReq extends MultiTenantReq{
 
     @PostConstruct
     public void preStat() {
-    //@todo 统计之前初始化数据
+        //@todo 统计之前初始化数据
     }
 
     @Schema(description = "通知统计结果")

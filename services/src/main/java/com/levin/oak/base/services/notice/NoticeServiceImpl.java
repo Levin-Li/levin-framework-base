@@ -4,7 +4,6 @@ import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 
-
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.support.*;
 import com.levin.commons.service.domain.*;
@@ -12,6 +11,7 @@ import com.levin.commons.service.domain.*;
 import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
+
 import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
@@ -27,7 +27,9 @@ import io.swagger.v3.oas.annotations.tags.*;
 import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
+
 import cn.hutool.core.lang.*;
+
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
@@ -46,17 +48,19 @@ import com.levin.oak.base.services.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.*;
 import com.levin.oak.base.entities.Notice.*;
+
 import java.util.Date;
 import java.util.List;
+
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 /**
- *  通知-服务实现
+ * 通知-服务实现
  *
- *@author auto gen by simple-dao-codegen 2022-6-20 16:50:12
- *
+ * @author auto gen by simple-dao-codegen 2022-6-20 16:50:12
  */
 
 //@Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
@@ -72,43 +76,43 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
     @Autowired
     private SimpleDao simpleDao;
 
-    protected NoticeService getSelfProxy(){
+    protected NoticeService getSelfProxy() {
         return getSelfProxy(NoticeService.class);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(summary = CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public String create(CreateNoticeReq req){
+    public String create(CreateNoticeReq req) {
         Notice entity = simpleDao.create(req);
         return entity.getId();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<String> batchCreate(List<CreateNoticeReq> reqList){
+    public List<String> batchCreate(List<CreateNoticeReq> reqList) {
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    @Cacheable(sync = false, condition = "#id != null", unless = "#result == null ", key = E_Notice.CACHE_KEY_PREFIX + "#id")
+    @Cacheable(condition = "#id != null", unless = "#result == null ", key = E_Notice.CACHE_KEY_PREFIX + "#id")
     public NoticeInfo findById(String id) {
         return findById(new NoticeIdReq().setId(id));
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //只更新缓存
-    @CachePut(unless = "#result == null" , condition = "#req.id != null" , key = E_Notice.CACHE_KEY_PREFIX + "#req.id")
+    @CachePut(unless = "#result == null", condition = "#req.id != null", key = E_Notice.CACHE_KEY_PREFIX + "#req.id")
     public NoticeInfo findById(NoticeIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findOneByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    @Operation(summary = UPDATE_ACTION)
     @Override
     @CacheEvict(condition = "#req.id != null", key = E_Notice.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
@@ -117,15 +121,15 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
         return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
+    @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public int batchUpdate(List<UpdateNoticeReq> reqList){
+    public int batchUpdate(List<UpdateNoticeReq> reqList) {
         //@Todo 优化批量提交
         return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n).sum();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(summary = DELETE_ACTION)
     @Override
     @CacheEvict(condition = "#req.id != null", key = E_Notice.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
@@ -134,19 +138,19 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
         return checkResult(simpleDao.deleteByQueryObj(req), DELETE_ACTION);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public int batchDelete(DeleteNoticeReq req){
+    public int batchDelete(DeleteNoticeReq req) {
         //@Todo 优化批量提交
         return Stream.of(req.getIdList())
-            .map(id -> simpleDao.copy(req, new NoticeIdReq().setId(id)))
-            .map(idReq -> getSelfProxy().delete(idReq))
-            .mapToInt(n -> n)
-            .sum();
+                .map(id -> simpleDao.copy(req, new NoticeIdReq().setId(id)))
+                .map(idReq -> getSelfProxy().delete(idReq))
+                .mapToInt(n -> n)
+                .sum();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
     public PagingData<NoticeInfo> query(QueryNoticeReq req, Paging paging) {
         return simpleDao.findPagingDataByQueryObj(req, paging);
@@ -159,15 +163,15 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
      * @param paging 分页设置，可空
      * @return pagingData 分页数据
      */
-    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    @Operation(summary = STAT_ACTION)
     @Override
-    public PagingData<StatNoticeReq.Result> stat(StatNoticeReq req , Paging paging){
+    public PagingData<StatNoticeReq.Result> stat(StatNoticeReq req, Paging paging) {
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
-    public NoticeInfo findOne(QueryNoticeReq req){
+    public NoticeInfo findOne(QueryNoticeReq req) {
         return simpleDao.findOneByQueryObj(req);
     }
 
@@ -178,13 +182,13 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
      * @return record count
      */
     @Override
-    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
-    public int count(QueryNoticeReq req){
+    @Operation(summary = STAT_ACTION)
+    public int count(QueryNoticeReq req) {
         return (int) simpleDao.countByQueryObj(req);
     }
 
     @Override
-    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_Notice.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {
     }
