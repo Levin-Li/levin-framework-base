@@ -51,6 +51,7 @@ public class ModuleSwaggerConfigurer
 
     @PostConstruct
     void init() {
+
         if (!StringUtils.hasText(enumDelimiter)) {
             enumDelimiter = "--";
         }

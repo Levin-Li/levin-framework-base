@@ -23,7 +23,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.*;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
@@ -60,7 +59,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     @Value("${springfox.documentation.swagger-ui.base-url:/swagger-ui}")
     private String swaggerUiBaseUrl;
 
-    @Value("${knifeUrl:doc.html}")
+    @Value("${knifeUrl:/doc.html}")
     private String knifeUrl;
 
     @Value("${open-api.v3.path:/v3/api-docs}")
@@ -170,6 +169,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                 }).addPathPatterns("/**")
                 .order(Ordered.HIGHEST_PRECEDENCE);
 
+        //要求租户绑定域名
         if (frameworkProperties.getTenantBindDomain().isEnable()) {
 
             HandlerInterceptor handlerInterceptor = new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)
@@ -208,6 +208,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     .order(Ordered.HIGHEST_PRECEDENCE + 2000);
         }
 
+
         if (frameworkProperties.getControllerAcl().isEnable()) {
 
             HandlerInterceptor handlerInterceptor = new ControllerAuthorizeInterceptor(rbacService
@@ -226,12 +227,12 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     .order(Ordered.HIGHEST_PRECEDENCE + 3000);
         }
 
-        if (StringUtils.hasText(frameworkProperties.getAdminPath())) {
-            //资源拦截器
-            registry.addInterceptor(resourceAuthorizeInterceptor())
-                    .addPathPatterns((frameworkProperties.getAdminPath() + "/**").replace("//", "/"))
-                    .order(Ordered.HIGHEST_PRECEDENCE + 4000);
-        }
+        log.info("全局资源拦截器已经启用，" + frameworkProperties.getResourcesAcl());
+
+        //全局资源拦截器
+        registry.addInterceptor(resourceAuthorizeInterceptor())
+                .addPathPatterns("/**")
+                .order(Ordered.HIGHEST_PRECEDENCE + 4000);
 
     }
 

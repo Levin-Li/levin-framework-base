@@ -1,5 +1,6 @@
 package com.levin.oak.base.interceptor;
 
+import cn.hutool.core.lang.Assert;
 import com.levin.commons.rbac.AuthorizationException;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
@@ -87,10 +88,7 @@ public class ResourceAuthorizeInterceptor
             return true;
         }
 
-        if (!authService.isLogin()) {
-            throw new AuthorizationException("UnAuthorization", "未登录");
-           // return false;
-        }
+        Assert.isTrue(authService.isLogin(), () -> new AuthorizationException("UnAuthorization", "未登录"));
 
         if (resCfg.isOnlyRequireAuthenticated()) {
             return true;
@@ -102,9 +100,7 @@ public class ResourceAuthorizeInterceptor
             throw new AuthorizationException("res-" + rp, "未授权的资源：" + info);
         });
 
-        if (!ok) {
-            throw new AuthorizationException("UnAuthorization", "未授权的操作");
-        }
+        Assert.isTrue(ok, () -> new AuthorizationException("UnAuthorization", "未授权的操作"));
 
         return ok;
     }

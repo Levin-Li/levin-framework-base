@@ -47,8 +47,8 @@ public class LoginReq implements AuthReq, ServiceReq {
     @InjectVar(isRequired = "false")
     //租户绑定域名启用时，可以
 //    @OR(autoClose = true, condition = "#tenantBindDomainEnable")
-    @IsNull(condition = "account == 'sa'", desc = "只有 sa 用户允许租户ID为空")
-    @Eq(condition = "account != 'sa'", desc = "只有 sa 用户允许租户ID为空")
+    @IsNull(condition = "#account == 'sa'", desc = "只有 sa 用户允许租户ID为空")
+    @Eq(condition = "#account != 'sa'", desc = "只有 sa 用户允许租户ID为空")
     protected String tenantId;
 
     @Schema(description = "登录名/手机号/邮箱", required = true)

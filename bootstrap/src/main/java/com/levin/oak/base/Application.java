@@ -29,6 +29,7 @@ import org.springframework.web.filter.CorsFilter;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.lang.reflect.Type;
+import java.util.stream.Stream;
 
 /**
  *  启动类
@@ -42,6 +43,9 @@ import java.lang.reflect.Type;
 public class Application {
 
     public static void main(String... args) {
+
+        boolean b = Stream.of(args).allMatch(arg -> arg.length() > 0);
+
         SpringApplication.run(Application.class, args);
     }
 
