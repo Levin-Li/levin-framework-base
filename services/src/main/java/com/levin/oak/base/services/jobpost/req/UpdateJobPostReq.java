@@ -3,6 +3,7 @@ package com.levin.oak.base.services.jobpost.req;
 import com.levin.commons.dao.TargetOption;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.update.Update;
+import com.levin.commons.service.support.*;
 import com.levin.oak.base.entities.E_JobPost;
 import com.levin.oak.base.entities.JobPost;
 import com.levin.oak.base.entities.JobPost.Type;

@@ -3,6 +3,7 @@ package com.levin.oak.base.services.apperrorlog.req;
 import com.levin.commons.dao.TargetOption;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.update.Update;
+import com.levin.commons.service.support.*;
 import com.levin.oak.base.entities.AppErrorLog;
 import com.levin.oak.base.entities.E_AppErrorLog;
 import com.levin.oak.base.services.commons.req.MultiTenantReq;
