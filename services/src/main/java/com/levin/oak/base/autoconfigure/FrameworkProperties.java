@@ -141,6 +141,8 @@ public class FrameworkProperties
 
         protected boolean andMode = true;
 
+        protected boolean denied = false;
+
         /**
          * 需要的权限列表，包括角色
          */

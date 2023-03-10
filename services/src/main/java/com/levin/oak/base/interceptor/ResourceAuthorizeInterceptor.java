@@ -88,6 +88,10 @@ public class ResourceAuthorizeInterceptor
             return true;
         }
 
+        if (resCfg.isDenied()) {
+            return false;
+        }
+
         Assert.isTrue(authService.isLogin(), () -> new AuthorizationException("UnAuthorization", "未登录"));
 
         if (resCfg.isOnlyRequireAuthenticated()) {
