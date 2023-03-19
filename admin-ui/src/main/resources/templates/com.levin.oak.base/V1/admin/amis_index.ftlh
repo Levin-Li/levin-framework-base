@@ -10,19 +10,18 @@
     />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
-    <link
-            rel="stylesheet"
-            title="default"
-            href="https://unpkg.com/amis/sdk/sdk.css"
+    <link rel="stylesheet" title="default"
+          href="https://unpkg.com/amis/sdk/sdk.css"
     />
-    <link
-            rel="stylesheet"
-            href="https://unpkg.com/amis/sdk/helper.css"
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/amis/sdk/helper.css"
     />
-    <link
-            rel="stylesheet"
-            href="https://unpkg.com/amis/sdk/iconfont.css"
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/amis/sdk/iconfont.css"
     />
+
     <script src="https://unpkg.com/amis/sdk/sdk.js"></script>
     <script src="https://unpkg.com/vue@2"></script>
     <script src="https://unpkg.com/history@4.10.1/umd/history.js"></script>
@@ -44,7 +43,7 @@
             /*左侧菜单栏宽度*/
             --Layout-aside-width: 15rem;
             /*--Avatar-width:1.6rem;*/
-            ${amisRootCss}
+        ${amisRootCss}
         }
     </style>
 </head>
@@ -170,7 +169,7 @@
                                         "label": "修改密码",
                                         "level": "primary",
                                         "actionType": "dialog",
-                                        showErrorMsg:false,
+                                        showErrorMsg: false,
                                         "dialog": {
                                             "title": "修改密码",
                                             "body": {
