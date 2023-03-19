@@ -242,7 +242,7 @@ public class AmisController extends BaseController {
      *
      * @return ApiResp
      */
-    @RequestMapping(value = "{uiType}", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/{uiType}", method = {RequestMethod.GET, RequestMethod.POST})
     @Operation(summary = "获取AmisUI界面(5分钟刷新)")
     public String getUiContent(@PathVariable String uiType, String path, String type, String category, CommonReq shareReq) {
 

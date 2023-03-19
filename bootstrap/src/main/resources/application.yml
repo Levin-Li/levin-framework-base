@@ -106,7 +106,7 @@ plugin:
             sign:
               enable: false
             log:
-              exclude-path-patterns: "/v3/api-docs/**"
+              exclude-path-patterns: /v3/api-docs/**,/**/api/amis/page
 
             resourcesAcl:
               - includePathPatterns: "/templates/com.levin.oak.base/**"
