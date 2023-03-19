@@ -109,10 +109,6 @@ public class AmisController extends BaseController {
     @Autowired
     SimpleDao simpleDao;
 
-    @Autowired
-    UiCodeGen uiCodeGen;
-
-
     final LRUCache<String, Page> lruCache = CacheUtil.newLRUCache(10 * 1000, 5 * 60 * 1000);
 
     @Data
@@ -141,7 +137,7 @@ public class AmisController extends BaseController {
      * @return ApiResp
      */
     @RequestMapping(value = "appMenuList", method = {RequestMethod.GET, RequestMethod.POST})
-    @Operation(tags = {"Amis支持"}, summary = "获取Amis菜单列表")
+    @Operation(summary = "获取Amis菜单列表")
     public AmisResp getAmisAppMenuList(boolean isShowNotPermissionMenu) {
 
         AmisResp resp = AmisResp.builder().build();
@@ -247,7 +243,7 @@ public class AmisController extends BaseController {
      * @return ApiResp
      */
     @RequestMapping(value = "{uiType}", method = {RequestMethod.GET, RequestMethod.POST})
-    @Operation(tags = {"Amis支持"}, summary = "获取Amis UI界面-5分钟刷新")
+    @Operation(summary = "获取AmisUI界面(5分钟刷新)")
     public String getUiContent(@PathVariable String uiType, String path, String type, String category, CommonReq shareReq) {
 
         Assert.hasText(path, "path 必须指定");

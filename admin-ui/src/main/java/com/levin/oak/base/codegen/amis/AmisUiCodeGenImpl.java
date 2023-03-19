@@ -27,7 +27,6 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 public class AmisUiCodeGenImpl
         implements UiCodeGen {
 
-
     @Autowired
     protected HttpServletRequest httpRequest;
 

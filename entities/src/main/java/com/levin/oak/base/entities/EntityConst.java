@@ -25,6 +25,7 @@ public interface EntityConst
 
     /**
      * 需要有管理员角色
+     *
      */
     String SYS_TYPE_NAME = "系统管理";
 
