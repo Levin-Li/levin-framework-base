@@ -1,31 +1,29 @@
 <!-- htmlcs-disable -->
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="UTF-8"/>
-    <title>Editor</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>    
-    <link rel="stylesheet" href="pkg/npm_deps_bc660f2.css" />
-    <link rel="stylesheet" href="node_modules/amis-editor/dist/style.css" />
+    <head>
+        <meta charset="UTF-8" />
+        <title>Editor</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />            
+    <link rel="stylesheet" href="pkg/npm_deps_592c5ff.css" />
 </head>
 
 <body>
-<div id="root" class="app-wrapper"></div><!--<script src="./jsrsasign-all-min.js"></script>-->
-<script src="mod_1e44709.js"></script>
-<script type="text/javascript" src="pkg/editor.html_map_80e7424.js"></script>
+<div id="root" class="app-wrapper"></div>
+<!--<script src="./jsrsasign-all-min.js"></script>-->
+<script src="mod_3f80d17.js"></script>
+<script type="text/javascript" src="pkg/editor.html_map_c89ed2d.js"></script>
 <script type="text/javascript">
     /* @require ./index.jsx 标记为同步依赖，提前加载 */
 
     // 备注: 需要带上自定义组件，避免移动端渲染异常
     /* globals amis */
-    amis.require(['node_modules/amis-editor/dist/index.min','node_modules/react-dom/index','renderer/MyRenderer.tsx'], function (editor, reactDom) {
+    amis.require(['node_modules/amis-editor/lib/index','node_modules/react-dom/index','./renderer/MyRenderer'], function (editor, reactDom) {
         editor.mountInIframe(document.getElementById('root'), reactDom);
     });
 
 </script>
 </body>
-
 </html>

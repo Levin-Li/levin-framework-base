@@ -10,29 +10,24 @@
     />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
-    <link rel="stylesheet"
-          title="default"
-          href="amis@beta/sdk/sdk.css"
-            <#--             href="https://unpkg.com/amis@beta/sdk/antd.css"-->
+    <link
+            rel="stylesheet"
+            title="default"
+            href="https://unpkg.com/amis/sdk/sdk.css"
     />
-
-    <link rel="stylesheet"
-          href="amis@beta/sdk/helper.css"
-            <#--          href="https://unpkg.com/amis@beta/sdk/helper.css"-->
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/amis/sdk/helper.css"
     />
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/amis/sdk/iconfont.css"
+    />
+    <script src="https://unpkg.com/amis/sdk/sdk.js"></script>
+    <script src="https://unpkg.com/vue@2"></script>
+    <script src="https://unpkg.com/history@4.10.1/umd/history.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/amis.css">
-
-    <#--    <script src="https://unpkg.com/amis@beta/sdk/sdk.js"></script>-->
-    <script src="amis@beta/sdk/sdk.js"></script>
-
-    <#--    <script src="https://unpkg.com/vue@2"></script>-->
-
-    <script src="vue/dist/vue.min.js"></script>
-
-    <#--    <script src="https://unpkg.com/history@4.10.1/umd/history.js"></script>-->
-    <script src="history@4.10.1/umd/history.production.min.js"></script>
-
 
     <style>
         html,
