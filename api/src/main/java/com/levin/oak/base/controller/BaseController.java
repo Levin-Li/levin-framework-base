@@ -1,5 +1,6 @@
 package com.levin.oak.base.controller;
 
+import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.oak.base.ModuleOption;
@@ -39,6 +40,9 @@ public abstract class BaseController {
 
     @Autowired
     protected ApplicationContext applicationContext;
+
+    @Autowired
+    protected SimpleDao simpleDao;
 
     protected Object selfProxy = null;
 
