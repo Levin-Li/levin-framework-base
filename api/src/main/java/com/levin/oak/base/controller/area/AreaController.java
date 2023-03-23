@@ -2,6 +2,8 @@ package com.levin.oak.base.controller.area;
 
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.ui.annotation.CRUD;
+import com.levin.commons.ui.annotation.Form;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -52,7 +54,6 @@ import static com.levin.oak.base.entities.EntityConst.*;
 //默认需要权限访问
 @ResAuthorize(domain = ID, type = TYPE_NAME, isAndMode = true, anyRoles = {RbacRoleObject.SA_ROLE})
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
-
 @Valid
 public class AreaController extends BaseController{
 
@@ -70,7 +71,7 @@ public class AreaController extends BaseController{
     @GetMapping("/query")
     @ResAuthorize(onlyRequireAuthenticated = true)
     @Operation( summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<AreaInfo>> query(QueryAreaReq req , SimplePaging paging) {
+    public ApiResp<PagingData<AreaInfo>> query(@Form QueryAreaReq req , SimplePaging paging) {
         return ApiResp.ok(areaService.query(req,paging));
     }
 

@@ -6,9 +6,12 @@ spring:
     username: dev
     password: dev
 
+#  cache:
+#    type: caffeine
+
   jpa:
     show-sql: false
     generate-ddl: true
     database: MYSQL
     hibernate:
-      ddl-auto: create
+      ddl-auto: update

@@ -271,7 +271,7 @@ public class AmisController extends BaseController {
         final Class<? extends SimpleEntity> aClass = "page".equalsIgnoreCase(uiType) ? SimplePage.class : SimpleForm.class;
 
         page = simpleDao.selectFrom(aClass)
-                //  .disableEmptyValueFilter()
+//                  .disableEmptyValueFilter()
                 .eq(E_SimpleEntity.type, type)
                 .eq(E_SimpleEntity.category, category)
                 .eq(E_SimpleEntity.path, path)
