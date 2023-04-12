@@ -193,7 +193,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                 }).addPathPatterns("/**")
                 .order(Ordered.HIGHEST_PRECEDENCE + 2000);
 
-
         //控制访问控制
         if (frameworkProperties.getControllerAcl().isEnable()) {
 
@@ -231,9 +230,10 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         registration
                 .excludePathPatterns(serverProperties.getError().getPath())
-                .excludePathPatterns(safeUrl("/" + openApiPath + "/**"))
-                .excludePathPatterns(safeUrl("/" + swaggerUiBaseUrl + "/**"))
-                .excludePathPatterns(safeUrl("/" + knifeUrl));
+//                .excludePathPatterns(safeUrl("/" + openApiPath + "/**"))
+//                .excludePathPatterns(safeUrl("/" + swaggerUiBaseUrl + "/**"))
+//                .excludePathPatterns(safeUrl("/" + knifeUrl))
+        ;
 
         if (excludePathPatterns != null) {
             excludePathPatterns.forEach(url -> registration.excludePathPatterns(safeUrl(url)));

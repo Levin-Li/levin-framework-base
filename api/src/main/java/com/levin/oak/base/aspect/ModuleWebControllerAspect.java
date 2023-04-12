@@ -213,8 +213,8 @@ public class ModuleWebControllerAspect {
         }
 
         return moduleResolverMap.getOrDefault(packageName, Collections.emptyList());
-
     }
+
 
     /**
      * 变量注入
@@ -303,8 +303,10 @@ public class ModuleWebControllerAspect {
 
         final String className = joinPoint.getSignature().getDeclaringTypeName();
 
-        //去除应用路径后，进行匹配
-        if (path.equals(serverProperties.getError().getPath())
+        //去除应用路径后，进行匹配，默认springdoc不记录日志
+        if (className.startsWith("springfox.")
+                || className.startsWith("org.springdoc.")
+                || path.equals(serverProperties.getError().getPath())
                 || !frameworkProperties.getLog().isMatched(className, path)) {
             return joinPoint.proceed(joinPoint.getArgs());
         }
