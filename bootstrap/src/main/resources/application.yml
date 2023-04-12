@@ -100,7 +100,7 @@ plugin:
       oak:
         base:
           framework:
-            admin-path: /
+            admin-path: /admin
             controller-acl:
               exclude-path-patterns: "/v3/api-docs/**"
             sign:
@@ -111,8 +111,6 @@ plugin:
             resourcesAcl:
               - includePathPatterns: "/templates/com.levin.oak.base/**"
                 denied: true
-              - exclude-path-patterns: /doc.html,/swagger-ui
+              - exclude-path-patterns: /doc.html,/swagger-ui/**,/admin/**,/webjars/**
 
             enable-mock-sms-send: true
-
-

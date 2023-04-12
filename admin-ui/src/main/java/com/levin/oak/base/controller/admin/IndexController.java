@@ -104,9 +104,14 @@ public class IndexController extends BaseController {
 
     @PostConstruct
     public void init() {
-        log.info("默认管理后台UI启用，访问路径:" + nullSafe(frameworkProperties.getAdminPath(), ADMIN_UI_PATH));
+        log.info("*** 默认管理后台UI启用，访问路径:" + nullSafe(frameworkProperties.getAdminPath(), ADMIN_UI_PATH));
     }
 
+    @GetMapping({""})
+    @Operation(summary = "首页", description = "首页")
+    public String index0(Model modelMap) throws IOException {
+        return "redirect:" + httpRequest.getRequestURI() + "/";
+    }
 
     /**
      * 首页
@@ -127,7 +132,7 @@ public class IndexController extends BaseController {
      * @return ApiResp
      */
     @SneakyThrows
-    @GetMapping({""})
+    @GetMapping({"/"})
     @Operation(summary = "首页", description = "首页")
     public String index(Model modelMap) throws IOException {
 
@@ -143,10 +148,10 @@ public class IndexController extends BaseController {
                 authService.logout();
             }
 
-            //request.getRequestURL():http://localhost:8080/bzbs/system/login.jsp
-//        request.getRequestURI():/bzbs/system/login.jsp
-//        request.getContextPath():/bzbs
-//        request.getServletPath():/system/login.jsp
+            //        request.getRequestURL():http://localhost:8080/bzbs/system/login.jsp
+            //        request.getRequestURI():/bzbs/system/login.jsp
+            //        request.getContextPath():/bzbs
+            //        request.getServletPath():/system/login.jsp
 
             return "redirect:" + httpRequest.getRequestURI();
         }
@@ -246,7 +251,6 @@ public class IndexController extends BaseController {
             //必须要使用前缀再重定向
             return "redirect:" + redirectUrl;
         }
-
 
         return ADMIN_UI_PATH + (authService.isLogin() ?
                 nullSafe(frameworkProperties.getAdminIndexTemplate(), "amis_index")
