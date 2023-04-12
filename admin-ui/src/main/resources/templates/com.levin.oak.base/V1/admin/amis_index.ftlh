@@ -95,7 +95,7 @@
             amisLib.confirm("确定要退出？", "提示", "确定")
                 .then((ok) => {
                     if (ok) {
-                        window.location = window._HOST_ROOT_URL + "?action=relogin";
+                        location = location.pathname + "?action=relogin";
                     }
                 })
         }

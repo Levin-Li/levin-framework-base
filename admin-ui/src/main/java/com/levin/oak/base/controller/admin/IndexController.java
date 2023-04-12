@@ -1,5 +1,7 @@
 package com.levin.oak.base.controller.admin;
 
+import cn.hutool.core.util.URLUtil;
+import cn.hutool.jwt.JWT;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.rbac.MenuResTag;
@@ -17,6 +19,7 @@ import com.levin.oak.base.services.setting.info.SettingInfo;
 import com.levin.oak.base.services.setting.req.CreateSettingReq;
 import com.levin.oak.base.services.setting.req.QuerySettingReq;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
+import com.levin.oak.base.utils.UrlPathUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.SneakyThrows;
@@ -39,7 +42,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -110,7 +114,7 @@ public class IndexController extends BaseController {
     @GetMapping({""})
     @Operation(summary = "首页", description = "首页")
     public String index0(Model modelMap) throws IOException {
-        return "redirect:" + httpRequest.getRequestURI() + "/";
+        return "redirect:" + UrlPathUtils.safeUrl(completeUrlParams(httpRequest.getRequestURI() + "/index"));
     }
 
     /**
@@ -132,9 +136,11 @@ public class IndexController extends BaseController {
      * @return ApiResp
      */
     @SneakyThrows
-    @GetMapping({"/"})
+    @GetMapping({"index"})
     @Operation(summary = "首页", description = "首页")
     public String index(Model modelMap) throws IOException {
+
+        modelMap.addAttribute("request", httpRequest);
 
         //验证码相关
         modelMap.addAttribute(FrameworkProperties.Fields.enableSmsVerificationCode, frameworkProperties.isEnableSmsVerificationCode());
@@ -158,7 +164,7 @@ public class IndexController extends BaseController {
 
         String basePath = getContextPath() + API_PATH;
 
-        final String adminBasePath = (getContextPath() + "/" + frameworkProperties.getAdminPath()).replace("//", "/");
+        final String adminBasePath = UrlPathUtils.safeUrl(getContextPath() + "/" + frameworkProperties.getAdminPath());
 
         modelMap.addAttribute("appPath", adminBasePath);
         modelMap.addAttribute("appName", frameworkProperties.getSysName());
@@ -252,10 +258,30 @@ public class IndexController extends BaseController {
             return "redirect:" + redirectUrl;
         }
 
-        return ADMIN_UI_PATH + (authService.isLogin() ?
+        String viewPath = ADMIN_UI_PATH + (authService.isLogin() ?
                 nullSafe(frameworkProperties.getAdminIndexTemplate(), "amis_index")
                 : nullSafe(frameworkProperties.getAdminLoginTemplate(), "login_index")
         );
+
+        return viewPath;
+    }
+
+    private String completeUrlParams(String url) {
+        return appendQueryParams(url, httpRequest.getQueryString());
+    }
+
+    private String appendQueryParams(String url, String queryParams) {
+
+        if (StringUtils.hasText(queryParams))
+            return url + (url.contains("?") ? "&" : "?") + URLUtil.encodeQuery(queryParams);
+        else
+            return url;
+    }
+
+    @GetMapping({"editor"})
+    @Operation(summary = "首页", description = "首页")
+    public String editor0(Model modelMap) throws IOException {
+        return "redirect:" + UrlPathUtils.safeUrl(completeUrlParams(httpRequest.getRequestURI() + "/index"));
     }
 
     /**
@@ -264,7 +290,7 @@ public class IndexController extends BaseController {
      * @return ApiResp
      */
     @SneakyThrows
-    @GetMapping("editor")
+    @GetMapping("editor/index")
     @Operation(summary = "页面编辑", description = "页面编辑")
     @ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME)
     public String editor(Model modelMap) {
@@ -274,16 +300,24 @@ public class IndexController extends BaseController {
 //        request.getContextPath():/bzbs
 //        request.getServletPath():/system/login.jsp
 
+        log.debug("访问编辑器：" + URLUtil.encode(httpRequest.getRequestURL().toString()));
+
+        JWT jwt = JWT.create()
+                .setPayload("baseUrl", httpRequest.getRequestURI())
+                .setPayload("loadUrl", httpRequest.getRequestURI() + "/load")
+                .setPayload("saveUrl", httpRequest.getRequestURI() + "/save")
+                .setExpiresAt(new Date(System.currentTimeMillis() + 3 * 60 * 1000))
+                .setSigner("HS256", "llw@oakpwd123456".getBytes(StandardCharsets.UTF_8));
+
+        log.debug("test params:t={}&a={}&p={}", URLUtil.encodeQuery(jwt.sign()), "HS256", "pwd123456");
+
         String path = httpRequest.getRequestURI();
         String contextPath = httpRequest.getContextPath();
         path = path.substring(path.indexOf(contextPath) + contextPath.length(), path.indexOf("/editor"));
 
-        final String basePath = path;
-
         if (!authService.isLogin()) {
-
             //重定向到登录页面
-            path += "/?r=" + URLEncoder.encode(httpRequest.getRequestURL().toString(), "utf-8");
+            path += "/index?r=" + URLUtil.encode(httpRequest.getRequestURL().toString());
 
             log.debug("sendRedirect:" + contextPath + "/" + path);
 
@@ -291,23 +325,14 @@ public class IndexController extends BaseController {
             Thread.sleep(100);
 
             //必须要使用前缀再重定向
-            return "redirect:" + path;
-
-        } else if (false) {
-            //
-            return ADMIN_UI_PATH + "/editor/index";
-        } else {
-            //必须要使用前缀再重定向
-            path = "redirect:" + path + "/editor/index.html";
-
-            if (StringUtils.hasText(httpRequest.getQueryString())) {
-                path += "?" + URLEncoder.encode(httpRequest.getQueryString(), "utf-8");
-            }
-
-            log.debug("sendRedirect:" + path);
-
-            return path;
+            return "redirect:" + UrlPathUtils.safeUrl(path);
         }
+
+        modelMap.addAttribute("request", httpRequest);
+
+        //视图资源文件
+        return UrlPathUtils.safeUrl(ADMIN_UI_PATH + "/editor/index");
+
     }
 
     String nullSafe(String v, String defaultV) {

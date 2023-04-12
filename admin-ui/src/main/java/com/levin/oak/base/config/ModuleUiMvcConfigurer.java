@@ -9,6 +9,7 @@ import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.interceptor.ControllerAuthorizeInterceptor;
 import com.levin.oak.base.interceptor.DomainInterceptor;
 import com.levin.oak.base.interceptor.ResourceAuthorizeInterceptor;
+import com.levin.oak.base.utils.UrlPathUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -79,7 +80,7 @@ public class ModuleUiMvcConfigurer implements WebMvcConfigurer {
         //registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
         if (StringUtils.hasText(frameworkProperties.getAdminPath())) {
-            registry.addResourceHandler(safeUrl(frameworkProperties.getAdminPath() + "/**"))
+            registry.addResourceHandler(UrlPathUtils.safeUrl(frameworkProperties.getAdminPath() + "/**"))
                     .addResourceLocations("classpath:/templates" + ADMIN_UI_PATH);
         }
 
@@ -100,24 +101,6 @@ public class ModuleUiMvcConfigurer implements WebMvcConfigurer {
             log.info("SpringMVC 视图访问路径：{}", frameworkProperties.getAdminPath());
         }
 
-    }
-
-    private String safeUrl(String url) {
-
-        while (url.contains("\\")) {
-            url = url.replace("\\", "/");
-        }
-
-        while (url.contains("//")) {
-            url = url.replace("//", "/");
-        }
-
-        //不允许空格
-        while (url.contains(" ")) {
-            url = url.replace(" ", "");
-        }
-
-        return url;
     }
 
 }

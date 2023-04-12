@@ -322,7 +322,7 @@ public class ModuleWebControllerAspect {
 
         if (log.isDebugEnabled()) {
             log.debug("*** " + title + " *** URL: {}?{}, headers:{}, 控制器方法参数：{}"
-                    , request.getRequestURL(), request.getQueryString()
+                    , request.getRequestURL(), (request.getQueryString())
                     , headerMap, paramMap);
         }
 

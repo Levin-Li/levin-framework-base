@@ -9,6 +9,7 @@ import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.interceptor.ControllerAuthorizeInterceptor;
 import com.levin.oak.base.interceptor.DomainInterceptor;
 import com.levin.oak.base.interceptor.ResourceAuthorizeInterceptor;
+import com.levin.oak.base.utils.UrlPathUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -236,36 +237,20 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         ;
 
         if (excludePathPatterns != null) {
-            excludePathPatterns.forEach(url -> registration.excludePathPatterns(safeUrl(url)));
+            excludePathPatterns.forEach(url -> registration.excludePathPatterns(UrlPathUtils.safeUrl(url)));
         }
 
         if (includePathPatterns == null || includePathPatterns.isEmpty()) {
             //默认加入所有
             registration.addPathPatterns("/**");
         } else {
-            includePathPatterns.forEach(url -> registration.addPathPatterns(safeUrl(url)));
+            includePathPatterns.forEach(url -> registration.addPathPatterns(UrlPathUtils.safeUrl(url)));
         }
 
         return registration;
     }
 
-    private String safeUrl(String url) {
 
-        while (url.contains("\\")) {
-            url = url.replace("\\", "/");
-        }
-
-        while (url.contains("//")) {
-            url = url.replace("//", "/");
-        }
-
-        //不允许空格
-        while (url.contains(" ")) {
-            url = url.replace(" ", "");
-        }
-
-        return url;
-    }
 
 
 }
