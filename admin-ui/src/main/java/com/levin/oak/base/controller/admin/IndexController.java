@@ -1,5 +1,6 @@
 package com.levin.oak.base.controller.admin;
 
+import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
@@ -39,6 +40,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.levin.oak.base.ModuleOption.*;
 
@@ -162,7 +165,7 @@ public class IndexController extends BaseController {
             modelMap.addAttribute("appName", nullSafe(tenantInfo.getSysName(), frameworkProperties.getSysName()));
             modelMap.addAttribute("appLogo", nullSafe(tenantInfo.getSysLogo(), tenantInfo.getLogo()));
         } else {
-
+            log.info("首页({})访问没有关联租户", httpRequest.getRequestURL());
         }
 
         final String tenantId = tenantInfo != null ? tenantInfo.getId() : null;
@@ -171,25 +174,23 @@ public class IndexController extends BaseController {
 
         PagingData<SettingInfo> pagingData = settingService.query(new QuerySettingReq()
                 .setCode(cssCode)
+                .setOrderDir(OrderBy.Type.Asc)
+                .setOrderBy(QuerySettingReq.Fields.orderCode)
                 .setContainsPublicData(true)
                 .setTenantId(tenantId), null);
 
         if (!pagingData.isEmpty()) {
 
-            StringBuilder css = new StringBuilder();
+            modelMap.addAttribute("amisRootCss",
+                    pagingData.getItems().stream().map(SettingInfo::getValueContent)
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.joining("\n"))
 
-            pagingData.getItems().forEach(settingInfo -> {
-                if (StringUtils.hasText(settingInfo.getValueContent())) {
-                    css.append(settingInfo.getValueContent())
-                            .append('\n');
-                }
-            });
-
-            modelMap.addAttribute("amisRootCss", css.toString());
+            );
 
         } else {
-
             //创建默认配置
+            String css = "/*amis root css*/\n" + "--Layout-aside-width: 15rem;\n";
             settingService.create(new CreateSettingReq()
                     .setCategoryName("系统界面")
                     .setGroupName("基础样式")
@@ -198,12 +199,11 @@ public class IndexController extends BaseController {
                     .setName("amisRootCss")
                     .setValueType(Setting.ValueType.Css)
                     .setNullable(true)
-                    .setValueContent("/*amis root css*/\n" +
-                            "--Layout-aside-width: 15rem;\n")
+                    .setValueContent(css)
                     .setTenantId(tenantId)
             );
 
-            modelMap.addAttribute("amisRootCss", "");
+            modelMap.addAttribute("amisRootCss", css);
         }
 
         if (authService.isLogin()) {
@@ -240,6 +240,8 @@ public class IndexController extends BaseController {
 
             //防止死循环时，大量占用CPU
             Thread.sleep(50);
+
+            log.debug("登录重定向" + redirectUrl);
 
             //必须要使用前缀再重定向
             return "redirect:" + redirectUrl;

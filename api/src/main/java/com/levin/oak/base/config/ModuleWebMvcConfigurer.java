@@ -25,10 +25,10 @@ import org.springframework.web.servlet.config.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 import java.util.List;
 
-import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.ModuleOption.API_PATH;
+import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @Configuration(PLUGIN_PREFIX + "ModuleWebMvcConfigurer")
 @Slf4j
@@ -90,13 +90,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         //注意每个资源路径后面的路径加 / !!! 重要的事情说三遍
         //注意每个资源路径后面的路径加 / !!! 重要的事情说三遍
 
-        //registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-
-        if (StringUtils.hasText(frameworkProperties.getAdminPath())) {
-            registry.addResourceHandler((frameworkProperties.getAdminPath() + "/**").replace("//", "/"))
-                    .addResourceLocations("classpath:/templates" + ADMIN_UI_PATH);
-        }
-
     }
 
     /**
@@ -111,6 +104,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         if (StringUtils.hasText(frameworkProperties.getAdminPath())) {
             //  registry.freeMarker();
+            //log.info("SpringMVC 视图访问路径：{}", frameworkProperties.getAdminPath());
         }
 
     }
@@ -180,54 +174,40 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                 }
             };
 
-            List<String> includePathPatterns = frameworkProperties.getTenantBindDomain().getIncludePathPatterns();
+            processDefaultPath(registry.addInterceptor(handlerInterceptor)
+                    , frameworkProperties.getTenantBindDomain().getExcludePathPatterns()
+                    , frameworkProperties.getTenantBindDomain().getIncludePathPatterns()
+            ).order(Ordered.HIGHEST_PRECEDENCE + 1000);
 
-            registry.addInterceptor(handlerInterceptor)
-                    .excludePathPatterns(serverProperties.getError().getPath())
-                    .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
-                    .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
-                    .excludePathPatterns("/" + openApiPath)
-                    .excludePathPatterns(frameworkProperties.getTenantBindDomain().getExcludePathPatterns())
-                    .addPathPatterns(includePathPatterns.isEmpty() ? Arrays.asList("/**") : includePathPatterns)
-                    .order(Ordered.HIGHEST_PRECEDENCE + 1000);
         }
 
-        {
-            //检查租户信息
-            registry.addInterceptor(new HandlerInterceptor() {
-                        @Override
-                        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-                            if ((handler instanceof HandlerMethod)) {
-                                bizTenantService.checkAndGetCurrentUserTenant();
-                            }
-
-                            return true;
+        //检查租户信息，要求所有的访问都必须有租户
+        registry.addInterceptor(new HandlerInterceptor() {
+                    @Override
+                    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+                        if ((handler instanceof HandlerMethod)) {
+                            bizTenantService.checkAndGetCurrentUserTenant();
                         }
-                    }).addPathPatterns("/**")
-                    .order(Ordered.HIGHEST_PRECEDENCE + 2000);
-        }
+                        return true;
+                    }
+                }).addPathPatterns("/**")
+                .order(Ordered.HIGHEST_PRECEDENCE + 2000);
 
 
+        //控制访问控制
         if (frameworkProperties.getControllerAcl().isEnable()) {
 
             HandlerInterceptor handlerInterceptor = new ControllerAuthorizeInterceptor(rbacService
                     , (className) -> frameworkProperties.getControllerAcl().isPackageMatched(className));
 
-            List<String> includePathPatterns = frameworkProperties.getControllerAcl().getIncludePathPatterns();
+            processDefaultPath(registry.addInterceptor(handlerInterceptor)
+                    , frameworkProperties.getControllerAcl().getExcludePathPatterns()
+                    , frameworkProperties.getControllerAcl().getIncludePathPatterns()
+            ).order(Ordered.HIGHEST_PRECEDENCE + 3000);
 
-            registry.addInterceptor(handlerInterceptor)
-                    .excludePathPatterns(serverProperties.getError().getPath())
-                    .excludePathPatterns("/swagger-resources/**", "/swagger-ui/**")
-                    .excludePathPatterns("/" + swaggerUiBaseUrl + "/**")
-                    .excludePathPatterns("/" + openApiPath)
-                    .excludePathPatterns("/" + knifeUrl)
-                    .excludePathPatterns(frameworkProperties.getControllerAcl().getExcludePathPatterns())
-                    .addPathPatterns(includePathPatterns.isEmpty() ? Arrays.asList("/**") : includePathPatterns)
-                    .order(Ordered.HIGHEST_PRECEDENCE + 3000);
         }
 
-        log.info("全局资源拦截器已经启用，" + frameworkProperties.getResourcesAcl());
+        log.info("*** 全局资源拦截器已经启用，" + frameworkProperties.getResourcesAcl());
 
         //全局资源拦截器
         registry.addInterceptor(resourceAuthorizeInterceptor())
@@ -245,4 +225,42 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     public ResourceAuthorizeInterceptor resourceAuthorizeInterceptor() {
         return new ResourceAuthorizeInterceptor();
     }
+
+
+    private InterceptorRegistration processDefaultPath(InterceptorRegistration registration, List<String> excludePathPatterns, List<String> includePathPatterns) {
+
+        registration
+                .excludePathPatterns(serverProperties.getError().getPath())
+                .excludePathPatterns(safeUrl("/" + openApiPath + "/**"))
+                .excludePathPatterns(safeUrl("/" + swaggerUiBaseUrl + "/**"))
+                .excludePathPatterns(safeUrl("/" + knifeUrl));
+
+        if (excludePathPatterns != null) {
+            excludePathPatterns.forEach(url -> registration.excludePathPatterns(safeUrl(url)));
+        }
+
+        if (includePathPatterns == null || includePathPatterns.isEmpty()) {
+            //默认加入所有
+            registration.addPathPatterns("/**");
+        } else {
+            includePathPatterns.forEach(url -> registration.addPathPatterns(safeUrl(url)));
+        }
+
+        return registration;
+    }
+
+    private String safeUrl(String url) {
+
+        while (url.contains("\\")) {
+            url = url.replace("\\", "/");
+        }
+
+        while (url.contains("//")) {
+            url = url.replace("//", "/");
+        }
+
+        return url;
+    }
+
+
 }
