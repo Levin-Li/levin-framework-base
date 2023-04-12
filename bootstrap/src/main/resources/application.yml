@@ -113,4 +113,5 @@ plugin:
                 denied: true
               - exclude-path-patterns: /**,/doc.html,/swagger-ui/**,/webjars/**
 
+#            enable-sms-verification-code: false
             enable-mock-sms-send: true
