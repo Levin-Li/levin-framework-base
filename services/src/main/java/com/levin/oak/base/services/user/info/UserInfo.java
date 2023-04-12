@@ -2,9 +2,6 @@ package com.levin.oak.base.services.user.info;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
@@ -19,6 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
+import org.springframework.data.annotation.ReadOnlyProperty;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -181,10 +179,18 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
     @Schema(description = "备注")
     private String remark;
 
+    @ReadOnlyProperty
+    @JsonIgnore
+    @Override
+    public boolean isTenantAdmin() {
+        return getRoleList() != null && RbacUserInfo.super.isTenantAdmin();
+    }
+
+    @ReadOnlyProperty
     @JsonIgnore
     @Override
     public boolean isSuperAdmin() {
-        return roleList != null && roleList.contains(RbacRoleObject.SA_ROLE);
+        return getRoleList() != null && RbacUserInfo.super.isTenantAdmin();
     }
 
 }
