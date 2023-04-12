@@ -1,10 +1,12 @@
 package com.levin.oak.base.services.user.info;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.User.Category;
 import com.levin.oak.base.entities.User.Sex;
@@ -179,6 +181,7 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
     @Schema(description = "备注")
     private String remark;
 
+    @JsonIgnore
     @Override
     public boolean isSuperAdmin() {
         return roleList != null && roleList.contains(RbacRoleObject.SA_ROLE);
