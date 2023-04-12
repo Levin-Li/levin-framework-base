@@ -112,6 +112,12 @@ public class ModuleUiMvcConfigurer implements WebMvcConfigurer {
             url = url.replace("//", "/");
         }
 
+        //不允许空格
+        while (url.contains(" ")) {
+            url = url.replace(" ", "");
+        }
+
         return url;
     }
+
 }
