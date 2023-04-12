@@ -183,14 +183,14 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
     @JsonIgnore
     @Override
     public boolean isTenantAdmin() {
-        return getRoleList() != null && RbacUserInfo.super.isTenantAdmin();
+        return RbacUserInfo.super.isTenantAdmin();
     }
 
     @ReadOnlyProperty
     @JsonIgnore
     @Override
     public boolean isSuperAdmin() {
-        return getRoleList() != null && RbacUserInfo.super.isTenantAdmin();
+        return RbacUserInfo.super.isTenantAdmin();
     }
 
 }
