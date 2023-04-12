@@ -111,8 +111,8 @@ plugin:
             resourcesAcl:
               - includePathPatterns: "/templates/com.levin.oak.base/**"
                 denied: true
+              - exclude-path-patterns: /doc.html,/swagger-ui
 
             enable-mock-sms-send: true
-
 
 
