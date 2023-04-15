@@ -321,8 +321,8 @@ public class ModuleWebControllerAspect {
         final String title = getRequestInfo(joinPoint, headerMap, paramMap, true);
 
         if (log.isDebugEnabled()) {
-            log.debug("*** " + title + " *** URL: {}?{}, headers:{}, 控制器方法参数：{}"
-                    , request.getRequestURL(), (request.getQueryString())
+            log.debug("*** 访问日志 " + title + " *** URL: {}{}, headers:{}, 控制器方法参数：{}"
+                    , request.getRequestURL(), (StringUtils.hasText(request.getQueryString()) ? "?" + request.getQueryString() : "")
                     , headerMap, paramMap);
         }
 
@@ -348,8 +348,8 @@ public class ModuleWebControllerAspect {
             final long execTime = System.currentTimeMillis() - st;
 
             if (log.isDebugEnabled()) {
-                log.debug("*** " + title + " *** URL: {}?{}, 执行耗时：{}ms, 发生异常：{} , 响应结果:{}"
-                        , request.getRequestURL(), request.getQueryString(),
+                log.debug("*** 访问日志 " + title + " *** URL: {}{}, 执行耗时：{}ms, 发生异常：{} , 响应结果:{}"
+                        , request.getRequestURL(), (StringUtils.hasText(request.getQueryString()) ? "?" + request.getQueryString() : ""),
                         execTime, ex != null, isAccessLogController ? "忽略对于访问日志控制器的访问结果" : result);
             }
 
@@ -425,7 +425,6 @@ public class ModuleWebControllerAspect {
         }
 
         return path;
-
     }
 
     /**

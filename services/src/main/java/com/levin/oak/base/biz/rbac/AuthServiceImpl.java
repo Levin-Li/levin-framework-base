@@ -326,9 +326,7 @@ public class AuthServiceImpl
 //    @Override
     public UserInfo auditUser(UserInfo user) throws AuthorizationException {
 
-        if (user == null) {
-            throw new IllegalArgumentException("1帐号不存在");
-        }
+        Assert.notNull(user,"1帐号不存在");
 
         if (!user.getEnable()
                 || !User.State.Normal.equals(user.getState())) {
@@ -465,7 +463,7 @@ public class AuthServiceImpl
             }
 
             MenuRes pluginRootMenu = simpleDao.create(new MenuRes()
-                    .setPath(plugin.getPackageName() + "/" + plugin.getVersion() + "/admin/Index")
+                    .setPath(plugin.getPackageName() + "/" + plugin.getVersion() + "/admin/index")
 //                    .setIcon(defaultIcon)
                     .setDomain(plugin.getPackageName())
                     .setName(plugin.getName())
@@ -479,6 +477,7 @@ public class AuthServiceImpl
                 final int no = index.incrementAndGet();
 
                 final String path = menuItem.getPath().replace("/api/", "/admin/");
+
                 //创建菜单
                 log.info("创建菜单{} - 插件[ {} ][ {} --> {}]", no, plugin.getId(), menuItem.getName(), path);
 

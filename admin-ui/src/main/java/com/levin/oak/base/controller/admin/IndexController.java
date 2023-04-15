@@ -42,9 +42,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.levin.oak.base.ModuleOption.*;
@@ -108,7 +110,20 @@ public class IndexController extends BaseController {
 
     @PostConstruct
     public void init() {
-        log.info("*** 默认管理后台UI启用，访问路径:" + nullSafe(frameworkProperties.getAdminPath(), ADMIN_UI_PATH));
+
+        String host = (Optional.ofNullable(this.serverProperties.getAddress()).orElse(InetAddress.getLoopbackAddress())).getHostAddress();
+
+        Integer port = Optional.ofNullable(this.serverProperties.getPort()).orElse(8080);
+
+        String contextPath = Optional.ofNullable(this.serverProperties.getServlet().getContextPath()).orElse("/");
+        String rootUrl = host + (port == 80 ? "" : ":" + port) + (contextPath.startsWith("/") ? "" : "/") + contextPath;
+
+        rootUrl = rootUrl + "/" + nullSafe(frameworkProperties.getAdminPath(), ADMIN_UI_PATH);
+
+        rootUrl = "http://" + UrlPathUtils.safeUrl(rootUrl);
+
+        log.info("*** 默认管理后台UI启用，访问路径: " + rootUrl);
+
     }
 
     @GetMapping({""})
