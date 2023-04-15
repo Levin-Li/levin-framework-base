@@ -190,7 +190,7 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
     @JsonIgnore
     @Override
     public boolean isSuperAdmin() {
-        return RbacUserInfo.super.isTenantAdmin();
+        return RbacUserInfo.super.isSuperAdmin();
     }
 
 }

@@ -313,7 +313,8 @@ public class AuthServiceImpl
 
     @Override
     public void logout() {
-        invalidate(StpUtil.getTokenValue());
+        StpUtil.logout();
+       // invalidate(StpUtil.getTokenValue());
     }
 
     /**

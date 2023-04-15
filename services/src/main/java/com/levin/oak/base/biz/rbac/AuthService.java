@@ -30,7 +30,7 @@ public interface AuthService extends SimpleAuthService<String, String> {
      * @return
      */
     default boolean isSuperAdmin(String account) {
-        return SA_ACCOUNT.equalsIgnoreCase(StringUtils.trimWhitespace(account));
+        return SA_ACCOUNT.equals(StringUtils.trimWhitespace(account));
     }
 
     /**
