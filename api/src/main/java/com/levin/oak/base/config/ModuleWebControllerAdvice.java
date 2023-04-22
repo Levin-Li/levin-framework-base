@@ -2,9 +2,11 @@ package com.levin.oak.base.config;
 
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.exception.SaTokenException;
+import cn.hutool.core.exceptions.ExceptionUtil;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.commons.service.domain.ServiceResp;
 import com.levin.commons.service.exception.AccessDeniedException;
+import com.levin.commons.service.exception.BizException;
 import com.levin.commons.service.exception.ServiceException;
 import com.levin.commons.service.exception.UnauthorizedException;
 import com.levin.commons.utils.ExceptionUtils;
@@ -134,6 +136,16 @@ public class ModuleWebControllerAdvice {
                 , e.getMessage());
     }
 
+    @ExceptionHandler({BizException.class})
+    public ApiResp onBizException(Exception e) {
+
+        log.error("业务参数异常," + request.getRequestURL(), e);
+
+        return (ApiResp) ApiResp.error(ServiceResp.ErrorType.BizError.getBaseErrorCode()
+                        , e.getMessage())
+                .setDetailMsg(ExceptionUtils.getAllCauseInfo(e, " -> "));
+    }
+
     @ExceptionHandler({IllegalArgumentException.class,
             IllegalStateException.class,
             MethodArgumentNotValidException.class,
@@ -143,6 +155,16 @@ public class ModuleWebControllerAdvice {
         log.error("请求参数异常," + request.getRequestURL(), e);
 
         return (ApiResp) ApiResp.error(ServiceResp.ErrorType.BizError.getBaseErrorCode()
+                        , e.getMessage())
+                .setDetailMsg(ExceptionUtils.getAllCauseInfo(e, " -> "));
+    }
+
+    @ExceptionHandler(ServiceException.class)
+    public ApiResp onServiceException(Exception e) {
+
+        response.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
+
+        return (ApiResp) ApiResp.error(ServiceResp.ErrorType.SystemInnerError.getBaseErrorCode()
                         , e.getMessage())
                 .setDetailMsg(ExceptionUtils.getAllCauseInfo(e, " -> "));
     }
@@ -160,20 +182,12 @@ public class ModuleWebControllerAdvice {
                 .setDetailMsg(ExceptionUtils.getRootCauseInfo(e));
     }
 
-    @ExceptionHandler(ServiceException.class)
-    public ApiResp onServiceException(Exception e) {
-
-        response.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
-
-        return (ApiResp) ApiResp.error(ServiceResp.ErrorType.SystemInnerError.getBaseErrorCode()
-                        , e.getMessage())
-                .setDetailMsg(ExceptionUtils.getAllCauseInfo(e, " -> "));
-    }
 
     @ExceptionHandler({PersistenceException.class, SQLException.class, DataAccessException.class})
     public ApiResp onPersistenceException(Exception e) {
 
-        Throwable rootCause = ExceptionUtils.getRootCause(e);
+        Throwable rootCause = ExceptionUtil.getRootCause(e);
+
         if (rootCause instanceof ConstraintViolationException
                 || rootCause instanceof DataIntegrityViolationException
                 || rootCause instanceof SQLIntegrityConstraintViolationException) {
