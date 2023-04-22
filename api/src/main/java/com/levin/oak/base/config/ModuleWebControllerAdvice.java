@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -145,7 +147,7 @@ public class ModuleWebControllerAdvice {
                 .setDetailMsg(ExceptionUtils.getAllCauseInfo(e, " -> "));
     }
 
-    @ExceptionHandler({ConstraintViolationException.class, SQLIntegrityConstraintViolationException.class})
+    @ExceptionHandler({ConstraintViolationException.class, DataIntegrityViolationException.class, SQLIntegrityConstraintViolationException.class})
     public ApiResp onConstraintViolationException(Exception e) {
 
         log.error("发生数据约束异常," + request.getRequestURL(), e);
@@ -168,11 +170,12 @@ public class ModuleWebControllerAdvice {
                 .setDetailMsg(ExceptionUtils.getAllCauseInfo(e, " -> "));
     }
 
-    @ExceptionHandler({PersistenceException.class, SQLException.class})
+    @ExceptionHandler({PersistenceException.class, SQLException.class, DataAccessException.class})
     public ApiResp onPersistenceException(Exception e) {
 
         Throwable rootCause = ExceptionUtils.getRootCause(e);
         if (rootCause instanceof ConstraintViolationException
+                || rootCause instanceof DataIntegrityViolationException
                 || rootCause instanceof SQLIntegrityConstraintViolationException) {
             return onConstraintViolationException((Exception) rootCause);
         }
