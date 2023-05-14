@@ -32,6 +32,7 @@ import javax.persistence.PersistenceException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ValidationException;
 import java.net.SocketException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -51,6 +52,8 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @RestControllerAdvice(annotations = {Controller.class, RestController.class})
 public class ModuleWebControllerAdvice {
 
+
+
     @Autowired
     HttpServletRequest request;
 
@@ -59,13 +62,12 @@ public class ModuleWebControllerAdvice {
 
     @PostConstruct
     void init() {
-        log.info("默认异常拦截器启用，匹配所有的控制器包名...");
+        log.info("init...");
     }
 
     /**
      * // @InitBinder标注的initBinder()方法表示注册一个Date类型的类型转换器，用于将类似这样的2019-06-10
      * // 日期格式的字符串转换成Date对象
-     *
      * @param binder
      */
     @InitBinder
@@ -109,6 +111,25 @@ public class ModuleWebControllerAdvice {
 //        return result;
 //    }
 
+
+//    @ExceptionHandler({NotLoginException.class,})
+//    public ApiResp onNotLoginException(Exception e) {
+//
+//        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+//
+//        return ApiResp.error(ServiceResp.ErrorType.AuthenticationError.getBaseErrorCode()
+//                , "未登录：" + e.getMessage());
+//    }
+//
+//    @ExceptionHandler({SaTokenException.class,})
+//    public ApiResp onSaTokenException(Exception e) {
+//
+//        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+//
+//        return ApiResp.error(ServiceResp.ErrorType.AuthenticationError.getBaseErrorCode()
+//                , "认证异常：" + e.getMessage());
+//    }
+
     @ExceptionHandler({NotLoginException.class,})
     public ApiResp onNotLoginException(Exception e) {
 
@@ -149,6 +170,7 @@ public class ModuleWebControllerAdvice {
     @ExceptionHandler({IllegalArgumentException.class,
             IllegalStateException.class,
             MethodArgumentNotValidException.class,
+            ValidationException.class,
             MissingServletRequestParameterException.class})
     public ApiResp onParameterException(Exception e) {
 
@@ -182,7 +204,6 @@ public class ModuleWebControllerAdvice {
                 .setDetailMsg(ExceptionUtils.getRootCauseInfo(e));
     }
 
-
     @ExceptionHandler({PersistenceException.class, SQLException.class, DataAccessException.class})
     public ApiResp onPersistenceException(Exception e) {
 
@@ -199,6 +220,7 @@ public class ModuleWebControllerAdvice {
         return (ApiResp) ApiResp.error(ServiceResp.ErrorType.SystemInnerError.getBaseErrorCode(),
                         "数据异常，请稍后重试")
                 .setDetailMsg(ExceptionUtils.getRootCauseInfo(e));
+
     }
 
     //    // 这里就是通用的异常处理器了,所有预料之外的Exception异常都由这里处理

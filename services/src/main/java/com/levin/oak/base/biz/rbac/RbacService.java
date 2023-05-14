@@ -152,6 +152,6 @@ public interface RbacService {
      *
      * @param method 控制器或是服务的方法
      */
-    void checkAuthorize(@NonNull Method method) throws AuthorizationException;
+    void checkAuthorize(Object beanOrClass, @NonNull Method method) throws AuthorizationException;
 
 }

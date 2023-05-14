@@ -7,7 +7,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.function.Predicate;
@@ -48,8 +47,10 @@ public class ControllerAuthorizeInterceptor implements HandlerInterceptor {
             return true;
         }
 
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+
         if (classNameFilter != null
-                && !classNameFilter.test(((HandlerMethod) handler).getBeanType().getName())) {
+                && !classNameFilter.test(handlerMethod.getBeanType().getName())) {
             return true;
         }
 
@@ -62,7 +63,8 @@ public class ControllerAuthorizeInterceptor implements HandlerInterceptor {
         }
 
         //检查权限
-        rbacService.checkAuthorize(((HandlerMethod) handler).getMethod());
+        rbacService.checkAuthorize(handlerMethod.getBean() instanceof CharSequence ? handlerMethod.getBeanType() : handlerMethod.getBean(),
+                handlerMethod.getMethod());
 
         return true;
     }

@@ -27,7 +27,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -172,7 +171,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
     @Override
     public boolean canAssignRole(Object targetUserId, String requireRoleCode, BiConsumer<String, String> matchErrorConsumer) {
 
-       // Assert.isTrue(authService.isLogin(), "用户未登录");
+        // Assert.isTrue(authService.isLogin(), "用户未登录");
 
         RbacUserInfo<String> userInfo = authService.getUserInfo();
 
@@ -360,13 +359,14 @@ public class RbacServiceImpl extends BaseService implements RbacService {
      * @return
      */
     @Override
-    public void checkAuthorize(@NonNull Method method) throws AuthorizationException {
+    public void checkAuthorize(Object beanOrClass, @NonNull Method method) throws AuthorizationException {
 
         if (method == null) {
             return;
         }
 
-        Class<?> controllerClass = method.getDeclaringClass();// AopProxyUtils.ultimateTargetClass(method.getDeclaringClass());
+        Class<?> controllerClass = beanOrClass != null ? (beanOrClass instanceof Class ? (Class) beanOrClass : beanOrClass.getClass())
+                : method.getDeclaringClass();// AopProxyUtils.ultimateTargetClass(method.getDeclaringClass());
 
         ///////////////////////////////获取 res 和 action 用于权限验证 //////////////////////////////////////////
         //
