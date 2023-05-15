@@ -1,6 +1,6 @@
 package com.levin.oak.base.biz.rbac;
 
-import com.levin.commons.rbac.AuthorizationException;
+import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.commons.rbac.Permission;
 import org.springframework.lang.NonNull;
 import org.springframework.util.StringUtils;

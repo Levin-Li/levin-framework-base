@@ -7,6 +7,7 @@ import com.levin.commons.plugin.Res;
 import com.levin.commons.plugin.ResLoader;
 import com.levin.commons.rbac.*;
 import com.levin.commons.service.domain.Identifiable;
+import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.commons.service.support.ContextHolder;
 import com.levin.commons.utils.ClassUtils;
 import com.levin.commons.utils.ExpressionUtils;
@@ -414,7 +415,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         }
 
         if (authService.getUserInfo() == null) {
-            throw new AuthorizationException("NotLogin", "未登录");
+            throw new AuthorizationException(401, "未登录");
         }
 
         if (resAuthorize.onlyRequireAuthenticated()) {
@@ -432,7 +433,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         );
 
         if (!ok) {
-            throw new AuthorizationException("UnAuthorization", "未授权的操作");
+            throw new AuthorizationException(401, "未授权的操作");
         }
     }
 }

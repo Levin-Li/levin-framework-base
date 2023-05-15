@@ -9,6 +9,7 @@ import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.*;
+import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.commons.service.support.ContextHolder;
 import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
