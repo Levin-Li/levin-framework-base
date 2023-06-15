@@ -63,8 +63,7 @@ public class ControllerAuthorizeInterceptor implements HandlerInterceptor {
         }
 
         //检查权限
-        rbacService.checkAuthorize(handlerMethod.getBean() instanceof CharSequence ? handlerMethod.getBeanType() : handlerMethod.getBean(),
-                handlerMethod.getMethod());
+        rbacService.checkAuthorize(handlerMethod.getBeanType(), handlerMethod.getMethod());
 
         return true;
     }

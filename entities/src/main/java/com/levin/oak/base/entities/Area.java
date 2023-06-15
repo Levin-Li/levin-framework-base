@@ -19,7 +19,7 @@ import java.util.Set;
 @EqualsAndHashCode(of = {"code"})
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "区域")
+@Schema(title = "区域")
 @Table(
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
@@ -35,44 +35,44 @@ public class Area
         TreeObject<Area, Area> {
 
     public enum Type implements EnumDesc {
-        @Schema(description = "国家")
+        @Schema(title = "国家")
         Nation,
-        @Schema(description = "省份、直辖市")
+        @Schema(title = "省份/直辖市")
         Province,
-        @Schema(description = "地市")
+        @Schema(title = "地市")
         City,
-        @Schema(description = "区县")
+        @Schema(title = "区县")
         County,
-        @Schema(description = "乡镇")
+        @Schema(title = "乡镇")
         Township,
-        @Schema(description = "村庄")
+        @Schema(title = "村庄")
         Village,
     }
 
-    @Schema(description = "编码")
+    @Schema(title = "编码")
     @Id
     @Column(length = 64)
     @StartsWith
     protected String code;
 
-    @Schema(description = "图标")
+    @Schema(title = "图标")
     protected String icon;
 
-    @Schema(description = "父区域ID")
+    @Schema(title = "父区域ID")
     @Column(length = 64)
     protected String parentCode;
 
-    @Schema(description = "父区域")
+    @Schema(title = "父区域")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parentCode", insertable = false, updatable = false)
     protected Area parent;
 
-    @Schema(description = "子区域")
+    @Schema(title = "子区域")
     @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE)
     @OrderBy("orderCode ASC , code ASC")
     protected Set<Area> children;
 
-    @Schema(description = "类型")
+    @Schema(title = "类型")
     @Column(nullable = false, length = 64)
     @Enumerated(EnumType.STRING)
     protected Type type;

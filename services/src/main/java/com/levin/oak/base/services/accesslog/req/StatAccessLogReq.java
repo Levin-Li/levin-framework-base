@@ -26,7 +26,7 @@ import java.util.Date;
  *
  * @Author Auto gen by simple-dao-codegen 2022-4-9 16:44:59
  */
-@Schema(description = "统计访问日志")
+@Schema(title = "统计访问日志")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -47,126 +47,126 @@ public class StatAccessLogReq extends MultiTenantReq {
 
     //@NotNull
 
-    @Schema(description = "id")
+    @Schema(title = "id")
     Long id;
 
 
-    @Schema(description = "请求的域名")
+    @Schema(title = "请求的域名")
     String domain;
-    @Schema(description = "模糊匹配 - 请求的域名")
+    @Schema(title = "模糊匹配 - 请求的域名")
     @Contains
     String containsDomain;
 
     //@Size(max = 64)
 
-    @Schema(description = "访问者")
+    @Schema(title = "访问者")
     String visitor;
 
     //@NotNull
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     Date gteCreateTime;
 
-    @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     Date lteCreateTime;
 
 
     //@NotBlank
 
-    @Schema(description = "标题")
+    @Schema(title = "标题")
     String title;
-    @Schema(description = "模糊匹配 - 标题")
+    @Schema(title = "模糊匹配 - 标题")
     @Contains
     String containsTitle;
 
     //@Size(max = 64)
 
-    @Schema(description = "日志类型")
+    @Schema(title = "日志类型")
     String logType;
 
 
-    @Schema(description = "差异修改数据")
+    @Schema(title = "差异修改数据")
     String diffModifyData;
 
 
-    @Schema(description = "业务主键")
+    @Schema(title = "业务主键")
     String bizKey;
-    @Schema(description = "模糊匹配 - 业务主键")
+    @Schema(title = "模糊匹配 - 业务主键")
     @Contains
     String containsBizKey;
 
 
-    @Schema(description = "业务类型")
+    @Schema(title = "业务类型")
     String bizType;
-    @Schema(description = "模糊匹配 - 业务类型")
+    @Schema(title = "模糊匹配 - 业务类型")
     @Contains
     String containsBizType;
 
 
-    @Schema(description = "请求URI")
+    @Schema(title = "请求URI")
     String requestUri;
-    @Schema(description = "模糊匹配 - 请求URI")
+    @Schema(title = "模糊匹配 - 请求URI")
     @Contains
     String containsRequestUri;
 
     //@Size(max = 32)
 
-    @Schema(description = "请求方法")
+    @Schema(title = "请求方法")
     String requestMethod;
 
 
-    @Schema(description = "请求参数")
+    @Schema(title = "请求参数")
     String requestParams;
 
 
-    @Schema(description = "头部信息")
+    @Schema(title = "头部信息")
     String headInfo;
 
 
-    @Schema(description = "响应数据")
+    @Schema(title = "响应数据")
     String responseData;
 
     //@Size(max = 128)
 
-    @Schema(description = "操作IP地址")
+    @Schema(title = "操作IP地址")
     String remoteAddr;
-    @Schema(description = "模糊匹配 - 操作IP地址")
+    @Schema(title = "模糊匹配 - 操作IP地址")
     @Contains
     String containsRemoteAddr;
 
     //@Size(max = 64)
 
-    @Schema(description = "服务器地址")
+    @Schema(title = "服务器地址")
     String serverAddr;
 
 
-    @Schema(description = "是否有异常")
+    @Schema(title = "是否有异常")
     Boolean isException;
 
 
-    @Schema(description = "异常信息")
+    @Schema(title = "异常信息")
     String exceptionInfo;
 
     //@Size(max = 768)
 
-    @Schema(description = "用户代理")
+    @Schema(title = "用户代理")
     String userAgent;
 
     //@Size(max = 128)
 
-    @Schema(description = "设备名称/操作系统")
+    @Schema(title = "设备名称/操作系统")
     String deviceName;
 
     //@Size(max = 64)
 
-    @Schema(description = "浏览器名称")
+    @Schema(title = "浏览器名称")
     String browserName;
 
 
-    @Schema(description = "执行时间(ms)")
+    @Schema(title = "执行时间(ms)")
     Long executeTime;
 
     public StatAccessLogReq(Long id) {
@@ -174,12 +174,12 @@ public class StatAccessLogReq extends MultiTenantReq {
     }
 
     //
-    //@Schema(description = "是否按状态分组统计")
+    //@Schema(title = "是否按状态分组统计")
     //@CtxVar //增加当前字段名称和字段值到环境变量中
     //@Ignore
     //private boolean isGroupByStatus;
 
-    //@Schema(description = "是否按日期分组统计")
+    //@Schema(title = "是否按日期分组统计")
     //@CtxVar //增加当前字段名称和字段值到环境变量中
     //@Ignore //
     //private boolean isGroupByDate;
@@ -190,30 +190,30 @@ public class StatAccessLogReq extends MultiTenantReq {
         //@todo 统计之前初始化数据
     }
 
-    @Schema(description = "访问日志统计结果")
+    @Schema(title = "访问日志统计结果")
     @Data
     @Accessors(chain = true)
     @FieldNameConstants
     public static class Result
             implements Serializable {
 
-        //@Schema(description = "状态分组统计")
+        //@Schema(title = "状态分组统计")
         //@GroupBy(condition = "#isGroupByStatus")
         //Status status;
 
-        //@Schema(description = "时间分组统计")
+        //@Schema(title = "时间分组统计")
         //@GroupBy(condition = "#isGroupByDate", value = "date_format(" + E_AccessLog.createDate + ",'%Y-%m-%d')", orderBy = @OrderBy(type = OrderBy.Type.Asc))
         //String createDate;
 
-        @Schema(description = "记录数")
+        @Schema(title = "记录数")
         @Count
         Integer cnt;
 
-        //@Schema(description = "分类记录数")
+        //@Schema(title = "分类记录数")
         //@Count(fieldCases = {@Case(column = E_AccessLog.status, whenOptions = {@Case.When(whenExpr = "OFF", thenExpr = "1")}, elseExpr = "NULL")})
         //Integer caseCnt;
 
-        //@Schema(description = "累计" , havingOp=Op.Gt)
+        //@Schema(title = "累计" , havingOp=Op.Gt)
         //@Sum
         //Double sumGmv;
 

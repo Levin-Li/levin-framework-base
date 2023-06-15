@@ -23,7 +23,7 @@
 
     <properties>
 
-        <revision>1.1.0-SNAPSHOT</revision>
+        <revision>1.2.0-SNAPSHOT</revision>
 
         <levin.simple-dao.groupId>com.levin.commons</levin.simple-dao.groupId>
         <levin.simple-dao.version>2.3.6-SNAPSHOT</levin.simple-dao.version>
@@ -463,7 +463,7 @@
                     <isCreateControllerSubDir>true</isCreateControllerSubDir>
 
                     <!-- 生成的DTO的Schema注解中描述的配置是否使用类引用-->
-                    <isSchemaDescUseConstRef>false</isSchemaDescUseConstRef>
+                    <isSchemaDescUseConstRef>true</isSchemaDescUseConstRef>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -474,6 +474,10 @@
                 </dependencies>
             </plugin>
 
+<!--            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>-->
 
 <!--            <plugin>
                 &lt;!&ndash;   <groupId>com.github.Levin-Li</groupId> &ndash;&gt;

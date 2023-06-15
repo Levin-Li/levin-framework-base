@@ -27,7 +27,7 @@ import java.util.Date;
  * 更新应用错误日志
  * Auto gen by simple-dao-codegen 2022-3-29 22:58:02
  */
-@Schema(description = "更新应用错误日志")
+@Schema(title = "更新应用错误日志")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,30 +43,30 @@ public class UpdateAppErrorLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1594864095L;
 
-    @Schema(description = "id", required = true)
+    @Schema(title = "id", required = true)
     @NotNull
     @Eq(require = true)
     private Long id;
 
     @Size(max = 64)
-    @Schema(description = "模块ID")
+    @Schema(title = "模块ID")
     private String moduleId;
 
-    @Schema(description = "发生时间")
+    @Schema(title = "发生时间")
     private Date occurTime;
 
     @NotBlank
     @Size(max = 1000)
-    @Schema(description = "标题")
+    @Schema(title = "标题")
     private String title;
 
-    @Schema(description = "错误级别")
+    @Schema(title = "错误级别")
     private String errorLevel;
 
-    @Schema(description = "根异常类型")
+    @Schema(title = "根异常类型")
     private String rootExceptionType;
 
-    @Schema(description = "完整异常堆栈")
+    @Schema(title = "完整异常堆栈")
     private String exceptionFullInfo;
 
 

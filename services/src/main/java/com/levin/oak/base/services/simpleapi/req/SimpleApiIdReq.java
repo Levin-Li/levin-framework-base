@@ -40,7 +40,7 @@ import java.util.Date;
  * //Auto gen by simple-dao-codegen 2022-5-23 10:30:00
  */
 
-@Schema(description = "简单动态接口 主键通用请求")
+@Schema(title = "简单动态接口 主键通用请求")
 @Data
 
 @AllArgsConstructor
@@ -57,7 +57,7 @@ public class SimpleApiIdReq extends MultiTenantReq {
     private static final long serialVersionUID = 1021385738L;
 
 
-    @Schema(description = "id", required = true)
+    @Schema(title = "id", required = true)
     @Eq(require = true)
     @NotNull
     protected String id;

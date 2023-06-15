@@ -19,7 +19,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "系统设置")
+@Schema(title = "系统设置")
 
 @Table(
         indexes = {
@@ -44,24 +44,24 @@ import javax.persistence.*;
 public class Setting
         extends AbstractNamedMultiTenantObject {
 
-    public enum ValueType  implements EnumDesc {
-        @Schema(description = "富文本")
+    public enum ValueType implements EnumDesc {
+        @Schema(title = "富文本")
         Html,
-        @Schema(description = "CSS")
+        @Schema(title = "CSS")
         Css,
-        @Schema(description = "JS")
+        @Schema(title = "JS")
         Js,
-        @Schema(description = "文本")
+        @Schema(title = "文本")
         Text,
-        @Schema(description = "Json")
+        @Schema(title = "Json")
         Json,
-        @Schema(description = "数值")
+        @Schema(title = "数值")
         Digit,
-        @Schema(description = "图片")
+        @Schema(title = "图片")
         Image,
-        @Schema(description = "视频")
+        @Schema(title = "视频")
         Video,
-        @Schema(description = "文件")
+        @Schema(title = "文件")
         File,
     }
 
@@ -71,32 +71,32 @@ public class Setting
     @Column(length = 64)
     protected String id;
 
-    @Schema(description = "分类名称")
+    @Schema(title = "分类名称")
     @Column(nullable = false, length = 64)
     protected String categoryName;
 
-    @Schema(description = "分组名称")
+    @Schema(title = "分组名称")
     @Column(length = 64)
     @Contains
     protected String groupName;
 
-    @Schema(description = "编码")
+    @Schema(title = "编码")
     @Column(nullable = false, length = 64)
     protected String code;
 
-    @Schema(description = "值类型")
-    @Column(nullable = false,length = 64)
+    @Schema(title = "值类型")
+    @Column(nullable = false, length = 64)
     @Enumerated(EnumType.STRING)
     protected ValueType valueType;
 
-    @Schema(description = "值")
+    @Schema(title = "值")
     @Lob
     protected String valueContent;
 
-    @Schema(description = "值是否可空")
+    @Schema(title = "值是否可空")
     protected Boolean nullable;
 
-    @Schema(description = "输入占位提示")
+    @Schema(title = "输入占位提示")
     @Column(length = 128)
     protected String inputPlaceholder;
 

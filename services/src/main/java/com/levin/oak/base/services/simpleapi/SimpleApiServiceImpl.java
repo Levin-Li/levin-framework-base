@@ -66,7 +66,7 @@ import java.util.Date;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimpleApiService", matchIfMissing = true)
 @Slf4j
 //@Validated
-@Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
+@Tag(name = E_SimpleApi.BIZ_NAME, title = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_SimpleApi.SIMPLE_CLASS_NAME})
 public class SimpleApiServiceImpl extends BaseService implements SimpleApiService {
 
@@ -173,7 +173,7 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
     }
 
     @Override
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, title = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_SimpleApi.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {
     }

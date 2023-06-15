@@ -30,7 +30,7 @@ import java.util.UUID;
 @FieldNameConstants
 
 //5、必须注解业务名称
-@Schema(description = "租户")
+@Schema(title = "租户")
 
 //6、必须建立索引
 @Entity(name = EntityConst.PREFIX + "Tenant")
@@ -57,67 +57,67 @@ import java.util.UUID;
 
 public class Tenant extends AbstractNamedEntityObject {
 
-    @Schema(description = "ID")
+    @Schema(title = "ID")
     @Id
     @GeneratedValue(generator = "default_id")
     @Column(length = 64)
     String id;
 
-    @Schema(description = "系统名称")
+    @Schema(title = "系统名称")
     @Column(length = 128)
     String sysName;
 
-    @Schema(description = "系统Logo")
+    @Schema(title = "系统Logo")
     String sysLogo;
 
-    @Schema(description = "租户Logo")
+    @Schema(title = "租户Logo")
     String logo;
 
-    @Schema(description = "企业信用编码")
+    @Schema(title = "企业信用编码")
     @Column(length = 128)
     String code;
 
-    @Schema(description = "租户编码")
+    @Schema(title = "租户编码")
     @Column(nullable = false)
     String tenantKey;
 
-    @Schema(description = "帐号余额")
+    @Schema(title = "帐号余额")
     Double balance;
 
-    @Schema(description = "总许可数")
+    @Schema(title = "总许可数")
     Integer licenseCnt;
 
-    @Schema(description = "剩余许可数")
+    @Schema(title = "剩余许可数")
     Integer remainingLicenseCnt;
 
-    @Schema(description = "到期时间")
+    @Schema(title = "到期时间")
     @Temporal(TemporalType.DATE)
     Date licenseExpire;
 
-    @Schema(description = "联系人")
+    @Schema(title = "联系人")
     @Column(length = 32)
     String contractPerson;
 
-    @Schema(description = "联系电话")
+    @Schema(title = "联系电话")
     @Column(length = 32)
     String contractPhone;
 
     ////////////////////////////////////////////////
-    @Schema(description = "域名列表")
+    @Schema(title = "域名列表")
     @Contains
     @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {String.class}, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Column(length = 1200)
     String domainList;
 
-    @Schema(description = "appId")
+    @Schema(title = "appId")
     @Column(length = 64)
     String appId;
 
-    @Schema(description = "appSecret")
+    @Schema(title = "appSecret")
     @Column(length = 512)
     String appSecret;
 
-    @Schema(description = "encryptKey")
+    @Schema(title = "encryptKey")
     @Column(length = 512)
     String encryptKey;
 

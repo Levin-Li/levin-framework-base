@@ -24,7 +24,7 @@ import javax.validation.constraints.NotEmpty;
  * 删除区域
  * //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
-@Schema(description = "删除区域")
+@Schema(title = "删除区域")
 @Data
 
 //@AllArgsConstructor
@@ -41,7 +41,7 @@ public class DeleteAreaReq extends BaseReq {
     private static final long serialVersionUID = -445860277L;
 
 
-    @Schema(description = "编码集合")
+    @Schema(title = "编码集合")
     @In(value = E_Area.code, require = true)
     @NotEmpty
     private String[] codeList;

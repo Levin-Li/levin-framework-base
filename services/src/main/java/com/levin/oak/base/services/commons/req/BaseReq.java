@@ -31,7 +31,7 @@ import java.util.*;
  *
  * @Author Auto gen by simple-dao-codegen 2022-5-31 19:43:35
  */
-@Schema(description = "基本查询对象")
+@Schema(title = "基本查询对象")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
@@ -40,7 +40,7 @@ public abstract class BaseReq
 //        OrganizedObject ,
         ServiceReq {
 
-//    @Schema(description = "组织ID" , hidden = true)
+//    @Schema(title = "组织ID" , hidden = true)
 //    @InjectVar(value = InjectConsts.ORG_ID , isRequired = "false")
 //    protected String orgId;
 

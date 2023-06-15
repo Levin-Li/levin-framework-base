@@ -16,7 +16,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "客户端文件")
+@Schema(title = "客户端文件")
 
 @Table(
         indexes = {
@@ -46,19 +46,19 @@ public class AppClientFile extends AbstractNamedMultiTenantObject {
     @Column(length = 64)
     protected String id;
 
-    @Schema(description = "客户端类型")
+    @Schema(title = "客户端类型")
     @Column(length = 64)
     protected String clientType;
 
-    @Schema(description = "文件类型")
+    @Schema(title = "文件类型")
     @Column(length = 128)
     protected String mimeType;
 
-    @Schema(description = "文件路径")
+    @Schema(title = "文件路径")
     @Column(nullable = false)
     protected String path;
 
-    @Schema(description = "文件内容")
+    @Schema(title = "文件内容")
     @Lob
     protected String content;
 

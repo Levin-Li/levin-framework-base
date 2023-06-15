@@ -27,7 +27,7 @@ import java.util.Date;
         @Index(columnList = E_AppErrorLog.errorLevel),
         @Index(columnList = E_AppErrorLog.rootExceptionType),
 })
-@Schema(description = "应用错误日志")
+@Schema(title = "应用错误日志")
 @Deprecated //一般不建议使用
 public class AppErrorLog implements MultiTenantObject {
 
@@ -35,32 +35,32 @@ public class AppErrorLog implements MultiTenantObject {
     @GeneratedValue
     protected Long id;
 
-    @Schema(description = "租户ID")
+    @Schema(title = "租户ID")
     protected String tenantId;
 
-    @Schema(description = "模块ID")
+    @Schema(title = "模块ID")
     @Column(length = 64)
     protected String moduleId;
 
-    @Schema(description = "发生时间")
+    @Schema(title = "发生时间")
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     protected Date occurTime;
 
-    @Schema(description = "标题")
+    @Schema(title = "标题")
     @Column(nullable = false, length = 768)
     @Contains
     protected String title;
 
-    @Schema(description = "错误级别")
+    @Schema(title = "错误级别")
     protected String errorLevel;
 
-    @Schema(description = "根异常类型")
+    @Schema(title = "根异常类型")
     @Contains
     protected String rootExceptionType;
 
     @Lob
-    @Schema(description = "完整异常堆栈")
+    @Schema(title = "完整异常堆栈")
     protected String exceptionFullInfo;
 
     @PrePersist

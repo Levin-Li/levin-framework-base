@@ -23,7 +23,7 @@ import java.util.Date;
 //自动导入列表
 ////////////////////////////////////
 
-@Schema(description = "租户剩余许可数变更请求")
+@Schema(title = "租户剩余许可数变更请求")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,27 +38,27 @@ public class TenantLicenseReq extends BaseReq {
 
     private static final long serialVersionUID = 1557223144L;
 
-    @Schema(description = "ID", required = true)
+    @Schema(title = "ID", required = true)
     @NotNull
     @NotBlank
     @Eq(require = true)
     private String id;
 
-    @Schema(description = "剩余许可数")
+    @Schema(title = "剩余许可数")
     @Update(paramExpr = "${_name} + ${_val}", require = true)
     //更新后的
     @Where(paramExpr = E_Tenant.licenseCnt + " >= ( ${_name} + ${_val} ) AND ( ${_name} + ${_val} ) >=0 ", require = true)
     private Integer remainingLicenseCnt;
 
-    @Schema(description = "到期时间")
+    @Schema(title = "到期时间")
     @Gt
     private final Date licenseExpire = new Date();
 
-    @Schema(description = "更新时间")
+    @Schema(title = "更新时间")
     @Update
     private Date lastUpdateTime;
 
-    @Schema(description = "是否允许")
+    @Schema(title = "是否允许")
     private final Boolean enable = true;
 
     public TenantLicenseReq(String id) {

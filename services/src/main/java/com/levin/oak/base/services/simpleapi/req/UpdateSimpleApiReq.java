@@ -41,7 +41,7 @@ import java.util.Date;
  * 更新简单动态接口
  * Auto gen by simple-dao-codegen 2022-5-23 10:30:00
  */
-@Schema(description = "更新简单动态接口")
+@Schema(title = "更新简单动态接口")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -57,76 +57,76 @@ public class UpdateSimpleApiReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1021385738L;
 
-    @Schema(description = "id", required = true)
+    @Schema(title = "id", required = true)
     @NotNull
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(title = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
 
     @Size(max = 16)
-    @Schema(title = "逗号隔开", description = "http方法")
+    @Schema(title = "逗号隔开", title = "http方法")
     String methods;
 
-    @Schema(description = "脚本语言")
+    @Schema(title = "脚本语言")
     Language language;
 
     @NotBlank
     @Size(max = 64)
-    @Schema(description = "类型")
+    @Schema(title = "类型")
     String type;
 
     @NotBlank
     @Size(max = 64)
-    @Schema(description = "分类名称")
+    @Schema(title = "分类名称")
     String category;
 
     @NotBlank
     @Size(max = 64)
-    @Schema(description = "分组名称")
+    @Schema(title = "分组名称")
     String groupName;
 
     @NotBlank
-    @Schema(description = "访问路径")
+    @Schema(title = "访问路径")
     String path;
 
     @Size(max = 1800)
-    @Schema(description = "需要的授权，权限或角色，json数组")
+    @Schema(title = "需要的授权，权限或角色，json数组")
     String requireAuthorizations;
 
-    @Schema(description = "内容")
+    @Schema(title = "内容")
     String content;
 
     @Size(max = 128)
-    @Schema(description = "系统子域")
+    @Schema(title = "系统子域")
     String domain;
 
     @NotBlank
     @Size(max = 128)
-    @Schema(description = "名称")
+    @Schema(title = "名称")
     String name;
 
     @Size(max = 128)
-    @Schema(description = "拼音，格式：全拼(简拼)")
+    @Schema(title = "拼音，格式：全拼(简拼)")
     String pinyinName;
 
-    @Schema(description = "更新时间")
+    @Schema(title = "更新时间")
     Date lastUpdateTime;
 
-    @Schema(description = "排序代码")
+    @Schema(title = "排序代码")
     Integer orderCode;
 
-    @Schema(description = "是否允许")
+    @Schema(title = "是否允许")
     Boolean enable;
 
-    @Schema(description = "是否可编辑")
+    @Schema(title = "是否可编辑")
     Boolean editable;
 
     @Size(max = 512)
-    @Schema(description = "备注")
+    @Schema(title = "备注")
     String remark;
 
 

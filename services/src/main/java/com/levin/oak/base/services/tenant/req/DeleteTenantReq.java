@@ -24,7 +24,7 @@ import javax.validation.constraints.NotEmpty;
  * 删除租户
  * //Auto gen by simple-dao-codegen 2022-3-25 18:38:00
  */
-@Schema(description = "删除租户")
+@Schema(title = "删除租户")
 @Data
 
 //@AllArgsConstructor
@@ -41,7 +41,7 @@ public class DeleteTenantReq extends BaseReq {
     private static final long serialVersionUID = 1557223144L;
 
 
-    @Schema(description = "ID集合")
+    @Schema(title = "ID集合")
     @In(value = E_Tenant.id, require = true)
     @NotEmpty
     private String[] idList;

@@ -32,7 +32,6 @@
 package com.levin.oak.base.entities;
 
 
-
 import com.levin.commons.dao.support.EnumDescType;
 import com.levin.commons.service.domain.EnumDesc;
 import org.hibernate.annotations.GenericGenerator;

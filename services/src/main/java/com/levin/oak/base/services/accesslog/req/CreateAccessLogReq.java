@@ -26,7 +26,7 @@ import java.util.Date;
  * 新增访问日志
  * //Auto gen by simple-dao-codegen 2022-4-2 13:49:52
  */
-@Schema(description = "新增访问日志")
+@Schema(title = "新增访问日志")
 @Data
 @Accessors(chain = true)
 @ToString
@@ -41,77 +41,77 @@ public class CreateAccessLogReq extends MultiTenantReq {
     private static final long serialVersionUID = 1030736962L;
 
 
-    @Schema(description = "请求的域名")
+    @Schema(title = "请求的域名")
     private String domain;
 
-    @Schema(description = "访问者")
+    @Schema(title = "访问者")
     @Size(max = 64)
     private String visitor;
 
-    @Schema(description = "创建时间", required = true)
+    @Schema(title = "创建时间", required = true)
     @NotNull
     private Date createTime;
 
-    @Schema(description = "标题", required = true)
+    @Schema(title = "标题", required = true)
     @NotBlank
     private String title;
 
-    @Schema(description = "日志类型")
+    @Schema(title = "日志类型")
     @Size(max = 64)
     private String logType;
 
-    @Schema(description = "差异修改数据")
+    @Schema(title = "差异修改数据")
     private String diffModifyData;
 
-    @Schema(description = "业务主键")
+    @Schema(title = "业务主键")
     private String bizKey;
 
-    @Schema(description = "业务类型")
+    @Schema(title = "业务类型")
     private String bizType;
 
-    @Schema(description = "请求URI")
+    @Schema(title = "请求URI")
     private String requestUri;
 
-    @Schema(description = "请求方法")
+    @Schema(title = "请求方法")
     @Size(max = 32)
     private String requestMethod;
 
-    @Schema(description = "请求参数")
+    @Schema(title = "请求参数")
     private String requestParams;
 
-    @Schema(description = "头部信息")
+    @Schema(title = "头部信息")
     private String headInfo;
 
-    @Schema(description = "响应数据")
+    @Schema(title = "响应数据")
     private String responseData;
 
-    @Schema(description = "操作IP地址")
+    @Schema(title = "操作IP地址")
     @Size(max = 128)
     private String remoteAddr;
 
-    @Schema(description = "服务器地址")
+    @Schema(title = "服务器地址")
     @Size(max = 64)
     private String serverAddr;
 
-    @Schema(description = "是否有异常")
+    @Schema(title = "是否有异常")
     private Boolean isException;
 
-    @Schema(description = "异常信息")
+    @Schema(title = "异常信息")
     private String exceptionInfo;
 
-    @Schema(description = "用户代理")
+    @Schema(title = "用户代理")
     @Size(max = 768)
     private String userAgent;
 
-    @Schema(description = "设备名称/操作系统")
+    @Schema(title = "设备名称/操作系统")
     @Size(max = 128)
     private String deviceName;
 
-    @Schema(description = "浏览器名称")
+    @Schema(title = "浏览器名称")
     @Size(max = 64)
     private String browserName;
 
-    @Schema(description = "执行时间(ms)")
+    @Schema(title = "执行时间(ms)")
     private Long executeTime;
 
 

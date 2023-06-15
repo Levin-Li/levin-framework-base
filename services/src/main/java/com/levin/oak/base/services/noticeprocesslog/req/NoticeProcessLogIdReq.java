@@ -39,7 +39,7 @@ import java.util.Date;
  * //Auto gen by simple-dao-codegen 2022-6-20 16:50:12
  */
 
-@Schema(description = "通知处理日志 主键通用请求")
+@Schema(title = "通知处理日志 主键通用请求")
 @Data
 
 @AllArgsConstructor
@@ -56,7 +56,7 @@ public class NoticeProcessLogIdReq extends MultiTenantReq {
     private static final long serialVersionUID = -1991983093L;
 
 
-    @Schema(description = "id", required = true)
+    @Schema(title = "id", required = true)
     @Eq(require = true)
     //@NotNull
     protected String id;

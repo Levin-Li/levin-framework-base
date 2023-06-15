@@ -23,7 +23,7 @@ import javax.validation.constraints.NotNull;
  * //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
 
-@Schema(description = "区域 主键通用请求")
+@Schema(title = "区域 主键通用请求")
 @Data
 
 @AllArgsConstructor
@@ -39,7 +39,7 @@ public class AreaIdReq extends BaseReq {
 
     private static final long serialVersionUID = -445860277L;
 
-    @Schema(description = "编码", required = true)
+    @Schema(title = "编码", required = true)
     @Eq(require = true)
     @NotNull
     protected String code;

@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
  *
  * @author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
  */
-@Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
+@Tag(name = E_SimpleApi.BIZ_NAME, title = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimpleApiService {
 
     String BIZ_NAME = E_SimpleApi.BIZ_NAME;
@@ -139,7 +139,7 @@ public interface SimpleApiService {
      *
      * @param key 缓存Key
      */
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是主键ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, title = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
 
 }

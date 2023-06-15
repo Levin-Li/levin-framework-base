@@ -22,7 +22,7 @@ import java.util.Date;
 @ToString(exclude = "org")
 
 @FieldNameConstants
-@Schema(description = "通知处理日志")
+@Schema(title = "通知处理日志")
 
 @Entity(name = EntityConst.PREFIX + "NoticeProcessLog")
 
@@ -52,7 +52,7 @@ public class NoticeProcessLog
     /**
      * 冗余字段
      */
-    @Schema(description = "租户ID")
+    @Schema(title = "租户ID")
     @Column(length = 128)
     @InjectVar(value = InjectConsts.TENANT_ID, isRequired = "false")
     String tenantId;
@@ -60,30 +60,30 @@ public class NoticeProcessLog
     /**
      * 冗余字段
      */
-    @Schema(description = "部门ID")
+    @Schema(title = "部门ID")
     @Column(length = 128)
     @InjectVar(value = InjectConsts.ORG_ID, isRequired = "false")
     String orgId;
 
-    @Schema(description = "用户ID")
+    @Schema(title = "用户ID")
     @Column(length = 128, nullable = false)
     @InjectVar(InjectConsts.USER_ID)
     String ownerId;
 
-    @Schema(description = "消息ID")
+    @Schema(title = "消息ID")
     @Column(length = 128, nullable = false)
     String noticeId;
 
-    @Schema(description = "处理状态")
+    @Schema(title = "处理状态")
     @Column(length = 128)
     String status;
 
-    @Schema(description = "处理时间")
+    @Schema(title = "处理时间")
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     protected Date createTime;
 
-    @Schema(description = "备注")
+    @Schema(title = "备注")
     @Column(length = 512)
     protected String remark;
 

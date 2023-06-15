@@ -23,7 +23,7 @@ import javax.validation.constraints.NotNull;
  * //Auto gen by simple-dao-codegen 2022-3-25 18:38:00
  */
 
-@Schema(description = "租户 主键通用请求")
+@Schema(title = "租户 主键通用请求")
 @Data
 
 @AllArgsConstructor
@@ -40,7 +40,7 @@ public class TenantIdReq extends BaseReq {
     private static final long serialVersionUID = 1557223144L;
 
 
-    @Schema(description = "ID", required = true)
+    @Schema(title = "ID", required = true)
     @Eq(require = true)
     @NotNull
     protected String id;

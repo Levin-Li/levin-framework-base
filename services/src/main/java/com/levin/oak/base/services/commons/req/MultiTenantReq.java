@@ -21,7 +21,7 @@ import lombok.experimental.FieldNameConstants;
  *
  * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:35
  */
-@Schema(description = "多租户查询对象")
+@Schema(title = "多租户查询对象")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
@@ -29,7 +29,7 @@ public abstract class MultiTenantReq
         extends BaseReq
         implements MultiTenantObject {
 
-    @Schema(description = "租户ID", hidden = true)
+    @Schema(title = "租户ID", hidden = true)
     @InjectVar(value = InjectConsts.TENANT_ID
             , isOverride = InjectVar.SPEL_PREFIX + "!#" + InjectConsts.IS_SUPER_ADMIN // 如果不是超级管理员, 那么覆盖必须的
             , isRequired = InjectVar.SPEL_PREFIX + "!#" + InjectConsts.IS_SUPER_ADMIN // 如果不是超级管理员，那么值是必须的
@@ -48,7 +48,7 @@ public abstract class MultiTenantReq
      *
      * @return
      */
-    @Schema(description = "请求是否包含公共数据", hidden = true)
+    @Schema(title = "请求是否包含公共数据", hidden = true)
     public boolean isContainsPublicData() {
         return false;
     }

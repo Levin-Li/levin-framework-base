@@ -28,7 +28,7 @@ import java.util.Date;
  *
  * @Author Auto gen by simple-dao-codegen 2022-3-29 22:58:02
  */
-@Schema(description = "查询应用错误日志")
+@Schema(title = "查询应用错误日志")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,35 +43,35 @@ public class QueryAppErrorLogReq extends MultiTenantReq {
     private static final long serialVersionUID = 1594864095L;
 
     @Ignore
-    @Schema(description = "排序字段")
+    @Schema(title = "排序字段")
     private String orderBy;
 
     //@Ignore
-    @Schema(description = "排序方向-desc asc")
+    @Schema(title = "排序方向-desc asc")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
     private OrderBy.Type orderDir;
 
 
     //@NotNull
 
-    @Schema(description = "id")
+    @Schema(title = "id")
     private Long id;
 
 
     //@Size(max = 64)
 
-    @Schema(description = "模块ID")
+    @Schema(title = "模块ID")
     private String moduleId;
 
 
     //@NotNull
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "大于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteOccurTime;
 
-    @Schema(description = "小于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "小于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteOccurTime;
 
@@ -79,27 +79,27 @@ public class QueryAppErrorLogReq extends MultiTenantReq {
     //@NotBlank
     //@Size(max = 1000)
 
-    @Schema(description = "标题")
+    @Schema(title = "标题")
     private String title;
 
-    @Schema(description = "模糊匹配 - 标题")
+    @Schema(title = "模糊匹配 - 标题")
     @Contains
     private String containsTitle;
 
 
-    @Schema(description = "错误级别")
+    @Schema(title = "错误级别")
     private String errorLevel;
 
 
-    @Schema(description = "根异常类型")
+    @Schema(title = "根异常类型")
     private String rootExceptionType;
 
-    @Schema(description = "模糊匹配 - 根异常类型")
+    @Schema(title = "模糊匹配 - 根异常类型")
     @Contains
     private String containsRootExceptionType;
 
 
-    @Schema(description = "完整异常堆栈")
+    @Schema(title = "完整异常堆栈")
     private String exceptionFullInfo;
 
 

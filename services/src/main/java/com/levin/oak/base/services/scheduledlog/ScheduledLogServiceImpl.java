@@ -48,7 +48,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ScheduledLogService", matchIfMissing = true)
 @Slf4j
 //@Validated
-@Tag(name = E_ScheduledLog.BIZ_NAME, description = E_ScheduledLog.BIZ_NAME + MAINTAIN_ACTION)
+@Tag(name = E_ScheduledLog.BIZ_NAME, title = E_ScheduledLog.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_ScheduledLog.SIMPLE_CLASS_NAME})
 public class ScheduledLogServiceImpl extends BaseService implements ScheduledLogService {
 
@@ -153,7 +153,7 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
     }
 
     @Override
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, title = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_ScheduledLog.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {
     }

@@ -45,7 +45,7 @@ import java.util.Date;
  *
  * @Author Auto gen by simple-dao-codegen 2022-6-20 16:50:12
  */
-@Schema(description = "查询通知处理日志")
+@Schema(title = "查询通知处理日志")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -60,51 +60,51 @@ public class QueryNoticeProcessLogReq extends MultiTenantReq {
     private static final long serialVersionUID = -1991983093L;
 
     @Ignore
-    @Schema(description = "排序字段")
+    @Schema(title = "排序字段")
     String orderBy;
 
     //@Ignore
-    @Schema(description = "排序方向-desc asc")
+    @Schema(title = "排序方向-desc asc")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
     OrderBy.Type orderDir;
 
 
     //@NotBlank
     //@Size(max = 64)
-    @Schema(description = "id")
+    @Schema(title = "id")
     String id;
 
     //@NotBlank
     //@InjectVar()
     //@Size(max = 128)
-    @Schema(description = "用户ID")
+    @Schema(title = "用户ID")
     String ownerId;
 
     //@NotBlank
     //@Size(max = 128)
-    @Schema(description = "消息ID")
+    @Schema(title = "消息ID")
     String noticeId;
 
     //@Size(max = 128)
-    @Schema(description = "处理状态")
+    @Schema(title = "处理状态")
     String status;
 
     //@NotNull
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于处理时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "大于等于处理时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     Date gteCreateTime;
 
-    @Schema(description = "小于等于处理时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "小于等于处理时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     Date lteCreateTime;
 
-    @Schema(description = "处理时间-日期范围，格式：yyyyMMdd-yyyyMMdd，大于等于且小余等于")
+    @Schema(title = "处理时间-日期范围，格式：yyyyMMdd-yyyyMMdd，大于等于且小余等于")
     @Between(paramDelimiter = "-", patterns = {"yyyyMMdd"})
     String betweenCreateTime;
 
     //@Size(max = 512)
-    @Schema(description = "备注")
+    @Schema(title = "备注")
     String remark;
 
     public QueryNoticeProcessLogReq(String id) {

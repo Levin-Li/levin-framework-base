@@ -26,7 +26,7 @@ import javax.validation.constraints.NotEmpty;
  * 删除客户端文件
  * //Auto gen by simple-dao-codegen 2022-4-20 10:49:23
  */
-@Schema(description = "删除客户端文件")
+@Schema(title = "删除客户端文件")
 @Data
 
 //@AllArgsConstructor
@@ -43,7 +43,7 @@ public class DeleteAppClientFileReq extends MultiTenantReq {
     private static final long serialVersionUID = -1155395350L;
 
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_AppClientFile.id, require = true)
     @NotEmpty
     private String[] idList;
@@ -58,7 +58,7 @@ public class DeleteAppClientFileReq extends MultiTenantReq {
     }
 
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(title = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 

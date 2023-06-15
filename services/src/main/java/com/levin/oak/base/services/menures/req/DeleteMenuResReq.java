@@ -24,7 +24,7 @@ import javax.validation.constraints.NotEmpty;
  * 删除菜单
  * //Auto gen by simple-dao-codegen 2022-3-25 17:01:37
  */
-@Schema(description = "删除菜单")
+@Schema(title = "删除菜单")
 @Data
 
 //@AllArgsConstructor
@@ -41,7 +41,7 @@ public class DeleteMenuResReq extends MultiTenantReq {
     private static final long serialVersionUID = -887712701L;
 
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_MenuRes.id, require = true)
     @NotEmpty
     private String[] idList;

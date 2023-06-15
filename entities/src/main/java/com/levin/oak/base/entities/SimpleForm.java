@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "简单表单")
+@Schema(title = "简单表单")
 
 @Table(
         indexes = {
@@ -45,7 +45,7 @@ import javax.persistence.Table;
 )
 public class SimpleForm extends SimpleEntity {
 
-    @Schema(description = "提交地址")
+    @Schema(title = "提交地址")
     protected String commitApi;
 
     @Override

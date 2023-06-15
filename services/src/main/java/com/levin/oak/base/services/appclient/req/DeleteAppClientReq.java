@@ -24,7 +24,7 @@ import javax.validation.constraints.NotEmpty;
  * 删除应用接入
  * //Auto gen by simple-dao-codegen 2022-4-3 0:55:04
  */
-@Schema(description = "删除应用接入")
+@Schema(title = "删除应用接入")
 @Data
 
 //@AllArgsConstructor
@@ -41,7 +41,7 @@ public class DeleteAppClientReq extends MultiTenantReq {
     private static final long serialVersionUID = -115048882L;
 
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_AppClient.id, require = true)
     @NotEmpty
     private String[] idList;

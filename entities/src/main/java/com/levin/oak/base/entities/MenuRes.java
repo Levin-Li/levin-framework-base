@@ -19,7 +19,7 @@ import javax.persistence.*;
 @Accessors(chain = true)
 @EqualsAndHashCode(of = {"id"})
 @FieldNameConstants
-@Schema(description = "菜单")
+@Schema(title = "菜单")
 @Table(
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
@@ -46,44 +46,44 @@ public class MenuRes
     @Column(length = 64)
     protected String id;
 
-    @Schema(description = "父ID")
+    @Schema(title = "父ID")
     @Column(length = 64)
     String parentId;
 
-    @Schema(description = "租户ID")
+    @Schema(title = "租户ID")
     @Column(length = 64)
     String tenantId;
 
-    @Schema(description = "子系统")
+    @Schema(title = "子系统")
     @Column(length = 128)
     String domain;
 
-    @Schema(description = "需要的授权，权限或角色，json数组")
+    @Schema(title = "需要的授权，权限或角色，json数组")
     @Column(length = 1800)
 //    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {String.class}, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     String requireAuthorizations;
 
-    @Schema(description = "无权限时是否展示")
+    @Schema(title = "无权限时是否展示")
     @Column(nullable = false)
     Boolean alwaysShow;
 
-    @Schema(description = "目标")
+    @Schema(title = "目标")
     @Column(length = 64)
     String target;
 
-    @Schema(description = "打开方式")
+    @Schema(title = "打开方式")
     @Enumerated(EnumType.STRING)
     @Column(length = 64)
     MenuItem.ActionType actionType;
 
-    @Schema(description = "图标")
+    @Schema(title = "图标")
     String icon;
 
-    @Schema(description = "路径/链接")
+    @Schema(title = "路径/链接")
     @Contains
     String path;
 
-    @Schema(description = "参数")
+    @Schema(title = "参数")
     @Column(length = 1800)
     String params;
 

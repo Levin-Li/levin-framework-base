@@ -24,7 +24,7 @@ import javax.validation.constraints.NotEmpty;
  * 删除调度任务
  * //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
-@Schema(description = "删除调度任务")
+@Schema(title = "删除调度任务")
 @Data
 
 //@AllArgsConstructor
@@ -41,7 +41,7 @@ public class DeleteScheduledTaskReq extends MultiTenantReq {
     private static final long serialVersionUID = -2056389676L;
 
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_ScheduledTask.id, require = true)
     @NotEmpty
     private String[] idList;

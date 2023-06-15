@@ -17,7 +17,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "简单页面")
+@Schema(title = "简单页面")
 
 @Table(
         indexes = {
@@ -43,18 +43,18 @@ import javax.persistence.*;
 )
 public class SimplePage extends SimpleEntity {
 
-    @Schema(description = "页面类型")
+    @Schema(title = "页面类型")
     public enum Type implements EnumDesc {
-        @Schema(description = "Json") json,
-        @Schema(description = "Jsonp") jsonp,
-        @Schema(description = "Html") html,
-        @Schema(description = "Java") java,
-        @Schema(description = "JavaScript") js,
-        @Schema(description = "Groovy") groovy,
-        @Schema(description = "Freemark") ftlh,
+        @Schema(title = "Json") json,
+        @Schema(title = "Jsonp") jsonp,
+        @Schema(title = "Html") html,
+        @Schema(title = "Java") java,
+        @Schema(title = "JavaScript") js,
+        @Schema(title = "Groovy") groovy,
+        @Schema(title = "Freemark") ftlh,
     }
 
-//    @Schema(description = "类型")
+//    @Schema(title = "类型")
 //    @Column(nullable = false, length = 128)
 //    @Enumerated(EnumType.STRING)
 //    protected Type type;

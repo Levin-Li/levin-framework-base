@@ -37,7 +37,7 @@ import java.util.Date;
  * 删除简单表单
  * //Auto gen by simple-dao-codegen 2022-5-23 10:30:01
  */
-@Schema(description = "删除简单表单")
+@Schema(title = "删除简单表单")
 @Data
 
 //@AllArgsConstructor
@@ -54,7 +54,7 @@ public class DeleteSimpleFormReq extends MultiTenantReq {
     private static final long serialVersionUID = 1598335188L;
 
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_SimpleForm.id, require = true)
     @NotEmpty
     private String[] idList;
@@ -69,7 +69,7 @@ public class DeleteSimpleFormReq extends MultiTenantReq {
     }
 
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(title = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 

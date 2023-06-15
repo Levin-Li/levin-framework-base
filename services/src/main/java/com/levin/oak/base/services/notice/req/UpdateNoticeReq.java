@@ -44,7 +44,7 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
  * 更新通知
  * Auto gen by simple-dao-codegen 2022-6-20 16:50:11
  */
-@Schema(description = "更新通知")
+@Schema(title = "更新通知")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -60,62 +60,62 @@ public class UpdateNoticeReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1394869526L;
 
-    @Schema(description = "id", required = true)
+    @Schema(title = "id", required = true)
     @NotNull
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(title = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
 
     @InjectVar()
     @Size(max = 128)
-    @Schema(title = "所有者ID", description = "所有者ID")
+    @Schema(title = "所有者ID", title = "所有者ID")
     String ownerId;
 
     @Size(max = 64)
-    @Schema(description = "通知类别")
+    @Schema(title = "通知类别")
     String category;
 
-    @Schema(description = "通知内容类型")
+    @Schema(title = "通知内容类型")
     ContentType contentType;
 
-    @Schema(description = "通知内容")
+    @Schema(title = "通知内容")
     String content;
 
-    @Schema(description = "过期时间")
+    @Schema(title = "过期时间")
     Date expiredDate;
 
     @Size(max = 128)
-    @Schema(description = "系统域")
+    @Schema(title = "系统域")
     String domain;
 
     @NotBlank
     @Size(max = 128)
-    @Schema(description = "名称")
+    @Schema(title = "名称")
     String name;
 
     @Size(max = 128)
     @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    @Schema(title = "拼音名称", description = "拼音，格式Json数组：[全拼,简拼]")
+    @Schema(title = "拼音名称", title = "拼音，格式Json数组：[全拼,简拼]")
     List<String> pinyinName;
 
-    @Schema(description = "更新时间")
+    @Schema(title = "更新时间")
     Date lastUpdateTime;
 
-    @Schema(description = "排序代码")
+    @Schema(title = "排序代码")
     Integer orderCode;
 
-    @Schema(description = "是否允许")
+    @Schema(title = "是否允许")
     Boolean enable;
 
-    @Schema(description = "是否可编辑")
+    @Schema(title = "是否可编辑")
     Boolean editable;
 
     @Size(max = 512)
-    @Schema(description = "备注")
+    @Schema(title = "备注")
     String remark;
 
 

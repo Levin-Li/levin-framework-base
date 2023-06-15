@@ -39,7 +39,7 @@ import java.util.Date;
  * 新增简单表单
  * //Auto gen by simple-dao-codegen 2022-5-23 10:30:01
  */
-@Schema(description = "新增简单表单")
+@Schema(title = "新增简单表单")
 @Data
 @Accessors(chain = true)
 @ToString
@@ -53,70 +53,70 @@ public class CreateSimpleFormReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1598335188L;
 
-    @Schema(description = "提交地址")
+    @Schema(title = "提交地址")
     String commitApi;
 
 
-    @Schema(description = "类型", required = true)
+    @Schema(title = "类型", required = true)
     @NotBlank
     @Size(max = 64)
     String type;
 
-    @Schema(description = "分类名称", required = true)
+    @Schema(title = "分类名称", required = true)
     @NotBlank
     @Size(max = 64)
     String category;
 
-    @Schema(description = "分组名称", required = true)
+    @Schema(title = "分组名称", required = true)
     @NotBlank
     @Size(max = 64)
     String groupName;
 
-    @Schema(description = "访问路径", required = true)
+    @Schema(title = "访问路径", required = true)
     @NotBlank
     String path;
 
-    @Schema(description = "内容")
+    @Schema(title = "内容")
     String content;
 
-    @Schema(description = "系统子域")
+    @Schema(title = "系统子域")
     @Size(max = 128)
     String domain;
 
-    @Schema(description = "名称", required = true)
+    @Schema(title = "名称", required = true)
     @NotBlank
     @Size(max = 128)
     String name;
 
-    @Schema(description = "拼音，格式：全拼(简拼)")
+    @Schema(title = "拼音，格式：全拼(简拼)")
     @Size(max = 128)
     String pinyinName;
 
-    @Schema(description = "创建者", hidden = true)
+    @Schema(title = "创建者", hidden = true)
     //@InjectVar()
     //@Size(max = 128)
     @InjectVar(InjectConsts.USER_ID)
     String creator;
 
-    @Schema(description = "创建时间", hidden = true)
+    @Schema(title = "创建时间", hidden = true)
     //@NotNull
     Date createTime;
 
-    @Schema(description = "更新时间", hidden = true)
+    @Schema(title = "更新时间", hidden = true)
     Date lastUpdateTime;
 
-    @Schema(description = "排序代码", hidden = true)
+    @Schema(title = "排序代码", hidden = true)
     Integer orderCode;
 
-    @Schema(description = "是否允许", hidden = true)
+    @Schema(title = "是否允许", hidden = true)
     //@NotNull
     Boolean enable;
 
-    @Schema(description = "是否可编辑", hidden = true)
+    @Schema(title = "是否可编辑", hidden = true)
     //@NotNull
     Boolean editable;
 
-    @Schema(description = "备注", hidden = true)
+    @Schema(title = "备注", hidden = true)
     //@Size(max = 512)
     String remark;
 

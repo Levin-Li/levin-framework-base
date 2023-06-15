@@ -2,7 +2,7 @@ package com.levin.oak.base.controller.user;
 
 import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.dao.support.SimplePaging;
-import com.levin.commons.rbac.AuthorizationException;
+import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizRoleService;

@@ -30,7 +30,7 @@ import java.util.Date;
  * 新增区域
  * //Auto gen by simple-dao-codegen 2022-4-2 13:49:52
  */
-@Schema(description = "新增区域")
+@Schema(title = "新增区域")
 @Data
 @Accessors(chain = true)
 @ToString
@@ -45,52 +45,52 @@ public class CreateAreaReq extends BaseReq {
     private static final long serialVersionUID = -445860277L;
 
 
-    @Schema(description = "图标")
+    @Schema(title = "图标")
     private String icon;
 
-    @Schema(description = "父区域ID")
+    @Schema(title = "父区域ID")
     @Size(max = 64)
     private String parentCode;
 
 
-    @Schema(description = "类型", required = true)
+    @Schema(title = "类型", required = true)
     @NotNull
     private Type type;
 
-    @Schema(description = "名称", required = true)
+    @Schema(title = "名称", required = true)
     @NotBlank
     @Size(max = 128)
     private String name;
 
-    @Schema(description = "拼音，格式：全拼(简拼)")
+    @Schema(title = "拼音，格式：全拼(简拼)")
     @Size(max = 128)
     private String pinyinName;
 
-    @Schema(description = "创建者", hidden = true)
+    @Schema(title = "创建者", hidden = true)
     //@InjectVar()
     //@Size(max = 128)
     @InjectVar(InjectConsts.USER_ID)
     private String creator;
 
-    @Schema(description = "创建时间", hidden = true)
+    @Schema(title = "创建时间", hidden = true)
     //@NotNull
     private Date createTime;
 
-    @Schema(description = "更新时间", hidden = true)
+    @Schema(title = "更新时间", hidden = true)
     private Date lastUpdateTime;
 
-    @Schema(description = "排序代码", hidden = true)
+    @Schema(title = "排序代码", hidden = true)
     private Integer orderCode;
 
-    @Schema(description = "是否允许", hidden = true)
+    @Schema(title = "是否允许", hidden = true)
     //@NotNull
     private Boolean enable;
 
-    @Schema(description = "是否可编辑", hidden = true)
+    @Schema(title = "是否可编辑", hidden = true)
     //@NotNull
     private Boolean editable;
 
-    @Schema(description = "备注")
+    @Schema(title = "备注")
     //@Size(max = 512)
     private String remark;
 

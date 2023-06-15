@@ -21,7 +21,7 @@ import java.util.List;
 @EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "字典")
+@Schema(title = "字典")
 
 @Entity(name = EntityConst.PREFIX + "Dict")
 @Table(
@@ -51,9 +51,9 @@ public class Dict
 
     public enum Type implements EnumDesc {
 
-        @Schema(description = "系统")
+        @Schema(title = "系统")
         System,
-        @Schema(description = "自定义")
+        @Schema(title = "自定义")
         Custom,
 
     }
@@ -61,12 +61,12 @@ public class Dict
     @Data
     @Accessors(chain = true)
     @FieldNameConstants
-    @Schema(description = "字典项")
+    @Schema(title = "字典项")
     public static class Item
             extends AbstractNamedEntityObject {
 
         @Id
-        @Schema(description = "编码")
+        @Schema(title = "编码")
         @Column(nullable = false)
         protected String code;
 
@@ -83,17 +83,17 @@ public class Dict
     @Column(length = 64)
     protected String id;
 
-    @Schema(description = "类型")
-    @Column(nullable = false,length = 64)
+    @Schema(title = "类型")
+    @Column(nullable = false, length = 64)
     @Enumerated(EnumType.STRING)
     protected Type type;
 
-    @Schema(description = "编码")
+    @Schema(title = "编码")
     @Column(nullable = false, length = 256)
     @Contains
     protected String code;
 
-    @Schema(description = "编码项", title = "Json 存储")
+    @Schema(title = "编码项", description = "Json 存储")
     @Lob
     @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {Item.class}, converter = DefaultJsonConverter.class, isRequired = "false")
     protected String itemList;

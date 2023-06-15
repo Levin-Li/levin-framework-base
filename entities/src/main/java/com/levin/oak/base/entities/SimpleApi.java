@@ -16,7 +16,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "简单动态接口")
+@Schema(title = "简单动态接口")
 @Table(
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
@@ -26,12 +26,12 @@ import javax.persistence.*;
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = AbstractNamedMultiTenantObject.Fields.tenantId),
                 @Index(columnList = AbstractNamedMultiTenantObject.Fields.domain),
-                @Index(columnList = TenantOrganizedEntity.Fields.orgId),
+                @Index(columnList = E_TenantOrganizedEntity.orgId),
 
-//                @Index(columnList = SimpleEntity.Fields.type),
-                @Index(columnList = SimpleEntity.Fields.path),
-                @Index(columnList = SimpleEntity.Fields.category),
-                @Index(columnList = SimpleEntity.Fields.groupName),
+//                @Index(columnList = E_SimpleEntity.type),
+                @Index(columnList = E_SimpleEntity.path),
+                @Index(columnList = E_SimpleEntity.category),
+                @Index(columnList = E_SimpleEntity.groupName),
 
                 @Index(columnList = E_SimpleApi.language),
 
@@ -51,12 +51,12 @@ public class SimpleApi extends SimpleEntity {
         JavaScript,
     }
 
-    @Schema(description = "http方法", title = "逗号隔开")
+    @Schema(title = "http方法", description = "逗号隔开")
     @Column(length = 16)
     protected String methods;
 
-    @Schema(description = "脚本语言")
-    @Column(nullable = false,length = 64)
+    @Schema(title = "脚本语言")
+    @Column(nullable = false, length = 64)
     @Enumerated(EnumType.STRING)
     Language language;
 

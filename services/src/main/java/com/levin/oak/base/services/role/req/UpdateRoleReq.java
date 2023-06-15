@@ -32,7 +32,7 @@ import java.util.List;
  * 更新角色
  * Auto gen by simple-dao-codegen 2022-3-25 17:01:35
  */
-@Schema(description = "更新角色")
+@Schema(title = "更新角色")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -48,61 +48,61 @@ public class UpdateRoleReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445356492L;
 
-    @Schema(description = "id", required = true)
+    @Schema(title = "id", required = true)
     @NotNull
     @Eq(require = true)
     private String id;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(title = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     //编码不允许修改
 //    @NotBlank
-//    @Schema(description = "编码")
+//    @Schema(title = "编码")
 //    private String code;
 
-    @Schema(description = "图标")
+    @Schema(title = "图标")
     private String icon;
 
-    @Schema(description = "部门数据权限")
+    @Schema(title = "部门数据权限")
     private OrgDataScope orgDataScope;
 
     @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
-    @Schema(description = "指定的部门列表")
+    @Schema(title = "指定的部门列表")
     private List<String> assignedOrgIdList;
 
     @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
-    @Schema(description = "资源权限列表")
+    @Schema(title = "资源权限列表")
     private List<String> permissionList;
 
     @Size(max = 64)
-    @Schema(description = "系统子域")
+    @Schema(title = "系统子域")
     private String domain;
 
     @NotBlank
     @Size(max = 128)
-    @Schema(description = "名称")
+    @Schema(title = "名称")
     private String name;
 
     @Size(max = 128)
-    @Schema(description = "拼音，格式：全拼(简拼)")
+    @Schema(title = "拼音，格式：全拼(简拼)")
     private String pinyinName;
 
-    @Schema(description = "更新时间")
+    @Schema(title = "更新时间")
     private Date lastUpdateTime;
 
-    @Schema(description = "排序代码")
+    @Schema(title = "排序代码")
     private Integer orderCode;
 
-    @Schema(description = "是否允许")
+    @Schema(title = "是否允许")
     private Boolean enable;
 
-    @Schema(description = "是否可编辑")
+    @Schema(title = "是否可编辑")
     private Boolean editable;
 
     @Size(max = 512)
-    @Schema(description = "备注")
+    @Schema(title = "备注")
     private String remark;
 
 

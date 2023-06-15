@@ -10,7 +10,7 @@ import lombok.experimental.FieldNameConstants;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-@Schema(description = "租户部门实体")
+@Schema(title = "租户部门实体")
 @MappedSuperclass
 @Data
 @Accessors(chain = true)
@@ -19,7 +19,7 @@ public abstract class TenantOrganizedEntity
         extends AbstractNamedMultiTenantObject
         implements OrganizedObject {
 
-    @Schema(description = "机构ID")
+    @Schema(title = "机构ID")
     @Column(length = 64)
     protected String orgId;
 

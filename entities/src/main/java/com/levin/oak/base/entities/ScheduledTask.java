@@ -22,7 +22,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 
-@Schema(description = "调度任务")
+@Schema(title = "调度任务")
 
 @Entity(name = EntityConst.PREFIX + "ScheduledTask")
 @Table(
@@ -47,31 +47,31 @@ public class ScheduledTask
     @Column(length = 64)
     protected String id;
 
-    @Schema(description = "任务分类")
+    @Schema(title = "任务分类")
     @Column(nullable = false, length = 128)
     String category;
 
-    @Schema(description = "任务组")
+    @Schema(title = "任务组")
     @Column(nullable = false, length = 128)
     @Contains
     String groupName;
 
-    @Schema(description = "调度表达式")
+    @Schema(title = "调度表达式")
     @Column(nullable = false)
     String cron;
 
-    @Schema(description = "执行表达式", title = "可以是 Groovy")
+    @Schema(title = "执行表达式", description = "可以是 Groovy")
     @Lob
     String invokeExpr;
 
-    @Schema(description = "允许并发执行")
+    @Schema(title = "允许并发执行")
     Boolean parallelInvoke;
 
-    @Schema(description = "最后一次时间")
+    @Schema(title = "最后一次时间")
     @Temporal(TemporalType.TIMESTAMP)
     Date lastInvokedTime;
 
-    @Schema(description = "下一次时间")
+    @Schema(title = "下一次时间")
     @Temporal(TemporalType.TIMESTAMP)
     Date nextInvokeTime;
 

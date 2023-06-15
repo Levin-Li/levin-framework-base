@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct;
 import java.io.Serializable;
 
 
-@Schema(description = "")
+@Schema(title = "")
 @Data
 
 @AllArgsConstructor

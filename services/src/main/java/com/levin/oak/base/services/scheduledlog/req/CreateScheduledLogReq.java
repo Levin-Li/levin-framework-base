@@ -26,7 +26,7 @@ import java.util.Date;
  * 新增调度日志
  * //Auto gen by simple-dao-codegen 2022-4-2 13:49:52
  */
-@Schema(description = "新增调度日志")
+@Schema(title = "新增调度日志")
 @Data
 @Accessors(chain = true)
 @ToString
@@ -41,23 +41,23 @@ public class CreateScheduledLogReq extends MultiTenantReq {
     private static final long serialVersionUID = 1319130901L;
 
 
-    @Schema(description = "任务ID", required = true)
+    @Schema(title = "任务ID", required = true)
     @NotBlank
     @Size(max = 64)
     private String taskId;
 
-    @Schema(description = "创建时间", required = true)
+    @Schema(title = "创建时间", required = true)
     @NotNull
     private Date createTime;
 
-    @Schema(description = "执行周期")
+    @Schema(title = "执行周期")
     @Size(max = 256)
     private String invokeCycle;
 
-    @Schema(description = "是否错误")
+    @Schema(title = "是否错误")
     private Boolean isError;
 
-    @Schema(description = "执行结果")
+    @Schema(title = "执行结果")
     private String invokeResult;
 
 

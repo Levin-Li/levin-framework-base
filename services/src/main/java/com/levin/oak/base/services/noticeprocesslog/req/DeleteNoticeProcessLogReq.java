@@ -37,7 +37,7 @@ import java.util.Date;
  * 删除通知处理日志
  * //Auto gen by simple-dao-codegen 2022-6-20 16:50:12
  */
-@Schema(description = "删除通知处理日志")
+@Schema(title = "删除通知处理日志")
 @Data
 
 //@AllArgsConstructor
@@ -54,7 +54,7 @@ public class DeleteNoticeProcessLogReq extends MultiTenantReq {
     private static final long serialVersionUID = -1991983093L;
 
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_NoticeProcessLog.id, require = true)
     @NotEmpty
     private String[] idList;

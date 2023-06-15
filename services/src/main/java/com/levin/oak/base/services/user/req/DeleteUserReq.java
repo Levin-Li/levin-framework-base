@@ -24,7 +24,7 @@ import javax.validation.constraints.NotEmpty;
  * 删除用户
  * //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
-@Schema(description = "删除用户")
+@Schema(title = "删除用户")
 @Data
 
 //@AllArgsConstructor
@@ -41,7 +41,7 @@ public class DeleteUserReq extends MultiTenantReq {
     private static final long serialVersionUID = -445263479L;
 
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_User.id, require = true)
     @NotEmpty
     private String[] idList;

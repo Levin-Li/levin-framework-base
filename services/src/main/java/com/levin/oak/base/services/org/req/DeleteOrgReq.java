@@ -24,7 +24,7 @@ import javax.validation.constraints.NotEmpty;
  * 删除机构
  * //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
-@Schema(description = "删除机构")
+@Schema(title = "删除机构")
 @Data
 
 //@AllArgsConstructor
@@ -41,7 +41,7 @@ public class DeleteOrgReq extends MultiTenantReq {
     private static final long serialVersionUID = -1399842458L;
 
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_Org.id, require = true)
     @NotEmpty
     private String[] idList;

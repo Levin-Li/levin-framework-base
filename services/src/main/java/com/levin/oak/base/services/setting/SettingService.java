@@ -20,7 +20,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
  *
  * @author Auto gen by simple-dao-codegen 2022-4-2 19:44:58
  */
-@Tag(name = E_Setting.BIZ_NAME, description = E_Setting.BIZ_NAME + MAINTAIN_ACTION)
+@Tag(name = E_Setting.BIZ_NAME, title = E_Setting.BIZ_NAME + MAINTAIN_ACTION)
 public interface SettingService {
 
     String BIZ_NAME = E_Setting.BIZ_NAME;
@@ -121,7 +121,7 @@ public interface SettingService {
      *
      * @param key 缓存Key
      */
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是主键ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, title = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
 
 }

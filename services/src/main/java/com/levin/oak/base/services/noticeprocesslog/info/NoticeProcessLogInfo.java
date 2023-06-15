@@ -34,7 +34,7 @@ import java.util.Date;
  *
  * @Author Auto gen by simple-dao-codegen 2022-6-20 16:50:12
  */
-@Schema(description = "通知处理日志")
+@Schema(title = "通知处理日志")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
@@ -48,47 +48,47 @@ public class NoticeProcessLogInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(description = "id", required = true)
+    @Schema(title = "id", required = true)
     String id;
 
 
     @InjectVar()
     @Size(max = 128)
-    @Schema(description = "租户ID")
+    @Schema(title = "租户ID")
     String tenantId;
 
 
     @InjectVar()
     @Size(max = 128)
-    @Schema(description = "部门ID")
+    @Schema(title = "部门ID")
     String orgId;
 
 
     @NotBlank
     @InjectVar()
     @Size(max = 128)
-    @Schema(description = "用户ID", required = true)
+    @Schema(title = "用户ID", required = true)
     String ownerId;
 
 
     @NotBlank
     @Size(max = 128)
-    @Schema(description = "消息ID", required = true)
+    @Schema(title = "消息ID", required = true)
     String noticeId;
 
 
     @Size(max = 128)
-    @Schema(description = "处理状态")
+    @Schema(title = "处理状态")
     String status;
 
 
     @NotNull
-    @Schema(description = "处理时间", required = true)
+    @Schema(title = "处理时间", required = true)
     Date createTime;
 
 
     @Size(max = 512)
-    @Schema(description = "备注")
+    @Schema(title = "备注")
     String remark;
 
 

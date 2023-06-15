@@ -41,7 +41,7 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
  * 删除通知
  * //Auto gen by simple-dao-codegen 2022-6-20 16:50:11
  */
-@Schema(description = "删除通知")
+@Schema(title = "删除通知")
 @Data
 
 //@AllArgsConstructor
@@ -58,7 +58,7 @@ public class DeleteNoticeReq extends MultiTenantReq {
     private static final long serialVersionUID = 1394869526L;
 
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_Notice.id, require = true)
     @NotEmpty
     private String[] idList;
@@ -73,7 +73,7 @@ public class DeleteNoticeReq extends MultiTenantReq {
     }
 
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(title = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 

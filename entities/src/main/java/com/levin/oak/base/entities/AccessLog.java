@@ -29,7 +29,7 @@ import java.util.Date;
                 @Index(columnList = E_AccessLog.bizType),
         }
 )
-@Schema(description = "访问日志")
+@Schema(title = "访问日志")
 public class AccessLog
         implements
         MultiTenantObject {
@@ -39,95 +39,95 @@ public class AccessLog
 //    @GeneratedValue(generator = "default_id")
     protected Long id;
 
-    @Schema(description = "租户ID")
+    @Schema(title = "租户ID")
     protected String tenantId;
 
-    @Schema(description = "请求的域名")
+    @Schema(title = "请求的域名")
     @Contains
     protected String domain;
 
-    @Schema(description = "访问者")
+    @Schema(title = "访问者")
     @Column(length = 64)
     protected String visitor;
 
-    @Schema(description = "创建时间")
+    @Schema(title = "创建时间")
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     protected Date createTime;
 
-    @Schema(description = "标题")
+    @Schema(title = "标题")
     @Column(nullable = false)
     @Contains
     protected String title;
 
-    @Schema(description = "日志类型")
+    @Schema(title = "日志类型")
     @Column(length = 64)
     protected String logType;
 
     ////////////////////////////////////
 
-    @Schema(description = "差异修改数据")
+    @Schema(title = "差异修改数据")
     protected String diffModifyData;
 
-    @Schema(description = "业务主键")
+    @Schema(title = "业务主键")
     @Contains
     protected String bizKey;
 
-    @Schema(description = "业务类型")
+    @Schema(title = "业务类型")
     @Contains
     protected String bizType;
 
     ////////////////////////////////////
 
-    @Schema(description = "请求URI")
+    @Schema(title = "请求URI")
     @Contains
     protected String requestUri;
 
-    @Schema(description = "请求方法")
+    @Schema(title = "请求方法")
     @Column(length = 32)
     protected String requestMethod;
 
-    @Schema(description = "请求参数")
+    @Schema(title = "请求参数")
     @Lob
     protected String requestParams;
 
     @Lob
-    @Schema(description = "头部信息")
+    @Schema(title = "头部信息")
     protected String headInfo;
 
     @Lob
-    @Schema(description = "响应数据")
+    @Schema(title = "响应数据")
     protected String responseData;
 
-    @Schema(description = "操作IP地址")
+    @Schema(title = "操作IP地址")
     @Column(length = 128)
     @Contains
     protected String remoteAddr;
 
-    @Schema(description = "服务器地址")
+    @Schema(title = "服务器地址")
     @Column(length = 64)
     protected String serverAddr;
 
-    @Schema(description = "是否有异常")
+    @Schema(title = "是否有异常")
     protected Boolean isException;
 
     @Lob
-    @Schema(description = "异常信息")
+    @Schema(title = "异常信息")
     protected String exceptionInfo;
 
-    @Schema(description = "用户代理")
+    @Schema(title = "用户代理")
     @Column(length = 768)
     protected String userAgent;
 
-    @Schema(description = "设备名称/操作系统")
+    @Schema(title = "设备名称/操作系统")
     @Column(length = 128)
     protected String deviceName;
 
-    @Schema(description = "浏览器名称")
+    @Schema(title = "浏览器名称")
     @Column(length = 64)
     protected String browserName;
 
-    @Schema(description = "执行时间(ms)")
+    @Schema(title = "执行时间(ms)")
     protected Long executeTime;
 
     @PrePersist

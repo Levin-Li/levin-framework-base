@@ -19,7 +19,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "工作岗位")
+@Schema(title = "工作岗位")
 
 @Table(
         indexes = {
@@ -43,13 +43,13 @@ import javax.persistence.*;
 public class JobPost
         extends AbstractNamedMultiTenantObject {
 
-    @Schema(description = "职位类型")
+    @Schema(title = "职位类型")
     public enum Type implements EnumDesc {
-        @Schema(description = "管理岗")
+        @Schema(title = "管理岗")
         Manager,
-        @Schema(description = "专业岗")
+        @Schema(title = "专业岗")
         Professional,
-        @Schema(description = "操作岗")
+        @Schema(title = "操作岗")
         Operator,
     }
 
@@ -59,12 +59,12 @@ public class JobPost
     @Column(length = 64)
     protected String id;
 
-    @Schema(description = "编码")
+    @Schema(title = "编码")
     @Column(nullable = false, length = 64)
     @Contains
     protected String code;
 
-    @Schema(description = "类型")
+    @Schema(title = "类型")
     @Column(nullable = false, length = 64)
     @Enumerated(EnumType.STRING)
     protected Type type;

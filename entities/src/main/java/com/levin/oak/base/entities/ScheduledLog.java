@@ -17,7 +17,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "调度日志")
+@Schema(title = "调度日志")
 
 @Table(
         indexes = {
@@ -34,31 +34,31 @@ public class ScheduledLog
     @GeneratedValue
     Long id;
 
-    @Schema(description = "租户ID")
+    @Schema(title = "租户ID")
     @Column(length = 64)
     String tenantId;
 
-    @Schema(description = "归属组织", required = true)
+    @Schema(title = "归属组织", required = true)
     @Column(nullable = false, length = 64)
     String orgId;
 
-    @Schema(description = "任务ID", required = true)
+    @Schema(title = "任务ID", required = true)
     @Column(nullable = false, length = 64)
     String taskId;
 
-    @Schema(description = "创建时间")
+    @Schema(title = "创建时间")
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     Date createTime;
 
-    @Schema(description = "执行周期")
+    @Schema(title = "执行周期")
     @Column(length = 128)
     String invokeCycle;
 
-    @Schema(description = "是否错误")
+    @Schema(title = "是否错误")
     Boolean isError;
 
-    @Schema(description = "执行结果")
+    @Schema(title = "执行结果")
     @Lob
     String invokeResult;
 

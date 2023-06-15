@@ -24,7 +24,7 @@ import javax.validation.constraints.NotEmpty;
  * 删除国际化资源
  * //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
-@Schema(description = "删除国际化资源")
+@Schema(title = "删除国际化资源")
 @Data
 
 //@AllArgsConstructor
@@ -41,7 +41,7 @@ public class DeleteI18nResReq extends MultiTenantReq {
     private static final long serialVersionUID = -1681554652L;
 
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_I18nRes.id, require = true)
     @NotEmpty
     private Long[] idList;

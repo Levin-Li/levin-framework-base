@@ -26,7 +26,7 @@ import java.util.Date;
 @ToString(exclude = "org")
 
 @FieldNameConstants
-@Schema(description = "通知")
+@Schema(title = "通知")
 
 @Entity(name = EntityConst.PREFIX + "Notice")
 
@@ -61,17 +61,17 @@ public class Notice
         extends TenantOrganizedEntity
         implements PersonalObject, OrganizedObject, MultiTenantObject {
 
-    @Schema(description = "通知内容类型")
+    @Schema(title = "通知内容类型")
     public enum ContentType implements EnumDesc {
-        @Schema(description = "文本")
+        @Schema(title = "文本")
         Text,
-        @Schema(description = "网页")
+        @Schema(title = "网页")
         Html,
-        @Schema(description = "图片")
+        @Schema(title = "图片")
         Pic,
-        @Schema(description = "MarkDown")
+        @Schema(title = "MarkDown")
         Markdown,
-        @Schema(description = "AmisJsonView")
+        @Schema(title = "AmisJsonView")
         AmisJsonView,
     }
 
@@ -86,19 +86,19 @@ public class Notice
     String ownerId;
     ////////////////////////////////////////////////////////////////////
 
-    @Schema(description = "通知类别")
+    @Schema(title = "通知类别")
     @Column(length = 64)
     String category;
 
-    @Schema(description = "通知内容类型")
+    @Schema(title = "通知内容类型")
     @Enumerated(EnumType.STRING)
     ContentType contentType;
 
-    @Schema(description = "通知内容")
+    @Schema(title = "通知内容")
     @Lob
     String content;
 
-    @Schema(description = "过期时间")
+    @Schema(title = "过期时间")
     @Temporal(TemporalType.TIMESTAMP)
     Date expiredDate;
 

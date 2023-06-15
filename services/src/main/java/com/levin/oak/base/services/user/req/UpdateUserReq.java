@@ -33,7 +33,7 @@ import java.util.List;
  * 更新用户
  * Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
-@Schema(description = "更新用户")
+@Schema(title = "更新用户")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -49,90 +49,90 @@ public class UpdateUserReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445263479L;
 
-    @Schema(description = "id", required = true)
+    @Schema(title = "id", required = true)
     @NotNull
     @Eq(require = true)
     private String id;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(title = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Size(max = 256)
-    @Schema(description = "登录密码")
+    @Schema(title = "登录密码")
     private String password;
 
     @Size(max = 20)
-    @Schema(description = "手机号")
+    @Schema(title = "手机号")
     private String telephone;
 
     @Size(max = 32)
-    @Schema(description = "邮箱")
+    @Schema(title = "邮箱")
     private String email;
 
     @Size(max = 64)
-    @Schema(description = "名称")
+    @Schema(title = "名称")
     private String name;
 
     @Size(max = 32)
-    @Schema(description = "昵称")
+    @Schema(title = "昵称")
     private String nickname;
 
-    @Schema(description = "头像")
+    @Schema(title = "头像")
     private String avatar;
 
-    @Schema(description = "性别")
+    @Schema(title = "性别")
     private Sex sex;
 
     @Size(max = 1800)
     @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
-    @Schema(description = "标签列表")
+    @Schema(title = "标签列表")
     private List<String> tagList;
 
-    @Schema(description = "帐号类型")
+    @Schema(title = "帐号类型")
     private Category category;
 
-    @Schema(description = "过期时间")
+    @Schema(title = "过期时间")
     private Date expiredDate;
 
-    @Schema(description = "帐号状态")
+    @Schema(title = "帐号状态")
     private State state;
 
     @Size(max = 32)
-    @Schema(description = "工号")
+    @Schema(title = "工号")
     private String staffNo;
 
     @Size(max = 128)
-    @Schema(description = "岗位职级")
+    @Schema(title = "岗位职级")
     private String jobPostCode;
 
     @Size(max = 1800)
     @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
-    @Schema(description = "角色列表")
+    @Schema(title = "角色列表")
     private List<String> roleList;
 
     @Size(max = 128)
-    @Schema(description = "微信 OpendId")
+    @Schema(title = "微信 OpendId")
     private String wxOpenId;
 
     @Size(max = 128)
-    @Schema(description = "阿里 OpendId")
+    @Schema(title = "阿里 OpendId")
     private String aliOpenId;
 
-    @Schema(description = "更新时间")
+    @Schema(title = "更新时间")
     private Date lastUpdateTime;
 
-    @Schema(description = "排序代码")
+    @Schema(title = "排序代码")
     private Integer orderCode;
 
-    @Schema(description = "是否允许")
+    @Schema(title = "是否允许")
     private Boolean enable;
 
-    @Schema(description = "是否可编辑")
+    @Schema(title = "是否可编辑")
     private Boolean editable;
 
     @Size(max = 512)
-    @Schema(description = "备注")
+    @Schema(title = "备注")
     private String remark;
 
 

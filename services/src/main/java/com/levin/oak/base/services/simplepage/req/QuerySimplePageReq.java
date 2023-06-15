@@ -45,7 +45,7 @@ import java.util.Date;
  *
  * @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
  */
-@Schema(description = "查询简单页面")
+@Schema(title = "查询简单页面")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,112 +59,112 @@ public class QuerySimplePageReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1598619295L;
 
-    @Schema(description = "是否包含公共数据", hidden = true)
+    @Schema(title = "是否包含公共数据", hidden = true)
     @Ignore
     private boolean isContainsPublicData = true;
 
     @Ignore
-    @Schema(description = "排序字段")
+    @Schema(title = "排序字段")
     String orderBy;
 
     //@Ignore
-    @Schema(description = "排序方向-desc asc")
+    @Schema(title = "排序方向-desc asc")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
     OrderBy.Type orderDir;
 
     //@NotNull
-    @Schema(description = "id")
+    @Schema(title = "id")
     String id;
 
     //@NotBlank
     //@Size(max = 64)
-    @Schema(description = "类型")
+    @Schema(title = "类型")
     String type;
 
     //@NotBlank
     //@Size(max = 64)
-    @Schema(description = "分类名称")
+    @Schema(title = "分类名称")
     String category;
 
     //@NotBlank
     //@Size(max = 64)
-    @Schema(description = "分组名称")
+    @Schema(title = "分组名称")
     String groupName;
-    @Schema(description = "模糊匹配 - 分组名称")
+    @Schema(title = "模糊匹配 - 分组名称")
     @Contains
     String containsGroupName;
 
     //@NotBlank
-    @Schema(description = "访问路径")
+    @Schema(title = "访问路径")
     String path;
 
-    @Schema(description = "内容")
+    @Schema(title = "内容")
     String content;
 
     //@Size(max = 128)
-    @Schema(description = "系统子域")
+    @Schema(title = "系统子域")
     String domain;
 
     //@NotBlank
     //@Size(max = 128)
-    @Schema(description = "名称")
+    @Schema(title = "名称")
     String name;
-    @Schema(description = "模糊匹配 - 名称")
+    @Schema(title = "模糊匹配 - 名称")
     @Contains
     String containsName;
 
     //@Size(max = 128)
-    @Schema(description = "拼音，格式：全拼(简拼)")
+    @Schema(title = "拼音，格式：全拼(简拼)")
     String pinyinName;
-    @Schema(description = "模糊匹配 - 拼音，格式：全拼(简拼)")
+    @Schema(title = "模糊匹配 - 拼音，格式：全拼(简拼)")
     @Contains
     String containsPinyinName;
 
     //@InjectVar()
     //@Size(max = 128)
-    @Schema(description = "创建者")
+    @Schema(title = "创建者")
     String creator;
 
     //@NotNull
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     Date gteCreateTime;
 
-    @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     Date lteCreateTime;
 
-    @Schema(description = "创建时间-日期范围，格式：yyyyMMdd-yyyyMMdd，大于等于且小余等于")
+    @Schema(title = "创建时间-日期范围，格式：yyyyMMdd-yyyyMMdd，大于等于且小余等于")
     @Between(paramDelimiter = "-", patterns = {"yyyyMMdd"})
     String betweenCreateTime;
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(description = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     Date lteLastUpdateTime;
 
-    @Schema(description = "更新时间-日期范围，格式：yyyyMMdd-yyyyMMdd，大于等于且小余等于")
+    @Schema(title = "更新时间-日期范围，格式：yyyyMMdd-yyyyMMdd，大于等于且小余等于")
     @Between(paramDelimiter = "-", patterns = {"yyyyMMdd"})
     String betweenLastUpdateTime;
 
-    @Schema(description = "排序代码")
+    @Schema(title = "排序代码")
     Integer orderCode;
 
     //@NotNull
-    @Schema(description = "是否允许")
+    @Schema(title = "是否允许")
     Boolean enable;
 
     //@NotNull
-    @Schema(description = "是否可编辑")
+    @Schema(title = "是否可编辑")
     Boolean editable;
 
     //@Size(max = 512)
-    @Schema(description = "备注")
+    @Schema(title = "备注")
     String remark;
 
     public QuerySimplePageReq(String id) {

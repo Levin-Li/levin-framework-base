@@ -24,7 +24,7 @@ import javax.validation.constraints.NotEmpty;
  * 删除调度日志
  * //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
-@Schema(description = "删除调度日志")
+@Schema(title = "删除调度日志")
 @Data
 
 //@AllArgsConstructor
@@ -41,7 +41,7 @@ public class DeleteScheduledLogReq extends MultiTenantReq {
     private static final long serialVersionUID = 1319130901L;
 
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_ScheduledLog.id, require = true)
     @NotEmpty
     private Long[] idList;

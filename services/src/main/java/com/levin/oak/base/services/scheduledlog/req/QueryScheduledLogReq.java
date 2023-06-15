@@ -27,7 +27,7 @@ import java.util.Date;
  *
  * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
-@Schema(description = "查询调度日志")
+@Schema(title = "查询调度日志")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,51 +42,51 @@ public class QueryScheduledLogReq extends MultiTenantReq {
     private static final long serialVersionUID = 1319130901L;
 
     @Ignore
-    @Schema(description = "排序字段")
+    @Schema(title = "排序字段")
     private String orderBy;
 
     //@Ignore
-    @Schema(description = "排序方向-desc asc")
+    @Schema(title = "排序方向-desc asc")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
     private OrderBy.Type orderDir;
 
 
     //@NotNull
 
-    @Schema(description = "id")
+    @Schema(title = "id")
     private Long id;
 
 
     //@NotBlank
     //@Size(max = 64)
 
-    @Schema(description = "任务ID")
+    @Schema(title = "任务ID")
     private String taskId;
 
 
     //@NotNull
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteCreateTime;
 
-    @Schema(description = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteCreateTime;
 
 
     //@Size(max = 256)
 
-    @Schema(description = "执行周期")
+    @Schema(title = "执行周期")
     private String invokeCycle;
 
 
-    @Schema(description = "是否错误")
+    @Schema(title = "是否错误")
     private Boolean isError;
 
 
-    @Schema(description = "执行结果")
+    @Schema(title = "执行结果")
     private String invokeResult;
 
 

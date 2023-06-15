@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
  * 更新调度日志
  * Auto gen by simple-dao-codegen 2022-3-25 17:01:36
  */
-@Schema(description = "更新调度日志")
+@Schema(title = "更新调度日志")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,28 +42,28 @@ public class UpdateScheduledLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1319130901L;
 
-    @Schema(description = "id", required = true)
+    @Schema(title = "id", required = true)
     @NotNull
     @Eq(require = true)
     private Long id;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(title = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @NotBlank
     @Size(max = 64)
-    @Schema(description = "任务ID")
+    @Schema(title = "任务ID")
     private String taskId;
 
     @Size(max = 256)
-    @Schema(description = "执行周期")
+    @Schema(title = "执行周期")
     private String invokeCycle;
 
-    @Schema(description = "是否错误")
+    @Schema(title = "是否错误")
     private Boolean isError;
 
-    @Schema(description = "执行结果")
+    @Schema(title = "执行结果")
     private String invokeResult;
 
 

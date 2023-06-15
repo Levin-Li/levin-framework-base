@@ -39,7 +39,7 @@ import java.util.Date;
  * //Auto gen by simple-dao-codegen 2022-5-23 10:30:01
  */
 
-@Schema(description = "简单表单 主键通用请求")
+@Schema(title = "简单表单 主键通用请求")
 @Data
 
 @AllArgsConstructor
@@ -56,7 +56,7 @@ public class SimpleFormIdReq extends MultiTenantReq {
     private static final long serialVersionUID = 1598335188L;
 
 
-    @Schema(description = "id", required = true)
+    @Schema(title = "id", required = true)
     @Eq(require = true)
     @NotNull
     protected String id;

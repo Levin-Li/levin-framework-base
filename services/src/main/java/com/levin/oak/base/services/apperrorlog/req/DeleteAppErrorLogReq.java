@@ -27,7 +27,7 @@ import java.util.List;
  * 删除应用错误日志
  * //Auto gen by simple-dao-codegen 2022-3-29 22:58:02
  */
-@Schema(description = "删除应用错误日志")
+@Schema(title = "删除应用错误日志")
 @Data
 
 //@AllArgsConstructor
@@ -43,31 +43,31 @@ public class DeleteAppErrorLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1594864095L;
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_AppErrorLog.id)
     private Long[] idList;
 
-    @Schema(description = "模块ID")
+    @Schema(title = "模块ID")
     private String moduleId;
 
     // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(description = "大于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "大于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Gte
     private Date gteOccurTime;
 
-    @Schema(description = "小于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = "小于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
     @Lte
     private Date lteOccurTime;
 
-    @Schema(description = "模糊匹配 - 标题")
+    @Schema(title = "模糊匹配 - 标题")
     @Contains
     private String containsTitle;
 
-    @Schema(description = "错误级别")
+    @Schema(title = "错误级别")
     @In
     private List<String> inErrorLevel;
 
-    @Schema(description = "模糊匹配 - 根异常类型")
+    @Schema(title = "模糊匹配 - 根异常类型")
     @Contains
     private String containsRootExceptionType;
 

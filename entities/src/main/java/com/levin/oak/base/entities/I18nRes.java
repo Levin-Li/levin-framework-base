@@ -17,7 +17,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "国际化资源")
+@Schema(title = "国际化资源")
 
 @Table(
         indexes = {
@@ -46,15 +46,15 @@ public class I18nRes
     @GeneratedValue
     protected Long id;
 
-    @Schema(description = "分类")
+    @Schema(title = "分类")
     @Column(nullable = false, length = 128)
     String category;
 
-    @Schema(description = "语言")
+    @Schema(title = "语言")
     @Column(nullable = false, length = 64)
     String lang;
 
-    @Schema(description = "标签")
+    @Schema(title = "标签")
     @Column(nullable = false, length = 768)
     @Contains
     String label;

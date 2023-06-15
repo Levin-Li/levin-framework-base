@@ -32,7 +32,7 @@ import java.util.List;
  * 更新租户
  * Auto gen by simple-dao-codegen 2022-3-25 18:38:00
  */
-@Schema(description = "更新租户")
+@Schema(title = "更新租户")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -48,89 +48,89 @@ public class UpdateTenantReq extends BaseReq {
 
     private static final long serialVersionUID = 1557223144L;
 
-    @Schema(description = "ID", required = true)
+    @Schema(title = "ID", required = true)
     @NotNull
     @Eq(require = true)
     private String id;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(title = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
 
-    @Schema(description = "系统名称")
+    @Schema(title = "系统名称")
     private String sysName;
 
 
-    @Schema(description = "系统Logo")
+    @Schema(title = "系统Logo")
     private String sysLogo;
 
-    @Schema(description = "租户头像")
+    @Schema(title = "租户头像")
     private String logo;
 
-    @Schema(description = "企业信用编码")
+    @Schema(title = "企业信用编码")
     private String code;
 
     @NotBlank
-    @Schema(description = "租户编码")
+    @Schema(title = "租户编码")
     private String tenantKey;
 
-    @Schema(description = "帐号余额")
+    @Schema(title = "帐号余额")
     private Double balance;
 
-    @Schema(description = "总许可数")
+    @Schema(title = "总许可数")
     private Integer licenseCnt;
 
-    @Schema(description = "剩余许可数")
+    @Schema(title = "剩余许可数")
     private Integer remainingLicenseCnt;
 
-    @Schema(description = "到期时间")
+    @Schema(title = "到期时间")
     private Date licenseExpire;
 
-    @Schema(description = "联系人")
+    @Schema(title = "联系人")
     private String contractPerson;
 
-    @Schema(description = "联系电话")
+    @Schema(title = "联系电话")
     private String contractPhone;
 
     @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
-    @Schema(description = "域名列表")
+    @Schema(title = "域名列表")
     private List<String> domainList;
 
     @Size(max = 32)
-    @Schema(description = "appId")
+    @Schema(title = "appId")
     private String appId;
 
     @Size(max = 256)
-    @Schema(description = "appSecret")
+    @Schema(title = "appSecret")
     private String appSecret;
 
-    @Schema(description = "EncryptKey")
+    @Schema(title = "EncryptKey")
     private String encryptKey;
 
     @NotBlank
     @Size(max = 128)
-    @Schema(description = "名称")
+    @Schema(title = "名称")
     private String name;
 
     @Size(max = 128)
-    @Schema(description = "拼音，格式：全拼(简拼)")
+    @Schema(title = "拼音，格式：全拼(简拼)")
     private String pinyinName;
 
-    @Schema(description = "更新时间")
+    @Schema(title = "更新时间")
     private Date lastUpdateTime;
 
-    @Schema(description = "排序代码")
+    @Schema(title = "排序代码")
     private Integer orderCode;
 
-    @Schema(description = "是否允许")
+    @Schema(title = "是否允许")
     private Boolean enable;
 
-    @Schema(description = "是否可编辑")
+    @Schema(title = "是否可编辑")
     private Boolean editable;
 
     @Size(max = 512)
-    @Schema(description = "备注")
+    @Schema(title = "备注")
     private String remark;
 
 

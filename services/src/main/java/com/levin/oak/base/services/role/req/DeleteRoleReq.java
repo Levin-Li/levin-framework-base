@@ -28,7 +28,7 @@ import javax.validation.constraints.NotEmpty;
  * 删除角色
  * //Auto gen by simple-dao-codegen 2022-3-25 17:01:35
  */
-@Schema(description = "删除角色")
+@Schema(title = "删除角色")
 @Data
 
 //@AllArgsConstructor
@@ -44,17 +44,17 @@ public class DeleteRoleReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445356492L;
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_Role.id, require = true)
     @NotEmpty
     private String[] idList;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(title = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     //不允许删除SA角色
-    @Schema(description = "无需设置", hidden = true)
+    @Schema(title = "无需设置", hidden = true)
     @NotEq(require = true)
     private final String notEqCode = RbacRoleObject.SA_ROLE;
 

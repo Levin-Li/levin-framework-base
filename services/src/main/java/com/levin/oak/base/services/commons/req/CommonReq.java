@@ -16,7 +16,7 @@ import lombok.experimental.FieldNameConstants;
  *
  * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:35
  */
-@Schema(title = "通用请求对象", description = "支持租户，部门的注入")
+@Schema(title = "通用请求对象", title = "支持租户，部门的注入")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
@@ -24,11 +24,11 @@ public final class CommonReq
         extends MultiTenantReq
         implements OrganizedObject {
 
-    @Schema(description = "组织ID", hidden = true)
+    @Schema(title = "组织ID", hidden = true)
     @InjectVar(value = InjectConsts.ORG_ID, isRequired = "false")
     private String orgId;
 
-    @Schema(description = "是否包含公共数据")
+    @Schema(title = "是否包含公共数据")
     @Ignore
     private boolean isContainsPublicData = true;
 

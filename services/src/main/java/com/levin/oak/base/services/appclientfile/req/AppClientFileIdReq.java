@@ -23,7 +23,7 @@ import javax.validation.constraints.NotNull;
  * //Auto gen by simple-dao-codegen 2022-4-20 10:49:23
  */
 
-@Schema(description = "客户端文件 主键通用请求")
+@Schema(title = "客户端文件 主键通用请求")
 @Data
 
 @AllArgsConstructor
@@ -40,7 +40,7 @@ public class AppClientFileIdReq extends MultiTenantReq {
     private static final long serialVersionUID = -1155395350L;
 
 
-    @Schema(description = "id", required = true)
+    @Schema(title = "id", required = true)
     @Eq(require = true)
     @NotNull
     protected String id;

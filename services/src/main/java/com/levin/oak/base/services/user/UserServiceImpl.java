@@ -52,7 +52,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "UserService", matchIfMissing = true)
 @Slf4j
 //@Validated
-@Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
+@Tag(name = E_User.BIZ_NAME, title = E_User.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_User.SIMPLE_CLASS_NAME})
 public class UserServiceImpl extends BaseService implements UserService {
 
@@ -207,7 +207,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, title = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_User.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {
     }

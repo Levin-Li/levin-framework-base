@@ -17,7 +17,7 @@ import java.util.UUID;
 @EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(description = "应用接入")
+@Schema(title = "应用接入")
 
 @Table(
         indexes = {
@@ -44,11 +44,11 @@ public class AppClient extends AbstractNamedMultiTenantObject {
     @Column(length = 64)
     protected String id;
 
-    @Schema(description = "应用ID")
+    @Schema(title = "应用ID")
     @Column(unique = true, nullable = false, length = 64)
     protected String appId;
 
-    @Schema(description = "应用密钥")
+    @Schema(title = "应用密钥")
     @Column(nullable = false, length = 512)
     protected String appSecret;
 

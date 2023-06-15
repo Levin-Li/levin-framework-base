@@ -34,7 +34,7 @@ import java.util.Date;
  *
  * @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
  */
-@Schema(description = "简单页面")
+@Schema(title = "简单页面")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
@@ -47,97 +47,97 @@ public class SimplePageInfo implements Serializable {
 
 
     @NotNull
-    @Schema(description = "id", required = true)
+    @Schema(title = "id", required = true)
     String id;
 
 
     @NotBlank
     @Size(max = 64)
-    @Schema(description = "类型", required = true)
+    @Schema(title = "类型", required = true)
     String type;
 
 
     @NotBlank
     @Size(max = 64)
-    @Schema(description = "分类名称", required = true)
+    @Schema(title = "分类名称", required = true)
     String category;
 
 
     @NotBlank
     @Size(max = 64)
-    @Schema(description = "分组名称", required = true)
+    @Schema(title = "分组名称", required = true)
     String groupName;
 
 
     @NotBlank
-    @Schema(description = "访问路径", required = true)
+    @Schema(title = "访问路径", required = true)
     String path;
 
     @Size(max = 1800)
-    @Schema(description = "需要的授权，权限或角色，json数组")
+    @Schema(title = "需要的授权，权限或角色，json数组")
     String requireAuthorizations;
 
-    @Schema(description = "内容")
+    @Schema(title = "内容")
     String content;
 
 
     @Size(max = 128)
-    @Schema(description = "机构ID")
+    @Schema(title = "机构ID")
     String orgId;
 
 
     @InjectVar()
     @Size(max = 128)
-    @Schema(description = "租户ID")
+    @Schema(title = "租户ID")
     String tenantId;
 
 
     @Size(max = 128)
-    @Schema(description = "系统子域")
+    @Schema(title = "系统子域")
     String domain;
 
 
     @NotBlank
     @Size(max = 128)
-    @Schema(description = "名称", required = true)
+    @Schema(title = "名称", required = true)
     String name;
 
 
     @Size(max = 128)
-    @Schema(description = "拼音，格式：全拼(简拼)")
+    @Schema(title = "拼音，格式：全拼(简拼)")
     String pinyinName;
 
 
     @InjectVar()
     @Size(max = 128)
-    @Schema(description = "创建者")
+    @Schema(title = "创建者")
     String creator;
 
 
     @NotNull
-    @Schema(description = "创建时间", required = true)
+    @Schema(title = "创建时间", required = true)
     Date createTime;
 
 
-    @Schema(description = "更新时间")
+    @Schema(title = "更新时间")
     Date lastUpdateTime;
 
 
-    @Schema(description = "排序代码")
+    @Schema(title = "排序代码")
     Integer orderCode;
 
     @NotNull
-    @Schema(description = "是否允许", required = true)
+    @Schema(title = "是否允许", required = true)
     Boolean enable;
 
 
     @NotNull
-    @Schema(description = "是否可编辑", required = true)
+    @Schema(title = "是否可编辑", required = true)
     Boolean editable;
 
 
     @Size(max = 512)
-    @Schema(description = "备注")
+    @Schema(title = "备注")
     String remark;
 
 }

@@ -38,7 +38,7 @@ import java.util.Date;
  * 删除简单动态接口
  * //Auto gen by simple-dao-codegen 2022-5-23 10:30:00
  */
-@Schema(description = "删除简单动态接口")
+@Schema(title = "删除简单动态接口")
 @Data
 
 //@AllArgsConstructor
@@ -55,7 +55,7 @@ public class DeleteSimpleApiReq extends MultiTenantReq {
     private static final long serialVersionUID = 1021385738L;
 
 
-    @Schema(description = "id集合")
+    @Schema(title = "id集合")
     @In(value = E_SimpleApi.id, require = true)
     @NotEmpty
     private String[] idList;
@@ -70,7 +70,7 @@ public class DeleteSimpleApiReq extends MultiTenantReq {
     }
 
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(title = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 

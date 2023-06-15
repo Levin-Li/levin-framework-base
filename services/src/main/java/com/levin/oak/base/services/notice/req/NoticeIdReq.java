@@ -43,7 +43,7 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
  * //Auto gen by simple-dao-codegen 2022-6-20 16:50:11
  */
 
-@Schema(description = "通知 主键通用请求")
+@Schema(title = "通知 主键通用请求")
 @Data
 
 @AllArgsConstructor
@@ -60,7 +60,7 @@ public class NoticeIdReq extends MultiTenantReq {
     private static final long serialVersionUID = 1394869526L;
 
 
-    @Schema(description = "id", required = true)
+    @Schema(title = "id", required = true)
     @Eq(require = true)
     //@NotNull
     protected String id;

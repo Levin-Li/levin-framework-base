@@ -5,6 +5,9 @@ import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.StatefulObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
+import com.levin.commons.dao.domain.support.AbstractMultiTenantObject;
+import com.levin.commons.dao.domain.support.E_AbstractBaseEntityObject;
+import com.levin.commons.dao.domain.support.E_AbstractMultiTenantObject;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
@@ -27,14 +30,14 @@ import java.util.List;
 @ToString(exclude = "org")
 
 @FieldNameConstants
-@Schema(description = "用户")
+@Schema(title = "用户")
 
 @Entity(name = EntityConst.PREFIX + "User")
 
 @Table(
         indexes = {
-                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-                @Index(columnList = E_User.tenantId),
+                @Index(columnList = E_AbstractBaseEntityObject.orderCode),
+                @Index(columnList = E_AbstractMultiTenantObject.tenantId),
                 @Index(columnList = E_User.staffNo),
                 @Index(columnList = E_User.telephone),
                 @Index(columnList = E_User.email),
@@ -46,7 +49,7 @@ import java.util.List;
         }
         ,
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.telephone}),
+                @UniqueConstraint(columnNames = {E_AbstractMultiTenantObject.tenantId, E_User.telephone}),
                 @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
         }
 )
@@ -55,33 +58,33 @@ public class User
         implements OrganizedObject, MultiTenantObject, StatefulObject {
 
     public enum State implements EnumDesc {
-        @Schema(description = "正常")
+        @Schema(title = "正常")
         Normal,
-        @Schema(description = "冻结")
+        @Schema(title = "冻结")
         Freeze,
-        @Schema(description = "注销")
+        @Schema(title = "注销")
         Cancellation,
     }
 
     public enum Sex implements EnumDesc {
-        @Schema(description = "男")
+        @Schema(title = "男")
         Man,
-        @Schema(description = "女")
+        @Schema(title = "女")
         Women,
     }
 
     public enum Category implements EnumDesc {
-        @Schema(description = "正式员工")
+        @Schema(title = "正式员工")
         Staff,
-        @Schema(description = "外包员工")
+        @Schema(title = "外包员工")
         OutsourcingStaff,
-        @Schema(description = "临时员工")
+        @Schema(title = "临时员工")
         TmpStaff,
-        @Schema(description = "外部驻场")
+        @Schema(title = "外部驻场")
         ExternalStaff,
-        @Schema(description = "VIP访客")
+        @Schema(title = "VIP访客")
         VipVisitor,
-        @Schema(description = "普通访客")
+        @Schema(title = "普通访客")
         Visitor,
     }
 
@@ -90,37 +93,33 @@ public class User
     @Column(length = 64)
     String id;
 
-    @Schema(description = "租户ID")
-    @Column(length = 64)
-    String tenantId;
-
-    @Schema(description = "手机号-可做为登录帐号")
+    @Schema(title = "手机号-可做为登录帐号")
     @Column(length = 20)
     @Contains
     String telephone;
 
-    @Schema(description = "邮箱-可做为登录帐号")
+    @Schema(title = "邮箱-可做为登录帐号")
     @Column(length = 32)
     String email;
 
-    @Schema(description = "登录密码")
+    @Schema(title = "登录密码")
     @Column(length = 256)
     String password;
 
-    @Schema(description = "昵称")
+    @Schema(title = "昵称")
     @Column(length = 32)
     @Contains
     String nickname;
 
-    @Schema(description = "头像")
+    @Schema(title = "头像")
     String avatar;
 
-    @Schema(description = "性别")
+    @Schema(title = "性别")
     @Column(length = 8)
     @Enumerated(EnumType.STRING)
     Sex sex;
 
-    @Schema(description = "标签列表（json数组）", title = "标签列表")
+    @Schema(title = "标签列表")
     @Column(length = 1800)
     @Contains
     @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
@@ -128,30 +127,30 @@ public class User
 
     ////////////////////////////////////////////////////////////////////
 
-    @Schema(description = "帐号类型")
+    @Schema(title = "帐号类型")
     @Column(length = 64)
     @Enumerated(EnumType.STRING)
     Category category;
 
-    @Schema(description = "过期时间")
+    @Schema(title = "过期时间")
     @Temporal(TemporalType.TIMESTAMP)
     Date expiredDate;
 
-    @Schema(description = "帐号状态")
+    @Schema(title = "帐号状态")
     @Column(nullable = false, length = 32)
     @Enumerated(EnumType.STRING)
     State state;
 
-    @Schema(description = "工号")
+    @Schema(title = "工号")
     @Column(length = 32)
     @Contains
     String staffNo;
 
-    @Schema(description = "岗位职级")
+    @Schema(title = "岗位职级")
     @Column(length = 128)
     String jobPostCode;
 
-    @Schema(description = "角色列表(Json数组)", title = "角色列表")
+    @Schema(title = "角色列表")
     @Column(length = 1800)
     @Contains
     @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
@@ -159,18 +158,18 @@ public class User
 
     ///////////////////////////////////////////////////////////////////////
 
-    @Schema(description = "所属部门")
+    @Schema(title = "所属部门")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orgId", insertable = false, updatable = false)
     Org org;
 
     //////////////////////////////////////////////////////////////////////
 
-    @Schema(description = "微信 OpendId")
+    @Schema(title = "微信 OpendId")
     @Column(length = 64)
     String wxOpenId;
 
-    @Schema(description = "阿里 OpendId")
+    @Schema(title = "阿里 OpendId")
     @Column(length = 64)
     String aliOpenId;
 

@@ -39,7 +39,7 @@ import java.util.Date;
  * 新增通知处理日志
  * //Auto gen by simple-dao-codegen 2022-6-20 16:50:12
  */
-@Schema(description = "新增通知处理日志")
+@Schema(title = "新增通知处理日志")
 @Data
 @Accessors(chain = true)
 @ToString
@@ -54,26 +54,26 @@ public class CreateNoticeProcessLogReq extends MultiTenantReq {
     private static final long serialVersionUID = -1991983093L;
 
 
-    @Schema(description = "用户ID", required = true)
+    @Schema(title = "用户ID", required = true)
     @NotBlank
     @InjectVar()
     @Size(max = 128)
     String ownerId;
 
-    @Schema(description = "消息ID", required = true)
+    @Schema(title = "消息ID", required = true)
     @NotBlank
     @Size(max = 128)
     String noticeId;
 
-    @Schema(description = "处理状态")
+    @Schema(title = "处理状态")
     @Size(max = 128)
     String status;
 
-    @Schema(description = "处理时间", required = true)
+    @Schema(title = "处理时间", required = true)
     @NotNull
     Date createTime;
 
-    @Schema(description = "备注")
+    @Schema(title = "备注")
     @Size(max = 512)
     String remark;
 
