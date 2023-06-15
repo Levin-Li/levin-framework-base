@@ -48,7 +48,7 @@ public class SimpleApiInfo implements Serializable {
 
 
     @Size(max = 16)
-    @Schema(title = "逗号隔开", title = "http方法")
+    @Schema(title = "逗号隔开", description = "http方法")
     String methods;
 
 

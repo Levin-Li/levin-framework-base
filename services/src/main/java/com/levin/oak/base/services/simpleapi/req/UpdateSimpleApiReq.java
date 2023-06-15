@@ -68,7 +68,7 @@ public class UpdateSimpleApiReq extends MultiTenantReq {
 
 
     @Size(max = 16)
-    @Schema(title = "逗号隔开", title = "http方法")
+    @Schema(title = "逗号隔开", description = "http方法")
     String methods;
 
     @Schema(title = "脚本语言")

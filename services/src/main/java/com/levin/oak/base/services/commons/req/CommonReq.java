@@ -16,7 +16,7 @@ import lombok.experimental.FieldNameConstants;
  *
  * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:35
  */
-@Schema(title = "通用请求对象", title = "支持租户，部门的注入")
+@Schema(title = "通用请求对象", description = "支持租户，部门的注入")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants

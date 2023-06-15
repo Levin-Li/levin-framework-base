@@ -9,7 +9,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-@Schema(description = "客户端请求")
+@Schema(title = "客户端请求")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,18 +22,18 @@ public class AppClientReq implements ServiceReq {
 
     private static final long serialVersionUID = -445263479L;
 
-    @Schema(description = "租户ID", hidden = true)
+    @Schema(title = "租户ID", hidden = true)
     @InjectVar(isRequired = "false")
     protected String tenantId;
 
-    @Schema(description = "客户端类型", hidden = true)
+    @Schema(title = "客户端类型", hidden = true)
     @InjectVar(InjectConsts.USER_AGENT)
     protected String ua;
 
-    @Schema(description = "客户端类型", hidden = true)
+    @Schema(title = "客户端类型", hidden = true)
     protected String clientType;
 
-    @Schema(description = "应用ID")
+    @Schema(title = "应用ID")
     protected String appId;
 
 }

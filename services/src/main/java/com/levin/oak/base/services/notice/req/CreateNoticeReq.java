@@ -58,7 +58,7 @@ public class CreateNoticeReq extends MultiTenantReq {
     private static final long serialVersionUID = 1394869526L;
 
 
-    @Schema(title = "所有者ID", title = "所有者ID")
+    @Schema(title = "所有者ID", description = "所有者ID")
     @InjectVar()
     @Size(max = 128)
     String ownerId;
@@ -85,7 +85,7 @@ public class CreateNoticeReq extends MultiTenantReq {
     @Size(max = 128)
     String name;
 
-    @Schema(title = "拼音名称", title = "拼音，格式Json数组：[全拼,简拼]")
+    @Schema(title = "拼音名称", description = "拼音，格式Json数组：[全拼,简拼]")
     @Size(max = 128)
     @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     List<String> pinyinName;

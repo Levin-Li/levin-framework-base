@@ -54,7 +54,7 @@ public class CreateSimpleApiReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1021385738L;
 
-    @Schema(title = "逗号隔开", title = "http方法")
+    @Schema(title = "逗号隔开", description = "http方法")
     @Size(max = 16)
     String methods;
 

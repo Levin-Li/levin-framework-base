@@ -256,7 +256,7 @@ public class ModuleWebControllerAspect {
 
         final List<VariableResolver> variableResolverList = new ArrayList<>();
 
-        final Map<String, ?> injectVars = injectVarService.getInjectVars();
+        final Map<String, ?> injectVars = Collections.emptyMap();// injectVarService.getInjectVars();
 
         variableResolverList.addAll(getModuleResolverList(joinPoint));
         variableResolverList.addAll(variableResolverManager.getVariableResolvers());

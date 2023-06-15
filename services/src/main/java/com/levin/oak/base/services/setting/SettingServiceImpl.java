@@ -48,7 +48,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SettingService", matchIfMissing = true)
 @Slf4j
 //@Validated
-@Tag(name = E_Setting.BIZ_NAME, title = E_Setting.BIZ_NAME + MAINTAIN_ACTION)
+@Tag(name = E_Setting.BIZ_NAME, description = E_Setting.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_Setting.SIMPLE_CLASS_NAME})
 public class SettingServiceImpl extends BaseService implements SettingService {
 
@@ -153,7 +153,7 @@ public class SettingServiceImpl extends BaseService implements SettingService {
     }
 
     @Override
-    @Operation(summary = CLEAR_CACHE_ACTION, title = "缓存Key通常是ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_Setting.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {
     }

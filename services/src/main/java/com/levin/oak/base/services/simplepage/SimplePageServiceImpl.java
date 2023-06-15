@@ -65,7 +65,7 @@ import java.util.Date;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimplePageService", matchIfMissing = true)
 @Slf4j
 //@Validated
-@Tag(name = E_SimplePage.BIZ_NAME, title = E_SimplePage.BIZ_NAME + MAINTAIN_ACTION)
+@Tag(name = E_SimplePage.BIZ_NAME, description = E_SimplePage.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_SimplePage.SIMPLE_CLASS_NAME})
 public class SimplePageServiceImpl extends BaseService implements SimplePageService {
 
@@ -172,7 +172,7 @@ public class SimplePageServiceImpl extends BaseService implements SimplePageServ
     }
 
     @Override
-    @Operation(summary = CLEAR_CACHE_ACTION, title = "缓存Key通常是ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_SimplePage.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {
     }

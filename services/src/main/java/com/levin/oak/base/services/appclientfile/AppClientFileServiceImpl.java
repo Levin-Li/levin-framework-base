@@ -49,7 +49,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppClientFileService", matchIfMissing = true)
 @Slf4j
 //@Validated
-@Tag(name = E_AppClientFile.BIZ_NAME, title = E_AppClientFile.BIZ_NAME + MAINTAIN_ACTION)
+@Tag(name = E_AppClientFile.BIZ_NAME, description = E_AppClientFile.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_AppClientFile.SIMPLE_CLASS_NAME})
 public class AppClientFileServiceImpl extends BaseService implements AppClientFileService {
 
@@ -156,7 +156,7 @@ public class AppClientFileServiceImpl extends BaseService implements AppClientFi
     }
 
     @Override
-    @Operation(summary = CLEAR_CACHE_ACTION, title = "缓存Key通常是ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_AppClientFile.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {
     }

@@ -10,7 +10,7 @@ import lombok.experimental.FieldNameConstants;
 import java.util.LinkedList;
 import java.util.List;
 
-@Schema(description = "模块信息")
+@Schema(title = "模块信息")
 @Data
 @AllArgsConstructor
 @Builder

@@ -5,11 +5,11 @@ import cn.hutool.cache.impl.LRUCache;
 import com.levin.commons.dao.Case;
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.dao.annotation.order.OrderBy;
-import com.levin.commons.rbac.AuthorizationException;
 import com.levin.commons.rbac.MenuItem;
 import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.rbac.AuthService;
@@ -214,11 +214,11 @@ public class AmisController extends BaseController {
         }
 
         boolean isAuthorized = rbacService.isAuthorized(true, page.requireAuthorizations, (rp, info) -> {
-            throw new AuthorizationException("ui-" + page.getPath(), "未授权的ui资源：" + rp);
+            throw new AuthorizationException("未授权的ui资源：" + rp + "," + page.getPath());
         });
 
         if (!isAuthorized) {
-            throw new AuthorizationException("ui-" + page.getPath(), "使用未授权的ui资源");
+            throw new AuthorizationException("未授权的ui资源-" + page.getPath());
         }
 
     }

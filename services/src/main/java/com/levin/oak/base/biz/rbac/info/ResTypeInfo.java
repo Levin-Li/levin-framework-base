@@ -9,7 +9,7 @@ import lombok.experimental.FieldNameConstants;
 import java.util.LinkedList;
 import java.util.List;
 
-@Schema(description = "资源类型")
+@Schema(title = "资源类型")
 @Data
 @AllArgsConstructor
 @Builder

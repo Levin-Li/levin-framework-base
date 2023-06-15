@@ -29,7 +29,7 @@ import javax.validation.constraints.NotBlank;
  *
  * @Author Auto gen by simple-dao-codegen 2021-10-28 16:17:41
  */
-@Schema(description = "用户认证")
+@Schema(title = "用户认证")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,7 +43,7 @@ public class LoginReq implements AuthReq, ServiceReq {
 
     private static final long serialVersionUID = -445263479L;
 
-    @Schema(description = "租户ID", hidden = true)
+    @Schema(title = "租户ID", hidden = true)
     @InjectVar(isRequired = "false")
     //租户绑定域名启用时，可以
 //    @OR(autoClose = true, condition = "#tenantBindDomainEnable")
@@ -51,7 +51,7 @@ public class LoginReq implements AuthReq, ServiceReq {
     @Eq(condition = "#account != 'sa'", desc = "只有 sa 用户允许租户ID为空")
     protected String tenantId;
 
-    @Schema(description = "登录名/手机号/邮箱", required = true)
+    @Schema(title = "登录名/手机号/邮箱", required = true)
     @NotBlank
     @OR(autoClose = true)
     @Eq(E_User.telephone)
@@ -64,7 +64,7 @@ public class LoginReq implements AuthReq, ServiceReq {
     @Eq
     protected String password;
 
-    @Schema(description = "图片/短信验证码")
+    @Schema(title = "图片/短信验证码")
     @Ignore
     protected String verificationCode;
 
@@ -72,16 +72,16 @@ public class LoginReq implements AuthReq, ServiceReq {
     @Ignore
     protected String verificationCodeType = "captcha";
 
-    @Schema(description = "客户端类型", hidden = true)
+    @Schema(title = "客户端类型", hidden = true)
     @Ignore
     @InjectVar(InjectConsts.USER_AGENT)
     protected String ua;
 
-    @Schema(description = "客户端类型", hidden = true)
+    @Schema(title = "客户端类型", hidden = true)
     @Ignore
     protected String clientType;
 
-    @Schema(description = "应用ID")
+    @Schema(title = "应用ID")
     @Ignore
     protected String appId;
 

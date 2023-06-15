@@ -9,7 +9,7 @@ import lombok.experimental.FieldNameConstants;
 import java.util.LinkedList;
 import java.util.List;
 
-@Schema(description = "资源信息")
+@Schema(title = "资源信息")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,10 +20,10 @@ import java.util.List;
 @FieldNameConstants
 public class ResInfo extends DefaultSimpleIdentifiableObject {
 
-    @Schema(description = "资源域")
+    @Schema(title = "资源域")
     String domain;
 
-    @Schema(description = "资源类型")
+    @Schema(title = "资源类型")
     String type;
 
 //    final List<Res.Action> actionList = new LinkedList<>();

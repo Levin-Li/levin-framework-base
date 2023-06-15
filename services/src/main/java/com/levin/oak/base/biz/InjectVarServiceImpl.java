@@ -6,6 +6,8 @@ import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.support.VariableInjector;
+import com.levin.commons.service.support.VariableResolverManager;
 import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.rbac.AuthService;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Map;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -94,9 +97,13 @@ public class InjectVarServiceImpl implements InjectVarService {
     @Autowired
     FrameworkProperties frameworkProperties;
 
+
+    @Autowired
+    VariableResolverManager variableResolverManager;
+
     @PostConstruct
     public void init() {
-        log.info("Http请求变量注入服务启用...");
+        variableResolverManager.add(VariableInjector.newResolverByMap(() -> Arrays.asList(getInjectVars())));
     }
 
     /**

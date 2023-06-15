@@ -6,7 +6,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-@Schema(description = "资源类型")
+@Schema(title = "资源类型")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +18,7 @@ import lombok.experimental.FieldNameConstants;
 public class ActionInfo
         extends DefaultSimpleIdentifiableObject {
 
-    @Schema(description = "完整表达式")
+    @Schema(title = "完整表达式")
     String permissionExpr;
 
     @Override

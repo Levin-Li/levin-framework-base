@@ -77,7 +77,7 @@ public class RoleController extends BaseController {
      * @return ApiResp<PagingData < RoleInfo>>
      */
     @GetMapping("/query")
-    @Operation( summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    @Operation(summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<RoleInfo>> query(QueryRoleReq req, SimplePaging paging) {
 
         PagingData<RoleInfo> pagingData = roleService.query(req, paging);
@@ -103,7 +103,7 @@ public class RoleController extends BaseController {
      * @return ApiResp
      */
     @PostMapping
-    @Operation( summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
+    @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<String> create(@RequestBody CreateRoleReq req) {
         checkCurrentUserCreateOrUpdateRolePermissions(req.getCode(), req.getPermissionList());
         return ApiResp.ok(roleService.create(req));
@@ -116,7 +116,7 @@ public class RoleController extends BaseController {
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation( summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
+    @Operation(summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateRoleReq> reqList) {
         reqList.stream().forEach(req -> checkCurrentUserCreateOrUpdateRolePermissions(req.getCode(), req.getPermissionList()));
         return ApiResp.ok(roleService.batchCreate(reqList));
@@ -128,7 +128,7 @@ public class RoleController extends BaseController {
      * @param req QueryRoleByIdReq
      */
     @GetMapping("")
-    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<RoleInfo> retrieve(@NotNull RoleIdReq req) {
         return ApiResp.ok(roleService.findById(req));
     }
@@ -139,7 +139,7 @@ public class RoleController extends BaseController {
      * @param req UpdateRoleReq
      */
     @PutMapping({""})
-    @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> update(@RequestBody UpdateRoleReq req) {
         checkCurrentUserCreateOrUpdateRolePermissions(null, req.getPermissionList());
         return ApiResp.ok(checkResult(roleService.update(req), UPDATE_ACTION));
@@ -149,7 +149,7 @@ public class RoleController extends BaseController {
      * 批量更新
      */
     @PutMapping("/batchUpdate")
-    @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateRoleReq> reqList) {
         reqList.stream().forEach(req -> checkCurrentUserCreateOrUpdateRolePermissions(null, req.getPermissionList()));
         return ApiResp.ok(checkResult(roleService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
@@ -161,7 +161,7 @@ public class RoleController extends BaseController {
      * @param req RoleIdReq
      */
     @DeleteMapping({"", "{id}"})
-    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> delete(RoleIdReq req, @PathVariable(required = false) String id) {
         return ApiResp.ok(checkResult(roleService.delete(req), DELETE_ACTION));
     }
@@ -172,7 +172,7 @@ public class RoleController extends BaseController {
      * @param req DeleteRoleReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteRoleReq req) {
         return ApiResp.ok(checkResult(roleService.batchDelete(req), BATCH_DELETE_ACTION));
     }
@@ -200,11 +200,11 @@ public class RoleController extends BaseController {
 //        Object loginUserId = authService.getLoginUserId();
 
         boolean isAuthorized = rbacService.isAuthorized(true, permissionList, (rp, info) -> {
-            throw new AuthorizationException("role-" + roleCode, "未授权的资源：" + rp);
+            throw new AuthorizationException("未授权的资源：" + rp + "-" + roleCode);
         });
 
         if (!isAuthorized) {
-            throw new AuthorizationException("role-" + roleCode, "角色非法使用未授权的资源");
+            throw new AuthorizationException("角色非法使用未授权的资源-" + roleCode);
         }
     }
 

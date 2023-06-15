@@ -76,7 +76,7 @@ public class StatNoticeReq extends MultiTenantReq {
 
     //@InjectVar()
     //@Size(max = 128)
-    @Schema(title = "所有者ID", title = "所有者ID")
+    @Schema(title = "所有者ID", description = "所有者ID")
     String ownerId;
 
     //@Size(max = 64)
@@ -116,7 +116,7 @@ public class StatNoticeReq extends MultiTenantReq {
 
     //@Size(max = 128)
     //@InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    @Schema(title = "拼音名称", title = "拼音，格式Json数组：[全拼,简拼]")
+    @Schema(title = "拼音名称", description = "拼音，格式Json数组：[全拼,简拼]")
     List<String> pinyinName;
 
     //@InjectVar()

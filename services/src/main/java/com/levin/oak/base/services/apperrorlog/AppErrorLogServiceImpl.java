@@ -47,7 +47,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppErrorLogService", matchIfMissing = true)
 @Slf4j
 //@Validated
-@Tag(name = E_AppErrorLog.BIZ_NAME, title = E_AppErrorLog.BIZ_NAME + MAINTAIN_ACTION)
+@Tag(name = E_AppErrorLog.BIZ_NAME, description = E_AppErrorLog.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_AppErrorLog.SIMPLE_CLASS_NAME})
 public class AppErrorLogServiceImpl extends BaseService implements AppErrorLogService {
 
@@ -152,7 +152,7 @@ public class AppErrorLogServiceImpl extends BaseService implements AppErrorLogSe
     }
 
     @Override
-    @Operation(summary = CLEAR_CACHE_ACTION, title = "缓存Key通常是ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_AppErrorLog.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {
     }
