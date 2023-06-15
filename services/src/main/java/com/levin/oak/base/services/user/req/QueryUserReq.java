@@ -116,7 +116,7 @@ public class QueryUserReq extends MultiTenantReq {
     private Sex sex;
 
     @Schema(title = "模糊匹配 - 标签列表")
-    @InjectVar(domain = "dao", expectBaseType = List.class, converter = JsonStrLikeConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Contains
     @OR(autoClose = true)
     private List<String> containsTagList;
@@ -159,7 +159,7 @@ public class QueryUserReq extends MultiTenantReq {
 
     @Schema(title = "模糊匹配 - 角色列表")
     @OR(autoClose = true)
-    @InjectVar(domain = "dao", expectBaseType = String.class, converter = JsonStrLikeConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Contains
     private List<String> containsRoleList;
 

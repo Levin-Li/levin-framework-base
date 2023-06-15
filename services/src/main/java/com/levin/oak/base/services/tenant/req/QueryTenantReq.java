@@ -117,7 +117,7 @@ public class QueryTenantReq extends BaseReq {
     @Schema(title = "模糊匹配 - 域名列表")
     @OR(autoClose = true)
     @Contains
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao",converter = JsonStrLikeConverter.class, isRequired = "false")
     private List<String> containsDomainList;
 
 
