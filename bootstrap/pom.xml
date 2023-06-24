@@ -42,8 +42,8 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <scope>provided</scope>
         </dependency>
+
         <dependency>
             <artifactId>framework-base-services</artifactId>
             <groupId>${project.groupId}</groupId>

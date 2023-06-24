@@ -57,6 +57,8 @@
         <oshi.version>5.6.1</oshi.version>
         <jsch.version>0.1.54</jsch.version>
         <redission.version>3.19.3</redission.version>
+        <redission.version>3.16.8</redission.version>
+
         <dm-db-version>8.1.2.79</dm-db-version>
 
         <IJPay.version>2.9.3</IJPay.version>

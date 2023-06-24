@@ -11,6 +11,10 @@ import com.levin.commons.utils.*;
 
 import javax.annotation.*;
 
+import com.levin.oak.base.autoconfigure.FrameworkProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.task.TaskSchedulingProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.*;
 
@@ -22,6 +26,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.apache.dubbo.config.spring.context.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 //Auto gen by simple-dao-codegen 2023年6月24日 下午12:28:38
 
