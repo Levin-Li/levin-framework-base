@@ -63,6 +63,12 @@
         </dependency>
 
         <dependency>
+            <artifactId>framework-base-starter</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <artifactId>framework-base-admin-ui</artifactId>
             <groupId>${project.groupId}</groupId>
             <version>${project.version}</version>

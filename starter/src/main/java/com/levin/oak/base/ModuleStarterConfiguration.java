@@ -44,7 +44,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 @EntityScan({PACKAGE_NAME})
 
 // Spring 扫描
-@ComponentScan(value = {PACKAGE_NAME})
+@ComponentScan({PACKAGE_NAME})
 
 // 自定义注解接口 扫描
 @ProxyBeanScan(basePackages = {PACKAGE_NAME}, scanType = EntityRepository.class, factoryBeanClass = RepositoryFactoryBean.class)
