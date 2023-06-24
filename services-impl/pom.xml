@@ -11,7 +11,7 @@
     </parent>
 
 
-    <artifactId>framework-base-services</artifactId>
+    <artifactId>framework-base-services-impl</artifactId>
 
 
     <packaging>jar</packaging>
@@ -24,7 +24,6 @@
 
     </repositories>
 
-
     <dependencyManagement>
         <dependencies>
 
@@ -32,65 +31,10 @@
     </dependencyManagement>
 
     <dependencies>
-
-        <dependency>
-            <artifactId>framework-base-entities</artifactId>
-            <groupId>${project.groupId}</groupId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.jfinal</groupId>
-            <artifactId>enjoy</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Sa-Token 权限认证, 在线文档：http://sa-token.dev33.cn/ -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot-starter</artifactId>
-        </dependency>
-
-        <!-- Sa-Token 整合 Redis （使用jackson序列化方式） -->
-        <!--        <dependency>
-                    <groupId>cn.dev33</groupId>
-                    <artifactId>sa-token-dao-redis-jackson</artifactId>
-                </dependency>-->
-
-        <!-- Sa-Token-Quick-Login 插件 -->
-        <!--        <dependency>
-                    <groupId>cn.dev33</groupId>
-                    <artifactId>sa-token-quick-login</artifactId>
-                </dependency>-->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-security</artifactId>-->
-        <!--            <scope>provided</scope>-->
-        <!--        </dependency>-->
-
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -99,6 +43,52 @@
             <artifactId>hutool-all</artifactId>
             <scope>provided</scope>
         </dependency>
+
+
+        <dependency>
+            <artifactId>framework-base-services</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <version>${project.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>com.h2database</groupId>
@@ -125,15 +115,33 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
+            <groupId>com.github.javen205</groupId>
+            <artifactId>IJPay-All</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <!--        <dependency>
+                    <groupId>com.github.whvcse</groupId>
+                    <artifactId>easy-captcha</artifactId>
+                    <version>1.6.2</version>
+                </dependency>-->
+
+        <!--        https://gitee.com/ramostear/Happy-Captcha?_from=gitee_search-->
+        <dependency>
+            <groupId>com.ramostear</groupId>
+            <artifactId>Happy-Captcha</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <!-- 短信通道 -->
+            <groupId>net.guerlab.sms</groupId>
+            <artifactId>guerlab-sms-server-starter</artifactId>
         </dependency>
 
     </dependencies>
 
     <build>
-
 
         <pluginManagement>
             <plugins>
@@ -147,6 +155,5 @@
         </plugins>
 
     </build>
-
 
 </project>

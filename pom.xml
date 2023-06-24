@@ -8,12 +8,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
+<!--    <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-<!--        <version>2.6.14</version>-->
         <version>2.7.8</version>
     </parent>
+    -->
 
     <groupId>com.levin.oak.base</groupId>
     <artifactId>framework-base</artifactId>
@@ -23,10 +23,13 @@
 
     <properties>
 
-        <revision>1.2.0-SNAPSHOT</revision>
+        <revision>2.0.0-SNAPSHOT</revision>
+
+        <dubbo.version>3.1.8</dubbo.version>
+        <spring-boot.version>2.7.10</spring-boot.version>
 
         <levin.simple-dao.groupId>com.levin.commons</levin.simple-dao.groupId>
-        <levin.simple-dao.version>2.3.6-SNAPSHOT</levin.simple-dao.version>
+        <levin.simple-dao.version>2.5.1-SNAPSHOT</levin.simple-dao.version>
 
         <levin.service-support.groupId>com.github.Levin-Li</levin.service-support.groupId>
         <levin.service-support.version>1.2.26-SNAPSHOT</levin.service-support.version>
@@ -57,7 +60,13 @@
         <dm-db-version>8.1.2.79</dm-db-version>
 
         <IJPay.version>2.9.3</IJPay.version>
+        <Happy-Captcha.version>1.0.1</Happy-Captcha.version>
         <egzosn-pay.version>2.14.4-fix</egzosn-pay.version>
+        <net.guerlab.sms.version>2.1.0</net.guerlab.sms.version>
+
+        <openfeign.version>3.1.5</openfeign.version>
+
+        <mysql-driver.version>8.0.32</mysql-driver.version>
 
         <maven-source-plugin.attach>true</maven-source-plugin.attach>
         <maven-jar-plugin.addMavenDescriptor>false</maven-jar-plugin.addMavenDescriptor>
@@ -69,17 +78,13 @@
 
 
     <modules>
-
         <module>entities</module>
-
-        <module>api</module>
-
         <module>services</module>
-
+        <module>services-impl</module>
+        <module>api</module>
+        <module>starter</module>
         <module>bootstrap</module>
-
         <module>admin-ui</module>
-
     </modules>
 
     <repositories>
@@ -207,6 +212,32 @@
         <dependencies>
 
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- dubbo3 https://cn.dubbo.apache.org/zh-cn/overview/core-features/ecosystem/-->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-bom</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-zookeeper</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
+            <dependency>
                 <groupId>${levin.simple-dao.groupId}</groupId>
                 <artifactId>simple-dao-annotations</artifactId>
                 <version>${levin.simple-dao.version}</version>
@@ -314,6 +345,38 @@
                 </exclusions>
             </dependency>
 
+            <!--     https://javen205.gitee.io/ijpay/    支付工具包 -->
+            <dependency>
+                <groupId>com.github.javen205</groupId>
+                <artifactId>IJPay-All</artifactId>
+                <version>${IJPay.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>cn.hutool</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ramostear</groupId>
+                <artifactId>Happy-Captcha</artifactId>
+                <version>${Happy-Captcha.version}</version>
+            </dependency>
+
+            <dependency>
+                <!-- 短信通道 -->
+                <groupId>net.guerlab.sms</groupId>
+                <artifactId>guerlab-sms-server-starter</artifactId>
+                <version>${net.guerlab.sms.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
@@ -323,7 +386,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.version}</version>
+                <version>${mysql-driver.version}</version>
             </dependency>
 
             <!-- Sa-Token 整合 Redis （使用jackson序列化方式） -->
@@ -353,7 +416,6 @@
                 <version>${jfinal-enjoy.version}</version>
             </dependency>
 
-
             <!-- https://mvnrepository.com/artifact/com.dameng/DmJdbcDriver18 -->
             <dependency>
                 <groupId>com.dameng</groupId>
@@ -368,6 +430,11 @@
                 <version>${dm-db-version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${openfeign.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -461,6 +528,8 @@
                 <configuration>
                     <!-- 生成的控制器代码是否包括目录-->
                     <isCreateControllerSubDir>true</isCreateControllerSubDir>
+
+                    <isCreateBizController>false</isCreateBizController>
 
                     <!-- 生成的DTO的Schema注解中描述的配置是否使用类引用-->
                     <isSchemaDescUseConstRef>true</isSchemaDescUseConstRef>

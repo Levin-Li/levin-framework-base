@@ -10,7 +10,6 @@ import com.levin.commons.utils.IPAddrUtils;
 import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
-import com.levin.oak.base.biz.InjectVarService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.controller.accesslog.AccessLogController;
 import com.levin.oak.base.services.accesslog.AccessLogService;
@@ -84,9 +83,6 @@ public class ModuleWebControllerAspect {
 
     @Autowired
     AuthService authService;
-
-    @Autowired
-    InjectVarService injectVarService;
 
     @Autowired
     BizTenantService bizTenantService;

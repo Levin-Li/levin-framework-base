@@ -15,7 +15,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
