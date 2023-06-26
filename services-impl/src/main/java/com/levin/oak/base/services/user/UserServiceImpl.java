@@ -15,6 +15,7 @@ import com.levin.oak.base.services.user.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
@@ -48,7 +49,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 //@Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-@Service(PLUGIN_PREFIX + "UserService")
+//@Service(PLUGIN_PREFIX + "UserService")
+@DubboService
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "UserService", matchIfMissing = true)
 @Slf4j
 //@Validated
@@ -205,6 +207,25 @@ public class UserServiceImpl extends BaseService implements UserService {
     private NotReq notSa() {
         return new NotReq().setAccount(AuthService.SA_ACCOUNT);
     }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public UserInfo findUnique(QueryUserReq req){
+        return simpleDao.findUnique(req);
+    }
+
+    /**
+     * 统计记录数
+     *
+     * @param req
+     * @return record count
+     */
+    @Override
+    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    public int count(QueryUserReq req){
+        return (int) simpleDao.countByQueryObj(req);
+    }
+
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")

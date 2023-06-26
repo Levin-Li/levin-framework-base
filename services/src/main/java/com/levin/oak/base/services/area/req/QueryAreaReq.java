@@ -1,33 +1,56 @@
 package com.levin.oak.base.services.area.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.misc.Fetch;
-import com.levin.commons.dao.annotation.order.OrderBy;
-import com.levin.commons.dao.annotation.order.SimpleOrderBy;
-import com.levin.oak.base.entities.Area;
-import com.levin.oak.base.entities.Area.Type;
-import com.levin.oak.base.entities.E_Area;
-import com.levin.oak.base.services.area.info.AreaInfo;
-import com.levin.oak.base.services.commons.req.BaseReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.support.*;
+
+import org.springframework.format.annotation.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
+import com.levin.oak.base.services.area.info.*;
+import com.levin.oak.base.entities.Area;
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_Area.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+    import com.levin.commons.service.support.InjectConsts;
+    import com.levin.commons.service.domain.InjectVar;
+    import com.levin.oak.base.entities.Area;
+    import com.levin.oak.base.services.area.info.*;
+    import java.util.Set;
+    import com.levin.oak.base.entities.Area.*;
+    import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 查询区域
- *
- * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *  查询区域
+ *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
+ *  代码生成哈希校验码：[59922f9eb5a4f36433e7c185244b442a]
  */
-@Schema(title = "查询区域")
+@Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,132 +60,114 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Area.class, alias = E_Area.ALIAS, resultClass = AreaInfo.class)
-public class QueryAreaReq extends BaseReq {
+public class QueryAreaReq extends BaseReq{
 
     private static final long serialVersionUID = -445860277L;
 
     @Ignore
     @Schema(title = "排序字段")
-    private String orderBy;
+    String orderBy;
 
     //@Ignore
-    @Schema(title = "排序方向-desc asc")
+    @Schema(title = "排序方向")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
-    private OrderBy.Type orderDir;
+    OrderBy.Type orderDir;
 
 
-    //@NotBlank
-    //@Size(max = 64)
+    @NotBlank
+    @Size(max = 64)
+    @Schema(title = L_code)
+    String code;
 
-    @Schema(title = "编码")
-    private String code;
-
-    @Schema(title = "模糊匹配 - 编码")
+    @Schema(title = "模糊匹配-" + L_code)
     @StartsWith
-    private String startsWithCode;
+    String startsWithCode;
 
+    @Schema(title = L_icon)
+    String icon;
 
-    @Schema(title = "图标")
-    private String icon;
+    @Size(max = 64)
+    @Schema(title = L_parentCode)
+    String parentCode;
 
-
-    //@Size(max = 64)
-
-    @Schema(title = "父区域ID")
-    private String parentCode;
-
-
-    @Schema(title = "是否加载父区域")
+    @Schema(title = "是否加载" + L_parent)
     @Fetch(attrs = E_Area.parent, condition = "#_val == true")
-    private Boolean loadParent;
+    Boolean loadParent;
 
-
-    @Schema(title = "是否加载子区域")
+    @Schema(title = "是否加载" + L_children)
     @Fetch(attrs = E_Area.children, condition = "#_val == true")
-    private Boolean loadChildren;
+    Boolean loadChildren;
 
+    @NotNull
+    @Schema(title = L_type)
+    Type type;
 
-    //@NotNull
+    @NotBlank
+    @Size(max = 128)
+    @Schema(title = L_name)
+    String name;
 
-    @Schema(title = "类型")
-    private Type type;
-
-
-    //@NotBlank
-    //@Size(max = 128)
-
-    @Schema(title = "名称")
-    private String name;
-
-    @Schema(title = "模糊匹配 - 名称")
+    @Schema(title = "模糊匹配-" + L_name)
     @Contains
-    private String containsName;
+    String containsName;
 
+    @Size(max = 128)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
 
-    //@Size(max = 128)
-
-    @Schema(title = "拼音，格式：全拼(简拼)")
-    private String pinyinName;
-
-    @Schema(title = "模糊匹配 - 拼音，格式：全拼(简拼)")
+    @Schema(title = "模糊匹配-" + L_pinyinName)
     @Contains
-    private String containsPinyinName;
+    String containsPinyinName;
 
+    @Size(max = 128)
+    @Schema(title = L_creator)
+    String creator;
 
-    //@Size(max = 128)
-
-    @Schema(title = "创建者")
-    private String creator;
-
-
-    //@NotNull
-
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @NotNull
+    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
-    private Date gteCreateTime;
+    Date gteCreateTime;
 
-    @Schema(title = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
     @Lte
-    private Date lteCreateTime;
+    Date lteCreateTime;
+
+    //@Schema(title = L_createTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenCreateTime;
 
 
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_lastUpdateTime , description = "大于等于" + L_lastUpdateTime)
     @Gte
-    private Date gteLastUpdateTime;
+    Date gteLastUpdateTime;
 
-    @Schema(title = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_lastUpdateTime , description = "小于等于" + L_lastUpdateTime)
     @Lte
-    private Date lteLastUpdateTime;
+    Date lteLastUpdateTime;
+
+    //@Schema(title = L_lastUpdateTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenLastUpdateTime;
 
 
-    @Schema(title = "排序代码")
-    private Integer orderCode;
+    @Schema(title = L_orderCode)
+    Integer orderCode;
 
+    @NotNull
+    @Schema(title = L_enable)
+    Boolean enable;
 
-    //@NotNull
+    @NotNull
+    @Schema(title = L_editable)
+    Boolean editable;
 
-    @Schema(title = "是否允许")
-    private Boolean enable;
-
-
-    //@NotNull
-
-    @Schema(title = "是否可编辑")
-    private Boolean editable;
-
-
-    //@Size(max = 512)
-
-    @Schema(title = "备注")
-    private String remark;
-
+    @Size(max = 512)
+    @Schema(title = L_remark)
+    String remark;
 
     public QueryAreaReq(String code) {
         this.code = code;
     }
-
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

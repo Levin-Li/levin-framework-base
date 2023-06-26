@@ -3,7 +3,6 @@ package com.levin.oak.base.services.commons.req;
 import com.levin.commons.dao.annotation.Ignore;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
 import com.levin.commons.service.support.InjectConsts;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -20,7 +19,7 @@ import lombok.experimental.FieldNameConstants;
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
-public final class CommonReq
+public final class CommonDataReq
         extends MultiTenantReq
         implements OrganizedObject {
 

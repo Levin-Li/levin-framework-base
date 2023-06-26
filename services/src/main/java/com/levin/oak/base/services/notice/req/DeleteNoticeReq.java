@@ -1,8 +1,11 @@
 package com.levin.oak.base.services.notice.req;
 
+import static com.levin.oak.base.entities.EntityConst.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
 
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.annotation.*;
@@ -18,30 +21,26 @@ import javax.validation.constraints.*;
 
 import lombok.*;
 import lombok.experimental.*;
-
 import java.util.*;
 
 import com.levin.oak.base.entities.Notice;
 import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_Notice.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
 import com.levin.oak.base.entities.Notice.*;
-
 import java.util.Date;
-import java.util.List;
-
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 /**
- * 删除通知
- * //Auto gen by simple-dao-codegen 2022-6-20 16:50:11
+ *  删除通知
+ *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ * 代码生成哈希校验码：[f0916188cda67049f5c1614bb69ab65e]
  */
-@Schema(title = "删除通知")
+@Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
 
 //@AllArgsConstructor
@@ -53,13 +52,13 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Notice.class, alias = E_Notice.ALIAS)
-public class DeleteNoticeReq extends MultiTenantReq {
+public class DeleteNoticeReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1394869526L;
 
 
-    @Schema(title = "id集合")
-    @In(value = E_Notice.id, require = true)
+    @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @In(value = E_Notice.id)
     @NotEmpty
     private String[] idList;
 
@@ -73,8 +72,8 @@ public class DeleteNoticeReq extends MultiTenantReq {
     }
 
 
-    @Schema(title = "可编辑条件", hidden = true)
-    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    @Schema(description = "可编辑条件" , hidden = true)
+    @Eq(condition ="!#user.isSuperAdmin()")
     final boolean eqEditable = true;
 
     @PostConstruct

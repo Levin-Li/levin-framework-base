@@ -1,8 +1,11 @@
 package com.levin.oak.base.services.noticeprocesslog.req;
 
+import static com.levin.oak.base.entities.EntityConst.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
 
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.annotation.*;
@@ -18,29 +21,26 @@ import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
-
 import java.util.*;
 
 import com.levin.oak.base.entities.NoticeProcessLog;
 import com.levin.oak.base.entities.*;
-
+import static com.levin.oak.base.entities.E_NoticeProcessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-
 import java.util.Date;
 ////////////////////////////////////
 
-
 /**
- * 更新通知处理日志
- * Auto gen by simple-dao-codegen 2022-6-20 16:50:12
+ *  更新通知处理日志
+ *  Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ *  代码生成哈希校验码：[0229ede608b5d8c3c5ea5d5c1088fabc]
  */
-@Schema(title = "更新通知处理日志")
+@Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -52,33 +52,33 @@ import java.util.Date;
 @TargetOption(entityClass = NoticeProcessLog.class, alias = E_NoticeProcessLog.ALIAS)
 //默认更新注解
 @Update
-public class UpdateNoticeProcessLogReq extends MultiTenantReq {
+public class UpdateNoticeProcessLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1991983093L;
 
-    @Schema(title = "id", required = true)
+    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull
     @Eq(require = true)
     String id;
 
 
+
     @NotBlank
-    @InjectVar()
     @Size(max = 128)
-    @Schema(title = "用户ID")
+    @Schema(title = L_ownerId)
     String ownerId;
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = "消息ID")
+    @Schema(title = L_noticeId)
     String noticeId;
 
     @Size(max = 128)
-    @Schema(title = "处理状态")
+    @Schema(title = L_status)
     String status;
 
     @Size(max = 512)
-    @Schema(title = "备注")
+    @Schema(title = L_remark)
     String remark;
 
 
@@ -86,9 +86,9 @@ public class UpdateNoticeProcessLogReq extends MultiTenantReq {
         this.id = id;
     }
 
-    public UpdateNoticeProcessLogReq setIdOnNotBlank(String id) {
-        if (isNotBlank(id)) {
-            this.id = id;
+    public UpdateNoticeProcessLogReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+        this.id = id;
         }
         return this;
     }

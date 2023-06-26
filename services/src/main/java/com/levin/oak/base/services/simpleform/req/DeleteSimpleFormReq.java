@@ -1,8 +1,11 @@
 package com.levin.oak.base.services.simpleform.req;
 
+import static com.levin.oak.base.entities.EntityConst.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
 
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.annotation.*;
@@ -18,26 +21,25 @@ import javax.validation.constraints.*;
 
 import lombok.*;
 import lombok.experimental.*;
-
 import java.util.*;
 
 import com.levin.oak.base.entities.SimpleForm;
 import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_SimpleForm.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-
 import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 删除简单表单
- * //Auto gen by simple-dao-codegen 2022-5-23 10:30:01
+ *  删除简单表单
+ *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
+ * 代码生成哈希校验码：[4954a0ecd75d3f0faed9eb40bbbf77e4]
  */
-@Schema(title = "删除简单表单")
+@Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
 
 //@AllArgsConstructor
@@ -49,13 +51,13 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimpleForm.class, alias = E_SimpleForm.ALIAS)
-public class DeleteSimpleFormReq extends MultiTenantReq {
+public class DeleteSimpleFormReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1598335188L;
 
 
-    @Schema(title = "id集合")
-    @In(value = E_SimpleForm.id, require = true)
+    @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @In(value = E_SimpleForm.id)
     @NotEmpty
     private String[] idList;
 
@@ -69,8 +71,8 @@ public class DeleteSimpleFormReq extends MultiTenantReq {
     }
 
 
-    @Schema(title = "可编辑条件", hidden = true)
-    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    @Schema(description = "可编辑条件" , hidden = true)
+    @Eq(condition ="!#user.isSuperAdmin()")
     final boolean eqEditable = true;
 
     @PostConstruct

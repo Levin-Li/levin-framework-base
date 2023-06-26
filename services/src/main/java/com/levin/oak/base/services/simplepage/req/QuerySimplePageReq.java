@@ -1,5 +1,7 @@
 package com.levin.oak.base.services.simplepage.req;
 
+import static com.levin.oak.base.entities.EntityConst.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import com.levin.commons.dao.annotation.Ignore;
 
@@ -14,6 +16,7 @@ import com.levin.commons.dao.annotation.misc.*;
 
 import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
+import com.levin.commons.service.support.*;
 
 import org.springframework.format.annotation.*;
 
@@ -22,30 +25,28 @@ import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
-
 import java.util.*;
 
 import com.levin.oak.base.services.simplepage.info.*;
 import com.levin.oak.base.entities.SimplePage;
 
 import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_SimplePage.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-
-import java.util.Date;
+    import com.levin.commons.service.support.InjectConsts;
+    import com.levin.commons.service.domain.InjectVar;
+    import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 查询简单页面
- *
- * @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
+ *  查询简单页面
+ *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
+ *  代码生成哈希校验码：[b99588ac00202b200e468322dfdc4acd]
  */
-@Schema(title = "查询简单页面")
+@Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -55,122 +56,128 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimplePage.class, alias = E_SimplePage.ALIAS, resultClass = SimplePageInfo.class)
-public class QuerySimplePageReq extends MultiTenantReq {
+public class QuerySimplePageReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = 1598619295L;
-
-    @Schema(title = "是否包含公共数据", hidden = true)
-    @Ignore
-    private boolean isContainsPublicData = true;
 
     @Ignore
     @Schema(title = "排序字段")
     String orderBy;
 
     //@Ignore
-    @Schema(title = "排序方向-desc asc")
+    @Schema(title = "排序方向")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
     OrderBy.Type orderDir;
 
-    //@NotNull
-    @Schema(title = "id")
+
+    @NotBlank
+    @Size(max = 64)
+    @Schema(title = L_id)
     String id;
 
-    //@NotBlank
-    //@Size(max = 64)
-    @Schema(title = "类型")
+    @NotBlank
+    @Size(max = 128)
+    @Schema(title = L_type)
     String type;
 
-    //@NotBlank
-    //@Size(max = 64)
-    @Schema(title = "分类名称")
+    @NotBlank
+    @Size(max = 128)
+    @Schema(title = L_category)
     String category;
 
-    //@NotBlank
-    //@Size(max = 64)
-    @Schema(title = "分组名称")
+    @NotBlank
+    @Size(max = 128)
+    @Schema(title = L_groupName)
     String groupName;
-    @Schema(title = "模糊匹配 - 分组名称")
+
+    @Schema(title = "模糊匹配-" + L_groupName)
     @Contains
     String containsGroupName;
 
-    //@NotBlank
-    @Schema(title = "访问路径")
+    @Schema(title = L_icon)
+    String icon;
+
+    @NotBlank
+    @Schema(title = L_path)
     String path;
 
-    @Schema(title = "内容")
+    @Size(max = 1800)
+    @Schema(title = L_requireAuthorizations)
+    String requireAuthorizations;
+
+    @Schema(title = L_content)
     String content;
 
-    //@Size(max = 128)
-    @Schema(title = "系统子域")
+    @Size(max = 128)
+    @Schema(title = L_domain)
     String domain;
 
-    //@NotBlank
-    //@Size(max = 128)
-    @Schema(title = "名称")
+    @NotBlank
+    @Size(max = 128)
+    @Schema(title = L_name)
     String name;
-    @Schema(title = "模糊匹配 - 名称")
+
+    @Schema(title = "模糊匹配-" + L_name)
     @Contains
     String containsName;
 
-    //@Size(max = 128)
-    @Schema(title = "拼音，格式：全拼(简拼)")
+    @Size(max = 128)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
-    @Schema(title = "模糊匹配 - 拼音，格式：全拼(简拼)")
+
+    @Schema(title = "模糊匹配-" + L_pinyinName)
     @Contains
     String containsPinyinName;
 
-    //@InjectVar()
-    //@Size(max = 128)
-    @Schema(title = "创建者")
+    @Size(max = 128)
+    @Schema(title = L_creator)
     String creator;
 
-    //@NotNull
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @NotNull
+    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
     @Lte
     Date lteCreateTime;
 
-    @Schema(title = "创建时间-日期范围，格式：yyyyMMdd-yyyyMMdd，大于等于且小余等于")
-    @Between(paramDelimiter = "-", patterns = {"yyyyMMdd"})
-    String betweenCreateTime;
+    //@Schema(title = L_createTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenCreateTime;
 
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+
+    @Schema(title = L_lastUpdateTime , description = "大于等于" + L_lastUpdateTime)
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_lastUpdateTime , description = "小于等于" + L_lastUpdateTime)
     @Lte
     Date lteLastUpdateTime;
 
-    @Schema(title = "更新时间-日期范围，格式：yyyyMMdd-yyyyMMdd，大于等于且小余等于")
-    @Between(paramDelimiter = "-", patterns = {"yyyyMMdd"})
-    String betweenLastUpdateTime;
+    //@Schema(title = L_lastUpdateTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenLastUpdateTime;
 
-    @Schema(title = "排序代码")
+
+    @Schema(title = L_orderCode)
     Integer orderCode;
 
-    //@NotNull
-    @Schema(title = "是否允许")
+    @NotNull
+    @Schema(title = L_enable)
     Boolean enable;
 
-    //@NotNull
-    @Schema(title = "是否可编辑")
+    @NotNull
+    @Schema(title = L_editable)
     Boolean editable;
 
-    //@Size(max = 512)
-    @Schema(title = "备注")
+    @Size(max = 512)
+    @Schema(title = L_remark)
     String remark;
 
     public QuerySimplePageReq(String id) {
         this.id = id;
     }
-
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

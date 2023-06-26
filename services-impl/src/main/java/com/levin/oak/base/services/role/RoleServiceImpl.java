@@ -14,6 +14,7 @@ import com.levin.oak.base.services.role.req.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
@@ -46,7 +47,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 //@Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-@Service(PLUGIN_PREFIX + "RoleService")
+//@Service(PLUGIN_PREFIX + "RoleService")
+@DubboService
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "RoleService", matchIfMissing = true)
 @Slf4j
 //@Validated

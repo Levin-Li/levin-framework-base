@@ -18,6 +18,7 @@ import com.levin.oak.base.services.user.req.CreateUserReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.util.Assert;
@@ -63,7 +64,8 @@ public class TenantController extends BaseController {
 
     private static final String BIZ_NAME = E_Tenant.BIZ_NAME;
 
-    @Autowired
+//    @Autowired
+    @DubboReference
     TenantService tenantService;
 
     @Autowired
@@ -143,7 +145,7 @@ public class TenantController extends BaseController {
      */
     @PutMapping({""})
     @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Integer> update(@RequestBody UpdateTenantReq req) {
+    public ApiResp<Boolean> update(@RequestBody UpdateTenantReq req) {
         return ApiResp.ok(checkResult(tenantService.update(req), UPDATE_ACTION));
     }
 
@@ -163,7 +165,7 @@ public class TenantController extends BaseController {
      */
     @DeleteMapping({""})
     @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Integer> delete(@NotNull TenantIdReq req) {
+    public ApiResp<Boolean> delete(@NotNull TenantIdReq req) {
         return ApiResp.ok(checkResult(tenantService.delete(req), DELETE_ACTION));
     }
 

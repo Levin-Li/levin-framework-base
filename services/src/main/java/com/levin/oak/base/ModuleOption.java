@@ -5,14 +5,35 @@ package com.levin.oak.base;
  * <p>
  * eg.
  * <p>
- * //Auto gen by simple-dao-codegen 2023-2-22 19:54:46
+ * Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
+ * 代码生成哈希校验码：[ef40e788536a6b507ecf859cc4e10ed9]
  */
 public interface ModuleOption {
 
     /**
+     * 主版本号
+     */
+    String MAJOR = "1";
+
+    /**
+     * 子版本号
+     */
+    String MINOR = "0";
+
+    /**
+     * 修订版本号
+     */
+    String REVISION = "0";
+
+    /**
+     * 版本号
+     */
+    String VERSION_NAME = MAJOR + "." + MINOR + "." + REVISION;
+
+    /**
      * module name
      */
-    String NAME = "oak-framework基础模块";
+    String NAME = "请填写模块名称";
 
     /**
      * module desc
@@ -28,16 +49,11 @@ public interface ModuleOption {
      * module id
      */
     String ID = PACKAGE_NAME;
-
+    
     /**
      * module prefix
      */
     String ID_PREFIX = ID + ".";
-
-    /**
-     * 缓存分隔符
-     */
-    String CACHE_DELIM = ":";
 
     /**
      * module prefix
@@ -45,15 +61,20 @@ public interface ModuleOption {
     String PLUGIN_PREFIX = "plugin." + ID_PREFIX;
 
     /**
-     * version
+     * 缓存分隔符
      */
-    String VERSION = "V1";
+    String CACHE_DELIM = ":";
+
+    /**
+     * api version
+     */
+    String API_VERSION = "V1";
 
     /**
      * base path
      * 注意路径必须以 / 开头和结尾
      */
-    String BASE_PATH = "/" + ID + "/" + VERSION + "/";
+    String BASE_PATH = "/" + ID + "/" + API_VERSION + "/";
 
     /**
      * api path
@@ -66,6 +87,7 @@ public interface ModuleOption {
      * 注意路径必须以 / 结尾
      */
     String WS_PATH = BASE_PATH + "ws/";
+
 
     /**
      * admin api path

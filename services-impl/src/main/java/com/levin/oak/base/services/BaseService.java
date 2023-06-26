@@ -28,12 +28,13 @@ import com.levin.oak.base.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-//Auto gen by simple-dao-codegen 2023年6月24日 下午12:28:36
 
 /**
  * 抽象服务类
  *
  * @author lilw
+ * Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
+ * 代码生成哈希校验码：[231e88d49c50df63fcdfc9816e9b5b8e]
  */
 @Slf4j
 public abstract class BaseService {
@@ -50,6 +51,12 @@ public abstract class BaseService {
         return ModuleOption.ID;
     }
 
+    /**
+     *
+     * @param type
+     * @param <T>
+     * @return
+     */
     protected <T> T getSelfProxy(Class<T> type) {
 
         if (selfProxy == null) {

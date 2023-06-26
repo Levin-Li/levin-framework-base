@@ -1,76 +1,87 @@
 package com.levin.oak.base.services.apperrorlog.info;
 
+import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import lombok.*;
+import lombok.experimental.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
+import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.*;
 /////////////////////////////////////////////////////
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_AppErrorLog.*;
 ////////////////////////////////////
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  * 应用错误日志
- *
- * @Author Auto gen by simple-dao-codegen 2022-3-29 22:58:02
+ * @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ * 代码生成哈希校验码：[5edac4a867ff8ea99a8124f155b72db4]
  */
-@Schema(title = "应用错误日志")
+@Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
+@JsonIgnoreProperties(tenantId)
 public class AppErrorLogInfo implements Serializable {
 
     private static final long serialVersionUID = 1594864095L;
 
 
     @NotNull
-    @Schema(title = "id")
-    private Long id;
+    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    Long id;
 
 
-    @Schema(title = "租户ID")
-    private String tenantId;
+    @Schema(title = L_tenantId )
+    String tenantId;
 
 
     @Size(max = 64)
-    @Schema(title = "模块ID")
-    private String moduleId;
+    @Schema(title = L_moduleId )
+    String moduleId;
 
 
     @NotNull
-    @Schema(title = "发生时间")
-    private Date occurTime;
+    @Schema(title = L_occurTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    Date occurTime;
 
 
     @NotBlank
-    @Size(max = 1000)
-    @Schema(title = "标题")
-    private String title;
+    @Size(max = 768)
+    @Schema(title = L_title , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    String title;
 
 
-    @Schema(title = "错误级别")
-    private String errorLevel;
+    @Schema(title = L_errorLevel )
+    String errorLevel;
 
 
-    @Schema(title = "根异常类型")
-    private String rootExceptionType;
+    @Schema(title = L_rootExceptionType )
+    String rootExceptionType;
 
 
-    @Schema(title = "完整异常堆栈")
-    private String exceptionFullInfo;
+    @Schema(title = L_exceptionFullInfo )
+    String exceptionFullInfo;
 
 
 }

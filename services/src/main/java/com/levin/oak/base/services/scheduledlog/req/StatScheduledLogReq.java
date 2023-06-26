@@ -1,31 +1,53 @@
 package com.levin.oak.base.services.scheduledlog.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Gte;
-import com.levin.commons.dao.annotation.Lte;
-import com.levin.commons.dao.annotation.stat.Count;
-import com.levin.oak.base.entities.E_ScheduledLog;
-import com.levin.oak.base.entities.ScheduledLog;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
+import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.support.*;
+
+import org.springframework.format.annotation.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
 import java.io.Serializable;
-import java.util.Date;
+
+import com.levin.oak.base.services.scheduledlog.info.*;
+import com.levin.oak.base.entities.ScheduledLog;
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_ScheduledLog.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+    import com.levin.commons.service.support.InjectConsts;
+    import com.levin.commons.service.domain.InjectVar;
+    import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 统计调度日志
- *
- * @Author Auto gen by simple-dao-codegen 2022-4-9 16:44:59
+ *  统计调度日志
+ *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
+ *  代码生成哈希校验码：[da4109ab121be8d55ffea977d886f585]
  */
-@Schema(title = "统计调度日志")
+@Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,96 +57,92 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS,
-        //连接统计
-        //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
-        resultClass = StatScheduledLogReq.Result.class
+     //连接统计
+    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
+    resultClass = StatScheduledLogReq.Result.class
 )
-public class StatScheduledLogReq extends MultiTenantReq {
+public class StatScheduledLogReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = 1319130901L;
 
 
-    //@NotNull
-
-    @Schema(title = "id")
+    @NotNull
+    @Schema(title = L_id)
     Long id;
 
-    //@NotBlank
-    //@Size(max = 64)
-
-    @Schema(title = "任务ID")
+    @NotBlank
+    @Size(max = 64)
+    @Schema(title = L_taskId)
     String taskId;
 
-    //@NotNull
-
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @NotNull
+    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
     @Lte
     Date lteCreateTime;
 
+    //@Schema(title = L_createTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenCreateTime;
 
-    //@Size(max = 256)
-
-    @Schema(title = "执行周期")
+    @Size(max = 128)
+    @Schema(title = L_invokeCycle)
     String invokeCycle;
 
-
-    @Schema(title = "是否错误")
+    @Schema(title = L_isError)
     Boolean isError;
 
-
-    @Schema(title = "执行结果")
+    @Schema(title = L_invokeResult)
     String invokeResult;
+
 
     public StatScheduledLogReq(Long id) {
         this.id = id;
     }
 
     //
-    //@Schema(title = "是否按状态分组统计")
+    //@Schema(description = "是否按状态分组统计")
     //@CtxVar //增加当前字段名称和字段值到环境变量中
     //@Ignore
     //private boolean isGroupByStatus;
 
-    //@Schema(title = "是否按日期分组统计")
+    //@Schema(description = "是否按日期分组统计")
     //@CtxVar //增加当前字段名称和字段值到环境变量中
     //@Ignore //
     //private boolean isGroupByDate;
 
-
     @PostConstruct
     public void preStat() {
-        //@todo 统计之前初始化数据
+    //@todo 统计之前初始化数据
     }
 
-    @Schema(title = "调度日志统计结果")
+    @Schema(description = BIZ_NAME + "统计结果")
     @Data
     @Accessors(chain = true)
     @FieldNameConstants
     public static class Result
             implements Serializable {
 
-        //@Schema(title = "状态分组统计")
+        //@Schema(description = "状态分组统计")
         //@GroupBy(condition = "#isGroupByStatus")
         //Status status;
 
-        //@Schema(title = "时间分组统计")
+        //@Schema(description = "时间分组统计")
         //@GroupBy(condition = "#isGroupByDate", value = "date_format(" + E_ScheduledLog.createDate + ",'%Y-%m-%d')", orderBy = @OrderBy(type = OrderBy.Type.Asc))
         //String createDate;
 
-        @Schema(title = "记录数")
+        @Schema(description = "记录数")
         @Count
         Integer cnt;
 
-        //@Schema(title = "分类记录数")
+        //@Schema(description = "分类记录数")
         //@Count(fieldCases = {@Case(column = E_ScheduledLog.status, whenOptions = {@Case.When(whenExpr = "OFF", thenExpr = "1")}, elseExpr = "NULL")})
         //Integer caseCnt;
 
-        //@Schema(title = "累计" , havingOp=Op.Gt)
+        //@Schema(description = "累计" , havingOp=Op.Gt)
         //@Sum
         //Double sumGmv;
 

@@ -1,156 +1,172 @@
 package com.levin.oak.base.services.tenant.info;
 
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import lombok.*;
+import lombok.experimental.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.*;
 /////////////////////////////////////////////////////
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_Tenant.*;
 ////////////////////////////////////
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 /**
  * 租户
- *
- * @Author Auto gen by simple-dao-codegen 2022-3-25 18:38:00
+ * @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
+ * 代码生成哈希校验码：[3cc2e2087613d27e28bb30b2dbe7fad3]
  */
-@Schema(title = "租户")
+@Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
+
 public class TenantInfo implements Serializable {
 
     private static final long serialVersionUID = 1557223144L;
 
 
     @NotBlank
-    @Schema(title = "ID")
-    private String id;
+    @Size(max = 64)
+    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    String id;
 
 
-    @Schema(title = "租户头像")
-    private String logo;
+    @Size(max = 128)
+    @Schema(title = L_sysName )
+    String sysName;
 
 
-    @Schema(title = "系统名称")
-    private String sysName;
+    @Schema(title = L_sysLogo )
+    String sysLogo;
 
 
-    @Schema(title = "系统Logo")
-    private String sysLogo;
+    @Schema(title = L_logo )
+    String logo;
 
 
-    @Schema(title = "企业信用编码")
-    private String code;
+    @Size(max = 128)
+    @Schema(title = L_code )
+    String code;
 
 
     @NotBlank
-    @Schema(title = "租户编码")
-    private String tenantKey;
+    @Schema(title = L_tenantKey , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    String tenantKey;
 
 
-    @Schema(title = "帐号余额")
-    private Double balance;
+    @Schema(title = L_balance )
+    Double balance;
 
 
-    @Schema(title = "总许可数")
-    private Integer licenseCnt;
+    @Schema(title = L_licenseCnt )
+    Integer licenseCnt;
 
 
-    @Schema(title = "剩余许可数")
-    private Integer remainingLicenseCnt;
+    @Schema(title = L_remainingLicenseCnt )
+    Integer remainingLicenseCnt;
 
 
-    @Schema(title = "到期时间")
-    private Date licenseExpire;
-
-
-    @Schema(title = "联系人")
-    private String contractPerson;
-
-
-    @Schema(title = "联系电话")
-    private String contractPhone;
-
-
-    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    @Schema(title = "域名列表")
-    private List<String> domainList;
+    @Schema(title = L_licenseExpire )
+    Date licenseExpire;
 
 
     @Size(max = 32)
-    @Schema(title = "appId")
-    private String appId;
+    @Schema(title = L_contractPerson )
+    String contractPerson;
 
 
-    @Size(max = 256)
-    @Schema(title = "appSecret")
-    private String appSecret;
+    @Size(max = 32)
+    @Schema(title = L_contractPhone )
+    String contractPhone;
 
 
-    @Schema(title = "EncryptKey")
-    private String encryptKey;
+    @Size(max = 1200)
+    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @Schema(title = L_domainList )
+    List<String> domainList;
+
+
+    @Size(max = 64)
+    @Schema(title = L_appId )
+    String appId;
+
+
+    @Size(max = 512)
+    @Schema(title = L_appSecret )
+    String appSecret;
+
+
+    @Size(max = 512)
+    @Schema(title = L_encryptKey )
+    String encryptKey;
 
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = "名称")
-    private String name;
+    @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    String name;
 
 
     @Size(max = 128)
-    @Schema(title = "拼音，格式：全拼(简拼)")
-    private String pinyinName;
+    @Schema(title = L_pinyinName , description = D_pinyinName )
+    String pinyinName;
 
 
     @Size(max = 128)
-    @Schema(title = "创建者")
-    private String creator;
+    @Schema(title = L_creator )
+    String creator;
 
 
     @NotNull
-    @Schema(title = "创建时间")
-    private Date createTime;
+    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    Date createTime;
 
 
-    @Schema(title = "更新时间")
-    private Date lastUpdateTime;
+    @Schema(title = L_lastUpdateTime )
+    Date lastUpdateTime;
 
 
-    @Schema(title = "排序代码")
-    private Integer orderCode;
-
-
-    @NotNull
-    @Schema(title = "是否允许")
-    private Boolean enable;
+    @Schema(title = L_orderCode )
+    Integer orderCode;
 
 
     @NotNull
-    @Schema(title = "是否可编辑")
-    private Boolean editable;
+    @Schema(title = L_enable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    Boolean enable;
+
+
+    @NotNull
+    @Schema(title = L_editable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    Boolean editable;
 
 
     @Size(max = 512)
-    @Schema(title = "备注")
-    private String remark;
+    @Schema(title = L_remark )
+    String remark;
 
 
 }

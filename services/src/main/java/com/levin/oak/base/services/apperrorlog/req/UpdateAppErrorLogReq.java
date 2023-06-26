@@ -1,33 +1,46 @@
 package com.levin.oak.base.services.apperrorlog.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Eq;
-import com.levin.commons.dao.annotation.update.Update;
-import com.levin.commons.service.support.*;
-import com.levin.oak.base.entities.AppErrorLog;
-import com.levin.oak.base.entities.E_AppErrorLog;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
+import com.levin.oak.base.entities.AppErrorLog;
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_AppErrorLog.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
 ////////////////////////////////////
 
-
 /**
- * 更新应用错误日志
- * Auto gen by simple-dao-codegen 2022-3-29 22:58:02
+ *  更新应用错误日志
+ *  Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ *  代码生成哈希校验码：[66cd7e5fdf97d96fdbafb567e71035d9]
  */
-@Schema(title = "更新应用错误日志")
+@Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,35 +56,44 @@ public class UpdateAppErrorLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1594864095L;
 
-    @Schema(title = "id", required = true)
+    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull
     @Eq(require = true)
-    private Long id;
+    Long id;
+
+
 
     @Size(max = 64)
-    @Schema(title = "模块ID")
-    private String moduleId;
+    @Schema(title = L_moduleId)
+    String moduleId;
 
-    @Schema(title = "发生时间")
-    private Date occurTime;
+    @Schema(title = L_occurTime)
+    Date occurTime;
 
     @NotBlank
-    @Size(max = 1000)
-    @Schema(title = "标题")
-    private String title;
+    @Size(max = 768)
+    @Schema(title = L_title)
+    String title;
 
-    @Schema(title = "错误级别")
-    private String errorLevel;
+    @Schema(title = L_errorLevel)
+    String errorLevel;
 
-    @Schema(title = "根异常类型")
-    private String rootExceptionType;
+    @Schema(title = L_rootExceptionType)
+    String rootExceptionType;
 
-    @Schema(title = "完整异常堆栈")
-    private String exceptionFullInfo;
+    @Schema(title = L_exceptionFullInfo)
+    String exceptionFullInfo;
 
 
     public UpdateAppErrorLogReq(Long id) {
         this.id = id;
+    }
+
+    public UpdateAppErrorLogReq updateIdWhenNotBlank(Long id){
+        if(isNotBlank(id)){
+        this.id = id;
+        }
+        return this;
     }
 
     @PostConstruct

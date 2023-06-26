@@ -1,34 +1,47 @@
 package com.levin.oak.base.services.scheduledtask.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-import com.levin.commons.service.support.InjectConsts;
-import com.levin.oak.base.entities.E_ScheduledTask;
-import com.levin.oak.base.entities.ScheduledTask;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+//import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /////////////////////////////////////////////////////
+import javax.validation.constraints.*;
+import javax.annotation.*;
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
 ///////////////////////////////////////////////////////
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_ScheduledTask.*;
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
 ////////////////////////////////////
 
 
 /**
- * 新增调度任务
- * //Auto gen by simple-dao-codegen 2022-4-2 13:49:52
+ *  新增调度任务
+ *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ * 代码生成哈希校验码：[8842e48c2c8ee08b75a52f0c363b4d11]
  */
-@Schema(title = "新增调度任务")
+@Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
@@ -38,86 +51,85 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = ScheduledTask.class, alias = E_ScheduledTask.ALIAS)
-public class CreateScheduledTaskReq extends MultiTenantReq {
+public class CreateScheduledTaskReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -2056389676L;
 
 
-    @Schema(title = "任务分类", required = true)
-    @NotBlank
-    @Size(max = 64)
-    private String category;
-
-    @Schema(title = "任务组", required = true)
-    @NotBlank
-    @Size(max = 64)
-    private String groupName;
-
-    @Schema(title = "调度表达式", required = true)
-    @NotBlank
-    private String cron;
-
-    @Schema(title = "执行表达式")
-    private String invokeExpr;
-
-    @Schema(title = "允许并发执行")
-    private Boolean parallelInvoke;
-
-    @Schema(title = "最后一次时间")
-    private Date lastInvokedTime;
-
-    @Schema(title = "下一次时间")
-    private Date nextInvokeTime;
-
-    @Schema(title = "系统子域")
-    @Size(max = 64)
-    private String domain;
-
-    @Schema(title = "名称", required = true)
+    @Schema(title = L_category  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
     @Size(max = 128)
-    private String name;
+    String category;
 
-    @Schema(title = "拼音，格式：全拼(简拼)")
+    @Schema(title = L_groupName  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotBlank
     @Size(max = 128)
-    private String pinyinName;
+    String groupName;
 
-    @Schema(title = "创建者", hidden = true)
-    //@InjectVar()
+    @Schema(title = L_cron  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotBlank
+    String cron;
+
+    @Schema(title = L_invokeExpr , description = D_invokeExpr  )
+    String invokeExpr;
+
+    @Schema(title = L_parallelInvoke  )
+    Boolean parallelInvoke;
+
+    @Schema(title = L_lastInvokedTime  )
+    Date lastInvokedTime;
+
+    @Schema(title = L_nextInvokeTime  )
+    Date nextInvokeTime;
+
+    @Schema(title = L_domain  )
+    @Size(max = 128)
+    String domain;
+
+    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotBlank
+    @Size(max = 128)
+    String name;
+
+    @Schema(title = L_pinyinName , description = D_pinyinName  )
+    @Size(max = 128)
+    String pinyinName;
+
+    @Schema(title = L_creator , hidden = true )
     //@Size(max = 128)
     @InjectVar(InjectConsts.USER_ID)
-    private String creator;
+    String creator;
 
-    @Schema(title = "创建时间", hidden = true)
+    @Schema(title = L_createTime , hidden = true )
     //@NotNull
-    private Date createTime;
+    Date createTime;
 
-    @Schema(title = "更新时间", hidden = true)
-    private Date lastUpdateTime;
+    @Schema(title = L_lastUpdateTime , hidden = true )
+    Date lastUpdateTime;
 
-    @Schema(title = "排序代码", hidden = true)
-    private Integer orderCode;
+    @Schema(title = L_orderCode , hidden = true )
+    Integer orderCode;
 
-    @Schema(title = "是否允许", hidden = true)
+    @Schema(title = L_enable , hidden = true )
     //@NotNull
-    private Boolean enable;
+    Boolean enable;
 
-    @Schema(title = "是否可编辑", hidden = true)
+    @Schema(title = L_editable , hidden = true )
     //@NotNull
-    private Boolean editable;
+    Boolean editable;
 
-    @Schema(title = "备注")
+    @Schema(title = L_remark , hidden = true )
     //@Size(max = 512)
-    private String remark;
+    String remark;
 
 
     @PostConstruct
     public void prePersist() {
 
-        //@todo 保存之前初始化数据
+       //@todo 保存之前初始化数据
 
 
-        if (getCreateTime() == null) {
+        if(getCreateTime() == null){
             setCreateTime(new Date());
         }
 

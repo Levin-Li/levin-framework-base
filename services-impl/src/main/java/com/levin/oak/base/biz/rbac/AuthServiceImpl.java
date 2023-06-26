@@ -526,7 +526,7 @@ public class AuthServiceImpl
 
         //如果允许域名
         if (frameworkProperties.getTenantBindDomain().isEnable()) {
-            req.setContainsDomainList(Arrays.asList("127.0.0.1"));
+            req.setDomainList(Arrays.asList("127.0.0.1"));
         }
 
         TenantInfo tenantInfo = tenantService.findOne(req);

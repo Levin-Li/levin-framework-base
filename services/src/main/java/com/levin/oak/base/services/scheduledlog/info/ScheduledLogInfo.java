@@ -1,79 +1,90 @@
 package com.levin.oak.base.services.scheduledlog.info;
 
+import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import lombok.*;
+import lombok.experimental.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
+import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.*;
 /////////////////////////////////////////////////////
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_ScheduledLog.*;
 ////////////////////////////////////
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  * 调度日志
- *
- * @Author Auto gen by simple-dao-codegen 2022-4-1 17:40:26
+ * @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
+ * 代码生成哈希校验码：[41574eb56a470e39f02ca6ecf852a68f]
  */
-@Schema(title = "调度日志")
+@Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
+@JsonIgnoreProperties(tenantId)
 public class ScheduledLogInfo implements Serializable {
 
     private static final long serialVersionUID = 1319130901L;
 
 
     @NotNull
-    @Schema(title = "id", required = true)
-    private Long id;
+    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    Long id;
 
 
     @Size(max = 64)
-    @Schema(title = "租户ID")
-    private String tenantId;
+    @Schema(title = L_tenantId )
+    String tenantId;
 
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = "归属组织", required = true)
-    private String orgId;
+    @Schema(title = L_orgId , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    String orgId;
 
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = "任务ID", required = true)
-    private String taskId;
+    @Schema(title = L_taskId , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    String taskId;
 
 
     @NotNull
-    @Schema(title = "创建时间", required = true)
-    private Date createTime;
+    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    Date createTime;
 
 
-    @Size(max = 256)
-    @Schema(title = "执行周期")
-    private String invokeCycle;
+    @Size(max = 128)
+    @Schema(title = L_invokeCycle )
+    String invokeCycle;
 
 
-    @Schema(title = "是否错误")
-    private Boolean isError;
+    @Schema(title = L_isError )
+    Boolean isError;
 
 
-    @Schema(title = "执行结果")
-    private String invokeResult;
+    @Schema(title = L_invokeResult )
+    String invokeResult;
 
 
 }

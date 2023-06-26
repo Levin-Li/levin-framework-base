@@ -1,32 +1,47 @@
 package com.levin.oak.base.services.apperrorlog.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.oak.base.entities.AppErrorLog;
-import com.levin.oak.base.entities.E_AppErrorLog;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+//import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /////////////////////////////////////////////////////
+import javax.validation.constraints.*;
+import javax.annotation.*;
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
 ///////////////////////////////////////////////////////
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_AppErrorLog.*;
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
 ////////////////////////////////////
 
 
 /**
- * 新增应用错误日志
- * //Auto gen by simple-dao-codegen 2022-4-2 13:49:52
+ *  新增应用错误日志
+ *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ * 代码生成哈希校验码：[01d9fc149b4912bb5b77538259f6af68]
  */
-@Schema(title = "新增应用错误日志")
+@Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
@@ -41,36 +56,36 @@ public class CreateAppErrorLogReq extends MultiTenantReq {
     private static final long serialVersionUID = 1594864095L;
 
 
-    @Schema(title = "模块ID")
+    @Schema(title = L_moduleId  )
     @Size(max = 64)
-    private String moduleId;
+    String moduleId;
 
-    @Schema(title = "发生时间", required = true)
+    @Schema(title = L_occurTime  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull
-    private Date occurTime;
+    Date occurTime;
 
-    @Schema(title = "标题", required = true)
+    @Schema(title = L_title  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
     @Size(max = 768)
-    private String title;
+    String title;
 
-    @Schema(title = "错误级别")
-    private String errorLevel;
+    @Schema(title = L_errorLevel  )
+    String errorLevel;
 
-    @Schema(title = "根异常类型")
-    private String rootExceptionType;
+    @Schema(title = L_rootExceptionType  )
+    String rootExceptionType;
 
-    @Schema(title = "完整异常堆栈")
-    private String exceptionFullInfo;
+    @Schema(title = L_exceptionFullInfo  )
+    String exceptionFullInfo;
 
 
     @PostConstruct
     public void prePersist() {
 
-        //@todo 保存之前初始化数据
+       //@todo 保存之前初始化数据
 
 
-        if (getOccurTime() == null) {
+        if(getOccurTime() == null){
             setOccurTime(new Date());
         }
 

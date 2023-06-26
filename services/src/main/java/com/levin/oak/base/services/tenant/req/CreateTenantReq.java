@@ -1,36 +1,49 @@
 package com.levin.oak.base.services.tenant.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import com.levin.oak.base.entities.E_Tenant;
-import com.levin.oak.base.entities.Tenant;
-import com.levin.oak.base.services.commons.req.BaseReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+//import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.List;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /////////////////////////////////////////////////////
+import javax.validation.constraints.*;
+import javax.annotation.*;
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
 ///////////////////////////////////////////////////////
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_Tenant.*;
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 
 /**
- * 新增租户
- * //Auto gen by simple-dao-codegen 2022-4-2 13:49:52
+ *  新增租户
+ *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
+ * 代码生成哈希校验码：[205a1b8d7a107b6201b004d270a20b38]
  */
-@Schema(title = "新增租户")
+@Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
@@ -45,101 +58,105 @@ public class CreateTenantReq extends BaseReq {
     private static final long serialVersionUID = 1557223144L;
 
 
-    @Schema(title = "系统名称")
-    private String sysName;
+    @Schema(title = L_sysName  )
+    @Size(max = 128)
+    String sysName;
 
+    @Schema(title = L_sysLogo  )
+    String sysLogo;
 
-    @Schema(title = "系统Logo")
-    private String sysLogo;
+    @Schema(title = L_logo  )
+    String logo;
 
-    @Schema(title = "租户头像")
-    private String logo;
+    @Schema(title = L_code  )
+    @Size(max = 128)
+    String code;
 
-    @Schema(title = "企业信用编码")
-    private String code;
-
-    @Schema(title = "租户编码", required = true)
+    @Schema(title = L_tenantKey  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
-    private String tenantKey;
+    String tenantKey;
 
-    @Schema(title = "帐号余额")
-    private Double balance;
+    @Schema(title = L_balance  )
+    Double balance;
 
-    @Schema(title = "总许可数")
-    private Integer licenseCnt;
+    @Schema(title = L_licenseCnt  )
+    Integer licenseCnt;
 
-    @Schema(title = "剩余许可数")
-    private Integer remainingLicenseCnt;
+    @Schema(title = L_remainingLicenseCnt  )
+    Integer remainingLicenseCnt;
 
-    @Schema(title = "到期时间")
-    private Date licenseExpire;
+    @Schema(title = L_licenseExpire  )
+    Date licenseExpire;
 
-    @Schema(title = "联系人")
-    private String contractPerson;
-
-    @Schema(title = "联系电话")
-    private String contractPhone;
-
-    @Schema(title = "域名列表")
-    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    private List<String> domainList;
-
-    @Schema(title = "appId")
+    @Schema(title = L_contractPerson  )
     @Size(max = 32)
-    private String appId;
+    String contractPerson;
 
-    @Schema(title = "appSecret")
-    @Size(max = 256)
-    private String appSecret;
+    @Schema(title = L_contractPhone  )
+    @Size(max = 32)
+    String contractPhone;
 
-    @Schema(title = "EncryptKey")
-    private String encryptKey;
+    @Schema(title = L_domainList  )
+    @Size(max = 1200)
+    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    List<String> domainList;
 
-    @Schema(title = "名称", required = true)
+    @Schema(title = L_appId  )
+    @Size(max = 64)
+    String appId;
+
+    @Schema(title = L_appSecret  )
+    @Size(max = 512)
+    String appSecret;
+
+    @Schema(title = L_encryptKey  )
+    @Size(max = 512)
+    String encryptKey;
+
+    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
     @Size(max = 128)
-    private String name;
+    String name;
 
-    @Schema(title = "拼音，格式：全拼(简拼)")
+    @Schema(title = L_pinyinName , description = D_pinyinName  )
     @Size(max = 128)
-    private String pinyinName;
+    String pinyinName;
 
-    @Schema(title = "创建者", hidden = true)
-    //@InjectVar()
+    @Schema(title = L_creator , hidden = true )
     //@Size(max = 128)
     @InjectVar(InjectConsts.USER_ID)
-    private String creator;
+    String creator;
 
-    @Schema(title = "创建时间", hidden = true)
+    @Schema(title = L_createTime , hidden = true )
     //@NotNull
-    private Date createTime;
+    Date createTime;
 
-    @Schema(title = "更新时间", hidden = true)
-    private Date lastUpdateTime;
+    @Schema(title = L_lastUpdateTime , hidden = true )
+    Date lastUpdateTime;
 
-    @Schema(title = "排序代码", hidden = true)
-    private Integer orderCode;
+    @Schema(title = L_orderCode , hidden = true )
+    Integer orderCode;
 
-    @Schema(title = "是否允许", hidden = true)
+    @Schema(title = L_enable , hidden = true )
     //@NotNull
-    private Boolean enable;
+    Boolean enable;
 
-    @Schema(title = "是否可编辑", hidden = true)
+    @Schema(title = L_editable , hidden = true )
     //@NotNull
-    private Boolean editable;
+    Boolean editable;
 
-    @Schema(title = "备注")
+    @Schema(title = L_remark , hidden = true )
     //@Size(max = 512)
-    private String remark;
+    String remark;
 
 
     @PostConstruct
     public void prePersist() {
 
-        //@todo 保存之前初始化数据
+       //@todo 保存之前初始化数据
 
 
-        if (getCreateTime() == null) {
+        if(getCreateTime() == null){
             setCreateTime(new Date());
         }
 

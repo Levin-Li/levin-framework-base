@@ -1,41 +1,42 @@
 package com.levin.oak.base;
 
-import com.levin.commons.dao.SimpleDao;
+import static com.levin.oak.base.ModuleOption.*;
+import com.levin.oak.base.entities.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.*;
+import com.levin.commons.rbac.*;
+import com.levin.commons.dao.repository.*;
 import com.levin.commons.plugin.*;
-import com.levin.commons.rbac.MenuItem;
-import com.levin.commons.rbac.RbacUtils;
-import com.levin.commons.service.domain.SimpleIdentifiable;
-import com.levin.commons.utils.MapUtils;
-import com.levin.oak.base.entities.EntityConst;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.context.*;
+import org.springframework.util.*;
+
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
-import org.springframework.util.LinkedMultiValueMap;
+import javax.annotation.*;
+import java.util.*;
+import java.util.stream.*;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
-
-//Auto gen by simple-dao-codegen 2022-4-21 14:12:07
-//模块插件
-
+/**
+ * 模块插件
+ *
+ * Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
+ * 代码生成哈希校验码：[0a00cb23847d318c3f2079a925d17b58]
+ */
 @Slf4j
 @Component(PLUGIN_PREFIX + "ModulePlugin")
 public class ModulePlugin implements Plugin, PluginManagerAware {
 
     @Autowired
-    ApplicationContext context;
+    private ApplicationContext context;
 
     @Autowired
-    SimpleDao simpleDao;
+    private SimpleDao simpleDao;
 
     private PluginManager pluginManager;
+
 
     @Override
     public String getId() {
@@ -54,12 +55,12 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
 
     @Override
     public String getVersion() {
-        return ModuleOption.VERSION;
+        return ModuleOption.VERSION_NAME;
     }
 
     @Override
     public Map<String, String> getAuthor() {
-        return MapUtils.put("name", "Levin").put("email", "99668980@qq.com").build();
+        return Collections.emptyMap();
     }
 
     @Override

@@ -3,8 +3,7 @@ package com.levin.oak.base.services.simpleapi;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.cache.annotation.*;
-
+//import org.springframework.cache.annotation.*;
 import java.util.*;
 import javax.validation.constraints.*;
 
@@ -18,14 +17,13 @@ import com.levin.oak.base.services.simpleapi.info.*;
 
 import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
-
 import static com.levin.oak.base.entities.EntityConst.*;
 
 
 /**
- * 简单动态接口-服务接口
- *
- * @author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
+ *  简单动态接口-服务接口
+ *  @author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
+ *  代码生成哈希校验码：[c0986b44c8c1b786b73b4675b76b8eb6]
  */
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimpleApiService {
@@ -34,38 +32,34 @@ public interface SimpleApiService {
 
     /**
      * 创建记录，返回主键ID
-     *
      * @param req
      * @return pkId 主键ID
      */
-    @Operation(summary = CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     String create(@NotNull CreateSimpleApiReq req);
 
     /**
      * 创建记录，返回主键ID列表
-     *
      * @param reqList
      * @return pkId 主键ID列表
      */
-    @Operation(summary = BATCH_CREATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     List<String> batchCreate(@NotNull List<CreateSimpleApiReq> reqList);
 
     /**
      * 通过主键查找记录，建议在服务内部调用，不要在控制器中调用
-     *
      * @param id 主键ID
      * @return data 数据详情
      */
-    @Operation(summary = VIEW_DETAIL_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     SimpleApiInfo findById(@NotNull String id);
 
     /**
-     * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性
-     *
-     * @param req
-     * @return data 数据详情
-     */
-    @Operation(summary = VIEW_DETAIL_ACTION)
+    * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性
+    * @param req
+    * @return data 数据详情
+    */
+    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     SimpleApiInfo findById(@NotNull SimpleApiIdReq req);
 
     /**
@@ -74,8 +68,8 @@ public interface SimpleApiService {
      * @param req
      * @return num 更新记录数
      */
-    @Operation(summary = UPDATE_ACTION)
-    int update(@NotNull UpdateSimpleApiReq req);
+    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    boolean update(@NotNull UpdateSimpleApiReq req);
 
     /**
      * 批量更新记录，并返回更新记录数
@@ -83,25 +77,23 @@ public interface SimpleApiService {
      * @param reqList
      * @return num 更新记录数
      */
-    @Operation(summary = BATCH_UPDATE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     int batchUpdate(@NotNull List<UpdateSimpleApiReq> reqList);
 
     /**
      * 删除记录，并返回删除记录数
-     *
      * @param req
      * @return num 删除记录数
      */
-    @Operation(summary = DELETE_ACTION)
-    int delete(@NotNull SimpleApiIdReq req);
+    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    boolean delete(@NotNull SimpleApiIdReq req);
 
     /**
      * 批量删除记录，并返回删除记录数
-     *
      * @param req
      * @return num 删除记录数
      */
-    @Operation(summary = BATCH_DELETE_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
     int batchDelete(@NotNull DeleteSimpleApiReq req);
 
     /**
@@ -111,8 +103,9 @@ public interface SimpleApiService {
      * @param paging 分页设置，可空
      * @return pagingData 分页数据
      */
-    @Operation(summary = QUERY_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<SimpleApiInfo> query(@NotNull QuerySimpleApiReq req, Paging paging);
+
 
     /**
      * 简单统计
@@ -121,8 +114,17 @@ public interface SimpleApiService {
      * @param paging 分页设置，可空
      * @return pagingData 分页数据
      */
-    @Operation(summary = STAT_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     PagingData<StatSimpleApiReq.Result> stat(@NotNull StatSimpleApiReq req, Paging paging);
+
+    /**
+     * 统计记录数
+     *
+     * @param req
+     * @return record count
+     */
+    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    int count(@NotNull QuerySimpleApiReq req);
 
     /**
      * 查询并返回第一条数据
@@ -130,16 +132,23 @@ public interface SimpleApiService {
      * @param req
      * @return data 第一条数据
      */
-    @Operation(summary = QUERY_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     SimpleApiInfo findOne(@NotNull QuerySimpleApiReq req);
 
+     /**
+     * 查询并返回唯一一条数据
+     * 如果有多余1条数据，将抛出异常
+     * @param req
+     * @return data
+     */
+     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+     SimpleApiInfo findUnique(QuerySimpleApiReq req);
 
     /**
-     * 清除缓存
-     *
-     * @param key 缓存Key
-     */
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是主键ID")
+    * 清除缓存
+    * @param key 缓存Key
+    */
+    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
 
 }

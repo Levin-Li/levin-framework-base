@@ -1,32 +1,47 @@
 package com.levin.oak.base.services.accesslog.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.oak.base.entities.AccessLog;
-import com.levin.oak.base.entities.E_AccessLog;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+//import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /////////////////////////////////////////////////////
+import javax.validation.constraints.*;
+import javax.annotation.*;
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
 ///////////////////////////////////////////////////////
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_AccessLog.*;
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
 ////////////////////////////////////
 
 
 /**
- * 新增访问日志
- * //Auto gen by simple-dao-codegen 2022-4-2 13:49:52
+ *  新增访问日志
+ *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ * 代码生成哈希校验码：[92c7bcfee5ca609549ec4f120330e0c5]
  */
-@Schema(title = "新增访问日志")
+@Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
@@ -41,87 +56,87 @@ public class CreateAccessLogReq extends MultiTenantReq {
     private static final long serialVersionUID = 1030736962L;
 
 
-    @Schema(title = "请求的域名")
-    private String domain;
+    @Schema(title = L_domain  )
+    String domain;
 
-    @Schema(title = "访问者")
+    @Schema(title = L_visitor  )
     @Size(max = 64)
-    private String visitor;
+    String visitor;
 
-    @Schema(title = "创建时间", required = true)
+    @Schema(title = L_createTime  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull
-    private Date createTime;
+    Date createTime;
 
-    @Schema(title = "标题", required = true)
+    @Schema(title = L_title  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
-    private String title;
+    String title;
 
-    @Schema(title = "日志类型")
+    @Schema(title = L_logType  )
     @Size(max = 64)
-    private String logType;
+    String logType;
 
-    @Schema(title = "差异修改数据")
-    private String diffModifyData;
+    @Schema(title = L_diffModifyData  )
+    String diffModifyData;
 
-    @Schema(title = "业务主键")
-    private String bizKey;
+    @Schema(title = L_bizKey  )
+    String bizKey;
 
-    @Schema(title = "业务类型")
-    private String bizType;
+    @Schema(title = L_bizType  )
+    String bizType;
 
-    @Schema(title = "请求URI")
-    private String requestUri;
+    @Schema(title = L_requestUri  )
+    String requestUri;
 
-    @Schema(title = "请求方法")
+    @Schema(title = L_requestMethod  )
     @Size(max = 32)
-    private String requestMethod;
+    String requestMethod;
 
-    @Schema(title = "请求参数")
-    private String requestParams;
+    @Schema(title = L_requestParams  )
+    String requestParams;
 
-    @Schema(title = "头部信息")
-    private String headInfo;
+    @Schema(title = L_headInfo  )
+    String headInfo;
 
-    @Schema(title = "响应数据")
-    private String responseData;
+    @Schema(title = L_responseData  )
+    String responseData;
 
-    @Schema(title = "操作IP地址")
+    @Schema(title = L_remoteAddr  )
     @Size(max = 128)
-    private String remoteAddr;
+    String remoteAddr;
 
-    @Schema(title = "服务器地址")
+    @Schema(title = L_serverAddr  )
     @Size(max = 64)
-    private String serverAddr;
+    String serverAddr;
 
-    @Schema(title = "是否有异常")
-    private Boolean isException;
+    @Schema(title = L_isException  )
+    Boolean isException;
 
-    @Schema(title = "异常信息")
-    private String exceptionInfo;
+    @Schema(title = L_exceptionInfo  )
+    String exceptionInfo;
 
-    @Schema(title = "用户代理")
+    @Schema(title = L_userAgent  )
     @Size(max = 768)
-    private String userAgent;
+    String userAgent;
 
-    @Schema(title = "设备名称/操作系统")
+    @Schema(title = L_deviceName  )
     @Size(max = 128)
-    private String deviceName;
+    String deviceName;
 
-    @Schema(title = "浏览器名称")
+    @Schema(title = L_browserName  )
     @Size(max = 64)
-    private String browserName;
+    String browserName;
 
-    @Schema(title = "执行时间(ms)")
-    private Long executeTime;
+    @Schema(title = L_executeTime  )
+    Long executeTime;
 
 
     @PostConstruct
     public void prePersist() {
 
-        //@todo 保存之前初始化数据
+       //@todo 保存之前初始化数据
 
 
-        if (getCreateTime() == null) {
+        if(getCreateTime() == null){
             setCreateTime(new Date());
         }
 

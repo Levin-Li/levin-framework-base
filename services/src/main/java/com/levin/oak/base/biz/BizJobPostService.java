@@ -31,10 +31,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  -业务服务
+ *  工作岗位-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月24日 下午12:28:37
- *
+ * @author auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ * 代码生成哈希校验码：[f1747f1e1a748aa051e58cf4c8896139]
  */
 
 @Tag(name = E_JobPost.BIZ_NAME + "-业务服务", description = "")

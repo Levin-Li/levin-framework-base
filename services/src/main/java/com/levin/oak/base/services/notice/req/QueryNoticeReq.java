@@ -1,5 +1,7 @@
 package com.levin.oak.base.services.notice.req;
 
+import static com.levin.oak.base.entities.EntityConst.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import com.levin.commons.dao.annotation.Ignore;
 
@@ -14,6 +16,7 @@ import com.levin.commons.dao.annotation.misc.*;
 
 import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
+import com.levin.commons.service.support.*;
 
 import org.springframework.format.annotation.*;
 
@@ -22,34 +25,29 @@ import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
-
 import java.util.*;
 
 import com.levin.oak.base.services.notice.info.*;
 import com.levin.oak.base.entities.Notice;
 
 import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_Notice.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-import com.levin.oak.base.entities.Notice.*;
-
-import java.util.Date;
-import java.util.List;
-
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+    import com.levin.commons.service.support.InjectConsts;
+    import com.levin.commons.service.domain.InjectVar;
+    import com.levin.oak.base.entities.Notice.*;
+    import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 查询通知
- *
- * @Author Auto gen by simple-dao-codegen 2022-6-20 16:50:11
+ *  查询通知
+ *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ *  代码生成哈希校验码：[e6ba3ae9312c58ef7b17aeb94b6cd66c]
  */
-@Schema(title = "查询通知")
+@Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,126 +57,125 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Notice.class, alias = E_Notice.ALIAS, resultClass = NoticeInfo.class)
-public class QueryNoticeReq extends MultiTenantReq {
+public class QueryNoticeReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = 1394869526L;
-
-    @Schema(title = "是否包含公共数据", hidden = true)
-    @Ignore
-    private boolean isContainsPublicData = true;
 
     @Ignore
     @Schema(title = "排序字段")
     String orderBy;
 
     //@Ignore
-    @Schema(title = "排序方向-desc asc")
+    @Schema(title = "排序方向")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
     OrderBy.Type orderDir;
 
-    //@NotBlank
-    //@Size(max = 64)
-    @Schema(title = "id")
+
+    @NotBlank
+    @Size(max = 64)
+    @Schema(title = L_id)
     String id;
 
-    //@InjectVar()
-    //@Size(max = 128)
-    @Schema(title = "所有者ID", description = "所有者ID")
+    @Size(max = 128)
+    @Schema(title = L_ownerId)
     String ownerId;
 
-    //@Size(max = 64)
-    @Schema(title = "通知类别")
+    @Size(max = 64)
+    @Schema(title = L_category)
     String category;
 
-    @Schema(title = "通知内容类型")
+    @Schema(title = L_contentType)
     ContentType contentType;
 
-    @Schema(title = "通知内容")
+    @Schema(title = L_content)
     String content;
 
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于过期时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_expiredDate , description = "大于等于" + L_expiredDate)
     @Gte
     Date gteExpiredDate;
 
-    @Schema(title = "小于等于过期时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_expiredDate , description = "小于等于" + L_expiredDate)
     @Lte
     Date lteExpiredDate;
 
-    @Schema(title = "过期时间-日期范围，格式：yyyyMMdd-yyyyMMdd，大于等于且小余等于")
-    @Between(paramDelimiter = "-", patterns = {"yyyyMMdd"})
-    String betweenExpiredDate;
+    //@Schema(title = L_expiredDate + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenExpiredDate;
 
-    //@Size(max = 128)
-    @Schema(title = "系统域")
+
+    @Size(max = 128)
+    @Schema(title = L_domain)
     String domain;
 
-    //@NotBlank
-    //@Size(max = 128)
-    @Schema(title = "名称")
+    @NotBlank
+    @Size(max = 128)
+    @Schema(title = L_name)
     String name;
-    @Schema(title = "模糊匹配 - 名称")
+
+    @Schema(title = "模糊匹配-" + L_name)
     @Contains
     String containsName;
 
-    //@Size(max = 128)
-    //@InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    @Schema(title = "拼音名称", description = "拼音，格式Json数组：[全拼,简拼]")
-    List<String> pinyinName;
+    @Size(max = 128)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
 
-    //@InjectVar()
-    //@Size(max = 128)
-    @Schema(title = "创建者")
+    @Schema(title = "模糊匹配-" + L_pinyinName)
+    @Contains
+    String containsPinyinName;
+
+    @Size(max = 128)
+    @Schema(title = L_creator)
     String creator;
 
-    //@NotNull
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @NotNull
+    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
     @Lte
     Date lteCreateTime;
 
-    @Schema(title = "创建时间-日期范围，格式：yyyyMMdd-yyyyMMdd，大于等于且小余等于")
-    @Between(paramDelimiter = "-", patterns = {"yyyyMMdd"})
-    String betweenCreateTime;
+    //@Schema(title = L_createTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenCreateTime;
 
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+
+    @Schema(title = L_lastUpdateTime , description = "大于等于" + L_lastUpdateTime)
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_lastUpdateTime , description = "小于等于" + L_lastUpdateTime)
     @Lte
     Date lteLastUpdateTime;
 
-    @Schema(title = "更新时间-日期范围，格式：yyyyMMdd-yyyyMMdd，大于等于且小余等于")
-    @Between(paramDelimiter = "-", patterns = {"yyyyMMdd"})
-    String betweenLastUpdateTime;
+    //@Schema(title = L_lastUpdateTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenLastUpdateTime;
 
-    @Schema(title = "排序代码")
+
+    @Schema(title = L_orderCode)
     Integer orderCode;
 
-    //@NotNull
-    @Schema(title = "是否允许")
+    @NotNull
+    @Schema(title = L_enable)
     Boolean enable;
 
-    //@NotNull
-    @Schema(title = "是否可编辑")
+    @NotNull
+    @Schema(title = L_editable)
     Boolean editable;
 
-    //@Size(max = 512)
-    @Schema(title = "备注")
+    @Size(max = 512)
+    @Schema(title = L_remark)
     String remark;
 
     public QueryNoticeReq(String id) {
         this.id = id;
     }
-
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据
     }
+
 }

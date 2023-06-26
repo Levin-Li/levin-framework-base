@@ -1,8 +1,12 @@
 package com.levin.oak.base.services.simplepage.req;
 
+import static com.levin.oak.base.entities.EntityConst.*;
+
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
 
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.annotation.*;
@@ -18,32 +22,28 @@ import javax.validation.constraints.*;
 
 import lombok.*;
 import lombok.experimental.*;
-
 import java.util.*;
-
 import com.levin.oak.base.services.simplepage.info.*;
 import com.levin.oak.base.entities.SimplePage;
 import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_SimplePage.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-
 import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 简单页面 主键通用请求
- * //Auto gen by simple-dao-codegen 2022-5-23 10:30:00
+ *  简单页面 主键通用请求
+ *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
+ *  代码生成哈希校验码：[17b5a84847c920e029fc129f06927189]
  */
 
-@Schema(title = "简单页面 主键通用请求")
+@Schema(title =  BIZ_NAME + " 主键通用查询")
 @Data
-
 @AllArgsConstructor
-
 @NoArgsConstructor
 @Builder
 //@EqualsAndHashCode(callSuper = true)
@@ -51,15 +51,21 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimplePage.class, alias = E_SimplePage.ALIAS, resultClass = SimplePageInfo.class)
-public class SimplePageIdReq extends MultiTenantReq {
+public class SimplePageIdReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1598619295L;
 
-
-    @Schema(title = "id", required = true)
+    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @Eq(require = true)
-    @NotNull
+    //@NotNull
     protected String id;
+
+    public SimplePageIdReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+            this.id = id;
+        }
+        return this;
+    }
 
 
     @PostConstruct

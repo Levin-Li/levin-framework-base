@@ -1,35 +1,55 @@
 package com.levin.oak.base.services.dict.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Contains;
-import com.levin.commons.dao.annotation.Gte;
-import com.levin.commons.dao.annotation.Ignore;
-import com.levin.commons.dao.annotation.Lte;
-import com.levin.commons.dao.annotation.order.OrderBy;
-import com.levin.commons.dao.annotation.order.SimpleOrderBy;
-import com.levin.oak.base.entities.Dict;
-import com.levin.oak.base.entities.Dict.Type;
-import com.levin.oak.base.entities.E_Dict;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import com.levin.oak.base.services.dict.info.DictInfo;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.support.*;
+
+import org.springframework.format.annotation.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
+import com.levin.oak.base.services.dict.info.*;
+import com.levin.oak.base.entities.Dict;
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_Dict.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+    import com.levin.commons.service.support.InjectConsts;
+    import com.levin.commons.service.domain.InjectVar;
+    import com.levin.oak.base.entities.Dict.*;
+    import java.util.List;
+    import com.levin.commons.service.support.DefaultJsonConverter;
+    import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 查询字典
- *
- * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *  查询字典
+ *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ *  代码生成哈希校验码：[5244a1b0026f1e48c134d019c78fb3da]
  */
-@Schema(title = "查询字典")
+@Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,133 +59,112 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Dict.class, alias = E_Dict.ALIAS, resultClass = DictInfo.class)
-public class QueryDictReq extends MultiTenantReq {
+public class QueryDictReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -445779596L;
 
-    @Schema(title = "是否包含公共数据", hidden = true)
-    @Ignore
-    private boolean isContainsPublicData = true;
-
     @Ignore
     @Schema(title = "排序字段")
-    private String orderBy;
+    String orderBy;
 
     //@Ignore
-    @Schema(title = "排序方向-desc asc")
+    @Schema(title = "排序方向")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
-    private OrderBy.Type orderDir;
-
-    //@NotNull
-
-    @Schema(title = "id")
-    private String id;
+    OrderBy.Type orderDir;
 
 
-    //@NotNull
+    @NotBlank
+    @Size(max = 64)
+    @Schema(title = L_id)
+    String id;
 
-    @Schema(title = "类型")
-    private Type type;
+    @NotNull
+    @Schema(title = L_type)
+    Type type;
 
+    @NotBlank
+    @Size(max = 256)
+    @Schema(title = L_code)
+    String code;
 
-    //@NotBlank
-    //@Size(max = 64)
-
-    @Schema(title = "编码")
-    private String code;
-
-    @Schema(title = "模糊匹配 - 编码")
+    @Schema(title = "模糊匹配-" + L_code)
     @Contains
-    private String containsCode;
+    String containsCode;
 
+    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = DefaultJsonConverter.class, isRequired = "false")
+    @Schema(title = L_itemList , description = D_itemList)
+    List<Item> itemList;
 
-    //@InjectVar(domain = "dao", expectBaseType = String.class, converter = DefaultJsonConverter.class)
+    @Size(max = 128)
+    @Schema(title = L_domain)
+    String domain;
 
-//    @Schema(title = "编码项")
-//    private List<Item> itemList;
+    @NotBlank
+    @Size(max = 128)
+    @Schema(title = L_name)
+    String name;
 
-
-    //@Size(max = 64)
-
-    @Schema(title = "系统子域")
-    private String domain;
-
-
-    //@NotBlank
-    //@Size(max = 128)
-
-    @Schema(title = "名称")
-    private String name;
-
-    @Schema(title = "模糊匹配 - 名称")
+    @Schema(title = "模糊匹配-" + L_name)
     @Contains
-    private String containsName;
+    String containsName;
 
+    @Size(max = 128)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
 
-    //@Size(max = 128)
-
-    @Schema(title = "拼音，格式：全拼(简拼)")
-    private String pinyinName;
-
-    @Schema(title = "模糊匹配 - 拼音，格式：全拼(简拼)")
+    @Schema(title = "模糊匹配-" + L_pinyinName)
     @Contains
-    private String containsPinyinName;
+    String containsPinyinName;
 
+    @Size(max = 128)
+    @Schema(title = L_creator)
+    String creator;
 
-    //@Size(max = 128)
-
-    @Schema(title = "创建者")
-    private String creator;
-
-
-    //@NotNull
-
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @NotNull
+    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
-    private Date gteCreateTime;
+    Date gteCreateTime;
 
-    @Schema(title = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
     @Lte
-    private Date lteCreateTime;
+    Date lteCreateTime;
+
+    //@Schema(title = L_createTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenCreateTime;
 
 
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_lastUpdateTime , description = "大于等于" + L_lastUpdateTime)
     @Gte
-    private Date gteLastUpdateTime;
+    Date gteLastUpdateTime;
 
-    @Schema(title = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_lastUpdateTime , description = "小于等于" + L_lastUpdateTime)
     @Lte
-    private Date lteLastUpdateTime;
+    Date lteLastUpdateTime;
+
+    //@Schema(title = L_lastUpdateTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenLastUpdateTime;
 
 
-    @Schema(title = "排序代码")
-    private Integer orderCode;
+    @Schema(title = L_orderCode)
+    Integer orderCode;
 
+    @NotNull
+    @Schema(title = L_enable)
+    Boolean enable;
 
-    //@NotNull
+    @NotNull
+    @Schema(title = L_editable)
+    Boolean editable;
 
-    @Schema(title = "是否允许")
-    private Boolean enable;
-
-
-    //@NotNull
-
-    @Schema(title = "是否可编辑")
-    private Boolean editable;
-
-
-    //@Size(max = 512)
-
-    @Schema(title = "备注")
-    private String remark;
-
+    @Size(max = 512)
+    @Schema(title = L_remark)
+    String remark;
 
     public QueryDictReq(String id) {
         this.id = id;
     }
-
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

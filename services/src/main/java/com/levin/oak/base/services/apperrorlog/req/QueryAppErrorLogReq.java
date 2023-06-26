@@ -1,34 +1,52 @@
 package com.levin.oak.base.services.apperrorlog.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Contains;
-import com.levin.commons.dao.annotation.Gte;
-import com.levin.commons.dao.annotation.Ignore;
-import com.levin.commons.dao.annotation.Lte;
-import com.levin.commons.dao.annotation.order.OrderBy;
-import com.levin.commons.dao.annotation.order.SimpleOrderBy;
-import com.levin.oak.base.entities.AppErrorLog;
-import com.levin.oak.base.entities.E_AppErrorLog;
-import com.levin.oak.base.services.apperrorlog.info.AppErrorLogInfo;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.support.*;
+
+import org.springframework.format.annotation.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
+import com.levin.oak.base.services.apperrorlog.info.*;
+import com.levin.oak.base.entities.AppErrorLog;
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_AppErrorLog.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+    import com.levin.commons.service.support.InjectConsts;
+    import com.levin.commons.service.domain.InjectVar;
+    import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 查询应用错误日志
- *
- * @Author Auto gen by simple-dao-codegen 2022-3-29 22:58:02
+ *  查询应用错误日志
+ *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ *  代码生成哈希校验码：[f17ee24405baa2d71f8870aa21b9bed9]
  */
-@Schema(title = "查询应用错误日志")
+@Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,75 +56,67 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppErrorLog.class, alias = E_AppErrorLog.ALIAS, resultClass = AppErrorLogInfo.class)
-public class QueryAppErrorLogReq extends MultiTenantReq {
+public class QueryAppErrorLogReq extends MultiTenantReq{
 
     private static final long serialVersionUID = 1594864095L;
 
     @Ignore
     @Schema(title = "排序字段")
-    private String orderBy;
+    String orderBy;
 
     //@Ignore
-    @Schema(title = "排序方向-desc asc")
+    @Schema(title = "排序方向")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
-    private OrderBy.Type orderDir;
+    OrderBy.Type orderDir;
 
 
-    //@NotNull
+    @NotNull
+    @Schema(title = L_id)
+    Long id;
 
-    @Schema(title = "id")
-    private Long id;
+    @Size(max = 64)
+    @Schema(title = L_moduleId)
+    String moduleId;
 
-
-    //@Size(max = 64)
-
-    @Schema(title = "模块ID")
-    private String moduleId;
-
-
-    //@NotNull
-
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @NotNull
+    @Schema(title = L_occurTime , description = "大于等于" + L_occurTime)
     @Gte
-    private Date gteOccurTime;
+    Date gteOccurTime;
 
-    @Schema(title = "小于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_occurTime , description = "小于等于" + L_occurTime)
     @Lte
-    private Date lteOccurTime;
+    Date lteOccurTime;
+
+    //@Schema(title = L_occurTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenOccurTime;
 
 
-    //@NotBlank
-    //@Size(max = 1000)
+    @NotBlank
+    @Size(max = 768)
+    @Schema(title = L_title)
+    String title;
 
-    @Schema(title = "标题")
-    private String title;
-
-    @Schema(title = "模糊匹配 - 标题")
+    @Schema(title = "模糊匹配-" + L_title)
     @Contains
-    private String containsTitle;
+    String containsTitle;
 
+    @Schema(title = L_errorLevel)
+    String errorLevel;
 
-    @Schema(title = "错误级别")
-    private String errorLevel;
+    @Schema(title = L_rootExceptionType)
+    String rootExceptionType;
 
-
-    @Schema(title = "根异常类型")
-    private String rootExceptionType;
-
-    @Schema(title = "模糊匹配 - 根异常类型")
+    @Schema(title = "模糊匹配-" + L_rootExceptionType)
     @Contains
-    private String containsRootExceptionType;
+    String containsRootExceptionType;
 
-
-    @Schema(title = "完整异常堆栈")
-    private String exceptionFullInfo;
-
+    @Schema(title = L_exceptionFullInfo)
+    String exceptionFullInfo;
 
     public QueryAppErrorLogReq(Long id) {
         this.id = id;
     }
-
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

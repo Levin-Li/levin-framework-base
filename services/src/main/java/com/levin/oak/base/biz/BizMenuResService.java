@@ -34,10 +34,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  -业务服务
+ *  菜单-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月24日 下午12:28:38
- *
+ * @author auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
+ * 代码生成哈希校验码：[e0a6cbfc5bf58954fee415912a87d311]
  */
 
 @Tag(name = E_MenuRes.BIZ_NAME + "-业务服务", description = "")

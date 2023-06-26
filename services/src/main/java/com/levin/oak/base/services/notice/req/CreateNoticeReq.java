@@ -1,18 +1,20 @@
 package com.levin.oak.base.services.notice.req;
 
+//import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /////////////////////////////////////////////////////
 import javax.validation.constraints.*;
 import javax.annotation.*;
-
 import lombok.*;
 import lombok.experimental.*;
-
 import java.util.*;
 
 ///////////////////////////////////////////////////////
 import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.annotation.*;
 import com.levin.commons.dao.annotation.update.*;
@@ -24,26 +26,23 @@ import com.levin.commons.dao.annotation.misc.*;
 
 
 import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_Notice.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
 import com.levin.oak.base.entities.Notice.*;
-
 import java.util.Date;
-import java.util.List;
-
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 
 /**
- * 新增通知
- * //Auto gen by simple-dao-codegen 2022-6-20 16:50:11
+ *  新增通知
+ *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ * 代码生成哈希校验码：[ae69c45c5e0ad1eb27d23a1bf08a9f41]
  */
-@Schema(title = "新增通知")
+@Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
@@ -53,68 +52,65 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = Notice.class, alias = E_Notice.ALIAS)
-public class CreateNoticeReq extends MultiTenantReq {
+public class CreateNoticeReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1394869526L;
 
 
-    @Schema(title = "所有者ID", description = "所有者ID")
-    @InjectVar()
+    @Schema(title = L_ownerId  )
     @Size(max = 128)
     String ownerId;
 
-    @Schema(title = "通知类别")
+    @Schema(title = L_category  )
     @Size(max = 64)
     String category;
 
-    @Schema(title = "通知内容类型")
+    @Schema(title = L_contentType  )
     ContentType contentType;
 
-    @Schema(title = "通知内容")
+    @Schema(title = L_content  )
     String content;
 
-    @Schema(title = "过期时间")
+    @Schema(title = L_expiredDate  )
     Date expiredDate;
 
-    @Schema(title = "系统域")
+    @Schema(title = L_domain  )
     @Size(max = 128)
     String domain;
 
-    @Schema(title = "名称", required = true)
+    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
     @Size(max = 128)
     String name;
 
-    @Schema(title = "拼音名称", description = "拼音，格式Json数组：[全拼,简拼]")
+    @Schema(title = L_pinyinName , description = D_pinyinName  )
     @Size(max = 128)
-    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    List<String> pinyinName;
+    String pinyinName;
 
-    @Schema(title = "创建者", hidden = true)
-    //@InjectVar()
+    @Schema(title = L_creator , hidden = true )
     //@Size(max = 128)
     @InjectVar(InjectConsts.USER_ID)
     String creator;
 
-    @Schema(title = "创建时间", hidden = true)
+    @Schema(title = L_createTime , hidden = true )
     //@NotNull
     Date createTime;
 
-    @Schema(title = "更新时间", hidden = true)
+    @Schema(title = L_lastUpdateTime , hidden = true )
     Date lastUpdateTime;
 
-    @Schema(title = "排序代码", hidden = true)
+    @Schema(title = L_orderCode , hidden = true )
     Integer orderCode;
 
-    @Schema(title = "是否允许", hidden = true)
+    @Schema(title = L_enable , hidden = true )
     //@NotNull
     Boolean enable;
 
-    @Schema(title = "是否可编辑", hidden = true)
+    @Schema(title = L_editable , hidden = true )
     //@NotNull
     Boolean editable;
 
-    @Schema(title = "备注", hidden = true)
+    @Schema(title = L_remark , hidden = true )
     //@Size(max = 512)
     String remark;
 
@@ -122,10 +118,10 @@ public class CreateNoticeReq extends MultiTenantReq {
     @PostConstruct
     public void prePersist() {
 
-        //@todo 保存之前初始化数据
+       //@todo 保存之前初始化数据
 
 
-        if (getCreateTime() == null) {
+        if(getCreateTime() == null){
             setCreateTime(new Date());
         }
 

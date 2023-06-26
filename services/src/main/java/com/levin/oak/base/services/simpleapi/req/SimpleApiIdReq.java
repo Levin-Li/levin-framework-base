@@ -1,8 +1,12 @@
 package com.levin.oak.base.services.simpleapi.req;
 
+import static com.levin.oak.base.entities.EntityConst.*;
+
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
 
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.annotation.*;
@@ -18,33 +22,29 @@ import javax.validation.constraints.*;
 
 import lombok.*;
 import lombok.experimental.*;
-
 import java.util.*;
-
 import com.levin.oak.base.services.simpleapi.info.*;
 import com.levin.oak.base.entities.SimpleApi;
 import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_SimpleApi.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
 import com.levin.oak.base.entities.SimpleApi.*;
-
 import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 简单动态接口 主键通用请求
- * //Auto gen by simple-dao-codegen 2022-5-23 10:30:00
+ *  简单动态接口 主键通用请求
+ *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
+ *  代码生成哈希校验码：[b29a7390fdfcccd09f4b623000aac53b]
  */
 
-@Schema(title = "简单动态接口 主键通用请求")
+@Schema(title =  BIZ_NAME + " 主键通用查询")
 @Data
-
 @AllArgsConstructor
-
 @NoArgsConstructor
 @Builder
 //@EqualsAndHashCode(callSuper = true)
@@ -52,15 +52,21 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS, resultClass = SimpleApiInfo.class)
-public class SimpleApiIdReq extends MultiTenantReq {
+public class SimpleApiIdReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1021385738L;
 
-
-    @Schema(title = "id", required = true)
+    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @Eq(require = true)
-    @NotNull
+    //@NotNull
     protected String id;
+
+    public SimpleApiIdReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+            this.id = id;
+        }
+        return this;
+    }
 
 
     @PostConstruct

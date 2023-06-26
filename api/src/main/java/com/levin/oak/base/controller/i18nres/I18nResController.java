@@ -1,34 +1,41 @@
 package com.levin.oak.base.controller.i18nres;
 
-import com.levin.commons.rbac.ResAuthorize;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.util.*;
 import javax.validation.*;
 import java.util.*;
+import javax.annotation.*;
 
 import javax.servlet.http.*;
 
+import org.apache.dubbo.config.annotation.*;
+
+import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.dao.*;
 import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
+import com.levin.commons.ui.annotation.*;
 import javax.validation.constraints.*;
 
 import com.levin.oak.base.controller.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
+
+import com.levin.oak.base.biz.*;
+
 import com.levin.oak.base.services.i18nres.*;
 import com.levin.oak.base.services.i18nres.req.*;
 import com.levin.oak.base.services.i18nres.info.*;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
-
-//Auto gen by simple-dao-codegen 2022-4-2 19:44:59
 
 // POST: 创建一个新的资源，如用户资源，部门资源
 // PATCH: 修改资源的某个属性
@@ -42,36 +49,62 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-@RestController(PLUGIN_PREFIX + "I18nResController")
-//@RequestMapping(API_PATH + "i18nres")
-@RequestMapping(API_PATH + "I18nRes")
+//生成的控制器默认不开启，请手动取消注释
+//@RestController(PLUGIN_PREFIX + "I18nResController")
+@RequestMapping(API_PATH + "I18nRes") //i18nres
 
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "I18nResController", matchIfMissing = true)
 
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
-@Tag(name = E_I18nRes.BIZ_NAME, description = E_I18nRes.BIZ_NAME + MAINTAIN_ACTION)
+//@ResAuthorize(domain = ID, type = TYPE_NAME)
 
+//类注解
+@Tag(name = E_I18nRes.BIZ_NAME, description = E_I18nRes.BIZ_NAME + MAINTAIN_ACTION)
 @Valid
+@CRUD
+/**
+ * 国际化资源控制器
+ *
+ * @author auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
+ * 代码生成哈希校验码：[1a4fc417756e0a4ea42f1fe41985fbcb]
+ */
 public class I18nResController extends BaseController{
 
-    private static final String BIZ_NAME = E_I18nRes.BIZ_NAME;
+    protected static final String BIZ_NAME = E_I18nRes.BIZ_NAME;
 
-    @Autowired
+    //@Autowired
+    @DubboReference
     I18nResService i18nResService;
 
+    //@Autowired
+    @DubboReference
+    BizI18nResService bizI18nResService;
+
     /**
-     * 分页查找
+     * 分页列表查找
      *
-     * @param req  QueryI18nResReq
+     * @param req QueryI18nResReq
      * @return  ApiResp<PagingData<I18nResInfo>>
      */
-    @GetMapping("/query")
-    @Operation( summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<I18nResInfo>> query(QueryI18nResReq req , SimplePaging paging) {
+    @GetMapping("/queryList")
+    @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    @CRUD.ListTable
+    public ApiResp<PagingData<I18nResInfo>> queryList(@Form QueryI18nResReq req, SimplePaging paging) {
         return ApiResp.ok(i18nResService.query(req,paging));
     }
+
+     /**
+      * 简单统计
+      *
+      * @param req QueryI18nResReq
+      * @return  ApiResp<PagingData<StatI18nResReq.Result>>
+      */
+     //@GetMapping("/stat") //默认不开放
+     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
+     public ApiResp<PagingData<StatI18nResReq.Result>> stat(StatI18nResReq req, SimplePaging paging) {
+         return ApiResp.ok(i18nResService.stat(req,paging));
+     }
 
     /**
      * 新增
@@ -80,10 +113,61 @@ public class I18nResController extends BaseController{
      * @return ApiResp
      */
     @PostMapping
-    @Operation( summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
+    @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
+    @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
     public ApiResp<Long> create(@RequestBody CreateI18nResReq req) {
         return ApiResp.ok(i18nResService.create(req));
     }
+
+    /**
+    * 查看详情
+    *
+    * @param req QueryI18nResByIdReq
+    */
+    @GetMapping({"","{id}"})
+    @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @CRUD.Op
+    public ApiResp<I18nResInfo> retrieve(@NotNull I18nResIdReq req, @PathVariable(required = false) Long id) {
+         req.updateIdWhenNotBlank(id);
+         return ApiResp.ok(i18nResService.findById(req));
+     }
+
+    /**
+     * 更新
+     * @param req UpdateI18nResReq
+     */
+     @PutMapping({"","{id}"})
+     @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+     @CRUD.Op
+     public ApiResp<Boolean> update(@RequestBody UpdateI18nResReq req, @PathVariable(required = false) Long id) {
+         req.updateIdWhenNotBlank(id);
+         return ApiResp.ok(checkResult(i18nResService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+    }
+
+    /**
+     * 删除
+     * @param req I18nResIdReq
+     */
+    @DeleteMapping({"","{id}"})
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
+    @CRUD.Op
+    public ApiResp<Boolean> delete(I18nResIdReq req, @PathVariable(required = false) Long id) {
+        req.updateIdWhenNotBlank(id);
+        return ApiResp.ok(checkResult(i18nResService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+    }
+
+    /**
+     * 删除
+     * @param req I18nResIdReq
+     */
+    @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    public ApiResp<Boolean> delete2(@RequestBody I18nResIdReq req, @PathVariable(required = false) Long id) {
+        req.updateIdWhenNotBlank(id);
+        return delete(req, id);
+    }
+
+    //////////////////////////////////////以下是批量操作//////////////////////////////////////
 
     /**
      * 批量新增
@@ -92,59 +176,18 @@ public class I18nResController extends BaseController{
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation( summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
+    @Operation(summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateI18nResReq> reqList) {
         return ApiResp.ok(i18nResService.batchCreate(reqList));
-    }
-
-    /**
-    * 查看详情
-    *
-    * @param req QueryI18nResByIdReq
-    */
-    @GetMapping("")
-    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
-    public ApiResp<I18nResInfo> retrieve(@NotNull I18nResIdReq req) {
-         return ApiResp.ok(i18nResService.findById(req));
-     }
-
-    /**
-     * 更新
-     * @param req UpdateI18nResReq
-     */
-     @PutMapping({""})
-     @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> update(@RequestBody UpdateI18nResReq req) {
-         return ApiResp.ok(checkResult(i18nResService.update(req), UPDATE_ACTION));
     }
 
     /**
      * 批量更新
      */
      @PutMapping("/batchUpdate")
-     @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
      public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateI18nResReq> reqList) {
-        return ApiResp.ok(checkResult(i18nResService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
-    }
-
-    /**
-     * 删除
-     * @param req I18nResIdReq
-     */
-    @DeleteMapping({""})
-    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Integer> delete(@NotNull I18nResIdReq req) {
-        return ApiResp.ok(checkResult(i18nResService.delete(req), DELETE_ACTION));
-    }
-
-    /**
-     * 删除
-     * @param req I18nResIdReq
-     */
-    @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Integer> delete2(@RequestBody I18nResIdReq req) {
-        return delete(req);
+        return ApiResp.ok(checkResult(i18nResService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -152,19 +195,20 @@ public class I18nResController extends BaseController{
      * @param req DeleteI18nResReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull DeleteI18nResReq req) {
-        return ApiResp.ok(checkResult(i18nResService.batchDelete(req), BATCH_DELETE_ACTION));
+        return ApiResp.ok(checkResult(i18nResService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
-    /**
-     * 检查结果
-     * @param n
-     * @param action
-     * @return
+     /**
+     * 批量删除2
+     * @param req @RequestBody DeleteI18nResReq
      */
-    protected int checkResult(int n, String action) {
-        Assert.isTrue(n > 0, action + BIZ_NAME + "失败");
-        return n;
+    @DeleteMapping(value = {"/batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchDelete2(@RequestBody DeleteI18nResReq req) {
+        return batchDelete(req);
     }
+
 }

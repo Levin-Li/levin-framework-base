@@ -295,7 +295,7 @@ public class BizTenantServiceImpl
 
         Assert.notBlank(domain, () -> new IllegalArgumentException("domain is blank"));
 
-        TenantInfo tenantInfo = tenantService.findOne(new QueryTenantReq().setContainsDomainList(Arrays.asList(domain)));
+        TenantInfo tenantInfo = tenantService.findOne(new QueryTenantReq().setDomainList(Arrays.asList(domain)));
 
         return auditTenant(tenantInfo);
     }

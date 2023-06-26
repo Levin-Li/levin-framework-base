@@ -1,35 +1,52 @@
 package com.levin.oak.base.services.org.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Eq;
-import com.levin.commons.dao.annotation.update.Update;
-import com.levin.commons.service.support.*;
-import com.levin.oak.base.entities.E_Org;
-import com.levin.oak.base.entities.Org;
-import com.levin.oak.base.entities.Org.State;
-import com.levin.oak.base.entities.Org.Type;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
+import com.levin.oak.base.entities.Org;
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_Org.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.Org.*;
+import com.levin.oak.base.entities.Area;
+import com.levin.oak.base.services.area.info.*;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.oak.base.entities.Org;
+import java.util.Set;
+import java.util.Date;
 ////////////////////////////////////
 
-
 /**
- * 更新机构
- * Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *  更新机构
+ *  Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ *  代码生成哈希校验码：[31752e25f0ee555de34ee9fe0e38f581]
  */
-@Schema(title = "更新机构")
+@Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,110 +62,119 @@ public class UpdateOrgReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -1399842458L;
 
-    @Schema(title = "id", required = true)
+    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull
     @Eq(require = true)
-    private String id;
+    String id;
 
-    @Schema(title = "可编辑条件", hidden = true)
+    @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
-    @Size(max = 128)
-    @Schema(title = "编码")
-    private String code;
-
-    @Schema(title = "图标")
-    private String icon;
-
-    @Schema(title = "状态")
-    private State state;
-
-    @Schema(title = "类型")
-    private Type type;
 
     @Size(max = 64)
-    @Schema(title = "所属行业")
-    private String industries;
+    @Schema(title = L_parentId)
+    String parentId;
+
+    @Size(max = 64)
+    @Schema(title = L_code , description = D_code)
+    String code;
+
+    @Schema(title = L_icon)
+    String icon;
+
+    @Schema(title = L_state)
+    State state;
+
+    @Schema(title = L_type)
+    Type type;
+
+    @Size(max = 64)
+    @Schema(title = L_industries)
+    String industries;
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = "区域编码")
-    private String areaCode;
+    @Schema(title = L_areaCode)
+    String areaCode;
 
     @Size(max = 128)
-    @Schema(title = "机构级别")
-    private String level;
+    @Schema(title = L_level , description = D_level)
+    String level;
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = "机构类别")
-    private String category;
+    @Schema(title = L_category , description = D_category)
+    String category;
 
-    @Schema(title = "是否外部机构")
-    private Boolean isExternal;
+    @Schema(title = L_isExternal)
+    Boolean isExternal;
 
     @Size(max = 64)
-    @Schema(title = "联系人")
-    private String contacts;
+    @Schema(title = L_contacts)
+    String contacts;
 
     @Size(max = 20)
-    @Schema(title = "联系电话")
-    private String phones;
+    @Schema(title = L_phones)
+    String phones;
 
     @Size(max = 32)
-    @Schema(title = "联系邮箱")
-    private String emails;
+    @Schema(title = L_emails)
+    String emails;
 
-    @Schema(title = "联系地址")
-    private String address;
+    @Schema(title = L_address)
+    String address;
 
     @Size(max = 32)
-    @Schema(title = "邮政编码")
-    private String zipCode;
-
-    @Schema(title = "父ID")
-    private String parentId;
+    @Schema(title = L_zipCode)
+    String zipCode;
 
     @Size(max = 1800)
-    @Schema(title = "id路径， 使用|包围，如|1|3|15|")
-    private String idPath;
+    @Schema(title = L_idPath , description = D_idPath)
+    String idPath;
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = "名称")
-    private String name;
+    @Schema(title = L_name)
+    String name;
 
     @Size(max = 128)
-    @Schema(title = "拼音，格式：全拼(简拼)")
-    private String pinyinName;
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
 
-    @Schema(title = "更新时间")
-    private Date lastUpdateTime;
+    @Schema(title = L_lastUpdateTime)
+    Date lastUpdateTime;
 
-    @Schema(title = "排序代码")
-    private Integer orderCode;
+    @Schema(title = L_orderCode)
+    Integer orderCode;
 
-    @Schema(title = "是否允许")
-    private Boolean enable;
+    @Schema(title = L_enable)
+    Boolean enable;
 
-    @Schema(title = "是否可编辑")
-    private Boolean editable;
+    @Schema(title = L_editable)
+    Boolean editable;
 
     @Size(max = 512)
-    @Schema(title = "备注")
-    private String remark;
+    @Schema(title = L_remark)
+    String remark;
 
 
     public UpdateOrgReq(String id) {
         this.id = id;
     }
 
+    public UpdateOrgReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+        this.id = id;
+        }
+        return this;
+    }
+
     @PostConstruct
     public void preUpdate() {
         //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }

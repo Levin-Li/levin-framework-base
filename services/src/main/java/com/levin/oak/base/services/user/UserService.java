@@ -117,14 +117,31 @@ public interface UserService {
     PagingData<UserInfo> query(@NotNull QueryUserReq req, Paging paging);
 
     /**
+     * 统计记录数
+     *
+     * @param req
+     * @return record count
+     */
+    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    int count(@NotNull QueryUserReq req);
+
+    /**
      * 查询并返回第一条数据
      *
      * @param req
      * @return data 第一条数据
      */
-    @Operation(summary = QUERY_ACTION)
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     UserInfo findOne(@NotNull QueryUserReq req);
 
+    /**
+     * 查询并返回唯一一条数据
+     * 如果有多余1条数据，将抛出异常
+     * @param req
+     * @return data
+     */
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    UserInfo findUnique(QueryUserReq req);
     /**
      * 清除缓存
      *

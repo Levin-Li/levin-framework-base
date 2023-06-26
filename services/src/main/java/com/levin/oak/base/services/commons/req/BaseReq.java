@@ -27,9 +27,9 @@ import java.util.*;
 
 
 /**
- * 基本查询对象
- *
- * @Author Auto gen by simple-dao-codegen 2022-5-31 19:43:35
+ *  基本查询对象
+ *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
+ *  代码生成哈希校验码：[2fea5f0f7387a14d2e6280d325d984f6]
  */
 @Schema(title = "基本查询对象")
 @Data
@@ -37,20 +37,14 @@ import java.util.*;
 @FieldNameConstants
 public abstract class BaseReq
         implements
-//        OrganizedObject ,
-        ServiceReq {
-
-//    @Schema(title = "组织ID" , hidden = true)
-//    @InjectVar(value = InjectConsts.ORG_ID , isRequired = "false")
-//    protected String orgId;
+        ServiceReq  {
 
     /**
      * 是否非空
-     *
      * @param value
      * @return
      */
-    protected boolean isNotBlank(Object value) {
+    protected boolean isNotBlank(Object value){
         return value != null
                 && (!(value instanceof CharSequence) || StringUtils.hasText((CharSequence) value));
     }

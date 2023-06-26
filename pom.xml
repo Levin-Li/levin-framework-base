@@ -32,6 +32,7 @@
         <levin.simple-dao.version>2.5.1-SNAPSHOT</levin.simple-dao.version>
 
         <levin.service-support.groupId>com.github.Levin-Li</levin.service-support.groupId>
+        <levin.service-support.groupId>com.levin.commons</levin.service-support.groupId>
         <levin.service-support.version>1.2.26-SNAPSHOT</levin.service-support.version>
 
         <hutool.version>5.8.11</hutool.version>
@@ -91,10 +92,10 @@
 
     <repositories>
 
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
+<!--        <repository>-->
+<!--            <id>jitpack.io</id>-->
+<!--            <url>https://jitpack.io</url>-->
+<!--        </repository>-->
 
         <!--        在 gitpack.io 打包时会非常的慢-->
         <!--        <repository>
@@ -105,13 +106,13 @@
 
     </repositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <!--  插件库 -->
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </pluginRepository>
-    </pluginRepositories>
+<!--    <pluginRepositories>-->
+<!--        <pluginRepository>-->
+<!--            &lt;!&ndash;  插件库 &ndash;&gt;-->
+<!--            <id>jitpack.io</id>-->
+<!--            <url>https://jitpack.io</url>-->
+<!--        </pluginRepository>-->
+<!--    </pluginRepositories>-->
 
 
     <distributionManagement>

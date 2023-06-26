@@ -1,32 +1,53 @@
 package com.levin.oak.base.services.apperrorlog.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Contains;
-import com.levin.commons.dao.annotation.Gte;
-import com.levin.commons.dao.annotation.Lte;
-import com.levin.commons.dao.annotation.stat.Count;
-import com.levin.oak.base.entities.AppErrorLog;
-import com.levin.oak.base.entities.E_AppErrorLog;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
+import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.support.*;
+
+import org.springframework.format.annotation.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
 import java.io.Serializable;
-import java.util.Date;
+
+import com.levin.oak.base.services.apperrorlog.info.*;
+import com.levin.oak.base.entities.AppErrorLog;
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_AppErrorLog.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+    import com.levin.commons.service.support.InjectConsts;
+    import com.levin.commons.service.domain.InjectVar;
+    import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 统计应用错误日志
- *
- * @Author Auto gen by simple-dao-codegen 2022-4-9 16:44:59
+ *  统计应用错误日志
+ *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ *  代码生成哈希校验码：[f02690faf767589bca1c6fd9a0561363]
  */
-@Schema(title = "统计应用错误日志")
+@Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,106 +57,103 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppErrorLog.class, alias = E_AppErrorLog.ALIAS,
-        //连接统计
-        //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
-        resultClass = StatAppErrorLogReq.Result.class
+     //连接统计
+    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
+    resultClass = StatAppErrorLogReq.Result.class
 )
-public class StatAppErrorLogReq extends MultiTenantReq {
+public class StatAppErrorLogReq extends MultiTenantReq{
 
     private static final long serialVersionUID = 1594864095L;
 
 
-    //@NotNull
-
-    @Schema(title = "id")
+    @NotNull
+    @Schema(title = L_id)
     Long id;
 
-    //@Size(max = 64)
-
-    @Schema(title = "模块ID")
+    @Size(max = 64)
+    @Schema(title = L_moduleId)
     String moduleId;
 
-    //@NotNull
-
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @NotNull
+    @Schema(title = L_occurTime , description = "大于等于" + L_occurTime)
     @Gte
     Date gteOccurTime;
 
-    @Schema(title = "小于等于发生时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_occurTime , description = "小于等于" + L_occurTime)
     @Lte
     Date lteOccurTime;
 
+    //@Schema(title = L_occurTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenOccurTime;
 
-    //@NotBlank
-    //@Size(max = 768)
-
-    @Schema(title = "标题")
+    @NotBlank
+    @Size(max = 768)
+    @Schema(title = L_title)
     String title;
-    @Schema(title = "模糊匹配 - 标题")
+
+    @Schema(title = "模糊匹配-" + L_title)
     @Contains
     String containsTitle;
 
-
-    @Schema(title = "错误级别")
+    @Schema(title = L_errorLevel)
     String errorLevel;
 
-
-    @Schema(title = "根异常类型")
+    @Schema(title = L_rootExceptionType)
     String rootExceptionType;
-    @Schema(title = "模糊匹配 - 根异常类型")
+
+    @Schema(title = "模糊匹配-" + L_rootExceptionType)
     @Contains
     String containsRootExceptionType;
 
-
-    @Schema(title = "完整异常堆栈")
+    @Schema(title = L_exceptionFullInfo)
     String exceptionFullInfo;
+
 
     public StatAppErrorLogReq(Long id) {
         this.id = id;
     }
 
     //
-    //@Schema(title = "是否按状态分组统计")
+    //@Schema(description = "是否按状态分组统计")
     //@CtxVar //增加当前字段名称和字段值到环境变量中
     //@Ignore
     //private boolean isGroupByStatus;
 
-    //@Schema(title = "是否按日期分组统计")
+    //@Schema(description = "是否按日期分组统计")
     //@CtxVar //增加当前字段名称和字段值到环境变量中
     //@Ignore //
     //private boolean isGroupByDate;
 
-
     @PostConstruct
     public void preStat() {
-        //@todo 统计之前初始化数据
+    //@todo 统计之前初始化数据
     }
 
-    @Schema(title = "应用错误日志统计结果")
+    @Schema(description = BIZ_NAME + "统计结果")
     @Data
     @Accessors(chain = true)
     @FieldNameConstants
     public static class Result
             implements Serializable {
 
-        //@Schema(title = "状态分组统计")
+        //@Schema(description = "状态分组统计")
         //@GroupBy(condition = "#isGroupByStatus")
         //Status status;
 
-        //@Schema(title = "时间分组统计")
+        //@Schema(description = "时间分组统计")
         //@GroupBy(condition = "#isGroupByDate", value = "date_format(" + E_AppErrorLog.createDate + ",'%Y-%m-%d')", orderBy = @OrderBy(type = OrderBy.Type.Asc))
         //String createDate;
 
-        @Schema(title = "记录数")
+        @Schema(description = "记录数")
         @Count
         Integer cnt;
 
-        //@Schema(title = "分类记录数")
+        //@Schema(description = "分类记录数")
         //@Count(fieldCases = {@Case(column = E_AppErrorLog.status, whenOptions = {@Case.When(whenExpr = "OFF", thenExpr = "1")}, elseExpr = "NULL")})
         //Integer caseCnt;
 
-        //@Schema(title = "累计" , havingOp=Op.Gt)
+        //@Schema(description = "累计" , havingOp=Op.Gt)
         //@Sum
         //Double sumGmv;
 

@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.simplepage.info;
 
+import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.*;
 /////////////////////////////////////////////////////
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.annotation.*;
@@ -20,124 +22,130 @@ import com.levin.commons.dao.annotation.logic.*;
 import com.levin.commons.dao.annotation.misc.*;
 
 import com.levin.oak.base.entities.*;
-
+import static com.levin.oak.base.entities.E_SimplePage.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  * 简单页面
- *
- * @Author Auto gen by simple-dao-codegen 2022-5-23 10:30:00
+ * @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
+ * 代码生成哈希校验码：[432935a81d954a5be7f74991d4a37b8b]
  */
-@Schema(title = "简单页面")
+@Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
+@JsonIgnoreProperties(tenantId)
 public class SimplePageInfo implements Serializable {
 
     private static final long serialVersionUID = 1598619295L;
 
 
-    @NotNull
-    @Schema(title = "id", required = true)
+    @NotBlank
+    @Size(max = 64)
+    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String id;
 
 
     @NotBlank
-    @Size(max = 64)
-    @Schema(title = "类型", required = true)
+    @Size(max = 128)
+    @Schema(title = L_type , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String type;
 
 
     @NotBlank
-    @Size(max = 64)
-    @Schema(title = "分类名称", required = true)
+    @Size(max = 128)
+    @Schema(title = L_category , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String category;
 
 
     @NotBlank
-    @Size(max = 64)
-    @Schema(title = "分组名称", required = true)
+    @Size(max = 128)
+    @Schema(title = L_groupName , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String groupName;
 
 
+    @Schema(title = L_icon )
+    String icon;
+
+
     @NotBlank
-    @Schema(title = "访问路径", required = true)
+    @Schema(title = L_path , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String path;
 
+
     @Size(max = 1800)
-    @Schema(title = "需要的授权，权限或角色，json数组")
+    @Schema(title = L_requireAuthorizations )
     String requireAuthorizations;
 
-    @Schema(title = "内容")
+
+    @Schema(title = L_content )
     String content;
 
 
-    @Size(max = 128)
-    @Schema(title = "机构ID")
+    @Size(max = 64)
+    @Schema(title = L_orgId )
     String orgId;
 
 
-    @InjectVar()
     @Size(max = 128)
-    @Schema(title = "租户ID")
+    @Schema(title = L_tenantId )
     String tenantId;
 
 
     @Size(max = 128)
-    @Schema(title = "系统子域")
+    @Schema(title = L_domain )
     String domain;
 
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = "名称", required = true)
+    @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String name;
 
 
     @Size(max = 128)
-    @Schema(title = "拼音，格式：全拼(简拼)")
+    @Schema(title = L_pinyinName , description = D_pinyinName )
     String pinyinName;
 
 
-    @InjectVar()
     @Size(max = 128)
-    @Schema(title = "创建者")
+    @Schema(title = L_creator )
     String creator;
 
 
     @NotNull
-    @Schema(title = "创建时间", required = true)
+    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     Date createTime;
 
 
-    @Schema(title = "更新时间")
+    @Schema(title = L_lastUpdateTime )
     Date lastUpdateTime;
 
 
-    @Schema(title = "排序代码")
+    @Schema(title = L_orderCode )
     Integer orderCode;
 
+
     @NotNull
-    @Schema(title = "是否允许", required = true)
+    @Schema(title = L_enable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     Boolean enable;
 
 
     @NotNull
-    @Schema(title = "是否可编辑", required = true)
+    @Schema(title = L_editable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     Boolean editable;
 
 
     @Size(max = 512)
-    @Schema(title = "备注")
+    @Schema(title = L_remark )
     String remark;
+
 
 }

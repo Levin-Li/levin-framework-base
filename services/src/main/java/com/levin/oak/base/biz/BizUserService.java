@@ -35,10 +35,10 @@ import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
- *  -业务服务
+ *  用户-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月24日 下午12:28:37
- *
+ * @author auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ * 代码生成哈希校验码：[af1658633bc2d3fb0a8a43379a2b9ba7]
  */
 
 @Tag(name = E_User.BIZ_NAME + "-业务服务", description = "")

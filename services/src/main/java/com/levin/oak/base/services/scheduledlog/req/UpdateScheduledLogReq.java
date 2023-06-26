@@ -1,32 +1,46 @@
 package com.levin.oak.base.services.scheduledlog.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Eq;
-import com.levin.commons.dao.annotation.update.Update;
-import com.levin.commons.service.support.*;
-import com.levin.oak.base.entities.E_ScheduledLog;
-import com.levin.oak.base.entities.ScheduledLog;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
+import com.levin.oak.base.entities.ScheduledLog;
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_ScheduledLog.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
 ////////////////////////////////////
 
-
 /**
- * 更新调度日志
- * Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *  更新调度日志
+ *  Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
+ *  代码生成哈希校验码：[a58320372e668dd1e4cf88964c672b48]
  */
-@Schema(title = "更新调度日志")
+@Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,37 +52,42 @@ import javax.validation.constraints.Size;
 @TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS)
 //默认更新注解
 @Update
-public class UpdateScheduledLogReq extends MultiTenantReq {
+public class UpdateScheduledLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1319130901L;
 
-    @Schema(title = "id", required = true)
+    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull
     @Eq(require = true)
-    private Long id;
+    Long id;
 
-    @Schema(title = "可编辑条件", hidden = true)
-    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
-    final boolean eqEditable = true;
+
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = "任务ID")
-    private String taskId;
+    @Schema(title = L_taskId)
+    String taskId;
 
-    @Size(max = 256)
-    @Schema(title = "执行周期")
-    private String invokeCycle;
+    @Size(max = 128)
+    @Schema(title = L_invokeCycle)
+    String invokeCycle;
 
-    @Schema(title = "是否错误")
-    private Boolean isError;
+    @Schema(title = L_isError)
+    Boolean isError;
 
-    @Schema(title = "执行结果")
-    private String invokeResult;
+    @Schema(title = L_invokeResult)
+    String invokeResult;
 
 
     public UpdateScheduledLogReq(Long id) {
         this.id = id;
+    }
+
+    public UpdateScheduledLogReq updateIdWhenNotBlank(Long id){
+        if(isNotBlank(id)){
+        this.id = id;
+        }
+        return this;
     }
 
     @PostConstruct

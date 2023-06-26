@@ -1,36 +1,51 @@
 package com.levin.oak.base.services.menures.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.rbac.MenuItem.ActionType;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-import com.levin.commons.service.support.InjectConsts;
-import com.levin.oak.base.entities.E_MenuRes;
-import com.levin.oak.base.entities.MenuRes;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+//import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /////////////////////////////////////////////////////
+import javax.validation.constraints.*;
+import javax.annotation.*;
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
 ///////////////////////////////////////////////////////
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_MenuRes.*;
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.rbac.MenuItem.*;
+import com.levin.oak.base.entities.MenuRes;
+import com.levin.oak.base.services.menures.info.*;
+import java.util.Set;
+import java.util.Date;
 ////////////////////////////////////
 
 
 /**
- * 新增菜单
- * //Auto gen by simple-dao-codegen 2022-4-2 13:49:52
+ *  新增菜单
+ *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
+ * 代码生成哈希校验码：[8119a4c28620bde2ce7733bc431f7719]
  */
-@Schema(title = "新增菜单")
+@Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
@@ -45,88 +60,89 @@ public class CreateMenuResReq extends MultiTenantReq {
     private static final long serialVersionUID = -887712701L;
 
 
-    @Schema(title = "子系统")
-    @Size(max = 128)
-    private String domain;
-
-    @Schema(title = "需要的授权，权限或角色，json数组")
-    @Size(max = 1800)
-    private String requireAuthorizations;
-
-    @Schema(title = "无权限时是否展示", required = true)
-    @NotNull
-    private Boolean alwaysShow;
-
-    @Schema(title = "目标")
+    @Schema(title = L_parentId  )
     @Size(max = 64)
-    private String target;
+    String parentId;
 
-    @Schema(title = "打开方式")
-    private ActionType actionType;
+    @Schema(title = L_domain  )
+    @Size(max = 128)
+    String domain;
 
-    @Schema(title = "图标")
-    private String icon;
-
-    @Schema(title = "路径/链接")
-    private String path;
-
-    @Schema(title = "参数")
+    @Schema(title = L_requireAuthorizations  )
     @Size(max = 1800)
-    private String params;
+    String requireAuthorizations;
 
-    @Schema(title = "父ID")
-    private String parentId;
+    @Schema(title = L_alwaysShow  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull
+    Boolean alwaysShow;
 
+    @Schema(title = L_target  )
+    @Size(max = 64)
+    String target;
 
-    @Schema(title = "id路径， 使用|包围，如|1|3|15|")
+    @Schema(title = L_actionType  )
+    ActionType actionType;
+
+    @Schema(title = L_icon  )
+    String icon;
+
+    @Schema(title = L_path  )
+    String path;
+
+    @Schema(title = L_params  )
     @Size(max = 1800)
-    private String idPath;
+    String params;
 
-    @Schema(title = "名称", required = true)
+
+
+    @Schema(title = L_idPath , description = D_idPath  )
+    @Size(max = 1800)
+    String idPath;
+
+    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
     @Size(max = 128)
-    private String name;
+    String name;
 
-    @Schema(title = "拼音，格式：全拼(简拼)")
+    @Schema(title = L_pinyinName , description = D_pinyinName  )
     @Size(max = 128)
-    private String pinyinName;
+    String pinyinName;
 
-    @Schema(title = "创建者", hidden = true)
-    //@InjectVar()
+    @Schema(title = L_creator , hidden = true )
     //@Size(max = 128)
     @InjectVar(InjectConsts.USER_ID)
-    private String creator;
+    String creator;
 
-    @Schema(title = "创建时间", hidden = true)
+    @Schema(title = L_createTime , hidden = true )
     //@NotNull
-    private Date createTime;
+    Date createTime;
 
-    @Schema(title = "更新时间", hidden = true)
-    private Date lastUpdateTime;
+    @Schema(title = L_lastUpdateTime , hidden = true )
+    Date lastUpdateTime;
 
-    @Schema(title = "排序代码", hidden = true)
-    private Integer orderCode;
+    @Schema(title = L_orderCode , hidden = true )
+    Integer orderCode;
 
-    @Schema(title = "是否允许", hidden = true)
+    @Schema(title = L_enable , hidden = true )
     //@NotNull
-    private Boolean enable;
+    Boolean enable;
 
-    @Schema(title = "是否可编辑", hidden = true)
+    @Schema(title = L_editable , hidden = true )
     //@NotNull
-    private Boolean editable;
+    Boolean editable;
 
-    @Schema(title = "备注")
+    @Schema(title = L_remark , hidden = true )
     //@Size(max = 512)
-    private String remark;
+    String remark;
 
 
     @PostConstruct
     public void prePersist() {
 
-        //@todo 保存之前初始化数据
+       //@todo 保存之前初始化数据
 
 
-        if (getCreateTime() == null) {
+        if(getCreateTime() == null){
             setCreateTime(new Date());
         }
 

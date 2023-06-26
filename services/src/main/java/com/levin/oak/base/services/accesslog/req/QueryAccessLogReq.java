@@ -1,34 +1,52 @@
 package com.levin.oak.base.services.accesslog.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Contains;
-import com.levin.commons.dao.annotation.Gte;
-import com.levin.commons.dao.annotation.Ignore;
-import com.levin.commons.dao.annotation.Lte;
-import com.levin.commons.dao.annotation.order.OrderBy;
-import com.levin.commons.dao.annotation.order.SimpleOrderBy;
-import com.levin.oak.base.entities.AccessLog;
-import com.levin.oak.base.entities.E_AccessLog;
-import com.levin.oak.base.services.accesslog.info.AccessLogInfo;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.support.*;
+
+import org.springframework.format.annotation.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
+import com.levin.oak.base.services.accesslog.info.*;
+import com.levin.oak.base.entities.AccessLog;
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_AccessLog.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+    import com.levin.commons.service.support.InjectConsts;
+    import com.levin.commons.service.domain.InjectVar;
+    import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 查询访问日志
- *
- * @Author Auto gen by simple-dao-codegen 2022-3-30 8:44:20
+ *  查询访问日志
+ *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ *  代码生成哈希校验码：[fe2de1a001125fc6c21a482f6673e28c]
  */
-@Schema(title = "查询访问日志")
+@Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,149 +56,134 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS, resultClass = AccessLogInfo.class)
-public class QueryAccessLogReq extends MultiTenantReq {
+public class QueryAccessLogReq extends MultiTenantReq{
 
     private static final long serialVersionUID = 1030736962L;
 
     @Ignore
     @Schema(title = "排序字段")
-    private String orderBy;
+    String orderBy;
 
     //@Ignore
-    @Schema(title = "排序方向-desc asc")
+    @Schema(title = "排序方向")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
-    private OrderBy.Type orderDir;
+    OrderBy.Type orderDir;
 
 
-    //@NotNull
-    @Schema(title = "id")
-    private Long id;
+    @NotNull
+    @Schema(title = L_id)
+    Long id;
 
-    @Schema(title = "请求的域名")
-    private String domain;
+    @Schema(title = L_domain)
+    String domain;
 
-    @Schema(title = "访问者")
-    private String visitor;
+    @Schema(title = "模糊匹配-" + L_domain)
+    @Contains
+    String containsDomain;
 
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Size(max = 64)
+    @Schema(title = L_visitor)
+    String visitor;
+
+    @NotNull
+    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
-    private Date gteCreateTime;
+    Date gteCreateTime;
 
-    @Schema(title = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
     @Lte
-    private Date lteCreateTime;
+    Date lteCreateTime;
+
+    //@Schema(title = L_createTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenCreateTime;
 
 
-    @Schema(title = "标题")
-    private String title;
+    @NotBlank
+    @Schema(title = L_title)
+    String title;
 
-    @Schema(title = "模糊匹配 - 标题")
+    @Schema(title = "模糊匹配-" + L_title)
     @Contains
-    private String containsTitle;
+    String containsTitle;
 
-    //@Size(max = 64)
+    @Size(max = 64)
+    @Schema(title = L_logType)
+    String logType;
 
-    @Schema(title = "日志类型")
-    private String logType;
+    @Schema(title = L_diffModifyData)
+    String diffModifyData;
 
+    @Schema(title = L_bizKey)
+    String bizKey;
 
-    @Schema(title = "差异修改数据")
-    private String diffModifyData;
-
-
-    @Schema(title = "业务主键")
-    private String bizKey;
-
-    @Schema(title = "模糊匹配 - 业务主键")
+    @Schema(title = "模糊匹配-" + L_bizKey)
     @Contains
-    private String containsBizKey;
+    String containsBizKey;
 
+    @Schema(title = L_bizType)
+    String bizType;
 
-    @Schema(title = "业务类型")
-    private String bizType;
-
-    @Schema(title = "模糊匹配 - 业务类型")
+    @Schema(title = "模糊匹配-" + L_bizType)
     @Contains
-    private String containsBizType;
+    String containsBizType;
 
+    @Schema(title = L_requestUri)
+    String requestUri;
 
-    @Schema(title = "请求URI")
-    private String requestUri;
-
-    @Schema(title = "模糊匹配 - 请求URI")
+    @Schema(title = "模糊匹配-" + L_requestUri)
     @Contains
-    private String containsRequestUri;
+    String containsRequestUri;
 
+    @Size(max = 32)
+    @Schema(title = L_requestMethod)
+    String requestMethod;
 
-    //@Size(max = 32)
+    @Schema(title = L_requestParams)
+    String requestParams;
 
-    @Schema(title = "请求方法")
-    private String requestMethod;
+    @Schema(title = L_headInfo)
+    String headInfo;
 
+    @Schema(title = L_responseData)
+    String responseData;
 
-    @Schema(title = "请求参数")
-    private String requestParams;
+    @Size(max = 128)
+    @Schema(title = L_remoteAddr)
+    String remoteAddr;
 
-
-    @Schema(title = "头部信息")
-    private String headInfo;
-
-
-    @Schema(title = "响应数据")
-    private String responseData;
-
-
-    //@Size(max = 128)
-
-    @Schema(title = "操作IP地址")
-    private String remoteAddr;
-
-    @Schema(title = "模糊匹配 - 操作IP地址")
+    @Schema(title = "模糊匹配-" + L_remoteAddr)
     @Contains
-    private String containsRemoteAddr;
+    String containsRemoteAddr;
 
+    @Size(max = 64)
+    @Schema(title = L_serverAddr)
+    String serverAddr;
 
-    //@Size(max = 64)
+    @Schema(title = L_isException)
+    Boolean isException;
 
-    @Schema(title = "服务器地址")
-    private String serverAddr;
+    @Schema(title = L_exceptionInfo)
+    String exceptionInfo;
 
+    @Size(max = 768)
+    @Schema(title = L_userAgent)
+    String userAgent;
 
-    @Schema(title = "是否有异常")
-    private Boolean isException;
+    @Size(max = 128)
+    @Schema(title = L_deviceName)
+    String deviceName;
 
+    @Size(max = 64)
+    @Schema(title = L_browserName)
+    String browserName;
 
-    @Schema(title = "异常信息")
-    private String exceptionInfo;
-
-
-    //@Size(max = 768)
-
-    @Schema(title = "用户代理")
-    private String userAgent;
-
-
-    //@Size(max = 128)
-
-    @Schema(title = "设备名称/操作系统")
-    private String deviceName;
-
-
-    //@Size(max = 64)
-
-    @Schema(title = "浏览器名称")
-    private String browserName;
-
-
-    @Schema(title = "执行时间(ms)")
-    private Long executeTime;
-
+    @Schema(title = L_executeTime)
+    Long executeTime;
 
     public QueryAccessLogReq(Long id) {
         this.id = id;
     }
-
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

@@ -15,12 +15,11 @@ import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacResService;
 import com.levin.oak.base.biz.rbac.RbacService;
-import com.levin.oak.base.codegen.UiCodeGen;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.AmisMenu;
 import com.levin.oak.base.controller.rbac.dto.AmisResp;
 import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.CommonReq;
+import com.levin.oak.base.services.commons.req.CommonDataReq;
 import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
@@ -45,7 +44,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -244,7 +242,7 @@ public class AmisController extends BaseController {
      */
     @RequestMapping(value = "/{uiType}", method = {RequestMethod.GET, RequestMethod.POST})
     @Operation(summary = "获取AmisUI界面(5分钟刷新)")
-    public String getUiContent(@PathVariable String uiType, String path, String type, String category, CommonReq shareReq) {
+    public String getUiContent(@PathVariable String uiType, String path, String type, String category, CommonDataReq shareReq) {
 
         Assert.hasText(path, "path 必须指定");
 

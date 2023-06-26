@@ -1,149 +1,166 @@
 package com.levin.oak.base.services.menures.info;
 
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import com.levin.commons.rbac.MenuItem.ActionType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import lombok.*;
+import lombok.experimental.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.*;
 /////////////////////////////////////////////////////
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_MenuRes.*;
 ////////////////////////////////////
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.rbac.MenuItem.*;
+import com.levin.oak.base.entities.MenuRes;
+import com.levin.oak.base.services.menures.info.*;
+import java.util.Set;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  * 菜单
- *
- * @Author Auto gen by simple-dao-codegen 2022-4-1 17:40:27
+ * @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
+ * 代码生成哈希校验码：[f481045dbe4af43f42ace5176b73d1de]
  */
-@Schema(title = "菜单")
+@Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(exclude = {"parent", "children",})
+@ToString(exclude = {"parent","children",})
 @FieldNameConstants
+@JsonIgnoreProperties(tenantId)
 public class MenuResInfo implements Serializable {
 
     private static final long serialVersionUID = -887712701L;
 
-    @NotNull
-    @Schema(title = "id", required = true)
-    private String id;
 
-
-    @Schema(title = "租户ID")
-    private String tenantId;
-
-
-    @Size(max = 128)
-    @Schema(title = "子系统")
-    private String domain;
-
-
-    @Size(max = 1800)
-    @Schema(title = "需要的授权，权限或角色，json数组")
-    private String requireAuthorizations;
-
-
-    @NotNull
-    @Schema(title = "无权限时是否展示", required = true)
-    private Boolean alwaysShow;
+    @NotBlank
+    @Size(max = 64)
+    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    String id;
 
 
     @Size(max = 64)
-    @Schema(title = "目标")
-    private String target;
+    @Schema(title = L_parentId )
+    String parentId;
 
 
-    @Schema(title = "打开方式")
-    private ActionType actionType;
+    @Size(max = 64)
+    @Schema(title = L_tenantId )
+    String tenantId;
 
 
-    @Schema(title = "图标")
-    private String icon;
-
-
-    @Schema(title = "路径/链接")
-    private String path;
-
-
-    @Size(max = 1800)
-    @Schema(title = "参数")
-    private String params;
-
-
-    @Schema(title = "父ID")
-    private String parentId;
-
-
-    //@Fetch //默认不加载，请通过查询对象控制
-    @Schema(title = "父对象")
-    private MenuResInfo parent;
-
-
-    //@Fetch //默认不加载，请通过查询对象控制
-    @Schema(title = "子节点")
-    private Set<MenuResInfo> children;
+    @Size(max = 128)
+    @Schema(title = L_domain )
+    String domain;
 
 
     @Size(max = 1800)
-    @Schema(title = "id路径， 使用|包围，如|1|3|15|")
-    private String idPath;
+    @Schema(title = L_requireAuthorizations )
+    String requireAuthorizations;
+
+
+    @NotNull
+    @Schema(title = L_alwaysShow , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    Boolean alwaysShow;
+
+
+    @Size(max = 64)
+    @Schema(title = L_target )
+    String target;
+
+
+    @Schema(title = L_actionType )
+    ActionType actionType;
+
+
+    @Schema(title = L_icon )
+    String icon;
+
+
+    @Schema(title = L_path )
+    String path;
+
+
+    @Size(max = 1800)
+    @Schema(title = L_params )
+    String params;
+
+
+    //@Fetch //默认不加载，请通过查询对象控制
+    @Schema(title = L_parent )
+    MenuResInfo parent;
+
+
+    //@Fetch //默认不加载，请通过查询对象控制
+    @Schema(title = L_children )
+    Set<MenuResInfo> children;
+
+
+    @Size(max = 1800)
+    @Schema(title = L_idPath , description = D_idPath )
+    String idPath;
 
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = "名称", required = true)
-    private String name;
+    @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    String name;
 
 
     @Size(max = 128)
-    @Schema(title = "拼音，格式：全拼(简拼)")
-    private String pinyinName;
+    @Schema(title = L_pinyinName , description = D_pinyinName )
+    String pinyinName;
 
 
     @Size(max = 128)
-    @Schema(title = "创建者")
-    private String creator;
+    @Schema(title = L_creator )
+    String creator;
 
 
     @NotNull
-    @Schema(title = "创建时间", required = true)
-    private Date createTime;
+    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    Date createTime;
 
 
-    @Schema(title = "更新时间")
-    private Date lastUpdateTime;
+    @Schema(title = L_lastUpdateTime )
+    Date lastUpdateTime;
 
 
-    @Schema(title = "排序代码")
-    private Integer orderCode;
-
-
-    @NotNull
-    @Schema(title = "是否允许", required = true)
-    private Boolean enable;
+    @Schema(title = L_orderCode )
+    Integer orderCode;
 
 
     @NotNull
-    @Schema(title = "是否可编辑", required = true)
-    private Boolean editable;
+    @Schema(title = L_enable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    Boolean enable;
+
+
+    @NotNull
+    @Schema(title = L_editable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    Boolean editable;
 
 
     @Size(max = 512)
-    @Schema(title = "备注")
-    private String remark;
+    @Schema(title = L_remark )
+    String remark;
 
 
 }

@@ -1,36 +1,48 @@
 package com.levin.oak.base.services.setting.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-import com.levin.commons.service.support.InjectConsts;
-import com.levin.oak.base.entities.E_Setting;
-import com.levin.oak.base.entities.Setting;
-import com.levin.oak.base.entities.Setting.ValueType;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+//import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /////////////////////////////////////////////////////
+import javax.validation.constraints.*;
+import javax.annotation.*;
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
 ///////////////////////////////////////////////////////
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_Setting.*;
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.Setting.*;
+import java.util.Date;
 ////////////////////////////////////
 
 
 /**
- * 新增系统设置
- * //Auto gen by simple-dao-codegen 2022-4-2 13:49:52
+ *  新增系统设置
+ *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
+ * 代码生成哈希校验码：[3b56f544418abfbf60ee8297f795781f]
  */
-@Schema(title = "新增系统设置")
+@Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
@@ -45,83 +57,82 @@ public class CreateSettingReq extends MultiTenantReq {
     private static final long serialVersionUID = 147875794L;
 
 
-    @Schema(title = "分类名称", required = true)
+    @Schema(title = L_categoryName  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
     @Size(max = 64)
-    private String categoryName;
+    String categoryName;
 
-    @Schema(title = "分组名称")
+    @Schema(title = L_groupName  )
     @Size(max = 64)
-    private String groupName;
+    String groupName;
 
-    @Schema(title = "编码", required = true)
+    @Schema(title = L_code  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
     @Size(max = 64)
-    private String code;
+    String code;
 
-    @Schema(title = "值类型", required = true)
+    @Schema(title = L_valueType  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull
-    private ValueType valueType;
+    ValueType valueType;
 
-    @Schema(title = "值")
-    private String valueContent;
+    @Schema(title = L_valueContent  )
+    String valueContent;
 
-    @Schema(title = "值是否可空")
-    private Boolean nullable;
+    @Schema(title = L_nullable  )
+    Boolean nullable;
 
-    @Schema(title = "输入占位提示")
-    @Size(max = 64)
-    private String inputPlaceholder;
+    @Schema(title = L_inputPlaceholder  )
+    @Size(max = 128)
+    String inputPlaceholder;
 
-    @Schema(title = "系统子域")
-    @Size(max = 64)
-    private String domain;
+    @Schema(title = L_domain  )
+    @Size(max = 128)
+    String domain;
 
-    @Schema(title = "名称", required = true)
+    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
     @Size(max = 128)
-    private String name;
+    String name;
 
-    @Schema(title = "拼音，格式：全拼(简拼)")
+    @Schema(title = L_pinyinName , description = D_pinyinName  )
     @Size(max = 128)
-    private String pinyinName;
+    String pinyinName;
 
-    @Schema(title = "创建者", hidden = true)
-    //@InjectVar()
+    @Schema(title = L_creator , hidden = true )
     //@Size(max = 128)
     @InjectVar(InjectConsts.USER_ID)
-    private String creator;
+    String creator;
 
-    @Schema(title = "创建时间", hidden = true)
+    @Schema(title = L_createTime , hidden = true )
     //@NotNull
-    private Date createTime;
+    Date createTime;
 
-    @Schema(title = "更新时间", hidden = true)
-    private Date lastUpdateTime;
+    @Schema(title = L_lastUpdateTime , hidden = true )
+    Date lastUpdateTime;
 
-    @Schema(title = "排序代码", hidden = true)
-    private Integer orderCode;
+    @Schema(title = L_orderCode , hidden = true )
+    Integer orderCode;
 
-    @Schema(title = "是否允许", hidden = true)
+    @Schema(title = L_enable , hidden = true )
     //@NotNull
-    private Boolean enable;
+    Boolean enable;
 
-    @Schema(title = "是否可编辑", hidden = true)
+    @Schema(title = L_editable , hidden = true )
     //@NotNull
-    private Boolean editable;
+    Boolean editable;
 
-    @Schema(title = "备注")
+    @Schema(title = L_remark , hidden = true )
     //@Size(max = 512)
-    private String remark;
+    String remark;
 
 
     @PostConstruct
     public void prePersist() {
 
-        //@todo 保存之前初始化数据
+       //@todo 保存之前初始化数据
 
 
-        if (getCreateTime() == null) {
+        if(getCreateTime() == null){
             setCreateTime(new Date());
         }
 

@@ -1,34 +1,50 @@
 package com.levin.oak.base.services.area.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Eq;
-import com.levin.commons.dao.annotation.update.Update;
-import com.levin.commons.service.support.*;
-import com.levin.oak.base.entities.Area;
-import com.levin.oak.base.entities.Area.Type;
-import com.levin.oak.base.entities.E_Area;
-import com.levin.oak.base.services.commons.req.BaseReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
+import com.levin.oak.base.entities.Area;
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_Area.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.Area;
+import com.levin.oak.base.services.area.info.*;
+import java.util.Set;
+import com.levin.oak.base.entities.Area.*;
+import java.util.Date;
 ////////////////////////////////////
 
-
 /**
- * 更新区域
- * Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *  更新区域
+ *  Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
+ *  代码生成哈希校验码：[42675b7ba03ed12398929c0474051bce]
  */
-@Schema(title = "更新区域")
+@Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -44,60 +60,68 @@ public class UpdateAreaReq extends BaseReq {
 
     private static final long serialVersionUID = -445860277L;
 
-    @Schema(title = "编码", required = true)
+    @Schema(title = L_code, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull
     @Eq(require = true)
-    private String code;
+    String code;
 
-    @Schema(title = "可编辑条件", hidden = true)
+    @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
-    @Schema(title = "图标")
-    private String icon;
+
+    @Schema(title = L_icon)
+    String icon;
 
     @Size(max = 64)
-    @Schema(title = "父区域ID")
-    private String parentCode;
+    @Schema(title = L_parentCode)
+    String parentCode;
 
-    @Schema(title = "类型")
-    private Type type;
+    @Schema(title = L_type)
+    Type type;
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = "名称")
-    private String name;
+    @Schema(title = L_name)
+    String name;
 
     @Size(max = 128)
-    @Schema(title = "拼音，格式：全拼(简拼)")
-    private String pinyinName;
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
 
-    @Schema(title = "更新时间")
-    private Date lastUpdateTime;
+    @Schema(title = L_lastUpdateTime)
+    Date lastUpdateTime;
 
-    @Schema(title = "排序代码")
-    private Integer orderCode;
+    @Schema(title = L_orderCode)
+    Integer orderCode;
 
-    @Schema(title = "是否允许")
-    private Boolean enable;
+    @Schema(title = L_enable)
+    Boolean enable;
 
-    @Schema(title = "是否可编辑")
-    private Boolean editable;
+    @Schema(title = L_editable)
+    Boolean editable;
 
     @Size(max = 512)
-    @Schema(title = "备注")
-    private String remark;
+    @Schema(title = L_remark)
+    String remark;
 
 
     public UpdateAreaReq(String code) {
         this.code = code;
     }
 
+    public UpdateAreaReq updateCodeWhenNotBlank(String code){
+        if(isNotBlank(code)){
+        this.code = code;
+        }
+        return this;
+    }
+
     @PostConstruct
     public void preUpdate() {
         //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }
