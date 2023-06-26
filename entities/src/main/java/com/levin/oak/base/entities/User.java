@@ -93,12 +93,12 @@ public class User
     @Column(length = 64)
     String id;
 
-    @Schema(title = "手机号-可做为登录帐号")
+    @Schema(title = "手机号",description = "可做为登录帐号")
     @Column(length = 20)
     @Contains
     String telephone;
 
-    @Schema(title = "邮箱-可做为登录帐号")
+    @Schema(title = "邮箱",description = "可做为登录帐号")
     @Column(length = 32)
     String email;
 

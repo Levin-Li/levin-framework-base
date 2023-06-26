@@ -13,6 +13,8 @@ import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Entity(name = EntityConst.PREFIX + "Setting")
 @Data
 
@@ -91,6 +93,7 @@ public class Setting
 
     @Schema(title = "值")
     @Lob
+    @Basic(fetch = LAZY)
     protected String valueContent;
 
     @Schema(title = "值是否可空")
