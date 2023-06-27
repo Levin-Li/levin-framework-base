@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  客户端文件-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:08
- *  代码生成哈希校验码：[267de545f5f6864d47c2d06dd805134a]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:55
+ *  代码生成哈希校验码：[35007a15308fa860c7365395850e4d7a]
  */
 
 //@Service(PLUGIN_PREFIX + "AppClientFileService")

@@ -50,8 +50,8 @@ import java.util.Date;
 
 /**
  *  统计机构
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
- *  代码生成哈希校验码：[fd140ea60a7b1f419514ffb85c0eaad1]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
+ *  代码生成哈希校验码：[f433bbaebf2d103f87c9e3a5171b35cd]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

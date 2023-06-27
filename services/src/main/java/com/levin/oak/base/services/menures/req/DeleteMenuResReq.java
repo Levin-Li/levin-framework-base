@@ -40,8 +40,8 @@ import java.util.Date;
 
 /**
  *  删除菜单
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:10
- * 代码生成哈希校验码：[9ebf665f7f0a2cf6ed05f4470e0dbc06]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:57
+ * 代码生成哈希校验码：[f96875bd410ecc0117fe69eb4773da6c]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

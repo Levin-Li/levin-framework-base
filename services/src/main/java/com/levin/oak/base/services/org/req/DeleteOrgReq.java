@@ -42,8 +42,8 @@ import java.util.Date;
 
 /**
  *  删除机构
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
- * 代码生成哈希校验码：[d76fc9fb12af4f70f23b1a95ff40fa6a]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
+ * 代码生成哈希校验码：[b330cdd707533404166924351a4d2a51]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

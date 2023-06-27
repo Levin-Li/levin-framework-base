@@ -46,8 +46,8 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 
 /**
  *  统计平台租户
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:07
- *  代码生成哈希校验码：[c34bb11b138bd33f135f10477f94f92b]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:54
+ *  代码生成哈希校验码：[a153989e8caa5d6628fcdb138f636022]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

@@ -33,8 +33,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
  * 抽象服务类
  *
  * @author lilw
- * Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:06
- * 代码生成哈希校验码：[3fcb20885e02ef60947d14b654153e74]
+ * Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:53
+ * 代码生成哈希校验码：[5f0d2277abbcae110eef749a2f129612]
  */
 @Slf4j
 public abstract class BaseService {

@@ -116,17 +116,11 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Override
     @CacheEvict(condition = "#req.id != null", key = E_Role.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
-    public int update(UpdateRoleReq req) {
+    public boolean update(UpdateRoleReq req) {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
 
-        int n = simpleDao.updateByQueryObj(req);
-
-        if (n > 1) {
-            throw new DaoSecurityException("非法的" + UPDATE_ACTION + "操作");
-        }
-
-        return n;
+        return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -134,27 +128,21 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Override
     public int batchUpdate(List<UpdateRoleReq> reqList) {
         //@Todo 优化批量提交
-        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n).sum();
+        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
     }
 
     @Operation(summary = DELETE_ACTION)
     @Override
     @CacheEvict(condition = "#req.id != null", key = E_Role.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
-    public int delete(RoleIdReq req) {
+    public boolean delete(RoleIdReq req) {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
 
         //关键逻辑
         //req.setContainsPublicData(false);
 
-        int n = simpleDao.deleteByQueryObj(req);
-
-        if (n > 1) {
-            throw new DaoSecurityException("非法的" + DELETE_ACTION + "操作");
-        }
-
-        return n;
+        return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(summary = BATCH_DELETE_ACTION)
@@ -165,7 +153,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
         return Stream.of(req.getIdList())
                 .map(id -> simpleDao.copy(req, new RoleIdReq().setId(id)))
                 .map(idReq -> getSelfProxy().delete((RoleIdReq) idReq))
-                .mapToInt(n -> n).sum();
+                .mapToInt(n -> n ? 1 : 0).sum();
     }
 
     @Operation(summary = QUERY_ACTION)

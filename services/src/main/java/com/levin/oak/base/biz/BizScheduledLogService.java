@@ -32,8 +32,8 @@ import java.util.Date;
 /**
  *  调度日志-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:07
- * 代码生成哈希校验码：[48a361eac3848fdf0647a01c3d9b6a63]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:54
+ * 代码生成哈希校验码：[f435d78104d2fb5f047a470a8e0ebf57]
  */
 
 @Tag(name = E_ScheduledLog.BIZ_NAME + "-业务服务", description = "")

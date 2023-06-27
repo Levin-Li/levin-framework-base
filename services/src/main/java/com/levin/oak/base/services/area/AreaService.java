@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  区域-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
- *  代码生成哈希校验码：[cbf0627ab19583063a79c765357a78b9]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:57
+ *  代码生成哈希校验码：[6f3915b76e6aa6785ffdcd7a01bc8047]
  */
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
 public interface AreaService {

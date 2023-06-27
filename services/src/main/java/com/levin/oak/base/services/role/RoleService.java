@@ -68,7 +68,7 @@ public interface RoleService {
      * @return num 更新记录数
      */
     @Operation(summary = UPDATE_ACTION)
-    int update(@NotNull UpdateRoleReq req);
+    boolean update(@NotNull UpdateRoleReq req);
 
     /**
      * 批量更新记录，并返回更新记录数
@@ -86,7 +86,7 @@ public interface RoleService {
      * @return num 删除记录数
      */
     @Operation(summary = DELETE_ACTION)
-    int delete(@NotNull RoleIdReq req);
+    boolean delete(@NotNull RoleIdReq req);
 
     /**
      * 批量删除记录，并返回删除记录数

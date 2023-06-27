@@ -32,8 +32,8 @@ import java.util.Date;
 /**
  *  调度任务-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
- * 代码生成哈希校验码：[23f90e5add3bf4ee1bc9c208e5e00559]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
+ * 代码生成哈希校验码：[9130242e44e908212ae23b7a036eaca9]
  */
 
 @Tag(name = E_ScheduledTask.BIZ_NAME + "-业务服务", description = "")

@@ -77,7 +77,7 @@ public interface UserService {
      * @return num 更新记录数
      */
     @Operation(summary = UPDATE_ACTION)
-    int update(@NotNull UpdateUserReq req);
+    boolean update(@NotNull UpdateUserReq req);
 
     /**
      * 批量更新记录，并返回更新记录数
@@ -95,7 +95,7 @@ public interface UserService {
      * @return num 删除记录数
      */
     @Operation(summary = DELETE_ACTION)
-    int delete(@NotNull UserIdReq req);
+    boolean delete(@NotNull UserIdReq req);
 
     /**
      * 批量删除记录，并返回删除记录数

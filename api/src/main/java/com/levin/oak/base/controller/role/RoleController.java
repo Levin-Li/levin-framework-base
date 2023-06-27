@@ -140,7 +140,7 @@ public class RoleController extends BaseController {
      */
     @PutMapping({""})
     @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Integer> update(@RequestBody UpdateRoleReq req) {
+    public ApiResp<Boolean> update(@RequestBody UpdateRoleReq req) {
         checkCurrentUserCreateOrUpdateRolePermissions(null, req.getPermissionList());
         return ApiResp.ok(checkResult(roleService.update(req), UPDATE_ACTION));
     }
@@ -162,7 +162,7 @@ public class RoleController extends BaseController {
      */
     @DeleteMapping({"", "{id}"})
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Integer> delete(RoleIdReq req, @PathVariable(required = false) String id) {
+    public ApiResp<Boolean> delete(RoleIdReq req, @PathVariable(required = false) String id) {
         return ApiResp.ok(checkResult(roleService.delete(req), DELETE_ACTION));
     }
 

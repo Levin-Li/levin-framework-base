@@ -33,8 +33,8 @@ import java.util.Date;
 /**
  *  工作岗位-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
- * 代码生成哈希校验码：[cc35f038cc06bffc262a129b4b449f05]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
+ * 代码生成哈希校验码：[8a945846926fb0a7d539bc5bdbbfdd73]
  */
 
 @Tag(name = E_JobPost.BIZ_NAME + "-业务服务", description = "")

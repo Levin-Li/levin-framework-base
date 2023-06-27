@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  统计简单页面
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:10
- *  代码生成哈希校验码：[e88cc06fb57f703124bea4ad96b72407]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:57
+ *  代码生成哈希校验码：[74fed044372fed812843c4159439c750]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

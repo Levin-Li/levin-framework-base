@@ -175,7 +175,7 @@ public class UserController extends BaseController {
      */
     @PutMapping({""})
     @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Integer> update(@RequestBody UpdateUserReq req) {
+    public ApiResp<Boolean> update(@RequestBody UpdateUserReq req) {
         checkCurrentUserCreateOrUpdateUserRole(req.getId(), req.getRoleList());
         return ApiResp.ok(checkResult(userService.update(req), UPDATE_ACTION));
     }
@@ -197,7 +197,7 @@ public class UserController extends BaseController {
      */
     @DeleteMapping({""})
     @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Integer> delete(@NotNull UserIdReq req) {
+    public ApiResp<Boolean> delete(@NotNull UserIdReq req) {
         return ApiResp.ok(checkResult(userService.delete(req), DELETE_ACTION));
     }
 

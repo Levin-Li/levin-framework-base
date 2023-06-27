@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 简单页面控制器
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:10
- * 代码生成哈希校验码：[cdf2a3d96cd5178a0de1765c05b46671]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:57
+ * 代码生成哈希校验码：[b50a99f31ed5f71e55d8bae566543031]
  */
 public class SimplePageController extends BaseController{
 

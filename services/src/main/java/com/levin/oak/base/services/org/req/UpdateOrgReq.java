@@ -43,8 +43,8 @@ import java.util.Date;
 
 /**
  *  更新机构
- *  Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
- *  代码生成哈希校验码：[b33646d4cf1746f5542fc30cc8501e25]
+ *  Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
+ *  代码生成哈希校验码：[bbdc744622bca5ebc5ceb617d6247c06]
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data

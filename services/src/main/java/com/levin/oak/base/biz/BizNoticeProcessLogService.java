@@ -32,8 +32,8 @@ import java.util.Date;
 /**
  *  通知处理日志-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
- * 代码生成哈希校验码：[1c90b28ef788dcfac8a6e27c853ac2b0]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
+ * 代码生成哈希校验码：[361c628d342896f51fb3058e25e977a8]
  */
 
 @Tag(name = E_NoticeProcessLog.BIZ_NAME + "-业务服务", description = "")

@@ -139,7 +139,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     @CacheEvict(condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
-    public int update(UpdateUserReq req) {
+    public boolean update(UpdateUserReq req) {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
 
@@ -147,7 +147,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         checkCreateOrUpdateAccount(req.getEmail(), req.getTelephone());
 
         //密码加密
-        return checkResult(simpleDao.updateByQueryObj(req.setPassword(encryptPwd(req.getPassword()))), UPDATE_ACTION);
+        return simpleDao.singleUpdateByQueryObj(req.setPassword(encryptPwd(req.getPassword())));
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -156,7 +156,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     public int batchUpdate(List<UpdateUserReq> reqList) {
 
         //@Todo 优化批量提交
-        int sum = reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n).sum();
+        int sum = reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
 
         //Assert.isTrue(sum > 0, BATCH_UPDATE_ACTION + BIZ_NAME + "失败");
 
@@ -167,12 +167,12 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     @CacheEvict(condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
-    public int delete(UserIdReq req) {
+    public boolean delete(UserIdReq req) {
 
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
 
         //不允许删除SA用户
-        return checkResult(simpleDao.deleteByQueryObj(req, notSa()), DELETE_ACTION);
+        return simpleDao.singleDeleteByQueryObj(req, notSa());
     }
 
     @Operation(summary = BATCH_DELETE_ACTION)
@@ -184,7 +184,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         int sum = Stream.of(req.getIdList())
                 .map(id -> simpleDao.copy(req, new UserIdReq().setId(id)))
                 .map(idReq -> getSelfProxy().delete(idReq))
-                .mapToInt(n -> n)
+                .mapToInt(n -> n ? 1 : 0)
                 .sum();
 
         //Assert.isTrue(sum > 0, BATCH_DELETE_ACTION + BIZ_NAME + "失败");
@@ -210,7 +210,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     @Override
-    public UserInfo findUnique(QueryUserReq req){
+    public UserInfo findUnique(QueryUserReq req) {
         return simpleDao.findUnique(req);
     }
 
@@ -222,7 +222,7 @@ public class UserServiceImpl extends BaseService implements UserService {
      */
     @Override
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
-    public int count(QueryUserReq req){
+    public int count(QueryUserReq req) {
         return (int) simpleDao.countByQueryObj(req);
     }
 

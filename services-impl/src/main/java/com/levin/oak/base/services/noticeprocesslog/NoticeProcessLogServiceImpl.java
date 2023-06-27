@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  通知处理日志-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
- *  代码生成哈希校验码：[c73e3cbc3731e26a10b658b9e0500ff9]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
+ *  代码生成哈希校验码：[873b8558aa52ff9c7c77a96f0946adcd]
  */
 
 //@Service(PLUGIN_PREFIX + "NoticeProcessLogService")

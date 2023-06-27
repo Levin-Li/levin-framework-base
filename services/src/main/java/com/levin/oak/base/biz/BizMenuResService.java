@@ -36,8 +36,8 @@ import java.util.Date;
 /**
  *  菜单-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:10
- * 代码生成哈希校验码：[d2b10b942f5421107106ade80abbf9b5]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:57
+ * 代码生成哈希校验码：[2fc1e93592b21a31e4c7afa9e1ee3559]
  */
 
 @Tag(name = E_MenuRes.BIZ_NAME + "-业务服务", description = "")
