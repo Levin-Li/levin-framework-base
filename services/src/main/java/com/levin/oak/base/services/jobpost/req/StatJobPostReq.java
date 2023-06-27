@@ -45,8 +45,8 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  统计工作岗位
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[110ef77cd796bbf0e02dc838c13bedde]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
+ *  代码生成哈希校验码：[f7e82d33b6dd2461ab1f70a038937819]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -102,7 +102,7 @@ public class StatJobPostReq extends MultiTenantReq{
     @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
     @Contains
     String containsPinyinName;
 

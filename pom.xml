@@ -32,7 +32,7 @@
         <levin.simple-dao.version>2.5.1-SNAPSHOT</levin.simple-dao.version>
 
         <levin.service-support.groupId>com.github.Levin-Li</levin.service-support.groupId>
-        <levin.service-support.groupId>com.levin.commons</levin.service-support.groupId>
+<!--        <levin.service-support.groupId>com.levin.commons</levin.service-support.groupId>-->
         <levin.service-support.version>1.2.26-SNAPSHOT</levin.service-support.version>
 
         <hutool.version>5.8.11</hutool.version>
@@ -90,46 +90,6 @@
         <module>admin-ui</module>
     </modules>
 
-    <repositories>
-
-<!--        <repository>-->
-<!--            <id>jitpack.io</id>-->
-<!--            <url>https://jitpack.io</url>-->
-<!--        </repository>-->
-
-        <!--        在 gitpack.io 打包时会非常的慢-->
-        <!--        <repository>
-                    &lt;!&ndash; 仓库首页 https://maven.aliyun.com/ &ndash;&gt;
-                    <id>aliyun-central仓和jcenter仓的聚合仓</id>
-                    <url>https://maven.aliyun.com/repository/public</url>
-                </repository>-->
-
-    </repositories>
-
-<!--    <pluginRepositories>-->
-<!--        <pluginRepository>-->
-<!--            &lt;!&ndash;  插件库 &ndash;&gt;-->
-<!--            <id>jitpack.io</id>-->
-<!--            <url>https://jitpack.io</url>-->
-<!--        </pluginRepository>-->
-<!--    </pluginRepositories>-->
-
-
-    <distributionManagement>
-
-        <!--具体变量来自 Setting 文件-->
-        <repository>
-            <id>${dist-repo}</id>
-            <url>${dist-repo.releases.url}</url>
-        </repository>
-
-        <snapshotRepository>
-            <id>${dist-repo}</id>
-            <url>${dist-repo.snapshots.url}</url>
-        </snapshotRepository>
-
-    </distributionManagement>
-
     <profiles>
 
         <profile>
@@ -161,7 +121,7 @@
 
 
         <profile>
-            <id>环境0-local</id>
+            <id>env0-local</id>
             <properties>
                 <spring.profiles.active>local</spring.profiles.active>
                 <logback.profiles.level>DEBUG</logback.profiles.level>
@@ -170,10 +130,11 @@
         </profile>
 
         <profile>
-            <id>环境1-dev</id>
+            <id>env1-dev</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+
             <properties>
                 <spring.profiles.active>dev</spring.profiles.active>
                 <logback.profiles.level>DEBUG</logback.profiles.level>
@@ -183,7 +144,7 @@
         </profile>
 
         <profile>
-            <id>环境2-test</id>
+            <id>env2-test</id>
             <properties>
                 <spring.profiles.active>test</spring.profiles.active>
                 <logback.profiles.level>DEBUG</logback.profiles.level>
@@ -192,7 +153,7 @@
         </profile>
 
         <profile>
-            <id>环境3-prod</id>
+            <id>env3-prod</id>
             <properties>
                 <spring.profiles.active>prod</spring.profiles.active>
                 <logback.profiles.level>INFO</logback.profiles.level>
@@ -210,6 +171,52 @@
         </profile>
 
     </profiles>
+
+    <distributionManagement>
+
+        <!--具体变量来自 Setting 文件-->
+        <repository>
+            <id>${dist-repo}</id>
+            <url>${dist-repo.releases.url}</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>${dist-repo}</id>
+            <url>${dist-repo.snapshots.url}</url>
+        </snapshotRepository>
+
+    </distributionManagement>
+
+    <repositories>
+
+        <repository>
+            <!-- 仓库首页 https://maven.aliyun.com/ , 如果在 gitpack.io 打包时会非常的慢 -->
+            <id>aliyun-central仓和jcenter仓的聚合仓</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://www.jitpack.io</url>
+        </repository>
+
+    </repositories>
+
+    <pluginRepositories>
+
+        <pluginRepository>
+            <!-- 仓库首页 https://maven.aliyun.com/ , 如果在 gitpack.io 打包时会非常的慢 -->
+            <id>aliyun-central仓和jcenter仓的聚合仓</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </pluginRepository>
+
+        <pluginRepository>
+            <!--  插件库 -->
+            <id>jitpack.io</id>
+            <url>https://www.jitpack.io</url>
+        </pluginRepository>
+
+    </pluginRepositories>
 
     <dependencyManagement>
         <dependencies>

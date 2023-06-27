@@ -47,8 +47,8 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询区域
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
- *  代码生成哈希校验码：[59922f9eb5a4f36433e7c185244b442a]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
+ *  代码生成哈希校验码：[fdc99f89a6a3da488c3cc10c32ae20b8]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -90,9 +90,11 @@ public class QueryAreaReq extends BaseReq{
     @Schema(title = L_parentCode)
     String parentCode;
 
+
     @Schema(title = "是否加载" + L_parent)
     @Fetch(attrs = E_Area.parent, condition = "#_val == true")
     Boolean loadParent;
+
 
     @Schema(title = "是否加载" + L_children)
     @Fetch(attrs = E_Area.children, condition = "#_val == true")
@@ -115,7 +117,7 @@ public class QueryAreaReq extends BaseReq{
     @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
     @Contains
     String containsPinyinName;
 

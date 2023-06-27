@@ -52,10 +52,10 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 /**
- *  租户-服务实现
+ *  平台租户-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
- *  代码生成哈希校验码：[69bb1e51f76fc885f0989338ca995d19]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
+ *  代码生成哈希校验码：[d7c15af62e16b1c76cac0c7d9730fab0]
  */
 
 //@Service(PLUGIN_PREFIX + "TenantService")

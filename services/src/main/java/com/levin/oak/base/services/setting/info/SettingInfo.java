@@ -32,15 +32,15 @@ import java.util.Date;
 
 /**
  * 系统设置
- * @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
- * 代码生成哈希校验码：[9d957fa4ac25b32522bc504345537e39]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
+ * 代码生成哈希校验码：[cf4d269f6b3dfd228583067678c53ac4]
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(exclude = {})
+@ToString(exclude = {"valueContent",})
 @FieldNameConstants
 @JsonIgnoreProperties(tenantId)
 public class SettingInfo implements Serializable {
@@ -76,6 +76,7 @@ public class SettingInfo implements Serializable {
     ValueType valueType;
 
 
+    //@Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_valueContent )
     String valueContent;
 

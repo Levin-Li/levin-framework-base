@@ -44,8 +44,8 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询工作岗位
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[7ab767769303c6489cf567f62db7a490]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
+ *  代码生成哈希校验码：[b58875068ba9b274c938b3518ed18c5b]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -106,7 +106,7 @@ public class QueryJobPostReq extends MultiTenantReq{
     @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
     @Contains
     String containsPinyinName;
 

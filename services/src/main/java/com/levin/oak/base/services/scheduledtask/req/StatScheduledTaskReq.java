@@ -44,8 +44,8 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  统计调度任务
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[f472b415e8b9901066c978b4490bb26e]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:50
+ *  代码生成哈希校验码：[ba7686db66db4fd7b274d6844f427ddf]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -136,7 +136,7 @@ public class StatScheduledTaskReq extends MultiTenantOrgReq{
     @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
     @Contains
     String containsPinyinName;
 

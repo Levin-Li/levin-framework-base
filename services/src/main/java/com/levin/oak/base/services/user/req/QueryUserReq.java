@@ -1,43 +1,57 @@
 package com.levin.oak.base.services.user.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Contains;
-import com.levin.commons.dao.annotation.Gte;
-import com.levin.commons.dao.annotation.Ignore;
-import com.levin.commons.dao.annotation.Lte;
-import com.levin.commons.dao.annotation.logic.OR;
-import com.levin.commons.dao.annotation.misc.Fetch;
-import com.levin.commons.dao.annotation.order.OrderBy;
-import com.levin.commons.dao.annotation.order.SimpleOrderBy;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-import com.levin.commons.service.support.JsonStrLikeConverter;
-import com.levin.oak.base.entities.E_User;
-import com.levin.oak.base.entities.User;
-import com.levin.oak.base.entities.User.Category;
-import com.levin.oak.base.entities.User.Sex;
-import com.levin.oak.base.entities.User.State;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import com.levin.oak.base.services.user.info.UserInfo;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import java.util.Date;
-import java.util.List;
+import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.support.*;
+
+import org.springframework.format.annotation.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
+import com.levin.oak.base.services.user.info.*;
+import com.levin.oak.base.entities.User;
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_User.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+    import com.levin.commons.service.support.InjectConsts;
+    import com.levin.commons.service.domain.InjectVar;
+    import com.levin.oak.base.entities.User.*;
+    import java.util.List;
+    import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+    import java.util.Date;
+    import com.levin.oak.base.services.org.info.*;
+    import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
- * 查询用户
- *
- * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *  查询用户
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:50
+ *  代码生成哈希校验码：[0e2676b05dbff4859b3cba80ffc72a5c]
  */
-@Schema(title = "查询用户")
+@Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -47,194 +61,184 @@ import java.util.List;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS, resultClass = UserInfo.class)
-public class QueryUserReq extends MultiTenantReq {
+public class QueryUserReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = -445263479L;
 
     @Ignore
     @Schema(title = "排序字段")
-    private String orderBy;
+    String orderBy;
 
     //@Ignore
-    @Schema(title = "排序方向-desc asc")
+    @Schema(title = "排序方向")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
-    private OrderBy.Type orderDir;
+    OrderBy.Type orderDir;
 
 
-    //@NotNull
+    @NotBlank
+    @Size(max = 64)
+    @Schema(title = L_id)
+    String id;
 
-    @Schema(title = "id")
-    private String id;
+    @Size(max = 20)
+    @Schema(title = L_telephone , description = D_telephone)
+    String telephone;
 
-
-    //@Size(max = 256)
-
-    @Schema(title = "登录密码")
-    private String password;
-
-
-    //@Size(max = 20)
-    @Schema(title = "手机号")
-    private String telephone;
-
-    @Schema(title = "模糊匹配 - 手机号")
+    @Schema(title = "模糊匹配-" + L_telephone , description = D_telephone)
     @Contains
-    private String containsTelephone;
+    String containsTelephone;
 
+    @Size(max = 32)
+    @Schema(title = L_email , description = D_email)
+    String email;
 
-    //@Size(max = 32)
+    @Size(max = 256)
+    @Schema(title = L_password)
+    String password;
 
-    @Schema(title = "邮箱")
-    private String email;
+    @Size(max = 32)
+    @Schema(title = L_nickname)
+    String nickname;
 
-
-    //@Size(max = 64)
-
-    @Schema(title = "名称")
-    private String name;
-
-    @Schema(title = "模糊匹配 - 名称")
+    @Schema(title = "模糊匹配-" + L_nickname)
     @Contains
-    private String containsName;
+    String containsNickname;
 
+    @Schema(title = L_avatar)
+    String avatar;
 
-    //@Size(max = 32)
+    @Schema(title = L_sex)
+    Sex sex;
 
-    @Schema(title = "昵称")
-    private String nickname;
-
-    @Schema(title = "模糊匹配 - 昵称")
-    @Contains
-    private String containsNickname;
-
-
-    @Schema(title = "头像")
-    private String avatar;
-
-
-    @Schema(title = "性别")
-    private Sex sex;
-
-    @Schema(title = "模糊匹配 - 标签列表")
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
-    @Contains
     @OR(autoClose = true)
-    private List<String> containsTagList;
+    @Contains
+    @InjectVar(domain = "dao",  converter = JsonStrLikeConverter.class, isRequired = "false")
+    @Size(max = 1800)
+    @Schema(title = L_tagList)
+    List<String> tagList;
 
+    @Schema(title = L_category)
+    Category category;
 
-    @Schema(title = "帐号类型")
-    private Category category;
-
-
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于过期时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_expiredDate , description = "大于等于" + L_expiredDate)
     @Gte
-    private Date gteExpiredDate;
+    Date gteExpiredDate;
 
-    @Schema(title = "小于等于过期时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_expiredDate , description = "小于等于" + L_expiredDate)
     @Lte
-    private Date lteExpiredDate;
+    Date lteExpiredDate;
+
+    //@Schema(title = L_expiredDate + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenExpiredDate;
 
 
-    //@NotNull
+    @NotNull
+    @Schema(title = L_state)
+    State state;
 
-    @Schema(title = "帐号状态")
-    private State state;
+    @Size(max = 32)
+    @Schema(title = L_staffNo)
+    String staffNo;
 
-
-    //@Size(max = 32)
-
-    @Schema(title = "工号")
-    private String staffNo;
-
-    @Schema(title = "模糊匹配 - 工号")
+    @Schema(title = "模糊匹配-" + L_staffNo)
     @Contains
-    private String containsStaffNo;
+    String containsStaffNo;
 
+    @Size(max = 128)
+    @Schema(title = L_jobPostCode)
+    String jobPostCode;
 
-    //@Size(max = 128)
-
-    @Schema(title = "岗位职级")
-    private String jobPostCode;
-
-    @Schema(title = "模糊匹配 - 角色列表")
     @OR(autoClose = true)
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Contains
-    private List<String> containsRoleList;
+    @InjectVar(domain = "dao",  converter = JsonStrLikeConverter.class, isRequired = "false")
+    @Size(max = 1800)
+    @Schema(title = L_roleList)
+    List<String> roleList;
 
 
-    @Schema(title = "是否加载所属部门")
+    @Schema(title = "是否加载" + L_org)
     @Fetch(attrs = E_User.org, condition = "#_val == true")
-    private Boolean loadOrg;
+    Boolean loadOrg;
 
+    @Size(max = 64)
+    @Schema(title = L_wxOpenId)
+    String wxOpenId;
 
-    //@Size(max = 128)
+    @Size(max = 64)
+    @Schema(title = L_aliOpenId)
+    String aliOpenId;
 
-    @Schema(title = "微信 OpendId")
-    private String wxOpenId;
+    @Size(max = 128)
+    @Schema(title = L_domain)
+    String domain;
 
+    @NotBlank
+    @Size(max = 128)
+    @Schema(title = L_name)
+    String name;
 
-    //@Size(max = 128)
+    @Schema(title = "模糊匹配-" + L_name)
+    @Contains
+    String containsName;
 
-    @Schema(title = "阿里 OpendId")
-    private String aliOpenId;
+    @Size(max = 128)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
 
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
+    @Contains
+    String containsPinyinName;
 
-    //@Size(max = 128)
+    @Size(max = 128)
+    @Schema(title = L_creator)
+    String creator;
 
-    @Schema(title = "创建者")
-    private String creator;
-
-
-    //@NotNull
-
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @NotNull
+    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
-    private Date gteCreateTime;
+    Date gteCreateTime;
 
-    @Schema(title = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
     @Lte
-    private Date lteCreateTime;
+    Date lteCreateTime;
+
+    //@Schema(title = L_createTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenCreateTime;
 
 
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_lastUpdateTime , description = "大于等于" + L_lastUpdateTime)
     @Gte
-    private Date gteLastUpdateTime;
+    Date gteLastUpdateTime;
 
-    @Schema(title = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_lastUpdateTime , description = "小于等于" + L_lastUpdateTime)
     @Lte
-    private Date lteLastUpdateTime;
+    Date lteLastUpdateTime;
+
+    //@Schema(title = L_lastUpdateTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenLastUpdateTime;
 
 
-    @Schema(title = "排序代码")
-    private Integer orderCode;
+    @Schema(title = L_orderCode)
+    Integer orderCode;
 
+    @NotNull
+    @Schema(title = L_enable)
+    Boolean enable;
 
-    //@NotNull
+    @NotNull
+    @Schema(title = L_editable)
+    Boolean editable;
 
-    @Schema(title = "是否允许")
-    private Boolean enable;
-
-
-    //@NotNull
-
-    @Schema(title = "是否可编辑")
-    private Boolean editable;
-
-
-    //@Size(max = 512)
-
-    @Schema(title = "备注")
-    private String remark;
-
+    @Size(max = 512)
+    @Schema(title = L_remark)
+    String remark;
 
     public QueryUserReq(String id) {
         this.id = id;
     }
-
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

@@ -169,6 +169,11 @@ public class Org
     @Column(length = 32)
     protected String zipCode;
 
+    @Lob
+    @Basic(fetch = FetchType.LAZY) //默认延迟加载
+    @Schema(title = "机构扩展信息")
+    protected String extInfo;
+
     @Override
     @PrePersist
     public void prePersist() {

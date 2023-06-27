@@ -28,8 +28,8 @@ import java.util.*;
 
 /**
  *  基本查询对象
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
- *  代码生成哈希校验码：[2fea5f0f7387a14d2e6280d325d984f6]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:48
+ *  代码生成哈希校验码：[fe4b609a922deb05e0a9523651a696e0]
  */
 @Schema(title = "基本查询对象")
 @Data

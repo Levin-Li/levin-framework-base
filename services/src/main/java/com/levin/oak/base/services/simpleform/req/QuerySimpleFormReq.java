@@ -43,8 +43,8 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询简单表单
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
- *  代码生成哈希校验码：[49d1b1d735a84a0870cad2d1d35ab6d9]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
+ *  代码生成哈希校验码：[32b90d14b3f0c14a278db224a0a5946f]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -128,7 +128,7 @@ public class QuerySimpleFormReq extends MultiTenantOrgReq{
     @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
     @Contains
     String containsPinyinName;
 

@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  *  系统设置 主键通用请求
- *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[c8cadccefe623c9aaeab1e79047f680b]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
+ *  代码生成哈希校验码：[62acf41085d58623bf83300e04389ce1]
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")

@@ -53,8 +53,8 @@ import java.util.Date;
 /**
  *  简单动态接口-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
- *  代码生成哈希校验码：[aa56c3a6cf4e7ca3937cb73604387dce]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
+ *  代码生成哈希校验码：[7c4af0136391a62f5919a3a8ef6cb6eb]
  */
 
 //@Service(PLUGIN_PREFIX + "SimpleApiService")

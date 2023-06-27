@@ -45,8 +45,8 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  统计系统设置
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[03dfe67990622d5a489fea228e4a9fb5]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
+ *  代码生成哈希校验码：[7907957c1b3acc7ba67de7eed39d44ae]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -97,6 +97,10 @@ public class StatSettingReq extends MultiTenantReq{
     @Schema(title = L_valueContent)
     String valueContent;
 
+    @Schema(title = "是否加载" + L_valueContent)
+    @Fetch(attrs = E_Setting.valueContent, condition = "#_val == true")
+    Boolean loadValueContent;
+
     @Schema(title = L_nullable)
     Boolean nullable;
 
@@ -121,7 +125,7 @@ public class StatSettingReq extends MultiTenantReq{
     @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
     @Contains
     String containsPinyinName;
 

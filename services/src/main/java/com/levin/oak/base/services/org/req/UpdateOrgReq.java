@@ -43,8 +43,8 @@ import java.util.Date;
 
 /**
  *  更新机构
- *  Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[31752e25f0ee555de34ee9fe0e38f581]
+ *  Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
+ *  代码生成哈希校验码：[47c55ebb82a579da84f7b302166b6657]
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -128,6 +128,9 @@ public class UpdateOrgReq extends MultiTenantReq {
     @Size(max = 32)
     @Schema(title = L_zipCode)
     String zipCode;
+
+    @Schema(title = L_extInfo)
+    String extInfo;
 
     @Size(max = 1800)
     @Schema(title = L_idPath , description = D_idPath)

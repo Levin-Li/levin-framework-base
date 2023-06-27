@@ -1,33 +1,56 @@
 package com.levin.oak.base.services.role.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.order.OrderBy;
-import com.levin.commons.dao.annotation.order.SimpleOrderBy;
-import com.levin.commons.rbac.RbacRoleObject;
-import com.levin.oak.base.entities.E_Role;
-import com.levin.oak.base.entities.Role;
-import com.levin.oak.base.entities.Role.OrgDataScope;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import com.levin.oak.base.services.role.info.RoleInfo;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import java.util.Date;
+import com.levin.commons.rbac.RbacRoleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.support.*;
+
+import org.springframework.format.annotation.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
+import com.levin.oak.base.services.role.info.*;
+import com.levin.oak.base.entities.Role;
+
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_Role.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+    import com.levin.commons.service.support.InjectConsts;
+    import com.levin.commons.service.domain.InjectVar;
+    import com.levin.oak.base.entities.Role.*;
+    import java.util.List;
+    import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+    import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 查询角色
- *
- * @Author Auto gen by simple-dao-codegen 2022-3-25 17:01:35
+ *  查询角色
+ *  @Author Auto gen by simple-dao-codegen 2023年6月27日 下午11:27:32
+ *  代码生成哈希校验码：[57ffd8b1eda12da5c3e4c09a645ccf1d]
  */
-@Schema(title = "查询角色")
+@Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,7 +60,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Role.class, alias = E_Role.ALIAS, resultClass = RoleInfo.class)
-public class QueryRoleReq extends MultiTenantReq {
+public class QueryRoleReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -445356492L;
 
@@ -49,133 +72,117 @@ public class QueryRoleReq extends MultiTenantReq {
 
     @Ignore
     @Schema(title = "排序字段")
-    private String orderBy;
+    String orderBy;
 
     //@Ignore
-    @Schema(title = "排序方向-desc asc")
+    @Schema(title = "排序方向")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
-    private OrderBy.Type orderDir;
+    OrderBy.Type orderDir;
 
 
-    //@NotNull
+    @NotBlank
+    @Size(max = 64)
+    @Schema(title = L_id)
+    String id;
 
-    @Schema(title = "id")
-    private String id;
+    @NotBlank
+    @Size(max = 128)
+    @Schema(title = L_code)
+    String code;
 
-
-    //@NotBlank
-
-    @Schema(title = "编码")
-    private String code;
-
-    @Schema(title = "模糊匹配 - 编码")
+    @Schema(title = "模糊匹配-" + L_code)
     @Contains
-    private String containsCode;
+    String containsCode;
 
+    @Schema(title = L_icon)
+    String icon;
 
-    @Schema(title = "图标")
-    private String icon;
+    @NotNull
+    @Schema(title = L_orgDataScope)
+    OrgDataScope orgDataScope;
 
-
-    //@NotNull
-
-    @Schema(title = "部门数据权限")
-    private OrgDataScope orgDataScope;
-
-
-//    @Schema(title = "指定的部门列表")
-//    @OR(autoClose = true)
-//    @InjectVar(domain = "dao", expectBaseType = String.class, converter = JsonStrLikeConverter.class)
-//    @Contains
-//    private List<String> assignedOrgIdList;
-//
-//    @Schema(title = "资源权限列表")
-//    @OR(autoClose = true)
-//    @InjectVar(domain = "dao", expectBaseType = String.class, converter = JsonStrLikeConverter.class)
-//    @Contains
-//    private List<String> permissionList;
-
-    //@Size(max = 64)
-
-    @Schema(title = "系统子域")
-    private String domain;
-
-
-    //@NotBlank
-    //@Size(max = 128)
-
-    @Schema(title = "名称")
-    private String name;
-
-    @Schema(title = "模糊匹配 - 名称")
+    @OR(autoClose = true)
     @Contains
-    private String containsName;
+    @InjectVar(domain = "dao",  converter = JsonStrLikeConverter.class, isRequired = "false")
+    @Schema(title = L_assignedOrgIdList , description = D_assignedOrgIdList)
+    List<String> assignedOrgIdList;
 
-
-    //@Size(max = 128)
-
-    @Schema(title = "拼音，格式：全拼(简拼)")
-    private String pinyinName;
-
-    @Schema(title = "模糊匹配 - 拼音，格式：全拼(简拼)")
+    @OR(autoClose = true)
     @Contains
-    private String containsPinyinName;
+    @InjectVar(domain = "dao",  converter = JsonStrLikeConverter.class, isRequired = "false")
+    @Schema(title = L_permissionList , description = D_permissionList)
+    List<String> permissionList;
 
+    @Size(max = 128)
+    @Schema(title = L_domain)
+    String domain;
 
-    //@Size(max = 128)
+    @NotBlank
+    @Size(max = 128)
+    @Schema(title = L_name)
+    String name;
 
-    @Schema(title = "创建者")
-    private String creator;
+    @Schema(title = "模糊匹配-" + L_name)
+    @Contains
+    String containsName;
 
+    @Size(max = 128)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
 
-    //@NotNull
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
+    @Contains
+    String containsPinyinName;
 
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Size(max = 128)
+    @Schema(title = L_creator)
+    String creator;
+
+    @NotNull
+    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
-    private Date gteCreateTime;
+    Date gteCreateTime;
 
-    @Schema(title = "小于等于创建时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
     @Lte
-    private Date lteCreateTime;
+    Date lteCreateTime;
+
+    //@Schema(title = L_createTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenCreateTime;
 
 
-    // @DateTimeFormat(iso = ISO.DATE_TIME) // Spring mvc 默认的时间格式：yyyy/MM/dd HH:mm:ss
-    @Schema(title = "大于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_lastUpdateTime , description = "大于等于" + L_lastUpdateTime)
     @Gte
-    private Date gteLastUpdateTime;
+    Date gteLastUpdateTime;
 
-    @Schema(title = "小于等于更新时间，默认的时间格式：yyyy/MM/dd HH:mm:ss")
+    @Schema(title = L_lastUpdateTime , description = "小于等于" + L_lastUpdateTime)
     @Lte
-    private Date lteLastUpdateTime;
+    Date lteLastUpdateTime;
+
+    //@Schema(title = L_lastUpdateTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenLastUpdateTime;
 
 
-    @Schema(title = "排序代码")
-    private Integer orderCode;
+    @Schema(title = L_orderCode)
+    Integer orderCode;
 
+    @NotNull
+    @Schema(title = L_enable)
+    Boolean enable;
 
-    //@NotNull
+    @NotNull
+    @Schema(title = L_editable)
+    Boolean editable;
 
-    @Schema(title = "是否允许")
-    private Boolean enable;
-
-
-    //@NotNull
-
-    @Schema(title = "是否可编辑")
-    private Boolean editable;
-
-
-    //@Size(max = 512)
-
-    @Schema(title = "备注")
-    private String remark;
-
+    @Size(max = 512)
+    @Schema(title = L_remark)
+    String remark;
 
     public QueryRoleReq(String id) {
         this.id = id;
     }
-
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

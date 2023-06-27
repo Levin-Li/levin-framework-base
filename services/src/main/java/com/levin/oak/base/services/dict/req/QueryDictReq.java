@@ -46,8 +46,8 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询字典
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[5244a1b0026f1e48c134d019c78fb3da]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
+ *  代码生成哈希校验码：[8cbb25521bbf87aeb1983a33ee3266f3]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -112,7 +112,7 @@ public class QueryDictReq extends MultiTenantReq{
     @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
     @Contains
     String containsPinyinName;
 

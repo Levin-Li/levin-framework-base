@@ -47,8 +47,8 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  统计字典
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[d09dde000d9d565fe6dcbcd74b034233]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
+ *  代码生成哈希校验码：[42d3170032265fb31033b1a9fccd8c3c]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -108,7 +108,7 @@ public class StatDictReq extends MultiTenantReq{
     @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
     @Contains
     String containsPinyinName;
 

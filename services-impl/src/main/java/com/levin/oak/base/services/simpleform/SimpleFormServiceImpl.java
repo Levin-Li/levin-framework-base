@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  简单表单-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月26日 下午6:06:03
- *  代码生成哈希校验码：[a52853c1eaa1279460abf9571e5f5316]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:52
+ *  代码生成哈希校验码：[489eb8928368ca467271f1a7f4de71c7]
  */
 
 //@Service(PLUGIN_PREFIX + "SimpleFormService")

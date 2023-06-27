@@ -33,8 +33,8 @@ import java.util.Date;
 /**
  *  通知-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- * 代码生成哈希校验码：[0321523c9e5f0e88d51296a23c731eb0]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:50
+ * 代码生成哈希校验码：[cc045ae1e753b6e40c6dd8045c670212]
  */
 
 @Tag(name = E_Notice.BIZ_NAME + "-业务服务", description = "")

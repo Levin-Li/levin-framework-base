@@ -30,7 +30,7 @@ import java.util.UUID;
 @FieldNameConstants
 
 //5、必须注解业务名称
-@Schema(title = "租户")
+@Schema(title = "平台租户")
 
 //6、必须建立索引
 @Entity(name = EntityConst.PREFIX + "Tenant")

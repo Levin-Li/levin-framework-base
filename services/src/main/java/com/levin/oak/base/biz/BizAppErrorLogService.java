@@ -32,8 +32,8 @@ import java.util.Date;
 /**
  *  应用错误日志-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- * 代码生成哈希校验码：[cf772fa829b23522269412505e1386e9]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:50
+ * 代码生成哈希校验码：[79e69de31923b5e93b914926110343d6]
  */
 
 @Tag(name = E_AppErrorLog.BIZ_NAME + "-业务服务", description = "")

@@ -53,8 +53,8 @@ import java.util.Date;
 /**
  *  系统设置-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[7cee244c77e7da5c8f17e9425997006b]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
+ *  代码生成哈希校验码：[c888183534cdb24a93ab551d38e83d53]
  */
 
 //@Service(PLUGIN_PREFIX + "SettingService")

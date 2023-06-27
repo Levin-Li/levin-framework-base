@@ -37,15 +37,15 @@ import java.util.Date;
 
 /**
  * 机构
- * @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- * 代码生成哈希校验码：[d65671640afda794f1b697e8041f9f57]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
+ * 代码生成哈希校验码：[14a940c7c1df9cf9e75644755a1fac24]
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(exclude = {"area","parent","children",})
+@ToString(exclude = {"area","extInfo","parent","children",})
 @FieldNameConstants
 @JsonIgnoreProperties(tenantId)
 public class OrgInfo implements Serializable {
@@ -142,6 +142,11 @@ public class OrgInfo implements Serializable {
     @Size(max = 32)
     @Schema(title = L_zipCode )
     String zipCode;
+
+
+    //@Fetch //默认不加载，请通过查询对象控制
+    @Schema(title = L_extInfo )
+    String extInfo;
 
 
     //@Fetch //默认不加载，请通过查询对象控制

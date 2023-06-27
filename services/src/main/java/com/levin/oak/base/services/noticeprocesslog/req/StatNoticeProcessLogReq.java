@@ -44,8 +44,8 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  统计通知处理日志
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[a54385e8c17f4cf303b50b5770054af5]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:50
+ *  代码生成哈希校验码：[994330cb772cab685f3453ed1fcb80c7]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

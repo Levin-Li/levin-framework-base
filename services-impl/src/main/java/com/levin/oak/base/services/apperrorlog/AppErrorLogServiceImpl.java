@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  应用错误日志-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[4aad67cdea4a9bc0ff17487fa80fb7c8]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:50
+ *  代码生成哈希校验码：[d7daa8cb37bdedc4662e653c46d7ed8c]
  */
 
 //@Service(PLUGIN_PREFIX + "AppErrorLogService")

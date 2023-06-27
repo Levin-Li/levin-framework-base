@@ -32,9 +32,9 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 /**
- * 租户
- * @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
- * 代码生成哈希校验码：[3cc2e2087613d27e28bb30b2dbe7fad3]
+ * 平台租户
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
+ * 代码生成哈希校验码：[b627acea2265460168efa8ab6d384e77]
  */
 @Schema(title = BIZ_NAME)
 @Data

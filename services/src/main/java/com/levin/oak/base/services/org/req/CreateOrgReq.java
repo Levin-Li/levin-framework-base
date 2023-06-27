@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  新增机构
- *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- * 代码生成哈希校验码：[abd3249d984fcacae5765009ce0f5cad]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
+ * 代码生成哈希校验码：[66a5c8c2e8cd644c14d0e490580eef1b]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -122,6 +122,9 @@ public class CreateOrgReq extends MultiTenantReq {
     @Schema(title = L_zipCode  )
     @Size(max = 32)
     String zipCode;
+
+    @Schema(title = L_extInfo  )
+    String extInfo;
 
 
 

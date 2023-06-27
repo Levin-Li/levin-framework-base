@@ -39,8 +39,8 @@ import java.util.Date;
 
 /**
  *  新增工作岗位
- *  //Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- * 代码生成哈希校验码：[28ed16a80c85ed9a08854fc5607795c2]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
+ * 代码生成哈希校验码：[3d75966d54034da368b7357fe20436d5]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data

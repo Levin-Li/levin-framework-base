@@ -45,8 +45,8 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  统计简单动态接口
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
- *  代码生成哈希校验码：[a40f97dce044d5d475a131d77db324dc]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
+ *  代码生成哈希校验码：[06e9c59dcd6a47315ba317d40502ff9e]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -130,7 +130,7 @@ public class StatSimpleApiReq extends MultiTenantOrgReq{
     @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
     @Contains
     String containsPinyinName;
 

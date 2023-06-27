@@ -43,8 +43,8 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询通知处理日志
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[c18813792e8ff7f1b61a7949c408da20]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:50
+ *  代码生成哈希校验码：[0d726fbdced8e16ef376342b33ffa744]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data

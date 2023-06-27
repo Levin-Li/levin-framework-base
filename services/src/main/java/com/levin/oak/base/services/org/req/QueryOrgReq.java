@@ -49,8 +49,8 @@ import com.levin.oak.base.services.commons.req.*;
 
 /**
  *  查询机构
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[bffbbb0fadc8ee7a65533c1248fb9c1e]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
+ *  代码生成哈希校验码：[ff9b10abce29bf5f36e191f32af20ebb]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -89,7 +89,7 @@ public class QueryOrgReq extends MultiTenantReq{
     @Schema(title = L_code , description = D_code)
     String code;
 
-    @Schema(title = "模糊匹配-" + L_code)
+    @Schema(title = "模糊匹配-" + L_code , description = D_code)
     @Contains
     String containsCode;
 
@@ -116,6 +116,7 @@ public class QueryOrgReq extends MultiTenantReq{
     @Schema(title = "模糊匹配-" + L_areaCode)
     @Contains
     String containsAreaCode;
+
 
     @Schema(title = "是否加载" + L_area)
     @Fetch(attrs = E_Org.area, condition = "#_val == true")
@@ -165,9 +166,18 @@ public class QueryOrgReq extends MultiTenantReq{
     @Schema(title = L_zipCode)
     String zipCode;
 
+    @Schema(title = L_extInfo)
+    String extInfo;
+
+    @Schema(title = "是否加载" + L_extInfo)
+    @Fetch(attrs = E_Org.extInfo, condition = "#_val == true")
+    Boolean loadExtInfo;
+
+
     @Schema(title = "是否加载" + L_parent)
     @Fetch(attrs = E_Org.parent, condition = "#_val == true")
     Boolean loadParent;
+
 
     @Schema(title = "是否加载" + L_children)
     @Fetch(attrs = E_Org.children, condition = "#_val == true")
@@ -190,7 +200,7 @@ public class QueryOrgReq extends MultiTenantReq{
     @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
     @Contains
     String containsPinyinName;
 

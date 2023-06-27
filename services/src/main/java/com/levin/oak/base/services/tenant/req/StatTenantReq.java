@@ -45,9 +45,9 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 
 /**
- *  统计租户
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
- *  代码生成哈希校验码：[223e5da2657103b842fde6130ac5d1b8]
+ *  统计平台租户
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
+ *  代码生成哈希校验码：[543bbc49fead85bc13e67c676714cdd4]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -152,7 +152,7 @@ public class StatTenantReq extends BaseReq{
     @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
     @Contains
     String containsPinyinName;
 
