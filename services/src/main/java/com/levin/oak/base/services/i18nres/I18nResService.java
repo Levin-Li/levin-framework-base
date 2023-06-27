@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  国际化资源-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
- *  代码生成哈希校验码：[bcb37588044b90cfdd23a0c2f928ccd2]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
+ *  代码生成哈希校验码：[c51bcbabce2d86c7b8e985cfd57e0540]
  */
 @Tag(name = E_I18nRes.BIZ_NAME, description = E_I18nRes.BIZ_NAME + MAINTAIN_ACTION)
 public interface I18nResService {

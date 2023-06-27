@@ -39,8 +39,8 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 
 /**
  *  平台租户 主键通用请求
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
- *  代码生成哈希校验码：[f329564826f12beab6cb5000eae260a4]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:07
+ *  代码生成哈希校验码：[fa871bbe3633b8c9a81fecc8a3cb2d48]
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")

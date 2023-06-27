@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  访问日志-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:50
- *  代码生成哈希校验码：[d34a7fdc05f30b6332c9284433629379]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:08
+ *  代码生成哈希校验码：[f24b00762ded21669968aaba4b0d3436]
  */
 
 //@Service(PLUGIN_PREFIX + "AccessLogService")

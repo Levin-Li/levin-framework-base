@@ -53,8 +53,8 @@ import java.util.Date;
 /**
  *  工作岗位-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
- *  代码生成哈希校验码：[7a7f289f9dce3cce172d7a3ed07f8e5d]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
+ *  代码生成哈希校验码：[cbbd39202f7327e717f4ac04420ec2ef]
  */
 
 //@Service(PLUGIN_PREFIX + "JobPostService")

@@ -37,19 +37,19 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import com.levin.commons.rbac.MenuItem.*;
-    import com.levin.oak.base.entities.MenuRes;
-    import com.levin.oak.base.services.menures.info.*;
-    import java.util.Set;
-    import java.util.Date;
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.rbac.MenuItem.*;
+import com.levin.oak.base.entities.MenuRes;
+import com.levin.oak.base.services.menures.info.*;
+import java.util.Set;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  统计菜单
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
- *  代码生成哈希校验码：[c3346c61335df627f3a15c05291a87cc]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:10
+ *  代码生成哈希校验码：[d70d1f21060332fa261a64de97e759d8]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

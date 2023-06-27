@@ -36,16 +36,16 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import com.levin.oak.base.entities.JobPost.*;
-    import java.util.Date;
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.JobPost.*;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  查询工作岗位
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
- *  代码生成哈希校验码：[b58875068ba9b274c938b3518ed18c5b]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
+ *  代码生成哈希校验码：[9c78ec24507980d31fee15f1ae00f1d3]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data

@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  调度任务-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:50
- *  代码生成哈希校验码：[a897fb4afefb1f58f5bd33a2c40f2d77]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
+ *  代码生成哈希校验码：[7f00b7822b70ad1d40a5aaf3779541ee]
  */
 
 //@Service(PLUGIN_PREFIX + "ScheduledTaskService")

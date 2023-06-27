@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  菜单-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
- *  代码生成哈希校验码：[693f723ec491b94fb3b99c18e9312a6f]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:10
+ *  代码生成哈希校验码：[12b3f3d8dbfd3d2b0740377065834bf0]
  */
 @Tag(name = E_MenuRes.BIZ_NAME, description = E_MenuRes.BIZ_NAME + MAINTAIN_ACTION)
 public interface MenuResService {

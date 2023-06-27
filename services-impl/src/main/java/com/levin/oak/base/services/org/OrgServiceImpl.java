@@ -58,8 +58,8 @@ import java.util.Date;
 /**
  *  机构-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
- *  代码生成哈希校验码：[40df89f26a8415e437dd3f21e3679c2c]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
+ *  代码生成哈希校验码：[213905543cb751c1ffec36af6c7707ee]
  */
 
 //@Service(PLUGIN_PREFIX + "OrgService")

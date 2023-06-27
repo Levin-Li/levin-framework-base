@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 应用接入控制器
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
- * 代码生成哈希校验码：[d4071ce68d08f965ca1e095bbd74003b]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:07
+ * 代码生成哈希校验码：[5205fd348842653e9e9bd3e751032791]
  */
 public class AppClientController extends BaseController{
 

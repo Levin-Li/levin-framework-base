@@ -36,15 +36,15 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import java.util.Date;
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  查询简单页面
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
- *  代码生成哈希校验码：[5c533088413ee24b8377b68477951a98]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:10
+ *  代码生成哈希校验码：[dfb9acf907c96e0c61673c439fc6ce6a]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data

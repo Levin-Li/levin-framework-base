@@ -38,8 +38,8 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 
 /**
  *  删除平台租户
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
- * 代码生成哈希校验码：[410f549f758f6f621d3db7fbca07b467]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:07
+ * 代码生成哈希校验码：[8c1e1966356b0f11e23a67067c2b46b2]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

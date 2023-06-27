@@ -32,8 +32,8 @@ import java.util.Date;
 /**
  *  访问日志-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:50
- * 代码生成哈希校验码：[05fee47cfcfe904b67a40cb16382ebb5]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:08
+ * 代码生成哈希校验码：[38ad25ce9dc7990c137912f3e12f1550]
  */
 
 @Tag(name = E_AccessLog.BIZ_NAME + "-业务服务", description = "")

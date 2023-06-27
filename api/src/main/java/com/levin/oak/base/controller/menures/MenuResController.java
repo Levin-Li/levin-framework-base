@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 菜单控制器
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
- * 代码生成哈希校验码：[9115ec07c7a7f5b017f4483966ef27ce]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:10
+ * 代码生成哈希校验码：[7083180698eeb37ee7d300ffcb725499]
  */
 public class MenuResController extends BaseController{
 

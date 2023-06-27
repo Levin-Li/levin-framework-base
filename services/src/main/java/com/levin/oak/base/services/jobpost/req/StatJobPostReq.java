@@ -37,16 +37,16 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import com.levin.oak.base.entities.JobPost.*;
-    import java.util.Date;
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.JobPost.*;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  统计工作岗位
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
- *  代码生成哈希校验码：[f7e82d33b6dd2461ab1f70a038937819]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
+ *  代码生成哈希校验码：[64e2cb9510b96b154e2289b86a7c9fdb]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

@@ -32,8 +32,8 @@ import java.util.Date;
 /**
  *  简单表单-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
- * 代码生成哈希校验码：[9c998245b5189e701815bcc7d1b2dd0a]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:10
+ * 代码生成哈希校验码：[1fbed89f0a2ade87cf87a3d703d1abbe]
  */
 
 @Tag(name = E_SimpleForm.BIZ_NAME + "-业务服务", description = "")

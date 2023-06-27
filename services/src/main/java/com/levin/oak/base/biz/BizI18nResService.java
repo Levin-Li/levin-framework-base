@@ -32,8 +32,8 @@ import java.util.Date;
 /**
  *  国际化资源-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:51
- * 代码生成哈希校验码：[4008166ef6fd85cb560e1e8bdd592706]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:09
+ * 代码生成哈希校验码：[3087ca7f7c1d2a80205c3d7b27dd65a0]
  */
 
 @Tag(name = E_I18nRes.BIZ_NAME + "-业务服务", description = "")

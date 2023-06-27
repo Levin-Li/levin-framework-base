@@ -33,8 +33,8 @@ import java.util.Date;
 /**
  *  系统设置-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:31:49
- * 代码生成哈希校验码：[9c907f70c6c1810b1d7ea2658e2e2b6d]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:43:08
+ * 代码生成哈希校验码：[cec4c8842dea456379e0ae5b7ea5fb49]
  */
 
 @Tag(name = E_Setting.BIZ_NAME + "-业务服务", description = "")
