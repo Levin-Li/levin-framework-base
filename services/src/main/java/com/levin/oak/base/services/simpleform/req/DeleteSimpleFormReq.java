@@ -31,13 +31,15 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  删除简单表单
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[e49ae72f297fb21c3702674a9e7834dd]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[357dfd70500af1da8d106a597f4aaede]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

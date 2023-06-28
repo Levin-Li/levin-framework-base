@@ -26,13 +26,15 @@ import static com.levin.oak.base.entities.E_SimpleForm.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  * 简单表单
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[6b82073bd919f14558ae55504d13840a]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[ae093abba4b0e927a1c07aa3965aa209]
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -84,23 +86,14 @@ public class SimpleFormInfo implements Serializable {
     String path;
 
 
+    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations )
-    String requireAuthorizations;
+    List<String> requireAuthorizations;
 
 
     @Schema(title = L_content )
     String content;
-
-
-    @Size(max = 64)
-    @Schema(title = L_orgId )
-    String orgId;
-
-
-    @Size(max = 128)
-    @Schema(title = L_tenantId )
-    String tenantId;
 
 
     @Size(max = 128)
@@ -109,14 +102,19 @@ public class SimpleFormInfo implements Serializable {
 
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String name;
 
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName )
-    String pinyinName;
+    @Schema(title = L_orgId )
+    String orgId;
+
+
+    @Size(max = 128)
+    @Schema(title = L_tenantId )
+    String tenantId;
 
 
     @Size(max = 128)

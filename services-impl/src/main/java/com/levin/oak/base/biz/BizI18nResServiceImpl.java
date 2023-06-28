@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  国际化资源-业务服务实现类
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[75fe0096816e9ea316dc80c0eafa1135]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[618bb9df9369ace9de3f8e2da8cec32f]
  */
 
 @DubboService

@@ -45,8 +45,8 @@ import java.util.Date;
 
 /**
  *  统计通知
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
- *  代码生成哈希校验码：[3ffcfdecc3b21258e2b2146bc92e3646]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[d4385977e4bdf44ca7116efd5fb8718d]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -103,21 +103,9 @@ public class StatNoticeReq extends MultiTenantOrgReq{
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Schema(title = "模糊匹配-" + L_name)
-    @Contains
-    String containsName;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
-
-    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
-    @Contains
-    String containsPinyinName;
 
     @Size(max = 128)
     @Schema(title = L_creator)

@@ -27,14 +27,16 @@ import com.levin.oak.base.services.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.SimpleApi.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  简单动态接口-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
- * 代码生成哈希校验码：[2fd941d7d6af2847a976fee9c8dbfe8c]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ * 代码生成哈希校验码：[360023abd6f22cfead619fff6dd0204a]
  */
 
 @Tag(name = E_SimpleApi.BIZ_NAME + "-业务服务", description = "")

@@ -2,7 +2,7 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
-import com.levin.commons.dao.domain.support.AbstractNamedMultiTenantObject;
+import com.levin.commons.service.support.InjectConsts;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,8 +25,8 @@ import javax.persistence.*;
                 @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = AbstractNamedMultiTenantObject.Fields.tenantId),
-                @Index(columnList = AbstractNamedMultiTenantObject.Fields.domain),
+                @Index(columnList = InjectConsts.TENANT_ID),
+                @Index(columnList = E_TenantOrgNamedEntity.domain),
 
                 @Index(columnList = E_AppClientFile.clientType),
 
@@ -35,10 +35,10 @@ import javax.persistence.*;
 //        ,
 //
 //        uniqueConstraints = {
-//                @UniqueConstraint(columnNames = {AbstractNamedMultiTenantObject.Fields.tenantId, E_Setting.code}),
+//                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_Setting.code}),
 //        }
 )
-public class AppClientFile extends AbstractNamedMultiTenantObject {
+public class AppClientFile extends TenantOrgNamedEntity {
 
     @Id
 //    @GeneratedValue

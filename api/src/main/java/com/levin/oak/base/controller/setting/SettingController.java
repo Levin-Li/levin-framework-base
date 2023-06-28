@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 系统设置控制器
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
- * 代码生成哈希校验码：[2ec6cfcf11e03241d5c2fdebdcf89c2d]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[18bde60de31d4312e4f7cb5453834f00]
  */
 public class SettingController extends BaseController{
 

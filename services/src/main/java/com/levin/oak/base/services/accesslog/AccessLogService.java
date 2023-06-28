@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  访问日志-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- *  代码生成哈希校验码：[9299b47c6ce09fb844f852bb1195c9af]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[7336b6d1f546c453eb1ab878f68298c3]
  */
 @Tag(name = E_AccessLog.BIZ_NAME, description = E_AccessLog.BIZ_NAME + MAINTAIN_ACTION)
 public interface AccessLogService {

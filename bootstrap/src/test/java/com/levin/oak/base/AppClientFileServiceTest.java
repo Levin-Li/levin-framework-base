@@ -54,8 +54,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 客户端文件测试
  *
- * Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[355a03a1f6e094038f96e15fccad00bf]
+ * Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[0ab011e58921e78c48be584851dd751e]
  */
 
 //@ActiveProfiles("test")
@@ -103,13 +103,13 @@ public class AppClientFileServiceTest {
 
             // req.setContent("文件内容_1");// 
 
-            // req.setTenantId("这是文本128");// 
-
             // req.setDomain("这是文本128");// 
 
-            // req.setName("这是文本128");// 必填
+            // req.setName("这是文本64");// 必填
 
-            // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+            // req.setOrgId("这是文本128");// 
+
+            // req.setTenantId("这是文本128");// 
 
             // req.setOrderCode(1);// 
 
@@ -139,10 +139,10 @@ public class AppClientFileServiceTest {
         // req.setMimeType("这是文本128");//
         // req.setPath("文件路径_1");//
         // req.setContent("文件内容_1");//
-        // req.setTenantId("这是文本128");//
         // req.setDomain("这是文本128");//
-        // req.setName("这是文本128");//
-        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
+        // req.setName("这是文本64");//
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
         // req.setOrderCode(1);//
         // req.setEnable(true);//
@@ -168,10 +168,10 @@ public class AppClientFileServiceTest {
            // req.setMimeType("这是文本128");// 
            // req.setPath("文件路径_1");// 必填
            // req.setContent("文件内容_1");// 
-           // req.setTenantId("这是文本128");// 
            // req.setDomain("这是文本128");// 
-           // req.setName("这是文本128");// 必填
-           // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+           // req.setName("这是文本64");// 必填
+           // req.setOrgId("这是文本128");// 
+           // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填

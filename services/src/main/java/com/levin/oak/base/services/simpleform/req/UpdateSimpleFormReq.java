@@ -32,13 +32,15 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  更新简单表单
- *  Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- *  代码生成哈希校验码：[41146f1192fbbbdb1e759ce8ea9ef129]
+ *  Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ *  代码生成哈希校验码：[773b066018456eeb046d9078adba425f]
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -91,9 +93,10 @@ public class UpdateSimpleFormReq extends MultiTenantOrgReq {
     @Schema(title = L_path)
     String path;
 
+    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations)
-    String requireAuthorizations;
+    List<String> requireAuthorizations;
 
     @Schema(title = L_content)
     String content;
@@ -103,13 +106,9 @@ public class UpdateSimpleFormReq extends MultiTenantOrgReq {
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;

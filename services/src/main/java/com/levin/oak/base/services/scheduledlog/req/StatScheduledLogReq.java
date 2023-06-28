@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  统计调度日志
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
- *  代码生成哈希校验码：[d07b53135f6fe379a2d012830e7b536e]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[2b61af095ff69988e3eba4a37b5aad32]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -75,6 +75,16 @@ public class StatScheduledLogReq extends MultiTenantOrgReq{
     @Schema(title = L_taskId)
     String taskId;
 
+    @Size(max = 128)
+    @Schema(title = L_invokeCycle)
+    String invokeCycle;
+
+    @Schema(title = L_isError)
+    Boolean isError;
+
+    @Schema(title = L_invokeResult)
+    String invokeResult;
+
     @NotNull
     @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
@@ -87,16 +97,6 @@ public class StatScheduledLogReq extends MultiTenantOrgReq{
     //@Schema(title = L_createTime + "-日期范围")
     //@Between(paramDelimiter = "-")
     //String betweenCreateTime;
-
-    @Size(max = 128)
-    @Schema(title = L_invokeCycle)
-    String invokeCycle;
-
-    @Schema(title = L_isError)
-    Boolean isError;
-
-    @Schema(title = L_invokeResult)
-    String invokeResult;
 
 
     public StatScheduledLogReq(Long id) {

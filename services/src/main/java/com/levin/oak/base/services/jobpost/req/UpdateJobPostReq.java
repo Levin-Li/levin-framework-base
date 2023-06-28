@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  *  更新工作岗位
- *  Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- *  代码生成哈希校验码：[1a416257be5bc040065eb9bac80d2ed1]
+ *  Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[93a5b4c52881be0061cce51d31fee25b]
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -53,7 +53,7 @@ import java.util.Date;
 @TargetOption(entityClass = JobPost.class, alias = E_JobPost.ALIAS)
 //默认更新注解
 @Update
-public class UpdateJobPostReq extends MultiTenantReq {
+public class UpdateJobPostReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1018878847L;
 
@@ -80,13 +80,9 @@ public class UpdateJobPostReq extends MultiTenantReq {
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;

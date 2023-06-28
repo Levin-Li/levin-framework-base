@@ -41,8 +41,8 @@ import com.levin.oak.base.entities.Org;
 
 /**
  *  删除用户
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- * 代码生成哈希校验码：[0a890ebaffcada327789f8c3e2de5ffd]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[cf0d01d3b3d185eb590dde85ddacd924]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

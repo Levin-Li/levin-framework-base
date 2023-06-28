@@ -36,8 +36,8 @@ import java.util.Date;
 
 /**
  *  删除访问日志
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- * 代码生成哈希校验码：[239c8b2862655e1d281e03b9d3978cbf]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[d870e847f25bc5a727c6e0eb3b925c69]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -51,7 +51,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS)
-public class DeleteAccessLogReq extends MultiTenantReq {
+public class DeleteAccessLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1030736962L;
 

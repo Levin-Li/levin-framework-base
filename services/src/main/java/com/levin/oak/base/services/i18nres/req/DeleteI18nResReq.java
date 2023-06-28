@@ -36,8 +36,8 @@ import java.util.Date;
 
 /**
  *  删除国际化资源
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[9c5687cb967376579aac9f700347a97b]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[57bcfde4d88e3065298c133dc30b99c9]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -51,7 +51,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS)
-public class DeleteI18nResReq extends MultiTenantReq {
+public class DeleteI18nResReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1681554652L;
 

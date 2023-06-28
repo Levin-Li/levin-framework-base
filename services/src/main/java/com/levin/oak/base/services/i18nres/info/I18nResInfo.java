@@ -31,8 +31,8 @@ import java.util.Date;
 
 /**
  * 国际化资源
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[7b0877ae02501d54789c240f908d2ece]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[5847296c5c1eb95ece364e70935c3789]
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -71,24 +71,24 @@ public class I18nResInfo implements Serializable {
 
 
     @Size(max = 128)
-    @Schema(title = L_tenantId )
-    String tenantId;
-
-
-    @Size(max = 128)
     @Schema(title = L_domain )
     String domain;
 
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String name;
 
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName )
-    String pinyinName;
+    @Schema(title = L_orgId )
+    String orgId;
+
+
+    @Size(max = 128)
+    @Schema(title = L_tenantId )
+    String tenantId;
 
 
     @Size(max = 128)

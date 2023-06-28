@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  访问日志 主键通用请求
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- *  代码生成哈希校验码：[6dc59dca33c120247ff4a1c7a546f741]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[0b83584026e8fd32f0cd04ba17aa3bdf]
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")
@@ -51,7 +51,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS, resultClass = AccessLogInfo.class)
-public class AccessLogIdReq extends MultiTenantReq {
+public class AccessLogIdReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1030736962L;
 

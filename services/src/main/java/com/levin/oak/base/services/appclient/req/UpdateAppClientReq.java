@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  更新应用接入
- *  Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
- *  代码生成哈希校验码：[b52eb5eb77019d5503b0cde209ddce8d]
+ *  Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ *  代码生成哈希校验码：[dbd555ebdb95fcc3e88b2ccc90940281]
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -52,7 +52,7 @@ import java.util.Date;
 @TargetOption(entityClass = AppClient.class, alias = E_AppClient.ALIAS)
 //默认更新注解
 @Update
-public class UpdateAppClientReq extends MultiTenantReq {
+public class UpdateAppClientReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -115048882L;
 
@@ -81,13 +81,9 @@ public class UpdateAppClientReq extends MultiTenantReq {
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;

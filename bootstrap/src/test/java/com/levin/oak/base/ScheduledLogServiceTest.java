@@ -54,8 +54,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 调度日志测试
  *
- * Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[4cf09426604ddc2422dd7a1016b12316]
+ * Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[16d8963bbd15c31dca18aa5d824f78c4]
  */
 
 //@ActiveProfiles("test")
@@ -95,10 +95,6 @@ public class ScheduledLogServiceTest {
 
         CreateScheduledLogReq req = new CreateScheduledLogReq();
 
-            // req.setTenantId("这是文本64");// 
-
-            // req.setOrgId("这是文本64");// 必填
-
             // req.setTaskId("这是文本64");// 必填
 
             // req.setInvokeCycle("这是文本128");// 
@@ -106,6 +102,10 @@ public class ScheduledLogServiceTest {
             // req.setIsError(true);// 
 
             // req.setInvokeResult("执行结果_1");// 
+
+            // req.setTenantId("这是文本128");// 
+
+            // req.setOrgId("这是文本128");// 
 
 
        Long id  = scheduledLogService.create(req);
@@ -123,12 +123,12 @@ public class ScheduledLogServiceTest {
         QueryScheduledLogReq req = new QueryScheduledLogReq();
 
         // req.setId(null);//
-        // req.setTenantId("这是文本64");//
-        // req.setOrgId("这是文本64");//
         // req.setTaskId("这是文本64");//
         // req.setInvokeCycle("这是文本128");//
         // req.setIsError(true);//
         // req.setInvokeResult("执行结果_1");//
+        // req.setTenantId("这是文本128");//
+        // req.setOrgId("这是文本128");//
 
         PagingData<ScheduledLogInfo> resp = scheduledLogService.query(req,null);
 
@@ -145,12 +145,12 @@ public class ScheduledLogServiceTest {
          req.setId(id);
 
 
-           // req.setTenantId("这是文本64");// 
-           // req.setOrgId("这是文本64");// 必填
            // req.setTaskId("这是文本64");// 必填
            // req.setInvokeCycle("这是文本128");// 
            // req.setIsError(true);// 
            // req.setInvokeResult("执行结果_1");// 
+           // req.setTenantId("这是文本128");// 
+           // req.setOrgId("这是文本128");// 
 
           boolean ok = scheduledLogService.update(req);
 

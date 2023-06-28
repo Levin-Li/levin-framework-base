@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  *  工作岗位 主键通用请求
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- *  代码生成哈希校验码：[732517c3151620d3e9c8ca424bc9682b]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ *  代码生成哈希校验码：[c9bdc4b2f3f1f37850e6f26c2724440d]
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")
@@ -52,7 +52,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = JobPost.class, alias = E_JobPost.ALIAS, resultClass = JobPostInfo.class)
-public class JobPostIdReq extends MultiTenantReq {
+public class JobPostIdReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1018878847L;
 

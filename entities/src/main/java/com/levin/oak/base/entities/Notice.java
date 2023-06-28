@@ -5,7 +5,6 @@ import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.PersonalObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
-import com.levin.commons.dao.domain.support.AbstractNamedMultiTenantObject;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConsts;
@@ -35,8 +34,8 @@ import java.util.Date;
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
                 @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = AbstractNamedMultiTenantObject.Fields.tenantId),
-                @Index(columnList = TenantOrganizedEntity.Fields.orgId),
+                @Index(columnList = E_TenantOrgNamedEntity.tenantId),
+                @Index(columnList = E_TenantOrgNamedEntity.orgId),
 
                 @Index(columnList = E_Notice.ownerId),
                 @Index(columnList = E_Notice.expiredDate),
@@ -58,7 +57,7 @@ import java.util.Date;
  *
  */
 public class Notice
-        extends TenantOrganizedEntity
+        extends TenantOrgNamedEntity
         implements PersonalObject, OrganizedObject, MultiTenantObject {
 
     @Schema(title = "通知内容类型")

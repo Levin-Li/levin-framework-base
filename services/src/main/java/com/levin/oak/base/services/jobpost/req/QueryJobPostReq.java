@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  查询工作岗位
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- *  代码生成哈希校验码：[5bdb410e244c3fa0f60c0e76fb3f2dc7]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ *  代码生成哈希校验码：[caf5a8e24789adb2d494609b19137992]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -57,7 +57,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = JobPost.class, alias = E_JobPost.ALIAS, resultClass = JobPostInfo.class)
-public class QueryJobPostReq extends MultiTenantReq{
+public class QueryJobPostReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = 1018878847L;
 
@@ -94,21 +94,9 @@ public class QueryJobPostReq extends MultiTenantReq{
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Schema(title = "模糊匹配-" + L_name)
-    @Contains
-    String containsName;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
-
-    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
-    @Contains
-    String containsPinyinName;
 
     @Size(max = 128)
     @Schema(title = L_creator)

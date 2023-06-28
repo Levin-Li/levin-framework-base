@@ -26,14 +26,16 @@ import com.levin.oak.base.services.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  简单页面-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[9ae6285d222a32910e84792c4ae75b7b]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[dccb701d75b9e40ef36a7b9d0606d64d]
  */
 
 @Tag(name = E_SimplePage.BIZ_NAME + "-业务服务", description = "")

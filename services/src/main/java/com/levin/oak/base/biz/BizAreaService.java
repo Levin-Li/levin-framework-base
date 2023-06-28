@@ -36,8 +36,8 @@ import java.util.Date;
 /**
  *  区域-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[fbf472a4b1ca190661796ada12aa1f22]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[99435007c9a9d7632f1fe6aca54d0f2a]
  */
 
 @Tag(name = E_Area.BIZ_NAME + "-业务服务", description = "")

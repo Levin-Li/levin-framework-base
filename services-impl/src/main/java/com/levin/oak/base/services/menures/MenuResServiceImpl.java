@@ -56,8 +56,8 @@ import java.util.Date;
 /**
  *  菜单-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- *  代码生成哈希校验码：[c50474e541cd565aa72702d5bf6aaee2]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ *  代码生成哈希校验码：[72c78df6bf2bbd9e91def8d0d3adfec9]
  */
 
 //@Service(PLUGIN_PREFIX + "MenuResService")

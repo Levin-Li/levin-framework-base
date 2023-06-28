@@ -49,8 +49,8 @@ import com.levin.oak.base.entities.Org;
 
 /**
  *  统计用户
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- *  代码生成哈希校验码：[516420d165c832c7468af534becc7513]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[1b589f824b51cb1da098a530939926c1]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -169,21 +169,9 @@ public class StatUserReq extends MultiTenantOrgReq{
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Schema(title = "模糊匹配-" + L_name)
-    @Contains
-    String containsName;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
-
-    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
-    @Contains
-    String containsPinyinName;
 
     @Size(max = 128)
     @Schema(title = L_creator)

@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  *  新增调度任务
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- * 代码生成哈希校验码：[78f9790c21d23585aa36578f1cee5070]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[9882602b12fdb827f14f7381df825877]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -88,12 +88,8 @@ public class CreateScheduledTaskReq extends MultiTenantOrgReq {
 
     @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     String name;
-
-    @Schema(title = L_pinyinName , description = D_pinyinName  )
-    @Size(max = 128)
-    String pinyinName;
 
     @Schema(title = L_creator , hidden = true )
     //@Size(max = 128)

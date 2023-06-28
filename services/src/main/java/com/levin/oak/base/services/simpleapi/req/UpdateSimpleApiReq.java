@@ -33,13 +33,15 @@ import com.levin.oak.base.services.commons.req.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.SimpleApi.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  更新简单动态接口
- *  Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:54
- *  代码生成哈希校验码：[232f4ab7e569298e9fd8eee4fd28eb5b]
+ *  Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ *  代码生成哈希校验码：[92a1eaacc620a2d24e67328c0c1d1f3e]
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -96,9 +98,10 @@ public class UpdateSimpleApiReq extends MultiTenantOrgReq {
     @Schema(title = L_path)
     String path;
 
+    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations)
-    String requireAuthorizations;
+    List<String> requireAuthorizations;
 
     @Schema(title = L_content)
     String content;
@@ -108,13 +111,9 @@ public class UpdateSimpleApiReq extends MultiTenantOrgReq {
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;

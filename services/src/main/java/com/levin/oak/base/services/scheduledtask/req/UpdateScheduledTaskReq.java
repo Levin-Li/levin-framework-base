@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  更新调度任务
- *  Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- *  代码生成哈希校验码：[4b98e5c65b118c3e8aa7763521cd5719]
+ *  Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[e43894d317d29daceb748b2938659d86]
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -97,13 +97,9 @@ public class UpdateScheduledTaskReq extends MultiTenantOrgReq {
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;

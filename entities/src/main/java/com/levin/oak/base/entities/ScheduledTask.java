@@ -3,7 +3,6 @@ package com.levin.oak.base.entities;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
-import com.levin.commons.dao.domain.support.AbstractNamedMultiTenantObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,13 +32,13 @@ import java.util.Date;
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-                @Index(columnList = AbstractNamedMultiTenantObject.Fields.tenantId),
-                @Index(columnList = TenantOrganizedEntity.Fields.orgId),
+                @Index(columnList = E_TenantOrgNamedEntity.tenantId),
+                @Index(columnList = E_TenantOrgNamedEntity.orgId),
                 @Index(columnList = E_ScheduledTask.groupName),
         }
 )
 public class ScheduledTask
-        extends TenantOrganizedEntity {
+        extends TenantOrgNamedEntity {
 
     @Id
 //    @GeneratedValue

@@ -32,13 +32,15 @@ import com.levin.oak.base.services.commons.req.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.SimpleApi.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  删除简单动态接口
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:54
- * 代码生成哈希校验码：[69e7468aa521f680b50ffb6960572a97]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ * 代码生成哈希校验码：[97a5cb3a24a45cbca912efbf4b60a07c]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

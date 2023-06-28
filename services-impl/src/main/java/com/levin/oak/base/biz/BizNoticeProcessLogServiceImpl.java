@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  通知处理日志-业务服务实现类
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- * 代码生成哈希校验码：[3c8d56f4853797fda8b558d5770959a2]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[3334951397459904d77643e2d3278ea2]
  */
 
 @DubboService

@@ -40,8 +40,8 @@ import java.util.Date;
 
 /**
  *  更新字典
- *  Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
- *  代码生成哈希校验码：[8b393b1a3ae78481cbe82ff02b8c70f1]
+ *  Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[96efdea718763645abec0bb7b72f76cd]
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -55,7 +55,7 @@ import java.util.Date;
 @TargetOption(entityClass = Dict.class, alias = E_Dict.ALIAS)
 //默认更新注解
 @Update
-public class UpdateDictReq extends MultiTenantReq {
+public class UpdateDictReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445779596L;
 
@@ -86,13 +86,9 @@ public class UpdateDictReq extends MultiTenantReq {
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;

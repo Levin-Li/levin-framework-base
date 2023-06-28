@@ -40,8 +40,8 @@ import java.util.Date;
 
 /**
  *  更新角色
- *  Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:54
- *  代码生成哈希校验码：[3b9d0eea2869845474ea131938d2f4c8]
+ *  Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ *  代码生成哈希校验码：[1d73cbf0cf9fe31e641a8d8de168fb5c]
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -55,7 +55,7 @@ import java.util.Date;
 @TargetOption(entityClass = Role.class, alias = E_Role.ALIAS)
 //默认更新注解
 @Update
-public class UpdateRoleReq extends MultiTenantReq {
+public class UpdateRoleReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445356492L;
 
@@ -93,13 +93,9 @@ public class UpdateRoleReq extends MultiTenantReq {
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;

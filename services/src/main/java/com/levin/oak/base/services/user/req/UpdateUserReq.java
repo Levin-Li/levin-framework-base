@@ -42,8 +42,8 @@ import com.levin.oak.base.entities.Org;
 
 /**
  *  更新用户
- *  Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- *  代码生成哈希校验码：[57149a776c731d28290961ef5f420e7b]
+ *  Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[2815427663311a4f02dc4f6b9759ed19]
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -133,13 +133,9 @@ public class UpdateUserReq extends MultiTenantOrgReq {
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;

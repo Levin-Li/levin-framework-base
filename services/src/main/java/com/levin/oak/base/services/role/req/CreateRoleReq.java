@@ -41,8 +41,8 @@ import java.util.Date;
 
 /**
  *  新增角色
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:54
- * 代码生成哈希校验码：[c8080faaebb8dcbc52b80755783d77af]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ * 代码生成哈希校验码：[9e290784178daa9ef29dce7d4f61ccb9]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -54,7 +54,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = Role.class, alias = E_Role.ALIAS)
-public class CreateRoleReq extends MultiTenantReq {
+public class CreateRoleReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445356492L;
 
@@ -85,12 +85,8 @@ public class CreateRoleReq extends MultiTenantReq {
 
     @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     String name;
-
-    @Schema(title = L_pinyinName , description = D_pinyinName  )
-    @Size(max = 128)
-    String pinyinName;
 
     @Schema(title = L_creator , hidden = true )
     //@Size(max = 128)

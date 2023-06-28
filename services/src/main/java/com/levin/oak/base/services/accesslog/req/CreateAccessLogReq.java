@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  *  新增访问日志
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- * 代码生成哈希校验码：[b0d306ac129d2ff89afb9e233cccf5a9]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[904b806007018612f3edb442787c49f4]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -51,7 +51,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS)
-public class CreateAccessLogReq extends MultiTenantReq {
+public class CreateAccessLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1030736962L;
 
@@ -62,10 +62,6 @@ public class CreateAccessLogReq extends MultiTenantReq {
     @Schema(title = L_visitor  )
     @Size(max = 64)
     String visitor;
-
-    @Schema(title = L_createTime  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull
-    Date createTime;
 
     @Schema(title = L_title  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
@@ -128,6 +124,10 @@ public class CreateAccessLogReq extends MultiTenantReq {
 
     @Schema(title = L_executeTime  )
     Long executeTime;
+
+    @Schema(title = L_createTime  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull
+    Date createTime;
 
 
     @PostConstruct

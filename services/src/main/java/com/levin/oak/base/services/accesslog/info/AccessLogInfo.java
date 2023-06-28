@@ -31,8 +31,8 @@ import java.util.Date;
 
 /**
  * 访问日志
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- * 代码生成哈希校验码：[382bde6cf4de571aee80be70f863b699]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[8d54bc952b08676e8e8d5137bf8110f2]
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -52,10 +52,6 @@ public class AccessLogInfo implements Serializable {
     Long id;
 
 
-    @Schema(title = L_tenantId )
-    String tenantId;
-
-
     @Schema(title = L_domain )
     String domain;
 
@@ -63,11 +59,6 @@ public class AccessLogInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_visitor )
     String visitor;
-
-
-    @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
-    Date createTime;
 
 
     @NotBlank
@@ -148,6 +139,21 @@ public class AccessLogInfo implements Serializable {
 
     @Schema(title = L_executeTime )
     Long executeTime;
+
+
+    @Size(max = 128)
+    @Schema(title = L_tenantId )
+    String tenantId;
+
+
+    @Size(max = 128)
+    @Schema(title = L_orgId )
+    String orgId;
+
+
+    @NotNull
+    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    Date createTime;
 
 
 }

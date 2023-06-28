@@ -43,8 +43,8 @@ import java.util.Date;
 
 /**
  *  查询访问日志
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- *  代码生成哈希校验码：[f145e8914ff3a1251f77d457b7eba522]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[4a8f27b6a922c601a231a2daa5fc7a3b]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -56,7 +56,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS, resultClass = AccessLogInfo.class)
-public class QueryAccessLogReq extends MultiTenantReq{
+public class QueryAccessLogReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = 1030736962L;
 
@@ -84,20 +84,6 @@ public class QueryAccessLogReq extends MultiTenantReq{
     @Size(max = 64)
     @Schema(title = L_visitor)
     String visitor;
-
-    @NotNull
-    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
-    @Gte
-    Date gteCreateTime;
-
-    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
-    @Lte
-    Date lteCreateTime;
-
-    //@Schema(title = L_createTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenCreateTime;
-
 
     @NotBlank
     @Schema(title = L_title)
@@ -180,6 +166,20 @@ public class QueryAccessLogReq extends MultiTenantReq{
 
     @Schema(title = L_executeTime)
     Long executeTime;
+
+    @NotNull
+    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
+    @Gte
+    Date gteCreateTime;
+
+    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
+    @Lte
+    Date lteCreateTime;
+
+    //@Schema(title = L_createTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenCreateTime;
+
 
     public QueryAccessLogReq(Long id) {
         this.id = id;

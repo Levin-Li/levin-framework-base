@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  调度日志-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
- *  代码生成哈希校验码：[cdb5f8a29c53d0e0fce80aa8e159c31f]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[29b605ad7c02cb9f3c46612e3d504e04]
  */
 
 //@Service(PLUGIN_PREFIX + "ScheduledLogService")

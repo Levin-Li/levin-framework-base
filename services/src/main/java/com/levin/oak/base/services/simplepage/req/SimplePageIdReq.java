@@ -32,13 +32,15 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  简单页面 主键通用请求
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- *  代码生成哈希校验码：[4b5279e2febe7a59add3ed1860727899]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ *  代码生成哈希校验码：[efc54e7d95b42de69ef80c5cf05b9dc8]
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")

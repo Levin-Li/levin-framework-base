@@ -54,8 +54,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 访问日志测试
  *
- * Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[281023804195bf27d78edb94b6e413ec]
+ * Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[1f77db721349bc7808808111b4e9ed97]
  */
 
 //@ActiveProfiles("test")
@@ -94,8 +94,6 @@ public class AccessLogServiceTest {
     public void createAccessLogTest() {
 
         CreateAccessLogReq req = new CreateAccessLogReq();
-
-            // req.setTenantId("租户ID_1");// 
 
             // req.setDomain("请求的域名_1");// 
 
@@ -137,6 +135,10 @@ public class AccessLogServiceTest {
 
             // req.setExecuteTime(1L);// 
 
+            // req.setTenantId("这是文本128");// 
+
+            // req.setOrgId("这是文本128");// 
+
 
        Long id  = accessLogService.create(req);
 
@@ -153,7 +155,6 @@ public class AccessLogServiceTest {
         QueryAccessLogReq req = new QueryAccessLogReq();
 
         // req.setId(null);//
-        // req.setTenantId("租户ID_1");//
         // req.setDomain("请求的域名_1");//
         // req.setVisitor("这是文本64");//
         // req.setTitle("标题_1");//
@@ -174,6 +175,8 @@ public class AccessLogServiceTest {
         // req.setDeviceName("这是文本128");//
         // req.setBrowserName("这是文本64");//
         // req.setExecuteTime(1L);//
+        // req.setTenantId("这是文本128");//
+        // req.setOrgId("这是文本128");//
 
         PagingData<AccessLogInfo> resp = accessLogService.query(req,null);
 
@@ -190,7 +193,6 @@ public class AccessLogServiceTest {
          req.setId(id);
 
 
-           // req.setTenantId("租户ID_1");// 
            // req.setDomain("请求的域名_1");// 
            // req.setVisitor("这是文本64");// 
            // req.setTitle("标题_1");// 必填
@@ -211,6 +213,8 @@ public class AccessLogServiceTest {
            // req.setDeviceName("这是文本128");// 
            // req.setBrowserName("这是文本64");// 
            // req.setExecuteTime(1L);// 
+           // req.setTenantId("这是文本128");// 
+           // req.setOrgId("这是文本128");// 
 
           boolean ok = accessLogService.update(req);
 

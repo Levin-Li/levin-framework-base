@@ -53,8 +53,8 @@ import java.util.Date;
 /**
  *  通知-业务服务实现类
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
- * 代码生成哈希校验码：[f59bc0789ba53da2cd27bb487855c20d]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[58b086f6a5a87f3b189e64680e030073]
  */
 
 @DubboService

@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  平台租户-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
- *  代码生成哈希校验码：[4a82863a377531c607b77b05ae0fb3ab]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ *  代码生成哈希校验码：[a2232f49d79b6a61656345fb2aa6c3f1]
  */
 @Tag(name = E_Tenant.BIZ_NAME, description = E_Tenant.BIZ_NAME + MAINTAIN_ACTION)
 public interface TenantService {

@@ -32,14 +32,16 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 ////////////////////////////////////
 
 
 /**
  *  新增简单页面
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[3ed62acafa84c27554439acae55b7ca5]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[0c59f2f655473b56d9cae4ce10b2c925]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -79,8 +81,9 @@ public class CreateSimplePageReq extends MultiTenantOrgReq {
     String path;
 
     @Schema(title = L_requireAuthorizations  )
+    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
-    String requireAuthorizations;
+    List<String> requireAuthorizations;
 
     @Schema(title = L_content  )
     String content;
@@ -91,12 +94,8 @@ public class CreateSimplePageReq extends MultiTenantOrgReq {
 
     @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     String name;
-
-    @Schema(title = L_pinyinName , description = D_pinyinName  )
-    @Size(max = 128)
-    String pinyinName;
 
     @Schema(title = L_creator , hidden = true )
     //@Size(max = 128)

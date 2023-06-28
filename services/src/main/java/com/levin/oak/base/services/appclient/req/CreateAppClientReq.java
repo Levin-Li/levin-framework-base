@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  *  新增应用接入
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
- * 代码生成哈希校验码：[e6aad5fa908858575ceb9bfbf5d95256]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ * 代码生成哈希校验码：[edefc5f922de1e7cb9bf66d054e4cb91]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -51,7 +51,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = AppClient.class, alias = E_AppClient.ALIAS)
-public class CreateAppClientReq extends MultiTenantReq {
+public class CreateAppClientReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -115048882L;
 
@@ -72,12 +72,8 @@ public class CreateAppClientReq extends MultiTenantReq {
 
     @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     String name;
-
-    @Schema(title = L_pinyinName , description = D_pinyinName  )
-    @Size(max = 128)
-    String pinyinName;
 
     @Schema(title = L_creator , hidden = true )
     //@Size(max = 128)

@@ -43,8 +43,8 @@ import com.levin.oak.base.entities.Org;
 
 /**
  *  新增用户
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- * 代码生成哈希校验码：[4eaeeb9b8ae893225e2d08438f9ea71e]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[c2b47df21b39e3a038842b279ea86c29]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -126,12 +126,8 @@ public class CreateUserReq extends MultiTenantOrgReq {
 
     @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     String name;
-
-    @Schema(title = L_pinyinName , description = D_pinyinName  )
-    @Size(max = 128)
-    String pinyinName;
 
     @Schema(title = L_creator , hidden = true )
     //@Size(max = 128)

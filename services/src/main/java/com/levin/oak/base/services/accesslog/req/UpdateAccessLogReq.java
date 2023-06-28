@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  更新访问日志
- *  Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- *  代码生成哈希校验码：[ef8f8b0f710cb47f4c59239c0ea98a5f]
+ *  Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[2caeaf1a943885cbab211c9757551e10]
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -52,7 +52,7 @@ import java.util.Date;
 @TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS)
 //默认更新注解
 @Update
-public class UpdateAccessLogReq extends MultiTenantReq {
+public class UpdateAccessLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1030736962L;
 

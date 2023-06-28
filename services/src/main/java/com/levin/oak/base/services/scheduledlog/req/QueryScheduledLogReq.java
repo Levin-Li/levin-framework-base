@@ -43,8 +43,8 @@ import java.util.Date;
 
 /**
  *  查询调度日志
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
- *  代码生成哈希校验码：[9ccbd50b94c546c1e3e4abc4cbb6e219]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[48ddb8bef586278a26142da74e7220b7]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -79,6 +79,16 @@ public class QueryScheduledLogReq extends MultiTenantOrgReq{
     @Schema(title = L_taskId)
     String taskId;
 
+    @Size(max = 128)
+    @Schema(title = L_invokeCycle)
+    String invokeCycle;
+
+    @Schema(title = L_isError)
+    Boolean isError;
+
+    @Schema(title = L_invokeResult)
+    String invokeResult;
+
     @NotNull
     @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
@@ -92,16 +102,6 @@ public class QueryScheduledLogReq extends MultiTenantOrgReq{
     //@Between(paramDelimiter = "-")
     //String betweenCreateTime;
 
-
-    @Size(max = 128)
-    @Schema(title = L_invokeCycle)
-    String invokeCycle;
-
-    @Schema(title = L_isError)
-    Boolean isError;
-
-    @Schema(title = L_invokeResult)
-    String invokeResult;
 
     public QueryScheduledLogReq(Long id) {
         this.id = id;

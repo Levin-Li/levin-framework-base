@@ -32,8 +32,8 @@ import java.util.Date;
 
 /**
  * 工作岗位
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- * 代码生成哈希校验码：[9960e9be02c4d989b69afad8a8668726]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[5950a207b0ab3b171700231a5b4d2e0c]
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -66,24 +66,24 @@ public class JobPostInfo implements Serializable {
 
 
     @Size(max = 128)
-    @Schema(title = L_tenantId )
-    String tenantId;
-
-
-    @Size(max = 128)
     @Schema(title = L_domain )
     String domain;
 
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String name;
 
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName )
-    String pinyinName;
+    @Schema(title = L_orgId )
+    String orgId;
+
+
+    @Size(max = 128)
+    @Schema(title = L_tenantId )
+    String tenantId;
 
 
     @Size(max = 128)

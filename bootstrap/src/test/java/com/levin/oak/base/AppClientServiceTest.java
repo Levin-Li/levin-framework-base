@@ -54,8 +54,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 应用接入测试
  *
- * Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[f2f41dc4f87d6ae6e88aec57eff5b414]
+ * Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[7a1266d4997d15a45ff2c0d8a14e36a2]
  */
 
 //@ActiveProfiles("test")
@@ -99,13 +99,13 @@ public class AppClientServiceTest {
 
             // req.setAppSecret("这是文本512");// 必填
 
-            // req.setTenantId("这是文本128");// 
-
             // req.setDomain("这是文本128");// 
 
-            // req.setName("这是文本128");// 必填
+            // req.setName("这是文本64");// 必填
 
-            // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+            // req.setOrgId("这是文本128");// 
+
+            // req.setTenantId("这是文本128");// 
 
             // req.setOrderCode(1);// 
 
@@ -133,10 +133,10 @@ public class AppClientServiceTest {
         // req.setId(null);//
         // req.setAppId(null);//
         // req.setAppSecret("这是文本512");//
-        // req.setTenantId("这是文本128");//
         // req.setDomain("这是文本128");//
-        // req.setName("这是文本128");//
-        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
+        // req.setName("这是文本64");//
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
         // req.setOrderCode(1);//
         // req.setEnable(true);//
@@ -160,10 +160,10 @@ public class AppClientServiceTest {
 
            // req.setAppId("这是文本64");// 必填
            // req.setAppSecret("这是文本512");// 必填
-           // req.setTenantId("这是文本128");// 
            // req.setDomain("这是文本128");// 
-           // req.setName("这是文本128");// 必填
-           // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+           // req.setName("这是文本64");// 必填
+           // req.setOrgId("这是文本128");// 
+           // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填

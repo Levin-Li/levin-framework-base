@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  * 机构
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- * 代码生成哈希校验码：[35049dbe26061fe0abd0d0a7f725d33a]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[e8aede1598a4797ac80a8073593a1525]
  */
 @Schema(title = BIZ_NAME)
 @Data

@@ -31,8 +31,8 @@ import java.util.Date;
 
 /**
  * 调度任务
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- * 代码生成哈希校验码：[8b3cce4ebfa5343cc0af91930ac2d4fb]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[a26ed738e06d15a0cefb46f9ef5faa85]
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -86,7 +86,18 @@ public class ScheduledTaskInfo implements Serializable {
     Date nextInvokeTime;
 
 
+    @Size(max = 128)
+    @Schema(title = L_domain )
+    String domain;
+
+
+    @NotBlank
     @Size(max = 64)
+    @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    String name;
+
+
+    @Size(max = 128)
     @Schema(title = L_orgId )
     String orgId;
 
@@ -94,22 +105,6 @@ public class ScheduledTaskInfo implements Serializable {
     @Size(max = 128)
     @Schema(title = L_tenantId )
     String tenantId;
-
-
-    @Size(max = 128)
-    @Schema(title = L_domain )
-    String domain;
-
-
-    @NotBlank
-    @Size(max = 128)
-    @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
-    String name;
-
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName )
-    String pinyinName;
 
 
     @Size(max = 128)

@@ -57,8 +57,8 @@ import com.levin.oak.base.entities.Org;
 /**
  *  用户-业务服务实现类
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- * 代码生成哈希校验码：[1c553055ac944487f8593b226017feab]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[c717b4a6e5c9848ca0fae73f5e174142]
  */
 
 @DubboService

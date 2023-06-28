@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  删除工作岗位
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- * 代码生成哈希校验码：[8f66373dd2431dc99ea6220e8d8dbab1]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[2a92ed5a9ea40ea7520615eead22a0fc]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -52,7 +52,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = JobPost.class, alias = E_JobPost.ALIAS)
-public class DeleteJobPostReq extends MultiTenantReq {
+public class DeleteJobPostReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1018878847L;
 

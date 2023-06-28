@@ -2,6 +2,7 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
+import com.levin.commons.dao.domain.support.SimpleTenantOrgObject;
 import com.levin.commons.service.domain.Identifiable;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -28,28 +29,17 @@ import java.util.Date;
         }
 )
 public class ScheduledLog
-        implements MultiTenantObject, Identifiable, OrganizedObject {
+        extends SimpleTenantOrgObject implements Identifiable {
 
     @Id
     @GeneratedValue
     Long id;
 
-    @Schema(title = "租户ID")
-    @Column(length = 64)
-    String tenantId;
-
-    @Schema(title = "归属组织", required = true)
-    @Column(nullable = false, length = 64)
-    String orgId;
 
     @Schema(title = "任务ID", required = true)
     @Column(nullable = false, length = 64)
     String taskId;
 
-    @Schema(title = "创建时间")
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    Date createTime;
 
     @Schema(title = "执行周期")
     @Column(length = 128)

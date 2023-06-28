@@ -3,6 +3,8 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
+import com.levin.commons.dao.domain.support.E_SimpleTenantOrgObject;
+import com.levin.commons.dao.domain.support.SimpleTenantOrgObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,7 +23,8 @@ import java.util.Date;
 
 @Table(
         indexes = {
-                @Index(columnList = E_AccessLog.tenantId),
+                @Index(columnList = E_SimpleTenantOrgObject.tenantId),
+                @Index(columnList = E_SimpleTenantOrgObject.orgId),
                 @Index(columnList = E_AccessLog.createTime),
                 @Index(columnList = E_AccessLog.visitor),
                 @Index(columnList = E_AccessLog.requestUri),
@@ -30,17 +33,12 @@ import java.util.Date;
         }
 )
 @Schema(title = "访问日志")
-public class AccessLog
-        implements
-        MultiTenantObject {
+public class AccessLog extends SimpleTenantOrgObject {
 
     @Id
     @GeneratedValue
 //    @GeneratedValue(generator = "default_id")
     protected Long id;
-
-    @Schema(title = "租户ID")
-    protected String tenantId;
 
     @Schema(title = "请求的域名")
     @Contains
@@ -49,11 +47,6 @@ public class AccessLog
     @Schema(title = "访问者")
     @Column(length = 64)
     protected String visitor;
-
-    @Schema(title = "创建时间")
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    protected Date createTime;
 
     @Schema(title = "标题")
     @Column(nullable = false)

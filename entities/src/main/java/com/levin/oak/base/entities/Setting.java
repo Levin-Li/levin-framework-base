@@ -3,7 +3,7 @@ package com.levin.oak.base.entities;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
-import com.levin.commons.dao.domain.support.AbstractNamedMultiTenantObject;
+import com.levin.commons.dao.domain.support.E_AbstractMultiTenantObject;
 import com.levin.commons.service.domain.EnumDesc;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -30,21 +30,19 @@ import static javax.persistence.FetchType.LAZY;
                 @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = AbstractNamedMultiTenantObject.Fields.tenantId),
+                @Index(columnList = E_AbstractMultiTenantObject.tenantId),
                 @Index(columnList = E_Setting.code),
                 @Index(columnList = E_Setting.categoryName),
                 @Index(columnList = E_Setting.groupName),
         }
-
         //如果同一个租户下重复的设置项目
         ,
-
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {AbstractNamedMultiTenantObject.Fields.tenantId, E_Setting.code}),
+                @UniqueConstraint(columnNames = {E_AbstractMultiTenantObject.tenantId, E_Setting.code}),
         }
 )
 public class Setting
-        extends AbstractNamedMultiTenantObject {
+        extends TenantOrgNamedEntity {
 
     public enum ValueType implements EnumDesc {
         @Schema(title = "富文本")

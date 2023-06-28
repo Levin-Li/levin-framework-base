@@ -4,8 +4,6 @@ import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.StatefulObject;
-import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
-import com.levin.commons.dao.domain.support.AbstractMultiTenantObject;
 import com.levin.commons.dao.domain.support.E_AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.E_AbstractMultiTenantObject;
 import com.levin.commons.service.domain.EnumDesc;
@@ -54,7 +52,7 @@ import java.util.List;
         }
 )
 public class User
-        extends TenantOrganizedEntity
+        extends TenantOrgNamedEntity
         implements OrganizedObject, MultiTenantObject, StatefulObject {
 
     public enum State implements EnumDesc {

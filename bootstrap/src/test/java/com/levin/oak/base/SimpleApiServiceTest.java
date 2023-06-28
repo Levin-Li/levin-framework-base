@@ -15,6 +15,8 @@ import com.levin.oak.base.services.simpleapi.info.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.SimpleApi.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -55,8 +57,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 简单动态接口测试
  *
- * Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[e3766bb132595b19a67b0af656b6e248]
+ * Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[701a5a44d14875b9aeba548c9027103b]
  */
 
 //@ActiveProfiles("test")
@@ -114,15 +116,13 @@ public class SimpleApiServiceTest {
 
             // req.setContent("内容_1");// 
 
-            // req.setOrgId("这是文本64");// 
-
-            // req.setTenantId("这是文本128");// 
-
             // req.setDomain("这是文本128");// 
 
-            // req.setName("这是文本128");// 必填
+            // req.setName("这是文本64");// 必填
 
-            // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+            // req.setOrgId("这是文本128");// 
+
+            // req.setTenantId("这是文本128");// 
 
             // req.setOrderCode(1);// 
 
@@ -157,11 +157,10 @@ public class SimpleApiServiceTest {
         // req.setPath("访问路径_1");//
         // req.setRequireAuthorizations("这是文本1800");//
         // req.setContent("内容_1");//
-        // req.setOrgId("这是文本64");//
-        // req.setTenantId("这是文本128");//
         // req.setDomain("这是文本128");//
-        // req.setName("这是文本128");//
-        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
+        // req.setName("这是文本64");//
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
         // req.setOrderCode(1);//
         // req.setEnable(true);//
@@ -192,11 +191,10 @@ public class SimpleApiServiceTest {
            // req.setPath("访问路径_1");// 必填
            // req.setRequireAuthorizations("这是文本1800");// 
            // req.setContent("内容_1");// 
-           // req.setOrgId("这是文本64");// 
-           // req.setTenantId("这是文本128");// 
            // req.setDomain("这是文本128");// 
-           // req.setName("这是文本128");// 必填
-           // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+           // req.setName("这是文本64");// 必填
+           // req.setOrgId("这是文本128");// 
+           // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填

@@ -40,13 +40,15 @@ import com.levin.oak.base.services.commons.req.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.SimpleApi.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  统计简单动态接口
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
- *  代码生成哈希校验码：[ef612dccb3f79cff11c5ecb7f1be7e76]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ *  代码生成哈希校验码：[a93338d56e4cc73ba04fc4c21003a5cf]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -106,9 +108,12 @@ public class StatSimpleApiReq extends MultiTenantOrgReq{
     @Schema(title = L_path)
     String path;
 
+    @OR(autoClose = true)
+    @Contains
+    @InjectVar(domain = "dao",  converter = JsonStrLikeConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations)
-    String requireAuthorizations;
+    List<String> requireAuthorizations;
 
     @Schema(title = L_content)
     String content;
@@ -118,21 +123,9 @@ public class StatSimpleApiReq extends MultiTenantOrgReq{
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Schema(title = "模糊匹配-" + L_name)
-    @Contains
-    String containsName;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
-
-    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
-    @Contains
-    String containsPinyinName;
 
     @Size(max = 128)
     @Schema(title = L_creator)

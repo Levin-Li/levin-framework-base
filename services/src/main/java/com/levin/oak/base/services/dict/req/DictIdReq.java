@@ -40,8 +40,8 @@ import java.util.Date;
 
 /**
  *  字典 主键通用请求
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
- *  代码生成哈希校验码：[f88b2aed85be9278f5ce5560b6404fec]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[08b6d3d7a4e8dffa2dd7662fbb67676f]
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")
@@ -54,7 +54,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Dict.class, alias = E_Dict.ALIAS, resultClass = DictInfo.class)
-public class DictIdReq extends MultiTenantReq {
+public class DictIdReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445779596L;
 

@@ -6,6 +6,8 @@ import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.dao.domain.support.AbstractTreeObject;
 import com.levin.commons.rbac.MenuItem;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConsts;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -52,6 +54,7 @@ public class MenuRes
 
     @Schema(title = "租户ID")
     @Column(length = 64)
+    @InjectVar(InjectConsts.TENANT_ID)
     String tenantId;
 
     @Schema(title = "子系统")

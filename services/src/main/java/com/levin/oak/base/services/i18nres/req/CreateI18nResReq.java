@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  *  新增国际化资源
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[cf456fdc85991533bf9ef28947cc5bf1]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[1d94554b8c2a961d1ed0a466e2914771]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -51,7 +51,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS)
-public class CreateI18nResReq extends MultiTenantReq {
+public class CreateI18nResReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1681554652L;
 
@@ -77,12 +77,8 @@ public class CreateI18nResReq extends MultiTenantReq {
 
     @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     String name;
-
-    @Schema(title = L_pinyinName , description = D_pinyinName  )
-    @Size(max = 128)
-    String pinyinName;
 
     @Schema(title = L_creator , hidden = true )
     //@Size(max = 128)

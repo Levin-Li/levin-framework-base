@@ -54,8 +54,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 国际化资源测试
  *
- * Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[1d2c7cdf0cf7c4590255da9565cfa721]
+ * Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[a6315527c38849bd468468d313f0831d]
  */
 
 //@ActiveProfiles("test")
@@ -101,13 +101,13 @@ public class I18nResServiceTest {
 
             // req.setLabel("这是文本768");// 必填
 
-            // req.setTenantId("这是文本128");// 
-
             // req.setDomain("这是文本128");// 
 
-            // req.setName("这是文本128");// 必填
+            // req.setName("这是文本64");// 必填
 
-            // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+            // req.setOrgId("这是文本128");// 
+
+            // req.setTenantId("这是文本128");// 
 
             // req.setOrderCode(1);// 
 
@@ -136,10 +136,10 @@ public class I18nResServiceTest {
         // req.setCategory("这是文本128");//
         // req.setLang("这是文本64");//
         // req.setLabel("这是文本768");//
-        // req.setTenantId("这是文本128");//
         // req.setDomain("这是文本128");//
-        // req.setName("这是文本128");//
-        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
+        // req.setName("这是文本64");//
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
         // req.setOrderCode(1);//
         // req.setEnable(true);//
@@ -164,10 +164,10 @@ public class I18nResServiceTest {
            // req.setCategory("这是文本128");// 必填
            // req.setLang("这是文本64");// 必填
            // req.setLabel("这是文本768");// 必填
-           // req.setTenantId("这是文本128");// 
            // req.setDomain("这是文本128");// 
-           // req.setName("这是文本128");// 必填
-           // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+           // req.setName("这是文本64");// 必填
+           // req.setOrgId("这是文本128");// 
+           // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填

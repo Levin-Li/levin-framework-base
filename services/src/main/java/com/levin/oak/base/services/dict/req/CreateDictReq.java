@@ -41,8 +41,8 @@ import java.util.Date;
 
 /**
  *  新增字典
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
- * 代码生成哈希校验码：[9d1d7c2e6086e0405a5b25bdb3478939]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[f94652e77dea88ae6e6db42723b49ccb]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -54,7 +54,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = Dict.class, alias = E_Dict.ALIAS)
-public class CreateDictReq extends MultiTenantReq {
+public class CreateDictReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445779596L;
 
@@ -78,12 +78,8 @@ public class CreateDictReq extends MultiTenantReq {
 
     @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     String name;
-
-    @Schema(title = L_pinyinName , description = D_pinyinName  )
-    @Size(max = 128)
-    String pinyinName;
 
     @Schema(title = L_creator , hidden = true )
     //@Size(max = 128)

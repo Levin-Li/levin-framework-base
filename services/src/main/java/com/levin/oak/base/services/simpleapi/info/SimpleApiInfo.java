@@ -27,13 +27,15 @@ import static com.levin.oak.base.entities.E_SimpleApi.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.SimpleApi.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  * 简单动态接口
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:54
- * 代码生成哈希校验码：[fa1a48f0dd0f2e59abd2e0314b55a830]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ * 代码生成哈希校验码：[50627274a7d6553fb4ddf7a231462e0c]
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -91,23 +93,14 @@ public class SimpleApiInfo implements Serializable {
     String path;
 
 
+    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations )
-    String requireAuthorizations;
+    List<String> requireAuthorizations;
 
 
     @Schema(title = L_content )
     String content;
-
-
-    @Size(max = 64)
-    @Schema(title = L_orgId )
-    String orgId;
-
-
-    @Size(max = 128)
-    @Schema(title = L_tenantId )
-    String tenantId;
 
 
     @Size(max = 128)
@@ -116,14 +109,19 @@ public class SimpleApiInfo implements Serializable {
 
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String name;
 
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName )
-    String pinyinName;
+    @Schema(title = L_orgId )
+    String orgId;
+
+
+    @Size(max = 128)
+    @Schema(title = L_tenantId )
+    String tenantId;
 
 
     @Size(max = 128)

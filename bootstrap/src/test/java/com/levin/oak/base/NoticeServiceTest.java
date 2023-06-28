@@ -56,8 +56,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 通知测试
  *
- * Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[0b4a0b89abcab73a4d952bb9c5bad55f]
+ * Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[0742230ac6d30befcefea63bbd7ed86c]
  */
 
 //@ActiveProfiles("test")
@@ -107,15 +107,13 @@ public class NoticeServiceTest {
 
             // req.setExpiredDate(new Date());// 
 
-            // req.setOrgId("这是文本64");// 
-
-            // req.setTenantId("这是文本128");// 
-
             // req.setDomain("这是文本128");// 
 
-            // req.setName("这是文本128");// 必填
+            // req.setName("这是文本64");// 必填
 
-            // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+            // req.setOrgId("这是文本128");// 
+
+            // req.setTenantId("这是文本128");// 
 
             // req.setOrderCode(1);// 
 
@@ -147,11 +145,10 @@ public class NoticeServiceTest {
         // req.setContent("通知内容_1");//
         // req.setGteExpiredDate(DateUtils.getZoneHour(new Date()));//最小
         // req.setLteExpiredDate(DateUtils.getEndHour(new Date()));//最大
-        // req.setOrgId("这是文本64");//
-        // req.setTenantId("这是文本128");//
         // req.setDomain("这是文本128");//
-        // req.setName("这是文本128");//
-        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
+        // req.setName("这是文本64");//
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
         // req.setOrderCode(1);//
         // req.setEnable(true);//
@@ -178,11 +175,10 @@ public class NoticeServiceTest {
            // req.setContentType(ContentType.Text);// 
            // req.setContent("通知内容_1");// 
            // req.setExpiredDate(new Date());// 
-           // req.setOrgId("这是文本64");// 
-           // req.setTenantId("这是文本128");// 
            // req.setDomain("这是文本128");// 
-           // req.setName("这是文本128");// 必填
-           // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+           // req.setName("这是文本64");// 必填
+           // req.setOrgId("这是文本128");// 
+           // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填

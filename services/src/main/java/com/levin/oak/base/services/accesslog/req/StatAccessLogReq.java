@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  统计访问日志
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
- *  代码生成哈希校验码：[b3d88fc15f54dcb36e68f6a7066f7c5a]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[c102310934e9ef6d9f1c17d096a004a9]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -61,7 +61,7 @@ import java.util.Date;
     //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
     resultClass = StatAccessLogReq.Result.class
 )
-public class StatAccessLogReq extends MultiTenantReq{
+public class StatAccessLogReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = 1030736962L;
 
@@ -80,19 +80,6 @@ public class StatAccessLogReq extends MultiTenantReq{
     @Size(max = 64)
     @Schema(title = L_visitor)
     String visitor;
-
-    @NotNull
-    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
-    @Gte
-    Date gteCreateTime;
-
-    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
-    @Lte
-    Date lteCreateTime;
-
-    //@Schema(title = L_createTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenCreateTime;
 
     @NotBlank
     @Schema(title = L_title)
@@ -175,6 +162,19 @@ public class StatAccessLogReq extends MultiTenantReq{
 
     @Schema(title = L_executeTime)
     Long executeTime;
+
+    @NotNull
+    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
+    @Gte
+    Date gteCreateTime;
+
+    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
+    @Lte
+    Date lteCreateTime;
+
+    //@Schema(title = L_createTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenCreateTime;
 
 
     public StatAccessLogReq(Long id) {

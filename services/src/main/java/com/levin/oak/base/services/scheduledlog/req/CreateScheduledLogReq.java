@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  *  新增调度日志
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
- * 代码生成哈希校验码：[b378ad1b4f76e23542e5fe03c150b7f8]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ * 代码生成哈希校验码：[6f2c07a38847c82360bf0806d560c299]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -61,10 +61,6 @@ public class CreateScheduledLogReq extends MultiTenantOrgReq {
     @Size(max = 64)
     String taskId;
 
-    @Schema(title = L_createTime  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull
-    Date createTime;
-
     @Schema(title = L_invokeCycle  )
     @Size(max = 128)
     String invokeCycle;
@@ -74,6 +70,10 @@ public class CreateScheduledLogReq extends MultiTenantOrgReq {
 
     @Schema(title = L_invokeResult  )
     String invokeResult;
+
+    @Schema(title = L_createTime  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull
+    Date createTime;
 
 
     @PostConstruct

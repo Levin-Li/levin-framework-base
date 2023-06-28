@@ -36,8 +36,8 @@ import java.util.Date;
 
 /**
  *  删除应用接入
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
- * 代码生成哈希校验码：[bfd8a7987c70d0ae19bb0ae64b9c37a1]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ * 代码生成哈希校验码：[cf74fe6924934f4fc0a121196debaedc]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -51,7 +51,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppClient.class, alias = E_AppClient.ALIAS)
-public class DeleteAppClientReq extends MultiTenantReq {
+public class DeleteAppClientReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -115048882L;
 

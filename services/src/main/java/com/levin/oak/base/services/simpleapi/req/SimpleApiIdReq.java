@@ -33,13 +33,15 @@ import com.levin.oak.base.services.commons.req.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.SimpleApi.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  简单动态接口 主键通用请求
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:54
- *  代码生成哈希校验码：[512e59c0e10c0c462c50bd9fb932352b]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ *  代码生成哈希校验码：[e6371d299f2b26a1b584d6df21ecb72c]
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")

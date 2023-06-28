@@ -39,8 +39,8 @@ import java.util.Date;
 
 /**
  *  删除字典
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
- * 代码生成哈希校验码：[a9cce74bbc4bf74f504a6391f0570d28]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[15534c956ea512ecf3306d958d33baa7]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -54,7 +54,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Dict.class, alias = E_Dict.ALIAS)
-public class DeleteDictReq extends MultiTenantReq {
+public class DeleteDictReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445779596L;
 

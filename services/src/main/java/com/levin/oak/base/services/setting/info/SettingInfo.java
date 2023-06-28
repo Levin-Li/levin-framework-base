@@ -32,8 +32,8 @@ import java.util.Date;
 
 /**
  * 系统设置
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
- * 代码生成哈希校验码：[bda956e76811466166c221e6f9f351dd]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[63cf9c8d028fa932c5e4d060dc2fac75]
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -91,24 +91,24 @@ public class SettingInfo implements Serializable {
 
 
     @Size(max = 128)
-    @Schema(title = L_tenantId )
-    String tenantId;
-
-
-    @Size(max = 128)
     @Schema(title = L_domain )
     String domain;
 
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String name;
 
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName )
-    String pinyinName;
+    @Schema(title = L_orgId )
+    String orgId;
+
+
+    @Size(max = 128)
+    @Schema(title = L_tenantId )
+    String tenantId;
 
 
     @Size(max = 128)

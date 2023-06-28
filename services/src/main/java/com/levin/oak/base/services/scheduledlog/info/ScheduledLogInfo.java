@@ -31,8 +31,8 @@ import java.util.Date;
 
 /**
  * 调度日志
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
- * 代码生成哈希校验码：[30b244891c1bc9c2886586f5b45e11f6]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ * 代码生成哈希校验码：[385606b84e5aa03e3197bbd46e717a98]
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -52,26 +52,10 @@ public class ScheduledLogInfo implements Serializable {
     Long id;
 
 
-    @Size(max = 64)
-    @Schema(title = L_tenantId )
-    String tenantId;
-
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_orgId , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
-    String orgId;
-
-
     @NotBlank
     @Size(max = 64)
     @Schema(title = L_taskId , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String taskId;
-
-
-    @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
-    Date createTime;
 
 
     @Size(max = 128)
@@ -85,6 +69,21 @@ public class ScheduledLogInfo implements Serializable {
 
     @Schema(title = L_invokeResult )
     String invokeResult;
+
+
+    @Size(max = 128)
+    @Schema(title = L_tenantId )
+    String tenantId;
+
+
+    @Size(max = 128)
+    @Schema(title = L_orgId )
+    String orgId;
+
+
+    @NotNull
+    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    Date createTime;
 
 
 }

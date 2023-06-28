@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  统计国际化资源
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- *  代码生成哈希校验码：[37c4ff890d7d6297826db4c0fe053062]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ *  代码生成哈希校验码：[e88f6cc4c09ad0959632205e2cf939d5]
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -61,7 +61,7 @@ import java.util.Date;
     //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
     resultClass = StatI18nResReq.Result.class
 )
-public class StatI18nResReq extends MultiTenantReq{
+public class StatI18nResReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = -1681554652L;
 
@@ -94,21 +94,9 @@ public class StatI18nResReq extends MultiTenantReq{
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Schema(title = "模糊匹配-" + L_name)
-    @Contains
-    String containsName;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
-
-    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
-    @Contains
-    String containsPinyinName;
 
     @Size(max = 128)
     @Schema(title = L_creator)

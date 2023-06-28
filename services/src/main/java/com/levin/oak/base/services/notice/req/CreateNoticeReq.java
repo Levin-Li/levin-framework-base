@@ -39,8 +39,8 @@ import java.util.Date;
 
 /**
  *  新增通知
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
- * 代码生成哈希校验码：[ededf997b49c0755732d72065731a364]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[d56a02ac6b96045fda8cc64aee555675]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -80,12 +80,8 @@ public class CreateNoticeReq extends MultiTenantOrgReq {
 
     @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     String name;
-
-    @Schema(title = L_pinyinName , description = D_pinyinName  )
-    @Size(max = 128)
-    String pinyinName;
 
     @Schema(title = L_creator , hidden = true )
     //@Size(max = 128)

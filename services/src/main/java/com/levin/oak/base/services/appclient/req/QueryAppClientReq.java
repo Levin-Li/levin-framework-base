@@ -43,8 +43,8 @@ import java.util.Date;
 
 /**
  *  查询应用接入
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
- *  代码生成哈希校验码：[b1c1e16e0b274105b90a818b6c88450a]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
+ *  代码生成哈希校验码：[90a2e4028673f9ed3ec53f16404664d0]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -56,7 +56,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppClient.class, alias = E_AppClient.ALIAS, resultClass = AppClientInfo.class)
-public class QueryAppClientReq extends MultiTenantReq{
+public class QueryAppClientReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = -115048882L;
 
@@ -90,21 +90,9 @@ public class QueryAppClientReq extends MultiTenantReq{
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Schema(title = "模糊匹配-" + L_name)
-    @Contains
-    String containsName;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
-
-    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
-    @Contains
-    String containsPinyinName;
 
     @Size(max = 128)
     @Schema(title = L_creator)

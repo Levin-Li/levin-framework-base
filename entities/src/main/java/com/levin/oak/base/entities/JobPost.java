@@ -3,8 +3,6 @@ package com.levin.oak.base.entities;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
-import com.levin.commons.dao.domain.support.AbstractNamedMultiTenantObject;
-import com.levin.commons.dao.domain.support.E_AbstractNamedMultiTenantObject;
 import com.levin.commons.service.domain.EnumDesc;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -30,18 +28,18 @@ import javax.persistence.*;
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = JobPost.Fields.code),
                 @Index(columnList = JobPost.Fields.type),
-                @Index(columnList = AbstractNamedMultiTenantObject.Fields.tenantId),
+                @Index(columnList = E_TenantOrgNamedEntity.tenantId),
         }
 
         ,
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {AbstractNamedMultiTenantObject.Fields.tenantId, E_JobPost.code}),
-                @UniqueConstraint(columnNames = {AbstractNamedMultiTenantObject.Fields.tenantId, E_AbstractNamedMultiTenantObject.name}),
+                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_JobPost.code}),
+                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_TenantOrgNamedEntity.name}),
         }
 )
 
 public class JobPost
-        extends AbstractNamedMultiTenantObject {
+        extends TenantOrgNamedEntity {
 
     @Schema(title = "职位类型")
     public enum Type implements EnumDesc {

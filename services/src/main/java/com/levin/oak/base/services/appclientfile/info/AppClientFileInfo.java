@@ -31,8 +31,8 @@ import java.util.Date;
 
 /**
  * 客户端文件
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
- * 代码生成哈希校验码：[c5f53a83bf77441af3ac7b94110ca7d1]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[ec4546222585e63c6aff64b006497ba3]
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -73,24 +73,24 @@ public class AppClientFileInfo implements Serializable {
 
 
     @Size(max = 128)
-    @Schema(title = L_tenantId )
-    String tenantId;
-
-
-    @Size(max = 128)
     @Schema(title = L_domain )
     String domain;
 
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String name;
 
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName )
-    String pinyinName;
+    @Schema(title = L_orgId )
+    String orgId;
+
+
+    @Size(max = 128)
+    @Schema(title = L_tenantId )
+    String tenantId;
 
 
     @Size(max = 128)

@@ -57,8 +57,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 角色测试
  *
- * Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[6cff056e65ff7f0ea1b2be0888496406]
+ * Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[13913b42b65b546e9e9e619c44659725]
  */
 
 //@ActiveProfiles("test")
@@ -108,13 +108,13 @@ public class RoleServiceTest {
 
             // req.setPermissionList("资源权限列表_1");//Json数组 
 
-            // req.setTenantId("这是文本128");// 
-
             // req.setDomain("这是文本128");// 
 
-            // req.setName("这是文本128");// 必填
+            // req.setName("这是文本64");// 必填
 
-            // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+            // req.setOrgId("这是文本128");// 
+
+            // req.setTenantId("这是文本128");// 
 
             // req.setOrderCode(1);// 
 
@@ -145,10 +145,10 @@ public class RoleServiceTest {
         // req.setOrgDataScope(OrgDataScope.All);//
         // req.setAssignedOrgIdList("指定的部门列表_1");//Json数组
         // req.setPermissionList("资源权限列表_1");//Json数组
-        // req.setTenantId("这是文本128");//
         // req.setDomain("这是文本128");//
-        // req.setName("这是文本128");//
-        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
+        // req.setName("这是文本64");//
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
         // req.setOrderCode(1);//
         // req.setEnable(true);//
@@ -175,10 +175,10 @@ public class RoleServiceTest {
            // req.setOrgDataScope(OrgDataScope.All);// 必填
            // req.setAssignedOrgIdList("指定的部门列表_1");//Json数组 
            // req.setPermissionList("资源权限列表_1");//Json数组 
-           // req.setTenantId("这是文本128");// 
            // req.setDomain("这是文本128");// 
-           // req.setName("这是文本128");// 必填
-           // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+           // req.setName("这是文本64");// 必填
+           // req.setOrgId("这是文本128");// 
+           // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填

@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  客户端文件 主键通用请求
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
- *  代码生成哈希校验码：[fa2ee43e1b65f4cdd0ff12c0fd857227]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ *  代码生成哈希校验码：[d560aadc741ad488611159e055eaa50f]
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")
@@ -51,7 +51,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppClientFile.class, alias = E_AppClientFile.ALIAS, resultClass = AppClientFileInfo.class)
-public class AppClientFileIdReq extends MultiTenantReq {
+public class AppClientFileIdReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1155395350L;
 

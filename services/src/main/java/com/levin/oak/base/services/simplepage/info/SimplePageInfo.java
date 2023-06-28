@@ -26,13 +26,15 @@ import static com.levin.oak.base.entities.E_SimplePage.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
  * 简单页面
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
- * 代码生成哈希校验码：[4898587c5eb9e9a90c94c48b88279239]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
+ * 代码生成哈希校验码：[8fe94ce83c9a35f77d8b5061e8697108]
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -80,23 +82,14 @@ public class SimplePageInfo implements Serializable {
     String path;
 
 
+    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations )
-    String requireAuthorizations;
+    List<String> requireAuthorizations;
 
 
     @Schema(title = L_content )
     String content;
-
-
-    @Size(max = 64)
-    @Schema(title = L_orgId )
-    String orgId;
-
-
-    @Size(max = 128)
-    @Schema(title = L_tenantId )
-    String tenantId;
 
 
     @Size(max = 128)
@@ -105,14 +98,19 @@ public class SimplePageInfo implements Serializable {
 
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String name;
 
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName )
-    String pinyinName;
+    @Schema(title = L_orgId )
+    String orgId;
+
+
+    @Size(max = 128)
+    @Schema(title = L_tenantId )
+    String tenantId;
 
 
     @Size(max = 128)

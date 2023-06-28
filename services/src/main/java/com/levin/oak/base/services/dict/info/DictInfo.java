@@ -34,8 +34,8 @@ import java.util.Date;
 
 /**
  * 字典
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
- * 代码生成哈希校验码：[7710766bc72908c9fbfddf46b80ff5d8]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
+ * 代码生成哈希校验码：[67216b5935558168a7ca5aae37eec5c2]
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -73,24 +73,24 @@ public class DictInfo implements Serializable {
 
 
     @Size(max = 128)
-    @Schema(title = L_tenantId )
-    String tenantId;
-
-
-    @Size(max = 128)
     @Schema(title = L_domain )
     String domain;
 
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     String name;
 
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName )
-    String pinyinName;
+    @Schema(title = L_orgId )
+    String orgId;
+
+
+    @Size(max = 128)
+    @Schema(title = L_tenantId )
+    String tenantId;
 
 
     @Size(max = 128)
