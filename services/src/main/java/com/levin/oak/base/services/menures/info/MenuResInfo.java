@@ -35,8 +35,8 @@ import java.util.Date;
 
 /**
  * 菜单
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:57
- * 代码生成哈希校验码：[e8a5da73c79187c59bd35a0956b02c17]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:58
+ * 代码生成哈希校验码：[fed01697d634fef9bb066ada8fcc3548]
  */
 @Schema(title = BIZ_NAME)
 @Data

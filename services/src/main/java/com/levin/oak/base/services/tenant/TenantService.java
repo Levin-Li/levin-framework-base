@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  平台租户-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:54
- *  代码生成哈希校验码：[6b724e045b2a94c38aba8dea17cf875c]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
+ *  代码生成哈希校验码：[821fa5f499e6efd42a01d1c321d87306]
  */
 @Tag(name = E_Tenant.BIZ_NAME, description = E_Tenant.BIZ_NAME + MAINTAIN_ACTION)
 public interface TenantService {
@@ -105,7 +105,6 @@ public interface TenantService {
      */
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<TenantInfo> query(@NotNull QueryTenantReq req, Paging paging);
-
 
     /**
      * 简单统计

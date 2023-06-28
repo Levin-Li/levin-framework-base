@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  调度日志-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:54
- *  代码生成哈希校验码：[be423754a060a4334111583fcc8b7948]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
+ *  代码生成哈希校验码：[ac7d99761d073c5e76f80c8f5f404d34]
  */
 @Tag(name = E_ScheduledLog.BIZ_NAME, description = E_ScheduledLog.BIZ_NAME + MAINTAIN_ACTION)
 public interface ScheduledLogService {
@@ -105,7 +105,6 @@ public interface ScheduledLogService {
      */
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<ScheduledLogInfo> query(@NotNull QueryScheduledLogReq req, Paging paging);
-
 
     /**
      * 简单统计

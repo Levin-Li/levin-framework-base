@@ -36,8 +36,8 @@ import java.util.Date;
 
 /**
  *  删除调度日志
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:54
- * 代码生成哈希校验码：[688c5273d4750b10d89dbc675dfb86a9]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
+ * 代码生成哈希校验码：[2809cb0948464c401db235e6c35683d7]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -56,6 +56,8 @@ public class DeleteScheduledLogReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = 1319130901L;
 
 
+
+
     @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @In(value = E_ScheduledLog.id)
     @NotEmpty
@@ -69,7 +71,6 @@ public class DeleteScheduledLogReq extends MultiTenantOrgReq {
         this.idList = idList;
         return this;
     }
-
 
 
     @PostConstruct

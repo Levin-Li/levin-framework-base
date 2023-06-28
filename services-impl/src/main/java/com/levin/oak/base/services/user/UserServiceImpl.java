@@ -23,12 +23,10 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import javax.persistence.PersistenceException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -132,7 +130,6 @@ public class UserServiceImpl extends BaseService implements UserService {
                 .setPassword(encryptPwd(req.getPassword()));
 
         return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
-
     }
 
     @Operation(summary = UPDATE_ACTION)
@@ -198,6 +195,31 @@ public class UserServiceImpl extends BaseService implements UserService {
         return simpleDao.findPagingDataByQueryObj(req, notSa(), paging);
     }
 
+    /**
+     * 简单统计
+     *
+     * @param req
+     * @param paging 分页设置，可空
+     * @return pagingData 分页数据
+     */
+    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    @Override
+    public PagingData<StatUserReq.Result> stat(StatUserReq req , Paging paging){
+        return simpleDao.findPagingDataByQueryObj(req, paging);
+    }
+
+    /**
+     * 统计记录数
+     *
+     * @param req
+     * @return record count
+     */
+    @Override
+    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    public int count(QueryUserReq req){
+        return (int) simpleDao.countByQueryObj(req);
+    }
+
     @Operation(summary = QUERY_ACTION)
     @Override
     public UserInfo findOne(QueryUserReq req) {
@@ -213,19 +235,6 @@ public class UserServiceImpl extends BaseService implements UserService {
     public UserInfo findUnique(QueryUserReq req) {
         return simpleDao.findUnique(req);
     }
-
-    /**
-     * 统计记录数
-     *
-     * @param req
-     * @return record count
-     */
-    @Override
-    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
-    public int count(QueryUserReq req) {
-        return (int) simpleDao.countByQueryObj(req);
-    }
-
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")

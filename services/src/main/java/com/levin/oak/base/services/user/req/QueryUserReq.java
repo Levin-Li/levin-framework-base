@@ -48,8 +48,8 @@ import com.levin.oak.base.entities.Org;
 
 /**
  *  查询用户
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:55
- *  代码生成哈希校验码：[f43d5f8acdce2720683f48ef5972a0bd]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[8fcfee0fd4ec95ffdd7b03924b827c2d]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data

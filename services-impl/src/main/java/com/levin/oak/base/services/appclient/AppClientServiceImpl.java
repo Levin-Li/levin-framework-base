@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  应用接入-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:54
- *  代码生成哈希校验码：[b660425dcb95bfb928b4702daaad40b0]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
+ *  代码生成哈希校验码：[e1dd23c0e6de350305977d9da3d3260f]
  */
 
 //@Service(PLUGIN_PREFIX + "AppClientService")
@@ -115,8 +115,7 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean update(UpdateAppClientReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
-       return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
@@ -167,18 +166,6 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public AppClientInfo findOne(QueryAppClientReq req){
-        return simpleDao.findOneByQueryObj(req);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public AppClientInfo findUnique(QueryAppClientReq req){
-        return simpleDao.findUnique(req);
-    }
-
     /**
      * 统计记录数
      *
@@ -189,6 +176,18 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     public int count(QueryAppClientReq req){
         return (int) simpleDao.countByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public AppClientInfo findOne(QueryAppClientReq req){
+        return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public AppClientInfo findUnique(QueryAppClientReq req){
+        return simpleDao.findUnique(req);
     }
 
     @Override

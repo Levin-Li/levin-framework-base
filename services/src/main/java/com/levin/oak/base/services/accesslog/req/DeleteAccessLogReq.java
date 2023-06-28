@@ -36,8 +36,8 @@ import java.util.Date;
 
 /**
  *  删除访问日志
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:55
- * 代码生成哈希校验码：[7204393580d3b0f6f4a3c89c8f060e23]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ * 代码生成哈希校验码：[1bf58243b4884b02ff9560f600297aaf]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -56,6 +56,8 @@ public class DeleteAccessLogReq extends MultiTenantReq {
     private static final long serialVersionUID = 1030736962L;
 
 
+
+
     @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @In(value = E_AccessLog.id)
     @NotEmpty
@@ -69,7 +71,6 @@ public class DeleteAccessLogReq extends MultiTenantReq {
         this.idList = idList;
         return this;
     }
-
 
 
     @PostConstruct

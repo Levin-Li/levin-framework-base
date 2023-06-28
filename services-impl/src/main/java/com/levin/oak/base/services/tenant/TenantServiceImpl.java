@@ -54,8 +54,8 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 /**
  *  平台租户-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:54
- *  代码生成哈希校验码：[8698f42ece1736f2712998ccaf023420]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
+ *  代码生成哈希校验码：[b35db7fbe98f68397a2775861a2d78d4]
  */
 
 //@Service(PLUGIN_PREFIX + "TenantService")
@@ -111,8 +111,7 @@ public class TenantServiceImpl extends BaseService implements TenantService {
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean update(UpdateTenantReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
-       return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
@@ -163,18 +162,6 @@ public class TenantServiceImpl extends BaseService implements TenantService {
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public TenantInfo findOne(QueryTenantReq req){
-        return simpleDao.findOneByQueryObj(req);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public TenantInfo findUnique(QueryTenantReq req){
-        return simpleDao.findUnique(req);
-    }
-
     /**
      * 统计记录数
      *
@@ -185,6 +172,18 @@ public class TenantServiceImpl extends BaseService implements TenantService {
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     public int count(QueryTenantReq req){
         return (int) simpleDao.countByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public TenantInfo findOne(QueryTenantReq req){
+        return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public TenantInfo findUnique(QueryTenantReq req){
+        return simpleDao.findUnique(req);
     }
 
     @Override

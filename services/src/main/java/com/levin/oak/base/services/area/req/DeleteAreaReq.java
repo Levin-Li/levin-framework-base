@@ -40,8 +40,8 @@ import java.util.Date;
 
 /**
  *  删除区域
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
- * 代码生成哈希校验码：[577f5e0710178bfa5d8c95944e2934f0]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:58
+ * 代码生成哈希校验码：[5a3ae9dd1171100c9e3b70f79977f941]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -60,6 +60,11 @@ public class DeleteAreaReq extends BaseReq {
     private static final long serialVersionUID = -445860277L;
 
 
+    @Schema(description = "可编辑条件" , hidden = true)
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    final boolean eqEditable = true;
+
+
     @Schema(title = L_code + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @In(value = E_Area.code)
     @NotEmpty
@@ -74,10 +79,6 @@ public class DeleteAreaReq extends BaseReq {
         return this;
     }
 
-
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
-    final boolean eqEditable = true;
 
     @PostConstruct
     public void preDelete() {

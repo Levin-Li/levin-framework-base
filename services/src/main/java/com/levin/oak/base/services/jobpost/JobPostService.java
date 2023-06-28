@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  工作岗位-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
- *  代码生成哈希校验码：[a1cd55576f6625e60c5ded30b88564ca]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[6b79237d2bef3355b2e4514729876c79]
  */
 @Tag(name = E_JobPost.BIZ_NAME, description = E_JobPost.BIZ_NAME + MAINTAIN_ACTION)
 public interface JobPostService {
@@ -105,7 +105,6 @@ public interface JobPostService {
      */
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<JobPostInfo> query(@NotNull QueryJobPostReq req, Paging paging);
-
 
     /**
      * 简单统计

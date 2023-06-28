@@ -36,8 +36,8 @@ import java.util.Date;
 
 /**
  *  删除通知处理日志
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
- * 代码生成哈希校验码：[596e0426eb3123eb9b21b3eb9cd837f4]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ * 代码生成哈希校验码：[806ef4658b726770b96b27891677d943]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -56,6 +56,8 @@ public class DeleteNoticeProcessLogReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -1991983093L;
 
 
+
+
     @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @In(value = E_NoticeProcessLog.id)
     @NotEmpty
@@ -69,7 +71,6 @@ public class DeleteNoticeProcessLogReq extends MultiTenantOrgReq {
         this.idList = idList;
         return this;
     }
-
 
 
     @PostConstruct

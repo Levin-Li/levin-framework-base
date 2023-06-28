@@ -1,39 +1,51 @@
 package com.levin.oak.base.services.user.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Eq;
-import com.levin.commons.dao.annotation.update.Update;
-import com.levin.commons.service.support.*;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import com.levin.oak.base.entities.E_User;
-import com.levin.oak.base.entities.User;
-import com.levin.oak.base.entities.User.Category;
-import com.levin.oak.base.entities.User.Sex;
-import com.levin.oak.base.entities.User.State;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.List;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
+import com.levin.oak.base.entities.User;
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_User.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.User.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.util.Date;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
-
 /**
- * 更新用户
- * Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *  更新用户
+ *  Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[0b601b460710080b1df222ec8ef717d9]
  */
-@Schema(title = "更新用户")
+@Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,106 +57,123 @@ import java.util.List;
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS)
 //默认更新注解
 @Update
-public class UpdateUserReq extends MultiTenantReq {
+public class UpdateUserReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445263479L;
 
-    @Schema(title = "id", required = true)
+    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull
     @Eq(require = true)
-    private String id;
+    String id;
 
-    @Schema(title = "可编辑条件", hidden = true)
+    @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
-    @Size(max = 256)
-    @Schema(title = "登录密码")
-    private String password;
 
     @Size(max = 20)
-    @Schema(title = "手机号")
-    private String telephone;
+    @Schema(title = L_telephone , description = D_telephone)
+    String telephone;
 
     @Size(max = 32)
-    @Schema(title = "邮箱")
-    private String email;
+    @Schema(title = L_email , description = D_email)
+    String email;
+
+    @Size(max = 256)
+    @Schema(title = L_password)
+    String password;
+
+    @Size(max = 32)
+    @Schema(title = L_nickname)
+    String nickname;
+
+    @Schema(title = L_avatar)
+    String avatar;
+
+    @Schema(title = L_sex)
+    Sex sex;
+
+    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @Size(max = 1800)
+    @Schema(title = L_tagList)
+    List<String> tagList;
+
+    @Schema(title = L_category)
+    Category category;
+
+    @Schema(title = L_expiredDate)
+    Date expiredDate;
+
+    @Schema(title = L_state)
+    State state;
+
+    @Size(max = 32)
+    @Schema(title = L_staffNo)
+    String staffNo;
+
+    @Size(max = 128)
+    @Schema(title = L_jobPostCode)
+    String jobPostCode;
+
+    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @Size(max = 1800)
+    @Schema(title = L_roleList)
+    List<String> roleList;
 
     @Size(max = 64)
-    @Schema(title = "名称")
-    private String name;
+    @Schema(title = L_wxOpenId)
+    String wxOpenId;
 
-    @Size(max = 32)
-    @Schema(title = "昵称")
-    private String nickname;
-
-    @Schema(title = "头像")
-    private String avatar;
-
-    @Schema(title = "性别")
-    private Sex sex;
-
-    @Size(max = 1800)
-    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
-    @Schema(title = "标签列表")
-    private List<String> tagList;
-
-    @Schema(title = "帐号类型")
-    private Category category;
-
-    @Schema(title = "过期时间")
-    private Date expiredDate;
-
-    @Schema(title = "帐号状态")
-    private State state;
-
-    @Size(max = 32)
-    @Schema(title = "工号")
-    private String staffNo;
+    @Size(max = 64)
+    @Schema(title = L_aliOpenId)
+    String aliOpenId;
 
     @Size(max = 128)
-    @Schema(title = "岗位职级")
-    private String jobPostCode;
+    @Schema(title = L_domain)
+    String domain;
 
-    @Size(max = 1800)
-    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
-    @Schema(title = "角色列表")
-    private List<String> roleList;
+    @NotBlank
+    @Size(max = 128)
+    @Schema(title = L_name)
+    String name;
 
     @Size(max = 128)
-    @Schema(title = "微信 OpendId")
-    private String wxOpenId;
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
 
-    @Size(max = 128)
-    @Schema(title = "阿里 OpendId")
-    private String aliOpenId;
+    @Schema(title = L_lastUpdateTime)
+    Date lastUpdateTime;
 
-    @Schema(title = "更新时间")
-    private Date lastUpdateTime;
+    @Schema(title = L_orderCode)
+    Integer orderCode;
 
-    @Schema(title = "排序代码")
-    private Integer orderCode;
+    @Schema(title = L_enable)
+    Boolean enable;
 
-    @Schema(title = "是否允许")
-    private Boolean enable;
-
-    @Schema(title = "是否可编辑")
-    private Boolean editable;
+    @Schema(title = L_editable)
+    Boolean editable;
 
     @Size(max = 512)
-    @Schema(title = "备注")
-    private String remark;
+    @Schema(title = L_remark)
+    String remark;
 
 
     public UpdateUserReq(String id) {
         this.id = id;
     }
 
+    public UpdateUserReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+        this.id = id;
+        }
+        return this;
+    }
+
     @PostConstruct
     public void preUpdate() {
         //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }

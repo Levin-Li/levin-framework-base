@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  删除系统设置
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:54
- * 代码生成哈希校验码：[9d19ff2c2d389ec38bb752eb6ce0ef05]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ * 代码生成哈希校验码：[0400322c29a335a961642bc4e91519d5]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -57,6 +57,11 @@ public class DeleteSettingReq extends MultiTenantReq {
     private static final long serialVersionUID = 147875794L;
 
 
+    @Schema(description = "可编辑条件" , hidden = true)
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    final boolean eqEditable = true;
+
+
     @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @In(value = E_Setting.id)
     @NotEmpty
@@ -71,10 +76,6 @@ public class DeleteSettingReq extends MultiTenantReq {
         return this;
     }
 
-
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
-    final boolean eqEditable = true;
 
     @PostConstruct
     public void preDelete() {

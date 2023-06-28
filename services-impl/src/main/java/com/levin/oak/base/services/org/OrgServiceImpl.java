@@ -10,7 +10,6 @@ import com.levin.commons.service.domain.*;
 import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
-
 import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
@@ -26,9 +25,7 @@ import io.swagger.v3.oas.annotations.tags.*;
 import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
-
 import cn.hutool.core.lang.*;
-
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
@@ -54,16 +51,15 @@ import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
-
 import java.util.Set;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
- * 机构-服务实现
+ *  机构-服务实现
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
- * 代码生成哈希校验码：[32dca72f076f17f8cb56ed48cba21ac6]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[50f5288373e33e81c18e0ced218d9641]
  */
 
 //@Service(PLUGIN_PREFIX + "OrgService")
@@ -77,14 +73,14 @@ import java.util.Date;
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Org.SIMPLE_CLASS_NAME})
 public class OrgServiceImpl extends BaseService implements OrgService {
 
-    protected OrgService getSelfProxy() {
+    protected OrgService getSelfProxy(){
         return getSelfProxy(OrgService.class);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public String create(CreateOrgReq req) {
+    public String create(CreateOrgReq req){
         Org entity = simpleDao.create(req, true);
         return entity.getId();
     }
@@ -92,7 +88,7 @@ public class OrgServiceImpl extends BaseService implements OrgService {
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<String> batchCreate(List<CreateOrgReq> reqList) {
+    public List<String> batchCreate(List<CreateOrgReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
@@ -119,16 +115,15 @@ public class OrgServiceImpl extends BaseService implements OrgService {
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean update(UpdateOrgReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public int batchUpdate(List<UpdateOrgReq> reqList) {
+    public int batchUpdate(List<UpdateOrgReq> reqList){
         //@Todo 优化批量提交
-        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
+        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n?1:0).sum();
     }
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
@@ -143,13 +138,13 @@ public class OrgServiceImpl extends BaseService implements OrgService {
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public int batchDelete(DeleteOrgReq req) {
+    public int batchDelete(DeleteOrgReq req){
         //@Todo 优化批量提交
         return Stream.of(req.getIdList())
-                .map(id -> simpleDao.copy(req, new OrgIdReq().setId(id)))
-                .map(idReq -> getSelfProxy().delete(idReq))
-                .mapToInt(n -> n ? 1 : 0)
-                .sum();
+            .map(id -> simpleDao.copy(req, new OrgIdReq().setId(id)))
+            .map(idReq -> getSelfProxy().delete(idReq))
+            .mapToInt(n -> n?1:0)
+            .sum();
     }
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
@@ -167,20 +162,8 @@ public class OrgServiceImpl extends BaseService implements OrgService {
      */
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     @Override
-    public PagingData<StatOrgReq.Result> stat(StatOrgReq req, Paging paging) {
+    public PagingData<StatOrgReq.Result> stat(StatOrgReq req , Paging paging){
         return simpleDao.findPagingDataByQueryObj(req, paging);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public OrgInfo findOne(QueryOrgReq req) {
-        return simpleDao.findOneByQueryObj(req);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public OrgInfo findUnique(QueryOrgReq req) {
-        return simpleDao.findUnique(req);
     }
 
     /**
@@ -191,8 +174,20 @@ public class OrgServiceImpl extends BaseService implements OrgService {
      */
     @Override
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
-    public int count(QueryOrgReq req) {
+    public int count(QueryOrgReq req){
         return (int) simpleDao.countByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public OrgInfo findOne(QueryOrgReq req){
+        return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public OrgInfo findUnique(QueryOrgReq req){
+        return simpleDao.findUnique(req);
     }
 
     @Override

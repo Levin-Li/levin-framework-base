@@ -36,8 +36,8 @@ import java.util.Date;
 
 /**
  *  删除调度任务
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
- * 代码生成哈希校验码：[b0c4c702129c4f0267e0c389b7e66ee8]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ * 代码生成哈希校验码：[f66a24f63f7f8a52e8fa6860116cd21c]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -56,6 +56,11 @@ public class DeleteScheduledTaskReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -2056389676L;
 
 
+    @Schema(description = "可编辑条件" , hidden = true)
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    final boolean eqEditable = true;
+
+
     @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @In(value = E_ScheduledTask.id)
     @NotEmpty
@@ -70,10 +75,6 @@ public class DeleteScheduledTaskReq extends MultiTenantOrgReq {
         return this;
     }
 
-
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
-    final boolean eqEditable = true;
 
     @PostConstruct
     public void preDelete() {

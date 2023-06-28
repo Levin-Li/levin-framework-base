@@ -36,8 +36,8 @@ import java.util.Date;
 
 /**
  *  删除应用错误日志
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:55
- * 代码生成哈希校验码：[69add68430c6b4a0f97f7823902f4b15]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ * 代码生成哈希校验码：[cead49f22a09aca4f50ec45d5b2f925f]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -56,6 +56,8 @@ public class DeleteAppErrorLogReq extends MultiTenantReq {
     private static final long serialVersionUID = 1594864095L;
 
 
+
+
     @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @In(value = E_AppErrorLog.id)
     @NotEmpty
@@ -69,7 +71,6 @@ public class DeleteAppErrorLogReq extends MultiTenantReq {
         this.idList = idList;
         return this;
     }
-
 
 
     @PostConstruct

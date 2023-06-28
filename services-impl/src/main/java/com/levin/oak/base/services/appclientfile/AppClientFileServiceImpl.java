@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  客户端文件-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:55
- *  代码生成哈希校验码：[35007a15308fa860c7365395850e4d7a]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[ce5f8f0b84a20639d7b5dd9c3593712c]
  */
 
 //@Service(PLUGIN_PREFIX + "AppClientFileService")
@@ -109,8 +109,7 @@ public class AppClientFileServiceImpl extends BaseService implements AppClientFi
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean update(UpdateAppClientFileReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
-       return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
@@ -161,18 +160,6 @@ public class AppClientFileServiceImpl extends BaseService implements AppClientFi
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public AppClientFileInfo findOne(QueryAppClientFileReq req){
-        return simpleDao.findOneByQueryObj(req);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public AppClientFileInfo findUnique(QueryAppClientFileReq req){
-        return simpleDao.findUnique(req);
-    }
-
     /**
      * 统计记录数
      *
@@ -183,6 +170,18 @@ public class AppClientFileServiceImpl extends BaseService implements AppClientFi
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     public int count(QueryAppClientFileReq req){
         return (int) simpleDao.countByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public AppClientFileInfo findOne(QueryAppClientFileReq req){
+        return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public AppClientFileInfo findUnique(QueryAppClientFileReq req){
+        return simpleDao.findUnique(req);
     }
 
     @Override

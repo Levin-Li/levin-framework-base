@@ -1,33 +1,54 @@
 package com.levin.oak.base.services.user.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Eq;
-import com.levin.oak.base.entities.E_User;
-import com.levin.oak.base.entities.User;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import com.levin.oak.base.services.user.info.UserInfo;
+import static com.levin.oak.base.entities.EntityConst.*;
+
+
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import javax.annotation.*;
+import javax.validation.constraints.*;
+
 import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
-
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotNull;
-
+import lombok.experimental.*;
+import java.util.*;
+import com.levin.oak.base.services.user.info.*;
+import com.levin.oak.base.entities.User;
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_User.*;
+import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.User.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.util.Date;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
- * 用户 主键通用请求
- * //Auto gen by simple-dao-codegen 2022-3-25 17:01:36
+ *  用户 主键通用请求
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[3f28773434c75bf12263141c49b4cf28]
  */
 
-@Schema(title = "用户 主键通用请求")
+@Schema(title =  BIZ_NAME + " 主键通用查询")
 @Data
-
 @AllArgsConstructor
-
 @NoArgsConstructor
 @Builder
 //@EqualsAndHashCode(callSuper = true)
@@ -35,15 +56,21 @@ import javax.validation.constraints.NotNull;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS, resultClass = UserInfo.class)
-public class UserIdReq extends MultiTenantReq {
+public class UserIdReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445263479L;
 
-
-    @Schema(title = "id", required = true)
+    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @Eq(require = true)
-    @NotNull
+    //@NotNull
     protected String id;
+
+    public UserIdReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+            this.id = id;
+        }
+        return this;
+    }
 
 
     @PostConstruct

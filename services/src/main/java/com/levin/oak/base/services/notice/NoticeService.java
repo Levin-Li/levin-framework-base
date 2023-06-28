@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  通知-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:55
- *  代码生成哈希校验码：[383f6837a8a77832850222735d21792a]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[aa5b1c15e525c2c031a74b763a6f0088]
  */
 @Tag(name = E_Notice.BIZ_NAME, description = E_Notice.BIZ_NAME + MAINTAIN_ACTION)
 public interface NoticeService {
@@ -105,7 +105,6 @@ public interface NoticeService {
      */
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<NoticeInfo> query(@NotNull QueryNoticeReq req, Paging paging);
-
 
     /**
      * 简单统计

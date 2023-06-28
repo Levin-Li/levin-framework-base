@@ -36,8 +36,8 @@ import java.util.Date;
 
 /**
  *  删除应用接入
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:54
- * 代码生成哈希校验码：[6fe70ae65f4a16861f8d0f1462ba5002]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
+ * 代码生成哈希校验码：[76f313c515eb19cf46d8ba62ac4c8ebc]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -56,6 +56,11 @@ public class DeleteAppClientReq extends MultiTenantReq {
     private static final long serialVersionUID = -115048882L;
 
 
+    @Schema(description = "可编辑条件" , hidden = true)
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    final boolean eqEditable = true;
+
+
     @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @In(value = E_AppClient.id)
     @NotEmpty
@@ -70,10 +75,6 @@ public class DeleteAppClientReq extends MultiTenantReq {
         return this;
     }
 
-
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
-    final boolean eqEditable = true;
 
     @PostConstruct
     public void preDelete() {

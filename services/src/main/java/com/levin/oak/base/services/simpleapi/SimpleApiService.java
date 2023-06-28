@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  简单动态接口-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:54
- *  代码生成哈希校验码：[2f1f47dabcec3fbad63a3c00e73b5ad6]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
+ *  代码生成哈希校验码：[8b24930ee4a285e7d1342e30f383b329]
  */
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimpleApiService {
@@ -105,7 +105,6 @@ public interface SimpleApiService {
      */
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<SimpleApiInfo> query(@NotNull QuerySimpleApiReq req, Paging paging);
-
 
     /**
      * 简单统计

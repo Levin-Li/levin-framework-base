@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  简单表单-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:57
- *  代码生成哈希校验码：[f26c913189ea87a5b1e6e62108d8df36]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:58
+ *  代码生成哈希校验码：[df462aa86dbfd7d30efb1a30d5355d75]
  */
 @Tag(name = E_SimpleForm.BIZ_NAME, description = E_SimpleForm.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimpleFormService {
@@ -105,7 +105,6 @@ public interface SimpleFormService {
      */
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<SimpleFormInfo> query(@NotNull QuerySimpleFormReq req, Paging paging);
-
 
     /**
      * 简单统计

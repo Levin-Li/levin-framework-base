@@ -33,8 +33,8 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 
 /**
  * 平台租户
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:54
- * 代码生成哈希校验码：[806a040e8ba19350c42905899811cf21]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
+ * 代码生成哈希校验码：[16d30573474ab29d7d0bced55409996b]
  */
 @Schema(title = BIZ_NAME)
 @Data

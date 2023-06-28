@@ -38,8 +38,8 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 
 /**
  *  删除平台租户
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:54
- * 代码生成哈希校验码：[0e14b80241824b8d58d485a4bfd5d7bc]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
+ * 代码生成哈希校验码：[fa69272b291a41b5eaea3a1d82b964f6]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -58,6 +58,11 @@ public class DeleteTenantReq extends BaseReq {
     private static final long serialVersionUID = 1557223144L;
 
 
+    @Schema(description = "可编辑条件" , hidden = true)
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    final boolean eqEditable = true;
+
+
     @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @In(value = E_Tenant.id)
     @NotEmpty
@@ -72,10 +77,6 @@ public class DeleteTenantReq extends BaseReq {
         return this;
     }
 
-
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
-    final boolean eqEditable = true;
 
     @PostConstruct
     public void preDelete() {

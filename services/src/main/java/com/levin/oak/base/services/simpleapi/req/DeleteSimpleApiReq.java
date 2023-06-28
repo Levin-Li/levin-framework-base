@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  删除简单动态接口
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:53
- * 代码生成哈希校验码：[99005bbc26c9536bd0b5388c2fcd4aea]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
+ * 代码生成哈希校验码：[41be9df1aa00ffa388fe8299fb8bd007]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -57,6 +57,11 @@ public class DeleteSimpleApiReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = 1021385738L;
 
 
+    @Schema(description = "可编辑条件" , hidden = true)
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    final boolean eqEditable = true;
+
+
     @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @In(value = E_SimpleApi.id)
     @NotEmpty
@@ -71,10 +76,6 @@ public class DeleteSimpleApiReq extends MultiTenantOrgReq {
         return this;
     }
 
-
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
-    final boolean eqEditable = true;
 
     @PostConstruct
     public void preDelete() {

@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  国际化资源-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
- *  代码生成哈希校验码：[74a5be1647117b8182a410e4618eca91]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[8a859c6fe1fd176db7752a1cd3ee7c60]
  */
 @Tag(name = E_I18nRes.BIZ_NAME, description = E_I18nRes.BIZ_NAME + MAINTAIN_ACTION)
 public interface I18nResService {
@@ -105,7 +105,6 @@ public interface I18nResService {
      */
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<I18nResInfo> query(@NotNull QueryI18nResReq req, Paging paging);
-
 
     /**
      * 简单统计

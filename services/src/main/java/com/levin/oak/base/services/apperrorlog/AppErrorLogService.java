@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  应用错误日志-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:55
- *  代码生成哈希校验码：[80b67310ea9755941884b443fd13bd50]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[d957152624fd6cacabdd5fb08d0bb024]
  */
 @Tag(name = E_AppErrorLog.BIZ_NAME, description = E_AppErrorLog.BIZ_NAME + MAINTAIN_ACTION)
 public interface AppErrorLogService {
@@ -105,7 +105,6 @@ public interface AppErrorLogService {
      */
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<AppErrorLogInfo> query(@NotNull QueryAppErrorLogReq req, Paging paging);
-
 
     /**
      * 简单统计

@@ -36,8 +36,8 @@ import java.util.Date;
 
 /**
  *  删除简单页面
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:57
- * 代码生成哈希校验码：[58cab2acab08bc6a64320aea92c1d677]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:58
+ * 代码生成哈希校验码：[bdaf4a1976c7c0ee98ff3f6b79e903a0]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -56,6 +56,11 @@ public class DeleteSimplePageReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = 1598619295L;
 
 
+    @Schema(description = "可编辑条件" , hidden = true)
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    final boolean eqEditable = true;
+
+
     @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @In(value = E_SimplePage.id)
     @NotEmpty
@@ -70,10 +75,6 @@ public class DeleteSimplePageReq extends MultiTenantOrgReq {
         return this;
     }
 
-
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
-    final boolean eqEditable = true;
 
     @PostConstruct
     public void preDelete() {

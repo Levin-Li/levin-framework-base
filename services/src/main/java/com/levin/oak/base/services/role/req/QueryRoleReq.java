@@ -37,18 +37,18 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import com.levin.oak.base.entities.Role.*;
-    import java.util.List;
-    import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-    import java.util.Date;
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.Role.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  查询角色
- *  @Author Auto gen by simple-dao-codegen 2023年6月27日 下午11:27:32
- *  代码生成哈希校验码：[57ffd8b1eda12da5c3e4c09a645ccf1d]
+ *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午9:06:28
+ *  代码生成哈希校验码：[4d03dfa2ca5b11ea9cd43238b77a29d1]
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data

@@ -55,8 +55,8 @@ import java.util.Date;
 /**
  *  字典-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:55
- *  代码生成哈希校验码：[8a0a048c2fc90bec89fffbff45bd973f]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[814760d47ee70c5a5e1610f9da5b7665]
  */
 
 //@Service(PLUGIN_PREFIX + "DictService")
@@ -112,8 +112,7 @@ public class DictServiceImpl extends BaseService implements DictService {
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean update(UpdateDictReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
-       return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
@@ -164,18 +163,6 @@ public class DictServiceImpl extends BaseService implements DictService {
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public DictInfo findOne(QueryDictReq req){
-        return simpleDao.findOneByQueryObj(req);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public DictInfo findUnique(QueryDictReq req){
-        return simpleDao.findUnique(req);
-    }
-
     /**
      * 统计记录数
      *
@@ -186,6 +173,18 @@ public class DictServiceImpl extends BaseService implements DictService {
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     public int count(QueryDictReq req){
         return (int) simpleDao.countByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public DictInfo findOne(QueryDictReq req){
+        return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public DictInfo findUnique(QueryDictReq req){
+        return simpleDao.findUnique(req);
     }
 
     @Override

@@ -11,6 +11,9 @@ import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.services.BaseService;
 import com.levin.oak.base.services.role.info.RoleInfo;
 import com.levin.oak.base.services.role.req.*;
+import com.levin.oak.base.services.tenant.info.TenantInfo;
+import com.levin.oak.base.services.tenant.req.QueryTenantReq;
+import com.levin.oak.base.services.tenant.req.StatTenantReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -162,12 +165,42 @@ public class RoleServiceImpl extends BaseService implements RoleService {
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
+    /**
+     * 简单统计
+     *
+     * @param req
+     * @param paging 分页设置，可空
+     * @return pagingData 分页数据
+     */
+    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    @Override
+    public PagingData<StatRoleReq.Result> stat(StatRoleReq req , Paging paging){
+        return simpleDao.findPagingDataByQueryObj(req, paging);
+    }
+
+    /**
+     * 统计记录数
+     *
+     * @param req
+     * @return record count
+     */
+    @Override
+    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    public int count(QueryRoleReq req){
+        return (int) simpleDao.countByQueryObj(req);
+    }
+
     @Operation(summary = QUERY_ACTION)
     @Override
     public RoleInfo findOne(QueryRoleReq req) {
         return simpleDao.findOneByQueryObj(req);
     }
 
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public RoleInfo findUnique(QueryRoleReq req){
+        return simpleDao.findUnique(req);
+    }
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")

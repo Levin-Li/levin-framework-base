@@ -36,8 +36,8 @@ import java.util.Date;
 
 /**
  *  删除简单表单
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:57
- * 代码生成哈希校验码：[684865aa49cb054baf2f77d591ca998e]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:58
+ * 代码生成哈希校验码：[1840e929cad40a83e1f464cb46df062a]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -56,6 +56,11 @@ public class DeleteSimpleFormReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = 1598335188L;
 
 
+    @Schema(description = "可编辑条件" , hidden = true)
+    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    final boolean eqEditable = true;
+
+
     @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @In(value = E_SimpleForm.id)
     @NotEmpty
@@ -70,10 +75,6 @@ public class DeleteSimpleFormReq extends MultiTenantOrgReq {
         return this;
     }
 
-
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition ="!#user.isSuperAdmin()")
-    final boolean eqEditable = true;
 
     @PostConstruct
     public void preDelete() {

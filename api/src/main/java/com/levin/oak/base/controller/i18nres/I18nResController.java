@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 国际化资源控制器
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
- * 代码生成哈希校验码：[6e0cd90c97e287c7e7fe49f0376246d0]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:58
+ * 代码生成哈希校验码：[b2f875504812f027058d962560e2dbce]
  */
 public class I18nResController extends BaseController{
 

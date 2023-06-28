@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  访问日志-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:55
- *  代码生成哈希校验码：[3349199446d1d20b787c041818bd7ecd]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[8190fd2a71289ecea271a1571299398a]
  */
 
 //@Service(PLUGIN_PREFIX + "AccessLogService")
@@ -109,8 +109,7 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean update(UpdateAccessLogReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
-       return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
@@ -161,18 +160,6 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public AccessLogInfo findOne(QueryAccessLogReq req){
-        return simpleDao.findOneByQueryObj(req);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public AccessLogInfo findUnique(QueryAccessLogReq req){
-        return simpleDao.findUnique(req);
-    }
-
     /**
      * 统计记录数
      *
@@ -183,6 +170,18 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     public int count(QueryAccessLogReq req){
         return (int) simpleDao.countByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public AccessLogInfo findOne(QueryAccessLogReq req){
+        return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public AccessLogInfo findUnique(QueryAccessLogReq req){
+        return simpleDao.findUnique(req);
     }
 
     @Override

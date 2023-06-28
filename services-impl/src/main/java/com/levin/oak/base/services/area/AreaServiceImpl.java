@@ -56,8 +56,8 @@ import java.util.Date;
 /**
  *  区域-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:57
- *  代码生成哈希校验码：[b487f57f8ba61ff8eb6f52eec29e0525]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:58
+ *  代码生成哈希校验码：[4dc020e560d317e772ce89d530ae7517]
  */
 
 //@Service(PLUGIN_PREFIX + "AreaService")
@@ -113,8 +113,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean update(UpdateAreaReq req) {
         Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
-
-       return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
@@ -165,18 +164,6 @@ public class AreaServiceImpl extends BaseService implements AreaService {
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public AreaInfo findOne(QueryAreaReq req){
-        return simpleDao.findOneByQueryObj(req);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public AreaInfo findUnique(QueryAreaReq req){
-        return simpleDao.findUnique(req);
-    }
-
     /**
      * 统计记录数
      *
@@ -187,6 +174,18 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     public int count(QueryAreaReq req){
         return (int) simpleDao.countByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public AreaInfo findOne(QueryAreaReq req){
+        return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public AreaInfo findUnique(QueryAreaReq req){
+        return simpleDao.findUnique(req);
     }
 
     @Override

@@ -1,38 +1,49 @@
 package com.levin.oak.base.services.role.req;
 
-import com.levin.commons.dao.TargetOption;
-import com.levin.commons.dao.annotation.Eq;
-import com.levin.commons.dao.annotation.update.Update;
-import com.levin.commons.service.support.*;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.*;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import com.levin.oak.base.entities.E_Role;
-import com.levin.oak.base.entities.Role;
-import com.levin.oak.base.entities.Role.OrgDataScope;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldNameConstants;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.List;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.update.*;
+import com.levin.commons.dao.annotation.select.*;
+import com.levin.commons.dao.annotation.stat.*;
+import com.levin.commons.dao.annotation.order.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.annotation.misc.*;
+
+import javax.validation.constraints.*;
+import javax.annotation.*;
+
+import lombok.*;
+import lombok.experimental.*;
+import java.util.*;
+
+import com.levin.oak.base.entities.Role;
+import com.levin.oak.base.entities.*;
+import static com.levin.oak.base.entities.E_Role.*;
+import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.Role.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.util.Date;
 ////////////////////////////////////
 
-
 /**
- * 更新角色
- * Auto gen by simple-dao-codegen 2022-3-25 17:01:35
+ *  更新角色
+ *  Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
+ *  代码生成哈希校验码：[6b653c26afd9d815018d3c7220c944c7]
  */
-@Schema(title = "更新角色")
+@Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -48,73 +59,81 @@ public class UpdateRoleReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -445356492L;
 
-    @Schema(title = "id", required = true)
+    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull
     @Eq(require = true)
-    private String id;
+    String id;
 
-    @Schema(title = "可编辑条件", hidden = true)
+    @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
-    //编码不允许修改
-//    @NotBlank
-//    @Schema(title = "编码")
-//    private String code;
-
-    @Schema(title = "图标")
-    private String icon;
-
-    @Schema(title = "部门数据权限")
-    private OrgDataScope orgDataScope;
-
-    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
-    @Schema(title = "指定的部门列表")
-    private List<String> assignedOrgIdList;
-
-    @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class)
-    @Schema(title = "资源权限列表")
-    private List<String> permissionList;
-
-    @Size(max = 64)
-    @Schema(title = "系统子域")
-    private String domain;
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = "名称")
-    private String name;
+    @Schema(title = L_code)
+    String code;
+
+    @Schema(title = L_icon)
+    String icon;
+
+    @Schema(title = L_orgDataScope)
+    OrgDataScope orgDataScope;
+
+    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @Schema(title = L_assignedOrgIdList , description = D_assignedOrgIdList)
+    List<String> assignedOrgIdList;
+
+    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @Schema(title = L_permissionList , description = D_permissionList)
+    List<String> permissionList;
 
     @Size(max = 128)
-    @Schema(title = "拼音，格式：全拼(简拼)")
-    private String pinyinName;
+    @Schema(title = L_domain)
+    String domain;
 
-    @Schema(title = "更新时间")
-    private Date lastUpdateTime;
+    @NotBlank
+    @Size(max = 128)
+    @Schema(title = L_name)
+    String name;
 
-    @Schema(title = "排序代码")
-    private Integer orderCode;
+    @Size(max = 128)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
 
-    @Schema(title = "是否允许")
-    private Boolean enable;
+    @Schema(title = L_lastUpdateTime)
+    Date lastUpdateTime;
 
-    @Schema(title = "是否可编辑")
-    private Boolean editable;
+    @Schema(title = L_orderCode)
+    Integer orderCode;
+
+    @Schema(title = L_enable)
+    Boolean enable;
+
+    @Schema(title = L_editable)
+    Boolean editable;
 
     @Size(max = 512)
-    @Schema(title = "备注")
-    private String remark;
+    @Schema(title = L_remark)
+    String remark;
 
 
     public UpdateRoleReq(String id) {
         this.id = id;
     }
 
+    public UpdateRoleReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+        this.id = id;
+        }
+        return this;
+    }
+
     @PostConstruct
     public void preUpdate() {
         //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }

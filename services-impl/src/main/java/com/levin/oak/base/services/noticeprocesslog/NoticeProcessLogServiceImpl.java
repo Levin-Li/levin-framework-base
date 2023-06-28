@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  通知处理日志-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
- *  代码生成哈希校验码：[873b8558aa52ff9c7c77a96f0946adcd]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[98d7e33e6ea776d53e2c600b68ec4cb1]
  */
 
 //@Service(PLUGIN_PREFIX + "NoticeProcessLogService")
@@ -109,8 +109,7 @@ public class NoticeProcessLogServiceImpl extends BaseService implements NoticePr
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean update(UpdateNoticeProcessLogReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
-       return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
@@ -161,18 +160,6 @@ public class NoticeProcessLogServiceImpl extends BaseService implements NoticePr
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public NoticeProcessLogInfo findOne(QueryNoticeProcessLogReq req){
-        return simpleDao.findOneByQueryObj(req);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public NoticeProcessLogInfo findUnique(QueryNoticeProcessLogReq req){
-        return simpleDao.findUnique(req);
-    }
-
     /**
      * 统计记录数
      *
@@ -183,6 +170,18 @@ public class NoticeProcessLogServiceImpl extends BaseService implements NoticePr
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     public int count(QueryNoticeProcessLogReq req){
         return (int) simpleDao.countByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public NoticeProcessLogInfo findOne(QueryNoticeProcessLogReq req){
+        return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public NoticeProcessLogInfo findUnique(QueryNoticeProcessLogReq req){
+        return simpleDao.findUnique(req);
     }
 
     @Override

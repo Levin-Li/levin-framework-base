@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  调度任务-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
- *  代码生成哈希校验码：[8b55a391d066530e5045c49e70feffdb]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[24264141c7c424c4dcd3e1b52fd81509]
  */
 @Tag(name = E_ScheduledTask.BIZ_NAME, description = E_ScheduledTask.BIZ_NAME + MAINTAIN_ACTION)
 public interface ScheduledTaskService {
@@ -105,7 +105,6 @@ public interface ScheduledTaskService {
      */
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<ScheduledTaskInfo> query(@NotNull QueryScheduledTaskReq req, Paging paging);
-
 
     /**
      * 简单统计

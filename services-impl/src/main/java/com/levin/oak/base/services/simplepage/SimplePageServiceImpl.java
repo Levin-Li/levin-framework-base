@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  简单页面-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:57
- *  代码生成哈希校验码：[dfc64553adccfb20cdbf8521bf537710]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:58
+ *  代码生成哈希校验码：[13e188a493431cc782a9229aaa887870]
  */
 
 //@Service(PLUGIN_PREFIX + "SimplePageService")
@@ -109,8 +109,7 @@ public class SimplePageServiceImpl extends BaseService implements SimplePageServ
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean update(UpdateSimplePageReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
-       return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
@@ -161,18 +160,6 @@ public class SimplePageServiceImpl extends BaseService implements SimplePageServ
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public SimplePageInfo findOne(QuerySimplePageReq req){
-        return simpleDao.findOneByQueryObj(req);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public SimplePageInfo findUnique(QuerySimplePageReq req){
-        return simpleDao.findUnique(req);
-    }
-
     /**
      * 统计记录数
      *
@@ -183,6 +170,18 @@ public class SimplePageServiceImpl extends BaseService implements SimplePageServ
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     public int count(QuerySimplePageReq req){
         return (int) simpleDao.countByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public SimplePageInfo findOne(QuerySimplePageReq req){
+        return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public SimplePageInfo findUnique(QuerySimplePageReq req){
+        return simpleDao.findUnique(req);
     }
 
     @Override

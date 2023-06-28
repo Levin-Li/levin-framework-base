@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  调度任务-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
- *  代码生成哈希校验码：[65af637dbdb5d026210195b8301bf76a]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[556a4ee040da1a3e020fe9211d0fa52b]
  */
 
 //@Service(PLUGIN_PREFIX + "ScheduledTaskService")
@@ -109,8 +109,7 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean update(UpdateScheduledTaskReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
-       return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
@@ -161,18 +160,6 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public ScheduledTaskInfo findOne(QueryScheduledTaskReq req){
-        return simpleDao.findOneByQueryObj(req);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public ScheduledTaskInfo findUnique(QueryScheduledTaskReq req){
-        return simpleDao.findUnique(req);
-    }
-
     /**
      * 统计记录数
      *
@@ -183,6 +170,18 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     public int count(QueryScheduledTaskReq req){
         return (int) simpleDao.countByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public ScheduledTaskInfo findOne(QueryScheduledTaskReq req){
+        return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public ScheduledTaskInfo findUnique(QueryScheduledTaskReq req){
+        return simpleDao.findUnique(req);
     }
 
     @Override

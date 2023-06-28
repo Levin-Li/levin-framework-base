@@ -53,8 +53,8 @@ import java.util.Date;
 /**
  *  工作岗位-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
- *  代码生成哈希校验码：[e993b29f98b466252ac4b96def69ee9a]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[8a17951b9948b81dc85824d3d9945756]
  */
 
 //@Service(PLUGIN_PREFIX + "JobPostService")
@@ -110,8 +110,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean update(UpdateJobPostReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
-       return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
@@ -162,18 +161,6 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public JobPostInfo findOne(QueryJobPostReq req){
-        return simpleDao.findOneByQueryObj(req);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public JobPostInfo findUnique(QueryJobPostReq req){
-        return simpleDao.findUnique(req);
-    }
-
     /**
      * 统计记录数
      *
@@ -184,6 +171,18 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     public int count(QueryJobPostReq req){
         return (int) simpleDao.countByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public JobPostInfo findOne(QueryJobPostReq req){
+        return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public JobPostInfo findUnique(QueryJobPostReq req){
+        return simpleDao.findUnique(req);
     }
 
     @Override

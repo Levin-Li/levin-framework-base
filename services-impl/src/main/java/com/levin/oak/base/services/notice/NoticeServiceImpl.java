@@ -53,8 +53,8 @@ import java.util.Date;
 /**
  *  通知-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午12:45:55
- *  代码生成哈希校验码：[9f0e281103b3c918ced8987bba36d902]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[f2b6872a6e7946e045849dedafbca942]
  */
 
 //@Service(PLUGIN_PREFIX + "NoticeService")
@@ -110,8 +110,7 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean update(UpdateNoticeReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
-       return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
@@ -162,18 +161,6 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public NoticeInfo findOne(QueryNoticeReq req){
-        return simpleDao.findOneByQueryObj(req);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-    @Override
-    public NoticeInfo findUnique(QueryNoticeReq req){
-        return simpleDao.findUnique(req);
-    }
-
     /**
      * 统计记录数
      *
@@ -184,6 +171,18 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     public int count(QueryNoticeReq req){
         return (int) simpleDao.countByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public NoticeInfo findOne(QueryNoticeReq req){
+        return simpleDao.findOneByQueryObj(req);
+    }
+
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Override
+    public NoticeInfo findUnique(QueryNoticeReq req){
+        return simpleDao.findUnique(req);
     }
 
     @Override

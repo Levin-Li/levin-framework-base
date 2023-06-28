@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  机构-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午12:45:56
- *  代码生成哈希校验码：[2906df2fd920fe468029e0af8ecdc534]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
+ *  代码生成哈希校验码：[fe56077ba2f84629fb2ebaba7e40568b]
  */
 @Tag(name = E_Org.BIZ_NAME, description = E_Org.BIZ_NAME + MAINTAIN_ACTION)
 public interface OrgService {
@@ -105,7 +105,6 @@ public interface OrgService {
      */
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     PagingData<OrgInfo> query(@NotNull QueryOrgReq req, Paging paging);
-
 
     /**
      * 简单统计
