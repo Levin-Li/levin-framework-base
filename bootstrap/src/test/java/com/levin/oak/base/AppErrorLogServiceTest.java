@@ -55,8 +55,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 应用错误日志测试
  *
- * Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:58
- * 代码生成哈希校验码：[e5aadf79158012370cc9dd6e419d6818]
+ * Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
+ * 代码生成哈希校验码：[110ac4460d14b6cb3f5a7022f5257186]
  */
 
 //@ActiveProfiles("test")

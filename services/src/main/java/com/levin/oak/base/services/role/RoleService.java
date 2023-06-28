@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  角色-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
- *  代码生成哈希校验码：[a1188229110bb18941133986b12b2a0e]
+ *  @author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:54
+ *  代码生成哈希校验码：[812afe1bb255cce04080fb33bd82a9c5]
  */
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)
 public interface RoleService {

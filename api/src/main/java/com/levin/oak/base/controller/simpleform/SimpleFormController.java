@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 简单表单控制器
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:58
- * 代码生成哈希校验码：[bcb7f5c020da170a91d25c2f92ca1aac]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
+ * 代码生成哈希校验码：[73cd41ff3aa13ba581ce7f0e33cc90b6]
  */
 public class SimpleFormController extends BaseController{
 

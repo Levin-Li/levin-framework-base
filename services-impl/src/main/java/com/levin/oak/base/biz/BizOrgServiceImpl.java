@@ -56,10 +56,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  -业务服务实现类
+ *  机构-业务服务实现类
  *
- * @author auto gen by simple-dao-codegen 2023年6月24日 下午12:28:37
- *
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
+ * 代码生成哈希校验码：[4fde2bbd687c95c1eb185d5e12e7472b]
  */
 
 @DubboService
@@ -71,6 +71,7 @@ import java.util.Date;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_Org.BIZ_NAME + "-业务服务", description = "")
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Org.SIMPLE_CLASS_NAME})
 public class BizOrgServiceImpl extends BaseService implements BizOrgService {
 
     @Autowired
@@ -79,5 +80,15 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
     protected BizOrgServiceImpl getSelfProxy(){
         return getSelfProxy(BizOrgServiceImpl.class);
     }
+
+    //示例方法
+    //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    //@Override
+    //@CacheEvict(condition = "#req.id != null", key = E_Org.CACHE_KEY_PREFIX + "#req.id")
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //public boolean update(UpdateOrgReq req) {
+    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
+    //    return simpleDao.singleUpdateByQueryObj(req);
+    //}
 
 }

@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 通知控制器
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
- * 代码生成哈希校验码：[220970b41b71a69d0c52565c5fd5878b]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
+ * 代码生成哈希校验码：[57c950598b95b48ae64663a01a9800aa]
  */
 public class NoticeController extends BaseController{
 

@@ -50,10 +50,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  -业务服务实现类
+ *  国际化资源-业务服务实现类
  *
- * @author auto gen by simple-dao-codegen 2023年6月24日 下午12:28:37
- *
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
+ * 代码生成哈希校验码：[75fe0096816e9ea316dc80c0eafa1135]
  */
 
 @DubboService
@@ -65,6 +65,7 @@ import java.util.Date;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_I18nRes.BIZ_NAME + "-业务服务", description = "")
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_I18nRes.SIMPLE_CLASS_NAME})
 public class BizI18nResServiceImpl extends BaseService implements BizI18nResService {
 
     @Autowired
@@ -73,5 +74,15 @@ public class BizI18nResServiceImpl extends BaseService implements BizI18nResServ
     protected BizI18nResServiceImpl getSelfProxy(){
         return getSelfProxy(BizI18nResServiceImpl.class);
     }
+
+    //示例方法
+    //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    //@Override
+    //@CacheEvict(condition = "#req.id != null", key = E_I18nRes.CACHE_KEY_PREFIX + "#req.id")
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //public boolean update(UpdateI18nResReq req) {
+    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
+    //    return simpleDao.singleUpdateByQueryObj(req);
+    //}
 
 }

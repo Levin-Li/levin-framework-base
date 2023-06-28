@@ -39,8 +39,8 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 
 /**
  *  更新平台租户
- *  Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
- *  代码生成哈希校验码：[4c72a95b979f4cc0e44bab0b8c969246]
+ *  Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
+ *  代码生成哈希校验码：[61e5c899c48b9913825fbe651d4ed39c]
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data

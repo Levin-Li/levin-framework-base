@@ -19,8 +19,8 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户查询对象
  *
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:55
- * 代码生成哈希校验码：[e82de2429aede34583ad354522d51726]
+ * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:54
+ * 代码生成哈希校验码：[001c03f8e45ea4c401b66a27f1235cee]
  */
 @Schema(title = "多租户查询对象")
 @Data

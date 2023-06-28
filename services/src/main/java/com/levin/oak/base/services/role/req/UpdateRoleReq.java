@@ -40,8 +40,8 @@ import java.util.Date;
 
 /**
  *  更新角色
- *  Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
- *  代码生成哈希校验码：[6b653c26afd9d815018d3c7220c944c7]
+ *  Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:54
+ *  代码生成哈希校验码：[3b9d0eea2869845474ea131938d2f4c8]
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data

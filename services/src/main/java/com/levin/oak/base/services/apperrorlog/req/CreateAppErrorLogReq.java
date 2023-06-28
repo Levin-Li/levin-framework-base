@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  *  新增应用错误日志
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
- * 代码生成哈希校验码：[878e57d6acb8a24158c65b08a8bf14dd]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
+ * 代码生成哈希校验码：[64183922a190c67cff39b0c6f4aba128]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data

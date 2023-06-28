@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 简单动态接口控制器
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
- * 代码生成哈希校验码：[79b231bc05e10cb3415854e81b45d047]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
+ * 代码生成哈希校验码：[dfa8deb31e8b3e3ef024634e15b60a81]
  */
 public class SimpleApiController extends BaseController{
 

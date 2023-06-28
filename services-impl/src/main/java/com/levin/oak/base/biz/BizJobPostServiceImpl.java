@@ -51,10 +51,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  -业务服务实现类
+ *  工作岗位-业务服务实现类
  *
- * @author auto gen by simple-dao-codegen 2023年6月24日 下午12:28:37
- *
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
+ * 代码生成哈希校验码：[b80a3ff5fe025f1dde140d9e8a650d27]
  */
 
 @DubboService
@@ -66,6 +66,7 @@ import java.util.Date;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_JobPost.BIZ_NAME + "-业务服务", description = "")
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_JobPost.SIMPLE_CLASS_NAME})
 public class BizJobPostServiceImpl extends BaseService implements BizJobPostService {
 
     @Autowired
@@ -74,5 +75,15 @@ public class BizJobPostServiceImpl extends BaseService implements BizJobPostServ
     protected BizJobPostServiceImpl getSelfProxy(){
         return getSelfProxy(BizJobPostServiceImpl.class);
     }
+
+    //示例方法
+    //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    //@Override
+    //@CacheEvict(condition = "#req.id != null", key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //public boolean update(UpdateJobPostReq req) {
+    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
+    //    return simpleDao.singleUpdateByQueryObj(req);
+    //}
 
 }

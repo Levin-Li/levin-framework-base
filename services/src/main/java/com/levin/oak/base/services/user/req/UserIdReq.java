@@ -42,8 +42,8 @@ import com.levin.oak.base.entities.Org;
 
 /**
  *  用户 主键通用请求
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
- *  代码生成哈希校验码：[3f28773434c75bf12263141c49b4cf28]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
+ *  代码生成哈希校验码：[28910df5f45763a4776b29e03a3b9e9b]
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")

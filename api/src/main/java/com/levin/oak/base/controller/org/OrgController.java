@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 机构控制器
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
- * 代码生成哈希校验码：[3e1b4b36d32c0f27eab7f319ad43ea50]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
+ * 代码生成哈希校验码：[740cd0ca7b7ec8976ac5ca2566beda24]
  */
 public class OrgController extends BaseController{
 

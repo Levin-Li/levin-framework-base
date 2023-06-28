@@ -53,8 +53,8 @@ import java.util.Date;
 /**
  *  通知-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
- *  代码生成哈希校验码：[f2b6872a6e7946e045849dedafbca942]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
+ *  代码生成哈希校验码：[9ab273b020d11ca3b7bb95fe44d4bf41]
  */
 
 //@Service(PLUGIN_PREFIX + "NoticeService")

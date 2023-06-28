@@ -56,8 +56,8 @@ import java.util.Date;
 /**
  *  区域-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:58
- *  代码生成哈希校验码：[4dc020e560d317e772ce89d530ae7517]
+ *  @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:58
+ *  代码生成哈希校验码：[53f5a49fdf363b73fb99952cdae384d1]
  */
 
 //@Service(PLUGIN_PREFIX + "AreaService")

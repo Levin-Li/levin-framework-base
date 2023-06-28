@@ -55,10 +55,10 @@ import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
- *  -业务服务实现类
+ *  用户-业务服务实现类
  *
- * @author auto gen by simple-dao-codegen 2023年6月24日 下午12:28:37
- *
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
+ * 代码生成哈希校验码：[1c553055ac944487f8593b226017feab]
  */
 
 @DubboService
@@ -70,6 +70,7 @@ import com.levin.oak.base.entities.Org;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_User.BIZ_NAME + "-业务服务", description = "")
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_User.SIMPLE_CLASS_NAME})
 public class BizUserServiceImpl extends BaseService implements BizUserService {
 
     @Autowired
@@ -78,5 +79,15 @@ public class BizUserServiceImpl extends BaseService implements BizUserService {
     protected BizUserServiceImpl getSelfProxy(){
         return getSelfProxy(BizUserServiceImpl.class);
     }
+
+    //示例方法
+    //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    //@Override
+    //@CacheEvict(condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //public boolean update(UpdateUserReq req) {
+    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
+    //    return simpleDao.singleUpdateByQueryObj(req);
+    //}
 
 }

@@ -33,8 +33,8 @@ import java.util.Date;
 /**
  *  简单动态接口-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:56
- * 代码生成哈希校验码：[d64d29d8633bb6756817c4f66fbbc70e]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:55
+ * 代码生成哈希校验码：[2fd941d7d6af2847a976fee9c8dbfe8c]
  */
 
 @Tag(name = E_SimpleApi.BIZ_NAME + "-业务服务", description = "")

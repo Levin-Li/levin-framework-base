@@ -4,8 +4,8 @@ import java.util.Map;
 
 /**
  * 注入变量服务
- * Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:55
- * 代码生成哈希校验码：[eb34282e51df1c28b2f1df2c3ad736c9]
+ * Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:54
+ * 代码生成哈希校验码：[fa77912b3c780949913b237b918febf4]
  */
 public interface InjectVarService {
 

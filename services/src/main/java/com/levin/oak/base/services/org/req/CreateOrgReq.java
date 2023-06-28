@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  新增机构
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
- * 代码生成哈希校验码：[4fd9bbfeca39e9b90e3e84ed7d177553]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
+ * 代码生成哈希校验码：[56bc059f83cc182e07a02a68dcb61c5c]
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data

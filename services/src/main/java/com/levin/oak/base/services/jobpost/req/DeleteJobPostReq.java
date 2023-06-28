@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  删除工作岗位
- *  //Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
- * 代码生成哈希校验码：[9d01fdf10cc9beabf6138715c6697c44]
+ *  //Auto gen by simple-dao-codegen 2023年6月28日 上午11:30:57
+ * 代码生成哈希校验码：[8f66373dd2431dc99ea6220e8d8dbab1]
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 应用错误日志控制器
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
- * 代码生成哈希校验码：[a2123e8b1a99bf83bf25aaf8589b2d2a]
+ * @author auto gen by simple-dao-codegen 2023年6月28日 上午11:30:56
+ * 代码生成哈希校验码：[167f7f1afa341edf4d81caa0b1df89e8]
  */
 public class AppErrorLogController extends BaseController{
 
