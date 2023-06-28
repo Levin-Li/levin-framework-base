@@ -127,14 +127,6 @@ public class QueryRoleReq extends MultiTenantReq{
     String containsName;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
-    String pinyinName;
-
-    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
-    @Contains
-    String containsPinyinName;
-
-    @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
 

@@ -160,11 +160,6 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
 
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName )
-    String pinyinName;
-
-
-    @Size(max = 128)
     @Schema(title = L_creator )
     String creator;
 
