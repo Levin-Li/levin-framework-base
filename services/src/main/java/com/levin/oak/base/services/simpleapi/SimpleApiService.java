@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  简单动态接口-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
- *  代码生成哈希校验码：[2a60efbc828044bc35bf1a6924868e2c]
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[f6152326c92f75cf47b699a42ffdbd75], 请不要修改和删除此行内容。
  */
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimpleApiService {

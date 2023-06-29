@@ -22,8 +22,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  字典-服务接口
- *  @author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
- *  代码生成哈希校验码：[3fbc52d48386028c937b47658793bc69]
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[e6ee5a9cedbe5f0c5907e94dc61180a9], 请不要修改和删除此行内容。
  */
 @Tag(name = E_Dict.BIZ_NAME, description = E_Dict.BIZ_NAME + MAINTAIN_ACTION)
 public interface DictService {

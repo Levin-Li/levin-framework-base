@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 区域控制器
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
- * 代码生成哈希校验码：[106b0bd686d8ea7c79a0ab614ee9cd25]
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[cb84f79689d4c6c81bf2786913eca1b1], 请不要修改和删除此行内容。
  */
 public class AreaController extends BaseController{
 

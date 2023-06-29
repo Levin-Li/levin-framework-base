@@ -37,8 +37,8 @@ import com.levin.oak.base.entities.Org;
 /**
  *  用户-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
- * 代码生成哈希校验码：[7c8142c35bbde5d4e09039ed4770498c]
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[6233e60f8984ca15882bda137c8e0b00], 请不要修改和删除此行内容。
  */
 
 @Tag(name = E_User.BIZ_NAME + "-业务服务", description = "")

@@ -47,8 +47,8 @@ import java.util.Date;
 
 /**
  *  查询区域
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
- *  代码生成哈希校验码：[b2597264a832c1e87e12eeeda2992067]
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[264cf0979d2195e65328f45b710b183e], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data

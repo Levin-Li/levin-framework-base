@@ -54,8 +54,8 @@ import java.util.Date;
 /**
  *  简单页面-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
- *  代码生成哈希校验码：[57a30bec64e2512a3501cf011e93768a]
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[a8fdd70ea51200c868409557517a4420], 请不要修改和删除此行内容。
  */
 
 //@Service(PLUGIN_PREFIX + "SimplePageService")

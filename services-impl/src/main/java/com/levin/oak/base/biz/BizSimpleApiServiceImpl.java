@@ -55,8 +55,8 @@ import java.util.Date;
 /**
  *  简单动态接口-业务服务实现类
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
- * 代码生成哈希校验码：[75f71c99d229a2b907eb77af2f4171d2]
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[d42fdcfa03b598c23121a85d2002bf4c], 请不要修改和删除此行内容。
  */
 
 @DubboService

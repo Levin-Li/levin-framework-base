@@ -54,8 +54,8 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 /**
  *  平台租户-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
- *  代码生成哈希校验码：[97a847f07861c5275bcfa15ba97c15ca]
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[15b9aa194f028a91066a8793b0390eec], 请不要修改和删除此行内容。
  */
 
 //@Service(PLUGIN_PREFIX + "TenantService")

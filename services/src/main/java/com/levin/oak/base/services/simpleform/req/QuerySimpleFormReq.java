@@ -45,8 +45,8 @@ import java.util.Date;
 
 /**
  *  查询简单表单
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
- *  代码生成哈希校验码：[a1ceca9ae9d467a201e7ac4c60c9d581]
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[6f0492d54f985714e1ea97a73d9f3d92], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data

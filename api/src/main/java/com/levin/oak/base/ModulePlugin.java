@@ -22,8 +22,8 @@ import java.util.stream.*;
 /**
  * 模块插件
  *
- * Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
- * 代码生成哈希校验码：[99f4aebbf1718b8b69c8655198f2eb08]
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:13, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[a967cf47c123315c93b60102d211fe6d], 请不要修改和删除此行内容。
  */
 @Slf4j
 @Component(PLUGIN_PREFIX + "ModulePlugin")

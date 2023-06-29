@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  调度日志 主键通用请求
- *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
- *  代码生成哈希校验码：[af04e4ab1f9f77b24ba5514670bd8b4c]
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[9b5a83e9219dd3f27c1032f030505373], 请不要修改和删除此行内容。
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")

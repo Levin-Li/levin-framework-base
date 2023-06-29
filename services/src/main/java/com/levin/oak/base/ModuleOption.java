@@ -5,8 +5,8 @@ package com.levin.oak.base;
  * <p>
  * eg.
  * <p>
- * Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:32
- * 代码生成哈希校验码：[8f571e05712a408f7e2ae32eeed7cc24]
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:13, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[c49ef6f83cabf1f0df1bd79dcec810d3], 请不要修改和删除此行内容。
  */
 public interface ModuleOption {
 

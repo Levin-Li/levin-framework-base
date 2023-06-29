@@ -35,8 +35,8 @@ import java.util.Date;
 /**
  *  字典-业务服务
  *
- * @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
- * 代码生成哈希校验码：[e117e6e8e0e800b4972d73134a174751]
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3fba8cc682ed471c5bec743b4e930d67], 请不要修改和删除此行内容。
  */
 
 @Tag(name = E_Dict.BIZ_NAME + "-业务服务", description = "")

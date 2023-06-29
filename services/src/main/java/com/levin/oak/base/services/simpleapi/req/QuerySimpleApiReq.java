@@ -46,8 +46,8 @@ import java.util.Date;
 
 /**
  *  查询简单动态接口
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
- *  代码生成哈希校验码：[64f117864a5962438543b25499208693]
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[7ccca20ee7582c13805e3205a226153c], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data

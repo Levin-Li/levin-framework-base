@@ -39,8 +39,8 @@ import java.util.Date;
 
 /**
  *  删除简单动态接口
- *  //Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
- * 代码生成哈希校验码：[97a5cb3a24a45cbca912efbf4b60a07c]
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[f7ee917f9751a855a8069d1410376dc3], 请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

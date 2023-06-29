@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  更新应用接入
- *  Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:30
- *  代码生成哈希校验码：[dbd555ebdb95fcc3e88b2ccc90940281]
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[0bb6c1f7ff2817c98d007b6d74db4552], 请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data

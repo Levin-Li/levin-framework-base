@@ -55,8 +55,8 @@ import java.util.Date;
 /**
  *  字典-服务实现
  *
- *  @author auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
- *  代码生成哈希校验码：[c6b3a1cb0626ec466fceb440d7a198bb]
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[69c5d02d6e99ebe0f96763d141a30538], 请不要修改和删除此行内容。
  */
 
 //@Service(PLUGIN_PREFIX + "DictService")

@@ -42,8 +42,8 @@ import com.levin.oak.base.entities.Org;
 
 /**
  *  更新用户
- *  Auto gen by simple-dao-codegen 2023年6月28日 下午4:18:31
- *  代码生成哈希校验码：[2815427663311a4f02dc4f6b9759ed19]
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[a605ac8dc81891e2537914817a0301b1], 请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
