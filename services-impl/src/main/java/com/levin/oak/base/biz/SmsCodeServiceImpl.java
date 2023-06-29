@@ -4,6 +4,7 @@ import cn.hutool.captcha.CaptchaUtil;
 import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,8 @@ import java.util.concurrent.TimeUnit;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
-@Service(PLUGIN_PREFIX + "SmsCodeService")
+//@Service(PLUGIN_PREFIX + "SmsCodeService")
+@DubboService
 @ConditionalOnClass({CaptchaUtil.class, RedissonClient.class})
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SmsCodeService", matchIfMissing = true)
 @Slf4j

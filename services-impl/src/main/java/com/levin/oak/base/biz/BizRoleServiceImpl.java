@@ -8,6 +8,7 @@ import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.Role;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,8 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 
 
-@Service(PLUGIN_PREFIX + "BizRoleService")
+//@Service(PLUGIN_PREFIX + "BizRoleService")
+@DubboService
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizRoleService", matchIfMissing = true)
 @Slf4j
 //@Validated

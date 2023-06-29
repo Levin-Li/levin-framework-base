@@ -18,6 +18,7 @@ import com.levin.oak.base.services.tenant.req.QueryTenantReq;
 import com.levin.oak.base.services.user.info.UserInfo;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,8 @@ import java.util.function.Supplier;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 
-@Service(PLUGIN_PREFIX + "BizTenantService")
+//@Service(PLUGIN_PREFIX + "BizTenantService")
+@DubboService
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizTenantService", matchIfMissing = true)
 @Slf4j
 //@Validated
