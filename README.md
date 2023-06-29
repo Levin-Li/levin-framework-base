@@ -35,6 +35,30 @@
 
 7、支持常见的OSS，短信和支付基本商业业务
 
-
-
+#### 框架配置文件
+ 
+        plugin:
+          com:
+            levin:
+              oak:
+                base:
+                  framework:
+                    #自带后台的路径
+                    admin-path: /
+                    #控制器访问控制
+                    controller-acl:
+                      exclude-path-patterns: "/v3/api-docs/**"
+                    sign:
+                      enable: false
+                    log:
+                      exclude-path-patterns: /v3/api-docs/**,/**/api/amis/page
+                    #资源访问控制
+                    resourcesAcl:
+                      - includePathPatterns: "/templates/com.levin.oak.base/**"
+                        denied: true
+                      - exclude-path-patterns: /**,/doc.html,/swagger-ui/**,/webjars/**
+                    #是开启短信验证码
+                 #  enable-sms-verification-code: false
+                    #是开启模拟短信验证码
+                    enable-mock-sms-send: true
 
