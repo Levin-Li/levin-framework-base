@@ -47,8 +47,8 @@ import java.util.Date;
 
 /**
  *  统计角色
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[b04dc94abee4a93b2c3af06c82925ea1], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[af9e6d2e6ab9ab122aec9218b1063530], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -87,7 +87,7 @@ public class StatRoleReq extends MultiTenantOrgReq{
     String icon;
 
     @NotNull
-    @Schema(title = L_orgDataScope)
+    @Schema(title = L_orgDataScope , description = D_orgDataScope)
     OrgDataScope orgDataScope;
 
     @OR(autoClose = true)

@@ -43,8 +43,8 @@ import java.util.Date;
 
 /**
  *  查询通知处理日志
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[251bcc117ccc2417edc51a841c3f2bcf], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[474e107f08236bceca612a7040ab5163], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -89,6 +89,10 @@ public class QueryNoticeProcessLogReq extends MultiTenantOrgReq{
     @Schema(title = L_status)
     String status;
 
+    @Size(max = 512)
+    @Schema(title = L_remark)
+    String remark;
+
     @NotNull
     @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
@@ -102,10 +106,6 @@ public class QueryNoticeProcessLogReq extends MultiTenantOrgReq{
     //@Between(paramDelimiter = "-")
     //String betweenCreateTime;
 
-
-    @Size(max = 512)
-    @Schema(title = L_remark)
-    String remark;
 
     public QueryNoticeProcessLogReq(String id) {
         this.id = id;

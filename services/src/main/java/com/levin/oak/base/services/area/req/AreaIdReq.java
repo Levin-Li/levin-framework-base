@@ -2,7 +2,7 @@ package com.levin.oak.base.services.area.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -41,8 +41,8 @@ import java.util.Date;
 
 /**
  *  区域 主键通用请求
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[495a83625488c159305606ccefe25eff], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[2e4534231da2d86f1713d0ed2a6bd1e2], 请不要修改和删除此行内容。
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")
@@ -59,7 +59,7 @@ public class AreaIdReq extends BaseReq {
 
     private static final long serialVersionUID = -445860277L;
 
-    @Schema(title = L_code , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_code , required = true, requiredMode = REQUIRED)
     @Eq(require = true)
     //@NotNull
     protected String code;

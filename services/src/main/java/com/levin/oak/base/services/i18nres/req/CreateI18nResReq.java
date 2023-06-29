@@ -4,7 +4,7 @@ package com.levin.oak.base.services.i18nres.req;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 /////////////////////////////////////////////////////
 import javax.validation.constraints.*;
 import javax.annotation.*;
@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  *  新增国际化资源
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[1cfd1f810f79ab8e4bb2cbc90b1a7d96], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[ca6861ac8fc11c9eccb99177147673e6], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -56,17 +56,17 @@ public class CreateI18nResReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -1681554652L;
 
 
-    @Schema(title = L_category  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_category  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String category;
 
-    @Schema(title = L_lang  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_lang  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 64)
     String lang;
 
-    @Schema(title = L_label  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_label  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 768)
     String label;
@@ -75,7 +75,7 @@ public class CreateI18nResReq extends MultiTenantOrgReq {
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 64)
     String name;

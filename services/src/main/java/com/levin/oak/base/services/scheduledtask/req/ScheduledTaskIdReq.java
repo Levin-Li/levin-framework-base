@@ -2,7 +2,7 @@ package com.levin.oak.base.services.scheduledtask.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  调度任务 主键通用请求
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[b8dafdcd751e00f91726b5e9f35a4e84], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[bd7ee3e2e4b819c094bb241580efbd99], 请不要修改和删除此行内容。
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")
@@ -55,7 +55,7 @@ public class ScheduledTaskIdReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -2056389676L;
 
-    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     @Eq(require = true)
     //@NotNull
     protected String id;

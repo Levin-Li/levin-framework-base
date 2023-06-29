@@ -2,6 +2,7 @@ package com.levin.oak.base.services.scheduledlog.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -37,8 +38,8 @@ import java.util.Date;
 
 /**
  *  更新调度日志
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[a787cd6e66fbcb1502ece481b4c0e987], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[7514bbed2c1340b2301694c67e26b96b], 请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -56,7 +57,7 @@ public class UpdateScheduledLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1319130901L;
 
-    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @NotNull
     @Eq(require = true)
     Long id;
@@ -71,6 +72,9 @@ public class UpdateScheduledLogReq extends MultiTenantOrgReq {
     @Size(max = 128)
     @Schema(title = L_invokeCycle)
     String invokeCycle;
+
+    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot)
+    String invokeSnapshot;
 
     @Schema(title = L_isError)
     Boolean isError;

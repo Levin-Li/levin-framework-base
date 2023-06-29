@@ -34,6 +34,7 @@ import java.util.List;
                 @Index(columnList = E_Dict.code),
                 @Index(columnList = E_Dict.type),
                 @Index(columnList = E_TenantOrgNamedEntity.tenantId),
+                @Index(columnList = E_TenantOrgNamedEntity.orgId),
         }
         ,
         uniqueConstraints = {
@@ -48,12 +49,8 @@ public class Dict
     private static final long serialVersionUID = -123456789L;
 
     public enum Type implements EnumDesc {
-
-        @Schema(title = "系统")
-        System,
-        @Schema(title = "自定义")
-        Custom,
-
+        @Schema(title = "系统") System,
+        @Schema(title = "自定义") Custom,
     }
 
     @Data
@@ -76,7 +73,6 @@ public class Dict
     }
 
     @Id
-//    @GeneratedValue
     @GeneratedValue(generator = "default_id")
     @Column(length = 64)
     protected String id;

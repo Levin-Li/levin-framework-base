@@ -60,8 +60,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 机构测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[70126f326a6add970c80c29e6158a89b], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[911ace5ad36582c789ec7db477f5d26d], 请不要修改和删除此行内容。
  */
 
 //@ActiveProfiles("test")
@@ -101,9 +101,9 @@ public class OrgServiceTest {
 
         CreateOrgReq req = new CreateOrgReq();
 
-            // req.setParentId("这是文本64");// 
-
             // req.setTenantId("这是文本64");// 
+
+            // req.setParentId("这是文本64");// 
 
             // req.setCode("这是文本64");//对于公司是统一信用码 
 
@@ -165,8 +165,8 @@ public class OrgServiceTest {
         QueryOrgReq req = new QueryOrgReq();
 
         // req.setId(null);//
-        // req.setParentId("这是文本64");//
         // req.setTenantId("这是文本64");//
+        // req.setParentId("这是文本64");//
         // req.setCode("这是文本64");//对于公司是统一信用码
         // req.setIcon("图标_1");//
         // req.setState(State.Normal);//
@@ -209,8 +209,8 @@ public class OrgServiceTest {
          req.setId(id);
 
 
-           // req.setParentId("这是文本64");// 
            // req.setTenantId("这是文本64");// 
+           // req.setParentId("这是文本64");// 
            // req.setCode("这是文本64");//对于公司是统一信用码 
            // req.setIcon("图标_1");// 
            // req.setState(State.Normal);// 必填

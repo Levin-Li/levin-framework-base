@@ -58,7 +58,7 @@ import java.util.Date;
  */
 public class Notice
         extends TenantOrgNamedEntity
-        implements PersonalObject, OrganizedObject, MultiTenantObject {
+        implements PersonalObject {
 
     @Schema(title = "通知内容类型")
     public enum ContentType implements EnumDesc {

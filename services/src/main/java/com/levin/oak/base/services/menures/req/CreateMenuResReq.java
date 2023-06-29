@@ -4,7 +4,7 @@ package com.levin.oak.base.services.menures.req;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 /////////////////////////////////////////////////////
 import javax.validation.constraints.*;
 import javax.annotation.*;
@@ -42,8 +42,8 @@ import java.util.Date;
 
 /**
  *  新增菜单
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[9657fec9a75d80c8dfb9a8f109cd7f06], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[877f103027fa4777a103bed61cb094c6], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -72,7 +72,7 @@ public class CreateMenuResReq extends MultiTenantReq {
     @Size(max = 1800)
     String requireAuthorizations;
 
-    @Schema(title = L_alwaysShow  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_alwaysShow  , required = true, requiredMode = REQUIRED)
     @NotNull
     Boolean alwaysShow;
 
@@ -99,7 +99,7 @@ public class CreateMenuResReq extends MultiTenantReq {
     @Size(max = 1800)
     String idPath;
 
-    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String name;

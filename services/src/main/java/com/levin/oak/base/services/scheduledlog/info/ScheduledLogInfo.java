@@ -2,6 +2,7 @@ package com.levin.oak.base.services.scheduledlog.info;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.*;
@@ -31,8 +32,8 @@ import java.util.Date;
 
 /**
  * 调度日志
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[195a1a9a522690706bad32d24317aafd], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[b01d1ee935bbd9f0f8f2593dd955451a], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -48,19 +49,23 @@ public class ScheduledLogInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     Long id;
 
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_taskId , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_taskId , required = true, requiredMode = REQUIRED)
     String taskId;
 
 
     @Size(max = 128)
     @Schema(title = L_invokeCycle )
     String invokeCycle;
+
+
+    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot )
+    String invokeSnapshot;
 
 
     @Schema(title = L_isError )
@@ -82,7 +87,7 @@ public class ScheduledLogInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
     Date createTime;
 
 

@@ -54,8 +54,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 通知处理日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[9131403d5765f8f2fae3839382c6d5d2], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[69b541fd6e0daa4f6a07a44d58bc7175], 请不要修改和删除此行内容。
  */
 
 //@ActiveProfiles("test")
@@ -95,10 +95,6 @@ public class NoticeProcessLogServiceTest {
 
         CreateNoticeProcessLogReq req = new CreateNoticeProcessLogReq();
 
-            // req.setTenantId("这是文本128");// 
-
-            // req.setOrgId("这是文本128");// 
-
             // req.setOwnerId("这是文本128");// 必填
 
             // req.setNoticeId("这是文本128");// 必填
@@ -106,6 +102,10 @@ public class NoticeProcessLogServiceTest {
             // req.setStatus("这是文本128");// 
 
             // req.setRemark("这是文本512");// 
+
+            // req.setTenantId("这是文本128");// 
+
+            // req.setOrgId("这是文本128");// 
 
 
        String id  = noticeProcessLogService.create(req);
@@ -123,12 +123,12 @@ public class NoticeProcessLogServiceTest {
         QueryNoticeProcessLogReq req = new QueryNoticeProcessLogReq();
 
         // req.setId(null);//
-        // req.setTenantId("这是文本128");//
-        // req.setOrgId("这是文本128");//
         // req.setOwnerId("这是文本128");//
         // req.setNoticeId("这是文本128");//
         // req.setStatus("这是文本128");//
         // req.setRemark("这是文本512");//
+        // req.setTenantId("这是文本128");//
+        // req.setOrgId("这是文本128");//
 
         PagingData<NoticeProcessLogInfo> resp = noticeProcessLogService.query(req,null);
 
@@ -145,12 +145,12 @@ public class NoticeProcessLogServiceTest {
          req.setId(id);
 
 
-           // req.setTenantId("这是文本128");// 
-           // req.setOrgId("这是文本128");// 
            // req.setOwnerId("这是文本128");// 必填
            // req.setNoticeId("这是文本128");// 必填
            // req.setStatus("这是文本128");// 
            // req.setRemark("这是文本512");// 
+           // req.setTenantId("这是文本128");// 
+           // req.setOrgId("这是文本128");// 
 
           boolean ok = noticeProcessLogService.update(req);
 

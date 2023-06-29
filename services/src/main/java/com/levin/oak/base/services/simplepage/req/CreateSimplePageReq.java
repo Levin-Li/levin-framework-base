@@ -4,7 +4,7 @@ package com.levin.oak.base.services.simplepage.req;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 /////////////////////////////////////////////////////
 import javax.validation.constraints.*;
 import javax.annotation.*;
@@ -40,8 +40,8 @@ import java.util.Date;
 
 /**
  *  新增简单页面
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[e55df19100620537cfd89a34d98b6154], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[2accd6063e38479834f58a3ffed13703], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -58,17 +58,17 @@ public class CreateSimplePageReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = 1598619295L;
 
 
-    @Schema(title = L_type  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_type  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String type;
 
-    @Schema(title = L_category  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_category  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String category;
 
-    @Schema(title = L_groupName  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_groupName  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String groupName;
@@ -76,7 +76,7 @@ public class CreateSimplePageReq extends MultiTenantOrgReq {
     @Schema(title = L_icon  )
     String icon;
 
-    @Schema(title = L_path  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_path  , required = true, requiredMode = REQUIRED)
     @NotBlank
     String path;
 
@@ -92,7 +92,7 @@ public class CreateSimplePageReq extends MultiTenantOrgReq {
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 64)
     String name;

@@ -2,6 +2,7 @@ package com.levin.oak.base.services.tenant.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -38,8 +39,8 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 
 /**
  *  删除平台租户
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[604258fb54162edc5105fb6809a81639], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[0fb28a5fe8d5d5d4d17ac030a7fff6fa], 请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -63,7 +64,7 @@ public class DeleteTenantReq extends BaseReq {
     final boolean eqEditable = true;
 
 
-    @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_Tenant.id)
     @NotEmpty
     private String[] idList;

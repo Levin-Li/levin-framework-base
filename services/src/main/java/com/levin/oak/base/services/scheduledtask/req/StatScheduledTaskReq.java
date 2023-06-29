@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  统计调度任务
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[d511076b32af8ce1b5d039aa444b8d0a], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[1d586b7e12105817c22f44f5d62df100], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -94,6 +94,9 @@ public class StatScheduledTaskReq extends MultiTenantOrgReq{
 
     @Schema(title = L_parallelInvoke)
     Boolean parallelInvoke;
+
+    @Schema(title = L_invokedCount)
+    Integer invokedCount;
 
     @Schema(title = L_lastInvokedTime , description = "大于等于" + L_lastInvokedTime)
     @Gte

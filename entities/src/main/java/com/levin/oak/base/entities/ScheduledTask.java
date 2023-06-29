@@ -36,15 +36,18 @@ import java.util.Date;
                 @Index(columnList = E_TenantOrgNamedEntity.orgId),
                 @Index(columnList = E_ScheduledTask.groupName),
         }
+//        ,
+//        uniqueConstraints = {
+//                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_TenantOrgNamedEntity.name}),
+//        }
 )
 public class ScheduledTask
         extends TenantOrgNamedEntity {
 
     @Id
-//    @GeneratedValue
     @GeneratedValue(generator = "default_id")
     @Column(length = 64)
-    protected String id;
+    String id;
 
     @Schema(title = "任务分类")
     @Column(nullable = false, length = 128)
@@ -65,6 +68,9 @@ public class ScheduledTask
 
     @Schema(title = "允许并发执行")
     Boolean parallelInvoke;
+
+    @Schema(title = "执行累计次数")
+    Integer invokedCount;
 
     @Schema(title = "最后一次时间")
     @Temporal(TemporalType.TIMESTAMP)

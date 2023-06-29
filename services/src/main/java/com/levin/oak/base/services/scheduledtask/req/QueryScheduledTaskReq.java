@@ -43,8 +43,8 @@ import java.util.Date;
 
 /**
  *  查询调度任务
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[e45e4f469da9595cf4402c8c92aed342], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[442971a04730f43acb2d7451c1cab7bd], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -98,6 +98,9 @@ public class QueryScheduledTaskReq extends MultiTenantOrgReq{
 
     @Schema(title = L_parallelInvoke)
     Boolean parallelInvoke;
+
+    @Schema(title = L_invokedCount)
+    Integer invokedCount;
 
     @Schema(title = L_lastInvokedTime , description = "大于等于" + L_lastInvokedTime)
     @Gte

@@ -2,6 +2,7 @@ package com.levin.oak.base.services.dict.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -39,8 +40,8 @@ import java.util.Date;
 
 /**
  *  删除字典
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[2d70aae7b3f9856b7c3defd29442ac50], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[538738103fae8a6b7149f410deaa233e], 请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -64,7 +65,7 @@ public class DeleteDictReq extends MultiTenantOrgReq {
     final boolean eqEditable = true;
 
 
-    @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_Dict.id)
     @NotEmpty
     private String[] idList;

@@ -2,6 +2,7 @@ package com.levin.oak.base.services.simpleform.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -38,8 +39,8 @@ import java.util.Date;
 
 /**
  *  删除简单表单
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[98e37bfb4a591bb0a53b29101ad01f6f], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[d15c9e12de9377cc011635c63810aa3e], 请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -63,7 +64,7 @@ public class DeleteSimpleFormReq extends MultiTenantOrgReq {
     final boolean eqEditable = true;
 
 
-    @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_SimpleForm.id)
     @NotEmpty
     private String[] idList;

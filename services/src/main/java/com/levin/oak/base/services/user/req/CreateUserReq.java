@@ -4,7 +4,7 @@ package com.levin.oak.base.services.user.req;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 /////////////////////////////////////////////////////
 import javax.validation.constraints.*;
 import javax.annotation.*;
@@ -43,8 +43,8 @@ import com.levin.oak.base.entities.Org;
 
 /**
  *  新增用户
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[bae4d3c66d1c144cfbe18794e5a8119b], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[096bbc5f7cb9e6d1c4b6c17b3f778b2e], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -94,7 +94,7 @@ public class CreateUserReq extends MultiTenantOrgReq {
     @Schema(title = L_expiredDate  )
     Date expiredDate;
 
-    @Schema(title = L_state  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_state  , required = true, requiredMode = REQUIRED)
     @NotNull
     State state;
 
@@ -124,7 +124,7 @@ public class CreateUserReq extends MultiTenantOrgReq {
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 64)
     String name;

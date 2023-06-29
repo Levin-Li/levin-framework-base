@@ -2,6 +2,7 @@ package com.levin.oak.base.services.jobpost.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -37,8 +38,8 @@ import java.util.Date;
 
 /**
  *  删除工作岗位
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[a749c2f874a353f580c808bf0ac0bec3], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[da6e037ad0dccb688a10ab61c353e423], 请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -62,7 +63,7 @@ public class DeleteJobPostReq extends MultiTenantOrgReq {
     final boolean eqEditable = true;
 
 
-    @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_JobPost.id)
     @NotEmpty
     private String[] idList;

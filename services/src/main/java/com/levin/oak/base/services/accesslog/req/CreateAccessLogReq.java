@@ -4,7 +4,7 @@ package com.levin.oak.base.services.accesslog.req;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 /////////////////////////////////////////////////////
 import javax.validation.constraints.*;
 import javax.annotation.*;
@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  *  新增访问日志
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[b9f7cf417d9072558c1da95212e94d60], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[dc5c6e765b68015afae18c4de900bc32], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -63,7 +63,7 @@ public class CreateAccessLogReq extends MultiTenantOrgReq {
     @Size(max = 64)
     String visitor;
 
-    @Schema(title = L_title  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_title  , required = true, requiredMode = REQUIRED)
     @NotBlank
     String title;
 
@@ -125,7 +125,7 @@ public class CreateAccessLogReq extends MultiTenantOrgReq {
     @Schema(title = L_executeTime  )
     Long executeTime;
 
-    @Schema(title = L_createTime  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_createTime  , required = true, requiredMode = REQUIRED)
     @NotNull
     Date createTime;
 

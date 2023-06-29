@@ -2,6 +2,7 @@ package com.levin.oak.base.services.appclientfile.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -37,8 +38,8 @@ import java.util.Date;
 
 /**
  *  更新客户端文件
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[d7fec00353a81106188df9450ee1a5d8], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[272f11ecd0482f814098b762b3c03de9], 请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -56,7 +57,7 @@ public class UpdateAppClientFileReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1155395350L;
 
-    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @NotNull
     @Eq(require = true)
     String id;
@@ -75,11 +76,11 @@ public class UpdateAppClientFileReq extends MultiTenantOrgReq {
     String mimeType;
 
     @NotBlank
-    @Schema(title = L_path)
+    @Schema(title = L_path , description = D_path)
     String path;
 
-    @Schema(title = L_content)
-    String content;
+    @Schema(title = L_content , description = D_content)
+    byte[] content;
 
     @Size(max = 128)
     @Schema(title = L_domain)

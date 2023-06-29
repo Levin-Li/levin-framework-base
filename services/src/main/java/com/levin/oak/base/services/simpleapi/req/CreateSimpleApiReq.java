@@ -4,7 +4,7 @@ package com.levin.oak.base.services.simpleapi.req;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 /////////////////////////////////////////////////////
 import javax.validation.constraints.*;
 import javax.annotation.*;
@@ -41,8 +41,8 @@ import java.util.Date;
 
 /**
  *  新增简单动态接口
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[ff869b277a6772093141c6005ce68f6f], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[1eaddd3f92b6a0d7ab01cebc10b23866], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -58,26 +58,30 @@ public class CreateSimpleApiReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1021385738L;
 
+    @Schema(title = L_url , description = D_url  )
+    @Size(max = 512)
+    String url;
+
     @Schema(title = L_methods , description = D_methods  )
     @Size(max = 16)
     String methods;
 
-    @Schema(title = L_language  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_language  , required = true, requiredMode = REQUIRED)
     @NotNull
     Language language;
 
 
-    @Schema(title = L_type  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_type  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String type;
 
-    @Schema(title = L_category  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_category  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String category;
 
-    @Schema(title = L_groupName  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_groupName  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String groupName;
@@ -85,7 +89,7 @@ public class CreateSimpleApiReq extends MultiTenantOrgReq {
     @Schema(title = L_icon  )
     String icon;
 
-    @Schema(title = L_path  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_path  , required = true, requiredMode = REQUIRED)
     @NotBlank
     String path;
 
@@ -101,7 +105,7 @@ public class CreateSimpleApiReq extends MultiTenantOrgReq {
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 64)
     String name;

@@ -47,8 +47,8 @@ import java.util.Date;
 
 /**
  *  统计简单动态接口
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[7aaf3081fe8565b205a4471135d4bb9a], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[ae3ba6204087cbc1ff674ac2a17420f0], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -68,6 +68,10 @@ public class StatSimpleApiReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = 1021385738L;
 
+
+    @Size(max = 512)
+    @Schema(title = L_url , description = D_url)
+    String url;
 
     @Size(max = 16)
     @Schema(title = L_methods , description = D_methods)
@@ -117,6 +121,10 @@ public class StatSimpleApiReq extends MultiTenantOrgReq{
 
     @Schema(title = L_content)
     String content;
+
+    @Schema(title = "是否加载" + L_content)
+    @Fetch(attrs = E_SimpleApi.content, condition = "#_val == true")
+    Boolean loadContent;
 
     @Size(max = 128)
     @Schema(title = L_domain)

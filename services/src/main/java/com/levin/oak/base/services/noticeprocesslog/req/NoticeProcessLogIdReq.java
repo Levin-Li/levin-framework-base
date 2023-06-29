@@ -2,7 +2,7 @@ package com.levin.oak.base.services.noticeprocesslog.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  通知处理日志 主键通用请求
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[4182fb4a9013a6926d22fe5203c70322], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[f5669ebc20c5a15250e5390b05a3e7d7], 请不要修改和删除此行内容。
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")
@@ -55,7 +55,7 @@ public class NoticeProcessLogIdReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1991983093L;
 
-    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     @Eq(require = true)
     //@NotNull
     protected String id;

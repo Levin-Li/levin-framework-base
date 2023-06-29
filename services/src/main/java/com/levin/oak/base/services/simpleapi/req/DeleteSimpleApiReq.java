@@ -2,6 +2,7 @@ package com.levin.oak.base.services.simpleapi.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -39,8 +40,8 @@ import java.util.Date;
 
 /**
  *  删除简单动态接口
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[f7ee917f9751a855a8069d1410376dc3], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[8bf4cdabc535fcc8f76ac4d1800158a4], 请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -64,7 +65,7 @@ public class DeleteSimpleApiReq extends MultiTenantOrgReq {
     final boolean eqEditable = true;
 
 
-    @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_SimpleApi.id)
     @NotEmpty
     private String[] idList;

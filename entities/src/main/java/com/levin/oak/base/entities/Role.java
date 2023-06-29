@@ -1,7 +1,7 @@
 package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.annotation.Contains;
-import com.levin.commons.dao.domain.support.AbstractBaseEntityObject; 
+import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
@@ -29,7 +29,6 @@ import java.util.List;
                 @Index(columnList = E_TenantOrgNamedEntity.tenantId),
                 @Index(columnList = E_Role.name),
                 @Index(columnList = E_Role.code),
-                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
         },
 
         uniqueConstraints = {
@@ -40,6 +39,7 @@ import java.util.List;
 public class Role
         extends TenantOrgNamedEntity {
 
+    @Schema(title = "数据权限")
     public enum OrgDataScope implements EnumDesc {
         @Schema(title = "所有部门") All,
         @Schema(title = "指定部门") Assigned,
@@ -49,7 +49,6 @@ public class Role
     }
 
     @Id
-//    @GeneratedValue
     @GeneratedValue(generator = "default_id")
     @Column(length = 64)
     protected String id;
@@ -62,12 +61,12 @@ public class Role
     @Schema(title = "图标")
     protected String icon;
 
-    @Schema(title = "部门数据权限")
+    @Schema(title = "组织数据权限", description = "参考组织ID列表")
     @Column(nullable = false, length = 64)
     @Enumerated(EnumType.STRING)
     protected OrgDataScope orgDataScope;
 
-    @Schema(title = "指定的部门列表", description = "Json数组")
+    @Schema(title = "组织ID列表", description = "指定的组织ID列表，Json数组")
     @Lob
     @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {String.class}, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     protected String assignedOrgIdList;

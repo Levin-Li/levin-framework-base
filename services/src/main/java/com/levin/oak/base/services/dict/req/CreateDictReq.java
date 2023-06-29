@@ -4,7 +4,7 @@ package com.levin.oak.base.services.dict.req;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 /////////////////////////////////////////////////////
 import javax.validation.constraints.*;
 import javax.annotation.*;
@@ -41,8 +41,8 @@ import java.util.Date;
 
 /**
  *  新增字典
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[b6a8dff83d6431397880bcd74de4c944], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[2567ff7449881263ee1c7dc1ebf3230d], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -59,11 +59,11 @@ public class CreateDictReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -445779596L;
 
 
-    @Schema(title = L_type  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_type  , required = true, requiredMode = REQUIRED)
     @NotNull
     Type type;
 
-    @Schema(title = L_code  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_code  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 256)
     String code;
@@ -76,7 +76,7 @@ public class CreateDictReq extends MultiTenantOrgReq {
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 64)
     String name;

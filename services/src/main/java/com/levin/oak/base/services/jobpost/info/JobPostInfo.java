@@ -2,6 +2,7 @@ package com.levin.oak.base.services.jobpost.info;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.*;
@@ -32,8 +33,8 @@ import java.util.Date;
 
 /**
  * 工作岗位
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[9993edc14981599c79e12abc604a024a], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[e349d0df5e41ecd333d055605b47433e], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -50,18 +51,18 @@ public class JobPostInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     String id;
 
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_code , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_code , required = true, requiredMode = REQUIRED)
     String code;
 
 
     @NotNull
-    @Schema(title = L_type , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_type , required = true, requiredMode = REQUIRED)
     Type type;
 
 
@@ -72,7 +73,7 @@ public class JobPostInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
     String name;
 
 
@@ -92,7 +93,7 @@ public class JobPostInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
     Date createTime;
 
 
@@ -105,12 +106,12 @@ public class JobPostInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
     Boolean enable;
 
 
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
     Boolean editable;
 
 

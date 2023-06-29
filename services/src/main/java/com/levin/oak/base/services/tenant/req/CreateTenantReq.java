@@ -4,7 +4,7 @@ package com.levin.oak.base.services.tenant.req;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 /////////////////////////////////////////////////////
 import javax.validation.constraints.*;
 import javax.annotation.*;
@@ -40,8 +40,8 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 
 /**
  *  新增平台租户
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[cc2411509fdf6019b24d60ea10ca3bc4], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[865632cb749e9d23827134ad420f95b2], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -72,7 +72,7 @@ public class CreateTenantReq extends BaseReq {
     @Size(max = 128)
     String code;
 
-    @Schema(title = L_tenantKey  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_tenantKey  , required = true, requiredMode = REQUIRED)
     @NotBlank
     String tenantKey;
 
@@ -113,7 +113,7 @@ public class CreateTenantReq extends BaseReq {
     @Size(max = 512)
     String encryptKey;
 
-    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String name;

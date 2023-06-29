@@ -2,7 +2,7 @@ package com.levin.oak.base.services.role.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -40,8 +40,8 @@ import java.util.Date;
 
 /**
  *  角色 主键通用请求
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[b280ce932e34af49df71691504c5a338], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[d9a0e096824268aa296fdeb052206e45], 请不要修改和删除此行内容。
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")
@@ -58,7 +58,7 @@ public class RoleIdReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445356492L;
 
-    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     @Eq(require = true)
     //@NotNull
     protected String id;

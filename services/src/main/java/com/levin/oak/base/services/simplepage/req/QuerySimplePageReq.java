@@ -45,8 +45,8 @@ import java.util.Date;
 
 /**
  *  查询简单页面
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[ad8672fc043204eafa0f1f8ba011a5c1], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[f7fe52728875c0faa8822a4567d24cf0], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -112,6 +112,10 @@ public class QuerySimplePageReq extends MultiTenantOrgReq{
 
     @Schema(title = L_content)
     String content;
+
+    @Schema(title = "是否加载" + L_content)
+    @Fetch(attrs = E_SimplePage.content, condition = "#_val == true")
+    Boolean loadContent;
 
     @Size(max = 128)
     @Schema(title = L_domain)

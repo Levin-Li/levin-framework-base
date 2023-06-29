@@ -66,7 +66,6 @@ public class Setting
     }
 
     @Id
-//    @GeneratedValue
     @GeneratedValue(generator = "default_id")
     @Column(length = 64)
     protected String id;

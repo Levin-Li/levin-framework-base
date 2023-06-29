@@ -40,7 +40,7 @@ public class AccessLog extends SimpleTenantOrgObject {
 //    @GeneratedValue(generator = "default_id")
     protected Long id;
 
-    @Schema(title = "请求的域名")
+    @Schema(title = "系统域")
     @Contains
     protected String domain;
 

@@ -35,19 +35,20 @@ import java.util.List;
 @Table(
         indexes = {
                 @Index(columnList = E_AbstractBaseEntityObject.orderCode),
-                @Index(columnList = E_AbstractMultiTenantObject.tenantId),
+                @Index(columnList = E_User.tenantId),
+                @Index(columnList = E_User.orgId),
                 @Index(columnList = E_User.staffNo),
                 @Index(columnList = E_User.telephone),
                 @Index(columnList = E_User.email),
                 @Index(columnList = E_User.state),
                 @Index(columnList = E_User.name),
-                @Index(columnList = E_User.orgId),
                 @Index(columnList = E_User.wxOpenId),
                 @Index(columnList = E_User.aliOpenId),
         }
         ,
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {E_AbstractMultiTenantObject.tenantId, E_User.telephone}),
+                //允许不同的租户中有一样的手机号
+                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.telephone}),
                 @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
         }
 )
@@ -56,19 +57,14 @@ public class User
         implements OrganizedObject, MultiTenantObject, StatefulObject {
 
     public enum State implements EnumDesc {
-        @Schema(title = "正常")
-        Normal,
-        @Schema(title = "冻结")
-        Freeze,
-        @Schema(title = "注销")
-        Cancellation,
+        @Schema(title = "正常") Normal,
+        @Schema(title = "冻结") Freeze,
+        @Schema(title = "注销") Cancellation,
     }
 
     public enum Sex implements EnumDesc {
-        @Schema(title = "男")
-        Man,
-        @Schema(title = "女")
-        Women,
+        @Schema(title = "男") Man,
+        @Schema(title = "女") Women,
     }
 
     public enum Category implements EnumDesc {
@@ -91,12 +87,12 @@ public class User
     @Column(length = 64)
     String id;
 
-    @Schema(title = "手机号",description = "可做为登录帐号")
+    @Schema(title = "手机号", description = "可做为登录帐号")
     @Column(length = 20)
     @Contains
     String telephone;
 
-    @Schema(title = "邮箱",description = "可做为登录帐号")
+    @Schema(title = "邮箱", description = "可做为登录帐号")
     @Column(length = 32)
     String email;
 
@@ -148,7 +144,7 @@ public class User
     @Column(length = 128)
     String jobPostCode;
 
-    @Schema(title = "角色列表")
+    @Schema(title = "角色ID列表")
     @Column(length = 1800)
     @Contains
     @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")

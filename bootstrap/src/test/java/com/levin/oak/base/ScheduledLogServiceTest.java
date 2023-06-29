@@ -54,8 +54,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 调度日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[9f0ca2e43c3104d74ac0320dc42cb719], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[838f0a5098d3444e884b0cc586790437], 请不要修改和删除此行内容。
  */
 
 //@ActiveProfiles("test")
@@ -99,6 +99,8 @@ public class ScheduledLogServiceTest {
 
             // req.setInvokeCycle("这是文本128");// 
 
+            // req.setInvokeSnapshot("指向内容快照_1");//包括调度表达式，执行脚本，执行参数等 
+
             // req.setIsError(true);// 
 
             // req.setInvokeResult("执行结果_1");// 
@@ -125,6 +127,7 @@ public class ScheduledLogServiceTest {
         // req.setId(null);//
         // req.setTaskId("这是文本64");//
         // req.setInvokeCycle("这是文本128");//
+        // req.setInvokeSnapshot("指向内容快照_1");//包括调度表达式，执行脚本，执行参数等
         // req.setIsError(true);//
         // req.setInvokeResult("执行结果_1");//
         // req.setTenantId("这是文本128");//
@@ -147,6 +150,7 @@ public class ScheduledLogServiceTest {
 
            // req.setTaskId("这是文本64");// 必填
            // req.setInvokeCycle("这是文本128");// 
+           // req.setInvokeSnapshot("指向内容快照_1");//包括调度表达式，执行脚本，执行参数等 
            // req.setIsError(true);// 
            // req.setInvokeResult("执行结果_1");// 
            // req.setTenantId("这是文本128");// 

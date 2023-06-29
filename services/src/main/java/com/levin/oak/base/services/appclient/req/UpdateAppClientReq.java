@@ -2,6 +2,7 @@ package com.levin.oak.base.services.appclient.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -37,8 +38,8 @@ import java.util.Date;
 
 /**
  *  更新应用接入
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[0bb6c1f7ff2817c98d007b6d74db4552], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[0d7c89dc38203307c6e83f5606f7f3fb], 请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -56,7 +57,7 @@ public class UpdateAppClientReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -115048882L;
 
-    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @NotNull
     @Eq(require = true)
     String id;
@@ -75,6 +76,10 @@ public class UpdateAppClientReq extends MultiTenantOrgReq {
     @Size(max = 512)
     @Schema(title = L_appSecret)
     String appSecret;
+
+    @Size(max = 512)
+    @Schema(title = L_appToken)
+    String appToken;
 
     @Size(max = 128)
     @Schema(title = L_domain)

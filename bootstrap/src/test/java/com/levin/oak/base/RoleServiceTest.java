@@ -57,8 +57,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 角色测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[5977146d421eaf01552580a2cabef8f1], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[75efe347012ee9acc2ced15f276c900a], 请不要修改和删除此行内容。
  */
 
 //@ActiveProfiles("test")
@@ -102,9 +102,9 @@ public class RoleServiceTest {
 
             // req.setIcon("图标_1");// 
 
-            // req.setOrgDataScope(OrgDataScope.All);// 必填
+            // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表 必填
 
-            // req.setAssignedOrgIdList("指定的部门列表_1");//Json数组 
+            // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组 
 
             // req.setPermissionList("资源权限列表_1");//Json数组 
 
@@ -142,8 +142,8 @@ public class RoleServiceTest {
         // req.setId(null);//
         // req.setCode("这是文本128");//
         // req.setIcon("图标_1");//
-        // req.setOrgDataScope(OrgDataScope.All);//
-        // req.setAssignedOrgIdList("指定的部门列表_1");//Json数组
+        // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表
+        // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组
         // req.setPermissionList("资源权限列表_1");//Json数组
         // req.setDomain("这是文本128");//
         // req.setName("这是文本64");//
@@ -172,8 +172,8 @@ public class RoleServiceTest {
 
            // req.setCode("这是文本128");// 必填
            // req.setIcon("图标_1");// 
-           // req.setOrgDataScope(OrgDataScope.All);// 必填
-           // req.setAssignedOrgIdList("指定的部门列表_1");//Json数组 
+           // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表 必填
+           // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组 
            // req.setPermissionList("资源权限列表_1");//Json数组 
            // req.setDomain("这是文本128");// 
            // req.setName("这是文本64");// 必填

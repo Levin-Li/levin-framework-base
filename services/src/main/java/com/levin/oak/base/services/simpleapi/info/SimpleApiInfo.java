@@ -2,6 +2,7 @@ package com.levin.oak.base.services.simpleapi.info;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.*;
@@ -34,20 +35,25 @@ import java.util.Date;
 
 /**
  * 简单动态接口
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[a1d02353e4a3ec390ffcf3dbffae5be4], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[e3066c641e8323e8d9214f30f1f44548], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(exclude = {})
+@ToString(exclude = {"content",})
 @FieldNameConstants
 @JsonIgnoreProperties(tenantId)
 public class SimpleApiInfo implements Serializable {
 
     private static final long serialVersionUID = 1021385738L;
+
+
+    @Size(max = 512)
+    @Schema(title = L_url , description = D_url )
+    String url;
 
 
     @Size(max = 16)
@@ -56,31 +62,31 @@ public class SimpleApiInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_language , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_language , required = true, requiredMode = REQUIRED)
     Language language;
 
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     String id;
 
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_type , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_type , required = true, requiredMode = REQUIRED)
     String type;
 
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_category , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_category , required = true, requiredMode = REQUIRED)
     String category;
 
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_groupName , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_groupName , required = true, requiredMode = REQUIRED)
     String groupName;
 
 
@@ -89,7 +95,7 @@ public class SimpleApiInfo implements Serializable {
 
 
     @NotBlank
-    @Schema(title = L_path , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_path , required = true, requiredMode = REQUIRED)
     String path;
 
 
@@ -99,6 +105,7 @@ public class SimpleApiInfo implements Serializable {
     List<String> requireAuthorizations;
 
 
+    //@Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_content )
     String content;
 
@@ -110,7 +117,7 @@ public class SimpleApiInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
     String name;
 
 
@@ -130,7 +137,7 @@ public class SimpleApiInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
     Date createTime;
 
 
@@ -143,12 +150,12 @@ public class SimpleApiInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
     Boolean enable;
 
 
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
     Boolean editable;
 
 

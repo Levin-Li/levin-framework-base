@@ -57,8 +57,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 简单动态接口测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[2071493cfa994ef1f8577752234b5c15], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[f5c153c46c60cb09dc2f5ab59902f7ff], 请不要修改和删除此行内容。
  */
 
 //@ActiveProfiles("test")
@@ -98,7 +98,9 @@ public class SimpleApiServiceTest {
 
         CreateSimpleApiReq req = new CreateSimpleApiReq();
 
-            // req.setMethods("这是文本16");//逗号隔开 
+            // req.setUrl("这是文本512");//默认为公共地址 
+
+            // req.setMethods("这是文本16");//逗号隔开，默认POST 
 
             // req.setLanguage(Language.Groovy);// 必填
 
@@ -147,7 +149,8 @@ public class SimpleApiServiceTest {
 
         QuerySimpleApiReq req = new QuerySimpleApiReq();
 
-        // req.setMethods("这是文本16");//逗号隔开
+        // req.setUrl("这是文本512");//默认为公共地址
+        // req.setMethods("这是文本16");//逗号隔开，默认POST
         // req.setLanguage(Language.Groovy);//
         // req.setId(null);//
         // req.setType("这是文本128");//
@@ -182,7 +185,8 @@ public class SimpleApiServiceTest {
          req.setId(id);
 
 
-           // req.setMethods("这是文本16");//逗号隔开 
+           // req.setUrl("这是文本512");//默认为公共地址 
+           // req.setMethods("这是文本16");//逗号隔开，默认POST 
            // req.setLanguage(Language.Groovy);// 必填
            // req.setType("这是文本128");// 必填
            // req.setCategory("这是文本128");// 必填

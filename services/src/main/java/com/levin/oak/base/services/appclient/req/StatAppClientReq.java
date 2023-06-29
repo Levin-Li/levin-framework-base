@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  统计应用接入
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[c59d7549eae662e899bca904683736a0], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[dfb2aef0234725203b94209318238c14], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -80,6 +80,10 @@ public class StatAppClientReq extends MultiTenantOrgReq{
     @Size(max = 512)
     @Schema(title = L_appSecret)
     String appSecret;
+
+    @Size(max = 512)
+    @Schema(title = L_appToken)
+    String appToken;
 
     @Size(max = 128)
     @Schema(title = L_domain)

@@ -2,7 +2,7 @@ package com.levin.oak.base.services.apperrorlog.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -37,8 +37,8 @@ import java.util.Date;
 
 /**
  *  应用错误日志 主键通用请求
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[e2361abbd374cda104642f1139ea8881], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[8ed9d8e6fb9b48068b6c890a3fd17228], 请不要修改和删除此行内容。
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")
@@ -55,7 +55,7 @@ public class AppErrorLogIdReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1594864095L;
 
-    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     @Eq(require = true)
     //@NotNull
     protected Long id;

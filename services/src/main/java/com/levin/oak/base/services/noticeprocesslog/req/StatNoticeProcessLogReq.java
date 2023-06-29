@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  统计通知处理日志
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[e57987d5a64fd3e8c327ea711ce25645], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[6125a90380638cf44273b8ae6020461a], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -85,6 +85,10 @@ public class StatNoticeProcessLogReq extends MultiTenantOrgReq{
     @Schema(title = L_status)
     String status;
 
+    @Size(max = 512)
+    @Schema(title = L_remark)
+    String remark;
+
     @NotNull
     @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
@@ -97,10 +101,6 @@ public class StatNoticeProcessLogReq extends MultiTenantOrgReq{
     //@Schema(title = L_createTime + "-日期范围")
     //@Between(paramDelimiter = "-")
     //String betweenCreateTime;
-
-    @Size(max = 512)
-    @Schema(title = L_remark)
-    String remark;
 
 
     public StatNoticeProcessLogReq(String id) {

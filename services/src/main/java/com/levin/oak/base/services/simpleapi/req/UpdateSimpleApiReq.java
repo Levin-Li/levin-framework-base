@@ -2,6 +2,7 @@ package com.levin.oak.base.services.simpleapi.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -40,8 +41,8 @@ import java.util.Date;
 
 /**
  *  更新简单动态接口
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[50c1aa21fdf56159d27c5b1126f89f8e], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[4e9615aa66f0571c2d26511c4ac0f4dd], 请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -59,7 +60,7 @@ public class UpdateSimpleApiReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1021385738L;
 
-    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @NotNull
     @Eq(require = true)
     String id;
@@ -68,6 +69,10 @@ public class UpdateSimpleApiReq extends MultiTenantOrgReq {
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
+
+    @Size(max = 512)
+    @Schema(title = L_url , description = D_url)
+    String url;
 
     @Size(max = 16)
     @Schema(title = L_methods , description = D_methods)

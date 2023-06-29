@@ -1,7 +1,5 @@
 package com.levin.oak.base.entities;
 
-import com.levin.commons.dao.domain.MultiTenantObject;
-import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.support.SimpleTenantOrgObject;
 import com.levin.commons.service.domain.Identifiable;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -35,15 +33,17 @@ public class ScheduledLog
     @GeneratedValue
     Long id;
 
-
     @Schema(title = "任务ID", required = true)
     @Column(nullable = false, length = 64)
     String taskId;
 
-
     @Schema(title = "执行周期")
     @Column(length = 128)
     String invokeCycle;
+
+    @Schema(title = "指向内容快照", description = "包括调度表达式，执行脚本，执行参数等")
+    @Lob
+    String invokeSnapshot;
 
     @Schema(title = "是否错误")
     Boolean isError;

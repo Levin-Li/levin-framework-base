@@ -2,6 +2,7 @@ package com.levin.oak.base.services.noticeprocesslog.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -36,8 +37,8 @@ import java.util.Date;
 
 /**
  *  删除通知处理日志
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[03f888511a31a7be3f4de0564c715ec8], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[bf8de5ecb6e6050d9fae14963c973d31], 请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -58,7 +59,7 @@ public class DeleteNoticeProcessLogReq extends MultiTenantOrgReq {
 
 
 
-    @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_NoticeProcessLog.id)
     @NotEmpty
     private String[] idList;

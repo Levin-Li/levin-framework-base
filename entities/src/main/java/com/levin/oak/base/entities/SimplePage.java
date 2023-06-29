@@ -55,11 +55,6 @@ public class SimplePage extends SimpleEntity {
         @Schema(title = "Freemark") ftlh,
     }
 
-//    @Schema(title = "类型")
-//    @Column(nullable = false, length = 128)
-//    @Enumerated(EnumType.STRING)
-//    protected Type type;
-
     @Override
     @PrePersist
     public void prePersist() {

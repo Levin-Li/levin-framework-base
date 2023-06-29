@@ -23,9 +23,9 @@ import javax.persistence.*;
                 @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = E_TenantOrganizedEntity.tenantId),
-                @Index(columnList = E_TenantOrganizedEntity.orgId),
-                @Index(columnList = E_TenantOrganizedEntity.domain),
+                @Index(columnList = E_TenantOrgNamedEntity.tenantId),
+                @Index(columnList = E_TenantOrgNamedEntity.orgId),
+                @Index(columnList = E_TenantOrgNamedEntity.domain),
 
 //                @Index(columnList = E_SimpleEntity.type),
                 @Index(columnList = E_SimpleEntity.path),
@@ -50,9 +50,13 @@ public class SimpleApi extends SimpleEntity {
         JavaScript,
     }
 
-    @Schema(title = "http方法", description = "逗号隔开")
+    @Schema(title = "url", description = "默认为公共地址")
+    @Column(length = 512)
+    String url;
+
+    @Schema(title = "http方法", description = "逗号隔开，默认POST")
     @Column(length = 16)
-    protected String methods;
+    String methods;
 
     @Schema(title = "脚本语言")
     @Column(nullable = false, length = 64)

@@ -2,6 +2,7 @@ package com.levin.oak.base.services.scheduledtask.info;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.*;
@@ -31,8 +32,8 @@ import java.util.Date;
 
 /**
  * 调度任务
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[edbcfa154450107f0344e4a418d81a5e], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[355f9e1f027a469fbc76f7e7428059d0], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -49,24 +50,24 @@ public class ScheduledTaskInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     String id;
 
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_category , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_category , required = true, requiredMode = REQUIRED)
     String category;
 
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_groupName , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_groupName , required = true, requiredMode = REQUIRED)
     String groupName;
 
 
     @NotBlank
-    @Schema(title = L_cron , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_cron , required = true, requiredMode = REQUIRED)
     String cron;
 
 
@@ -76,6 +77,10 @@ public class ScheduledTaskInfo implements Serializable {
 
     @Schema(title = L_parallelInvoke )
     Boolean parallelInvoke;
+
+
+    @Schema(title = L_invokedCount )
+    Integer invokedCount;
 
 
     @Schema(title = L_lastInvokedTime )
@@ -93,7 +98,7 @@ public class ScheduledTaskInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
     String name;
 
 
@@ -113,7 +118,7 @@ public class ScheduledTaskInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
     Date createTime;
 
 
@@ -126,12 +131,12 @@ public class ScheduledTaskInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
     Boolean enable;
 
 
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
     Boolean editable;
 
 

@@ -2,6 +2,7 @@ package com.levin.oak.base.services.noticeprocesslog.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -37,8 +38,8 @@ import java.util.Date;
 
 /**
  *  更新通知处理日志
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[32605a890e239e3d9a10a3ff5b600d9b], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[e7c4d565e2c477899bc55ef3920b8c2f], 请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -56,7 +57,7 @@ public class UpdateNoticeProcessLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1991983093L;
 
-    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @NotNull
     @Eq(require = true)
     String id;

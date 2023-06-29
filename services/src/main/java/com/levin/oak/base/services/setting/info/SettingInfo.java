@@ -2,6 +2,7 @@ package com.levin.oak.base.services.setting.info;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.*;
@@ -32,8 +33,8 @@ import java.util.Date;
 
 /**
  * 系统设置
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[fbf82c1890306b773a68598d7a6bde46], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[657ff1752ebb7ec0434b2fb3e49199a4], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -50,13 +51,13 @@ public class SettingInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     String id;
 
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_categoryName , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_categoryName , required = true, requiredMode = REQUIRED)
     String categoryName;
 
 
@@ -67,12 +68,12 @@ public class SettingInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_code , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_code , required = true, requiredMode = REQUIRED)
     String code;
 
 
     @NotNull
-    @Schema(title = L_valueType , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_valueType , required = true, requiredMode = REQUIRED)
     ValueType valueType;
 
 
@@ -97,7 +98,7 @@ public class SettingInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
     String name;
 
 
@@ -117,7 +118,7 @@ public class SettingInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
     Date createTime;
 
 
@@ -130,12 +131,12 @@ public class SettingInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
     Boolean enable;
 
 
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
     Boolean editable;
 
 

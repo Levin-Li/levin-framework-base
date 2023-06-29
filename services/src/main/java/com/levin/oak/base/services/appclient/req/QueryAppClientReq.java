@@ -43,8 +43,8 @@ import java.util.Date;
 
 /**
  *  查询应用接入
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[7afb86fc9141b51fefa51c4303c76f77], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[4380d9c288d0f1a44b6ca6f195ea687f], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -84,6 +84,10 @@ public class QueryAppClientReq extends MultiTenantOrgReq{
     @Size(max = 512)
     @Schema(title = L_appSecret)
     String appSecret;
+
+    @Size(max = 512)
+    @Schema(title = L_appToken)
+    String appToken;
 
     @Size(max = 128)
     @Schema(title = L_domain)

@@ -23,7 +23,6 @@ public abstract class SimpleEntity
         extends TenantOrgNamedEntity {
 
     @Id
-//    @GeneratedValue
     @GeneratedValue(generator = "default_id")
     @Column(length = 64)
     protected String id;
@@ -55,6 +54,7 @@ public abstract class SimpleEntity
 
     @Schema(title = "内容")
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     protected String content;
 
     @Override

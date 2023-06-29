@@ -3,6 +3,7 @@ package com.levin.oak.base.entities;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.PersonalObject;
+import com.levin.commons.dao.domain.support.SimpleTenantOrgObject;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConsts;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -41,29 +42,13 @@ import java.util.Date;
 //                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
         }
 )
-public class NoticeProcessLog
-        implements PersonalObject, OrganizedObject, MultiTenantObject {
+public class NoticeProcessLog extends SimpleTenantOrgObject
+        implements PersonalObject {
 
     @Id
     @GeneratedValue(generator = "default_id")
     @Column(length = 64)
     String id;
-
-    /**
-     * 冗余字段
-     */
-    @Schema(title = "租户ID")
-    @Column(length = 128)
-    @InjectVar(value = InjectConsts.TENANT_ID, isRequired = "false")
-    String tenantId;
-
-    /**
-     * 冗余字段
-     */
-    @Schema(title = "部门ID")
-    @Column(length = 128)
-    @InjectVar(value = InjectConsts.ORG_ID, isRequired = "false")
-    String orgId;
 
     @Schema(title = "用户ID")
     @Column(length = 128, nullable = false)
@@ -77,11 +62,6 @@ public class NoticeProcessLog
     @Schema(title = "处理状态")
     @Column(length = 128)
     String status;
-
-    @Schema(title = "处理时间")
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    protected Date createTime;
 
     @Schema(title = "备注")
     @Column(length = 512)

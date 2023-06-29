@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  统计调度日志
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[60b439781590c9df7744b6a93cc8206c], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[598e9a7051a5fd7b22ef796463156e16], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -78,6 +78,9 @@ public class StatScheduledLogReq extends MultiTenantOrgReq{
     @Size(max = 128)
     @Schema(title = L_invokeCycle)
     String invokeCycle;
+
+    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot)
+    String invokeSnapshot;
 
     @Schema(title = L_isError)
     Boolean isError;

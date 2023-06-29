@@ -54,8 +54,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 客户端文件测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[60301c50fb77905c5364ba66179fc07e], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[554610ef1e44b7825d4e1b7cf72152b8], 请不要修改和删除此行内容。
  */
 
 //@ActiveProfiles("test")
@@ -99,9 +99,7 @@ public class AppClientFileServiceTest {
 
             // req.setMimeType("这是文本128");// 
 
-            // req.setPath("文件路径_1");// 必填
-
-            // req.setContent("文件内容_1");// 
+            // req.setPath("文件路径_1");//本地路径或是网络路径 必填
 
             // req.setDomain("这是文本128");// 
 
@@ -137,8 +135,8 @@ public class AppClientFileServiceTest {
         // req.setId(null);//
         // req.setClientType("这是文本64");//
         // req.setMimeType("这是文本128");//
-        // req.setPath("文件路径_1");//
-        // req.setContent("文件内容_1");//
+        // req.setPath("文件路径_1");//本地路径或是网络路径
+        // req.setContent(null);//一般不建议存储在数据库
         // req.setDomain("这是文本128");//
         // req.setName("这是文本64");//
         // req.setOrgId("这是文本128");//
@@ -166,8 +164,7 @@ public class AppClientFileServiceTest {
 
            // req.setClientType("这是文本64");// 
            // req.setMimeType("这是文本128");// 
-           // req.setPath("文件路径_1");// 必填
-           // req.setContent("文件内容_1");// 
+           // req.setPath("文件路径_1");//本地路径或是网络路径 必填
            // req.setDomain("这是文本128");// 
            // req.setName("这是文本64");// 必填
            // req.setOrgId("这是文本128");// 

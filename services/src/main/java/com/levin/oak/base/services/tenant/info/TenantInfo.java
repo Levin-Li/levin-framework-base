@@ -2,6 +2,7 @@ package com.levin.oak.base.services.tenant.info;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.*;
@@ -33,8 +34,8 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 
 /**
  * 平台租户
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[6c9bd8af45719f9b110a5d57fde8f5bd], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[e6adf7271b8195fce53b756b6582e8e9], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -51,7 +52,7 @@ public class TenantInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     String id;
 
 
@@ -74,7 +75,7 @@ public class TenantInfo implements Serializable {
 
 
     @NotBlank
-    @Schema(title = L_tenantKey , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_tenantKey , required = true, requiredMode = REQUIRED)
     String tenantKey;
 
 
@@ -127,7 +128,7 @@ public class TenantInfo implements Serializable {
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
     String name;
 
 
@@ -142,7 +143,7 @@ public class TenantInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
     Date createTime;
 
 
@@ -155,12 +156,12 @@ public class TenantInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
     Boolean enable;
 
 
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
     Boolean editable;
 
 

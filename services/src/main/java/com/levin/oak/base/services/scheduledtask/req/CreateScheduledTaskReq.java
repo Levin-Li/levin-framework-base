@@ -4,7 +4,7 @@ package com.levin.oak.base.services.scheduledtask.req;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 /////////////////////////////////////////////////////
 import javax.validation.constraints.*;
 import javax.annotation.*;
@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  *  新增调度任务
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[9dea6e5ebe5881a3b28e2e66a0513aa4], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[6ab79868c37090c30234c68744244655], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -56,17 +56,17 @@ public class CreateScheduledTaskReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -2056389676L;
 
 
-    @Schema(title = L_category  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_category  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String category;
 
-    @Schema(title = L_groupName  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_groupName  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String groupName;
 
-    @Schema(title = L_cron  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_cron  , required = true, requiredMode = REQUIRED)
     @NotBlank
     String cron;
 
@@ -75,6 +75,9 @@ public class CreateScheduledTaskReq extends MultiTenantOrgReq {
 
     @Schema(title = L_parallelInvoke  )
     Boolean parallelInvoke;
+
+    @Schema(title = L_invokedCount  )
+    Integer invokedCount;
 
     @Schema(title = L_lastInvokedTime  )
     Date lastInvokedTime;
@@ -86,7 +89,7 @@ public class CreateScheduledTaskReq extends MultiTenantOrgReq {
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 64)
     String name;

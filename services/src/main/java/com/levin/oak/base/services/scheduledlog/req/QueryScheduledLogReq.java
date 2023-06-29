@@ -43,8 +43,8 @@ import java.util.Date;
 
 /**
  *  查询调度日志
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[eeae53eb302efeddb333e1ec44d191fa], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[b18e84ef2403b9ccbf799bebeb56a4ef], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -82,6 +82,9 @@ public class QueryScheduledLogReq extends MultiTenantOrgReq{
     @Size(max = 128)
     @Schema(title = L_invokeCycle)
     String invokeCycle;
+
+    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot)
+    String invokeSnapshot;
 
     @Schema(title = L_isError)
     Boolean isError;

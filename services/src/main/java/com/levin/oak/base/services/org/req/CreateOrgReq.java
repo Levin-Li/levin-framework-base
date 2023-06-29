@@ -4,7 +4,7 @@ package com.levin.oak.base.services.org.req;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 /////////////////////////////////////////////////////
 import javax.validation.constraints.*;
 import javax.annotation.*;
@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  新增机构
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[256dac0481271aa264fd11e67cb6a8df], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[f198d89771d4590ca65b4ba7833ec2b3], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -73,11 +73,11 @@ public class CreateOrgReq extends MultiTenantReq {
     @Schema(title = L_icon  )
     String icon;
 
-    @Schema(title = L_state  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_state  , required = true, requiredMode = REQUIRED)
     @NotNull
     State state;
 
-    @Schema(title = L_type  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_type  , required = true, requiredMode = REQUIRED)
     @NotNull
     Type type;
 
@@ -85,7 +85,7 @@ public class CreateOrgReq extends MultiTenantReq {
     @Size(max = 64)
     String industries;
 
-    @Schema(title = L_areaCode  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_areaCode  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 64)
     String areaCode;
@@ -95,12 +95,12 @@ public class CreateOrgReq extends MultiTenantReq {
     @Size(max = 128)
     String level;
 
-    @Schema(title = L_category , description = D_category  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_category , description = D_category  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String category;
 
-    @Schema(title = L_isExternal  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_isExternal  , required = true, requiredMode = REQUIRED)
     @NotNull
     Boolean isExternal;
 
@@ -132,7 +132,7 @@ public class CreateOrgReq extends MultiTenantReq {
     @Size(max = 1800)
     String idPath;
 
-    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String name;

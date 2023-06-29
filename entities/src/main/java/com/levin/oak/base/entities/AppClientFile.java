@@ -16,7 +16,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
-@Schema(title = "客户端文件")
+@Schema(title = "客户端文件", description = "简单的文件存储，一般不建议使用")
 
 @Table(
         indexes = {
@@ -29,7 +29,6 @@ import javax.persistence.*;
                 @Index(columnList = E_TenantOrgNamedEntity.domain),
 
                 @Index(columnList = E_AppClientFile.clientType),
-
         }
 
 //        ,
@@ -41,7 +40,6 @@ import javax.persistence.*;
 public class AppClientFile extends TenantOrgNamedEntity {
 
     @Id
-//    @GeneratedValue
     @GeneratedValue(generator = "default_id")
     @Column(length = 64)
     protected String id;
@@ -54,12 +52,13 @@ public class AppClientFile extends TenantOrgNamedEntity {
     @Column(length = 128)
     protected String mimeType;
 
-    @Schema(title = "文件路径")
+    @Schema(title = "文件路径", description = "本地路径或是网络路径")
     @Column(nullable = false)
     protected String path;
 
-    @Schema(title = "文件内容")
+    @Schema(title = "文件内容", description = "一般不建议存储在数据库")
     @Lob
-    protected String content;
+    @Basic(fetch = FetchType.LAZY)
+    protected byte[] content;
 
 }

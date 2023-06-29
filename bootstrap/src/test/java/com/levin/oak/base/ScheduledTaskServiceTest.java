@@ -55,8 +55,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 调度任务测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[5d545452ca0f4b7a566df358d55d0834], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[8a57bb76321db7263a36f00051d29c37], 请不要修改和删除此行内容。
  */
 
 //@ActiveProfiles("test")
@@ -106,6 +106,8 @@ public class ScheduledTaskServiceTest {
 
             // req.setParallelInvoke(true);// 
 
+            // req.setInvokedCount(1);// 
+
             // req.setLastInvokedTime(new Date());// 
 
             // req.setNextInvokeTime(new Date());// 
@@ -147,6 +149,7 @@ public class ScheduledTaskServiceTest {
         // req.setCron("调度表达式_1");//
         // req.setInvokeExpr("执行表达式_1");//可以是 Groovy
         // req.setParallelInvoke(true);//
+        // req.setInvokedCount(1);//
         // req.setGteLastInvokedTime(DateUtils.getZoneHour(new Date()));//最小
         // req.setLteLastInvokedTime(DateUtils.getEndHour(new Date()));//最大
         // req.setGteNextInvokeTime(DateUtils.getZoneHour(new Date()));//最小
@@ -181,6 +184,7 @@ public class ScheduledTaskServiceTest {
            // req.setCron("调度表达式_1");// 必填
            // req.setInvokeExpr("执行表达式_1");//可以是 Groovy 
            // req.setParallelInvoke(true);// 
+           // req.setInvokedCount(1);// 
            // req.setLastInvokedTime(new Date());// 
            // req.setNextInvokeTime(new Date());// 
            // req.setDomain("这是文本128");// 

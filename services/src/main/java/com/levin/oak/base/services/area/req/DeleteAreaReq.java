@@ -2,6 +2,7 @@ package com.levin.oak.base.services.area.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -40,8 +41,8 @@ import java.util.Date;
 
 /**
  *  删除区域
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[daf68d938aa3081c574c16ca60433518], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3622e31d0523f0c9a9a8322123d2cb01], 请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -65,7 +66,7 @@ public class DeleteAreaReq extends BaseReq {
     final boolean eqEditable = true;
 
 
-    @Schema(title = L_code + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_code + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_Area.code)
     @NotEmpty
     private String[] codeList;

@@ -2,6 +2,7 @@ package com.levin.oak.base.services.apperrorlog.info;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.*;
@@ -31,8 +32,8 @@ import java.util.Date;
 
 /**
  * 应用错误日志
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[5cb20785c1ecc27c1bcbc40f38e384bc], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[c53b55e098155c334d1fa95c403bb339], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -48,7 +49,7 @@ public class AppErrorLogInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     Long id;
 
 
@@ -62,13 +63,13 @@ public class AppErrorLogInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_occurTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_occurTime , required = true, requiredMode = REQUIRED)
     Date occurTime;
 
 
     @NotBlank
     @Size(max = 768)
-    @Schema(title = L_title , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_title , required = true, requiredMode = REQUIRED)
     String title;
 
 

@@ -2,6 +2,7 @@ package com.levin.oak.base.services.simplepage.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -39,8 +40,8 @@ import java.util.Date;
 
 /**
  *  更新简单页面
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[a7e9bdc1c93d6563bc5e93aeabf96585], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[54e34556942577f04d2c1aa92db58733], 请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -58,7 +59,7 @@ public class UpdateSimplePageReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1598619295L;
 
-    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @NotNull
     @Eq(require = true)
     String id;

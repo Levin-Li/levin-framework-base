@@ -2,6 +2,7 @@ package com.levin.oak.base.services.scheduledtask.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -37,8 +38,8 @@ import java.util.Date;
 
 /**
  *  更新调度任务
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[b4cd60d82199c77d3a8e742e29e659d0], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[934b5da95f0dbd2f5f7d39cb4f5dd6d6], 请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -56,7 +57,7 @@ public class UpdateScheduledTaskReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -2056389676L;
 
-    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @NotNull
     @Eq(require = true)
     String id;
@@ -85,6 +86,9 @@ public class UpdateScheduledTaskReq extends MultiTenantOrgReq {
 
     @Schema(title = L_parallelInvoke)
     Boolean parallelInvoke;
+
+    @Schema(title = L_invokedCount)
+    Integer invokedCount;
 
     @Schema(title = L_lastInvokedTime)
     Date lastInvokedTime;

@@ -1,7 +1,7 @@
 package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
-import com.levin.commons.dao.domain.support.AbstractNamedEntityObject; 
+import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.service.support.InjectConsts;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -26,15 +26,13 @@ import java.util.UUID;
                 @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = InjectConsts.TENANT_ID),
+                @Index(columnList = E_TenantOrgNamedEntity.tenantId),
                 @Index(columnList = E_TenantOrgNamedEntity.domain),
         }
-
-//        ,
-//
-//        uniqueConstraints = {
-//                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_Setting.code}),
-//        }
+        ,
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_AppClient.appId}),
+        }
 )
 public class AppClient extends TenantOrgNamedEntity {
 
@@ -51,6 +49,10 @@ public class AppClient extends TenantOrgNamedEntity {
     @Schema(title = "应用密钥")
     @Column(nullable = false, length = 512)
     protected String appSecret;
+
+    @Schema(title = "应用Token")
+    @Column(length = 512)
+    protected String appToken;
 
     @Override
     @PrePersist

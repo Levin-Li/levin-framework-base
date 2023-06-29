@@ -2,6 +2,7 @@ package com.levin.oak.base.services.simplepage.info;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.*;
@@ -33,15 +34,15 @@ import java.util.Date;
 
 /**
  * 简单页面
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[91f0575aff27e18b5624632812f18a52], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[e1aea1f1624e0ea1085a308b2f769503], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(exclude = {})
+@ToString(exclude = {"content",})
 @FieldNameConstants
 @JsonIgnoreProperties(tenantId)
 public class SimplePageInfo implements Serializable {
@@ -51,25 +52,25 @@ public class SimplePageInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     String id;
 
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_type , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_type , required = true, requiredMode = REQUIRED)
     String type;
 
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_category , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_category , required = true, requiredMode = REQUIRED)
     String category;
 
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_groupName , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_groupName , required = true, requiredMode = REQUIRED)
     String groupName;
 
 
@@ -78,7 +79,7 @@ public class SimplePageInfo implements Serializable {
 
 
     @NotBlank
-    @Schema(title = L_path , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_path , required = true, requiredMode = REQUIRED)
     String path;
 
 
@@ -88,6 +89,7 @@ public class SimplePageInfo implements Serializable {
     List<String> requireAuthorizations;
 
 
+    //@Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_content )
     String content;
 
@@ -99,7 +101,7 @@ public class SimplePageInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_name , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
     String name;
 
 
@@ -119,7 +121,7 @@ public class SimplePageInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
     Date createTime;
 
 
@@ -132,12 +134,12 @@ public class SimplePageInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
     Boolean enable;
 
 
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
     Boolean editable;
 
 

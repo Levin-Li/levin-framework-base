@@ -54,8 +54,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 访问日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[9c651ed5871de6b3f36245ce3035cd53], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[5931e03fc2499e4bc7770104834a2285], 请不要修改和删除此行内容。
  */
 
 //@ActiveProfiles("test")
@@ -95,7 +95,7 @@ public class AccessLogServiceTest {
 
         CreateAccessLogReq req = new CreateAccessLogReq();
 
-            // req.setDomain("请求的域名_1");// 
+            // req.setDomain("系统域_1");// 
 
             // req.setVisitor("这是文本64");// 
 
@@ -155,7 +155,7 @@ public class AccessLogServiceTest {
         QueryAccessLogReq req = new QueryAccessLogReq();
 
         // req.setId(null);//
-        // req.setDomain("请求的域名_1");//
+        // req.setDomain("系统域_1");//
         // req.setVisitor("这是文本64");//
         // req.setTitle("标题_1");//
         // req.setLogType("这是文本64");//
@@ -193,7 +193,7 @@ public class AccessLogServiceTest {
          req.setId(id);
 
 
-           // req.setDomain("请求的域名_1");// 
+           // req.setDomain("系统域_1");// 
            // req.setVisitor("这是文本64");// 
            // req.setTitle("标题_1");// 必填
            // req.setLogType("这是文本64");// 

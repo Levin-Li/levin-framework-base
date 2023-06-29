@@ -4,7 +4,7 @@ package com.levin.oak.base.services.area.req;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 /////////////////////////////////////////////////////
 import javax.validation.constraints.*;
 import javax.annotation.*;
@@ -42,8 +42,8 @@ import java.util.Date;
 
 /**
  *  新增区域
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[bede2d3dfc7445e46898ccde29bd5a71], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[2ca7e155bb514cc263dd748029e8b246], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -69,11 +69,11 @@ public class CreateAreaReq extends BaseReq {
 
 
 
-    @Schema(title = L_type  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_type  , required = true, requiredMode = REQUIRED)
     @NotNull
     Type type;
 
-    @Schema(title = L_name  , required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
     @NotBlank
     @Size(max = 128)
     String name;
