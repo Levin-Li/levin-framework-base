@@ -13,6 +13,7 @@ import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity(name = EntityConst.PREFIX + "Setting")
@@ -43,20 +44,19 @@ import static javax.persistence.FetchType.LAZY;
 )
 public class Setting
         extends TenantOrgNamedEntity {
-
     public enum ValueType implements EnumDesc {
-        @Schema(title = "富文本")
+        @Schema(title = "Html")
         Html,
-        @Schema(title = "CSS")
+        @Schema(title = "Css")
         Css,
-        @Schema(title = "JS")
+        @Schema(title = "Js")
         Js,
         @Schema(title = "文本")
         Text,
-        @Schema(title = "Json")
-        Json,
         @Schema(title = "数值")
         Digit,
+        @Schema(title = "Json")
+        Json,
         @Schema(title = "图片")
         Image,
         @Schema(title = "视频")
@@ -90,7 +90,7 @@ public class Setting
 
     @Schema(title = "值")
     @Lob
-    @Basic(fetch = LAZY)
+    @Basic(fetch = FetchType.EAGER)
     protected String valueContent;
 
     @Schema(title = "值是否可空")

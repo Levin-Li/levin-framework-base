@@ -45,8 +45,8 @@ import java.util.Date;
 
 /**
  *  统计系统设置
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[a5417afcc2a08c15e8d58fdd830416b7], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午3:14:49, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[9fe29494759dd3a57b0bd8fb22267871], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -96,10 +96,6 @@ public class StatSettingReq extends MultiTenantOrgReq{
 
     @Schema(title = L_valueContent)
     String valueContent;
-
-    @Schema(title = "是否加载" + L_valueContent)
-    @Fetch(attrs = E_Setting.valueContent, condition = "#_val == true")
-    Boolean loadValueContent;
 
     @Schema(title = L_nullable)
     Boolean nullable;

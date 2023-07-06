@@ -36,16 +36,16 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-    import com.levin.commons.service.support.InjectConsts;
-    import com.levin.commons.service.domain.InjectVar;
-    import com.levin.oak.base.entities.Setting.*;
-    import java.util.Date;
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.Setting.*;
+import java.util.Date;
 ////////////////////////////////////
 
 /**
  *  查询系统设置
- *  @Author Auto gen by simple-dao-codegen 2023年6月26日 下午6:06:02
- *  代码生成哈希校验码：[70d968d9c1bd0bdd3c8acdc25a709e88]
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午3:14:49, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[b4f5ec755ebb59aa56a8659a6f62abc6], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -57,7 +57,7 @@ import com.levin.oak.base.services.commons.req.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Setting.class, alias = E_Setting.ALIAS, resultClass = SettingInfo.class)
-public class QuerySettingReq extends MultiTenantReq{
+public class QuerySettingReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = 147875794L;
 
@@ -70,9 +70,6 @@ public class QuerySettingReq extends MultiTenantReq{
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
     OrderBy.Type orderDir;
 
-    @Schema(title = "是否包含公共数据")
-    @Ignore
-    private boolean isContainsPublicData = true;
 
     @NotBlank
     @Size(max = 64)
@@ -116,14 +113,9 @@ public class QuerySettingReq extends MultiTenantReq{
     String domain;
 
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @Schema(title = "模糊匹配-" + L_name)
-    @Contains
-    String containsName;
-
 
     @Size(max = 128)
     @Schema(title = L_creator)

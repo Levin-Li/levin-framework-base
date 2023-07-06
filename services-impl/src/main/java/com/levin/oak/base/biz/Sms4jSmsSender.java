@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.dromara.sms4j.api.SmsBlend;
 import org.dromara.sms4j.core.factory.SmsFactory;
+import org.dromara.sms4j.provider.enumerate.SupplierType;
 import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,6 @@ public class Sms4jSmsSender
         log.info("短信发送服务启用-" + Sms4jSmsSender.class.getName());
     }
 
-
     protected SettingInfo getSmsSetting(String tenantId, String appId) {
 
         if (!StringUtils.hasText(appId)) {
@@ -92,11 +92,11 @@ public class Sms4jSmsSender
             appId = "";
         }
 
-        String key = tenantId + appId;
+        // String key = tenantId + appId;
 
-        smsBlendMap.computeIfPresent()
+        //@todo 后期支持从数据库配置
 
-        // SupplierType.
+        SmsFactory.createSmsBlend(SupplierType.TENCENT).sendMessage(phone, code);
 
         return code;
     }

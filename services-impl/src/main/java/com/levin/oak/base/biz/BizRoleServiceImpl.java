@@ -45,6 +45,7 @@ public class BizRoleServiceImpl implements BizRoleService {
      */
     @Override
     public List<String> getRolePermissionList(String tenantId, List<String> roleCodeList) {
+        boolean hasTenant = StringUtils.hasText(tenantId);
         return new ArrayList<>(
                 //获取指定用户的权限列表
                 simpleDao.selectFrom(Role.class)
@@ -52,8 +53,8 @@ public class BizRoleServiceImpl implements BizRoleService {
                         .eq(E_Role.enable, true)
                         .in(E_Role.code, roleCodeList)
                         //公共角色和自有角色，只能二选一
-                        .appendByAnnotations(StringUtils.hasText(tenantId), E_Role.tenantId, tenantId, Eq.class)
-                        .appendByAnnotations(tenantId == null, E_Role.tenantId, null, IsNull.class)
+                        .appendByAnnotations(hasTenant, E_Role.tenantId, tenantId, Eq.class)
+                        .appendByAnnotations(!hasTenant, E_Role.tenantId, null, IsNull.class)
                         .find(String.class)
                         .stream()
                         .filter(StringUtils::hasText)

@@ -32,6 +32,7 @@ import com.levin.oak.base.services.user.info.UserInfo;
 import com.levin.oak.base.services.user.req.CreateUserReq;
 import com.levin.oak.base.utils.AmisUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -55,13 +56,17 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 /**
  * 认证服务
+ *
+ * @todo 分离web相关部分
+ *
  */
 
 @Slf4j
 @Order
+//@Service(PLUGIN_PREFIX + "DefaultAuthService")
+@DubboService
 //@ConditionalOnMissingBean(AuthService.class)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", matchIfMissing = true)
-@Service(PLUGIN_PREFIX + "DefaultAuthService")
 public class AuthServiceImpl
         extends BaseService
         implements AuthService, ApplicationListener<ContextRefreshedEvent> {
@@ -117,10 +122,7 @@ public class AuthServiceImpl
 
     @PostConstruct
     public void init() {
-
         log.info("默认认证服务启用...");
-
-        //
     }
 
     /**

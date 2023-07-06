@@ -22,7 +22,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 /**
  *  系统设置-服务接口
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午3:14:49, 请不要修改和删除此行内容。
  *  代码生成哈希校验码：[0a86bc202f329d29219ce7bb79cb4706], 请不要修改和删除此行内容。
  */
 @Tag(name = E_Setting.BIZ_NAME, description = E_Setting.BIZ_NAME + MAINTAIN_ACTION)
