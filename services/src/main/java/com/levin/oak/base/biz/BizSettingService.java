@@ -8,6 +8,7 @@ import com.levin.commons.dao.support.*;
 import com.levin.commons.service.domain.*;
 
 import java.util.*;
+
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
 
@@ -27,11 +28,12 @@ import com.levin.oak.base.services.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Setting.*;
+
 import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  系统设置-业务服务
+ * 系统设置-业务服务
  *
  * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
  * 代码生成哈希校验码：[b5b7622b0bf0a4ad9f9fa8491f60cb23], 请不要修改和删除此行内容。
@@ -39,5 +41,22 @@ import java.util.Date;
 
 @Tag(name = E_Setting.BIZ_NAME + "-业务服务", description = "")
 public interface BizSettingService {
+    /**
+     * 更新系统设置
+     *
+     * @param tenantId
+     * @param code
+     * @param valueContent
+     * @return
+     */
+    boolean updateValue(String tenantId, String code, String valueContent);
 
+    /**
+     * 获取系统设置
+     *
+     * @param tenantId
+     * @param code
+     * @return
+     */
+    String getValue(String tenantId, String code);
 }

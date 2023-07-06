@@ -55,6 +55,8 @@ public class Setting
         Text,
         @Schema(title = "数值")
         Digit,
+        @Schema(title = "Yaml")
+        Yaml,
         @Schema(title = "Json")
         Json,
         @Schema(title = "图片")

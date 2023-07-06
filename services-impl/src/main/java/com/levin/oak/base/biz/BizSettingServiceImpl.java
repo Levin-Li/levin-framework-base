@@ -10,6 +10,7 @@ import com.levin.commons.service.domain.*;
 import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
+
 import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
@@ -25,7 +26,9 @@ import io.swagger.v3.oas.annotations.tags.*;
 import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
+
 import cn.hutool.core.lang.*;
+
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
@@ -47,11 +50,12 @@ import com.levin.oak.base.services.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Setting.*;
+
 import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  系统设置-业务服务实现类
+ * 系统设置-业务服务实现类
  *
  * @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:29, 请不要修改和删除此行内容。
  * 代码生成哈希校验码：[c2765b51f028d3f4c1e4331ed59da1d9], 请不要修改和删除此行内容。
@@ -73,7 +77,7 @@ public class BizSettingServiceImpl extends BaseService implements BizSettingServ
     @Autowired
     SettingService settingService;
 
-    protected BizSettingServiceImpl getSelfProxy(){
+    protected BizSettingServiceImpl getSelfProxy() {
         return getSelfProxy(BizSettingServiceImpl.class);
     }
 
@@ -86,5 +90,28 @@ public class BizSettingServiceImpl extends BaseService implements BizSettingServ
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
     //}
+
+
+    @PostConstruct
+    public void init() {
+
+    }
+
+    @CacheEvict(condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "(#tenantId + #code)")
+    @Override
+    public boolean updateValue(String tenantId, String code, String valueContent) {
+        return simpleDao.updateTo(Setting.class)
+                .eq(E_Setting.tenantId, tenantId)
+                .eq(E_Setting.code, code)
+                .set(E_Setting.valueContent, valueContent)
+                .singleUpdate();
+    }
+
+    @CachePut(unless = "#result == null", condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "(#tenantId + #code)")
+    @Override
+    public String getValue(String tenantId, String code) {
+        SettingInfo info = settingService.findUnique(new QuerySettingReq().setCode(code).setTenantId(tenantId));
+        return info != null ? info.getValueContent() : null;
+    }
 
 }
