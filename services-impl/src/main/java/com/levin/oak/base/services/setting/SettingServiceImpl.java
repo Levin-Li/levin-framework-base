@@ -53,12 +53,14 @@ import java.util.Date;
 /**
  *  系统设置-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[cd6349a3ec75b4a0d888e6d2c6307adf], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:29, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[820bdb1bdd5b1a6ebc653f25b29ea502], 请不要修改和删除此行内容。
  */
 
 //@Service(PLUGIN_PREFIX + "SettingService")
 @DubboService
+
+@ConditionalOnMissingBean({SettingService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SettingService", matchIfMissing = true)
 @Slf4j
 
@@ -89,8 +91,7 @@ public class SettingServiceImpl extends BaseService implements SettingService {
 
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     @Override
-    //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    //@Cacheable(condition = "#id != null", unless = "#result == null ", key = E_Setting.CACHE_KEY_PREFIX + "#id")
+    @Cacheable(condition = "#id != null", unless = "#result == null ", key = E_Setting.CACHE_KEY_PREFIX + "#id")
     public SettingInfo findById(String id) {
         return findById(new SettingIdReq().setId(id));
     }
@@ -98,7 +99,7 @@ public class SettingServiceImpl extends BaseService implements SettingService {
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
     @Override
     //只更新缓存
-    //@CachePut(unless = "#result == null" , condition = "#req.id != null" , key = E_Setting.CACHE_KEY_PREFIX + "#req.id")
+    @CachePut(unless = "#result == null" , condition = "#req.id != null" , key = E_Setting.CACHE_KEY_PREFIX + "#req.id")
     public SettingInfo findById(SettingIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findUnique(req);
@@ -106,7 +107,7 @@ public class SettingServiceImpl extends BaseService implements SettingService {
 
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
-    //@CacheEvict(condition = "#req.id != null", key = E_Setting.CACHE_KEY_PREFIX + "#req.id")
+    @CacheEvict(condition = "#req.id != null", key = E_Setting.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean update(UpdateSettingReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -123,7 +124,7 @@ public class SettingServiceImpl extends BaseService implements SettingService {
 
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
-    //@CacheEvict(condition = "#req.id != null", key = E_Setting.CACHE_KEY_PREFIX + "#req.id")
+    @CacheEvict(condition = "#req.id != null", key = E_Setting.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     public boolean delete(SettingIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");

@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  * 机构
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[d3003fbfa0689c1b0a322862d8b6f0fe], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午2:07:07, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3ebb7a13280be68826a7a87e3baab9d1], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -94,9 +94,8 @@ public class OrgInfo implements Serializable {
     String industries;
 
 
-    @NotBlank
     @Size(max = 64)
-    @Schema(title = L_areaCode , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_areaCode )
     String areaCode;
 
 
@@ -117,7 +116,7 @@ public class OrgInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_isExternal , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_isExternal , description = D_isExternal , required = true, requiredMode = REQUIRED)
     Boolean isExternal;
 
 

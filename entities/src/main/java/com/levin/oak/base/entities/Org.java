@@ -127,7 +127,7 @@ public class Org
     protected String industries;
 
     @Schema(title = "区域编码")
-    @Column(nullable = false, length = 64)
+    @Column(length = 64)
     @Contains
     protected String areaCode;
 
@@ -145,7 +145,7 @@ public class Org
     protected String category;
 
     @Column(nullable = false)
-    @Schema(title = "是否外部机构")
+    @Schema(title = "是否外部机构",description = "是否外部机构，是相对于上级节点来说")
     protected Boolean isExternal;
 
     //////////////////////////////////////////////////////////////////////
@@ -186,6 +186,7 @@ public class Org
         if (state == null) {
             state = State.Normal;
         }
+
     }
 
 }

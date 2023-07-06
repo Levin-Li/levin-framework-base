@@ -14,11 +14,13 @@ import com.levin.oak.base.services.role.req.*;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.services.tenant.req.QueryTenantReq;
 import com.levin.oak.base.services.tenant.req.StatTenantReq;
+import com.levin.oak.base.services.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -52,6 +54,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 //@Service(PLUGIN_PREFIX + "RoleService")
 @DubboService
+@ConditionalOnMissingBean({RoleService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "RoleService", matchIfMissing = true)
 @Slf4j
 //@Validated

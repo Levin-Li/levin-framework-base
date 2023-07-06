@@ -54,12 +54,14 @@ import java.util.Date;
 /**
  *  简单页面-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[a8fdd70ea51200c868409557517a4420], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:32, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[6e265c7758ea5c00f1582f9f51e4b46d], 请不要修改和删除此行内容。
  */
 
 //@Service(PLUGIN_PREFIX + "SimplePageService")
 @DubboService
+
+@ConditionalOnMissingBean({SimplePageService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimplePageService", matchIfMissing = true)
 @Slf4j
 

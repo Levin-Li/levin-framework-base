@@ -1,6 +1,5 @@
 package com.levin.oak.base.biz;
 
-import cn.hutool.captcha.CaptchaUtil;
 import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +8,7 @@ import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,8 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 //@Service(PLUGIN_PREFIX + "SmsCodeService")
 @DubboService
-@ConditionalOnClass({CaptchaUtil.class, RedissonClient.class})
+@ConditionalOnClass({RedissonClient.class})
+@ConditionalOnMissingBean(SmsCodeService.class)
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SmsCodeService", matchIfMissing = true)
 @Slf4j
 @CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "SmsCodeService"})
@@ -44,8 +45,12 @@ public class SmsCodeServiceImpl
 
     @PostConstruct
     void init() {
+
         mapCache = redissonClient.getMapCache(CACHE_NAME);
-        log.warn("未发现短信发送服务：" + SmsSender.class.getName());
+
+        if (smsSender == null) {
+            log.warn("未发现短信发送服务：" + SmsSender.class.getName());
+        }
     }
 
     @Override
@@ -92,7 +97,6 @@ public class SmsCodeServiceImpl
                 frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
         return code;
-
     }
 
     @Override

@@ -53,12 +53,14 @@ import java.util.Date;
 /**
  *  工作岗位-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[8e0e47787e35f8d9d08393a971e65e85], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:32, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[769b7f4f58e1aa2e134dc6cb7e42ed00], 请不要修改和删除此行内容。
  */
 
 //@Service(PLUGIN_PREFIX + "JobPostService")
 @DubboService
+
+@ConditionalOnMissingBean({JobPostService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "JobPostService", matchIfMissing = true)
 @Slf4j
 

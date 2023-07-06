@@ -52,12 +52,14 @@ import java.util.Date;
 /**
  *  调度日志-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[cf6a9ce8a2a88334e4d5deb0c7ab5c8e], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:29, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[0aae6606e5eb3827f55f956a60893e14], 请不要修改和删除此行内容。
  */
 
 //@Service(PLUGIN_PREFIX + "ScheduledLogService")
 @DubboService
+
+@ConditionalOnMissingBean({ScheduledLogService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ScheduledLogService", matchIfMissing = true)
 @Slf4j
 

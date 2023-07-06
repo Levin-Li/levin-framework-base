@@ -6,6 +6,7 @@ import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.dao.support.PagingData;
 import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
+import com.levin.oak.base.biz.BizRoleService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
@@ -17,6 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -49,6 +51,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 //@Service(PLUGIN_PREFIX + "UserService")
 @DubboService
+@ConditionalOnMissingBean({UserService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "UserService", matchIfMissing = true)
 @Slf4j
 //@Validated

@@ -10,6 +10,7 @@ import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.context.annotation.Primary;
@@ -28,6 +29,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @Service(PLUGIN_PREFIX + "HappyCaptchaService")
 @ConditionalOnClass({HappyCaptcha.class, RedissonClient.class})
+@ConditionalOnMissingBean(CaptchaService.class)
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "HappyCaptchaService", matchIfMissing = true)
 @Slf4j
 @CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "HappyCaptchaService"})

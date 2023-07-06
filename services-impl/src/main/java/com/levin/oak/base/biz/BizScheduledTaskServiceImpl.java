@@ -52,13 +52,14 @@ import java.util.Date;
 /**
  *  调度任务-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[3dc3da79ac4a7f50f578bddbabead36f], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:31, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[b82dba28532ae420b75c0a2a2518e1f3], 请不要修改和删除此行内容。
  */
 
 @DubboService
 //@Service(PLUGIN_PREFIX + "BizScheduledTaskServiceImpl")
 
+@ConditionalOnMissingBean({BizScheduledTaskService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizScheduledTaskServiceImpl", matchIfMissing = true)
 @Slf4j
 

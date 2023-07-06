@@ -60,8 +60,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 机构测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[911ace5ad36582c789ec7db477f5d26d], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午2:07:08, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[eff8b38a16e38bbc94eb308618520a15], 请不要修改和删除此行内容。
  */
 
 //@ActiveProfiles("test")
@@ -115,13 +115,13 @@ public class OrgServiceTest {
 
             // req.setIndustries("这是文本64");// 
 
-            // req.setAreaCode("这是文本64");// 必填
+            // req.setAreaCode("这是文本64");// 
 
             // req.setLevel("这是文本128");//使用字典值配置 
 
             // req.setCategory("这是文本128");//使用字典值配置 必填
 
-            // req.setIsExternal(true);// 必填
+            // req.setIsExternal(true);//是否外部机构，是相对于上级节点来说 必填
 
             // req.setContacts("这是文本64");// 
 
@@ -176,7 +176,7 @@ public class OrgServiceTest {
         // req.setLoadArea(true);//加载
         // req.setLevel("这是文本128");//使用字典值配置
         // req.setCategory("这是文本128");//使用字典值配置
-        // req.setIsExternal(true);//
+        // req.setIsExternal(true);//是否外部机构，是相对于上级节点来说
         // req.setContacts("这是文本64");//
         // req.setPhones("这是文本20");//
         // req.setEmails("这是文本32");//
@@ -216,10 +216,10 @@ public class OrgServiceTest {
            // req.setState(State.Normal);// 必填
            // req.setType(Type.LegalPerson);// 必填
            // req.setIndustries("这是文本64");// 
-           // req.setAreaCode("这是文本64");// 必填
+           // req.setAreaCode("这是文本64");// 
            // req.setLevel("这是文本128");//使用字典值配置 
            // req.setCategory("这是文本128");//使用字典值配置 必填
-           // req.setIsExternal(true);// 必填
+           // req.setIsExternal(true);//是否外部机构，是相对于上级节点来说 必填
            // req.setContacts("这是文本64");// 
            // req.setPhones("这是文本20");// 
            // req.setEmails("这是文本32");// 

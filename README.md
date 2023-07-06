@@ -43,7 +43,7 @@
               oak:
                 base:
                   framework:
-                    #自带后台的路径
+                    #自带后台的访问路径
                     admin-path: /
                     #控制器访问控制
                     controller-acl:

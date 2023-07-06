@@ -54,12 +54,14 @@ import java.util.Date;
 /**
  *  简单表单-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[bbc8e68cee1d5e2f142d8773dfd33e2f], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:33, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[617feec4e1e6fb07a6a2a6f4b8f4e063], 请不要修改和删除此行内容。
  */
 
 //@Service(PLUGIN_PREFIX + "SimpleFormService")
 @DubboService
+
+@ConditionalOnMissingBean({SimpleFormService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimpleFormService", matchIfMissing = true)
 @Slf4j
 

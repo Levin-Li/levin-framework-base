@@ -57,13 +57,14 @@ import com.levin.oak.base.entities.Org;
 /**
  *  用户-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[2d88343c4cd976e27a1b02b8145633e4], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:30, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[7cb12384ebe6cfe09c2d676473276b4f], 请不要修改和删除此行内容。
  */
 
 @DubboService
 //@Service(PLUGIN_PREFIX + "BizUserServiceImpl")
 
+@ConditionalOnMissingBean({BizUserService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizUserServiceImpl", matchIfMissing = true)
 @Slf4j
 

@@ -1,24 +1,22 @@
-package com.levin.oak.base.biz;
+package com.levin.oak.base;
 
+import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.*;
 
-import com.levin.commons.dao.DaoContext;
-import com.levin.commons.dao.SimpleDao;
+import com.levin.oak.base.biz.InjectVarService;
+//import com.levin.commons.dao.DaoContext;
+//import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.support.VariableInjector;
 import com.levin.commons.service.support.VariableResolverManager;
 import com.levin.commons.utils.MapUtils;
-import com.levin.oak.base.autoconfigure.FrameworkProperties;
-import com.levin.oak.base.biz.rbac.AuthService;
-import com.levin.oak.base.services.tenant.info.TenantInfo;
-import com.levin.oak.base.services.user.info.UserInfo;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -26,12 +24,20 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Map;
 
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+/**
+ * web模块注入服务
+ *
+ * 正常情况下，一个项目只需要一个注入服务，为项目提供注入上下文。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午2:07:08, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[d25caab5a28265c3bb9ff7beb74f1af2], 请不要修改和删除此行内容。
+ */
 
-@Service(PLUGIN_PREFIX + "InjectVarService")
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "InjectVarService", matchIfMissing = true)
+//默认不启用
+//@Service(PLUGIN_PREFIX + "ModuleWebInjectVarService")
+@ConditionalOnMissingBean({InjectVarService.class}) //默认只有在无对应服务才启用
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleWebInjectVarService", matchIfMissing = true)
 @Slf4j
-public class InjectVarServiceImpl implements InjectVarService {
+public class ModuleWebInjectVarServiceImpl implements InjectVarService {
 
     public static final RbacUserInfo anonymous = new RbacUserInfo() {
         @Override
@@ -77,36 +83,23 @@ public class InjectVarServiceImpl implements InjectVarService {
     };
 
     @Autowired
-    AuthService baseAuthService;
-
-    @Autowired
     Environment environment;
-
-    @Value("${spring.application.name:}")
-    String appModuleName = "";
-
-    @Autowired
-    SimpleDao dao;
-
-    @Autowired
-    BizTenantService bizTenantService;
 
     @Autowired
     HttpServletRequest httpServletRequest;
-
-    @Autowired
-    FrameworkProperties frameworkProperties;
-
 
     @Autowired
     VariableResolverManager variableResolverManager;
 
     @PostConstruct
     public void init() {
+        log.info("启用模块Web注入服务...");
+        //设置上下文
         variableResolverManager.add(VariableInjector.newResolverByMap(() -> Arrays.asList(getInjectVars())));
     }
 
     /**
+     *清除缓存
      *
      */
     @Override
@@ -124,43 +117,33 @@ public class InjectVarServiceImpl implements InjectVarService {
             return result;
         }
 
-        TenantInfo tenantInfo = bizTenantService.checkAndGetCurrentUserTenant();
+        MapUtils.Builder<String, Object> builder = MapUtils.newBuilder();
 
-        MapUtils.Builder<String, Object> builder
-                = MapUtils.putFirst("tenantBindDomainEnable", frameworkProperties.getTenantBindDomain().isEnable());
+        //@todo  获取当前登录用户
+        RbacUserInfo userInfo = null;
 
         //当前登录用户
-        if (baseAuthService.isLogin()) {
+        if (userInfo != null) {
 
             //暂时兼容
             //获取登录信息
-            UserInfo userInfo = baseAuthService.getUserInfo();
-
             builder.put(InjectConsts.USER_ID, userInfo.getId())
                     .put(InjectConsts.USER_NAME, userInfo.getName())
                     .put(InjectConsts.USER, userInfo)
                     .put(InjectConsts.IS_SUPER_ADMIN, userInfo.isSuperAdmin())
                     .put(InjectConsts.IS_TENANT_ADMIN, userInfo.getRoleList() != null && userInfo.getRoleList().contains(RbacRoleObject.ADMIN_ROLE))
-                    .put(InjectConsts.ORG, userInfo.getOrg())
-                    .put(InjectConsts.ORG_ID, userInfo.getOrgId());
+//                    .put(InjectConsts.ORG, userInfo.getOrg())
+//                    .put(InjectConsts.ORG_ID, userInfo.getOrgId())
+            ;
 
         } else {
             //匿名用户
             builder.put(InjectConsts.USER, anonymous);
         }
 
-        //租户信息
-        if (tenantInfo != null) {
-            builder.put(InjectConsts.TENANT, tenantInfo)
-                    .put(InjectConsts.TENANT_ID, tenantInfo.getId());
-        }
-
         final Map<String, Object> ctx = builder.build();
 
         result = ctx;
-
-        //设置注入变量到Dao上下文中
-        DaoContext.threadContext.putAll(ctx);
 
         //缓存到请求对象重
         httpServletRequest.setAttribute(INJECT_VAR_CACHE_KEY, result);

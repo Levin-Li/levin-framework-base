@@ -49,8 +49,8 @@ import java.util.Date;
 
 /**
  *  查询机构
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[24854c3436704c6d2b104b03366e065d], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午2:07:07, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[b4e3c59084eb6d087eb33724f2ff0ebf], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -108,7 +108,6 @@ public class QueryOrgReq extends MultiTenantReq{
     @Schema(title = L_industries)
     String industries;
 
-    @NotBlank
     @Size(max = 64)
     @Schema(title = L_areaCode)
     String areaCode;
@@ -132,7 +131,7 @@ public class QueryOrgReq extends MultiTenantReq{
     String category;
 
     @NotNull
-    @Schema(title = L_isExternal)
+    @Schema(title = L_isExternal , description = D_isExternal)
     Boolean isExternal;
 
     @Size(max = 64)

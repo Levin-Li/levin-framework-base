@@ -134,9 +134,9 @@
         </dependency>
 
         <dependency>
-            <!-- 短信通道 -->
-            <groupId>net.guerlab.sms</groupId>
-            <artifactId>guerlab-sms-server-starter</artifactId>
+            <!--    https://wind.kim/     https://gitee.com/dromara/sms4j  -->
+            <groupId>org.dromara.sms4j</groupId>
+            <artifactId>sms4j-spring-boot-starter</artifactId>
         </dependency>
 
     </dependencies>

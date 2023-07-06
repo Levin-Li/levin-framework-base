@@ -145,7 +145,7 @@ public class AuthServiceImpl
 
         Assert.hasText(req.getAccount(), "登录帐号不能为空");
 
-        //如果是超级帐号，必须要密码
+        //如果是超级用户，必须要密码
         boolean isSA = isSuperAdmin(req.getAccount());
 
         if (!isSA) {

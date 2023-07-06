@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  更新机构
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[6253ee467f3cfb96fc8d0c33f2e6529a], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午2:07:07, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[e47e012358dad6aca5370f22f37f6952], 请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -94,7 +94,6 @@ public class UpdateOrgReq extends MultiTenantReq {
     @Schema(title = L_industries)
     String industries;
 
-    @NotBlank
     @Size(max = 64)
     @Schema(title = L_areaCode)
     String areaCode;
@@ -108,7 +107,7 @@ public class UpdateOrgReq extends MultiTenantReq {
     @Schema(title = L_category , description = D_category)
     String category;
 
-    @Schema(title = L_isExternal)
+    @Schema(title = L_isExternal , description = D_isExternal)
     Boolean isExternal;
 
     @Size(max = 64)

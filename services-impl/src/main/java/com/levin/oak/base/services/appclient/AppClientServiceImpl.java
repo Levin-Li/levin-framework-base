@@ -52,12 +52,14 @@ import java.util.Date;
 /**
  *  应用接入-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[602f11eb19c6c80227d626ae537e6b6e], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:28, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[3a2f4f4202a4e3c42d977e12f2febf78], 请不要修改和删除此行内容。
  */
 
 //@Service(PLUGIN_PREFIX + "AppClientService")
 @DubboService
+
+@ConditionalOnMissingBean({AppClientService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppClientService", matchIfMissing = true)
 @Slf4j
 

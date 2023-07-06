@@ -1,7 +1,7 @@
 package com.levin.oak.base.biz;
 
 /**
- * 短信发生服务
+ * 短信发送服务服务
  */
 public interface SmsSender {
 

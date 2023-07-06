@@ -52,13 +52,14 @@ import java.util.Date;
 /**
  *  客户端文件-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[f64d8468f652871aad2d5075b39f7a13], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:30, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[bd8a260032bf0aa0937896e53239562d], 请不要修改和删除此行内容。
  */
 
 @DubboService
 //@Service(PLUGIN_PREFIX + "BizAppClientFileServiceImpl")
 
+@ConditionalOnMissingBean({BizAppClientFileService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizAppClientFileServiceImpl", matchIfMissing = true)
 @Slf4j
 

@@ -8,7 +8,7 @@ public interface SmsCodeService {
     /**
      * 生成并发送短信验证码
      * <p>
-     * 如果为模拟通道，返回的验证码以mock:做为前缀
+     * 如果是模拟通道，返回的验证码以mock:做为前缀
      *
      * @param tenantId
      * @param appId

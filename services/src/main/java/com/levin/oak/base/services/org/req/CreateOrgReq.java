@@ -44,8 +44,8 @@ import java.util.Date;
 
 /**
  *  新增机构
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[f198d89771d4590ca65b4ba7833ec2b3], 请不要修改和删除此行内容。
+ *  //@author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午2:07:07, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3ecf91d62ca17a952371aa674ad420b4], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -85,8 +85,7 @@ public class CreateOrgReq extends MultiTenantReq {
     @Size(max = 64)
     String industries;
 
-    @Schema(title = L_areaCode  , required = true, requiredMode = REQUIRED)
-    @NotBlank
+    @Schema(title = L_areaCode  )
     @Size(max = 64)
     String areaCode;
 
@@ -100,7 +99,7 @@ public class CreateOrgReq extends MultiTenantReq {
     @Size(max = 128)
     String category;
 
-    @Schema(title = L_isExternal  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_isExternal , description = D_isExternal  , required = true, requiredMode = REQUIRED)
     @NotNull
     Boolean isExternal;
 

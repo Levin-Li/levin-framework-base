@@ -52,12 +52,14 @@ import java.util.Date;
 /**
  *  客户端文件-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[0d24f642a1c8f5a5e9c33dc2d63d0476], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:30, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[0f47e4eb91abb926f1b5eb23e6f6c960], 请不要修改和删除此行内容。
  */
 
 //@Service(PLUGIN_PREFIX + "AppClientFileService")
 @DubboService
+
+@ConditionalOnMissingBean({AppClientFileService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppClientFileService", matchIfMissing = true)
 @Slf4j
 

@@ -50,8 +50,8 @@ import java.util.Date;
 
 /**
  *  统计机构
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[55db87ea11692f39448d34b564bb3332], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午2:07:07, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[2d21906743186c7de9c1e530d1e78586], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -104,7 +104,6 @@ public class StatOrgReq extends MultiTenantReq{
     @Schema(title = L_industries)
     String industries;
 
-    @NotBlank
     @Size(max = 64)
     @Schema(title = L_areaCode)
     String areaCode;
@@ -128,7 +127,7 @@ public class StatOrgReq extends MultiTenantReq{
     String category;
 
     @NotNull
-    @Schema(title = L_isExternal)
+    @Schema(title = L_isExternal , description = D_isExternal)
     Boolean isExternal;
 
     @Size(max = 64)
