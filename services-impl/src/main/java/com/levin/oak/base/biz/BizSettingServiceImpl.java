@@ -98,21 +98,27 @@ public class BizSettingServiceImpl extends BaseService implements BizSettingServ
 
     }
 
-    @CacheEvict(condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "(#tenantId + #code)")
+    @CacheEvict(condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "('' + #tenantId + #code)")
     @Override
     public boolean updateValue(String tenantId, String code, String valueContent) {
-        return simpleDao.updateTo(Setting.class)
-                .eq(E_Setting.tenantId, tenantId)
-                .eq(E_Setting.code, code)
-                .set(E_Setting.valueContent, valueContent)
-                .singleUpdate();
+
+        Assert.notBlank(code, "系统设置编码不能为空");
+
+        return simpleDao.singleUpdateByQueryObj(new UpdateSettingValueReq()
+                .setCode(code)
+                .setValueContent(valueContent)
+                .setTenantId(tenantId)
+        );
+
     }
 
-    @CachePut(unless = "#result == null", condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "(#tenantId + #code)")
+    @CachePut(unless = "#result == null", condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "('' + #tenantId + #code)")
     @Override
     public String getValue(String tenantId, String code, Supplier<SettingInfo> supplierForCreateIfNotaExist) {
 
-        SettingInfo info = settingService.findUnique(new QuerySettingReq().setCode(code).setTenantId(tenantId));
+        Assert.notBlank(code, "系统设置编码不能为空");
+
+        SettingInfo info = settingService.findOne(new QuerySettingReq().setCode(code).setTenantId(tenantId));
 
         if (info == null && supplierForCreateIfNotaExist != null) {
 

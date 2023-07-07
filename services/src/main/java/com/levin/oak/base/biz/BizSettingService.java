@@ -28,7 +28,9 @@ import com.levin.oak.base.services.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Setting.*;
+import org.springframework.lang.Nullable;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.function.Supplier;
 ////////////////////////////////////
@@ -51,7 +53,7 @@ public interface BizSettingService {
      * @param valueContent
      * @return
      */
-    boolean updateValue(String tenantId, String code, String valueContent);
+    boolean updateValue(@Nullable String tenantId, @NotNull String code, String valueContent);
 
     /**
      * 获取系统设置
@@ -60,7 +62,7 @@ public interface BizSettingService {
      * @param code
      * @return
      */
-    default String getValue(String tenantId, String code) {
+    default String getValue(@Nullable String tenantId, @NotNull String code) {
         return getValue(tenantId, code, null);
     }
 
@@ -71,6 +73,6 @@ public interface BizSettingService {
      * @param code
      * @return
      */
-    String getValue(String tenantId, String code, Supplier<SettingInfo> supplierForCreateIfNotaExist);
+    String getValue(@Nullable String tenantId, @NotNull String code, Supplier<SettingInfo> supplierForCreateIfNotaExist);
 
 }

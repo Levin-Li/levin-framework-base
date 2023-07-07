@@ -206,7 +206,6 @@ public class IndexController extends BaseController {
                 .setTenantId(tenantId), null);
 
         if (!pagingData.isEmpty()) {
-
             modelMap.addAttribute("amisRootCss",
                     pagingData.getItems().stream().map(SettingInfo::getValueContent)
                             .filter(Objects::nonNull)

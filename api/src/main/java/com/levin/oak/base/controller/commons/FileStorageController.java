@@ -1,6 +1,7 @@
 package com.levin.oak.base.controller.commons;
 
 import cn.hutool.core.lang.ClassScanner;
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ClassUtil;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.MenuResTag;
@@ -9,12 +10,14 @@ import com.levin.commons.service.domain.ApiResp;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
+import com.levin.oak.base.biz.BizFileStorageService;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacResService;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.commons.dto.EnumInfo;
 import com.levin.oak.base.entities.EntityConst;
+import com.levin.oak.base.services.commons.req.MultiTenantOrgReq;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,14 +25,15 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static com.levin.oak.base.ModuleOption.*;
 
@@ -45,7 +49,6 @@ import static com.levin.oak.base.ModuleOption.*;
 // http协议明确规定，put、get、delete请求都是具有幂等性的，而post为非幂等性的。
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
-
 
 @RestController(PLUGIN_PREFIX + "FileStorageController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "FileStorageController", matchIfMissing = true)
@@ -78,49 +81,51 @@ public class FileStorageController extends BaseController {
     @Autowired
     PluginManager pluginManager;
 
-    final Map<String, EnumInfo> enumCacheMap = new ConcurrentHashMap<>();
+    @Autowired
+    BizFileStorageService fileStorageService;
 
-    @GetMapping("")
-    @Operation(summary = "枚举列表", description = "一次性返回所有的枚举")
-    public ApiResp<Map<String, EnumInfo>> enums() {
+    @PostMapping("uploadSingleFile")
+    @Operation(summary = "上传单个文件", description = "返回访问Url路径")
+    public ApiResp<String> uploadSingleFile(MultiTenantOrgReq req, HttpServletRequest request) {
 
-        synchronized (enumCacheMap) {
-            if (enumCacheMap.isEmpty()) {
-                pluginManager.getInstalledPlugins()
-                        .parallelStream()
-                        .flatMap(plugin -> ClassScanner.scanPackage(plugin.getPackageName(), clazz -> clazz.isEnum()).stream())
-                        .forEach(clazz -> {
-                            enumCacheMap.put(clazz.getName(), toEnumInfo((Class<Enum>) clazz));
-                        });
+        if (request instanceof MultipartRequest) {
+
+            Map<String, MultipartFile> fileMap = ((MultipartRequest) request).getFileMap();
+
+            if (fileMap.size() < 1) {
+                return ApiResp.error("请上传文件");
+            } else if (fileMap.size() > 1) {
+                return ApiResp.error("一次只能上传一个文件");
             }
+
+            return ApiResp.ok(fileStorageService.upload(req.getTenantId(), null, fileMap.values().stream().findFirst().get()));
         }
 
-        return ApiResp.ok(enumCacheMap);
-
+        return ApiResp.error("请上传文件");
     }
 
-    @GetMapping("{enumName}")
-    @Operation(summary = "单个枚举")
-    public ApiResp<EnumInfo> enums(@PathVariable String enumName) {
-        return ApiResp.ok(MapUtils.getAndAutoPut(enumCacheMap, enumName, null, () -> toEnumInfo(ClassUtil.loadClass(enumName))));
-    }
+    @PostMapping("uploadFiles")
+    @Operation(summary = "上传多个文件", description = "返回访问Url路径")
+    public ApiResp<Map<String, String>> uploadFiles(MultiTenantOrgReq req, HttpServletRequest request) {
 
-    protected static EnumInfo toEnumInfo(Class<Enum> enumClass) {
+        if (request instanceof MultipartRequest) {
 
-        EnumInfo enumInfo = new EnumInfo().setFullName(enumClass.getName())
-                .setName(enumClass.getSimpleName())
-                .setLabel(enumClass.getSimpleName());
+            Map<String, MultipartFile> fileMap = ((MultipartRequest) request).getFileMap();
 
-        for (Enum anEnum : enumClass.getEnumConstants()) {
+            if (fileMap.size() < 1) {
+                return ApiResp.error("请上传文件");
+            }
 
-            enumInfo.getValues().add(new EnumInfo.Item()
-                    .setOrdinal(anEnum.ordinal())
-                    .setDetail(anEnum)
-                    .setValue(anEnum.name())
-                    .setLabel(EnumDesc.getDesc(anEnum)));
+            Map<String, String> result = new LinkedHashMap<>();
+
+            fileMap.forEach((fn, file) -> {
+                result.put(fn, fileStorageService.upload(req.getTenantId(), null, file));
+            });
+
+            return ApiResp.ok(result);
+
         }
 
-        return enumInfo;
+        return ApiResp.error("请上传文件");
     }
-
 }

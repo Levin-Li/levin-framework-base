@@ -93,7 +93,7 @@ public class EnumController extends BaseController {
     final Map<String, EnumInfo> enumCacheMap = new ConcurrentHashMap<>();
 
     @GetMapping("")
-    @Operation(summary = "枚举列表",description = "一次性返回所有的枚举")
+    @Operation(summary = "枚举列表", description = "一次性返回所有的枚举")
     public ApiResp<Map<String, EnumInfo>> enums() {
 
         synchronized (enumCacheMap) {
@@ -108,7 +108,6 @@ public class EnumController extends BaseController {
         }
 
         return ApiResp.ok(enumCacheMap);
-
     }
 
     @GetMapping("{enumName}")

@@ -70,6 +70,9 @@ public class QuerySettingReq extends MultiTenantOrgReq{
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
     OrderBy.Type orderDir;
 
+    @Schema(title = "是否包含公共数据")
+    @Ignore
+    private boolean isContainsPublicData = true;
 
     @NotBlank
     @Size(max = 64)
