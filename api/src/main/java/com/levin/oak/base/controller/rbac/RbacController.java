@@ -22,6 +22,7 @@ import com.levin.oak.base.services.user.UserService;
 import com.levin.oak.base.services.user.req.UpdateUserPwdReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -35,6 +36,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Map;
 
 import static com.levin.oak.base.ModuleOption.*;
 
@@ -99,13 +101,25 @@ public class RbacController extends BaseController {
         return ApiResp.ok(authService.sendSmsCode(req.getTenantId(), req.getAppId(), account));
     }
 
+    @SneakyThrows
     @GetMapping("/captcha")
     @Operation(tags = {"授权管理"}, summary = "获取验图片证码")
     @ResAuthorize(ignored = true)
-    public void genCaptcha(@NotNull AppClientReq req, @NotBlank String account) {
+    public void genCaptcha(@NotNull AppClientReq req, @NotBlank String account, @RequestParam Map<String, String> params) {
+
         Assert.notNull(req, "请求对象不能为空");
         Assert.hasText(account, "帐号不能为空");
-        captchaService.genCode(super.httpRequest, super.httpResponse, req.getTenantId(), req.getAppId(), account);
+
+        //  super.httpRequest, super.httpResponse
+        CaptchaService.Code code = captchaService.genCode(req.getTenantId(), req.getAppId(), account, params);
+
+        httpResponse.setContentType(code.getContentType());
+        httpResponse.setHeader("Pragma", "No-cache");
+        httpResponse.setHeader("Cache-Control", "no-cache");
+        httpResponse.setDateHeader("Expires", 0L);
+        httpRequest.getSession().setAttribute("captchaCode", code.getCode());
+        httpResponse.getOutputStream().write(code.getImgData());
+
     }
 
     /**

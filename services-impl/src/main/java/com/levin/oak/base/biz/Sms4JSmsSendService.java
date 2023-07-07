@@ -8,7 +8,7 @@ import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.entities.Setting;
 import com.levin.oak.base.services.setting.SettingService;
-import com.levin.oak.base.services.setting.req.CreateSettingReq;
+import com.levin.oak.base.services.setting.info.SettingInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.dromara.sms4j.aliyun.config.AlibabaConfig;
@@ -32,23 +32,24 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
-//@Service(PLUGIN_PREFIX + "Sms4jSmsSender")
+//@Service(PLUGIN_PREFIX + "SmsSendService")
 @DubboService
 @ConditionalOnClass({SmsFactory.class, SmsBlend.class, RedissonClient.class})
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SmsSender", matchIfMissing = true)
-@ConditionalOnMissingBean(SmsSender.class)
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SmsSendService", matchIfMissing = true)
+@ConditionalOnMissingBean(SmsSendService.class)
 @Slf4j
-@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "SmsSender"})
-public class Sms4jSmsSender
-        implements SmsSender {
+@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "SmsSendService"})
+public class Sms4JSmsSendService
+        implements SmsSendService {
 
-    private static final String CACHE_NAME = Sms4jSmsSender.class.getName();
+    private static final String CACHE_NAME = Sms4JSmsSendService.class.getName();
 
     public static final String CFG_CODE = "短信通道配置";
 
@@ -68,7 +69,7 @@ public class Sms4jSmsSender
 
     Map<String, SmsBlend> smsBlendMap = MapUtil.newConcurrentHashMap();
 
-    private Gson gson = new Gson();
+    private static Gson gson = new Gson();
 
     private static Map<SupplierType, Class<? extends SupplierConfig>> configClass = new ConcurrentHashMap<>();
 
@@ -85,7 +86,7 @@ public class Sms4jSmsSender
     @PostConstruct
     void init() {
         mapCache = redissonClient.getMapCache(CACHE_NAME);
-        log.info("短信发送服务启用-" + Sms4jSmsSender.class.getName());
+        log.info("短信发送服务启用-" + Sms4JSmsSendService.class.getName());
     }
 
     protected Map<String, Object> getSmsSetting(String tenantId, String appId) {
@@ -94,28 +95,26 @@ public class Sms4jSmsSender
             appId = "";
         }
 
-        String code = CFG_CODE + appId;
+        String code = CFG_CODE + "|" + appId;
 
-        String value = bizSettingService.getValue(tenantId, code);
+        String value = bizSettingService.getValue(tenantId, code, () -> {
 
-        if (!StringUtils.hasText(value)) {
+                    Map<String, Object> config = MapUtil.builder("ref_doc", (Object) "Json格式，具体配置参考文档：https://wind.kim/doc/supplier/")
+                            .put("channelType", SupplierType.ALIBABA.name())
+                            .build();
+                    return new SettingInfo().setCategoryName(CFG_CODE)
+                            .setCode(code)
+                            .setValueType(Setting.ValueType.Json)
+                            .setInputPlaceholder("Json格式,channelType属性配置通道类型")
+                            .setValueContent(gson.toJson(config))
+                            .setName(CFG_CODE)
+                            .setRemark("内容必须为Json格式，channelType属性配置通道类型：" +
+                                    configClass.keySet()
+                                    + "\n具体配置参考文档：https://wind.kim/doc/supplier/");
+                }
+        );
 
-            Map<String, Object> config = MapUtil.builder("ref_doc", (Object) "Json格式，具体配置参考文档：https://wind.kim/doc/supplier/")
-                    // .put("channelType", SupplierType.ALIBABA.name())
-                    .build();
-
-            value = gson.toJson(config);
-
-            settingService.create(new CreateSettingReq().setCategoryName(CFG_CODE)
-                    .setCode(code)
-                    .setValueType(Setting.ValueType.Json)
-                    .setValueContent(value)
-                    .setName(CFG_CODE)
-                    .setRemark("Json格式，具体配置参考文档：https://wind.kim/doc/supplier/"));
-        }
-
-
-        return (Map<String, Object>) gson.fromJson(value, Map.class);
+        return (Map<String, Object>) (StringUtils.hasText(value) ? gson.fromJson(value, Map.class) : Collections.emptyMap());
     }
 
     /**
@@ -157,7 +156,6 @@ public class Sms4jSmsSender
             Assert.notNull(type, "通道配置不支持:{}", supplierType);
 
             supplierType.getProviderFactory().createMultitonSms(newConfig(smsSetting, type)).sendMessage(phone, code);
-
         }
 
         return code;

@@ -58,12 +58,16 @@
         <hutool.version>5.7.2</hutool.version>
         <oshi.version>5.6.1</oshi.version>
         <jsch.version>0.1.54</jsch.version>
+        <commons-compress.version>1.21</commons-compress.version>
+
         <redission.version>3.19.3</redission.version>
         <redission.version>3.16.8</redission.version>
 
         <dm-db-version>8.1.2.79</dm-db-version>
 
         <IJPay.version>2.9.3</IJPay.version>
+        <cn.xuyanwu-file-storage.version>0.7.0</cn.xuyanwu-file-storage.version>
+
         <Happy-Captcha.version>1.0.1</Happy-Captcha.version>
         <egzosn-pay.version>2.14.4-fix</egzosn-pay.version>
         <net.guerlab.sms.version>2.1.0</net.guerlab.sms.version>
@@ -302,7 +306,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
-                <version>1.21</version>
+                <version>${commons-compress.version}</version>
             </dependency>
 
             <dependency>
@@ -371,6 +375,41 @@
                 </exclusions>
             </dependency>
 
+            <!--  文档   https://spring-file-storage.xuyanwu.cn/  -->
+            <dependency>
+                <groupId>cn.xuyanwu</groupId>
+                <artifactId>spring-file-storage</artifactId>
+                <version>${cn.xuyanwu-file-storage.version}</version>
+            </dependency>
+
+            <!-- 华为云 OBS 不使用的情况下可以不引入 -->
+            <dependency>
+                <groupId>com.huaweicloud</groupId>
+                <artifactId>esdk-obs-java</artifactId>
+                <version>3.22.3.1</version>
+            </dependency>
+
+            <!-- 阿里云 OSS 不使用的情况下可以不引入 -->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>3.15.1</version>
+            </dependency>
+
+            <!-- 七牛云 Kodo 不使用的情况下可以不引入 -->
+            <dependency>
+                <groupId>com.qiniu</groupId>
+                <artifactId>qiniu-java-sdk</artifactId>
+                <version>7.11.0</version>
+            </dependency>
+
+            <!-- 腾讯云 COS 不使用的情况下可以不引入 -->
+            <dependency>
+                <groupId>com.qcloud</groupId>
+                <artifactId>cos_api</artifactId>
+                <version>5.6.98</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.ramostear</groupId>
                 <artifactId>Happy-Captcha</artifactId>
@@ -378,7 +417,7 @@
             </dependency>
 
             <dependency>
-                <!-- 短信通道 -->
+                <!-- 短信通道2   -->
                 <groupId>net.guerlab.sms</groupId>
                 <artifactId>guerlab-sms-server-starter</artifactId>
                 <version>${net.guerlab.sms.version}</version>
@@ -391,7 +430,7 @@
             </dependency>
 
             <dependency>
-                <!--                https://gitee.com/dromara/sms4j   https://wind.kim/ -->
+                <!--  文档   https://gitee.com/dromara/sms4j   https://wind.kim/  -->
                 <groupId>org.dromara.sms4j</groupId>
                 <artifactId>sms4j-spring-boot-starter</artifactId>
                 <version>${org.dromara.sms4j.version}</version>

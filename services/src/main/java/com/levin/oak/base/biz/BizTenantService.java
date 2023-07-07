@@ -114,5 +114,4 @@ public interface BizTenantService {
      */
     TenantInfo getTenantByTenantKey(String tenantKey);
 
-
 }

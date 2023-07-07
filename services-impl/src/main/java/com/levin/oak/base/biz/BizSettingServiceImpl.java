@@ -3,12 +3,14 @@ package com.levin.oak.base.biz;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.support.*;
 import com.levin.commons.service.domain.*;
 
 import javax.annotation.*;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.*;
 
 import org.springframework.cache.annotation.*;
@@ -91,7 +93,6 @@ public class BizSettingServiceImpl extends BaseService implements BizSettingServ
     //    return simpleDao.singleUpdateByQueryObj(req);
     //}
 
-
     @PostConstruct
     public void init() {
 
@@ -109,8 +110,19 @@ public class BizSettingServiceImpl extends BaseService implements BizSettingServ
 
     @CachePut(unless = "#result == null", condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "(#tenantId + #code)")
     @Override
-    public String getValue(String tenantId, String code) {
+    public String getValue(String tenantId, String code, Supplier<SettingInfo> supplierForCreateIfNotaExist) {
+
         SettingInfo info = settingService.findUnique(new QuerySettingReq().setCode(code).setTenantId(tenantId));
+
+        if (info == null && supplierForCreateIfNotaExist != null) {
+
+            info = supplierForCreateIfNotaExist.get();
+
+            if (info != null) {
+                info.setId(settingService.create(BeanUtil.copyProperties(info, CreateSettingReq.class)));
+            }
+        }
+
         return info != null ? info.getValueContent() : null;
     }
 

@@ -12,6 +12,7 @@ public interface SmsCodeService {
      *
      * @param tenantId
      * @param appId
+     * @param account
      * @param phoneNo
      * @return 短信验证码，如果为模拟通道，返回的验证码以mock:做为前缀
      */
@@ -20,6 +21,10 @@ public interface SmsCodeService {
     /**
      * 校验验证码
      *
+     * @param tenantId
+     * @param appId
+     * @param account
+     * @param code
      * @return
      */
     boolean verification(String tenantId, String appId, String account, String code);

@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -47,18 +46,16 @@ import static com.levin.oak.base.ModuleOption.*;
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-/**
- * 一次性返回所有的枚举变量
- */
-@RestController(PLUGIN_PREFIX + "EnumController")
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "EnumController", matchIfMissing = true)
-@RequestMapping(API_PATH + "enums")
-@Tag(name = "业务枚举类", description = "业务枚举类服务")
+
+@RestController(PLUGIN_PREFIX + "FileStorageController")
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "FileStorageController", matchIfMissing = true)
+@RequestMapping(API_PATH + "fss")
+@Tag(name = "文件存储", description = "文件存储服务")
 @Slf4j
 @Valid
 @ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME, onlyRequireAuthenticated = true)
 @MenuResTag(false)
-public class EnumController extends BaseController {
+public class FileStorageController extends BaseController {
 
     @Autowired
     RoleService roleService;
@@ -81,19 +78,10 @@ public class EnumController extends BaseController {
     @Autowired
     PluginManager pluginManager;
 
-    //扫描类
-//    final ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(
-//            false) {
-//        @Override
-//        protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
-//            return true;
-//        }
-//    };
-
     final Map<String, EnumInfo> enumCacheMap = new ConcurrentHashMap<>();
 
     @GetMapping("")
-    @Operation(summary = "枚举列表",description = "一次性返回所有的枚举")
+    @Operation(summary = "枚举列表", description = "一次性返回所有的枚举")
     public ApiResp<Map<String, EnumInfo>> enums() {
 
         synchronized (enumCacheMap) {

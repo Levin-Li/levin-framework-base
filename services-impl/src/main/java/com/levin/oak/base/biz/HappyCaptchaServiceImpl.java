@@ -1,76 +1,47 @@
 package com.levin.oak.base.biz;
 
 import com.levin.oak.base.ModuleOption;
-import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.ramostear.captcha.HappyCaptcha;
 import com.ramostear.captcha.core.Captcha;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RMapCache;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
-import java.util.concurrent.TimeUnit;
+import java.io.ByteArrayOutputStream;
+import java.io.Serializable;
+import java.util.Map;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
-@Service(PLUGIN_PREFIX + "HappyCaptchaService")
+//@Service(PLUGIN_PREFIX + "HappyCaptchaService")
+@DubboService
 @ConditionalOnClass({HappyCaptcha.class, RedissonClient.class})
 @ConditionalOnMissingBean(CaptchaService.class)
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "HappyCaptchaService", matchIfMissing = true)
 @Slf4j
 @CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "HappyCaptchaService"})
 @Primary
-public class HappyCaptchaServiceImpl implements CaptchaService {
-
-    private static final String CACHE_NAME = HappyCaptchaServiceImpl.class.getName();
-
-    @Autowired
-    RedissonClient redissonClient;
-
-    RMapCache<Object, Object> mapCache = null;
-
-    @Autowired
-    FrameworkProperties frameworkProperties;
-
-    @PostConstruct
-    void init() {
-        mapCache = redissonClient.getMapCache(CACHE_NAME);
-    }
-
+public class HappyCaptchaServiceImpl extends AbstractCaptchaService implements CaptchaService {
 
     /**
-     * 生成图片验证码
+     * 填充验证码
      *
-     * @param request
-     * @param response
-     * @param tenantId
-     * @param appId
-     * @param account
-     * @return
+     * @param code
+     * @param genParams
      */
-    @SneakyThrows
     @Override
-    public String genCode(HttpServletRequest request, HttpServletResponse response, String tenantId, String appId, String account) {
+    protected void fillCode(Code code, Map<String, ? extends Serializable> genParams) {
 
-        Assert.hasText(account, "帐号不能为空");
-        final String prefix = String.join("|", tenantId, appId, account);
-
-        String w = request.getParameter("w");
-        String h = request.getParameter("h");
+        String w = genParams != null ? ((Map) genParams).getOrDefault("w", "").toString() : null;
+        String h = genParams != null ? ((Map) genParams).getOrDefault("h", "").toString() : null;
 
         Captcha captcha = new Captcha();
 
@@ -86,41 +57,13 @@ public class HappyCaptchaServiceImpl implements CaptchaService {
 
         // captcha.setFont(Fonts.getInstance().defaultFont());
 
-        String captchaCode = captcha.getCaptchaCode();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        captcha.render(out);
 
-        response.setContentType("image/gif");
-        response.setHeader("Pragma", "No-cache");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setDateHeader("Expires", 0L);
-        request.getSession().setAttribute("captchaCode", captchaCode);
+        code.setCode(captcha.getCode())
+                .setImgData(out.toByteArray())
+                .setContentType("image/gif");
 
-        captcha.render(response.getOutputStream());
-
-        mapCache.fastPut(prefix + captchaCode.toLowerCase(), System.currentTimeMillis(),
-                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
-
-        log.debug("gen code:" + captchaCode);
-
-        return captchaCode;
     }
 
-    /**
-     * 验证
-     *
-     * @param code
-     * @return
-     */
-    @Override
-    public boolean verification(String tenantId, String appId, String account, String code) {
-
-        Assert.hasText(account, "帐号不能为空");
-        Assert.hasText(code, "验证码不能为空");
-
-        final String prefix = String.join("|", tenantId, appId, account);
-
-        Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
-        //小余1分钟
-        return putTime != null && (System.currentTimeMillis() - putTime)
-                < frameworkProperties.getVerificationCodeDurationOfMinutes() * 60 * 1000L;
-    }
 }

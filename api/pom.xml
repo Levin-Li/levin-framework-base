@@ -118,6 +118,19 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--  文档   https://spring-file-storage.xuyanwu.cn/  -->
+        <dependency>
+            <groupId>cn.xuyanwu</groupId>
+            <artifactId>spring-file-storage</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 

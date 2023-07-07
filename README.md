@@ -34,6 +34,7 @@
 6、支持Amis前端
 
 7、支持常见的OSS，短信和支付基本商业业务
+   https://spring-file-storage.xuyanwu.cn/#/ 
 
 #### 框架配置文件
  

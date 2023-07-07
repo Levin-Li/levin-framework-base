@@ -11,11 +11,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -39,7 +37,7 @@ public class SmsCodeServiceImpl
     FrameworkProperties frameworkProperties;
 
     @Autowired(required = false)
-    SmsSender smsSender;
+    SmsSendService smsSender;
 
     RMapCache<String, Object> mapCache = null;
 
@@ -49,7 +47,7 @@ public class SmsCodeServiceImpl
         mapCache = redissonClient.getMapCache(CACHE_NAME);
 
         if (smsSender == null) {
-            log.warn("未发现短信发送服务：" + SmsSender.class.getName());
+            log.warn("未发现短信发送服务：" + SmsSendService.class.getName());
         }
     }
 

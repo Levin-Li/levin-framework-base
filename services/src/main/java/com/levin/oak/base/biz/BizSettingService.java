@@ -30,6 +30,7 @@ import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Setting.*;
 
 import java.util.Date;
+import java.util.function.Supplier;
 ////////////////////////////////////
 
 /**
@@ -41,6 +42,7 @@ import java.util.Date;
 
 @Tag(name = E_Setting.BIZ_NAME + "-业务服务", description = "")
 public interface BizSettingService {
+
     /**
      * 更新系统设置
      *
@@ -58,5 +60,17 @@ public interface BizSettingService {
      * @param code
      * @return
      */
-    String getValue(String tenantId, String code);
+    default String getValue(String tenantId, String code) {
+        return getValue(tenantId, code, null);
+    }
+
+    /**
+     * 获取系统设置
+     *
+     * @param tenantId
+     * @param code
+     * @return
+     */
+    String getValue(String tenantId, String code, Supplier<SettingInfo> supplierForCreateIfNotaExist);
+
 }
