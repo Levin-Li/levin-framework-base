@@ -61,14 +61,14 @@ public class ModuleVariableResolverConfigurer
                 new VariableResolver() {
                     @Override
                     public boolean isSupported(String name) {
-                        return name.startsWith("env:");
+                        return name.toLowerCase().startsWith("env:");
                     }
 
                     @Override
                     public <T> ValueHolder<T> resolve(String key, T originalValue, boolean throwExWhenNotFound, boolean isRequireNotNull, Type... expectTypes) throws VariableNotFoundException {
 
                         if (!isSupported(key)) {
-                            return ValueHolder.notValue();
+                            return ValueHolder.notValue(key);
                         }
 
                         key = key.substring(4);
