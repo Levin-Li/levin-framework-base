@@ -5,6 +5,7 @@ import com.levin.commons.rbac.Permission;
 import org.springframework.lang.NonNull;
 import org.springframework.util.StringUtils;
 
+import javax.validation.constraints.NotNull;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
@@ -59,6 +60,22 @@ public interface RbacService {
     default Map<String, Object> getAuthorizeContext() {
         return Collections.emptyMap();
     }
+
+//    /**
+//     * 获取用户的权限列表
+//     *
+//     * @param loginId
+//     * @return
+//     */
+//    List<String> getPermissionList(@NotNull String loginId);
+//
+//    /**
+//     * 获取用户的角色列表
+//     *
+//     * @param loginId
+//     * @return
+//     */
+//    List<String> getRoleList(@NotNull String loginId);
 
     /**
      * 当前用户是否能给目标用户分配指定的角色

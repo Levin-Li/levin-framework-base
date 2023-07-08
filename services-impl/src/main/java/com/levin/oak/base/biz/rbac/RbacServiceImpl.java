@@ -17,6 +17,7 @@ import com.levin.oak.base.services.BaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
@@ -59,7 +60,8 @@ public class RbacServiceImpl extends BaseService implements RbacService {
     @Autowired
     AuthService authService;
 
-    @Autowired
+//    @Autowired
+    @DubboReference
     BizRoleService bizRoleService;
 
     final ContextHolder<String, Res.Action> actionContextHolder = ContextHolder.buildContext(true);
