@@ -1,14 +1,10 @@
 package com.levin.oak.base;
 
 import static com.levin.oak.base.ModuleOption.*;
-import static com.levin.oak.base.entities.EntityConst.*;
 
-import com.levin.commons.dao.DaoContext;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.InjectVarService;
-//import com.levin.commons.dao.DaoContext;
-//import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.support.InjectConsts;
@@ -24,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -41,11 +38,11 @@ import java.util.Map;
  */
 
 //默认不启用
-//@Service(PLUGIN_PREFIX + "ModuleWebInjectVarService")
+@Service(PLUGIN_PREFIX + "ModuleWebInjectVarService")
 @ConditionalOnMissingBean({InjectVarService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleWebInjectVarService", matchIfMissing = true)
 @Slf4j
-public class ModuleWebInjectVarServiceImpl implements InjectVarService {
+public class ModuleWebInjectVarService implements InjectVarService {
 
     public static final RbacUserInfo anonymous = new RbacUserInfo() {
         @Override
@@ -169,9 +166,6 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
         final Map<String, Object> ctx = builder.build();
 
         result = ctx;
-
-        //设置注入变量到Dao上下文中
-        DaoContext.threadContext.putAll(ctx);
 
         //缓存到请求对象重
         httpServletRequest.setAttribute(INJECT_VAR_CACHE_KEY, result);
