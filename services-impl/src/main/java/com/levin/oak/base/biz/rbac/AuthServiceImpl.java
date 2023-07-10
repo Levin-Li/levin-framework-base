@@ -5,6 +5,7 @@ import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.PhoneUtil;
+import cn.hutool.core.util.StrUtil;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
@@ -21,6 +22,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.BaseService;
 import com.levin.oak.base.services.appclient.req.CreateAppClientReq;
 import com.levin.oak.base.services.menures.MenuResService;
+import com.levin.oak.base.services.org.req.CreateOrgReq;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.role.req.CreateRoleReq;
 import com.levin.oak.base.services.tenant.TenantService;
@@ -58,7 +60,6 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
  * 认证服务
  *
  * @todo 分离web相关部分
- *
  */
 
 @Slf4j
@@ -317,7 +318,7 @@ public class AuthServiceImpl
     @Override
     public void logout() {
         StpUtil.logout();
-       // invalidate(StpUtil.getTokenValue());
+        // invalidate(StpUtil.getTokenValue());
     }
 
     /**
@@ -330,7 +331,7 @@ public class AuthServiceImpl
 //    @Override
     public UserInfo auditUser(UserInfo user) throws AuthorizationException {
 
-        Assert.notNull(user,"1帐号不存在");
+        Assert.notNull(user, "1帐号不存在");
 
         if (!user.getEnable()
                 || !User.State.Normal.equals(user.getState())) {
@@ -478,46 +479,46 @@ public class AuthServiceImpl
             RbacUtils.getMenuItemByController(context, plugin.getPackageName(), EntityConst.QUERY_ACTION)
                     .stream().filter(Objects::nonNull).forEach(menuItem -> {
 
-                final int no = index.incrementAndGet();
+                        final int no = index.incrementAndGet();
 
-                final String path = menuItem.getPath().replace("/api/", "/admin/");
+                        final String path = menuItem.getPath().replace("/api/", "/admin/");
 
-                //创建菜单
-                log.info("创建菜单{} - 插件[ {} ][ {} --> {}]", no, plugin.getId(), menuItem.getName(), path);
+                        //创建菜单
+                        log.info("创建菜单{} - 插件[ {} ][ {} --> {}]", no, plugin.getId(), menuItem.getName(), path);
 
-                simpleDao.create(
-                        simpleDao.copy(menuItem,
-                                new MenuRes()
-                                        .setPath(path)
+                        simpleDao.create(
+                                simpleDao.copy(menuItem,
+                                        new MenuRes()
+                                                .setPath(path)
 //                                        .setIcon(defaultIcon)
-                                        .setParentId(pluginRootMenu.getId()),
-                                1,
-                                E_MenuRes.parentId,
-                                E_MenuRes.children,
-                                E_MenuRes.icon,
-                                E_MenuRes.parent,
-                                E_MenuRes.path)
-                );
+                                                .setParentId(pluginRootMenu.getId()),
+                                        1,
+                                        E_MenuRes.parentId,
+                                        E_MenuRes.children,
+                                        E_MenuRes.icon,
+                                        E_MenuRes.parent,
+                                        E_MenuRes.path)
+                        );
 
-                //创建默认页面
-                log.info("创建页面{} - 插件[ {} ][ {} --> {}]", no, plugin.getId(), menuItem.getName(), path);
+                        //创建默认页面
+                        log.info("创建页面{} - 插件[ {} ][ {} --> {}]", no, plugin.getId(), menuItem.getName(), path);
 
-                simpleDao.create(new SimplePage()
-                                .setType(SimplePage.Type.json.name())
-                                .setCategory("amis")
-                                .setGroupName("管理后台页面|" + plugin.getName())
-                                .setPath(path)
-                                //设置访问需要的权限
-                                .setRequireAuthorizations(menuItem.getRequireAuthorizations())
+                        simpleDao.create(new SimplePage()
+                                        .setType(SimplePage.Type.json.name())
+                                        .setCategory("amis")
+                                        .setGroupName("管理后台页面|" + plugin.getName())
+                                        .setPath(path)
+                                        //设置访问需要的权限
+                                        .setRequireAuthorizations(menuItem.getRequireAuthorizations())
 
 //                        .setIcon(defaultIcon)
-                                .setContent(AmisUtils.readAdminClassPathResource(path))
-                                .setDomain(plugin.getPackageName())
-                                .setName(menuItem.getName())
-                                .setRemark("Amis默认页面")
-                );
+                                        .setContent(AmisUtils.readAdminClassPathResource(path))
+                                        .setDomain(plugin.getPackageName())
+                                        .setName(menuItem.getName())
+                                        .setRemark("Amis默认页面")
+                        );
 
-            });
+                    });
         }
     }
 
@@ -571,12 +572,12 @@ public class AuthServiceImpl
                     .setEditable(false)
                     .setOrgDataScope(Role.OrgDataScope.All)
                     .setPermissionList(Collections.singletonList(
-                            new ResPermission()
-                                    .setDomain("*")
-                                    .setType("*")
-                                    .setRes("*")
-                                    .setAction("*")
-                                    .toString()
+                                    new ResPermission()
+                                            .setDomain("*")
+                                            .setType("*")
+                                            .setRes("*")
+                                            .setAction("*")
+                                            .toString()
                             )
                     )
             );
@@ -651,6 +652,18 @@ public class AuthServiceImpl
         }
 
         /////////////////////////////////////////////////////////////
+        String orgId = simpleDao.selectFrom(Org.class)
+                .select(E_Org.id)
+                .isNull(E_Org.parentId)
+                .eq(E_Org.tenantId, tenantInfo.getId())
+                .findUnique();
+
+        if (StrUtil.isBlank(orgId)) {
+            orgId = simpleDao.create(new CreateOrgReq()
+                    .setName(tenantInfo.getName())
+                    .setTenantId(tenantInfo.getId())
+            );
+        }
 
         user = simpleDao.selectFrom(User.class)
                 .eq(E_User.tenantId, tenantInfo.getId())
@@ -658,6 +671,8 @@ public class AuthServiceImpl
                 .findOne();
 
         if (user == null) {
+
+
             simpleDao.create(new CreateUserReq()
                     .setEmail("admin")
                     .setTelephone("18095279527")
@@ -665,7 +680,9 @@ public class AuthServiceImpl
                     .setName("管理员")
                     .setStaffNo("9999")
                     .setRoleList(Collections.singletonList(RbacRoleObject.ADMIN_ROLE))
+                    .setOrgId(orgId)
                     .setTenantId(tenantInfo.getId())
+
             );
         }
 
