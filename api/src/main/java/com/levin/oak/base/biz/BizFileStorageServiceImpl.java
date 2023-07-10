@@ -50,7 +50,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
 @Service(PLUGIN_PREFIX + "BizFileStorageService")
-//@ConditionalOnClass({FileStorageService.class})
+@ConditionalOnClass({FileStorageService.class})
 //@ConditionalOnMissingBean({BizFileStorageService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizFileStorageService", matchIfMissing = true)
 @Slf4j
