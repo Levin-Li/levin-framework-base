@@ -22,7 +22,7 @@ import java.util.Map;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 //@Service(PLUGIN_PREFIX + "DefaultCaptchaService")
-@DubboService
+//@DubboService
 @ConditionalOnClass({CaptchaUtil.class, RedissonClient.class})
 @ConditionalOnMissingBean(CaptchaService.class)
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "DefaultCaptchaService", matchIfMissing = true)
@@ -35,15 +35,8 @@ public class DefaultCaptchaServiceImpl extends AbstractCaptchaService implements
     @PostConstruct
     @Override
     public void init() {
-
         super.init();
-
-        iCaptcha = CaptchaUtil.createCircleCaptcha(200, 100, frameworkProperties.getVerificationCodeLen(), 20);
-
-        //首次调用比较慢
-        iCaptcha.createCode();
     }
-
 
     /**
      * 填充验证码
@@ -53,6 +46,10 @@ public class DefaultCaptchaServiceImpl extends AbstractCaptchaService implements
      */
     @Override
     protected void fillCode(Code code, Map<String, ? extends Serializable> genParams) {
+
+        if (iCaptcha == null) {
+            iCaptcha = CaptchaUtil.createCircleCaptcha(200, 100, frameworkProperties.getVerificationCodeLen(), 20);
+        }
 
         String w = genParams != null ? ((Map) genParams).getOrDefault("w", "").toString() : null;
         String h = genParams != null ? ((Map) genParams).getOrDefault("h", "").toString() : null;
