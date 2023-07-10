@@ -40,6 +40,8 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 @Configuration(PLUGIN_PREFIX + "ModuleStarterConfiguration")
 @Slf4j
 
+@EnableConfigurationProperties({FrameworkProperties.class})
+
 // Spring data jpa scan，jpa querydsl entity class ...
 @EntityScan({PACKAGE_NAME})
 
@@ -54,8 +56,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 // Dubbo 扫描
 @DubboComponentScan(basePackages = {PACKAGE_NAME})
-
-@EnableConfigurationProperties({FrameworkProperties.class})
 
 public class ModuleStarterConfiguration {
 

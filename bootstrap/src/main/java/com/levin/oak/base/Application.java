@@ -26,6 +26,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import org.apache.dubbo.config.spring.context.annotation.*;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.lang.reflect.Type;
@@ -40,12 +42,10 @@ import java.util.stream.Stream;
 @EnableScheduling
 @EnableCaching
 @EnableAsync
+@EnableDubboConfig
 public class Application {
 
     public static void main(String... args) {
-
-        boolean b = Stream.of(args).allMatch(arg -> arg.length() > 0);
-
         SpringApplication.run(Application.class, args);
     }
 
