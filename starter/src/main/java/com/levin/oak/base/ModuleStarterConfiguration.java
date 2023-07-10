@@ -45,17 +45,17 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 // Spring data jpa scan，jpa querydsl entity class ...
 @EntityScan({PACKAGE_NAME})
 
-// Spring 扫描
-@ComponentScan({PACKAGE_NAME})
-
 // 自定义注解接口 扫描
 @ProxyBeanScan(basePackages = {PACKAGE_NAME}, scanType = EntityRepository.class, factoryBeanClass = RepositoryFactoryBean.class)
 
 // FeignClients 扫描
 @EnableFeignClients({PACKAGE_NAME})
 
-// Dubbo 扫描
+// Dubbo 扫描，会重复 Spring 扫描并且不会有刷新事件
 @DubboComponentScan(basePackages = {PACKAGE_NAME})
+
+// Spring 扫描
+@ComponentScan({PACKAGE_NAME})
 
 public class ModuleStarterConfiguration {
 

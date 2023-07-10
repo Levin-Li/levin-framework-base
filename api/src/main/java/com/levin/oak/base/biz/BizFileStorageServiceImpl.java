@@ -50,11 +50,10 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
 @Service(PLUGIN_PREFIX + "BizFileStorageService")
-@ConditionalOnClass({FileStorageService.class})
-@ConditionalOnMissingBean({BizFileStorageService.class}) //默认只有在无对应服务才启用
+//@ConditionalOnClass({FileStorageService.class})
+//@ConditionalOnMissingBean({BizFileStorageService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizFileStorageService", matchIfMissing = true)
 @Slf4j
-
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = "文件存储服务", description = "支持OSS，COS，S3等云服务")

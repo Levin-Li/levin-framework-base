@@ -71,8 +71,9 @@ public class Org
         Normal,
         @Schema(title = "冻结")
         Freeze,
+
         @Schema(title = "注销")
-        Cancellation,
+        canceled,
     }
 
     @Schema(title = "组织类型")
@@ -87,8 +88,8 @@ public class Org
         Department,
         @Schema(title = "小组")
         Group,
-        @Schema(title = "其它")
-        Other,
+        @Schema(title = "临时组织")
+        TempOrg,
     }
 
     @Id
@@ -145,7 +146,7 @@ public class Org
     protected String category;
 
     @Column(nullable = false)
-    @Schema(title = "是否外部机构",description = "是否外部机构，是相对于上级节点来说")
+    @Schema(title = "是否外部机构", description = "是否外部机构，是相对于上级节点来说")
     protected Boolean isExternal;
 
     //////////////////////////////////////////////////////////////////////
@@ -185,6 +186,14 @@ public class Org
 
         if (state == null) {
             state = State.Normal;
+        }
+
+        if (isExternal == null) {
+            isExternal = false;
+        }
+
+        if(category == null){
+            category="";
         }
 
     }

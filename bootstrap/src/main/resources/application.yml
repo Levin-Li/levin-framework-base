@@ -96,7 +96,7 @@ dubbo:
     port: -1
     ext-protocol: dubbo,
   registry:
-#    address: zookeeper://${zookeeper.address:127.0.0.1}:2181
+    address: #zookeeper://${zookeeper.address:127.0.0.1}:2181
 
 #日志配置
 logging:

@@ -537,7 +537,7 @@ public class AuthServiceImpl
         if (tenantInfo == null) {
 
             String id = tenantService.create(new CreateTenantReq()
-                    .setName("测试租户")
+                    .setName("默认租户")
                     .setRemark("支持本地地址")
                     .setDomainList(Arrays.asList("127.0.0.1", "localhost"))
             );
@@ -659,10 +659,13 @@ public class AuthServiceImpl
                 .findUnique();
 
         if (StrUtil.isBlank(orgId)) {
-            orgId = simpleDao.create(new CreateOrgReq()
+            Org org  = simpleDao.create(new CreateOrgReq()
                     .setName(tenantInfo.getName())
+                    .setType(Org.Type.LegalPerson)
                     .setTenantId(tenantInfo.getId())
             );
+
+            orgId = org.getId();
         }
 
         user = simpleDao.selectFrom(User.class)
@@ -671,7 +674,6 @@ public class AuthServiceImpl
                 .findOne();
 
         if (user == null) {
-
 
             simpleDao.create(new CreateUserReq()
                     .setEmail("admin")
