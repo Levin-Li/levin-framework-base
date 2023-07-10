@@ -49,8 +49,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-//生成的控制器默认不开启，请手动取消注释
-//@RestController(PLUGIN_PREFIX + "OrgController")
+//生成的控制器
+@RestController(PLUGIN_PREFIX + "OrgController")
 @RequestMapping(API_PATH + "Org") //org
 
 @Slf4j
@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 机构控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[0bdcf631372310be433ff2d9ef62fff3], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月10日 下午5:46:47, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[c53fe1d42abd4165c8dd90acaca9581c], 请不要修改和删除此行内容。
  */
 public class OrgController extends BaseController{
 

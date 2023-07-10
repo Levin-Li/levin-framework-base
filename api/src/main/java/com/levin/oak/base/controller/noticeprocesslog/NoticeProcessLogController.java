@@ -49,8 +49,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-//生成的控制器默认不开启，请手动取消注释
-//@RestController(PLUGIN_PREFIX + "NoticeProcessLogController")
+//生成的控制器
+@RestController(PLUGIN_PREFIX + "NoticeProcessLogController")
 @RequestMapping(API_PATH + "NoticeProcessLog") //noticeprocesslog
 
 @Slf4j
@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 通知处理日志控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[6204f939fb6d9c9c3e167e0e6e9df0ed], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月10日 下午5:46:47, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[d283e5902a272798e1cc15602385ad38], 请不要修改和删除此行内容。
  */
 public class NoticeProcessLogController extends BaseController{
 

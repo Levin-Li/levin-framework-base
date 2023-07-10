@@ -49,8 +49,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-//生成的控制器默认不开启，请手动取消注释
-//@RestController(PLUGIN_PREFIX + "SimpleApiController")
+//生成的控制器
+@RestController(PLUGIN_PREFIX + "SimpleApiController")
 @RequestMapping(API_PATH + "SimpleApi") //simpleapi
 
 @Slf4j
@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 简单动态接口控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[65d82148cc9a1ea992db20db4bd3ae52], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月10日 下午5:46:46, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[64efdb8d7d0494efe7a0637cf4677739], 请不要修改和删除此行内容。
  */
 public class SimpleApiController extends BaseController{
 

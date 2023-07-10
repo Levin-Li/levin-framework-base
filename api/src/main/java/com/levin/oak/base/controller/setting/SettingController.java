@@ -49,8 +49,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-//生成的控制器默认不开启，请手动取消注释
-//@RestController(PLUGIN_PREFIX + "SettingController")
+//生成的控制器
+@RestController(PLUGIN_PREFIX + "SettingController")
 @RequestMapping(API_PATH + "Setting") //setting
 
 @Slf4j
@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 系统设置控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[8982e149a01fc7927353e2e23b8a04a4], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月10日 下午5:46:47, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[7c853518366d181468efabba5d7c1f0c], 请不要修改和删除此行内容。
  */
 public class SettingController extends BaseController{
 
