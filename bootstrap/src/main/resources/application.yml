@@ -87,6 +87,17 @@ spring:
       date-time: yyyy-MM-dd HH:mm:ss
       time: HH:mm:ss
 
+#dubbo 配置
+dubbo:
+  application:
+    name: dubbo-node
+  protocol:
+    name: tri
+    port: -1
+    ext-protocol: dubbo,
+  registry:
+#    address: zookeeper://${zookeeper.address:127.0.0.1}:2181
+
 #日志配置
 logging:
   level:
