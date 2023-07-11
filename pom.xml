@@ -50,7 +50,10 @@
 
         <maven.test.skip>false</maven.test.skip>
         <maven.javadoc.skip>true</maven.javadoc.skip>
-        <maven.source.skip>true</maven.source.skip>
+
+
+<!--        <maven.source.skip>false</maven.source.skip> -->
+<!--        <maven.source.attach>true</maven.source.attach> -->
 
         <sa-token.version>1.34.0</sa-token.version>
         <jfinal-enjoy.version>4.9.16</jfinal-enjoy.version>
@@ -78,7 +81,6 @@
 
         <mysql-driver.version>8.0.32</mysql-driver.version>
 
-        <maven-source-plugin.attach>true</maven-source-plugin.attach>
         <maven-jar-plugin.addMavenDescriptor>false</maven-jar-plugin.addMavenDescriptor>
 
         <spring-boot.repackage-not-single-jar>false</spring-boot.repackage-not-single-jar>
@@ -570,6 +572,7 @@
 
     <build>
 
+
         <resources>
             <!--   过滤SpringBoot profile文件   -->
             <resource>
@@ -595,6 +598,18 @@
         </resources>
 
         <plugins>
+
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-source</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
             <plugin>
                 <groupId>${levin.simple-dao.groupId}</groupId>

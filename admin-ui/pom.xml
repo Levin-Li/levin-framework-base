@@ -15,7 +15,8 @@
     <packaging>jar</packaging>
 
     <properties>
-
+        <maven.source.skip>true</maven.source.skip>
+<!--        <maven.source.attach>false</maven.source.attach> -->
     </properties>
 
     <repositories>
