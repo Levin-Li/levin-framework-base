@@ -64,7 +64,7 @@ import java.util.Date;
  */
 
 @DubboService
-//@Service(PLUGIN_PREFIX + "BizSettingServiceImpl")
+@Service(PLUGIN_PREFIX + "BizSettingServiceImpl")
 
 @ConditionalOnMissingBean({BizSettingService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizSettingServiceImpl", matchIfMissing = true)

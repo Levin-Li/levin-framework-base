@@ -24,6 +24,7 @@ import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.entities.Setting;
 import com.levin.oak.base.services.setting.SettingService;
 import com.levin.oak.base.services.setting.info.SettingInfo;
+import com.levin.oak.base.services.setting.req.CreateSettingReq;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -65,6 +66,10 @@ public class BizFileStorageServiceImpl
 
     @Autowired
     FrameworkProperties frameworkProperties;
+
+
+    @DubboReference
+    SettingService settingService;
 
     @DubboReference
     BizSettingService bizSettingService;
@@ -108,9 +113,18 @@ public class BizFileStorageServiceImpl
         fileStorageService.setTikaFactory(tikaFactory);
 
         log.info("文件存储服务初始完成");
-
     }
 
+    protected Map<String, Object> getSetting(String tenantId, String appId) {
+
+        String value = bizSettingService.getValue(tenantId, getSettingCode(tenantId, appId));
+
+        return (Map<String, Object>) (StringUtils.hasText(value) ? gson.fromJson(value, Map.class) : Collections.emptyMap());
+    }
+
+    private String getSettingCode(String tenantId, String appId) {
+        return CFG_CODE + (StringUtils.hasText(appId) ? "|" + appId : "");
+    }
 
     /**
      * 获取文件存储器
@@ -122,6 +136,12 @@ public class BizFileStorageServiceImpl
     protected FileStorage getFileStorage(String tenantId, String appId) {
 
         Map<String, Object> setting = getSetting(tenantId, appId);
+
+        if (setting == null || setting.isEmpty()) {
+            //创建默认配置
+            settingService.create(BeanUtil.copyProperties(newDefaultConfig(getSettingCode(tenantId, appId)), CreateSettingReq.class));
+            setting = getSetting(tenantId, appId);
+        }
 
         String fileStorageType = (String) setting.get("fileStorageType");
 
@@ -138,38 +158,21 @@ public class BizFileStorageServiceImpl
         return BeanUtil.copyProperties(setting, implType);
     }
 
-    /**
-     * 获取配置信息
-     *
-     * @param tenantId
-     * @param appId
-     * @return
-     */
-    protected Map<String, Object> getSetting(String tenantId, String appId) {
 
-        if (!StringUtils.hasText(appId)) {
-            appId = "";
-        }
+    private static SettingInfo newDefaultConfig(String code) {
 
-        String code = CFG_CODE + "|" + appId;
-
-        String value = bizSettingService.getValue(tenantId, code, () -> {
-                    Map<String, Object> config = MapUtil.builder("ref_doc", (Object) "Json格式，具体配置参考文档：https://spring-file-storage.xuyanwu.cn/")
-                            .put("fileStorageType", "AliyunOss")
-                            .build();
-                    return new SettingInfo().setCategoryName(CFG_CODE)
-                            .setCode(code)
-                            .setValueType(Setting.ValueType.Json)
-                            .setInputPlaceholder("Json格式,fileStorageType属性配置通道类型")
-                            .setValueContent(gson.toJson(config))
-                            .setName(CFG_CODE)
-                            .setRemark("内容必须Json格式，fileStorageType 属性必须指定，可选择包括："
-                                    + fileStorageClassMap.keySet()
-                                    + "\n具体配置参考文档：https://spring-file-storage.xuyanwu.cn/");
-                }
-        );
-
-        return (Map<String, Object>) (StringUtils.hasText(value) ? gson.fromJson(value, Map.class) : Collections.emptyMap());
+        Map<String, Object> config = MapUtil.builder("ref_doc", (Object) "Json格式，具体配置参考文档：https://spring-file-storage.xuyanwu.cn/")
+                .put("fileStorageType", "AliyunOss")
+                .build();
+        return new SettingInfo().setCategoryName(CFG_CODE)
+                .setCode(code)
+                .setValueType(Setting.ValueType.Json)
+                .setInputPlaceholder("Json格式,fileStorageType属性配置通道类型")
+                .setValueContent(gson.toJson(config))
+                .setName(CFG_CODE)
+                .setRemark("内容必须Json格式，fileStorageType 属性必须指定，可选择包括："
+                        + fileStorageClassMap.keySet()
+                        + "\n具体配置参考文档：https://spring-file-storage.xuyanwu.cn/");
     }
 
 

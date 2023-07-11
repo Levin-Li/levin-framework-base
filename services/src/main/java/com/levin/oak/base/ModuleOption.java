@@ -33,12 +33,12 @@ public interface ModuleOption {
     /**
      * module name
      */
-    String NAME = "请填写模块名称";
+    String NAME = "基础模块";
 
     /**
      * module desc
      */
-    String DESC = "请填写模块描述";
+    String DESC = "框架基础模块";
 
     /**
      * module package name
@@ -49,7 +49,7 @@ public interface ModuleOption {
      * module id
      */
     String ID = PACKAGE_NAME;
-    
+
     /**
      * module prefix
      */

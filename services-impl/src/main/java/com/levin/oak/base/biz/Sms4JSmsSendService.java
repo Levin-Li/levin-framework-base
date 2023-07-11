@@ -9,6 +9,7 @@ import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.entities.Setting;
 import com.levin.oak.base.services.setting.SettingService;
 import com.levin.oak.base.services.setting.info.SettingInfo;
+import com.levin.oak.base.services.setting.req.CreateSettingReq;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.dromara.sms4j.aliyun.config.AlibabaConfig;
@@ -89,32 +90,31 @@ public class Sms4JSmsSendService
         log.info("短信发送服务启用-" + Sms4JSmsSendService.class.getName());
     }
 
-    protected Map<String, Object> getSmsSetting(String tenantId, String appId) {
+    protected Map<String, Object> getSetting(String tenantId, String appId) {
 
-        if (!StringUtils.hasText(appId)) {
-            appId = "";
-        }
-
-        String code = CFG_CODE + "|" + appId;
-
-        String value = bizSettingService.getValue(tenantId, code, () -> {
-
-                    Map<String, Object> config = MapUtil.builder("ref_doc", (Object) "Json格式，具体配置参考文档：https://wind.kim/doc/supplier/")
-                            .put("channelType", SupplierType.ALIBABA.name())
-                            .build();
-                    return new SettingInfo().setCategoryName(CFG_CODE)
-                            .setCode(code)
-                            .setValueType(Setting.ValueType.Json)
-                            .setInputPlaceholder("Json格式,channelType属性配置通道类型")
-                            .setValueContent(gson.toJson(config))
-                            .setName(CFG_CODE)
-                            .setRemark("内容必须为Json格式，channelType属性配置通道类型：" +
-                                    configClass.keySet()
-                                    + "\n具体配置参考文档：https://wind.kim/doc/supplier/");
-                }
-        );
+        String value = bizSettingService.getValue(tenantId, getSettingCode(tenantId, appId));
 
         return (Map<String, Object>) (StringUtils.hasText(value) ? gson.fromJson(value, Map.class) : Collections.emptyMap());
+    }
+
+    private String getSettingCode(String tenantId, String appId) {
+        return CFG_CODE + (StringUtils.hasText(appId) ? "|" + appId : "");
+    }
+
+    private static SettingInfo newDefaultConfig(String code) {
+
+        Map<String, Object> config = MapUtil.builder("ref_doc", (Object) "Json格式，具体配置参考文档：https://wind.kim/doc/supplier/")
+                .put("channelType", SupplierType.ALIBABA.name())
+                .build();
+        return new SettingInfo().setCategoryName(CFG_CODE)
+                .setCode(code)
+                .setValueType(Setting.ValueType.Json)
+                .setInputPlaceholder("Json格式,channelType属性配置通道类型")
+                .setValueContent(gson.toJson(config))
+                .setName(CFG_CODE)
+                .setRemark("内容必须为Json格式，channelType属性配置通道类型：" +
+                        configClass.keySet()
+                        + "\n具体配置参考文档：https://wind.kim/doc/supplier/");
     }
 
     /**
@@ -135,7 +135,13 @@ public class Sms4JSmsSendService
             appId = "";
         }
 
-        Map<String, Object> smsSetting = getSmsSetting(tenantId, appId);
+        Map<String, Object> smsSetting = getSetting(tenantId, appId);
+
+        if (smsSetting == null || smsSetting.isEmpty()) {
+            //创建默认配置
+            settingService.create(BeanUtil.copyProperties(newDefaultConfig(getSettingCode(tenantId, appId)), CreateSettingReq.class));
+            smsSetting = getSetting(tenantId, appId);
+        }
 
         if (!smsSetting.containsKey("channelType")) {
             SmsFactory.createSmsBlend(SupplierType.ALIBABA).sendMessage(phone, code);
