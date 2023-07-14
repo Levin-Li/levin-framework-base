@@ -214,6 +214,8 @@ public class ModuleWebControllerAspect {
 
     /**
      * 变量注入
+     * <p>
+     * 目前对所有的路径都进行拦截处理
      *
      * @param joinPoint
      * @throws Throwable

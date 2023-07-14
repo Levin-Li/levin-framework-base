@@ -121,6 +121,8 @@ public class AuthServiceImpl
      */
     final ContextHolder<String, List<String>> permissionListThreadCache = ContextHolder.buildThreadContext(false, true);
 
+    final static ThreadLocal<UserInfo> currentUser = new ThreadLocal<>();
+
     @PostConstruct
     public void init() {
         log.info("默认认证服务启用...");
@@ -235,6 +237,8 @@ public class AuthServiceImpl
 
         auditUser(user);
 
+        setCurrentUser(user);
+
         return auth(user.getId(), MapUtils.putFirst("user-agent", req.getUa()).build());
     }
 
@@ -278,9 +282,21 @@ public class AuthServiceImpl
     }
 
 
+    protected void setCurrentUser(UserInfo userInfo) {
+        currentUser.set(userInfo);
+    }
+
     @Override
     public RbacUserInfo<String> getUserInfo() {
-        return getUserInfo(getLoginId());
+
+        UserInfo userInfo = currentUser.get();
+
+        if (userInfo == null) {
+            userInfo = (UserInfo) getUserInfo(getLoginId());
+            currentUser.set(userInfo);
+        }
+
+        return userInfo;
     }
 
     /**
@@ -378,8 +394,6 @@ public class AuthServiceImpl
                     }
 
                     UserInfo userInfo = (UserInfo) getUserInfo(loginId);
-
-                    auditUser(userInfo);
 
                     return bizRoleService.getRolePermissionList(userInfo.getTenantId(), roleList);
                 }
@@ -659,7 +673,7 @@ public class AuthServiceImpl
                 .findUnique();
 
         if (StrUtil.isBlank(orgId)) {
-            Org org  = simpleDao.create(new CreateOrgReq()
+            Org org = simpleDao.create(new CreateOrgReq()
                     .setName(tenantInfo.getName())
                     .setType(Org.Type.LegalPerson)
                     .setTenantId(tenantInfo.getId())

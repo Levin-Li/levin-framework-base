@@ -80,8 +80,24 @@ public class ModuleUiMvcConfigurer implements WebMvcConfigurer {
         //registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
         if (StringUtils.hasText(frameworkProperties.getAdminPath())) {
+
+            //@todo 对 knife4j 的兼容支持
+            //如果是根路径
+            if (UrlPathUtils.safeUrl(frameworkProperties.getAdminPath()).equalsIgnoreCase("/")) {
+
+                log.warn("默认的admin-ui模块占用了根路径，将导致knife4j的默认访问路径/doc.html不可用，请使用/knife4j/doc.html访问。");
+
+                registry.addResourceHandler("/knife4j/doc.html")
+                        .addResourceLocations("classpath:/META-INF/resources/doc.html");
+
+                registry.addResourceHandler("/knife4j/webjars/**")
+                        .addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+            }
+
             registry.addResourceHandler(UrlPathUtils.safeUrl(frameworkProperties.getAdminPath() + "/**"))
                     .addResourceLocations("classpath:/templates" + ADMIN_UI_PATH);
+
         }
 
     }
