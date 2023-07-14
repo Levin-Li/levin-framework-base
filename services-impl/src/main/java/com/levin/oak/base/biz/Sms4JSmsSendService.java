@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.dromara.sms4j.aliyun.config.AlibabaConfig;
 import org.dromara.sms4j.api.SmsBlend;
+import org.dromara.sms4j.api.entity.SmsResponse;
 import org.dromara.sms4j.api.universal.SupplierConfig;
 import org.dromara.sms4j.cloopen.config.CloopenConfig;
 import org.dromara.sms4j.core.factory.SmsFactory;
@@ -103,7 +104,7 @@ public class Sms4JSmsSendService
 
     private static SettingInfo newDefaultConfig(String code) {
 
-        Map<String, Object> config = MapUtil.builder("ref_doc", (Object) "Json格式，具体配置参考文档：https://wind.kim/doc/supplier/")
+        Map<String, Object> config = MapUtil.builder("配置参考文档", (Object) "Json格式，具体配置参考文档：https://wind.kim/doc/supplier/")
                 .put("channelType", SupplierType.ALIBABA.name())
                 .build();
         return new SettingInfo().setCategoryName(CFG_CODE)
@@ -131,6 +132,9 @@ public class Sms4JSmsSendService
     @Override
     public String sendCode(String tenantId, String appId, String phone, String code) {
 
+        Assert.notBlank(phone, "手机号码是必须");
+        Assert.notBlank(code, "验证码是必须的");
+
         if (!StringUtils.hasText(appId)) {
             appId = "";
         }
@@ -143,8 +147,10 @@ public class Sms4JSmsSendService
             smsSetting = getSetting(tenantId, appId);
         }
 
+        SmsResponse smsResponse = null;
+
         if (!smsSetting.containsKey("channelType")) {
-            SmsFactory.createSmsBlend(SupplierType.ALIBABA).sendMessage(phone, code);
+            smsResponse = SmsFactory.createSmsBlend(SupplierType.ALIBABA).sendMessage(phone, code);
         } else {
             String channelType = (String) smsSetting.getOrDefault("channelType", SupplierType.ALIBABA.name());
 
@@ -161,8 +167,19 @@ public class Sms4JSmsSendService
 
             Assert.notNull(type, "通道配置不支持:{}", supplierType);
 
-            supplierType.getProviderFactory().createMultitonSms(newConfig(smsSetting, type)).sendMessage(phone, code);
+            smsResponse = supplierType.getProviderFactory().createMultitonSms(newConfig(smsSetting, type)).sendMessage(phone, code);
         }
+
+        Assert.notNull(smsResponse, "短信发送失败-通道无响应");
+
+        //@todo  发现组件有BUG，腾讯云短信发送失败，仍然提示发送成功。
+        boolean ok = !smsResponse.isSuccess() || !"OK".equalsIgnoreCase(smsResponse.getCode());
+
+        if (ok) {
+            log.warn("短信发送失败，租户：{}，发送配置：{}，返回结果：{}", tenantId, smsSetting, BeanUtil.beanToMap(smsResponse));
+        }
+
+        Assert.isTrue(ok, "短信发送失败,{}-{}", smsResponse.getErrorCode(), smsResponse.getErrMessage());
 
         return code;
     }

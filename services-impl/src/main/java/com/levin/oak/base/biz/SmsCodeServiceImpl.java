@@ -64,9 +64,13 @@ public class SmsCodeServiceImpl
         //使用纳秒随机码
         String code = "" + System.nanoTime();
 
+        Assert.isTrue(frameworkProperties.getVerificationCodeLen() >= 4, "配置的验证长度为不能小于4");
+
         code = code.substring(code.length() - frameworkProperties.getVerificationCodeLen());
 
         final String genCode = code.toLowerCase();
+
+        Assert.hasText(genCode, "生成的验证码为空");
 
         //如果有发送服务
         if (smsSender != null) {
@@ -74,7 +78,7 @@ public class SmsCodeServiceImpl
             String resp = null;
 
             try {
-                resp = smsSender.sendCode(tenantId, appId, phoneNo, code);
+                resp = smsSender.sendCode(tenantId, appId, phoneNo, genCode);
             } catch (Exception e) {
                 resp = e.getMessage();
                 log.error("短信发送失败", e);

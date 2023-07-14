@@ -108,6 +108,10 @@ public class BizFileStorageServiceImpl
             tikaFactory = new DefaultTikaFactory();
         }
 
+        if (aspectList == null) {
+            aspectList = Collections.emptyList();
+        }
+
         fileStorageService.setProperties(new FileStorageProperties());
         fileStorageService.setFileRecorder(fileRecorder);
         fileStorageService.setTikaFactory(tikaFactory);
@@ -161,7 +165,7 @@ public class BizFileStorageServiceImpl
 
     private static SettingInfo newDefaultConfig(String code) {
 
-        Map<String, Object> config = MapUtil.builder("ref_doc", (Object) "Json格式，具体配置参考文档：https://spring-file-storage.xuyanwu.cn/")
+        Map<String, Object> config = MapUtil.builder("配置参考文档", (Object) "Json格式，具体配置参考文档：https://spring-file-storage.xuyanwu.cn/")
                 .put("fileStorageType", "AliyunOss")
                 .build();
         return new SettingInfo().setCategoryName(CFG_CODE)
