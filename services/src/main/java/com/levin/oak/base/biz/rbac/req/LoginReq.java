@@ -74,7 +74,7 @@ public class LoginReq implements AuthReq, ServiceReq {
 
     @Schema(title = "客户端类型", hidden = true)
     @Ignore
-    @InjectVar(InjectConsts.USER_AGENT)
+    @InjectVar(value = InjectConsts.USER_AGENT,isRequired = "false")
     protected String ua;
 
     @Schema(title = "客户端类型", hidden = true)

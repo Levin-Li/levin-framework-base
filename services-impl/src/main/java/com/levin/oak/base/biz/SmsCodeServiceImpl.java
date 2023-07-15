@@ -81,12 +81,12 @@ public class SmsCodeServiceImpl
                 resp = smsSender.sendCode(tenantId, appId, phoneNo, genCode);
             } catch (Exception e) {
                 resp = e.getMessage();
-                log.error("短信发送失败", e);
+                log.error("租户短信发送失败", e);
             }
 
             //如果
             if (!code.equals(resp)) {
-                throw new IllegalStateException("短信发送失败-" + resp);
+                throw new IllegalStateException("短信发送失败");
             }
         } else if (frameworkProperties.isEnableMockSmsSend()) {
             //模拟短信发送

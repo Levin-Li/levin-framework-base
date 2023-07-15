@@ -51,7 +51,7 @@ public class HappyCaptchaServiceImpl extends AbstractCaptchaService implements C
         }
 
         //
-        captcha.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, (int) (captcha.getHeight() * 0.75)));
+        captcha.setFont(new Font(null, Font.PLAIN, (int) (captcha.getHeight() * 0.75)));
 
         captcha.setLength(frameworkProperties.getVerificationCodeLen());
 

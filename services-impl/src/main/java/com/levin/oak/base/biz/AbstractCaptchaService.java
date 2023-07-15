@@ -43,7 +43,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
      * @param code
      * @param genParams
      */
-    protected abstract void fillCode(Code code, Map<String, ?extends Serializable> genParams);
+    protected abstract void fillCode(Code code, Map<String, ? extends Serializable> genParams);
 
     /**
      * 生成验证码
@@ -58,6 +58,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
     public Code genCode(String tenantId, String appId, String account, Map<String, ? extends Serializable> genParams) {
 
         Assert.hasText(account, "帐号不能为空");
+
+        Assert.isTrue(frameworkProperties.getVerificationCodeLen() > 0, "系统图片验证码生成失效-0");
 
         Code code = new Code().setContentType("image/gif");
 
