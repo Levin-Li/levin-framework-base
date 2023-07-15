@@ -54,7 +54,7 @@ public class SmsCodeServiceImpl
     @Override
     public String genAndSendSmsCode(String tenantId, String appId, String account, String phoneNo) {
 
-        Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证码已经禁用");
+        Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证码关闭");
 
         Assert.hasText(account, "帐号不能为空");
         Assert.hasText(phoneNo, "手机号不能为空");
@@ -64,13 +64,17 @@ public class SmsCodeServiceImpl
         //使用纳秒随机码
         String code = "" + System.nanoTime();
 
-        Assert.isTrue(frameworkProperties.getVerificationCodeLen() >= 4, "配置的验证长度为不能小于4");
+        final int codeLen = frameworkProperties.getVerificationCodeLen();
 
-        code = code.substring(code.length() - frameworkProperties.getVerificationCodeLen());
+        Assert.isTrue(codeLen >= 4, "短信验证长度为不能小于4");
+
+        code = code.substring(code.length() - codeLen);
 
         final String genCode = code.toLowerCase();
 
-        Assert.hasText(genCode, "生成的验证码为空");
+        Assert.hasText(genCode, "短信验证码生成失败");
+
+        Assert.isTrue(codeLen == genCode.length(), "短信验证码生成失败-" + codeLen);
 
         //如果有发送服务
         if (smsSender != null) {
