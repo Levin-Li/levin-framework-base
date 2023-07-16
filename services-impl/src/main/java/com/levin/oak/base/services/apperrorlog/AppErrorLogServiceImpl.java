@@ -52,11 +52,11 @@ import java.util.Date;
 /**
  *  应用错误日志-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:29, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[cb05d3a9a3ccc817a571908b8becfcb7], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[96d71ece0ff7d3082340ce3438322fde], 请不要修改和删除此行内容。
  */
 
-//@Service(PLUGIN_PREFIX + "AppErrorLogService")
+@Service(PLUGIN_PREFIX + "AppErrorLogService")
 @DubboService
 
 @ConditionalOnMissingBean({AppErrorLogService.class}) //默认只有在无对应服务才启用

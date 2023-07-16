@@ -3,6 +3,7 @@ package com.levin.oak.base;
 import static com.levin.oak.base.ModuleOption.*;
 
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
+import com.levin.oak.base.biz.BizOrgService;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.InjectVarService;
 import com.levin.commons.rbac.RbacRoleObject;
@@ -42,7 +43,7 @@ import java.util.Map;
 //@ConditionalOnMissingBean(InjectVarService.class) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleWebInjectVarService", matchIfMissing = true)
 @Slf4j
-public class ModuleWebInjectVarService implements InjectVarService {
+public class ModuleWebInjectVarServiceImpl implements InjectVarService {
 
     public static final RbacUserInfo anonymous = new RbacUserInfo() {
         @Override
@@ -110,9 +111,18 @@ public class ModuleWebInjectVarService implements InjectVarService {
 
     @PostConstruct
     public void init() {
+
         log.info("启用模块Web注入服务...");
-        //设置上下文
+
+        //重要逻辑点
+
+        //1、设置上下文
         variableResolverManager.add(VariableInjector.newResolverByMap(() -> Arrays.asList(getInjectVars())));
+
+        //2、动态加入用户相关的动态的会变的数据，如用户能访问的机构列表，用户权限列表
+
+        //@todo 重要待实现
+
     }
 
     /**
@@ -140,6 +150,7 @@ public class ModuleWebInjectVarService implements InjectVarService {
 
         //当前登录用户
         if (baseAuthService.isLogin()) {
+
             //暂时兼容
             //获取登录信息
             UserInfo userInfo = baseAuthService.getUserInfo();
@@ -147,14 +158,25 @@ public class ModuleWebInjectVarService implements InjectVarService {
             builder.put(InjectConsts.USER_ID, userInfo.getId())
                     .put(InjectConsts.USER_NAME, userInfo.getName())
                     .put(InjectConsts.USER, userInfo)
+
                     .put(InjectConsts.IS_SUPER_ADMIN, userInfo.isSuperAdmin())
-                    .put(InjectConsts.IS_TENANT_ADMIN, userInfo.getRoleList() != null && userInfo.getRoleList().contains(RbacRoleObject.ADMIN_ROLE))
+                    .put(InjectConsts.IS_TENANT_ADMIN, userInfo.isTenantAdmin())
+
                     .put(InjectConsts.ORG, userInfo.getOrg())
                     .put(InjectConsts.ORG_ID, userInfo.getOrgId());
 
         } else {
             //匿名用户
-            builder.put(InjectConsts.USER, anonymous);
+            builder.put(InjectConsts.USER_ID, anonymous.getId())
+                    .put(InjectConsts.USER_NAME, anonymous.getName())
+                    .put(InjectConsts.USER, anonymous)
+
+                    .put(InjectConsts.IS_SUPER_ADMIN, false)
+                    .put(InjectConsts.IS_TENANT_ADMIN, false)
+
+                    .put(InjectConsts.ORG, null)
+                    .put(InjectConsts.ORG_ID_LIST, null)
+                    .put(InjectConsts.ORG_ID, null);
         }
 
         //租户信息

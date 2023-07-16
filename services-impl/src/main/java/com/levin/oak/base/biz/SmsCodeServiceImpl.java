@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
-//@Service(PLUGIN_PREFIX + "SmsCodeService")
+@Service(PLUGIN_PREFIX + "SmsCodeService")
 @DubboService
 @ConditionalOnClass({RedissonClient.class})
 @ConditionalOnMissingBean(SmsCodeService.class)

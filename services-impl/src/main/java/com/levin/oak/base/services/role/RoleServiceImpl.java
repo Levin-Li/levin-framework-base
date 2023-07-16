@@ -52,7 +52,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 //@Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-//@Service(PLUGIN_PREFIX + "RoleService")
+@Service(PLUGIN_PREFIX + "RoleService")
 @DubboService
 @ConditionalOnMissingBean({RoleService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "RoleService", matchIfMissing = true)

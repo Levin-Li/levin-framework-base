@@ -32,8 +32,8 @@ import java.util.Date;
 
 /**
  * 访问日志
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[6a8e6f39fde95a49b63af4859da69db2], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[8520f8eb5316e7b123e16c10e5b3ed72], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -84,6 +84,7 @@ public class AccessLogInfo implements Serializable {
     String bizType;
 
 
+    @Size(max = 512)
     @Schema(title = L_requestUri )
     String requestUri;
 

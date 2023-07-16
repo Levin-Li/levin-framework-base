@@ -38,8 +38,8 @@ import java.util.Date;
 
 /**
  *  更新访问日志
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[0297d01f2f732dba217a27180a68ef64], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[95bb99f45b9a2d3b5a662e434067a02f], 请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -88,6 +88,7 @@ public class UpdateAccessLogReq extends MultiTenantOrgReq {
     @Schema(title = L_bizType)
     String bizType;
 
+    @Size(max = 512)
     @Schema(title = L_requestUri)
     String requestUri;
 

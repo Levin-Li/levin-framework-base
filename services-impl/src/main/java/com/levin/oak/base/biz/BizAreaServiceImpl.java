@@ -56,12 +56,12 @@ import java.util.Date;
 /**
  *  区域-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:32, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[961b09391c1612f9bb14452f4abf9729], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:49, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[183921557a13ae1d5265d5792a219f2a], 请不要修改和删除此行内容。
  */
 
+@Service(PLUGIN_PREFIX + "BizAreaServiceImpl")
 @DubboService
-//@Service(PLUGIN_PREFIX + "BizAreaServiceImpl")
 
 @ConditionalOnMissingBean({BizAreaService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizAreaServiceImpl", matchIfMissing = true)

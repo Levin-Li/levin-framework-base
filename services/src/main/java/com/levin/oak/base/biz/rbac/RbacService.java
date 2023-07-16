@@ -1,5 +1,6 @@
 package com.levin.oak.base.biz.rbac;
 
+import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.commons.rbac.Permission;
 import org.springframework.lang.NonNull;
@@ -22,6 +23,19 @@ import java.util.function.Predicate;
  * 3、方法授权检查
  */
 public interface RbacService {
+
+    /**
+     * 超管帐号
+     */
+    String SA_ACCOUNT = "sa";
+
+    /**
+     * 密码加密
+     *
+     * @param pwd
+     * @return
+     */
+    String encryptPassword(String pwd);
 
     /**
      * 获取权限分隔符
@@ -61,21 +75,37 @@ public interface RbacService {
         return Collections.emptyMap();
     }
 
-//    /**
-//     * 获取用户的权限列表
-//     *
-//     * @param loginId
-//     * @return
-//     */
-//    List<String> getPermissionList(@NotNull String loginId);
-//
-//    /**
-//     * 获取用户的角色列表
-//     *
-//     * @param loginId
-//     * @return
-//     */
-//    List<String> getRoleList(@NotNull String loginId);
+    /**
+     * 获取用户信息
+     *
+     * @param userId
+     * @return
+     */
+    RbacUserInfo<String> getUserInfo(Object userId);
+
+    /**
+     * 获取用户的权限列表
+     *
+     * @param userId
+     * @return
+     */
+    List<String> getPermissionList(@NotNull Object userId);
+
+    /**
+     * 获取用户的角色列表
+     *
+     * @param userId
+     * @return
+     */
+    List<String> getRoleList(@NotNull Object userId);
+
+    /**
+     * 获取一个用户有权限访问的组织ID列表
+     *
+     * @param userId
+     * @return
+     */
+    List<String> getCanAcccessOrgIdList(@NotNull Object userId);
 
     /**
      * 当前用户是否能给目标用户分配指定的角色
@@ -85,21 +115,22 @@ public interface RbacService {
      * @param matchErrorConsumer  匹配错误回调 参数1为请求的角色，参数2为没有匹配的权限
      * @return
      */
-    default boolean canAssignRole(Object targetUserId, List<String> requireRoleCodeList
+    default boolean canAssignRole(Object sourceUserId, Object targetUserId, List<String> requireRoleCodeList
             , BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer) {
         return requireRoleCodeList.stream().filter(StringUtils::hasText)
-                .allMatch(requireRoleCode -> canAssignRole(targetUserId, requireRoleCode, matchErrorConsumer));
+                .allMatch(requireRoleCode -> canAssignRole(sourceUserId, targetUserId, requireRoleCode, matchErrorConsumer));
     }
 
     /**
-     * 当前用户是否能给目标用户分配指定的角色
+     * 源用户是否能给目标用户分配指定的角色
      *
+     * @param sourceUserId
      * @param targetUserId
      * @param requireRoleCode
      * @param matchErrorConsumer 匹配错误回调 参数1为请求的角色，参数2为没有匹配的权限
      * @return
      */
-    boolean canAssignRole(Object targetUserId, String requireRoleCode
+    boolean canAssignRole(Object sourceUserId, Object targetUserId, String requireRoleCode
             , BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer);
 
     /**
@@ -110,9 +141,9 @@ public interface RbacService {
      * @param requirePermissionList
      * @return
      */
-    default boolean isAuthorized(BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer,
+    default boolean isAuthorized(Object userId, BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer,
                                  boolean isRequireAllPermission, String... requirePermissionList) {
-        return isAuthorized(isRequireAllPermission, Arrays.asList(requirePermissionList), matchErrorConsumer);
+        return isAuthorized(userId, isRequireAllPermission, Arrays.asList(requirePermissionList), matchErrorConsumer);
     }
 
     /**
@@ -123,7 +154,7 @@ public interface RbacService {
      * @param matchErrorConsumer
      * @return
      */
-    boolean isAuthorized(boolean isRequireAllPermission, List<String> requirePermissionList,
+    boolean isAuthorized(Object userId, boolean isRequireAllPermission, List<String> requirePermissionList,
                          BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer);
 
     /**
@@ -163,12 +194,5 @@ public interface RbacService {
      */
     boolean isAuthorized(List<String> ownerRoleList, List<String> ownerPermissionList, String requirePermission
             , BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer);
-
-    /**
-     * 检查当前用户的方法调用授权
-     *
-     * @param method 控制器或是服务的方法
-     */
-    void checkAuthorize(Object beanOrClass, @NonNull Method method) throws AuthorizationException;
 
 }

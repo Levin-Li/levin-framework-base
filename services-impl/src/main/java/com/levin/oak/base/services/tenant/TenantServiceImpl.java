@@ -54,11 +54,11 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 /**
  *  平台租户-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:28, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[481b5652546b415d25287e0bc638c6b4], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:47, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[611007b59981e776fbfb8a202423ad6d], 请不要修改和删除此行内容。
  */
 
-//@Service(PLUGIN_PREFIX + "TenantService")
+@Service(PLUGIN_PREFIX + "TenantService")
 @DubboService
 
 @ConditionalOnMissingBean({TenantService.class}) //默认只有在无对应服务才启用

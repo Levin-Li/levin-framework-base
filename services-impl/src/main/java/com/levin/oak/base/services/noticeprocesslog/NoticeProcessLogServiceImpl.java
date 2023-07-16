@@ -52,11 +52,11 @@ import java.util.Date;
 /**
  *  通知处理日志-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:31, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[e1fe1d05c55a7c8dd6c5f0917ec4449b], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[a3bbdf19107d64f085109ca4cc89a65b], 请不要修改和删除此行内容。
  */
 
-//@Service(PLUGIN_PREFIX + "NoticeProcessLogService")
+@Service(PLUGIN_PREFIX + "NoticeProcessLogService")
 @DubboService
 
 @ConditionalOnMissingBean({NoticeProcessLogService.class}) //默认只有在无对应服务才启用

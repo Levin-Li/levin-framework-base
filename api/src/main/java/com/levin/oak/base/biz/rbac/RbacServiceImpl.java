@@ -1,35 +1,28 @@
 package com.levin.oak.base.biz.rbac;
 
-
+import cn.hutool.crypto.SecureUtil;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.plugin.Res;
 import com.levin.commons.plugin.ResLoader;
-import com.levin.commons.rbac.*;
+import com.levin.commons.rbac.RbacUserInfo;
+import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.Identifiable;
-import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.commons.service.support.ContextHolder;
-import com.levin.commons.utils.ClassUtils;
 import com.levin.commons.utils.ExpressionUtils;
-import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.biz.BizRoleService;
-import com.levin.oak.base.services.BaseService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import com.levin.oak.base.services.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.expression.BeanFactoryResolver;
-import org.springframework.core.annotation.AnnotatedElementUtils;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
-import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
@@ -41,15 +34,14 @@ import java.util.stream.Stream;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
+/**
+ * 逻辑
+ */
 @Service(PLUGIN_PREFIX + "RbacService")
 @Slf4j
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacService", matchIfMissing = true)
 @ResAuthorize(ignored = true)
-public class RbacServiceImpl extends BaseService implements RbacService {
-
-    static final ContextHolder<Method, ResAuthorize> cache = ContextHolder.buildContext(true);
-
-    final ResAuthorize defaultResAuthorize = getClass().getAnnotation(ResAuthorize.class);
+public class RbacServiceImpl implements RbacService {
 
     @Autowired
     ApplicationContext context;
@@ -57,15 +49,13 @@ public class RbacServiceImpl extends BaseService implements RbacService {
     @Autowired
     PluginManager pluginManager;
 
-    @Autowired
-    AuthService authService;
-
-//    @Autowired
     @DubboReference
     BizRoleService bizRoleService;
 
-    final ContextHolder<String, Res.Action> actionContextHolder = ContextHolder.buildContext(true);
+    @DubboReference
+    UserService userService;
 
+    final ContextHolder<String, Res.Action> actionContextHolder = ContextHolder.buildContext(true);
 
     private static final BiConsumer<String, String> emptyConsumer = (v1, v2) -> {
     };
@@ -75,6 +65,10 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         log.info("默认权限控制服务启用...");
     }
 
+    @Override
+    public String encryptPassword(String pwd) {
+        return StringUtils.hasText(pwd) ? SecureUtil.sha1(pwd) : null;
+    }
 
     /**
      * @param requirePermission
@@ -163,6 +157,35 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         ).orElse(false);
     }
 
+    @Override
+    public RbacUserInfo<String> getUserInfo(Object userId) {
+        return userService.findById((String) userId);
+    }
+
+    @Override
+    public List<String> getPermissionList(Object userId) {
+
+        RbacUserInfo<String> userInfo = getUserInfo(userId);
+
+        List<String> roleList = userInfo.getRoleList();
+
+        if (roleList == null || roleList.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        return bizRoleService.getRolePermissionList(userInfo.getTenantId(), roleList);
+    }
+
+    @Override
+    public List<String> getRoleList(Object userId) {
+        return getUserInfo(userId).getRoleList();
+    }
+
+    @Override
+    public List<String> getCanAcccessOrgIdList(Object userId) {
+        return null;
+    }
+
     /**
      * 当前用户是否能给目标用户分配指定的角色
      *
@@ -172,11 +195,11 @@ public class RbacServiceImpl extends BaseService implements RbacService {
      * @return
      */
     @Override
-    public boolean canAssignRole(Object targetUserId, String requireRoleCode, BiConsumer<String, String> matchErrorConsumer) {
+    public boolean canAssignRole(Object sourceUserId, Object targetUserId, String requireRoleCode, BiConsumer<String, String> matchErrorConsumer) {
 
         // Assert.isTrue(authService.isLogin(), "用户未登录");
 
-        RbacUserInfo<String> userInfo = authService.getUserInfo();
+        RbacUserInfo<String> userInfo = getUserInfo(sourceUserId);
 
         //1、如果是超级管理员，可以分配任何角色
         if (userInfo.isSuperAdmin()) {
@@ -189,7 +212,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
         }
 
         //3、用户全部的权限
-        List<String> ownerPermissionList = authService.getPermissionList(userInfo.getId());
+        List<String> ownerPermissionList = getPermissionList(userInfo.getId());
 
         //4、角色的权限列表
         List<String> requirePermissionList = bizRoleService.getRolePermissionList(userInfo.getTenantId(), requireRoleCode);
@@ -208,11 +231,11 @@ public class RbacServiceImpl extends BaseService implements RbacService {
      * @return
      */
     @Override
-    public boolean isAuthorized(boolean isRequireAllPermission, List<String> requirePermissionList, BiConsumer<String, String> matchErrorConsumer) {
+    public boolean isAuthorized(Object userId, boolean isRequireAllPermission, List<String> requirePermissionList, BiConsumer<String, String> matchErrorConsumer) {
 
         //Assert.isTrue(authService.isLogin(), "用户未登录");
 
-        RbacUserInfo<String> userInfo = authService.getUserInfo();
+        RbacUserInfo<String> userInfo = getUserInfo(userId);
 
         //如果是超级管理员
         if (userInfo.isSuperAdmin()) {
@@ -220,7 +243,7 @@ public class RbacServiceImpl extends BaseService implements RbacService {
             // return true;
         }
 
-        return isAuthorized(userInfo.getRoleList(), authService.getPermissionList(userInfo.getId()),
+        return isAuthorized(userInfo.getRoleList(), getPermissionList(userInfo.getId()),
                 isRequireAllPermission, requirePermissionList, matchErrorConsumer);
     }
 
@@ -355,87 +378,4 @@ public class RbacServiceImpl extends BaseService implements RbacService {
                 : suppliers.parallelStream().anyMatch(Supplier::get);
     }
 
-
-    /**
-     * 检查访问权限
-     *
-     * @return
-     */
-    @Override
-    public void checkAuthorize(Object beanOrClass, @NonNull Method method) throws AuthorizationException {
-
-        if (method == null) {
-            return;
-        }
-
-        Class<?> controllerClass = beanOrClass != null ? (beanOrClass instanceof Class ? (Class) beanOrClass : beanOrClass.getClass())
-                : method.getDeclaringClass();// AopProxyUtils.ultimateTargetClass(method.getDeclaringClass());
-
-        ///////////////////////////////获取 res 和 action 用于权限验证 //////////////////////////////////////////
-        //
-        Tag tag = controllerClass.getAnnotation(Tag.class);
-        Operation operation = method.getAnnotation(Operation.class);
-
-        String res = controllerClass.getSimpleName().replace("Controller", "");
-
-        if (tag != null) {
-            res = Arrays.asList(tag.name(), tag.description())
-                    .stream().filter(StringUtils::hasText).findFirst().orElse(res);
-        }
-
-        String action = method.getName();
-        if (operation != null) {
-            action = Arrays.asList(operation.summary(), operation.operationId(), operation.description())
-                    .stream().filter(StringUtils::hasText).findFirst().orElse(action);
-        }
-        /////////////////////////////// 获取注解 ///////////////////////////////////////////////////
-        ResAuthorize resAuthorize = cache.get(method);
-        //如果没有放入
-        if (resAuthorize == null
-                && !cache.containsKey(method)) {
-
-            resAuthorize = ClassUtils.merge(MapUtils.putFirst(ResPermission.Fields.res, res)
-                            .put(ResPermission.Fields.action, action).build()
-                    //默认条件为不空或是不是空字符串则覆盖
-                    , (k, v) -> v != null && (!(v instanceof CharSequence) || StringUtils.hasText((CharSequence) v))
-
-                    , ResAuthorize.class,
-                    AnnotatedElementUtils.getMergedAnnotation(controllerClass, ResAuthorize.class),
-                    AnnotatedElementUtils.getMergedAnnotation(method, ResAuthorize.class)
-            );
-
-            if (resAuthorize == null) {
-                resAuthorize = defaultResAuthorize;
-            }
-
-            cache.put(method, resAuthorize);
-        }
-
-        if (resAuthorize == null
-                || resAuthorize.ignored()) {
-            return;
-        }
-
-        if (authService.getUserInfo() == null) {
-            throw new AuthorizationException(401, "未登录");
-        }
-
-        if (resAuthorize.onlyRequireAuthenticated()) {
-            return;
-        }
-
-        ///////////////////////// 构建权限检查逻辑的闭包 //////////////////////////////////////
-
-        boolean ok = isAuthorized(
-                String.join(getPermissionDelimiter(), resAuthorize.domain(), resAuthorize.type(), resAuthorize.res()),
-                SimpleResAction.newAction(resAuthorize),
-                authService.getRoleList(authService.getLoginId()),
-                authService.getPermissionList(authService.getLoginId()),
-                getAuthorizeContext()
-        );
-
-        if (!ok) {
-            throw new AuthorizationException(401, "未授权的操作");
-        }
-    }
 }

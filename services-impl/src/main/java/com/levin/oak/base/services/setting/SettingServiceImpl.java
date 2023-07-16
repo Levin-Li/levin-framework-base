@@ -57,7 +57,7 @@ import java.util.Date;
  *  代码生成哈希校验码：[820bdb1bdd5b1a6ebc653f25b29ea502], 请不要修改和删除此行内容。
  */
 
-//@Service(PLUGIN_PREFIX + "SettingService")
+@Service(PLUGIN_PREFIX + "SettingService")
 @DubboService
 
 @ConditionalOnMissingBean({SettingService.class}) //默认只有在无对应服务才启用

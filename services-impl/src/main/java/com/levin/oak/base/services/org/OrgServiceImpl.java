@@ -58,11 +58,11 @@ import java.util.Date;
 /**
  *  机构-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:32, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[b909283c9ac9b1d623a63ef16256196e], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:49, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[e077b74ee4e6889e0600105b8de6bbf3], 请不要修改和删除此行内容。
  */
 
-//@Service(PLUGIN_PREFIX + "OrgService")
+@Service(PLUGIN_PREFIX + "OrgService")
 @DubboService
 
 @ConditionalOnMissingBean({OrgService.class}) //默认只有在无对应服务才启用

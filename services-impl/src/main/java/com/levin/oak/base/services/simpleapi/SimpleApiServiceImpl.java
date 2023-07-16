@@ -55,11 +55,11 @@ import java.util.Date;
 /**
  *  简单动态接口-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:28, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[3bc87908439d55cebbc5bdae90d61b74], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:47, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[0e888e16fcdb65340c26fb93a17951ea], 请不要修改和删除此行内容。
  */
 
-//@Service(PLUGIN_PREFIX + "SimpleApiService")
+@Service(PLUGIN_PREFIX + "SimpleApiService")
 @DubboService
 
 @ConditionalOnMissingBean({SimpleApiService.class}) //默认只有在无对应服务才启用

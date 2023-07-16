@@ -1,7 +1,7 @@
 package com.levin.oak.base;
 
 import com.levin.commons.dao.SimpleDao;
-import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.RbacInitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.Random;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -28,9 +27,6 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
 
     @Autowired
     JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    AuthService authService;
 
     private ApplicationContext applicationContext;
 
@@ -54,9 +50,6 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
 
         Random random = new Random(this.hashCode());
 
-        //@todo 初始化数据
-
-        authService.initData();
 
         log.info("***** {} 数据初始化完成 ******", ModuleOption.ID);
     }

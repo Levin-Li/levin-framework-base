@@ -19,8 +19,8 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[38ce24a216fd8153f7bc4e03d1b5f56a], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:46, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[9e520bf41ae6c968ceb5cbb511a8d09f], 请不要修改和删除此行内容。
  */
 @Schema(title = "多租户查询对象")
 @Data
@@ -50,6 +50,12 @@ public class MultiTenantReq
         return false;
     }
 
+    /**
+     * 设置租户ID
+     * @param tenantId
+     * @return
+     * @param <T>
+     */
     public <T extends MultiTenantReq> T setTenantId(String tenantId) {
         this.tenantId = tenantId;
         return (T) this;

@@ -21,7 +21,7 @@ import java.util.Map;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
-//@Service(PLUGIN_PREFIX + "HappyCaptchaService")
+@Service(PLUGIN_PREFIX + "HappyCaptchaService")
 @DubboService
 @ConditionalOnClass({HappyCaptcha.class, RedissonClient.class})
 @ConditionalOnMissingBean(CaptchaService.class)

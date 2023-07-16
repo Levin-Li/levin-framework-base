@@ -53,11 +53,11 @@ import java.util.Date;
 /**
  *  通知-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:30, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[ea01b433d60dfbc8eeff206c1b543d74], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[4ba791a81f9845609f90939a7979658f], 请不要修改和删除此行内容。
  */
 
-//@Service(PLUGIN_PREFIX + "NoticeService")
+@Service(PLUGIN_PREFIX + "NoticeService")
 @DubboService
 
 @ConditionalOnMissingBean({NoticeService.class}) //默认只有在无对应服务才启用

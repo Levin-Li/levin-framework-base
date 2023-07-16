@@ -2,26 +2,21 @@ package com.levin.oak.base.biz.rbac;
 
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.SimpleAuthService;
+import com.levin.commons.service.exception.AuthorizationException;
+import org.springframework.lang.NonNull;
 import org.springframework.util.StringUtils;
 
-import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.lang.reflect.Method;
+
+import static com.levin.oak.base.biz.rbac.RbacService.SA_ACCOUNT;
+
 
 /**
  * 认证服务
+ * <p>
+ * 务必注意：本接口和当前登录用户有关，实现类必须和使用方在同一个虚拟机中。
  */
 public interface AuthService extends SimpleAuthService<String, String> {
-
-    /**
-     * 超管帐号
-     */
-    String SA_ACCOUNT = "sa";
-
-    /**
-     * 初始化数据
-     */
-    default void initData() {
-    }
 
     /**
      * 是否超级用户帐号
@@ -80,22 +75,6 @@ public interface AuthService extends SimpleAuthService<String, String> {
     <U extends RbacUserInfo<String>> U getUserInfo(String loginId);
 
     /**
-     * 获取用户的权限列表
-     *
-     * @param loginId
-     * @return
-     */
-    List<String> getPermissionList(@NotNull String loginId);
-
-    /**
-     * 获取用户的角色列表
-     *
-     * @param loginId
-     * @return
-     */
-    List<String> getRoleList(@NotNull String loginId);
-
-    /**
      * 用户登出
      */
     void logout();
@@ -115,5 +94,13 @@ public interface AuthService extends SimpleAuthService<String, String> {
      * @return
      */
     String getDeviceType(String ua);
+
+
+    /**
+     * 检查当前用户的方法调用授权
+     *
+     * @param method 控制器或是服务的方法
+     */
+    void checkAuthorize(Object beanOrClass, @NonNull Method method) throws AuthorizationException;
 
 }

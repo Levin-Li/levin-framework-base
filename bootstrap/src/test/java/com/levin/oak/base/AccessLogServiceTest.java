@@ -54,8 +54,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 访问日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[5931e03fc2499e4bc7770104834a2285], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:50, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[a567008b8dafd6e37ee1d2feca9f1d45], 请不要修改和删除此行内容。
  */
 
 //@ActiveProfiles("test")
@@ -109,7 +109,7 @@ public class AccessLogServiceTest {
 
             // req.setBizType("业务类型_1");// 
 
-            // req.setRequestUri("请求URI_1");// 
+            // req.setRequestUri("这是文本512");// 
 
             // req.setRequestMethod("这是文本32");// 
 
@@ -162,7 +162,7 @@ public class AccessLogServiceTest {
         // req.setDiffModifyData("差异修改数据_1");//
         // req.setBizKey("业务主键_1");//
         // req.setBizType("业务类型_1");//
-        // req.setRequestUri("请求URI_1");//
+        // req.setRequestUri("这是文本512");//
         // req.setRequestMethod("这是文本32");//
         // req.setRequestParams("请求参数_1");//
         // req.setHeadInfo("头部信息_1");//
@@ -200,7 +200,7 @@ public class AccessLogServiceTest {
            // req.setDiffModifyData("差异修改数据_1");// 
            // req.setBizKey("业务主键_1");// 
            // req.setBizType("业务类型_1");// 
-           // req.setRequestUri("请求URI_1");// 
+           // req.setRequestUri("这是文本512");// 
            // req.setRequestMethod("这是文本32");// 
            // req.setRequestParams("请求参数_1");// 
            // req.setHeadInfo("头部信息_1");// 

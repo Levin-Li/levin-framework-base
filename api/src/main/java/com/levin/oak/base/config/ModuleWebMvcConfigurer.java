@@ -31,6 +31,10 @@ import java.util.List;
 import static com.levin.oak.base.ModuleOption.API_PATH;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
+
+/**
+ * 配置权限控制，资源拦截等需求
+ */
 @Configuration(PLUGIN_PREFIX + "ModuleWebMvcConfigurer")
 @Slf4j
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "ModuleWebMvcConfigurer", matchIfMissing = true)
@@ -249,8 +253,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         return registration;
     }
-
-
 
 
 }

@@ -1,6 +1,7 @@
 package com.levin.oak.base.biz.rbac;
 
 import com.levin.commons.dao.annotation.order.OrderBy;
+import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.plugin.Res;
@@ -15,7 +16,6 @@ import com.levin.oak.base.biz.rbac.info.ModuleInfo;
 import com.levin.oak.base.biz.rbac.info.ResInfo;
 import com.levin.oak.base.biz.rbac.info.ResTypeInfo;
 import com.levin.oak.base.entities.E_MenuRes;
-import com.levin.oak.base.services.BaseService;
 import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.menures.req.QueryMenuResReq;
@@ -28,7 +28,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -40,16 +39,13 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacResService", matchIfMissing = true)
 @ResAuthorize(ignored = true)
-public class RbacResServiceImpl extends BaseService implements RbacResService {
+public class RbacResServiceImpl implements RbacResService {
 
     @Autowired
     ApplicationContext context;
 
     @Autowired
     PluginManager pluginManager;
-
-    @Autowired
-    AuthService authService;
 
     @Autowired
     MenuResService menuResService;
@@ -59,6 +55,7 @@ public class RbacResServiceImpl extends BaseService implements RbacResService {
 
     @Autowired
     RbacService rbacService;
+
 
     /**
      * 获取授权的菜单列表
@@ -71,7 +68,7 @@ public class RbacResServiceImpl extends BaseService implements RbacResService {
 
         Assert.notNull(userId, "无效的用户标识");
 
-        RbacUserInfo<String> userInfo = authService.getUserInfo(userId);
+        RbacUserInfo<String> userInfo = rbacService.getUserInfo(userId);
 
         Assert.notNull(userInfo, "无效的用户标识");
 
@@ -83,14 +80,14 @@ public class RbacResServiceImpl extends BaseService implements RbacResService {
 //                .orderBy(OrderBy.Type.Asc, E_MenuRes.orderCode)
 //                .find(MenuResInfo.class);
 
-        List<MenuResInfo> menuRes = simpleDao.findByQueryObj(
+        List<MenuResInfo> menuRes = menuResService.query(
                 new QueryMenuResReq()
                         .setEnable(true)
                         .setContainsPublicData(true)
                         .setOrderBy(E_MenuRes.orderCode)
                         .setOrderDir(OrderBy.Type.Asc)
-                        .setTenantId(userInfo.getTenantId())
-        );
+                        .setTenantId(userInfo.getTenantId()), new SimplePaging().setPageIndex(0).setPageSize(5000)
+        ).getItems();
 
         final Map<String, MenuResInfo> cacheMap = new LinkedHashMap<>();
 
@@ -125,8 +122,8 @@ public class RbacResServiceImpl extends BaseService implements RbacResService {
         ///////////////////////////////////////////////////////////////////////////
         //过滤出有权限的菜单，或是设置为enable = false
 
-        List<String> roleList = authService.getRoleList(userId);
-        List<String> permissionList = authService.getPermissionList(userId);
+        List<String> roleList = rbacService.getRoleList(userId);
+        List<String> permissionList = rbacService.getPermissionList(userId);
 
         for (Map.Entry<String, MenuResInfo> entry : cacheMap2.entrySet()) {
             //
@@ -197,8 +194,8 @@ public class RbacResServiceImpl extends BaseService implements RbacResService {
         //
         boolean hasUser = userId != null && (!(userId instanceof CharSequence) || StringUtils.hasText(userId.toString()));
 
-        List<String> roleList = hasUser ? authService.getRoleList(userId) : Collections.emptyList();
-        List<String> permissionList = hasUser ? authService.getPermissionList(userId) : Collections.emptyList();
+        List<String> roleList = hasUser ? rbacService.getRoleList(userId) : Collections.emptyList();
+        List<String> permissionList = hasUser ? rbacService.getPermissionList(userId) : Collections.emptyList();
 
         //返回结果
         List<ModuleInfo> result = new LinkedList<>();

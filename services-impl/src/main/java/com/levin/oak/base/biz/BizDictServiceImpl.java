@@ -55,12 +55,12 @@ import java.util.Date;
 /**
  *  字典-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:29, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[1e1ff0d1659435661665b3920087b34c], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:47, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[a6d05091b20a3695194a96d136309c72], 请不要修改和删除此行内容。
  */
 
+@Service(PLUGIN_PREFIX + "BizDictServiceImpl")
 @DubboService
-//@Service(PLUGIN_PREFIX + "BizDictServiceImpl")
 
 @ConditionalOnMissingBean({BizDictService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizDictServiceImpl", matchIfMissing = true)

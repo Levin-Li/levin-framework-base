@@ -24,7 +24,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 
 
-//@Service(PLUGIN_PREFIX + "BizRoleService")
+@Service(PLUGIN_PREFIX + "BizRoleService")
 @DubboService
 @ConditionalOnMissingBean({BizRoleService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizRoleService", matchIfMissing = true)

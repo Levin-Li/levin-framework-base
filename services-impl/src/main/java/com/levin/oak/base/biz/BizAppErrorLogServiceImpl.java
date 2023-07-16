@@ -52,12 +52,12 @@ import java.util.Date;
 /**
  *  应用错误日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月30日 上午11:56:29, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[a21a30419cfaa4ef4123371d5e44582b], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[7232a3171a3af20b84560fd60607a5a9], 请不要修改和删除此行内容。
  */
 
+@Service(PLUGIN_PREFIX + "BizAppErrorLogServiceImpl")
 @DubboService
-//@Service(PLUGIN_PREFIX + "BizAppErrorLogServiceImpl")
 
 @ConditionalOnMissingBean({BizAppErrorLogService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizAppErrorLogServiceImpl", matchIfMissing = true)

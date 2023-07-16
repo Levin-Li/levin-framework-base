@@ -3,13 +3,13 @@ package com.levin.oak.base.biz.rbac;
 import cn.dev33.satoken.SaManager;
 import cn.dev33.satoken.stp.StpInterface;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -28,8 +28,8 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 public class StpInterfaceImpl
         implements StpInterface {
 
-    @Autowired
-    AuthService authService;
+    @DubboReference
+    RbacService rbacService;
 
     @PostConstruct
     void init() {
@@ -40,12 +40,12 @@ public class StpInterfaceImpl
 
     @Override
     public List<String> getPermissionList(Object loginId, String loginType) {
-        return authService.getPermissionList(loginId.toString());
+        return rbacService.getPermissionList(loginId.toString());
     }
 
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
-        return authService.getRoleList(loginId.toString());
+        return rbacService.getRoleList(loginId.toString());
     }
 
 }
