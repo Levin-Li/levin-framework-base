@@ -31,6 +31,9 @@ public class FrameworkProperties
 
     /**
      * 验证码长度
+     * <p>
+     * 目前多种验证码长度共用
+     * <p>
      * 如果验证码长度小余1，则表示禁用验证码
      */
     private int verificationCodeLen = 4;
@@ -45,6 +48,12 @@ public class FrameworkProperties
      * 默认允许
      */
     private boolean enableSmsVerificationCode = true;
+
+    /**
+     * 是否允许图片验证码
+     * 默认允许
+     */
+    private boolean enableCaptchaVerificationCode = true;
 
     /**
      * 是否允许模拟短信发生

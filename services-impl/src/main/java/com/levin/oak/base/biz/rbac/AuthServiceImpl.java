@@ -4,6 +4,7 @@ import cn.dev33.satoken.exception.IdTokenInvalidException;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.PhoneUtil;
 import cn.hutool.core.util.StrUtil;
 import com.levin.commons.dao.annotation.order.OrderBy;
@@ -110,10 +111,10 @@ public class AuthServiceImpl
     @Autowired
     ResourceLoader resourceLoader;
 
-    @Autowired
+    @Autowired(required = false)
     CaptchaService captchaService;
 
-    @Autowired
+    @Autowired(required = false)
     SmsCodeService smsCodeService;
 
     /**
@@ -188,7 +189,7 @@ public class AuthServiceImpl
             req = (LoginReq) authReq;
         } else {
             //拷贝对象
-            req = simpleDao.copy(authReq, new LoginReq(), 1);
+            req = BeanUtil.copyProperties(authReq,LoginReq.class);
         }
 
         Assert.hasText(req.getAccount(), "登录帐号不能为空");
@@ -202,26 +203,32 @@ public class AuthServiceImpl
 
         boolean requirePwd = true;
 
-        //如果开启了验证码
-        if (frameworkProperties.getVerificationCodeLen() > 1) {
+        if ("sms".equalsIgnoreCase(req.getVerificationCodeType())) {
+
+            Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证关闭");
+            Assert.notNull(smsCodeService, "短信验证码服务不存在");
 
             Assert.hasText(req.getVerificationCode(), "验证码不能为空");
 
-            if ("sms".equalsIgnoreCase(req.getVerificationCodeType())) {
+            //如果是短信验证码，可以不验证密码
+            requirePwd = false;
 
-                //如果是短信验证码，可以不验证密码
-                requirePwd = false;
+            //验证短信
+            Assert.isTrue(smsCodeService.verification(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "短信验证码错误");
 
-                //验证短信
-                Assert.isTrue(smsCodeService.verification(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "短信验证码错误");
+        } else if ("captcha".equalsIgnoreCase(req.getVerificationCodeType())) {
 
-            } else if ("captcha".equalsIgnoreCase(req.getVerificationCodeType())) {
-
-                //验证图片验证码
+            //验证图片验证码
+            if (frameworkProperties.isEnableCaptchaVerificationCode()) {
+                Assert.notNull(captchaService, "图片验证码服务不存在");
+                Assert.hasText(req.getVerificationCode(), "验证码不能为空");
                 Assert.isTrue(captchaService.verification(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "图片验证码错误");
-            } else {
-                throw new IllegalArgumentException("不支持的验证码类型:" + req.getVerificationCodeType());
+            }else {
+                //可以不验证
             }
+
+        } else {
+            throw new IllegalArgumentException("不支持的验证码类型:" + req.getVerificationCodeType());
         }
 
         //@todo 考虑超级用户必须要密码

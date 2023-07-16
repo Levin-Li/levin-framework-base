@@ -59,7 +59,9 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         Assert.hasText(account, "帐号不能为空");
 
-        Assert.isTrue(frameworkProperties.getVerificationCodeLen() > 0, "系统图片验证码关闭");
+        Assert.isTrue(frameworkProperties.isEnableCaptchaVerificationCode(), "系统图片验证码关闭");
+
+        Assert.isTrue(frameworkProperties.getVerificationCodeLen() > 0, "系统图片验证码长度错误");
 
         Code code = new Code().setContentType("image/gif");
 
@@ -86,6 +88,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         Assert.hasText(account, "帐号不能为空");
         Assert.hasText(code, "验证码不能为空");
+
+        Assert.isTrue(frameworkProperties.isEnableCaptchaVerificationCode(), "系统图片验证码关闭");
 
         final String prefix = String.join("|", tenantId, appId, account);
 

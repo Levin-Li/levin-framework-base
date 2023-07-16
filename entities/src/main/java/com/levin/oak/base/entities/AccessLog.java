@@ -74,6 +74,7 @@ public class AccessLog extends SimpleTenantOrgObject {
 
     @Schema(title = "请求URI")
     @Contains
+    @Column(length = 512)
     protected String requestUri;
 
     @Schema(title = "请求方法")

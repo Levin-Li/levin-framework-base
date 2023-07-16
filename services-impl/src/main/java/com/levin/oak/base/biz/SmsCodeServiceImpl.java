@@ -54,7 +54,9 @@ public class SmsCodeServiceImpl
     @Override
     public String genAndSendSmsCode(String tenantId, String appId, String account, String phoneNo) {
 
-        Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证码关闭");
+        Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "系统短信验证码关闭");
+
+        Assert.isTrue(frameworkProperties.getVerificationCodeLen() > 0, "系统短信验证码长度错误");
 
         Assert.hasText(account, "帐号不能为空");
         Assert.hasText(phoneNo, "手机号不能为空");
@@ -108,10 +110,10 @@ public class SmsCodeServiceImpl
     @Override
     public boolean verification(String tenantId, String appId, String account, String code) {
 
-        Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证码已经禁用");
-
         Assert.hasText(account, "帐号不能为空");
         Assert.hasText(code, "短信验证码不能为空");
+
+        Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证码关闭");
 
         final String prefix = String.join("|", tenantId, appId, account);
 
