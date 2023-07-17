@@ -100,8 +100,8 @@ public class ResourceAuthorizeInterceptor
 
         bizTenantService.checkAndGetCurrentUserTenant();
 
-        boolean ok = rbacService.isAuthorized(resCfg.isAndMode(), resCfg.getRequiredPermissions(), (rp, info) -> {
-            throw new AuthorizationException(403,"res-" + rp, "未授权的资源：" + info);
+        boolean ok = rbacService.isAuthorized(authService.getLoginId(), resCfg.isAndMode(), resCfg.getRequiredPermissions(), (rp, info) -> {
+            throw new AuthorizationException(403, "res-" + rp, "未授权的资源：" + info);
         });
 
         Assert.isTrue(ok, () -> new AuthorizationException(403, "未授权的操作"));
