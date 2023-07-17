@@ -356,7 +356,7 @@ public class DefaultRbacInitServiceImpl
                 .select(E_Org.id)
                 .isNull(E_Org.parentId)
                 .eq(E_Org.tenantId, tenantInfo.getId())
-                .findUnique();
+                .findOne();
 
         if (StrUtil.isBlank(orgId)) {
             Org org = simpleDao.create(new CreateOrgReq()
