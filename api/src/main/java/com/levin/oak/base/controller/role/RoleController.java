@@ -87,7 +87,7 @@ public class RoleController extends BaseController {
             //@todo 只过滤出当前用户完全拥有权限的角色
             pagingData.setItems(
                     pagingData.getItems().stream()
-                            .filter(roleInfo -> rbacService.canAssignRole(null, roleInfo.getCode(), null))
+                            .filter(roleInfo -> rbacService.canAssignRole( authService.getLoginId(),null, roleInfo.getCode(), null))
                             .collect(Collectors.toList())
             );
 
@@ -197,9 +197,8 @@ public class RoleController extends BaseController {
             return;
         }
 
-//        Object loginUserId = authService.getLoginUserId();
 
-        boolean isAuthorized = rbacService.isAuthorized(true, permissionList, (rp, info) -> {
+        boolean isAuthorized = rbacService.isAuthorized(authService.getLoginId(),true, permissionList, (rp, info) -> {
             throw new AuthorizationException("未授权的资源：" + rp + "-" + roleCode);
         });
 

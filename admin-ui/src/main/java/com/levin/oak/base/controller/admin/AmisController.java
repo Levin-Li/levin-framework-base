@@ -211,7 +211,7 @@ public class AmisController extends BaseController {
             return;
         }
 
-        boolean isAuthorized = rbacService.isAuthorized(true, page.requireAuthorizations, (rp, info) -> {
+        boolean isAuthorized = rbacService.isAuthorized(authService.getLoginId(),true, page.requireAuthorizations, (rp, info) -> {
             throw new AuthorizationException("未授权的ui资源：" + rp + "," + page.getPath());
         });
 

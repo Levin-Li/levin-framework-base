@@ -62,7 +62,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Slf4j
 @Order
 @Service(PLUGIN_PREFIX + "DefaultAuthService")
-@ConditionalOnMissingBean(AuthService.class)
+//@ConditionalOnMissingBean(AuthService.class)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", matchIfMissing = true)
 @ResAuthorize(ignored = true)
 public class AuthServiceImpl

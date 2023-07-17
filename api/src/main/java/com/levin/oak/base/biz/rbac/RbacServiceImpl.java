@@ -219,7 +219,7 @@ public class RbacServiceImpl implements RbacService {
     @Override
     public boolean canAssignRole(Object sourceUserId, Object targetUserId, String requireRoleCode, BiConsumer<String, String> matchErrorConsumer) {
 
-        // Assert.isTrue(authService.isLogin(), "用户未登录");
+         Assert.notNull(sourceUserId, "用户未登录");
 
         RbacUserInfo<String> userInfo = getUserInfo(sourceUserId);
 

@@ -201,7 +201,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         //控制访问控制
         if (frameworkProperties.getControllerAcl().isEnable()) {
 
-            HandlerInterceptor handlerInterceptor = new ControllerAuthorizeInterceptor(rbacService
+            HandlerInterceptor handlerInterceptor = new ControllerAuthorizeInterceptor(authService
                     , (className) -> frameworkProperties.getControllerAcl().isPackageMatched(className));
 
             processDefaultPath(registry.addInterceptor(handlerInterceptor)

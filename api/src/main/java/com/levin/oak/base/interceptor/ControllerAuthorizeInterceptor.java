@@ -1,6 +1,7 @@
 package com.levin.oak.base.interceptor;
 
-import com.levin.oak.base.biz.rbac.RbacService;
+import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.method.HandlerMethod;
@@ -18,19 +19,19 @@ import java.util.function.Supplier;
 public class ControllerAuthorizeInterceptor implements HandlerInterceptor {
 
     @Autowired
-    RbacService rbacService;
+    AuthService authService;
 
-    Supplier<RbacService> supplier;
+    Supplier<AuthService> supplier;
 
     Predicate<String> classNameFilter;
 
-    public ControllerAuthorizeInterceptor(RbacService rbacService, Predicate<String> classNameFilter) {
-        Assert.notNull(rbacService, "rbacService is null");
-        this.rbacService = rbacService;
+    public ControllerAuthorizeInterceptor(AuthService authService, Predicate<String> classNameFilter) {
+        Assert.notNull(authService, "authService is null");
+        this.authService = authService;
         this.classNameFilter = classNameFilter;
     }
 
-    public ControllerAuthorizeInterceptor(Supplier<RbacService> supplier, Predicate<String> classNameFilter) {
+    public ControllerAuthorizeInterceptor(Supplier<AuthService> supplier, Predicate<String> classNameFilter) {
         Assert.notNull(supplier, "supplier is null");
         this.supplier = supplier;
         this.classNameFilter = classNameFilter;
@@ -54,16 +55,16 @@ public class ControllerAuthorizeInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        if (rbacService == null && supplier != null) {
-            rbacService = supplier.get();
+        if (authService == null && supplier != null) {
+            authService = supplier.get();
         }
 
-        if (rbacService == null) {
-            throw new IllegalStateException("rbacService is null");
+        if (authService == null) {
+            throw new IllegalStateException("authService is null");
         }
 
         //检查权限
-        rbacService.checkAuthorize(handlerMethod.getBeanType(), handlerMethod.getMethod());
+        authService.checkAuthorize(handlerMethod.getBeanType(), handlerMethod.getMethod());
 
         return true;
     }

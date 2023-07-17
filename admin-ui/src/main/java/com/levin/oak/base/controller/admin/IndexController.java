@@ -248,7 +248,7 @@ public class IndexController extends BaseController {
             modelMap.addAttribute("sendSmsCodeApi", basePath + "rbac/sendSmsCode");
         }
 
-        modelMap.addAttribute("SA_ACCOUNT", AuthService.SA_ACCOUNT);
+        modelMap.addAttribute("SA_ACCOUNT", RbacService.SA_ACCOUNT);
 
         String redirectUrl = httpRequest.getParameter("r");
 
