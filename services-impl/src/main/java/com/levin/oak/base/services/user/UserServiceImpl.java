@@ -8,6 +8,7 @@ import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizRoleService;
 import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
 import com.levin.oak.base.services.BaseService;
@@ -25,6 +26,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -230,7 +232,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     private NotReq notSa() {
-        return new NotReq().setAccount(AuthService.SA_ACCOUNT);
+        return new NotReq().setAccount(RbacService.SA_ACCOUNT);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)

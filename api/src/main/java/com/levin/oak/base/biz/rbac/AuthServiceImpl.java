@@ -66,7 +66,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", matchIfMissing = true)
 @ResAuthorize(ignored = true)
 public class AuthServiceImpl
-        implements AuthService, ApplicationListener<ContextRefreshedEvent> {
+        implements AuthService,RbacPermissionThreadCachedService<String>, ApplicationListener<ContextRefreshedEvent> {
 
     final ResAuthorize defaultResAuthorize = getClass().getAnnotation(ResAuthorize.class);
 
@@ -395,19 +395,39 @@ public class AuthServiceImpl
     }
 
 
-    public List<String> getPermissionList(String loginId) {
+    @Override
+    public List<String> getRoleList(String userId) {
 
-        Assert.notNull(loginId, "loginId is null");
+        Assert.notNull(userId, "userId is null");
 
-        return permissionListThreadCache.getAndAutoPut("P-" + loginId, null,
+        return permissionListThreadCache.getAndAutoPut("R-" + userId, null,
                 () -> {
-                    List<String> roleList = rbacService.getRoleList(loginId);
+                    List<String> roleList = rbacService.getRoleList(userId);
 
                     if (roleList == null || roleList.isEmpty()) {
                         return Collections.emptyList();
                     }
 
-                    UserInfo userInfo = (UserInfo) getUserInfo(loginId);
+                    UserInfo userInfo = (UserInfo) getUserInfo(userId);
+
+                    return userInfo.getRoleList();
+                }
+        );
+    }
+
+    public List<String> getPermissionList(String userId) {
+
+        Assert.notNull(userId, "userId is null");
+
+        return permissionListThreadCache.getAndAutoPut("P-" + userId, null,
+                () -> {
+                    List<String> roleList = rbacService.getRoleList(userId);
+
+                    if (roleList == null || roleList.isEmpty()) {
+                        return Collections.emptyList();
+                    }
+
+                    UserInfo userInfo = (UserInfo) getUserInfo(userId);
 
                     return bizRoleService.getRolePermissionList(userInfo.getTenantId(), roleList);
                 }
