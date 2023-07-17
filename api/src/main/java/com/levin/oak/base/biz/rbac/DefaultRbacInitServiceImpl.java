@@ -56,7 +56,7 @@ import static com.levin.oak.base.biz.rbac.RbacService.SA_ACCOUNT;
 @Slf4j
 @Order
 @Service(PLUGIN_PREFIX + "DefaultRbacInitService")
-@ConditionalOnMissingBean(RbacInitService.class)
+//@ConditionalOnMissingBean(RbacInitService.class)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultRbacInitService", matchIfMissing = true)
 public class DefaultRbacInitServiceImpl
         implements RbacInitService, ApplicationListener<ContextRefreshedEvent> {
@@ -116,7 +116,7 @@ public class DefaultRbacInitServiceImpl
 
         log.info("默认Rbac初始化服务启用...");
 
-        initRbacData();
+
     }
 
     /**
@@ -131,6 +131,7 @@ public class DefaultRbacInitServiceImpl
 
         if (event.getApplicationContext() == this.context) {
 
+            initRbacData();
         }
     }
 
