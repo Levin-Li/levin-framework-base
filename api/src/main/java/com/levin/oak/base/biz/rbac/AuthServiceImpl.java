@@ -437,7 +437,7 @@ public class AuthServiceImpl
 
     @Override
     public String encryptPassword(String pwd) {
-        return StringUtils.hasText(pwd) ? (pwd) : null;
+        return StringUtils.hasText(pwd) ? rbacService.encryptPassword(pwd) : null;
     }
 
     @Override

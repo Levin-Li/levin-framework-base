@@ -28,7 +28,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 public class StpInterfaceImpl
         implements StpInterface {
 
-    @DubboReference
+    @Autowired
     RbacPermissionThreadCachedService permissionThreadCachedService;
 
     @PostConstruct
