@@ -66,7 +66,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", matchIfMissing = true)
 @ResAuthorize(ignored = true)
 public class AuthServiceImpl
-        implements AuthService,RbacPermissionThreadCachedService<String>, ApplicationListener<ContextRefreshedEvent> {
+        implements AuthService, RbacPermissionThreadCachedService<String>, ApplicationListener<ContextRefreshedEvent> {
 
     final ResAuthorize defaultResAuthorize = getClass().getAnnotation(ResAuthorize.class);
 
@@ -250,6 +250,8 @@ public class AuthServiceImpl
                 req.setPassword(encryptPassword(req.getPassword()))
         );
 
+        user.setPassword(null);
+
         auditUser(user);
 
         setCurrentUser(user);
@@ -309,6 +311,10 @@ public class AuthServiceImpl
         if (userInfo == null) {
             userInfo = (UserInfo) getUserInfo(getLoginId());
             currentUser.set(userInfo);
+        }
+
+        if (userInfo != null) {
+            userInfo.setPassword(null);
         }
 
         return userInfo;
@@ -553,7 +559,7 @@ public class AuthServiceImpl
 //                rbacService.getAuthorizeContext()
 //        );
 
-        boolean ok =  rbacService.isAuthorized(loginId,resAuthorize);
+        boolean ok = rbacService.isAuthorized(loginId, resAuthorize);
 
         if (!ok) {
             throw new AuthorizationException(401, "未授权的操作");
