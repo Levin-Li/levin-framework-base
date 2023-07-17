@@ -95,7 +95,6 @@ public interface AuthService extends SimpleAuthService<String, String> {
      */
     String getDeviceType(String ua);
 
-
     /**
      * 检查当前用户的方法调用授权
      *

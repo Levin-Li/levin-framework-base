@@ -39,7 +39,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacResService", matchIfMissing = true)
 @ResAuthorize(ignored = true)
-public class RbacResServiceImpl implements RbacResService {
+public class RbacResServiceImpl implements RbacResService<String> {
 
     @Autowired
     ApplicationContext context;

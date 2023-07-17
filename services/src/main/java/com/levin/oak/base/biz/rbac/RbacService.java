@@ -1,6 +1,8 @@
 package com.levin.oak.base.biz.rbac;
 
+import com.levin.commons.plugin.Res;
 import com.levin.commons.rbac.RbacUserInfo;
+import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.commons.rbac.Permission;
 import org.springframework.lang.NonNull;
@@ -83,13 +85,6 @@ public interface RbacService {
      */
     RbacUserInfo<String> getUserInfo(Object userId);
 
-    /**
-     * 获取用户的权限列表
-     *
-     * @param userId
-     * @return
-     */
-    List<String> getPermissionList(@NotNull Object userId);
 
     /**
      * 获取用户的角色列表
@@ -100,12 +95,40 @@ public interface RbacService {
     List<String> getRoleList(@NotNull Object userId);
 
     /**
+     * 获取用户的权限列表
+     *
+     * @param userId
+     * @return
+     */
+    List<String> getPermissionList(@NotNull Object userId);
+
+    /**
      * 获取一个用户有权限访问的组织ID列表
      *
      * @param userId
      * @return
      */
     List<String> getCanAcccessOrgIdList(@NotNull Object userId);
+
+
+    /**
+     * 用户对指定的注解是否有权限
+     *
+     * @param userId
+     * @param resAuthorize
+     * @return
+     */
+    boolean isAuthorized(@NotNull Object userId, ResAuthorize resAuthorize);
+
+    /**
+     * 用户对指定资源的动作是否有权限
+     *
+     * @param userId
+     * @param resPrefix
+     * @param action
+     * @return
+     */
+    boolean isAuthorized(@NotNull Object userId, String resPrefix, Res.Action action);
 
     /**
      * 当前用户是否能给目标用户分配指定的角色

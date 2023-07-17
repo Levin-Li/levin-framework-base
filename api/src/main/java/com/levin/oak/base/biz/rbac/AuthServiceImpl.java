@@ -64,8 +64,11 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Service(PLUGIN_PREFIX + "DefaultAuthService")
 @ConditionalOnMissingBean(AuthService.class)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", matchIfMissing = true)
+@ResAuthorize(ignored = true)
 public class AuthServiceImpl
         implements AuthService, ApplicationListener<ContextRefreshedEvent> {
+
+    final ResAuthorize defaultResAuthorize = getClass().getAnnotation(ResAuthorize.class);
 
 //    static final Gson gson = new Gson();
 //
@@ -521,13 +524,16 @@ public class AuthServiceImpl
         ///////////////////////// 构建权限检查逻辑的闭包 //////////////////////////////////////
 
         String loginId = getLoginId();
-        boolean ok = rbacService.isAuthorized(loginId,
-                String.join(rbacService.getPermissionDelimiter(), resAuthorize.domain(), resAuthorize.type(), resAuthorize.res()),
-                SimpleResAction.newAction(resAuthorize),
-                rbacService.getRoleList(loginId),
-                getPermissionList(loginId),
-                rbacService.getAuthorizeContext()
-        );
+
+//        boolean ok = rbacService.isAuthorized(
+//                String.join(rbacService.getPermissionDelimiter(), resAuthorize.domain(), resAuthorize.type(), resAuthorize.res()),
+//                SimpleResAction.newAction(resAuthorize),
+//                rbacService.getRoleList(loginId),
+//                getPermissionList(loginId),
+//                rbacService.getAuthorizeContext()
+//        );
+
+        boolean ok =  rbacService.isAuthorized(loginId,resAuthorize);
 
         if (!ok) {
             throw new AuthorizationException(401, "未授权的操作");

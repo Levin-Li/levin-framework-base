@@ -7,6 +7,7 @@ import com.levin.commons.plugin.Res;
 import com.levin.commons.plugin.ResLoader;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.rbac.SimpleResAction;
 import com.levin.commons.service.domain.Identifiable;
 import com.levin.commons.service.support.ContextHolder;
 import com.levin.commons.utils.ExpressionUtils;
@@ -184,6 +185,27 @@ public class RbacServiceImpl implements RbacService {
     @Override
     public List<String> getCanAcccessOrgIdList(Object userId) {
         return null;
+    }
+
+    @Override
+    public boolean isAuthorized(Object userId, ResAuthorize resAuthorize) {
+        return isAuthorized(
+                String.join(getPermissionDelimiter(), resAuthorize.domain(), resAuthorize.type(), resAuthorize.res()),
+                SimpleResAction.newAction(resAuthorize),
+                getRoleList(userId),
+                getPermissionList(userId),
+                getAuthorizeContext()
+        );
+    }
+
+    public boolean isAuthorized(Object userId, String resPrefix, Res.Action action) {
+        return isAuthorized(
+                resPrefix,
+                action,
+                getRoleList(userId),
+                getPermissionList(userId),
+                getAuthorizeContext()
+        );
     }
 
     /**
