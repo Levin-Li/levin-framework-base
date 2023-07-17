@@ -250,8 +250,6 @@ public class AuthServiceImpl
                 req.setPassword(encryptPassword(req.getPassword()))
         );
 
-        user.setPassword(null);
-
         auditUser(user);
 
         setCurrentUser(user);
@@ -311,10 +309,6 @@ public class AuthServiceImpl
         if (userInfo == null) {
             userInfo = (UserInfo) getUserInfo(getLoginId());
             currentUser.set(userInfo);
-        }
-
-        if (userInfo != null) {
-            userInfo.setPassword(null);
         }
 
         return userInfo;
@@ -476,6 +470,7 @@ public class AuthServiceImpl
     @Override
     public void clearThreadCacheData() {
         permissionListThreadCache.clear();
+        currentUser.set(null);
     }
 
 

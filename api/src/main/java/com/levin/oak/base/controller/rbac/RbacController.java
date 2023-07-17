@@ -193,7 +193,7 @@ public class RbacController extends BaseController {
     @PostMapping("userInfo")
     @Operation(tags = {"授权管理"}, summary = "用户信息")
     public ApiResp<RbacUserInfo<String>> getUserInfo() {
-        return ApiResp.ok(authService.getUserInfo());
+        return ApiResp.ok(authService.getUserInfo(authService.getLoginId()));
     }
 
     /**
