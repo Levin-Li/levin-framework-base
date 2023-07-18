@@ -102,7 +102,7 @@ public class SmsCodeServiceImpl
             throw new IllegalStateException("1短信发送失败，通道不可用");
         }
 
-        mapCache.fastPut(prefix + genCode, System.currentTimeMillis(),
+        mapCache.put(prefix + genCode, System.currentTimeMillis(),
                 frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
         return code;

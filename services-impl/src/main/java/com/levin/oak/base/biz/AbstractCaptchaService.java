@@ -69,7 +69,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         final String prefix = String.join("|", tenantId, appId, account);
 
-        mapCache.fastPut(prefix + code.getCode().toLowerCase(), System.currentTimeMillis(),
+        mapCache.put(prefix + code.getCode().toLowerCase(), System.currentTimeMillis(),
                 frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
         log.debug(prefix + " gen code: " + code.getCode());
