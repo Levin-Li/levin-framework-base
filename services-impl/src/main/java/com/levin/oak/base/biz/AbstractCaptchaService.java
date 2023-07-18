@@ -9,6 +9,7 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -34,7 +35,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 //    protected RMapCache<Object, Object> mapCache = null;
 
     @Autowired
-    RedisOperations<String, Long> redisOperations;
+    StringRedisTemplate redisTemplate;
+//    RedisOperations<String, Long> redisOperations;
 
     @PostConstruct
     protected void init() {
@@ -73,8 +75,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         final String prefix = String.join("|", tenantId, appId, account);
 
-        redisOperations.opsForValue().
-                set(prefix + code.getCode().toLowerCase(), System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+        redisTemplate.opsForValue().
+                set(prefix + code.getCode().toLowerCase(), "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
 //        mapCache.put(prefix + code.getCode().toLowerCase(), System.currentTimeMillis(),
 //                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
@@ -100,7 +102,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         final String prefix = String.join("|", tenantId, appId, account);
 
-        Long putTime = (Long) redisOperations.opsForValue().getAndDelete(prefix + code.toLowerCase());
+        String value = redisTemplate.opsForValue().getAndDelete(prefix + code.toLowerCase());
+        Long putTime = StringUtils.hasText(value) ? Long.parseLong(value) : null;
 
         //  Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
 

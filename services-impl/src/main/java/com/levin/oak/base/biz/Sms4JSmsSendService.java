@@ -68,7 +68,7 @@ public class Sms4JSmsSendService
     @Autowired
     BizSettingService bizSettingService;
 
-    RMapCache<String, Object> mapCache = null;
+//    RMapCache<String, Object> mapCache = null;
 
     Map<String, SmsBlend> smsBlendMap = MapUtil.newConcurrentHashMap();
 
@@ -88,7 +88,7 @@ public class Sms4JSmsSendService
 
     @PostConstruct
     void init() {
-        mapCache = redissonClient.getMapCache(CACHE_NAME);
+//        mapCache = redissonClient.getMapCache(CACHE_NAME);
         log.info("短信发送服务启用-" + Sms4JSmsSendService.class.getName());
     }
 

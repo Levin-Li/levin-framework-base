@@ -12,8 +12,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
@@ -44,7 +46,8 @@ public class SmsCodeServiceImpl
 //    RMapCache<String, Object> mapCache = null;
 
     @Autowired
-    RedisOperations<String, Long> redisOperations;
+//    RedisOperations<String, Long> redisOperations;
+    StringRedisTemplate redisTemplate;
 
     @PostConstruct
     void init() {
@@ -106,8 +109,8 @@ public class SmsCodeServiceImpl
             throw new IllegalStateException("1短信发送失败，通道不可用");
         }
 
-        redisOperations.opsForValue().
-                set(prefix + genCode, System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+        redisTemplate.opsForValue().
+                set(prefix + genCode, "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
 
 //        mapCache.put(prefix + genCode, System.currentTimeMillis(),
@@ -128,7 +131,9 @@ public class SmsCodeServiceImpl
 
 //        Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
 
-        Long putTime = (Long) redisOperations.opsForValue().getAndDelete(prefix + code.toLowerCase());
+        String value = redisTemplate.opsForValue().getAndDelete(prefix + code.toLowerCase());
+
+        Long putTime = StringUtils.hasText(value) ? Long.decode(value) : null;
 
         //小余1分钟
         return putTime != null && (System.currentTimeMillis() - putTime)
