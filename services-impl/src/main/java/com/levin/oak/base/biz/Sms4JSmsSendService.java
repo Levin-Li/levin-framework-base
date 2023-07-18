@@ -174,13 +174,13 @@ public class Sms4JSmsSendService
         Assert.notNull(smsResponse, "短信发送失败-通道无响应");
 
         //@todo  发现组件有BUG，腾讯云短信发送失败，仍然提示发送成功。
-        boolean ok = !smsResponse.isSuccess() || !"OK".equalsIgnoreCase(smsResponse.getCode());
+        boolean error = !smsResponse.isSuccess() || !"OK".equalsIgnoreCase(smsResponse.getCode());
 
-        if (ok) {
+        if (error) {
             log.warn("短信发送失败，租户：{}，发送配置：{}，返回结果：{}", tenantId, smsSetting, BeanUtil.beanToMap(smsResponse));
         }
 
-        Assert.isTrue(ok, "短信发送失败,{}-{}", smsResponse.getErrorCode(), smsResponse.getErrMessage());
+        Assert.isTrue(!error, "短信发送失败,{}-{}", smsResponse.getErrorCode(), smsResponse.getErrMessage());
 
         return code;
     }
