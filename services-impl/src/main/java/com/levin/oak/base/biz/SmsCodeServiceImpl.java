@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -31,8 +32,8 @@ public class SmsCodeServiceImpl
 
     private static final String CACHE_NAME = SmsCodeServiceImpl.class.getName();
 
-    @Autowired
-    RedissonClient redissonClient;
+//    @Autowired
+//    RedissonClient redissonClient;
 
     @Autowired
     FrameworkProperties frameworkProperties;
@@ -40,12 +41,15 @@ public class SmsCodeServiceImpl
     @Autowired(required = false)
     SmsSendService smsSender;
 
-    RMapCache<String, Object> mapCache = null;
+//    RMapCache<String, Object> mapCache = null;
+
+    @Autowired
+    RedisOperations<String, Long> redisOperations;
 
     @PostConstruct
     void init() {
 
-        mapCache = redissonClient.getMapCache(CACHE_NAME);
+//        mapCache = redissonClient.getMapCache(CACHE_NAME);
 
         if (smsSender == null) {
             log.warn("未发现短信发送服务：" + SmsSendService.class.getName());
@@ -102,8 +106,12 @@ public class SmsCodeServiceImpl
             throw new IllegalStateException("1短信发送失败，通道不可用");
         }
 
-        mapCache.put(prefix + genCode, System.currentTimeMillis(),
-                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+        redisOperations.opsForValue().
+                set(prefix + genCode, System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+
+
+//        mapCache.put(prefix + genCode, System.currentTimeMillis(),
+//                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
         return code;
     }
@@ -118,7 +126,10 @@ public class SmsCodeServiceImpl
 
         final String prefix = String.join("|", tenantId, appId, account);
 
-        Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
+//        Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
+
+        Long putTime = (Long) redisOperations.opsForValue().getAndDelete(prefix + code.toLowerCase());
+
         //小余1分钟
         return putTime != null && (System.currentTimeMillis() - putTime)
                 < frameworkProperties.getVerificationCodeDurationOfMinutes() * 60 * 1000L;

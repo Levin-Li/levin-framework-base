@@ -8,6 +8,7 @@ import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -21,20 +22,23 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public abstract class AbstractCaptchaService implements CaptchaService {
 
-    @Autowired
-    protected CacheManager cacheManager;
+//    @Autowired
+//    protected CacheManager cacheManager;
 
-    @Autowired
-    protected RedissonClient redissonClient;
+//    @Autowired
+//    protected RedissonClient redissonClient;
 
     @Autowired
     protected FrameworkProperties frameworkProperties;
 
-    protected RMapCache<Object, Object> mapCache = null;
+//    protected RMapCache<Object, Object> mapCache = null;
+
+    @Autowired
+    RedisOperations<String, Long> redisOperations;
 
     @PostConstruct
     protected void init() {
-        mapCache = redissonClient.getMapCache(CaptchaService.class.getName());
+//        mapCache = redissonClient.getMapCache(CaptchaService.class.getName());
     }
 
     /**
@@ -69,8 +73,11 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         final String prefix = String.join("|", tenantId, appId, account);
 
-        mapCache.put(prefix + code.getCode().toLowerCase(), System.currentTimeMillis(),
-                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+        redisOperations.opsForValue().
+                set(prefix + code.getCode().toLowerCase(), System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+
+//        mapCache.put(prefix + code.getCode().toLowerCase(), System.currentTimeMillis(),
+//                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
         log.debug(prefix + " gen code: " + code.getCode());
 
@@ -93,7 +100,9 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         final String prefix = String.join("|", tenantId, appId, account);
 
-        Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
+        Long putTime = (Long) redisOperations.opsForValue().getAndDelete(prefix + code.toLowerCase());
+
+        //  Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
 
         //小余1分钟
         return putTime != null && (System.currentTimeMillis() - putTime)
