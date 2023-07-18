@@ -44,10 +44,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -285,8 +282,10 @@ public class AuthServiceImpl
      */
     private static <T> T getValue(String key, Map<String, Object>... params) {
         return Stream.of(params)
+                .filter(Objects::nonNull)
                 .filter(map -> map.containsKey(key))
                 .map(map -> (T) map.get(key))
+                .filter(Objects::nonNull)
                 .findFirst()
                 .orElse(null);
     }
