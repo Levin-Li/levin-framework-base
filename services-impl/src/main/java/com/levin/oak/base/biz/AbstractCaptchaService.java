@@ -29,6 +29,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 //    @Autowired
 //    protected RedissonClient redissonClient;
 
+    private static final String CACHE_NAME = CaptchaService.class.getName();
+
     @Autowired
     protected FrameworkProperties frameworkProperties;
 
@@ -76,7 +78,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
         final String prefix = String.join("|", tenantId, appId, account);
 
         redisTemplate.opsForValue().
-                set(prefix + code.getCode().toLowerCase(), "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+                set(CACHE_NAME + ":" +prefix + code.getCode().toLowerCase(), "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
 //        mapCache.put(prefix + code.getCode().toLowerCase(), System.currentTimeMillis(),
 //                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
@@ -102,7 +104,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         final String prefix = String.join("|", tenantId, appId, account);
 
-        String value = redisTemplate.opsForValue().getAndDelete(prefix + code.toLowerCase());
+        String value = redisTemplate.opsForValue().getAndDelete(CACHE_NAME + ":" +prefix + code.toLowerCase());
         Long putTime = StringUtils.hasText(value) ? Long.parseLong(value) : null;
 
         //  Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());

@@ -32,7 +32,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 public class SmsCodeServiceImpl
         implements SmsCodeService {
 
-    private static final String CACHE_NAME = SmsCodeServiceImpl.class.getName();
+    private static final String CACHE_NAME = SmsCodeService.class.getName();
 
 //    @Autowired
 //    RedissonClient redissonClient;
@@ -53,6 +53,7 @@ public class SmsCodeServiceImpl
     void init() {
 
 //        mapCache = redissonClient.getMapCache(CACHE_NAME);
+
 
         if (smsSender == null) {
             log.warn("未发现短信发送服务：" + SmsSendService.class.getName());
@@ -110,7 +111,7 @@ public class SmsCodeServiceImpl
         }
 
         redisTemplate.opsForValue().
-                set(prefix + genCode, "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+                set(CACHE_NAME + ":" + prefix + genCode, "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
 
 //        mapCache.put(prefix + genCode, System.currentTimeMillis(),
@@ -131,7 +132,7 @@ public class SmsCodeServiceImpl
 
 //        Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
 
-        String value = redisTemplate.opsForValue().getAndDelete(prefix + code.toLowerCase());
+        String value = redisTemplate.opsForValue().getAndDelete(CACHE_NAME + ":" + prefix + code.toLowerCase());
 
         Long putTime = StringUtils.hasText(value) ? Long.decode(value) : null;
 
