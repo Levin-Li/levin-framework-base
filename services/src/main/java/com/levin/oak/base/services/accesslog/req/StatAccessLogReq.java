@@ -45,8 +45,8 @@ import java.util.Date;
 /**
  * 统计访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[cf8dc2ef5e13ea2701e1857a15a635e6], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 00:40:31, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[b6a7d30ce238dea12924aebb4a9f7659], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -128,6 +128,9 @@ public class StatAccessLogReq extends MultiTenantOrgReq{
 
     @Schema(title = L_headInfo)
     String headInfo;
+
+    @Schema(title = L_requestBody)
+    String requestBody;
 
     @Schema(title = L_responseData)
     String responseData;

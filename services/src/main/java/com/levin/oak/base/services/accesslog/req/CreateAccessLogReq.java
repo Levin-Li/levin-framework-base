@@ -39,8 +39,8 @@ import java.util.Date;
 /**
  * 新增访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[7544a7c50d7fa7fe89ebe25042fc3c3c], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 00:40:30, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[388aee605502da45e3a5d340f425a9c1], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -94,6 +94,9 @@ public class CreateAccessLogReq extends MultiTenantOrgReq {
 
     @Schema(title = L_headInfo )
     String headInfo;
+
+    @Schema(title = L_requestBody )
+    String requestBody;
 
     @Schema(title = L_responseData )
     String responseData;

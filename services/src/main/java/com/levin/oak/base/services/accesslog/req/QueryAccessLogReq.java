@@ -44,8 +44,8 @@ import java.util.Date;
 /**
  * 查询访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[242abb50b0e1fbe250e8ee39f99001d4], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 00:40:31, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[4be76bf2c26232da30da0adc5b49d74c], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -132,6 +132,9 @@ public class QueryAccessLogReq extends MultiTenantOrgReq{
 
     @Schema(title = L_headInfo)
     String headInfo;
+
+    @Schema(title = L_requestBody)
+    String requestBody;
 
     @Schema(title = L_responseData)
     String responseData;
