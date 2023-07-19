@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 调度日志控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:47, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[7fb1ccbadd5a2e691a082c8eefb7cca4], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:09:46, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[9ad62a430bc046c1a27531fe597511ad], 请不要修改和删除此行内容。
  */
 public class ScheduledLogController extends BaseController{
 
@@ -115,7 +115,7 @@ public class ScheduledLogController extends BaseController{
     @PostMapping
     @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
-    public ApiResp<Long> create(@RequestBody CreateScheduledLogReq req) {
+    public ApiResp<String> create(@RequestBody CreateScheduledLogReq req) {
         return ApiResp.ok(scheduledLogService.create(req));
     }
 
@@ -127,7 +127,7 @@ public class ScheduledLogController extends BaseController{
     @GetMapping({"","{id}"})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
-    public ApiResp<ScheduledLogInfo> retrieve(@NotNull ScheduledLogIdReq req, @PathVariable(required = false) Long id) {
+    public ApiResp<ScheduledLogInfo> retrieve(@NotNull ScheduledLogIdReq req, @PathVariable(required = false) String id) {
          req.updateIdWhenNotBlank(id);
          return ApiResp.ok(scheduledLogService.findById(req));
      }
@@ -139,7 +139,7 @@ public class ScheduledLogController extends BaseController{
      @PutMapping({"","{id}"})
      @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
      @CRUD.Op
-     public ApiResp<Boolean> update(@RequestBody UpdateScheduledLogReq req, @PathVariable(required = false) Long id) {
+     public ApiResp<Boolean> update(@RequestBody UpdateScheduledLogReq req, @PathVariable(required = false) String id) {
          req.updateIdWhenNotBlank(id);
          return ApiResp.ok(checkResult(scheduledLogService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
@@ -151,7 +151,7 @@ public class ScheduledLogController extends BaseController{
     @DeleteMapping({"","{id}"})
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<Boolean> delete(ScheduledLogIdReq req, @PathVariable(required = false) Long id) {
+    public ApiResp<Boolean> delete(ScheduledLogIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(checkResult(scheduledLogService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
@@ -162,7 +162,7 @@ public class ScheduledLogController extends BaseController{
      */
     @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
-    public ApiResp<Boolean> delete2(@RequestBody ScheduledLogIdReq req, @PathVariable(required = false) Long id) {
+    public ApiResp<Boolean> delete2(@RequestBody ScheduledLogIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return delete(req, id);
     }
@@ -177,7 +177,7 @@ public class ScheduledLogController extends BaseController{
      */
     @PostMapping("/batchCreate")
     @Operation(summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<List<Long>> batchCreate(@RequestBody List<CreateScheduledLogReq> reqList) {
+    public ApiResp<List<String>> batchCreate(@RequestBody List<CreateScheduledLogReq> reqList) {
         return ApiResp.ok(scheduledLogService.batchCreate(reqList));
     }
 

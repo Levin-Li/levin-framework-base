@@ -21,9 +21,10 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 
 /**
- *  调度任务-服务接口
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[71e0d19831011a49daa37c7f80bf9904], 请不要修改和删除此行内容。
+ * 调度任务-服务接口
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[25b57b736650b9c857ded64d9a20f3bc], 请不要修改和删除此行内容。
  */
 @Tag(name = E_ScheduledTask.BIZ_NAME, description = E_ScheduledTask.BIZ_NAME + MAINTAIN_ACTION)
 public interface ScheduledTaskService {
@@ -134,19 +135,19 @@ public interface ScheduledTaskService {
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     ScheduledTaskInfo findOne(@NotNull QueryScheduledTaskReq req);
 
-     /**
+    /**
      * 查询并返回唯一一条数据
      * 如果有多余1条数据，将抛出异常
      * @param req
      * @return data
      */
-     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-     ScheduledTaskInfo findUnique(QueryScheduledTaskReq req);
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    ScheduledTaskInfo findUnique(QueryScheduledTaskReq req);
 
     /**
-    * 清除缓存
-    * @param key 缓存Key
-    */
+     * 清除缓存
+     * @param key 缓存Key
+     */
     @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
 

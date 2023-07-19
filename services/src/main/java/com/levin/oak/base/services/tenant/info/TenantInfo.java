@@ -34,8 +34,9 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 
 /**
  * 平台租户
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[e6adf7271b8195fce53b756b6582e8e9], 请不要修改和删除此行内容。
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[c317274e757d99f8de9d545b548ec578], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -52,122 +53,97 @@ public class TenantInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id)
     String id;
 
-
     @Size(max = 128)
-    @Schema(title = L_sysName )
+    @Schema(title = L_sysName)
     String sysName;
 
-
-    @Schema(title = L_sysLogo )
+    @Schema(title = L_sysLogo)
     String sysLogo;
 
-
-    @Schema(title = L_logo )
+    @Schema(title = L_logo)
     String logo;
 
-
     @Size(max = 128)
-    @Schema(title = L_code )
+    @Schema(title = L_code)
     String code;
 
-
     @NotBlank
-    @Schema(title = L_tenantKey , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_tenantKey)
     String tenantKey;
 
-
-    @Schema(title = L_balance )
+    @Schema(title = L_balance)
     Double balance;
 
-
-    @Schema(title = L_licenseCnt )
+    @Schema(title = L_licenseCnt)
     Integer licenseCnt;
 
-
-    @Schema(title = L_remainingLicenseCnt )
+    @Schema(title = L_remainingLicenseCnt)
     Integer remainingLicenseCnt;
 
-
-    @Schema(title = L_licenseExpire )
+    @Schema(title = L_licenseExpire)
     Date licenseExpire;
 
-
     @Size(max = 32)
-    @Schema(title = L_contractPerson )
+    @Schema(title = L_contractPerson)
     String contractPerson;
 
-
     @Size(max = 32)
-    @Schema(title = L_contractPhone )
+    @Schema(title = L_contractPhone)
     String contractPhone;
-
 
     @Size(max = 1200)
     @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    @Schema(title = L_domainList )
+    @Schema(title = L_domainList)
     List<String> domainList;
 
-
     @Size(max = 64)
-    @Schema(title = L_appId )
+    @Schema(title = L_appId)
     String appId;
 
-
     @Size(max = 512)
-    @Schema(title = L_appSecret )
+    @Schema(title = L_appSecret)
     String appSecret;
 
-
     @Size(max = 512)
-    @Schema(title = L_encryptKey )
+    @Schema(title = L_encryptKey)
     String encryptKey;
-
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_name)
     String name;
 
-
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName )
+    @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
-
     @Size(max = 128)
-    @Schema(title = L_creator )
+    @Schema(title = L_creator)
     String creator;
 
-
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_createTime)
     Date createTime;
 
-
-    @Schema(title = L_lastUpdateTime )
+    @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
-
-    @Schema(title = L_orderCode )
+    @Schema(title = L_orderCode)
     Integer orderCode;
 
-
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_enable)
     Boolean enable;
 
-
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_editable)
     Boolean editable;
 
-
     @Size(max = 512)
-    @Schema(title = L_remark )
+    @Schema(title = L_remark)
     String remark;
-
 
 }

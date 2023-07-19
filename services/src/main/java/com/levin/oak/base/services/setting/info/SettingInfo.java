@@ -33,8 +33,9 @@ import java.util.Date;
 
 /**
  * 系统设置
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午3:14:49, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[3c1a4fa9da17ccaf10b142983323c602], 请不要修改和删除此行内容。
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[1ad4d25cd05d28de6ba6ed1ca60d54a0], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -51,97 +52,78 @@ public class SettingInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id)
     String id;
 
-
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_categoryName , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_categoryName)
     String categoryName;
 
-
     @Size(max = 64)
-    @Schema(title = L_groupName )
+    @Schema(title = L_groupName)
     String groupName;
 
-
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_code , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_code)
     String code;
 
-
     @NotNull
-    @Schema(title = L_valueType , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_valueType)
     ValueType valueType;
 
-
-    @Schema(title = L_valueContent )
+    @Schema(title = L_valueContent)
     String valueContent;
 
-
-    @Schema(title = L_nullable )
+    @Schema(title = L_nullable)
     Boolean nullable;
 
-
     @Size(max = 128)
-    @Schema(title = L_inputPlaceholder )
+    @Schema(title = L_inputPlaceholder)
     String inputPlaceholder;
 
-
     @Size(max = 128)
-    @Schema(title = L_domain )
+    @Schema(title = L_domain)
     String domain;
-
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_name)
     String name;
 
-
     @Size(max = 128)
-    @Schema(title = L_orgId )
+    @Schema(title = L_orgId)
     String orgId;
 
-
     @Size(max = 128)
-    @Schema(title = L_tenantId )
+    @Schema(title = L_tenantId)
     String tenantId;
 
-
     @Size(max = 128)
-    @Schema(title = L_creator )
+    @Schema(title = L_creator)
     String creator;
 
-
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_createTime)
     Date createTime;
 
-
-    @Schema(title = L_lastUpdateTime )
+    @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
-
-    @Schema(title = L_orderCode )
+    @Schema(title = L_orderCode)
     Integer orderCode;
 
-
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_enable)
     Boolean enable;
 
-
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_editable)
     Boolean editable;
 
-
     @Size(max = 512)
-    @Schema(title = L_remark )
+    @Schema(title = L_remark)
     String remark;
-
 
 }

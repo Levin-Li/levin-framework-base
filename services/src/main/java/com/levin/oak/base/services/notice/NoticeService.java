@@ -21,9 +21,10 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 
 /**
- *  通知-服务接口
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[3ece75a3a7335e4fb03878979d897b48], 请不要修改和删除此行内容。
+ * 通知-服务接口
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[7287df257efc40fbd6fad49efa6d65d2], 请不要修改和删除此行内容。
  */
 @Tag(name = E_Notice.BIZ_NAME, description = E_Notice.BIZ_NAME + MAINTAIN_ACTION)
 public interface NoticeService {
@@ -134,19 +135,19 @@ public interface NoticeService {
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     NoticeInfo findOne(@NotNull QueryNoticeReq req);
 
-     /**
+    /**
      * 查询并返回唯一一条数据
      * 如果有多余1条数据，将抛出异常
      * @param req
      * @return data
      */
-     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-     NoticeInfo findUnique(QueryNoticeReq req);
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    NoticeInfo findUnique(QueryNoticeReq req);
 
     /**
-    * 清除缓存
-    * @param key 缓存Key
-    */
+     * 清除缓存
+     * @param key 缓存Key
+     */
     @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
 

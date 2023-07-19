@@ -44,9 +44,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  统计工作岗位
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[8d6be2b623e1c97e0e4d9ddc3d47566d], 请不要修改和删除此行内容。
+ * 统计工作岗位
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[8ab989833b29b3bdc22b819a62623216], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

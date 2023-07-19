@@ -38,8 +38,9 @@ import java.util.Date;
 
 /**
  * 机构
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午2:07:07, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[3ebb7a13280be68826a7a87e3baab9d1], 请不要修改和删除此行内容。
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[c7a8887c28a7d4a14af1fc00a0881fa9], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -56,156 +57,125 @@ public class OrgInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id)
     String id;
 
-
     @Size(max = 64)
-    @Schema(title = L_tenantId )
+    @Schema(title = L_tenantId)
     String tenantId;
 
-
     @Size(max = 64)
-    @Schema(title = L_parentId )
+    @Schema(title = L_parentId)
     String parentId;
 
-
     @Size(max = 64)
-    @Schema(title = L_code , description = D_code )
+    @Schema(title = L_code , description = D_code)
     String code;
 
-
-    @Schema(title = L_icon )
+    @Schema(title = L_icon)
     String icon;
 
-
     @NotNull
-    @Schema(title = L_state , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_state)
     State state;
 
-
     @NotNull
-    @Schema(title = L_type , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_type)
     Type type;
 
-
     @Size(max = 64)
-    @Schema(title = L_industries )
+    @Schema(title = L_industries)
     String industries;
 
-
     @Size(max = 64)
-    @Schema(title = L_areaCode )
+    @Schema(title = L_areaCode)
     String areaCode;
 
-
     //@Fetch //默认不加载，请通过查询对象控制
-    @Schema(title = L_area )
+    @Schema(title = L_area)
     AreaInfo area;
 
-
     @Size(max = 128)
-    @Schema(title = L_level , description = D_level )
+    @Schema(title = L_level , description = D_level)
     String level;
 
-
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_category , description = D_category , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_category , description = D_category)
     String category;
 
-
     @NotNull
-    @Schema(title = L_isExternal , description = D_isExternal , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_isExternal , description = D_isExternal)
     Boolean isExternal;
 
-
     @Size(max = 64)
-    @Schema(title = L_contacts )
+    @Schema(title = L_contacts)
     String contacts;
 
-
     @Size(max = 20)
-    @Schema(title = L_phones )
+    @Schema(title = L_phones)
     String phones;
 
-
     @Size(max = 32)
-    @Schema(title = L_emails )
+    @Schema(title = L_emails)
     String emails;
 
-
-    @Schema(title = L_address )
+    @Schema(title = L_address)
     String address;
 
-
     @Size(max = 32)
-    @Schema(title = L_zipCode )
+    @Schema(title = L_zipCode)
     String zipCode;
 
-
     //@Fetch //默认不加载，请通过查询对象控制
-    @Schema(title = L_extInfo )
+    @Schema(title = L_extInfo)
     String extInfo;
 
-
     //@Fetch //默认不加载，请通过查询对象控制
-    @Schema(title = L_parent )
+    @Schema(title = L_parent)
     OrgInfo parent;
 
-
     //@Fetch //默认不加载，请通过查询对象控制
-    @Schema(title = L_children )
+    @Schema(title = L_children)
     Set<OrgInfo> children;
 
-
     @Size(max = 1800)
-    @Schema(title = L_idPath , description = D_idPath )
+    @Schema(title = L_idPath , description = D_idPath)
     String idPath;
-
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_name)
     String name;
 
-
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName )
+    @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
-
     @Size(max = 128)
-    @Schema(title = L_creator )
+    @Schema(title = L_creator)
     String creator;
 
-
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_createTime)
     Date createTime;
 
-
-    @Schema(title = L_lastUpdateTime )
+    @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
-
-    @Schema(title = L_orderCode )
+    @Schema(title = L_orderCode)
     Integer orderCode;
 
-
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_enable)
     Boolean enable;
 
-
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_editable)
     Boolean editable;
 
-
     @Size(max = 512)
-    @Schema(title = L_remark )
+    @Schema(title = L_remark)
     String remark;
-
 
 }

@@ -54,8 +54,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 调度日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[838f0a5098d3444e884b0cc586790437], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:09:47, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[197b5f6f99e0073c9c945e9b9ee0cc41], 请不要修改和删除此行内容。
  */
 
 //@ActiveProfiles("test")
@@ -72,7 +72,7 @@ public class ScheduledLogServiceTest {
     @Autowired
     private BizScheduledLogService bizscheduledLogService;
 
-    private Long id;
+    private String id;
 
     @BeforeAll
     public static void beforeAll() throws Exception {
@@ -110,7 +110,7 @@ public class ScheduledLogServiceTest {
             // req.setOrgId("这是文本128");// 
 
 
-       Long id  = scheduledLogService.create(req);
+       String id  = scheduledLogService.create(req);
 
         log.debug("新增调度日志->" + id);
 

@@ -37,9 +37,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  删除系统设置
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午3:14:49, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[3780ab789a3f88d7874bb3a12309cef0], 请不要修改和删除此行内容。
+ * 删除系统设置
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[f541d66344c5fb66a77c83a7ccb7803b], 请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

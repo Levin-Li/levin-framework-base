@@ -30,10 +30,10 @@ public class ScheduledLog
         extends SimpleTenantOrgObject implements Identifiable {
 
     @Id
-    @GeneratedValue
-    Long id;
+    @GeneratedValue(generator = "default_id")
+    String id;
 
-    @Schema(title = "任务ID", required = true)
+    @Schema(title = "任务ID")
     @Column(nullable = false, length = 64)
     String taskId;
 
@@ -51,12 +51,5 @@ public class ScheduledLog
     @Schema(title = "执行结果")
     @Lob
     String invokeResult;
-
-    @PrePersist
-    public void prePersist() {
-        if (createTime == null) {
-            createTime = new Date();
-        }
-    }
 
 }

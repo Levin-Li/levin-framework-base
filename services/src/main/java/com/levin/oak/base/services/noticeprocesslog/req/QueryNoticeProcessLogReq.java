@@ -42,9 +42,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  查询通知处理日志
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[474e107f08236bceca612a7040ab5163], 请不要修改和删除此行内容。
+ * 查询通知处理日志
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[6b6b8c7e19e83e0e4ee6dfb8fd590534], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data

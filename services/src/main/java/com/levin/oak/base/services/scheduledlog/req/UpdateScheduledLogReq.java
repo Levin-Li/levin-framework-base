@@ -37,9 +37,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  更新调度日志
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[7514bbed2c1340b2301694c67e26b96b], 请不要修改和删除此行内容。
+ * 更新调度日志
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[d88b41c542128a7d63bd2a0b67d8f420], 请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -60,7 +61,7 @@ public class UpdateScheduledLogReq extends MultiTenantOrgReq {
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @NotNull
     @Eq(require = true)
-    Long id;
+    String id;
 
 
 
@@ -83,11 +84,11 @@ public class UpdateScheduledLogReq extends MultiTenantOrgReq {
     String invokeResult;
 
 
-    public UpdateScheduledLogReq(Long id) {
+    public UpdateScheduledLogReq(String id) {
         this.id = id;
     }
 
-    public UpdateScheduledLogReq updateIdWhenNotBlank(Long id){
+    public UpdateScheduledLogReq updateIdWhenNotBlank(String id){
         if(isNotBlank(id)){
         this.id = id;
         }

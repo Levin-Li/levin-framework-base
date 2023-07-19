@@ -41,9 +41,10 @@ import java.util.Date;
 
 
 /**
- *  新增菜单
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[877f103027fa4777a103bed61cb094c6], 请不要修改和删除此行内容。
+ * 新增菜单
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:57, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[6b7a743ccb98c21c4fcf686303879853], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -60,92 +61,88 @@ public class CreateMenuResReq extends MultiTenantReq {
     private static final long serialVersionUID = -887712701L;
 
 
-    @Schema(title = L_parentId  )
+    @Schema(title = L_parentId )
     @Size(max = 64)
     String parentId;
 
-    @Schema(title = L_domain  )
+    @Schema(title = L_domain )
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_requireAuthorizations  )
+    @Schema(title = L_requireAuthorizations )
     @Size(max = 1800)
     String requireAuthorizations;
 
-    @Schema(title = L_alwaysShow  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_alwaysShow )
     @NotNull
     Boolean alwaysShow;
 
-    @Schema(title = L_target  )
+    @Schema(title = L_target )
     @Size(max = 64)
     String target;
 
-    @Schema(title = L_actionType  )
+    @Schema(title = L_actionType )
     ActionType actionType;
 
-    @Schema(title = L_icon  )
+    @Schema(title = L_icon )
     String icon;
 
-    @Schema(title = L_path  )
+    @Schema(title = L_path )
     String path;
 
-    @Schema(title = L_params  )
+    @Schema(title = L_params )
     @Size(max = 1800)
     String params;
 
 
 
-    @Schema(title = L_idPath , description = D_idPath  )
+    @Schema(title = L_idPath , description = D_idPath )
     @Size(max = 1800)
     String idPath;
 
-    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_name )
     @NotBlank
     @Size(max = 128)
     String name;
 
-    @Schema(title = L_pinyinName , description = D_pinyinName  )
+    @Schema(title = L_pinyinName , description = D_pinyinName )
     @Size(max = 128)
     String pinyinName;
 
-    @Schema(title = L_creator , hidden = true )
+    @Schema(title = L_creator , hidden = true)
     //@Size(max = 128)
-    @InjectVar(InjectConsts.USER_ID)
     String creator;
 
-    @Schema(title = L_createTime , hidden = true )
+    @Schema(title = L_createTime , hidden = true)
     //@NotNull
     Date createTime;
 
-    @Schema(title = L_lastUpdateTime , hidden = true )
+    @Schema(title = L_lastUpdateTime , hidden = true)
     Date lastUpdateTime;
 
-    @Schema(title = L_orderCode , hidden = true )
+    @Schema(title = L_orderCode , hidden = true)
     Integer orderCode;
 
-    @Schema(title = L_enable , hidden = true )
+    @Schema(title = L_enable , hidden = true)
     //@NotNull
     Boolean enable;
 
-    @Schema(title = L_editable , hidden = true )
+    @Schema(title = L_editable , hidden = true)
     //@NotNull
     Boolean editable;
 
-    @Schema(title = L_remark , hidden = true )
+    @Schema(title = L_remark , hidden = true)
     //@Size(max = 512)
     String remark;
 
 
     @PostConstruct
     public void prePersist() {
-
-       //@todo 保存之前初始化数据
-
+       //@todo 保存之前初始化数据，比如时间，初始状态等
 
         if(getCreateTime() == null){
             setCreateTime(new Date());
         }
-
     }
 
 }

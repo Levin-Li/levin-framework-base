@@ -32,8 +32,9 @@ import java.util.Date;
 
 /**
  * 国际化资源
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[98e8f618e20e323bd2fad7f2f166e678], 请不要修改和删除此行内容。
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3df88b1321b40486bce6fd4c3f3e3fb8], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -49,80 +50,65 @@ public class I18nResInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id)
     Long id;
-
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_category , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_category)
     String category;
-
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_lang , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_lang)
     String lang;
-
 
     @NotBlank
     @Size(max = 768)
-    @Schema(title = L_label , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_label)
     String label;
 
-
     @Size(max = 128)
-    @Schema(title = L_domain )
+    @Schema(title = L_domain)
     String domain;
-
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_name)
     String name;
 
-
     @Size(max = 128)
-    @Schema(title = L_orgId )
+    @Schema(title = L_orgId)
     String orgId;
 
-
     @Size(max = 128)
-    @Schema(title = L_tenantId )
+    @Schema(title = L_tenantId)
     String tenantId;
 
-
     @Size(max = 128)
-    @Schema(title = L_creator )
+    @Schema(title = L_creator)
     String creator;
 
-
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_createTime)
     Date createTime;
 
-
-    @Schema(title = L_lastUpdateTime )
+    @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
-
-    @Schema(title = L_orderCode )
+    @Schema(title = L_orderCode)
     Integer orderCode;
 
-
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_enable)
     Boolean enable;
 
-
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_editable)
     Boolean editable;
 
-
     @Size(max = 512)
-    @Schema(title = L_remark )
+    @Schema(title = L_remark)
     String remark;
-
 
 }

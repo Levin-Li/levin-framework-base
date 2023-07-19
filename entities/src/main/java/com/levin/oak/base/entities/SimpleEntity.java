@@ -44,7 +44,7 @@ public abstract class SimpleEntity
     protected String icon;
 
     @Schema(title = "访问路径")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 800)
     protected String path;
 
     @Schema(title = "需要的权限或角色")

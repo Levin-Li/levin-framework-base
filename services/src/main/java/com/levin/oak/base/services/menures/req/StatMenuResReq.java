@@ -47,9 +47,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  统计菜单
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[79e7d29e0f9d2881288d3877ef6c4640], 请不要修改和删除此行内容。
+ * 统计菜单
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:57, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[68bfaadbe6d078300778c91b67cd0f63], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

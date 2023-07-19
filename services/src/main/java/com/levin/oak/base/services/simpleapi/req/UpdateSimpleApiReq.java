@@ -40,9 +40,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  更新简单动态接口
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[4e9615aa66f0571c2d26511c4ac0f4dd], 请不要修改和删除此行内容。
+ * 更新简单动态接口
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:54, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[8752fbfec8d26a6033e68a6086562816], 请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -70,10 +71,6 @@ public class UpdateSimpleApiReq extends MultiTenantOrgReq {
     final boolean eqEditable = true;
 
 
-    @Size(max = 512)
-    @Schema(title = L_url , description = D_url)
-    String url;
-
     @Size(max = 16)
     @Schema(title = L_methods , description = D_methods)
     String methods;
@@ -100,6 +97,7 @@ public class UpdateSimpleApiReq extends MultiTenantOrgReq {
     String icon;
 
     @NotBlank
+    @Size(max = 800)
     @Schema(title = L_path)
     String path;
 

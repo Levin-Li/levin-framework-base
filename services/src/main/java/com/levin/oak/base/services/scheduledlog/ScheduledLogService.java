@@ -21,9 +21,10 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 
 /**
- *  调度日志-服务接口
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[dbba02cdafd51308e7a8cbadda93da98], 请不要修改和删除此行内容。
+ * 调度日志-服务接口
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[a99bb8da54c69e3111dde1b6af7072dc], 请不要修改和删除此行内容。
  */
 @Tag(name = E_ScheduledLog.BIZ_NAME, description = E_ScheduledLog.BIZ_NAME + MAINTAIN_ACTION)
 public interface ScheduledLogService {
@@ -36,7 +37,7 @@ public interface ScheduledLogService {
      * @return pkId 主键ID
      */
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    Long create(@NotNull CreateScheduledLogReq req);
+    String create(@NotNull CreateScheduledLogReq req);
 
     /**
      * 创建记录，返回主键ID列表
@@ -44,7 +45,7 @@ public interface ScheduledLogService {
      * @return pkId 主键ID列表
      */
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    List<Long> batchCreate(@NotNull List<CreateScheduledLogReq> reqList);
+    List<String> batchCreate(@NotNull List<CreateScheduledLogReq> reqList);
 
     /**
      * 通过主键查找记录，建议在服务内部调用，不要在控制器中调用
@@ -52,7 +53,7 @@ public interface ScheduledLogService {
      * @return data 数据详情
      */
     @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
-    ScheduledLogInfo findById(@NotNull Long id);
+    ScheduledLogInfo findById(@NotNull String id);
 
     /**
     * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性
@@ -134,19 +135,19 @@ public interface ScheduledLogService {
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     ScheduledLogInfo findOne(@NotNull QueryScheduledLogReq req);
 
-     /**
+    /**
      * 查询并返回唯一一条数据
      * 如果有多余1条数据，将抛出异常
      * @param req
      * @return data
      */
-     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-     ScheduledLogInfo findUnique(QueryScheduledLogReq req);
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    ScheduledLogInfo findUnique(QueryScheduledLogReq req);
 
     /**
-    * 清除缓存
-    * @param key 缓存Key
-    */
+     * 清除缓存
+     * @param key 缓存Key
+     */
     @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
 

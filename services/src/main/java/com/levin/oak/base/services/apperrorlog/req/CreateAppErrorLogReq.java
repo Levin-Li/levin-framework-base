@@ -37,9 +37,10 @@ import java.util.Date;
 
 
 /**
- *  新增应用错误日志
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[3a5ae13a86284b94b71d2d649b2879e8], 请不要修改和删除此行内容。
+ * 新增应用错误日志
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[91d8c8550cbc206ffc64fee5cfb9fda4], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -56,39 +57,36 @@ public class CreateAppErrorLogReq extends MultiTenantReq {
     private static final long serialVersionUID = 1594864095L;
 
 
-    @Schema(title = L_moduleId  )
+    @Schema(title = L_moduleId )
     @Size(max = 64)
     String moduleId;
 
-    @Schema(title = L_occurTime  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_occurTime )
     @NotNull
     Date occurTime;
 
-    @Schema(title = L_title  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_title )
     @NotBlank
     @Size(max = 768)
     String title;
 
-    @Schema(title = L_errorLevel  )
+    @Schema(title = L_errorLevel )
     String errorLevel;
 
-    @Schema(title = L_rootExceptionType  )
+    @Schema(title = L_rootExceptionType )
     String rootExceptionType;
 
-    @Schema(title = L_exceptionFullInfo  )
+    @Schema(title = L_exceptionFullInfo )
     String exceptionFullInfo;
 
 
     @PostConstruct
     public void prePersist() {
-
-       //@todo 保存之前初始化数据
-
+       //@todo 保存之前初始化数据，比如时间，初始状态等
 
         if(getOccurTime() == null){
             setOccurTime(new Date());
         }
-
     }
 
 }

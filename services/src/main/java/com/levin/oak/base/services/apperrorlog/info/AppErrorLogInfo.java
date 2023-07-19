@@ -32,8 +32,9 @@ import java.util.Date;
 
 /**
  * 应用错误日志
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[c53b55e098155c334d1fa95c403bb339], 请不要修改和删除此行内容。
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3ad6c6cd0f37d68a696663b77f9431d6], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -49,40 +50,32 @@ public class AppErrorLogInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id)
     Long id;
 
-
-    @Schema(title = L_tenantId )
+    @Schema(title = L_tenantId)
     String tenantId;
 
-
     @Size(max = 64)
-    @Schema(title = L_moduleId )
+    @Schema(title = L_moduleId)
     String moduleId;
 
-
     @NotNull
-    @Schema(title = L_occurTime , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_occurTime)
     Date occurTime;
-
 
     @NotBlank
     @Size(max = 768)
-    @Schema(title = L_title , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_title)
     String title;
 
-
-    @Schema(title = L_errorLevel )
+    @Schema(title = L_errorLevel)
     String errorLevel;
 
-
-    @Schema(title = L_rootExceptionType )
+    @Schema(title = L_rootExceptionType)
     String rootExceptionType;
 
-
-    @Schema(title = L_exceptionFullInfo )
+    @Schema(title = L_exceptionFullInfo)
     String exceptionFullInfo;
-
 
 }

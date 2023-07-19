@@ -35,8 +35,9 @@ import java.util.Date;
 
 /**
  * 字典
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[cfa8a1b0166787bb33b0e12fd17893b9], 请不要修改和删除此行内容。
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[4a2aa91f35224a867fad5a6fd6af2872], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -53,78 +54,63 @@ public class DictInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id)
     String id;
 
-
     @NotNull
-    @Schema(title = L_type , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_type)
     Type type;
-
 
     @NotBlank
     @Size(max = 256)
-    @Schema(title = L_code , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_code)
     String code;
 
-
     @InjectVar(domain = "dao",  converter = DefaultJsonConverter.class, isRequired = "false")
-    @Schema(title = L_itemList , description = D_itemList )
+    @Schema(title = L_itemList , description = D_itemList)
     List<Item> itemList;
 
-
     @Size(max = 128)
-    @Schema(title = L_domain )
+    @Schema(title = L_domain)
     String domain;
-
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_name)
     String name;
 
-
     @Size(max = 128)
-    @Schema(title = L_orgId )
+    @Schema(title = L_orgId)
     String orgId;
 
-
     @Size(max = 128)
-    @Schema(title = L_tenantId )
+    @Schema(title = L_tenantId)
     String tenantId;
 
-
     @Size(max = 128)
-    @Schema(title = L_creator )
+    @Schema(title = L_creator)
     String creator;
 
-
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_createTime)
     Date createTime;
 
-
-    @Schema(title = L_lastUpdateTime )
+    @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
-
-    @Schema(title = L_orderCode )
+    @Schema(title = L_orderCode)
     Integer orderCode;
 
-
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_enable)
     Boolean enable;
 
-
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_editable)
     Boolean editable;
 
-
     @Size(max = 512)
-    @Schema(title = L_remark )
+    @Schema(title = L_remark)
     String remark;
-
 
 }

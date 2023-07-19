@@ -21,9 +21,10 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 
 /**
- *  简单动态接口-服务接口
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[f6152326c92f75cf47b699a42ffdbd75], 请不要修改和删除此行内容。
+ * 简单动态接口-服务接口
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:54, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[4d895824acc847e344b48fe885ed92f8], 请不要修改和删除此行内容。
  */
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimpleApiService {
@@ -134,19 +135,19 @@ public interface SimpleApiService {
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     SimpleApiInfo findOne(@NotNull QuerySimpleApiReq req);
 
-     /**
+    /**
      * 查询并返回唯一一条数据
      * 如果有多余1条数据，将抛出异常
      * @param req
      * @return data
      */
-     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-     SimpleApiInfo findUnique(QuerySimpleApiReq req);
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    SimpleApiInfo findUnique(QuerySimpleApiReq req);
 
     /**
-    * 清除缓存
-    * @param key 缓存Key
-    */
+     * 清除缓存
+     * @param key 缓存Key
+     */
     @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
 

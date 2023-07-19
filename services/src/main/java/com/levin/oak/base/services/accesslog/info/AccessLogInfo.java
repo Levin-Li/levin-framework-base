@@ -32,8 +32,9 @@ import java.util.Date;
 
 /**
  * 访问日志
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[8520f8eb5316e7b123e16c10e5b3ed72], 请不要修改和删除此行内容。
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3a5a0c845516cdc99529d67a7955b6e7], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -49,113 +50,89 @@ public class AccessLogInfo implements Serializable {
 
 
     @NotNull
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id)
     Long id;
 
-
-    @Schema(title = L_domain )
+    @Schema(title = L_domain)
     String domain;
 
-
     @Size(max = 64)
-    @Schema(title = L_visitor )
+    @Schema(title = L_visitor)
     String visitor;
 
-
     @NotBlank
-    @Schema(title = L_title , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_title)
     String title;
 
-
     @Size(max = 64)
-    @Schema(title = L_logType )
+    @Schema(title = L_logType)
     String logType;
 
-
-    @Schema(title = L_diffModifyData )
+    @Schema(title = L_diffModifyData)
     String diffModifyData;
 
-
-    @Schema(title = L_bizKey )
+    @Schema(title = L_bizKey)
     String bizKey;
 
-
-    @Schema(title = L_bizType )
+    @Schema(title = L_bizType)
     String bizType;
 
-
     @Size(max = 512)
-    @Schema(title = L_requestUri )
+    @Schema(title = L_requestUri)
     String requestUri;
 
-
     @Size(max = 32)
-    @Schema(title = L_requestMethod )
+    @Schema(title = L_requestMethod)
     String requestMethod;
 
-
-    @Schema(title = L_requestParams )
+    @Schema(title = L_requestParams)
     String requestParams;
 
-
-    @Schema(title = L_headInfo )
+    @Schema(title = L_headInfo)
     String headInfo;
 
-
-    @Schema(title = L_responseData )
+    @Schema(title = L_responseData)
     String responseData;
 
-
     @Size(max = 128)
-    @Schema(title = L_remoteAddr )
+    @Schema(title = L_remoteAddr)
     String remoteAddr;
 
-
     @Size(max = 64)
-    @Schema(title = L_serverAddr )
+    @Schema(title = L_serverAddr)
     String serverAddr;
 
-
-    @Schema(title = L_isException )
+    @Schema(title = L_isException)
     Boolean isException;
 
-
-    @Schema(title = L_exceptionInfo )
+    @Schema(title = L_exceptionInfo)
     String exceptionInfo;
 
-
     @Size(max = 768)
-    @Schema(title = L_userAgent )
+    @Schema(title = L_userAgent)
     String userAgent;
 
-
     @Size(max = 128)
-    @Schema(title = L_deviceName )
+    @Schema(title = L_deviceName)
     String deviceName;
 
-
     @Size(max = 64)
-    @Schema(title = L_browserName )
+    @Schema(title = L_browserName)
     String browserName;
 
-
-    @Schema(title = L_executeTime )
+    @Schema(title = L_executeTime)
     Long executeTime;
 
-
     @Size(max = 128)
-    @Schema(title = L_tenantId )
+    @Schema(title = L_tenantId)
     String tenantId;
 
-
     @Size(max = 128)
-    @Schema(title = L_orgId )
+    @Schema(title = L_orgId)
     String orgId;
 
-
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_createTime)
     Date createTime;
-
 
 }

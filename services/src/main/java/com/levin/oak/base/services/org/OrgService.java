@@ -21,9 +21,10 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 
 /**
- *  机构-服务接口
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[4e644e3ade14ceea829999b1c36b77f5], 请不要修改和删除此行内容。
+ * 机构-服务接口
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[91c67c3d1d9888b74c3bcae7031b806e], 请不要修改和删除此行内容。
  */
 @Tag(name = E_Org.BIZ_NAME, description = E_Org.BIZ_NAME + MAINTAIN_ACTION)
 public interface OrgService {
@@ -134,19 +135,19 @@ public interface OrgService {
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     OrgInfo findOne(@NotNull QueryOrgReq req);
 
-     /**
+    /**
      * 查询并返回唯一一条数据
      * 如果有多余1条数据，将抛出异常
      * @param req
      * @return data
      */
-     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
-     OrgInfo findUnique(QueryOrgReq req);
+    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    OrgInfo findUnique(QueryOrgReq req);
 
     /**
-    * 清除缓存
-    * @param key 缓存Key
-    */
+     * 清除缓存
+     * @param key 缓存Key
+     */
     @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
 

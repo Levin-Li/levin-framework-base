@@ -39,9 +39,10 @@ import java.util.Date;
 
 
 /**
- *  新增简单页面
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[2accd6063e38479834f58a3ffed13703], 请不要修改和删除此行内容。
+ * 新增简单页面
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:57, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[9995ff9b95ed319111c4d5d7f529a59f], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -58,83 +59,80 @@ public class CreateSimplePageReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = 1598619295L;
 
 
-    @Schema(title = L_type  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_type )
     @NotBlank
     @Size(max = 128)
     String type;
 
-    @Schema(title = L_category  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_category )
     @NotBlank
     @Size(max = 128)
     String category;
 
-    @Schema(title = L_groupName  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_groupName )
     @NotBlank
     @Size(max = 128)
     String groupName;
 
-    @Schema(title = L_icon  )
+    @Schema(title = L_icon )
     String icon;
 
-    @Schema(title = L_path  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_path )
     @NotBlank
+    @Size(max = 800)
     String path;
 
-    @Schema(title = L_requireAuthorizations  )
+    @Schema(title = L_requireAuthorizations )
     @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     List<String> requireAuthorizations;
 
-    @Schema(title = L_content  )
+    @Schema(title = L_content )
     String content;
 
-    @Schema(title = L_domain  )
+    @Schema(title = L_domain )
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_name )
     @NotBlank
     @Size(max = 64)
     String name;
 
-    @Schema(title = L_creator , hidden = true )
+    @Schema(title = L_creator , hidden = true)
     //@Size(max = 128)
-    @InjectVar(InjectConsts.USER_ID)
     String creator;
 
-    @Schema(title = L_createTime , hidden = true )
+    @Schema(title = L_createTime , hidden = true)
     //@NotNull
     Date createTime;
 
-    @Schema(title = L_lastUpdateTime , hidden = true )
+    @Schema(title = L_lastUpdateTime , hidden = true)
     Date lastUpdateTime;
 
-    @Schema(title = L_orderCode , hidden = true )
+    @Schema(title = L_orderCode , hidden = true)
     Integer orderCode;
 
-    @Schema(title = L_enable , hidden = true )
+    @Schema(title = L_enable , hidden = true)
     //@NotNull
     Boolean enable;
 
-    @Schema(title = L_editable , hidden = true )
+    @Schema(title = L_editable , hidden = true)
     //@NotNull
     Boolean editable;
 
-    @Schema(title = L_remark , hidden = true )
+    @Schema(title = L_remark , hidden = true)
     //@Size(max = 512)
     String remark;
 
 
     @PostConstruct
     public void prePersist() {
-
-       //@todo 保存之前初始化数据
-
+       //@todo 保存之前初始化数据，比如时间，初始状态等
 
         if(getCreateTime() == null){
             setCreateTime(new Date());
         }
-
     }
 
 }

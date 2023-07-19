@@ -40,9 +40,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  删除区域
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[3622e31d0523f0c9a9a8322123d2cb01], 请不要修改和删除此行内容。
+ * 删除区域
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:57, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3d7891a21b0e36ca2bd0db366feb075f], 请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

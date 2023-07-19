@@ -32,8 +32,9 @@ import java.util.Date;
 
 /**
  * 调度任务
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[355f9e1f027a469fbc76f7e7428059d0], 请不要修改和删除此行内容。
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[ace1b58c8bdc43416ac8da30a4bfd22e], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -50,99 +51,79 @@ public class ScheduledTaskInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id)
     String id;
 
-
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_category , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_category)
     String category;
 
-
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_groupName , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_groupName)
     String groupName;
 
-
     @NotBlank
-    @Schema(title = L_cron , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_cron)
     String cron;
 
-
-    @Schema(title = L_invokeExpr , description = D_invokeExpr )
+    @Schema(title = L_invokeExpr , description = D_invokeExpr)
     String invokeExpr;
 
-
-    @Schema(title = L_parallelInvoke )
+    @Schema(title = L_parallelInvoke)
     Boolean parallelInvoke;
 
-
-    @Schema(title = L_invokedCount )
+    @Schema(title = L_invokedCount)
     Integer invokedCount;
 
-
-    @Schema(title = L_lastInvokedTime )
+    @Schema(title = L_lastInvokedTime)
     Date lastInvokedTime;
 
-
-    @Schema(title = L_nextInvokeTime )
+    @Schema(title = L_nextInvokeTime)
     Date nextInvokeTime;
 
-
     @Size(max = 128)
-    @Schema(title = L_domain )
+    @Schema(title = L_domain)
     String domain;
-
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_name)
     String name;
 
-
     @Size(max = 128)
-    @Schema(title = L_orgId )
+    @Schema(title = L_orgId)
     String orgId;
 
-
     @Size(max = 128)
-    @Schema(title = L_tenantId )
+    @Schema(title = L_tenantId)
     String tenantId;
 
-
     @Size(max = 128)
-    @Schema(title = L_creator )
+    @Schema(title = L_creator)
     String creator;
 
-
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_createTime)
     Date createTime;
 
-
-    @Schema(title = L_lastUpdateTime )
+    @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
-
-    @Schema(title = L_orderCode )
+    @Schema(title = L_orderCode)
     Integer orderCode;
 
-
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_enable)
     Boolean enable;
 
-
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_editable)
     Boolean editable;
 
-
     @Size(max = 512)
-    @Schema(title = L_remark )
+    @Schema(title = L_remark)
     String remark;
-
 
 }

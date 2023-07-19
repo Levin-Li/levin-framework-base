@@ -35,8 +35,9 @@ import java.util.Date;
 
 /**
  * 角色
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[8668d81ac22e906be5553b862330233c], 请不要修改和删除此行内容。
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:54, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[46bdf05e3251339a4465d8826c3ae390], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -53,87 +54,70 @@ public class RoleInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id)
     String id;
-
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_code , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_code)
     String code;
 
-
-    @Schema(title = L_icon )
+    @Schema(title = L_icon)
     String icon;
 
-
     @NotNull
-    @Schema(title = L_orgDataScope , description = D_orgDataScope , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_orgDataScope , description = D_orgDataScope)
     OrgDataScope orgDataScope;
 
-
     @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    @Schema(title = L_assignedOrgIdList , description = D_assignedOrgIdList )
+    @Schema(title = L_assignedOrgIdList , description = D_assignedOrgIdList)
     List<String> assignedOrgIdList;
 
-
     @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    @Schema(title = L_permissionList , description = D_permissionList )
+    @Schema(title = L_permissionList , description = D_permissionList)
     List<String> permissionList;
 
-
     @Size(max = 128)
-    @Schema(title = L_domain )
+    @Schema(title = L_domain)
     String domain;
-
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_name)
     String name;
 
-
     @Size(max = 128)
-    @Schema(title = L_orgId )
+    @Schema(title = L_orgId)
     String orgId;
 
-
     @Size(max = 128)
-    @Schema(title = L_tenantId )
+    @Schema(title = L_tenantId)
     String tenantId;
 
-
     @Size(max = 128)
-    @Schema(title = L_creator )
+    @Schema(title = L_creator)
     String creator;
 
-
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_createTime)
     Date createTime;
 
-
-    @Schema(title = L_lastUpdateTime )
+    @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
-
-    @Schema(title = L_orderCode )
+    @Schema(title = L_orderCode)
     Integer orderCode;
 
-
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_enable)
     Boolean enable;
 
-
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_editable)
     Boolean editable;
 
-
     @Size(max = 512)
-    @Schema(title = L_remark )
+    @Schema(title = L_remark)
     String remark;
-
 
 }

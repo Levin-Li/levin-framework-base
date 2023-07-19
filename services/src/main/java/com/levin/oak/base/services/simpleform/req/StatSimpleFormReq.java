@@ -45,9 +45,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  统计简单表单
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:40, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[c8a32caa631d0164680ee2724c45e840], 请不要修改和删除此行内容。
+ * 统计简单表单
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:57, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[493e7e5b42b8ee15687493470128958f], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -99,6 +100,7 @@ public class StatSimpleFormReq extends MultiTenantOrgReq{
     String icon;
 
     @NotBlank
+    @Size(max = 800)
     @Schema(title = L_path)
     String path;
 

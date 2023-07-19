@@ -46,13 +46,8 @@ public class SimpleApi extends SimpleEntity {
 
     public enum Language {
         Groovy,
-        Spel,
         JavaScript,
     }
-
-    @Schema(title = "url", description = "默认为公共地址")
-    @Column(length = 512)
-    String url;
 
     @Schema(title = "http方法", description = "逗号隔开，默认POST")
     @Column(length = 16)

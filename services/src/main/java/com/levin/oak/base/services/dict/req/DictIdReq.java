@@ -39,9 +39,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  字典 主键通用请求
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[08b7859827e4ee3eaa90f50d98d83142], 请不要修改和删除此行内容。
+ * 字典 主键通用请求
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[fa8fa42971570c530f33d28da8c47725], 请不要修改和删除此行内容。
  */
 
 @Schema(title =  BIZ_NAME + " 主键通用查询")

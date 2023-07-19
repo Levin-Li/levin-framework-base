@@ -46,9 +46,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  查询区域
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[264cf0979d2195e65328f45b710b183e], 请不要修改和删除此行内容。
+ * 查询区域
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:57, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[d50e7ffab8ef254104c9db0703d442a9], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data

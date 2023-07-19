@@ -45,9 +45,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  查询简单动态接口
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[943af3bf82a62a2487a4f2f666821d9f], 请不要修改和删除此行内容。
+ * 查询简单动态接口
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:54, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[a08f1b3063b83bc84236158f98775a24], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -72,10 +73,6 @@ public class QuerySimpleApiReq extends MultiTenantOrgReq{
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
     OrderBy.Type orderDir;
 
-
-    @Size(max = 512)
-    @Schema(title = L_url , description = D_url)
-    String url;
 
     @Size(max = 16)
     @Schema(title = L_methods , description = D_methods)
@@ -113,6 +110,7 @@ public class QuerySimpleApiReq extends MultiTenantOrgReq{
     String icon;
 
     @NotBlank
+    @Size(max = 800)
     @Schema(title = L_path)
     String path;
 

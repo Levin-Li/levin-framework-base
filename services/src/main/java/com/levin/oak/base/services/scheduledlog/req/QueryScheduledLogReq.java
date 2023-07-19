@@ -42,9 +42,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  查询调度日志
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[b18e84ef2403b9ccbf799bebeb56a4ef], 请不要修改和删除此行内容。
+ * 查询调度日志
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[ce45b5a47e5ef8bc422dce3c022dc7f5], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -70,9 +71,9 @@ public class QueryScheduledLogReq extends MultiTenantOrgReq{
     OrderBy.Type orderDir;
 
 
-    @NotNull
+    @NotBlank
     @Schema(title = L_id)
-    Long id;
+    String id;
 
     @NotBlank
     @Size(max = 64)
@@ -106,7 +107,7 @@ public class QueryScheduledLogReq extends MultiTenantOrgReq{
     //String betweenCreateTime;
 
 
-    public QueryScheduledLogReq(Long id) {
+    public QueryScheduledLogReq(String id) {
         this.id = id;
     }
     @PostConstruct

@@ -56,8 +56,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 简单表单测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[388fb92f3b81fb206adbaca2917c4dcf], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:09:47, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[4fd17f195c8f33ad0e52fd88be1464d1], 请不要修改和删除此行内容。
  */
 
 //@ActiveProfiles("test")
@@ -107,7 +107,7 @@ public class SimpleFormServiceTest {
 
             // req.setIcon("图标_1");// 
 
-            // req.setPath("访问路径_1");// 必填
+            // req.setPath("这是文本800");// 必填
 
             // req.setRequireAuthorizations("这是文本1800");// 
 
@@ -150,7 +150,7 @@ public class SimpleFormServiceTest {
         // req.setCategory("这是文本128");//
         // req.setGroupName("这是文本128");//
         // req.setIcon("图标_1");//
-        // req.setPath("访问路径_1");//
+        // req.setPath("这是文本800");//
         // req.setRequireAuthorizations("这是文本1800");//
         // req.setContent("内容_1");//
         // req.setDomain("这是文本128");//
@@ -183,7 +183,7 @@ public class SimpleFormServiceTest {
            // req.setCategory("这是文本128");// 必填
            // req.setGroupName("这是文本128");// 必填
            // req.setIcon("图标_1");// 
-           // req.setPath("访问路径_1");// 必填
+           // req.setPath("这是文本800");// 必填
            // req.setRequireAuthorizations("这是文本1800");// 
            // req.setContent("内容_1");// 
            // req.setDomain("这是文本128");// 

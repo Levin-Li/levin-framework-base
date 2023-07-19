@@ -32,8 +32,9 @@ import java.util.Date;
 
 /**
  * 调度日志
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[b01d1ee935bbd9f0f8f2593dd955451a], 请不要修改和删除此行内容。
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[f03b57982c6c9f6a81579d4546827f3e], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -48,47 +49,38 @@ public class ScheduledLogInfo implements Serializable {
     private static final long serialVersionUID = 1319130901L;
 
 
-    @NotNull
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
-    Long id;
-
+    @NotBlank
+    @Schema(title = L_id)
+    String id;
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_taskId , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_taskId)
     String taskId;
 
-
     @Size(max = 128)
-    @Schema(title = L_invokeCycle )
+    @Schema(title = L_invokeCycle)
     String invokeCycle;
 
-
-    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot )
+    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot)
     String invokeSnapshot;
 
-
-    @Schema(title = L_isError )
+    @Schema(title = L_isError)
     Boolean isError;
 
-
-    @Schema(title = L_invokeResult )
+    @Schema(title = L_invokeResult)
     String invokeResult;
 
-
     @Size(max = 128)
-    @Schema(title = L_tenantId )
+    @Schema(title = L_tenantId)
     String tenantId;
 
-
     @Size(max = 128)
-    @Schema(title = L_orgId )
+    @Schema(title = L_orgId)
     String orgId;
 
-
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_createTime)
     Date createTime;
-
 
 }

@@ -35,8 +35,9 @@ import java.util.Date;
 
 /**
  * 简单动态接口
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:38, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[e3066c641e8323e8d9214f30f1f44548], 请不要修改和删除此行内容。
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:54, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[f83f154e281db65ed9281be69dc03d35], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -51,117 +52,92 @@ public class SimpleApiInfo implements Serializable {
     private static final long serialVersionUID = 1021385738L;
 
 
-    @Size(max = 512)
-    @Schema(title = L_url , description = D_url )
-    String url;
-
-
     @Size(max = 16)
-    @Schema(title = L_methods , description = D_methods )
+    @Schema(title = L_methods , description = D_methods)
     String methods;
 
-
     @NotNull
-    @Schema(title = L_language , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_language)
     Language language;
-
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id)
     String id;
 
-
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_type , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_type)
     String type;
 
-
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_category , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_category)
     String category;
 
-
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_groupName , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_groupName)
     String groupName;
 
-
-    @Schema(title = L_icon )
+    @Schema(title = L_icon)
     String icon;
 
-
     @NotBlank
-    @Schema(title = L_path , required = true, requiredMode = REQUIRED)
+    @Size(max = 800)
+    @Schema(title = L_path)
     String path;
-
 
     @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
-    @Schema(title = L_requireAuthorizations )
+    @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
 
-
     //@Fetch //默认不加载，请通过查询对象控制
-    @Schema(title = L_content )
+    @Schema(title = L_content)
     String content;
 
-
     @Size(max = 128)
-    @Schema(title = L_domain )
+    @Schema(title = L_domain)
     String domain;
-
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_name , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_name)
     String name;
 
-
     @Size(max = 128)
-    @Schema(title = L_orgId )
+    @Schema(title = L_orgId)
     String orgId;
 
-
     @Size(max = 128)
-    @Schema(title = L_tenantId )
+    @Schema(title = L_tenantId)
     String tenantId;
 
-
     @Size(max = 128)
-    @Schema(title = L_creator )
+    @Schema(title = L_creator)
     String creator;
 
-
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_createTime)
     Date createTime;
 
-
-    @Schema(title = L_lastUpdateTime )
+    @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
-
-    @Schema(title = L_orderCode )
+    @Schema(title = L_orderCode)
     Integer orderCode;
 
-
     @NotNull
-    @Schema(title = L_enable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_enable)
     Boolean enable;
 
-
     @NotNull
-    @Schema(title = L_editable , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_editable)
     Boolean editable;
 
-
     @Size(max = 512)
-    @Schema(title = L_remark )
+    @Schema(title = L_remark)
     String remark;
-
 
 }

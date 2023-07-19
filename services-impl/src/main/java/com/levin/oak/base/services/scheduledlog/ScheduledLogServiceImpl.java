@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  调度日志-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:47, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[7f2c92237ed394f6ba4b4adee5f0dd60], 请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:09:46, 请不要修改和删除此行内容。
+ *  代码生成哈希校验码：[99bcce5d0ef7128a742a292376959f5e], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "ScheduledLogService")
@@ -76,7 +76,7 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public Long create(CreateScheduledLogReq req){
+    public String create(CreateScheduledLogReq req){
         ScheduledLog entity = simpleDao.create(req, true);
         return entity.getId();
     }
@@ -84,7 +84,7 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
-    public List<Long> batchCreate(List<CreateScheduledLogReq> reqList){
+    public List<String> batchCreate(List<CreateScheduledLogReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
@@ -92,7 +92,7 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
     @Override
     //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
     //@Cacheable(condition = "#id != null", unless = "#result == null ", key = E_ScheduledLog.CACHE_KEY_PREFIX + "#id")
-    public ScheduledLogInfo findById(Long id) {
+    public ScheduledLogInfo findById(String id) {
         return findById(new ScheduledLogIdReq().setId(id));
     }
 

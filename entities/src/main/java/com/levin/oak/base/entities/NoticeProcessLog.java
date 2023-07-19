@@ -65,7 +65,7 @@ public class NoticeProcessLog extends SimpleTenantOrgObject
 
     @Schema(title = "备注")
     @Column(length = 512)
-    protected String remark;
+    String remark;
 
     @PrePersist
     public void prePersist() {

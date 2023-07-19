@@ -40,9 +40,10 @@ import java.util.Date;
 
 
 /**
- *  新增字典
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[2567ff7449881263ee1c7dc1ebf3230d], 请不要修改和删除此行内容。
+ * 新增字典
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[6a3840a025ae542e3ff295db8833e614], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -59,66 +60,62 @@ public class CreateDictReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -445779596L;
 
 
-    @Schema(title = L_type  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_type )
     @NotNull
     Type type;
 
-    @Schema(title = L_code  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_code )
     @NotBlank
     @Size(max = 256)
     String code;
 
-    @Schema(title = L_itemList , description = D_itemList  )
+    @Schema(title = L_itemList , description = D_itemList )
     @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = DefaultJsonConverter.class, isRequired = "false")
     List<Item> itemList;
 
-    @Schema(title = L_domain  )
+    @Schema(title = L_domain )
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_name )
     @NotBlank
     @Size(max = 64)
     String name;
 
-    @Schema(title = L_creator , hidden = true )
+    @Schema(title = L_creator , hidden = true)
     //@Size(max = 128)
-    @InjectVar(InjectConsts.USER_ID)
     String creator;
 
-    @Schema(title = L_createTime , hidden = true )
+    @Schema(title = L_createTime , hidden = true)
     //@NotNull
     Date createTime;
 
-    @Schema(title = L_lastUpdateTime , hidden = true )
+    @Schema(title = L_lastUpdateTime , hidden = true)
     Date lastUpdateTime;
 
-    @Schema(title = L_orderCode , hidden = true )
+    @Schema(title = L_orderCode , hidden = true)
     Integer orderCode;
 
-    @Schema(title = L_enable , hidden = true )
+    @Schema(title = L_enable , hidden = true)
     //@NotNull
     Boolean enable;
 
-    @Schema(title = L_editable , hidden = true )
+    @Schema(title = L_editable , hidden = true)
     //@NotNull
     Boolean editable;
 
-    @Schema(title = L_remark , hidden = true )
+    @Schema(title = L_remark , hidden = true)
     //@Size(max = 512)
     String remark;
 
 
     @PostConstruct
     public void prePersist() {
-
-       //@todo 保存之前初始化数据
-
+       //@todo 保存之前初始化数据，比如时间，初始状态等
 
         if(getCreateTime() == null){
             setCreateTime(new Date());
         }
-
     }
 
 }

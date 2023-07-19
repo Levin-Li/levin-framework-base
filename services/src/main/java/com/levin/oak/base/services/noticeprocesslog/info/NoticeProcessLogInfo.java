@@ -32,8 +32,9 @@ import java.util.Date;
 
 /**
  * 通知处理日志
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[2da3ff65d0afbd9288bb6dd1762ce8a1], 请不要修改和删除此行内容。
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[b25f9670b89db38f38670f621d2b1706], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -50,45 +51,37 @@ public class NoticeProcessLogInfo implements Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id)
     String id;
 
-
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_ownerId , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_ownerId)
     String ownerId;
 
-
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_noticeId , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_noticeId)
     String noticeId;
 
-
     @Size(max = 128)
-    @Schema(title = L_status )
+    @Schema(title = L_status)
     String status;
 
-
     @Size(max = 512)
-    @Schema(title = L_remark )
+    @Schema(title = L_remark)
     String remark;
 
-
     @Size(max = 128)
-    @Schema(title = L_tenantId )
+    @Schema(title = L_tenantId)
     String tenantId;
 
-
     @Size(max = 128)
-    @Schema(title = L_orgId )
+    @Schema(title = L_orgId)
     String orgId;
 
-
     @NotNull
-    @Schema(title = L_createTime , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_createTime)
     Date createTime;
-
 
 }

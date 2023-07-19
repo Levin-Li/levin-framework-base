@@ -42,9 +42,10 @@ import com.levin.oak.base.entities.Org;
 
 
 /**
- *  新增用户
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[096bbc5f7cb9e6d1c4b6c17b3f778b2e], 请不要修改和删除此行内容。
+ * 新增用户
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[0eb94918d14dfaf1dcabd890bdc057b8], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -61,112 +62,108 @@ public class CreateUserReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -445263479L;
 
 
-    @Schema(title = L_telephone , description = D_telephone  )
+    @Schema(title = L_telephone , description = D_telephone )
     @Size(max = 20)
     String telephone;
 
-    @Schema(title = L_email , description = D_email  )
+    @Schema(title = L_email , description = D_email )
     @Size(max = 32)
     String email;
 
-    @Schema(title = L_password  )
+    @Schema(title = L_password )
     @Size(max = 256)
     String password;
 
-    @Schema(title = L_nickname  )
+    @Schema(title = L_nickname )
     @Size(max = 32)
     String nickname;
 
-    @Schema(title = L_avatar  )
+    @Schema(title = L_avatar )
     String avatar;
 
-    @Schema(title = L_sex  )
+    @Schema(title = L_sex )
     Sex sex;
 
-    @Schema(title = L_tagList  )
+    @Schema(title = L_tagList )
     @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     List<String> tagList;
 
-    @Schema(title = L_category  )
+    @Schema(title = L_category )
     Category category;
 
-    @Schema(title = L_expiredDate  )
+    @Schema(title = L_expiredDate )
     Date expiredDate;
 
-    @Schema(title = L_state  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_state )
     @NotNull
     State state;
 
-    @Schema(title = L_staffNo  )
+    @Schema(title = L_staffNo )
     @Size(max = 32)
     String staffNo;
 
-    @Schema(title = L_jobPostCode  )
+    @Schema(title = L_jobPostCode )
     @Size(max = 128)
     String jobPostCode;
 
-    @Schema(title = L_roleList  )
+    @Schema(title = L_roleList )
     @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     List<String> roleList;
 
 
-    @Schema(title = L_wxOpenId  )
+    @Schema(title = L_wxOpenId )
     @Size(max = 64)
     String wxOpenId;
 
-    @Schema(title = L_aliOpenId  )
+    @Schema(title = L_aliOpenId )
     @Size(max = 64)
     String aliOpenId;
 
-    @Schema(title = L_domain  )
+    @Schema(title = L_domain )
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_name  , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_name )
     @NotBlank
     @Size(max = 64)
     String name;
 
-    @Schema(title = L_creator , hidden = true )
+    @Schema(title = L_creator , hidden = true)
     //@Size(max = 128)
-    @InjectVar(InjectConsts.USER_ID)
     String creator;
 
-    @Schema(title = L_createTime , hidden = true )
+    @Schema(title = L_createTime , hidden = true)
     //@NotNull
     Date createTime;
 
-    @Schema(title = L_lastUpdateTime , hidden = true )
+    @Schema(title = L_lastUpdateTime , hidden = true)
     Date lastUpdateTime;
 
-    @Schema(title = L_orderCode , hidden = true )
+    @Schema(title = L_orderCode , hidden = true)
     Integer orderCode;
 
-    @Schema(title = L_enable , hidden = true )
+    @Schema(title = L_enable , hidden = true)
     //@NotNull
     Boolean enable;
 
-    @Schema(title = L_editable , hidden = true )
+    @Schema(title = L_editable , hidden = true)
     //@NotNull
     Boolean editable;
 
-    @Schema(title = L_remark , hidden = true )
+    @Schema(title = L_remark , hidden = true)
     //@Size(max = 512)
     String remark;
 
 
     @PostConstruct
     public void prePersist() {
-
-       //@todo 保存之前初始化数据
-
+       //@todo 保存之前初始化数据，比如时间，初始状态等
 
         if(getCreateTime() == null){
             setCreateTime(new Date());
         }
-
     }
 
 }

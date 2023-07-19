@@ -43,9 +43,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  统计调度日志
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[598e9a7051a5fd7b22ef796463156e16], 请不要修改和删除此行内容。
+ * 统计调度日志
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[4d7e9fe5908179dba16463b2523f81cf], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -66,9 +67,9 @@ public class StatScheduledLogReq extends MultiTenantOrgReq{
     private static final long serialVersionUID = 1319130901L;
 
 
-    @NotNull
+    @NotBlank
     @Schema(title = L_id)
-    Long id;
+    String id;
 
     @NotBlank
     @Size(max = 64)
@@ -102,7 +103,7 @@ public class StatScheduledLogReq extends MultiTenantOrgReq{
     //String betweenCreateTime;
 
 
-    public StatScheduledLogReq(Long id) {
+    public StatScheduledLogReq(String id) {
         this.id = id;
     }
 

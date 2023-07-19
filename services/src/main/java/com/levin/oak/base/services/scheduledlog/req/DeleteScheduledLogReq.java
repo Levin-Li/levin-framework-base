@@ -36,9 +36,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  删除调度日志
- *  //@author Auto gen by simple-dao-codegen, @time: 2023年6月29日 下午6:00:39, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[5838b4d349a1dada798197ff1c5ea293], 请不要修改和删除此行内容。
+ * 删除调度日志
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[b3bb5782a61eea1a9b0f0265d3fcfdad], 请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -62,13 +63,13 @@ public class DeleteScheduledLogReq extends MultiTenantOrgReq {
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_ScheduledLog.id)
     @NotEmpty
-    private Long[] idList;
+    private String[] idList;
 
-    public DeleteScheduledLogReq(Long... idList) {
+    public DeleteScheduledLogReq(String... idList) {
         this.idList = idList;
     }
 
-    public DeleteScheduledLogReq setIdList(Long... idList) {
+    public DeleteScheduledLogReq setIdList(String... idList) {
         this.idList = idList;
         return this;
     }
