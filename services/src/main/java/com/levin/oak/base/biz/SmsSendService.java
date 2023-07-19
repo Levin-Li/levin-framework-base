@@ -3,6 +3,7 @@ package com.levin.oak.base.biz;
 /**
  * 短信发送服务服务
  */
+@FunctionalInterface
 public interface SmsSendService {
 
     /**

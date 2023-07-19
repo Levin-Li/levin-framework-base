@@ -95,7 +95,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
      * @return
      */
     @Override
-    public boolean verification(String tenantId, String appId, String account, String code) {
+    public boolean verify(String tenantId, String appId, String account, String code) {
 
         Assert.hasText(account, "帐号不能为空");
         Assert.hasText(code, "验证码不能为空");

@@ -28,7 +28,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.ApplicationContext;
@@ -219,7 +218,7 @@ public class AuthServiceImpl
             requirePwd = false;
 
             //验证短信
-            Assert.isTrue(smsCodeService.verification(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "短信验证码错误");
+            Assert.isTrue(smsCodeService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "短信验证码错误");
 
         } else if ("captcha".equalsIgnoreCase(req.getVerificationCodeType())) {
 
@@ -227,7 +226,7 @@ public class AuthServiceImpl
             if (frameworkProperties.isEnableCaptchaVerificationCode()) {
                 Assert.notNull(captchaService, "图片验证码服务不存在");
                 Assert.hasText(req.getVerificationCode(), "验证码不能为空");
-                Assert.isTrue(captchaService.verification(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "图片验证码错误");
+                Assert.isTrue(captchaService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "图片验证码错误");
             } else {
                 //可以不验证
             }

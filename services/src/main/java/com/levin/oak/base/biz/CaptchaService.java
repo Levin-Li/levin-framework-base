@@ -35,8 +35,8 @@ public interface CaptchaService {
     /**
      * 生成验证码
      *
-     * @param tenantId
-     * @param appId
+     * @param tenantId  租户标识
+     * @param appId     应用标识
      * @param account
      * @param genParams
      * @return
@@ -49,6 +49,20 @@ public interface CaptchaService {
      * @param code
      * @return
      */
-    boolean verification(String tenantId, String appId, String account, String code);
+    default boolean verify(String tenantId, String account, String code) {
+        return verify(tenantId, null, account, code);
+    }
+
+
+    /**
+     * 校验验证码
+     *
+     * @param tenantId
+     * @param appId
+     * @param account
+     * @param code
+     * @return
+     */
+    boolean verify(String tenantId, String appId, String account, String code);
 
 }

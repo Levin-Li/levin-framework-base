@@ -113,7 +113,6 @@ public class SmsCodeServiceImpl
         redisTemplate.opsForValue().
                 set(CACHE_NAME + ":" + prefix + genCode, "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
-
 //        mapCache.put(prefix + genCode, System.currentTimeMillis(),
 //                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
@@ -121,7 +120,7 @@ public class SmsCodeServiceImpl
     }
 
     @Override
-    public boolean verification(String tenantId, String appId, String account, String code) {
+    public boolean verify(String tenantId, String appId, String account, String code) {
 
         Assert.hasText(account, "帐号不能为空");
         Assert.hasText(code, "短信验证码不能为空");
