@@ -123,7 +123,7 @@ public class BizTenantServiceImpl
                             && !tenantInfo.getId().contentEquals(tenantInfo2.getId())) {
 
                         //如果用户的租户和域名的租户不匹配，则抛出异常
-                        throw new AccessDeniedException(400,"当前用户归属的租户和当前访问的域名不匹配");
+                        throw new AccessDeniedException(400, "当前用户归属的租户和当前访问的域名不匹配");
                     }
 
                     tenantInfo = tenantInfo2;
@@ -132,7 +132,7 @@ public class BizTenantServiceImpl
 
             //除了超管，其它用户必须要归属于指定的租户
             if (!userInfo.isSuperAdmin() && tenantInfo == null) {
-                throw new AccessDeniedException(403,"非法的无租户用户");
+                throw new AccessDeniedException(403, "非法的无租户用户");
             }
         }
 
@@ -270,12 +270,11 @@ public class BizTenantServiceImpl
         Assert.notNull(tenantInfo, () -> new ServiceException(400, "租户不存在"));
 
         Assert.isTrue(tenantInfo.getEnable(),
-                () -> new ServiceException(400,tenantInfo.getId()+"租户账户已经冻结"));
+                () -> new ServiceException(400, tenantInfo.getId() + "租户账户已经冻结"));
 
         Assert.isTrue(tenantInfo.getLicenseExpire() == null
                         || tenantInfo.getLicenseExpire().getTime() > System.currentTimeMillis(),
-                () -> new ServiceException(400,tenantInfo.getId()+ "租户已经过期"));
-
+                () -> new ServiceException(400, tenantInfo.getId() + "租户已经过期"));
 
         return tenantInfo;
     }

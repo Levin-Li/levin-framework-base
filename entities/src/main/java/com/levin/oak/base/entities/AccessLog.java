@@ -89,6 +89,10 @@ public class AccessLog extends SimpleTenantOrgObject {
     @Schema(title = "头部信息")
     protected String headInfo;
 
+    @Schema(title = "请求参数")
+    @Lob
+    protected String requestBody;
+
     @Lob
     @Schema(title = "响应数据")
     protected String responseData;

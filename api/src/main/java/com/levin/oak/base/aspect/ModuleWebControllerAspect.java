@@ -302,11 +302,13 @@ public class ModuleWebControllerAspect {
         final String className = joinPoint.getSignature().getDeclaringTypeName();
 
         //去除应用路径后，进行匹配，默认springdoc不记录日志
+        Object[] joinPointArgs = joinPoint.getArgs();
+
         if (className.startsWith("springfox.")
                 || className.startsWith("org.springdoc.")
                 || path.equals(serverProperties.getError().getPath())
                 || !frameworkProperties.getLog().isMatched(className, path)) {
-            return joinPoint.proceed(joinPoint.getArgs());
+            return joinPoint.proceed(joinPointArgs);
         }
 
         //得到其方法签名
@@ -316,7 +318,7 @@ public class ModuleWebControllerAspect {
         LinkedHashMap<String, String> headerMap = new LinkedHashMap<>();
         LinkedHashMap<String, Object> paramMap = new LinkedHashMap<>();
 
-        final String title = getRequestInfo(joinPoint, headerMap, paramMap, true);
+        final String title = getRequestInfo(joinPoint, headerMap, paramMap, false);
 
         if (log.isDebugEnabled()) {
             log.debug("*** 访问日志 " + title + " *** URL: {}{}, headers:{}, 控制器方法参数：{}"
@@ -338,7 +340,7 @@ public class ModuleWebControllerAspect {
         Throwable ex = null;
 
         try {
-            result = joinPoint.proceed(joinPoint.getArgs());
+            result = joinPoint.proceed(joinPointArgs);
         } catch (Throwable e) {
             ex = e;
         } finally {
@@ -353,16 +355,16 @@ public class ModuleWebControllerAspect {
 
             TenantInfo tenantInfo = bizTenantService.getCurrentTenant();
 
-            String tenantInfoId = null;
+            String tenantId = null;
 
             if (tenantInfo != null) {
-                tenantInfoId = tenantInfo.getId();
+                tenantId = tenantInfo.getId();
             }
 
             String visitor = null;
 
             if (authService.isLogin()) {
-                tenantInfoId = authService.getUserInfo().getTenantId();
+                tenantId = authService.getUserInfo().getTenantId();
                 visitor = authService.getUserInfo().getName() + "(" + authService.getLoginId() + ")";
             }
 
@@ -381,7 +383,7 @@ public class ModuleWebControllerAspect {
                     .setIsException(ex != null)
                     .setExceptionInfo(ex != null ? ExceptionUtils.getPrintInfo(ex) : null)
                     .setUserAgent(headerMap.get("user-agent"))
-                    .setTenantId(tenantInfoId);
+                    .setTenantId(tenantId);
 
             if (isAccessLogController) {
                 req.setResponseData("忽略对于访问日志控制器的访问结果");
@@ -441,6 +443,7 @@ public class ModuleWebControllerAspect {
 
         //得到其方法签名
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+
         //获取方法参数类型数组
         Class[] paramTypes = methodSignature.getParameterTypes();
         String[] paramNames = methodSignature.getParameterNames();
@@ -492,9 +495,13 @@ public class ModuleWebControllerAspect {
 //                    paramName = paramName != null ? paramName : "";
 //                    paramName = paramName + "(" + paramType.getSimpleName() + ")";
 
-                    if (StringUtils.hasText(paramName)) {
+                    if (StringUtils.hasText(paramName) && args != null && i < args.length) {
                         paramMap.put(paramName, args[i]);
                     }
+                }
+            } else if (args != null && args.length > 0) {
+                for (int i = 0; i < args.length; i++) {
+                    paramMap.put("P" + i, args[i]);
                 }
             }
         }
