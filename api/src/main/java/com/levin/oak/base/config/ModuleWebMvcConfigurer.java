@@ -154,6 +154,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     @Override
                     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
                         //清楚缓存数据
+                        bizTenantService.clearThreadCacheData();
                         authService.clearThreadCacheData();
                         injectVarService.clearCache();
                         return true;
@@ -162,6 +163,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     @Override
                     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
                         //清楚缓存数据
+                        bizTenantService.clearThreadCacheData();
                         authService.clearThreadCacheData();
                         injectVarService.clearCache();
                     }

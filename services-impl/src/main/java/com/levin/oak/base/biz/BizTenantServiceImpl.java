@@ -91,6 +91,11 @@ public class BizTenantServiceImpl
                         .orElse(null);
     }
 
+    @Override
+    public void clearThreadCacheData() {
+        currentTenant.set(null);
+        currentDomain.set(null);
+    }
 
     @Override
     public TenantInfo checkAndGetCurrentUserTenant() {
@@ -101,7 +106,8 @@ public class BizTenantServiceImpl
         final String domain = getData(getCurrentDomain(), StringUtils::hasText, () -> request.getServerName());
 
         //如果当前没有域名，获取域名关联的租户
-        if (tenantInfo == null && frameworkProperties.getTenantBindDomain().isEnable()) {
+        if (tenantInfo == null
+                && frameworkProperties.getTenantBindDomain().isEnable()) {
             tenantInfo = setCurrentTenantByDomain(domain);
             log.warn("当前请求的域名[ {} ]未关联租户", domain);
         }
@@ -123,14 +129,14 @@ public class BizTenantServiceImpl
                             && !tenantInfo.getId().contentEquals(tenantInfo2.getId())) {
 
                         //如果用户的租户和域名的租户不匹配，则抛出异常
-                        throw new AccessDeniedException(400, "当前用户归属的租户和当前访问的域名不匹配");
+                        throw new AccessDeniedException(400, "当前用户的租户和当前域名的租户不匹配");
                     }
 
                     tenantInfo = tenantInfo2;
                 }
             }
 
-            //除了超管，其它用户必须要归属于指定的租户
+            //除了超管，其它用户必须要有归属于指定的租户
             if (!userInfo.isSuperAdmin() && tenantInfo == null) {
                 throw new AccessDeniedException(403, "非法的无租户用户");
             }
@@ -178,6 +184,7 @@ public class BizTenantServiceImpl
         setCurrentTenant(tenantInfo);
 
         FrameworkProperties.Cfg sign = frameworkProperties.getSign();
+
         if (sign.isEnable()) {
 
             String path = request.getRequestURI().substring(getLen(request.getContextPath()));
@@ -298,7 +305,7 @@ public class BizTenantServiceImpl
 
         Assert.notBlank(domain, () -> new IllegalArgumentException("domain is blank"));
 
-        TenantInfo tenantInfo = tenantService.findOne(new QueryTenantReq().setDomainList(Arrays.asList(domain)));
+        TenantInfo tenantInfo = tenantService.findUnique(new QueryTenantReq().setDomainList(Arrays.asList(domain)));
 
         return auditTenant(tenantInfo);
     }
@@ -314,7 +321,7 @@ public class BizTenantServiceImpl
 
         Assert.isTrue(StringUtils.hasText(tenantKey), "租户Key不能为空");
 
-        TenantInfo tenantInfo = tenantService.findOne(new QueryTenantReq().setTenantKey(tenantKey));
+        TenantInfo tenantInfo = tenantService.findUnique(new QueryTenantReq().setTenantKey(tenantKey));
 
         return auditTenant(tenantInfo);
     }
