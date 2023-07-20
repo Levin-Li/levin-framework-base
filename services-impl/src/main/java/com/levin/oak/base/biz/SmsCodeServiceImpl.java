@@ -54,7 +54,6 @@ public class SmsCodeServiceImpl
 
 //        mapCache = redissonClient.getMapCache(CACHE_NAME);
 
-
         if (smsSender == null) {
             log.warn("未发现短信发送服务：" + SmsSendService.class.getName());
         }
@@ -131,7 +130,7 @@ public class SmsCodeServiceImpl
 
 //        Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
 
-        String value = redisTemplate.opsForValue().getAndDelete(CACHE_NAME + ":" + prefix + code.toLowerCase());
+        String value = redisTemplate.opsForValue().getAndExpire(CACHE_NAME + ":" + prefix + code.toLowerCase(), 1, TimeUnit.MICROSECONDS);
 
         Long putTime = StringUtils.hasText(value) ? Long.decode(value) : null;
 

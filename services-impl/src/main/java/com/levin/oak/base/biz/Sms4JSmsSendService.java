@@ -56,8 +56,8 @@ public class Sms4JSmsSendService
 
     public static final String CFG_CODE = "短信通道配置";
 
-    @Autowired
-    RedissonClient redissonClient;
+//    @Autowired
+//    RedissonClient redissonClient;
 
     @Autowired
     FrameworkProperties frameworkProperties;
