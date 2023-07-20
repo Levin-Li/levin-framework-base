@@ -202,6 +202,8 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
     private synchronized List<VariableResolver> getVariableResolvers(Plugin plugin) {
 
+
+
         final String packageName = plugin.getPackageName();
 
         //如果当前模块不存在解析器
