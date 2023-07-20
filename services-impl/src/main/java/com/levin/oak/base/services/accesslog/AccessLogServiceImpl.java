@@ -50,10 +50,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  访问日志-服务实现
+ * 访问日志-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[95d10e6b3460207ea7da500dead43fdb], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[084cad50d553c2ef7e50fe890b746e27], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "AccessLogService")
@@ -74,7 +74,7 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
     }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = {RuntimeException.class})
     @Override
     public Long create(CreateAccessLogReq req){
         AccessLog entity = simpleDao.create(req, true);
@@ -82,7 +82,8 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public List<Long> batchCreate(List<CreateAccessLogReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
@@ -108,14 +109,14 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_AccessLog.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateAccessLogReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchUpdate(List<UpdateAccessLogReq> reqList){
         //@Todo 优化批量提交
@@ -125,14 +126,14 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_AccessLog.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(AccessLogIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchDelete(DeleteAccessLogReq req){
         //@Todo 优化批量提交

@@ -51,10 +51,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  工作岗位-服务实现
+ * 工作岗位-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:49, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[1be662228b5aec3c75d27f1332c0c2fc], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[5f0876b2a23103acc893b55dabea5146], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "JobPostService")
@@ -75,7 +75,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = {RuntimeException.class})
     @Override
     public String create(CreateJobPostReq req){
         JobPost entity = simpleDao.create(req, true);
@@ -83,7 +83,8 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public List<String> batchCreate(List<CreateJobPostReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
@@ -109,14 +110,14 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateJobPostReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchUpdate(List<UpdateJobPostReq> reqList){
         //@Todo 优化批量提交
@@ -126,14 +127,14 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(JobPostIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchDelete(DeleteJobPostReq req){
         //@Todo 优化批量提交

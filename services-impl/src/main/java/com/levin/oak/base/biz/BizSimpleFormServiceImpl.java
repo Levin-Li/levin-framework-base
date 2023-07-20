@@ -54,8 +54,8 @@ import java.util.Date;
 /**
  *  简单表单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:49, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[7310bc22fd4b7a4786a7d913795d8c77], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:01, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[f74e09484de6063e9362d6e314979318], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "BizSimpleFormServiceImpl")
@@ -82,10 +82,15 @@ public class BizSimpleFormServiceImpl extends BaseService implements BizSimpleFo
     //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     //@Override
     //@CacheEvict(condition = "#req.id != null", key = E_SimpleForm.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = RuntimeException.class)
     //public boolean update(UpdateSimpleFormReq req) {
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
+    //}
+
+    //@Transactional(rollbackFor = RuntimeException.class)
+    //public void update(UpdateReq req){
+    //    simpleFormService.update(req);
     //}
 
 }

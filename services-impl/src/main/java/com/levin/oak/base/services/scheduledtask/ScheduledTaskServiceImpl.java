@@ -50,10 +50,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  调度任务-服务实现
+ * 调度任务-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[f8f0788b2e0c7ba3a183b65958b7c35a], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[697325ffd5741547a9cff435eb17dc39], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "ScheduledTaskService")
@@ -74,7 +74,7 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = {RuntimeException.class})
     @Override
     public String create(CreateScheduledTaskReq req){
         ScheduledTask entity = simpleDao.create(req, true);
@@ -82,7 +82,8 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public List<String> batchCreate(List<CreateScheduledTaskReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
@@ -108,14 +109,14 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_ScheduledTask.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateScheduledTaskReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchUpdate(List<UpdateScheduledTaskReq> reqList){
         //@Todo 优化批量提交
@@ -125,14 +126,14 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_ScheduledTask.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(ScheduledTaskIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchDelete(DeleteScheduledTaskReq req){
         //@Todo 优化批量提交

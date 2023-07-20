@@ -55,8 +55,8 @@ import java.util.Date;
 /**
  *  简单动态接口-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:47, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[43b6731c7ea16d977cf580dcf00475f2], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:51:59, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3df522bae963a2f45a9966ae72a8db55], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "BizSimpleApiServiceImpl")
@@ -83,10 +83,15 @@ public class BizSimpleApiServiceImpl extends BaseService implements BizSimpleApi
     //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     //@Override
     //@CacheEvict(condition = "#req.id != null", key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = RuntimeException.class)
     //public boolean update(UpdateSimpleApiReq req) {
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
+    //}
+
+    //@Transactional(rollbackFor = RuntimeException.class)
+    //public void update(UpdateReq req){
+    //    simpleApiService.update(req);
     //}
 
 }

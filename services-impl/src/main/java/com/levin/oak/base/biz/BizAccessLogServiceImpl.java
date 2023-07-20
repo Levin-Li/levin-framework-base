@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  访问日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[a2914932b7d02b2e3734427e2396a863], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[4a2a74e5d6d6676ec9eb71af9c8f4bae], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "BizAccessLogServiceImpl")
@@ -80,10 +80,15 @@ public class BizAccessLogServiceImpl extends BaseService implements BizAccessLog
     //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     //@Override
     //@CacheEvict(condition = "#req.id != null", key = E_AccessLog.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = RuntimeException.class)
     //public boolean update(UpdateAccessLogReq req) {
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
+    //}
+
+    //@Transactional(rollbackFor = RuntimeException.class)
+    //public void update(UpdateReq req){
+    //    accessLogService.update(req);
     //}
 
 }

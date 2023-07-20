@@ -52,10 +52,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  简单页面-服务实现
+ * 简单页面-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:49, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[aeac6538411bc98c491f5baa7bbd72b7], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:01, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[9ba55ba8f85b9673251cb1bb4825f088], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "SimplePageService")
@@ -76,7 +76,7 @@ public class SimplePageServiceImpl extends BaseService implements SimplePageServ
     }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = {RuntimeException.class})
     @Override
     public String create(CreateSimplePageReq req){
         SimplePage entity = simpleDao.create(req, true);
@@ -84,7 +84,8 @@ public class SimplePageServiceImpl extends BaseService implements SimplePageServ
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public List<String> batchCreate(List<CreateSimplePageReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
@@ -110,14 +111,14 @@ public class SimplePageServiceImpl extends BaseService implements SimplePageServ
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_SimplePage.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateSimplePageReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchUpdate(List<UpdateSimplePageReq> reqList){
         //@Todo 优化批量提交
@@ -127,14 +128,14 @@ public class SimplePageServiceImpl extends BaseService implements SimplePageServ
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_SimplePage.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(SimplePageIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchDelete(DeleteSimplePageReq req){
         //@Todo 优化批量提交

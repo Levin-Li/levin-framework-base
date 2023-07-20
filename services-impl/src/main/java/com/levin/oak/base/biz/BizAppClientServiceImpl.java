@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  *  应用接入-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:47, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[6c1f1644f87cd287cbbb5d9e3e48fe24], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[88bc05b68e93cb04aca074df900c280a], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "BizAppClientServiceImpl")
@@ -80,10 +80,15 @@ public class BizAppClientServiceImpl extends BaseService implements BizAppClient
     //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     //@Override
     //@CacheEvict(condition = "#req.id != null", key = E_AppClient.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = RuntimeException.class)
     //public boolean update(UpdateAppClientReq req) {
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
+    //}
+
+    //@Transactional(rollbackFor = RuntimeException.class)
+    //public void update(UpdateReq req){
+    //    appClientService.update(req);
     //}
 
 }

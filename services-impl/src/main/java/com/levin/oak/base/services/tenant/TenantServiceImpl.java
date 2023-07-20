@@ -52,10 +52,10 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 /**
- *  平台租户-服务实现
+ * 平台租户-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:47, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[611007b59981e776fbfb8a202423ad6d], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[e9cd3f05021163304e2629cc11a94da3], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "TenantService")
@@ -76,7 +76,7 @@ public class TenantServiceImpl extends BaseService implements TenantService {
     }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = {RuntimeException.class})
     @Override
     public String create(CreateTenantReq req){
         Tenant entity = simpleDao.create(req, true);
@@ -84,7 +84,8 @@ public class TenantServiceImpl extends BaseService implements TenantService {
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public List<String> batchCreate(List<CreateTenantReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
@@ -110,14 +111,14 @@ public class TenantServiceImpl extends BaseService implements TenantService {
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_Tenant.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateTenantReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchUpdate(List<UpdateTenantReq> reqList){
         //@Todo 优化批量提交
@@ -127,14 +128,14 @@ public class TenantServiceImpl extends BaseService implements TenantService {
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_Tenant.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(TenantIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchDelete(DeleteTenantReq req){
         //@Todo 优化批量提交

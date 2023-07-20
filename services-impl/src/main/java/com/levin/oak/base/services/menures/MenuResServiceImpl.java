@@ -54,10 +54,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  菜单-服务实现
+ * 菜单-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:49, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[c3efcd8fe9a0e3e959fe49424d378917], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:01, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[6d1f3993e68f67e302a70f036e4a9da5], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "MenuResService")
@@ -78,7 +78,7 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = {RuntimeException.class})
     @Override
     public String create(CreateMenuResReq req){
         MenuRes entity = simpleDao.create(req, true);
@@ -86,7 +86,8 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public List<String> batchCreate(List<CreateMenuResReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
@@ -112,14 +113,14 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateMenuResReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchUpdate(List<UpdateMenuResReq> reqList){
         //@Todo 优化批量提交
@@ -129,14 +130,14 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(MenuResIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchDelete(DeleteMenuResReq req){
         //@Todo 优化批量提交

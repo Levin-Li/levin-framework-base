@@ -50,10 +50,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  通知处理日志-服务实现
+ * 通知处理日志-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[a3bbdf19107d64f085109ca4cc89a65b], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3d80ff1539e7086aab310a829f457eb8], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "NoticeProcessLogService")
@@ -74,7 +74,7 @@ public class NoticeProcessLogServiceImpl extends BaseService implements NoticePr
     }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = {RuntimeException.class})
     @Override
     public String create(CreateNoticeProcessLogReq req){
         NoticeProcessLog entity = simpleDao.create(req, true);
@@ -82,7 +82,8 @@ public class NoticeProcessLogServiceImpl extends BaseService implements NoticePr
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public List<String> batchCreate(List<CreateNoticeProcessLogReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
@@ -108,14 +109,14 @@ public class NoticeProcessLogServiceImpl extends BaseService implements NoticePr
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_NoticeProcessLog.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateNoticeProcessLogReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchUpdate(List<UpdateNoticeProcessLogReq> reqList){
         //@Todo 优化批量提交
@@ -125,14 +126,14 @@ public class NoticeProcessLogServiceImpl extends BaseService implements NoticePr
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_NoticeProcessLog.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(NoticeProcessLogIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchDelete(DeleteNoticeProcessLogReq req){
         //@Todo 优化批量提交

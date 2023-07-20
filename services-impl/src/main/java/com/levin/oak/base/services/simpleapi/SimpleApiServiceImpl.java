@@ -53,10 +53,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  简单动态接口-服务实现
+ * 简单动态接口-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:47, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[0e888e16fcdb65340c26fb93a17951ea], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:51:59, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[be2136b3637a236a176d8ebab7acbb40], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "SimpleApiService")
@@ -77,7 +77,7 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
     }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = {RuntimeException.class})
     @Override
     public String create(CreateSimpleApiReq req){
         SimpleApi entity = simpleDao.create(req, true);
@@ -85,7 +85,8 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public List<String> batchCreate(List<CreateSimpleApiReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
@@ -111,14 +112,14 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateSimpleApiReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchUpdate(List<UpdateSimpleApiReq> reqList){
         //@Todo 优化批量提交
@@ -128,14 +129,14 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(SimpleApiIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchDelete(DeleteSimpleApiReq req){
         //@Todo 优化批量提交

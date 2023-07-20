@@ -54,8 +54,8 @@ import java.util.Date;
 /**
  *  简单页面-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:49, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[30c0c26e1a09b09f44939dc8a93655e3], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:01, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[61c8800d621f0f3a8d29cfcd7def3f45], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "BizSimplePageServiceImpl")
@@ -82,10 +82,15 @@ public class BizSimplePageServiceImpl extends BaseService implements BizSimplePa
     //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     //@Override
     //@CacheEvict(condition = "#req.id != null", key = E_SimplePage.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = RuntimeException.class)
     //public boolean update(UpdateSimplePageReq req) {
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
+    //}
+
+    //@Transactional(rollbackFor = RuntimeException.class)
+    //public void update(UpdateReq req){
+    //    simplePageService.update(req);
     //}
 
 }

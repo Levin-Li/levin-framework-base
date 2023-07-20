@@ -54,10 +54,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  区域-服务实现
+ * 区域-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:49, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[abd308b27ee87cf439d43ac7a45c9264], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:01, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[bc2e8cebdc6f393d8844b69918cc2ef8], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "AreaService")
@@ -78,7 +78,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = {RuntimeException.class})
     @Override
     public String create(CreateAreaReq req){
         Area entity = simpleDao.create(req, true);
@@ -86,7 +86,8 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public List<String> batchCreate(List<CreateAreaReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
@@ -112,14 +113,14 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.code != null", key = E_Area.CACHE_KEY_PREFIX + "#req.code")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateAreaReq req) {
         Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchUpdate(List<UpdateAreaReq> reqList){
         //@Todo 优化批量提交
@@ -129,14 +130,14 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.code != null", key = E_Area.CACHE_KEY_PREFIX + "#req.code")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(AreaIdReq req) {
         Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchDelete(DeleteAreaReq req){
         //@Todo 优化批量提交

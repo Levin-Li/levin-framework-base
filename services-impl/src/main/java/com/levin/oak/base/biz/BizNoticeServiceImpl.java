@@ -53,8 +53,8 @@ import java.util.Date;
 /**
  *  通知-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[96745c8554dd64005f3febc4e5cc8b01], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[d013c6dd24e197c629c5821b20341486], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "BizNoticeServiceImpl")
@@ -81,10 +81,15 @@ public class BizNoticeServiceImpl extends BaseService implements BizNoticeServic
     //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     //@Override
     //@CacheEvict(condition = "#req.id != null", key = E_Notice.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = RuntimeException.class)
     //public boolean update(UpdateNoticeReq req) {
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
+    //}
+
+    //@Transactional(rollbackFor = RuntimeException.class)
+    //public void update(UpdateReq req){
+    //    noticeService.update(req);
     //}
 
 }

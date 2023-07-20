@@ -50,10 +50,10 @@ import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  客户端文件-服务实现
+ * 客户端文件-服务实现
  *
- *  @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[0db40b5e6b18af724d3d4f8fd35a7b5b], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[87b19be995839534dfdf00431168f893], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "AppClientFileService")
@@ -74,7 +74,7 @@ public class AppClientFileServiceImpl extends BaseService implements AppClientFi
     }
 
     @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = {RuntimeException.class})
     @Override
     public String create(CreateAppClientFileReq req){
         AppClientFile entity = simpleDao.create(req, true);
@@ -82,7 +82,8 @@ public class AppClientFileServiceImpl extends BaseService implements AppClientFi
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public List<String> batchCreate(List<CreateAppClientFileReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
@@ -108,14 +109,14 @@ public class AppClientFileServiceImpl extends BaseService implements AppClientFi
     @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_AppClientFile.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateAppClientFileReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchUpdate(List<UpdateAppClientFileReq> reqList){
         //@Todo 优化批量提交
@@ -125,14 +126,14 @@ public class AppClientFileServiceImpl extends BaseService implements AppClientFi
     @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_AppClientFile.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(AppClientFileIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchDelete(DeleteAppClientFileReq req){
         //@Todo 优化批量提交
