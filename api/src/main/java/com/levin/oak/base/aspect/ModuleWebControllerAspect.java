@@ -1,5 +1,6 @@
 package com.levin.oak.base.aspect;
 
+import cn.hutool.core.lang.Assert;
 import com.google.gson.Gson;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
@@ -30,6 +31,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.ResolvableType;
 import org.springframework.http.HttpEntity;
@@ -58,10 +62,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @Slf4j
 @Component(PLUGIN_PREFIX + "ModuleWebControllerAspect")
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleWebControllerAspect", matchIfMissing = true)
-public class ModuleWebControllerAspect {
+public class ModuleWebControllerAspect implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
-    GenericApplicationContext context;
+    ApplicationContext context;
 
     @Autowired
     VariableInjector variableInjector;
@@ -96,8 +100,7 @@ public class ModuleWebControllerAspect {
     @Autowired
     PluginManager pluginManager;
 
-
-    final AsyncHandler<CreateAccessLogReq> asyncHandler = new AsyncHandler<>();
+    private final AsyncHandler<CreateAccessLogReq> asyncHandler = new AsyncHandler<>();
 
     //全局，线程安全变量
     private static final Gson gson = new Gson();
@@ -105,7 +108,9 @@ public class ModuleWebControllerAspect {
     /**
      * 存储模块的变量解析器
      */
-    private MultiValueMap<String, VariableResolver> moduleResolverMap = new LinkedMultiValueMap<>();
+    private final MultiValueMap<String, VariableResolver> moduleResolverMap = new LinkedMultiValueMap<>();
+
+    private boolean isInit = false;
 
     @PostConstruct
     void init() {
@@ -126,6 +131,17 @@ public class ModuleWebControllerAspect {
         log.info("控制器拦截器init...");
     }
 
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+
+        log.info("On ContextRefreshedEvent " + event);
+
+        if (event.getApplicationContext() == this.context) {
+            //初始化完成
+            isInit = true;
+        }
+
+    }
 
     /**
      * 模块包
@@ -164,6 +180,8 @@ public class ModuleWebControllerAspect {
      */
     private List<VariableResolver> getModuleResolverList(JoinPoint joinPoint) {
 
+        Assert.isTrue(isInit, "系统初始化还未完成");
+
         Signature signature = joinPoint.getSignature();
 
         final String className = signature.getDeclaringTypeName();
@@ -178,6 +196,11 @@ public class ModuleWebControllerAspect {
         if (plugin == null) {
             return Collections.emptyList();
         }
+
+        return getVariableResolvers(plugin);
+    }
+
+    private synchronized List<VariableResolver> getVariableResolvers(Plugin plugin) {
 
         final String packageName = plugin.getPackageName();
 
@@ -199,6 +222,7 @@ public class ModuleWebControllerAspect {
             SpringContextHolder.<VariableResolver>findBeanByBeanName(context
                             , ResolvableType.forClass(VariableResolver.class).getType()
                             , "plugin." + packageName, packageName)
+                    .stream().filter(Objects::nonNull)
                     .forEach(v -> moduleResolverMap.add(packageName, v));
 
             //按包名查找
@@ -209,6 +233,7 @@ public class ModuleWebControllerAspect {
         }
 
         return moduleResolverMap.getOrDefault(packageName, Collections.emptyList());
+
     }
 
 
@@ -225,8 +250,10 @@ public class ModuleWebControllerAspect {
     public void injectVar(JoinPoint joinPoint) {
 
         Object[] requestArgs = joinPoint.getArgs();
+
         //如果没有参数,或是空参数 或是简单参数，直接返回
-        if (requestArgs == null || requestArgs.length == 0
+        if (requestArgs == null
+                || requestArgs.length == 0
                 || Arrays.stream(requestArgs).allMatch(arg -> arg == null || BeanUtils.isSimpleValueType(arg.getClass()))) {
             return;
         }
