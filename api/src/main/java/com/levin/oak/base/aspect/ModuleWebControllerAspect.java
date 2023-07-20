@@ -203,7 +203,6 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
     private synchronized List<VariableResolver> getVariableResolvers(Plugin plugin) {
 
 
-
         final String packageName = plugin.getPackageName();
 
         //如果当前模块不存在解析器
@@ -397,6 +396,17 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
                 visitor = authService.getUserInfo().getName() + "(" + authService.getLoginId() + ")";
             }
 
+            String requestUri = request.getRequestURI();
+
+            if (StringUtils.hasText(request.getQueryString())) {
+                requestUri += "?" + request.getQueryString();
+            }
+
+            //超过的长度截取
+            if (requestUri.length() > 512) {
+                requestUri = requestUri.substring(0, 512);
+            }
+
             CreateAccessLogReq req = new CreateAccessLogReq()
                     .setCreateTime(new Date())
                     .setTitle(title)
@@ -405,7 +415,7 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
                     .setRemoteAddr(IPAddrUtils.try2GetUserRealIPAddr(request, false))
                     .setServerAddr(request.getLocalAddr())
                     .setRequestMethod(request.getMethod())
-                    .setRequestUri(request.getRequestURI() + "?" + request.getQueryString())
+                    .setRequestUri(requestUri)
                     .setRequestParams(gson.toJson(paramMap))
                     .setHeadInfo(gson.toJson(headerMap))
                     .setExecuteTime(execTime)
@@ -415,18 +425,18 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
                     .setTenantId(tenantId);
 
             if (isAccessLogController) {
-                req.setResponseData("忽略对于访问日志控制器的访问结果");
+                req.setResponseBody("忽略对于访问日志控制器的访问结果");
             } else if (result instanceof HttpEntity) {
                 MediaType contentType = ((HttpEntity) result).getHeaders().getContentType();
                 if (contentType != null
                         && contentType.isCompatibleWith(APPLICATION_JSON)) {
                     //只记录JSON
-                    req.setResponseData(gson.toJson(result));
+                    req.setResponseBody(gson.toJson(result));
                 } else {
-                    req.setResponseData("忽略类型-" + contentType);
+                    req.setResponseBody("忽略类型-" + contentType);
                 }
             } else {
-                req.setResponseData(result != null ? gson.toJson(result) : null);
+                req.setResponseBody(result != null ? gson.toJson(result) : null);
             }
 
             asyncHandler.addTask(req);

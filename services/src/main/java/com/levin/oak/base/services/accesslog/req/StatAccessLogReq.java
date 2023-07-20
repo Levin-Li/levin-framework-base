@@ -45,8 +45,8 @@ import java.util.Date;
 /**
  * 统计访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 00:40:31, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[b6a7d30ce238dea12924aebb4a9f7659], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 12:12:29, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[79666c4ece300243c9b2d6febf926c39], 请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -111,7 +111,7 @@ public class StatAccessLogReq extends MultiTenantOrgReq{
     @Contains
     String containsBizType;
 
-    @Size(max = 512)
+    @Size(max = 768)
     @Schema(title = L_requestUri)
     String requestUri;
 
@@ -123,17 +123,17 @@ public class StatAccessLogReq extends MultiTenantOrgReq{
     @Schema(title = L_requestMethod)
     String requestMethod;
 
-    @Schema(title = L_requestParams)
-    String requestParams;
-
     @Schema(title = L_headInfo)
     String headInfo;
+
+    @Schema(title = L_requestParams)
+    String requestParams;
 
     @Schema(title = L_requestBody)
     String requestBody;
 
-    @Schema(title = L_responseData)
-    String responseData;
+    @Schema(title = L_responseBody)
+    String responseBody;
 
     @Size(max = 128)
     @Schema(title = L_remoteAddr)
@@ -153,7 +153,7 @@ public class StatAccessLogReq extends MultiTenantOrgReq{
     @Schema(title = L_exceptionInfo)
     String exceptionInfo;
 
-    @Size(max = 768)
+    @Size(max = 1800)
     @Schema(title = L_userAgent)
     String userAgent;
 
@@ -161,7 +161,7 @@ public class StatAccessLogReq extends MultiTenantOrgReq{
     @Schema(title = L_deviceName)
     String deviceName;
 
-    @Size(max = 64)
+    @Size(max = 128)
     @Schema(title = L_browserName)
     String browserName;
 

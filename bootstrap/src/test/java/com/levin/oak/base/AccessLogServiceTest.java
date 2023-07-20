@@ -54,8 +54,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 访问日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 00:40:31, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[0bc455f09496a1599093f5931288d938], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 12:12:30, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[ee387320bc0436af31c3e977896210d8], 请不要修改和删除此行内容。
  */
 
 //@ActiveProfiles("test")
@@ -109,17 +109,17 @@ public class AccessLogServiceTest {
 
             // req.setBizType("业务类型_1");// 
 
-            // req.setRequestUri("这是文本512");// 
+            // req.setRequestUri("这是文本768");// 
 
             // req.setRequestMethod("这是文本32");// 
 
-            // req.setRequestParams("请求参数_1");// 
-
             // req.setHeadInfo("头部信息_1");// 
 
-            // req.setRequestBody("请求参数_1");// 
+            // req.setRequestParams("请求参数_1");// 
 
-            // req.setResponseData("响应数据_1");// 
+            // req.setRequestBody("请求体_1");// 
+
+            // req.setResponseBody("响应体_1");// 
 
             // req.setRemoteAddr("这是文本128");// 
 
@@ -129,11 +129,11 @@ public class AccessLogServiceTest {
 
             // req.setExceptionInfo("异常信息_1");// 
 
-            // req.setUserAgent("这是文本768");// 
+            // req.setUserAgent("这是文本1800");// 
 
             // req.setDeviceName("这是文本128");// 
 
-            // req.setBrowserName("这是文本64");// 
+            // req.setBrowserName("这是文本128");// 
 
             // req.setExecuteTime(1L);// 
 
@@ -164,19 +164,19 @@ public class AccessLogServiceTest {
         // req.setDiffModifyData("差异修改数据_1");//
         // req.setBizKey("业务主键_1");//
         // req.setBizType("业务类型_1");//
-        // req.setRequestUri("这是文本512");//
+        // req.setRequestUri("这是文本768");//
         // req.setRequestMethod("这是文本32");//
-        // req.setRequestParams("请求参数_1");//
         // req.setHeadInfo("头部信息_1");//
-        // req.setRequestBody("请求参数_1");//
-        // req.setResponseData("响应数据_1");//
+        // req.setRequestParams("请求参数_1");//
+        // req.setRequestBody("请求体_1");//
+        // req.setResponseBody("响应体_1");//
         // req.setRemoteAddr("这是文本128");//
         // req.setServerAddr("这是文本64");//
         // req.setIsException(true);//
         // req.setExceptionInfo("异常信息_1");//
-        // req.setUserAgent("这是文本768");//
+        // req.setUserAgent("这是文本1800");//
         // req.setDeviceName("这是文本128");//
-        // req.setBrowserName("这是文本64");//
+        // req.setBrowserName("这是文本128");//
         // req.setExecuteTime(1L);//
         // req.setTenantId("这是文本128");//
         // req.setOrgId("这是文本128");//
@@ -203,19 +203,19 @@ public class AccessLogServiceTest {
            // req.setDiffModifyData("差异修改数据_1");// 
            // req.setBizKey("业务主键_1");// 
            // req.setBizType("业务类型_1");// 
-           // req.setRequestUri("这是文本512");// 
+           // req.setRequestUri("这是文本768");// 
            // req.setRequestMethod("这是文本32");// 
-           // req.setRequestParams("请求参数_1");// 
            // req.setHeadInfo("头部信息_1");// 
-           // req.setRequestBody("请求参数_1");// 
-           // req.setResponseData("响应数据_1");// 
+           // req.setRequestParams("请求参数_1");// 
+           // req.setRequestBody("请求体_1");// 
+           // req.setResponseBody("响应体_1");// 
            // req.setRemoteAddr("这是文本128");// 
            // req.setServerAddr("这是文本64");// 
            // req.setIsException(true);// 
            // req.setExceptionInfo("异常信息_1");// 
-           // req.setUserAgent("这是文本768");// 
+           // req.setUserAgent("这是文本1800");// 
            // req.setDeviceName("这是文本128");// 
-           // req.setBrowserName("这是文本64");// 
+           // req.setBrowserName("这是文本128");// 
            // req.setExecuteTime(1L);// 
            // req.setTenantId("这是文本128");// 
            // req.setOrgId("这是文本128");// 

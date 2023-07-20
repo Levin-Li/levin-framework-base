@@ -5,6 +5,8 @@ import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.support.E_SimpleTenantOrgObject;
 import com.levin.commons.dao.domain.support.SimpleTenantOrgObject;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConsts;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -46,6 +48,7 @@ public class AccessLog extends SimpleTenantOrgObject {
 
     @Schema(title = "访问者")
     @Column(length = 64)
+    @InjectVar(value = InjectConsts.USER_NAME, isRequired = "false")
     protected String visitor;
 
     @Schema(title = "标题")
@@ -74,16 +77,12 @@ public class AccessLog extends SimpleTenantOrgObject {
 
     @Schema(title = "请求URI")
     @Contains
-    @Column(length = 512)
+    @Column(length = 768)
     protected String requestUri;
 
     @Schema(title = "请求方法")
     @Column(length = 32)
     protected String requestMethod;
-
-    @Schema(title = "请求参数")
-    @Lob
-    protected String requestParams;
 
     @Lob
     @Schema(title = "头部信息")
@@ -91,11 +90,15 @@ public class AccessLog extends SimpleTenantOrgObject {
 
     @Schema(title = "请求参数")
     @Lob
+    protected String requestParams;
+
+    @Schema(title = "请求体")
+    @Lob
     protected String requestBody;
 
+    @Schema(title = "响应体")
     @Lob
-    @Schema(title = "响应数据")
-    protected String responseData;
+    protected String responseBody;
 
     @Schema(title = "操作IP地址")
     @Column(length = 128)
@@ -114,7 +117,7 @@ public class AccessLog extends SimpleTenantOrgObject {
     protected String exceptionInfo;
 
     @Schema(title = "用户代理")
-    @Column(length = 768)
+    @Column(length = 1800)
     protected String userAgent;
 
     @Schema(title = "设备名称/操作系统")
@@ -122,10 +125,10 @@ public class AccessLog extends SimpleTenantOrgObject {
     protected String deviceName;
 
     @Schema(title = "浏览器名称")
-    @Column(length = 64)
+    @Column(length = 128)
     protected String browserName;
 
-    @Schema(title = "执行时间(ms)")
+    @Schema(title = "执行耗时(ms)")
     protected Long executeTime;
 
     @PrePersist

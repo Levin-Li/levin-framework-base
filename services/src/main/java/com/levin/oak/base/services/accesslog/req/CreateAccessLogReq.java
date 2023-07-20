@@ -39,8 +39,8 @@ import java.util.Date;
 /**
  * 新增访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 00:40:30, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[388aee605502da45e3a5d340f425a9c1], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 12:12:29, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[ec81739bbbaf2227e98f4d1a69c43761], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -82,24 +82,24 @@ public class CreateAccessLogReq extends MultiTenantOrgReq {
     String bizType;
 
     @Schema(title = L_requestUri )
-    @Size(max = 512)
+    @Size(max = 768)
     String requestUri;
 
     @Schema(title = L_requestMethod )
     @Size(max = 32)
     String requestMethod;
 
-    @Schema(title = L_requestParams )
-    String requestParams;
-
     @Schema(title = L_headInfo )
     String headInfo;
+
+    @Schema(title = L_requestParams )
+    String requestParams;
 
     @Schema(title = L_requestBody )
     String requestBody;
 
-    @Schema(title = L_responseData )
-    String responseData;
+    @Schema(title = L_responseBody )
+    String responseBody;
 
     @Schema(title = L_remoteAddr )
     @Size(max = 128)
@@ -116,7 +116,7 @@ public class CreateAccessLogReq extends MultiTenantOrgReq {
     String exceptionInfo;
 
     @Schema(title = L_userAgent )
-    @Size(max = 768)
+    @Size(max = 1800)
     String userAgent;
 
     @Schema(title = L_deviceName )
@@ -124,7 +124,7 @@ public class CreateAccessLogReq extends MultiTenantOrgReq {
     String deviceName;
 
     @Schema(title = L_browserName )
-    @Size(max = 64)
+    @Size(max = 128)
     String browserName;
 
     @Schema(title = L_executeTime )
