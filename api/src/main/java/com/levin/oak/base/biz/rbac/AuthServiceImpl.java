@@ -173,7 +173,7 @@ public class AuthServiceImpl
         String code = smsCodeService.genAndSendSmsCode(req.getTenantId(), req.getAppId(), req.getAccount(), user.getTelephone());
 
         return code.trim().startsWith("mock:") ? code :
-                ("验证码已经发生至" + PhoneUtil.subBefore(user.getTelephone()) + "*" + PhoneUtil.subAfter(user.getTelephone()));
+                ("验证码已经发送到" + PhoneUtil.subBefore(user.getTelephone()) + "*" + PhoneUtil.subAfter(user.getTelephone()));
 
     }
 
