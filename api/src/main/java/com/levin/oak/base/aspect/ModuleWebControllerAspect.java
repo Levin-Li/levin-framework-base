@@ -1,6 +1,7 @@
 package com.levin.oak.base.aspect;
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.StrUtil;
 import com.google.gson.Gson;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
@@ -18,6 +19,7 @@ import com.levin.oak.base.services.accesslog.req.CreateAccessLogReq;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -49,6 +51,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -194,6 +197,10 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
                 .orElse(null);
 
         if (plugin == null) {
+            log.warn("AOP拦截，类：{} --> 模块：未知, signature:{}", className, signature);
+        }
+
+        if (plugin == null) {
             return Collections.emptyList();
         }
 
@@ -284,7 +291,14 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
         final Map<String, ?> injectVars = Collections.emptyMap();// injectVarService.getInjectVars();
 
-        variableResolverList.addAll(getModuleResolverList(joinPoint));
+        List<VariableResolver> moduleResolverList = getModuleResolverList(joinPoint);
+
+        if (moduleResolverList == null || moduleResolverList.isEmpty()) {
+            log.warn("AOP拦截，类：{}，URI:{}, signature:{} 没有找到模块变量解析器", className, path, signature);
+        }
+
+        variableResolverList.addAll(moduleResolverList);
+
         variableResolverList.addAll(variableResolverManager.getVariableResolvers());
 
         //对方法参数进行迭代
@@ -466,6 +480,15 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         return path;
     }
 
+    private String getFirst(String defaultValue, String... texts) {
+
+        if (texts == null || texts.length == 0) {
+            return defaultValue;
+        }
+
+        return Stream.of(texts).filter(StringUtils::hasText).findFirst().orElse(defaultValue);
+    }
+
     /**
      * 获取请求信息
      *
@@ -489,33 +512,40 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
         Method method = methodSignature.getMethod();
 
+        Tag tag = method.getClass().getAnnotation(Tag.class);
+
+        String tagName = tag != null ? getFirst("", tag.name(), tag.description()) : "";
+
         String requestName = "";
 
         if (method.isAnnotationPresent(Operation.class)) {
 
             Operation operation = method.getAnnotation(Operation.class);
 
-            String[] tags = operation.tags();
+            tagName = getFirst(tagName, operation.tags());
 
-            if (tags != null && tags.length > 0) {
-                requestName = tags[0];
-            }
-
-            requestName += "|" + operation.summary();
+            requestName = getFirst(operation.summary(), operation.description());
 
         } else if (method.isAnnotationPresent(Schema.class)) {
-            requestName = method.getAnnotation(Schema.class).description();
+            Schema schema = method.getAnnotation(Schema.class);
+            requestName = getFirst(schema.title(), schema.description());
         } else if (method.isAnnotationPresent(Desc.class)) {
-            requestName = method.getAnnotation(Desc.class).value();
-        } else {
+            Desc desc = method.getAnnotation(Desc.class);
+            requestName = getFirst(desc.value(), desc.name());
+        }
+
+        if (!StringUtils.hasText(requestName)) {
             requestName = request.getRequestURI();
+        }
+
+        if (StringUtils.hasText(tagName)) {
+            requestName += tagName + "|" + requestName;
         }
 
         //获取请求参数
         if (paramMap != null) {
 
             if (isOnlyHttpParams) {
-
                 request.getParameterMap().forEach((name, value) -> {
                     paramMap.put(name, value.length > 1 ? Arrays.asList(value) : (value.length > 0 ? value[0] : null));
                 });
