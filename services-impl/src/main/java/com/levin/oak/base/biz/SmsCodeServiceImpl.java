@@ -130,7 +130,7 @@ public class SmsCodeServiceImpl
 
 //        Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
 
-        String value = redisTemplate.opsForValue().getAndExpire(CACHE_NAME + ":" + prefix + code.toLowerCase(), 1, TimeUnit.MICROSECONDS);
+        String value = redisTemplate.opsForValue().getAndDelete(CACHE_NAME + ":" + prefix + code.toLowerCase());
 
         Long putTime = StringUtils.hasText(value) ? Long.decode(value) : null;
 

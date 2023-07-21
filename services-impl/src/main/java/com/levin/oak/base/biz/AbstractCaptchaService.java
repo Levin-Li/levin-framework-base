@@ -104,7 +104,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         final String prefix = String.join("|", tenantId, appId, account);
 
-        String value = redisTemplate.opsForValue().getAndExpire(CACHE_NAME + ":" +prefix + code.toLowerCase(),1, TimeUnit.MICROSECONDS);
+        String value = redisTemplate.opsForValue().getAndDelete(CACHE_NAME + ":" +prefix + code.toLowerCase());
         Long putTime = StringUtils.hasText(value) ? Long.parseLong(value) : null;
 
         //  Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
