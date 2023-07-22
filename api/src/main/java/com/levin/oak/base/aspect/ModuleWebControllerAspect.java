@@ -38,16 +38,26 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.ResolvableType;
+import org.springframework.core.io.InputStreamSource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.Writer;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
@@ -564,13 +574,19 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 //                    paramName = paramName != null ? paramName : "";
 //                    paramName = paramName + "(" + paramType.getSimpleName() + ")";
 
-                    if (StringUtils.hasText(paramName) && args != null && i < args.length) {
-                        paramMap.put(paramName, args[i]);
+                    if (StringUtils.hasText(paramName)
+                            && args != null && i < args.length) {
+                        if (!isIgnore(args[i])) {
+                            paramMap.put(paramName, args[i]);
+                        }
+
                     }
                 }
             } else if (args != null && args.length > 0) {
                 for (int i = 0; i < args.length; i++) {
-                    paramMap.put("P" + i, args[i]);
+                    if (!isIgnore(args[i])) {
+                        paramMap.put("P" + i, args[i]);
+                    }
                 }
             }
         }
@@ -584,6 +600,19 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         }
 
         return requestName;
+    }
+
+    private boolean isIgnore(Object object) {
+        return object instanceof ServletRequest
+                || object instanceof MultipartRequest
+                || object instanceof InputStreamSource
+                || object instanceof InputStream
+                || object instanceof OutputStream
+                || object instanceof Reader
+                || object instanceof Writer
+                || object instanceof WebRequest
+                || object instanceof ModelAndView
+                || object instanceof ServletResponse;
     }
 
 }
