@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  * 应用错误日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:14, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[fb7c545939ccb12713c68a2c36ecc290], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:31, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[7679c7fdc9207709ddb5e4aaa09ba012], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "AppErrorLogService")
@@ -160,7 +160,7 @@ public class AppErrorLogServiceImpl extends BaseService implements AppErrorLogSe
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleAppErrorLogInfo> simpleQuery(QueryAppErrorLogReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleAppErrorLogInfo.class, req, paging);
     }
 
     /**

@@ -53,8 +53,8 @@ import java.util.Date;
 /**
  * 通知-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:14, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[f4e945d923cc34b4a97ae1bc3048cd1e], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:31, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[07e7b8e39c1a667d4b3be71b9917bca0], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "NoticeService")
@@ -161,7 +161,7 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleNoticeInfo> simpleQuery(QueryNoticeReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleNoticeInfo.class, req, paging);
     }
 
     /**

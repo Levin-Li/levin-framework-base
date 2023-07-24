@@ -56,8 +56,8 @@ import java.util.Date;
 /**
  * 区域-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[b855f082154a4d026095b1ceebc936f7], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:34, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[c2ed647591cdbac683e6bb92825f9661], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "AreaService")
@@ -164,7 +164,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleAreaInfo> simpleQuery(QueryAreaReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleAreaInfo.class, req, paging);
     }
 
     /**

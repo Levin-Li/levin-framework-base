@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  * 访问日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:15, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[b4051edacb9ee0a9391b32a09850b1a3], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:32, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[4d57641290929822fd3fd50073b62a92], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "AccessLogService")
@@ -160,7 +160,7 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleAccessLogInfo> simpleQuery(QueryAccessLogReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleAccessLogInfo.class, req, paging);
     }
 
     /**

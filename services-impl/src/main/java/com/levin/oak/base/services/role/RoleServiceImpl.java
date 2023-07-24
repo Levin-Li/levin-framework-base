@@ -10,7 +10,9 @@ import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.services.BaseService;
 import com.levin.oak.base.services.role.info.RoleInfo;
+import com.levin.oak.base.services.role.info.SimpleRoleInfo;
 import com.levin.oak.base.services.role.req.*;
+import com.levin.oak.base.services.simpleapi.req.QuerySimpleApiReq;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.services.tenant.req.QueryTenantReq;
 import com.levin.oak.base.services.tenant.req.StatTenantReq;
@@ -177,7 +179,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
      */
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
     @Override
-    public PagingData<StatRoleReq.Result> stat(StatRoleReq req , Paging paging){
+    public PagingData<StatRoleReq.Result> stat(StatRoleReq req, Paging paging) {
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
@@ -189,7 +191,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
      */
     @Override
     @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
-    public int count(QueryRoleReq req){
+    public int count(QueryRoleReq req) {
         return (int) simpleDao.countByQueryObj(req);
     }
 
@@ -201,8 +203,20 @@ public class RoleServiceImpl extends BaseService implements RoleService {
 
     @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
     @Override
-    public RoleInfo findUnique(QueryRoleReq req){
+    public RoleInfo findUnique(QueryRoleReq req) {
         return simpleDao.findUnique(req);
+    }
+
+    /**
+     * 指定选择列查询
+     *
+     * @param req
+     * @param paging 分页设置，可空
+     * @return pagingData 分页数据
+     */
+    @Override
+    public PagingData<SimpleRoleInfo> simpleQuery(QueryRoleReq req, Paging paging) {
+        return simpleDao.findPageByQueryObj(SimpleRoleInfo.class, req, paging);
     }
 
     @Override

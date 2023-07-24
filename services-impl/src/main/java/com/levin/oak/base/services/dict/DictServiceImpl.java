@@ -55,8 +55,8 @@ import java.util.Date;
 /**
  * 字典-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:14, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[02e76480ecb71d089ac0fd11e3d939e0], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:31, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[715346fc36aab019db4c4d7e63de2f77], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "DictService")
@@ -163,7 +163,7 @@ public class DictServiceImpl extends BaseService implements DictService {
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleDictInfo> simpleQuery(QueryDictReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleDictInfo.class, req, paging);
     }
 
     /**

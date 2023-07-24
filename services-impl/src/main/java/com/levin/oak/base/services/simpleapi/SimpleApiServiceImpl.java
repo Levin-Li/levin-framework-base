@@ -55,8 +55,8 @@ import java.util.Date;
 /**
  * 简单动态接口-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[cb13d60ecacd517e9bb1fc2692d1a4ee], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:29, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[e956fc1bed1079f5f259bf26d9d3bf5b], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "SimpleApiService")
@@ -163,7 +163,7 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleSimpleApiInfo> simpleQuery(QuerySimpleApiReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleSimpleApiInfo.class, req, paging);
     }
 
     /**

@@ -54,8 +54,8 @@ import java.util.Date;
 /**
  * 简单页面-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[02a09c6b4abe2e526303a3cf6309ebc1], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:34, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[c0bfa5031115007fe40b06cd7cd63b9c], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "SimplePageService")
@@ -162,7 +162,7 @@ public class SimplePageServiceImpl extends BaseService implements SimplePageServ
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleSimplePageInfo> simpleQuery(QuerySimplePageReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleSimplePageInfo.class, req, paging);
     }
 
     /**

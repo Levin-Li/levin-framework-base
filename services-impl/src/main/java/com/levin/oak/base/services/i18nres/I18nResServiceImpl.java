@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  * 国际化资源-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:16, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[e2565ea444ed7c581333a5c242b87f3b], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:33, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[d317f113313403bc5d0e95ce29e2955c], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "I18nResService")
@@ -160,7 +160,7 @@ public class I18nResServiceImpl extends BaseService implements I18nResService {
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleI18nResInfo> simpleQuery(QueryI18nResReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleI18nResInfo.class, req, paging);
     }
 
     /**

@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  * 应用接入-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[b724f66f400bf4b7b32474a1b106936e], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:29, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[160f47d769fd0271ae4bae779442c9cd], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "AppClientService")
@@ -166,7 +166,7 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleAppClientInfo> simpleQuery(QueryAppClientReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleAppClientInfo.class, req, paging);
     }
 
     /**

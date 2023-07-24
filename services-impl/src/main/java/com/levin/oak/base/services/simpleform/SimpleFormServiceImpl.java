@@ -54,8 +54,8 @@ import java.util.Date;
 /**
  * 简单表单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[304c51251bf2cd607b5b7fdfd698ed9f], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:34, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[43a71d0e6558f1965e9915419bb35dd5], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "SimpleFormService")
@@ -162,7 +162,7 @@ public class SimpleFormServiceImpl extends BaseService implements SimpleFormServ
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleSimpleFormInfo> simpleQuery(QuerySimpleFormReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleSimpleFormInfo.class, req, paging);
     }
 
     /**

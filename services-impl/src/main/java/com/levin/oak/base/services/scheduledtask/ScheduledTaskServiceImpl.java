@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  * 调度任务-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:15, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[4555e933e65dfbfa86d2afcc2c07943e], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:32, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[6cef00e9859050f32862cf44ba0cea5a], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "ScheduledTaskService")
@@ -160,7 +160,7 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleScheduledTaskInfo> simpleQuery(QueryScheduledTaskReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleScheduledTaskInfo.class, req, paging);
     }
 
     /**

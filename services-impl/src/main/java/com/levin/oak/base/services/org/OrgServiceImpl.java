@@ -58,8 +58,8 @@ import java.util.Date;
 /**
  * 机构-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:16, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[71d2eaab09e7a9ac2eece2c80fcda136], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:33, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[06d0a50dd0cd16db4bcb13773c0143e1], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "OrgService")
@@ -166,7 +166,7 @@ public class OrgServiceImpl extends BaseService implements OrgService {
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleOrgInfo> simpleQuery(QueryOrgReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleOrgInfo.class, req, paging);
     }
 
     /**

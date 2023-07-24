@@ -54,8 +54,8 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 /**
  * 平台租户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[25ad86e2de283d0942be2e2665270d34], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:30, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[f2aba8c91a9175b05484eebbcadd1692], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "TenantService")
@@ -162,7 +162,7 @@ public class TenantServiceImpl extends BaseService implements TenantService {
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleTenantInfo> simpleQuery(QueryTenantReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleTenantInfo.class, req, paging);
     }
 
     /**

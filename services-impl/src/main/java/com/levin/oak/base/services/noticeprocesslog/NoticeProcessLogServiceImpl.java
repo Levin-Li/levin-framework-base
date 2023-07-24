@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  * 通知处理日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:15, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[90bc74248827aa5f1c4a070f4a97ec68], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:33, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[5630e253c9fb395e1fdbe193de77b176], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "NoticeProcessLogService")
@@ -160,7 +160,7 @@ public class NoticeProcessLogServiceImpl extends BaseService implements NoticePr
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleNoticeProcessLogInfo> simpleQuery(QueryNoticeProcessLogReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleNoticeProcessLogInfo.class, req, paging);
     }
 
     /**

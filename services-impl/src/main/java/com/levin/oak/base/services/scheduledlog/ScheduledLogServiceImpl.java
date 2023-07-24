@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  * 调度日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[9f71e1f7b679ad654b07bf1c96e31da1], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:30, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[a222058885a7f3172f6302f361e6b055], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "ScheduledLogService")
@@ -160,7 +160,7 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleScheduledLogInfo> simpleQuery(QueryScheduledLogReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleScheduledLogInfo.class, req, paging);
     }
 
     /**

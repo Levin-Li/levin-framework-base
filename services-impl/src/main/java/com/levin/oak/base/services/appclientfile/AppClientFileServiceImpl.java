@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  * 客户端文件-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:14, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[e9339dc80abed48b0d6c8b60ec44f5f5], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:31, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[ed5bc268680f4bdeefe5dfa557e1c2fa], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "AppClientFileService")
@@ -160,7 +160,7 @@ public class AppClientFileServiceImpl extends BaseService implements AppClientFi
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleAppClientFileInfo> simpleQuery(QueryAppClientFileReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleAppClientFileInfo.class, req, paging);
     }
 
     /**

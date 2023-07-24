@@ -56,8 +56,8 @@ import java.util.Date;
 /**
  * 菜单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[060515d881ffa97bc37debc3d09f8345], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:34, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[c75fa1b314a96375f3230091eda9c203], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "MenuResService")
@@ -164,7 +164,7 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
     public PagingData<SimpleMenuResInfo> simpleQuery(QueryMenuResReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+        return simpleDao.findPagingDataByQueryObj(SimpleMenuResInfo.class, req, paging);
     }
 
     /**
