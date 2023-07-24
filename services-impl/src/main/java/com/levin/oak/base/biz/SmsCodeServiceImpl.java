@@ -110,7 +110,7 @@ public class SmsCodeServiceImpl
         }
 
         redisTemplate.opsForValue().
-                set(CACHE_NAME + ":" + prefix + genCode, "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+                set(CACHE_NAME + "_" + prefix + genCode, "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
 //        mapCache.put(prefix + genCode, System.currentTimeMillis(),
 //                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
@@ -130,7 +130,7 @@ public class SmsCodeServiceImpl
 
 //        Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
 
-        String value = redisTemplate.opsForValue().getAndDelete(CACHE_NAME + ":" + prefix + code.toLowerCase());
+        String value = redisTemplate.opsForValue().getAndDelete(CACHE_NAME + "_" + prefix + code.toLowerCase());
 
         Long putTime = StringUtils.hasText(value) ? Long.decode(value) : null;
 

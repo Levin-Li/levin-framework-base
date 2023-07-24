@@ -78,7 +78,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
         final String prefix = String.join("_", tenantId, appId, account);
 
         redisTemplate.opsForValue().
-                set(CACHE_NAME + ":" +prefix + code.getCode().toLowerCase(), "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+                set(CACHE_NAME + "_" +prefix + code.getCode().toLowerCase(), "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
 //        mapCache.put(prefix + code.getCode().toLowerCase(), System.currentTimeMillis(),
 //                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
@@ -104,7 +104,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         final String prefix = String.join("_", tenantId, appId, account);
 
-        String value = redisTemplate.opsForValue().getAndDelete(CACHE_NAME + ":" +prefix + code.toLowerCase());
+        String value = redisTemplate.opsForValue().getAndDelete(CACHE_NAME + "_" +prefix + code.toLowerCase());
         Long putTime = StringUtils.hasText(value) ? Long.parseLong(value) : null;
 
         //  Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
