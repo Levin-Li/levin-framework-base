@@ -77,11 +77,11 @@ public class SmsCodeServiceImpl
 
         code = code.substring(code.length() - codeLen);
 
-        final String genCode = code.toLowerCase();
+        Assert.hasText(code, "短信验证码生成失败");
 
-        Assert.hasText(genCode, "短信验证码生成失败");
+        Assert.isTrue(codeLen == code.length(), "短信验证码生成失败-" + codeLen);
 
-        Assert.isTrue(codeLen == genCode.length(), "短信验证码生成失败-" + codeLen);
+        final String cacheKey = CACHE_NAME + "_" + String.join("_", tenantId, appId, account) + code;
 
         //如果有发送服务
         if (smsSender != null) {
@@ -89,7 +89,7 @@ public class SmsCodeServiceImpl
             String resp = null;
 
             try {
-                resp = smsSender.sendCode(tenantId, appId, phoneNo, genCode);
+                resp = smsSender.sendCode(tenantId, appId, phoneNo, code);
             } catch (Exception e) {
                 resp = e.getMessage();
                 log.error("租户短信发送失败", e);
@@ -106,17 +106,12 @@ public class SmsCodeServiceImpl
             throw new IllegalStateException("1短信发送失败，通道不可用");
         }
 
-        final String key = CACHE_NAME + "_" + String.join("_", tenantId, appId, account) + genCode;
+        //  redisTemplate.opsForValue().set(cacheKey, "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
-        log.debug("send sms code , redis key:{}", key);
-
-//        redisTemplate.opsForValue().set(key, "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
-
-        mapCache.put(key, System.currentTimeMillis(),
+        mapCache.put(cacheKey, System.currentTimeMillis(),
                 frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
         return code;
-
     }
 
     @Override
@@ -127,13 +122,13 @@ public class SmsCodeServiceImpl
 
         Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证码关闭");
 
-        final String key = CACHE_NAME + "_" + String.join("_", tenantId, appId, account) + code.toLowerCase();
+        final String cacheKey = CACHE_NAME + "_" + String.join("_", tenantId, appId, account) + code;
 
-        log.debug("verify sms code , redis key:{}", key);
+        log.debug("verify sms code , redis cacheKey:{}", cacheKey);
 
-        Long putTime = (Long) mapCache.remove(key);
+        Long putTime = (Long) mapCache.remove(cacheKey);
 
-//        String value = redisTemplate.opsForValue().getAndDelete(key);
+//        String value = redisTemplate.opsForValue().getAndDelete(cacheKey);
 //        Long putTime = StringUtils.hasText(value) ? Long.decode(value) : null;
 
         //小余1分钟

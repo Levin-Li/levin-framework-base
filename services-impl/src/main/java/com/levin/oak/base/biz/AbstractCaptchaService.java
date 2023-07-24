@@ -26,15 +26,15 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 //    @Autowired
 //    protected CacheManager cacheManager;
 
-//    @Autowired
-//    protected RedissonClient redissonClient;
+    @Autowired
+    protected RedissonClient redissonClient;
 
     private static final String CACHE_NAME = CaptchaService.class.getName();
 
     @Autowired
     protected FrameworkProperties frameworkProperties;
 
-//    protected RMapCache<Object, Object> mapCache = null;
+    protected RMapCache<Object, Object> mapCache = null;
 
     @Autowired
     StringRedisTemplate redisTemplate;
@@ -42,7 +42,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
     @PostConstruct
     protected void init() {
-//        mapCache = redissonClient.getMapCache(CaptchaService.class.getName());
+        mapCache = redissonClient.getMapCache(CaptchaService.class.getName());
     }
 
     /**
@@ -75,15 +75,17 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         fillCode(code, genParams);
 
-        final String prefix = String.join("_", tenantId, appId, account);
+        Assert.hasText(code.getCode(), "验证码生成失败");
 
-        redisTemplate.opsForValue().
-                set(CACHE_NAME + "_" +prefix + code.getCode().toLowerCase(), "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+        final String cacheKey = CACHE_NAME + "_" + String.join("_", tenantId, appId, account) + code.getCode();
 
-//        mapCache.put(prefix + code.getCode().toLowerCase(), System.currentTimeMillis(),
-//                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+//        redisTemplate.opsForValue().
+//                set(cacheKey, "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
-        log.debug(prefix + " gen code: " + code.getCode());
+        mapCache.put(cacheKey, System.currentTimeMillis()
+                , frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+
+//        log.debug(prefix + " gen code: " + code.getCode());
 
         return code;
     }
@@ -102,12 +104,12 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         Assert.isTrue(frameworkProperties.isEnableCaptchaVerificationCode(), "系统图片验证码关闭");
 
-        final String prefix = String.join("_", tenantId, appId, account);
+        final String cacheKey = CACHE_NAME + "_" + String.join("_", tenantId, appId, account) + code;
 
-        String value = redisTemplate.opsForValue().getAndDelete(CACHE_NAME + "_" +prefix + code.toLowerCase());
-        Long putTime = StringUtils.hasText(value) ? Long.parseLong(value) : null;
+//        String value = redisTemplate.opsForValue().getAndDelete(cacheKey);
+//        Long putTime = StringUtils.hasText(value) ? Long.parseLong(value) : null;
 
-        //  Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
+        Long putTime = (Long) mapCache.remove(cacheKey);
 
         //小余1分钟
         return putTime != null && (System.currentTimeMillis() - putTime)
