@@ -52,7 +52,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "UserController", matchIfMissing = true)
 
 //默认需要权限访问
-//@ResAuthorize(domain = ID, type = TYPE_NAME)
+//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 @Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid
@@ -100,12 +100,12 @@ public class UserController extends BaseController {
      */
     protected void checkCurrentUserCreateOrUpdateUserRole(String targetUserId, List<String> roleList) {
 
-        boolean ok = rbacService.canAssignRole(authService.getLoginId(),targetUserId, roleList, (roleCode, info) -> {
-            throw new AuthorizationException(  "分配角色(" + roleCode + ")失败，请检查是否拥有角色所需的权限," + info);
+        boolean ok = rbacService.canAssignRole(authService.getLoginId(), targetUserId, roleList, (roleCode, info) -> {
+            throw new AuthorizationException("分配角色(" + roleCode + ")失败，请检查是否拥有角色所需的权限," + info);
         });
 
         if (!ok) {
-            throw new AuthorizationException( "分配角色失败，请检查是否拥有角色所需的权限");
+            throw new AuthorizationException("分配角色失败，请检查是否拥有角色所需的权限");
         }
     }
 
@@ -116,7 +116,7 @@ public class UserController extends BaseController {
      * @return ApiResp<PagingData < UserInfo>>
      */
     @GetMapping("/query")
-    @Operation( summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     public ApiResp<PagingData<UserInfo>> query(QueryUserReq req, SimplePaging paging) {
 
         PagingData<UserInfo> pagingData = userService.query(req, paging);
@@ -137,7 +137,7 @@ public class UserController extends BaseController {
      * @return ApiResp
      */
     @PostMapping
-    @Operation( summary = CREATE_ACTION)
+    @Operation(summary = CREATE_ACTION)
     public ApiResp<String> create(@RequestBody CreateUserReq req) {
         checkCurrentUserCreateOrUpdateUserRole(null, req.getRoleList());
         return ApiResp.ok(userService.create(req));
@@ -150,7 +150,7 @@ public class UserController extends BaseController {
      * @return ApiResp
      */
     @PostMapping("/batchCreate")
-    @Operation( summary = BATCH_CREATE_ACTION)
+    @Operation(summary = BATCH_CREATE_ACTION)
     public ApiResp<List<String>> batchCreate(@RequestBody List<CreateUserReq> reqList) {
         reqList.forEach(req -> checkCurrentUserCreateOrUpdateUserRole(null, req.getRoleList()));
         return ApiResp.ok(userService.batchCreate(reqList));
@@ -163,7 +163,7 @@ public class UserController extends BaseController {
      * @param req QueryUserByIdReq
      */
     @GetMapping("")
-    @Operation( summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<UserInfo> retrieve(@NotNull UserIdReq req) {
         return ApiResp.ok(desensitize(userService.findById(req)));
     }
@@ -174,7 +174,7 @@ public class UserController extends BaseController {
      * @param req UpdateUserReq
      */
     @PutMapping({""})
-    @Operation( summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Boolean> update(@RequestBody UpdateUserReq req) {
         checkCurrentUserCreateOrUpdateUserRole(req.getId(), req.getRoleList());
         return ApiResp.ok(checkResult(userService.update(req), UPDATE_ACTION));
@@ -184,7 +184,7 @@ public class UserController extends BaseController {
      * 批量更新
      */
     @PutMapping("/batchUpdate")
-    @Operation( summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateUserReq> reqList) {
         reqList.forEach(req -> checkCurrentUserCreateOrUpdateUserRole(req.getId(), req.getRoleList()));
         return ApiResp.ok(checkResult(userService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
@@ -196,7 +196,7 @@ public class UserController extends BaseController {
      * @param req UserIdReq
      */
     @DeleteMapping({""})
-    @Operation( summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Boolean> delete(@NotNull UserIdReq req) {
         return ApiResp.ok(checkResult(userService.delete(req), DELETE_ACTION));
     }
@@ -207,7 +207,7 @@ public class UserController extends BaseController {
      * @param req DeleteUserReq
      */
     @DeleteMapping({"/batchDelete"})
-    @Operation( summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
+    @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteUserReq req) {
         return ApiResp.ok(checkResult(userService.batchDelete(req), BATCH_DELETE_ACTION));
     }

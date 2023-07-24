@@ -53,8 +53,8 @@ import java.util.Date;
 /**
  * 工作岗位-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[5f0876b2a23103acc893b55dabea5146], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:16, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[df9d54bdf28284df6d42cd930c1d3fb8], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "JobPostService")
@@ -74,15 +74,16 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
         return getSelfProxy(JobPostService.class);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(summary = CREATE_ACTION)
     @Transactional(rollbackFor = {RuntimeException.class})
     @Override
     public String create(CreateJobPostReq req){
+        //保存自动先查询唯一约束，并给出错误信息
         JobPost entity = simpleDao.create(req, true);
         return entity.getId();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(summary = BATCH_CREATE_ACTION)
     //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
@@ -90,7 +91,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
     //@Cacheable(condition = "#id != null", unless = "#result == null ", key = E_JobPost.CACHE_KEY_PREFIX + "#id")
@@ -98,7 +99,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
         return findById(new JobPostIdReq().setId(id));
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //只更新缓存
     //@CachePut(unless = "#result == null" , condition = "#req.id != null" , key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
@@ -107,7 +108,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
         return simpleDao.findUnique(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    @Operation(summary = UPDATE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
@@ -116,15 +117,15 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
+    @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchUpdate(List<UpdateJobPostReq> reqList){
         //@Todo 优化批量提交
-        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n?1:0).sum();
+        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(summary = DELETE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
@@ -133,7 +134,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchDelete(DeleteJobPostReq req){
@@ -141,13 +142,25 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
         return Stream.of(req.getIdList())
             .map(id -> simpleDao.copy(req, new JobPostIdReq().setId(id)))
             .map(idReq -> getSelfProxy().delete(idReq))
-            .mapToInt(n -> n?1:0)
+            .mapToInt(n -> n ? 1 : 0)
             .sum();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
     public PagingData<JobPostInfo> query(QueryJobPostReq req, Paging paging) {
+        return simpleDao.findPagingDataByQueryObj(req, paging);
+    }
+
+    /**
+     * 指定选择列查询
+     *
+     * @param req
+     * @param paging 分页设置，可空
+     * @return pagingData 分页数据
+     */
+    @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
+    public PagingData<SimpleJobPostInfo> simpleQuery(QueryJobPostReq req, Paging paging){
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
@@ -158,7 +171,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
      * @param paging 分页设置，可空
      * @return pagingData 分页数据
      */
-    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    @Operation(summary = STAT_ACTION)
     @Override
     public PagingData<StatJobPostReq.Result> stat(StatJobPostReq req , Paging paging){
         return simpleDao.findPagingDataByQueryObj(req, paging);
@@ -171,25 +184,25 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
      * @return record count
      */
     @Override
-    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    @Operation(summary = STAT_ACTION)
     public int count(QueryJobPostReq req){
         return (int) simpleDao.countByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
     public JobPostInfo findOne(QueryJobPostReq req){
         return simpleDao.findOneByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
     public JobPostInfo findUnique(QueryJobPostReq req){
         return simpleDao.findUnique(req);
     }
 
     @Override
-    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_JobPost.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {
     }

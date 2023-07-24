@@ -69,7 +69,7 @@ public class SmsCodeServiceImpl
         Assert.hasText(account, "帐号不能为空");
         Assert.hasText(phoneNo, "手机号不能为空");
 
-        final String prefix = String.join("|", tenantId, appId, account);
+        final String prefix = String.join("_", tenantId, appId, account);
 
         //使用纳秒随机码
         String code = "" + System.nanoTime();
@@ -126,7 +126,7 @@ public class SmsCodeServiceImpl
 
         Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证码关闭");
 
-        final String prefix = String.join("|", tenantId, appId, account);
+        final String prefix = String.join("_", tenantId, appId, account);
 
 //        Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
 

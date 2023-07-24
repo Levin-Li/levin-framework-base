@@ -23,8 +23,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 简单页面-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:57, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[0d66ed9f42b9540a29ee26b44c331bfe], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[f1d68fe2059522ea32eaf6560894ec30], 请不要修改和删除此行内容。
  */
 @Tag(name = E_SimplePage.BIZ_NAME, description = E_SimplePage.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimplePageService {
@@ -36,7 +36,7 @@ public interface SimplePageService {
      * @param req
      * @return pkId 主键ID
      */
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(summary = CREATE_ACTION)
     String create(@NotNull CreateSimplePageReq req);
 
     /**
@@ -44,7 +44,7 @@ public interface SimplePageService {
      * @param reqList
      * @return pkId 主键ID列表
      */
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(summary = BATCH_CREATE_ACTION)
     List<String> batchCreate(@NotNull List<CreateSimplePageReq> reqList);
 
     /**
@@ -52,7 +52,7 @@ public interface SimplePageService {
      * @param id 主键ID
      * @return data 数据详情
      */
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     SimplePageInfo findById(@NotNull String id);
 
     /**
@@ -60,7 +60,7 @@ public interface SimplePageService {
     * @param req
     * @return data 数据详情
     */
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     SimplePageInfo findById(@NotNull SimplePageIdReq req);
 
     /**
@@ -69,7 +69,7 @@ public interface SimplePageService {
      * @param req
      * @return num 更新记录数
      */
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    @Operation(summary = UPDATE_ACTION)
     boolean update(@NotNull UpdateSimplePageReq req);
 
     /**
@@ -78,7 +78,7 @@ public interface SimplePageService {
      * @param reqList
      * @return num 更新记录数
      */
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
+    @Operation(summary = BATCH_UPDATE_ACTION)
     int batchUpdate(@NotNull List<UpdateSimplePageReq> reqList);
 
     /**
@@ -86,7 +86,7 @@ public interface SimplePageService {
      * @param req
      * @return num 删除记录数
      */
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(summary = DELETE_ACTION)
     boolean delete(@NotNull SimplePageIdReq req);
 
     /**
@@ -94,7 +94,7 @@ public interface SimplePageService {
      * @param req
      * @return num 删除记录数
      */
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    @Operation(summary = BATCH_DELETE_ACTION)
     int batchDelete(@NotNull DeleteSimplePageReq req);
 
     /**
@@ -104,8 +104,18 @@ public interface SimplePageService {
      * @param paging 分页设置，可空
      * @return pagingData 分页数据
      */
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     PagingData<SimplePageInfo> query(@NotNull QuerySimplePageReq req, Paging paging);
+
+    /**
+     * 指定选择列查询
+     *
+     * @param req
+     * @param paging 分页设置，可空
+     * @return pagingData 分页数据
+     */
+    @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
+    PagingData<SimpleSimplePageInfo> simpleQuery(@NotNull QuerySimplePageReq req, Paging paging);
 
     /**
      * 简单统计
@@ -114,7 +124,7 @@ public interface SimplePageService {
      * @param paging 分页设置，可空
      * @return pagingData 分页数据
      */
-    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    @Operation(summary = STAT_ACTION)
     PagingData<StatSimplePageReq.Result> stat(@NotNull StatSimplePageReq req, Paging paging);
 
     /**
@@ -123,7 +133,7 @@ public interface SimplePageService {
      * @param req
      * @return record count
      */
-    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    @Operation(summary = STAT_ACTION)
     int count(@NotNull QuerySimplePageReq req);
 
     /**
@@ -132,7 +142,7 @@ public interface SimplePageService {
      * @param req
      * @return data 第一条数据
      */
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     SimplePageInfo findOne(@NotNull QuerySimplePageReq req);
 
     /**
@@ -141,14 +151,14 @@ public interface SimplePageService {
      * @param req
      * @return data
      */
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     SimplePageInfo findUnique(QuerySimplePageReq req);
 
     /**
      * 清除缓存
      * @param key 缓存Key
      */
-    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
 
 }

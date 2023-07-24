@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AccessLogController", matchIfMissing = true)
 
 //默认需要权限访问
-//@ResAuthorize(domain = ID, type = TYPE_NAME)
+//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
 //类注解
 @Tag(name = E_AccessLog.BIZ_NAME, description = E_AccessLog.BIZ_NAME + MAINTAIN_ACTION)
@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 访问日志控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[2f4952ba4a0a4bd6580d9eb16229c7c4], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:15, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[1690411e438953deb27e7879b6eb4a7f], 请不要修改和删除此行内容。
  */
 public class AccessLogController extends BaseController{
 
@@ -120,10 +120,10 @@ public class AccessLogController extends BaseController{
     }
 
     /**
-    * 查看详情
-    *
-    * @param req QueryAccessLogByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QueryAccessLogByIdReq
+     */
     @GetMapping({"","{id}"})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
@@ -136,12 +136,12 @@ public class AccessLogController extends BaseController{
      * 更新
      * @param req UpdateAccessLogReq
      */
-     @PutMapping({"","{id}"})
-     @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
-     @CRUD.Op
-     public ApiResp<Boolean> update(@RequestBody UpdateAccessLogReq req, @PathVariable(required = false) Long id) {
-         req.updateIdWhenNotBlank(id);
-         return ApiResp.ok(checkResult(accessLogService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+    @PutMapping({"","{id}"})
+    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @CRUD.Op
+    public ApiResp<Boolean> update(@RequestBody UpdateAccessLogReq req, @PathVariable(required = false) Long id) {
+        req.updateIdWhenNotBlank(id);
+        return ApiResp.ok(checkResult(accessLogService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -184,9 +184,9 @@ public class AccessLogController extends BaseController{
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAccessLogReq> reqList) {
+    @PutMapping("/batchUpdate")
+    @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAccessLogReq> reqList) {
         return ApiResp.ok(checkResult(accessLogService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -201,7 +201,7 @@ public class AccessLogController extends BaseController{
         return ApiResp.ok(checkResult(accessLogService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
-     /**
+    /**
      * 批量删除2
      * @param req @RequestBody DeleteAccessLogReq
      */
@@ -210,5 +210,4 @@ public class AccessLogController extends BaseController{
     public ApiResp<Integer> batchDelete2(@RequestBody DeleteAccessLogReq req) {
         return batchDelete(req);
     }
-
 }

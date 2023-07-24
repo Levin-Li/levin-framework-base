@@ -24,7 +24,6 @@ import com.levin.commons.dao.annotation.order.*;
 import com.levin.commons.dao.annotation.logic.*;
 import com.levin.commons.dao.annotation.misc.*;
 
-
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_Area.*;
 import com.levin.oak.base.services.commons.req.*;
@@ -39,12 +38,11 @@ import com.levin.oak.base.entities.Area.*;
 import java.util.Date;
 ////////////////////////////////////
 
-
 /**
  * 新增区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:57, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[8bffc9145491dc3c85c8d92655d6d8fa], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:16, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[740e502e3205dc26ef76c7f71e4bbaea], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -60,6 +58,10 @@ public class CreateAreaReq extends BaseReq {
 
     private static final long serialVersionUID = -445860277L;
 
+    @Schema(title = L_code )
+    @NotBlank
+    @Size(max = 64)
+    String code;
 
     @Schema(title = L_icon )
     String icon;
@@ -67,8 +69,6 @@ public class CreateAreaReq extends BaseReq {
     @Schema(title = L_parentCode )
     @Size(max = 64)
     String parentCode;
-
-
 
     @Schema(title = L_type )
     @NotNull
@@ -118,5 +118,4 @@ public class CreateAreaReq extends BaseReq {
             setCreateTime(new Date());
         }
     }
-
 }

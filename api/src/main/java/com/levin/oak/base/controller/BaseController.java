@@ -40,7 +40,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
  */
 @Slf4j
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = TYPE_NAME)
+@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 @MenuResTag(domain = ID)
 public abstract class BaseController {
 

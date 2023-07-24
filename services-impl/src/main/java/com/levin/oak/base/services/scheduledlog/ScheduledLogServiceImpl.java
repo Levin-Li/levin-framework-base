@@ -52,8 +52,8 @@ import java.util.Date;
 /**
  * 调度日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[dbd90fb84b9a9655710844315ffd3351], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:13, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[9f71e1f7b679ad654b07bf1c96e31da1], 请不要修改和删除此行内容。
  */
 
 @Service(PLUGIN_PREFIX + "ScheduledLogService")
@@ -73,15 +73,16 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
         return getSelfProxy(ScheduledLogService.class);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = CREATE_ACTION)
+    @Operation(summary = CREATE_ACTION)
     @Transactional(rollbackFor = {RuntimeException.class})
     @Override
     public String create(CreateScheduledLogReq req){
+        //保存自动先查询唯一约束，并给出错误信息
         ScheduledLog entity = simpleDao.create(req, true);
         return entity.getId();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_CREATE_ACTION)
+    @Operation(summary = BATCH_CREATE_ACTION)
     //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
@@ -89,7 +90,7 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
     //@Cacheable(condition = "#id != null", unless = "#result == null ", key = E_ScheduledLog.CACHE_KEY_PREFIX + "#id")
@@ -97,7 +98,7 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
         return findById(new ScheduledLogIdReq().setId(id));
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = VIEW_DETAIL_ACTION)
+    @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //只更新缓存
     //@CachePut(unless = "#result == null" , condition = "#req.id != null" , key = E_ScheduledLog.CACHE_KEY_PREFIX + "#req.id")
@@ -106,7 +107,7 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
         return simpleDao.findUnique(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    @Operation(summary = UPDATE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_ScheduledLog.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
@@ -115,15 +116,15 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_UPDATE_ACTION)
+    @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchUpdate(List<UpdateScheduledLogReq> reqList){
         //@Todo 优化批量提交
-        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n?1:0).sum();
+        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = DELETE_ACTION)
+    @Operation(summary = DELETE_ACTION)
     @Override
     //@CacheEvict(condition = "#req.id != null", key = E_ScheduledLog.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
@@ -132,7 +133,7 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = BATCH_DELETE_ACTION)
+    @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public int batchDelete(DeleteScheduledLogReq req){
@@ -140,13 +141,25 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
         return Stream.of(req.getIdList())
             .map(id -> simpleDao.copy(req, new ScheduledLogIdReq().setId(id)))
             .map(idReq -> getSelfProxy().delete(idReq))
-            .mapToInt(n -> n?1:0)
+            .mapToInt(n -> n ? 1 : 0)
             .sum();
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
     public PagingData<ScheduledLogInfo> query(QueryScheduledLogReq req, Paging paging) {
+        return simpleDao.findPagingDataByQueryObj(req, paging);
+    }
+
+    /**
+     * 指定选择列查询
+     *
+     * @param req
+     * @param paging 分页设置，可空
+     * @return pagingData 分页数据
+     */
+    @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
+    public PagingData<SimpleScheduledLogInfo> simpleQuery(QueryScheduledLogReq req, Paging paging){
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
@@ -157,7 +170,7 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
      * @param paging 分页设置，可空
      * @return pagingData 分页数据
      */
-    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    @Operation(summary = STAT_ACTION)
     @Override
     public PagingData<StatScheduledLogReq.Result> stat(StatScheduledLogReq req , Paging paging){
         return simpleDao.findPagingDataByQueryObj(req, paging);
@@ -170,25 +183,25 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
      * @return record count
      */
     @Override
-    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    @Operation(summary = STAT_ACTION)
     public int count(QueryScheduledLogReq req){
         return (int) simpleDao.countByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
     public ScheduledLogInfo findOne(QueryScheduledLogReq req){
         return simpleDao.findOneByQueryObj(req);
     }
 
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
     public ScheduledLogInfo findUnique(QueryScheduledLogReq req){
         return simpleDao.findUnique(req);
     }
 
     @Override
-    @Operation(tags = {BIZ_NAME}, summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_ScheduledLog.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {
     }

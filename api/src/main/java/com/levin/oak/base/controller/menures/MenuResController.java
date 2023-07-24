@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "MenuResController", matchIfMissing = true)
 
 //默认需要权限访问
-//@ResAuthorize(domain = ID, type = TYPE_NAME)
+@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
 //类注解
 @Tag(name = E_MenuRes.BIZ_NAME, description = E_MenuRes.BIZ_NAME + MAINTAIN_ACTION)
@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 菜单控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:49, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[5fdcb00fa19ba05915866f6e637ff564], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[da818e6b9513f3997a5e8ba854391cdb], 请不要修改和删除此行内容。
  */
 public class MenuResController extends BaseController{
 
@@ -120,10 +120,10 @@ public class MenuResController extends BaseController{
     }
 
     /**
-    * 查看详情
-    *
-    * @param req QueryMenuResByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QueryMenuResByIdReq
+     */
     @GetMapping({"","{id}"})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
@@ -136,12 +136,12 @@ public class MenuResController extends BaseController{
      * 更新
      * @param req UpdateMenuResReq
      */
-     @PutMapping({"","{id}"})
-     @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
-     @CRUD.Op
-     public ApiResp<Boolean> update(@RequestBody UpdateMenuResReq req, @PathVariable(required = false) String id) {
-         req.updateIdWhenNotBlank(id);
-         return ApiResp.ok(checkResult(menuResService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+    @PutMapping({"","{id}"})
+    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @CRUD.Op
+    public ApiResp<Boolean> update(@RequestBody UpdateMenuResReq req, @PathVariable(required = false) String id) {
+        req.updateIdWhenNotBlank(id);
+        return ApiResp.ok(checkResult(menuResService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -184,9 +184,9 @@ public class MenuResController extends BaseController{
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateMenuResReq> reqList) {
+    @PutMapping("/batchUpdate")
+    @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateMenuResReq> reqList) {
         return ApiResp.ok(checkResult(menuResService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -201,7 +201,7 @@ public class MenuResController extends BaseController{
         return ApiResp.ok(checkResult(menuResService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
-     /**
+    /**
      * 批量删除2
      * @param req @RequestBody DeleteMenuResReq
      */
@@ -210,5 +210,4 @@ public class MenuResController extends BaseController{
     public ApiResp<Integer> batchDelete2(@RequestBody DeleteMenuResReq req) {
         return batchDelete(req);
     }
-
 }

@@ -75,7 +75,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         fillCode(code, genParams);
 
-        final String prefix = String.join("|", tenantId, appId, account);
+        final String prefix = String.join("_", tenantId, appId, account);
 
         redisTemplate.opsForValue().
                 set(CACHE_NAME + ":" +prefix + code.getCode().toLowerCase(), "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
@@ -102,7 +102,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         Assert.isTrue(frameworkProperties.isEnableCaptchaVerificationCode(), "系统图片验证码关闭");
 
-        final String prefix = String.join("|", tenantId, appId, account);
+        final String prefix = String.join("_", tenantId, appId, account);
 
         String value = redisTemplate.opsForValue().getAndDelete(CACHE_NAME + ":" +prefix + code.toLowerCase());
         Long putTime = StringUtils.hasText(value) ? Long.parseLong(value) : null;

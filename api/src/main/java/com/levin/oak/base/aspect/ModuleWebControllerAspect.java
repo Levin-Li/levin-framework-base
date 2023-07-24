@@ -1,5 +1,8 @@
 package com.levin.oak.base.aspect;
 
+import cn.hutool.core.exceptions.ExceptionUtil;
+import cn.hutool.core.io.IORuntimeException;
+import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import com.google.gson.Gson;
@@ -42,22 +45,19 @@ import org.springframework.core.io.InputStreamSource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.util.StringUtils;
+import org.springframework.util.*;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.ServletInputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
@@ -555,40 +555,79 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         //获取请求参数
         if (paramMap != null) {
 
-            if (isOnlyHttpParams) {
-                request.getParameterMap().forEach((name, value) -> {
-                    paramMap.put(name, value.length > 1 ? Arrays.asList(value) : (value.length > 0 ? value[0] : null));
-                });
+            final String contentType = request.getContentType();
 
-            } else if (paramTypes != null && paramTypes.length > 0) {
+            final MimeType mimeType = StringUtils.hasText(contentType) ? MimeTypeUtils.parseMimeType(contentType) : null;
 
-                if (paramNames == null || paramNames.length != paramTypes.length) {
-                    paramNames = new String[paramTypes.length];
-                }
+            final String encoding = (mimeType != null && mimeType.getCharset() != null) ? mimeType.getCharset().name() : request.getCharacterEncoding();
 
-                for (int i = 0; i < paramTypes.length; i++) {
-                    //  Class paramType = paramTypes[i];
+            //读取URL参数
+            request.getParameterMap().forEach((name, value) -> {
+                paramMap.put(name, value.length > 1 ? Arrays.asList(value) : (value.length > 0 ? value[0] : null));
+            });
 
-                    String paramName = paramNames[i];
+            //获取请求内容
+            if (!isOnlyHttpParams) {
 
-//                    paramName = paramName != null ? paramName : "";
-//                    paramName = paramName + "(" + paramType.getSimpleName() + ")";
+                if (request instanceof MultipartHttpServletRequest
+                        || request instanceof MultipartRequest) {
+                    //如果是附件
+                    paramMap.put("multipart", "" + contentType + "-" + request.getContentLengthLong());
+                } else if (StringUtils.hasText(contentType)
+                        && (contentType.toLowerCase().contains("text/")
+                        || contentType.toLowerCase().contains("/json"))) {
 
-                    if (StringUtils.hasText(paramName)
-                            && args != null && i < args.length) {
-                        if (!isIgnore(args[i])) {
-                            paramMap.put(paramName, args[i]);
+                    //如果是文本
+                    try {
+                        ServletInputStream inputStream = request.getInputStream();
+                        try {
+                            inputStream.reset();
+                            String content = StringUtils.hasText(encoding) ? IoUtil.read(inputStream, encoding) : IoUtil.readUtf8(inputStream);
+                            paramMap.put("body", content);
+                        } finally {
+                            inputStream.reset();
                         }
+                    } catch (Exception e) {
+                        log.warn("获取请求内容失败，URL：" + request.getRequestURL() + "," + contentType, e);
+                        paramMap.put("error", "获取请求内容失败," + ExceptionUtil.getRootCauseMessage(e));
+                    }
 
-                    }
-                }
-            } else if (args != null && args.length > 0) {
-                for (int i = 0; i < args.length; i++) {
-                    if (!isIgnore(args[i])) {
-                        paramMap.put("P" + i, args[i]);
-                    }
+                } else {
+                    paramMap.put("content", "" + contentType + "-" + request.getContentLengthLong());
                 }
             }
+
+            //读取参数
+//            if (paramTypes != null && paramTypes.length > 0) {
+//
+//                if (paramNames == null || paramNames.length != paramTypes.length) {
+//                    paramNames = new String[paramTypes.length];
+//                }
+//
+//                for (int i = 0; i < paramTypes.length; i++) {
+//                    //  Class paramType = paramTypes[i];
+//
+//                    String paramName = paramNames[i];
+//
+////                    paramName = paramName != null ? paramName : "";
+////                    paramName = paramName + "(" + paramType.getSimpleName() + ")";
+//
+//                    if (StringUtils.hasText(paramName)
+//                            && args != null && i < args.length) {
+//                        if (!isIgnore(args[i])) {
+//                            paramMap.put(paramName, args[i]);
+//                        }
+//
+//                    }
+//                }
+//            } else if (args != null && args.length > 0) {
+//                for (int i = 0; i < args.length; i++) {
+//                    if (!isIgnore(args[i])) {
+//                        paramMap.put("P" + i, args[i]);
+//                    }
+//                }
+//            }
+
         }
 
         if (headerMap != null) {

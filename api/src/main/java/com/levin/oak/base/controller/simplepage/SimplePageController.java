@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimplePageController", matchIfMissing = true)
 
 //默认需要权限访问
-//@ResAuthorize(domain = ID, type = TYPE_NAME)
+//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
 //类注解
 @Tag(name = E_SimplePage.BIZ_NAME, description = E_SimplePage.BIZ_NAME + MAINTAIN_ACTION)
@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 简单页面控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:49, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[f030a98e830c35725dc4183f4c568d22], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[143a454a2a93e3be6b2f8dcd4d25c57d], 请不要修改和删除此行内容。
  */
 public class SimplePageController extends BaseController{
 
@@ -120,10 +120,10 @@ public class SimplePageController extends BaseController{
     }
 
     /**
-    * 查看详情
-    *
-    * @param req QuerySimplePageByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QuerySimplePageByIdReq
+     */
     @GetMapping({"","{id}"})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
@@ -136,12 +136,12 @@ public class SimplePageController extends BaseController{
      * 更新
      * @param req UpdateSimplePageReq
      */
-     @PutMapping({"","{id}"})
-     @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
-     @CRUD.Op
-     public ApiResp<Boolean> update(@RequestBody UpdateSimplePageReq req, @PathVariable(required = false) String id) {
-         req.updateIdWhenNotBlank(id);
-         return ApiResp.ok(checkResult(simplePageService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+    @PutMapping({"","{id}"})
+    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @CRUD.Op
+    public ApiResp<Boolean> update(@RequestBody UpdateSimplePageReq req, @PathVariable(required = false) String id) {
+        req.updateIdWhenNotBlank(id);
+        return ApiResp.ok(checkResult(simplePageService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -184,9 +184,9 @@ public class SimplePageController extends BaseController{
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateSimplePageReq> reqList) {
+    @PutMapping("/batchUpdate")
+    @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateSimplePageReq> reqList) {
         return ApiResp.ok(checkResult(simplePageService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -201,7 +201,7 @@ public class SimplePageController extends BaseController{
         return ApiResp.ok(checkResult(simplePageService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
-     /**
+    /**
      * 批量删除2
      * @param req @RequestBody DeleteSimplePageReq
      */
@@ -210,5 +210,4 @@ public class SimplePageController extends BaseController{
     public ApiResp<Integer> batchDelete2(@RequestBody DeleteSimplePageReq req) {
         return batchDelete(req);
     }
-
 }

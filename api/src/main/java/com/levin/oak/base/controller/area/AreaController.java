@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AreaController", matchIfMissing = true)
 
 //默认需要权限访问
-//@ResAuthorize(domain = ID, type = TYPE_NAME)
+//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
 //类注解
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 区域控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:49, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[d39517a4faad89db3a0f96eabc9ef4cc], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[5b8f350822a46da8030cd80cd971ef87], 请不要修改和删除此行内容。
  */
 public class AreaController extends BaseController{
 
@@ -120,10 +120,10 @@ public class AreaController extends BaseController{
     }
 
     /**
-    * 查看详情
-    *
-    * @param req QueryAreaByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QueryAreaByIdReq
+     */
     @GetMapping({"","{code}"})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
@@ -136,12 +136,12 @@ public class AreaController extends BaseController{
      * 更新
      * @param req UpdateAreaReq
      */
-     @PutMapping({"","{code}"})
-     @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
-     @CRUD.Op
-     public ApiResp<Boolean> update(@RequestBody UpdateAreaReq req, @PathVariable(required = false) String code) {
-         req.updateCodeWhenNotBlank(code);
-         return ApiResp.ok(checkResult(areaService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+    @PutMapping({"","{code}"})
+    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @CRUD.Op
+    public ApiResp<Boolean> update(@RequestBody UpdateAreaReq req, @PathVariable(required = false) String code) {
+        req.updateCodeWhenNotBlank(code);
+        return ApiResp.ok(checkResult(areaService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -184,9 +184,9 @@ public class AreaController extends BaseController{
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAreaReq> reqList) {
+    @PutMapping("/batchUpdate")
+    @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAreaReq> reqList) {
         return ApiResp.ok(checkResult(areaService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -201,7 +201,7 @@ public class AreaController extends BaseController{
         return ApiResp.ok(checkResult(areaService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
-     /**
+    /**
      * 批量删除2
      * @param req @RequestBody DeleteAreaReq
      */
@@ -210,5 +210,4 @@ public class AreaController extends BaseController{
     public ApiResp<Integer> batchDelete2(@RequestBody DeleteAreaReq req) {
         return batchDelete(req);
     }
-
 }

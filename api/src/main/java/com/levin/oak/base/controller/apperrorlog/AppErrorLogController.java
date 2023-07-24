@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppErrorLogController", matchIfMissing = true)
 
 //默认需要权限访问
-//@ResAuthorize(domain = ID, type = TYPE_NAME)
+//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
 //类注解
 @Tag(name = E_AppErrorLog.BIZ_NAME, description = E_AppErrorLog.BIZ_NAME + MAINTAIN_ACTION)
@@ -66,8 +66,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 应用错误日志控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:48, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[863ee60d2cc212fd367b52b1bb1a973a], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:14, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[407882e117aef009cc93a33d0b709b04], 请不要修改和删除此行内容。
  */
 public class AppErrorLogController extends BaseController{
 
@@ -120,10 +120,10 @@ public class AppErrorLogController extends BaseController{
     }
 
     /**
-    * 查看详情
-    *
-    * @param req QueryAppErrorLogByIdReq
-    */
+     * 查看详情
+     *
+     * @param req QueryAppErrorLogByIdReq
+     */
     @GetMapping({"","{id}"})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
@@ -136,12 +136,12 @@ public class AppErrorLogController extends BaseController{
      * 更新
      * @param req UpdateAppErrorLogReq
      */
-     @PutMapping({"","{id}"})
-     @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
-     @CRUD.Op
-     public ApiResp<Boolean> update(@RequestBody UpdateAppErrorLogReq req, @PathVariable(required = false) Long id) {
-         req.updateIdWhenNotBlank(id);
-         return ApiResp.ok(checkResult(appErrorLogService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+    @PutMapping({"","{id}"})
+    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @CRUD.Op
+    public ApiResp<Boolean> update(@RequestBody UpdateAppErrorLogReq req, @PathVariable(required = false) Long id) {
+        req.updateIdWhenNotBlank(id);
+        return ApiResp.ok(checkResult(appErrorLogService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -184,9 +184,9 @@ public class AppErrorLogController extends BaseController{
     /**
      * 批量更新
      */
-     @PutMapping("/batchUpdate")
-     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
-     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAppErrorLogReq> reqList) {
+    @PutMapping("/batchUpdate")
+    @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
+    public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAppErrorLogReq> reqList) {
         return ApiResp.ok(checkResult(appErrorLogService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -201,7 +201,7 @@ public class AppErrorLogController extends BaseController{
         return ApiResp.ok(checkResult(appErrorLogService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
-     /**
+    /**
      * 批量删除2
      * @param req @RequestBody DeleteAppErrorLogReq
      */
@@ -210,5 +210,4 @@ public class AppErrorLogController extends BaseController{
     public ApiResp<Integer> batchDelete2(@RequestBody DeleteAppErrorLogReq req) {
         return batchDelete(req);
     }
-
 }
