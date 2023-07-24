@@ -581,11 +581,15 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
                     try {
                         ServletInputStream inputStream = request.getInputStream();
                         try {
-                            inputStream.reset();
+                            if (inputStream.markSupported()) {
+                                inputStream.reset();
+                            }
                             String content = StringUtils.hasText(encoding) ? IoUtil.read(inputStream, encoding) : IoUtil.readUtf8(inputStream);
                             paramMap.put("body", content);
                         } finally {
-                            inputStream.reset();
+                            if (inputStream.markSupported()) {
+                                inputStream.reset();
+                            }
                         }
                     } catch (Exception e) {
                         log.warn("获取请求内容失败，URL：" + request.getRequestURL() + "," + contentType, e);

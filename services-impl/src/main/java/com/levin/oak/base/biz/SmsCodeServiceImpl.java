@@ -34,8 +34,8 @@ public class SmsCodeServiceImpl
 
     private static final String CACHE_NAME = SmsCodeService.class.getName();
 
-//    @Autowired
-//    RedissonClient redissonClient;
+    @Autowired
+    RedissonClient redissonClient;
 
     @Autowired
     FrameworkProperties frameworkProperties;
@@ -43,16 +43,15 @@ public class SmsCodeServiceImpl
     @Autowired(required = false)
     SmsSendService smsSender;
 
-//    RMapCache<String, Object> mapCache = null;
+    RMapCache<String, Object> mapCache = null;
 
     @Autowired
-//    RedisOperations<String, Long> redisOperations;
     StringRedisTemplate redisTemplate;
 
     @PostConstruct
     void init() {
 
-//        mapCache = redissonClient.getMapCache(CACHE_NAME);
+        mapCache = redissonClient.getMapCache(CACHE_NAME);
 
         if (smsSender == null) {
             log.warn("未发现短信发送服务：" + SmsSendService.class.getName());
@@ -68,8 +67,6 @@ public class SmsCodeServiceImpl
 
         Assert.hasText(account, "帐号不能为空");
         Assert.hasText(phoneNo, "手机号不能为空");
-
-        final String prefix = String.join("_", tenantId, appId, account);
 
         //使用纳秒随机码
         String code = "" + System.nanoTime();
@@ -109,13 +106,17 @@ public class SmsCodeServiceImpl
             throw new IllegalStateException("1短信发送失败，通道不可用");
         }
 
-        redisTemplate.opsForValue().
-                set(CACHE_NAME + "_" + prefix + genCode, "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+        final String key = CACHE_NAME + "_" + String.join("_", tenantId, appId, account) + genCode;
 
-//        mapCache.put(prefix + genCode, System.currentTimeMillis(),
-//                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+        log.debug("send sms code , redis key:{}", key);
+
+//        redisTemplate.opsForValue().set(key, "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
+
+        mapCache.put(key, System.currentTimeMillis(),
+                frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
 
         return code;
+
     }
 
     @Override
@@ -126,13 +127,14 @@ public class SmsCodeServiceImpl
 
         Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证码关闭");
 
-        final String prefix = String.join("_", tenantId, appId, account);
+        final String key = CACHE_NAME + "_" + String.join("_", tenantId, appId, account) + code.toLowerCase();
 
-//        Long putTime = (Long) mapCache.remove(prefix + code.toLowerCase());
+        log.debug("verify sms code , redis key:{}", key);
 
-        String value = redisTemplate.opsForValue().getAndDelete(CACHE_NAME + "_" + prefix + code.toLowerCase());
+        Long putTime = (Long) mapCache.remove(key);
 
-        Long putTime = StringUtils.hasText(value) ? Long.decode(value) : null;
+//        String value = redisTemplate.opsForValue().getAndDelete(key);
+//        Long putTime = StringUtils.hasText(value) ? Long.decode(value) : null;
 
         //小余1分钟
         return putTime != null && (System.currentTimeMillis() - putTime)
