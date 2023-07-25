@@ -530,7 +530,6 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
         String tagName = tag != null ? getFirst("", tag.name(), tag.description()) : "";
 
-
         String requestName = "";
 
         if (method.isAnnotationPresent(Operation.class)) {
@@ -554,7 +553,7 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         }
 
         if (StringUtils.hasText(tagName)) {
-            requestName += tagName + "|" + requestName;
+            requestName = tagName + "|" + requestName;
         }
 
         //获取请求参数
