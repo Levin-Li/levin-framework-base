@@ -36,8 +36,8 @@ import java.util.Date;
 /**
  * 字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[4a2aa91f35224a867fad5a6fd6af2872], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[e5ab34ee967eb3d286a1ea4eae78d559], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -46,7 +46,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 public class DictInfo implements Serializable {
 
     private static final long serialVersionUID = -445779596L;

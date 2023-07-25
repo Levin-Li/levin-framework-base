@@ -56,18 +56,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppClientFileController", matchIfMissing = true)
 
-//默认需要权限访问
+//默认需要权限访问，默认从父类继承
 //@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
 //类注解
+
 @Tag(name = E_AppClientFile.BIZ_NAME, description = E_AppClientFile.BIZ_NAME + MAINTAIN_ACTION)
 @Valid
 @CRUD
 /**
  * 客户端文件控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:14, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[c9bf33f4034d2b4f442330162a9eecab], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:57:42, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[f09a5225fd6d47a263655ef92c15105b], 请不要修改和删除此行内容。
  */
 public class AppClientFileController extends BaseController{
 

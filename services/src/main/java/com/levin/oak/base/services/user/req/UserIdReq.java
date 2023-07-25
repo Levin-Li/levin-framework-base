@@ -43,7 +43,7 @@ import com.levin.oak.base.entities.Org;
 /**
  * 用户 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:50:28, 请不要修改和删除此行内容。
  * 代码生成哈希校验码：[d46a8b1a3f0cc0f765773c5c1ab5cb58], 请不要修改和删除此行内容。
  */
 

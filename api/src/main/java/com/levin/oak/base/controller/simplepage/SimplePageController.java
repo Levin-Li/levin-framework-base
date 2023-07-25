@@ -56,18 +56,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimplePageController", matchIfMissing = true)
 
-//默认需要权限访问
+//默认需要权限访问，默认从父类继承
 //@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
 //类注解
+
 @Tag(name = E_SimplePage.BIZ_NAME, description = E_SimplePage.BIZ_NAME + MAINTAIN_ACTION)
 @Valid
 @CRUD
 /**
  * 简单页面控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[143a454a2a93e3be6b2f8dcd4d25c57d], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:57:43, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[7da093e15b274aad2722d06eca417234], 请不要修改和删除此行内容。
  */
 public class SimplePageController extends BaseController{
 

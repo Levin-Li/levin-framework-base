@@ -33,8 +33,8 @@ import java.util.Date;
 /**
  * 国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:16, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[587b0e769c8bdefef90391a68351a413], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:27, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[337f7777d72bfcc3a533836db538745c], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -43,7 +43,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 @Select
 public class SimpleI18nResInfo implements Serializable {
 

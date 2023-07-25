@@ -56,18 +56,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "DictController", matchIfMissing = true)
 
-//默认需要权限访问
+//默认需要权限访问，默认从父类继承
 //@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
 //类注解
+
 @Tag(name = E_Dict.BIZ_NAME, description = E_Dict.BIZ_NAME + MAINTAIN_ACTION)
 @Valid
 @CRUD
 /**
  * 字典控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:14, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[1a7ff5774feefe50503ec6330900dc20], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:57:41, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3f7b2e4dfa519382d58e8f632e2d4a9d], 请不要修改和删除此行内容。
  */
 public class DictController extends BaseController{
 

@@ -38,8 +38,8 @@ import com.levin.oak.base.entities.Org;
 /**
  * 用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:14, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[6065e6ab14aa9f3369ad19d946982f85], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[afc5657c7758c623eedb0a05f6052882], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -48,7 +48,7 @@ import com.levin.oak.base.entities.Org;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"org",})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId, password})
 @Select
 public class SimpleUserInfo implements Serializable {
 

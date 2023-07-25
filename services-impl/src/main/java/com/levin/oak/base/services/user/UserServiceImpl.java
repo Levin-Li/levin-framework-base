@@ -1,115 +1,104 @@
 package com.levin.oak.base.services.user;
 
-import com.levin.commons.dao.DaoSecurityException;
-import com.levin.commons.dao.Paging;
-import com.levin.commons.dao.SimpleDao;
-import com.levin.commons.dao.support.PagingData;
-import com.levin.oak.base.ModuleOption;
-import com.levin.oak.base.autoconfigure.FrameworkProperties;
-import com.levin.oak.base.biz.BizRoleService;
-import com.levin.oak.base.biz.rbac.AuthService;
-import com.levin.oak.base.biz.rbac.RbacService;
-import com.levin.oak.base.entities.E_User;
-import com.levin.oak.base.entities.User;
-import com.levin.oak.base.services.BaseService;
-import com.levin.oak.base.services.user.info.UserInfo;
-import com.levin.oak.base.services.user.req.*;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
+import static com.levin.oak.base.ModuleOption.*;
+import static com.levin.oak.base.entities.EntityConst.*;
+
+import com.levin.commons.dao.*;
+import com.levin.commons.dao.support.*;
+import com.levin.commons.service.domain.*;
+
+import javax.annotation.*;
+import java.util.*;
+import java.util.stream.*;
+import org.springframework.cache.annotation.*;
+import org.springframework.transaction.annotation.*;
+import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.util.StringUtils;
+import org.springframework.beans.BeanUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import io.swagger.v3.oas.annotations.*;
+import io.swagger.v3.oas.annotations.tags.*;
+import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import cn.hutool.core.lang.*;
+import javax.persistence.EntityExistsException;
+import javax.persistence.PersistenceException;
 
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
-import static com.levin.oak.base.entities.EntityConst.*;
+//import org.apache.dubbo.config.spring.context.annotation.*;
+import org.apache.dubbo.config.annotation.*;
+
+import com.levin.oak.base.entities.*;
+import com.levin.oak.base.entities.User;
+
+import com.levin.oak.base.services.user.req.*;
+import com.levin.oak.base.services.user.info.*;
+
+import com.levin.oak.base.*;
+import com.levin.oak.base.services.*;
+
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.oak.base.entities.User.*;
+import java.util.List;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.util.Date;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
 /**
  * 用户-服务实现
  *
- * @author auto gen by simple-dao-codegen 2022-4-2 19:50:05
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 14:00:51, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[75d88342b7776789420196fe95de5b3b], 请不要修改和删除此行内容。
  */
-
-//@Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @Service(PLUGIN_PREFIX + "UserService")
 @DubboService
+
 @ConditionalOnMissingBean({UserService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "UserService", matchIfMissing = true)
 @Slf4j
+
+//@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + E_User.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_User.SIMPLE_CLASS_NAME})
 public class UserServiceImpl extends BaseService implements UserService {
 
-    @Autowired
-    private SimpleDao simpleDao;
-
-    @Autowired
-    AuthService authService;
-
-    @Autowired
-    FrameworkProperties frameworkProperties;
-
-    protected UserService getSelfProxy() {
+    protected UserService getSelfProxy(){
         return getSelfProxy(UserService.class);
     }
 
     @Operation(summary = CREATE_ACTION)
+    @Transactional(rollbackFor = {RuntimeException.class})
     @Override
-    public String create(CreateUserReq req) {
-
-        checkCreateOrUpdateAccount(req.getEmail(), req.getTelephone());
-
-        //密码加密
-        User entity = simpleDao.create(req.setPassword(encryptPwd(req.getPassword())));
-
+    public String create(CreateUserReq req){
+        //保存自动先查询唯一约束，并给出错误信息
+        User entity = simpleDao.create(req, true);
         return entity.getId();
     }
 
-    private String encryptPwd(String pwd) {
-        return StringUtils.hasText(pwd) ? authService.encryptPassword(pwd) : null;
-    }
-
-    private void checkCreateOrUpdateAccount(String... accounts) {
-
-        for (String account : accounts) {
-            //不允许创建或是变更为 SA 帐号
-            Assert.isTrue(!authService.isSuperAdmin(account), "帐号已经存在");
-        }
-
-    }
-
     @Operation(summary = BATCH_CREATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
-    public List<String> batchCreate(List<CreateUserReq> reqList) {
+    public List<String> batchCreate(List<CreateUserReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-   // @Cacheable(condition = "#id != null", unless = "#result == null ", key = E_User.CACHE_KEY_PREFIX + "#id")
+    //@Cacheable(condition = "#id != null", unless = "#result == null ", key = E_User.CACHE_KEY_PREFIX + "#id")
     public UserInfo findById(String id) {
         return findById(new UserIdReq().setId(id));
     }
@@ -117,87 +106,66 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //只更新缓存
-    //@CachePut(unless = "#result == null", condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
+    //@CachePut(unless = "#result == null" , condition = "#req.id != null" , key = E_User.CACHE_KEY_PREFIX + "#req.id")
     public UserInfo findById(UserIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-        return simpleDao.findOneByQueryObj(req);
-    }
-
-    @Override
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
-    public int update(UpdateUserPwdReq req) {
-
-        Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-        Assert.hasText(req.getOldPassword(), "旧密码不能为空");
-        Assert.hasText(req.getPassword(), "新密码不能为空");
-
-        req.setOldPassword(encryptPwd(req.getOldPassword()))
-                .setPassword(encryptPwd(req.getPassword()));
-
-        return checkResult(simpleDao.updateByQueryObj(req), UPDATE_ACTION);
+        return simpleDao.findUnique(req);
     }
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    @CacheEvict(condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@CacheEvict(condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateUserReq req) {
-
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
-        //检查帐号名称
-        checkCreateOrUpdateAccount(req.getEmail(), req.getTelephone());
-
-        //密码加密
-        return simpleDao.singleUpdateByQueryObj(req.setPassword(encryptPwd(req.getPassword())));
+        return simpleDao.singleUpdateByQueryObj(req);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
-    public int batchUpdate(List<UpdateUserReq> reqList) {
-
+    public int batchUpdate(List<UpdateUserReq> reqList){
         //@Todo 优化批量提交
-        int sum = reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
-
-        //Assert.isTrue(sum > 0, BATCH_UPDATE_ACTION + BIZ_NAME + "失败");
-
-        return sum;
+        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
     }
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    @CacheEvict(condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@CacheEvict(condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(UserIdReq req) {
-
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-
-        //不允许删除SA用户
-        return simpleDao.singleDeleteByQueryObj(req, notSa());
+        return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(summary = BATCH_DELETE_ACTION)
-    @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
-    public int batchDelete(DeleteUserReq req) {
-
+    public int batchDelete(DeleteUserReq req){
         //@Todo 优化批量提交
-        int sum = Stream.of(req.getIdList())
-                .map(id -> simpleDao.copy(req, new UserIdReq().setId(id)))
-                .map(idReq -> getSelfProxy().delete(idReq))
-                .mapToInt(n -> n ? 1 : 0)
-                .sum();
-
-        //Assert.isTrue(sum > 0, BATCH_DELETE_ACTION + BIZ_NAME + "失败");
-
-        return sum;
+        return Stream.of(req.getIdList())
+            .map(id -> simpleDao.copy(req, new UserIdReq().setId(id)))
+            .map(idReq -> getSelfProxy().delete(idReq))
+            .mapToInt(n -> n ? 1 : 0)
+            .sum();
     }
 
     @Operation(summary = QUERY_ACTION)
     @Override
     public PagingData<UserInfo> query(QueryUserReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, notSa(), paging);
+        return simpleDao.findPagingDataByQueryObj(req, paging);
+    }
+
+    /**
+     * 指定选择列查询
+     *
+     * @param req
+     * @param paging 分页设置，可空
+     * @return pagingData 分页数据
+     */
+    @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
+    public PagingData<SimpleUserInfo> simpleQuery(QueryUserReq req, Paging paging){
+        return simpleDao.findPagingDataByQueryObj(SimpleUserInfo.class, req, paging);
     }
 
     /**
@@ -207,7 +175,7 @@ public class UserServiceImpl extends BaseService implements UserService {
      * @param paging 分页设置，可空
      * @return pagingData 分页数据
      */
-    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    @Operation(summary = STAT_ACTION)
     @Override
     public PagingData<StatUserReq.Result> stat(StatUserReq req , Paging paging){
         return simpleDao.findPagingDataByQueryObj(req, paging);
@@ -220,24 +188,20 @@ public class UserServiceImpl extends BaseService implements UserService {
      * @return record count
      */
     @Override
-    @Operation(tags = {BIZ_NAME}, summary = STAT_ACTION)
+    @Operation(summary = STAT_ACTION)
     public int count(QueryUserReq req){
         return (int) simpleDao.countByQueryObj(req);
     }
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public UserInfo findOne(QueryUserReq req) {
-        return simpleDao.findOneByQueryObj(req, notSa());
+    public UserInfo findOne(QueryUserReq req){
+        return simpleDao.findOneByQueryObj(req);
     }
 
-    private NotReq notSa() {
-        return new NotReq().setAccount(RbacService.SA_ACCOUNT);
-    }
-
-    @Operation(tags = {BIZ_NAME}, summary = QUERY_ACTION)
+    @Operation(summary = QUERY_ACTION)
     @Override
-    public UserInfo findUnique(QueryUserReq req) {
+    public UserInfo findUnique(QueryUserReq req){
         return simpleDao.findUnique(req);
     }
 
@@ -247,10 +211,4 @@ public class UserServiceImpl extends BaseService implements UserService {
     public void clearCache(Object key) {
     }
 
-    protected int checkResult(int n, String action) {
-        if (n > 1) {
-            throw new DaoSecurityException("非法的" + action + "操作");
-        }
-        return n;
-    }
 }

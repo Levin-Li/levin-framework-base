@@ -35,8 +35,8 @@ import java.util.Date;
 /**
  * 简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[2802e55116bfc5b3abb6433958eb1726], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:27, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[0472a638b9b10ea36a2d52f4989bb7d1], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -45,7 +45,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"content",})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 @Select
 public class SimpleSimplePageInfo implements Serializable {
 

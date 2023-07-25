@@ -56,18 +56,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "I18nResController", matchIfMissing = true)
 
-//默认需要权限访问
+//默认需要权限访问，默认从父类继承
 //@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
 //类注解
+
 @Tag(name = E_I18nRes.BIZ_NAME, description = E_I18nRes.BIZ_NAME + MAINTAIN_ACTION)
 @Valid
 @CRUD
 /**
  * 国际化资源控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:16, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[7b28f389aba4ab12c16cd05de7cb2f9a], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:57:43, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[138d74e91404421f4d3d63668cf6edce], 请不要修改和删除此行内容。
  */
 public class I18nResController extends BaseController{
 

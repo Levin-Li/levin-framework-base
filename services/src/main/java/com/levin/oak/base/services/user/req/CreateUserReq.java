@@ -24,7 +24,6 @@ import com.levin.commons.dao.annotation.order.*;
 import com.levin.commons.dao.annotation.logic.*;
 import com.levin.commons.dao.annotation.misc.*;
 
-
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_User.*;
 import com.levin.oak.base.services.commons.req.*;
@@ -40,11 +39,10 @@ import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
 
-
 /**
  * 新增用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:50:28, 请不要修改和删除此行内容。
  * 代码生成哈希校验码：[0eb94918d14dfaf1dcabd890bdc057b8], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -60,7 +58,6 @@ import com.levin.oak.base.entities.Org;
 public class CreateUserReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445263479L;
-
 
     @Schema(title = L_telephone , description = D_telephone )
     @Size(max = 20)
@@ -111,7 +108,6 @@ public class CreateUserReq extends MultiTenantOrgReq {
     @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     List<String> roleList;
-
 
     @Schema(title = L_wxOpenId )
     @Size(max = 64)
@@ -165,5 +161,4 @@ public class CreateUserReq extends MultiTenantOrgReq {
             setCreateTime(new Date());
         }
     }
-
 }

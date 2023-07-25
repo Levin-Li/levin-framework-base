@@ -35,8 +35,8 @@ import java.util.Date;
 /**
  * 简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[53a52b802140421669130d799394e0c5], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:27, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[12cf9bbbbddc2d3d8f559e5b2f78f331], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -45,7 +45,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"content",})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 @Select
 public class SimpleSimpleFormInfo implements Serializable {
 

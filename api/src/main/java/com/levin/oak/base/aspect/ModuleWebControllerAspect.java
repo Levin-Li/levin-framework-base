@@ -373,7 +373,7 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         final String title = getRequestInfo(joinPoint, headerMap, paramMap, false);
 
         if (log.isDebugEnabled()) {
-            log.debug("*** 访问日志 " + title + " *** URL: {}{}, headers:{}, 控制器方法参数：{}"
+            log.debug("*** 访问 [" + title + "] *** URL: {}{}, headers:{}, 控制器方法参数：{}"
                     , request.getRequestURL(), (StringUtils.hasText(request.getQueryString()) ? "?" + request.getQueryString() : "")
                     , headerMap, paramMap);
         }
@@ -400,7 +400,7 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
             final long execTime = System.currentTimeMillis() - st;
 
             if (log.isDebugEnabled()) {
-                log.debug("*** 访问日志 " + title + " *** URL: {}{}, 执行耗时：{}ms, 发生异常：{} , 响应结果:{}"
+                log.debug("*** 访问 [" + title + "] *** URL: {}{}, 执行耗时：{}ms, 发生异常：{} , 响应结果:{}"
                         , request.getRequestURL(), (StringUtils.hasText(request.getQueryString()) ? "?" + request.getQueryString() : ""),
                         execTime, ex != null, isAccessLogController ? "忽略对于访问日志控制器的访问结果" : result);
             }
@@ -522,9 +522,14 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
         Method method = methodSignature.getMethod();
 
-        Tag tag = method.getClass().getAnnotation(Tag.class);
+        Tag tag = method.getDeclaringClass().getAnnotation(Tag.class);
+
+        if (tag == null) {
+            tag = (Tag) methodSignature.getDeclaringType().getAnnotation(Tag.class);
+        }
 
         String tagName = tag != null ? getFirst("", tag.name(), tag.description()) : "";
+
 
         String requestName = "";
 
@@ -569,68 +574,69 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
             //获取请求内容
             if (!isOnlyHttpParams) {
 
-                if (request instanceof MultipartHttpServletRequest
-                        || request instanceof MultipartRequest) {
-                    //如果是附件
-                    paramMap.put("multipart", "" + contentType + "-" + request.getContentLengthLong());
-                } else if (StringUtils.hasText(contentType)
-                        && (contentType.toLowerCase().contains("text/")
-                        || contentType.toLowerCase().contains("/json"))) {
+//                if (request instanceof MultipartHttpServletRequest
+//                        || request instanceof MultipartRequest) {
+//                    //如果是附件
+//                    paramMap.put("multipart", "" + contentType + "-" + request.getContentLengthLong());
+//                } else if (StringUtils.hasText(contentType)
+//                        && (contentType.toLowerCase().contains("text/")
+//                        || contentType.toLowerCase().contains("/json"))) {
+//
+//                    //如果是文本
+//                    try {
+//                        ServletInputStream inputStream = request.getInputStream();
+//                        try {
+//                            if (inputStream.markSupported()) {
+//                                inputStream.reset();
+//                            }
+//                            String content = StringUtils.hasText(encoding) ? IoUtil.read(inputStream, encoding) : IoUtil.readUtf8(inputStream);
+//                            paramMap.put("body", content);
+//                        } finally {
+//                            if (inputStream.markSupported()) {
+//                                inputStream.reset();
+//                            }
+//                        }
+//                    } catch (Exception e) {
+//                        log.warn("获取请求内容失败，URL：" + request.getRequestURL() + "," + contentType, e);
+//                        paramMap.put("error", "获取请求内容失败," + ExceptionUtil.getRootCauseMessage(e));
+//                    }
+//
+//                } else {
+//                    paramMap.put("content", "" + contentType + "-" + request.getContentLengthLong());
+//                }
 
-                    //如果是文本
-                    try {
-                        ServletInputStream inputStream = request.getInputStream();
-                        try {
-                            if (inputStream.markSupported()) {
-                                inputStream.reset();
-                            }
-                            String content = StringUtils.hasText(encoding) ? IoUtil.read(inputStream, encoding) : IoUtil.readUtf8(inputStream);
-                            paramMap.put("body", content);
-                        } finally {
-                            if (inputStream.markSupported()) {
-                                inputStream.reset();
-                            }
-                        }
-                    } catch (Exception e) {
-                        log.warn("获取请求内容失败，URL：" + request.getRequestURL() + "," + contentType, e);
-                        paramMap.put("error", "获取请求内容失败," + ExceptionUtil.getRootCauseMessage(e));
+                //读取参数
+                if (paramTypes != null && paramTypes.length > 0) {
+
+                    if (paramNames == null || paramNames.length != paramTypes.length) {
+                        paramNames = new String[paramTypes.length];
                     }
 
-                } else {
-                    paramMap.put("content", "" + contentType + "-" + request.getContentLengthLong());
-                }
-            }
+                    for (int i = 0; i < paramTypes.length; i++) {
+                        //  Class paramType = paramTypes[i];
 
-            //读取参数
-//            if (paramTypes != null && paramTypes.length > 0) {
-//
-//                if (paramNames == null || paramNames.length != paramTypes.length) {
-//                    paramNames = new String[paramTypes.length];
-//                }
-//
-//                for (int i = 0; i < paramTypes.length; i++) {
-//                    //  Class paramType = paramTypes[i];
-//
-//                    String paramName = paramNames[i];
-//
-////                    paramName = paramName != null ? paramName : "";
-////                    paramName = paramName + "(" + paramType.getSimpleName() + ")";
-//
-//                    if (StringUtils.hasText(paramName)
-//                            && args != null && i < args.length) {
-//                        if (!isIgnore(args[i])) {
-//                            paramMap.put(paramName, args[i]);
-//                        }
-//
-//                    }
-//                }
-//            } else if (args != null && args.length > 0) {
-//                for (int i = 0; i < args.length; i++) {
-//                    if (!isIgnore(args[i])) {
-//                        paramMap.put("P" + i, args[i]);
-//                    }
-//                }
-//            }
+                        String paramName = paramNames[i];
+
+//                    paramName = paramName != null ? paramName : "";
+//                    paramName = paramName + "(" + paramType.getSimpleName() + ")";
+
+                        if (StringUtils.hasText(paramName)
+                                && args != null && i < args.length) {
+                            if (!isIgnore(args[i])) {
+                                paramMap.put(paramName, args[i]);
+                            }
+
+                        }
+                    }
+                } else if (args != null && args.length > 0) {
+                    for (int i = 0; i < args.length; i++) {
+                        if (!isIgnore(args[i])) {
+                            paramMap.put("P" + i, args[i]);
+                        }
+                    }
+                }
+
+            }//
 
         }
 

@@ -33,8 +33,8 @@ import java.util.Date;
 /**
  * 客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[a1db15e6df6c1e26e0293ef9e48a4e9f], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3935965f10cf21c3f59f98d9a9a2c16e], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -43,7 +43,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"content",})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 public class AppClientFileInfo implements Serializable {
 
     private static final long serialVersionUID = -1155395350L;

@@ -56,18 +56,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimpleApiController", matchIfMissing = true)
 
-//默认需要权限访问
+//默认需要权限访问，默认从父类继承
 //@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
 //类注解
+
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 @Valid
 @CRUD
 /**
  * 简单动态接口控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[6229988d0ab993b7714af118fe207db7], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:57:40, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[8d71fd0d1dbc6c61feb6a2902095ef61], 请不要修改和删除此行内容。
  */
 public class SimpleApiController extends BaseController{
 

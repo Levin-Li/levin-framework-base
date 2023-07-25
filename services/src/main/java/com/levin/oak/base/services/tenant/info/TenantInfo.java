@@ -35,8 +35,8 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 /**
  * 平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[c317274e757d99f8de9d545b548ec578], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:25, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[e68dc971fb4e8688801f0e76d4b22f76], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -45,7 +45,7 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-
+@JsonIgnoreProperties({})
 public class TenantInfo implements Serializable {
 
     private static final long serialVersionUID = 1557223144L;

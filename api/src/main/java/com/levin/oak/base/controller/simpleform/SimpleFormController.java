@@ -56,18 +56,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimpleFormController", matchIfMissing = true)
 
-//默认需要权限访问
+//默认需要权限访问，默认从父类继承
 //@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
 //类注解
+
 @Tag(name = E_SimpleForm.BIZ_NAME, description = E_SimpleForm.BIZ_NAME + MAINTAIN_ACTION)
 @Valid
 @CRUD
 /**
  * 简单表单控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[08058a93805db0fa28ff285b2f6dfb53], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:57:43, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[6bbe0c85fd32a68e4f021400a65ebe41], 请不要修改和删除此行内容。
  */
 public class SimpleFormController extends BaseController{
 

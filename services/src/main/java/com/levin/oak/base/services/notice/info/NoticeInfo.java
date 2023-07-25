@@ -34,8 +34,8 @@ import java.util.Date;
 /**
  * 通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[d8c3440055342eccd38c28111d493dff], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[b30d06c3c94d564e01618c209a8e4308], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -44,7 +44,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 public class NoticeInfo implements Serializable {
 
     private static final long serialVersionUID = 1394869526L;

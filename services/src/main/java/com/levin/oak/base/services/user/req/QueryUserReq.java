@@ -25,16 +25,13 @@ import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
-
 import java.util.*;
 
 import com.levin.oak.base.services.user.info.*;
 import com.levin.oak.base.entities.User;
 
 import com.levin.oak.base.entities.*;
-
 import static com.levin.oak.base.entities.E_User.*;
-
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
@@ -42,13 +39,9 @@ import com.levin.oak.base.services.commons.req.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.User.*;
-
 import java.util.List;
-
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-
 import java.util.Date;
-
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 ////////////////////////////////////
@@ -56,9 +49,8 @@ import com.levin.oak.base.entities.Org;
 /**
  * 查询用户
  *
- *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[e3cb2552a5a69eecd795a929c16eb24c], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:50:28, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[f67b7e7ce2e99d3a9cb2b718aff5de7a], 请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -70,7 +62,7 @@ import com.levin.oak.base.entities.Org;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS, resultClass = UserInfo.class)
-public class QueryUserReq extends MultiTenantOrgReq {
+public class QueryUserReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = -445263479L;
 
@@ -90,15 +82,15 @@ public class QueryUserReq extends MultiTenantOrgReq {
     String id;
 
     @Size(max = 20)
-    @Schema(title = L_telephone, description = D_telephone)
+    @Schema(title = L_telephone , description = D_telephone)
     String telephone;
 
-    @Schema(title = "模糊匹配-" + L_telephone, description = D_telephone)
+    @Schema(title = "模糊匹配-" + L_telephone , description = D_telephone)
     @Contains
     String containsTelephone;
 
     @Size(max = 32)
-    @Schema(title = L_email, description = D_email)
+    @Schema(title = L_email , description = D_email)
     String email;
 
     @Size(max = 256)
@@ -121,7 +113,7 @@ public class QueryUserReq extends MultiTenantOrgReq {
 
     @OR(autoClose = true)
     @Contains
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao",  converter = JsonStrLikeConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_tagList)
     List<String> tagList;
@@ -129,11 +121,11 @@ public class QueryUserReq extends MultiTenantOrgReq {
     @Schema(title = L_category)
     Category category;
 
-    @Schema(title = L_expiredDate, description = "大于等于" + L_expiredDate)
+    @Schema(title = L_expiredDate , description = "大于等于" + L_expiredDate)
     @Gte
     Date gteExpiredDate;
 
-    @Schema(title = L_expiredDate, description = "小于等于" + L_expiredDate)
+    @Schema(title = L_expiredDate , description = "小于等于" + L_expiredDate)
     @Lte
     Date lteExpiredDate;
 
@@ -160,7 +152,7 @@ public class QueryUserReq extends MultiTenantOrgReq {
 
     @OR(autoClose = true)
     @Contains
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao",  converter = JsonStrLikeConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_roleList)
     List<String> roleList;
@@ -192,11 +184,11 @@ public class QueryUserReq extends MultiTenantOrgReq {
     String creator;
 
     @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
     @Lte
     Date lteCreateTime;
 
@@ -205,11 +197,11 @@ public class QueryUserReq extends MultiTenantOrgReq {
     //String betweenCreateTime;
 
 
-    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime , description = "大于等于" + L_lastUpdateTime)
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime , description = "小于等于" + L_lastUpdateTime)
     @Lte
     Date lteLastUpdateTime;
 
@@ -236,7 +228,6 @@ public class QueryUserReq extends MultiTenantOrgReq {
     public QueryUserReq(String id) {
         this.id = id;
     }
-
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

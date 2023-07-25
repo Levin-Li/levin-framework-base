@@ -3,12 +3,11 @@ package com.levin.oak.base.biz.rbac;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.SimpleAuthService;
 import com.levin.commons.service.exception.AuthorizationException;
+import com.levin.oak.base.biz.BizUserService;
 import org.springframework.lang.NonNull;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
-
-import static com.levin.oak.base.biz.rbac.RbacService.SA_ACCOUNT;
 
 
 /**
@@ -17,16 +16,6 @@ import static com.levin.oak.base.biz.rbac.RbacService.SA_ACCOUNT;
  * 务必注意：本接口和当前登录用户有关，实现类必须和使用方在同一个虚拟机中。
  */
 public interface AuthService extends SimpleAuthService<String, String> {
-
-    /**
-     * 是否超级用户帐号
-     *
-     * @param account
-     * @return
-     */
-    default boolean isSuperAdmin(String account) {
-        return SA_ACCOUNT.equals(StringUtils.trimWhitespace(account));
-    }
 
     /**
      * 清除线程缓存数据
@@ -78,14 +67,6 @@ public interface AuthService extends SimpleAuthService<String, String> {
      * 用户登出
      */
     void logout();
-
-    /**
-     * 加密密码
-     *
-     * @param pwd
-     * @return
-     */
-    String encryptPassword(String pwd);
 
     /**
      * 获取设备类型

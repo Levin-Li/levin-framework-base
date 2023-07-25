@@ -33,8 +33,8 @@ import java.util.Date;
 /**
  * 调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[e81d1b564313784312fc7bb536cc5c95], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:25, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[746e3eed2b46b71d8a8d090a2560f344], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -43,7 +43,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 @Select
 public class SimpleScheduledLogInfo implements Serializable {
 

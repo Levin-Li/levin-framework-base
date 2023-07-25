@@ -34,8 +34,8 @@ import java.util.Date;
 /**
  * 系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[f170e26ac287ffcb778147d50d02e463], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:25, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[8b3790d1c3a517cc70fd65deba4471ae], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -44,7 +44,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 @Select
 public class SimpleSettingInfo implements Serializable {
 

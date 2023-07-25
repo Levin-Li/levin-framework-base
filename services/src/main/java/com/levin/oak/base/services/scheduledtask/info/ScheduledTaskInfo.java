@@ -33,8 +33,8 @@ import java.util.Date;
 /**
  * 调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[ace1b58c8bdc43416ac8da30a4bfd22e], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[09c7fe76153b1a6237359ab0ac973b6b], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -43,7 +43,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 public class ScheduledTaskInfo implements Serializable {
 
     private static final long serialVersionUID = -2056389676L;

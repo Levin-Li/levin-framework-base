@@ -36,8 +36,8 @@ import java.util.Date;
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:54, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[46bdf05e3251339a4465d8826c3ae390], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:25, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[a0e56493d0ca08a8be3d7ab8a461f724], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -46,7 +46,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 public class RoleInfo implements Serializable {
 
     private static final long serialVersionUID = -445356492L;

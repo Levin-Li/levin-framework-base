@@ -42,7 +42,7 @@ import com.levin.oak.base.entities.Org;
 /**
  * 新增用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:14, 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:50:28, 请不要修改和删除此行内容。
  * 代码生成哈希校验码：[15c57bc96ca40f25da54900cba018580], 请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)

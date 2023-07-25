@@ -28,19 +28,6 @@ import java.util.stream.Collectors;
 public interface RbacService {
 
     /**
-     * 超管帐号
-     */
-    String SA_ACCOUNT = "sa";
-
-    /**
-     * 密码加密
-     *
-     * @param pwd
-     * @return
-     */
-    String encryptPassword(String pwd);
-
-    /**
      * 获取权限分隔符
      *
      * @return

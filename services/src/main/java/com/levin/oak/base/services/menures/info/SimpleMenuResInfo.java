@@ -37,8 +37,8 @@ import java.util.Date;
 /**
  * 菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[c6b4f6daf2bbea847f4b6dcc840a9223], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:27, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[e7365f2687296bab35e7bc9cc2882d93], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -47,7 +47,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"parent","children",})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 @Select
 public class SimpleMenuResInfo implements Serializable {
 

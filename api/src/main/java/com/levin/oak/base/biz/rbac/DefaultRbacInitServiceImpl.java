@@ -10,6 +10,7 @@ import com.levin.commons.rbac.RbacUtils;
 import com.levin.commons.rbac.ResPermission;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizRoleService;
+import com.levin.oak.base.biz.BizUserService;
 import com.levin.oak.base.biz.CaptchaService;
 import com.levin.oak.base.biz.SmsCodeService;
 import com.levin.oak.base.entities.*;
@@ -26,6 +27,7 @@ import com.levin.oak.base.services.user.UserService;
 import com.levin.oak.base.services.user.req.CreateUserReq;
 import com.levin.oak.base.utils.AmisUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -44,8 +46,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
-import static com.levin.oak.base.biz.rbac.RbacService.SA_ACCOUNT;
-
+import static com.levin.oak.base.biz.BizUserService.SA_ACCOUNT;
 
 /**
  * Rbac初始化服务
@@ -80,6 +81,9 @@ public class DefaultRbacInitServiceImpl
 
     @Autowired
     RbacService rbacService;
+
+    @DubboReference
+    BizUserService bizUserService;
 
     @Autowired
     BizRoleService bizRoleService;
@@ -393,7 +397,7 @@ public class DefaultRbacInitServiceImpl
     }
 
     private String encryptPassword(String pwd) {
-        return rbacService.encryptPassword(pwd);
+        return bizUserService.encryptPwd(pwd);
     }
 
 }

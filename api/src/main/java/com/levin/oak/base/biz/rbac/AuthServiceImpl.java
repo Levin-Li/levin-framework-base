@@ -156,7 +156,7 @@ public class AuthServiceImpl
         Assert.hasText(req.getAccount(), "登录帐号不能为空");
 
         //如果是超级用户，必须要密码
-        boolean isSA = isSuperAdmin(req.getAccount());
+        boolean isSA = bizUserService.isSuperAdminAccount(req.getAccount());
 
         if (!isSA) {
             Assert.hasText(req.getTenantId(), "未知的租户");
@@ -199,7 +199,7 @@ public class AuthServiceImpl
         Assert.hasText(req.getAccount(), "登录帐号不能为空");
 
         //如果是超级帐号，必须要密码
-        boolean isSA = isSuperAdmin(req.getAccount());
+        boolean isSA = bizUserService.isSuperAdminAccount(req.getAccount());
 
         if (!isSA) {
             Assert.hasText(req.getTenantId(), "未知的租户");
@@ -241,10 +241,7 @@ public class AuthServiceImpl
         }
 
         //存在多个用户的情况
-        UserInfo user = bizUserService.findUser(
-                //密码加密
-                req.setPassword(encryptPassword(req.getPassword()))
-        );
+        UserInfo user = bizUserService.findUser(req);
 
         auditUser(user);
 
@@ -430,12 +427,6 @@ public class AuthServiceImpl
                     return bizRoleService.getRolePermissionList(userInfo.getTenantId(), roleList);
                 }
         );
-    }
-
-
-    @Override
-    public String encryptPassword(String pwd) {
-        return StringUtils.hasText(pwd) ? rbacService.encryptPassword(pwd) : null;
     }
 
     @Override

@@ -39,8 +39,8 @@ import java.util.Date;
 /**
  * 机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:16, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[962b6a5fadadfc02dbe903440631d192], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3adc9d381a2460b04b5ef12309e6b1d6], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -49,7 +49,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"area","extInfo","parent","children",})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 @Select
 public class SimpleOrgInfo implements Serializable {
 

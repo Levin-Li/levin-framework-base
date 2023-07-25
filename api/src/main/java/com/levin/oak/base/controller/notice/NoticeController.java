@@ -56,18 +56,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "NoticeController", matchIfMissing = true)
 
-//默认需要权限访问
+//默认需要权限访问，默认从父类继承
 //@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
 //类注解
+
 @Tag(name = E_Notice.BIZ_NAME, description = E_Notice.BIZ_NAME + MAINTAIN_ACTION)
 @Valid
 @CRUD
 /**
  * 通知控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:14, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[3ba9d7cf4bae2a08ddc3237b36199a9b], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:57:41, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[c191e4f027c4cea4cfb4e494f824ffb7], 请不要修改和删除此行内容。
  */
 public class NoticeController extends BaseController{
 

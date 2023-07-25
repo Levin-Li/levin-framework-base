@@ -36,8 +36,8 @@ import java.util.Date;
 /**
  * 简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:54, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[f83f154e281db65ed9281be69dc03d35], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:25, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[887075a3d0de386bb4220df7e8ae3d21], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -46,7 +46,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"content",})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 public class SimpleApiInfo implements Serializable {
 
     private static final long serialVersionUID = 1021385738L;

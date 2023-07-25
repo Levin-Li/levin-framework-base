@@ -6,6 +6,7 @@ import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
+import com.levin.oak.base.biz.BizUserService;
 import com.levin.oak.base.biz.CaptchaService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacResService;
@@ -18,7 +19,6 @@ import com.levin.oak.base.entities.EntityConst;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
-import com.levin.oak.base.services.user.UserService;
 import com.levin.oak.base.services.user.req.UpdateUserPwdReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,7 +31,6 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -67,7 +66,7 @@ public class RbacController extends BaseController {
     RoleService roleService;
 
     @Autowired
-    UserService userService;
+    BizUserService bizUserService;
 
     @Autowired
     RbacResService rbacResService;
@@ -213,7 +212,7 @@ public class RbacController extends BaseController {
     @PutMapping({"updatePwd"})
     @Operation(tags = {"授权管理"}, summary = "修改密码")
     public ApiResp<Void> updatePwd(@RequestBody UpdateUserPwdReq req) {
-        return userService.update(req) > 0 ? ApiResp.ok() : ApiResp.error("修改密码失败,请确认原密码是否正确");
+        return bizUserService.updatePwd(req) ? ApiResp.ok() : ApiResp.error("修改密码失败,请确认原密码是否正确");
     }
 
     /**

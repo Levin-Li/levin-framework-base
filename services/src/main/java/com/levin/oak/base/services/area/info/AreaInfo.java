@@ -37,8 +37,8 @@ import java.util.Date;
 /**
  * 区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:57, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[f4bb8425f15ca78c6c9f7457817b6774], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:27, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[4b6b446ed3239e9012216811f7c1a0ae], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -47,7 +47,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"code"})
 @ToString(exclude = {"parent","children",})
 @FieldNameConstants
-
+@JsonIgnoreProperties({})
 public class AreaInfo implements Serializable {
 
     private static final long serialVersionUID = -445860277L;

@@ -66,11 +66,6 @@ public class RbacServiceImpl implements RbacService {
         log.info("默认权限控制服务启用...");
     }
 
-    @Override
-    public String encryptPassword(String pwd) {
-        return StringUtils.hasText(pwd) ? SecureUtil.sha1(pwd) : null;
-    }
-
     protected ContextHolder<String, Res.Action> getActionContext() {
 
         synchronized (actionContextHolder) {

@@ -33,8 +33,8 @@ import java.util.Date;
 /**
  * 通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[b25f9670b89db38f38670f621d2b1706], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[4f88a6f4c14a5d3cbafc83bd45389638], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -43,7 +43,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 public class NoticeProcessLogInfo implements Serializable {
 
     private static final long serialVersionUID = -1991983093L;

@@ -33,8 +33,8 @@ import java.util.Date;
 /**
  * 访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 12:12:29, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[68654eba0f595a30cf53ed9860c626ff], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[3c8bf3b32d9ea29dc1a0b3d09b8dc2ea], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -43,7 +43,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties(tenantId)
+@JsonIgnoreProperties({tenantId})
 public class AccessLogInfo implements Serializable {
 
     private static final long serialVersionUID = 1030736962L;

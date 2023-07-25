@@ -1,43 +1,20 @@
 package com.levin.oak.base.biz;
 
-import static com.levin.oak.base.ModuleOption.*;
-import static com.levin.oak.base.entities.EntityConst.*;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.support.*;
-import com.levin.commons.service.domain.*;
-
-import java.util.*;
-
+import com.levin.commons.dao.support.PagingData;
+import com.levin.commons.dao.support.SimplePaging;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
-import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
 
 import com.levin.oak.base.entities.*;
-import com.levin.oak.base.entities.User;
 
-import com.levin.oak.base.services.user.*;
 import com.levin.oak.base.services.user.req.*;
 import com.levin.oak.base.services.user.info.*;
-
-import com.levin.oak.base.*;
-import com.levin.oak.base.services.*;
 
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.oak.base.entities.User.*;
 
-import java.util.List;
-
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-
-import java.util.Date;
-
-import com.levin.oak.base.services.org.info.*;
-import com.levin.oak.base.entities.Org;
+import org.springframework.util.StringUtils;
 ////////////////////////////////////
 
 /**
@@ -51,10 +28,78 @@ import com.levin.oak.base.entities.Org;
 public interface BizUserService {
 
     /**
+     * 超管帐号
+     */
+    String SA_ACCOUNT = "sa";
+
+    /**
+     * 是否超级用户帐号
+     *
+     * @param account
+     * @return
+     */
+    default boolean isSuperAdminAccount(String account) {
+        return SA_ACCOUNT.equals(StringUtils.trimWhitespace(account));
+    }
+
+    /**
      * 查找用户
      *
      * @param req
      * @return
      */
     UserInfo findUser(LoginReq req);
+
+    /**
+     * 密码加密
+     *
+     * @param pwd
+     * @return
+     */
+    String encryptPwd(String pwd);
+
+
+    /**
+     * @param req
+     * @return
+     */
+    String create(CreateUserReq req);
+
+    /**
+     * 修改密码
+     *
+     * @param req
+     * @return
+     */
+    boolean updatePwd(UpdateUserPwdReq req);
+
+    /**
+     * 删除
+     *
+     * @param req
+     * @return
+     */
+    boolean delete(UserIdReq req);
+
+    /**
+     * @param req
+     * @return
+     */
+    boolean update(UpdateUserReq req);
+
+    /**
+     * 查找用户
+     *
+     * @param req
+     * @return
+     */
+    UserInfo findById(UserIdReq req);
+
+    /**
+     * @param req
+     * @param paging
+     * @return
+     */
+    PagingData<UserInfo> query(QueryUserReq req, SimplePaging paging);
+
 }

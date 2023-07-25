@@ -2,6 +2,8 @@ package com.levin.oak.base.services.user.info;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
+
 import com.levin.commons.rbac.RbacUserInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -23,29 +25,23 @@ import com.levin.commons.dao.annotation.logic.*;
 import com.levin.commons.dao.annotation.misc.*;
 
 import com.levin.oak.base.entities.*;
-
 import static com.levin.oak.base.entities.E_User.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.User.*;
-
 import java.util.List;
-
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-
 import java.util.Date;
-
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
-import org.springframework.data.annotation.ReadOnlyProperty;
 ////////////////////////////////////
 
 /**
  * 用户
  *
- * @Author Auto gen by simple-dao-codegen 2023年6月28日 上午9:18:57
- * 代码生成哈希校验码：[f413cf640406caa92f17377be5406505]
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
+ * 代码生成哈希校验码：[bd7caec2718bd3201de704cb61dd68c3], 请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -62,153 +58,112 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id)
     String id;
 
-
     @Size(max = 20)
-    @Schema(title = L_telephone, description = D_telephone)
+    @Schema(title = L_telephone , description = D_telephone)
     String telephone;
 
-
     @Size(max = 32)
-    @Schema(title = L_email, description = D_email)
+    @Schema(title = L_email , description = D_email)
     String email;
-
 
     @Size(max = 256)
     @Schema(title = L_password)
     String password;
 
-
     @Size(max = 32)
     @Schema(title = L_nickname)
     String nickname;
 
-
     @Schema(title = L_avatar)
     String avatar;
-
 
     @Schema(title = L_sex)
     Sex sex;
 
-
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_tagList)
     List<String> tagList;
 
-
     @Schema(title = L_category)
     Category category;
-
 
     @Schema(title = L_expiredDate)
     Date expiredDate;
 
-
     @NotNull
-    @Schema(title = L_state, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_state)
     State state;
-
 
     @Size(max = 32)
     @Schema(title = L_staffNo)
     String staffNo;
 
-
     @Size(max = 128)
     @Schema(title = L_jobPostCode)
     String jobPostCode;
 
-
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_roleList)
     List<String> roleList;
-
 
     //@Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_org)
     OrgInfo org;
 
-
     @Size(max = 64)
     @Schema(title = L_wxOpenId)
     String wxOpenId;
-
 
     @Size(max = 64)
     @Schema(title = L_aliOpenId)
     String aliOpenId;
 
+    @Size(max = 128)
+    @Schema(title = L_domain)
+    String domain;
 
+    @NotBlank
     @Size(max = 64)
+    @Schema(title = L_name)
+    String name;
+
+    @Size(max = 128)
     @Schema(title = L_orgId)
     String orgId;
-
 
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
 
-
-    @Size(max = 128)
-    @Schema(title = L_domain)
-    String domain;
-
-
-    @NotBlank
-    @Size(max = 128)
-    @Schema(title = L_name, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
-    String name;
-
-
     @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
 
-
     @NotNull
-    @Schema(title = L_createTime, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_createTime)
     Date createTime;
-
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
-
     @Schema(title = L_orderCode)
     Integer orderCode;
 
-
     @NotNull
-    @Schema(title = L_enable, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_enable)
     Boolean enable;
 
-
     @NotNull
-    @Schema(title = L_editable, required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_editable)
     Boolean editable;
-
 
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
-
-    @ReadOnlyProperty
-    @JsonIgnore
-    @Override
-    public boolean isTenantAdmin() {
-        return RbacUserInfo.super.isTenantAdmin();
-    }
-
-    @ReadOnlyProperty
-    @JsonIgnore
-    @Override
-    public boolean isSuperAdmin() {
-        return RbacUserInfo.super.isSuperAdmin();
-    }
 
 }
