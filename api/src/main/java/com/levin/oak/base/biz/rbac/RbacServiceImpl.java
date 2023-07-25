@@ -71,11 +71,7 @@ public class RbacServiceImpl implements RbacService {
         return StringUtils.hasText(pwd) ? SecureUtil.sha1(pwd) : null;
     }
 
-    /**
-     * @param requirePermission
-     * @return
-     */
-    protected Res.Action getAction(String requirePermission) {
+    protected ContextHolder<String, Res.Action> getActionContext() {
 
         synchronized (actionContextHolder) {
             if (actionContextHolder.isEmpty()) {
@@ -105,7 +101,15 @@ public class RbacServiceImpl implements RbacService {
             }
         }
 
-        return actionContextHolder.get(requirePermission);
+        return actionContextHolder;
+    }
+
+    /**
+     * @param requirePermission
+     * @return
+     */
+    protected Res.Action getAction(String requirePermission) {
+        return getActionContext().get(requirePermission);
     }
 
 
@@ -119,7 +123,7 @@ public class RbacServiceImpl implements RbacService {
 
         Map<String, Res.Action> actionMap = new LinkedHashMap<>();
 
-        actionContextHolder.getAll(true).forEach((k, v) -> {
+        getActionContext().getAll(true).forEach((k, v) -> {
             if (vagueMatch(requirePermissionPattern, k)) {
                 actionMap.put(k, v);
             }
@@ -219,7 +223,7 @@ public class RbacServiceImpl implements RbacService {
     @Override
     public boolean canAssignRole(Object sourceUserId, Object targetUserId, String requireRoleCode, BiConsumer<String, String> matchErrorConsumer) {
 
-         Assert.notNull(sourceUserId, "用户未登录");
+        Assert.notNull(sourceUserId, "用户未登录");
 
         RbacUserInfo<String> userInfo = getUserInfo(sourceUserId);
 
@@ -297,10 +301,16 @@ public class RbacServiceImpl implements RbacService {
             return found;
         }
 
+        //
+        if (ownerPermissionList.contains(requirePermission)) {
+            return true;
+        }
+
         Map<String, Res.Action> actionMap = new LinkedHashMap<>(1);
 
         //是否是通配权限表达式
-        boolean isPattern = requirePermission.contains("*");
+        boolean isPattern = requirePermission.contains("*" + getPermissionDelimiter())
+                || requirePermission.contains(getPermissionDelimiter() + "*");
 
         if (isPattern) {
             //如果包含通配权限，要拆解出权限清单

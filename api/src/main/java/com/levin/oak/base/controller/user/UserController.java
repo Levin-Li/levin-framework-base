@@ -101,7 +101,7 @@ public class UserController extends BaseController {
     protected void checkCurrentUserCreateOrUpdateUserRole(String targetUserId, List<String> roleList) {
 
         boolean ok = rbacService.canAssignRole(authService.getLoginId(), targetUserId, roleList, (roleCode, info) -> {
-            throw new AuthorizationException("分配角色(" + roleCode + ")失败，请检查是否拥有角色所需的权限," + info);
+            throw new AuthorizationException("分配角色(" + roleCode + ")失败，请检查是否拥有角色所需的权限, " + info);
         });
 
         if (!ok) {
