@@ -173,12 +173,9 @@ public class BizUserServiceImpl extends BaseService implements BizUserService {
      */
     @Override
     public boolean update(UpdateUserReq req) {
-
-        req.setPassword(null);
-
         checkCreateOrUpdateAccount(req.getEmail(), req.getTelephone());
-
-        return userService.update(req);
+        //@todo 暂时允许设置密码
+        return userService.update(req.setPassword(encryptPwd(req.getPassword())));
     }
 
     /**
