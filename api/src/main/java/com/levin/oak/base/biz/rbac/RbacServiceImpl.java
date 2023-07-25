@@ -237,14 +237,34 @@ public class RbacServiceImpl implements RbacService {
             return true;
         }
 
-        //3、用户全部的权限
+        //3、角色的权限列表
+        List<String> rolePermissionList = bizRoleService.getRolePermissionList(userInfo.getTenantId(), requireRoleCode);
+
+        //如果角色不需要权限
+        if (rolePermissionList == null
+                || rolePermissionList.isEmpty()) {
+            return true;
+        }
+
+        //4、用户全部的权限
         List<String> ownerPermissionList = getPermissionList(userInfo.getId());
 
-        //4、角色的权限列表
-        List<String> requirePermissionList = bizRoleService.getRolePermissionList(userInfo.getTenantId(), requireRoleCode);
+        //如果源用户没有权限
+        if (ownerPermissionList == null
+                || ownerPermissionList.isEmpty()) {
+            return false;
+        }
 
-        //5、匹配
-        return isAuthorized(userInfo.getRoleList(), ownerPermissionList, true, requirePermissionList
+        //5、提升效率，去除已经拥有的相同的权限
+        rolePermissionList = rolePermissionList.stream()
+
+                //保留源用户未拥有的权限列表，再去检查
+                .filter(p -> !ownerPermissionList.contains(p))
+
+                .collect(Collectors.toList());
+
+        //6、匹配
+        return isAuthorized(userInfo.getRoleList(), ownerPermissionList, true, rolePermissionList
                 , (rp, info) -> Optional.ofNullable(matchErrorConsumer).orElse(emptyConsumer).accept(requireRoleCode, rp + " " + info)
         );
     }
@@ -289,19 +309,22 @@ public class RbacServiceImpl implements RbacService {
 
         Assert.hasText(requirePermission, "检查的权限表达式为空");
 
-        //如果是角色，不是权限
+        //如果是角色，不是权限，按角色处理
         if (isRole(requirePermission)) {
 
             boolean found = ownerRoleList.contains(requirePermission);
 
             if (!found) {
-                Optional.ofNullable(matchErrorConsumer).orElse(emptyConsumer).accept(requirePermission, "role not found");
+                Optional.ofNullable(matchErrorConsumer).orElse(emptyConsumer).accept(requirePermission, requirePermission + " role not authorized ");
             }
+
+            //@todo 拆解角色需要的权限，然后匹配权限
+            //问题无法获取 角色对应的权限列表，只能匹配失败
 
             return found;
         }
 
-        //
+        //如果有直接相同的权限，则直接放回
         if (ownerPermissionList.contains(requirePermission)) {
             return true;
         }

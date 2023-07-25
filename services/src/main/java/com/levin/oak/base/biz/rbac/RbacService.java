@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Rbac 基本服务
@@ -196,6 +197,27 @@ public interface RbacService {
                                  boolean isRequireAllPermission, List<String> requirePermissionList,
                                  BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer) {
 
+        //如果不需要权限
+        if (requirePermissionList == null
+                || requirePermissionList.isEmpty()) {
+            return true;
+        }
+
+        if (ownerPermissionList != null
+                && !ownerPermissionList.isEmpty()) {
+
+            if (isRequireAllPermission) {
+                //提升效率，去除已经拥有的相同的权限
+                requirePermissionList = requirePermissionList.stream()
+                        //保留源用户未拥有的权限列表，再去检查
+                        .filter(p -> !ownerPermissionList.contains(p))
+                        .collect(Collectors.toList());
+            } else if (requirePermissionList.stream().anyMatch(ownerPermissionList::contains)) {
+                //如果只是需要任意一个权限，并且已经拥有，则直接返回
+                return true;
+            }
+        }
+
         Predicate<String> predicate = rp -> isAuthorized(ownerRoleList, ownerPermissionList, rp, matchErrorConsumer);
 
         //是否要求匹配所有权限
@@ -206,6 +228,9 @@ public interface RbacService {
 
     /**
      * 授权验证，是否可以访问指定资源
+     * <p>
+     * 匹配单个权限
+     *
      * <p>
      * 关键方法
      *
