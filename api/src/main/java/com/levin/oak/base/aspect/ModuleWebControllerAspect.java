@@ -202,7 +202,8 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         //获取当前插件
         Plugin plugin = pluginManager.getInstalledPlugins()
                 .stream()
-                .filter(plugin1 -> className.startsWith(plugin1.getPackageName() + "."))
+                //找出类归属的插件
+                .filter(p -> className.startsWith(p.getPackageName() + "."))
                 .findFirst()
                 .orElse(null);
 
@@ -214,13 +215,12 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
             return Collections.emptyList();
         }
 
-        return getVariableResolvers(plugin);
+        return getVariableResolvers(plugin.getPackageName());
     }
 
-    private synchronized List<VariableResolver> getVariableResolvers(Plugin plugin) {
+    private synchronized List<VariableResolver> getVariableResolvers(String packageName) {
 
-
-        final String packageName = plugin.getPackageName();
+        //final String packageName = plugin.getPackageName();
 
         //如果当前模块不存在解析器
         if (!moduleResolverMap.containsKey(packageName)) {
