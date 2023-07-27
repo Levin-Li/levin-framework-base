@@ -8,6 +8,7 @@ import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
+import com.levin.oak.base.biz.BizUserService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.controller.BaseController;
@@ -248,7 +249,7 @@ public class IndexController extends BaseController {
             modelMap.addAttribute("sendSmsCodeApi", basePath + "rbac/sendSmsCode");
         }
 
-        modelMap.addAttribute("SA_ACCOUNT", RbacService.SA_ACCOUNT);
+        modelMap.addAttribute("SA_ACCOUNT", BizUserService.SA_ACCOUNT);
 
         String redirectUrl = httpRequest.getParameter("r");
 

@@ -131,6 +131,18 @@ public class RoleServiceImpl extends BaseService implements RoleService {
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
+    /**
+     * 更新记录，并返回更新记录数
+     *
+     * @param setReq
+     * @param whereReq
+     * @return int 记录数
+     */
+    @Override
+    public int update(SimpleUpdateRoleReq setReq, QueryRoleReq whereReq) {
+        return simpleDao.updateByQueryObj(setReq,whereReq);
+    }
+
     @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Override
