@@ -9,9 +9,8 @@ import com.levin.oak.base.services.simpleapi.*;
 import com.levin.oak.base.services.simpleapi.req.*;
 import com.levin.oak.base.services.simpleapi.info.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.SimpleApi.*;
@@ -50,97 +49,86 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 简单动态接口测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:09:47, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[eef91cf6af6bb483ba2b7231fbd0e109], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[b0dcb1cfeac0ad84f369525c3dbcab1b]，请不要修改和删除此行内容。
  */
 
-//@ActiveProfiles("test")
-//@RunWith(SpringRunner.class)
+// @ActiveProfiles("test")
+// @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@Transactional(rollbackFor = {Throwable.class})
+// @Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class SimpleApiServiceTest {
 
-    @Autowired
-    private SimpleApiService simpleApiService;
+    @Autowired private SimpleApiService simpleApiService;
 
-    @Autowired
-    private BizSimpleApiService bizsimpleApiService;
+    @Autowired private BizSimpleApiService bizsimpleApiService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {
-    }
+    public static void beforeAll() throws Exception {}
 
     @AfterAll
-    public static void afterAll() throws Exception {
-    }
+    public static void afterAll() throws Exception {}
 
     @BeforeEach
-    public void beforeEach() throws Exception {
-    }
+    public void beforeEach() throws Exception {}
 
     @AfterEach
-    public void afterEach() throws Exception {
-    }
+    public void afterEach() throws Exception {}
 
     @Test
     public void createSimpleApiTest() {
 
         CreateSimpleApiReq req = new CreateSimpleApiReq();
 
-            // req.setMethods("这是文本16");//逗号隔开，默认POST 
+        // req.setMethods("这是文本16");//逗号隔开，默认POST
 
-            // req.setLanguage(Language.Groovy);// 必填
+        // req.setLanguage(Language.Groovy);// 必填
 
-            // req.setType("这是文本128");// 必填
+        // req.setType("这是文本128");// 必填
 
-            // req.setCategory("这是文本128");// 必填
+        // req.setCategory("这是文本128");// 必填
 
-            // req.setGroupName("这是文本128");// 必填
+        // req.setGroupName("这是文本128");// 必填
 
-            // req.setIcon("图标_1");// 
+        // req.setIcon("图标_1");//
 
-            // req.setPath("这是文本800");// 必填
+        // req.setPath("这是文本800");// 必填
 
-            // req.setRequireAuthorizations("这是文本1800");// 
+        // req.setRequireAuthorizations("这是文本1800");//
 
-            // req.setContent("内容_1");// 
+        // req.setContent("内容_1");//
 
-            // req.setDomain("这是文本128");// 
+        // req.setDomain("这是文本128");//
 
-            // req.setName("这是文本64");// 必填
+        // req.setName("这是文本64");// 必填
 
-            // req.setOrgId("这是文本128");// 
+        // req.setOrgId("这是文本128");//
 
-            // req.setTenantId("这是文本128");// 
+        // req.setTenantId("这是文本128");//
 
-            // req.setOrderCode(1);// 
+        // req.setOrderCode(1);//
 
-            // req.setEnable(true);// 必填
+        // req.setEnable(true);// 必填
 
-            // req.setEditable(true);// 必填
+        // req.setEditable(true);// 必填
 
-            // req.setRemark("这是文本512");// 
+        // req.setRemark("这是文本512");//
 
-
-       String id  = simpleApiService.create(req);
+        String id = simpleApiService.create(req);
 
         log.debug("新增简单动态接口->" + id);
 
         Assert.isTrue(id != null, "简单动态接口");
-
     }
-
 
     @Test
     public void querySimpleApiTest() {
@@ -167,7 +155,7 @@ public class SimpleApiServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<SimpleApiInfo> resp = simpleApiService.query(req,null);
+        PagingData<SimpleApiInfo> resp = simpleApiService.query(req, null);
 
         log.debug("查询简单动态接口->" + resp);
 
@@ -177,34 +165,33 @@ public class SimpleApiServiceTest {
     @Test
     public void updateSimpleApiTest() {
 
-         UpdateSimpleApiReq req = new UpdateSimpleApiReq();
+        UpdateSimpleApiReq req = new UpdateSimpleApiReq();
 
-         req.setId(id);
+        req.setId(id);
 
+        // req.setMethods("这是文本16");//逗号隔开，默认POST
+        // req.setLanguage(Language.Groovy);// 必填
+        // req.setType("这是文本128");// 必填
+        // req.setCategory("这是文本128");// 必填
+        // req.setGroupName("这是文本128");// 必填
+        // req.setIcon("图标_1");//
+        // req.setPath("这是文本800");// 必填
+        // req.setRequireAuthorizations("这是文本1800");//
+        // req.setContent("内容_1");//
+        // req.setDomain("这是文本128");//
+        // req.setName("这是文本64");// 必填
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
+        // req.setOrderCode(1);//
+        // req.setEnable(true);// 必填
+        // req.setEditable(true);// 必填
+        // req.setRemark("这是文本512");//
 
-           // req.setMethods("这是文本16");//逗号隔开，默认POST 
-           // req.setLanguage(Language.Groovy);// 必填
-           // req.setType("这是文本128");// 必填
-           // req.setCategory("这是文本128");// 必填
-           // req.setGroupName("这是文本128");// 必填
-           // req.setIcon("图标_1");// 
-           // req.setPath("这是文本800");// 必填
-           // req.setRequireAuthorizations("这是文本1800");// 
-           // req.setContent("内容_1");// 
-           // req.setDomain("这是文本128");// 
-           // req.setName("这是文本64");// 必填
-           // req.setOrgId("这是文本128");// 
-           // req.setTenantId("这是文本128");// 
-           // req.setOrderCode(1);// 
-           // req.setEnable(true);// 必填
-           // req.setEditable(true);// 必填
-           // req.setRemark("这是文本512");// 
+        boolean ok = simpleApiService.update(req);
 
-          boolean ok = simpleApiService.update(req);
+        log.debug("更新简单动态接口-> " + ok);
 
-          log.debug("更新简单动态接口-> " + ok);
-
-          Assert.isTrue(ok, "简单动态接口");
+        Assert.isTrue(ok, "简单动态接口");
     }
 
     @Test
@@ -218,6 +205,6 @@ public class SimpleApiServiceTest {
 
         log.debug("删除简单动态接口->" + ok);
 
-        Assert.isTrue(ok , "简单动态接口");
+        Assert.isTrue(ok, "简单动态接口");
     }
 }

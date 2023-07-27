@@ -29,13 +29,13 @@ import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Setting.*;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:25, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[d9e132e8584421f94034960fc1c7becf], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[57f9cdddfa5bd6ed121b2d11416dfe65]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -48,7 +48,6 @@ import java.util.Date;
 public class SettingInfo implements Serializable {
 
     private static final long serialVersionUID = 147875794L;
-
 
     @NotBlank
     @Size(max = 64)
@@ -125,5 +124,4 @@ public class SettingInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
-
 }

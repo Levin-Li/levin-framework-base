@@ -28,20 +28,23 @@ import static com.levin.oak.base.entities.E_AppClientFile.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[7187684697e380ad65bd81e3f61fd6ce], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[28968b249d918b30df6846bf993f75d0]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(exclude = {"content",})
+@ToString(
+        exclude = {
+            "content",
+        })
 @FieldNameConstants
 @JsonIgnoreProperties({tenantId})
 @Select
@@ -63,11 +66,11 @@ public class SimpleAppClientFileInfo implements Serializable {
     String mimeType;
 
     @NotBlank
-    @Schema(title = L_path , description = D_path)
+    @Schema(title = L_path, description = D_path)
     String path;
 
-    //@Fetch //默认不加载，请通过查询对象控制
-    @Schema(title = L_content , description = D_content)
+    // @Fetch //默认不加载，请通过查询对象控制
+    @Schema(title = L_content, description = D_content)
     byte[] content;
 
     @Size(max = 128)
@@ -86,6 +89,4 @@ public class SimpleAppClientFileInfo implements Serializable {
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
-
-
 }

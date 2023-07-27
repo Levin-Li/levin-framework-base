@@ -35,29 +35,32 @@ import static com.levin.oak.base.entities.E_AccessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 查询访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 12:12:29, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[1634b527c1d1de2d7b1cdfc1b1b8c253], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[6a863f79acefb61af889912bcf747d86]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS, resultClass = AccessLogInfo.class)
-public class QueryAccessLogReq extends MultiTenantOrgReq{
+@TargetOption(
+        entityClass = AccessLog.class,
+        alias = E_AccessLog.ALIAS,
+        resultClass = AccessLogInfo.class)
+public class QueryAccessLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1030736962L;
 
@@ -65,11 +68,13 @@ public class QueryAccessLogReq extends MultiTenantOrgReq{
     @Schema(title = "排序字段")
     String orderBy;
 
-    //@Ignore
+    // @Ignore
     @Schema(title = "排序方向")
-    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
+    @SimpleOrderBy(
+            expr = "orderBy + ' ' + orderDir",
+            condition = "orderBy != null && orderDir != null",
+            remark = "生成排序表达式")
     OrderBy.Type orderDir;
-
 
     @NotNull
     @Schema(title = L_id)
@@ -173,25 +178,24 @@ public class QueryAccessLogReq extends MultiTenantOrgReq{
     Long executeTime;
 
     @NotNull
-    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
     @Lte
     Date lteCreateTime;
 
-    //@Schema(title = L_createTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenCreateTime;
-
+    // @Schema(title = L_createTime + "-日期范围")
+    // @Between(paramDelimiter = "-")
+    // String betweenCreateTime;
 
     public QueryAccessLogReq(Long id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
-        //@todo 查询之前初始化数据
+        // @todo 查询之前初始化数据
     }
-
 }

@@ -1,6 +1,5 @@
 package com.levin.oak.base.services.commons.req;
 
-
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.service.support.InjectConsts;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,28 +24,25 @@ import org.springframework.util.StringUtils;
 
 import java.util.*;
 
-
 /**
- *  基本查询对象
- *  @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[4c2c1d23e838f5a5c2d57d59f456338c], 请不要修改和删除此行内容。
+ * 基本查询对象
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:40, 代码生成哈希校验码：[feeaa977cfcada0b52a013fda1177a0b]，请不要修改和删除此行内容。
  */
 @Schema(title = "基本查询对象")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
-public abstract class BaseReq
-        implements
-        ServiceReq  {
+public abstract class BaseReq implements ServiceReq {
 
     /**
      * 是否非空
+     *
      * @param value
      * @return
      */
-    protected boolean isNotBlank(Object value){
+    protected boolean isNotBlank(Object value) {
         return value != null
                 && (!(value instanceof CharSequence) || StringUtils.hasText((CharSequence) value));
     }
-
 }

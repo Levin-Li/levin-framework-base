@@ -41,54 +41,53 @@ import com.levin.oak.base.services.i18nres.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
- *  国际化资源-业务服务实现类
+ * 国际化资源-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:01, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[d2a66e534ef032aed806756098b5d8c9], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[db559af0d303e8536643320a6ec53d90]，请不要修改和删除此行内容。
  */
-
 @Service(PLUGIN_PREFIX + "BizI18nResServiceImpl")
 @DubboService
-
-@ConditionalOnMissingBean({BizI18nResService.class}) //默认只有在无对应服务才启用
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizI18nResServiceImpl", matchIfMissing = true)
+@ConditionalOnMissingBean({BizI18nResService.class}) // 默认只有在无对应服务才启用
+@ConditionalOnProperty(
+        prefix = PLUGIN_PREFIX,
+        name = "BizI18nResServiceImpl",
+        matchIfMissing = true)
 @Slf4j
 
-//@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
-//@Validated
+// @Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
+// @Validated
 @Tag(name = E_I18nRes.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_I18nRes.SIMPLE_CLASS_NAME})
 public class BizI18nResServiceImpl extends BaseService implements BizI18nResService {
 
-    @Autowired
-    I18nResService i18nResService;
+    @Autowired I18nResService i18nResService;
 
-    protected BizI18nResServiceImpl getSelfProxy(){
+    protected BizI18nResServiceImpl getSelfProxy() {
         return getSelfProxy(BizI18nResServiceImpl.class);
     }
 
-    //示例方法
-    //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    //@Override
-    //@CacheEvict(condition = "#req.id != null", key = E_I18nRes.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public boolean update(UpdateI18nResReq req) {
+    // 示例方法
+    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    // @Override
+    // @CacheEvict(condition = "#req.id != null", key = E_I18nRes.CACHE_KEY_PREFIX + "#req.id")
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public boolean update(UpdateI18nResReq req) {
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
-    //}
+    // }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public void update(UpdateReq req){
     //    i18nResService.update(req);
-    //}
+    // }
 
 }

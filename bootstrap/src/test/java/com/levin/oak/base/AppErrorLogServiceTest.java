@@ -9,9 +9,8 @@ import com.levin.oak.base.services.apperrorlog.*;
 import com.levin.oak.base.services.apperrorlog.req.*;
 import com.levin.oak.base.services.apperrorlog.info.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
@@ -48,77 +47,66 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 应用错误日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[a25681fd442c28d0898cf6f75a0474af], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[2e3f4d0f6b9221d8f00ad610cf5e3c46]，请不要修改和删除此行内容。
  */
 
-//@ActiveProfiles("test")
-//@RunWith(SpringRunner.class)
+// @ActiveProfiles("test")
+// @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@Transactional(rollbackFor = {Throwable.class})
+// @Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class AppErrorLogServiceTest {
 
-    @Autowired
-    private AppErrorLogService appErrorLogService;
+    @Autowired private AppErrorLogService appErrorLogService;
 
-    @Autowired
-    private BizAppErrorLogService bizappErrorLogService;
+    @Autowired private BizAppErrorLogService bizappErrorLogService;
 
     private Long id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {
-    }
+    public static void beforeAll() throws Exception {}
 
     @AfterAll
-    public static void afterAll() throws Exception {
-    }
+    public static void afterAll() throws Exception {}
 
     @BeforeEach
-    public void beforeEach() throws Exception {
-    }
+    public void beforeEach() throws Exception {}
 
     @AfterEach
-    public void afterEach() throws Exception {
-    }
+    public void afterEach() throws Exception {}
 
     @Test
     public void createAppErrorLogTest() {
 
         CreateAppErrorLogReq req = new CreateAppErrorLogReq();
 
-            // req.setTenantId("租户ID_1");// 
+        // req.setTenantId("租户ID_1");//
 
-            // req.setModuleId("这是文本64");// 
+        // req.setModuleId("这是文本64");//
 
-            // req.setOccurTime(new Date());// 必填
+        // req.setOccurTime(new Date());// 必填
 
-            // req.setTitle("这是文本768");// 必填
+        // req.setTitle("这是文本768");// 必填
 
-            // req.setErrorLevel("错误级别_1");// 
+        // req.setErrorLevel("错误级别_1");//
 
-            // req.setRootExceptionType("根异常类型_1");// 
+        // req.setRootExceptionType("根异常类型_1");//
 
-            // req.setExceptionFullInfo("完整异常堆栈_1");// 
+        // req.setExceptionFullInfo("完整异常堆栈_1");//
 
-
-       Long id  = appErrorLogService.create(req);
+        Long id = appErrorLogService.create(req);
 
         log.debug("新增应用错误日志->" + id);
 
         Assert.isTrue(id != null, "应用错误日志");
-
     }
-
 
     @Test
     public void queryAppErrorLogTest() {
@@ -135,7 +123,7 @@ public class AppErrorLogServiceTest {
         // req.setRootExceptionType("根异常类型_1");//
         // req.setExceptionFullInfo("完整异常堆栈_1");//
 
-        PagingData<AppErrorLogInfo> resp = appErrorLogService.query(req,null);
+        PagingData<AppErrorLogInfo> resp = appErrorLogService.query(req, null);
 
         log.debug("查询应用错误日志->" + resp);
 
@@ -145,24 +133,23 @@ public class AppErrorLogServiceTest {
     @Test
     public void updateAppErrorLogTest() {
 
-         UpdateAppErrorLogReq req = new UpdateAppErrorLogReq();
+        UpdateAppErrorLogReq req = new UpdateAppErrorLogReq();
 
-         req.setId(id);
+        req.setId(id);
 
+        // req.setTenantId("租户ID_1");//
+        // req.setModuleId("这是文本64");//
+        // req.setOccurTime(new Date());// 必填
+        // req.setTitle("这是文本768");// 必填
+        // req.setErrorLevel("错误级别_1");//
+        // req.setRootExceptionType("根异常类型_1");//
+        // req.setExceptionFullInfo("完整异常堆栈_1");//
 
-           // req.setTenantId("租户ID_1");// 
-           // req.setModuleId("这是文本64");// 
-           // req.setOccurTime(new Date());// 必填
-           // req.setTitle("这是文本768");// 必填
-           // req.setErrorLevel("错误级别_1");// 
-           // req.setRootExceptionType("根异常类型_1");// 
-           // req.setExceptionFullInfo("完整异常堆栈_1");// 
+        boolean ok = appErrorLogService.update(req);
 
-          boolean ok = appErrorLogService.update(req);
+        log.debug("更新应用错误日志-> " + ok);
 
-          log.debug("更新应用错误日志-> " + ok);
-
-          Assert.isTrue(ok, "应用错误日志");
+        Assert.isTrue(ok, "应用错误日志");
     }
 
     @Test
@@ -176,6 +163,6 @@ public class AppErrorLogServiceTest {
 
         log.debug("删除应用错误日志->" + ok);
 
-        Assert.isTrue(ok , "应用错误日志");
+        Assert.isTrue(ok, "应用错误日志");
     }
 }

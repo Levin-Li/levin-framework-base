@@ -35,29 +35,32 @@ import static com.levin.oak.base.entities.E_AppErrorLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 查询应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[29718c36d9935ef21c601d3d69876329], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[fce28aab5aeaad783490b87b750dc974]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = AppErrorLog.class, alias = E_AppErrorLog.ALIAS, resultClass = AppErrorLogInfo.class)
-public class QueryAppErrorLogReq extends MultiTenantReq{
+@TargetOption(
+        entityClass = AppErrorLog.class,
+        alias = E_AppErrorLog.ALIAS,
+        resultClass = AppErrorLogInfo.class)
+public class QueryAppErrorLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1594864095L;
 
@@ -65,11 +68,13 @@ public class QueryAppErrorLogReq extends MultiTenantReq{
     @Schema(title = "排序字段")
     String orderBy;
 
-    //@Ignore
+    // @Ignore
     @Schema(title = "排序方向")
-    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
+    @SimpleOrderBy(
+            expr = "orderBy + ' ' + orderDir",
+            condition = "orderBy != null && orderDir != null",
+            remark = "生成排序表达式")
     OrderBy.Type orderDir;
-
 
     @NotNull
     @Schema(title = L_id)
@@ -80,18 +85,17 @@ public class QueryAppErrorLogReq extends MultiTenantReq{
     String moduleId;
 
     @NotNull
-    @Schema(title = L_occurTime , description = "大于等于" + L_occurTime)
+    @Schema(title = L_occurTime, description = "大于等于" + L_occurTime)
     @Gte
     Date gteOccurTime;
 
-    @Schema(title = L_occurTime , description = "小于等于" + L_occurTime)
+    @Schema(title = L_occurTime, description = "小于等于" + L_occurTime)
     @Lte
     Date lteOccurTime;
 
-    //@Schema(title = L_occurTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenOccurTime;
-
+    // @Schema(title = L_occurTime + "-日期范围")
+    // @Between(paramDelimiter = "-")
+    // String betweenOccurTime;
 
     @NotBlank
     @Size(max = 768)
@@ -118,9 +122,9 @@ public class QueryAppErrorLogReq extends MultiTenantReq{
     public QueryAppErrorLogReq(Long id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
-        //@todo 查询之前初始化数据
+        // @todo 查询之前初始化数据
     }
-
 }

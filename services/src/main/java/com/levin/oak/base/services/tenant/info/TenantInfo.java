@@ -30,13 +30,13 @@ import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 import java.util.List;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+
 ////////////////////////////////////
 
 /**
  * 平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:25, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[e68dc971fb4e8688801f0e76d4b22f76], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:42, 代码生成哈希校验码：[dfe0fad390fd0640920e51cf679314fd]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -49,7 +49,6 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 public class TenantInfo implements Serializable {
 
     private static final long serialVersionUID = 1557223144L;
-
 
     @NotBlank
     @Size(max = 64)
@@ -95,7 +94,7 @@ public class TenantInfo implements Serializable {
     String contractPhone;
 
     @Size(max = 1200)
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Schema(title = L_domainList)
     List<String> domainList;
 
@@ -117,7 +116,7 @@ public class TenantInfo implements Serializable {
     String name;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
+    @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
     @Size(max = 128)
@@ -145,5 +144,4 @@ public class TenantInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
-
 }

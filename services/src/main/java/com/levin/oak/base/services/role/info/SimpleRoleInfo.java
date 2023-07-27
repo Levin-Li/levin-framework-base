@@ -31,13 +31,13 @@ import com.levin.oak.base.entities.Role.*;
 import java.util.List;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:25, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[b710184de73db4f593be0a0f22f2bbea], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:40, 代码生成哈希校验码：[4554bb72f805e429fc94ad716213e6b9]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -66,15 +66,15 @@ public class SimpleRoleInfo implements Serializable {
     String icon;
 
     @NotNull
-    @Schema(title = L_orgDataScope , description = D_orgDataScope)
+    @Schema(title = L_orgDataScope, description = D_orgDataScope)
     OrgDataScope orgDataScope;
 
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    @Schema(title = L_assignedOrgIdList , description = D_assignedOrgIdList)
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @Schema(title = L_assignedOrgIdList, description = D_assignedOrgIdList)
     List<String> assignedOrgIdList;
 
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    @Schema(title = L_permissionList , description = D_permissionList)
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @Schema(title = L_permissionList, description = D_permissionList)
     List<String> permissionList;
 
     @Size(max = 128)
@@ -93,6 +93,4 @@ public class SimpleRoleInfo implements Serializable {
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
-
-
 }

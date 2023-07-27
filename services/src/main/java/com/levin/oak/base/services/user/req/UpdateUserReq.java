@@ -30,7 +30,7 @@ import static com.levin.oak.base.entities.E_User.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.User.*;
@@ -39,25 +39,25 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
+
 ////////////////////////////////////
 
 /**
  * 更新用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:50:28, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[6118178c48096a19946feb4bbf0981e6], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[e589c028b1950d63ff559d064652d69b]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class UpdateUserReq extends MultiTenantOrgReq {
 
@@ -68,17 +68,16 @@ public class UpdateUserReq extends MultiTenantOrgReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件" , hidden = true)
+    @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
-
     @Size(max = 20)
-    @Schema(title = L_telephone , description = D_telephone)
+    @Schema(title = L_telephone, description = D_telephone)
     String telephone;
 
     @Size(max = 32)
-    @Schema(title = L_email , description = D_email)
+    @Schema(title = L_email, description = D_email)
     String email;
 
     @Size(max = 256)
@@ -95,7 +94,11 @@ public class UpdateUserReq extends MultiTenantOrgReq {
     @Schema(title = L_sex)
     Sex sex;
 
-    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(
+            domain = "dao",
+            expectBaseType = String.class,
+            converter = PrimitiveArrayJsonConverter.class,
+            isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_tagList)
     List<String> tagList;
@@ -117,7 +120,11 @@ public class UpdateUserReq extends MultiTenantOrgReq {
     @Schema(title = L_jobPostCode)
     String jobPostCode;
 
-    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(
+            domain = "dao",
+            expectBaseType = String.class,
+            converter = PrimitiveArrayJsonConverter.class,
+            isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_roleList)
     List<String> roleList;
@@ -155,25 +162,23 @@ public class UpdateUserReq extends MultiTenantOrgReq {
     @Schema(title = L_remark)
     String remark;
 
-
     public UpdateUserReq(String id) {
         this.id = id;
     }
 
-    public UpdateUserReq updateIdWhenNotBlank(String id){
-        if(isNotBlank(id)){
-        this.id = id;
+    public UpdateUserReq updateIdWhenNotBlank(String id) {
+        if (isNotBlank(id)) {
+            this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
 
-        if(getLastUpdateTime() == null){
+        if (getLastUpdateTime() == null) {
             setLastUpdateTime(new Date());
         }
     }
-
 }

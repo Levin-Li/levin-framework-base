@@ -30,49 +30,43 @@ import static com.levin.oak.base.entities.E_SimpleApi.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.SimpleApi.*;
 import java.util.List;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 更新简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[8aa84dff797e7a776073ff0e6a647ba5], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:41, 代码生成哈希校验码：[41d2e5b752a5dd7c0eebe9ad7f5a1699]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1021385738L;
 
-    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
-    @NotNull
-    @Eq(require = true)
-    String id;
-
-    @Schema(description = "可编辑条件" , hidden = true)
+    @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
-
     @Size(max = 16)
-    @Schema(title = L_methods , description = D_methods)
+    @Schema(title = L_methods, description = D_methods)
     String methods;
 
     @Schema(title = L_language)
@@ -101,7 +95,11 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq {
     @Schema(title = L_path)
     String path;
 
-    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(
+            domain = "dao",
+            expectBaseType = String.class,
+            converter = PrimitiveArrayJsonConverter.class,
+            isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
@@ -118,20 +116,8 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
-
-    public SimpleUpdateSimpleApiReq(String id) {
-        this.id = id;
-    }
-
-    public SimpleUpdateSimpleApiReq updateIdWhenNotBlank(String id){
-        if(isNotBlank(id)){
-        this.id = id;
-        }
-        return this;
-    }
-
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
     }
 }

@@ -35,7 +35,7 @@ import static com.levin.oak.base.entities.E_Org.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Org.*;
@@ -45,25 +45,25 @@ import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 import java.util.Set;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 查询机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[86cab04191a81dc2b14c26b0811c6929], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[61a5db680d1b8882369ff0b33d81a741]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Org.class, alias = E_Org.ALIAS, resultClass = OrgInfo.class)
-public class QueryOrgReq extends MultiTenantReq{
+public class QueryOrgReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -1399842458L;
 
@@ -71,11 +71,13 @@ public class QueryOrgReq extends MultiTenantReq{
     @Schema(title = "排序字段")
     String orderBy;
 
-    //@Ignore
+    // @Ignore
     @Schema(title = "排序方向")
-    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
+    @SimpleOrderBy(
+            expr = "orderBy + ' ' + orderDir",
+            condition = "orderBy != null && orderDir != null",
+            remark = "生成排序表达式")
     OrderBy.Type orderDir;
-
 
     @NotBlank
     @Size(max = 64)
@@ -87,10 +89,10 @@ public class QueryOrgReq extends MultiTenantReq{
     String parentId;
 
     @Size(max = 64)
-    @Schema(title = L_code , description = D_code)
+    @Schema(title = L_code, description = D_code)
     String code;
 
-    @Schema(title = "模糊匹配-" + L_code , description = D_code)
+    @Schema(title = "模糊匹配-" + L_code, description = D_code)
     @Contains
     String containsCode;
 
@@ -117,22 +119,21 @@ public class QueryOrgReq extends MultiTenantReq{
     @Contains
     String containsAreaCode;
 
-
     @Schema(title = "是否加载" + L_area)
     @Fetch(attrs = E_Org.area, condition = "#_val == true")
     Boolean loadArea;
 
     @Size(max = 128)
-    @Schema(title = L_level , description = D_level)
+    @Schema(title = L_level, description = D_level)
     String level;
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_category , description = D_category)
+    @Schema(title = L_category, description = D_category)
     String category;
 
     @NotNull
-    @Schema(title = L_isExternal , description = D_isExternal)
+    @Schema(title = L_isExternal, description = D_isExternal)
     Boolean isExternal;
 
     @Size(max = 64)
@@ -173,18 +174,16 @@ public class QueryOrgReq extends MultiTenantReq{
     @Fetch(attrs = E_Org.extInfo, condition = "#_val == true")
     Boolean loadExtInfo;
 
-
     @Schema(title = "是否加载" + L_parent)
     @Fetch(attrs = E_Org.parent, condition = "#_val == true")
     Boolean loadParent;
-
 
     @Schema(title = "是否加载" + L_children)
     @Fetch(attrs = E_Org.children, condition = "#_val == true")
     Boolean loadChildren;
 
     @Size(max = 1800)
-    @Schema(title = L_idPath , description = D_idPath)
+    @Schema(title = L_idPath, description = D_idPath)
     String idPath;
 
     @NotBlank
@@ -197,10 +196,10 @@ public class QueryOrgReq extends MultiTenantReq{
     String containsName;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
+    @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName, description = D_pinyinName)
     @Contains
     String containsPinyinName;
 
@@ -209,31 +208,29 @@ public class QueryOrgReq extends MultiTenantReq{
     String creator;
 
     @NotNull
-    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
     @Lte
     Date lteCreateTime;
 
-    //@Schema(title = L_createTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenCreateTime;
+    // @Schema(title = L_createTime + "-日期范围")
+    // @Between(paramDelimiter = "-")
+    // String betweenCreateTime;
 
-
-    @Schema(title = L_lastUpdateTime , description = "大于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = L_lastUpdateTime , description = "小于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
     @Lte
     Date lteLastUpdateTime;
 
-    //@Schema(title = L_lastUpdateTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenLastUpdateTime;
-
+    // @Schema(title = L_lastUpdateTime + "-日期范围")
+    // @Between(paramDelimiter = "-")
+    // String betweenLastUpdateTime;
 
     @Schema(title = L_orderCode)
     Integer orderCode;
@@ -253,9 +250,9 @@ public class QueryOrgReq extends MultiTenantReq{
     public QueryOrgReq(String id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
-        //@todo 查询之前初始化数据
+        // @todo 查询之前初始化数据
     }
-
 }

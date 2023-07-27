@@ -32,26 +32,29 @@ import com.levin.oak.base.entities.MenuRes;
 import com.levin.oak.base.services.menures.info.*;
 import java.util.Set;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:27, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[750b3a767ac407e87f3269165daf0b82], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[6082c72fe8242f8784db6cb0cef7560b]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(exclude = {"parent","children",})
+@ToString(
+        exclude = {
+            "parent",
+            "children",
+        })
 @FieldNameConstants
 @JsonIgnoreProperties({tenantId})
 public class MenuResInfo implements Serializable {
 
     private static final long serialVersionUID = -887712701L;
-
 
     @NotBlank
     @Size(max = 64)
@@ -95,16 +98,16 @@ public class MenuResInfo implements Serializable {
     @Schema(title = L_params)
     String params;
 
-    //@Fetch //默认不加载，请通过查询对象控制
+    // @Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_parent)
     MenuResInfo parent;
 
-    //@Fetch //默认不加载，请通过查询对象控制
+    // @Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_children)
     Set<MenuResInfo> children;
 
     @Size(max = 1800)
-    @Schema(title = L_idPath , description = D_idPath)
+    @Schema(title = L_idPath, description = D_idPath)
     String idPath;
 
     @NotBlank
@@ -113,7 +116,7 @@ public class MenuResInfo implements Serializable {
     String name;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
+    @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
     @Size(max = 128)
@@ -141,5 +144,4 @@ public class MenuResInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
-
 }

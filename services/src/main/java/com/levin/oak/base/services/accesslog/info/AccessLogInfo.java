@@ -28,13 +28,13 @@ import static com.levin.oak.base.entities.E_AccessLog.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[3c8bf3b32d9ea29dc1a0b3d09b8dc2ea], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[32376a1807b12f2ffe4c1df819523e3e]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -47,7 +47,6 @@ import java.util.Date;
 public class AccessLogInfo implements Serializable {
 
     private static final long serialVersionUID = 1030736962L;
-
 
     @NotNull
     @Schema(title = L_id)
@@ -137,5 +136,4 @@ public class AccessLogInfo implements Serializable {
     @NotNull
     @Schema(title = L_createTime)
     Date createTime;
-
 }

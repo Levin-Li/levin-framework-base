@@ -41,56 +41,55 @@ import com.levin.oak.base.services.simpleform.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.List;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
- *  简单表单-业务服务实现类
+ * 简单表单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:01, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[f74e09484de6063e9362d6e314979318], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[9a4a964ca1f38436502f67f6996ddcdc]，请不要修改和删除此行内容。
  */
-
 @Service(PLUGIN_PREFIX + "BizSimpleFormServiceImpl")
 @DubboService
-
-@ConditionalOnMissingBean({BizSimpleFormService.class}) //默认只有在无对应服务才启用
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizSimpleFormServiceImpl", matchIfMissing = true)
+@ConditionalOnMissingBean({BizSimpleFormService.class}) // 默认只有在无对应服务才启用
+@ConditionalOnProperty(
+        prefix = PLUGIN_PREFIX,
+        name = "BizSimpleFormServiceImpl",
+        matchIfMissing = true)
 @Slf4j
 
-//@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
-//@Validated
+// @Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
+// @Validated
 @Tag(name = E_SimpleForm.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleForm.SIMPLE_CLASS_NAME})
 public class BizSimpleFormServiceImpl extends BaseService implements BizSimpleFormService {
 
-    @Autowired
-    SimpleFormService simpleFormService;
+    @Autowired SimpleFormService simpleFormService;
 
-    protected BizSimpleFormServiceImpl getSelfProxy(){
+    protected BizSimpleFormServiceImpl getSelfProxy() {
         return getSelfProxy(BizSimpleFormServiceImpl.class);
     }
 
-    //示例方法
-    //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    //@Override
-    //@CacheEvict(condition = "#req.id != null", key = E_SimpleForm.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public boolean update(UpdateSimpleFormReq req) {
+    // 示例方法
+    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    // @Override
+    // @CacheEvict(condition = "#req.id != null", key = E_SimpleForm.CACHE_KEY_PREFIX + "#req.id")
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public boolean update(UpdateSimpleFormReq req) {
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
-    //}
+    // }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public void update(UpdateReq req){
     //    simpleFormService.update(req);
-    //}
+    // }
 
 }

@@ -33,20 +33,23 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
+
 ////////////////////////////////////
 
 /**
  * 用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[afc5657c7758c623eedb0a05f6052882], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[e000bcff59b87a54d5aa6c81a214dde2]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(exclude = {"org",})
+@ToString(
+        exclude = {
+            "org",
+        })
 @FieldNameConstants
 @JsonIgnoreProperties({tenantId, password})
 @Select
@@ -60,11 +63,11 @@ public class SimpleUserInfo implements Serializable {
     String id;
 
     @Size(max = 20)
-    @Schema(title = L_telephone , description = D_telephone)
+    @Schema(title = L_telephone, description = D_telephone)
     String telephone;
 
     @Size(max = 32)
-    @Schema(title = L_email , description = D_email)
+    @Schema(title = L_email, description = D_email)
     String email;
 
     @Size(max = 256)
@@ -81,7 +84,7 @@ public class SimpleUserInfo implements Serializable {
     @Schema(title = L_sex)
     Sex sex;
 
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_tagList)
     List<String> tagList;
@@ -104,12 +107,12 @@ public class SimpleUserInfo implements Serializable {
     @Schema(title = L_jobPostCode)
     String jobPostCode;
 
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_roleList)
     List<String> roleList;
 
-    //@Fetch //默认不加载，请通过查询对象控制
+    // @Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_org)
     OrgInfo org;
 
@@ -137,6 +140,4 @@ public class SimpleUserInfo implements Serializable {
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
-
-
 }

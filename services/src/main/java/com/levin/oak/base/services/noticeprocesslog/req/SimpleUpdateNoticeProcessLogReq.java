@@ -30,39 +30,33 @@ import static com.levin.oak.base.entities.E_NoticeProcessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 更新通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:15, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[b93456a778178360b5f5f2eea1f1af40], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[44d1cb51c5db7befc8123a8cb9a662f4]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = NoticeProcessLog.class, alias = E_NoticeProcessLog.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class SimpleUpdateNoticeProcessLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1991983093L;
-
-    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
-    @NotNull
-    @Eq(require = true)
-    String id;
-
 
     @NotBlank
     @Size(max = 128)
@@ -82,20 +76,8 @@ public class SimpleUpdateNoticeProcessLogReq extends MultiTenantOrgReq {
     @Schema(title = L_remark)
     String remark;
 
-
-    public SimpleUpdateNoticeProcessLogReq(String id) {
-        this.id = id;
-    }
-
-    public SimpleUpdateNoticeProcessLogReq updateIdWhenNotBlank(String id){
-        if(isNotBlank(id)){
-        this.id = id;
-        }
-        return this;
-    }
-
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
     }
 }

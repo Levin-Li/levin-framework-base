@@ -41,9 +41,8 @@ import com.levin.oak.base.services.area.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Area;
@@ -51,48 +50,45 @@ import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
 import com.levin.oak.base.entities.Area.*;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
- *  区域-业务服务实现类
+ * 区域-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:01, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[56133fa3a4c068b5378807789dc33692], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[77e95f9a03dd8b6bcb69ef3c522e0070]，请不要修改和删除此行内容。
  */
-
 @Service(PLUGIN_PREFIX + "BizAreaServiceImpl")
 @DubboService
-
-@ConditionalOnMissingBean({BizAreaService.class}) //默认只有在无对应服务才启用
+@ConditionalOnMissingBean({BizAreaService.class}) // 默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizAreaServiceImpl", matchIfMissing = true)
 @Slf4j
 
-//@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
-//@Validated
+// @Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
+// @Validated
 @Tag(name = E_Area.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Area.SIMPLE_CLASS_NAME})
 public class BizAreaServiceImpl extends BaseService implements BizAreaService {
 
-    @Autowired
-    AreaService areaService;
+    @Autowired AreaService areaService;
 
-    protected BizAreaServiceImpl getSelfProxy(){
+    protected BizAreaServiceImpl getSelfProxy() {
         return getSelfProxy(BizAreaServiceImpl.class);
     }
 
-    //示例方法
-    //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    //@Override
-    //@CacheEvict(condition = "#req.id != null", key = E_Area.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public boolean update(UpdateAreaReq req) {
+    // 示例方法
+    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    // @Override
+    // @CacheEvict(condition = "#req.id != null", key = E_Area.CACHE_KEY_PREFIX + "#req.id")
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public boolean update(UpdateAreaReq req) {
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
-    //}
+    // }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public void update(UpdateReq req){
     //    areaService.update(req);
-    //}
+    // }
 
 }

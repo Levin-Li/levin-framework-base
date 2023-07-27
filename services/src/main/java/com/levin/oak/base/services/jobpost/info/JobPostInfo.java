@@ -29,13 +29,13 @@ import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.JobPost.*;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[8aa9ad9510ecaa44c4408f84b5d6ebc0], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[556213e810793d30a4cb819190b0165e]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -48,7 +48,6 @@ import java.util.Date;
 public class JobPostInfo implements Serializable {
 
     private static final long serialVersionUID = 1018878847L;
-
 
     @NotBlank
     @Size(max = 64)
@@ -106,5 +105,4 @@ public class JobPostInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
-
 }

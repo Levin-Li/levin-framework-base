@@ -35,7 +35,7 @@ import static com.levin.oak.base.entities.E_Area.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Area;
@@ -43,25 +43,25 @@ import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
 import com.levin.oak.base.entities.Area.*;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 查询区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:57, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[d50e7ffab8ef254104c9db0703d442a9], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[8a97f72e2ec13c9d5ffa708f471ec8d1]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Area.class, alias = E_Area.ALIAS, resultClass = AreaInfo.class)
-public class QueryAreaReq extends BaseReq{
+public class QueryAreaReq extends BaseReq {
 
     private static final long serialVersionUID = -445860277L;
 
@@ -69,11 +69,13 @@ public class QueryAreaReq extends BaseReq{
     @Schema(title = "排序字段")
     String orderBy;
 
-    //@Ignore
+    // @Ignore
     @Schema(title = "排序方向")
-    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
+    @SimpleOrderBy(
+            expr = "orderBy + ' ' + orderDir",
+            condition = "orderBy != null && orderDir != null",
+            remark = "生成排序表达式")
     OrderBy.Type orderDir;
-
 
     @NotBlank
     @Size(max = 64)
@@ -91,11 +93,9 @@ public class QueryAreaReq extends BaseReq{
     @Schema(title = L_parentCode)
     String parentCode;
 
-
     @Schema(title = "是否加载" + L_parent)
     @Fetch(attrs = E_Area.parent, condition = "#_val == true")
     Boolean loadParent;
-
 
     @Schema(title = "是否加载" + L_children)
     @Fetch(attrs = E_Area.children, condition = "#_val == true")
@@ -115,10 +115,10 @@ public class QueryAreaReq extends BaseReq{
     String containsName;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
+    @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName, description = D_pinyinName)
     @Contains
     String containsPinyinName;
 
@@ -127,31 +127,29 @@ public class QueryAreaReq extends BaseReq{
     String creator;
 
     @NotNull
-    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
     @Lte
     Date lteCreateTime;
 
-    //@Schema(title = L_createTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenCreateTime;
+    // @Schema(title = L_createTime + "-日期范围")
+    // @Between(paramDelimiter = "-")
+    // String betweenCreateTime;
 
-
-    @Schema(title = L_lastUpdateTime , description = "大于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = L_lastUpdateTime , description = "小于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
     @Lte
     Date lteLastUpdateTime;
 
-    //@Schema(title = L_lastUpdateTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenLastUpdateTime;
-
+    // @Schema(title = L_lastUpdateTime + "-日期范围")
+    // @Between(paramDelimiter = "-")
+    // String betweenLastUpdateTime;
 
     @Schema(title = L_orderCode)
     Integer orderCode;
@@ -171,9 +169,9 @@ public class QueryAreaReq extends BaseReq{
     public QueryAreaReq(String code) {
         this.code = code;
     }
+
     @PostConstruct
     public void preQuery() {
-        //@todo 查询之前初始化数据
+        // @todo 查询之前初始化数据
     }
-
 }

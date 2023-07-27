@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.appclientfile.req;
 
-//import static com.levin.oak.base.ModuleOption.*;
+// import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,23 +28,23 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_AppClientFile.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 新增客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:14, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[29dd82cd0b96c145ff8e6efaa2763858], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[296b0fc1ce83e43fa1b5cc30d2622c93]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor
 @NoArgsConstructor
@@ -54,33 +54,32 @@ public class SimpleCreateAppClientFileReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1155395350L;
 
-    @Schema(title = L_clientType )
+    @Schema(title = L_clientType)
     @Size(max = 64)
     String clientType;
 
-    @Schema(title = L_mimeType )
+    @Schema(title = L_mimeType)
     @Size(max = 128)
     String mimeType;
 
-    @Schema(title = L_path , description = D_path )
+    @Schema(title = L_path, description = D_path)
     @NotBlank
     String path;
 
-    @Schema(title = L_content , description = D_content )
+    @Schema(title = L_content, description = D_content)
     byte[] content;
 
-    @Schema(title = L_domain )
+    @Schema(title = L_domain)
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_name )
+    @Schema(title = L_name)
     @NotBlank
     @Size(max = 64)
     String name;
 
-
     @PostConstruct
     public void prePersist() {
-       //@todo 保存之前初始化数据，比如时间，初始状态等
+        // @todo 保存之前初始化数据，比如时间，初始状态等
     }
 }

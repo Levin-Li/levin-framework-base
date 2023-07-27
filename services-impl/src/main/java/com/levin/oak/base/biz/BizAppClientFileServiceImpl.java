@@ -41,54 +41,54 @@ import com.levin.oak.base.services.appclientfile.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
- *  客户端文件-业务服务实现类
+ * 客户端文件-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[ecd52ac5ff6125dd8df152494ecb9aaa], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[fe773dc234c48ffc9c728cf9b8b95ff3]，请不要修改和删除此行内容。
  */
-
 @Service(PLUGIN_PREFIX + "BizAppClientFileServiceImpl")
 @DubboService
-
-@ConditionalOnMissingBean({BizAppClientFileService.class}) //默认只有在无对应服务才启用
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizAppClientFileServiceImpl", matchIfMissing = true)
+@ConditionalOnMissingBean({BizAppClientFileService.class}) // 默认只有在无对应服务才启用
+@ConditionalOnProperty(
+        prefix = PLUGIN_PREFIX,
+        name = "BizAppClientFileServiceImpl",
+        matchIfMissing = true)
 @Slf4j
 
-//@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
-//@Validated
+// @Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
+// @Validated
 @Tag(name = E_AppClientFile.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_AppClientFile.SIMPLE_CLASS_NAME})
 public class BizAppClientFileServiceImpl extends BaseService implements BizAppClientFileService {
 
-    @Autowired
-    AppClientFileService appClientFileService;
+    @Autowired AppClientFileService appClientFileService;
 
-    protected BizAppClientFileServiceImpl getSelfProxy(){
+    protected BizAppClientFileServiceImpl getSelfProxy() {
         return getSelfProxy(BizAppClientFileServiceImpl.class);
     }
 
-    //示例方法
-    //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    //@Override
-    //@CacheEvict(condition = "#req.id != null", key = E_AppClientFile.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public boolean update(UpdateAppClientFileReq req) {
+    // 示例方法
+    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    // @Override
+    // @CacheEvict(condition = "#req.id != null", key = E_AppClientFile.CACHE_KEY_PREFIX +
+    // "#req.id")
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public boolean update(UpdateAppClientFileReq req) {
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
-    //}
+    // }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public void update(UpdateReq req){
     //    appClientFileService.update(req);
-    //}
+    // }
 
 }

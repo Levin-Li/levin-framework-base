@@ -1,9 +1,8 @@
 package com.levin.oak.base.services.user;
 
-
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-//import org.springframework.cache.annotation.*;
+// import org.springframework.cache.annotation.*;
 import java.util.*;
 import javax.validation.constraints.*;
 
@@ -19,12 +18,10 @@ import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-
 /**
  * 用户-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:50:28, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[cc65bfcdc1328d987e75d6013345dbc8], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[b773cfb2b44c8357b8a4a24aed7b254c]，请不要修改和删除此行内容。
  */
 @Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
 public interface UserService {
@@ -33,6 +30,7 @@ public interface UserService {
 
     /**
      * 创建记录，返回主键ID
+     *
      * @param req
      * @return pkId 主键ID
      */
@@ -41,6 +39,7 @@ public interface UserService {
 
     /**
      * 创建记录，返回主键ID列表
+     *
      * @param reqList
      * @return pkId 主键ID列表
      */
@@ -48,29 +47,23 @@ public interface UserService {
     List<String> batchCreate(@NotNull List<CreateUserReq> reqList);
 
     /**
-     * 通过主键查找记录，建议在服务内部调用，不要在控制器中调用
-     * @param id 主键ID
-     * @return data 数据详情
+     * 更新记录，并返回更新是否成功
+     *
+     * @param req
+     * @return boolean 是否成功
      */
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    UserInfo findById(@NotNull String id);
-
-    /**
-    * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性
-    * @param req
-    * @return data 数据详情
-    */
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    UserInfo findById(@NotNull UserIdReq req);
+    @Operation(summary = UPDATE_ACTION)
+    boolean update(@NotNull UpdateUserReq req);
 
     /**
      * 更新记录，并返回更新记录数
      *
-     * @param req
-     * @return num 更新记录数
+     * @param setReq
+     * @param whereReq
+     * @return int 记录数
      */
     @Operation(summary = UPDATE_ACTION)
-    boolean update(@NotNull UpdateUserReq req);
+    int update(@NotNull SimpleUpdateUserReq setReq, QueryUserReq whereReq);
 
     /**
      * 批量更新记录，并返回更新记录数
@@ -82,15 +75,17 @@ public interface UserService {
     int batchUpdate(@NotNull List<UpdateUserReq> reqList);
 
     /**
-     * 删除记录，并返回删除记录数
+     * 删除记录，并返回删除是否成功
+     *
      * @param req
-     * @return num 删除记录数
+     * @return boolean 删除是否成功
      */
     @Operation(summary = DELETE_ACTION)
     boolean delete(@NotNull UserIdReq req);
 
     /**
      * 批量删除记录，并返回删除记录数
+     *
      * @param req
      * @return num 删除记录数
      */
@@ -137,6 +132,24 @@ public interface UserService {
     int count(@NotNull QueryUserReq req);
 
     /**
+     * 通过主键查找记录，建议在服务内部调用，不要在控制器中调用
+     *
+     * @param id 主键ID
+     * @return data 数据详情
+     */
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    UserInfo findById(@NotNull String id);
+
+    /**
+     * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性
+     *
+     * @param req
+     * @return data 数据详情
+     */
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    UserInfo findById(@NotNull UserIdReq req);
+
+    /**
      * 查询并返回第一条数据
      *
      * @param req
@@ -146,8 +159,8 @@ public interface UserService {
     UserInfo findOne(@NotNull QueryUserReq req);
 
     /**
-     * 查询并返回唯一一条数据
-     * 如果有多余1条数据，将抛出异常
+     * 查询并返回唯一一条数据 如果有多余1条数据，将抛出异常
+     *
      * @param req
      * @return data
      */
@@ -156,9 +169,9 @@ public interface UserService {
 
     /**
      * 清除缓存
+     *
      * @param key 缓存Key
      */
-    @Operation(summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
-
 }

@@ -1,6 +1,5 @@
 package com.levin.oak.base.controller.jobpost;
 
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -49,17 +48,16 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-//生成的控制器
+// 生成的控制器
 @RestController(PLUGIN_PREFIX + "JobPostController")
-@RequestMapping(API_PATH + "JobPost") //jobpost
-
+@RequestMapping(API_PATH + "JobPost") // jobpost
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "JobPostController", matchIfMissing = true)
 
-//默认需要权限访问，默认从父类继承
-//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
+// 默认需要权限访问，默认从父类继承
+// @ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
-//类注解
+// 类注解
 
 @Tag(name = E_JobPost.BIZ_NAME, description = E_JobPost.BIZ_NAME + MAINTAIN_ACTION)
 @Valid
@@ -67,45 +65,44 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 工作岗位控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:57:42, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[18540445e6fb9474b7cd080b973b2fa2], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[fedf40dc34ce4567dbbc4e8495c73ab9]，请不要修改和删除此行内容。
  */
-public class JobPostController extends BaseController{
+public class JobPostController extends BaseController {
 
     protected static final String BIZ_NAME = E_JobPost.BIZ_NAME;
 
-    //@Autowired
-    @DubboReference
-    protected JobPostService jobPostService;
+    // @Autowired
+    @DubboReference protected JobPostService jobPostService;
 
-    //@Autowired
-    @DubboReference
-    protected BizJobPostService bizJobPostService;
+    // @Autowired
+    @DubboReference protected BizJobPostService bizJobPostService;
 
     /**
      * 分页列表查找
      *
      * @param req QueryJobPostReq
-     * @return  ApiResp<PagingData<JobPostInfo>>
+     * @return ApiResp<PagingData<JobPostInfo>>
      */
     @GetMapping("/queryList")
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
-    public ApiResp<PagingData<JobPostInfo>> queryList(@Form QueryJobPostReq req, SimplePaging paging) {
-        return ApiResp.ok(jobPostService.query(req,paging));
+    public ApiResp<PagingData<JobPostInfo>> queryList(
+            @Form QueryJobPostReq req, SimplePaging paging) {
+        return ApiResp.ok(jobPostService.query(req, paging));
     }
 
-     /**
-      * 简单统计
-      *
-      * @param req QueryJobPostReq
-      * @return  ApiResp<PagingData<StatJobPostReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatJobPostReq.Result>> stat(StatJobPostReq req, SimplePaging paging) {
-         return ApiResp.ok(jobPostService.stat(req,paging));
-     }
+    /**
+     * 简单统计
+     *
+     * @param req QueryJobPostReq
+     * @return ApiResp<PagingData<StatJobPostReq.Result>>
+     */
+    // @GetMapping("/stat") //默认不开放
+    @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
+    public ApiResp<PagingData<StatJobPostReq.Result>> stat(
+            StatJobPostReq req, SimplePaging paging) {
+        return ApiResp.ok(jobPostService.stat(req, paging));
+    }
 
     /**
      * 新增
@@ -125,32 +122,40 @@ public class JobPostController extends BaseController{
      *
      * @param req QueryJobPostByIdReq
      */
-    @GetMapping({"","{id}"})
+    @GetMapping({"", "{id}"})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
-    public ApiResp<JobPostInfo> retrieve(@NotNull JobPostIdReq req, @PathVariable(required = false) String id) {
-         req.updateIdWhenNotBlank(id);
-         return ApiResp.ok(jobPostService.findById(req));
-     }
+    public ApiResp<JobPostInfo> retrieve(
+            @NotNull JobPostIdReq req, @PathVariable(required = false) String id) {
+        req.updateIdWhenNotBlank(id);
+        return ApiResp.ok(jobPostService.findById(req));
+    }
 
     /**
      * 更新
+     *
      * @param req UpdateJobPostReq
      */
-    @PutMapping({"","{id}"})
-    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @PutMapping({"", "{id}"})
+    @Operation(
+            summary = UPDATE_ACTION + "(RequestBody方式)",
+            description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<Boolean> update(@RequestBody UpdateJobPostReq req, @PathVariable(required = false) String id) {
+    public ApiResp<Boolean> update(
+            @RequestBody UpdateJobPostReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(checkResult(jobPostService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 删除
+     *
      * @param req JobPostIdReq
      */
-    @DeleteMapping({"","{id}"})
-    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
+    @DeleteMapping({"", "{id}"})
+    @Operation(
+            summary = DELETE_ACTION,
+            description = DELETE_ACTION + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> delete(JobPostIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
@@ -159,16 +164,22 @@ public class JobPostController extends BaseController{
 
     /**
      * 删除
+     *
      * @param req JobPostIdReq
      */
-    @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
-    public ApiResp<Boolean> delete2(@RequestBody JobPostIdReq req, @PathVariable(required = false) String id) {
+    @DeleteMapping(
+            value = {"", "{id}"},
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(
+            summary = DELETE_ACTION + "(RequestBody方式)",
+            description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    public ApiResp<Boolean> delete2(
+            @RequestBody JobPostIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return delete(req, id);
     }
 
-    //////////////////////////////////////以下是批量操作//////////////////////////////////////
+    ////////////////////////////////////// 以下是批量操作//////////////////////////////////////
 
     /**
      * 批量新增
@@ -182,31 +193,38 @@ public class JobPostController extends BaseController{
         return ApiResp.ok(jobPostService.batchCreate(reqList));
     }
 
-    /**
-     * 批量更新
-     */
+    /** 批量更新 */
     @PutMapping("/batchUpdate")
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateJobPostReq> reqList) {
-        return ApiResp.ok(checkResult(jobPostService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(
+                checkResult(
+                        jobPostService.batchUpdate(reqList),
+                        BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 批量删除
+     *
      * @param req DeleteJobPostReq
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull DeleteJobPostReq req) {
-        return ApiResp.ok(checkResult(jobPostService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(
+                checkResult(
+                        jobPostService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 批量删除2
+     *
      * @param req @RequestBody DeleteJobPostReq
      */
-    @DeleteMapping(value = {"/batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(
+            value = {"/batchDelete"},
+            consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete2(@RequestBody DeleteJobPostReq req) {
         return batchDelete(req);

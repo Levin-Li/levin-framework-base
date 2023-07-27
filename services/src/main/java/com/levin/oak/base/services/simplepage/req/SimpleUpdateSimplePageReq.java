@@ -30,45 +30,39 @@ import static com.levin.oak.base.entities.E_SimplePage.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.List;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 更新简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:17, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[4d16e16ae39ddc8da2cdadd5200af4f7], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[1c0ac0dff96465c5f9f4bf6c1733fa59]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimplePage.class, alias = E_SimplePage.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class SimpleUpdateSimplePageReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1598619295L;
 
-    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
-    @NotNull
-    @Eq(require = true)
-    String id;
-
-    @Schema(description = "可编辑条件" , hidden = true)
+    @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
-
 
     @NotBlank
     @Size(max = 128)
@@ -93,7 +87,11 @@ public class SimpleUpdateSimplePageReq extends MultiTenantOrgReq {
     @Schema(title = L_path)
     String path;
 
-    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(
+            domain = "dao",
+            expectBaseType = String.class,
+            converter = PrimitiveArrayJsonConverter.class,
+            isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
@@ -110,20 +108,8 @@ public class SimpleUpdateSimplePageReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
-
-    public SimpleUpdateSimplePageReq(String id) {
-        this.id = id;
-    }
-
-    public SimpleUpdateSimplePageReq updateIdWhenNotBlank(String id){
-        if(isNotBlank(id)){
-        this.id = id;
-        }
-        return this;
-    }
-
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
     }
 }

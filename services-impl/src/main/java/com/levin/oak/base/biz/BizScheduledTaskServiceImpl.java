@@ -41,54 +41,54 @@ import com.levin.oak.base.services.scheduledtask.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
- *  调度任务-业务服务实现类
+ * 调度任务-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[4e3c8d977fa6f568efab02c214419d5e], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[5e6a364607be5ab48c0f035e4ceeffc1]，请不要修改和删除此行内容。
  */
-
 @Service(PLUGIN_PREFIX + "BizScheduledTaskServiceImpl")
 @DubboService
-
-@ConditionalOnMissingBean({BizScheduledTaskService.class}) //默认只有在无对应服务才启用
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizScheduledTaskServiceImpl", matchIfMissing = true)
+@ConditionalOnMissingBean({BizScheduledTaskService.class}) // 默认只有在无对应服务才启用
+@ConditionalOnProperty(
+        prefix = PLUGIN_PREFIX,
+        name = "BizScheduledTaskServiceImpl",
+        matchIfMissing = true)
 @Slf4j
 
-//@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
-//@Validated
+// @Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
+// @Validated
 @Tag(name = E_ScheduledTask.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_ScheduledTask.SIMPLE_CLASS_NAME})
 public class BizScheduledTaskServiceImpl extends BaseService implements BizScheduledTaskService {
 
-    @Autowired
-    ScheduledTaskService scheduledTaskService;
+    @Autowired ScheduledTaskService scheduledTaskService;
 
-    protected BizScheduledTaskServiceImpl getSelfProxy(){
+    protected BizScheduledTaskServiceImpl getSelfProxy() {
         return getSelfProxy(BizScheduledTaskServiceImpl.class);
     }
 
-    //示例方法
-    //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    //@Override
-    //@CacheEvict(condition = "#req.id != null", key = E_ScheduledTask.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public boolean update(UpdateScheduledTaskReq req) {
+    // 示例方法
+    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    // @Override
+    // @CacheEvict(condition = "#req.id != null", key = E_ScheduledTask.CACHE_KEY_PREFIX +
+    // "#req.id")
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public boolean update(UpdateScheduledTaskReq req) {
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
-    //}
+    // }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public void update(UpdateReq req){
     //    scheduledTaskService.update(req);
-    //}
+    // }
 
 }

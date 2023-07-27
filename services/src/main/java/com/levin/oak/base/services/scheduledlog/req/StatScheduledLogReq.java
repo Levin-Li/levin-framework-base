@@ -36,36 +36,37 @@ import static com.levin.oak.base.entities.E_ScheduledLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 统计调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[4d7e9fe5908179dba16463b2523f81cf], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[1cb1cca3266148fbd47ce356efb35d61]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS,
-     //连接统计
-    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
-    resultClass = StatScheduledLogReq.Result.class
-)
-public class StatScheduledLogReq extends MultiTenantOrgReq{
+@TargetOption(
+        entityClass = ScheduledLog.class,
+        alias = E_ScheduledLog.ALIAS,
+        // 连接统计
+        // joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn =
+        // E_XXX.joinColumn)},
+        resultClass = StatScheduledLogReq.Result.class)
+public class StatScheduledLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1319130901L;
-
 
     @NotBlank
     @Schema(title = L_id)
@@ -80,7 +81,7 @@ public class StatScheduledLogReq extends MultiTenantOrgReq{
     @Schema(title = L_invokeCycle)
     String invokeCycle;
 
-    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot)
+    @Schema(title = L_invokeSnapshot, description = D_invokeSnapshot)
     String invokeSnapshot;
 
     @Schema(title = L_isError)
@@ -90,66 +91,65 @@ public class StatScheduledLogReq extends MultiTenantOrgReq{
     String invokeResult;
 
     @NotNull
-    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
     @Lte
     Date lteCreateTime;
 
-    //@Schema(title = L_createTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenCreateTime;
-
+    // @Schema(title = L_createTime + "-日期范围")
+    // @Between(paramDelimiter = "-")
+    // String betweenCreateTime;
 
     public StatScheduledLogReq(String id) {
         this.id = id;
     }
 
     //
-    //@Schema(description = "是否按状态分组统计")
-    //@CtxVar //增加当前字段名称和字段值到环境变量中
-    //@Ignore
-    //private boolean isGroupByStatus;
+    // @Schema(description = "是否按状态分组统计")
+    // @CtxVar //增加当前字段名称和字段值到环境变量中
+    // @Ignore
+    // private boolean isGroupByStatus;
 
-    //@Schema(description = "是否按日期分组统计")
-    //@CtxVar //增加当前字段名称和字段值到环境变量中
-    //@Ignore //
-    //private boolean isGroupByDate;
+    // @Schema(description = "是否按日期分组统计")
+    // @CtxVar //增加当前字段名称和字段值到环境变量中
+    // @Ignore //
+    // private boolean isGroupByDate;
 
     @PostConstruct
     public void preStat() {
-    //@todo 统计之前初始化数据
+        // @todo 统计之前初始化数据
     }
 
     @Schema(description = BIZ_NAME + "统计结果")
     @Data
     @Accessors(chain = true)
     @FieldNameConstants
-    public static class Result
-            implements Serializable {
+    public static class Result implements Serializable {
 
-        //@Schema(description = "状态分组统计")
-        //@GroupBy(condition = "#isGroupByStatus")
-        //Status status;
+        // @Schema(description = "状态分组统计")
+        // @GroupBy(condition = "#isGroupByStatus")
+        // Status status;
 
-        //@Schema(description = "时间分组统计")
-        //@GroupBy(condition = "#isGroupByDate", value = "date_format(" + E_ScheduledLog.createDate + ",'%Y-%m-%d')", orderBy = @OrderBy(type = OrderBy.Type.Asc))
-        //String createDate;
+        // @Schema(description = "时间分组统计")
+        // @GroupBy(condition = "#isGroupByDate", value = "date_format(" + E_ScheduledLog.createDate
+        // + ",'%Y-%m-%d')", orderBy = @OrderBy(type = OrderBy.Type.Asc))
+        // String createDate;
 
         @Schema(description = "记录数")
         @Count
         Integer cnt;
 
-        //@Schema(description = "分类记录数")
-        //@Count(fieldCases = {@Case(column = E_ScheduledLog.status, whenOptions = {@Case.When(whenExpr = "OFF", thenExpr = "1")}, elseExpr = "NULL")})
-        //Integer caseCnt;
+        // @Schema(description = "分类记录数")
+        // @Count(fieldCases = {@Case(column = E_ScheduledLog.status, whenOptions =
+        // {@Case.When(whenExpr = "OFF", thenExpr = "1")}, elseExpr = "NULL")})
+        // Integer caseCnt;
 
-        //@Schema(description = "累计" , havingOp=Op.Gt)
-        //@Sum
-        //Double sumGmv;
+        // @Schema(description = "累计" , havingOp=Op.Gt)
+        // @Sum
+        // Double sumGmv;
 
     }
-
 }

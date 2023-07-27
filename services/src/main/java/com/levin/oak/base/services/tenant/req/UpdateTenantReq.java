@@ -30,31 +30,31 @@ import static com.levin.oak.base.entities.E_Tenant.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 import java.util.List;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+
 ////////////////////////////////////
 
 /**
  * 更新平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[5d902c77b5ddb126c86e984582cee31f], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:42, 代码生成哈希校验码：[c96aa047b32e5168482b2c330ac5c119]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Tenant.class, alias = E_Tenant.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class UpdateTenantReq extends BaseReq {
 
@@ -65,10 +65,9 @@ public class UpdateTenantReq extends BaseReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件" , hidden = true)
+    @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
-
 
     @Size(max = 128)
     @Schema(title = L_sysName)
@@ -109,7 +108,11 @@ public class UpdateTenantReq extends BaseReq {
     String contractPhone;
 
     @Size(max = 1200)
-    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(
+            domain = "dao",
+            expectBaseType = String.class,
+            converter = PrimitiveArrayJsonConverter.class,
+            isRequired = "false")
     @Schema(title = L_domainList)
     List<String> domainList;
 
@@ -131,7 +134,7 @@ public class UpdateTenantReq extends BaseReq {
     String name;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
+    @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
@@ -150,25 +153,23 @@ public class UpdateTenantReq extends BaseReq {
     @Schema(title = L_remark)
     String remark;
 
-
     public UpdateTenantReq(String id) {
         this.id = id;
     }
 
-    public UpdateTenantReq updateIdWhenNotBlank(String id){
-        if(isNotBlank(id)){
-        this.id = id;
+    public UpdateTenantReq updateIdWhenNotBlank(String id) {
+        if (isNotBlank(id)) {
+            this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
 
-        if(getLastUpdateTime() == null){
+        if (getLastUpdateTime() == null) {
             setLastUpdateTime(new Date());
         }
     }
-
 }

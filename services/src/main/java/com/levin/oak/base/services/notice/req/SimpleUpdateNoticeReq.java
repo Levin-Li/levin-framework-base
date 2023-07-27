@@ -30,44 +30,38 @@ import static com.levin.oak.base.entities.E_Notice.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Notice.*;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 更新通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:14, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[7515257170f19f0c558990341f39a514], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[b8a963f6361ae604284b8d77751b7ad0]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Notice.class, alias = E_Notice.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class SimpleUpdateNoticeReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1394869526L;
 
-    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
-    @NotNull
-    @Eq(require = true)
-    String id;
-
-    @Schema(description = "可编辑条件" , hidden = true)
+    @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
-
 
     @Size(max = 128)
     @Schema(title = L_ownerId)
@@ -95,20 +89,8 @@ public class SimpleUpdateNoticeReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
-
-    public SimpleUpdateNoticeReq(String id) {
-        this.id = id;
-    }
-
-    public SimpleUpdateNoticeReq updateIdWhenNotBlank(String id){
-        if(isNotBlank(id)){
-        this.id = id;
-        }
-        return this;
-    }
-
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
     }
 }

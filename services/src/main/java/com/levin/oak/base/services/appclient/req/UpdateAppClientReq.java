@@ -30,29 +30,29 @@ import static com.levin.oak.base.entities.E_AppClient.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 更新应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[6a6979f98ce03c21f8a021cef1a2abe4], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:42, 代码生成哈希校验码：[867c854bca2a5d670c20e2942f1b0f3e]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppClient.class, alias = E_AppClient.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class UpdateAppClientReq extends MultiTenantOrgReq {
 
@@ -63,10 +63,9 @@ public class UpdateAppClientReq extends MultiTenantOrgReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件" , hidden = true)
+    @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
-
 
     @NotBlank
     @Size(max = 64)
@@ -107,25 +106,23 @@ public class UpdateAppClientReq extends MultiTenantOrgReq {
     @Schema(title = L_remark)
     String remark;
 
-
     public UpdateAppClientReq(String id) {
         this.id = id;
     }
 
-    public UpdateAppClientReq updateIdWhenNotBlank(String id){
-        if(isNotBlank(id)){
-        this.id = id;
+    public UpdateAppClientReq updateIdWhenNotBlank(String id) {
+        if (isNotBlank(id)) {
+            this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
 
-        if(getLastUpdateTime() == null){
+        if (getLastUpdateTime() == null) {
             setLastUpdateTime(new Date());
         }
     }
-
 }

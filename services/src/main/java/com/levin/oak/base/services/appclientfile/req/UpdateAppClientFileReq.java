@@ -30,29 +30,29 @@ import static com.levin.oak.base.entities.E_AppClientFile.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 更新客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:55, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[13ddab56e78ee3b2df9e3243a8ec0213], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[9a99721104a004b220383e4e3e9f1dc7]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppClientFile.class, alias = E_AppClientFile.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class UpdateAppClientFileReq extends MultiTenantOrgReq {
 
@@ -63,10 +63,9 @@ public class UpdateAppClientFileReq extends MultiTenantOrgReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件" , hidden = true)
+    @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
-
 
     @Size(max = 64)
     @Schema(title = L_clientType)
@@ -77,10 +76,10 @@ public class UpdateAppClientFileReq extends MultiTenantOrgReq {
     String mimeType;
 
     @NotBlank
-    @Schema(title = L_path , description = D_path)
+    @Schema(title = L_path, description = D_path)
     String path;
 
-    @Schema(title = L_content , description = D_content)
+    @Schema(title = L_content, description = D_content)
     byte[] content;
 
     @Size(max = 128)
@@ -108,25 +107,23 @@ public class UpdateAppClientFileReq extends MultiTenantOrgReq {
     @Schema(title = L_remark)
     String remark;
 
-
     public UpdateAppClientFileReq(String id) {
         this.id = id;
     }
 
-    public UpdateAppClientFileReq updateIdWhenNotBlank(String id){
-        if(isNotBlank(id)){
-        this.id = id;
+    public UpdateAppClientFileReq updateIdWhenNotBlank(String id) {
+        if (isNotBlank(id)) {
+            this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
 
-        if(getLastUpdateTime() == null){
+        if (getLastUpdateTime() == null) {
             setLastUpdateTime(new Date());
         }
     }
-
 }

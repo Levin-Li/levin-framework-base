@@ -21,23 +21,19 @@ import com.levin.oak.base.services.notice.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Notice.*;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
- *  通知-业务服务
+ * 通知-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[fdea36683bd44b089fae884aaf502634], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[adbd1a9f396e1bdceee6173ed7814754]，请不要修改和删除此行内容。
  */
-
 @Tag(name = E_Notice.BIZ_NAME + "-业务服务", description = "")
-public interface BizNoticeService {
-
-}
+public interface BizNoticeService {}

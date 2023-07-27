@@ -31,13 +31,13 @@ import com.levin.oak.base.entities.Dict.*;
 import java.util.List;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[84ed777e1c8cdbe431f6a6bf2bd8172a], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[fe901899da1fa32e0f95cd122c8e8cbb]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -66,8 +66,8 @@ public class SimpleDictInfo implements Serializable {
     @Schema(title = L_code)
     String code;
 
-    @InjectVar(domain = "dao",  converter = DefaultJsonConverter.class, isRequired = "false")
-    @Schema(title = L_itemList , description = D_itemList)
+    @InjectVar(domain = "dao", converter = DefaultJsonConverter.class, isRequired = "false")
+    @Schema(title = L_itemList, description = D_itemList)
     List<Item> itemList;
 
     @Size(max = 128)
@@ -86,6 +86,4 @@ public class SimpleDictInfo implements Serializable {
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
-
-
 }

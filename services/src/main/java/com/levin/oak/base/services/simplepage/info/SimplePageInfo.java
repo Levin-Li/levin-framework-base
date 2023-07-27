@@ -30,26 +30,28 @@ import com.levin.commons.service.domain.InjectVar;
 import java.util.List;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:27, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[f3314f530c013985f1f3b961dfa6147a], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[7fa0ccbfec6490735195a46f59c8e4d7]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(exclude = {"content",})
+@ToString(
+        exclude = {
+            "content",
+        })
 @FieldNameConstants
 @JsonIgnoreProperties({tenantId})
 public class SimplePageInfo implements Serializable {
 
     private static final long serialVersionUID = 1598619295L;
-
 
     @NotBlank
     @Size(max = 64)
@@ -79,12 +81,12 @@ public class SimplePageInfo implements Serializable {
     @Schema(title = L_path)
     String path;
 
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
 
-    //@Fetch //默认不加载，请通过查询对象控制
+    // @Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_content)
     String content;
 
@@ -130,5 +132,4 @@ public class SimplePageInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
-
 }

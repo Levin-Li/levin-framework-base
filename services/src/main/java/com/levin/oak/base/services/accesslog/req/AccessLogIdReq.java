@@ -29,48 +29,49 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_AccessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 访问日志 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[c8d900938e86c316d5d2e7e38a11bf2a], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[124e5f89f4d56d05df4a8248a6e89091]，请不要修改和删除此行内容。
  */
-
-@Schema(title =  BIZ_NAME + " 主键通用查询")
+@Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS, resultClass = AccessLogInfo.class)
+@TargetOption(
+        entityClass = AccessLog.class,
+        alias = E_AccessLog.ALIAS,
+        resultClass = AccessLogInfo.class)
 public class AccessLogIdReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1030736962L;
 
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    //@NotNull
+    // @NotNull
     protected Long id;
 
-    public AccessLogIdReq updateIdWhenNotBlank(Long id){
-        if(isNotBlank(id)){
+    public AccessLogIdReq updateIdWhenNotBlank(Long id) {
+        if (isNotBlank(id)) {
             this.id = id;
         }
         return this;
     }
 
-
     @PostConstruct
     public void preQuery() {
-        //@todo ID 查询之前初始化数据
+        // @todo ID 查询之前初始化数据
     }
 }

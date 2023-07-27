@@ -15,32 +15,41 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-
 /**
  * 多租户查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月16日 上午9:40:46, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[8e70033acbed3f5bd61fbae07d82c4c2], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:40, 代码生成哈希校验码：[20f1e22cbeecf358be416f5870afabde]，请不要修改和删除此行内容。
  */
 @Schema(title = "多租户查询对象")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
-public class MultiTenantOrgReq
-        extends MultiTenantReq
-        implements MultiTenantObject {
+public class MultiTenantOrgReq extends MultiTenantReq implements MultiTenantObject {
 
-    //注意需要在注入服务中设置isTenantAdmin变量
-    @InjectVar(value = InjectConsts.ORG_ID
-            , isOverride = InjectVar.SPEL_PREFIX + "!#" + InjectConsts.IS_SUPER_ADMIN  + " && !#" + InjectConsts.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员, 那么覆盖必须的
-            , isRequired = InjectVar.SPEL_PREFIX + "!#" + InjectConsts.IS_SUPER_ADMIN  + " && !#" + InjectConsts.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员，那么值是必须的
-    )
-    @Schema(title = "机构ID" , hidden = true)
+    // 注意需要在注入服务中设置isTenantAdmin变量
+    @InjectVar(
+            value = InjectConsts.ORG_ID,
+            isOverride =
+                    InjectVar.SPEL_PREFIX
+                            + "!#"
+                            + InjectConsts.IS_SUPER_ADMIN
+                            + " && !#"
+                            + InjectConsts.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员, 那么覆盖必须的
+            ,
+            isRequired =
+                    InjectVar.SPEL_PREFIX
+                            + "!#"
+                            + InjectConsts.IS_SUPER_ADMIN
+                            + " && !#"
+                            + InjectConsts.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员，那么值是必须的
+            )
+    @Schema(title = "机构ID", hidden = true)
     @Eq
     protected String orgId;
 
     /**
      * 设置部门ID
+     *
      * @param orgId
      * @return
      * @param <T>
@@ -49,5 +58,4 @@ public class MultiTenantOrgReq
         this.orgId = orgId;
         return (T) this;
     }
-
 }

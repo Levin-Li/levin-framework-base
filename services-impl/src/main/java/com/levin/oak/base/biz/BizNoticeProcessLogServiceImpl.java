@@ -41,54 +41,55 @@ import com.levin.oak.base.services.noticeprocesslog.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
- *  通知处理日志-业务服务实现类
+ * 通知处理日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:52:00, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[e7d1b21d07ebbb6a532eb1bdcb08be2f], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[e40f5c18e1d4fa6f02442f9f11a6d0d0]，请不要修改和删除此行内容。
  */
-
 @Service(PLUGIN_PREFIX + "BizNoticeProcessLogServiceImpl")
 @DubboService
-
-@ConditionalOnMissingBean({BizNoticeProcessLogService.class}) //默认只有在无对应服务才启用
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizNoticeProcessLogServiceImpl", matchIfMissing = true)
+@ConditionalOnMissingBean({BizNoticeProcessLogService.class}) // 默认只有在无对应服务才启用
+@ConditionalOnProperty(
+        prefix = PLUGIN_PREFIX,
+        name = "BizNoticeProcessLogServiceImpl",
+        matchIfMissing = true)
 @Slf4j
 
-//@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
-//@Validated
+// @Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
+// @Validated
 @Tag(name = E_NoticeProcessLog.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_NoticeProcessLog.SIMPLE_CLASS_NAME})
-public class BizNoticeProcessLogServiceImpl extends BaseService implements BizNoticeProcessLogService {
+public class BizNoticeProcessLogServiceImpl extends BaseService
+        implements BizNoticeProcessLogService {
 
-    @Autowired
-    NoticeProcessLogService noticeProcessLogService;
+    @Autowired NoticeProcessLogService noticeProcessLogService;
 
-    protected BizNoticeProcessLogServiceImpl getSelfProxy(){
+    protected BizNoticeProcessLogServiceImpl getSelfProxy() {
         return getSelfProxy(BizNoticeProcessLogServiceImpl.class);
     }
 
-    //示例方法
-    //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    //@Override
-    //@CacheEvict(condition = "#req.id != null", key = E_NoticeProcessLog.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public boolean update(UpdateNoticeProcessLogReq req) {
+    // 示例方法
+    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    // @Override
+    // @CacheEvict(condition = "#req.id != null", key = E_NoticeProcessLog.CACHE_KEY_PREFIX +
+    // "#req.id")
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public boolean update(UpdateNoticeProcessLogReq req) {
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
-    //}
+    // }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public void update(UpdateReq req){
     //    noticeProcessLogService.update(req);
-    //}
+    // }
 
 }

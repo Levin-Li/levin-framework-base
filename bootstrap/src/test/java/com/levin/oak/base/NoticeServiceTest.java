@@ -9,9 +9,8 @@ import com.levin.oak.base.services.notice.*;
 import com.levin.oak.base.services.notice.req.*;
 import com.levin.oak.base.services.notice.info.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Notice.*;
@@ -49,89 +48,78 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 通知测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[9704f416db9d960e385def6d81ff6061], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[d8d7b786124a767482b666ffa04022c3]，请不要修改和删除此行内容。
  */
 
-//@ActiveProfiles("test")
-//@RunWith(SpringRunner.class)
+// @ActiveProfiles("test")
+// @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@Transactional(rollbackFor = {Throwable.class})
+// @Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class NoticeServiceTest {
 
-    @Autowired
-    private NoticeService noticeService;
+    @Autowired private NoticeService noticeService;
 
-    @Autowired
-    private BizNoticeService biznoticeService;
+    @Autowired private BizNoticeService biznoticeService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {
-    }
+    public static void beforeAll() throws Exception {}
 
     @AfterAll
-    public static void afterAll() throws Exception {
-    }
+    public static void afterAll() throws Exception {}
 
     @BeforeEach
-    public void beforeEach() throws Exception {
-    }
+    public void beforeEach() throws Exception {}
 
     @AfterEach
-    public void afterEach() throws Exception {
-    }
+    public void afterEach() throws Exception {}
 
     @Test
     public void createNoticeTest() {
 
         CreateNoticeReq req = new CreateNoticeReq();
 
-            // req.setOwnerId("这是文本128");// 
+        // req.setOwnerId("这是文本128");//
 
-            // req.setCategory("这是文本64");// 
+        // req.setCategory("这是文本64");//
 
-            // req.setContentType(ContentType.Text);// 
+        // req.setContentType(ContentType.Text);//
 
-            // req.setContent("通知内容_1");// 
+        // req.setContent("通知内容_1");//
 
-            // req.setExpiredDate(new Date());// 
+        // req.setExpiredDate(new Date());//
 
-            // req.setDomain("这是文本128");// 
+        // req.setDomain("这是文本128");//
 
-            // req.setName("这是文本64");// 必填
+        // req.setName("这是文本64");// 必填
 
-            // req.setOrgId("这是文本128");// 
+        // req.setOrgId("这是文本128");//
 
-            // req.setTenantId("这是文本128");// 
+        // req.setTenantId("这是文本128");//
 
-            // req.setOrderCode(1);// 
+        // req.setOrderCode(1);//
 
-            // req.setEnable(true);// 必填
+        // req.setEnable(true);// 必填
 
-            // req.setEditable(true);// 必填
+        // req.setEditable(true);// 必填
 
-            // req.setRemark("这是文本512");// 
+        // req.setRemark("这是文本512");//
 
-
-       String id  = noticeService.create(req);
+        String id = noticeService.create(req);
 
         log.debug("新增通知->" + id);
 
         Assert.isTrue(id != null, "通知");
-
     }
-
 
     @Test
     public void queryNoticeTest() {
@@ -155,7 +143,7 @@ public class NoticeServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<NoticeInfo> resp = noticeService.query(req,null);
+        PagingData<NoticeInfo> resp = noticeService.query(req, null);
 
         log.debug("查询通知->" + resp);
 
@@ -165,30 +153,29 @@ public class NoticeServiceTest {
     @Test
     public void updateNoticeTest() {
 
-         UpdateNoticeReq req = new UpdateNoticeReq();
+        UpdateNoticeReq req = new UpdateNoticeReq();
 
-         req.setId(id);
+        req.setId(id);
 
+        // req.setOwnerId("这是文本128");//
+        // req.setCategory("这是文本64");//
+        // req.setContentType(ContentType.Text);//
+        // req.setContent("通知内容_1");//
+        // req.setExpiredDate(new Date());//
+        // req.setDomain("这是文本128");//
+        // req.setName("这是文本64");// 必填
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
+        // req.setOrderCode(1);//
+        // req.setEnable(true);// 必填
+        // req.setEditable(true);// 必填
+        // req.setRemark("这是文本512");//
 
-           // req.setOwnerId("这是文本128");// 
-           // req.setCategory("这是文本64");// 
-           // req.setContentType(ContentType.Text);// 
-           // req.setContent("通知内容_1");// 
-           // req.setExpiredDate(new Date());// 
-           // req.setDomain("这是文本128");// 
-           // req.setName("这是文本64");// 必填
-           // req.setOrgId("这是文本128");// 
-           // req.setTenantId("这是文本128");// 
-           // req.setOrderCode(1);// 
-           // req.setEnable(true);// 必填
-           // req.setEditable(true);// 必填
-           // req.setRemark("这是文本512");// 
+        boolean ok = noticeService.update(req);
 
-          boolean ok = noticeService.update(req);
+        log.debug("更新通知-> " + ok);
 
-          log.debug("更新通知-> " + ok);
-
-          Assert.isTrue(ok, "通知");
+        Assert.isTrue(ok, "通知");
     }
 
     @Test
@@ -202,6 +189,6 @@ public class NoticeServiceTest {
 
         log.debug("删除通知->" + ok);
 
-        Assert.isTrue(ok , "通知");
+        Assert.isTrue(ok, "通知");
     }
 }

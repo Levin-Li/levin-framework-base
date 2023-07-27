@@ -21,22 +21,18 @@ import com.levin.oak.base.services.appclient.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
- *  应用接入-业务服务
+ * 应用接入-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:11, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[eb71f3c48f1a6657e378196b50a92946], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:42, 代码生成哈希校验码：[830be0ece767e2965f9cd2ef3072e1dc]，请不要修改和删除此行内容。
  */
-
 @Tag(name = E_AppClient.BIZ_NAME + "-业务服务", description = "")
-public interface BizAppClientService {
-
-}
+public interface BizAppClientService {}

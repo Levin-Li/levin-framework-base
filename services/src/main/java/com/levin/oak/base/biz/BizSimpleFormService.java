@@ -21,24 +21,20 @@ import com.levin.oak.base.services.simpleform.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.List;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
- *  简单表单-业务服务
+ * 简单表单-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[6137a4d1d3962a35042bd25822e5aca7], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[a672f647a07b4cd8b09378dd22834652]，请不要修改和删除此行内容。
  */
-
 @Tag(name = E_SimpleForm.BIZ_NAME + "-业务服务", description = "")
-public interface BizSimpleFormService {
-
-}
+public interface BizSimpleFormService {}

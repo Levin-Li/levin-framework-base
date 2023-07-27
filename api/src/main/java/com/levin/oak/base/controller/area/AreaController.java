@@ -1,6 +1,5 @@
 package com.levin.oak.base.controller.area;
 
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -49,17 +48,16 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
-//生成的控制器
+// 生成的控制器
 @RestController(PLUGIN_PREFIX + "AreaController")
-@RequestMapping(API_PATH + "Area") //area
-
+@RequestMapping(API_PATH + "Area") // area
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AreaController", matchIfMissing = true)
 
-//默认需要权限访问，默认从父类继承
-//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
+// 默认需要权限访问，默认从父类继承
+// @ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
-//类注解
+// 类注解
 
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
 @Valid
@@ -67,45 +65,42 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 区域控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:57:43, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[c1dba2eb52167a691d893ae9cd9dcb27], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[727d26dfe37a82309bb883ee4a6e324f]，请不要修改和删除此行内容。
  */
-public class AreaController extends BaseController{
+public class AreaController extends BaseController {
 
     protected static final String BIZ_NAME = E_Area.BIZ_NAME;
 
-    //@Autowired
-    @DubboReference
-    protected AreaService areaService;
+    // @Autowired
+    @DubboReference protected AreaService areaService;
 
-    //@Autowired
-    @DubboReference
-    protected BizAreaService bizAreaService;
+    // @Autowired
+    @DubboReference protected BizAreaService bizAreaService;
 
     /**
      * 分页列表查找
      *
      * @param req QueryAreaReq
-     * @return  ApiResp<PagingData<AreaInfo>>
+     * @return ApiResp<PagingData<AreaInfo>>
      */
     @GetMapping("/queryList")
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<AreaInfo>> queryList(@Form QueryAreaReq req, SimplePaging paging) {
-        return ApiResp.ok(areaService.query(req,paging));
+        return ApiResp.ok(areaService.query(req, paging));
     }
 
-     /**
-      * 简单统计
-      *
-      * @param req QueryAreaReq
-      * @return  ApiResp<PagingData<StatAreaReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatAreaReq.Result>> stat(StatAreaReq req, SimplePaging paging) {
-         return ApiResp.ok(areaService.stat(req,paging));
-     }
+    /**
+     * 简单统计
+     *
+     * @param req QueryAreaReq
+     * @return ApiResp<PagingData<StatAreaReq.Result>>
+     */
+    // @GetMapping("/stat") //默认不开放
+    @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
+    public ApiResp<PagingData<StatAreaReq.Result>> stat(StatAreaReq req, SimplePaging paging) {
+        return ApiResp.ok(areaService.stat(req, paging));
+    }
 
     /**
      * 新增
@@ -125,32 +120,40 @@ public class AreaController extends BaseController{
      *
      * @param req QueryAreaByIdReq
      */
-    @GetMapping({"","{code}"})
+    @GetMapping({"", "{code}"})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
-    public ApiResp<AreaInfo> retrieve(@NotNull AreaIdReq req, @PathVariable(required = false) String code) {
-         req.updateCodeWhenNotBlank(code);
-         return ApiResp.ok(areaService.findById(req));
-     }
+    public ApiResp<AreaInfo> retrieve(
+            @NotNull AreaIdReq req, @PathVariable(required = false) String code) {
+        req.updateCodeWhenNotBlank(code);
+        return ApiResp.ok(areaService.findById(req));
+    }
 
     /**
      * 更新
+     *
      * @param req UpdateAreaReq
      */
-    @PutMapping({"","{code}"})
-    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @PutMapping({"", "{code}"})
+    @Operation(
+            summary = UPDATE_ACTION + "(RequestBody方式)",
+            description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<Boolean> update(@RequestBody UpdateAreaReq req, @PathVariable(required = false) String code) {
+    public ApiResp<Boolean> update(
+            @RequestBody UpdateAreaReq req, @PathVariable(required = false) String code) {
         req.updateCodeWhenNotBlank(code);
         return ApiResp.ok(checkResult(areaService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 删除
+     *
      * @param req AreaIdReq
      */
-    @DeleteMapping({"","{code}"})
-    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
+    @DeleteMapping({"", "{code}"})
+    @Operation(
+            summary = DELETE_ACTION,
+            description = DELETE_ACTION + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> delete(AreaIdReq req, @PathVariable(required = false) String code) {
         req.updateCodeWhenNotBlank(code);
@@ -159,16 +162,22 @@ public class AreaController extends BaseController{
 
     /**
      * 删除
+     *
      * @param req AreaIdReq
      */
-    @DeleteMapping(value = {"","{code}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
-    public ApiResp<Boolean> delete2(@RequestBody AreaIdReq req, @PathVariable(required = false) String code) {
+    @DeleteMapping(
+            value = {"", "{code}"},
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(
+            summary = DELETE_ACTION + "(RequestBody方式)",
+            description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    public ApiResp<Boolean> delete2(
+            @RequestBody AreaIdReq req, @PathVariable(required = false) String code) {
         req.updateCodeWhenNotBlank(code);
         return delete(req, code);
     }
 
-    //////////////////////////////////////以下是批量操作//////////////////////////////////////
+    ////////////////////////////////////// 以下是批量操作//////////////////////////////////////
 
     /**
      * 批量新增
@@ -182,31 +191,36 @@ public class AreaController extends BaseController{
         return ApiResp.ok(areaService.batchCreate(reqList));
     }
 
-    /**
-     * 批量更新
-     */
+    /** 批量更新 */
     @PutMapping("/batchUpdate")
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAreaReq> reqList) {
-        return ApiResp.ok(checkResult(areaService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(
+                checkResult(
+                        areaService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 批量删除
+     *
      * @param req DeleteAreaReq
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull DeleteAreaReq req) {
-        return ApiResp.ok(checkResult(areaService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(
+                checkResult(areaService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 批量删除2
+     *
      * @param req @RequestBody DeleteAreaReq
      */
-    @DeleteMapping(value = {"/batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(
+            value = {"/batchDelete"},
+            consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete2(@RequestBody DeleteAreaReq req) {
         return batchDelete(req);

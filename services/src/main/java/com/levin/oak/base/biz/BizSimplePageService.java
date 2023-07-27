@@ -21,24 +21,20 @@ import com.levin.oak.base.services.simplepage.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.List;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
- *  简单页面-业务服务
+ * 简单页面-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:12, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[b97528a124bdd622648c0b0214dd4230], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[0edfcbf8aa22d8df382c97804ecb1ca9]，请不要修改和删除此行内容。
  */
-
 @Tag(name = E_SimplePage.BIZ_NAME + "-业务服务", description = "")
-public interface BizSimplePageService {
-
-}
+public interface BizSimplePageService {}

@@ -41,57 +41,56 @@ import com.levin.oak.base.services.simpleapi.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.SimpleApi.*;
 import java.util.List;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
- *  简单动态接口-业务服务实现类
+ * 简单动态接口-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 11:51:59, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[3df522bae963a2f45a9966ae72a8db55], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:41, 代码生成哈希校验码：[61505ae218957c7852e85da3aef67a75]，请不要修改和删除此行内容。
  */
-
 @Service(PLUGIN_PREFIX + "BizSimpleApiServiceImpl")
 @DubboService
-
-@ConditionalOnMissingBean({BizSimpleApiService.class}) //默认只有在无对应服务才启用
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizSimpleApiServiceImpl", matchIfMissing = true)
+@ConditionalOnMissingBean({BizSimpleApiService.class}) // 默认只有在无对应服务才启用
+@ConditionalOnProperty(
+        prefix = PLUGIN_PREFIX,
+        name = "BizSimpleApiServiceImpl",
+        matchIfMissing = true)
 @Slf4j
 
-//@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
-//@Validated
+// @Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
+// @Validated
 @Tag(name = E_SimpleApi.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleApi.SIMPLE_CLASS_NAME})
 public class BizSimpleApiServiceImpl extends BaseService implements BizSimpleApiService {
 
-    @Autowired
-    SimpleApiService simpleApiService;
+    @Autowired SimpleApiService simpleApiService;
 
-    protected BizSimpleApiServiceImpl getSelfProxy(){
+    protected BizSimpleApiServiceImpl getSelfProxy() {
         return getSelfProxy(BizSimpleApiServiceImpl.class);
     }
 
-    //示例方法
-    //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    //@Override
-    //@CacheEvict(condition = "#req.id != null", key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public boolean update(UpdateSimpleApiReq req) {
+    // 示例方法
+    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
+    // @Override
+    // @CacheEvict(condition = "#req.id != null", key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public boolean update(UpdateSimpleApiReq req) {
     //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
     //    return simpleDao.singleUpdateByQueryObj(req);
-    //}
+    // }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
+    // @Transactional(rollbackFor = RuntimeException.class)
+    // public void update(UpdateReq req){
     //    simpleApiService.update(req);
-    //}
+    // }
 
 }

@@ -29,7 +29,7 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_Area.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Area;
@@ -37,21 +37,20 @@ import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
 import com.levin.oak.base.entities.Area.*;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 区域 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:57, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[0e7b377667897efaa4e1565572d0f4f3], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[1903491139cee01ca0720a7e58d222ba]，请不要修改和删除此行内容。
  */
-
-@Schema(title =  BIZ_NAME + " 主键通用查询")
+@Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
@@ -60,21 +59,20 @@ public class AreaIdReq extends BaseReq {
 
     private static final long serialVersionUID = -445860277L;
 
-    @Schema(title = L_code , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_code, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    //@NotNull
+    // @NotNull
     protected String code;
 
-    public AreaIdReq updateCodeWhenNotBlank(String code){
-        if(isNotBlank(code)){
+    public AreaIdReq updateCodeWhenNotBlank(String code) {
+        if (isNotBlank(code)) {
             this.code = code;
         }
         return this;
     }
 
-
     @PostConstruct
     public void preQuery() {
-        //@todo ID 查询之前初始化数据
+        // @todo ID 查询之前初始化数据
     }
 }

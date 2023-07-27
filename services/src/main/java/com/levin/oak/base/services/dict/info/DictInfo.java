@@ -31,13 +31,13 @@ import com.levin.oak.base.entities.Dict.*;
 import java.util.List;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[e5ab34ee967eb3d286a1ea4eae78d559], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[fae3f48b850cd868311e49252e2bcc7c]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -50,7 +50,6 @@ import java.util.Date;
 public class DictInfo implements Serializable {
 
     private static final long serialVersionUID = -445779596L;
-
 
     @NotBlank
     @Size(max = 64)
@@ -66,8 +65,8 @@ public class DictInfo implements Serializable {
     @Schema(title = L_code)
     String code;
 
-    @InjectVar(domain = "dao",  converter = DefaultJsonConverter.class, isRequired = "false")
-    @Schema(title = L_itemList , description = D_itemList)
+    @InjectVar(domain = "dao", converter = DefaultJsonConverter.class, isRequired = "false")
+    @Schema(title = L_itemList, description = D_itemList)
     List<Item> itemList;
 
     @Size(max = 128)
@@ -112,5 +111,4 @@ public class DictInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
-
 }

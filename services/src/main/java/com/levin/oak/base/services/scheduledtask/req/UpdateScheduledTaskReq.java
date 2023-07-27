@@ -30,29 +30,29 @@ import static com.levin.oak.base.entities.E_ScheduledTask.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 更新调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[778b9909e926147e51dee8eae256491f], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[8c44802ecc7fec0142149c80e19fcf55]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = ScheduledTask.class, alias = E_ScheduledTask.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class UpdateScheduledTaskReq extends MultiTenantOrgReq {
 
@@ -63,10 +63,9 @@ public class UpdateScheduledTaskReq extends MultiTenantOrgReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件" , hidden = true)
+    @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
-
 
     @NotBlank
     @Size(max = 128)
@@ -82,7 +81,7 @@ public class UpdateScheduledTaskReq extends MultiTenantOrgReq {
     @Schema(title = L_cron)
     String cron;
 
-    @Schema(title = L_invokeExpr , description = D_invokeExpr)
+    @Schema(title = L_invokeExpr, description = D_invokeExpr)
     String invokeExpr;
 
     @Schema(title = L_parallelInvoke)
@@ -122,25 +121,23 @@ public class UpdateScheduledTaskReq extends MultiTenantOrgReq {
     @Schema(title = L_remark)
     String remark;
 
-
     public UpdateScheduledTaskReq(String id) {
         this.id = id;
     }
 
-    public UpdateScheduledTaskReq updateIdWhenNotBlank(String id){
-        if(isNotBlank(id)){
-        this.id = id;
+    public UpdateScheduledTaskReq updateIdWhenNotBlank(String id) {
+        if (isNotBlank(id)) {
+            this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
 
-        if(getLastUpdateTime() == null){
+        if (getLastUpdateTime() == null) {
             setLastUpdateTime(new Date());
         }
     }
-
 }

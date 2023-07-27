@@ -28,13 +28,13 @@ import static com.levin.oak.base.entities.E_ScheduledLog.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:25, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[746e3eed2b46b71d8a8d090a2560f344], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[beff95c855a585085297b05aabb904d5]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -62,7 +62,7 @@ public class SimpleScheduledLogInfo implements Serializable {
     @Schema(title = L_invokeCycle)
     String invokeCycle;
 
-    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot)
+    @Schema(title = L_invokeSnapshot, description = D_invokeSnapshot)
     String invokeSnapshot;
 
     @Schema(title = L_isError)
@@ -82,6 +82,4 @@ public class SimpleScheduledLogInfo implements Serializable {
     @NotNull
     @Schema(title = L_createTime)
     Date createTime;
-
-
 }

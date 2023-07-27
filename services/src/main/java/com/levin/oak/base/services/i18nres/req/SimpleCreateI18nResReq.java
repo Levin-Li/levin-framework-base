@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.i18nres.req;
 
-//import static com.levin.oak.base.ModuleOption.*;
+// import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,23 +28,23 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_I18nRes.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 新增国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:16, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[0451abe125f4ea5f3f4c0bde9a88e27d], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[6dea7dcb9e6dd00c3a313efe6ca8f509]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor
 @NoArgsConstructor
@@ -54,33 +54,32 @@ public class SimpleCreateI18nResReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1681554652L;
 
-    @Schema(title = L_category )
+    @Schema(title = L_category)
     @NotBlank
     @Size(max = 128)
     String category;
 
-    @Schema(title = L_lang )
+    @Schema(title = L_lang)
     @NotBlank
     @Size(max = 64)
     String lang;
 
-    @Schema(title = L_label )
+    @Schema(title = L_label)
     @NotBlank
     @Size(max = 768)
     String label;
 
-    @Schema(title = L_domain )
+    @Schema(title = L_domain)
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_name )
+    @Schema(title = L_name)
     @NotBlank
     @Size(max = 64)
     String name;
 
-
     @PostConstruct
     public void prePersist() {
-       //@todo 保存之前初始化数据，比如时间，初始状态等
+        // @todo 保存之前初始化数据，比如时间，初始状态等
     }
 }

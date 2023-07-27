@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.scheduledlog.req;
 
-//import static com.levin.oak.base.ModuleOption.*;
+// import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,23 +28,23 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_ScheduledLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 新增调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[f72aa3c2ebb957b2261dbf6a01eaf432], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[1c48115e25a5eb9ced0358eb3f0a27f3]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor
 @NoArgsConstructor
@@ -54,31 +54,30 @@ public class SimpleCreateScheduledLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1319130901L;
 
-    @Schema(title = L_taskId )
+    @Schema(title = L_taskId)
     @NotBlank
     @Size(max = 64)
     String taskId;
 
-    @Schema(title = L_invokeCycle )
+    @Schema(title = L_invokeCycle)
     @Size(max = 128)
     String invokeCycle;
 
-    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot )
+    @Schema(title = L_invokeSnapshot, description = D_invokeSnapshot)
     String invokeSnapshot;
 
-    @Schema(title = L_isError )
+    @Schema(title = L_isError)
     Boolean isError;
 
-    @Schema(title = L_invokeResult )
+    @Schema(title = L_invokeResult)
     String invokeResult;
 
-    @Schema(title = L_createTime )
+    @Schema(title = L_createTime)
     @NotNull
     Date createTime;
 
-
     @PostConstruct
     public void prePersist() {
-       //@todo 保存之前初始化数据，比如时间，初始状态等
+        // @todo 保存之前初始化数据，比如时间，初始状态等
     }
 }

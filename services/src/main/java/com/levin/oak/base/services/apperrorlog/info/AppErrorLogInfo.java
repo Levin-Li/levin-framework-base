@@ -28,13 +28,13 @@ import static com.levin.oak.base.entities.E_AppErrorLog.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[d94ac4be11bcdf55925713745a26e055], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[f7f3fe0efc4b344af2d625a98419e22c]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -47,7 +47,6 @@ import java.util.Date;
 public class AppErrorLogInfo implements Serializable {
 
     private static final long serialVersionUID = 1594864095L;
-
 
     @NotNull
     @Schema(title = L_id)
@@ -77,5 +76,4 @@ public class AppErrorLogInfo implements Serializable {
 
     @Schema(title = L_exceptionFullInfo)
     String exceptionFullInfo;
-
 }

@@ -30,13 +30,13 @@ import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
 import java.util.List;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+
 ////////////////////////////////////
 
 /**
  * 平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:25, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[82aae4d7e04feda61c692fdbf0d658ae], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:42, 代码生成哈希校验码：[38885cfc34777e6f8c33e92d10e6f7bb]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -95,7 +95,7 @@ public class SimpleTenantInfo implements Serializable {
     String contractPhone;
 
     @Size(max = 1200)
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Schema(title = L_domainList)
     List<String> domainList;
 
@@ -117,8 +117,6 @@ public class SimpleTenantInfo implements Serializable {
     String name;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
+    @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
-
-
 }

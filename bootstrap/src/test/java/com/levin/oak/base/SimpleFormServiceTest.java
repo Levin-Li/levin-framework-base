@@ -9,9 +9,8 @@ import com.levin.oak.base.services.simpleform.*;
 import com.levin.oak.base.services.simpleform.req.*;
 import com.levin.oak.base.services.simpleform.info.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.List;
@@ -49,95 +48,84 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 简单表单测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:09:47, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[4fd17f195c8f33ad0e52fd88be1464d1], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:47, 代码生成哈希校验码：[7d74c077403f48179ac8d824e0aee3ac]，请不要修改和删除此行内容。
  */
 
-//@ActiveProfiles("test")
-//@RunWith(SpringRunner.class)
+// @ActiveProfiles("test")
+// @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@Transactional(rollbackFor = {Throwable.class})
+// @Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class SimpleFormServiceTest {
 
-    @Autowired
-    private SimpleFormService simpleFormService;
+    @Autowired private SimpleFormService simpleFormService;
 
-    @Autowired
-    private BizSimpleFormService bizsimpleFormService;
+    @Autowired private BizSimpleFormService bizsimpleFormService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {
-    }
+    public static void beforeAll() throws Exception {}
 
     @AfterAll
-    public static void afterAll() throws Exception {
-    }
+    public static void afterAll() throws Exception {}
 
     @BeforeEach
-    public void beforeEach() throws Exception {
-    }
+    public void beforeEach() throws Exception {}
 
     @AfterEach
-    public void afterEach() throws Exception {
-    }
+    public void afterEach() throws Exception {}
 
     @Test
     public void createSimpleFormTest() {
 
         CreateSimpleFormReq req = new CreateSimpleFormReq();
 
-            // req.setCommitApi("提交地址_1");// 
+        // req.setCommitApi("提交地址_1");//
 
-            // req.setType("这是文本128");// 必填
+        // req.setType("这是文本128");// 必填
 
-            // req.setCategory("这是文本128");// 必填
+        // req.setCategory("这是文本128");// 必填
 
-            // req.setGroupName("这是文本128");// 必填
+        // req.setGroupName("这是文本128");// 必填
 
-            // req.setIcon("图标_1");// 
+        // req.setIcon("图标_1");//
 
-            // req.setPath("这是文本800");// 必填
+        // req.setPath("这是文本800");// 必填
 
-            // req.setRequireAuthorizations("这是文本1800");// 
+        // req.setRequireAuthorizations("这是文本1800");//
 
-            // req.setContent("内容_1");// 
+        // req.setContent("内容_1");//
 
-            // req.setDomain("这是文本128");// 
+        // req.setDomain("这是文本128");//
 
-            // req.setName("这是文本64");// 必填
+        // req.setName("这是文本64");// 必填
 
-            // req.setOrgId("这是文本128");// 
+        // req.setOrgId("这是文本128");//
 
-            // req.setTenantId("这是文本128");// 
+        // req.setTenantId("这是文本128");//
 
-            // req.setOrderCode(1);// 
+        // req.setOrderCode(1);//
 
-            // req.setEnable(true);// 必填
+        // req.setEnable(true);// 必填
 
-            // req.setEditable(true);// 必填
+        // req.setEditable(true);// 必填
 
-            // req.setRemark("这是文本512");// 
+        // req.setRemark("这是文本512");//
 
-
-       String id  = simpleFormService.create(req);
+        String id = simpleFormService.create(req);
 
         log.debug("新增简单表单->" + id);
 
         Assert.isTrue(id != null, "简单表单");
-
     }
-
 
     @Test
     public void querySimpleFormTest() {
@@ -163,7 +151,7 @@ public class SimpleFormServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<SimpleFormInfo> resp = simpleFormService.query(req,null);
+        PagingData<SimpleFormInfo> resp = simpleFormService.query(req, null);
 
         log.debug("查询简单表单->" + resp);
 
@@ -173,33 +161,32 @@ public class SimpleFormServiceTest {
     @Test
     public void updateSimpleFormTest() {
 
-         UpdateSimpleFormReq req = new UpdateSimpleFormReq();
+        UpdateSimpleFormReq req = new UpdateSimpleFormReq();
 
-         req.setId(id);
+        req.setId(id);
 
+        // req.setCommitApi("提交地址_1");//
+        // req.setType("这是文本128");// 必填
+        // req.setCategory("这是文本128");// 必填
+        // req.setGroupName("这是文本128");// 必填
+        // req.setIcon("图标_1");//
+        // req.setPath("这是文本800");// 必填
+        // req.setRequireAuthorizations("这是文本1800");//
+        // req.setContent("内容_1");//
+        // req.setDomain("这是文本128");//
+        // req.setName("这是文本64");// 必填
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
+        // req.setOrderCode(1);//
+        // req.setEnable(true);// 必填
+        // req.setEditable(true);// 必填
+        // req.setRemark("这是文本512");//
 
-           // req.setCommitApi("提交地址_1");// 
-           // req.setType("这是文本128");// 必填
-           // req.setCategory("这是文本128");// 必填
-           // req.setGroupName("这是文本128");// 必填
-           // req.setIcon("图标_1");// 
-           // req.setPath("这是文本800");// 必填
-           // req.setRequireAuthorizations("这是文本1800");// 
-           // req.setContent("内容_1");// 
-           // req.setDomain("这是文本128");// 
-           // req.setName("这是文本64");// 必填
-           // req.setOrgId("这是文本128");// 
-           // req.setTenantId("这是文本128");// 
-           // req.setOrderCode(1);// 
-           // req.setEnable(true);// 必填
-           // req.setEditable(true);// 必填
-           // req.setRemark("这是文本512");// 
+        boolean ok = simpleFormService.update(req);
 
-          boolean ok = simpleFormService.update(req);
+        log.debug("更新简单表单-> " + ok);
 
-          log.debug("更新简单表单-> " + ok);
-
-          Assert.isTrue(ok, "简单表单");
+        Assert.isTrue(ok, "简单表单");
     }
 
     @Test
@@ -213,6 +200,6 @@ public class SimpleFormServiceTest {
 
         log.debug("删除简单表单->" + ok);
 
-        Assert.isTrue(ok , "简单表单");
+        Assert.isTrue(ok, "简单表单");
     }
 }

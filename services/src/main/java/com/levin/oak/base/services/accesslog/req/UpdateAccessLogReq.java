@@ -30,29 +30,29 @@ import static com.levin.oak.base.entities.E_AccessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 更新访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月20日 12:12:29, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[9c22ff96c7ce06b195ea3207fcceb4b8], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[50874d043d276b8c4f385c27d37a54d5]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class UpdateAccessLogReq extends MultiTenantOrgReq {
 
@@ -62,8 +62,6 @@ public class UpdateAccessLogReq extends MultiTenantOrgReq {
     @NotNull
     @Eq(require = true)
     Long id;
-
-
 
     @Schema(title = L_domain)
     String domain;
@@ -138,21 +136,19 @@ public class UpdateAccessLogReq extends MultiTenantOrgReq {
     @Schema(title = L_executeTime)
     Long executeTime;
 
-
     public UpdateAccessLogReq(Long id) {
         this.id = id;
     }
 
-    public UpdateAccessLogReq updateIdWhenNotBlank(Long id){
-        if(isNotBlank(id)){
-        this.id = id;
+    public UpdateAccessLogReq updateIdWhenNotBlank(Long id) {
+        if (isNotBlank(id)) {
+            this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
     }
-
 }

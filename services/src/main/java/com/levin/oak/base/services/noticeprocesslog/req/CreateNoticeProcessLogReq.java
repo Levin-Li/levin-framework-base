@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.noticeprocesslog.req;
 
-//import static com.levin.oak.base.ModuleOption.*;
+// import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,29 +24,27 @@ import com.levin.commons.dao.annotation.order.*;
 import com.levin.commons.dao.annotation.logic.*;
 import com.levin.commons.dao.annotation.misc.*;
 
-
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_NoticeProcessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
-////////////////////////////////////
 
+////////////////////////////////////
 
 /**
  * 新增通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月19日 23:49:56, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[eaa8647ec37ca4379d3007073214a344], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[026d87f555198deb85e5206234c8e525]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor
 @NoArgsConstructor
@@ -56,37 +54,34 @@ public class CreateNoticeProcessLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1991983093L;
 
-
-    @Schema(title = L_ownerId )
+    @Schema(title = L_ownerId)
     @NotBlank
     @Size(max = 128)
     String ownerId;
 
-    @Schema(title = L_noticeId )
+    @Schema(title = L_noticeId)
     @NotBlank
     @Size(max = 128)
     String noticeId;
 
-    @Schema(title = L_status )
+    @Schema(title = L_status)
     @Size(max = 128)
     String status;
 
-    @Schema(title = L_remark )
+    @Schema(title = L_remark)
     @Size(max = 512)
     String remark;
 
-    @Schema(title = L_createTime )
+    @Schema(title = L_createTime)
     @NotNull
     Date createTime;
 
-
     @PostConstruct
     public void prePersist() {
-       //@todo 保存之前初始化数据，比如时间，初始状态等
+        // @todo 保存之前初始化数据，比如时间，初始状态等
 
-        if(getCreateTime() == null){
+        if (getCreateTime() == null) {
             setCreateTime(new Date());
         }
     }
-
 }

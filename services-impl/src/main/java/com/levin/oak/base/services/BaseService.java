@@ -12,7 +12,7 @@ import javax.validation.*;
 import java.util.*;
 import javax.annotation.*;
 
-//import javax.servlet.http.*;
+// import javax.servlet.http.*;
 
 import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
@@ -28,22 +28,18 @@ import com.levin.oak.base.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-
 /**
  * 抽象服务类
  *
  * @author lilw
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:10, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[5dd765e029bcb2e88edf53feb780dbf7], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:39, 代码生成哈希校验码：[1f4adada27e0a634f95b3cfd1681177e]，请不要修改和删除此行内容。
  */
 @Slf4j
 public abstract class BaseService {
 
-    @Autowired
-    protected SimpleDao simpleDao;
+    @Autowired protected SimpleDao simpleDao;
 
-    @Autowired
-    protected ApplicationContext applicationContext;
+    @Autowired protected ApplicationContext applicationContext;
 
     protected Object selfProxy = null;
 
@@ -52,7 +48,6 @@ public abstract class BaseService {
     }
 
     /**
-     *
      * @param type
      * @param <T>
      * @return
@@ -65,5 +60,4 @@ public abstract class BaseService {
 
         return (T) selfProxy;
     }
-
 }

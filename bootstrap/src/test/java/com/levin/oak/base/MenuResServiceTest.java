@@ -9,9 +9,8 @@ import com.levin.oak.base.services.menures.*;
 import com.levin.oak.base.services.menures.req.*;
 import com.levin.oak.base.services.menures.info.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.rbac.MenuItem.*;
@@ -51,97 +50,86 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 菜单测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年6月29日 上午10:11:13, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[fe23a51858a4f5629db6f09e2bb968bb], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:47, 代码生成哈希校验码：[1e9183da566cfdc78c23211755419b16]，请不要修改和删除此行内容。
  */
 
-//@ActiveProfiles("test")
-//@RunWith(SpringRunner.class)
+// @ActiveProfiles("test")
+// @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@Transactional(rollbackFor = {Throwable.class})
+// @Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class MenuResServiceTest {
 
-    @Autowired
-    private MenuResService menuResService;
+    @Autowired private MenuResService menuResService;
 
-    @Autowired
-    private BizMenuResService bizmenuResService;
+    @Autowired private BizMenuResService bizmenuResService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {
-    }
+    public static void beforeAll() throws Exception {}
 
     @AfterAll
-    public static void afterAll() throws Exception {
-    }
+    public static void afterAll() throws Exception {}
 
     @BeforeEach
-    public void beforeEach() throws Exception {
-    }
+    public void beforeEach() throws Exception {}
 
     @AfterEach
-    public void afterEach() throws Exception {
-    }
+    public void afterEach() throws Exception {}
 
     @Test
     public void createMenuResTest() {
 
         CreateMenuResReq req = new CreateMenuResReq();
 
-            // req.setParentId("这是文本64");// 
+        // req.setParentId("这是文本64");//
 
-            // req.setTenantId("这是文本64");// 
+        // req.setTenantId("这是文本64");//
 
-            // req.setDomain("这是文本128");// 
+        // req.setDomain("这是文本128");//
 
-            // req.setRequireAuthorizations("这是文本1800");// 
+        // req.setRequireAuthorizations("这是文本1800");//
 
-            // req.setAlwaysShow(true);// 必填
+        // req.setAlwaysShow(true);// 必填
 
-            // req.setTarget("这是文本64");// 
+        // req.setTarget("这是文本64");//
 
-            // req.setActionType(ActionType.Default);// 
+        // req.setActionType(ActionType.Default);//
 
-            // req.setIcon("图标_1");// 
+        // req.setIcon("图标_1");//
 
-            // req.setPath("路径/链接_1");// 
+        // req.setPath("路径/链接_1");//
 
-            // req.setParams("这是文本1800");// 
+        // req.setParams("这是文本1800");//
 
-            // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
+        // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15|
 
-            // req.setName("这是文本128");// 必填
+        // req.setName("这是文本128");// 必填
 
-            // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
 
-            // req.setOrderCode(1);// 
+        // req.setOrderCode(1);//
 
-            // req.setEnable(true);// 必填
+        // req.setEnable(true);// 必填
 
-            // req.setEditable(true);// 必填
+        // req.setEditable(true);// 必填
 
-            // req.setRemark("这是文本512");// 
+        // req.setRemark("这是文本512");//
 
-
-       String id  = menuResService.create(req);
+        String id = menuResService.create(req);
 
         log.debug("新增菜单->" + id);
 
         Assert.isTrue(id != null, "菜单");
-
     }
-
 
     @Test
     public void queryMenuResTest() {
@@ -170,7 +158,7 @@ public class MenuResServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<MenuResInfo> resp = menuResService.query(req,null);
+        PagingData<MenuResInfo> resp = menuResService.query(req, null);
 
         log.debug("查询菜单->" + resp);
 
@@ -180,34 +168,33 @@ public class MenuResServiceTest {
     @Test
     public void updateMenuResTest() {
 
-         UpdateMenuResReq req = new UpdateMenuResReq();
+        UpdateMenuResReq req = new UpdateMenuResReq();
 
-         req.setId(id);
+        req.setId(id);
 
+        // req.setParentId("这是文本64");//
+        // req.setTenantId("这是文本64");//
+        // req.setDomain("这是文本128");//
+        // req.setRequireAuthorizations("这是文本1800");//
+        // req.setAlwaysShow(true);// 必填
+        // req.setTarget("这是文本64");//
+        // req.setActionType(ActionType.Default);//
+        // req.setIcon("图标_1");//
+        // req.setPath("路径/链接_1");//
+        // req.setParams("这是文本1800");//
+        // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15|
+        // req.setName("这是文本128");// 必填
+        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
+        // req.setOrderCode(1);//
+        // req.setEnable(true);// 必填
+        // req.setEditable(true);// 必填
+        // req.setRemark("这是文本512");//
 
-           // req.setParentId("这是文本64");// 
-           // req.setTenantId("这是文本64");// 
-           // req.setDomain("这是文本128");// 
-           // req.setRequireAuthorizations("这是文本1800");// 
-           // req.setAlwaysShow(true);// 必填
-           // req.setTarget("这是文本64");// 
-           // req.setActionType(ActionType.Default);// 
-           // req.setIcon("图标_1");// 
-           // req.setPath("路径/链接_1");// 
-           // req.setParams("这是文本1800");// 
-           // req.setIdPath("这是文本1800");//id路径， 使用|包围，如|1|3|15| 
-           // req.setName("这是文本128");// 必填
-           // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
-           // req.setOrderCode(1);// 
-           // req.setEnable(true);// 必填
-           // req.setEditable(true);// 必填
-           // req.setRemark("这是文本512");// 
+        boolean ok = menuResService.update(req);
 
-          boolean ok = menuResService.update(req);
+        log.debug("更新菜单-> " + ok);
 
-          log.debug("更新菜单-> " + ok);
-
-          Assert.isTrue(ok, "菜单");
+        Assert.isTrue(ok, "菜单");
     }
 
     @Test
@@ -221,6 +208,6 @@ public class MenuResServiceTest {
 
         log.debug("删除菜单->" + ok);
 
-        Assert.isTrue(ok , "菜单");
+        Assert.isTrue(ok, "菜单");
     }
 }

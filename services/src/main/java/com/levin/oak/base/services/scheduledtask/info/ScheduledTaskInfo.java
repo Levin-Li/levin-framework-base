@@ -28,13 +28,13 @@ import static com.levin.oak.base.entities.E_ScheduledTask.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[09c7fe76153b1a6237359ab0ac973b6b], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[49bd0e81c0f0bd4659d0ea09422018e5]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -47,7 +47,6 @@ import java.util.Date;
 public class ScheduledTaskInfo implements Serializable {
 
     private static final long serialVersionUID = -2056389676L;
-
 
     @NotBlank
     @Size(max = 64)
@@ -68,7 +67,7 @@ public class ScheduledTaskInfo implements Serializable {
     @Schema(title = L_cron)
     String cron;
 
-    @Schema(title = L_invokeExpr , description = D_invokeExpr)
+    @Schema(title = L_invokeExpr, description = D_invokeExpr)
     String invokeExpr;
 
     @Schema(title = L_parallelInvoke)
@@ -125,5 +124,4 @@ public class ScheduledTaskInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
-
 }

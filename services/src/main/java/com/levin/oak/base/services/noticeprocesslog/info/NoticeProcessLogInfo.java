@@ -28,13 +28,13 @@ import static com.levin.oak.base.entities.E_NoticeProcessLog.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[4f88a6f4c14a5d3cbafc83bd45389638], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[26667bc0d41fd6730c35b2cc3d528841]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -47,7 +47,6 @@ import java.util.Date;
 public class NoticeProcessLogInfo implements Serializable {
 
     private static final long serialVersionUID = -1991983093L;
-
 
     @NotBlank
     @Size(max = 64)
@@ -83,5 +82,4 @@ public class NoticeProcessLogInfo implements Serializable {
     @NotNull
     @Schema(title = L_createTime)
     Date createTime;
-
 }

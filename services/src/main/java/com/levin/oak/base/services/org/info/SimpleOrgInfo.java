@@ -34,20 +34,26 @@ import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 import java.util.Set;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[3adc9d381a2460b04b5ef12309e6b1d6], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[07723a7aa94b41ddef44694032ac386a]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(exclude = {"area","extInfo","parent","children",})
+@ToString(
+        exclude = {
+            "area",
+            "extInfo",
+            "parent",
+            "children",
+        })
 @FieldNameConstants
 @JsonIgnoreProperties({tenantId})
 @Select
@@ -69,7 +75,7 @@ public class SimpleOrgInfo implements Serializable {
     String parentId;
 
     @Size(max = 64)
-    @Schema(title = L_code , description = D_code)
+    @Schema(title = L_code, description = D_code)
     String code;
 
     @Schema(title = L_icon)
@@ -91,21 +97,21 @@ public class SimpleOrgInfo implements Serializable {
     @Schema(title = L_areaCode)
     String areaCode;
 
-    //@Fetch //默认不加载，请通过查询对象控制
+    // @Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_area)
     AreaInfo area;
 
     @Size(max = 128)
-    @Schema(title = L_level , description = D_level)
+    @Schema(title = L_level, description = D_level)
     String level;
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_category , description = D_category)
+    @Schema(title = L_category, description = D_category)
     String category;
 
     @NotNull
-    @Schema(title = L_isExternal , description = D_isExternal)
+    @Schema(title = L_isExternal, description = D_isExternal)
     Boolean isExternal;
 
     @Size(max = 64)
@@ -127,20 +133,20 @@ public class SimpleOrgInfo implements Serializable {
     @Schema(title = L_zipCode)
     String zipCode;
 
-    //@Fetch //默认不加载，请通过查询对象控制
+    // @Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_extInfo)
     String extInfo;
 
-    //@Fetch //默认不加载，请通过查询对象控制
+    // @Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_parent)
     OrgInfo parent;
 
-    //@Fetch //默认不加载，请通过查询对象控制
+    // @Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_children)
     Set<OrgInfo> children;
 
     @Size(max = 1800)
-    @Schema(title = L_idPath , description = D_idPath)
+    @Schema(title = L_idPath, description = D_idPath)
     String idPath;
 
     @NotBlank
@@ -149,8 +155,6 @@ public class SimpleOrgInfo implements Serializable {
     String name;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
+    @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
-
-
 }

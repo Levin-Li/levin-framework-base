@@ -29,13 +29,13 @@ import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Notice.*;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[b30d06c3c94d564e01618c209a8e4308], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[cf83eda5837ff48ec66e102eb9f023fa]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -48,7 +48,6 @@ import java.util.Date;
 public class NoticeInfo implements Serializable {
 
     private static final long serialVersionUID = 1394869526L;
-
 
     @NotBlank
     @Size(max = 64)
@@ -114,5 +113,4 @@ public class NoticeInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
-
 }

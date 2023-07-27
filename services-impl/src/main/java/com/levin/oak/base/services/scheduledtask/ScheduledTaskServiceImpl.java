@@ -29,7 +29,7 @@ import cn.hutool.core.lang.*;
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
-//import org.apache.dubbo.config.spring.context.annotation.*;
+// import org.apache.dubbo.config.spring.context.annotation.*;
 import org.apache.dubbo.config.annotation.*;
 
 import com.levin.oak.base.entities.*;
@@ -41,92 +41,83 @@ import com.levin.oak.base.services.scheduledtask.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 调度任务-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 18:46:32, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[6cef00e9859050f32862cf44ba0cea5a], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[c9aa2c44a04586cc2ca687b67d2f1716]，请不要修改和删除此行内容。
  */
-
 @Service(PLUGIN_PREFIX + "ScheduledTaskService")
 @DubboService
-
-@ConditionalOnMissingBean({ScheduledTaskService.class}) //默认只有在无对应服务才启用
+@ConditionalOnMissingBean({ScheduledTaskService.class}) // 默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ScheduledTaskService", matchIfMissing = true)
 @Slf4j
 
-//@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
-//@Validated
+// @Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
+// @Validated
 @Tag(name = E_ScheduledTask.BIZ_NAME, description = E_ScheduledTask.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_ScheduledTask.SIMPLE_CLASS_NAME})
 public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTaskService {
 
-    protected ScheduledTaskService getSelfProxy(){
+    protected ScheduledTaskService getSelfProxy() {
         return getSelfProxy(ScheduledTaskService.class);
     }
 
     @Operation(summary = CREATE_ACTION)
     @Transactional(rollbackFor = {RuntimeException.class})
     @Override
-    public String create(CreateScheduledTaskReq req){
-        //保存自动先查询唯一约束，并给出错误信息
+    public String create(CreateScheduledTaskReq req) {
+        // 保存自动先查询唯一约束，并给出错误信息
         ScheduledTask entity = simpleDao.create(req, true);
         return entity.getId();
     }
 
     @Operation(summary = BATCH_CREATE_ACTION)
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    // @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
-    public List<String> batchCreate(List<CreateScheduledTaskReq> reqList){
+    public List<String> batchCreate(List<CreateScheduledTaskReq> reqList) {
         return reqList.stream().map(this::create).collect(Collectors.toList());
-    }
-
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    @Override
-    //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    //@Cacheable(condition = "#id != null", unless = "#result == null ", key = E_ScheduledTask.CACHE_KEY_PREFIX + "#id")
-    public ScheduledTaskInfo findById(String id) {
-        return findById(new ScheduledTaskIdReq().setId(id));
-    }
-
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    @Override
-    //只更新缓存
-    //@CachePut(unless = "#result == null" , condition = "#req.id != null" , key = E_ScheduledTask.CACHE_KEY_PREFIX + "#req.id")
-    public ScheduledTaskInfo findById(ScheduledTaskIdReq req) {
-        Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-        return simpleDao.findUnique(req);
     }
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    //@CacheEvict(condition = "#req.id != null", key = E_ScheduledTask.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#req.id != null", key = E_ScheduledTask.CACHE_KEY_PREFIX +
+    // "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateScheduledTaskReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleUpdateByQueryObj(req);
     }
 
+    @Operation(summary = UPDATE_ACTION)
+    @Override
+    public int update(SimpleUpdateScheduledTaskReq setReq, QueryScheduledTaskReq whereReq) {
+        return simpleDao.updateByQueryObj(setReq, whereReq);
+    }
+
     @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
-    public int batchUpdate(List<UpdateScheduledTaskReq> reqList){
-        //@Todo 优化批量提交
-        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
+    public int batchUpdate(List<UpdateScheduledTaskReq> reqList) {
+        // @Todo 优化批量提交
+        return reqList.stream()
+                .map(req -> getSelfProxy().update(req))
+                .mapToInt(n -> n ? 1 : 0)
+                .sum();
     }
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    //@CacheEvict(condition = "#req.id != null", key = E_ScheduledTask.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#req.id != null", key = E_ScheduledTask.CACHE_KEY_PREFIX +
+    // "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(ScheduledTaskIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -136,13 +127,13 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
-    public int batchDelete(DeleteScheduledTaskReq req){
-        //@Todo 优化批量提交
+    public int batchDelete(DeleteScheduledTaskReq req) {
+        // @Todo 优化批量提交
         return Stream.of(req.getIdList())
-            .map(id -> simpleDao.copy(req, new ScheduledTaskIdReq().setId(id)))
-            .map(idReq -> getSelfProxy().delete(idReq))
-            .mapToInt(n -> n ? 1 : 0)
-            .sum();
+                .map(id -> simpleDao.copy(req, new ScheduledTaskIdReq().setId(id)))
+                .map(idReq -> getSelfProxy().delete(idReq))
+                .mapToInt(n -> n ? 1 : 0)
+                .sum();
     }
 
     @Operation(summary = QUERY_ACTION)
@@ -151,59 +142,59 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    /**
-     * 指定选择列查询
-     *
-     * @param req
-     * @param paging 分页设置，可空
-     * @return pagingData 分页数据
-     */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    public PagingData<SimpleScheduledTaskInfo> simpleQuery(QueryScheduledTaskReq req, Paging paging){
+    public PagingData<SimpleScheduledTaskInfo> simpleQuery(
+            QueryScheduledTaskReq req, Paging paging) {
         return simpleDao.findPagingDataByQueryObj(SimpleScheduledTaskInfo.class, req, paging);
     }
 
-    /**
-     * 简单统计
-     *
-     * @param req
-     * @param paging 分页设置，可空
-     * @return pagingData 分页数据
-     */
     @Operation(summary = STAT_ACTION)
     @Override
-    public PagingData<StatScheduledTaskReq.Result> stat(StatScheduledTaskReq req , Paging paging){
+    public PagingData<StatScheduledTaskReq.Result> stat(StatScheduledTaskReq req, Paging paging) {
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
-    /**
-     * 统计记录数
-     *
-     * @param req
-     * @return record count
-     */
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryScheduledTaskReq req){
+    public int count(QueryScheduledTaskReq req) {
         return (int) simpleDao.countByQueryObj(req);
+    }
+
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    @Override
+    // Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
+    // @Cacheable(condition = "#id != null", unless = "#result == null ", key =
+    // E_ScheduledTask.CACHE_KEY_PREFIX + "#id")
+    public ScheduledTaskInfo findById(String id) {
+        return findById(new ScheduledTaskIdReq().setId(id));
+    }
+
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    @Override
+    // 只更新缓存
+    // @CachePut(unless = "#result == null" , condition = "#req.id != null" , key =
+    // E_ScheduledTask.CACHE_KEY_PREFIX + "#req.id")
+    public ScheduledTaskInfo findById(ScheduledTaskIdReq req) {
+        Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
+        return simpleDao.findUnique(req);
     }
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public ScheduledTaskInfo findOne(QueryScheduledTaskReq req){
+    public ScheduledTaskInfo findOne(QueryScheduledTaskReq req) {
         return simpleDao.findOneByQueryObj(req);
     }
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public ScheduledTaskInfo findUnique(QueryScheduledTaskReq req){
+    public ScheduledTaskInfo findUnique(QueryScheduledTaskReq req) {
         return simpleDao.findUnique(req);
     }
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "#key != null && #key.toString().trim().length() > 0", key = E_ScheduledTask.CACHE_KEY_PREFIX + "#key")
-    public void clearCache(Object key) {
-    }
-
+    @CacheEvict(
+            condition = "#key != null && #key.toString().trim().length() > 0",
+            key = E_ScheduledTask.CACHE_KEY_PREFIX + "#key")
+    public void clearCache(Object key) {}
 }

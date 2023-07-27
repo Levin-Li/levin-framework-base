@@ -30,43 +30,37 @@ import static com.levin.oak.base.entities.E_I18nRes.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+
 ////////////////////////////////////
 
 /**
  * 更新国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月24日 15:26:16, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[722bdf1325ebed67508e6f4c74d97797], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[a581f36043cf5f0414ec5f34c7ed91a6]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class SimpleUpdateI18nResReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1681554652L;
 
-    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
-    @NotNull
-    @Eq(require = true)
-    Long id;
-
-    @Schema(description = "可编辑条件" , hidden = true)
+    @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
-
 
     @NotBlank
     @Size(max = 128)
@@ -92,20 +86,8 @@ public class SimpleUpdateI18nResReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
-
-    public SimpleUpdateI18nResReq(Long id) {
-        this.id = id;
-    }
-
-    public SimpleUpdateI18nResReq updateIdWhenNotBlank(Long id){
-        if(isNotBlank(id)){
-        this.id = id;
-        }
-        return this;
-    }
-
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
     }
 }
