@@ -332,7 +332,7 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
                                 tempList.addAll(variableResolverList);
 
-                                variableInjector.injectByVariableResolvers(param, tempList);
+                                variableInjector.injectValues(param, tempList);
                             });
 
                 });

@@ -57,7 +57,7 @@ import com.levin.oak.base.entities.Org;
 /**
  * 用户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[c018e20d53ed2daafb9453d90a92cf92]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:32, 代码生成哈希校验码：[6ecda6f8853c2413cb6e0a858ee6ae01]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "UserService")
 @DubboService
@@ -94,7 +94,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_User.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateUserReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -120,7 +120,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_User.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(UserIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -165,7 +165,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    // @Cacheable(condition = "#id != null", unless = "#result == null ", key =
+    // @Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key =
     // E_User.CACHE_KEY_PREFIX + "#id")
     public UserInfo findById(String id) {
         return findById(new UserIdReq().setId(id));
@@ -174,7 +174,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // 只更新缓存
-    // @CachePut(unless = "#result == null" , condition = "#req.id != null" , key =
+    // @CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key =
     // E_User.CACHE_KEY_PREFIX + "#req.id")
     public UserInfo findById(UserIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -195,8 +195,6 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(
-            condition = "#key != null && #key.toString().trim().length() > 0",
-            key = E_User.CACHE_KEY_PREFIX + "#key")
+    @CacheEvict(condition = "#isNotEmpty(#key)", key = E_User.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {}
 }

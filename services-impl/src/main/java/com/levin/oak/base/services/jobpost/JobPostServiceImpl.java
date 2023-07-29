@@ -53,7 +53,7 @@ import java.util.Date;
 /**
  * 工作岗位-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[088d34a6a6fe3ed53c2cf964ea167aab]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:34, 代码生成哈希校验码：[0b4fa4b99c083c3e5002c1f639793186]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "JobPostService")
 @DubboService
@@ -90,7 +90,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateJobPostReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -116,7 +116,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(JobPostIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -161,7 +161,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    // @Cacheable(condition = "#id != null", unless = "#result == null ", key =
+    // @Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key =
     // E_JobPost.CACHE_KEY_PREFIX + "#id")
     public JobPostInfo findById(String id) {
         return findById(new JobPostIdReq().setId(id));
@@ -170,7 +170,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // 只更新缓存
-    // @CachePut(unless = "#result == null" , condition = "#req.id != null" , key =
+    // @CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key =
     // E_JobPost.CACHE_KEY_PREFIX + "#req.id")
     public JobPostInfo findById(JobPostIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -191,8 +191,6 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(
-            condition = "#key != null && #key.toString().trim().length() > 0",
-            key = E_JobPost.CACHE_KEY_PREFIX + "#key")
+    @CacheEvict(condition = "#isNotEmpty(#key)", key = E_JobPost.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {}
 }

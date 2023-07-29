@@ -42,7 +42,7 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 /**
  * 更新平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:42, 代码生成哈希校验码：[632781ea19436e70836b66259c435265]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:30, 代码生成哈希校验码：[74afc795a050378a151c363cfd3a6c01]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -132,8 +132,15 @@ public class SimpleUpdateTenantReq extends BaseReq {
     @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
+    @Schema(title = L_lastUpdateTime)
+    Date lastUpdateTime;
+
     @PostConstruct
     public void preUpdate() {
         // @todo 更新之前初始化数据
+
+        if (getLastUpdateTime() == null) {
+            setLastUpdateTime(new Date());
+        }
     }
 }

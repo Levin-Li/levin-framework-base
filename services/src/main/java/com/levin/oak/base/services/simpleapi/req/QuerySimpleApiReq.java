@@ -48,7 +48,7 @@ import java.util.Date;
 /**
  * 查询简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:41, 代码生成哈希校验码：[50288c74a6e7962753630b849cfc7898]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:29, 代码生成哈希校验码：[d9db990f00a92aa0549c70d6bbc0d826]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -75,8 +75,13 @@ public class QuerySimpleApiReq extends MultiTenantOrgReq {
     @Schema(title = "排序方向")
     @SimpleOrderBy(
             expr = "orderBy + ' ' + orderDir",
-            condition = "orderBy != null && orderDir != null",
+            condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)",
             remark = "生成排序表达式")
+    @OrderBy(
+            value = createTime,
+            condition = "#isEmpty(orderBy) || #isEmpty(orderDir)",
+            order = Integer.MAX_VALUE,
+            desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
     @Size(max = 16)
@@ -128,10 +133,6 @@ public class QuerySimpleApiReq extends MultiTenantOrgReq {
 
     @Schema(title = L_content)
     String content;
-
-    @Schema(title = "是否加载" + L_content)
-    @Fetch(attrs = E_SimpleApi.content, condition = "#_val == true")
-    Boolean loadContent;
 
     @Size(max = 128)
     @Schema(title = L_domain)

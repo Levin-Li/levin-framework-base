@@ -45,7 +45,7 @@ import java.util.Date;
 /**
  * 查询客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[df96efa02a4fab0b39e43d1c7d7c2d8d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:32, 代码生成哈希校验码：[32f1f04ccb3e9f868abca032afdd3577]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -72,8 +72,13 @@ public class QueryAppClientFileReq extends MultiTenantOrgReq {
     @Schema(title = "排序方向")
     @SimpleOrderBy(
             expr = "orderBy + ' ' + orderDir",
-            condition = "orderBy != null && orderDir != null",
+            condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)",
             remark = "生成排序表达式")
+    @OrderBy(
+            value = createTime,
+            condition = "#isEmpty(orderBy) || #isEmpty(orderDir)",
+            order = Integer.MAX_VALUE,
+            desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
     @NotBlank
@@ -95,10 +100,6 @@ public class QueryAppClientFileReq extends MultiTenantOrgReq {
 
     @Schema(title = L_content, description = D_content)
     byte[] content;
-
-    @Schema(title = "是否加载" + L_content)
-    @Fetch(attrs = E_AppClientFile.content, condition = "#_val == true")
-    Boolean loadContent;
 
     @Size(max = 128)
     @Schema(title = L_domain)

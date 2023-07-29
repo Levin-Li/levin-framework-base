@@ -37,17 +37,14 @@ import java.util.Date;
 /**
  * 简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:41, 代码生成哈希校验码：[640f25adb2970055a4c9203706e663ce]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:29, 代码生成哈希校验码：[52ca40202541969a04550c0bd8127eac]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(
-        exclude = {
-            "content",
-        })
+@ToString(exclude = {})
 @FieldNameConstants
 @JsonIgnoreProperties({tenantId})
 @Select
@@ -96,7 +93,6 @@ public class SimpleSimpleApiInfo implements Serializable {
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
 
-    // @Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_content)
     String content;
 

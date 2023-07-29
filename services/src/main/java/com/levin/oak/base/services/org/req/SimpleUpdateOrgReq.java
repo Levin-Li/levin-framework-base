@@ -46,7 +46,7 @@ import java.util.Date;
 /**
  * 更新机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[6d0f75dee75895c6dc43fceec5ee8c8e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:34, 代码生成哈希校验码：[cf20c4952cf7f066fcba54ab52dce8b5]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -140,8 +140,15 @@ public class SimpleUpdateOrgReq extends MultiTenantReq {
     @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
+    @Schema(title = L_lastUpdateTime)
+    Date lastUpdateTime;
+
     @PostConstruct
     public void preUpdate() {
         // @todo 更新之前初始化数据
+
+        if (getLastUpdateTime() == null) {
+            setLastUpdateTime(new Date());
+        }
     }
 }

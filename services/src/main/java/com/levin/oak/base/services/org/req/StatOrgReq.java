@@ -52,7 +52,7 @@ import java.util.Date;
 /**
  * 统计机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[6ac489a7769d16419fea7950bc2b5339]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:34, 代码生成哈希校验码：[181984c5355d7af0b50eddbd90cb80a7]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -164,10 +164,6 @@ public class StatOrgReq extends MultiTenantReq {
 
     @Schema(title = L_extInfo)
     String extInfo;
-
-    @Schema(title = "是否加载" + L_extInfo)
-    @Fetch(attrs = E_Org.extInfo, condition = "#_val == true")
-    Boolean loadExtInfo;
 
     @Schema(title = "是否加载" + L_parent)
     @Fetch(attrs = E_Org.parent, condition = "#_val == true")

@@ -43,7 +43,7 @@ import java.util.Date;
 /**
  * 更新简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:41, 代码生成哈希校验码：[41d2e5b752a5dd7c0eebe9ad7f5a1699]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:29, 代码生成哈希校验码：[104569a665a7c913a2144feac647391b]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -116,8 +116,15 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
+    @Schema(title = L_lastUpdateTime)
+    Date lastUpdateTime;
+
     @PostConstruct
     public void preUpdate() {
         // @todo 更新之前初始化数据
+
+        if (getLastUpdateTime() == null) {
+            setLastUpdateTime(new Date());
+        }
     }
 }

@@ -40,7 +40,7 @@ import java.util.Date;
 /**
  * 机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[07723a7aa94b41ddef44694032ac386a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:33, 代码生成哈希校验码：[72de7cce5d9f0381317d00b8a854e92b]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -50,7 +50,6 @@ import java.util.Date;
 @ToString(
         exclude = {
             "area",
-            "extInfo",
             "parent",
             "children",
         })
@@ -133,7 +132,6 @@ public class SimpleOrgInfo implements Serializable {
     @Schema(title = L_zipCode)
     String zipCode;
 
-    // @Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_extInfo)
     String extInfo;
 

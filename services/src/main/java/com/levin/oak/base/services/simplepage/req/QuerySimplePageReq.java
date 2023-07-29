@@ -47,7 +47,7 @@ import java.util.Date;
 /**
  * 查询简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[ea0097cd606f5534bec87ca50cdc0e79]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:35, 代码生成哈希校验码：[2ce2c769b3ffb1c5f8f487509013a7ec]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -74,8 +74,13 @@ public class QuerySimplePageReq extends MultiTenantOrgReq {
     @Schema(title = "排序方向")
     @SimpleOrderBy(
             expr = "orderBy + ' ' + orderDir",
-            condition = "orderBy != null && orderDir != null",
+            condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)",
             remark = "生成排序表达式")
+    @OrderBy(
+            value = createTime,
+            condition = "#isEmpty(orderBy) || #isEmpty(orderDir)",
+            order = Integer.MAX_VALUE,
+            desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
     @NotBlank
@@ -119,10 +124,6 @@ public class QuerySimplePageReq extends MultiTenantOrgReq {
 
     @Schema(title = L_content)
     String content;
-
-    @Schema(title = "是否加载" + L_content)
-    @Fetch(attrs = E_SimplePage.content, condition = "#_val == true")
-    Boolean loadContent;
 
     @Size(max = 128)
     @Schema(title = L_domain)

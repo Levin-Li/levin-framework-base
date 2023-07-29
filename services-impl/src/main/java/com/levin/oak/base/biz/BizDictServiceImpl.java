@@ -55,7 +55,7 @@ import java.util.Date;
 /**
  * 字典-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[663b9f265c9c7d92fd461192e1c8da83]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:31, 代码生成哈希校验码：[c73add0f531a1eca5005960cb6fe8368]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizDictServiceImpl")
 @DubboService
@@ -74,16 +74,6 @@ public class BizDictServiceImpl extends BaseService implements BizDictService {
     protected BizDictServiceImpl getSelfProxy() {
         return getSelfProxy(BizDictServiceImpl.class);
     }
-
-    // 示例方法
-    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    // @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_Dict.CACHE_KEY_PREFIX + "#req.id")
-    // @Transactional(rollbackFor = RuntimeException.class)
-    // public boolean update(UpdateDictReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    // }
 
     // @Transactional(rollbackFor = RuntimeException.class)
     // public void update(UpdateReq req){

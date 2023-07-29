@@ -46,7 +46,7 @@ import java.util.Date;
 /**
  * 统计客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[b46c536ab0f8c79ebb3befdc2eb4efcf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:32, 代码生成哈希校验码：[1ab25306ead219aa0f6bef4fd99bbb25]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -87,10 +87,6 @@ public class StatAppClientFileReq extends MultiTenantOrgReq {
 
     @Schema(title = L_content, description = D_content)
     byte[] content;
-
-    @Schema(title = "是否加载" + L_content)
-    @Fetch(attrs = E_AppClientFile.content, condition = "#_val == true")
-    Boolean loadContent;
 
     @Size(max = 128)
     @Schema(title = L_domain)

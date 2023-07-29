@@ -48,7 +48,7 @@ import java.util.Date;
 /**
  * 统计简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[de41058bf929812f03cd733d06790545]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:35, 代码生成哈希校验码：[e741cd29b261bf329d39f8aa5cafcd1b]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -111,10 +111,6 @@ public class StatSimplePageReq extends MultiTenantOrgReq {
 
     @Schema(title = L_content)
     String content;
-
-    @Schema(title = "是否加载" + L_content)
-    @Fetch(attrs = E_SimplePage.content, condition = "#_val == true")
-    Boolean loadContent;
 
     @Size(max = 128)
     @Schema(title = L_domain)

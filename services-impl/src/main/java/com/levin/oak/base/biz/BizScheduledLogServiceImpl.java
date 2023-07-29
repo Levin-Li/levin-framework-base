@@ -52,7 +52,7 @@ import java.util.Date;
 /**
  * 调度日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[880f5d3c5dfefd8cd2594787295abc40]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:30, 代码生成哈希校验码：[e7373516be667904ed9d52e4c9a1535d]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizScheduledLogServiceImpl")
 @DubboService
@@ -74,16 +74,6 @@ public class BizScheduledLogServiceImpl extends BaseService implements BizSchedu
     protected BizScheduledLogServiceImpl getSelfProxy() {
         return getSelfProxy(BizScheduledLogServiceImpl.class);
     }
-
-    // 示例方法
-    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    // @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_ScheduledLog.CACHE_KEY_PREFIX + "#req.id")
-    // @Transactional(rollbackFor = RuntimeException.class)
-    // public boolean update(UpdateScheduledLogReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    // }
 
     // @Transactional(rollbackFor = RuntimeException.class)
     // public void update(UpdateReq req){

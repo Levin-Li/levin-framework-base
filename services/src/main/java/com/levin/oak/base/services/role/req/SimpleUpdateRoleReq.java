@@ -43,7 +43,7 @@ import java.util.Date;
 /**
  * 更新角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:41, 代码生成哈希校验码：[028b7f55ef6e0fbb94a8553e9953cc53]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:28, 代码生成哈希校验码：[5a8a887184ad72385f8374daa3abf052]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -101,8 +101,15 @@ public class SimpleUpdateRoleReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
+    @Schema(title = L_lastUpdateTime)
+    Date lastUpdateTime;
+
     @PostConstruct
     public void preUpdate() {
         // @todo 更新之前初始化数据
+
+        if (getLastUpdateTime() == null) {
+            setLastUpdateTime(new Date());
+        }
     }
 }

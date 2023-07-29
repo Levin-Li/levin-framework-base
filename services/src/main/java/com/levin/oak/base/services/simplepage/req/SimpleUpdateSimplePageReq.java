@@ -42,7 +42,7 @@ import java.util.Date;
 /**
  * 更新简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[1c0ac0dff96465c5f9f4bf6c1733fa59]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:35, 代码生成哈希校验码：[fefbda61e388f506fde00b2197a72a86]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -108,8 +108,15 @@ public class SimpleUpdateSimplePageReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
+    @Schema(title = L_lastUpdateTime)
+    Date lastUpdateTime;
+
     @PostConstruct
     public void preUpdate() {
         // @todo 更新之前初始化数据
+
+        if (getLastUpdateTime() == null) {
+            setLastUpdateTime(new Date());
+        }
     }
 }

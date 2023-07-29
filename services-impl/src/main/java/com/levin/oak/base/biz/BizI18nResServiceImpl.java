@@ -52,7 +52,7 @@ import java.util.Date;
 /**
  * 国际化资源-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[db559af0d303e8536643320a6ec53d90]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:34, 代码生成哈希校验码：[18abc5f92ce9c0a3f311df506d8915de]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizI18nResServiceImpl")
 @DubboService
@@ -74,16 +74,6 @@ public class BizI18nResServiceImpl extends BaseService implements BizI18nResServ
     protected BizI18nResServiceImpl getSelfProxy() {
         return getSelfProxy(BizI18nResServiceImpl.class);
     }
-
-    // 示例方法
-    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    // @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_I18nRes.CACHE_KEY_PREFIX + "#req.id")
-    // @Transactional(rollbackFor = RuntimeException.class)
-    // public boolean update(UpdateI18nResReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    // }
 
     // @Transactional(rollbackFor = RuntimeException.class)
     // public void update(UpdateReq req){

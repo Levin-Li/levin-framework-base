@@ -44,7 +44,7 @@ import java.util.Date;
 /**
  * 更新区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[0c35551aca4a311f450459405f07d8c2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:34, 代码生成哈希校验码：[3274ec77a1cfdf8d1b311e924a9c3595]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -85,8 +85,15 @@ public class SimpleUpdateAreaReq extends BaseReq {
     @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
+    @Schema(title = L_lastUpdateTime)
+    Date lastUpdateTime;
+
     @PostConstruct
     public void preUpdate() {
         // @todo 更新之前初始化数据
+
+        if (getLastUpdateTime() == null) {
+            setLastUpdateTime(new Date());
+        }
     }
 }

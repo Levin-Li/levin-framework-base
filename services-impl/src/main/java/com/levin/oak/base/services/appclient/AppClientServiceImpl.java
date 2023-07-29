@@ -52,7 +52,7 @@ import java.util.Date;
 /**
  * 应用接入-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:42, 代码生成哈希校验码：[eea3699a623b69655f04beba2182f912]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:30, 代码生成哈希校验码：[b2dfd7ac773f13f927315d965ff24118]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "AppClientService")
 @DubboService
@@ -95,7 +95,8 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_AppClient.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_AppClient.CACHE_KEY_PREFIX +
+    // "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateAppClientReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -121,7 +122,8 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_AppClient.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_AppClient.CACHE_KEY_PREFIX +
+    // "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(AppClientIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -166,7 +168,7 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    // @Cacheable(condition = "#id != null", unless = "#result == null ", key =
+    // @Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key =
     // E_AppClient.CACHE_KEY_PREFIX + "#id")
     public AppClientInfo findById(String id) {
         return findById(new AppClientIdReq().setId(id));
@@ -175,7 +177,7 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // 只更新缓存
-    // @CachePut(unless = "#result == null" , condition = "#req.id != null" , key =
+    // @CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key =
     // E_AppClient.CACHE_KEY_PREFIX + "#req.id")
     public AppClientInfo findById(AppClientIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -196,8 +198,6 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(
-            condition = "#key != null && #key.toString().trim().length() > 0",
-            key = E_AppClient.CACHE_KEY_PREFIX + "#key")
+    @CacheEvict(condition = "#isNotEmpty(#key)", key = E_AppClient.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {}
 }

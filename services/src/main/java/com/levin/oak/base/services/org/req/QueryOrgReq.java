@@ -51,7 +51,7 @@ import java.util.Date;
 /**
  * 查询机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[61a5db680d1b8882369ff0b33d81a741]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:34, 代码生成哈希校验码：[87b1c2c4fc46d89618a034883ee19e1e]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -75,8 +75,13 @@ public class QueryOrgReq extends MultiTenantReq {
     @Schema(title = "排序方向")
     @SimpleOrderBy(
             expr = "orderBy + ' ' + orderDir",
-            condition = "orderBy != null && orderDir != null",
+            condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)",
             remark = "生成排序表达式")
+    @OrderBy(
+            value = createTime,
+            condition = "#isEmpty(orderBy) || #isEmpty(orderDir)",
+            order = Integer.MAX_VALUE,
+            desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
     @NotBlank
@@ -169,10 +174,6 @@ public class QueryOrgReq extends MultiTenantReq {
 
     @Schema(title = L_extInfo)
     String extInfo;
-
-    @Schema(title = "是否加载" + L_extInfo)
-    @Fetch(attrs = E_Org.extInfo, condition = "#_val == true")
-    Boolean loadExtInfo;
 
     @Schema(title = "是否加载" + L_parent)
     @Fetch(attrs = E_Org.parent, condition = "#_val == true")

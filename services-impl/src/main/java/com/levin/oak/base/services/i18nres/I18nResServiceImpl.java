@@ -52,7 +52,7 @@ import java.util.Date;
 /**
  * 国际化资源-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[5e5ac3355033139962360462f2443299]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:34, 代码生成哈希校验码：[06180dca1090738f23cb321a75206d44]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "I18nResService")
 @DubboService
@@ -89,7 +89,7 @@ public class I18nResServiceImpl extends BaseService implements I18nResService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_I18nRes.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_I18nRes.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateI18nResReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -115,7 +115,7 @@ public class I18nResServiceImpl extends BaseService implements I18nResService {
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_I18nRes.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_I18nRes.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(I18nResIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -160,7 +160,7 @@ public class I18nResServiceImpl extends BaseService implements I18nResService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    // @Cacheable(condition = "#id != null", unless = "#result == null ", key =
+    // @Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key =
     // E_I18nRes.CACHE_KEY_PREFIX + "#id")
     public I18nResInfo findById(Long id) {
         return findById(new I18nResIdReq().setId(id));
@@ -169,7 +169,7 @@ public class I18nResServiceImpl extends BaseService implements I18nResService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // 只更新缓存
-    // @CachePut(unless = "#result == null" , condition = "#req.id != null" , key =
+    // @CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key =
     // E_I18nRes.CACHE_KEY_PREFIX + "#req.id")
     public I18nResInfo findById(I18nResIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -190,8 +190,6 @@ public class I18nResServiceImpl extends BaseService implements I18nResService {
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(
-            condition = "#key != null && #key.toString().trim().length() > 0",
-            key = E_I18nRes.CACHE_KEY_PREFIX + "#key")
+    @CacheEvict(condition = "#isNotEmpty(#key)", key = E_I18nRes.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {}
 }

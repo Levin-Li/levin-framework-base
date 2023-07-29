@@ -52,7 +52,7 @@ import java.util.Date;
 /**
  * 调度任务-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[5e6a364607be5ab48c0f035e4ceeffc1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:33, 代码生成哈希校验码：[cfb40cd1d0f9af5ec5e59997748ca2c3]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizScheduledTaskServiceImpl")
 @DubboService
@@ -74,17 +74,6 @@ public class BizScheduledTaskServiceImpl extends BaseService implements BizSched
     protected BizScheduledTaskServiceImpl getSelfProxy() {
         return getSelfProxy(BizScheduledTaskServiceImpl.class);
     }
-
-    // 示例方法
-    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    // @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_ScheduledTask.CACHE_KEY_PREFIX +
-    // "#req.id")
-    // @Transactional(rollbackFor = RuntimeException.class)
-    // public boolean update(UpdateScheduledTaskReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    // }
 
     // @Transactional(rollbackFor = RuntimeException.class)
     // public void update(UpdateReq req){

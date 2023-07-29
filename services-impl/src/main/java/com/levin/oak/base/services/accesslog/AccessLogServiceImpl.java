@@ -52,7 +52,7 @@ import java.util.Date;
 /**
  * 访问日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[4287ac480ba71c6ec5bebc97df7168b3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:33, 代码生成哈希校验码：[1f5ebee61539e8d909965455510fd4e0]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "AccessLogService")
 @DubboService
@@ -89,7 +89,8 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_AccessLog.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_AccessLog.CACHE_KEY_PREFIX +
+    // "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateAccessLogReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -115,7 +116,8 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_AccessLog.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_AccessLog.CACHE_KEY_PREFIX +
+    // "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(AccessLogIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -160,7 +162,7 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    // @Cacheable(condition = "#id != null", unless = "#result == null ", key =
+    // @Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key =
     // E_AccessLog.CACHE_KEY_PREFIX + "#id")
     public AccessLogInfo findById(Long id) {
         return findById(new AccessLogIdReq().setId(id));
@@ -169,7 +171,7 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // 只更新缓存
-    // @CachePut(unless = "#result == null" , condition = "#req.id != null" , key =
+    // @CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key =
     // E_AccessLog.CACHE_KEY_PREFIX + "#req.id")
     public AccessLogInfo findById(AccessLogIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -190,8 +192,6 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(
-            condition = "#key != null && #key.toString().trim().length() > 0",
-            key = E_AccessLog.CACHE_KEY_PREFIX + "#key")
+    @CacheEvict(condition = "#isNotEmpty(#key)", key = E_AccessLog.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {}
 }

@@ -56,7 +56,7 @@ import java.util.Date;
 /**
  * 区域-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[c55ae52c6d97a6dce5f0ea1e22e1b40e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:35, 代码生成哈希校验码：[56486b3cfbef8bfc8d4accadf3bbf230]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "AreaService")
 @DubboService
@@ -93,7 +93,8 @@ public class AreaServiceImpl extends BaseService implements AreaService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.code != null", key = E_Area.CACHE_KEY_PREFIX + "#req.code")
+    // @CacheEvict(condition = "#isNotEmpty(#req.code)", key = E_Area.CACHE_KEY_PREFIX +
+    // "#req.code")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateAreaReq req) {
         Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
@@ -119,7 +120,8 @@ public class AreaServiceImpl extends BaseService implements AreaService {
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.code != null", key = E_Area.CACHE_KEY_PREFIX + "#req.code")
+    // @CacheEvict(condition = "#isNotEmpty(#req.code)", key = E_Area.CACHE_KEY_PREFIX +
+    // "#req.code")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(AreaIdReq req) {
         Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
@@ -164,7 +166,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    // @Cacheable(condition = "#code != null", unless = "#result == null ", key =
+    // @Cacheable(condition = "#isNotEmpty(#code)", unless = "#result == null ", key =
     // E_Area.CACHE_KEY_PREFIX + "#code")
     public AreaInfo findById(String code) {
         return findById(new AreaIdReq().setCode(code));
@@ -173,7 +175,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // 只更新缓存
-    // @CachePut(unless = "#result == null" , condition = "#req.code != null" , key =
+    // @CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.code)" , key =
     // E_Area.CACHE_KEY_PREFIX + "#req.code")
     public AreaInfo findById(AreaIdReq req) {
         Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
@@ -194,8 +196,6 @@ public class AreaServiceImpl extends BaseService implements AreaService {
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(
-            condition = "#key != null && #key.toString().trim().length() > 0",
-            key = E_Area.CACHE_KEY_PREFIX + "#key")
+    @CacheEvict(condition = "#isNotEmpty(#key)", key = E_Area.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {}
 }

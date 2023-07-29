@@ -45,7 +45,7 @@ import com.levin.oak.base.entities.Org;
 /**
  * 更新用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[99ca8ea1f8d6688390df461533fc1854]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:32, 代码生成哈希校验码：[98c2ccbb36ee2e7d625a8b0a415927fc]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -141,8 +141,15 @@ public class SimpleUpdateUserReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
+    @Schema(title = L_lastUpdateTime)
+    Date lastUpdateTime;
+
     @PostConstruct
     public void preUpdate() {
         // @todo 更新之前初始化数据
+
+        if (getLastUpdateTime() == null) {
+            setLastUpdateTime(new Date());
+        }
     }
 }

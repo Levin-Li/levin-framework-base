@@ -48,7 +48,7 @@ import java.util.Date;
 /**
  * 统计简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[7565b18748ada146ee16ff1d5968aaa4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:36, 代码生成哈希校验码：[e150c0f0d55542876648e28a5ebdd224]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -114,10 +114,6 @@ public class StatSimpleFormReq extends MultiTenantOrgReq {
 
     @Schema(title = L_content)
     String content;
-
-    @Schema(title = "是否加载" + L_content)
-    @Fetch(attrs = E_SimpleForm.content, condition = "#_val == true")
-    Boolean loadContent;
 
     @Size(max = 128)
     @Schema(title = L_domain)

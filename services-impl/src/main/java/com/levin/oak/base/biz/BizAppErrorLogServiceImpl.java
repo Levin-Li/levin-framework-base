@@ -52,7 +52,7 @@ import java.util.Date;
 /**
  * 应用错误日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[396152343a000a69497e9f59b6ea1bbe]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:31, 代码生成哈希校验码：[6cdf488fc9154c6c33153bc82b0161e3]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizAppErrorLogServiceImpl")
 @DubboService
@@ -74,16 +74,6 @@ public class BizAppErrorLogServiceImpl extends BaseService implements BizAppErro
     protected BizAppErrorLogServiceImpl getSelfProxy() {
         return getSelfProxy(BizAppErrorLogServiceImpl.class);
     }
-
-    // 示例方法
-    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    // @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_AppErrorLog.CACHE_KEY_PREFIX + "#req.id")
-    // @Transactional(rollbackFor = RuntimeException.class)
-    // public boolean update(UpdateAppErrorLogReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    // }
 
     // @Transactional(rollbackFor = RuntimeException.class)
     // public void update(UpdateReq req){

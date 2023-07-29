@@ -54,7 +54,7 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 /**
  * 平台租户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:42, 代码生成哈希校验码：[b6e4dfb40b8ce9c33ee82483c539b33f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:30, 代码生成哈希校验码：[237fc8b1f99f2c4bb820c961eb6405a1]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "TenantService")
 @DubboService
@@ -91,7 +91,7 @@ public class TenantServiceImpl extends BaseService implements TenantService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_Tenant.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_Tenant.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateTenantReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -117,7 +117,7 @@ public class TenantServiceImpl extends BaseService implements TenantService {
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_Tenant.CACHE_KEY_PREFIX + "#req.id")
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_Tenant.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(TenantIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -162,7 +162,7 @@ public class TenantServiceImpl extends BaseService implements TenantService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    // @Cacheable(condition = "#id != null", unless = "#result == null ", key =
+    // @Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key =
     // E_Tenant.CACHE_KEY_PREFIX + "#id")
     public TenantInfo findById(String id) {
         return findById(new TenantIdReq().setId(id));
@@ -171,7 +171,7 @@ public class TenantServiceImpl extends BaseService implements TenantService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // 只更新缓存
-    // @CachePut(unless = "#result == null" , condition = "#req.id != null" , key =
+    // @CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key =
     // E_Tenant.CACHE_KEY_PREFIX + "#req.id")
     public TenantInfo findById(TenantIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -192,8 +192,6 @@ public class TenantServiceImpl extends BaseService implements TenantService {
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(
-            condition = "#key != null && #key.toString().trim().length() > 0",
-            key = E_Tenant.CACHE_KEY_PREFIX + "#key")
+    @CacheEvict(condition = "#isNotEmpty(#key)", key = E_Tenant.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {}
 }

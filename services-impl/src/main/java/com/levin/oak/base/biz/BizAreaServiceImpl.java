@@ -56,7 +56,7 @@ import java.util.Date;
 /**
  * 区域-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[77e95f9a03dd8b6bcb69ef3c522e0070]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:35, 代码生成哈希校验码：[1b25087917aaf531d17d6edee7e2b609]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizAreaServiceImpl")
 @DubboService
@@ -75,16 +75,6 @@ public class BizAreaServiceImpl extends BaseService implements BizAreaService {
     protected BizAreaServiceImpl getSelfProxy() {
         return getSelfProxy(BizAreaServiceImpl.class);
     }
-
-    // 示例方法
-    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    // @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_Area.CACHE_KEY_PREFIX + "#req.id")
-    // @Transactional(rollbackFor = RuntimeException.class)
-    // public boolean update(UpdateAreaReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    // }
 
     // @Transactional(rollbackFor = RuntimeException.class)
     // public void update(UpdateReq req){

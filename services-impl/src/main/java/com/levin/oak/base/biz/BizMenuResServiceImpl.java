@@ -56,7 +56,7 @@ import java.util.Date;
 /**
  * 菜单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[87f173e810ef77f7651fc4995a085660]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:35, 代码生成哈希校验码：[e6ec069b462090d746ed82c5651a8d1c]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizMenuResServiceImpl")
 @DubboService
@@ -78,16 +78,6 @@ public class BizMenuResServiceImpl extends BaseService implements BizMenuResServ
     protected BizMenuResServiceImpl getSelfProxy() {
         return getSelfProxy(BizMenuResServiceImpl.class);
     }
-
-    // 示例方法
-    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    // @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
-    // @Transactional(rollbackFor = RuntimeException.class)
-    // public boolean update(UpdateMenuResReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    // }
 
     // @Transactional(rollbackFor = RuntimeException.class)
     // public void update(UpdateReq req){

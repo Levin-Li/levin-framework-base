@@ -58,7 +58,7 @@ import java.util.Date;
 /**
  * 机构-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[4f13c2d186b59b526d7da532896f70f2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:34, 代码生成哈希校验码：[02e6249cae60e5b4cfaad7ddbfcdc798]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizOrgServiceImpl")
 @DubboService
@@ -77,16 +77,6 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
     protected BizOrgServiceImpl getSelfProxy() {
         return getSelfProxy(BizOrgServiceImpl.class);
     }
-
-    // 示例方法
-    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    // @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_Org.CACHE_KEY_PREFIX + "#req.id")
-    // @Transactional(rollbackFor = RuntimeException.class)
-    // public boolean update(UpdateOrgReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    // }
 
     // @Transactional(rollbackFor = RuntimeException.class)
     // public void update(UpdateReq req){

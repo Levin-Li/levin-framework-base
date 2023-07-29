@@ -52,7 +52,7 @@ import java.util.Date;
 /**
  * 通知处理日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[e40f5c18e1d4fa6f02442f9f11a6d0d0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:33, 代码生成哈希校验码：[0d0537519ba5c3e9818aabb41cf9a5cc]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizNoticeProcessLogServiceImpl")
 @DubboService
@@ -75,17 +75,6 @@ public class BizNoticeProcessLogServiceImpl extends BaseService
     protected BizNoticeProcessLogServiceImpl getSelfProxy() {
         return getSelfProxy(BizNoticeProcessLogServiceImpl.class);
     }
-
-    // 示例方法
-    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    // @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_NoticeProcessLog.CACHE_KEY_PREFIX +
-    // "#req.id")
-    // @Transactional(rollbackFor = RuntimeException.class)
-    // public boolean update(UpdateNoticeProcessLogReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    // }
 
     // @Transactional(rollbackFor = RuntimeException.class)
     // public void update(UpdateReq req){

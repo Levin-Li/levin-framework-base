@@ -52,7 +52,7 @@ import java.util.Date;
 /**
  * 调度任务-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[c9aa2c44a04586cc2ca687b67d2f1716]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:33, 代码生成哈希校验码：[0d9b564226016c24f11c060e960f0140]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "ScheduledTaskService")
 @DubboService
@@ -89,7 +89,7 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_ScheduledTask.CACHE_KEY_PREFIX +
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_ScheduledTask.CACHE_KEY_PREFIX +
     // "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateScheduledTaskReq req) {
@@ -116,7 +116,7 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_ScheduledTask.CACHE_KEY_PREFIX +
+    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_ScheduledTask.CACHE_KEY_PREFIX +
     // "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(ScheduledTaskIdReq req) {
@@ -163,7 +163,7 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    // @Cacheable(condition = "#id != null", unless = "#result == null ", key =
+    // @Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key =
     // E_ScheduledTask.CACHE_KEY_PREFIX + "#id")
     public ScheduledTaskInfo findById(String id) {
         return findById(new ScheduledTaskIdReq().setId(id));
@@ -172,7 +172,7 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // 只更新缓存
-    // @CachePut(unless = "#result == null" , condition = "#req.id != null" , key =
+    // @CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key =
     // E_ScheduledTask.CACHE_KEY_PREFIX + "#req.id")
     public ScheduledTaskInfo findById(ScheduledTaskIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -193,8 +193,6 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(
-            condition = "#key != null && #key.toString().trim().length() > 0",
-            key = E_ScheduledTask.CACHE_KEY_PREFIX + "#key")
+    @CacheEvict(condition = "#isNotEmpty(#key)", key = E_ScheduledTask.CACHE_KEY_PREFIX + "#key")
     public void clearCache(Object key) {}
 }

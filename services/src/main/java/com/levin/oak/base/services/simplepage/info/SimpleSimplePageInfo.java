@@ -36,17 +36,14 @@ import java.util.Date;
 /**
  * 简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[50b128b5e721755f02c8bd55ede5ad95]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:35, 代码生成哈希校验码：[1eb997ef4589999cc765a55b8bc8c28d]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(
-        exclude = {
-            "content",
-        })
+@ToString(exclude = {})
 @FieldNameConstants
 @JsonIgnoreProperties({tenantId})
 @Select
@@ -87,7 +84,6 @@ public class SimpleSimplePageInfo implements Serializable {
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
 
-    // @Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_content)
     String content;
 

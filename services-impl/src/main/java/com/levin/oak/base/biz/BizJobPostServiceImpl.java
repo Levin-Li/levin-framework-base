@@ -53,7 +53,7 @@ import java.util.Date;
 /**
  * 工作岗位-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:45, 代码生成哈希校验码：[a88b165b100dcd20af9aba51e7a1d05d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:34, 代码生成哈希校验码：[a45fe983fc73e62867e27e0babba1b92]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizJobPostServiceImpl")
 @DubboService
@@ -75,16 +75,6 @@ public class BizJobPostServiceImpl extends BaseService implements BizJobPostServ
     protected BizJobPostServiceImpl getSelfProxy() {
         return getSelfProxy(BizJobPostServiceImpl.class);
     }
-
-    // 示例方法
-    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    // @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
-    // @Transactional(rollbackFor = RuntimeException.class)
-    // public boolean update(UpdateJobPostReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    // }
 
     // @Transactional(rollbackFor = RuntimeException.class)
     // public void update(UpdateReq req){

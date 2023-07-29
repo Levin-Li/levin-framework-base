@@ -52,7 +52,7 @@ import java.util.Date;
 /**
  * 应用接入-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:42, 代码生成哈希校验码：[cb7ee5e6b7b7b836ce26dc4194de9d92]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:30, 代码生成哈希校验码：[36aaef8da74f779e1b1fd162e7242b57]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizAppClientServiceImpl")
 @DubboService
@@ -74,16 +74,6 @@ public class BizAppClientServiceImpl extends BaseService implements BizAppClient
     protected BizAppClientServiceImpl getSelfProxy() {
         return getSelfProxy(BizAppClientServiceImpl.class);
     }
-
-    // 示例方法
-    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    // @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_AppClient.CACHE_KEY_PREFIX + "#req.id")
-    // @Transactional(rollbackFor = RuntimeException.class)
-    // public boolean update(UpdateAppClientReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    // }
 
     // @Transactional(rollbackFor = RuntimeException.class)
     // public void update(UpdateReq req){

@@ -54,7 +54,7 @@ import java.util.Date;
 /**
  * 简单表单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[9a4a964ca1f38436502f67f6996ddcdc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:36, 代码生成哈希校验码：[c40120289b4d92fce67a12927a79dbbc]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizSimpleFormServiceImpl")
 @DubboService
@@ -76,16 +76,6 @@ public class BizSimpleFormServiceImpl extends BaseService implements BizSimpleFo
     protected BizSimpleFormServiceImpl getSelfProxy() {
         return getSelfProxy(BizSimpleFormServiceImpl.class);
     }
-
-    // 示例方法
-    // @Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    // @Override
-    // @CacheEvict(condition = "#req.id != null", key = E_SimpleForm.CACHE_KEY_PREFIX + "#req.id")
-    // @Transactional(rollbackFor = RuntimeException.class)
-    // public boolean update(UpdateSimpleFormReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    // }
 
     // @Transactional(rollbackFor = RuntimeException.class)
     // public void update(UpdateReq req){

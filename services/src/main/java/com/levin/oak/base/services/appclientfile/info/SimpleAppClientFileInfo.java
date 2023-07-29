@@ -34,17 +34,14 @@ import java.util.Date;
 /**
  * 客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[28968b249d918b30df6846bf993f75d0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:32, 代码生成哈希校验码：[2940dd2941ee99ae40d80025af4f4554]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(
-        exclude = {
-            "content",
-        })
+@ToString(exclude = {})
 @FieldNameConstants
 @JsonIgnoreProperties({tenantId})
 @Select
@@ -69,7 +66,6 @@ public class SimpleAppClientFileInfo implements Serializable {
     @Schema(title = L_path, description = D_path)
     String path;
 
-    // @Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_content, description = D_content)
     byte[] content;
 
