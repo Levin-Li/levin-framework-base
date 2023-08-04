@@ -1,10 +1,6 @@
 package com.levin.oak.base.aspect;
 
-import cn.hutool.core.exceptions.ExceptionUtil;
-import cn.hutool.core.io.IORuntimeException;
-import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.lang.Assert;
-import cn.hutool.core.util.StrUtil;
 import com.google.gson.Gson;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
@@ -39,7 +35,6 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.http.HttpEntity;
@@ -47,12 +42,10 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.*;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.ServletInputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -490,7 +483,11 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         return path;
     }
 
-    private String getFirst(String defaultValue, String... texts) {
+    private String getFirst(String... texts) {
+        return getFirstOrDefault(null, texts);
+    }
+
+    private String getFirstOrDefault(String defaultValue, String... texts) {
 
         if (texts == null || texts.length == 0) {
             return defaultValue;
@@ -528,7 +525,7 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
             tag = (Tag) methodSignature.getDeclaringType().getAnnotation(Tag.class);
         }
 
-        String tagName = tag != null ? getFirst("", tag.name(), tag.description()) : "";
+        String tagName = tag != null ? getFirstOrDefault("", tag.name(), tag.description()) : "";
 
         String requestName = "";
 
@@ -536,7 +533,7 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
             Operation operation = method.getAnnotation(Operation.class);
 
-            tagName = getFirst(tagName, operation.tags());
+            tagName = getFirstOrDefault(tagName, operation.tags());
 
             requestName = getFirst(operation.summary(), operation.description());
 
