@@ -46,7 +46,7 @@ import java.util.Date;
 /**
  * 统计访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[dba8ac61a0f7298b33be1f2a1a6b79b5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月5日 上午12:22:21, 代码生成哈希校验码：[68e1327eec008379179782bbaf9b1cdc]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -82,6 +82,10 @@ public class StatAccessLogReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_visitor)
     String visitor;
+
+    @Schema(title = "模糊匹配-" + L_visitor)
+    @Contains
+    String containsVisitor;
 
     @NotBlank
     @Schema(title = L_title)
@@ -157,6 +161,10 @@ public class StatAccessLogReq extends MultiTenantOrgReq {
     @Size(max = 1800)
     @Schema(title = L_userAgent)
     String userAgent;
+
+    @Schema(title = "模糊匹配-" + L_userAgent)
+    @Contains
+    String containsUserAgent;
 
     @Size(max = 128)
     @Schema(title = L_deviceName)

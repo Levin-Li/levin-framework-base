@@ -49,6 +49,7 @@ public class AccessLog extends SimpleTenantOrgObject {
     @Schema(title = "访问者")
     @Column(length = 64)
     @InjectVar(value = InjectConsts.USER_NAME, isRequired = "false")
+    @Contains
     protected String visitor;
 
     @Schema(title = "标题")
@@ -118,6 +119,7 @@ public class AccessLog extends SimpleTenantOrgObject {
 
     @Schema(title = "用户代理")
     @Column(length = 1800)
+    @Contains
     protected String userAgent;
 
     @Schema(title = "设备名称/操作系统")
