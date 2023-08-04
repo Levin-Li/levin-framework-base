@@ -192,6 +192,15 @@ public class BizUserServiceImpl extends BaseService implements BizUserService {
 
     /**
      * @param req
+     * @return
+     */
+    @Override
+    public UserInfo findUnique(QueryUserReq req) {
+        return simpleDao.findUnique(req);
+    }
+
+    /**
+     * @param req
      * @param paging
      * @return
      */

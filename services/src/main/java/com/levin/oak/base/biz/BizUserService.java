@@ -96,6 +96,12 @@ public interface BizUserService {
     UserInfo findById(UserIdReq req);
 
     /**
+     *
+     * @param req
+     * @return
+     */
+    UserInfo findUnique(QueryUserReq req);
+    /**
      * @param req
      * @param paging
      * @return
