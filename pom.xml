@@ -33,7 +33,7 @@
 
         <levin.service-support.groupId>com.github.Levin-Li</levin.service-support.groupId>
         <!--        <levin.service-support.groupId>com.levin.commons</levin.service-support.groupId>-->
-        <levin.service-support.version>1.2.26-SNAPSHOT</levin.service-support.version>
+        <levin.service-support.version>1.2.27-SNAPSHOT</levin.service-support.version>
 
         <hutool.version>5.8.11</hutool.version>
 
