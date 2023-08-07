@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 客户端文件测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[a1e574d707f776777d9441bd6d9b614d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[4b6b8060ac839c0d512efb30f66a37e0]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -65,7 +65,7 @@ public class AppClientFileServiceTest {
 
     @Autowired private AppClientFileService appClientFileService;
 
-    @Autowired private BizAppClientFileService bizappClientFileService;
+    @Autowired private BizAppClientFileService bizAppClientFileService;
 
     private String id;
 

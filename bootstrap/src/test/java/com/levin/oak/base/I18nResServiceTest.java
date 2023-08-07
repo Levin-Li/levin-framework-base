@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 国际化资源测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[f343918f44787fdc631936af4425c845]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:22, 代码生成哈希校验码：[d532c883bbbf8968d504d5c239a334a4]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -65,7 +65,7 @@ public class I18nResServiceTest {
 
     @Autowired private I18nResService i18nResService;
 
-    @Autowired private BizI18nResService bizi18nResService;
+    @Autowired private BizI18nResService bizI18nResService;
 
     private Long id;
 

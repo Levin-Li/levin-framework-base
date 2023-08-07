@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 字典测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[b0a35b4398cc1435b66cdfdac48deab5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[78f32ad560d9dd8e5c2e6d1b299372ed]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -68,7 +68,7 @@ public class DictServiceTest {
 
     @Autowired private DictService dictService;
 
-    @Autowired private BizDictService bizdictService;
+    @Autowired private BizDictService bizDictService;
 
     private String id;
 

@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 访问日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[24c735b4a2333b1ede8eafb18589060b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[5f7d93adde6cfc4b2dd825038e70b3a2]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -65,7 +65,7 @@ public class AccessLogServiceTest {
 
     @Autowired private AccessLogService accessLogService;
 
-    @Autowired private BizAccessLogService bizaccessLogService;
+    @Autowired private BizAccessLogService bizAccessLogService;
 
     private Long id;
 

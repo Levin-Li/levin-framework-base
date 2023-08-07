@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 平台租户测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[0b470a533bfb60a828c9449b1008ca97]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[b3083ac962b59489074972fa46969ae9]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -68,7 +68,7 @@ public class TenantServiceTest {
 
     @Autowired private TenantService tenantService;
 
-    @Autowired private BizTenantService biztenantService;
+    @Autowired private BizTenantService bizTenantService;
 
     private String id;
 

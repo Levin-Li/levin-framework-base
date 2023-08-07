@@ -58,7 +58,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 机构测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[a3097c4fe422861e97167b5a343d4b60]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[323bcc7d12b8d76256ad536f5c740f69]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -71,7 +71,7 @@ public class OrgServiceTest {
 
     @Autowired private OrgService orgService;
 
-    @Autowired private BizOrgService bizorgService;
+    @Autowired private BizOrgService bizOrgService;
 
     private String id;
 

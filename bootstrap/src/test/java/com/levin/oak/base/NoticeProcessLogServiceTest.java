@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 通知处理日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[0b34eec8ba966cfe986283241ba95b81]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[7ac13d309c3d79a9684bbef4b6026bd0]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -65,7 +65,7 @@ public class NoticeProcessLogServiceTest {
 
     @Autowired private NoticeProcessLogService noticeProcessLogService;
 
-    @Autowired private BizNoticeProcessLogService biznoticeProcessLogService;
+    @Autowired private BizNoticeProcessLogService bizNoticeProcessLogService;
 
     private String id;
 

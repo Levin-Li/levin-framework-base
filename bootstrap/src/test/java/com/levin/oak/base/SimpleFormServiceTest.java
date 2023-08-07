@@ -54,7 +54,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 简单表单测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:47, 代码生成哈希校验码：[7d74c077403f48179ac8d824e0aee3ac]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:22, 代码生成哈希校验码：[af57048616a5262887e493e5de376472]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -67,7 +67,7 @@ public class SimpleFormServiceTest {
 
     @Autowired private SimpleFormService simpleFormService;
 
-    @Autowired private BizSimpleFormService bizsimpleFormService;
+    @Autowired private BizSimpleFormService bizSimpleFormService;
 
     private String id;
 

@@ -58,7 +58,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 用户测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[da3cfa12a54ffb80b187b2bcb469c590]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[bb614651c7459f1525dc7ff673736d4d]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -71,7 +71,7 @@ public class UserServiceTest {
 
     @Autowired private UserService userService;
 
-    @Autowired private BizUserService bizuserService;
+    @Autowired private BizUserService bizUserService;
 
     private String id;
 

@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 系统设置测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[bd20e1742c3e70043a5e4ead034a2122]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[61fdf504f87a9880e4e9fe23f917d02f]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -66,7 +66,7 @@ public class SettingServiceTest {
 
     @Autowired private SettingService settingService;
 
-    @Autowired private BizSettingService bizsettingService;
+    @Autowired private BizSettingService bizSettingService;
 
     private String id;
 

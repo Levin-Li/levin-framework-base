@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 调度任务测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[afeef103dada5ccb9de11405649461b2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[2bc0062d1fcd23892eaf48d065088304]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -66,7 +66,7 @@ public class ScheduledTaskServiceTest {
 
     @Autowired private ScheduledTaskService scheduledTaskService;
 
-    @Autowired private BizScheduledTaskService bizscheduledTaskService;
+    @Autowired private BizScheduledTaskService bizScheduledTaskService;
 
     private String id;
 

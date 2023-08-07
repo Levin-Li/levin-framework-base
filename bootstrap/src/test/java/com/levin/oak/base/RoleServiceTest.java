@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 角色测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[aeceb918f7b89b236a245af413703a21]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[acdfb627bf152603a7850322d1027367]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -68,7 +68,7 @@ public class RoleServiceTest {
 
     @Autowired private RoleService roleService;
 
-    @Autowired private BizRoleService bizroleService;
+    @Autowired private BizRoleService bizRoleService;
 
     private String id;
 

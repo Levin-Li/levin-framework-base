@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 菜单测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:47, 代码生成哈希校验码：[1e9183da566cfdc78c23211755419b16]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:22, 代码生成哈希校验码：[f303c947fd425cd74e63c0dad2eecce8]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -69,7 +69,7 @@ public class MenuResServiceTest {
 
     @Autowired private MenuResService menuResService;
 
-    @Autowired private BizMenuResService bizmenuResService;
+    @Autowired private BizMenuResService bizMenuResService;
 
     private String id;
 

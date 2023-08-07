@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 区域测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:47, 代码生成哈希校验码：[89c1155d449c7b3f8630a9d9225f6986]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:22, 代码生成哈希校验码：[6d870e4fa112b2f55e3214cbcfbf0b64]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -69,7 +69,7 @@ public class AreaServiceTest {
 
     @Autowired private AreaService areaService;
 
-    @Autowired private BizAreaService bizareaService;
+    @Autowired private BizAreaService bizAreaService;
 
     private String code;
 

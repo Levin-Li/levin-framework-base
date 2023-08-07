@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 应用错误日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[2e3f4d0f6b9221d8f00ad610cf5e3c46]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[2cbacace2f363d7532df161b09fcdd99]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -66,7 +66,7 @@ public class AppErrorLogServiceTest {
 
     @Autowired private AppErrorLogService appErrorLogService;
 
-    @Autowired private BizAppErrorLogService bizappErrorLogService;
+    @Autowired private BizAppErrorLogService bizAppErrorLogService;
 
     private Long id;
 

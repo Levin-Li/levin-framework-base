@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 简单动态接口测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[b0dcb1cfeac0ad84f369525c3dbcab1b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[ef22a285115f9f10ab75a0e11ad9b863]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -68,7 +68,7 @@ public class SimpleApiServiceTest {
 
     @Autowired private SimpleApiService simpleApiService;
 
-    @Autowired private BizSimpleApiService bizsimpleApiService;
+    @Autowired private BizSimpleApiService bizSimpleApiService;
 
     private String id;
 
