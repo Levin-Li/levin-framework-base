@@ -45,7 +45,7 @@ import java.util.Date;
 /**
  * 查询访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月5日 上午12:22:21, 代码生成哈希校验码：[0759e21f2b462743793f243338a75c50]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月9日 上午12:07:38, 代码生成哈希校验码：[17e78fdc6faecbd476873eeae231f00e]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -160,6 +160,14 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
     @Schema(title = "模糊匹配-" + L_remoteAddr)
     @Contains
     String containsRemoteAddr;
+
+    @Size(max = 256)
+    @Schema(title = L_accessRegion)
+    String accessRegion;
+
+    @Schema(title = "模糊匹配-" + L_accessRegion)
+    @Contains
+    String containsAccessRegion;
 
     @Size(max = 64)
     @Schema(title = L_serverAddr)

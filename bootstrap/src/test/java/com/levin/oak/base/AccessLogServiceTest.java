@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 访问日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[5f7d93adde6cfc4b2dd825038e70b3a2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月9日 上午12:07:40, 代码生成哈希校验码：[aa2339ff948ce5d47bb0b10c7273a296]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -114,6 +114,8 @@ public class AccessLogServiceTest {
 
         // req.setRemoteAddr("这是文本128");//
 
+        // req.setAccessRegion("这是文本256");//
+
         // req.setServerAddr("这是文本64");//
 
         // req.setIsException(true);//
@@ -159,6 +161,7 @@ public class AccessLogServiceTest {
         // req.setRequestBody("请求体_1");//
         // req.setResponseBody("响应体_1");//
         // req.setRemoteAddr("这是文本128");//
+        // req.setAccessRegion("这是文本256");//
         // req.setServerAddr("这是文本64");//
         // req.setIsException(true);//
         // req.setExceptionInfo("异常信息_1");//
@@ -197,6 +200,7 @@ public class AccessLogServiceTest {
         // req.setRequestBody("请求体_1");//
         // req.setResponseBody("响应体_1");//
         // req.setRemoteAddr("这是文本128");//
+        // req.setAccessRegion("这是文本256");//
         // req.setServerAddr("这是文本64");//
         // req.setIsException(true);//
         // req.setExceptionInfo("异常信息_1");//

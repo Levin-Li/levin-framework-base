@@ -46,7 +46,7 @@ import java.util.Date;
 /**
  * 统计访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月5日 上午12:22:21, 代码生成哈希校验码：[68e1327eec008379179782bbaf9b1cdc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月9日 上午12:07:38, 代码生成哈希校验码：[b01c9dee31959f0a11b1a4b4d6e2fa9c]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -147,6 +147,14 @@ public class StatAccessLogReq extends MultiTenantOrgReq {
     @Schema(title = "模糊匹配-" + L_remoteAddr)
     @Contains
     String containsRemoteAddr;
+
+    @Size(max = 256)
+    @Schema(title = L_accessRegion)
+    String accessRegion;
+
+    @Schema(title = "模糊匹配-" + L_accessRegion)
+    @Contains
+    String containsAccessRegion;
 
     @Size(max = 64)
     @Schema(title = L_serverAddr)

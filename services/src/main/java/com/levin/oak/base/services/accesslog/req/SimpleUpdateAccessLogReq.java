@@ -40,7 +40,7 @@ import java.util.Date;
 /**
  * 更新访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[f66ec21fdaaef8b69a18057122d8f364]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月9日 上午12:07:38, 代码生成哈希校验码：[4aeb9e3f6cab019f1d8a1f150f21c3df]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -105,6 +105,10 @@ public class SimpleUpdateAccessLogReq extends MultiTenantOrgReq {
     @Size(max = 128)
     @Schema(title = L_remoteAddr)
     String remoteAddr;
+
+    @Size(max = 256)
+    @Schema(title = L_accessRegion)
+    String accessRegion;
 
     @Size(max = 64)
     @Schema(title = L_serverAddr)

@@ -114,6 +114,11 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
+        </dependency>
+
         <!--  文档   https://spring-file-storage.xuyanwu.cn/  -->
         <dependency>
             <groupId>cn.xuyanwu</groupId>

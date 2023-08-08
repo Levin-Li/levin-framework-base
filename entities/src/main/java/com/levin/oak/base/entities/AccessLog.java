@@ -106,6 +106,11 @@ public class AccessLog extends SimpleTenantOrgObject {
     @Contains
     protected String remoteAddr;
 
+    @Schema(title = "访问地区")
+    @Column(length = 256)
+    @Contains
+    protected String accessRegion;
+
     @Schema(title = "服务器地址")
     @Column(length = 64)
     protected String serverAddr;

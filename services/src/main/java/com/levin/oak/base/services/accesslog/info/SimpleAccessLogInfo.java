@@ -34,7 +34,7 @@ import java.util.Date;
 /**
  * 访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[e240215b4f3cc4a4e3578c957df03bd0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月9日 上午12:07:37, 代码生成哈希校验码：[9e4732903e15eaa923beb290b185c8f3]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -100,6 +100,10 @@ public class SimpleAccessLogInfo implements Serializable {
     @Size(max = 128)
     @Schema(title = L_remoteAddr)
     String remoteAddr;
+
+    @Size(max = 256)
+    @Schema(title = L_accessRegion)
+    String accessRegion;
 
     @Size(max = 64)
     @Schema(title = L_serverAddr)
