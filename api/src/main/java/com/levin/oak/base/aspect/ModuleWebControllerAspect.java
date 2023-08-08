@@ -441,9 +441,9 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
                     .setUserAgent(headerMap.get("user-agent"))
                     .setTenantId(tenantId);
 
-            if(StringUtils.hasText(req.getRemoteAddr())){
-                //@todo 写入 地区
-               // req.setAccessRegion(IPAddrUtils.se);
+            if (StringUtils.hasText(req.getRemoteAddr())) {
+                //设置IP地址
+                req.setAccessRegion(IPAddrUtils.searchIpRegion(req.getRemoteAddr()));
             }
 
             if (isAccessLogController) {
