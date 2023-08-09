@@ -26,15 +26,16 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_ScheduledLog.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[beff95c855a585085297b05aabb904d5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:20, 代码生成哈希校验码：[86b6ee010cfa625883d37b36134a701a]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -43,7 +44,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties({tenantId})
+@JsonIgnoreProperties({"tenantId"})
 @Select
 public class SimpleScheduledLogInfo implements Serializable {
 

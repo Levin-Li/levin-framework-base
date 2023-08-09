@@ -30,15 +30,16 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 新增调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[1c48115e25a5eb9ced0358eb3f0a27f3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:20, 代码生成哈希校验码：[71a521588c91147b70929983fff2ed20]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data

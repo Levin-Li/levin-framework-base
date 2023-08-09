@@ -12,6 +12,7 @@ import com.levin.oak.base.services.noticeprocesslog.info.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
@@ -52,7 +53,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 通知处理日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[7ac13d309c3d79a9684bbef4b6026bd0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[0325fd5e0377b425ec4038a15c017ac3]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

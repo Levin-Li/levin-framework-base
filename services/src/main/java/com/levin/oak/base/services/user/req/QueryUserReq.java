@@ -37,20 +37,22 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.User.*;
 import java.util.List;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import java.util.Date;
 import com.levin.oak.base.services.org.info.*;
+import java.util.Date;
 import com.levin.oak.base.entities.Org;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 查询用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:32, 代码生成哈希校验码：[e768c0641c4171fd16d147d2a58f304a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:22, 代码生成哈希校验码：[f47f7ce17199b64798f7c3c059d09a74]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -101,6 +103,7 @@ public class QueryUserReq extends MultiTenantOrgReq {
     String email;
 
     @Size(max = 256)
+    @JsonIgnore
     @Schema(title = L_password)
     String password;
 

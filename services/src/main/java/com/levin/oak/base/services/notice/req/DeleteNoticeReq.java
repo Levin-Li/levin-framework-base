@@ -31,16 +31,17 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Notice.*;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 删除通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[bb176c308f87c46764b41b00d3dbdf06]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:22, 代码生成哈希校验码：[8fa53ddc3939c4fcc45804f3cc0f2552]，请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

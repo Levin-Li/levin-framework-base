@@ -12,8 +12,9 @@ import com.levin.oak.base.services.apperrorlog.info.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -53,7 +54,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 应用错误日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[2cbacace2f363d7532df161b09fcdd99]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[beaf334dc4992610600f25a704c9eb67]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

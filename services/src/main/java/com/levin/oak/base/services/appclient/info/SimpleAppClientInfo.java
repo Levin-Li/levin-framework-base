@@ -26,15 +26,16 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_AppClient.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:42, 代码生成哈希校验码：[2cb6a85f69431682e7038f1861645fd9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:20, 代码生成哈希校验码：[cf90012719e01dc915b12987d31e4d92]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -43,7 +44,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties({tenantId})
+@JsonIgnoreProperties({"tenantId"})
 @Select
 public class SimpleAppClientInfo implements Serializable {
 

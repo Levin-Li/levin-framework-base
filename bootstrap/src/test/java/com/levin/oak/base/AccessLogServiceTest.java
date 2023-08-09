@@ -12,6 +12,7 @@ import com.levin.oak.base.services.accesslog.info.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
@@ -52,7 +53,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 访问日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月9日 上午12:07:40, 代码生成哈希校验码：[aa2339ff948ce5d47bb0b10c7273a296]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[5d047de7483a5fb68ef5eed10d3a3fb9]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

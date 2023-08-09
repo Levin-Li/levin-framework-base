@@ -44,18 +44,19 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.oak.base.entities.SimpleApi.*;
 import java.util.List;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.levin.oak.base.entities.SimpleApi.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 简单动态接口-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:29, 代码生成哈希校验码：[5e5dbf795cd19ea96032d4cd46cab0f7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:20, 代码生成哈希校验码：[55c8a6113667f6c52f01f88c758a7b29]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "SimpleApiService")
 @DubboService

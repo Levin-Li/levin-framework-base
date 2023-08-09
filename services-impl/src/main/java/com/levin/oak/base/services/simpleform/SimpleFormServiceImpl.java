@@ -44,17 +44,18 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import java.util.List;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 简单表单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:36, 代码生成哈希校验码：[12e2f45819d684c5f90a01707e7a353e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[49c2cc00a3e69bbdd48fcb12e65e8e2e]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "SimpleFormService")
 @DubboService

@@ -26,15 +26,16 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_ScheduledTask.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[c8036cdc039560427e65a97ab266da0c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:23, 代码生成哈希校验码：[c6dc4b699266df952fff18b9025afeb6]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -43,7 +44,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties({tenantId})
+@JsonIgnoreProperties({"tenantId"})
 @Select
 public class SimpleScheduledTaskInfo implements Serializable {
 

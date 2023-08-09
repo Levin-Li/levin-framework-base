@@ -37,15 +37,16 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 查询应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:31, 代码生成哈希校验码：[40c02cb0e666f6ce66cd2f4578fdfc2c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:21, 代码生成哈希校验码：[dcf59306dd7221a4e977a20ea0de6301]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data

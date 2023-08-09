@@ -44,19 +44,20 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.rbac.MenuItem.*;
 import com.levin.oak.base.entities.MenuRes;
-import com.levin.oak.base.services.menures.info.*;
-import java.util.Set;
 import java.util.Date;
+import com.levin.commons.rbac.MenuItem.*;
+import java.util.Set;
+import com.levin.oak.base.services.menures.info.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 菜单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:35, 代码生成哈希校验码：[e6ec069b462090d746ed82c5651a8d1c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[f6d49d31f5fa94d8649bdb3ddc42a8c1]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizMenuResServiceImpl")
 @DubboService

@@ -26,17 +26,18 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_SimplePage.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import java.util.List;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.util.Date;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:35, 代码生成哈希校验码：[1eb997ef4589999cc765a55b8bc8c28d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:24, 代码生成哈希校验码：[4bf6edaf96783135681dfc728eefa2cc]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -45,7 +46,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties({tenantId})
+@JsonIgnoreProperties({"tenantId"})
 @Select
 public class SimpleSimplePageInfo implements Serializable {
 

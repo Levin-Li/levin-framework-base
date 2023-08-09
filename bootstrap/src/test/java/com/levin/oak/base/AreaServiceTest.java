@@ -12,10 +12,10 @@ import com.levin.oak.base.services.area.info.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
+import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Area.*;
 ////////////////////////////////////
 
@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 区域测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:22, 代码生成哈希校验码：[6d870e4fa112b2f55e3214cbcfbf0b64]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:26, 代码生成哈希校验码：[bd5f463df3798dfeb85ad86bec27191f]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

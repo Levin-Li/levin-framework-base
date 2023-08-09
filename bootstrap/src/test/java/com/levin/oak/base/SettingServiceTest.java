@@ -12,8 +12,9 @@ import com.levin.oak.base.services.setting.info.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Setting.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -53,7 +54,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 系统设置测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[61fdf504f87a9880e4e9fe23f917d02f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[e45426fc7ae5df221780b7b4d4aa2369]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

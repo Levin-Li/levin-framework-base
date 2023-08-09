@@ -44,21 +44,22 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.oak.base.entities.Org.*;
-import com.levin.oak.base.entities.Area;
-import com.levin.oak.base.services.area.info.*;
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
-import java.util.Set;
 import java.util.Date;
+import com.levin.oak.base.entities.Area;
+import com.levin.oak.base.services.area.info.*;
+import java.util.Set;
+import com.levin.oak.base.entities.Org.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 机构-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:34, 代码生成哈希校验码：[a836aa5d4025d7618dbb408d23af0578]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:23, 代码生成哈希校验码：[914a9e51bfa8fc2c92b385b209a87f7f]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "OrgService")
 @DubboService

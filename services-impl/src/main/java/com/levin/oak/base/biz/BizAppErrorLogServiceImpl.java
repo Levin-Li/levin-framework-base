@@ -44,15 +44,16 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 应用错误日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:31, 代码生成哈希校验码：[6cdf488fc9154c6c33153bc82b0161e3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:21, 代码生成哈希校验码：[51756ea01dfc55a1306f15a256b92e89]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizAppErrorLogServiceImpl")
 @DubboService

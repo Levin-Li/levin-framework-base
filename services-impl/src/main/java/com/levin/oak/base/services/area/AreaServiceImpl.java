@@ -44,19 +44,19 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
+import java.util.Date;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
+import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Area.*;
-import java.util.Date;
 
 ////////////////////////////////////
 
 /**
  * 区域-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:35, 代码生成哈希校验码：[56486b3cfbef8bfc8d4accadf3bbf230]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:24, 代码生成哈希校验码：[885075c33edc60bfa157b04a970d166c]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "AreaService")
 @DubboService

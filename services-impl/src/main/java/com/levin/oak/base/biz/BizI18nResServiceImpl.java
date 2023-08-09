@@ -44,15 +44,16 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 国际化资源-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:34, 代码生成哈希校验码：[18abc5f92ce9c0a3f311df506d8915de]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:24, 代码生成哈希校验码：[ad7a3be9beb2ef691565aa8ec2094c3d]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizI18nResServiceImpl")
 @DubboService

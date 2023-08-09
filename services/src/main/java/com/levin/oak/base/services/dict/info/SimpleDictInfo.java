@@ -26,18 +26,19 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_Dict.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.oak.base.entities.Dict.*;
 import java.util.List;
-import com.levin.commons.service.support.DefaultJsonConverter;
 import java.util.Date;
+import com.levin.oak.base.entities.Dict.*;
+import com.levin.commons.service.support.DefaultJsonConverter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:43, 代码生成哈希校验码：[fe901899da1fa32e0f95cd122c8e8cbb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:21, 代码生成哈希校验码：[3f56f6c6b303b69007f65df87e84c1ae]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -46,7 +47,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties({tenantId})
+@JsonIgnoreProperties({"tenantId"})
 @Select
 public class SimpleDictInfo implements Serializable {
 

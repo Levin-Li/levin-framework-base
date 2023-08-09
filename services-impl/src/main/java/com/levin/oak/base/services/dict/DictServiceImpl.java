@@ -44,18 +44,19 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.oak.base.entities.Dict.*;
 import java.util.List;
-import com.levin.commons.service.support.DefaultJsonConverter;
 import java.util.Date;
+import com.levin.oak.base.entities.Dict.*;
+import com.levin.commons.service.support.DefaultJsonConverter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 字典-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:31, 代码生成哈希校验码：[faf5d46c698e6022164d7c55b4452cd8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:21, 代码生成哈希校验码：[bfc604240ad6f4529fc5206954f8f65d]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "DictService")
 @DubboService

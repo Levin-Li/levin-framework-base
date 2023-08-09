@@ -12,11 +12,12 @@ import com.levin.oak.base.services.menures.info.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.rbac.MenuItem.*;
 import com.levin.oak.base.entities.MenuRes;
-import com.levin.oak.base.services.menures.info.*;
+import com.levin.commons.rbac.MenuItem.*;
 import java.util.Set;
+import com.levin.oak.base.services.menures.info.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -56,7 +57,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 菜单测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:22, 代码生成哈希校验码：[f303c947fd425cd74e63c0dad2eecce8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:26, 代码生成哈希校验码：[496b3c759c9ea09e316a5eb6dad9ed42]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

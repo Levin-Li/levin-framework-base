@@ -44,16 +44,17 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.oak.base.entities.Setting.*;
 import java.util.Date;
+import com.levin.oak.base.entities.Setting.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 系统设置-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月29日 下午11:45:31, 代码生成哈希校验码：[397e2b6cb8c5b1e37ee013ba8b19ceba]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:21, 代码生成哈希校验码：[a13a4e70367ec1a5cf049454d8b6339d]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "SettingService")
 @DubboService

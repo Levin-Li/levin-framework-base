@@ -26,17 +26,17 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_Tenant.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import java.util.Date;
 import java.util.List;
+import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:42, 代码生成哈希校验码：[38885cfc34777e6f8c33e92d10e6f7bb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:20, 代码生成哈希校验码：[035a92c1a085d14d971abbef81dbb00e]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -45,7 +45,6 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {})
 @FieldNameConstants
-@JsonIgnoreProperties({})
 @Select
 public class SimpleTenantInfo implements Serializable {
 

@@ -26,20 +26,22 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_User.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.User.*;
 import java.util.List;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import java.util.Date;
 import com.levin.oak.base.services.org.info.*;
+import java.util.Date;
 import com.levin.oak.base.entities.Org;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[e000bcff59b87a54d5aa6c81a214dde2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:22, 代码生成哈希校验码：[c80c8588bb53b3b026f546d8dc5b44ca]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -51,7 +53,7 @@ import com.levin.oak.base.entities.Org;
             "org",
         })
 @FieldNameConstants
-@JsonIgnoreProperties({tenantId, password})
+@JsonIgnoreProperties({"tenantId"})
 @Select
 public class SimpleUserInfo implements Serializable {
 
@@ -71,6 +73,7 @@ public class SimpleUserInfo implements Serializable {
     String email;
 
     @Size(max = 256)
+    @JsonIgnore
     @Schema(title = L_password)
     String password;
 

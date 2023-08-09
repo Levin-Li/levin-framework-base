@@ -12,13 +12,15 @@ import com.levin.oak.base.services.user.info.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.User.*;
 import java.util.List;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import java.util.Date;
 import com.levin.oak.base.services.org.info.*;
+import java.util.Date;
 import com.levin.oak.base.entities.Org;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -58,7 +60,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 用户测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月7日 下午1:39:21, 代码生成哈希校验码：[bb614651c7459f1525dc7ff673736d4d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[27ec2fbfaf9989faf2a9974008cef5e0]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

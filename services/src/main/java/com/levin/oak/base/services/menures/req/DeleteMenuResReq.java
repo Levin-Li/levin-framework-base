@@ -31,19 +31,20 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.rbac.MenuItem.*;
 import com.levin.oak.base.entities.MenuRes;
-import com.levin.oak.base.services.menures.info.*;
-import java.util.Set;
 import java.util.Date;
+import com.levin.commons.rbac.MenuItem.*;
+import java.util.Set;
+import com.levin.oak.base.services.menures.info.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
 
 /**
  * 删除菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:46, 代码生成哈希校验码：[ad485bbd0ee86deff3cd18906c4452ba]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[d7d69482463b53fba80c8413dc7fa643]，请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
