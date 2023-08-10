@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Assert;
 import com.google.gson.Gson;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
+import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.domain.Desc;
 import com.levin.commons.service.support.*;
 import com.levin.commons.utils.ExceptionUtils;
@@ -53,6 +54,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.stream.Stream;
 
@@ -118,8 +121,13 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
     private boolean isInit = false;
 
+    private ExecutorService executorService = null;
+
     @PostConstruct
     void init() {
+
+        this.executorService = Executors.newWorkStealingPool();
+
         //
         this.frameworkProperties.getLog().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
@@ -360,8 +368,8 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 //        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 //        Method method = methodSignature.getMethod();
 
-        LinkedHashMap<String, String> headerMap = new LinkedHashMap<>();
-        LinkedHashMap<String, Object> paramMap = new LinkedHashMap<>();
+        final LinkedHashMap<String, String> headerMap = new LinkedHashMap<>();
+        final LinkedHashMap<String, Object> paramMap = new LinkedHashMap<>();
 
         final String title = getRequestInfo(joinPoint, headerMap, paramMap, false);
 
@@ -372,8 +380,6 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////
-
-        final boolean isAccessLogController = AccessLogController.class.getName().contentEquals(className);
 
         final long st = System.currentTimeMillis();
 
@@ -389,6 +395,8 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         } catch (Throwable e) {
             ex = e;
         } finally {
+
+            final boolean isAccessLogController = AccessLogController.class.getName().contentEquals(className);
 
             final long execTime = System.currentTimeMillis() - st;
 
@@ -409,8 +417,9 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
             String visitor = null;
 
             if (authService.isLogin()) {
-                tenantId = authService.getUserInfo().getTenantId();
-                visitor = authService.getUserInfo().getName() + "(" + authService.getLoginId() + ")";
+                RbacUserInfo<String> userInfo = authService.getUserInfo();
+                tenantId = userInfo.getTenantId();
+                visitor = userInfo.getName() + "(" + userInfo.getId() + ")";
             }
 
             String requestUri = request.getRequestURI();
@@ -433,35 +442,16 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
                     .setServerAddr(request.getLocalAddr())
                     .setRequestMethod(request.getMethod())
                     .setRequestUri(requestUri)
-                    .setRequestParams(gson.toJson(paramMap))
-                    .setHeadInfo(gson.toJson(headerMap))
                     .setExecuteTime(execTime)
                     .setIsException(ex != null)
                     .setExceptionInfo(ex != null ? ExceptionUtils.getPrintInfo(ex) : null)
                     .setUserAgent(headerMap.get("user-agent"))
                     .setTenantId(tenantId);
 
-            if (StringUtils.hasText(req.getRemoteAddr())) {
-                //设置IP地址
-                req.setAccessRegion(IPAddrUtils.searchIpRegion(req.getRemoteAddr()));
-            }
+            final Object tempResult = result;
+            //异步处理，尽量减少正常业务的等待时间
+            executorService.submit(() -> saveLog(joinPoint, headerMap, paramMap, tempResult, req));
 
-            if (isAccessLogController) {
-                req.setResponseBody("忽略对于访问日志控制器的访问结果");
-            } else if (result instanceof HttpEntity) {
-                MediaType contentType = ((HttpEntity) result).getHeaders().getContentType();
-                if (contentType != null
-                        && contentType.isCompatibleWith(APPLICATION_JSON)) {
-                    //只记录JSON
-                    req.setResponseBody(gson.toJson(result));
-                } else {
-                    req.setResponseBody("忽略类型-" + contentType);
-                }
-            } else {
-                req.setResponseBody(result != null ? gson.toJson(result) : null);
-            }
-
-            asyncHandler.addTask(req);
         }
 
         //如果这里不返回result，则目标对象实际返回值会被置为null
@@ -472,33 +462,44 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         return result;
     }
 
-    private String getRequestPath() {
+    private void saveLog(ProceedingJoinPoint joinPoint, LinkedHashMap<String, String> headerMap, LinkedHashMap<String, Object> paramMap, Object result, CreateAccessLogReq req) {
 
-        String contextPath = serverProperties.getServlet().getContextPath() + "/";
+        String declaringTypeName = joinPoint.getSignature().getDeclaringTypeName();
 
-        contextPath = contextPath.replace("//", "/");
+        final boolean isAccessLogController = AccessLogController.class.getName().contentEquals(declaringTypeName);
 
-        String path = request.getRequestURI().replace("//", "/");
+        if (StringUtils.hasText(req.getRemoteAddr())) {
+            //设置IP地址
+            req.setAccessRegion(IPAddrUtils.searchIpRegion(req.getRemoteAddr()));
 
-        //去除应用路径
-        if (path.startsWith(contextPath)) {
-            path = path.substring(contextPath.length() - 1);
+            if (StringUtils.hasText(req.getAccessRegion())) {
+                //去掉
+                req.setAccessRegion(req.getAccessRegion().replace("中国|0|", ""));
+            }
         }
 
-        return path;
-    }
+        req.setBizType(declaringTypeName);
 
-    private String getFirst(String... texts) {
-        return getFirstOrDefault(null, texts);
-    }
+        req.setRequestParams(gson.toJson(paramMap))
+                .setHeadInfo(gson.toJson(headerMap));
 
-    private String getFirstOrDefault(String defaultValue, String... texts) {
-
-        if (texts == null || texts.length == 0) {
-            return defaultValue;
+        if (isAccessLogController) {
+            req.setResponseBody("忽略对于访问日志控制器的访问结果");
+        } else if (result instanceof HttpEntity) {
+            MediaType contentType = ((HttpEntity) result).getHeaders().getContentType();
+            if (contentType != null
+                    && contentType.isCompatibleWith(APPLICATION_JSON)) {
+                //只记录JSON
+                req.setResponseBody(gson.toJson(result));
+            } else {
+                req.setResponseBody("忽略类型-" + contentType);
+            }
+        } else {
+            req.setResponseBody(result != null ? gson.toJson(result) : null);
         }
 
-        return Stream.of(texts).filter(StringUtils::hasText).findFirst().orElse(defaultValue);
+        asyncHandler.addTask(req);
+
     }
 
     /**
@@ -519,7 +520,7 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 
         //获取方法参数类型数组
-        Class[] paramTypes = methodSignature.getParameterTypes();
+        Class<?>[] paramTypes = methodSignature.getParameterTypes();
         String[] paramNames = methodSignature.getParameterNames();
 
         Method method = methodSignature.getMethod();
@@ -561,11 +562,11 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         //获取请求参数
         if (paramMap != null) {
 
-            final String contentType = request.getContentType();
+            // final String contentType = request.getContentType();
 
-            final MimeType mimeType = StringUtils.hasText(contentType) ? MimeTypeUtils.parseMimeType(contentType) : null;
+            //  final MimeType mimeType = StringUtils.hasText(contentType) ? MimeTypeUtils.parseMimeType(contentType) : null;
 
-            final String encoding = (mimeType != null && mimeType.getCharset() != null) ? mimeType.getCharset().name() : request.getCharacterEncoding();
+            // final String encoding = (mimeType != null && mimeType.getCharset() != null) ? mimeType.getCharset().name() : request.getCharacterEncoding();
 
             //读取URL参数
             request.getParameterMap().forEach((name, value) -> {
@@ -650,6 +651,36 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         }
 
         return requestName;
+    }
+
+
+    private String getRequestPath() {
+
+        String contextPath = serverProperties.getServlet().getContextPath() + "/";
+
+        contextPath = contextPath.replace("//", "/");
+
+        String path = request.getRequestURI().replace("//", "/");
+
+        //去除应用路径
+        if (path.startsWith(contextPath)) {
+            path = path.substring(contextPath.length() - 1);
+        }
+
+        return path;
+    }
+
+    private String getFirst(String... texts) {
+        return getFirstOrDefault(null, texts);
+    }
+
+    private String getFirstOrDefault(String defaultValue, String... texts) {
+
+        if (texts == null || texts.length == 0) {
+            return defaultValue;
+        }
+
+        return Stream.of(texts).filter(StringUtils::hasText).findFirst().orElse(defaultValue);
     }
 
     private boolean isIgnore(Object object) {

@@ -16,6 +16,8 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -96,6 +98,7 @@ public class User
     @Column(length = 32)
     String email;
 
+    @JsonIgnore
     @Schema(title = "登录密码")
     @Column(length = 256)
     String password;

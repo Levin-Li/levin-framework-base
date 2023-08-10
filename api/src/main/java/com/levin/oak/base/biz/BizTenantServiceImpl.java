@@ -109,7 +109,7 @@ public class BizTenantServiceImpl
         if (tenantInfo == null
                 && frameworkProperties.getTenantBindDomain().isEnable()) {
             tenantInfo = setCurrentTenantByDomain(domain);
-            log.warn("当前请求的域名[ {} ]未关联租户", domain);
+            log.warn("当前请求的域名[ {} ]未关联租户, URL:{}", domain, request.getRequestURL());
         }
 
         //当前登录用户
