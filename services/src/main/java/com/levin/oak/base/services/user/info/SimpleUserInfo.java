@@ -41,7 +41,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:22, 代码生成哈希校验码：[c80c8588bb53b3b026f546d8dc5b44ca]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 下午11:50:55, 代码生成哈希校验码：[13dafd489e827a94ce14b18311fcc537]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -73,7 +73,7 @@ public class SimpleUserInfo implements Serializable {
     String email;
 
     @Size(max = 256)
-    @JsonIgnore
+    @JsonIgnore(value = true)
     @Schema(title = L_password)
     String password;
 

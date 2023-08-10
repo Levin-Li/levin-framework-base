@@ -45,7 +45,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:22, 代码生成哈希校验码：[22e21244c5bf2e02c036b680cd698981]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 下午11:50:55, 代码生成哈希校验码：[5d9dff57054917ebfabe321eef343ba8]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -71,7 +71,7 @@ public class CreateUserReq extends MultiTenantOrgReq {
 
     @Schema(title = L_password)
     @Size(max = 256)
-    @JsonIgnore
+    @JsonIgnore(value = true)
     String password;
 
     @Schema(title = L_nickname)

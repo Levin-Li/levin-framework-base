@@ -53,7 +53,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:22, 代码生成哈希校验码：[b27f2ac196bfbf8eca9124ec001cd666]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 下午11:50:55, 代码生成哈希校验码：[27e90ba6061c96ce769bbf160ee62b19]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -93,7 +93,7 @@ public class StatUserReq extends MultiTenantOrgReq {
     String email;
 
     @Size(max = 256)
-    @JsonIgnore
+    @JsonIgnore(value = true)
     @Schema(title = L_password)
     String password;
 

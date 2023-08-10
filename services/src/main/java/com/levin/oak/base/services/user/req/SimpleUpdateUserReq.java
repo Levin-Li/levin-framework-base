@@ -47,7 +47,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:22, 代码生成哈希校验码：[d4b6c105804afe3915b04b057d6ec4b4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 下午11:50:55, 代码生成哈希校验码：[af39ddd11b21be388550a1a183aa72a8]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -78,7 +78,7 @@ public class SimpleUpdateUserReq extends MultiTenantOrgReq {
     String email;
 
     @Size(max = 256)
-    @JsonIgnore
+    @JsonIgnore(value = true)
     @Schema(title = L_password)
     String password;
 
