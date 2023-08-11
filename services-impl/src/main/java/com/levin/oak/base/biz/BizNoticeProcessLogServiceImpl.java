@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -53,7 +54,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 通知处理日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:23, 代码生成哈希校验码：[f7d4f63c0d701f5bbb32e1e8281cf45c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:27, 代码生成哈希校验码：[52eae61804eca8141445fa292434d219]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizNoticeProcessLogServiceImpl")
 @DubboService

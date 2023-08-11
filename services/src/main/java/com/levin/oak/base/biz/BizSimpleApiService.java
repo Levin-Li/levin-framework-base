@@ -10,6 +10,7 @@ import com.levin.commons.service.domain.*;
 import java.util.*;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
+import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.SimpleApi;
@@ -36,7 +37,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单动态接口-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:19, 代码生成哈希校验码：[1e7ee6dbc70520fec566175552558ba5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:22, 代码生成哈希校验码：[a8fa7db55ecc6efb87437b87c395cb12]，请不要修改和删除此行内容。
  */
 @Tag(name = E_SimpleApi.BIZ_NAME + "-业务服务", description = "")
 public interface BizSimpleApiService {}

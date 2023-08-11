@@ -10,6 +10,7 @@ import com.levin.commons.service.domain.*;
 import java.util.*;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
+import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.Org;
@@ -39,7 +40,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 机构-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:23, 代码生成哈希校验码：[0aa575bb498708d2b07d14c491c9b291]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:27, 代码生成哈希校验码：[c5824b0cae775c1f8b62c47ff62da4f7]，请不要修改和删除此行内容。
  */
 @Tag(name = E_Org.BIZ_NAME + "-业务服务", description = "")
 public interface BizOrgService {}

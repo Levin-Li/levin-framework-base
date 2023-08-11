@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -56,7 +57,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单动态接口-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:20, 代码生成哈希校验码：[75d45a8582c87d87be16cb80a621b844]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:22, 代码生成哈希校验码：[012855d3db0c4ef4fd65469027256051]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizSimpleApiServiceImpl")
 @DubboService

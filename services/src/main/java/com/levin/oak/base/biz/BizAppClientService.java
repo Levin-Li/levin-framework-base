@@ -10,6 +10,7 @@ import com.levin.commons.service.domain.*;
 import java.util.*;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
+import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.AppClient;
@@ -33,7 +34,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 应用接入-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:20, 代码生成哈希校验码：[c519e6b2c24a6ccfd8f6d9f5c8ad0e16]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:23, 代码生成哈希校验码：[e0874fd6ef48d6f4acfa41b32e1f7744]，请不要修改和删除此行内容。
  */
 @Tag(name = E_AppClient.BIZ_NAME + "-业务服务", description = "")
 public interface BizAppClientService {}

@@ -10,6 +10,7 @@ import com.levin.commons.service.domain.*;
 import java.util.*;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
+import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.ScheduledTask;
@@ -33,7 +34,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 调度任务-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:23, 代码生成哈希校验码：[b52c1e9eaf5c6e92ae736bc8b65d8e8a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:26, 代码生成哈希校验码：[b831c2615fce0c64a0a6371828ce0743]，请不要修改和删除此行内容。
  */
 @Tag(name = E_ScheduledTask.BIZ_NAME + "-业务服务", description = "")
 public interface BizScheduledTaskService {}

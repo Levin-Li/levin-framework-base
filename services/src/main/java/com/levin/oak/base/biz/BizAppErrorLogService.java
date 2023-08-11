@@ -10,6 +10,7 @@ import com.levin.commons.service.domain.*;
 import java.util.*;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
+import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.AppErrorLog;
@@ -33,7 +34,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 应用错误日志-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:21, 代码生成哈希校验码：[4de385bc25d5bd9f855fd4a98c2e17e5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:24, 代码生成哈希校验码：[f0af46ff5c9eec8a181dae3acd50bfb0]，请不要修改和删除此行内容。
  */
 @Tag(name = E_AppErrorLog.BIZ_NAME + "-业务服务", description = "")
 public interface BizAppErrorLogService {}

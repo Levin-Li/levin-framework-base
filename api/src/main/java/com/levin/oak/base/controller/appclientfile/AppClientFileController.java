@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.validation.annotation.*;
 import org.springframework.util.*;
 import javax.validation.*;
 import java.util.*;
@@ -43,10 +44,16 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // GET: 获取某个资源的详情
 
 // 在数学计算或者计算机科学中，幂等性（idempotence）是指相同操作或资源在一次或多次请求中具有同样效果的作用。幂等性是在分布式系统设计中具有十分重要的地位。
-
 // http协议明确规定，put、get、delete请求都是具有幂等性的，而post为非幂等性的。
 // 所以一般插入新数据的时候使用post方法，更新数据库时用put方法
-// @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
+
+// Spring mvc 参数验证说明
+// @Valid 只能用在controller
+// @Validated 可以用在其他被spring管理的类上
+// 注意 只有 @Valid 才支持对象嵌套验证，示例如下：
+// @Valid
+// @NotNull(groups = AdvanceInfo.class)
+// private UserAddress useraddress;
 
 // 生成的控制器
 @RestController(PLUGIN_PREFIX + "AppClientFileController")
@@ -63,12 +70,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // 类注解
 
 @Tag(name = E_AppClientFile.BIZ_NAME, description = E_AppClientFile.BIZ_NAME + MAINTAIN_ACTION)
-@Valid
+@Validated // @Valid
 @CRUD
 /**
  * 客户端文件控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[9bc3e4ead4836ee32d0207cd015a0343]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:25, 代码生成哈希校验码：[eb289ba9747aeb195d5047961525f4e7]，请不要修改和删除此行内容。
  */
 public class AppClientFileController extends BaseController {
 
@@ -90,7 +97,7 @@ public class AppClientFileController extends BaseController {
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<AppClientFileInfo>> queryList(
-            @Form QueryAppClientFileReq req, SimplePaging paging) {
+            @Form @Valid QueryAppClientFileReq req, SimplePaging paging) {
         return ApiResp.ok(appClientFileService.query(req, paging));
     }
 
@@ -103,7 +110,7 @@ public class AppClientFileController extends BaseController {
     // @GetMapping("/stat") //默认不开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<StatAppClientFileReq.Result>> stat(
-            StatAppClientFileReq req, SimplePaging paging) {
+            @Valid StatAppClientFileReq req, SimplePaging paging) {
         return ApiResp.ok(appClientFileService.stat(req, paging));
     }
 
@@ -116,7 +123,7 @@ public class AppClientFileController extends BaseController {
     @PostMapping
     @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
-    public ApiResp<String> create(@RequestBody CreateAppClientFileReq req) {
+    public ApiResp<String> create(@RequestBody @Valid CreateAppClientFileReq req) {
         return ApiResp.ok(appClientFileService.create(req));
     }
 
@@ -129,7 +136,7 @@ public class AppClientFileController extends BaseController {
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
     public ApiResp<AppClientFileInfo> retrieve(
-            @NotNull AppClientFileIdReq req, @PathVariable(required = false) String id) {
+            @NotNull @Valid AppClientFileIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(appClientFileService.findById(req));
     }
@@ -145,7 +152,8 @@ public class AppClientFileController extends BaseController {
             description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(
-            @RequestBody UpdateAppClientFileReq req, @PathVariable(required = false) String id) {
+            @RequestBody @Valid UpdateAppClientFileReq req,
+            @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
                 checkResult(appClientFileService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
@@ -162,7 +170,7 @@ public class AppClientFileController extends BaseController {
             description = DELETE_ACTION + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> delete(
-            AppClientFileIdReq req, @PathVariable(required = false) String id) {
+            @Valid AppClientFileIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
                 checkResult(appClientFileService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
@@ -180,7 +188,7 @@ public class AppClientFileController extends BaseController {
             summary = DELETE_ACTION + "(RequestBody方式)",
             description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     public ApiResp<Boolean> delete2(
-            @RequestBody AppClientFileIdReq req, @PathVariable(required = false) String id) {
+            @RequestBody @Valid AppClientFileIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return delete(req, id);
     }
@@ -195,14 +203,15 @@ public class AppClientFileController extends BaseController {
      */
     @PostMapping("/batchCreate")
     @Operation(summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<List<String>> batchCreate(@RequestBody List<CreateAppClientFileReq> reqList) {
+    public ApiResp<List<String>> batchCreate(
+            @RequestBody @Valid List<CreateAppClientFileReq> reqList) {
         return ApiResp.ok(appClientFileService.batchCreate(reqList));
     }
 
     /** 批量更新 */
     @PutMapping("/batchUpdate")
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateAppClientFileReq> reqList) {
+    public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateAppClientFileReq> reqList) {
         return ApiResp.ok(
                 checkResult(
                         appClientFileService.batchUpdate(reqList),
@@ -217,7 +226,7 @@ public class AppClientFileController extends BaseController {
     @DeleteMapping({"/batchDelete"})
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
-    public ApiResp<Integer> batchDelete(@NotNull DeleteAppClientFileReq req) {
+    public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteAppClientFileReq req) {
         return ApiResp.ok(
                 checkResult(
                         appClientFileService.batchDelete(req),
@@ -233,7 +242,7 @@ public class AppClientFileController extends BaseController {
             value = {"/batchDelete"},
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Integer> batchDelete2(@RequestBody DeleteAppClientFileReq req) {
+    public ApiResp<Integer> batchDelete2(@RequestBody @Valid DeleteAppClientFileReq req) {
         return batchDelete(req);
     }
 }

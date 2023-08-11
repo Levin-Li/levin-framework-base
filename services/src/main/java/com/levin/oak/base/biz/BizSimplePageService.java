@@ -10,6 +10,7 @@ import com.levin.commons.service.domain.*;
 import java.util.*;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
+import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.SimplePage;
@@ -35,7 +36,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单页面-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:24, 代码生成哈希校验码：[1c6f9f14329f03f5e18ec1515ef8228e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:29, 代码生成哈希校验码：[c722b1958df559dda9fce71b3953452b]，请不要修改和删除此行内容。
  */
 @Tag(name = E_SimplePage.BIZ_NAME + "-业务服务", description = "")
 public interface BizSimplePageService {}

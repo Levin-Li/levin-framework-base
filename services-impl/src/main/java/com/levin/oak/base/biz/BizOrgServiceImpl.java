@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -59,7 +60,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 机构-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:23, 代码生成哈希校验码：[3a8f36fb66c2eb1d1bb2afcbef534f6f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:27, 代码生成哈希校验码：[ee1ddf9990167d113feaacf108f340c5]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "BizOrgServiceImpl")
 @DubboService

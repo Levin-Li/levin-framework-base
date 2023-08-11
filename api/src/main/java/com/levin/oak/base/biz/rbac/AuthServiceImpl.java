@@ -1,6 +1,5 @@
 package com.levin.oak.base.biz.rbac;
 
-import cn.dev33.satoken.exception.IdTokenInvalidException;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
@@ -335,7 +334,7 @@ public class AuthServiceImpl
         String loginId = (String) StpUtil.getLoginIdByToken(token);
 
         if (!StringUtils.hasText(loginId)) {
-            throw new IdTokenInvalidException("token:" + token);
+            throw new AuthorizationException(NotLoginException.INVALID_TOKEN_MESSAGE);
         }
 
         return loginId;
@@ -390,7 +389,7 @@ public class AuthServiceImpl
         Object loginId = StpUtil.getLoginId();
 
         if (loginId == null) {
-            throw NotLoginException.newInstance("user", NotLoginException.NOT_TOKEN);
+            throw new NotLoginException(NotLoginException.NOT_TOKEN_MESSAGE, StpUtil.getLoginType(), StpUtil.getLoginDevice());
         }
 
         return (String) loginId;
