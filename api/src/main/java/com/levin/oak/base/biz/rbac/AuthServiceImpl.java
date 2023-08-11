@@ -4,6 +4,7 @@ import cn.dev33.satoken.exception.IdTokenInvalidException;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.util.PhoneUtil;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.*;
@@ -247,7 +248,13 @@ public class AuthServiceImpl
 
         setCurrentUser(user);
 
-        return auth(user.getId(), MapUtils.putFirst("user-agent", req.getUa()).build());
+        final LinkedHashMap params = new LinkedHashMap<>();
+
+        Stream.of(extras).filter(Objects::nonNull).forEachOrdered(map -> params.putAll(map));
+
+        BeanUtil.copyProperties(user, params, CopyOptions.create().ignoreNullValue());
+
+        return auth(user.getId(), params);
     }
 
     /**
@@ -445,8 +452,8 @@ public class AuthServiceImpl
                 || ua.contains("iOS ")
                 || ua.contains("iPhone OS ")) {
             return "Phone";
-        } else if (ua.contains("iPad;")) {
-            return "iPad";
+        } else if (ua.contains("Pad;")) {
+            return "Pad";
         } else if (ua.contains("Windows ")
                 || ua.contains("Macintosh;")
                 || ua.contains(" Mac OS X ")) {
