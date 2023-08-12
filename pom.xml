@@ -59,7 +59,7 @@
         <sa-token.version>1.35.0.RC</sa-token.version>
         <jfinal-enjoy.version>4.9.16</jfinal-enjoy.version>
 
-        <hutool.version>5.7.2</hutool.version>
+        <hutool.version>5.8.11</hutool.version>
         <oshi.version>5.6.1</oshi.version>
         <jsch.version>0.1.54</jsch.version>
         <commons-compress.version>1.21</commons-compress.version>
