@@ -28,6 +28,10 @@ import java.util.UUID;
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = E_TenantOrgNamedEntity.tenantId),
                 @Index(columnList = E_TenantOrgNamedEntity.domain),
+
+                //复合索引
+                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_AppClient.id),
+                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
         }
         ,
         uniqueConstraints = {

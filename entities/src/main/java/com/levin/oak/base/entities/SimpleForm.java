@@ -37,6 +37,8 @@ import javax.persistence.Table;
                 @Index(columnList = SimpleEntity.Fields.path),
                 @Index(columnList = SimpleEntity.Fields.category),
                 @Index(columnList = SimpleEntity.Fields.groupName),
+
+                @Index(columnList = E_SimpleEntity.tenantId + "," + E_SimpleEntity.orgId),
         }
 
 //        ,

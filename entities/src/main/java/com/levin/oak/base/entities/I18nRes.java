@@ -21,19 +21,23 @@ import javax.persistence.*;
 
 @Table(
         indexes = {
-                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-                @Index(columnList = AbstractBaseEntityObject.Fields.enable),
-                @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
-                @Index(columnList = AbstractBaseEntityObject.Fields.creator),
-                @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = E_AbstractMultiTenantObject.tenantId),
+                @Index(columnList = E_I18nRes.orderCode),
+                @Index(columnList = E_I18nRes.enable),
+                @Index(columnList = E_I18nRes.createTime),
+                @Index(columnList = E_I18nRes.creator),
+                @Index(columnList = E_I18nRes.name),
+                @Index(columnList = E_I18nRes.tenantId),
                 @Index(columnList = E_I18nRes.category),
                 @Index(columnList = E_I18nRes.lang),
                 @Index(columnList = E_I18nRes.label),
+
+                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
+
+                @Index(columnList = E_I18nRes.tenantId + "," + E_I18nRes.orgId + "," + E_I18nRes.name),
         }
         ,
         uniqueConstraints = {
-//                @UniqueConstraint(columnNames = {E_AbstractMultiTenantObject.tenantId, E_Dict.code}),
+                @UniqueConstraint(columnNames = {E_I18nRes.tenantId, E_I18nRes.orgId, E_I18nRes.name}),
 //                @UniqueConstraint(columnNames = {E_AbstractMultiTenantObject.tenantId, E_I18nRes.label}),
         }
 )

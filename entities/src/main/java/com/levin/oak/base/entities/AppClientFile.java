@@ -29,6 +29,8 @@ import javax.persistence.*;
                 @Index(columnList = E_TenantOrgNamedEntity.domain),
 
                 @Index(columnList = E_AppClientFile.clientType),
+
+                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
         }
 
 //        ,

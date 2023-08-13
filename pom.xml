@@ -389,6 +389,7 @@
                 <groupId>org.lionsoul</groupId>
                 <artifactId>ip2region</artifactId>
                 <version>2.7.0</version>
+
             </dependency>
 
             <!-- 华为云 OBS 不使用的情况下可以不引入 -->

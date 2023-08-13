@@ -29,6 +29,12 @@ import java.util.List;
                 @Index(columnList = E_TenantOrgNamedEntity.tenantId),
                 @Index(columnList = E_Role.name),
                 @Index(columnList = E_Role.code),
+
+                //优化性能
+                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
+                @Index(columnList = E_Role.tenantId + "," + E_Role.orgId + "," + E_Role.id),
+                @Index(columnList = E_Role.tenantId + "," + E_Role.orgId + "," + E_Role.code),
+
         },
 
         uniqueConstraints = {

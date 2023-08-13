@@ -24,14 +24,12 @@ import javax.persistence.*;
 @Schema(title = "机构")
 @Table(
         indexes = {
-                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-                @Index(columnList = AbstractBaseEntityObject.Fields.enable),
-                @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
-                @Index(columnList = AbstractBaseEntityObject.Fields.creator),
+                @Index(columnList = E_Org.orderCode),
+                @Index(columnList = E_Org.enable),
+                @Index(columnList = E_Org.createTime),
+                @Index(columnList = E_Org.creator),
 
-                @Index(columnList = AbstractNamedEntityObject.Fields.name),
-//                @Index(columnList = AbstractTreeObject.Fields.parentId),
-//                @Index(columnList = AbstractTreeObject.Fields.idPath),
+                @Index(columnList = E_Org.name),
 
                 @Index(columnList = E_Org.parentId),
                 @Index(columnList = E_Org.code),
@@ -41,6 +39,11 @@ import javax.persistence.*;
                 @Index(columnList = E_Org.category),
                 @Index(columnList = E_Org.state),
                 @Index(columnList = E_Org.level),
+
+                @Index(columnList = E_Org.tenantId + "," + E_Org.parentId),
+                @Index(columnList = E_Org.tenantId + "," + E_Org.parentId + "," + E_Org.id),
+                @Index(columnList = E_Org.tenantId + "," + E_Org.parentId + "," + E_Org.code),
+
         }
         ,
         uniqueConstraints = {

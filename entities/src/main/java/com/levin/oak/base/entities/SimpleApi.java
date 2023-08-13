@@ -34,6 +34,7 @@ import javax.persistence.*;
 
                 @Index(columnList = E_SimpleApi.language),
 
+                @Index(columnList = E_SimpleEntity.tenantId + "," + E_SimpleEntity.orgId),
         }
 
 //        ,

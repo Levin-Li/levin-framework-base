@@ -24,15 +24,17 @@ import javax.persistence.*;
 @Schema(title = "菜单")
 @Table(
         indexes = {
-                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-                @Index(columnList = AbstractBaseEntityObject.Fields.enable),
-                @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
-                @Index(columnList = AbstractBaseEntityObject.Fields.creator),
-                @Index(columnList = AbstractNamedEntityObject.Fields.name),
+                @Index(columnList = E_MenuRes.orderCode),
+                @Index(columnList = E_MenuRes.enable),
+                @Index(columnList = E_MenuRes.createTime),
+                @Index(columnList = E_MenuRes.creator),
+                @Index(columnList = E_MenuRes.name),
                 @Index(columnList = E_MenuRes.parentId),
                 @Index(columnList = E_MenuRes.domain),
                 @Index(columnList = E_MenuRes.actionType),
                 @Index(columnList = E_MenuRes.tenantId),
+
+                @Index(columnList = E_MenuRes.tenantId + "," + E_MenuRes.parentId),
         }
 //        ,
 //        uniqueConstraints = {

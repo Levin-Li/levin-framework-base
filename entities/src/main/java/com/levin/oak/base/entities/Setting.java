@@ -26,15 +26,20 @@ import static javax.persistence.FetchType.LAZY;
 
 @Table(
         indexes = {
-                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-                @Index(columnList = AbstractBaseEntityObject.Fields.enable),
-                @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
-                @Index(columnList = AbstractBaseEntityObject.Fields.creator),
-                @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = E_AbstractMultiTenantObject.tenantId),
+                @Index(columnList = E_Setting.orderCode),
+                @Index(columnList = E_Setting.enable),
+                @Index(columnList = E_Setting.createTime),
+                @Index(columnList = E_Setting.creator),
+                @Index(columnList = E_Setting.name),
+                @Index(columnList = E_Setting.tenantId),
                 @Index(columnList = E_Setting.code),
                 @Index(columnList = E_Setting.categoryName),
                 @Index(columnList = E_Setting.groupName),
+
+                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
+                @Index(columnList = E_Setting.tenantId + "," + E_Setting.orgId + "," + E_Setting.id),
+                @Index(columnList = E_Setting.tenantId + "," + E_Setting.orgId + "," + E_Setting.code),
+
         }
         //如果同一个租户下重复的设置项目
         ,

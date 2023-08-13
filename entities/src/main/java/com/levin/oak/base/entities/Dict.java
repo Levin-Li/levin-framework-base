@@ -25,16 +25,20 @@ import java.util.List;
 @Entity(name = EntityConst.PREFIX + "Dict")
 @Table(
         indexes = {
-                @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-                @Index(columnList = AbstractBaseEntityObject.Fields.enable),
-                @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
-                @Index(columnList = AbstractBaseEntityObject.Fields.creator),
+                @Index(columnList = E_Dict.orderCode),
+                @Index(columnList = E_Dict.enable),
+                @Index(columnList = E_Dict.createTime),
+                @Index(columnList = E_Dict.creator),
 
-                @Index(columnList = AbstractNamedEntityObject.Fields.name),
+                @Index(columnList = E_Dict.name),
                 @Index(columnList = E_Dict.code),
                 @Index(columnList = E_Dict.type),
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId),
-                @Index(columnList = E_TenantOrgNamedEntity.orgId),
+                @Index(columnList = E_Dict.tenantId),
+                @Index(columnList = E_Dict.orgId),
+
+                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
+
+                @Index(columnList = E_Dict.tenantId + "," + E_Dict.orgId + "," + E_Dict.code),
         }
         ,
         uniqueConstraints = {

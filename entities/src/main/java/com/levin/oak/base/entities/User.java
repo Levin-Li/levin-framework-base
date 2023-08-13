@@ -4,8 +4,6 @@ import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.StatefulObject;
-import com.levin.commons.dao.domain.support.E_AbstractBaseEntityObject;
-import com.levin.commons.dao.domain.support.E_AbstractMultiTenantObject;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
@@ -36,7 +34,7 @@ import java.util.List;
 
 @Table(
         indexes = {
-                @Index(columnList = E_AbstractBaseEntityObject.orderCode),
+                @Index(columnList = E_User.orderCode),
                 @Index(columnList = E_User.tenantId),
                 @Index(columnList = E_User.orgId),
                 @Index(columnList = E_User.staffNo),
@@ -46,6 +44,11 @@ import java.util.List;
                 @Index(columnList = E_User.name),
                 @Index(columnList = E_User.wxOpenId),
                 @Index(columnList = E_User.aliOpenId),
+
+                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
+                @Index(columnList = E_User.tenantId + "," + E_User.orgId + "," + E_User.id),
+                @Index(columnList = E_User.tenantId + "," + E_User.telephone),
+                @Index(columnList = E_User.tenantId + "," + E_User.email),
         }
         ,
         uniqueConstraints = {
