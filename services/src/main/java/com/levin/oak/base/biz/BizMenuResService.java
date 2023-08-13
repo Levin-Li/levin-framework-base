@@ -38,7 +38,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 菜单-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:29, 代码生成哈希校验码：[c67477bd236cf4893e9f2acbd9616baf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:28, 代码生成哈希校验码：[3c39c3e9959cee7ec698912ad0e6ed00]，请不要修改和删除此行内容。
  */
 @Tag(name = E_MenuRes.BIZ_NAME + "-业务服务", description = "")
 public interface BizMenuResService {}

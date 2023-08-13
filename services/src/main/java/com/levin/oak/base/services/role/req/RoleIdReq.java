@@ -43,7 +43,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 角色 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:19, 代码生成哈希校验码：[36d79ff49fb704b9576a3e7e3365d88c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:08, 代码生成哈希校验码：[d6e5cea2a95f84f333ebb2ea3aff8940]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data

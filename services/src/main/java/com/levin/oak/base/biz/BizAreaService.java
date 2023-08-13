@@ -37,7 +37,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:28, 代码生成哈希校验码：[d169c5dbc9c91804cf386131d85594d7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:27, 代码生成哈希校验码：[46a95c24a57513115075bdf8817f9a44]，请不要修改和删除此行内容。
  */
 @Tag(name = E_Area.BIZ_NAME + "-业务服务", description = "")
 public interface BizAreaService {}

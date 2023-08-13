@@ -53,7 +53,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 调度日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:21, 代码生成哈希校验码：[d25b1e74c204b9b656f936d457c62e43]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:15, 代码生成哈希校验码：[2225889614e9dcd6e6dc43abfe73320a]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "ScheduledLogService")
 @DubboService

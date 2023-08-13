@@ -45,7 +45,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:23, 代码生成哈希校验码：[b34c1d4477a38e6e5d27e332e332dd4c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:23, 代码生成哈希校验码：[3b2f3736c4bcfe1aef3d45f03483c01d]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data

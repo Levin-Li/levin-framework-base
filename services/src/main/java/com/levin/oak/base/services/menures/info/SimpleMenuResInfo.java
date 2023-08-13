@@ -39,7 +39,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[fac80e7eaed84bec8b93c0a3c1faaa69]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:28, 代码生成哈希校验码：[5a227c3296807100ed91ddb4f6fbb92d]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data

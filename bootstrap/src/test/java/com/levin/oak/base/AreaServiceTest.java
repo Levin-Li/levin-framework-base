@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 区域测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:26, 代码生成哈希校验码：[bd5f463df3798dfeb85ad86bec27191f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:31, 代码生成哈希校验码：[56a6a043a581c9b5b6ad459ec9116525]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

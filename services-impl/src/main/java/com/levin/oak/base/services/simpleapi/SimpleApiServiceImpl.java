@@ -56,7 +56,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单动态接口-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:20, 代码生成哈希校验码：[55c8a6113667f6c52f01f88c758a7b29]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:10, 代码生成哈希校验码：[8d4cfaa9504e56247cb16fa37587beeb]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "SimpleApiService")
 @DubboService

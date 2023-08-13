@@ -75,7 +75,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 客户端文件控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:25, 代码生成哈希校验码：[eb289ba9747aeb195d5047961525f4e7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:19, 代码生成哈希校验码：[26d34c5f982db5d1af0798c340f183ca]，请不要修改和删除此行内容。
  */
 public class AppClientFileController extends BaseController {
 

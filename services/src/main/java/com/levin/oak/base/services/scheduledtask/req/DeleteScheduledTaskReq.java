@@ -40,7 +40,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 删除调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:23, 代码生成哈希校验码：[2cbed5b20268729dea4e7f1849b2f7a7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:21, 代码生成哈希校验码：[c344ca230f5cbbec81e4cff20b176d6a]，请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

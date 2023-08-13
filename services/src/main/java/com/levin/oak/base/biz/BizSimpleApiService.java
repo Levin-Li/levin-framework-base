@@ -37,7 +37,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单动态接口-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:22, 代码生成哈希校验码：[a8fa7db55ecc6efb87437b87c395cb12]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:10, 代码生成哈希校验码：[a1fef60d6c1f67eb6c95e711e1b14b6a]，请不要修改和删除此行内容。
  */
 @Tag(name = E_SimpleApi.BIZ_NAME + "-业务服务", description = "")
 public interface BizSimpleApiService {}

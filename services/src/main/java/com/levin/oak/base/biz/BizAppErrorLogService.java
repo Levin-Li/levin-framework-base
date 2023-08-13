@@ -34,7 +34,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 应用错误日志-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:24, 代码生成哈希校验码：[f0af46ff5c9eec8a181dae3acd50bfb0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:18, 代码生成哈希校验码：[35c057e7bdf91121b685c9ce92cc04c9]，请不要修改和删除此行内容。
  */
 @Tag(name = E_AppErrorLog.BIZ_NAME + "-业务服务", description = "")
 public interface BizAppErrorLogService {}

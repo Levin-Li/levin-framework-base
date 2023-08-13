@@ -41,7 +41,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:22, 代码生成哈希校验码：[959bb7ce47d591780d2de324d738849d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:21, 代码生成哈希校验码：[025e7d91aa53452005fcade6b8752393]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data

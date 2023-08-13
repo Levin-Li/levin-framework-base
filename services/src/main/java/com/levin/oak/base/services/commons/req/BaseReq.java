@@ -27,7 +27,7 @@ import java.util.*;
 /**
  * 基本查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:40, 代码生成哈希校验码：[feeaa977cfcada0b52a013fda1177a0b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:06, 代码生成哈希校验码：[0e5bd9dd1ec5716b53d426a717337fdb]，请不要修改和删除此行内容。
  */
 @Schema(title = "基本查询对象")
 @Data

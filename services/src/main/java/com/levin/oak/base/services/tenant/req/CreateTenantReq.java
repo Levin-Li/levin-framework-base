@@ -40,7 +40,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:20, 代码生成哈希校验码：[fbc41b1b5182a924e034effcf5b56766]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:13, 代码生成哈希校验码：[676407ced90bca6587810d21b7f8dd06]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data

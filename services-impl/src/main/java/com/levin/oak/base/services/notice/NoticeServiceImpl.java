@@ -54,7 +54,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 通知-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:22, 代码生成哈希校验码：[90e9ca12608c9aee888a76463c50a8bb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:18, 代码生成哈希校验码：[cad88037492bea2752806f60a74462c8]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "NoticeService")
 @DubboService

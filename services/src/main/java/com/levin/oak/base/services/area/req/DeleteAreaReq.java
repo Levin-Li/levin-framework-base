@@ -43,7 +43,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 删除区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:24, 代码生成哈希校验码：[2e4b20ddce6fd48c1af0499c3411aea7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:26, 代码生成哈希校验码：[b297427e1eb28af91cc11b2908dd8190]，请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

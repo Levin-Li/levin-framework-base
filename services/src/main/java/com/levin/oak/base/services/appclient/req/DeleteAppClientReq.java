@@ -40,7 +40,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 删除应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:20, 代码生成哈希校验码：[804f27d86b1393d610deb5f649f81fc4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:11, 代码生成哈希校验码：[cfca658baf3baa39cf70160cf8219a04]，请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data

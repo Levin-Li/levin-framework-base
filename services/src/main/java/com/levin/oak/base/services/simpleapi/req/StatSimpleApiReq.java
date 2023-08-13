@@ -50,7 +50,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:19, 代码生成哈希校验码：[95f1795a42427f3b16db3cbc2fc6456e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:09, 代码生成哈希校验码：[acc525ca7a311325c9c0ace6fc45a262]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

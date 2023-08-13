@@ -34,7 +34,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 访问日志-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:26, 代码生成哈希校验码：[eed5da788b1e434dc7bd945881cb0c5e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:21, 代码生成哈希校验码：[88722ee40db668dbbea0d7ca40f64e5c]，请不要修改和删除此行内容。
  */
 @Tag(name = E_AccessLog.BIZ_NAME + "-业务服务", description = "")
 public interface BizAccessLogService {}

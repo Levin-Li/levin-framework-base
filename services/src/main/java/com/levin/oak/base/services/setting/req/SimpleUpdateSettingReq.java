@@ -42,7 +42,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:21, 代码生成哈希校验码：[69a41ad7a741ec26d9182544704762de]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:15, 代码生成哈希校验码：[bdd3de95ff8b86e2b6a6447770131add]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data

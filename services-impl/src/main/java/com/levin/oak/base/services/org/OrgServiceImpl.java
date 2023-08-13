@@ -59,7 +59,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 机构-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:23, 代码生成哈希校验码：[914a9e51bfa8fc2c92b385b209a87f7f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:24, 代码生成哈希校验码：[170e92b4ca556d3bcb7aa983276f5877]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "OrgService")
 @DubboService

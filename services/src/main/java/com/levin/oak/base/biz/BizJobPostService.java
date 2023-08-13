@@ -35,7 +35,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 工作岗位-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:28, 代码生成哈希校验码：[ba23e2affb5794590790da025c55fd6b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:25, 代码生成哈希校验码：[34578017708b22653b2f3caeb7ca3228]，请不要修改和删除此行内容。
  */
 @Tag(name = E_JobPost.BIZ_NAME + "-业务服务", description = "")
 public interface BizJobPostService {}

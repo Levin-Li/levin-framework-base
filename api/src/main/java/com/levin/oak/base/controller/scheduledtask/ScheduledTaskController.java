@@ -75,7 +75,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 调度任务控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:26, 代码生成哈希校验码：[037249aad50707f3c0c9c2fe5e727822]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:22, 代码生成哈希校验码：[bfac69f89bb278a5e48e087d79873d5a]，请不要修改和删除此行内容。
  */
 public class ScheduledTaskController extends BaseController {
 

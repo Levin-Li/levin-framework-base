@@ -53,7 +53,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 国际化资源-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:24, 代码生成哈希校验码：[f5ec89bc46d599bfc6b42595ec61f654]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:26, 代码生成哈希校验码：[7ec7711cd60f05a3d1d64ef83267b7f7]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "I18nResService")
 @DubboService

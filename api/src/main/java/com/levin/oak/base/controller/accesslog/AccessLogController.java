@@ -72,7 +72,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 访问日志控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:26, 代码生成哈希校验码：[b61967f17322994f21b25e1adaf38c42]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:21, 代码生成哈希校验码：[d2f6ee4d0d37880133cd5aee66ca9c23]，请不要修改和删除此行内容。
  */
 public class AccessLogController extends BaseController {
 

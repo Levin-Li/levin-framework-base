@@ -55,7 +55,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单表单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[49c2cc00a3e69bbdd48fcb12e65e8e2e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:29, 代码生成哈希校验码：[d08965418db2f52da78e6043642fe144]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "SimpleFormService")
 @DubboService

@@ -52,7 +52,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:23, 代码生成哈希校验码：[fb8ef1610d7c42529abc928b42481434]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:23, 代码生成哈希校验码：[e39abb516de4ccec76687024d99de30a]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data

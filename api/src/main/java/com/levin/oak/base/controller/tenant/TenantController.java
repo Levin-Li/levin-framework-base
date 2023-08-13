@@ -72,7 +72,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 平台租户控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:23, 代码生成哈希校验码：[5350acfe93468343047d0ba8ec65c442]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:14, 代码生成哈希校验码：[435e97ae37d19ef51a6579ad86f047e0]，请不要修改和删除此行内容。
  */
 public class TenantController extends BaseController {
 

@@ -54,7 +54,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 系统设置-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:21, 代码生成哈希校验码：[a13a4e70367ec1a5cf049454d8b6339d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:15, 代码生成哈希校验码：[d630b7c95888714bd26024383ce6658e]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "SettingService")
 @DubboService

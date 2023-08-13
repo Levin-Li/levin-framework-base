@@ -77,7 +77,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 通知处理日志控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:27, 代码生成哈希校验码：[f15fabdc251d25b9ea2f880f606fedc3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:22, 代码生成哈希校验码：[23b21b0320168f096b0cdf85b81a4e4a]，请不要修改和删除此行内容。
  */
 public class NoticeProcessLogController extends BaseController {
 

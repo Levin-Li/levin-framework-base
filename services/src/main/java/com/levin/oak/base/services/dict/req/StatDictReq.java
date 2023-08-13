@@ -50,7 +50,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:21, 代码生成哈希校验码：[bb73a63062fbb83ce01a2c0ea1a920b7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:17, 代码生成哈希校验码：[ce46e60764f14c88fff7262bde73356d]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 简单表单测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:26, 代码生成哈希校验码：[4a6f837412d2e05f9b1010e3d12ba478]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:31, 代码生成哈希校验码：[c6cbcf9fad905565e719a2f5c8c4c883]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

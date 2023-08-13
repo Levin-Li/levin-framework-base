@@ -37,7 +37,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 字典-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:24, 代码生成哈希校验码：[50437c2a5fdde18f59e689df5d99ec7d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:17, 代码生成哈希校验码：[538fbf94a0030bc3d07d4afb3aabb66d]，请不要修改和删除此行内容。
  */
 @Tag(name = E_Dict.BIZ_NAME + "-业务服务", description = "")
 public interface BizDictService {}

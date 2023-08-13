@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 应用接入测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[9621e220461b88e1938def41e9b8a845]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:30, 代码生成哈希校验码：[9e0743bfc198ea2b0bf240545390e92d]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

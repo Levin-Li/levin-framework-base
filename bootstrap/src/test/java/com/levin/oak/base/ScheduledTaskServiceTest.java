@@ -54,7 +54,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 调度任务测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[6a885eb60e8830a5c875dc1f8bcfc40a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:31, 代码生成哈希校验码：[fb541393797b1443a0353cbea458276d]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

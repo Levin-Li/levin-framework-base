@@ -48,7 +48,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:20, 代码生成哈希校验码：[b9fc4be2e77ea77cf2af05f35aec724c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:14, 代码生成哈希校验码：[c5ba8792a5a765bc6f6117ad250756bf]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

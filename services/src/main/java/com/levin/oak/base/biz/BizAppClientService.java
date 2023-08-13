@@ -34,7 +34,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 应用接入-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:23, 代码生成哈希校验码：[e0874fd6ef48d6f4acfa41b32e1f7744]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:12, 代码生成哈希校验码：[f88ff0051e53466f372e8d46e006eca0]，请不要修改和删除此行内容。
  */
 @Tag(name = E_AppClient.BIZ_NAME + "-业务服务", description = "")
 public interface BizAppClientService {}

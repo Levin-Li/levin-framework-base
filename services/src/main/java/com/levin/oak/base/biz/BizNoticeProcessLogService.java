@@ -34,7 +34,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 通知处理日志-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:27, 代码生成哈希校验码：[456cbae69a2c67f664ebe3455be9bf5e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:22, 代码生成哈希校验码：[1bbc2d22b8e079f83de3d5153ccf34b9]，请不要修改和删除此行内容。
  */
 @Tag(name = E_NoticeProcessLog.BIZ_NAME + "-业务服务", description = "")
 public interface BizNoticeProcessLogService {}

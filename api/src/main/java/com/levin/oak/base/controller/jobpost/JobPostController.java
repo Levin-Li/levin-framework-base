@@ -72,7 +72,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 工作岗位控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:28, 代码生成哈希校验码：[132ec38978b170b8bab08c9911367232]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:25, 代码生成哈希校验码：[d0818880bf4089060cdd09c13f9ca214]，请不要修改和删除此行内容。
  */
 public class JobPostController extends BaseController {
 

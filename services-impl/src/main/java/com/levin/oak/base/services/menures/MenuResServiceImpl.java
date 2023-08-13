@@ -57,7 +57,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 菜单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[e2b2e451614892431e9b5c033d2055d1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:29, 代码生成哈希校验码：[f790615d4a3f2970e2560c389932b441]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "MenuResService")
 @DubboService

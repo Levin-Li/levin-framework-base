@@ -44,7 +44,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:19, 代码生成哈希校验码：[449e2f0b11190725a52170df2d306b5e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:09, 代码生成哈希校验码：[d4178740542f3abba91d97d13401ac05]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data

@@ -48,7 +48,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:21, 代码生成哈希校验码：[62476c3311d83cec863f412b75e3280b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:15, 代码生成哈希校验码：[4850a117e60e3e58ea656bd2a72bbf34]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

@@ -54,7 +54,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 平台租户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:20, 代码生成哈希校验码：[3e0fc38900f974ce7c6696b238c08c7a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:14, 代码生成哈希校验码：[02394d29b4c0d1cd963f384330e13cd8]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "TenantService")
 @DubboService

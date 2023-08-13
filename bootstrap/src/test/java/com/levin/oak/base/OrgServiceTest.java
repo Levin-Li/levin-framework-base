@@ -59,7 +59,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 机构测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:25, 代码生成哈希校验码：[690506b31ef966c3dff117f7e271866a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:31, 代码生成哈希校验码：[9d29c3043986e729717b975dee8ed4b4]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

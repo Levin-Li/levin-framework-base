@@ -57,7 +57,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月12日 下午5:49:50, 代码生成哈希校验码：[6c8ad2298aff9b6e485996a1accbcf87]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:27, 代码生成哈希校验码：[05d4afbfa99b67ca52ca93819b9fe881]，请不要修改和删除此行内容。
  */
 
 // 事务隔离级别

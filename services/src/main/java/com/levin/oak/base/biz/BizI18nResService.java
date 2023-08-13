@@ -34,7 +34,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 国际化资源-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:28, 代码生成哈希校验码：[1d10e4e01ff04467ae4965c9efbcbf23]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:26, 代码生成哈希校验码：[4ee694301bebf83d0731e6efd1c36dc4]，请不要修改和删除此行内容。
  */
 @Tag(name = E_I18nRes.BIZ_NAME + "-业务服务", description = "")
 public interface BizI18nResService {}

@@ -21,7 +21,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 用户-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月27日 下午6:25:44, 代码生成哈希校验码：[b773cfb2b44c8357b8a4a24aed7b254c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:20, 代码生成哈希校验码：[a58038c0c7a72a570ef9840c554ab495]，请不要修改和删除此行内容。
  */
 @Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
 public interface UserService {

@@ -56,7 +56,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:24, 代码生成哈希校验码：[885075c33edc60bfa157b04a970d166c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:27, 代码生成哈希校验码：[876aafa22c476e36589052ab10ef7491]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "AreaService")
 @DubboService

@@ -40,7 +40,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 机构-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:27, 代码生成哈希校验码：[c5824b0cae775c1f8b62c47ff62da4f7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:24, 代码生成哈希校验码：[042ae66ed99d78b2915b529976e15f4b]，请不要修改和删除此行内容。
  */
 @Tag(name = E_Org.BIZ_NAME + "-业务服务", description = "")
 public interface BizOrgService {}

@@ -35,7 +35,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 通知-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:25, 代码生成哈希校验码：[4172a226c90360f777c019ece8e4587a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:18, 代码生成哈希校验码：[08eeddf39d122179b6ea9eaa57cfc97d]，请不要修改和删除此行内容。
  */
 @Tag(name = E_Notice.BIZ_NAME + "-业务服务", description = "")
 public interface BizNoticeService {}

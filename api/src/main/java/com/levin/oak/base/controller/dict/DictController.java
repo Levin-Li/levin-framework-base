@@ -72,7 +72,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 字典控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:24, 代码生成哈希校验码：[85df6f5734d12cdc239270f54af9f9f7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:17, 代码生成哈希校验码：[b470447d6ba5fd7cccd3c4a1784d4a4f]，请不要修改和删除此行内容。
  */
 public class DictController extends BaseController {
 

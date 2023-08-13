@@ -53,7 +53,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 应用错误日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:21, 代码生成哈希校验码：[f8bb3ea3733307c40a3fa04ab317135e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:18, 代码生成哈希校验码：[aefc4c153feee1e4f09adf826b909980]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "AppErrorLogService")
 @DubboService

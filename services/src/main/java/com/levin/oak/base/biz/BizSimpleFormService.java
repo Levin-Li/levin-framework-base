@@ -36,7 +36,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单表单-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:29, 代码生成哈希校验码：[ff966df20c8cc2946052205ce704bd87]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:29, 代码生成哈希校验码：[eed16fa070fe0f6d729da76a7b28039a]，请不要修改和删除此行内容。
  */
 @Tag(name = E_SimpleForm.BIZ_NAME + "-业务服务", description = "")
 public interface BizSimpleFormService {}

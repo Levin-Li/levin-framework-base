@@ -42,7 +42,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 新增区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:24, 代码生成哈希校验码：[4655c81d6cb4866d16a9a9d49c531de9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:26, 代码生成哈希校验码：[7c768bc905294deb128ff83e847a3c4f]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data

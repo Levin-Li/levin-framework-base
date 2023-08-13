@@ -75,7 +75,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 调度日志控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:23, 代码生成哈希校验码：[4a8dfd68af3606be53a2d91c6474739e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:15, 代码生成哈希校验码：[48bcc2e59ea24fdd5491d2356ea66209]，请不要修改和删除此行内容。
  */
 public class ScheduledLogController extends BaseController {
 

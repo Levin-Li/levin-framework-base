@@ -56,7 +56,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单页面-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月12日 下午5:49:50, 代码生成哈希校验码：[47d7393e0797615f3a2a7a8f3174bd02]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:28, 代码生成哈希校验码：[17815ed93deb05a19d8cbf2b899be2b0]，请不要修改和删除此行内容。
  */
 
 // 事务隔离级别

@@ -38,7 +38,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月10日 上午2:41:19, 代码生成哈希校验码：[b52d02abc2a311d8e34224dada112e61]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:08, 代码生成哈希校验码：[92b817e68084edd165e00035d6f0bc06]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data

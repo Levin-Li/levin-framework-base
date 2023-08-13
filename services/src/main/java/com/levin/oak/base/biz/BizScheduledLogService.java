@@ -34,7 +34,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 调度日志-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月11日 下午5:40:23, 代码生成哈希校验码：[18c32cd252f00e6da13c74f6e236e291]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:15, 代码生成哈希校验码：[f6a5041835053433ed34f80d39ba563a]，请不要修改和删除此行内容。
  */
 @Tag(name = E_ScheduledLog.BIZ_NAME + "-业务服务", description = "")
 public interface BizScheduledLogService {}
