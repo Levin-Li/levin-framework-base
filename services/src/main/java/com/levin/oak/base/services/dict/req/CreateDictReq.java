@@ -42,7 +42,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:16, 代码生成哈希校验码：[69fe9eedc5c68c3ee0463f0561558c05]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:55, 代码生成哈希校验码：[f82168d5aeeb43e17ff4b135b087804d]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -83,6 +83,9 @@ public class CreateDictReq extends MultiTenantOrgReq {
     @NotBlank
     @Size(max = 64)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Schema(title = L_creator, hidden = true)
     // @Size(max = 128)

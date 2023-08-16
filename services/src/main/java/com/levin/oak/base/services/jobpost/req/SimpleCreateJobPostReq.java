@@ -40,7 +40,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:24, 代码生成哈希校验码：[ecad7a36071f2b2eec12bcb290a4eca7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:58, 代码生成哈希校验码：[b1994b2b9e029c6d59c9fc762b303bb5]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -73,6 +73,9 @@ public class SimpleCreateJobPostReq extends MultiTenantOrgReq {
     @NotBlank
     @Size(max = 64)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @PostConstruct
     public void prePersist() {

@@ -50,7 +50,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:09, 代码生成哈希校验码：[acc525ca7a311325c9c0ace6fc45a262]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:54, 代码生成哈希校验码：[9725e8238bc660ebcaf9a02b808bfc47]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -130,6 +130,9 @@ public class StatSimpleApiReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_creator)

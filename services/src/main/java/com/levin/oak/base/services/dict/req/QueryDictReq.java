@@ -49,7 +49,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:16, 代码生成哈希校验码：[9f3f1f1702c5b61c42056e7b1d2fa84e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:55, 代码生成哈希校验码：[ff9d1f10098dafffd04cc3557b45ee0e]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -116,6 +116,9 @@ public class QueryDictReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_creator)

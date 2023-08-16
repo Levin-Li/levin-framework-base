@@ -47,7 +47,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:26, 代码生成哈希校验码：[ae6f47f57109f6ab356e0d9cb379d35e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:58, 代码生成哈希校验码：[987b6d7df01541c1c0fc09f01dfe8b11]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -100,6 +100,9 @@ public class StatI18nResReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_creator)

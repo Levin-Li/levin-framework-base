@@ -38,7 +38,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:07, 代码生成哈希校验码：[6fa59661a85ad3eee519f9cd089fb81f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:53, 代码生成哈希校验码：[369d8525e4653e32dc850834117dd46a]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -85,6 +85,9 @@ public class RoleInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_orgId)

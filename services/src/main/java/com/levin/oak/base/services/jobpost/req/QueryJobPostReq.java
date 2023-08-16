@@ -47,7 +47,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:24, 代码生成哈希校验码：[79a108c7140997d3ecfc3f607ccae501]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:58, 代码生成哈希校验码：[9e178cdfea426fa61ca96b0bd5396228]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -106,6 +106,9 @@ public class QueryJobPostReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_creator)

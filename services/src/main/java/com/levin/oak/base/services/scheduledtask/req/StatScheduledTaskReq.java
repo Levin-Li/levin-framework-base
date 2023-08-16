@@ -47,7 +47,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:22, 代码生成哈希校验码：[2ae6917dff38564b683c5dc5ceaee67c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:57, 代码生成哈希校验码：[f01473dbaee19b38d3ec0a4dbf4ad575]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -133,6 +133,9 @@ public class StatScheduledTaskReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_creator)

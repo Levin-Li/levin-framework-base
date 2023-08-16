@@ -38,7 +38,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:16, 代码生成哈希校验码：[5fcf7486d6be6cc0d3be0ccf720c4f18]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:55, 代码生成哈希校验码：[633ae9d5863e34be08a6e79ea20db7a9]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -79,6 +79,9 @@ public class SimpleDictInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_orgId)

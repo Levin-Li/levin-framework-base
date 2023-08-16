@@ -39,7 +39,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:25, 代码生成哈希校验码：[885d79dff72c0f827fbe3fcc4e255b1b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:58, 代码生成哈希校验码：[d0c910b9db20a481bbabe4c6ae8c1271]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -78,6 +78,9 @@ public class SimpleCreateI18nResReq extends MultiTenantOrgReq {
     @NotBlank
     @Size(max = 64)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @PostConstruct
     public void prePersist() {

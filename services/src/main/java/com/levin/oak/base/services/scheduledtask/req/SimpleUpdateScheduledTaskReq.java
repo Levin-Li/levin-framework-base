@@ -41,7 +41,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:21, 代码生成哈希校验码：[fa798d444a38061c76ac2957a92df67e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:57, 代码生成哈希校验码：[506c7735c0ae0a6518d9f5653b7136a8]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -100,6 +100,11 @@ public class SimpleUpdateScheduledTaskReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Eq(desc = "乐观锁更新条件")
+    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;

@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 简单动态接口测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:30, 代码生成哈希校验码：[6a334418bf09380bff98a0153a8565ed]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:13:00, 代码生成哈希校验码：[ccdd2b52b0ea1056a9c2781081d7c609]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -112,6 +112,8 @@ public class SimpleApiServiceTest {
 
         // req.setName("这是文本64");// 必填
 
+        // req.setOptimisticLock(1);//
+
         // req.setOrgId("这是文本128");//
 
         // req.setTenantId("这是文本128");//
@@ -148,6 +150,7 @@ public class SimpleApiServiceTest {
         // req.setContent("内容_1");//
         // req.setDomain("这是文本128");//
         // req.setName("这是文本64");//
+        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
@@ -181,6 +184,7 @@ public class SimpleApiServiceTest {
         // req.setContent("内容_1");//
         // req.setDomain("这是文本128");//
         // req.setName("这是文本64");// 必填
+        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setOrderCode(1);//

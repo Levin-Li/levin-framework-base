@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 字典测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:30, 代码生成哈希校验码：[36262fdaf97bb4affd45fc9101e6037c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:13:00, 代码生成哈希校验码：[8c610f4083441f19ade8754761507e04]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -100,6 +100,8 @@ public class DictServiceTest {
 
         // req.setName("这是文本64");// 必填
 
+        // req.setOptimisticLock(1);//
+
         // req.setOrgId("这是文本128");//
 
         // req.setTenantId("这是文本128");//
@@ -130,6 +132,7 @@ public class DictServiceTest {
         // req.setItemList("编码项_1");//Json 存储
         // req.setDomain("这是文本128");//
         // req.setName("这是文本64");//
+        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
@@ -157,6 +160,7 @@ public class DictServiceTest {
         // req.setItemList("编码项_1");//Json 存储
         // req.setDomain("这是文本128");//
         // req.setName("这是文本64");// 必填
+        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setOrderCode(1);//

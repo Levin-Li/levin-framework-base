@@ -42,7 +42,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:07, 代码生成哈希校验码：[afa47e2ff8caf86fc8607ad0e8bced6f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:53, 代码生成哈希校验码：[b698db4592b3f4b0d7a923353fc34e56]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -94,6 +94,9 @@ public class SimpleCreateRoleReq extends MultiTenantOrgReq {
     @NotBlank
     @Size(max = 64)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @PostConstruct
     public void prePersist() {

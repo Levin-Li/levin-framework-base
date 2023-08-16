@@ -46,7 +46,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:22, 代码生成哈希校验码：[898c2aa5eb578ec9b6c0afcbac229d90]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:57, 代码生成哈希校验码：[638095bbd44b47b75c52f02d35a32def]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -146,6 +146,9 @@ public class QueryScheduledTaskReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_creator)

@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 简单页面测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:31, 代码生成哈希校验码：[f93d90f89034d72898b13b63b695a451]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:13:00, 代码生成哈希校验码：[4c218909b49ff0058787a3f03684a407]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -107,6 +107,8 @@ public class SimplePageServiceTest {
 
         // req.setName("这是文本64");// 必填
 
+        // req.setOptimisticLock(1);//
+
         // req.setOrgId("这是文本128");//
 
         // req.setTenantId("这是文本128");//
@@ -141,6 +143,7 @@ public class SimplePageServiceTest {
         // req.setContent("内容_1");//
         // req.setDomain("这是文本128");//
         // req.setName("这是文本64");//
+        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
@@ -172,6 +175,7 @@ public class SimplePageServiceTest {
         // req.setContent("内容_1");//
         // req.setDomain("这是文本128");//
         // req.setName("这是文本64");// 必填
+        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setOrderCode(1);//

@@ -50,7 +50,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:08, 代码生成哈希校验码：[3cdc4c119df0b4d24429200c4cb193dc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:53, 代码生成哈希校验码：[3eed24a5bfd5787eda7bbfc03eb35252]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -113,6 +113,9 @@ public class StatRoleReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_creator)

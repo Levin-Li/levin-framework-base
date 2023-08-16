@@ -49,7 +49,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:27, 代码生成哈希校验码：[41d38b9cdae7eb5d19390744dc62773a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:59, 代码生成哈希校验码：[00343cba964b030bb109aa2839e2aab5]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -121,6 +121,9 @@ public class StatSimplePageReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_creator)

@@ -35,7 +35,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:25, 代码生成哈希校验码：[060c3bff250093e440d17f0ef7fc81fe]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:58, 代码生成哈希校验码：[bd95ac19ca0fab6eaa5200932dbd0cad]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -76,6 +76,9 @@ public class I18nResInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_orgId)

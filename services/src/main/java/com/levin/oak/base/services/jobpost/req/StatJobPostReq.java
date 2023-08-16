@@ -48,7 +48,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:24, 代码生成哈希校验码：[db04b45352c6812d9913b9f75183c658]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:58, 代码生成哈希校验码：[6622c975a43cd1330a936f26a5e816bd]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -96,6 +96,9 @@ public class StatJobPostReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_creator)

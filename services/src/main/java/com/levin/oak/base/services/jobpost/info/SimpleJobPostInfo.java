@@ -36,7 +36,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:24, 代码生成哈希校验码：[c45033419f3c8a2414ed24f3a366ab33]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:58, 代码生成哈希校验码：[f6267b697ae481bec6aeb683d7e0c797]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -73,6 +73,9 @@ public class SimpleJobPostInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_orgId)

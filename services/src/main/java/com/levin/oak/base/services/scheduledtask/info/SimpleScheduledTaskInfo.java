@@ -35,7 +35,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:21, 代码生成哈希校验码：[ef889b1ee5f9a41a40c4b466a0fd747f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:57, 代码生成哈希校验码：[936fe173a5ba5ad02e5b8fb8bfa104fb]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -92,6 +92,9 @@ public class SimpleScheduledTaskInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_orgId)

@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 通知测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:30, 代码生成哈希校验码：[8c4511fcae1a3fa0620e385002caa036]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:13:00, 代码生成哈希校验码：[0692c2482fd9ec37fe534636106c5481]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -103,6 +103,8 @@ public class NoticeServiceTest {
 
         // req.setName("这是文本64");// 必填
 
+        // req.setOptimisticLock(1);//
+
         // req.setOrgId("这是文本128");//
 
         // req.setTenantId("这是文本128");//
@@ -136,6 +138,7 @@ public class NoticeServiceTest {
         // req.setLteExpiredDate(DateUtils.getEndHour(new Date()));//最大
         // req.setDomain("这是文本128");//
         // req.setName("这是文本64");//
+        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
@@ -165,6 +168,7 @@ public class NoticeServiceTest {
         // req.setExpiredDate(new Date());//
         // req.setDomain("这是文本128");//
         // req.setName("这是文本64");// 必填
+        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setOrderCode(1);//

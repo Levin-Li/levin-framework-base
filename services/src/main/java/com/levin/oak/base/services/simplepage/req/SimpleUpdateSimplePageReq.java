@@ -43,7 +43,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:27, 代码生成哈希校验码：[78ba447fbaee49428edfb784e830bcd8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:59, 代码生成哈希校验码：[837807e96306482d381b2bee6f392f85]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -108,6 +108,11 @@ public class SimpleUpdateSimplePageReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Eq(desc = "乐观锁更新条件")
+    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;

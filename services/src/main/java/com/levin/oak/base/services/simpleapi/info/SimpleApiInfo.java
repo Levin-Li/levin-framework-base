@@ -38,7 +38,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:08, 代码生成哈希校验码：[92b817e68084edd165e00035d6f0bc06]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:54, 代码生成哈希校验码：[cf31b469db9c27325873f423a15f881d]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -104,6 +104,9 @@ public class SimpleApiInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_orgId)

@@ -40,7 +40,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:18, 代码生成哈希校验码：[0467af040ccb21173184cbc7408f8c12]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:56, 代码生成哈希校验码：[e3b6f920815471a2f2e14eaeab8d8441]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -81,6 +81,9 @@ public class SimpleCreateNoticeReq extends MultiTenantOrgReq {
     @NotBlank
     @Size(max = 64)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @PostConstruct
     public void prePersist() {

@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 国际化资源测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:31, 代码生成哈希校验码：[02466c2d650bacc314a33156e1688302]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:13:00, 代码生成哈希校验码：[eb3f358b3d6cbaa1adc17fbe3e9dae18]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -97,6 +97,8 @@ public class I18nResServiceTest {
 
         // req.setName("这是文本64");// 必填
 
+        // req.setOptimisticLock(1);//
+
         // req.setOrgId("这是文本128");//
 
         // req.setTenantId("这是文本128");//
@@ -127,6 +129,7 @@ public class I18nResServiceTest {
         // req.setLabel("这是文本768");//
         // req.setDomain("这是文本128");//
         // req.setName("这是文本64");//
+        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
@@ -154,6 +157,7 @@ public class I18nResServiceTest {
         // req.setLabel("这是文本768");// 必填
         // req.setDomain("这是文本128");//
         // req.setName("这是文本64");// 必填
+        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setOrderCode(1);//

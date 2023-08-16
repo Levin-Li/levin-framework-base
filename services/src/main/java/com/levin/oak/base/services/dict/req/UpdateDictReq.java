@@ -44,7 +44,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:16, 代码生成哈希校验码：[17db1ccaddcdcb834c0745fbd732d21a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:55, 代码生成哈希校验码：[b806f713919a2e969155b6ef88ead2e9]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -95,6 +95,11 @@ public class UpdateDictReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Eq(desc = "乐观锁更新条件")
+    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;

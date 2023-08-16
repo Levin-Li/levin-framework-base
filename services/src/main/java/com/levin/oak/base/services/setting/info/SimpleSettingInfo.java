@@ -36,7 +36,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:15, 代码生成哈希校验码：[12545c40b4e3a2c77dfd95fc76a0b322]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:55, 代码生成哈希校验码：[8d320a976b770a5cbaa1ec8600c546d8]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -92,6 +92,9 @@ public class SimpleSettingInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     @Size(max = 128)
     @Schema(title = L_orgId)
