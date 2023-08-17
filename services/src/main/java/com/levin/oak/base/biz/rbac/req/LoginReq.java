@@ -87,6 +87,6 @@ public class LoginReq implements AuthReq, ServiceReq {
 
     @Schema(title = "应用密钥")
     @Ignore
-    protected String appSecure;
+    protected String appKey;
 
 }

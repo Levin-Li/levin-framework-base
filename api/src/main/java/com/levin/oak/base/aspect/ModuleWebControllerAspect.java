@@ -368,6 +368,8 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 //        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 //        Method method = methodSignature.getMethod();
 
+        final long getParamSt = System.currentTimeMillis();
+
         final LinkedHashMap<String, String> headerMap = new LinkedHashMap<>();
         final LinkedHashMap<String, Object> paramMap = new LinkedHashMap<>();
 
@@ -381,7 +383,7 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
         //////////////////////////////////////////////////////////////////////////////////////////
 
-        final long st = System.currentTimeMillis();
+       final long st = System.currentTimeMillis();
 
         //动态修改其参数
         //注意，如果调用joinPoint.proceed()方法，则修改的参数值不会生效，必须调用joinPoint.proceed(Object[] args)
