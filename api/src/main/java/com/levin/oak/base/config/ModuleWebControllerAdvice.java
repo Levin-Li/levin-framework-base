@@ -53,7 +53,6 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 public class ModuleWebControllerAdvice {
 
 
-
     @Autowired
     HttpServletRequest request;
 
@@ -68,6 +67,7 @@ public class ModuleWebControllerAdvice {
     /**
      * // @InitBinder标注的initBinder()方法表示注册一个Date类型的类型转换器，用于将类似这样的2019-06-10
      * // 日期格式的字符串转换成Date对象
+     *
      * @param binder
      */
     @InitBinder
@@ -196,12 +196,13 @@ public class ModuleWebControllerAdvice {
 
         log.error("发生数据约束异常," + request.getRequestURL(), e);
 
-        boolean used = e.getMessage().contains(" delete ")
-                || e.getMessage().contains(" update ");
+//        boolean used = e.getMessage().contains(" delete ")
+//                || e.getMessage().contains(" update ");
 
         return (ApiResp) ApiResp.error(ServiceResp.ErrorType.BizError.getBaseErrorCode()
-                        , used ? "操作失败，数据已经被使用" : "名称、编码或其它唯一值已经存在")
-                .setDetailMsg(ExceptionUtils.getRootCauseInfo(e));
+                        , "数据约束异常")
+                .setDetailMsg(ExceptionUtils.getAllCauseInfo(e, "->"));
+
     }
 
     @ExceptionHandler({PersistenceException.class, SQLException.class, DataAccessException.class})
