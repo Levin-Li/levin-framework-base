@@ -18,6 +18,8 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -28,8 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-import static com.levin.oak.base.ModuleOption.API_PATH;
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import static com.levin.oak.base.ModuleOption.*;
 
 
 /**
@@ -95,7 +96,21 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         //注意每个资源路径后面的路径加 / !!! 重要的事情说三遍
         //注意每个资源路径后面的路径加 / !!! 重要的事情说三遍
 
+        if (StringUtils.hasText(frameworkProperties.getAdminPath())
+                && UrlPathUtils.safeUrl(frameworkProperties.getAdminPath()).equalsIgnoreCase("/")
+                && ClassUtils.isPresent("com.github.xiaoymin.knife4j.annotations.ApiSort", null)) {
+
+            log.warn("默认的admin-ui模块占用了根路径，将导致knife4j的默认访问路径/doc.html不可用，请使用/knife4j/doc.html访问。");
+
+            registry.addResourceHandler("/knife4j/doc.html")
+                    .addResourceLocations("classpath:/META-INF/resources/doc.html");
+
+            registry.addResourceHandler("/knife4j/webjars/**")
+                    .addResourceLocations("classpath:/META-INF/resources/webjars/");
+        }
     }
+
+}
 
     /**
      * 视图配置
@@ -109,7 +124,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         if (StringUtils.hasText(frameworkProperties.getAdminPath())) {
             //  registry.freeMarker();
-            //log.info("SpringMVC 视图访问路径：{}", frameworkProperties.getAdminPath());
+            log.info("SpringMVC 视图访问路径：{}", frameworkProperties.getAdminPath());
         }
 
     }

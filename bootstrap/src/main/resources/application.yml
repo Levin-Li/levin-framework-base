@@ -139,8 +139,6 @@ plugin:
 #            enable-sms-verification-code: false
             enable-mock-sms-send: true
 
-
-
 #日志配置
 logging:
   level:

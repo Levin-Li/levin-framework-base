@@ -38,7 +38,7 @@
         <hutool.version>5.8.11</hutool.version>
 
         <springdoc.version>1.6.14</springdoc.version>
-        <knife4j.version>4.0.0</knife4j.version>
+        <knife4j.version>4.3.0</knife4j.version>
         <swagger.version>2.2.7</swagger.version>
         <swagger.enable>true</swagger.enable>
 
