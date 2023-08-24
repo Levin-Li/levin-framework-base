@@ -88,7 +88,7 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
     @Autowired
     HttpServletResponse response;
 
-    @Autowired
+    @Autowired(required = false)
     ScheduledExecutorService scheduledExecutorService;
 
     @Autowired
@@ -127,6 +127,10 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
     void init() {
 
         this.executorService = Executors.newWorkStealingPool();
+
+        if (this.scheduledExecutorService == null) {
+            this.scheduledExecutorService = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
+        }
 
         //
         this.frameworkProperties.getLog().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
@@ -383,7 +387,7 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
         //////////////////////////////////////////////////////////////////////////////////////////
 
-       final long st = System.currentTimeMillis();
+        final long st = System.currentTimeMillis();
 
         //动态修改其参数
         //注意，如果调用joinPoint.proceed()方法，则修改的参数值不会生效，必须调用joinPoint.proceed(Object[] args)

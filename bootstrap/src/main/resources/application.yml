@@ -123,7 +123,7 @@ plugin:
       oak:
         base:
           framework:
-            admin-path: /admin
+            admin-path: /
             controller-acl:
               exclude-path-patterns: "/v3/api-docs/**"
             sign:

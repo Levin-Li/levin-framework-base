@@ -36,9 +36,9 @@ import java.util.function.Supplier;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 
+
 @Service(PLUGIN_PREFIX + "BizTenantService")
-@DubboService
-@ConditionalOnMissingBean({BizTenantService.class}) //默认只有在无对应服务才启用
+//@ConditionalOnMissingBean({BizTenantService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizTenantService", matchIfMissing = true)
 @Slf4j
 //@Validated

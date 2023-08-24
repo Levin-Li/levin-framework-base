@@ -26,6 +26,8 @@
         <revision>2.0.0-SNAPSHOT</revision>
 
         <dubbo.version>3.1.8</dubbo.version>
+        <dubbo.version>3.2.5</dubbo.version>
+        <dubbo.version>3.1.11</dubbo.version>
         <spring-boot.version>2.7.10</spring-boot.version>
 
         <levin.simple-dao.groupId>com.levin.commons</levin.simple-dao.groupId>

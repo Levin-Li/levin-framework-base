@@ -29,6 +29,7 @@ import com.levin.oak.base.utils.AmisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -55,7 +56,7 @@ import static com.levin.oak.base.biz.BizUserService.SA_ACCOUNT;
  */
 
 @Slf4j
-@Order
+//@org.springframework.context.annotation.Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 @Service(PLUGIN_PREFIX + "DefaultRbacInitService")
 //@ConditionalOnMissingBean(RbacInitService.class)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultRbacInitService", matchIfMissing = true)
@@ -94,7 +95,7 @@ public class DefaultRbacInitServiceImpl
     @Autowired
     PluginManager pluginManager;
 
-    @Autowired
+    @DubboReference
     TenantService tenantService;
 
     @Autowired
@@ -120,7 +121,6 @@ public class DefaultRbacInitServiceImpl
 
         log.info("默认Rbac初始化服务启用...");
 
-
     }
 
     /**
@@ -134,7 +134,6 @@ public class DefaultRbacInitServiceImpl
         log.info("On ContextRefreshedEvent " + event);
 
         if (event.getApplicationContext() == this.context) {
-
             initRbacData();
         }
     }

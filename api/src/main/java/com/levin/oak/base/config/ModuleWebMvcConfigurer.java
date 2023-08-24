@@ -96,18 +96,19 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         //注意每个资源路径后面的路径加 / !!! 重要的事情说三遍
         //注意每个资源路径后面的路径加 / !!! 重要的事情说三遍
 
-        if (StringUtils.hasText(frameworkProperties.getAdminPath())
-                && UrlPathUtils.safeUrl(frameworkProperties.getAdminPath()).equalsIgnoreCase("/")
-                && ClassUtils.isPresent("com.github.xiaoymin.knife4j.annotations.ApiSort", null)) {
+//        if (StringUtils.hasText(frameworkProperties.getAdminPath())
+//                && UrlPathUtils.safeUrl(frameworkProperties.getAdminPath()).equalsIgnoreCase("/")
+//                && ClassUtils.isPresent("com.github.xiaoymin.knife4j.annotations.ApiSort", null)) {
+//
+//            log.warn("admin-ui模块占用了根路径，将导致knife4j的默认访问路径/doc.html不可用，请使用/knife4j/doc.html访问。");
+//
+//            registry.addResourceHandler("/knife4j/doc.html")
+//                    .addResourceLocations("classpath:/META-INF/resources/doc.html");
+//
+//            registry.addResourceHandler("/knife4j/webjars/**")
+//                    .addResourceLocations("classpath:/META-INF/resources/webjars/");
+//        }
 
-            log.warn("默认的admin-ui模块占用了根路径，将导致knife4j的默认访问路径/doc.html不可用，请使用/knife4j/doc.html访问。");
-
-            registry.addResourceHandler("/knife4j/doc.html")
-                    .addResourceLocations("classpath:/META-INF/resources/doc.html");
-
-            registry.addResourceHandler("/knife4j/webjars/**")
-                    .addResourceLocations("classpath:/META-INF/resources/webjars/");
-        }
     }
 
     /**
@@ -185,7 +186,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         //要求租户绑定域名
         if (frameworkProperties.getTenantBindDomain().isEnable()) {
-
             HandlerInterceptor handlerInterceptor = new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)
                     , (className) -> frameworkProperties.getTenantBindDomain().isPackageMatched(className)) {
                 @Override
@@ -198,7 +198,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     , frameworkProperties.getTenantBindDomain().getExcludePathPatterns()
                     , frameworkProperties.getTenantBindDomain().getIncludePathPatterns()
             ).order(Ordered.HIGHEST_PRECEDENCE + 1000);
-
         }
 
         //检查租户信息，要求所有的访问都必须有租户

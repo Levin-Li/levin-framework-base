@@ -16,8 +16,11 @@ import com.levin.oak.base.services.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Role;
 import org.springframework.context.expression.BeanFactoryResolver;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -38,7 +41,9 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 /**
  * 逻辑
  */
+@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 @Service(PLUGIN_PREFIX + "RbacService")
+//@ConditionalOnMissingBean(RbacService.class)
 @Slf4j
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacService", matchIfMissing = true)
 @ResAuthorize(ignored = true)

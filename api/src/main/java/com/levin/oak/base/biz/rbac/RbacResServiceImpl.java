@@ -22,8 +22,11 @@ import com.levin.oak.base.services.menures.req.QueryMenuResReq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Role;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -35,8 +38,9 @@ import java.util.stream.Collectors;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @Service(PLUGIN_PREFIX + "RbacResService")
+@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 @Slf4j
-
+//@ConditionalOnMissingBean(RbacResService.class)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacResService", matchIfMissing = true)
 @ResAuthorize(ignored = true)
 public class RbacResServiceImpl implements RbacResService<String> {
