@@ -72,17 +72,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 区域控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:27, 代码生成哈希校验码：[9f990c7af84654213b91ecda97f863bc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:04:01, 代码生成哈希校验码：[b7610a2e12b8e4ecffd10a5558193964]，请不要修改和删除此行内容。
  */
 public class AreaController extends BaseController {
 
     protected static final String BIZ_NAME = E_Area.BIZ_NAME;
 
-    // @Autowired
-    @DubboReference protected AreaService areaService;
+    @DubboReference // @Autowired
+    protected AreaService areaService;
 
-    // @Autowired
-    @DubboReference protected BizAreaService bizAreaService;
+    @DubboReference // @Autowired
+    protected BizAreaService bizAreaService;
 
     /**
      * 分页列表查找
@@ -151,7 +151,7 @@ public class AreaController extends BaseController {
     public ApiResp<Boolean> update(
             @RequestBody @Valid UpdateAreaReq req, @PathVariable(required = false) String code) {
         req.updateCodeWhenNotBlank(code);
-        return ApiResp.ok(checkResult(areaService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(areaService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -167,7 +167,7 @@ public class AreaController extends BaseController {
     public ApiResp<Boolean> delete(
             @Valid AreaIdReq req, @PathVariable(required = false) String code) {
         req.updateCodeWhenNotBlank(code);
-        return ApiResp.ok(checkResult(areaService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(areaService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -206,7 +206,7 @@ public class AreaController extends BaseController {
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateAreaReq> reqList) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         areaService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -220,7 +220,7 @@ public class AreaController extends BaseController {
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteAreaReq req) {
         return ApiResp.ok(
-                checkResult(areaService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(areaService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**

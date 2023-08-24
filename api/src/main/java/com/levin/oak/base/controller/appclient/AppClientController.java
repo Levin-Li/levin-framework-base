@@ -72,17 +72,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 应用接入控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:12, 代码生成哈希校验码：[0297425088ec13a4a0acaca1af8e782f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:03:57, 代码生成哈希校验码：[f1a9d579b704e48296372ce5d9574af7]，请不要修改和删除此行内容。
  */
 public class AppClientController extends BaseController {
 
     protected static final String BIZ_NAME = E_AppClient.BIZ_NAME;
 
-    // @Autowired
-    @DubboReference protected AppClientService appClientService;
+    @DubboReference // @Autowired
+    protected AppClientService appClientService;
 
-    // @Autowired
-    @DubboReference protected BizAppClientService bizAppClientService;
+    @DubboReference // @Autowired
+    protected BizAppClientService bizAppClientService;
 
     /**
      * 分页列表查找
@@ -152,7 +152,7 @@ public class AppClientController extends BaseController {
             @RequestBody @Valid UpdateAppClientReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
-                checkResult(appClientService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(appClientService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -169,7 +169,7 @@ public class AppClientController extends BaseController {
             @Valid AppClientIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
-                checkResult(appClientService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(appClientService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -208,7 +208,7 @@ public class AppClientController extends BaseController {
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateAppClientReq> reqList) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         appClientService.batchUpdate(reqList),
                         BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
@@ -223,7 +223,7 @@ public class AppClientController extends BaseController {
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteAppClientReq req) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         appClientService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 

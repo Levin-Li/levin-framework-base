@@ -72,17 +72,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 通知控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:18, 代码生成哈希校验码：[94bb2b966c005e68209ed4a657cf88bc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:03:59, 代码生成哈希校验码：[8e92019fd5f45caaaa95a125255692fa]，请不要修改和删除此行内容。
  */
 public class NoticeController extends BaseController {
 
     protected static final String BIZ_NAME = E_Notice.BIZ_NAME;
 
-    // @Autowired
-    @DubboReference protected NoticeService noticeService;
+    @DubboReference // @Autowired
+    protected NoticeService noticeService;
 
-    // @Autowired
-    @DubboReference protected BizNoticeService bizNoticeService;
+    @DubboReference // @Autowired
+    protected BizNoticeService bizNoticeService;
 
     /**
      * 分页列表查找
@@ -151,7 +151,7 @@ public class NoticeController extends BaseController {
     public ApiResp<Boolean> update(
             @RequestBody @Valid UpdateNoticeReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(noticeService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(noticeService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -167,7 +167,7 @@ public class NoticeController extends BaseController {
     public ApiResp<Boolean> delete(
             @Valid NoticeIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(noticeService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(noticeService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -206,7 +206,7 @@ public class NoticeController extends BaseController {
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateNoticeReq> reqList) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         noticeService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -220,7 +220,7 @@ public class NoticeController extends BaseController {
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteNoticeReq req) {
         return ApiResp.ok(
-                checkResult(noticeService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(noticeService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**

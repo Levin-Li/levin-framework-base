@@ -18,7 +18,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:06, 代码生成哈希校验码：[f311765bb62a725e52dd13082f67dbde]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月24日 下午11:43:23, 代码生成哈希校验码：[d14701dd409ab673046fe4f2d1f24fcf]，请不要修改和删除此行内容。
  */
 @Schema(title = "多租户查询对象")
 @Data
@@ -37,7 +37,7 @@ public class MultiTenantReq extends BaseReq implements MultiTenantObject {
             )
     @OR(autoClose = true)
     @Eq
-    @IsNull(condition = "#_this.isContainsPublicData()") // 如果是公共数据，允许包括非该租户的数据
+    @IsNull(condition = "#isNotEmpty(#_val) && isContainsPublicData()") // 如果是公共数据，允许包括非该租户的数据
     protected String tenantId;
 
     /**

@@ -157,7 +157,7 @@ public class UserController extends BaseController {
     @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Boolean> update(@RequestBody UpdateUserReq req) {
         checkCurrentUserCreateOrUpdateUserRole(req.getId(), req.getRoleList());
-        return ApiResp.ok(checkResult(bizUserService.update(req), UPDATE_ACTION));
+        return ApiResp.ok(assertTrue(bizUserService.update(req), UPDATE_ACTION));
     }
 
     /**
@@ -168,18 +168,7 @@ public class UserController extends BaseController {
     @DeleteMapping({""})
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Boolean> delete(@NotNull UserIdReq req) {
-        return ApiResp.ok(checkResult(bizUserService.delete(req), DELETE_ACTION));
+        return ApiResp.ok(assertTrue(bizUserService.delete(req), DELETE_ACTION));
     }
 
-    /**
-     * 检查结果
-     *
-     * @param n
-     * @param action
-     * @return
-     */
-    protected int checkResult(int n, String action) {
-        Assert.isTrue(n > 0, action + BIZ_NAME + "失败");
-        return n;
-    }
 }

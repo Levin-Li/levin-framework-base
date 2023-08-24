@@ -141,7 +141,7 @@ public class SettingController extends BaseController{
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody UpdateSettingReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(settingService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(settingService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -153,7 +153,7 @@ public class SettingController extends BaseController{
     @CRUD.Op
     public ApiResp<Boolean> delete(SettingIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(settingService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(settingService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -187,7 +187,7 @@ public class SettingController extends BaseController{
     @PutMapping("/batchUpdate")
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateSettingReq> reqList) {
-        return ApiResp.ok(checkResult(settingService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(settingService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -198,7 +198,7 @@ public class SettingController extends BaseController{
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull DeleteSettingReq req) {
-        return ApiResp.ok(checkResult(settingService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(settingService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**

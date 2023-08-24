@@ -72,17 +72,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 字典控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:17, 代码生成哈希校验码：[b470447d6ba5fd7cccd3c4a1784d4a4f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:03:58, 代码生成哈希校验码：[7ddb993bfc74398df22ff63999c4d1e1]，请不要修改和删除此行内容。
  */
 public class DictController extends BaseController {
 
     protected static final String BIZ_NAME = E_Dict.BIZ_NAME;
 
-    // @Autowired
-    @DubboReference protected DictService dictService;
+    @DubboReference // @Autowired
+    protected DictService dictService;
 
-    // @Autowired
-    @DubboReference protected BizDictService bizDictService;
+    @DubboReference // @Autowired
+    protected BizDictService bizDictService;
 
     /**
      * 分页列表查找
@@ -151,7 +151,7 @@ public class DictController extends BaseController {
     public ApiResp<Boolean> update(
             @RequestBody @Valid UpdateDictReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(dictService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(dictService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -167,7 +167,7 @@ public class DictController extends BaseController {
     public ApiResp<Boolean> delete(
             @Valid DictIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(dictService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(dictService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -206,7 +206,7 @@ public class DictController extends BaseController {
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateDictReq> reqList) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         dictService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -220,7 +220,7 @@ public class DictController extends BaseController {
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteDictReq req) {
         return ApiResp.ok(
-                checkResult(dictService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(dictService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**

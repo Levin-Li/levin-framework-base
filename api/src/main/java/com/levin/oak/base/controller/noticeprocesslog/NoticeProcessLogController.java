@@ -77,17 +77,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 通知处理日志控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:22, 代码生成哈希校验码：[23b21b0320168f096b0cdf85b81a4e4a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:04:00, 代码生成哈希校验码：[669d304b409283ab3a73340c4010de10]，请不要修改和删除此行内容。
  */
 public class NoticeProcessLogController extends BaseController {
 
     protected static final String BIZ_NAME = E_NoticeProcessLog.BIZ_NAME;
 
-    // @Autowired
-    @DubboReference protected NoticeProcessLogService noticeProcessLogService;
+    @DubboReference // @Autowired
+    protected NoticeProcessLogService noticeProcessLogService;
 
-    // @Autowired
-    @DubboReference protected BizNoticeProcessLogService bizNoticeProcessLogService;
+    @DubboReference // @Autowired
+    protected BizNoticeProcessLogService bizNoticeProcessLogService;
 
     /**
      * 分页列表查找
@@ -158,7 +158,7 @@ public class NoticeProcessLogController extends BaseController {
             @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
-                checkResult(noticeProcessLogService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(noticeProcessLogService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -175,7 +175,7 @@ public class NoticeProcessLogController extends BaseController {
             @Valid NoticeProcessLogIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
-                checkResult(noticeProcessLogService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(noticeProcessLogService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -217,7 +217,7 @@ public class NoticeProcessLogController extends BaseController {
     public ApiResp<Integer> batchUpdate(
             @RequestBody @Valid List<UpdateNoticeProcessLogReq> reqList) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         noticeProcessLogService.batchUpdate(reqList),
                         BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
@@ -232,7 +232,7 @@ public class NoticeProcessLogController extends BaseController {
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteNoticeProcessLogReq req) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         noticeProcessLogService.batchDelete(req),
                         BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }

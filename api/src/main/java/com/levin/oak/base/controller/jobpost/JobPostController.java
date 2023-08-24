@@ -72,17 +72,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 工作岗位控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:25, 代码生成哈希校验码：[d0818880bf4089060cdd09c13f9ca214]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:04:01, 代码生成哈希校验码：[84a009364156c592f8e972f5fc88f854]，请不要修改和删除此行内容。
  */
 public class JobPostController extends BaseController {
 
     protected static final String BIZ_NAME = E_JobPost.BIZ_NAME;
 
-    // @Autowired
-    @DubboReference protected JobPostService jobPostService;
+    @DubboReference // @Autowired
+    protected JobPostService jobPostService;
 
-    // @Autowired
-    @DubboReference protected BizJobPostService bizJobPostService;
+    @DubboReference // @Autowired
+    protected BizJobPostService bizJobPostService;
 
     /**
      * 分页列表查找
@@ -151,7 +151,7 @@ public class JobPostController extends BaseController {
     public ApiResp<Boolean> update(
             @RequestBody @Valid UpdateJobPostReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(jobPostService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(jobPostService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -167,7 +167,7 @@ public class JobPostController extends BaseController {
     public ApiResp<Boolean> delete(
             @Valid JobPostIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(jobPostService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(jobPostService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -206,7 +206,7 @@ public class JobPostController extends BaseController {
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateJobPostReq> reqList) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         jobPostService.batchUpdate(reqList),
                         BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
@@ -221,8 +221,7 @@ public class JobPostController extends BaseController {
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteJobPostReq req) {
         return ApiResp.ok(
-                checkResult(
-                        jobPostService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(jobPostService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**

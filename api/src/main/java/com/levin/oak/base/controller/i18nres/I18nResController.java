@@ -72,17 +72,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 国际化资源控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:26, 代码生成哈希校验码：[ae1915a97dde5584325ebce26a29599f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:04:01, 代码生成哈希校验码：[c3158c75c4d6c4be35c6b7d35139c78f]，请不要修改和删除此行内容。
  */
 public class I18nResController extends BaseController {
 
     protected static final String BIZ_NAME = E_I18nRes.BIZ_NAME;
 
-    // @Autowired
-    @DubboReference protected I18nResService i18nResService;
+    @DubboReference // @Autowired
+    protected I18nResService i18nResService;
 
-    // @Autowired
-    @DubboReference protected BizI18nResService bizI18nResService;
+    @DubboReference // @Autowired
+    protected BizI18nResService bizI18nResService;
 
     /**
      * 分页列表查找
@@ -151,7 +151,7 @@ public class I18nResController extends BaseController {
     public ApiResp<Boolean> update(
             @RequestBody @Valid UpdateI18nResReq req, @PathVariable(required = false) Long id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(i18nResService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(i18nResService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -167,7 +167,7 @@ public class I18nResController extends BaseController {
     public ApiResp<Boolean> delete(
             @Valid I18nResIdReq req, @PathVariable(required = false) Long id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(i18nResService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(i18nResService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -206,7 +206,7 @@ public class I18nResController extends BaseController {
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateI18nResReq> reqList) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         i18nResService.batchUpdate(reqList),
                         BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
@@ -221,8 +221,7 @@ public class I18nResController extends BaseController {
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteI18nResReq req) {
         return ApiResp.ok(
-                checkResult(
-                        i18nResService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(i18nResService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**

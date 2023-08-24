@@ -142,7 +142,7 @@ public class RoleController extends BaseController {
     @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Boolean> update(@RequestBody UpdateRoleReq req) {
         checkCurrentUserCreateOrUpdateRolePermissions(null, req.getPermissionList());
-        return ApiResp.ok(checkResult(roleService.update(req), UPDATE_ACTION));
+        return ApiResp.ok(assertTrue(roleService.update(req), UPDATE_ACTION));
     }
 
     /**
@@ -152,7 +152,7 @@ public class RoleController extends BaseController {
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody List<UpdateRoleReq> reqList) {
         reqList.stream().forEach(req -> checkCurrentUserCreateOrUpdateRolePermissions(null, req.getPermissionList()));
-        return ApiResp.ok(checkResult(roleService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
+        return ApiResp.ok(assertTrue(roleService.batchUpdate(reqList), BATCH_UPDATE_ACTION));
     }
 
     /**
@@ -163,7 +163,7 @@ public class RoleController extends BaseController {
     @DeleteMapping({"", "{id}"})
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Boolean> delete(RoleIdReq req, @PathVariable(required = false) String id) {
-        return ApiResp.ok(checkResult(roleService.delete(req), DELETE_ACTION));
+        return ApiResp.ok(assertTrue(roleService.delete(req), DELETE_ACTION));
     }
 
     /**
@@ -174,7 +174,7 @@ public class RoleController extends BaseController {
     @DeleteMapping({"/batchDelete"})
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete(@NotNull DeleteRoleReq req) {
-        return ApiResp.ok(checkResult(roleService.batchDelete(req), BATCH_DELETE_ACTION));
+        return ApiResp.ok(assertTrue(roleService.batchDelete(req), BATCH_DELETE_ACTION));
     }
 
     /**
@@ -205,17 +205,5 @@ public class RoleController extends BaseController {
         if (!isAuthorized) {
             throw new AuthorizationException("角色非法使用未授权的资源-" + roleCode);
         }
-    }
-
-    /**
-     * 检查结果
-     *
-     * @param n
-     * @param action
-     * @return
-     */
-    protected int checkResult(int n, String action) {
-        Assert.isTrue(n > 0, action + BIZ_NAME + "失败");
-        return n;
     }
 }

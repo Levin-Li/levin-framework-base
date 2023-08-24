@@ -72,17 +72,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 简单页面控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:28, 代码生成哈希校验码：[7b64a8a13e46859aaadbc24e86abebc5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:04:01, 代码生成哈希校验码：[6dc5686323ee7f074a1f90538f91cbfc]，请不要修改和删除此行内容。
  */
 public class SimplePageController extends BaseController {
 
     protected static final String BIZ_NAME = E_SimplePage.BIZ_NAME;
 
-    // @Autowired
-    @DubboReference protected SimplePageService simplePageService;
+    @DubboReference // @Autowired
+    protected SimplePageService simplePageService;
 
-    // @Autowired
-    @DubboReference protected BizSimplePageService bizSimplePageService;
+    @DubboReference // @Autowired
+    protected BizSimplePageService bizSimplePageService;
 
     /**
      * 分页列表查找
@@ -153,7 +153,7 @@ public class SimplePageController extends BaseController {
             @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
-                checkResult(simplePageService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(simplePageService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -170,7 +170,7 @@ public class SimplePageController extends BaseController {
             @Valid SimplePageIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
-                checkResult(simplePageService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(simplePageService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -210,7 +210,7 @@ public class SimplePageController extends BaseController {
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateSimplePageReq> reqList) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         simplePageService.batchUpdate(reqList),
                         BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
@@ -225,7 +225,7 @@ public class SimplePageController extends BaseController {
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteSimplePageReq req) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         simplePageService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 

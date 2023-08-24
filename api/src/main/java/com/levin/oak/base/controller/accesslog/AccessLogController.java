@@ -72,17 +72,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 访问日志控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:21, 代码生成哈希校验码：[d2f6ee4d0d37880133cd5aee66ca9c23]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:04:00, 代码生成哈希校验码：[c1d9064dc66995c3704b6aa096eb7ab2]，请不要修改和删除此行内容。
  */
 public class AccessLogController extends BaseController {
 
     protected static final String BIZ_NAME = E_AccessLog.BIZ_NAME;
 
-    // @Autowired
-    @DubboReference protected AccessLogService accessLogService;
+    @DubboReference // @Autowired
+    protected AccessLogService accessLogService;
 
-    // @Autowired
-    @DubboReference protected BizAccessLogService bizAccessLogService;
+    @DubboReference // @Autowired
+    protected BizAccessLogService bizAccessLogService;
 
     /**
      * 分页列表查找
@@ -152,7 +152,7 @@ public class AccessLogController extends BaseController {
             @RequestBody @Valid UpdateAccessLogReq req, @PathVariable(required = false) Long id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
-                checkResult(accessLogService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(accessLogService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -169,7 +169,7 @@ public class AccessLogController extends BaseController {
             @Valid AccessLogIdReq req, @PathVariable(required = false) Long id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
-                checkResult(accessLogService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(accessLogService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -208,7 +208,7 @@ public class AccessLogController extends BaseController {
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateAccessLogReq> reqList) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         accessLogService.batchUpdate(reqList),
                         BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
@@ -223,7 +223,7 @@ public class AccessLogController extends BaseController {
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteAccessLogReq req) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         accessLogService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 

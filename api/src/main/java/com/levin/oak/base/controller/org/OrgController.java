@@ -72,17 +72,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 机构控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:24, 代码生成哈希校验码：[1e04985a66f65f29b05a292a26a1e713]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:04:00, 代码生成哈希校验码：[881066250dde55f088d5a625e9a36bff]，请不要修改和删除此行内容。
  */
 public class OrgController extends BaseController {
 
     protected static final String BIZ_NAME = E_Org.BIZ_NAME;
 
-    // @Autowired
-    @DubboReference protected OrgService orgService;
+    @DubboReference // @Autowired
+    protected OrgService orgService;
 
-    // @Autowired
-    @DubboReference protected BizOrgService bizOrgService;
+    @DubboReference // @Autowired
+    protected BizOrgService bizOrgService;
 
     /**
      * 分页列表查找
@@ -150,7 +150,7 @@ public class OrgController extends BaseController {
     public ApiResp<Boolean> update(
             @RequestBody @Valid UpdateOrgReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(orgService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(orgService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -165,7 +165,7 @@ public class OrgController extends BaseController {
     @CRUD.Op
     public ApiResp<Boolean> delete(@Valid OrgIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(orgService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(orgService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -204,8 +204,7 @@ public class OrgController extends BaseController {
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateOrgReq> reqList) {
         return ApiResp.ok(
-                checkResult(
-                        orgService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(orgService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -218,7 +217,7 @@ public class OrgController extends BaseController {
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteOrgReq req) {
         return ApiResp.ok(
-                checkResult(orgService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(orgService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**

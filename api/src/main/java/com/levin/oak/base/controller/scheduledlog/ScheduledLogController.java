@@ -75,17 +75,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 调度日志控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:15, 代码生成哈希校验码：[48bcc2e59ea24fdd5491d2356ea66209]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:03:58, 代码生成哈希校验码：[346f5ffc6d84cb653be7fd03f58259b2]，请不要修改和删除此行内容。
  */
 public class ScheduledLogController extends BaseController {
 
     protected static final String BIZ_NAME = E_ScheduledLog.BIZ_NAME;
 
-    // @Autowired
-    @DubboReference protected ScheduledLogService scheduledLogService;
+    @DubboReference // @Autowired
+    protected ScheduledLogService scheduledLogService;
 
-    // @Autowired
-    @DubboReference protected BizScheduledLogService bizScheduledLogService;
+    @DubboReference // @Autowired
+    protected BizScheduledLogService bizScheduledLogService;
 
     /**
      * 分页列表查找
@@ -156,7 +156,7 @@ public class ScheduledLogController extends BaseController {
             @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
-                checkResult(scheduledLogService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(scheduledLogService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -173,7 +173,7 @@ public class ScheduledLogController extends BaseController {
             @Valid ScheduledLogIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
-                checkResult(scheduledLogService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(scheduledLogService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -213,7 +213,7 @@ public class ScheduledLogController extends BaseController {
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateScheduledLogReq> reqList) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         scheduledLogService.batchUpdate(reqList),
                         BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
@@ -228,7 +228,7 @@ public class ScheduledLogController extends BaseController {
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteScheduledLogReq req) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         scheduledLogService.batchDelete(req),
                         BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }

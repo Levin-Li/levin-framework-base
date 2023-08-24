@@ -72,17 +72,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 简单动态接口控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:10, 代码生成哈希校验码：[2a3da623c3866ae969292bb98ac7fe49]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:03:57, 代码生成哈希校验码：[74037cb3bf608e76d2d2a4a9530fad0f]，请不要修改和删除此行内容。
  */
 public class SimpleApiController extends BaseController {
 
     protected static final String BIZ_NAME = E_SimpleApi.BIZ_NAME;
 
-    // @Autowired
-    @DubboReference protected SimpleApiService simpleApiService;
+    @DubboReference // @Autowired
+    protected SimpleApiService simpleApiService;
 
-    // @Autowired
-    @DubboReference protected BizSimpleApiService bizSimpleApiService;
+    @DubboReference // @Autowired
+    protected BizSimpleApiService bizSimpleApiService;
 
     /**
      * 分页列表查找
@@ -152,7 +152,7 @@ public class SimpleApiController extends BaseController {
             @RequestBody @Valid UpdateSimpleApiReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
-                checkResult(simpleApiService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(simpleApiService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -169,7 +169,7 @@ public class SimpleApiController extends BaseController {
             @Valid SimpleApiIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(
-                checkResult(simpleApiService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(simpleApiService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -208,7 +208,7 @@ public class SimpleApiController extends BaseController {
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateSimpleApiReq> reqList) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         simpleApiService.batchUpdate(reqList),
                         BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
@@ -223,7 +223,7 @@ public class SimpleApiController extends BaseController {
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteSimpleApiReq req) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         simpleApiService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 

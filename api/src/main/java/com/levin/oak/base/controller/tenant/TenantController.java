@@ -72,17 +72,17 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 平台租户控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:14, 代码生成哈希校验码：[435e97ae37d19ef51a6579ad86f047e0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:07:47, 代码生成哈希校验码：[b1d68ae61dde2967efae9a404f8c28e0]，请不要修改和删除此行内容。
  */
 public class TenantController extends BaseController {
 
     protected static final String BIZ_NAME = E_Tenant.BIZ_NAME;
 
-    // @Autowired
-    @DubboReference protected TenantService tenantService;
+    @DubboReference // @Autowired
+    protected TenantService tenantService;
 
-     @Autowired
-     protected BizTenantService bizTenantService;
+    @DubboReference // @Autowired
+    protected BizTenantService bizTenantService;
 
     /**
      * 分页列表查找
@@ -151,7 +151,7 @@ public class TenantController extends BaseController {
     public ApiResp<Boolean> update(
             @RequestBody @Valid UpdateTenantReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(tenantService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(tenantService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -167,7 +167,7 @@ public class TenantController extends BaseController {
     public ApiResp<Boolean> delete(
             @Valid TenantIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(checkResult(tenantService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(tenantService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -206,7 +206,7 @@ public class TenantController extends BaseController {
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateTenantReq> reqList) {
         return ApiResp.ok(
-                checkResult(
+                assertTrue(
                         tenantService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -220,7 +220,7 @@ public class TenantController extends BaseController {
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteTenantReq req) {
         return ApiResp.ok(
-                checkResult(tenantService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+                assertTrue(tenantService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
