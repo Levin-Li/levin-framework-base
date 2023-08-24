@@ -110,8 +110,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         }
     }
 
-}
-
     /**
      * 视图配置
      *
