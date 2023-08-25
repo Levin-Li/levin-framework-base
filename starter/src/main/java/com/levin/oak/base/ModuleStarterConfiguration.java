@@ -37,10 +37,9 @@ import org.springframework.web.bind.annotation.RestController;
 // Spring data jpa scan，jpa querydsl entity class ...
 @EntityScan({PACKAGE_NAME})
 
-
 // Spring 扫描
-// @ComponentScan({PACKAGE_NAME})
 @ConfigurationPropertiesScan({PACKAGE_NAME})
+@ComponentScan({PACKAGE_NAME})
 
 // 自定义注解接口 扫描
 @ProxyBeanScan(
@@ -55,5 +54,7 @@ import org.springframework.web.bind.annotation.RestController;
 @DubboComponentScan({PACKAGE_NAME})
 public class ModuleStarterConfiguration {
 
-    @Autowired Environment environment;
+    @Autowired
+    Environment environment;
+
 }
