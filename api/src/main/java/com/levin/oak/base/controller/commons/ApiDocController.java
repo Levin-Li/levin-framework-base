@@ -48,7 +48,7 @@ import static com.levin.oak.base.ModuleOption.*;
 @MenuResTag(false)
 public class ApiDocController extends BaseController {
 
-    public static final String SPRING_DOC_PATH = "/v3/api-docs/";
+    private static final String SPRING_DOC_PATH = "/v3/api-docs/";
 
     @Autowired
     FrameworkProperties frameworkProperties;
