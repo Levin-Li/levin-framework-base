@@ -134,10 +134,9 @@ plugin:
             resources-acl:
               - includePathPatterns: "/templates/com.levin.oak.base/**"
                 denied: true
-              - exclude-path-patterns: /doc/**,/doc.html,/swagger-ui/**,/webjars/**
+              - exclude-path-patterns: /**,/doc.html,/swagger-ui/**,/webjars/**
 
             enable-mock-sms-send: true
-
 
 #日志配置
 logging:

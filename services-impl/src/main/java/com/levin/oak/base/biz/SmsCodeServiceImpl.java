@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
@@ -39,6 +41,9 @@ public class SmsCodeServiceImpl
 
     @Autowired
     FrameworkProperties frameworkProperties;
+
+    @Autowired
+    Environment environment;
 
     @Autowired(required = false)
     SmsSendService smsSender;
@@ -83,8 +88,10 @@ public class SmsCodeServiceImpl
 
         final String cacheKey = CACHE_NAME + "_" + String.join("_", tenantId, appId, account) + code;
 
-        //如果有发送服务
-        if (smsSender != null) {
+        if (frameworkProperties.isEnableMockSmsSend()) {
+            //模拟短信发送
+            code = "mock:" + code;
+        } else if (smsSender != null) {  //如果有发送服务
             //@todo 发送短信验证码
             String resp = null;
 
@@ -99,9 +106,6 @@ public class SmsCodeServiceImpl
             if (!code.equals(resp)) {
                 throw new IllegalStateException("短信发送失败");
             }
-        } else if (frameworkProperties.isEnableMockSmsSend()) {
-            //模拟短信发送
-            code = "mock:" + code;
         } else {
             throw new IllegalStateException("1短信发送失败，通道不可用");
         }

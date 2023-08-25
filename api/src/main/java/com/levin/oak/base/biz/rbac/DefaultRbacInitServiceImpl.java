@@ -179,7 +179,7 @@ public class DefaultRbacInitServiceImpl
                     .setOrderCode(plugin.getOrderCode())
                     .setRemark(plugin.getRemark()));
 
-            RbacUtils.getMenuItemByController(context, plugin.getPackageName(), EntityConst.QUERY_ACTION)
+            RbacUtils.getMenuItemByController(context, plugin.getPackageName(), EntityConst.QUERY_LIST_ACTION)
                     .stream().filter(Objects::nonNull).forEach(menuItem -> {
 
                         final int no = index.incrementAndGet();
@@ -306,7 +306,7 @@ public class DefaultRbacInitServiceImpl
 
                                     new ResPermission()
                                             .setDomain("*")
-                                            .setType(EntityConst.TYPE_NAME)
+                                            .setType(EntityConst.ENTITY_TYPE_NAME)
                                             .setRes("*")
                                             .setAction("*")
                                             .toString(),

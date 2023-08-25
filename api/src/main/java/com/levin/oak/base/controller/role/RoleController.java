@@ -76,8 +76,8 @@ public class RoleController extends BaseController {
      * @param req QueryRoleReq
      * @return ApiResp<PagingData < RoleInfo>>
      */
-    @GetMapping("/query")
-    @Operation(summary = QUERY_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
+    @GetMapping("/queryList")
+    @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     public ApiResp<PagingData<RoleInfo>> query(QueryRoleReq req, SimplePaging paging) {
 
         PagingData<RoleInfo> pagingData = roleService.query(req, paging);

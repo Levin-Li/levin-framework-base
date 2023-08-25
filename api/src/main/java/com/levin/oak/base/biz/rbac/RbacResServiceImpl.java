@@ -90,7 +90,8 @@ public class RbacResServiceImpl implements RbacResService<String> {
                         .setContainsPublicData(true)
                         .setOrderBy(E_MenuRes.orderCode)
                         .setOrderDir(OrderBy.Type.Asc)
-                        .setTenantId(userInfo.getTenantId()), new SimplePaging().setPageIndex(0).setPageSize(5000)
+                        .setTenantId(userInfo.getTenantId()),
+                new SimplePaging().setPageIndex(0).setPageSize(2000)
         ).getItems();
 
         final Map<String, MenuResInfo> cacheMap = new LinkedHashMap<>();

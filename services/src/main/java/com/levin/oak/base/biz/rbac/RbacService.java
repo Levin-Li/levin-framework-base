@@ -1,22 +1,22 @@
 package com.levin.oak.base.biz.rbac;
 
 import com.levin.commons.plugin.Res;
+import com.levin.commons.rbac.Permission;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.ResAuthorize;
-import com.levin.commons.service.exception.AuthorizationException;
-import com.levin.commons.rbac.Permission;
-import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
+import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.springframework.util.StringUtils.*;
 
 /**
  * Rbac 基本服务
@@ -43,7 +43,23 @@ public interface RbacService {
      * @return
      */
     default boolean isPermission(String requirePermission) {
-        return requirePermission.contains(getPermissionDelimiter());
+
+        return hasText(requirePermission)
+                && (
+                requirePermission.contains(getPermissionDelimiter())
+                        //*号也可以是权限
+                        || "*".equals(trimWhitespace(requirePermission))
+        );
+
+    }
+
+    /**
+     * 是否是匹配模板
+     *
+     * @return
+     */
+    default boolean isPattern(String permission) {
+        return StringUtils.hasText(permission) && permission.contains("*");
     }
 
     /**
@@ -53,8 +69,108 @@ public interface RbacService {
      * @return
      */
     default boolean isRole(String requirePermission) {
-        return !isPermission(requirePermission);
+        return hasText(requirePermission)
+                && !isPermission(requirePermission)
+                ;
     }
+
+
+    /**
+     * 文本*号匹配
+     * <p>
+     * 注意不支持问号
+     *
+     * <p>
+     * Match a String against the given pattern, supporting the following simple pattern styles: "xxx*", "*xxx", "*xxx*" and "xxx*yyy" matches (with an arbitrary number of pattern parts), as well as direct equality.
+     *
+     * @param pattern
+     * @param str
+     * @return
+     * @see PatternMatchUtils#simpleMatch
+     */
+    default boolean textPatternMatch(@Nullable String pattern, @Nullable String str) {
+        return PatternMatchUtils.simpleMatch(pattern, str);
+    }
+
+    /**
+     * 简单匹配
+     *
+     * <p>
+     * 重要方法，能提升性能
+     *
+     * @param requirePermission
+     * @param ownerPermission
+     * @return
+     */
+    default boolean simpleMatch(String requirePermission, String ownerPermission) {
+
+        //去除所有空字符
+        requirePermission = trimWhitespace(requirePermission);
+        //如果需要去权限为空
+        if (!StringUtils.hasText(requirePermission)) {
+            return true;
+        }
+
+        //去除所有空字符
+        ownerPermission = trimWhitespace(ownerPermission);
+        if (!StringUtils.hasText(ownerPermission)) {
+            return false;
+        }
+
+        //1、如果相等，直接返回
+        if (ownerPermission.equals(requirePermission)) {
+            return true;
+        }
+
+        //是否是角色
+        boolean opIsRole = isRole(ownerPermission);
+        boolean rpIsRole = isRole(requirePermission);
+
+        if (opIsRole || rpIsRole) {
+            //2、只要是角色，就只能是角色之间比较
+            return opIsRole && rpIsRole && textPatternMatch(ownerPermission, requirePermission);
+        }
+
+        //3、如果拥有权限是模板
+        if (isPattern(ownerPermission)) {
+
+            //拥有的权限 A*:B*:C*:D*
+            final String[] ownerList = ownerPermission.split(getPermissionDelimiter());
+
+            final AtomicInteger idx = new AtomicInteger(-1);
+
+            //切割出单个比较项目
+            return Stream.of(requirePermission.split(getPermissionDelimiter()))
+                    .allMatch(rp -> textPatternMatch(
+                                    //超过数组长度以后，总是取最后一个
+                                    trimWhitespace(ownerList[idx.updateAndGet(oldValue -> oldValue < ownerList.length ? oldValue + 1 : oldValue)])
+                                    , trimWhitespace(rp)
+                            )
+                    );
+        }
+
+        return false;
+    }
+
+
+    /**
+     * 多个匹配
+     *
+     * @param requirePermission
+     * @param ownerPermissions
+     * @return
+     */
+    default boolean simpleMatch(final String requirePermission, Collection<String> ownerPermissions) {
+
+        if (!StringUtils.hasText(requirePermission)) {
+            return true;
+        }
+
+        return ownerPermissions != null
+                && !ownerPermissions.isEmpty()
+                && ownerPermissions.stream().anyMatch(op -> simpleMatch(requirePermission, op));
+    }
+
 
     /**
      * 获取认证上下文
@@ -72,7 +188,6 @@ public interface RbacService {
      * @return
      */
     RbacUserInfo<String> getUserInfo(Object userId);
-
 
     /**
      * 获取用户的角色列表
@@ -97,7 +212,6 @@ public interface RbacService {
      * @return
      */
     List<String> getCanAcccessOrgIdList(@NotNull Object userId);
-
 
     /**
      * 用户对指定的注解是否有权限
@@ -184,26 +298,22 @@ public interface RbacService {
                                  boolean isRequireAllPermission, List<String> requirePermissionList,
                                  BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer) {
 
-        //如果不需要权限
-        if (requirePermissionList == null
-                || requirePermissionList.isEmpty()) {
-            return true;
-        }
+        {
+            //如果不需要权限
+            if (requirePermissionList == null
+                    || requirePermissionList.isEmpty()) {
+                return true;
+            }
 
-        if (ownerPermissionList != null
-                && !ownerPermissionList.isEmpty()) {
+            //过滤空的权限列表
+            requirePermissionList = requirePermissionList.stream().filter(StringUtils::hasText).collect(Collectors.toList());
 
-            if (isRequireAllPermission) {
-                //提升效率，去除已经拥有的相同的权限
-                requirePermissionList = requirePermissionList.stream()
-                        //保留源用户未拥有的权限列表，再去检查
-                        .filter(p -> !ownerPermissionList.contains(p))
-                        .collect(Collectors.toList());
-            } else if (requirePermissionList.stream().anyMatch(ownerPermissionList::contains)) {
-                //如果只是需要任意一个权限，并且已经拥有，则直接返回
+            if (requirePermissionList.isEmpty()) {
                 return true;
             }
         }
+
+        ///////////////////////////////////////////////////////////////
 
         Predicate<String> predicate = rp -> isAuthorized(ownerRoleList, ownerPermissionList, rp, matchErrorConsumer);
 

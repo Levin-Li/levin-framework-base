@@ -4,6 +4,7 @@ import com.levin.commons.service.support.MatchConfig;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 import org.springframework.beans.factory.ObjectProvider;
@@ -145,6 +146,7 @@ public class FrameworkProperties
     @Data
     @Accessors(chain = true)
     @FieldNameConstants
+    @ToString(exclude = "antPathMatcher")
     public static class ResCfg {
 
         protected final AntPathMatcher antPathMatcher = new AntPathMatcher();

@@ -1,6 +1,5 @@
 package com.levin.oak.base.biz.rbac;
 
-import cn.hutool.crypto.SecureUtil;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.plugin.Res;
@@ -17,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Role;
@@ -36,6 +34,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import static org.springframework.util.StringUtils.*;
 
 
 /**
@@ -124,7 +123,7 @@ public class RbacServiceImpl implements RbacService {
         Map<String, Res.Action> actionMap = new LinkedHashMap<>();
 
         getActionContext().getAll(true).forEach((k, v) -> {
-            if (vagueMatch(requirePermissionPattern, k)) {
+            if (textPatternMatch(requirePermissionPattern, k)) {
                 actionMap.put(k, v);
             }
         });
@@ -133,6 +132,8 @@ public class RbacServiceImpl implements RbacService {
     }
 
     /**
+     * 暂时不用
+     * <p>
      * 字符串模糊匹配
      * <p>example:
      * <p> user* user-add   --  true
@@ -142,8 +143,9 @@ public class RbacServiceImpl implements RbacService {
      * @param str     待匹配的字符串
      * @return 是否可以匹配
      */
+    @Deprecated
     private static boolean vagueMatch(String pattern, String str) {
-        // 如果表达式不带有*号，则只需简单equals即可 (速度提升200倍)
+
         if (!pattern.contains("*")) {
             return pattern.equals(str);
         }
@@ -152,11 +154,14 @@ public class RbacServiceImpl implements RbacService {
 
 
     /**
+     * 暂时不用
+     * <p>
      * 判断：集合中是否包含指定元素（模糊匹配）
      */
+    @Deprecated
     private static boolean hasElement(List<String> ownerPermissionList, String requestPermission) {
         return Optional.ofNullable(ownerPermissionList).map(patternList ->
-                patternList.parallelStream()
+                patternList.stream()
                         .filter(Objects::nonNull)
                         .anyMatch(pattern -> pattern.equals(requestPermission) || vagueMatch(pattern, requestPermission))
         ).orElse(false);
@@ -281,6 +286,18 @@ public class RbacServiceImpl implements RbacService {
 
         //Assert.isTrue(authService.isLogin(), "用户未登录");
 
+        //如果不需要权限
+        if (requirePermissionList == null
+                || requirePermissionList.isEmpty()) {
+            return true;
+        }
+        //过滤空的权限列表
+        requirePermissionList = requirePermissionList.stream().filter(StringUtils::hasText).collect(Collectors.toList());
+
+        if (requirePermissionList.isEmpty()) {
+            return true;
+        }
+
         RbacUserInfo<String> userInfo = getUserInfo(userId);
 
         //如果是超级管理员
@@ -292,6 +309,7 @@ public class RbacServiceImpl implements RbacService {
         return isAuthorized(userInfo.getRoleList(), getPermissionList(userInfo.getId()),
                 isRequireAllPermission, requirePermissionList, matchErrorConsumer);
     }
+
 
     /**
      * 授权验证，是否可以访问指定资源
@@ -307,7 +325,21 @@ public class RbacServiceImpl implements RbacService {
     @Override
     public boolean isAuthorized(List<String> ownerRoleList, List<String> ownerPermissionList, String requirePermission, BiConsumer<String, String> matchErrorConsumer) {
 
-        Assert.hasText(requirePermission, "检查的权限表达式为空");
+        //Assert.hasText(requirePermission, "检查的权限表达式为空");
+
+        //去除所有的百空格
+        requirePermission = trimWhitespace(requirePermission);
+
+        //如果不需要权限
+        if (!hasText(requirePermission)) {
+            return true;
+        }
+
+        //角色简单匹配,权限列表简单匹配
+        if (simpleMatch(requirePermission, ownerRoleList)
+                || simpleMatch(requirePermission, ownerPermissionList)) {
+            return true;
+        }
 
         //如果是角色，不是权限，按角色处理
         if (isRole(requirePermission)) {
@@ -324,18 +356,10 @@ public class RbacServiceImpl implements RbacService {
             return found;
         }
 
-        //如果有直接相同的权限，则直接放回
-        if (ownerPermissionList.contains(requirePermission)) {
-            return true;
-        }
-
-        Map<String, Res.Action> actionMap = new LinkedHashMap<>(1);
+        Map<String, Res.Action> actionMap = new LinkedHashMap<>(7);
 
         //是否是通配权限表达式
-        boolean isPattern = requirePermission.contains("*" + getPermissionDelimiter())
-                || requirePermission.contains(getPermissionDelimiter() + "*");
-
-        if (isPattern) {
+        if (isPattern(requirePermission)) {
             //如果包含通配权限，要拆解出权限清单
             actionMap = getMatchActions(requirePermission);
         } else {
@@ -389,26 +413,29 @@ public class RbacServiceImpl implements RbacService {
      */
     protected boolean isAuthorized(String resPrefix, Res.Action action, List<String> ownerRoleList, List<String> ownerPermissionList, Map<String, Object>... exprContexts) {
 
-        if (action.isIgnored() || action.isOnlyRequireAuthenticated()) {
+        if (action.isIgnored()
+                || action.isOnlyRequireAuthenticated()) {
             return true;
         }
 
         //过滤
-        List<String> requireAnyRoles = action.getAnyRoles().parallelStream().filter(Objects::nonNull).collect(Collectors.toList());
+        List<String> requireAnyRoles = action.getAnyRoles().stream().filter(Objects::nonNull).collect(Collectors.toList());
+
         //生成表达式
-        String requirePermission = String.join(getPermissionDelimiter(), resPrefix, action.getId());
+        final String requirePermission = String.join(getPermissionDelimiter(), resPrefix, action.getId());
 
         //1、权限检查闭包
-        Supplier<Boolean> hasPermission = () -> hasElement(ownerPermissionList, requirePermission);
+//        Supplier<Boolean> hasPermission = () -> hasElement(ownerPermissionList, requirePermission);
+        Supplier<Boolean> hasPermission = () -> simpleMatch(requirePermission, ownerPermissionList);
 
         //2、角色检查闭包
-        Supplier<Boolean> hasAnyRoles = requireAnyRoles.isEmpty() ? null : () -> requireAnyRoles.parallelStream().anyMatch(ownerRoleList::contains);
+        Supplier<Boolean> hasAnyRoles = requireAnyRoles.isEmpty() ? null : () -> requireAnyRoles.stream().anyMatch(ownerRoleList::contains);
 
         //表达式支持
         String verifyExpression = action.getVerifyExpression();
 
         //3、表达式闭包
-        Supplier<Boolean> expressTrue = StringUtils.hasText(verifyExpression) ? () -> (Boolean) ExpressionUtils.evalSpEL(null, verifyExpression,
+        Supplier<Boolean> expressTrue = hasText(verifyExpression) ? () -> (Boolean) ExpressionUtils.evalSpEL(null, verifyExpression,
                 (ctx) -> {
                     ctx.setBeanResolver(new BeanFactoryResolver(context));
                     // ctx.setVariable("stpLogic", StpUtil.stpLogic);
@@ -424,13 +451,13 @@ public class RbacServiceImpl implements RbacService {
 
         //合并闭包
         List<Supplier<Boolean>> suppliers = Arrays.asList(hasAnyRoles, hasPermission, expressTrue)
-                .parallelStream()
+                .stream()
                 .filter(Objects::nonNull).collect(Collectors.toList());
 
         //执行判断
         return action.isAndMode()
-                ? suppliers.parallelStream().allMatch(Supplier::get)
-                : suppliers.parallelStream().anyMatch(Supplier::get);
+                ? suppliers.stream().allMatch(Supplier::get)
+                : suppliers.stream().anyMatch(Supplier::get);
     }
 
 }
