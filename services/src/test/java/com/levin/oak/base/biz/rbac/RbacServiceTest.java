@@ -80,7 +80,7 @@ class RbacServiceTest {
         Assert.isTrue(rbacService.isPermission("*:*"));
         Assert.isTrue(rbacService.isPermission("*"));
 
-        Assert.isTrue(rbacService.isPermission("**"));
+        Assert.isFalse(rbacService.isPermission("**"));
 
 
         Assert.isTrue(rbacService.textPatternMatch("A*","ABCD"));

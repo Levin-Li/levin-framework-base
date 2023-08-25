@@ -143,7 +143,7 @@ public interface RbacService {
             return Stream.of(requirePermission.split(getPermissionDelimiter()))
                     .allMatch(rp -> textPatternMatch(
                                     //超过数组长度以后，总是取最后一个
-                                    trimWhitespace(ownerList[idx.updateAndGet(oldValue -> oldValue < ownerList.length ? oldValue + 1 : oldValue)])
+                                    trimWhitespace(ownerList[idx.updateAndGet(oldValue -> oldValue < ownerList.length - 1 ? oldValue + 1 : oldValue)])
                                     , trimWhitespace(rp)
                             )
                     );
