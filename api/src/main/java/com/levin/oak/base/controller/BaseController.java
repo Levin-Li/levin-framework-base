@@ -70,6 +70,13 @@ public abstract class BaseController {
         // SimpleDateFormat("MM-dd-yyyy"),false));
     }
 
+    //        request.getRequestURL():http://localhost:8080/bzbs/system/login.jsp
+    //        request.getRequestURI():/bzbs/system/login.jsp
+    //        request.getContextPath():/bzbs
+    //        request.getServletPath():/system/login.jsp
+
+
+
     /**
      * @return
      */

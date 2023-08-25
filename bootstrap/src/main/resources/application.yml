@@ -86,8 +86,6 @@ spring:
       date: yyyy-MM-dd
       date-time: yyyy-MM-dd HH:mm:ss
       time: HH:mm:ss
-
-
 ############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
 sa-token:
   # token 名称（同时也是 cookie 名称）
@@ -124,6 +122,8 @@ plugin:
         base:
           framework:
             admin-path: /
+            api-doc-path: /doc
+
             controller-acl:
               exclude-path-patterns: "/v3/api-docs/**"
             sign:
@@ -131,13 +131,13 @@ plugin:
             log:
               exclude-path-patterns: /v3/api-docs/**,/**/api/amis/page
 
-            resourcesAcl:
+            resources-acl:
               - includePathPatterns: "/templates/com.levin.oak.base/**"
                 denied: true
-              - exclude-path-patterns: /**,/doc.html,/swagger-ui/**,/webjars/**
+              - exclude-path-patterns: /doc/**,/doc.html,/swagger-ui/**,/webjars/**
 
-#            enable-sms-verification-code: false
             enable-mock-sms-send: true
+
 
 #日志配置
 logging:

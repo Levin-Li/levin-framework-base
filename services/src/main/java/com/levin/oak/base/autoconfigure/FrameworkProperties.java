@@ -67,6 +67,11 @@ public class FrameworkProperties
     private String adminPath = null;
 
     /**
+     * api 文档路径
+     */
+    private String apiDocPath = null;
+
+    /**
      * admin 首页 amis 模板，不需要包含模板根路径
      */
     private String adminIndexTemplate = null;
@@ -165,13 +170,16 @@ public class FrameworkProperties
         }
 
         public boolean isPathMatched(String path) {
-            return this.enable && this.excludePathPatterns.stream().filter(StringUtils::hasText).noneMatch((p) -> {
-                return this.antPathMatcher.match(p, path);
-            }) && (this.includePathPatterns.stream().noneMatch(StringUtils::hasText) || this.includePathPatterns.stream().filter(StringUtils::hasText).anyMatch((p) -> {
-                return this.antPathMatcher.match(p, path);
-            }));
+            return this.enable
+                    //没有被排除
+                    && this.excludePathPatterns.stream().filter(StringUtils::hasText).noneMatch((p) -> this.antPathMatcher.match(p, path))
+                    //并且是包含的
+                    && (
+                    this.includePathPatterns.stream().noneMatch(StringUtils::hasText)
+                            || this.includePathPatterns.stream().filter(StringUtils::hasText).anyMatch((p) -> this.antPathMatcher.match(p, path)
+                    )
+            );
         }
-
     }
 
     /**

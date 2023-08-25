@@ -81,7 +81,7 @@ public class TenantController extends BaseController {
     @DubboReference // @Autowired
     protected TenantService tenantService;
 
-    @DubboReference // @Autowired
+    @Autowired
     protected BizTenantService bizTenantService;
 
     /**

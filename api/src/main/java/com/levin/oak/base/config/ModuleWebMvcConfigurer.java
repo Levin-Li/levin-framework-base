@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -60,16 +61,10 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     FrameworkProperties frameworkProperties;
 
     @Autowired
+    WebProperties webProperties;
+
+    @Autowired
     PluginManager pluginManager;
-
-    @Value("${springfox.documentation.swagger-ui.base-url:/swagger-ui}")
-    private String swaggerUiBaseUrl;
-
-    @Value("${knifeUrl:/doc.html}")
-    private String knifeUrl;
-
-    @Value("${open-api.v3.path:/v3/api-docs}")
-    private String openApiPath;
 
     @PostConstruct
     void init() {
@@ -79,6 +74,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         frameworkProperties.getTenantBindDomain().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
         frameworkProperties.getControllerAcl().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
+
 
     }
 
@@ -96,18 +92,10 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         //注意每个资源路径后面的路径加 / !!! 重要的事情说三遍
         //注意每个资源路径后面的路径加 / !!! 重要的事情说三遍
 
-//        if (StringUtils.hasText(frameworkProperties.getAdminPath())
-//                && UrlPathUtils.safeUrl(frameworkProperties.getAdminPath()).equalsIgnoreCase("/")
-//                && ClassUtils.isPresent("com.github.xiaoymin.knife4j.annotations.ApiSort", null)) {
-//
-//            log.warn("admin-ui模块占用了根路径，将导致knife4j的默认访问路径/doc.html不可用，请使用/knife4j/doc.html访问。");
-//
-//            registry.addResourceHandler("/knife4j/doc.html")
-//                    .addResourceLocations("classpath:/META-INF/resources/doc.html");
-//
-//            registry.addResourceHandler("/knife4j/webjars/**")
-//                    .addResourceLocations("classpath:/META-INF/resources/webjars/");
-//        }
+        if (StringUtils.hasText(frameworkProperties.getApiDocPath())) {
+            registry.addResourceHandler(UrlPathUtils.safeUrl("/" + frameworkProperties.getApiDocPath() + "/**"))
+                    .addResourceLocations(webProperties.getResources().getStaticLocations());
+        }
 
     }
 
@@ -181,7 +169,9 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                         authService.clearThreadCacheData();
                         injectVarService.clearCache();
                     }
-                }).addPathPatterns("/**")
+                })
+                .excludePathPatterns(serverProperties.getError().getPath())
+                .addPathPatterns("/**")
                 .order(Ordered.HIGHEST_PRECEDENCE);
 
         //要求租户绑定域名
@@ -209,7 +199,9 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                         }
                         return true;
                     }
-                }).addPathPatterns("/**")
+                })
+                .excludePathPatterns(serverProperties.getError().getPath())
+                .addPathPatterns("/**")
                 .order(Ordered.HIGHEST_PRECEDENCE + 2000);
 
         //控制访问控制
@@ -222,13 +214,13 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     , frameworkProperties.getControllerAcl().getExcludePathPatterns()
                     , frameworkProperties.getControllerAcl().getIncludePathPatterns()
             ).order(Ordered.HIGHEST_PRECEDENCE + 3000);
-
         }
 
         log.info("*** 全局资源拦截器已经启用，" + frameworkProperties.getResourcesAcl());
 
         //全局资源拦截器
         registry.addInterceptor(resourceAuthorizeInterceptor())
+                .excludePathPatterns(serverProperties.getError().getPath())
                 .addPathPatterns("/**")
                 .order(Ordered.HIGHEST_PRECEDENCE + 4000);
 

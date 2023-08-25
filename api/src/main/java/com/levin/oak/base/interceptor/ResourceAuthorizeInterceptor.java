@@ -75,11 +75,16 @@ public class ResourceAuthorizeInterceptor
         //去除上下文路径
         String path = request.getRequestURI().substring(getLen(request.getContextPath()));
 
-        return frameworkProperties.getResourcesAcl()
+        boolean pass = frameworkProperties.getResourcesAcl()
                 .stream()
                 .filter(resCfg -> resCfg.isEnable() && resCfg.isPathMatched(path))
                 .allMatch(this::isAuthorized);
 
+        if (!pass) {
+            log.debug("资源许可匹配：{} --> {}", path, pass);
+        }
+
+        return pass;
     }
 
     protected boolean isAuthorized(FrameworkProperties.ResCfg resCfg) {
