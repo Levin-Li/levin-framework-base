@@ -16,7 +16,7 @@
 
     <properties>
         <maven.source.skip>true</maven.source.skip>
-<!--        <maven.source.attach>false</maven.source.attach> -->
+        <!--        <maven.source.attach>false</maven.source.attach> -->
     </properties>
 
     <repositories>
@@ -48,6 +48,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
             <scope>provided</scope>
         </dependency>
 

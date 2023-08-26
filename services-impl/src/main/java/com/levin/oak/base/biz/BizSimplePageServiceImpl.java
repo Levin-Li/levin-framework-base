@@ -4,12 +4,14 @@ import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import com.levin.commons.dao.*;
+import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.dao.support.*;
 import com.levin.commons.service.domain.*;
 
 import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
+
 import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
@@ -26,7 +28,9 @@ import io.swagger.v3.oas.annotations.tags.*;
 import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
+
 import cn.hutool.core.lang.*;
+
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
@@ -45,8 +49,10 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 // 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
+
 import java.util.List;
 import java.util.Date;
+
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -84,7 +90,8 @@ import com.levin.commons.service.domain.InjectVar;
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimplePage.SIMPLE_CLASS_NAME})
 public class BizSimplePageServiceImpl extends BaseService implements BizSimplePageService {
 
-    @Autowired SimplePageService simplePageService;
+    @Autowired
+    SimplePageService simplePageService;
 
     protected BizSimplePageServiceImpl getSelfProxy() {
         return getSelfProxy(BizSimplePageServiceImpl.class);
@@ -95,4 +102,23 @@ public class BizSimplePageServiceImpl extends BaseService implements BizSimplePa
     //    simplePageService.update(req);
     // }
 
+
+    @Override
+    public SimplePageInfo findOnePage(QuerySimplePageReq req) {
+
+        return simpleDao.selectFrom(SimplePage.class)
+//                  .disableEmptyValueFilter()
+                .eq(E_SimpleEntity.type, req.getType())
+                .eq(E_SimpleEntity.category, req.getCategory())
+                .eq(E_SimpleEntity.path, req.getPath())
+                .isNullOrEq(E_SimpleEntity.tenantId, req.getTenantId())
+                //排序,本租户优先
+                .orderBy(OrderBy.Type.Desc, new Case()
+                        .when(E_SimpleEntity.tenantId + " IS NULL", "0")
+                        .elseExpr("1")
+                        .toString("(", ")")
+                ).orderBy(OrderBy.Type.Asc, E_SimpleEntity.orderCode)
+                .findOne(SimplePageInfo.class);
+
+    }
 }

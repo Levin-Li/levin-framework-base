@@ -25,6 +25,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -85,7 +86,7 @@ public class IndexController extends BaseController {
     @Autowired
     ApplicationContext applicationContext;
 
-    @Autowired
+    @DubboReference
     RoleService roleService;
 
     @Autowired
@@ -106,7 +107,7 @@ public class IndexController extends BaseController {
     @Autowired
     FrameworkProperties frameworkProperties;
 
-    @Autowired
+    @DubboReference
     SettingService settingService;
 
     @PostConstruct

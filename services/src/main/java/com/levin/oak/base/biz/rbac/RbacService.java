@@ -171,6 +171,23 @@ public interface RbacService {
                 && ownerPermissions.stream().anyMatch(op -> simpleMatch(requirePermission, op));
     }
 
+    /**
+     * 多个匹配
+     *
+     * @param requirePermission
+     * @param ownerPermissions
+     * @return
+     */
+    default boolean simpleMatch(final String requirePermission, String... ownerPermissions) {
+
+        if (!StringUtils.hasText(requirePermission)) {
+            return true;
+        }
+
+        return ownerPermissions != null
+                && ownerPermissions.length > 0
+                && Stream.of(ownerPermissions).anyMatch(op -> simpleMatch(requirePermission, op));
+    }
 
     /**
      * 获取认证上下文

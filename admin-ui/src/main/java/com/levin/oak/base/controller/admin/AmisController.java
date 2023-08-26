@@ -2,6 +2,7 @@ package com.levin.oak.base.controller.admin;
 
 import cn.hutool.cache.CacheUtil;
 import cn.hutool.cache.impl.LRUCache;
+import cn.hutool.core.bean.BeanUtil;
 import com.levin.commons.dao.Case;
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.dao.annotation.order.OrderBy;
@@ -12,6 +13,7 @@ import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
+import com.levin.oak.base.biz.BizSimplePageService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacResService;
 import com.levin.oak.base.biz.rbac.RbacService;
@@ -24,6 +26,7 @@ import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.simplepage.SimplePageService;
+import com.levin.oak.base.services.simplepage.req.QuerySimplePageReq;
 import com.levin.oak.base.utils.AmisUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,6 +34,7 @@ import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -77,7 +81,7 @@ import static com.levin.oak.base.ModuleOption.*;
 @ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME, onlyRequireAuthenticated = true)
 public class AmisController extends BaseController {
 
-    @Autowired
+    @DubboReference // @DubboReference
     RoleService roleService;
 
     @Autowired
@@ -89,7 +93,7 @@ public class AmisController extends BaseController {
     @Autowired
     AuthService authService;
 
-    @Autowired
+    @DubboReference // @Autowired
     MenuResService menuResService;
 
     @Autowired
@@ -101,11 +105,11 @@ public class AmisController extends BaseController {
     @Autowired
     FrameworkProperties frameworkProperties;
 
-    @Autowired
+    @DubboReference // @Autowired
     SimplePageService simplePageService;
 
-    @Autowired
-    SimpleDao simpleDao;
+    @DubboReference // @Autowired
+    BizSimplePageService bizSimplePageService;
 
     final LRUCache<String, Page> lruCache = CacheUtil.newLRUCache(10 * 1000, 5 * 60 * 1000);
 
@@ -203,7 +207,6 @@ public class AmisController extends BaseController {
                 .orElse(null);
     }
 
-
     private void checkAuthorize(Page page) {
 
         if (page.requireAuthorizations == null
@@ -211,7 +214,7 @@ public class AmisController extends BaseController {
             return;
         }
 
-        boolean isAuthorized = rbacService.isAuthorized(authService.getLoginId(),true, page.requireAuthorizations, (rp, info) -> {
+        boolean isAuthorized = rbacService.isAuthorized(authService.getLoginId(), true, page.requireAuthorizations, (rp, info) -> {
             throw new AuthorizationException("未授权的ui资源：" + rp + "," + page.getPath());
         });
 
@@ -268,19 +271,12 @@ public class AmisController extends BaseController {
 
         final Class<? extends SimpleEntity> aClass = "page".equalsIgnoreCase(uiType) ? SimplePage.class : SimpleForm.class;
 
-        page = simpleDao.selectFrom(aClass)
-//                  .disableEmptyValueFilter()
-                .eq(E_SimpleEntity.type, type)
-                .eq(E_SimpleEntity.category, category)
-                .eq(E_SimpleEntity.path, path)
-                .isNullOrEq(E_SimpleEntity.tenantId, shareReq.getTenantId())
-                //排序,本租户优先
-                .orderBy(OrderBy.Type.Desc, new Case()
-                        .when(E_SimpleEntity.tenantId + " IS NULL", "0")
-                        .elseExpr("1")
-                        .toString("(", ")")
-                )
-                .findOne(Page.class);
+        page = BeanUtil.copyProperties(bizSimplePageService.findOnePage(
+                new QuerySimplePageReq()
+                        .setType(type)
+                        .setCategory(category)
+                        .setPath(path).setTenantId(shareReq.getTenantId())
+        ), Page.class);
 
         //如果是被禁用
         if (page != null && !Boolean.TRUE.equals(page.getEnable())) {
