@@ -13,6 +13,8 @@ import com.levin.oak.base.utils.UrlPathUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties;
+import org.springframework.boot.actuate.autoconfigure.web.server.ManagementServerProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.WebProperties;
@@ -29,7 +31,11 @@ import org.springframework.web.servlet.config.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.*;
 
@@ -58,23 +64,42 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     ServerProperties serverProperties;
 
     @Autowired
-    FrameworkProperties frameworkProperties;
-
-    @Autowired
     WebProperties webProperties;
 
     @Autowired
+    FrameworkProperties frameworkProperties;
+
+    @Autowired
     PluginManager pluginManager;
+
+
+    @Autowired(required = false)
+    WebEndpointProperties webEndpointProperties;
+
+    @Autowired(required = false)
+    ManagementServerProperties managementServerProperties;
 
     @PostConstruct
     void init() {
 
         log.info("init...");
 
+        //设置默认排除的路径
+        frameworkProperties.setDefaultExcludePathPatterns(
+                Stream.of(serverProperties.getError().getPath()
+                                , frameworkProperties.getApiDocPath() + "/**"
+                                , Optional.ofNullable(managementServerProperties).map(p -> p.getBasePath() + "/**").orElse(null)
+                                , Optional.ofNullable(webEndpointProperties).map(p -> p.getBasePath() + "/**").orElse(null)
+                                , ClassUtils.isPresent("org.springdoc.core.GroupedOpenApi", null) ? "/v3/api-docs/**" : null
+
+                        ).filter(StringUtils::hasText)
+                        .map(UrlPathUtils::safeUrl)
+                        .collect(Collectors.toList())
+        );
+
         frameworkProperties.getTenantBindDomain().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
         frameworkProperties.getControllerAcl().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
-
 
     }
 
@@ -170,7 +195,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                         injectVarService.clearCache();
                     }
                 })
-                .excludePathPatterns(serverProperties.getError().getPath())
+                .excludePathPatterns(frameworkProperties.getDefaultExcludePathPatterns())
                 .addPathPatterns("/**")
                 .order(Ordered.HIGHEST_PRECEDENCE);
 
@@ -200,7 +225,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                         return true;
                     }
                 })
-                .excludePathPatterns(serverProperties.getError().getPath())
+                .excludePathPatterns(frameworkProperties.getDefaultExcludePathPatterns())
                 .addPathPatterns("/**")
                 .order(Ordered.HIGHEST_PRECEDENCE + 2000);
 
@@ -214,13 +239,14 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     , frameworkProperties.getControllerAcl().getExcludePathPatterns()
                     , frameworkProperties.getControllerAcl().getIncludePathPatterns()
             ).order(Ordered.HIGHEST_PRECEDENCE + 3000);
+
         }
 
         log.info("*** 全局资源拦截器已经启用，" + frameworkProperties.getResourcesAcl());
 
         //全局资源拦截器
         registry.addInterceptor(resourceAuthorizeInterceptor())
-                .excludePathPatterns(serverProperties.getError().getPath())
+                .excludePathPatterns(frameworkProperties.getDefaultExcludePathPatterns())
                 .addPathPatterns("/**")
                 .order(Ordered.HIGHEST_PRECEDENCE + 4000);
 
@@ -239,12 +265,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
     private InterceptorRegistration processDefaultPath(InterceptorRegistration registration, List<String> excludePathPatterns, List<String> includePathPatterns) {
 
-        registration
-                .excludePathPatterns(serverProperties.getError().getPath())
-//                .excludePathPatterns(safeUrl("/" + openApiPath + "/**"))
-//                .excludePathPatterns(safeUrl("/" + swaggerUiBaseUrl + "/**"))
-//                .excludePathPatterns(safeUrl("/" + knifeUrl))
-        ;
+        registration.excludePathPatterns(frameworkProperties.getDefaultExcludePathPatterns());
 
         if (excludePathPatterns != null) {
             excludePathPatterns.forEach(url -> registration.excludePathPatterns(UrlPathUtils.safeUrl(url)));

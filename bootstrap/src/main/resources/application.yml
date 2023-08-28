@@ -86,6 +86,36 @@ spring:
       date: yyyy-MM-dd
       date-time: yyyy-MM-dd HH:mm:ss
       time: HH:mm:ss
+
+
+
+  #====================== spring-boot-admin ===============
+  #被管理节点的配置
+  boot:
+    admin:
+      client:
+        #        管理服务器的地址，用于注册当前节点
+        #        要注册的server端的url地址。如果要同时在多个server端口注册，则用逗号分隔各个server端的url地址
+        url: http://localhost:8080
+
+#管理服务的配置，只要一个节点中配置
+management:
+  server:
+    #管理路径，建议不填
+#    base-path: /management
+#    port: 19876
+
+  #========= 被管理节点的配置 ===============
+  endpoints: # 启动所有监控点
+    web:
+      exposure:
+        include: '*'
+
+  info: # spring-boot 2.6以后info默认值为false.需手动开启
+    env:
+      enabled: true
+      #====================== spring-boot-admin ===============
+
 ############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
 sa-token:
   # token 名称（同时也是 cookie 名称）

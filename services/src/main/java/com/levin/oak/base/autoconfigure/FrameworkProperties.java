@@ -93,6 +93,11 @@ public class FrameworkProperties
     private String sysName = "";
 
     /**
+     * 默认排除的路径
+     */
+    private List<String> defaultExcludePathPatterns = new ArrayList<>(10);
+
+    /**
      * 请求变量注入
      */
     @NestedConfigurationProperty
@@ -221,6 +226,10 @@ public class FrameworkProperties
             return tip;
         }
 
+        @Override
+        public boolean isPathMatched(String path) {
+            return super.isPathMatched(path);
+        }
     }
 
 }

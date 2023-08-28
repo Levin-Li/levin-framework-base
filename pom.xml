@@ -28,7 +28,9 @@
         <dubbo.version>3.1.8</dubbo.version>
         <dubbo.version>3.2.5</dubbo.version>
         <dubbo.version>3.1.11</dubbo.version>
+
         <spring-boot.version>2.7.10</spring-boot.version>
+        <spring-boot-admin.version>2.7.10</spring-boot-admin.version>
 
         <levin.simple-dao.groupId>com.levin.commons</levin.simple-dao.groupId>
         <levin.simple-dao.version>2.5.1-SNAPSHOT</levin.simple-dao.version>
@@ -60,6 +62,7 @@
 
         <sa-token.version>1.35.0.RC</sa-token.version>
         <jfinal-enjoy.version>4.9.16</jfinal-enjoy.version>
+
 
         <hutool.version>5.8.11</hutool.version>
         <oshi.version>5.6.1</oshi.version>
@@ -237,6 +240,15 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-dependencies</artifactId>
+                <version>${spring-boot-admin.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

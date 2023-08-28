@@ -1,6 +1,7 @@
 package com.levin.oak.base;
 
 import com.levin.commons.service.support.*;
+//import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
@@ -48,6 +49,7 @@ import java.util.stream.Stream;
 @EnableCaching
 @EnableAsync
 @EnableDubboConfig
+//@EnableAdminServer
 public class Application {
 
     public static void main(String... args) {
