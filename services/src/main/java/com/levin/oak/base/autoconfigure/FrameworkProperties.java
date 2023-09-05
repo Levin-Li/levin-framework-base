@@ -70,7 +70,7 @@ public class FrameworkProperties
     /**
      * api 文档路径
      */
-    private String apiDocPath = null;
+    private String apiDocPath = "api-docs";
 
     /**
      * admin 首页 amis 模板，不需要包含模板根路径
