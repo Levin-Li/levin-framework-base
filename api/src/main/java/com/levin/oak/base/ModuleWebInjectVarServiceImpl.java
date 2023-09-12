@@ -152,7 +152,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
         return Stream.of(thread.getStackTrace())
 
                 //过滤自己
-                .filter(e -> e.getClassName().startsWith(getClass().getName()))
+                .filter(e -> !e.getClassName().startsWith(getClass().getName()))
 
                 //只过滤出业务类
                 .filter(e -> plugins.stream().anyMatch(plugin -> e.getClassName().startsWith(plugin.getPackageName())))
