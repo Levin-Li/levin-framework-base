@@ -2,6 +2,8 @@ package com.levin.oak.base;
 
 import static com.levin.oak.base.ModuleOption.*;
 
+import com.levin.commons.plugin.Plugin;
+import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.utils.ExceptionUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizOrgService;
@@ -28,6 +30,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -112,6 +115,10 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
     @Value("${spring.application.name:}")
     String appModuleName = "";
 
+    @Autowired
+    PluginManager pluginManager;
+
+
     @PostConstruct
     public void init() {
 
@@ -125,7 +132,6 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
         //2、动态加入用户相关的动态的会变的数据，如用户能访问的机构列表，用户权限列表
 
         //@todo 重要待实现
-
     }
 
     /**
@@ -134,6 +140,20 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
     @Override
     public void clearCache() {
         httpServletRequest.removeAttribute(INJECT_VAR_CACHE_KEY);
+    }
+
+    public List<String> getBizStack(Thread thread) {
+
+        if (thread == null) {
+            thread = Thread.currentThread();
+        }
+
+        List<Plugin> plugins = pluginManager.getInstalledPlugins();
+        return Stream.of(thread.getStackTrace())
+                //只过滤出业务类
+                .filter(e -> plugins.stream().anyMatch(plugin -> e.getClassName().startsWith(plugin.getPackageName())))
+                .map(e -> e.getClassName() + " " + e.getMethodName() + "(" + e.getLineNumber() + ")")
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -169,8 +189,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
                     .put(InjectConsts.ORG_ID, userInfo.getOrgId());
 
             if (log.isDebugEnabled()) {
-                log.debug("当前登录用户：{}, {}", userInfo,
-                        Stream.of(Thread.currentThread().getStackTrace()).map(e -> e.getClassName() + "." + e.getMethodName()).collect(Collectors.joining(" -> ")));
+                log.debug("当前登录用户：{}, {}", userInfo, getBizStack(null));
             }
 
         } else {

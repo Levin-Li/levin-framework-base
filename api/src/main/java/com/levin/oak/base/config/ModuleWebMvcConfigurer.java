@@ -22,6 +22,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
@@ -109,12 +110,13 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    public FilterRegistrationBean clearThreadCacheDataFilterBean() {
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public OncePerRequestFilter clearThreadCacheDataFilterBean() {
 
         //通过FilterRegistrationBean实例设置优先级可以生效
         //通过@WebFilter无效
-        FilterRegistrationBean bean = new FilterRegistrationBean();
-        bean.setFilter(new OncePerRequestFilter() {
+
+        OncePerRequestFilter filter = new OncePerRequestFilter() {
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
                 try {
@@ -124,14 +126,19 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     clearThreadCacheData();
                 }
             }
-        });//注册自定义过滤器
-        bean.setName("clearThreadCacheDataFilter");//过滤器名称
-        bean.addUrlPatterns("/**");//过滤所有路径
-        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);//优先级，越低越优先
+        };
 
-        log.debug("初始化线程变量清除过滤器.");
+        return filter;
 
-        return bean;
+//        FilterRegistrationBean bean = new FilterRegistrationBean();
+//        bean.setFilter(filter);//注册自定义过滤器
+//        bean.setName("clearThreadCacheDataFilter");//过滤器名称
+//        bean.addUrlPatterns("/**");//过滤所有路径
+//        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);//优先级，越低越优先
+//
+//        log.debug("初始化线程变量清除过滤器.");
+//
+//        return bean;
     }
 
     /**
@@ -212,8 +219,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //            SaRouter.match("/comment/**", r -> StpUtil.checkPermission("comment"));
 //        })).addPathPatterns("/**");
 
-        //线程级别用户权限清除，注意必须是所有路径
-        //使用过滤器清除线程缓存变量
+        //线程级别用户权限清除，注意必须是所有路径, 也可以用过滤器清除线程缓存变量
 //        registry.addInterceptor(new HandlerInterceptor() {
 //                    @Override
 //                    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

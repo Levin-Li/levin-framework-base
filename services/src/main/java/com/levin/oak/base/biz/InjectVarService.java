@@ -1,5 +1,6 @@
 package com.levin.oak.base.biz;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,8 +12,18 @@ public interface InjectVarService {
 
     String INJECT_VAR_CACHE_KEY = InjectVarService.class.getName() + ".INJECT_VAR_CACHE_KEY";
 
-    /** 清除缓存 */
+    /**
+     * 清除缓存
+     */
     void clearCache();
+
+    /**
+     * 获取业务堆栈
+     *
+     * @param thread
+     * @return
+     */
+    List<String> getBizStack(Thread thread);
 
     /**
      * 获取默认常规的注入变量

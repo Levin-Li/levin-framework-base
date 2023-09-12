@@ -47,9 +47,6 @@ public class BizTenantServiceImpl
         implements BizTenantService {
 
     @Autowired
-    SimpleDao simpleDao;
-
-    @Autowired
     AuthService authService;
 
     @Autowired
@@ -67,6 +64,8 @@ public class BizTenantServiceImpl
     @Autowired
     FrameworkProperties frameworkProperties;
 
+    @Autowired
+    InjectVarService injectVarService;
 
     final static ThreadLocal<TenantInfo> currentTenant = new ThreadLocal<>();
 
@@ -108,8 +107,11 @@ public class BizTenantServiceImpl
         //如果当前没有域名，获取域名关联的租户
         if (tenantInfo == null
                 && frameworkProperties.getTenantBindDomain().isEnable()) {
+
             tenantInfo = setCurrentTenantByDomain(domain);
-            log.warn("当前请求的域名[ {} ]未关联租户, URL:{}", domain, request.getRequestURL());
+
+            log.warn("当前请求的域名[ {} ]未关联租户, URL:{}, 调用堆栈：{}", domain, request.getRequestURL(), injectVarService.getBizStack(null));
+
         }
 
         //当前登录用户

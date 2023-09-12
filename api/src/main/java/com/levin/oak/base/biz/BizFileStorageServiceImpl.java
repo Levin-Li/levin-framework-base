@@ -70,7 +70,6 @@ public class BizFileStorageServiceImpl
     @Autowired
     FrameworkProperties frameworkProperties;
 
-
     @DubboReference
     SettingService settingService;
 
