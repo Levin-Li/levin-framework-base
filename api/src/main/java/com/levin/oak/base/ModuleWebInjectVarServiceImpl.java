@@ -2,6 +2,7 @@ package com.levin.oak.base;
 
 import static com.levin.oak.base.ModuleOption.*;
 
+import com.levin.commons.utils.ExceptionUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizOrgService;
 import com.levin.oak.base.biz.BizTenantService;
@@ -28,6 +29,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * web模块注入服务
@@ -165,6 +168,11 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
                     .put(InjectConsts.ORG, userInfo.getOrg())
                     .put(InjectConsts.ORG_ID, userInfo.getOrgId());
 
+            if (log.isDebugEnabled()) {
+                log.debug("当前登录用户：{}, {}", userInfo,
+                        Stream.of(Thread.currentThread().getStackTrace()).map(e -> e.getClassName() + "." + e.getMethodName()).collect(Collectors.joining(" -> ")));
+            }
+
         } else {
             //匿名用户
             builder.put(InjectConsts.USER_ID, anonymous.getId())
@@ -177,6 +185,8 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
                     .put(InjectConsts.ORG, null)
                     .put(InjectConsts.ORG_ID_LIST, null)
                     .put(InjectConsts.ORG_ID, null);
+
+            log.debug("当前登录用户未登录");
         }
 
         //租户信息

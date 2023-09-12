@@ -176,7 +176,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //            SaRouter.match("/comment/**", r -> StpUtil.checkPermission("comment"));
 //        })).addPathPatterns("/**");
 
-        //线程级别用户权限清除
+        //线程级别用户权限清除，注意必须是所有路径
         registry.addInterceptor(new HandlerInterceptor() {
                     @Override
                     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -195,7 +195,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                         injectVarService.clearCache();
                     }
                 })
-                .excludePathPatterns(frameworkProperties.getDefaultExcludePathPatterns())
                 .addPathPatterns("/**")
                 .order(Ordered.HIGHEST_PRECEDENCE);
 

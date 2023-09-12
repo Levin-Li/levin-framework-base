@@ -108,7 +108,7 @@ public class UserController extends BaseController {
      * @param req QueryUserReq
      * @return ApiResp<PagingData < UserInfo>>
      */
-    @GetMapping("/queryList")
+    @GetMapping({"/queryList","/query"})
     @Operation(summary = QUERY_LIST_ACTION)
     public ApiResp<PagingData<UserInfo>> query(QueryUserReq req, SimplePaging paging) {
 
