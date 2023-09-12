@@ -110,7 +110,7 @@ public class BizTenantServiceImpl
 
             tenantInfo = setCurrentTenantByDomain(domain);
 
-            log.warn("当前请求的域名[ {} ]未关联租户, URL:{}, 调用堆栈：{}", domain, request.getRequestURL(), injectVarService.getBizStack(null));
+            log.warn("当前请求的域名[ {} ]未关联租户, URL:{}, 调用堆栈：{}", domain, request.getRequestURL(), injectVarService.getBizStack());
 
         }
 

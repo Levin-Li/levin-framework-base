@@ -150,9 +150,15 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
 
         List<Plugin> plugins = pluginManager.getInstalledPlugins();
         return Stream.of(thread.getStackTrace())
+
+                //过滤自己
+                .filter(e -> e.getClassName().startsWith(getClass().getName()))
+
                 //只过滤出业务类
                 .filter(e -> plugins.stream().anyMatch(plugin -> e.getClassName().startsWith(plugin.getPackageName())))
-                .map(e -> e.getClassName() + " " + e.getMethodName() + "(" + e.getLineNumber() + ")")
+
+                .map(e -> e.getClassName() + ":" + e.getMethodName() + "(" + e.getFileName() + ":" + e.getLineNumber() + ")")
+
                 .collect(Collectors.toList());
     }
 
@@ -189,7 +195,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
                     .put(InjectConsts.ORG_ID, userInfo.getOrgId());
 
             if (log.isDebugEnabled()) {
-                log.debug("当前登录用户：{}, {}", userInfo, getBizStack(null));
+                log.debug("当前登录用户：{}, {}", userInfo, getBizStack());
             }
 
         } else {

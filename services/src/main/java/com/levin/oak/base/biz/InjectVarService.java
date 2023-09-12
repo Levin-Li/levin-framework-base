@@ -2,6 +2,7 @@ package com.levin.oak.base.biz;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 注入变量服务
@@ -16,6 +17,10 @@ public interface InjectVarService {
      * 清除缓存
      */
     void clearCache();
+
+    default String getBizStack() {
+        return getBizStack(null).stream().collect(Collectors.joining(" -> "));
+    }
 
     /**
      * 获取业务堆栈
