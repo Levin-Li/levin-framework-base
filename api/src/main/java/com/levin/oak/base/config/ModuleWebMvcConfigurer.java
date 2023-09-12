@@ -18,19 +18,24 @@ import org.springframework.boot.actuate.autoconfigure.web.server.ManagementServe
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.WebProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -103,6 +108,32 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
     }
 
+    @Bean
+    public FilterRegistrationBean clearThreadCacheDataFilterBean() {
+
+        //通过FilterRegistrationBean实例设置优先级可以生效
+        //通过@WebFilter无效
+        FilterRegistrationBean bean = new FilterRegistrationBean();
+        bean.setFilter(new OncePerRequestFilter() {
+            @Override
+            protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+                try {
+                    clearThreadCacheData();
+                    filterChain.doFilter(request, response);
+                } finally {
+                    clearThreadCacheData();
+                }
+            }
+        });//注册自定义过滤器
+        bean.setName("clearThreadCacheDataFilter");//过滤器名称
+        bean.addUrlPatterns("/**");//过滤所有路径
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);//优先级，越低越优先
+
+        log.debug("初始化线程变量清除过滤器.");
+
+        return bean;
+    }
+
     /**
      * 配置静态访问资源
      * spring boot 默认的{ "classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/" };
@@ -160,6 +191,11 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                 .allowedOriginPatterns("*");
     }
 
+    protected void clearThreadCacheData() {
+        bizTenantService.clearThreadCacheData();
+        authService.clearThreadCacheData();
+        injectVarService.clearCache();
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -177,26 +213,23 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //        })).addPathPatterns("/**");
 
         //线程级别用户权限清除，注意必须是所有路径
-        registry.addInterceptor(new HandlerInterceptor() {
-                    @Override
-                    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-                        //清楚缓存数据
-                        bizTenantService.clearThreadCacheData();
-                        authService.clearThreadCacheData();
-                        injectVarService.clearCache();
-                        return true;
-                    }
-
-                    @Override
-                    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-                        //清楚缓存数据
-                        bizTenantService.clearThreadCacheData();
-                        authService.clearThreadCacheData();
-                        injectVarService.clearCache();
-                    }
-                })
-                .addPathPatterns("/**")
-                .order(Ordered.HIGHEST_PRECEDENCE);
+        //使用过滤器清除线程缓存变量
+//        registry.addInterceptor(new HandlerInterceptor() {
+//                    @Override
+//                    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+//                        //清楚缓存数据
+//                        clearThreadCacheData();
+//                        return true;
+//                    }
+//
+//                    @Override
+//                    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+//                        //清楚缓存数据
+//                        clearThreadCacheData();
+//                    }
+//                })
+//                .addPathPatterns("/**")
+//                .order(Ordered.HIGHEST_PRECEDENCE);
 
         //要求租户绑定域名
         if (frameworkProperties.getTenantBindDomain().isEnable()) {
