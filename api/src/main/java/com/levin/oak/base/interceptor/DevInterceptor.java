@@ -69,7 +69,11 @@ public class DevInterceptor implements HandlerInterceptor {
 
             response.addHeader(PARA_NAME, devKey);
 
-            response.addCookie(new Cookie(PARA_NAME, devKey));
+            Cookie cookie = new Cookie(PARA_NAME, devKey);
+
+            cookie.setMaxAge(3600);
+            cookie.setComment("dev");
+            response.addCookie(cookie);
 
             return true;
         }
