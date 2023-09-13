@@ -7,6 +7,7 @@ import com.levin.oak.base.biz.InjectVarService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.interceptor.ControllerAuthorizeInterceptor;
+import com.levin.oak.base.interceptor.DevInterceptor;
 import com.levin.oak.base.interceptor.DomainInterceptor;
 import com.levin.oak.base.interceptor.ResourceAuthorizeInterceptor;
 import com.levin.oak.base.utils.UrlPathUtils;
@@ -237,15 +238,18 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //                .addPathPatterns("/**")
 //                .order(Ordered.HIGHEST_PRECEDENCE);
 
+        //api 文档资源特别处理
+        if (StringUtils.hasText(frameworkProperties.getApiDocPath())) {
+            registry.addInterceptor(new DevInterceptor())
+                    .addPathPatterns(UrlPathUtils.safeUrl("/" + frameworkProperties.getApiDocPath() + "/**"))
+                    .order(Ordered.HIGHEST_PRECEDENCE);
+        }
+
         //要求租户绑定域名
         if (frameworkProperties.getTenantBindDomain().isEnable()) {
+
             HandlerInterceptor handlerInterceptor = new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)
-                    , (className) -> frameworkProperties.getTenantBindDomain().isPackageMatched(className)) {
-                @Override
-                public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-                    super.afterCompletion(request, response, handler, ex);
-                }
-            };
+                    , (className) -> frameworkProperties.getTenantBindDomain().isPackageMatched(className));
 
             processDefaultPath(registry.addInterceptor(handlerInterceptor)
                     , frameworkProperties.getTenantBindDomain().getExcludePathPatterns()

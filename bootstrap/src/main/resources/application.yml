@@ -156,15 +156,16 @@ plugin:
 
             controller-acl:
               exclude-path-patterns: "/v3/api-docs/**"
+
             sign:
               enable: false
             log:
-              exclude-path-patterns: /v3/api-docs/**,/**/api/amis/page
+              exclude-path-patterns: /**/api/amis/page
 
             resources-acl:
               - includePathPatterns: "/templates/com.levin.oak.base/**"
                 denied: true
-              - exclude-path-patterns: /**,/doc.html,/swagger-ui/**,/webjars/**
+              - exclude-path-patterns: /swagger-ui/**,/webjars/**
 
             enable-mock-sms-send: true
 

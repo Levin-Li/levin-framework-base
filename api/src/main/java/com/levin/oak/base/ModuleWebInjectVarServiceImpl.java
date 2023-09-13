@@ -153,6 +153,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
 
                 //过滤自己
                 .filter(e -> !e.getClassName().startsWith(getClass().getName()))
+                .filter(e -> !e.getClassName().startsWith(InjectVarService.class.getName()))
 
                 //只过滤出业务类
                 .filter(e -> plugins.stream().anyMatch(plugin -> e.getClassName().startsWith(plugin.getPackageName())))

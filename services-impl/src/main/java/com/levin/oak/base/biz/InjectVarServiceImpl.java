@@ -5,6 +5,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 import com.levin.commons.dao.DaoContext;
 import com.levin.commons.dao.SimpleDao;
+import com.levin.commons.plugin.Plugin;
+import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.support.InjectConsts;
@@ -23,7 +25,10 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 /**
@@ -93,6 +98,9 @@ public class InjectVarServiceImpl implements InjectVarService {
     @Autowired
     VariableResolverManager variableResolverManager;
 
+    @Autowired
+    PluginManager pluginManager;
+
     private static ThreadLocal<Map<String, ?>> varCache = new ThreadLocal<>();
 
     @PostConstruct
@@ -100,6 +108,28 @@ public class InjectVarServiceImpl implements InjectVarService {
         log.info("启用模块注入服务...");
         //设置上下文
         variableResolverManager.add(VariableInjector.newResolverByMap(() -> Arrays.asList(getInjectVars())));
+    }
+
+
+    public List<String> getBizStack(Thread thread) {
+
+        if (thread == null) {
+            thread = Thread.currentThread();
+        }
+
+        List<Plugin> plugins = pluginManager.getInstalledPlugins();
+        return Stream.of(thread.getStackTrace())
+
+                //过滤自己
+                .filter(e -> !e.getClassName().startsWith(getClass().getName()))
+                .filter(e -> !e.getClassName().startsWith(InjectVarService.class.getName()))
+
+                //只过滤出业务类
+                .filter(e -> plugins.stream().anyMatch(plugin -> e.getClassName().startsWith(plugin.getPackageName())))
+
+                .map(e -> e.getClassName() + ":" + e.getMethodName() + "(" + e.getFileName() + ":" + e.getLineNumber() + ")")
+
+                .collect(Collectors.toList());
     }
 
     /**
