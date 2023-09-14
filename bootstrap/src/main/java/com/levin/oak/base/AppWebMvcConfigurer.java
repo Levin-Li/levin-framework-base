@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.levin.commons.dao.domain.support.TestEntity;
 import com.levin.commons.service.domain.ApiResp;
+import com.levin.commons.service.domain.BaseResp;
 import com.levin.commons.service.domain.EnumDesc;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -15,6 +17,7 @@ import org.springframework.core.convert.converter.ConverterFactory;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.config.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -79,15 +82,21 @@ public class AppWebMvcConfigurer implements WebMvcConfigurer {
             if (converter instanceof MappingJackson2HttpMessageConverter) {
                 ObjectMapper o = ((MappingJackson2HttpMessageConverter) converter).getObjectMapper();
 
-                SimpleModule module = new SimpleModule().addSerializer(ApiResp.class, new JsonSerializer<ApiResp>() {
+                SimpleModule module = new SimpleModule().addSerializer(TestEntity.class, new JsonSerializer<TestEntity>() {
                     @Override
-                    public void serialize(ApiResp apiResp, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+                    public void serialize(TestEntity testEntity, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
 
-                       // jsonGenerator.writeFieldName();
+                        jsonGenerator.writeStartObject();
+
+                        jsonGenerator.writeBooleanField("test", true);
+
+                        //定制输出
+                        jsonGenerator.writeEndObject();
+
                     }
                 });
 
-                o.registerModule(module);
+                // o.registerModule(module);
             }
         }
 
