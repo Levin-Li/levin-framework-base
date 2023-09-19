@@ -75,7 +75,7 @@
         <dm-db-version>8.1.2.79</dm-db-version>
 
         <IJPay.version>2.9.3</IJPay.version>
-        <cn.xuyanwu-file-storage.version>0.7.0</cn.xuyanwu-file-storage.version>
+        <cn.xuyanwu-file-storage.version>1.0.3</cn.xuyanwu-file-storage.version>
 
         <Happy-Captcha.version>1.0.1</Happy-Captcha.version>
         <egzosn-pay.version>2.14.4-fix</egzosn-pay.version>
