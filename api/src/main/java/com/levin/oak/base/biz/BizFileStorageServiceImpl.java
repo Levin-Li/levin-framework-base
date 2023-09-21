@@ -14,6 +14,7 @@ import cn.xuyanwu.spring.file.storage.exception.FileStorageRuntimeException;
 import cn.xuyanwu.spring.file.storage.platform.FileStorage;
 import cn.xuyanwu.spring.file.storage.recorder.DefaultFileRecorder;
 import cn.xuyanwu.spring.file.storage.recorder.FileRecorder;
+import cn.xuyanwu.spring.file.storage.spring.file.MultipartFileWrapperAdapter;
 import cn.xuyanwu.spring.file.storage.tika.DefaultTikaFactory;
 import cn.xuyanwu.spring.file.storage.tika.TikaFactory;
 import com.google.gson.Gson;
@@ -140,9 +141,17 @@ public class BizFileStorageServiceImpl
         //加入配置
         configList.add(0, baseConfig);
 
+        log.info("Build FileStorageService , fileStorageType:{},configList:{}", fileStorageType, configList);
+
         FileStorageServiceBuilder builder = FileStorageServiceBuilder.create(fileStorageProperties).useDefault();
 
-        return builder.build();
+        builder.addFileWrapperAdapter(new MultipartFileWrapperAdapter());
+
+        FileStorageService fileStorageService = builder.build();
+
+        fileStorageService.setDefaultPlatform(baseConfig.getPlatform());
+
+        return fileStorageService;
     }
 
 
