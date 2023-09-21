@@ -7,10 +7,7 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.xuyanwu.spring.file.storage.FileInfo;
-import cn.xuyanwu.spring.file.storage.FileStorageProperties;
-import cn.xuyanwu.spring.file.storage.FileStorageService;
-import cn.xuyanwu.spring.file.storage.UploadPretreatment;
+import cn.xuyanwu.spring.file.storage.*;
 import cn.xuyanwu.spring.file.storage.aspect.FileStorageAspect;
 import cn.xuyanwu.spring.file.storage.aspect.UploadAspectChain;
 import cn.xuyanwu.spring.file.storage.exception.FileStorageRuntimeException;
@@ -48,6 +45,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
@@ -76,18 +74,7 @@ public class BizFileStorageServiceImpl
     @DubboReference
     BizSettingService bizSettingService;
 
-    @Autowired(required = false)
-    List<FileStorageAspect> aspectList;
-
-    @Autowired(required = false)
-    FileRecorder fileRecorder;
-
-    @Autowired(required = false)
-    TikaFactory tikaFactory;
-
     private static Gson gson = new Gson();
-
-    final FileStorageService fileStorageService = new FileStorageService();
 
     public static final String CFG_CODE = "文件存储配置";
 
@@ -96,27 +83,11 @@ public class BizFileStorageServiceImpl
     {
         ClassUtil.scanPackage(FileStorage.class.getPackage().getName(),
                         type -> FileStorage.class.isAssignableFrom(type) && !Modifier.isAbstract(type.getModifiers()))
-                .stream().forEach(type -> fileStorageClassMap.put(type.getSimpleName(), (Class<? extends FileStorage>) type));
-
+                .stream().forEach(type -> fileStorageClassMap.put(type.getSimpleName().substring(0, type.getSimpleName().indexOf("FileStorage")), (Class<? extends FileStorage>) type));
     }
 
     @PostConstruct
     public void init() {
-
-        if (fileRecorder == null) {
-            fileRecorder = new DefaultFileRecorder();
-        }
-        if (tikaFactory == null) {
-            tikaFactory = new DefaultTikaFactory();
-        }
-
-        if (aspectList == null) {
-            aspectList = Collections.emptyList();
-        }
-
-        fileStorageService.setProperties(new FileStorageProperties());
-        fileStorageService.setFileRecorder(fileRecorder);
-        fileStorageService.setTikaFactory(tikaFactory);
 
         log.info("文件存储服务初始完成");
     }
@@ -139,7 +110,7 @@ public class BizFileStorageServiceImpl
      * @param appId
      * @return
      */
-    protected FileStorage getFileStorage(String tenantId, String appId) {
+    protected FileStorageService getFileStorageService(String tenantId, String appId) {
 
         Map<String, Object> setting = getSetting(tenantId, appId);
 
@@ -155,22 +126,35 @@ public class BizFileStorageServiceImpl
 
         Class<? extends FileStorage> implType = fileStorageClassMap.get(fileStorageType);
 
-        if (implType == null && !fileStorageType.endsWith("FileStorage")) {
-            implType = fileStorageClassMap.get(fileStorageType + "FileStorage");
-        }
+        // Assert.notNull(implType, "未知的存储类型：fileStorageType={}", fileStorageType);
 
         Assert.notNull(implType, "不支持的文件存储类型{}", fileStorageType);
 
-        return BeanUtil.copyProperties(setting, implType);
+        FileStorageProperties fileStorageProperties = new FileStorageProperties();
+
+        //配置类
+        FileStorageProperties.BaseConfig baseConfig = BeanUtil.copyProperties(setting, ClassUtil.loadClass(FileStorageProperties.class.getName() + "." + fileStorageType + "Config"));
+
+        List configList = (List) BeanUtil.getFieldValue(fileStorageProperties, StrUtil.lowerFirst(fileStorageType));
+
+        //加入配置
+        configList.add(0, baseConfig);
+
+        FileStorageServiceBuilder builder = FileStorageServiceBuilder.create(fileStorageProperties).useDefault();
+
+        return builder.build();
     }
 
 
     private static SettingInfo newDefaultConfig(String code) {
 
         Map<String, Object> config = MapUtil.builder("配置参考文档", (Object) "Json格式，具体配置参考文档：https://spring-file-storage.xuyanwu.cn/")
+                .put("fileStorageTypeList", fileStorageClassMap.keySet().stream().collect(Collectors.toList()))
                 .put("fileStorageType", "AliyunOss")
                 .build();
-        return new SettingInfo().setCategoryName(CFG_CODE)
+
+        return new SettingInfo()
+                .setCategoryName(CFG_CODE)
                 .setCode(code)
                 .setValueType(Setting.ValueType.Json)
                 .setInputPlaceholder("Json格式,fileStorageType属性配置通道类型")
@@ -179,72 +163,6 @@ public class BizFileStorageServiceImpl
                 .setRemark("内容必须Json格式，fileStorageType 属性必须指定，可选择包括："
                         + fileStorageClassMap.keySet()
                         + "\n具体配置参考文档：https://spring-file-storage.xuyanwu.cn/");
-    }
-
-
-    /**
-     * 上传文件，成功返回文件信息，失败返回 null
-     */
-    public FileInfo upload(UploadPretreatment pre, FileStorage fileStorage) {
-
-        //FileStorage fileStorage = getFileStorage(pre.getPlatform());
-
-        if (fileStorage == null)
-            throw new FileStorageRuntimeException("没有找到对应的存储平台！");
-
-        MultipartFile file = pre.getFileWrapper();
-
-        if (file == null)
-            throw new FileStorageRuntimeException("文件不允许为 null ！");
-
-        if (pre.getPlatform() == null)
-            throw new FileStorageRuntimeException("platform 不允许为 null ！");
-
-        FileInfo fileInfo = new FileInfo();
-        fileInfo.setCreateTime(new Date());
-        fileInfo.setSize(file.getSize());
-        fileInfo.setOriginalFilename(file.getOriginalFilename());
-        fileInfo.setExt(FileNameUtil.getSuffix(file.getOriginalFilename()));
-        fileInfo.setObjectId(pre.getObjectId());
-        fileInfo.setObjectType(pre.getObjectType());
-        fileInfo.setPath(pre.getPath());
-        fileInfo.setPlatform(pre.getPlatform());
-        fileInfo.setAttr(pre.getAttr());
-
-        if (StrUtil.isNotBlank(pre.getSaveFilename())) {
-            fileInfo.setFilename(pre.getSaveFilename());
-        } else {
-            fileInfo.setFilename(IdUtil.objectId() + (StrUtil.isEmpty(fileInfo.getExt()) ? StrUtil.EMPTY : "." + fileInfo.getExt()));
-        }
-        if (pre.getContentType() != null) {
-            fileInfo.setContentType(pre.getContentType());
-        } else if (pre.getFileWrapper().getContentType() != null) {
-            fileInfo.setContentType(pre.getFileWrapper().getContentType());
-        } else {
-            fileInfo.setContentType(tikaFactory.getTika().detect(fileInfo.getFilename()));
-        }
-
-        byte[] thumbnailBytes = pre.getThumbnailBytes();
-        if (thumbnailBytes != null) {
-            fileInfo.setThSize((long) thumbnailBytes.length);
-            if (StrUtil.isNotBlank(pre.getSaveThFilename())) {
-                fileInfo.setThFilename(pre.getSaveThFilename() + pre.getThumbnailSuffix());
-            } else {
-                fileInfo.setThFilename(fileInfo.getFilename() + pre.getThumbnailSuffix());
-            }
-            fileInfo.setThContentType(tikaFactory.getTika().detect(thumbnailBytes, fileInfo.getThFilename()));
-        }
-
-        //处理切面
-        return new UploadAspectChain(aspectList, (_fileInfo, _pre, _fileStorage, _fileRecorder) -> {
-            //真正开始保存
-            if (_fileStorage.save(_fileInfo, _pre)) {
-                if (_fileRecorder.record(_fileInfo)) {
-                    return _fileInfo;
-                }
-            }
-            return null;
-        }).next(fileInfo, pre, fileStorage, fileRecorder);
     }
 
     /**
@@ -259,19 +177,9 @@ public class BizFileStorageServiceImpl
 
         Assert.notNull(multipartFile, "MultipartFile 上传内容没有指定");
 
-        FileStorage fileStorage = getFileStorage(tenantId, appId);
+        FileStorageService fileStorageService = getFileStorageService(tenantId, appId);
 
-        try {
-            FileInfo fileInfo = upload(fileStorageService.of(multipartFile), fileStorage);
-
-            Assert.notNull(fileInfo, "文件({})上传失败", multipartFile.getOriginalFilename());
-
-            return fileInfo.getUrl();
-
-        } finally {
-            fileStorage.close();
-        }
-
+        return fileStorageService.of(multipartFile).upload().getUrl();
     }
 
 
@@ -287,26 +195,7 @@ public class BizFileStorageServiceImpl
      */
     @Override
     public String upload(String tenantId, String appId, String fileName, Supplier<InputStream> sourceSupplier, Map<String, Object> sourceExtInfo) {
-
-        FileStorage fileStorage = getFileStorage(tenantId, appId);
-
-        InputStream inputStream = sourceSupplier.get();
-
-        try {
-
-            UploadPretreatment pretreatment = fileStorageService.of(inputStream);
-
-            pretreatment.getAttr().putAll(sourceExtInfo);
-
-            FileInfo fileInfo = upload(pretreatment, fileStorage);
-
-            Assert.notNull(fileInfo, "文件({})上传失败", fileName);
-
-            return fileInfo.getUrl();
-
-        } finally {
-            fileStorage.close();
-        }
+        return getFileStorageService(tenantId, appId).of(sourceSupplier.get()).upload().getUrl();
     }
 
 }
