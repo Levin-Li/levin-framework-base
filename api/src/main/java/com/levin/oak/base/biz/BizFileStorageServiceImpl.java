@@ -18,6 +18,7 @@ import cn.xuyanwu.spring.file.storage.spring.file.MultipartFileWrapperAdapter;
 import cn.xuyanwu.spring.file.storage.tika.DefaultTikaFactory;
 import cn.xuyanwu.spring.file.storage.tika.TikaFactory;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.entities.Setting;
 import com.levin.oak.base.services.setting.SettingService;
@@ -75,7 +76,7 @@ public class BizFileStorageServiceImpl
     @DubboReference
     BizSettingService bizSettingService;
 
-    private static Gson gson = new Gson();
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().setLenient().create();
 
     public static final String CFG_CODE = "文件存储配置";
 
@@ -160,7 +161,12 @@ public class BizFileStorageServiceImpl
 
         Map<String, Object> config = MapUtil.builder("配置参考文档", (Object) "Json格式，具体配置参考文档：https://spring-file-storage.xuyanwu.cn/")
                 .put("fileStorageTypeList", fileStorageClassMap.keySet().stream().collect(Collectors.toList()))
-                .put("fileStorageType", "AliyunOss")
+                .put("fileStorageType", "LocalPlus")
+                .put("platform", "LocalPlus-1")
+                .put("domain", "https://xxx.doamin.com")
+                .put("storagePath", "/home/dev")
+                .put("basePath", "pic/")
+                .put("配置说明", "LocalPlus 是本地存储方案，可以指定Spring mvc资源路径作为[storagePath]，basePath为访问路径")
                 .build();
 
         return new SettingInfo()
@@ -189,7 +195,11 @@ public class BizFileStorageServiceImpl
 
         FileStorageService fileStorageService = getFileStorageService(tenantId, appId);
 
-        return fileStorageService.of(multipartFile).upload().getUrl();
+        try {
+            return fileStorageService.of(multipartFile).upload().getUrl();
+        } finally {
+            fileStorageService.destroy();
+        }
     }
 
 
@@ -205,7 +215,12 @@ public class BizFileStorageServiceImpl
      */
     @Override
     public String upload(String tenantId, String appId, String fileName, Supplier<InputStream> sourceSupplier, Map<String, Object> sourceExtInfo) {
-        return getFileStorageService(tenantId, appId).of(sourceSupplier.get()).upload().getUrl();
+        FileStorageService fileStorageService = getFileStorageService(tenantId, appId);
+        try {
+            return fileStorageService.of(sourceSupplier.get()).upload().getUrl();
+        } finally {
+            fileStorageService.destroy();
+        }
     }
 
 }

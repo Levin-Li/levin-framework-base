@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.MapUtil;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.entities.Setting;
@@ -38,6 +39,7 @@ import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -72,14 +74,14 @@ public class Sms4JSmsSendService
 
     Map<String, SmsBlend> smsBlendMap = MapUtil.newConcurrentHashMap();
 
-    private static Gson gson = new Gson();
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().setLenient().create();
 
     private static Map<SupplierType, Class<? extends SupplierConfig>> configClass = new ConcurrentHashMap<>();
 
     static {
         configClass.put(SupplierType.ALIBABA, AlibabaConfig.class);
-        configClass.put(SupplierType.HUAWEI, HuaweiConfig.class);
         configClass.put(SupplierType.TENCENT, TencentConfig.class);
+        configClass.put(SupplierType.HUAWEI, HuaweiConfig.class);
         configClass.put(SupplierType.JD_CLOUD, JdCloudConfig.class);
         configClass.put(SupplierType.EMAY, EmayConfig.class);
         configClass.put(SupplierType.CLOOPEN, CloopenConfig.class);
@@ -106,7 +108,10 @@ public class Sms4JSmsSendService
     private static SettingInfo newDefaultConfig(String code) {
 
         Map<String, Object> config = MapUtil.builder("配置参考文档", (Object) "Json格式，具体配置参考文档：https://wind.kim/doc/supplier/")
+                .put("channelType可选项", Stream.of(SupplierType.values()).collect(Collectors.toList()))
                 .put("channelType", SupplierType.ALIBABA.name())
+                .put("配置说明", "")
+
                 .build();
         return new SettingInfo().setCategoryName(CFG_CODE)
                 .setCode(code)
