@@ -123,7 +123,7 @@ public class BizFileStorageServiceImpl
 
         String fileStorageType = (String) setting.get("fileStorageType");
 
-        Assert.notBlank(fileStorageType, "系统设置中[{}]，fileStorageType属性必须指定", CFG_CODE);
+        Assert.notBlank(fileStorageType, "系统设置[{}]，fileStorageType属性必须指定", CFG_CODE);
 
         Class<? extends FileStorage> implType = fileStorageClassMap.get(fileStorageType);
 
@@ -141,9 +141,10 @@ public class BizFileStorageServiceImpl
         //加入配置
         configList.add(0, baseConfig);
 
-        log.info("Build FileStorageService , fileStorageType:{},configList:{}", fileStorageType, configList);
+        log.info("*** Build FileStorageService , fileStorageType:{},configList:{}", fileStorageType, configList);
 
         FileStorageServiceBuilder builder = FileStorageServiceBuilder.create(fileStorageProperties).useDefault();
+
 
         builder.addFileWrapperAdapter(new MultipartFileWrapperAdapter());
 
