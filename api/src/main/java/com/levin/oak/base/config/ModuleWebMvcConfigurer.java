@@ -93,6 +93,10 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         log.info("init...");
 
+        if (!StringUtils.hasText(frameworkProperties.getApiDocPath())) {
+            log.info("可以配置[" + PLUGIN_PREFIX + "framework.api-doc-path] 启用Knife4j在线文档");
+        }
+
         //设置默认排除的路径
         frameworkProperties.setDefaultExcludePathPatterns(
                 Stream.of(serverProperties.getError().getPath()
