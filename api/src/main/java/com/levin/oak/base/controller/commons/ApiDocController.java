@@ -40,7 +40,7 @@ import static com.levin.oak.base.ModuleOption.*;
 
 @Controller(PLUGIN_PREFIX + "ApiDocController")
 @ConditionalOnProperty(PLUGIN_PREFIX + "framework.api-doc-path")
-@RequestMapping("${" + PLUGIN_PREFIX + "framework.api-doc-path" + ":doc}")
+@RequestMapping("${" + PLUGIN_PREFIX + "framework.api-doc-path" + ":api-docs}")
 @Tag(name = "ApiDoc", description = "API文档")
 @Slf4j
 @Valid

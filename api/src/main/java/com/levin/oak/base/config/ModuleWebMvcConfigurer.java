@@ -1,5 +1,6 @@
 package com.levin.oak.base.config;
 
+import cn.hutool.core.util.StrUtil;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
@@ -40,6 +41,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -94,9 +96,9 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         //设置默认排除的路径
         frameworkProperties.setDefaultExcludePathPatterns(
                 Stream.of(serverProperties.getError().getPath()
-                                , frameworkProperties.getApiDocPath() + "/**"
-                                , Optional.ofNullable(managementServerProperties).map(p -> p.getBasePath() + "/**").orElse(null)
-                                , Optional.ofNullable(webEndpointProperties).map(p -> p.getBasePath() + "/**").orElse(null)
+                                , StrUtil.isNotBlank(frameworkProperties.getApiDocPath()) ? frameworkProperties.getApiDocPath() + "/**" : null
+                                , Optional.ofNullable(managementServerProperties).map(p -> p.getBasePath()).filter(StringUtils::hasText).map(p -> p + "/**").orElse(null)
+                                , Optional.ofNullable(webEndpointProperties).map(p -> p.getBasePath()).filter(StringUtils::hasText).map(p -> p + "/**").orElse(null)
                                 , ClassUtils.isPresent("org.springdoc.core.GroupedOpenApi", null) ? "/v3/api-docs/**" : null
 
                         ).filter(StringUtils::hasText)
