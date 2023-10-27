@@ -98,12 +98,12 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         //设置默认排除的路径
         frameworkProperties.setDefaultExcludePathPatterns(
-                Stream.of(serverProperties.getError().getPath()
+                Stream.of("/" + serverProperties.getError().getPath()
                                 , "/favicon.ico"
-                                , StrUtil.isNotBlank(frameworkProperties.getApiDocPath()) ? frameworkProperties.getApiDocPath() : null
-                                , StrUtil.isNotBlank(frameworkProperties.getApiDocPath()) ? frameworkProperties.getApiDocPath() + "/**" : null
-                                , Optional.ofNullable(managementServerProperties).map(p -> p.getBasePath()).filter(StringUtils::hasText).map(p -> p + "/**").orElse(null)
-                                , Optional.ofNullable(webEndpointProperties).map(p -> p.getBasePath()).filter(StringUtils::hasText).map(p -> p + "/**").orElse(null)
+                                , StrUtil.isNotBlank(frameworkProperties.getApiDocPath()) ? "/" + frameworkProperties.getApiDocPath() : null
+                                , StrUtil.isNotBlank(frameworkProperties.getApiDocPath()) ? "/" + frameworkProperties.getApiDocPath() + "/**" : null
+                                , Optional.ofNullable(managementServerProperties).map(p -> p.getBasePath()).filter(StringUtils::hasText).map(p -> "/" + p + "/**").orElse(null)
+                                , Optional.ofNullable(webEndpointProperties).map(p -> p.getBasePath()).filter(StringUtils::hasText).map(p -> "/" + p + "/**").orElse(null)
                                 , ClassUtils.isPresent("org.springdoc.core.GroupedOpenApi", null) ? "/v3/api-docs/**" : null
 
                         ).filter(StringUtils::hasText)
@@ -116,7 +116,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         frameworkProperties.getTenantBindDomain().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
         frameworkProperties.getControllerAcl().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
-
     }
 
     @Bean
