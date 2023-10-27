@@ -10,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -87,7 +88,7 @@ public class DevInterceptor implements HandlerInterceptor {
 
                 //路径必须填写，不然会导致多个同名Cookie存在
                 cookie.setPath(PARA_NAME);
-                cookie.setMaxAge(3600);
+                cookie.setMaxAge(3600 - Calendar.getInstance().get(Calendar.MINUTE) * 60);
                 cookie.setComment(PARA_NAME);
                 response.addCookie(cookie);
             }
@@ -95,7 +96,7 @@ public class DevInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        log.debug("[{}] 请求devKey：{} ，匹配的devKey：{}", request.getRequestURL(), devKey, tmpAccessKey);
+        log.info("[{}] 请求devKey：{} ，匹配的devKey={}", request.getRequestURL(), devKey, tmpAccessKey);
 
         return false;
     }
