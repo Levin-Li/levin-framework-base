@@ -40,7 +40,7 @@ import static com.levin.oak.base.ModuleOption.*;
 
 @Controller(PLUGIN_PREFIX + "ApiDocController")
 @ConditionalOnProperty(PLUGIN_PREFIX + "framework.api-doc-path")
-@RequestMapping("${" + PLUGIN_PREFIX + "framework.api-doc-path" + ":api-docs}")
+@RequestMapping("${" + PLUGIN_PREFIX + "framework.api-doc-path" + ":doc}")
 @Tag(name = "ApiDoc", description = "API文档")
 @Slf4j
 @Valid
@@ -58,7 +58,7 @@ public class ApiDocController extends BaseController {
 
     @PostConstruct
     public void init() {
-        log.info("SpringDoc 转发 [{}{}] -> [{}]", frameworkProperties.getApiDocPath(), SPRING_DOC_PATH, SPRING_DOC_PATH);
+        log.info("SpringDoc UI访问路径{}，api路径 [{}{}]", frameworkProperties.getApiDocPath(), frameworkProperties.getApiDocPath(), SPRING_DOC_PATH);
     }
 
     @RequestMapping(SPRING_DOC_PATH + "**")

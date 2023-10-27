@@ -81,7 +81,6 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     @Autowired
     PluginManager pluginManager;
 
-
     @Autowired(required = false)
     WebEndpointProperties webEndpointProperties;
 
@@ -100,6 +99,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         //设置默认排除的路径
         frameworkProperties.setDefaultExcludePathPatterns(
                 Stream.of(serverProperties.getError().getPath()
+                                , "/favicon.ico"
+                                , StrUtil.isNotBlank(frameworkProperties.getApiDocPath()) ? frameworkProperties.getApiDocPath() : null
                                 , StrUtil.isNotBlank(frameworkProperties.getApiDocPath()) ? frameworkProperties.getApiDocPath() + "/**" : null
                                 , Optional.ofNullable(managementServerProperties).map(p -> p.getBasePath()).filter(StringUtils::hasText).map(p -> p + "/**").orElse(null)
                                 , Optional.ofNullable(webEndpointProperties).map(p -> p.getBasePath()).filter(StringUtils::hasText).map(p -> p + "/**").orElse(null)
@@ -109,6 +110,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                         .map(UrlPathUtils::safeUrl)
                         .collect(Collectors.toList())
         );
+
+        log.info("资源拦截器默认排查的路径：{}", frameworkProperties.getDefaultExcludePathPatterns());
 
         frameworkProperties.getTenantBindDomain().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
@@ -126,6 +129,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         OncePerRequestFilter filter = new OncePerRequestFilter() {
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+                //log.debug("Web Filter:{}", request.getRequestURL());
                 try {
                     clearThreadCacheData();
                     filterChain.doFilter(request, response);
