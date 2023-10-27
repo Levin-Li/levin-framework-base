@@ -48,6 +48,7 @@ public class DevInterceptor implements HandlerInterceptor {
             devKey = request.getHeader(PARA_NAME);
         }
 
+        boolean fromCookie = false;
         Cookie[] cookies = request.getCookies();
         if (!StringUtils.hasText(devKey) && cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies) {
@@ -55,6 +56,7 @@ public class DevInterceptor implements HandlerInterceptor {
                         && PARA_NAME.equals(cookie.getName())) {
                     //获取同名的最后一个cookie，可能存在同名cookie
                     devKey = cookie.getValue();
+                    fromCookie = true;
                 }
             }
         }
@@ -79,14 +81,16 @@ public class DevInterceptor implements HandlerInterceptor {
 
             response.addHeader(PARA_NAME, devKey);
 
-            Cookie cookie = new Cookie(PARA_NAME, devKey);
+            if (!fromCookie) {
 
-            //路径必须填写
-            cookie.setPath(PARA_NAME);
-            cookie.setMaxAge(3600);
-            cookie.setComment(PARA_NAME);
+                Cookie cookie = new Cookie(PARA_NAME, devKey);
 
-            response.addCookie(cookie);
+                //路径必须填写，不然会导致多个同名Cookie存在
+                cookie.setPath(PARA_NAME);
+                cookie.setMaxAge(3600);
+                cookie.setComment(PARA_NAME);
+                response.addCookie(cookie);
+            }
 
             return true;
         }
