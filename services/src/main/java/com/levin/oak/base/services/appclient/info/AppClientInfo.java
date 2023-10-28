@@ -35,7 +35,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:54, 代码生成哈希校验码：[6771b82d1b26e3fcbd97863c0bbdc2fe]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:17, 代码生成哈希校验码：[2e0e57c6331be12e837dddb1034b3ef6]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -69,7 +69,7 @@ public class AppClientInfo implements Serializable {
     String appToken;
 
     @Size(max = 128)
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank

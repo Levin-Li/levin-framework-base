@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 简单表单测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:13:00, 代码生成哈希校验码：[8cebc9636ecf3ecb7e792d875b497556]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:23, 代码生成哈希校验码：[afb5a19d1dd2ab30aec3dc1236254270]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -105,7 +105,7 @@ public class SimpleFormServiceTest {
 
         // req.setContent("内容_1");//
 
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
 
         // req.setName("这是文本64");// 必填
 
@@ -144,7 +144,7 @@ public class SimpleFormServiceTest {
         // req.setPath("这是文本800");//
         // req.setRequireAuthorizations("这是文本1800");//
         // req.setContent("内容_1");//
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");//
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
@@ -177,7 +177,7 @@ public class SimpleFormServiceTest {
         // req.setPath("这是文本800");// 必填
         // req.setRequireAuthorizations("这是文本1800");//
         // req.setContent("内容_1");//
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");// 必填
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//

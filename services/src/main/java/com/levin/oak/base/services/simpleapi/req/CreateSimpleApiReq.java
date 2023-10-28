@@ -42,7 +42,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:54, 代码生成哈希校验码：[f5f649df2ea966288fdbc0245feeabe6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:17, 代码生成哈希校验码：[4f7f93fbe36c01cdc31d184a8bf0b00e]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -101,7 +101,7 @@ public class CreateSimpleApiReq extends MultiTenantOrgReq {
     @Schema(title = L_content)
     String content;
 
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     @Size(max = 128)
     String domain;
 

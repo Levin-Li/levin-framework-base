@@ -47,7 +47,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:21, 代码生成哈希校验码：[020ddc4ec52f371d08e86e01a1ba39d9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[f1499cb4fc4339f661fba97abc27732a]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -73,12 +73,19 @@ public class StatAccessLogReq extends MultiTenantOrgReq {
     @Schema(title = L_id)
     Long id;
 
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
-    @Schema(title = "模糊匹配-" + L_domain)
+    @Schema(title = "模糊匹配-" + L_domain, description = D_domain)
     @Contains
     String containsDomain;
+
+    @Schema(title = L_module, description = D_module)
+    String module;
+
+    @Schema(title = "模糊匹配-" + L_module, description = D_module)
+    @Contains
+    String containsModule;
 
     @Size(max = 64)
     @Schema(title = L_visitor)

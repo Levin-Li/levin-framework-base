@@ -40,7 +40,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:56, 代码生成哈希校验码：[80e29f4ed2b38dd0dfe2da9f0ca8b640]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:19, 代码生成哈希校验码：[c0f54f25d4887bbc84b5701170186715]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -56,10 +56,6 @@ public class CreateNoticeReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1394869526L;
 
-    @Schema(title = L_ownerId)
-    @Size(max = 128)
-    String ownerId;
-
     @Schema(title = L_category)
     @Size(max = 64)
     String category;
@@ -73,7 +69,7 @@ public class CreateNoticeReq extends MultiTenantOrgReq {
     @Schema(title = L_expiredDate)
     Date expiredDate;
 
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     @Size(max = 128)
     String domain;
 

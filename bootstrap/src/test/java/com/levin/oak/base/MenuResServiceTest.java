@@ -57,7 +57,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 菜单测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:31, 代码生成哈希校验码：[a9dd2f1ce423b6c0efcba59da6707063]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:23, 代码生成哈希校验码：[7e49fd1412e2443b548ad658c6390c95]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -95,7 +95,9 @@ public class MenuResServiceTest {
 
         // req.setTenantId("这是文本64");//
 
-        // req.setDomain("这是文本128");//
+        // req.setDomain("系统域_1");//归属的子系统
+
+        // req.setModule("模块_1");//归属的应用或模块
 
         // req.setRequireAuthorizations("这是文本1800");//
 
@@ -140,7 +142,8 @@ public class MenuResServiceTest {
         // req.setId(null);//
         // req.setParentId("这是文本64");//
         // req.setTenantId("这是文本64");//
-        // req.setDomain("这是文本128");//
+        // req.setDomain("系统域_1");//归属的子系统
+        // req.setModule("模块_1");//归属的应用或模块
         // req.setRequireAuthorizations("这是文本1800");//
         // req.setAlwaysShow(true);//
         // req.setTarget("这是文本64");//
@@ -175,7 +178,8 @@ public class MenuResServiceTest {
 
         // req.setParentId("这是文本64");//
         // req.setTenantId("这是文本64");//
-        // req.setDomain("这是文本128");//
+        // req.setDomain("系统域_1");//归属的子系统
+        // req.setModule("模块_1");//归属的应用或模块
         // req.setRequireAuthorizations("这是文本1800");//
         // req.setAlwaysShow(true);// 必填
         // req.setTarget("这是文本64");//

@@ -41,7 +41,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:57, 代码生成哈希校验码：[506c7735c0ae0a6518d9f5653b7136a8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[ef35a482e293bbf7d1e52b8b8028df35]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -93,7 +93,7 @@ public class SimpleUpdateScheduledTaskReq extends MultiTenantOrgReq {
     Date nextInvokeTime;
 
     @Size(max = 128)
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank

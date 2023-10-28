@@ -35,7 +35,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:20, 代码生成哈希校验码：[4ad4faa1a9f19509841f14f92b035e13]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[46ef3490773eae4cf6a54aa387b36732]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -53,8 +53,11 @@ public class AccessLogInfo implements Serializable {
     @Schema(title = L_id)
     Long id;
 
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
+
+    @Schema(title = L_module, description = D_module)
+    String module;
 
     @Size(max = 64)
     @Schema(title = L_visitor)

@@ -43,7 +43,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:28, 代码生成哈希校验码：[9489d3743f1745286b866064de40213d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:22, 代码生成哈希校验码：[b6249ac7c37492258749998d672666ae]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -63,9 +63,11 @@ public class SimpleCreateMenuResReq extends MultiTenantReq {
     @Size(max = 64)
     String parentId;
 
-    @Schema(title = L_domain)
-    @Size(max = 128)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
+
+    @Schema(title = L_module, description = D_module)
+    String module;
 
     @Schema(title = L_requireAuthorizations)
     @Size(max = 1800)

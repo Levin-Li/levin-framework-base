@@ -59,9 +59,13 @@ public class MenuRes
     @InjectVar(InjectConsts.TENANT_ID)
     String tenantId;
 
-    @Schema(title = "子系统")
-    @Column(length = 128)
+    @Schema(title = "系统域", description = "归属的子系统")
+    @Contains
     String domain;
+
+    @Schema(title = "模块", description = "归属的应用或模块")
+    @Contains
+    String module;
 
     @Schema(title = "需要的授权，权限或角色，json数组")
     @Column(length = 1800)

@@ -35,7 +35,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:22, 代码生成哈希校验码：[4a8aaa41d4f0bb3565cab20cb412e224]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[662cf437af0253a11aadf9b0e7bf1080]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -54,10 +54,9 @@ public class NoticeProcessLogInfo implements Serializable {
     @Schema(title = L_id)
     String id;
 
-    @NotBlank
     @Size(max = 128)
-    @Schema(title = L_ownerId)
-    String ownerId;
+    @Schema(title = L_creator)
+    String creator;
 
     @NotBlank
     @Size(max = 128)

@@ -31,7 +31,7 @@ import java.util.Date;
         indexes = {
                 @Index(columnList = E_NoticeProcessLog.tenantId),
                 @Index(columnList = E_NoticeProcessLog.orgId),
-                @Index(columnList = E_NoticeProcessLog.ownerId),
+                @Index(columnList = E_NoticeProcessLog.creator),
                 @Index(columnList = E_NoticeProcessLog.noticeId),
                 @Index(columnList = E_NoticeProcessLog.createTime),
                 @Index(columnList = E_NoticeProcessLog.status),
@@ -42,18 +42,17 @@ import java.util.Date;
 //                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
         }
 )
-public class NoticeProcessLog extends SimpleTenantOrgObject
-        implements PersonalObject {
+public class NoticeProcessLog extends SimpleTenantOrgObject{
 
     @Id
     @GeneratedValue(generator = "default_id")
     @Column(length = 64)
     String id;
 
-    @Schema(title = "用户ID")
-    @Column(length = 128, nullable = false)
-    @InjectVar(InjectConsts.USER_ID)
-    String ownerId;
+    @Schema(title = "创建者")
+    @Column(length = 128)
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
+    String creator;
 
     @Schema(title = "消息ID")
     @Column(length = 128, nullable = false)

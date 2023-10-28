@@ -39,7 +39,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:20, 代码生成哈希校验码：[2aa1372c6d18cc99d1f0bf0df1dd7168]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[b6f8bffe23b074a2c1a8a8cd1de5e9a9]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -55,8 +55,11 @@ public class CreateAccessLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1030736962L;
 
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
+
+    @Schema(title = L_module, description = D_module)
+    String module;
 
     @Schema(title = L_visitor)
     @Size(max = 64)

@@ -46,7 +46,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:56, 代码生成哈希校验码：[f1bc50d7b9be62002ba2da0ce73dff88]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:19, 代码生成哈希校验码：[869dd28e8aba686d860316ce071d0302]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -103,7 +103,7 @@ public class QueryAppClientFileReq extends MultiTenantOrgReq {
     byte[] content;
 
     @Size(max = 128)
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank

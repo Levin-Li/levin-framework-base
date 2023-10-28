@@ -51,7 +51,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:28, 代码生成哈希校验码：[12feb5670a508e17e6c7d31a19291d0a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:22, 代码生成哈希校验码：[eee607f0af8506b8edb272bfb32cbfca]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -82,9 +82,19 @@ public class StatMenuResReq extends MultiTenantReq {
     @Schema(title = L_parentId)
     String parentId;
 
-    @Size(max = 128)
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
+
+    @Schema(title = "模糊匹配-" + L_domain, description = D_domain)
+    @Contains
+    String containsDomain;
+
+    @Schema(title = L_module, description = D_module)
+    String module;
+
+    @Schema(title = "模糊匹配-" + L_module, description = D_module)
+    @Contains
+    String containsModule;
 
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations)

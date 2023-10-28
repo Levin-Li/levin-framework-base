@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 应用接入测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:13:00, 代码生成哈希校验码：[9638287f5bc33878e9e015be53477fca]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:23, 代码生成哈希校验码：[2be74b4013f5698099ba3d3264a80272]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -93,7 +93,7 @@ public class AppClientServiceTest {
 
         // req.setAppToken("这是文本512");//
 
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
 
         // req.setName("这是文本64");// 必填
 
@@ -127,7 +127,7 @@ public class AppClientServiceTest {
         // req.setAppId(null);//
         // req.setAppSecret("这是文本512");//
         // req.setAppToken("这是文本512");//
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");//
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
@@ -155,7 +155,7 @@ public class AppClientServiceTest {
         // req.setAppId("这是文本64");// 必填
         // req.setAppSecret("这是文本512");// 必填
         // req.setAppToken("这是文本512");//
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");// 必填
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//

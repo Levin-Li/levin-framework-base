@@ -42,9 +42,13 @@ public class AccessLog extends SimpleTenantOrgObject {
 //    @GeneratedValue(generator = "default_id")
     protected Long id;
 
-    @Schema(title = "系统域")
+    @Schema(title = "系统域", description = "归属的子系统")
     @Contains
     protected String domain;
+
+    @Schema(title = "模块", description = "归属的应用或模块")
+    @Contains
+    protected String module;
 
     @Schema(title = "访问者")
     @Column(length = 64)

@@ -40,7 +40,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:55, 代码生成哈希校验码：[6b633e3b6fd3b5266e7976ee3b9e3d5a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:18, 代码生成哈希校验码：[3b276c12d43057ce864daf03f0f3a9c8]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -84,7 +84,7 @@ public class CreateSettingReq extends MultiTenantOrgReq {
     @Size(max = 128)
     String inputPlaceholder;
 
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     @Size(max = 128)
     String domain;
 

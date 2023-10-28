@@ -41,7 +41,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:59, 代码生成哈希校验码：[977ef5f1c82ea1d026ea576d27cfa212]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:22, 代码生成哈希校验码：[c0919ca0d291c22bdf79d735db975048]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -92,7 +92,7 @@ public class CreateSimplePageReq extends MultiTenantOrgReq {
     @Schema(title = L_content)
     String content;
 
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     @Size(max = 128)
     String domain;
 

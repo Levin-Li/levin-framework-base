@@ -41,7 +41,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:22, 代码生成哈希校验码：[4d85f5a3578a7c85900ce12c329c35e8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[2bc3912531894170cd2e1c441cfa11b3]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -63,11 +63,6 @@ public class UpdateNoticeProcessLogReq extends MultiTenantOrgReq {
     @NotNull
     @Eq(require = true)
     String id;
-
-    @NotBlank
-    @Size(max = 128)
-    @Schema(title = L_ownerId)
-    String ownerId;
 
     @NotBlank
     @Size(max = 128)

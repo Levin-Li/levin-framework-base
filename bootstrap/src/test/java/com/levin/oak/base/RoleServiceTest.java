@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 角色测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:59, 代码生成哈希校验码：[a06318a089e500b8c87c0f3ad326cab1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:22, 代码生成哈希校验码：[52665ebcc84722c0dea296ec6347a3e6]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -100,7 +100,7 @@ public class RoleServiceTest {
 
         // req.setPermissionList("资源权限列表_1");//Json数组
 
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
 
         // req.setName("这是文本64");// 必填
 
@@ -136,7 +136,7 @@ public class RoleServiceTest {
         // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表
         // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组
         // req.setPermissionList("资源权限列表_1");//Json数组
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");//
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
@@ -166,7 +166,7 @@ public class RoleServiceTest {
         // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表 必填
         // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组
         // req.setPermissionList("资源权限列表_1");//Json数组
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");// 必填
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//

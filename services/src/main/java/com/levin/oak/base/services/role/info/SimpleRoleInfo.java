@@ -38,7 +38,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:53, 代码生成哈希校验码：[498754e4f12145d9c35b6b6256793810]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:16, 代码生成哈希校验码：[3d032dfdca7ff1d6683565d5fb1a01dd]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -79,7 +79,7 @@ public class SimpleRoleInfo implements Serializable {
     List<String> permissionList;
 
     @Size(max = 128)
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank

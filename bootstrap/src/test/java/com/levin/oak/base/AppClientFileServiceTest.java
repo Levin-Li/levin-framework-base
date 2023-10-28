@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 客户端文件测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:13:00, 代码生成哈希校验码：[7844bee47a7533e295cb0903f216f598]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:23, 代码生成哈希校验码：[fbe1d80ae0e1d433029450a43a781c38]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -93,7 +93,7 @@ public class AppClientFileServiceTest {
 
         // req.setPath("文件路径_1");//本地路径或是网络路径 必填
 
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
 
         // req.setName("这是文本64");// 必填
 
@@ -128,7 +128,7 @@ public class AppClientFileServiceTest {
         // req.setMimeType("这是文本128");//
         // req.setPath("文件路径_1");//本地路径或是网络路径
         // req.setContent(null);//一般不建议存储在数据库
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");//
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
@@ -156,7 +156,7 @@ public class AppClientFileServiceTest {
         // req.setClientType("这是文本64");//
         // req.setMimeType("这是文本128");//
         // req.setPath("文件路径_1");//本地路径或是网络路径 必填
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");// 必填
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//

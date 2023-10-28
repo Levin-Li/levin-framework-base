@@ -42,7 +42,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:56, 代码生成哈希校验码：[48cefd10e59768c278fab41c92a42733]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:19, 代码生成哈希校验码：[14a05287c01e3c25a0f7360eff25916b]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -64,10 +64,6 @@ public class SimpleUpdateNoticeReq extends MultiTenantOrgReq {
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
-    @Size(max = 128)
-    @Schema(title = L_ownerId)
-    String ownerId;
-
     @Size(max = 64)
     @Schema(title = L_category)
     String category;
@@ -82,7 +78,7 @@ public class SimpleUpdateNoticeReq extends MultiTenantOrgReq {
     Date expiredDate;
 
     @Size(max = 128)
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank

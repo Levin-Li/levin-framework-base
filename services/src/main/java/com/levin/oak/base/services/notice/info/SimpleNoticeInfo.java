@@ -36,7 +36,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:56, 代码生成哈希校验码：[780255c1e102e82f5a83d09af37ef0be]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:19, 代码生成哈希校验码：[2ecfc6071d3b9cb276c1dec2ba6de30d]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -56,10 +56,6 @@ public class SimpleNoticeInfo implements Serializable {
     @Schema(title = L_id)
     String id;
 
-    @Size(max = 128)
-    @Schema(title = L_ownerId)
-    String ownerId;
-
     @Size(max = 64)
     @Schema(title = L_category)
     String category;
@@ -74,7 +70,7 @@ public class SimpleNoticeInfo implements Serializable {
     Date expiredDate;
 
     @Size(max = 128)
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank

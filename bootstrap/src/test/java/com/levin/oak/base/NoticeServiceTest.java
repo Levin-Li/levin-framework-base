@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 通知测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:13:00, 代码生成哈希校验码：[0692c2482fd9ec37fe534636106c5481]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:23, 代码生成哈希校验码：[39278fc3cb1c12184f1e10c2909116c8]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -89,8 +89,6 @@ public class NoticeServiceTest {
 
         CreateNoticeReq req = new CreateNoticeReq();
 
-        // req.setOwnerId("这是文本128");//
-
         // req.setCategory("这是文本64");//
 
         // req.setContentType(ContentType.Text);//
@@ -99,7 +97,7 @@ public class NoticeServiceTest {
 
         // req.setExpiredDate(new Date());//
 
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
 
         // req.setName("这是文本64");// 必填
 
@@ -130,13 +128,12 @@ public class NoticeServiceTest {
         QueryNoticeReq req = new QueryNoticeReq();
 
         // req.setId(null);//
-        // req.setOwnerId("这是文本128");//
         // req.setCategory("这是文本64");//
         // req.setContentType(ContentType.Text);//
         // req.setContent("通知内容_1");//
         // req.setGteExpiredDate(DateUtils.getZoneHour(new Date()));//最小
         // req.setLteExpiredDate(DateUtils.getEndHour(new Date()));//最大
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");//
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
@@ -161,12 +158,11 @@ public class NoticeServiceTest {
 
         req.setId(id);
 
-        // req.setOwnerId("这是文本128");//
         // req.setCategory("这是文本64");//
         // req.setContentType(ContentType.Text);//
         // req.setContent("通知内容_1");//
         // req.setExpiredDate(new Date());//
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");// 必填
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//

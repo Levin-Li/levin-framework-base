@@ -46,7 +46,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:21, 代码生成哈希校验码：[2773fcd6dfdacc726ec279c17cfc23ca]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[44a7de888fdb4247ff9d58688f49fa99]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -86,12 +86,19 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
     @Schema(title = L_id)
     Long id;
 
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
-    @Schema(title = "模糊匹配-" + L_domain)
+    @Schema(title = "模糊匹配-" + L_domain, description = D_domain)
     @Contains
     String containsDomain;
+
+    @Schema(title = L_module, description = D_module)
+    String module;
+
+    @Schema(title = "模糊匹配-" + L_module, description = D_module)
+    @Contains
+    String containsModule;
 
     @Size(max = 64)
     @Schema(title = L_visitor)

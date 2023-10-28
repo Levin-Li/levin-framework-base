@@ -54,7 +54,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 工作岗位测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:13:00, 代码生成哈希校验码：[4d0dcdd6732fc6e089fb49065b1f2e5a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:23, 代码生成哈希校验码：[047cb19b89300e4508b87d0fbcdd30f0]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -92,7 +92,7 @@ public class JobPostServiceTest {
 
         // req.setType(Type.Manager);// 必填
 
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
 
         // req.setName("这是文本64");// 必填
 
@@ -125,7 +125,7 @@ public class JobPostServiceTest {
         // req.setId(null);//
         // req.setCode("这是文本64");//
         // req.setType(Type.Manager);//
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");//
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
@@ -152,7 +152,7 @@ public class JobPostServiceTest {
 
         // req.setCode("这是文本64");// 必填
         // req.setType(Type.Manager);// 必填
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");// 必填
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//

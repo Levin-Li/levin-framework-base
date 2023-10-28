@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 访问日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:31, 代码生成哈希校验码：[b9d6cde2e13bbf1451a75910fc6bd3b1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:23, 代码生成哈希校验码：[869a9c011d324c268e021c91dc3f7acb]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -87,7 +87,9 @@ public class AccessLogServiceTest {
 
         CreateAccessLogReq req = new CreateAccessLogReq();
 
-        // req.setDomain("系统域_1");//
+        // req.setDomain("系统域_1");//归属的子系统
+
+        // req.setModule("模块_1");//归属的应用或模块
 
         // req.setVisitor("这是文本64");//
 
@@ -148,7 +150,8 @@ public class AccessLogServiceTest {
         QueryAccessLogReq req = new QueryAccessLogReq();
 
         // req.setId(null);//
-        // req.setDomain("系统域_1");//
+        // req.setDomain("系统域_1");//归属的子系统
+        // req.setModule("模块_1");//归属的应用或模块
         // req.setVisitor("这是文本64");//
         // req.setTitle("标题_1");//
         // req.setLogType("这是文本64");//
@@ -187,7 +190,8 @@ public class AccessLogServiceTest {
 
         req.setId(id);
 
-        // req.setDomain("系统域_1");//
+        // req.setDomain("系统域_1");//归属的子系统
+        // req.setModule("模块_1");//归属的应用或模块
         // req.setVisitor("这是文本64");//
         // req.setTitle("标题_1");// 必填
         // req.setLogType("这是文本64");//

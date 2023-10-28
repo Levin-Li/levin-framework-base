@@ -37,7 +37,7 @@ import java.util.Date;
                 @Index(columnList = E_TenantOrgNamedEntity.tenantId),
                 @Index(columnList = E_TenantOrgNamedEntity.orgId),
 
-                @Index(columnList = E_Notice.ownerId),
+                @Index(columnList = E_Notice.creator),
                 @Index(columnList = E_Notice.expiredDate),
                 @Index(columnList = E_Notice.category),
                 @Index(columnList = E_Notice.contentType),
@@ -57,8 +57,7 @@ import java.util.Date;
  *
  */
 public class Notice
-        extends TenantOrgNamedEntity
-        implements PersonalObject {
+        extends TenantOrgNamedEntity  {
 
     @Schema(title = "通知内容类型")
     public enum ContentType implements EnumDesc {
@@ -78,12 +77,6 @@ public class Notice
     @GeneratedValue(generator = "default_id")
     @Column(length = 64)
     String id;
-
-    @Schema(title = "所有者ID")
-    @Column(length = 128)
-    @InjectVar(InjectConsts.USER_ID)
-    String ownerId;
-    ////////////////////////////////////////////////////////////////////
 
     @Schema(title = "通知类别")
     @Column(length = 64)

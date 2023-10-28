@@ -48,7 +48,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:12:56, 代码生成哈希校验码：[8eabcd2adc1f319dcc15680cd427ed77]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:19, 代码生成哈希校验码：[b09b79892abb8a9d8151e69127bc8c00]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -75,10 +75,6 @@ public class StatNoticeReq extends MultiTenantOrgReq {
     @Schema(title = L_id)
     String id;
 
-    @Size(max = 128)
-    @Schema(title = L_ownerId)
-    String ownerId;
-
     @Size(max = 64)
     @Schema(title = L_category)
     String category;
@@ -102,7 +98,7 @@ public class StatNoticeReq extends MultiTenantOrgReq {
     // String betweenExpiredDate;
 
     @Size(max = 128)
-    @Schema(title = L_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank

@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 通知处理日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:31, 代码生成哈希校验码：[6ea480889e929f9375401e9d1004b648]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:23, 代码生成哈希校验码：[b8db237eae16829eb440b45a8db10c3e]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -87,8 +87,6 @@ public class NoticeProcessLogServiceTest {
 
         CreateNoticeProcessLogReq req = new CreateNoticeProcessLogReq();
 
-        // req.setOwnerId("这是文本128");// 必填
-
         // req.setNoticeId("这是文本128");// 必填
 
         // req.setStatus("这是文本128");//
@@ -112,7 +110,7 @@ public class NoticeProcessLogServiceTest {
         QueryNoticeProcessLogReq req = new QueryNoticeProcessLogReq();
 
         // req.setId(null);//
-        // req.setOwnerId("这是文本128");//
+        // req.setCreator("这是文本128");//
         // req.setNoticeId("这是文本128");//
         // req.setStatus("这是文本128");//
         // req.setRemark("这是文本512");//
@@ -133,7 +131,6 @@ public class NoticeProcessLogServiceTest {
 
         req.setId(id);
 
-        // req.setOwnerId("这是文本128");// 必填
         // req.setNoticeId("这是文本128");// 必填
         // req.setStatus("这是文本128");//
         // req.setRemark("这是文本512");//

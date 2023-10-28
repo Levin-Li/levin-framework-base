@@ -54,7 +54,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 调度任务测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月16日 下午1:13:00, 代码生成哈希校验码：[4b455c98148941506adf3392a00a127e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:23, 代码生成哈希校验码：[45a95766871ab6f750b7e34737a0ac2e]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")
@@ -104,7 +104,7 @@ public class ScheduledTaskServiceTest {
 
         // req.setNextInvokeTime(new Date());//
 
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
 
         // req.setName("这是文本64");// 必填
 
@@ -145,7 +145,7 @@ public class ScheduledTaskServiceTest {
         // req.setLteLastInvokedTime(DateUtils.getEndHour(new Date()));//最大
         // req.setGteNextInvokeTime(DateUtils.getZoneHour(new Date()));//最小
         // req.setLteNextInvokeTime(DateUtils.getEndHour(new Date()));//最大
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");//
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
@@ -178,7 +178,7 @@ public class ScheduledTaskServiceTest {
         // req.setInvokedCount(1);//
         // req.setLastInvokedTime(new Date());//
         // req.setNextInvokeTime(new Date());//
-        // req.setDomain("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统
         // req.setName("这是文本64");// 必填
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//

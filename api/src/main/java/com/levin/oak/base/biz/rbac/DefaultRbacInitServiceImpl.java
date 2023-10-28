@@ -173,7 +173,7 @@ public class DefaultRbacInitServiceImpl
             MenuRes pluginRootMenu = simpleDao.create(new MenuRes()
                     .setPath(plugin.getPackageName() + "/" + plugin.getVersion() + "/admin/index")
 //                    .setIcon(defaultIcon)
-                    .setDomain(plugin.getPackageName())
+                    .setModule(plugin.getPackageName())
                     .setName(plugin.getName())
                     .setEnable(plugin.isEnable())
                     .setOrderCode(plugin.getOrderCode())

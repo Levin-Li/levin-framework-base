@@ -39,7 +39,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:22, 代码生成哈希校验码：[1f7cddb0b8fd33500f67691772eb7db1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[f7f319756ad32c83c2f0fb8823305961]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -55,10 +55,9 @@ public class CreateNoticeProcessLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1991983093L;
 
-    @Schema(title = L_ownerId)
-    @NotBlank
+    @Schema(title = L_creator)
     @Size(max = 128)
-    String ownerId;
+    String creator;
 
     @Schema(title = L_noticeId)
     @NotBlank
