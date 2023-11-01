@@ -29,13 +29,13 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:17, 代码生成哈希校验码：[0b598eb95960c1810819607ea2c4f17e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:40, 代码生成哈希校验码：[7e3ad23277b5f27a52a2fdda15628dcf]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -78,4 +78,6 @@ public class SimpleAppErrorLogInfo implements Serializable {
 
     @Schema(title = L_exceptionFullInfo)
     String exceptionFullInfo;
+
+
 }

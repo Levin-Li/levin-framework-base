@@ -30,7 +30,7 @@ import static com.levin.oak.base.entities.E_MenuRes.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.MenuRes;
 import java.util.Date;
@@ -39,25 +39,25 @@ import java.util.Set;
 import com.levin.oak.base.services.menures.info.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 更新菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:22, 代码生成哈希校验码：[c81d6cb2dd14abd6877f80f5dcc6e080]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:45, 代码生成哈希校验码：[fe2fff5edab33ee34d05ebfa14fa24a2]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = MenuRes.class, alias = E_MenuRes.ALIAS)
-// 默认更新注解
+//默认更新注解
 @Update
 public class UpdateMenuResReq extends MultiTenantReq {
 
@@ -68,7 +68,7 @@ public class UpdateMenuResReq extends MultiTenantReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
@@ -76,10 +76,10 @@ public class UpdateMenuResReq extends MultiTenantReq {
     @Schema(title = L_parentId)
     String parentId;
 
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
-    @Schema(title = L_module, description = D_module)
+    @Schema(title = L_module , description = D_module)
     String module;
 
     @Size(max = 1800)
@@ -107,7 +107,7 @@ public class UpdateMenuResReq extends MultiTenantReq {
     String params;
 
     @Size(max = 1800)
-    @Schema(title = L_idPath, description = D_idPath)
+    @Schema(title = L_idPath , description = D_idPath)
     String idPath;
 
     @NotBlank
@@ -116,7 +116,7 @@ public class UpdateMenuResReq extends MultiTenantReq {
     String name;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName, description = D_pinyinName)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
@@ -135,22 +135,23 @@ public class UpdateMenuResReq extends MultiTenantReq {
     @Schema(title = L_remark)
     String remark;
 
+
     public UpdateMenuResReq(String id) {
         this.id = id;
     }
 
-    public UpdateMenuResReq updateIdWhenNotBlank(String id) {
-        if (isNotBlank(id)) {
-            this.id = id;
+    public UpdateMenuResReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+        this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        // @todo 更新之前初始化数据
+        //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }

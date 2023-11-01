@@ -30,13 +30,14 @@ import java.util.Date;
 import com.levin.oak.base.entities.Setting.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
+
 
 /**
  * 系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:18, 代码生成哈希校验码：[7ff91629e5a1db0e400987e7e547b2e5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:40, 代码生成哈希校验码：[b7f89294ffb9e9eb84bd55ab62672aea]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -49,6 +50,7 @@ import com.levin.commons.service.domain.InjectVar;
 public class SettingInfo implements Serializable {
 
     private static final long serialVersionUID = 147875794L;
+
 
     @NotBlank
     @Size(max = 64)
@@ -84,7 +86,7 @@ public class SettingInfo implements Serializable {
     String inputPlaceholder;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -128,4 +130,5 @@ public class SettingInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
 }

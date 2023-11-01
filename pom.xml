@@ -33,11 +33,11 @@
         <spring-boot-admin.version>2.7.10</spring-boot-admin.version>
 
         <levin.simple-dao.groupId>com.levin.commons</levin.simple-dao.groupId>
-        <levin.simple-dao.version>2.5.1-SNAPSHOT</levin.simple-dao.version>
+        <levin.simple-dao.version>2.5.2-SNAPSHOT</levin.simple-dao.version>
 
         <levin.service-support.groupId>com.github.Levin-Li</levin.service-support.groupId>
         <!--        <levin.service-support.groupId>com.levin.commons</levin.service-support.groupId>-->
-        <levin.service-support.version>1.2.27-SNAPSHOT</levin.service-support.version>
+        <levin.service-support.version>1.2.28-SNAPSHOT</levin.service-support.version>
 
         <hutool.version>5.8.11</hutool.version>
 
@@ -668,6 +668,10 @@
                     <isCreateControllerSubDir>true</isCreateControllerSubDir>
 
                     <isCreateBizController>false</isCreateBizController>
+
+                    <isOutputFormatCode>false</isOutputFormatCode>
+
+                    <isIgnoreCodeCommentChange>true</isIgnoreCodeCommentChange>
 
                     <!-- 生成的DTO的Schema注解中描述的配置是否使用类引用-->
                     <isSchemaDescUseConstRef>true</isSchemaDescUseConstRef>

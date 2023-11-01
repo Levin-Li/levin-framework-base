@@ -30,31 +30,31 @@ import static com.levin.oak.base.entities.E_JobPost.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.levin.oak.base.entities.JobPost.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 更新工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:21, 代码生成哈希校验码：[ea4e84ba1db235e3ff36ce9f1f373028]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:43, 代码生成哈希校验码：[3da0c95b460f718b264917a32682ca51]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = JobPost.class, alias = E_JobPost.ALIAS)
-// 默认更新注解
+//默认更新注解
 @Update
 public class UpdateJobPostReq extends MultiTenantOrgReq {
 
@@ -65,7 +65,7 @@ public class UpdateJobPostReq extends MultiTenantOrgReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
@@ -78,7 +78,7 @@ public class UpdateJobPostReq extends MultiTenantOrgReq {
     Type type;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -107,22 +107,23 @@ public class UpdateJobPostReq extends MultiTenantOrgReq {
     @Schema(title = L_remark)
     String remark;
 
+
     public UpdateJobPostReq(String id) {
         this.id = id;
     }
 
-    public UpdateJobPostReq updateIdWhenNotBlank(String id) {
-        if (isNotBlank(id)) {
-            this.id = id;
+    public UpdateJobPostReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+        this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        // @todo 更新之前初始化数据
+        //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }

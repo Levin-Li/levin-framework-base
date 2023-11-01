@@ -22,19 +22,23 @@ import com.levin.oak.base.services.i18nres.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
- * 国际化资源-业务服务
+ *  国际化资源-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:26, 代码生成哈希校验码：[4ee694301bebf83d0731e6efd1c36dc4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:44, 代码生成哈希校验码：[45defc341e88b130a0ae7b82323526cb]，请不要修改和删除此行内容。
+ *
  */
+
 @Tag(name = E_I18nRes.BIZ_NAME + "-业务服务", description = "")
-public interface BizI18nResService {}
+public interface BizI18nResService {
+
+}

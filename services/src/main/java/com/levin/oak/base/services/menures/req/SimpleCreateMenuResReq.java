@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.menures.req;
 
-// import static com.levin.oak.base.ModuleOption.*;
+//import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,7 +28,7 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_MenuRes.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.MenuRes;
 import java.util.Date;
@@ -37,19 +37,19 @@ import java.util.Set;
 import com.levin.oak.base.services.menures.info.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 新增菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:22, 代码生成哈希校验码：[b6249ac7c37492258749998d672666ae]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:45, 代码生成哈希校验码：[fdcabfc28475693da8abbf90c9df31ad]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,56 +59,57 @@ public class SimpleCreateMenuResReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -887712701L;
 
-    @Schema(title = L_parentId)
+    @Schema(title = L_parentId )
     @Size(max = 64)
     String parentId;
 
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain )
     String domain;
 
-    @Schema(title = L_module, description = D_module)
+    @Schema(title = L_module , description = D_module )
     String module;
 
-    @Schema(title = L_requireAuthorizations)
+    @Schema(title = L_requireAuthorizations )
     @Size(max = 1800)
     String requireAuthorizations;
 
-    @Schema(title = L_alwaysShow)
+    @Schema(title = L_alwaysShow )
     @NotNull
     Boolean alwaysShow;
 
-    @Schema(title = L_target)
+    @Schema(title = L_target )
     @Size(max = 64)
     String target;
 
-    @Schema(title = L_actionType)
+    @Schema(title = L_actionType )
     ActionType actionType;
 
-    @Schema(title = L_icon)
+    @Schema(title = L_icon )
     String icon;
 
-    @Schema(title = L_path)
+    @Schema(title = L_path )
     String path;
 
-    @Schema(title = L_params)
+    @Schema(title = L_params )
     @Size(max = 1800)
     String params;
 
-    @Schema(title = L_idPath, description = D_idPath)
+    @Schema(title = L_idPath , description = D_idPath )
     @Size(max = 1800)
     String idPath;
 
-    @Schema(title = L_name)
+    @Schema(title = L_name )
     @NotBlank
     @Size(max = 128)
     String name;
 
-    @Schema(title = L_pinyinName, description = D_pinyinName)
+    @Schema(title = L_pinyinName , description = D_pinyinName )
     @Size(max = 128)
     String pinyinName;
 
+
     @PostConstruct
     public void prePersist() {
-        // @todo 保存之前初始化数据，比如时间，初始状态等
+       //@todo 保存之前初始化数据，比如时间，初始状态等
     }
 }

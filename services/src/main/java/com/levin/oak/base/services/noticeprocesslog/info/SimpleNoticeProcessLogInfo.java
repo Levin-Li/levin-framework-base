@@ -29,13 +29,13 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[88972f72a841ed7cd24c5d7d6c8697dc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:43, 代码生成哈希校验码：[4825b0b8e9d377caab5f8776ad27b068]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -83,4 +83,6 @@ public class SimpleNoticeProcessLogInfo implements Serializable {
     @NotNull
     @Schema(title = L_createTime)
     Date createTime;
+
+
 }

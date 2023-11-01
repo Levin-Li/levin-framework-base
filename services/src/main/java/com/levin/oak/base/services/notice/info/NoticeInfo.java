@@ -30,13 +30,14 @@ import com.levin.oak.base.entities.Notice.*;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
+
 
 /**
  * 通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:19, 代码生成哈希校验码：[e0976f213cc8898c06aedcb2d646e882]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:41, 代码生成哈希校验码：[f3b823f62efa061d1b96ad510db7ccf9]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -49,6 +50,7 @@ import com.levin.commons.service.domain.InjectVar;
 public class NoticeInfo implements Serializable {
 
     private static final long serialVersionUID = 1394869526L;
+
 
     @NotBlank
     @Size(max = 64)
@@ -69,7 +71,7 @@ public class NoticeInfo implements Serializable {
     Date expiredDate;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -113,4 +115,5 @@ public class NoticeInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
 }

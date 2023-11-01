@@ -9,8 +9,9 @@ import com.levin.oak.base.services.role.*;
 import com.levin.oak.base.services.role.req.*;
 import com.levin.oak.base.services.role.info.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
@@ -50,80 +51,91 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 角色测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:22, 代码生成哈希校验码：[52665ebcc84722c0dea296ec6347a3e6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:45, 代码生成哈希校验码：[0370c7c593857df2762fcf303e59f40b]，请不要修改和删除此行内容。
+ *
  */
 
-// @ActiveProfiles("test")
-// @RunWith(SpringRunner.class)
+//@ActiveProfiles("test")
+//@RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-// @Transactional(rollbackFor = {Throwable.class})
+//@Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class RoleServiceTest {
 
-    @Autowired private RoleService roleService;
+    @Autowired
+    private RoleService roleService;
 
-    @Autowired private BizRoleService bizRoleService;
+    @Autowired
+    private BizRoleService bizRoleService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {}
+    public static void beforeAll() throws Exception {
+    }
 
     @AfterAll
-    public static void afterAll() throws Exception {}
+    public static void afterAll() throws Exception {
+    }
 
     @BeforeEach
-    public void beforeEach() throws Exception {}
+    public void beforeEach() throws Exception {
+    }
 
     @AfterEach
-    public void afterEach() throws Exception {}
+    public void afterEach() throws Exception {
+    }
 
     @Test
     public void createRoleTest() {
 
         CreateRoleReq req = new CreateRoleReq();
 
-        // req.setCode("这是文本128");// 必填
+            // req.setCode("这是文本128");// 必填
 
-        // req.setIcon("图标_1");//
+            // req.setIcon("图标_1");// 
 
-        // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表 必填
+            // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表 必填
 
-        // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组
+            // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组 
 
-        // req.setPermissionList("资源权限列表_1");//Json数组
+            // req.setPermissionList("资源权限列表_1");//Json数组 
 
-        // req.setDomain("这是文本128");//归属的子系统
+            // req.setDomain("这是文本128");//归属的子系统或应用 
 
-        // req.setName("这是文本64");// 必填
+            // req.setName("这是文本64");// 必填
 
-        // req.setOptimisticLock(1);//
+            // req.setOptimisticLock(1);// 
 
-        // req.setOrgId("这是文本128");//
+            // req.setOrgId("这是文本128");// 
 
-        // req.setTenantId("这是文本128");//
+            // req.setTenantId("这是文本128");// 
 
-        // req.setOrderCode(1);//
+            // req.setOrderCode(1);// 
 
-        // req.setEnable(true);// 必填
+            // req.setEnable(true);// 必填
 
-        // req.setEditable(true);// 必填
+            // req.setEditable(true);// 必填
 
-        // req.setRemark("这是文本512");//
+            // req.setRemark("这是文本512");// 
 
-        String id = roleService.create(req);
+
+       String id  = roleService.create(req);
 
         log.debug("新增角色->" + id);
 
         Assert.isTrue(id != null, "角色");
+
     }
+
 
     @Test
     public void queryRoleTest() {
@@ -136,7 +148,7 @@ public class RoleServiceTest {
         // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表
         // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组
         // req.setPermissionList("资源权限列表_1");//Json数组
-        // req.setDomain("这是文本128");//归属的子系统
+        // req.setDomain("这是文本128");//归属的子系统或应用
         // req.setName("这是文本64");//
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
@@ -147,7 +159,7 @@ public class RoleServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<RoleInfo> resp = roleService.query(req, null);
+        PagingData<RoleInfo> resp = roleService.query(req,null);
 
         log.debug("查询角色->" + resp);
 
@@ -157,30 +169,31 @@ public class RoleServiceTest {
     @Test
     public void updateRoleTest() {
 
-        UpdateRoleReq req = new UpdateRoleReq();
+         UpdateRoleReq req = new UpdateRoleReq();
 
-        req.setId(id);
+         req.setId(id);
 
-        // req.setCode("这是文本128");// 必填
-        // req.setIcon("图标_1");//
-        // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表 必填
-        // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组
-        // req.setPermissionList("资源权限列表_1");//Json数组
-        // req.setDomain("这是文本128");//归属的子系统
-        // req.setName("这是文本64");// 必填
-        // req.setOptimisticLock(1);//
-        // req.setOrgId("这是文本128");//
-        // req.setTenantId("这是文本128");//
-        // req.setOrderCode(1);//
-        // req.setEnable(true);// 必填
-        // req.setEditable(true);// 必填
-        // req.setRemark("这是文本512");//
 
-        boolean ok = roleService.update(req);
+           // req.setCode("这是文本128");// 必填
+           // req.setIcon("图标_1");// 
+           // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表 必填
+           // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组 
+           // req.setPermissionList("资源权限列表_1");//Json数组 
+           // req.setDomain("这是文本128");//归属的子系统或应用 
+           // req.setName("这是文本64");// 必填
+           // req.setOptimisticLock(1);// 
+           // req.setOrgId("这是文本128");// 
+           // req.setTenantId("这是文本128");// 
+           // req.setOrderCode(1);// 
+           // req.setEnable(true);// 必填
+           // req.setEditable(true);// 必填
+           // req.setRemark("这是文本512");// 
 
-        log.debug("更新角色-> " + ok);
+          boolean ok = roleService.update(req);
 
-        Assert.isTrue(ok, "角色");
+          log.debug("更新角色-> " + ok);
+
+          Assert.isTrue(ok, "角色");
     }
 
     @Test
@@ -194,6 +207,6 @@ public class RoleServiceTest {
 
         log.debug("删除角色->" + ok);
 
-        Assert.isTrue(ok, "角色");
+        Assert.isTrue(ok , "角色");
     }
 }

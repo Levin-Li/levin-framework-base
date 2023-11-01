@@ -30,7 +30,7 @@ import static com.levin.oak.base.entities.E_Dict.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
@@ -38,25 +38,25 @@ import com.levin.oak.base.entities.Dict.*;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 更新字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:19, 代码生成哈希校验码：[ffb2583b55f52d993238a6e4484b49a1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:40, 代码生成哈希校验码：[b33f7363300c1c49450dad015a7b7cf5]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Dict.class, alias = E_Dict.ALIAS)
-// 默认更新注解
+//默认更新注解
 @Update
 public class UpdateDictReq extends MultiTenantOrgReq {
 
@@ -67,7 +67,7 @@ public class UpdateDictReq extends MultiTenantOrgReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
@@ -79,16 +79,12 @@ public class UpdateDictReq extends MultiTenantOrgReq {
     @Schema(title = L_code)
     String code;
 
-    @InjectVar(
-            domain = "dao",
-            expectBaseType = String.class,
-            converter = DefaultJsonConverter.class,
-            isRequired = "false")
-    @Schema(title = L_itemList, description = D_itemList)
+    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = DefaultJsonConverter.class, isRequired = "false")
+    @Schema(title = L_itemList , description = D_itemList)
     List<Item> itemList;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -117,22 +113,23 @@ public class UpdateDictReq extends MultiTenantOrgReq {
     @Schema(title = L_remark)
     String remark;
 
+
     public UpdateDictReq(String id) {
         this.id = id;
     }
 
-    public UpdateDictReq updateIdWhenNotBlank(String id) {
-        if (isNotBlank(id)) {
-            this.id = id;
+    public UpdateDictReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+        this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        // @todo 更新之前初始化数据
+        //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }

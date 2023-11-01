@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.function.Predicate;
 
 /**
  * 开发者临时过滤器
@@ -23,8 +22,21 @@ import java.util.stream.Stream;
 @Slf4j
 public class DevInterceptor implements HandlerInterceptor {
 
+    private final Predicate<String> keyAuth;
+    private final Predicate<HttpServletRequest> userAuth;
+
+    public DevInterceptor(Predicate<String> keyAuth, Predicate<HttpServletRequest> userAuth) {
+        this.keyAuth = keyAuth;
+        this.userAuth = userAuth;
+    }
+
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+
+        //如果是认证的用户，直接返回true
+        if (userAuth != null && userAuth.test(request)) {
+            return true;
+        }
 
         String domainName = request.getParameter("api_refer_domain");
 
@@ -73,7 +85,7 @@ public class DevInterceptor implements HandlerInterceptor {
         final String tmpAccessKey = SecureUtil.md5(domainName + "-开发者资源-" + DateUtil.format(new Date(), "yy-MM-dd-HH"));
 
         if (StringUtils.hasText(devKey)
-                && devKey.equalsIgnoreCase(tmpAccessKey)) {
+                && (keyAuth != null ? keyAuth.test(devKey) : devKey.equalsIgnoreCase(tmpAccessKey))) {
 
             request.getSession(true)
                     .setAttribute(PARA_NAME, devKey);
@@ -97,6 +109,8 @@ public class DevInterceptor implements HandlerInterceptor {
         }
 
         log.info("[{}] 请求devKey：{} ，匹配的devKey={}", request.getRequestURL(), devKey, tmpAccessKey);
+
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
         return false;
     }

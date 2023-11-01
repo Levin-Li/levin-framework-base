@@ -14,7 +14,7 @@ import javax.validation.*;
 import java.util.*;
 import javax.annotation.*;
 
-// import javax.servlet.http.*;
+//import javax.servlet.http.*;
 
 import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
@@ -30,18 +30,22 @@ import com.levin.oak.base.*;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
+
 /**
  * 抽象服务类
  *
  * @author lilw
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:04, 代码生成哈希校验码：[19275c756ff7c50d660777e2130026eb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:35, 代码生成哈希校验码：[ce6a7c477e1b25854b7f33fc157cc57c]，请不要修改和删除此行内容。
+ *
  */
 @Slf4j
 public abstract class BaseService {
 
-    @Autowired protected SimpleDao simpleDao;
+    @Autowired
+    protected SimpleDao simpleDao;
 
-    @Autowired protected ApplicationContext applicationContext;
+    @Autowired
+    protected ApplicationContext applicationContext;
 
     protected Object selfProxy = null;
 
@@ -70,12 +74,11 @@ public abstract class BaseService {
 
         if (selfProxy == null
                 || !type.isInstance(selfProxy)
-                || !(AopUtils.isCglibProxy(selfProxy)
-                        || AopUtils.isAopProxy(selfProxy)
-                        || AopUtils.isJdkDynamicProxy(selfProxy))) {
+                || !(AopUtils.isCglibProxy(selfProxy) || AopUtils.isAopProxy(selfProxy) || AopUtils.isJdkDynamicProxy(selfProxy))) {
             selfProxy = applicationContext.getBean(type);
         }
 
         return (T) selfProxy;
     }
+
 }

@@ -30,31 +30,31 @@ import static com.levin.oak.base.entities.E_Setting.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.levin.oak.base.entities.Setting.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 更新系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:18, 代码生成哈希校验码：[cdf1a88b56b7ef41e1fdebc604710245]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:40, 代码生成哈希校验码：[67a4df05d0135edcfb631097b46d793e]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Setting.class, alias = E_Setting.ALIAS)
-// 默认更新注解
+//默认更新注解
 @Update
 public class UpdateSettingReq extends MultiTenantOrgReq {
 
@@ -65,7 +65,7 @@ public class UpdateSettingReq extends MultiTenantOrgReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
@@ -97,7 +97,7 @@ public class UpdateSettingReq extends MultiTenantOrgReq {
     String inputPlaceholder;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -126,22 +126,23 @@ public class UpdateSettingReq extends MultiTenantOrgReq {
     @Schema(title = L_remark)
     String remark;
 
+
     public UpdateSettingReq(String id) {
         this.id = id;
     }
 
-    public UpdateSettingReq updateIdWhenNotBlank(String id) {
-        if (isNotBlank(id)) {
-            this.id = id;
+    public UpdateSettingReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+        this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        // @todo 更新之前初始化数据
+        //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }

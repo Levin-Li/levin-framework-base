@@ -22,8 +22,9 @@ import com.levin.oak.base.services.menures.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.MenuRes;
 import java.util.Date;
@@ -32,13 +33,16 @@ import java.util.Set;
 import com.levin.oak.base.services.menures.info.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
- * 菜单-业务服务
+ *  菜单-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:28, 代码生成哈希校验码：[3c39c3e9959cee7ec698912ad0e6ed00]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:45, 代码生成哈希校验码：[d26e299ca5e504d3dcf2201920458f87]，请不要修改和删除此行内容。
+ *
  */
+
 @Tag(name = E_MenuRes.BIZ_NAME + "-业务服务", description = "")
-public interface BizMenuResService {}
+public interface BizMenuResService {
+
+}

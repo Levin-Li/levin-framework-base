@@ -36,54 +36,53 @@ import static com.levin.oak.base.entities.E_AccessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 统计访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[f1499cb4fc4339f661fba97abc27732a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:42, 代码生成哈希校验码：[84a491e0190607533facaf76797de9eb]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(
-        entityClass = AccessLog.class,
-        alias = E_AccessLog.ALIAS,
-        // 连接统计
-        // joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn =
-        // E_XXX.joinColumn)},
-        resultClass = StatAccessLogReq.Result.class)
-public class StatAccessLogReq extends MultiTenantOrgReq {
+@TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS,
+     //连接统计
+    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
+    resultClass = StatAccessLogReq.Result.class
+)
+public class StatAccessLogReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = 1030736962L;
+
 
     @NotNull
     @Schema(title = L_id)
     Long id;
 
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
-    @Schema(title = "模糊匹配-" + L_domain, description = D_domain)
+    @Schema(title = "模糊匹配-" + L_domain , description = D_domain)
     @Contains
     String containsDomain;
 
-    @Schema(title = L_module, description = D_module)
+    @Schema(title = L_module , description = D_module)
     String module;
 
-    @Schema(title = "模糊匹配-" + L_module, description = D_module)
+    @Schema(title = "模糊匹配-" + L_module , description = D_module)
     @Contains
     String containsModule;
 
@@ -194,65 +193,65 @@ public class StatAccessLogReq extends MultiTenantOrgReq {
     Long executeTime;
 
     @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
     @Lte
     Date lteCreateTime;
 
-    // @Schema(title = L_createTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenCreateTime;
+    //@Schema(title = L_createTime + "-日期范围")
+    //@Between(paramDelimiter = "-")
+    //String betweenCreateTime;
+
 
     public StatAccessLogReq(Long id) {
         this.id = id;
     }
 
     //
-    // @Schema(description = "是否按状态分组统计")
-    // @CtxVar //增加当前字段名称和字段值到环境变量中
-    // @Ignore
-    // private boolean isGroupByStatus;
+    //@Schema(description = "是否按状态分组统计")
+    //@CtxVar //增加当前字段名称和字段值到环境变量中
+    //@Ignore
+    //private boolean isGroupByStatus;
 
-    // @Schema(description = "是否按日期分组统计")
-    // @CtxVar //增加当前字段名称和字段值到环境变量中
-    // @Ignore //
-    // private boolean isGroupByDate;
+    //@Schema(description = "是否按日期分组统计")
+    //@CtxVar //增加当前字段名称和字段值到环境变量中
+    //@Ignore //
+    //private boolean isGroupByDate;
 
     @PostConstruct
     public void preStat() {
-        // @todo 统计之前初始化数据
+    //@todo 统计之前初始化数据
     }
 
     @Schema(description = BIZ_NAME + "统计结果")
     @Data
     @Accessors(chain = true)
     @FieldNameConstants
-    public static class Result implements Serializable {
+    public static class Result
+            implements Serializable {
 
-        // @Schema(description = "状态分组统计")
-        // @GroupBy(condition = "#isGroupByStatus")
-        // Status status;
+        //@Schema(description = "状态分组统计")
+        //@GroupBy(condition = "#isGroupByStatus")
+        //Status status;
 
-        // @Schema(description = "时间分组统计")
-        // @GroupBy(condition = "#isGroupByDate", value = "date_format(" + E_AccessLog.createDate +
-        // ",'%Y-%m-%d')", orderBy = @OrderBy(type = OrderBy.Type.Asc))
-        // String createDate;
+        //@Schema(description = "时间分组统计")
+        //@GroupBy(condition = "#isGroupByDate", value = "date_format(" + E_AccessLog.createDate + ",'%Y-%m-%d')", orderBy = @OrderBy(type = OrderBy.Type.Asc))
+        //String createDate;
 
         @Schema(description = "记录数")
         @Count
         Integer cnt;
 
-        // @Schema(description = "分类记录数")
-        // @Count(fieldCases = {@Case(column = E_AccessLog.status, whenOptions =
-        // {@Case.When(whenExpr = "OFF", thenExpr = "1")}, elseExpr = "NULL")})
-        // Integer caseCnt;
+        //@Schema(description = "分类记录数")
+        //@Count(fieldCases = {@Case(column = E_AccessLog.status, whenOptions = {@Case.When(whenExpr = "OFF", thenExpr = "1")}, elseExpr = "NULL")})
+        //Integer caseCnt;
 
-        // @Schema(description = "累计" , havingOp=Op.Gt)
-        // @Sum
-        // Double sumGmv;
+        //@Schema(description = "累计" , havingOp=Op.Gt)
+        //@Sum
+        //Double sumGmv;
 
     }
 }

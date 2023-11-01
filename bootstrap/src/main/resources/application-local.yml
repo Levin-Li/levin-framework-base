@@ -1,17 +1,16 @@
-#Auto gen by simple-dao-codegen 2023-2-5 11:13:19
+#@author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:19:48, 代码生成哈希校验码：[ad2564c635002dd56471c1a8f176cb56]，请不要修改和删除此行内容。
+
 spring:
   datasource:
-#    url: jdbc:h2:./dev.db;MODE=MySQL;
+    #    url: jdbc:h2:./dev.db;MODE=MySQL;
     url: jdbc:h2:mem:dev.db;MODE=MySQL;
     username: dev
     password: dev
 
-#  cache:
-#    type: caffeine
-
   jpa:
-    show-sql: false
+    show-sql: true
     generate-ddl: true
-    database: MYSQL
+    database: mysql
     hibernate:
       ddl-auto: update
+

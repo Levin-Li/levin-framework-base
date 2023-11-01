@@ -31,13 +31,14 @@ import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
+
 
 /**
  * 简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:22, 代码生成哈希校验码：[2818ddc0676e9510aafb7e6637f1c608]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:45, 代码生成哈希校验码：[27989e3c3083bfc3f0b36c1be59bb2cb]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -50,6 +51,7 @@ import com.levin.commons.service.domain.InjectVar;
 public class SimpleFormInfo implements Serializable {
 
     private static final long serialVersionUID = 1598335188L;
+
 
     @Schema(title = L_commitApi)
     String commitApi;
@@ -82,7 +84,7 @@ public class SimpleFormInfo implements Serializable {
     @Schema(title = L_path)
     String path;
 
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
@@ -91,7 +93,7 @@ public class SimpleFormInfo implements Serializable {
     String content;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -135,4 +137,5 @@ public class SimpleFormInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
 }

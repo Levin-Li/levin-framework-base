@@ -22,8 +22,9 @@ import com.levin.oak.base.services.area.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.levin.oak.base.entities.Area;
@@ -31,13 +32,16 @@ import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Area.*;
-
 ////////////////////////////////////
 
 /**
- * 区域-业务服务
+ *  区域-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:27, 代码生成哈希校验码：[46a95c24a57513115075bdf8817f9a44]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:44, 代码生成哈希校验码：[ddae94e067d39fef6d524b3b5d7ff9f7]，请不要修改和删除此行内容。
+ *
  */
+
 @Tag(name = E_Area.BIZ_NAME + "-业务服务", description = "")
-public interface BizAreaService {}
+public interface BizAreaService {
+
+}

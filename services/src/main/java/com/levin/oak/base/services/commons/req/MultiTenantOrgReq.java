@@ -15,41 +15,32 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
+
 /**
  * 多租户查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:06, 代码生成哈希校验码：[8fce388d7986673bb78a612ef9aa3920]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:35, 代码生成哈希校验码：[6b923693a46c4fa3a1c68d7fa6099260]，请不要修改和删除此行内容。
+ * 
  */
 @Schema(title = "多租户查询对象")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
-public class MultiTenantOrgReq extends MultiTenantReq implements MultiTenantObject {
+public class MultiTenantOrgReq
+        extends MultiTenantReq
+        implements MultiTenantObject {
 
-    // 注意需要在注入服务中设置isTenantAdmin变量
-    @InjectVar(
-            value = InjectConsts.ORG_ID,
-            isOverride =
-                    InjectVar.SPEL_PREFIX
-                            + "!#"
-                            + InjectConsts.IS_SUPER_ADMIN
-                            + " && !#"
-                            + InjectConsts.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员, 那么覆盖必须的
-            ,
-            isRequired =
-                    InjectVar.SPEL_PREFIX
-                            + "!#"
-                            + InjectConsts.IS_SUPER_ADMIN
-                            + " && !#"
-                            + InjectConsts.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员，那么值是必须的
-            )
-    @Schema(title = "机构ID", hidden = true)
+    //注意需要在注入服务中设置isTenantAdmin变量
+    @InjectVar(value = InjectConsts.ORG_ID
+            , isOverride = InjectVar.SPEL_PREFIX + "!#" + InjectConsts.IS_SUPER_ADMIN  + " && !#" + InjectConsts.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员, 那么覆盖必须的
+            , isRequired = InjectVar.SPEL_PREFIX + "!#" + InjectConsts.IS_SUPER_ADMIN  + " && !#" + InjectConsts.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员，那么值是必须的
+    )
+    @Schema(title = "机构ID" , hidden = true)
     @Eq
     protected String orgId;
 
     /**
      * 设置部门ID
-     *
      * @param orgId
      * @return
      * @param <T>
@@ -58,4 +49,5 @@ public class MultiTenantOrgReq extends MultiTenantReq implements MultiTenantObje
         this.orgId = orgId;
         return (T) this;
     }
+
 }

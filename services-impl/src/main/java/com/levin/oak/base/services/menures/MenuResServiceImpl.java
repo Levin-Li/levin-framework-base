@@ -29,7 +29,7 @@ import cn.hutool.core.lang.*;
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
-// import org.apache.dubbo.config.spring.context.annotation.*;
+//import org.apache.dubbo.config.spring.context.annotation.*;
 import org.apache.dubbo.config.annotation.*;
 
 import com.levin.oak.base.entities.*;
@@ -41,8 +41,9 @@ import com.levin.oak.base.services.menures.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.MenuRes;
 import java.util.Date;
@@ -51,50 +52,52 @@ import java.util.Set;
 import com.levin.oak.base.services.menures.info.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 菜单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:29, 代码生成哈希校验码：[f790615d4a3f2970e2560c389932b441]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:45, 代码生成哈希校验码：[93748e6fbe90176dc5d33499613fd27f]，请不要修改和删除此行内容。
+ *
  */
+
 @Service(PLUGIN_PREFIX + "MenuResService")
 @DubboService
-@ConditionalOnMissingBean({MenuResService.class}) // 默认只有在无对应服务才启用
+
+@ConditionalOnMissingBean({MenuResService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "MenuResService", matchIfMissing = true)
 @Slf4j
 
-// @Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
-// @Validated
+//@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
+//@Validated
 @Tag(name = E_MenuRes.BIZ_NAME, description = E_MenuRes.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_MenuRes.SIMPLE_CLASS_NAME})
 public class MenuResServiceImpl extends BaseService implements MenuResService {
 
-    protected MenuResService getSelfProxy() {
+    protected MenuResService getSelfProxy(){
         return getSelfProxy(MenuResService.class);
     }
 
     @Operation(summary = CREATE_ACTION)
     @Transactional(rollbackFor = {RuntimeException.class})
     @Override
-    public String create(CreateMenuResReq req) {
-        // 保存自动先查询唯一约束，并给出错误信息
+    public String create(CreateMenuResReq req){
+        //保存自动先查询唯一约束，并给出错误信息
         MenuRes entity = simpleDao.create(req, true);
         return entity.getId();
     }
 
     @Operation(summary = BATCH_CREATE_ACTION)
-    // @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
-    public List<String> batchCreate(List<CreateMenuResReq> reqList) {
+    public List<String> batchCreate(List<CreateMenuResReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
+    //@CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateMenuResReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -103,24 +106,21 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    public int update(SimpleUpdateMenuResReq setReq, QueryMenuResReq whereReq) {
-        return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int update(SimpleUpdateMenuResReq setReq, QueryMenuResReq whereReq){
+       return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
-    public int batchUpdate(List<UpdateMenuResReq> reqList) {
-        // @Todo 优化批量提交
-        return reqList.stream()
-                .map(req -> getSelfProxy().update(req))
-                .mapToInt(n -> n ? 1 : 0)
-                .sum();
+    public int batchUpdate(List<UpdateMenuResReq> reqList){
+        //@Todo 优化批量提交
+        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
     }
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
+    //@CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(MenuResIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -130,13 +130,13 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
-    public int batchDelete(DeleteMenuResReq req) {
-        // @Todo 优化批量提交
+    public int batchDelete(DeleteMenuResReq req){
+        //@Todo 优化批量提交
         return Stream.of(req.getIdList())
-                .map(id -> simpleDao.copy(req, new MenuResIdReq().setId(id)))
-                .map(idReq -> getSelfProxy().delete(idReq))
-                .mapToInt(n -> n ? 1 : 0)
-                .sum();
+            .map(id -> simpleDao.copy(req, new MenuResIdReq().setId(id)))
+            .map(idReq -> getSelfProxy().delete(idReq))
+            .mapToInt(n -> n ? 1 : 0)
+            .sum();
     }
 
     @Operation(summary = QUERY_ACTION)
@@ -146,36 +146,34 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    public PagingData<SimpleMenuResInfo> simpleQuery(QueryMenuResReq req, Paging paging) {
+    public PagingData<SimpleMenuResInfo> simpleQuery(QueryMenuResReq req, Paging paging){
         return simpleDao.findPagingDataByQueryObj(SimpleMenuResInfo.class, req, paging);
     }
 
     @Operation(summary = STAT_ACTION)
     @Override
-    public PagingData<StatMenuResReq.Result> stat(StatMenuResReq req, Paging paging) {
+    public PagingData<StatMenuResReq.Result> stat(StatMenuResReq req , Paging paging){
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryMenuResReq req) {
+    public int count(QueryMenuResReq req){
         return (int) simpleDao.countByQueryObj(req);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    // Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    // @Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key =
-    // E_MenuRes.CACHE_KEY_PREFIX + "#id")
+    //Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
+    //@Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key = E_MenuRes.CACHE_KEY_PREFIX + "#id")
     public MenuResInfo findById(String id) {
         return findById(new MenuResIdReq().setId(id));
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    // 只更新缓存
-    // @CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key =
-    // E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
+    //只更新缓存
+    //@CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
     public MenuResInfo findById(MenuResIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findUnique(req);
@@ -183,18 +181,20 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public MenuResInfo findOne(QueryMenuResReq req) {
+    public MenuResInfo findOne(QueryMenuResReq req){
         return simpleDao.findOneByQueryObj(req);
     }
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public MenuResInfo findUnique(QueryMenuResReq req) {
+    public MenuResInfo findUnique(QueryMenuResReq req){
         return simpleDao.findUnique(req);
     }
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#isNotEmpty(#key)", key = E_MenuRes.CACHE_KEY_PREFIX + "#key")
-    public void clearCache(Object key) {}
+    public void clearCache(Object key) {
+    }
+
 }

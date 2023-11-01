@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.appclient.req;
 
-// import static com.levin.oak.base.ModuleOption.*;
+//import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,24 +28,24 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_AppClient.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 新增应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:17, 代码生成哈希校验码：[8784c8a488183b6d10d62f972a2c7422]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:38, 代码生成哈希校验码：[697c355abf7464ace708235f97838796]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor
 @NoArgsConstructor
@@ -55,63 +55,64 @@ public class CreateAppClientReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -115048882L;
 
-    @Schema(title = L_appId)
+    @Schema(title = L_appId )
     @NotBlank
     @Size(max = 64)
     String appId;
 
-    @Schema(title = L_appSecret)
+    @Schema(title = L_appSecret )
     @NotBlank
     @Size(max = 512)
     String appSecret;
 
-    @Schema(title = L_appToken)
+    @Schema(title = L_appToken )
     @Size(max = 512)
     String appToken;
 
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain )
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_name)
+    @Schema(title = L_name )
     @NotBlank
     @Size(max = 64)
     String name;
 
-    @Schema(title = L_optimisticLock)
+    @Schema(title = L_optimisticLock )
     Integer optimisticLock;
 
-    @Schema(title = L_creator, hidden = true)
-    // @Size(max = 128)
+    @Schema(title = L_creator , hidden = true)
+    //@Size(max = 128)
     String creator;
 
-    @Schema(title = L_createTime, hidden = true)
-    // @NotNull
+    @Schema(title = L_createTime , hidden = true)
+    //@NotNull
     Date createTime;
 
-    @Schema(title = L_lastUpdateTime, hidden = true)
+    @Schema(title = L_lastUpdateTime , hidden = true)
     Date lastUpdateTime;
 
-    @Schema(title = L_orderCode, hidden = true)
+    @Schema(title = L_orderCode , hidden = true)
     Integer orderCode;
 
-    @Schema(title = L_enable, hidden = true)
-    // @NotNull
+    @Schema(title = L_enable , hidden = true)
+    //@NotNull
     Boolean enable;
 
-    @Schema(title = L_editable, hidden = true)
-    // @NotNull
+    @Schema(title = L_editable , hidden = true)
+    //@NotNull
     Boolean editable;
 
-    @Schema(title = L_remark, hidden = true)
-    // @Size(max = 512)
+    @Schema(title = L_remark , hidden = true)
+    //@Size(max = 512)
     String remark;
+
 
     @PostConstruct
     public void prePersist() {
-        // @todo 保存之前初始化数据，比如时间，初始状态等
+       //@todo 保存之前初始化数据，比如时间，初始状态等
 
-        if (getCreateTime() == null) {
+        if(getCreateTime() == null){
             setCreateTime(new Date());
         }
     }

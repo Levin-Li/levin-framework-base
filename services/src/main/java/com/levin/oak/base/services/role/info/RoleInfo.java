@@ -32,13 +32,14 @@ import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
+
 
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:16, 代码生成哈希校验码：[c5ab53d20b96693aa17f4c83c48f44ff]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:36, 代码生成哈希校验码：[f801850e0646bef9556ecdc7dae3e834]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -51,6 +52,7 @@ import com.levin.commons.service.domain.InjectVar;
 public class RoleInfo implements Serializable {
 
     private static final long serialVersionUID = -445356492L;
+
 
     @NotBlank
     @Size(max = 64)
@@ -66,19 +68,19 @@ public class RoleInfo implements Serializable {
     String icon;
 
     @NotNull
-    @Schema(title = L_orgDataScope, description = D_orgDataScope)
+    @Schema(title = L_orgDataScope , description = D_orgDataScope)
     OrgDataScope orgDataScope;
 
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    @Schema(title = L_assignedOrgIdList, description = D_assignedOrgIdList)
+    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @Schema(title = L_assignedOrgIdList , description = D_assignedOrgIdList)
     List<String> assignedOrgIdList;
 
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    @Schema(title = L_permissionList, description = D_permissionList)
+    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @Schema(title = L_permissionList , description = D_permissionList)
     List<String> permissionList;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -122,4 +124,5 @@ public class RoleInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
 }

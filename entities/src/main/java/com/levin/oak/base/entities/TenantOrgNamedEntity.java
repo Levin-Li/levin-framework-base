@@ -19,7 +19,7 @@ import javax.persistence.Version;
 public abstract class TenantOrgNamedEntity
         extends AbstractMultiTenantOrgObject implements NamedObject {
 
-    @Schema(title = "系统域", description = "归属的子系统")
+    @Schema(title = "系统域", description = "归属的子系统或应用")
     @Column(length = 128)
     protected String domain;
 

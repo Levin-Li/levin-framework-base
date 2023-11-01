@@ -1,5 +1,7 @@
 #!/bin/bash
 #Author Lilw @2012
+### 代码生成哈希校验码：[c63d18bc8c306b04f2391cc1e00cb97c], 请不要修改和删除此行内容。
+
 execDir=`pwd`
 
 #sh文件所在目录
@@ -9,8 +11,11 @@ cd $shellDir
 
 shellDir=`pwd`
 
+#包括双引号
+keyword="\"${shellDir}\""
+
 #获取进程ID
-pids=`ps -ef | grep java | grep "$shellDir" | awk '{print $2}'`
+pids=`ps -ef | grep java | grep "${keyword}" | awk '{print $2}'`
 
 if [ -z "${pids}" ]; then
 
@@ -18,7 +23,7 @@ if [ -z "${pids}" ]; then
 
 else
 #尝试停止进程
-   ps -ef | grep java | grep `pwd`
+   ps -ef | grep java | grep "${keyword}"
 
    tempPid=$pids
 
@@ -30,7 +35,7 @@ else
 
       sleep 1
 
-      pids=`ps -ef | grep java | grep "$shellDir" | awk '{print $2}'`
+      pids=`ps -ef | grep java | grep "${keyword}" | awk '{print $2}'`
 
       if [ -z "${pids}" ]; then
          echo "program ${tempPid} stopped."
@@ -43,7 +48,7 @@ fi
 
 ##################强制停止进程#######################
 
-pids=`ps -ef | grep java | grep "$shellDir" | awk '{print $2}'`
+pids=`ps -ef | grep java | grep "${keyword}" | awk '{print $2}'`
 
 if [ -n "${pids}" ]; then
    echo "***Warning*** kill -9 $pids ..."

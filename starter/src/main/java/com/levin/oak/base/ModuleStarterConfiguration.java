@@ -27,9 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 模块自举配置
  *
- * <p>模块需要自举加载的内容都需要配置在该类中
+ * 模块需要自举加载的内容都需要配置在该类中
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:46, 代码生成哈希校验码：[6420a4c6090c8e62dcac9ce29d1797c8]，请不要修改和删除此行内容。
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月17日 上午12:55:58, 代码生成哈希校验码：[2fb41cd4ed189e15c370dfeaee799787]，请不要修改和删除此行内容。
  */
 @Configuration(PLUGIN_PREFIX + "ModuleStarterConfiguration")
 @Slf4j
@@ -42,16 +42,14 @@ import org.springframework.web.bind.annotation.RestController;
 @ComponentScan({PACKAGE_NAME})
 
 // 自定义注解接口 扫描
-@ProxyBeanScan(
-        basePackages = {PACKAGE_NAME},
-        scanType = EntityRepository.class,
-        factoryBeanClass = RepositoryFactoryBean.class)
+@ProxyBeanScan(basePackages = {PACKAGE_NAME} , scanType = EntityRepository.class , factoryBeanClass = RepositoryFactoryBean.class)
 
 // FeignClients 扫描
 @EnableFeignClients({PACKAGE_NAME})
 
 // Dubbo 扫描，根据现有的 Dubbo 3.1.x 版本的机制， DubboComponentScan 会先自动先扫描 Spring 的注解, 所以 @ComponentScan 可以注释。
 @DubboComponentScan({PACKAGE_NAME})
+
 public class ModuleStarterConfiguration {
 
     @Autowired

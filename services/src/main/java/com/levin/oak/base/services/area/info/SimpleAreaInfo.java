@@ -32,24 +32,20 @@ import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Area.*;
-
 ////////////////////////////////////
 
 /**
  * 区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:26, 代码生成哈希校验码：[e96340c856317d8ca5edfbe8d28526bd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:44, 代码生成哈希校验码：[c065dab61653f257bbfc58c2f05368f5]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"code"})
-@ToString(
-        exclude = {
-            "parent",
-            "children",
-        })
+@ToString(exclude = {"parent","children",})
 @FieldNameConstants
 @Select
 public class SimpleAreaInfo implements Serializable {
@@ -68,11 +64,11 @@ public class SimpleAreaInfo implements Serializable {
     @Schema(title = L_parentCode)
     String parentCode;
 
-    // @Fetch //默认不加载，请通过查询对象控制
+    //@Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_parent)
     AreaInfo parent;
 
-    // @Fetch //默认不加载，请通过查询对象控制
+    //@Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_children)
     Set<AreaInfo> children;
 
@@ -86,6 +82,8 @@ public class SimpleAreaInfo implements Serializable {
     String name;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName, description = D_pinyinName)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
+
+
 }

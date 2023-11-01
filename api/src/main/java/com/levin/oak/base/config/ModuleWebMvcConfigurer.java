@@ -249,7 +249,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         //api 文档资源特别处理
         if (StringUtils.hasText(frameworkProperties.getApiDocPath())) {
-            registry.addInterceptor(new DevInterceptor())
+            //允许登录用户访问文档
+            registry.addInterceptor(new DevInterceptor(null, request -> authService.isLogin()))
                     .addPathPatterns(UrlPathUtils.safeUrl("/" + frameworkProperties.getApiDocPath() + "/**"))
                     .order(Ordered.HIGHEST_PRECEDENCE);
         }

@@ -1,5 +1,6 @@
 package com.levin.oak.base.controller.simpleapi;
 
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -55,61 +56,61 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // @NotNull(groups = AdvanceInfo.class)
 // private UserAddress useraddress;
 
-// 生成的控制器
+//生成的控制器
 @RestController(PLUGIN_PREFIX + "SimpleApiController")
-@RequestMapping(API_PATH + "SimpleApi") // simpleapi
+@RequestMapping(API_PATH + "SimpleApi") //simpleapi
+
 @Slf4j
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimpleApiController", matchIfMissing = true)
 
-// 默认需要权限访问，默认从父类继承
-// @ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
+//默认需要权限访问，默认从父类继承
+//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
-// 类注解
+//类注解
 
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
-@Validated // @Valid
+@Validated //@Valid
 @CRUD
 /**
  * 简单动态接口控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:03:57, 代码生成哈希校验码：[74037cb3bf608e76d2d2a4a9530fad0f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:38, 代码生成哈希校验码：[afe85b8a6ecf2cdf886870b4bde3ec39]，请不要修改和删除此行内容。
+ *
  */
-public class SimpleApiController extends BaseController {
+public class SimpleApiController extends BaseController{
 
     protected static final String BIZ_NAME = E_SimpleApi.BIZ_NAME;
 
-    @DubboReference // @Autowired
+    @DubboReference //@Autowired
     protected SimpleApiService simpleApiService;
 
-    @DubboReference // @Autowired
+    @DubboReference //@Autowired
     protected BizSimpleApiService bizSimpleApiService;
 
     /**
      * 分页列表查找
      *
      * @param req QuerySimpleApiReq
-     * @return ApiResp<PagingData<SimpleApiInfo>>
+     * @return  ApiResp<PagingData<SimpleApiInfo>>
      */
     @GetMapping("/queryList")
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
-    public ApiResp<PagingData<SimpleApiInfo>> queryList(
-            @Form @Valid QuerySimpleApiReq req, SimplePaging paging) {
-        return ApiResp.ok(simpleApiService.query(req, paging));
+    public ApiResp<PagingData<SimpleApiInfo>> queryList(@Form @Valid QuerySimpleApiReq req, SimplePaging paging) {
+        return ApiResp.ok(simpleApiService.query(req,paging));
     }
 
-    /**
-     * 简单统计
-     *
-     * @param req QuerySimpleApiReq
-     * @return ApiResp<PagingData<StatSimpleApiReq.Result>>
-     */
-    // @GetMapping("/stat") //默认不开放
-    @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatSimpleApiReq.Result>> stat(
-            @Valid StatSimpleApiReq req, SimplePaging paging) {
-        return ApiResp.ok(simpleApiService.stat(req, paging));
-    }
+     /**
+      * 简单统计
+      *
+      * @param req QuerySimpleApiReq
+      * @return  ApiResp<PagingData<StatSimpleApiReq.Result>>
+      */
+     //@GetMapping("/stat") //默认不开放
+     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
+     public ApiResp<PagingData<StatSimpleApiReq.Result>> stat(@Valid StatSimpleApiReq req, SimplePaging paging) {
+         return ApiResp.ok(simpleApiService.stat(req,paging));
+     }
 
     /**
      * 新增
@@ -129,67 +130,50 @@ public class SimpleApiController extends BaseController {
      *
      * @param req QuerySimpleApiByIdReq
      */
-    @GetMapping({"", "{id}"})
+    @GetMapping({"","{id}"})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
-    public ApiResp<SimpleApiInfo> retrieve(
-            @NotNull @Valid SimpleApiIdReq req, @PathVariable(required = false) String id) {
-        req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(simpleApiService.findById(req));
-    }
+    public ApiResp<SimpleApiInfo> retrieve(@NotNull @Valid SimpleApiIdReq req, @PathVariable(required = false) String id) {
+         req.updateIdWhenNotBlank(id);
+         return ApiResp.ok(simpleApiService.findById(req));
+     }
 
     /**
      * 更新
-     *
      * @param req UpdateSimpleApiReq
      */
-    @PutMapping({"", "{id}"})
-    @Operation(
-            summary = UPDATE_ACTION + "(RequestBody方式)",
-            description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @PutMapping({"","{id}"})
+    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<Boolean> update(
-            @RequestBody @Valid UpdateSimpleApiReq req, @PathVariable(required = false) String id) {
+    public ApiResp<Boolean> update(@RequestBody @Valid UpdateSimpleApiReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(
-                assertTrue(simpleApiService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(simpleApiService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 删除
-     *
      * @param req SimpleApiIdReq
      */
-    @DeleteMapping({"", "{id}"})
-    @Operation(
-            summary = DELETE_ACTION,
-            description = DELETE_ACTION + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
+    @DeleteMapping({"","{id}"})
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<Boolean> delete(
-            @Valid SimpleApiIdReq req, @PathVariable(required = false) String id) {
+    public ApiResp<Boolean> delete(@Valid SimpleApiIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(
-                assertTrue(simpleApiService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(simpleApiService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 删除
-     *
      * @param req SimpleApiIdReq
      */
-    @DeleteMapping(
-            value = {"", "{id}"},
-            consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(
-            summary = DELETE_ACTION + "(RequestBody方式)",
-            description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
-    public ApiResp<Boolean> delete2(
-            @RequestBody @Valid SimpleApiIdReq req, @PathVariable(required = false) String id) {
+    @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    public ApiResp<Boolean> delete2(@RequestBody @Valid SimpleApiIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return delete(req, id);
     }
 
-    ////////////////////////////////////// 以下是批量操作//////////////////////////////////////
+    //////////////////////////////////////以下是批量操作//////////////////////////////////////
 
     /**
      * 批量新增
@@ -203,38 +187,31 @@ public class SimpleApiController extends BaseController {
         return ApiResp.ok(simpleApiService.batchCreate(reqList));
     }
 
-    /** 批量更新 */
+    /**
+     * 批量更新
+     */
     @PutMapping("/batchUpdate")
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateSimpleApiReq> reqList) {
-        return ApiResp.ok(
-                assertTrue(
-                        simpleApiService.batchUpdate(reqList),
-                        BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(simpleApiService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 批量删除
-     *
      * @param req DeleteSimpleApiReq
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteSimpleApiReq req) {
-        return ApiResp.ok(
-                assertTrue(
-                        simpleApiService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(simpleApiService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 批量删除2
-     *
      * @param req @RequestBody DeleteSimpleApiReq
      */
-    @DeleteMapping(
-            value = {"/batchDelete"},
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = {"/batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete2(@RequestBody @Valid DeleteSimpleApiReq req) {
         return batchDelete(req);

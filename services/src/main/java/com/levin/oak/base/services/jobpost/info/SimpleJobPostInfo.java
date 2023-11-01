@@ -30,13 +30,13 @@ import java.util.Date;
 import com.levin.oak.base.entities.JobPost.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:21, 代码生成哈希校验码：[692512fcd9c863db791622d0e982d811]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:43, 代码生成哈希校验码：[aa7739b766d4c0e85dfca31ab8810982]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -66,7 +66,7 @@ public class SimpleJobPostInfo implements Serializable {
     Type type;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -84,4 +84,6 @@ public class SimpleJobPostInfo implements Serializable {
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
+
+
 }

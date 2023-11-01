@@ -29,13 +29,14 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
+
 
 /**
  * 调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[7a30264d487399e277e3565ee3ef0106]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:42, 代码生成哈希校验码：[fed3b780735de04bc5eee22137a9138b]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -48,6 +49,7 @@ import com.levin.commons.service.domain.InjectVar;
 public class ScheduledTaskInfo implements Serializable {
 
     private static final long serialVersionUID = -2056389676L;
+
 
     @NotBlank
     @Size(max = 64)
@@ -68,7 +70,7 @@ public class ScheduledTaskInfo implements Serializable {
     @Schema(title = L_cron)
     String cron;
 
-    @Schema(title = L_invokeExpr, description = D_invokeExpr)
+    @Schema(title = L_invokeExpr , description = D_invokeExpr)
     String invokeExpr;
 
     @Schema(title = L_parallelInvoke)
@@ -84,7 +86,7 @@ public class ScheduledTaskInfo implements Serializable {
     Date nextInvokeTime;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -128,4 +130,5 @@ public class ScheduledTaskInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
 }

@@ -18,20 +18,25 @@ import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
 
+
 /**
  * 模块插件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:32, 代码生成哈希校验码：[89345067fc248f3631b9f81d134a504b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:46, 代码生成哈希校验码：[a8e9140138d85ed647daf2d4aca805bd]，请不要修改和删除此行内容。
+ * 
  */
 @Slf4j
 @Component(PLUGIN_PREFIX + "ModulePlugin")
 public class ModulePlugin implements Plugin, PluginManagerAware {
 
-    @Autowired private ApplicationContext context;
+    @Autowired
+    private ApplicationContext context;
 
-    @Autowired private SimpleDao simpleDao;
+    @Autowired
+    private SimpleDao simpleDao;
 
     private PluginManager pluginManager;
+
 
     @Override
     public String getId() {
@@ -60,21 +65,19 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
 
     @Override
     public ResLoader getResLoader() {
-        // @todo 返回资源加载器
+        //@todo 返回资源加载器
         return resLoader;
     }
 
     @Override
     public <M extends MenuItem> List<M> getMenuList() {
-        return (List<M>)
-                RbacUtils.getMenuItemByController(
-                        context, ModuleOption.ID, EntityConst.QUERY_ACTION);
+        return (List<M>) RbacUtils.getMenuItemByController(context, ModuleOption.ID, EntityConst.QUERY_ACTION);
     }
 
     @Override
     public boolean onEvent(Object... objects) {
-        // log.debug(getDescription() + " onEvent " + Arrays.asList(objects));
-        // @todo
+        //log.debug(getDescription() + " onEvent " + Arrays.asList(objects));
+        //@todo
         return false;
     }
 
@@ -89,46 +92,45 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
     }
 
     @Override
-    public void destroy() throws PluginException {}
+    public void destroy() throws PluginException {
+    }
 
-    /** 资源加载器 */
-    private final ResLoader resLoader =
-            new ResLoader() {
+    /**
+     * 资源加载器
+     */
+    private final ResLoader resLoader = new ResLoader() {
 
-                final List<SimpleIdentifiable> types = new ArrayList<>();
+        final List<SimpleIdentifiable> types = new ArrayList<>();
 
-                final LinkedMultiValueMap<String, Res> resMap = new LinkedMultiValueMap<>();
+        final LinkedMultiValueMap<String, Res> resMap = new LinkedMultiValueMap<>();
 
-                @Override
-                public List<SimpleIdentifiable> getResTypes() {
-                    synchronized (types) {
-                        if (types.isEmpty()) {
-                            types.addAll(
-                                    RbacUtils.loadResTypeFromSpringCtx(
-                                            context, getPackageName(), null));
-                        }
-                    }
-                    return types;
+        @Override
+        public List<SimpleIdentifiable> getResTypes() {
+            synchronized (types) {
+                if (types.isEmpty()) {
+                    types.addAll(RbacUtils.loadResTypeFromSpringCtx(context, getPackageName(), null));
                 }
+            }
+            return types;
+        }
 
-                @Override
-                public <R extends Res> List<R> getResItems(String resType, int loadDeep) {
+        @Override
+        public <R extends Res> List<R> getResItems(String resType, int loadDeep) {
 
-                    Assert.hasText(resType, "资源类型没有指定");
+            Assert.hasText(resType, "资源类型没有指定");
 
-                    if (!resMap.containsKey(resType)) {
-                        resMap.put(
-                                resType,
-                                RbacUtils.loadResFromSpringCtx(context, getPackageName(), resType));
-                    }
+            if (!resMap.containsKey(resType)) {
+                resMap.put(resType, RbacUtils.loadResFromSpringCtx(context, getPackageName(), resType));
+            }
 
-                    return (List<R>) resMap.get(resType);
-                }
+            return (List<R>) resMap.get(resType);
+        }
 
-                @Override
-                public <R extends Res> Collection<R> getSubItems(
-                        String resType, String resId, int loadDeep) {
-                    throw new UnsupportedOperationException("getSubItems");
-                }
-            };
+        @Override
+        public <R extends Res> Collection<R> getSubItems(String resType, String resId, int loadDeep) {
+            throw new UnsupportedOperationException("getSubItems");
+        }
+
+    };
+
 } // end class

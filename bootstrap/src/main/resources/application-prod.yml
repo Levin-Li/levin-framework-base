@@ -1,7 +1,7 @@
-#Auto gen by simple-dao-codegen 2023-2-5 11:13:19
+#@author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:19:48, 代码生成哈希校验码：[ec23ed5826410f2206a86d608d5fbda2]，请不要修改和删除此行内容。
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/framework-base
+    url: jdbc:mysql://localhost:3306/framework-base?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: prod
     password: prod
 

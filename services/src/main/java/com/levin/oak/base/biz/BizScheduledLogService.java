@@ -22,19 +22,23 @@ import com.levin.oak.base.services.scheduledlog.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
- * 调度日志-业务服务
+ *  调度日志-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:15, 代码生成哈希校验码：[f6a5041835053433ed34f80d39ba563a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:39, 代码生成哈希校验码：[e3bc2564606f49eb9c0e9948b722a7ea]，请不要修改和删除此行内容。
+ *
  */
+
 @Tag(name = E_ScheduledLog.BIZ_NAME + "-业务服务", description = "")
-public interface BizScheduledLogService {}
+public interface BizScheduledLogService {
+
+}

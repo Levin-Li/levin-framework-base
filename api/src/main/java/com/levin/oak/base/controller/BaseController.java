@@ -35,16 +35,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
  * 抽象控制器
  *
  * @author lilw
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:00:24, 代码生成哈希校验码：[3273f7ff186a5f91c72206b798e4ea70]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午4:26:57, 代码生成哈希校验码：[c2649949ef140b840a2cf2bc177802f6]，请不要修改和删除此行内容。
  */
 @Slf4j
-// 默认需要权限访问
+//默认需要权限访问
 @ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 @MenuResTag(domain = ID)
 public abstract class BaseController {
-    @Autowired protected HttpServletRequest httpRequest;
-    @Autowired protected HttpServletResponse httpResponse;
-    @Autowired protected ApplicationContext applicationContext;
+    @Autowired
+    protected HttpServletRequest httpRequest;
+    @Autowired
+    protected HttpServletResponse httpResponse;
+    @Autowired
+    protected ApplicationContext applicationContext;
     protected Object selfProxy = null;
 
     public final String getModuleId() {
@@ -66,16 +69,8 @@ public abstract class BaseController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        // binder.registerCustomEditor(Date.class,new CustomDateEditor(new
-        // SimpleDateFormat("MM-dd-yyyy"),false));
+        // binder.registerCustomEditor(Date.class,new CustomDateEditor(new SimpleDateFormat("MM-dd-yyyy"),false));
     }
-
-    //        request.getRequestURL():http://localhost:8080/bzbs/system/login.jsp
-    //        request.getRequestURI():/bzbs/system/login.jsp
-    //        request.getContextPath():/bzbs
-    //        request.getServletPath():/system/login.jsp
-
-
 
     /**
      * @return
@@ -84,9 +79,9 @@ public abstract class BaseController {
         return httpRequest.getServletContext().getContextPath();
     }
 
+
     /**
      * null2Empty
-     *
      * @param txt
      * @return
      */
@@ -96,7 +91,6 @@ public abstract class BaseController {
 
     /**
      * null2Empty
-     *
      * @param txt
      * @param prefix
      * @param suffix

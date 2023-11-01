@@ -3,7 +3,7 @@ package com.levin.oak.base;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.OncePerRequestFilter;
-
+import org.springframework.beans.factory.annotation.*;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +13,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
+ *
  * 支持的必要的时候，阻断新的请求
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:21:53, 代码生成哈希校验码：[ccf7564117e31cff8ea0e25748dcdf0a]，请不要修改和删除此行内容。
+ * 
  */
 @Slf4j
 public class BlockingFilter extends OncePerRequestFilter {

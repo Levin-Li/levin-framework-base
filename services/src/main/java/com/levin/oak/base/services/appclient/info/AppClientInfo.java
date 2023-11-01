@@ -29,13 +29,14 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
+
 
 /**
  * 应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:17, 代码生成哈希校验码：[2e0e57c6331be12e837dddb1034b3ef6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:38, 代码生成哈希校验码：[cd6713460cbc4563e23a35f33d777e48]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -48,6 +49,7 @@ import com.levin.commons.service.domain.InjectVar;
 public class AppClientInfo implements Serializable {
 
     private static final long serialVersionUID = -115048882L;
+
 
     @NotBlank
     @Size(max = 64)
@@ -69,7 +71,7 @@ public class AppClientInfo implements Serializable {
     String appToken;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -113,4 +115,5 @@ public class AppClientInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
 }

@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.user.req;
 
-// import static com.levin.oak.base.ModuleOption.*;
+//import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,7 +28,7 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_User.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.User.*;
 import java.util.List;
@@ -39,19 +39,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 新增用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[7d718b7f961ec88d8fc24b1a4369a865]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:41, 代码生成哈希校验码：[19128b68b7872d4cc58e9c2d00f001fd]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor
 @NoArgsConstructor
@@ -61,87 +61,80 @@ public class SimpleCreateUserReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445263479L;
 
-    @Schema(title = L_telephone, description = D_telephone)
+    @Schema(title = L_telephone , description = D_telephone )
     @Size(max = 20)
     String telephone;
 
-    @Schema(title = L_email, description = D_email)
+    @Schema(title = L_email , description = D_email )
     @Size(max = 32)
     String email;
 
-    @Schema(title = L_password)
+    @Schema(title = L_password )
     @Size(max = 256)
-    @JsonIgnore(value = true)
+    @JsonIgnore(value=true)
     String password;
 
-    @Schema(title = L_nickname)
+    @Schema(title = L_nickname )
     @Size(max = 32)
     String nickname;
 
-    @Schema(title = L_avatar)
+    @Schema(title = L_avatar )
     String avatar;
 
-    @Schema(title = L_sex)
+    @Schema(title = L_sex )
     Sex sex;
 
-    @Schema(title = L_tagList)
-    @InjectVar(
-            domain = "dao",
-            expectBaseType = String.class,
-            converter = PrimitiveArrayJsonConverter.class,
-            isRequired = "false")
+    @Schema(title = L_tagList )
+    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     List<String> tagList;
 
-    @Schema(title = L_category)
+    @Schema(title = L_category )
     Category category;
 
-    @Schema(title = L_expiredDate)
+    @Schema(title = L_expiredDate )
     Date expiredDate;
 
-    @Schema(title = L_state)
+    @Schema(title = L_state )
     @NotNull
     State state;
 
-    @Schema(title = L_staffNo)
+    @Schema(title = L_staffNo )
     @Size(max = 32)
     String staffNo;
 
-    @Schema(title = L_jobPostCode)
+    @Schema(title = L_jobPostCode )
     @Size(max = 128)
     String jobPostCode;
 
-    @Schema(title = L_roleList)
-    @InjectVar(
-            domain = "dao",
-            expectBaseType = String.class,
-            converter = PrimitiveArrayJsonConverter.class,
-            isRequired = "false")
+    @Schema(title = L_roleList )
+    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     List<String> roleList;
 
-    @Schema(title = L_wxOpenId)
+    @Schema(title = L_wxOpenId )
     @Size(max = 64)
     String wxOpenId;
 
-    @Schema(title = L_aliOpenId)
+    @Schema(title = L_aliOpenId )
     @Size(max = 64)
     String aliOpenId;
 
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain )
     @Size(max = 128)
     String domain;
 
-    @Schema(title = L_name)
+    @Schema(title = L_name )
     @NotBlank
     @Size(max = 64)
     String name;
 
-    @Schema(title = L_optimisticLock)
+    @Schema(title = L_optimisticLock )
     Integer optimisticLock;
+
 
     @PostConstruct
     public void prePersist() {
-        // @todo 保存之前初始化数据，比如时间，初始状态等
+       //@todo 保存之前初始化数据，比如时间，初始状态等
     }
 }

@@ -9,8 +9,9 @@ import com.levin.oak.base.services.accesslog.*;
 import com.levin.oak.base.services.accesslog.req.*;
 import com.levin.oak.base.services.accesslog.info.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -47,102 +48,113 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 访问日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:23, 代码生成哈希校验码：[869a9c011d324c268e021c91dc3f7acb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:46, 代码生成哈希校验码：[66d2b7c81a2d519d94022de384274c09]，请不要修改和删除此行内容。
+ *
  */
 
-// @ActiveProfiles("test")
-// @RunWith(SpringRunner.class)
+//@ActiveProfiles("test")
+//@RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-// @Transactional(rollbackFor = {Throwable.class})
+//@Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class AccessLogServiceTest {
 
-    @Autowired private AccessLogService accessLogService;
+    @Autowired
+    private AccessLogService accessLogService;
 
-    @Autowired private BizAccessLogService bizAccessLogService;
+    @Autowired
+    private BizAccessLogService bizAccessLogService;
 
     private Long id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {}
+    public static void beforeAll() throws Exception {
+    }
 
     @AfterAll
-    public static void afterAll() throws Exception {}
+    public static void afterAll() throws Exception {
+    }
 
     @BeforeEach
-    public void beforeEach() throws Exception {}
+    public void beforeEach() throws Exception {
+    }
 
     @AfterEach
-    public void afterEach() throws Exception {}
+    public void afterEach() throws Exception {
+    }
 
     @Test
     public void createAccessLogTest() {
 
         CreateAccessLogReq req = new CreateAccessLogReq();
 
-        // req.setDomain("系统域_1");//归属的子系统
+            // req.setDomain("系统域_1");//归属的子系统 
 
-        // req.setModule("模块_1");//归属的应用或模块
+            // req.setModule("模块_1");//归属的应用或模块 
 
-        // req.setVisitor("这是文本64");//
+            // req.setVisitor("这是文本64");// 
 
-        // req.setTitle("标题_1");// 必填
+            // req.setTitle("标题_1");// 必填
 
-        // req.setLogType("这是文本64");//
+            // req.setLogType("这是文本64");// 
 
-        // req.setDiffModifyData("差异修改数据_1");//
+            // req.setDiffModifyData("差异修改数据_1");// 
 
-        // req.setBizKey("业务主键_1");//
+            // req.setBizKey("业务主键_1");// 
 
-        // req.setBizType("业务类型_1");//
+            // req.setBizType("业务类型_1");// 
 
-        // req.setRequestUri("这是文本768");//
+            // req.setRequestUri("这是文本768");// 
 
-        // req.setRequestMethod("这是文本32");//
+            // req.setRequestMethod("这是文本32");// 
 
-        // req.setHeadInfo("头部信息_1");//
+            // req.setHeadInfo("头部信息_1");// 
 
-        // req.setRequestParams("请求参数_1");//
+            // req.setRequestParams("请求参数_1");// 
 
-        // req.setRequestBody("请求体_1");//
+            // req.setRequestBody("请求体_1");// 
 
-        // req.setResponseBody("响应体_1");//
+            // req.setResponseBody("响应体_1");// 
 
-        // req.setRemoteAddr("这是文本128");//
+            // req.setRemoteAddr("这是文本128");// 
 
-        // req.setAccessRegion("这是文本256");//
+            // req.setAccessRegion("这是文本256");// 
 
-        // req.setServerAddr("这是文本64");//
+            // req.setServerAddr("这是文本64");// 
 
-        // req.setIsException(true);//
+            // req.setIsException(true);// 
 
-        // req.setExceptionInfo("异常信息_1");//
+            // req.setExceptionInfo("异常信息_1");// 
 
-        // req.setUserAgent("这是文本1800");//
+            // req.setUserAgent("这是文本1800");// 
 
-        // req.setDeviceName("这是文本128");//
+            // req.setDeviceName("这是文本128");// 
 
-        // req.setBrowserName("这是文本128");//
+            // req.setBrowserName("这是文本128");// 
 
-        // req.setExecuteTime(1L);//
+            // req.setExecuteTime(1L);// 
 
-        // req.setTenantId("这是文本128");//
+            // req.setTenantId("这是文本128");// 
 
-        // req.setOrgId("这是文本128");//
+            // req.setOrgId("这是文本128");// 
 
-        Long id = accessLogService.create(req);
+
+       Long id  = accessLogService.create(req);
 
         log.debug("新增访问日志->" + id);
 
         Assert.isTrue(id != null, "访问日志");
+
     }
+
 
     @Test
     public void queryAccessLogTest() {
@@ -176,7 +188,7 @@ public class AccessLogServiceTest {
         // req.setTenantId("这是文本128");//
         // req.setOrgId("这是文本128");//
 
-        PagingData<AccessLogInfo> resp = accessLogService.query(req, null);
+        PagingData<AccessLogInfo> resp = accessLogService.query(req,null);
 
         log.debug("查询访问日志->" + resp);
 
@@ -186,41 +198,42 @@ public class AccessLogServiceTest {
     @Test
     public void updateAccessLogTest() {
 
-        UpdateAccessLogReq req = new UpdateAccessLogReq();
+         UpdateAccessLogReq req = new UpdateAccessLogReq();
 
-        req.setId(id);
+         req.setId(id);
 
-        // req.setDomain("系统域_1");//归属的子系统
-        // req.setModule("模块_1");//归属的应用或模块
-        // req.setVisitor("这是文本64");//
-        // req.setTitle("标题_1");// 必填
-        // req.setLogType("这是文本64");//
-        // req.setDiffModifyData("差异修改数据_1");//
-        // req.setBizKey("业务主键_1");//
-        // req.setBizType("业务类型_1");//
-        // req.setRequestUri("这是文本768");//
-        // req.setRequestMethod("这是文本32");//
-        // req.setHeadInfo("头部信息_1");//
-        // req.setRequestParams("请求参数_1");//
-        // req.setRequestBody("请求体_1");//
-        // req.setResponseBody("响应体_1");//
-        // req.setRemoteAddr("这是文本128");//
-        // req.setAccessRegion("这是文本256");//
-        // req.setServerAddr("这是文本64");//
-        // req.setIsException(true);//
-        // req.setExceptionInfo("异常信息_1");//
-        // req.setUserAgent("这是文本1800");//
-        // req.setDeviceName("这是文本128");//
-        // req.setBrowserName("这是文本128");//
-        // req.setExecuteTime(1L);//
-        // req.setTenantId("这是文本128");//
-        // req.setOrgId("这是文本128");//
 
-        boolean ok = accessLogService.update(req);
+           // req.setDomain("系统域_1");//归属的子系统 
+           // req.setModule("模块_1");//归属的应用或模块 
+           // req.setVisitor("这是文本64");// 
+           // req.setTitle("标题_1");// 必填
+           // req.setLogType("这是文本64");// 
+           // req.setDiffModifyData("差异修改数据_1");// 
+           // req.setBizKey("业务主键_1");// 
+           // req.setBizType("业务类型_1");// 
+           // req.setRequestUri("这是文本768");// 
+           // req.setRequestMethod("这是文本32");// 
+           // req.setHeadInfo("头部信息_1");// 
+           // req.setRequestParams("请求参数_1");// 
+           // req.setRequestBody("请求体_1");// 
+           // req.setResponseBody("响应体_1");// 
+           // req.setRemoteAddr("这是文本128");// 
+           // req.setAccessRegion("这是文本256");// 
+           // req.setServerAddr("这是文本64");// 
+           // req.setIsException(true);// 
+           // req.setExceptionInfo("异常信息_1");// 
+           // req.setUserAgent("这是文本1800");// 
+           // req.setDeviceName("这是文本128");// 
+           // req.setBrowserName("这是文本128");// 
+           // req.setExecuteTime(1L);// 
+           // req.setTenantId("这是文本128");// 
+           // req.setOrgId("这是文本128");// 
 
-        log.debug("更新访问日志-> " + ok);
+          boolean ok = accessLogService.update(req);
 
-        Assert.isTrue(ok, "访问日志");
+          log.debug("更新访问日志-> " + ok);
+
+          Assert.isTrue(ok, "访问日志");
     }
 
     @Test
@@ -234,6 +247,6 @@ public class AccessLogServiceTest {
 
         log.debug("删除访问日志->" + ok);
 
-        Assert.isTrue(ok, "访问日志");
+        Assert.isTrue(ok , "访问日志");
     }
 }

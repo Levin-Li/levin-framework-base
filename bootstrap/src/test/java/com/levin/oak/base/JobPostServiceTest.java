@@ -9,8 +9,9 @@ import com.levin.oak.base.services.jobpost.*;
 import com.levin.oak.base.services.jobpost.req.*;
 import com.levin.oak.base.services.jobpost.info.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.JobPost.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -48,74 +49,85 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 工作岗位测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:23, 代码生成哈希校验码：[047cb19b89300e4508b87d0fbcdd30f0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:46, 代码生成哈希校验码：[75dfefa8b584a9eeabd6251b5adadef3]，请不要修改和删除此行内容。
+ *
  */
 
-// @ActiveProfiles("test")
-// @RunWith(SpringRunner.class)
+//@ActiveProfiles("test")
+//@RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-// @Transactional(rollbackFor = {Throwable.class})
+//@Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class JobPostServiceTest {
 
-    @Autowired private JobPostService jobPostService;
+    @Autowired
+    private JobPostService jobPostService;
 
-    @Autowired private BizJobPostService bizJobPostService;
+    @Autowired
+    private BizJobPostService bizJobPostService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {}
+    public static void beforeAll() throws Exception {
+    }
 
     @AfterAll
-    public static void afterAll() throws Exception {}
+    public static void afterAll() throws Exception {
+    }
 
     @BeforeEach
-    public void beforeEach() throws Exception {}
+    public void beforeEach() throws Exception {
+    }
 
     @AfterEach
-    public void afterEach() throws Exception {}
+    public void afterEach() throws Exception {
+    }
 
     @Test
     public void createJobPostTest() {
 
         CreateJobPostReq req = new CreateJobPostReq();
 
-        // req.setCode("这是文本64");// 必填
+            // req.setCode("这是文本64");// 必填
 
-        // req.setType(Type.Manager);// 必填
+            // req.setType(Type.Manager);// 必填
 
-        // req.setDomain("这是文本128");//归属的子系统
+            // req.setDomain("这是文本128");//归属的子系统或应用 
 
-        // req.setName("这是文本64");// 必填
+            // req.setName("这是文本64");// 必填
 
-        // req.setOptimisticLock(1);//
+            // req.setOptimisticLock(1);// 
 
-        // req.setOrgId("这是文本128");//
+            // req.setOrgId("这是文本128");// 
 
-        // req.setTenantId("这是文本128");//
+            // req.setTenantId("这是文本128");// 
 
-        // req.setOrderCode(1);//
+            // req.setOrderCode(1);// 
 
-        // req.setEnable(true);// 必填
+            // req.setEnable(true);// 必填
 
-        // req.setEditable(true);// 必填
+            // req.setEditable(true);// 必填
 
-        // req.setRemark("这是文本512");//
+            // req.setRemark("这是文本512");// 
 
-        String id = jobPostService.create(req);
+
+       String id  = jobPostService.create(req);
 
         log.debug("新增工作岗位->" + id);
 
         Assert.isTrue(id != null, "工作岗位");
+
     }
+
 
     @Test
     public void queryJobPostTest() {
@@ -125,7 +137,7 @@ public class JobPostServiceTest {
         // req.setId(null);//
         // req.setCode("这是文本64");//
         // req.setType(Type.Manager);//
-        // req.setDomain("这是文本128");//归属的子系统
+        // req.setDomain("这是文本128");//归属的子系统或应用
         // req.setName("这是文本64");//
         // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
@@ -136,7 +148,7 @@ public class JobPostServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<JobPostInfo> resp = jobPostService.query(req, null);
+        PagingData<JobPostInfo> resp = jobPostService.query(req,null);
 
         log.debug("查询工作岗位->" + resp);
 
@@ -146,27 +158,28 @@ public class JobPostServiceTest {
     @Test
     public void updateJobPostTest() {
 
-        UpdateJobPostReq req = new UpdateJobPostReq();
+         UpdateJobPostReq req = new UpdateJobPostReq();
 
-        req.setId(id);
+         req.setId(id);
 
-        // req.setCode("这是文本64");// 必填
-        // req.setType(Type.Manager);// 必填
-        // req.setDomain("这是文本128");//归属的子系统
-        // req.setName("这是文本64");// 必填
-        // req.setOptimisticLock(1);//
-        // req.setOrgId("这是文本128");//
-        // req.setTenantId("这是文本128");//
-        // req.setOrderCode(1);//
-        // req.setEnable(true);// 必填
-        // req.setEditable(true);// 必填
-        // req.setRemark("这是文本512");//
 
-        boolean ok = jobPostService.update(req);
+           // req.setCode("这是文本64");// 必填
+           // req.setType(Type.Manager);// 必填
+           // req.setDomain("这是文本128");//归属的子系统或应用 
+           // req.setName("这是文本64");// 必填
+           // req.setOptimisticLock(1);// 
+           // req.setOrgId("这是文本128");// 
+           // req.setTenantId("这是文本128");// 
+           // req.setOrderCode(1);// 
+           // req.setEnable(true);// 必填
+           // req.setEditable(true);// 必填
+           // req.setRemark("这是文本512");// 
 
-        log.debug("更新工作岗位-> " + ok);
+          boolean ok = jobPostService.update(req);
 
-        Assert.isTrue(ok, "工作岗位");
+          log.debug("更新工作岗位-> " + ok);
+
+          Assert.isTrue(ok, "工作岗位");
     }
 
     @Test
@@ -180,6 +193,6 @@ public class JobPostServiceTest {
 
         log.debug("删除工作岗位->" + ok);
 
-        Assert.isTrue(ok, "工作岗位");
+        Assert.isTrue(ok , "工作岗位");
     }
 }

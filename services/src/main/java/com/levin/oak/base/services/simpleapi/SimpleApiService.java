@@ -1,8 +1,9 @@
 package com.levin.oak.base.services.simpleapi;
 
+
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-// import org.springframework.cache.annotation.*;
+//import org.springframework.cache.annotation.*;
 import java.util.*;
 import javax.validation.constraints.*;
 
@@ -18,10 +19,12 @@ import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
+
 /**
  * 简单动态接口-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:09, 代码生成哈希校验码：[1cbc7afad0c5c0955e16b2494fd67dee]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:38, 代码生成哈希校验码：[c94e9b1e34a390cf0c4f90b4d0bfdabc]，请不要修改和删除此行内容。
+ *
  */
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimpleApiService {
@@ -30,7 +33,6 @@ public interface SimpleApiService {
 
     /**
      * 创建记录，返回主键ID
-     *
      * @param req
      * @return pkId 主键ID
      */
@@ -39,7 +41,6 @@ public interface SimpleApiService {
 
     /**
      * 创建记录，返回主键ID列表
-     *
      * @param reqList
      * @return pkId 主键ID列表
      */
@@ -76,7 +77,6 @@ public interface SimpleApiService {
 
     /**
      * 删除记录，并返回删除是否成功
-     *
      * @param req
      * @return boolean 删除是否成功
      */
@@ -85,7 +85,6 @@ public interface SimpleApiService {
 
     /**
      * 批量删除记录，并返回删除记录数
-     *
      * @param req
      * @return num 删除记录数
      */
@@ -133,7 +132,6 @@ public interface SimpleApiService {
 
     /**
      * 通过主键查找记录，建议在服务内部调用，不要在控制器中调用
-     *
      * @param id 主键ID
      * @return data 数据详情
      */
@@ -141,11 +139,10 @@ public interface SimpleApiService {
     SimpleApiInfo findById(@NotNull String id);
 
     /**
-     * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性
-     *
-     * @param req
-     * @return data 数据详情
-     */
+    * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性
+    * @param req
+    * @return data 数据详情
+    */
     @Operation(summary = VIEW_DETAIL_ACTION)
     SimpleApiInfo findById(@NotNull SimpleApiIdReq req);
 
@@ -159,8 +156,8 @@ public interface SimpleApiService {
     SimpleApiInfo findOne(@NotNull QuerySimpleApiReq req);
 
     /**
-     * 查询并返回唯一一条数据 如果有多余1条数据，将抛出异常
-     *
+     * 查询并返回唯一一条数据
+     * 如果有多余1条数据，将抛出异常
      * @param req
      * @return data
      */
@@ -169,9 +166,9 @@ public interface SimpleApiService {
 
     /**
      * 清除缓存
-     *
      * @param key 缓存Key
      */
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是主键ID")
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
+
 }

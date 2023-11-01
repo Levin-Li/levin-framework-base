@@ -1,8 +1,9 @@
 package com.levin.oak.base.services.scheduledlog;
 
+
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-// import org.springframework.cache.annotation.*;
+//import org.springframework.cache.annotation.*;
 import java.util.*;
 import javax.validation.constraints.*;
 
@@ -18,10 +19,12 @@ import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
+
 /**
  * 调度日志-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:15, 代码生成哈希校验码：[cf6940e95bfd30d19bf3b94655a263dd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:39, 代码生成哈希校验码：[6b66aac3fc3e82a4c6e8636a04c043bd]，请不要修改和删除此行内容。
+ *
  */
 @Tag(name = E_ScheduledLog.BIZ_NAME, description = E_ScheduledLog.BIZ_NAME + MAINTAIN_ACTION)
 public interface ScheduledLogService {
@@ -30,7 +33,6 @@ public interface ScheduledLogService {
 
     /**
      * 创建记录，返回主键ID
-     *
      * @param req
      * @return pkId 主键ID
      */
@@ -39,7 +41,6 @@ public interface ScheduledLogService {
 
     /**
      * 创建记录，返回主键ID列表
-     *
      * @param reqList
      * @return pkId 主键ID列表
      */
@@ -76,7 +77,6 @@ public interface ScheduledLogService {
 
     /**
      * 删除记录，并返回删除是否成功
-     *
      * @param req
      * @return boolean 删除是否成功
      */
@@ -85,7 +85,6 @@ public interface ScheduledLogService {
 
     /**
      * 批量删除记录，并返回删除记录数
-     *
      * @param req
      * @return num 删除记录数
      */
@@ -110,8 +109,7 @@ public interface ScheduledLogService {
      * @return pagingData 分页数据
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    PagingData<SimpleScheduledLogInfo> simpleQuery(
-            @NotNull QueryScheduledLogReq req, Paging paging);
+    PagingData<SimpleScheduledLogInfo> simpleQuery(@NotNull QueryScheduledLogReq req, Paging paging);
 
     /**
      * 简单统计
@@ -134,7 +132,6 @@ public interface ScheduledLogService {
 
     /**
      * 通过主键查找记录，建议在服务内部调用，不要在控制器中调用
-     *
      * @param id 主键ID
      * @return data 数据详情
      */
@@ -142,11 +139,10 @@ public interface ScheduledLogService {
     ScheduledLogInfo findById(@NotNull String id);
 
     /**
-     * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性
-     *
-     * @param req
-     * @return data 数据详情
-     */
+    * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性
+    * @param req
+    * @return data 数据详情
+    */
     @Operation(summary = VIEW_DETAIL_ACTION)
     ScheduledLogInfo findById(@NotNull ScheduledLogIdReq req);
 
@@ -160,8 +156,8 @@ public interface ScheduledLogService {
     ScheduledLogInfo findOne(@NotNull QueryScheduledLogReq req);
 
     /**
-     * 查询并返回唯一一条数据 如果有多余1条数据，将抛出异常
-     *
+     * 查询并返回唯一一条数据
+     * 如果有多余1条数据，将抛出异常
      * @param req
      * @return data
      */
@@ -170,9 +166,9 @@ public interface ScheduledLogService {
 
     /**
      * 清除缓存
-     *
      * @param key 缓存Key
      */
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是主键ID")
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
+
 }

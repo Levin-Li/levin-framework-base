@@ -29,13 +29,13 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[8e06ceea75c83c6c7a428e24d6b3aaed]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:42, 代码生成哈希校验码：[2ddd0a6558d752726c111fde2da8fd32]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -54,10 +54,10 @@ public class SimpleAccessLogInfo implements Serializable {
     @Schema(title = L_id)
     Long id;
 
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
-    @Schema(title = L_module, description = D_module)
+    @Schema(title = L_module , description = D_module)
     String module;
 
     @Size(max = 64)
@@ -145,4 +145,6 @@ public class SimpleAccessLogInfo implements Serializable {
     @NotNull
     @Schema(title = L_createTime)
     Date createTime;
+
+
 }

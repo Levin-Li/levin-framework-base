@@ -30,30 +30,30 @@ import static com.levin.oak.base.entities.E_I18nRes.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 更新国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:21, 代码生成哈希校验码：[f4d90d8951808cdf599478e107f6aa4f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:44, 代码生成哈希校验码：[2ce39729ff59a59e4b2e8c1352e265ff]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS)
-// 默认更新注解
+//默认更新注解
 @Update
 public class UpdateI18nResReq extends MultiTenantOrgReq {
 
@@ -64,7 +64,7 @@ public class UpdateI18nResReq extends MultiTenantOrgReq {
     @Eq(require = true)
     Long id;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
@@ -84,7 +84,7 @@ public class UpdateI18nResReq extends MultiTenantOrgReq {
     String label;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -113,22 +113,23 @@ public class UpdateI18nResReq extends MultiTenantOrgReq {
     @Schema(title = L_remark)
     String remark;
 
+
     public UpdateI18nResReq(Long id) {
         this.id = id;
     }
 
-    public UpdateI18nResReq updateIdWhenNotBlank(Long id) {
-        if (isNotBlank(id)) {
-            this.id = id;
+    public UpdateI18nResReq updateIdWhenNotBlank(Long id){
+        if(isNotBlank(id)){
+        this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        // @todo 更新之前初始化数据
+        //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }

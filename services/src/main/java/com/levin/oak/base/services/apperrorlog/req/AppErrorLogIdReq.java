@@ -29,50 +29,49 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_AppErrorLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 应用错误日志 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:17, 代码生成哈希校验码：[46024848231a001e5e5727a8a962fc75]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:41, 代码生成哈希校验码：[88799e3e1efa994b2d70a30818a7e18b]，请不要修改和删除此行内容。
+ *
  */
-@Schema(title = BIZ_NAME + " 主键通用查询")
+
+@Schema(title =  BIZ_NAME + " 主键通用查询")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(
-        entityClass = AppErrorLog.class,
-        alias = E_AppErrorLog.ALIAS,
-        resultClass = AppErrorLogInfo.class)
+@TargetOption(entityClass = AppErrorLog.class, alias = E_AppErrorLog.ALIAS, resultClass = AppErrorLogInfo.class)
 public class AppErrorLogIdReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1594864095L;
 
-    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    // @NotNull
+    //@NotNull
     protected Long id;
 
-    public AppErrorLogIdReq updateIdWhenNotBlank(Long id) {
-        if (isNotBlank(id)) {
+    public AppErrorLogIdReq updateIdWhenNotBlank(Long id){
+        if(isNotBlank(id)){
             this.id = id;
         }
         return this;
     }
 
+
     @PostConstruct
     public void preQuery() {
-        // @todo ID 查询之前初始化数据
+        //@todo ID 查询之前初始化数据
     }
 }

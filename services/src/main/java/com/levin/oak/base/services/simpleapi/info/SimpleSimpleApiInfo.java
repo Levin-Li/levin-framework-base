@@ -32,13 +32,13 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.SimpleApi.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:17, 代码生成哈希校验码：[c4d2f7153d26859228ef7f7fa2da23f1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:37, 代码生成哈希校验码：[855c9b13fd7d0cdcc3b1ef7fd8b54deb]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -54,7 +54,7 @@ public class SimpleSimpleApiInfo implements Serializable {
     private static final long serialVersionUID = 1021385738L;
 
     @Size(max = 16)
-    @Schema(title = L_methods, description = D_methods)
+    @Schema(title = L_methods , description = D_methods)
     String methods;
 
     @NotNull
@@ -89,7 +89,7 @@ public class SimpleSimpleApiInfo implements Serializable {
     @Schema(title = L_path)
     String path;
 
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
@@ -98,7 +98,7 @@ public class SimpleSimpleApiInfo implements Serializable {
     String content;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -116,4 +116,6 @@ public class SimpleSimpleApiInfo implements Serializable {
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
+
+
 }

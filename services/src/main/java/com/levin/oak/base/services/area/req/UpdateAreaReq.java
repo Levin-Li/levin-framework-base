@@ -30,7 +30,7 @@ import static com.levin.oak.base.entities.E_Area.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.levin.oak.base.entities.Area;
@@ -38,25 +38,25 @@ import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Area.*;
-
 ////////////////////////////////////
 
 /**
  * 更新区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:26, 代码生成哈希校验码：[5d736f782ff739176a53e463ba6f0a08]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:44, 代码生成哈希校验码：[d4db515015533dd8e98c73e58fb47c30]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Area.class, alias = E_Area.ALIAS)
-// 默认更新注解
+//默认更新注解
 @Update
 public class UpdateAreaReq extends BaseReq {
 
@@ -67,7 +67,7 @@ public class UpdateAreaReq extends BaseReq {
     @Eq(require = true)
     String code;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
@@ -87,7 +87,7 @@ public class UpdateAreaReq extends BaseReq {
     String name;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName, description = D_pinyinName)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
@@ -106,22 +106,23 @@ public class UpdateAreaReq extends BaseReq {
     @Schema(title = L_remark)
     String remark;
 
+
     public UpdateAreaReq(String code) {
         this.code = code;
     }
 
-    public UpdateAreaReq updateCodeWhenNotBlank(String code) {
-        if (isNotBlank(code)) {
-            this.code = code;
+    public UpdateAreaReq updateCodeWhenNotBlank(String code){
+        if(isNotBlank(code)){
+        this.code = code;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        // @todo 更新之前初始化数据
+        //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }

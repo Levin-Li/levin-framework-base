@@ -22,20 +22,24 @@ import com.levin.oak.base.services.jobpost.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.levin.oak.base.entities.JobPost.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
- * 工作岗位-业务服务
+ *  工作岗位-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:25, 代码生成哈希校验码：[34578017708b22653b2f3caeb7ca3228]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:44, 代码生成哈希校验码：[47a44651d2d85a961ffbce55e745b231]，请不要修改和删除此行内容。
+ *
  */
+
 @Tag(name = E_JobPost.BIZ_NAME + "-业务服务", description = "")
-public interface BizJobPostService {}
+public interface BizJobPostService {
+
+}

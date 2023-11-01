@@ -23,7 +23,7 @@ import java.util.concurrent.Executor;
  * 分布式定时任务
  * 通过Redis锁支持分布式，允许在多个节点同时。
  *
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:32:09, 代码生成哈希校验码：[a1c91c198ef768af75625c6cc75fed35]，请不要修改和删除此行内容。
  *
  */
 @Service(PLUGIN_PREFIX + "DemoJob")

@@ -22,8 +22,9 @@ import com.levin.oak.base.services.dict.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
@@ -31,13 +32,16 @@ import com.levin.oak.base.entities.Dict.*;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
- * 字典-业务服务
+ *  字典-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:17, 代码生成哈希校验码：[538fbf94a0030bc3d07d4afb3aabb66d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:40, 代码生成哈希校验码：[43c84247ebe3685b1bae061166671cf5]，请不要修改和删除此行内容。
+ *
  */
+
 @Tag(name = E_Dict.BIZ_NAME + "-业务服务", description = "")
-public interface BizDictService {}
+public interface BizDictService {
+
+}

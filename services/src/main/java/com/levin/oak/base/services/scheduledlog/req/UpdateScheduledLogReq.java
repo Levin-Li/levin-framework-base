@@ -30,30 +30,30 @@ import static com.levin.oak.base.entities.E_ScheduledLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 更新调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:14, 代码生成哈希校验码：[78de15e520b6f8aefe613c304b0cdcc5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:39, 代码生成哈希校验码：[10ce5f9dba0dcd89b9d42eb80dc15e12]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS)
-// 默认更新注解
+//默认更新注解
 @Update
 public class UpdateScheduledLogReq extends MultiTenantOrgReq {
 
@@ -73,7 +73,7 @@ public class UpdateScheduledLogReq extends MultiTenantOrgReq {
     @Schema(title = L_invokeCycle)
     String invokeCycle;
 
-    @Schema(title = L_invokeSnapshot, description = D_invokeSnapshot)
+    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot)
     String invokeSnapshot;
 
     @Schema(title = L_isError)
@@ -82,19 +82,20 @@ public class UpdateScheduledLogReq extends MultiTenantOrgReq {
     @Schema(title = L_invokeResult)
     String invokeResult;
 
+
     public UpdateScheduledLogReq(String id) {
         this.id = id;
     }
 
-    public UpdateScheduledLogReq updateIdWhenNotBlank(String id) {
-        if (isNotBlank(id)) {
-            this.id = id;
+    public UpdateScheduledLogReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+        this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        // @todo 更新之前初始化数据
+        //@todo 更新之前初始化数据
     }
 }

@@ -30,38 +30,39 @@ import static com.levin.oak.base.entities.E_ScheduledTask.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 更新调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:20, 代码生成哈希校验码：[ef35a482e293bbf7d1e52b8b8028df35]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:42, 代码生成哈希校验码：[19dfaa94c9dfaf22572969b3471fb1f0]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = ScheduledTask.class, alias = E_ScheduledTask.ALIAS)
-// 默认更新注解
+//默认更新注解
 @Update
 public class SimpleUpdateScheduledTaskReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -2056389676L;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
+
 
     @NotBlank
     @Size(max = 128)
@@ -77,7 +78,7 @@ public class SimpleUpdateScheduledTaskReq extends MultiTenantOrgReq {
     @Schema(title = L_cron)
     String cron;
 
-    @Schema(title = L_invokeExpr, description = D_invokeExpr)
+    @Schema(title = L_invokeExpr , description = D_invokeExpr)
     String invokeExpr;
 
     @Schema(title = L_parallelInvoke)
@@ -93,7 +94,7 @@ public class SimpleUpdateScheduledTaskReq extends MultiTenantOrgReq {
     Date nextInvokeTime;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -106,14 +107,15 @@ public class SimpleUpdateScheduledTaskReq extends MultiTenantOrgReq {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
-    @Schema(title = L_lastUpdateTime)
-    Date lastUpdateTime;
+        @Schema(title = L_lastUpdateTime)
+        Date lastUpdateTime;
+
 
     @PostConstruct
     public void preUpdate() {
-        // @todo 更新之前初始化数据
+        //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }

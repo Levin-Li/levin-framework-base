@@ -22,19 +22,23 @@ import com.levin.oak.base.services.noticeprocesslog.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
- * 通知处理日志-业务服务
+ *  通知处理日志-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:22, 代码生成哈希校验码：[1bbc2d22b8e079f83de3d5153ccf34b9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:43, 代码生成哈希校验码：[030de5b4bd0ace0fae80e7b570a124e7]，请不要修改和删除此行内容。
+ *
  */
+
 @Tag(name = E_NoticeProcessLog.BIZ_NAME + "-业务服务", description = "")
-public interface BizNoticeProcessLogService {}
+public interface BizNoticeProcessLogService {
+
+}

@@ -29,27 +29,27 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_AppErrorLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 删除应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:17, 代码生成哈希校验码：[2d0f2aeb2fbbf948b80d8b9881c19585]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:41, 代码生成哈希校验码：[20a50784ee23d54cf735ba70cab0273f]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
 
-// @AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
@@ -57,6 +57,7 @@ import com.levin.commons.service.domain.InjectVar;
 public class DeleteAppErrorLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1594864095L;
+
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_AppErrorLog.id)
@@ -72,8 +73,10 @@ public class DeleteAppErrorLogReq extends MultiTenantReq {
         return this;
     }
 
+
     @PostConstruct
     public void preDelete() {
-        // @todo 删除之前初始化数据
+        //@todo 删除之前初始化数据
     }
+
 }

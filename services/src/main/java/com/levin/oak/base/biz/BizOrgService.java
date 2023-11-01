@@ -22,8 +22,9 @@ import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
@@ -34,13 +35,16 @@ import java.util.Set;
 import com.levin.oak.base.entities.Org.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
- * 机构-业务服务
+ *  机构-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月13日 下午4:53:24, 代码生成哈希校验码：[042ae66ed99d78b2915b529976e15f4b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:43, 代码生成哈希校验码：[3e792739a653a1644c56d0699ff6d150]，请不要修改和删除此行内容。
+ *
  */
+
 @Tag(name = E_Org.BIZ_NAME + "-业务服务", description = "")
-public interface BizOrgService {}
+public interface BizOrgService {
+
+}

@@ -1,30 +1,32 @@
 package com.levin.oak.base;
 
 import com.levin.commons.service.support.*;
-//import de.codecentric.boot.admin.server.config.EnableAdminServer;
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.License;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.task.TaskExecutorBuilder;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
+import org.redisson.codec.JsonJacksonCodec;
+import org.redisson.spring.starter.RedissonAutoConfigurationCustomizer;
 import org.springframework.core.env.*;
 import org.springframework.beans.factory.annotation.*;
-import com.levin.commons.plugin.PluginManager;
-import com.levin.commons.plugin.support.PluginManagerImpl;
+
+import com.levin.commons.service.support.ValueHolder;
+import com.levin.commons.service.support.VariableNotFoundException;
+import com.levin.commons.service.support.VariableResolver;
+import com.levin.commons.service.support.VariableResolverConfigurer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.task.TaskExecutorBuilder;
 import org.springframework.cache.annotation.EnableCaching;
+//import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -34,22 +36,25 @@ import org.springframework.web.filter.CorsFilter;
 
 import org.apache.dubbo.config.spring.context.annotation.*;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.lang.reflect.Type;
-import java.util.stream.Stream;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+
 
 /**
  *  启动类
- *  @author Auto gen by simple-dao-codegen 2023-2-5 11:13:19
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:25:25, 代码生成哈希校验码：[34ca859d1bec11abe138195d5af31fc4]，请不要修改和删除此行内容。
+ *
  */
-@SpringBootApplication
 @Slf4j
+
+@SpringBootApplication
+//@EnableWebSocketMessageBroker
+//@EnableWebSocket
 @EnableScheduling
 @EnableCaching
 @EnableAsync
 @EnableDubboConfig
-//@EnableAdminServer
 public class Application {
 
     public static void main(String... args) {
@@ -59,15 +64,14 @@ public class Application {
     @Autowired
     Environment environment;
 
-    @Lazy
-    @Bean(name = {"applicationTaskExecutor", "taskExecutor"})
-    @ConditionalOnMissingBean(name = {"applicationTaskExecutor", "taskExecutor"})
-    public ThreadPoolTaskExecutor applicationTaskExecutor(@Autowired TaskExecutorBuilder builder) {
-        return builder.build();
+    @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public BlockingFilter blockingFilter() {
+        return new BlockingFilter();
     }
 
     @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
+    @Order(Ordered.HIGHEST_PRECEDENCE + 1)
     public CorsFilter corsFilter() {
 
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -83,17 +87,42 @@ public class Application {
         return new CorsFilter(source);
     }
 
+    /**
+     * 默认执行器
+     *
+     * @param builder
+     * @return
+     */
+    @Lazy
+    @Bean(name = {"applicationTaskExecutor", "taskExecutor"})
+    @ConditionalOnMissingBean(name = {"applicationTaskExecutor", "taskExecutor"})
+    public ThreadPoolTaskExecutor applicationTaskExecutor(@Autowired TaskExecutorBuilder builder) {
+        return builder.build();
+    }
+
+    /**
+     * 使用json序列化
+     * 默认过期时间
+     *
+     * @return
+     */
     @Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .info(new Info()
-                        .title("OAK框架-基础模块")
-                        .version("1.0.0")
-                        .description("基础模块")
-                        .termsOfService("http://doc.xiaominfo.com")
-                        .license(new License().name("Apache 2.0")
-                                .url("http://doc.xiaominfo.com")
-                        ));
+    public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
+        return builder -> builder
+                .cacheDefaults(RedisCacheConfiguration.defaultCacheConfig()
+                        //redis 默认缓存 60 分钟
+                        .entryTtl(Duration.of(60, ChronoUnit.MINUTES))
+                        .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(RedisSerializer.json())));
+    }
+
+    /**
+     * redisson 序列化
+     * @return
+     */
+    @Bean
+    public RedissonAutoConfigurationCustomizer redissonAutoConfigurationCustomizer() {
+        return config -> config
+                .setCodec(JsonJacksonCodec.INSTANCE);
     }
 
 //    @Bean
@@ -108,7 +137,7 @@ public class Application {
 //    }
 
     @Bean
-    VariableResolverConfigurer variableResolverConfigurer() {
+    public VariableResolverConfigurer variableResolverConfigurer() {
         return variableResolverManager -> {
 
             //加入全局变量

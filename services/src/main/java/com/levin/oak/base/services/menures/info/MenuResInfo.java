@@ -33,29 +33,27 @@ import java.util.Set;
 import com.levin.oak.base.services.menures.info.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
+
 
 /**
  * 菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:22, 代码生成哈希校验码：[c17ca959073203ae2ede3cc81eadece0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:45, 代码生成哈希校验码：[733ced113e8897b041164a48769d1df5]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(
-        exclude = {
-            "parent",
-            "children",
-        })
+@ToString(exclude = {"parent","children",})
 @FieldNameConstants
 @JsonIgnoreProperties({"tenantId"})
 public class MenuResInfo implements Serializable {
 
     private static final long serialVersionUID = -887712701L;
+
 
     @NotBlank
     @Size(max = 64)
@@ -70,10 +68,10 @@ public class MenuResInfo implements Serializable {
     @Schema(title = L_tenantId)
     String tenantId;
 
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
-    @Schema(title = L_module, description = D_module)
+    @Schema(title = L_module , description = D_module)
     String module;
 
     @Size(max = 1800)
@@ -101,16 +99,16 @@ public class MenuResInfo implements Serializable {
     @Schema(title = L_params)
     String params;
 
-    // @Fetch //默认不加载，请通过查询对象控制
+    //@Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_parent)
     MenuResInfo parent;
 
-    // @Fetch //默认不加载，请通过查询对象控制
+    //@Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_children)
     Set<MenuResInfo> children;
 
     @Size(max = 1800)
-    @Schema(title = L_idPath, description = D_idPath)
+    @Schema(title = L_idPath , description = D_idPath)
     String idPath;
 
     @NotBlank
@@ -119,7 +117,7 @@ public class MenuResInfo implements Serializable {
     String name;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName, description = D_pinyinName)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
     @Size(max = 128)
@@ -147,4 +145,5 @@ public class MenuResInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
 }

@@ -30,38 +30,39 @@ import static com.levin.oak.base.entities.E_AppClientFile.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-
 ////////////////////////////////////
 
 /**
  * 更新客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年10月28日 下午12:14:19, 代码生成哈希校验码：[e9c0b6ea0e5d541bca96a4c76ee7e12f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:41, 代码生成哈希校验码：[860ad00efaed81954af244fa47fb9158]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppClientFile.class, alias = E_AppClientFile.ALIAS)
-// 默认更新注解
+//默认更新注解
 @Update
 public class SimpleUpdateAppClientFileReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1155395350L;
 
-    @Schema(description = "可编辑条件", hidden = true)
+    @Schema(description = "可编辑条件" , hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
+
 
     @Size(max = 64)
     @Schema(title = L_clientType)
@@ -72,14 +73,14 @@ public class SimpleUpdateAppClientFileReq extends MultiTenantOrgReq {
     String mimeType;
 
     @NotBlank
-    @Schema(title = L_path, description = D_path)
+    @Schema(title = L_path , description = D_path)
     String path;
 
-    @Schema(title = L_content, description = D_content)
+    @Schema(title = L_content , description = D_content)
     byte[] content;
 
     @Size(max = 128)
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -92,14 +93,15 @@ public class SimpleUpdateAppClientFileReq extends MultiTenantOrgReq {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
-    @Schema(title = L_lastUpdateTime)
-    Date lastUpdateTime;
+        @Schema(title = L_lastUpdateTime)
+        Date lastUpdateTime;
+
 
     @PostConstruct
     public void preUpdate() {
-        // @todo 更新之前初始化数据
+        //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }
