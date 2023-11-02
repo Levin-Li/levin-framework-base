@@ -58,11 +58,11 @@ public class ApiDocController extends BaseController {
 
     @PostConstruct
     public void init() {
-        log.info("SpringDoc UI访问路径{}，api路径 [{}{}]", frameworkProperties.getApiDocPath(), frameworkProperties.getApiDocPath(), SPRING_DOC_PATH);
+        log.info("Api文档路径转发启用...");
     }
 
     @RequestMapping(SPRING_DOC_PATH + "**")
-    @Operation(summary = "SpringDoc API 路径", description = "转发", hidden = true)
+    @Operation(summary = "SpringDoc API路径转发", description = "转发", hidden = true)
     public String springDocPath() {
         //转发到根路径
         //        request.getRequestURL():http://localhost:8080/bzbs/system/login.jsp

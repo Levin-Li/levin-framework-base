@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties;
 import org.springframework.boot.actuate.autoconfigure.web.server.ManagementServerProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -25,6 +26,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.env.Environment;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
@@ -38,7 +40,9 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -91,14 +95,24 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     @Value("${springdoc.swagger-ui.path:}")
     String springdocUiPath;
 
+    @Autowired
+    Environment environment;
+
+    @Autowired
+    DataSourceProperties dataSourceProperties;
+
     @PostConstruct
     void init() {
 
-        log.info("init...");
+        log.info("应用 ActiveProfiles:" + Arrays.asList(environment.getActiveProfiles()) + " , 工作目录：[" + new File(".").getAbsolutePath() + "]" + " , 数据库URL：[" + dataSourceProperties.getUrl() + "]");
 
-        if (!StringUtils.hasText(frameworkProperties.getApiDocPath())) {
-            log.info("可以配置[" + PLUGIN_PREFIX + "framework.api-doc-path] 启用Knife4j在线文档");
-        }
+        final String host = Optional.ofNullable(serverProperties.getAddress()).orElse(InetAddress.getLoopbackAddress()).getHostAddress();
+
+        final Integer port = Optional.ofNullable(serverProperties.getPort()).orElse(8080);
+
+        final String contextPath = Optional.ofNullable(serverProperties.getServlet().getContextPath()).orElse("/");
+
+        final String rootUrl = host + ((port == 80) ? "" : (":" + port)) + (contextPath.startsWith("/") ? "" : "/") + contextPath;
 
         //设置默认排除的路径
         boolean hasSpringDoc = ClassUtils.isPresent("org.springdoc.core.GroupedOpenApi", null);
@@ -110,19 +124,28 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         frameworkProperties.setDefaultExcludePathPatterns(
                 Stream.of("/" + serverProperties.getError().getPath()
                                 , "/favicon.ico"
-                                , hasSpringDocUiPath ? "/" + springdocUiPath + "/**" : null
-                                , hasApiDocPath ? "/" + frameworkProperties.getApiDocPath() : null
-                                , hasApiDocPath ? "/" + frameworkProperties.getApiDocPath() + "/**" : null
+                                , hasSpringDoc && hasApiDocPath ? "/" + frameworkProperties.getApiDocPath() + "/**" : null
+                                , hasSpringDoc && hasSpringDocUiPath ? "/" + springdocUiPath + "/**" : null
                                 , Optional.ofNullable(managementServerProperties).map(p -> p.getBasePath()).filter(StringUtils::hasText).map(p -> "/" + p + "/**").orElse(null)
                                 , Optional.ofNullable(webEndpointProperties).map(p -> p.getBasePath()).filter(StringUtils::hasText).map(p -> "/" + p + "/**").orElse(null)
                                 , hasSpringDoc && (hasApiDocPath || hasSpringDocUiPath) ? "/v3/api-docs/**" : null
 
                         ).filter(StringUtils::hasText)
+                        .map(url -> "/" + url)
                         .map(UrlPathUtils::safeUrl)
                         .collect(Collectors.toList())
         );
 
-        log.info("资源拦截器默认排除的路径：{}", frameworkProperties.getDefaultExcludePathPatterns());
+        if (hasSpringDoc && (hasApiDocPath || hasSpringDocUiPath)) {
+            if (hasApiDocPath) {
+                log.info("*** Api文档(knife4j)访问路径：{}", "http://" + UrlPathUtils.safeUrl(rootUrl + "/" + frameworkProperties.getApiDocPath()));
+            }
+            if (hasSpringDocUiPath) {
+                log.info("*** Api文档(swagger-ui)访问路径：{}", "http://" + UrlPathUtils.safeUrl(rootUrl + "/" + springdocUiPath));
+            }
+        }
+
+        log.info("*** 资源拦截器默认排除的路径：{}", frameworkProperties.getDefaultExcludePathPatterns());
 
         frameworkProperties.getTenantBindDomain().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 
@@ -195,7 +218,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         if (StringUtils.hasText(frameworkProperties.getAdminPath())) {
             //  registry.freeMarker();
-            log.info("SpringMVC 视图访问路径：{}", frameworkProperties.getAdminPath());
+            //  log.info("SpringMVC 视图访问路径：{}", frameworkProperties.getAdminPath());
         }
 
     }
