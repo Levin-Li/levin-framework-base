@@ -87,6 +87,10 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     @Autowired(required = false)
     ManagementServerProperties managementServerProperties;
 
+    //
+    @Value("${springdoc.swagger-ui.path:}")
+    String springdocUiPath;
+
     @PostConstruct
     void init() {
 
@@ -97,21 +101,28 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         }
 
         //设置默认排除的路径
+        boolean hasSpringDoc = ClassUtils.isPresent("org.springdoc.core.GroupedOpenApi", null);
+
+        boolean hasApiDocPath = StrUtil.isNotBlank(frameworkProperties.getApiDocPath());
+
+        boolean hasSpringDocUiPath = StrUtil.isNotBlank(springdocUiPath);
+
         frameworkProperties.setDefaultExcludePathPatterns(
                 Stream.of("/" + serverProperties.getError().getPath()
                                 , "/favicon.ico"
-                                , StrUtil.isNotBlank(frameworkProperties.getApiDocPath()) ? "/" + frameworkProperties.getApiDocPath() : null
-                                , StrUtil.isNotBlank(frameworkProperties.getApiDocPath()) ? "/" + frameworkProperties.getApiDocPath() + "/**" : null
+                                , hasSpringDocUiPath ? "/" + springdocUiPath + "/**" : null
+                                , hasApiDocPath ? "/" + frameworkProperties.getApiDocPath() : null
+                                , hasApiDocPath ? "/" + frameworkProperties.getApiDocPath() + "/**" : null
                                 , Optional.ofNullable(managementServerProperties).map(p -> p.getBasePath()).filter(StringUtils::hasText).map(p -> "/" + p + "/**").orElse(null)
                                 , Optional.ofNullable(webEndpointProperties).map(p -> p.getBasePath()).filter(StringUtils::hasText).map(p -> "/" + p + "/**").orElse(null)
-                                , ClassUtils.isPresent("org.springdoc.core.GroupedOpenApi", null) ? "/v3/api-docs/**" : null
+                                , hasSpringDoc && (hasApiDocPath || hasSpringDocUiPath) ? "/v3/api-docs/**" : null
 
                         ).filter(StringUtils::hasText)
                         .map(UrlPathUtils::safeUrl)
                         .collect(Collectors.toList())
         );
 
-        log.info("资源拦截器默认排查的路径：{}", frameworkProperties.getDefaultExcludePathPatterns());
+        log.info("资源拦截器默认排除的路径：{}", frameworkProperties.getDefaultExcludePathPatterns());
 
         frameworkProperties.getTenantBindDomain().friendlyTip(log.isInfoEnabled(), (info) -> log.info(info));
 

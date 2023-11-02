@@ -5,8 +5,10 @@ import static com.levin.oak.base.ModuleOption.*;
 import com.levin.oak.base.*;
 
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.GroupedOpenApi;
+import org.springdoc.core.customizers.OperationCustomizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -20,6 +22,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 //Swagger3
 
@@ -64,19 +70,36 @@ public class ModuleSwaggerConfigurer
 
     @Bean(PLUGIN_PREFIX + "GroupedOpenApi")
     public GroupedOpenApi groupedOpenApi() {
+
         return GroupedOpenApi.builder()
                 .group(ID)
                 .displayName(GROUP_NAME)
                 .packagesToScan(PACKAGE_NAME)
                 .addOpenApiCustomiser(openApi ->
-                        openApi.setInfo(new Info()
-                                .summary(GROUP_NAME)
-                                .title(NAME)
-                                .version(API_VERSION)
-                                .description(DESC)
-                        ))
-                .addOperationCustomizer((operation, handlerMethod) -> operation)
-                .build();
+                        //Tag排序
+                        openApi.tags(sort(openApi.getTags()))
+                                //设置模块信息
+                                .info(new Info()
+                                        .summary(GROUP_NAME)
+                                        .title(NAME)
+                                        .version(API_VERSION)
+                                        .description(DESC)
+                                )
+                ).build();
+    }
+
+    /**
+     * 排序
+     * 目前实际测试无效果
+     * 因为 tag.getExtensions() 为null
+     *
+     * @param tagList
+     * @return
+     */
+    private List<Tag> sort(List<Tag> tagList) {
+        return tagList.stream().sorted(Comparator.comparing(tag -> (tag.getExtensions() == null ? Collections.<String, Object>emptyMap() : tag.getExtensions())
+                        .keySet().stream().filter(key -> key.startsWith("x-SORT-")).findFirst().orElse("x-SORT-10000")))
+                .collect(Collectors.toList());
     }
 
 }

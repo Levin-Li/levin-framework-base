@@ -1,6 +1,7 @@
 package com.levin.oak.base.aspect;
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.StrUtil;
 import com.google.gson.Gson;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
@@ -380,9 +381,9 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         final String title = getRequestInfo(joinPoint, headerMap, paramMap, false);
 
         if (log.isDebugEnabled()) {
-            log.debug("*** 访问 [" + title + "] *** URL: {}{}, headers:{}, 控制器方法参数：{}"
+            log.debug("*** 访问 [" + title + "] *** URL: {}{}, 请求头:{}, 控制器方法参数：{}"
                     , request.getRequestURL(), (StringUtils.hasText(request.getQueryString()) ? "?" + request.getQueryString() : "")
-                    , headerMap, paramMap);
+                    , toStrAndTrimMiddle(headerMap), toStrAndTrimMiddle(paramMap));
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////
@@ -407,9 +408,9 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
             final long execTime = System.currentTimeMillis() - st;
 
             if (log.isDebugEnabled()) {
+                String tmpResult = isAccessLogController ? "忽略对于访问日志控制器的访问结果" : toStrAndTrimMiddle(result);
                 log.debug("*** 访问 [" + title + "] *** URL: {}{}, 执行耗时：{}ms, 发生异常：{} , 响应结果:{}"
-                        , request.getRequestURL(), (StringUtils.hasText(request.getQueryString()) ? "?" + request.getQueryString() : ""),
-                        execTime, ex != null, isAccessLogController ? "忽略对于访问日志控制器的访问结果" : result);
+                        , request.getRequestURL(), (StringUtils.hasText(request.getQueryString()) ? "?" + request.getQueryString() : ""), execTime, ex != null, tmpResult);
             }
 
             TenantInfo tenantInfo = bizTenantService.getCurrentTenant();
@@ -466,6 +467,28 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         }
 
         return result;
+    }
+
+    private static String toStrAndTrimMiddle(Object result) {
+        return trimMiddle((result instanceof String) ? (String) result : (String.valueOf(result)));
+    }
+
+    private static String trimMiddle(String str) {
+        return trimMiddle(str, 2000);
+    }
+
+    private static String trimMiddle(String str, int maxLen) {
+
+        if (maxLen < 100) {
+            maxLen = 100;
+        }
+
+        if (str != null
+                && str.length() > maxLen) {
+            return str.substring(0, maxLen / 2 - 10) + " ... " + str.substring(str.length() - maxLen / 2);
+        }
+
+        return str;
     }
 
     private void saveLog(ProceedingJoinPoint joinPoint, LinkedHashMap<String, String> headerMap, LinkedHashMap<String, Object> paramMap, Object result, CreateAccessLogReq req) {

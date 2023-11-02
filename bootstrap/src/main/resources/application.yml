@@ -144,6 +144,13 @@ dubbo:
   registry:
     address: #zookeeper://${zookeeper.address:127.0.0.1}:2181
 
+springdoc:
+  swagger-ui:
+    path: /api-docs/swagger-ui.html
+#    tags-sorter: alpha
+    # 该参数是swagger默认的排序规则，如果设置为alpha，那么Knife4j提供的按照order排序的增强规则不生效
+    operations-sorter:
+
 # 插件系统配置
 plugin:
   com:
