@@ -58,9 +58,7 @@ public class ModuleUiMvcConfigurer implements WebMvcConfigurer {
 
     @PostConstruct
     void init() {
-
         log.info("init...");
-
     }
 
     /**
