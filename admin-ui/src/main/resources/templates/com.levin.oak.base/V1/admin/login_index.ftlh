@@ -156,24 +156,26 @@
             inputView = $(inputView)
         }
 
-        let placeholder = "" + inputView.attr('placeholder');
-
-        if (!placeholder.startsWith("请输入")) {
-            placeholder = placeholder + "不能为空！";
-        }
-
         let inputValue = inputView.val().trim();
 
-        if (inputValue === "") {
+        if (!inputValue || inputValue === "") {
+
+            let placeholder = "" + inputView.attr('placeholder');
+
+            if (!placeholder.startsWith("请输入")) {
+                placeholder = placeholder + "不能为空！";
+            }
 
             showError(prompt || placeholder);
 
             inputView.focus();
 
             return false;
-        } else if (reqLen && inputValue.length !== reqLen) {
+        }
 
-            showError(prompt || placeholder);
+        if (reqLen && inputValue.length !== reqLen) {
+
+            showError(prompt || "长度必须为" + reqLen + "位");
 
             inputView.focus();
 
