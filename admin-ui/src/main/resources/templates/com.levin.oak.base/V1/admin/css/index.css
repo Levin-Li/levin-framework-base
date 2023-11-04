@@ -85,5 +85,5 @@ strong{font-weight:inherit;}
 .gonggao_c ul li a em{ display:block; width:242px; height:30px;padding-left:8px; line-height:30px;font-size:14px; color:#cccccc; float:left; background:url(li.jpg) no-repeat left center;}
 .gonggao_c ul li a strong{ display:block; height:30px; line-height:30px;font-size:14px; color:#999; overflow:hidden; text-align:right}
 
-
-.canvas_bg{position: absolute; z-index: 1; left:0;top: 0; right:0;bottom:0; opacity: .2;}
+ /*原画布透明度：  opacity: .2; */
+.canvas_bg{position: absolute; z-index: 1; left:0;top: 0; right:0;bottom:0;opacity: .6;}

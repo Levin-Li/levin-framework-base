@@ -77,7 +77,9 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         Assert.hasText(code.getCode(), "验证码生成失败");
 
-        final String cacheKey = CACHE_NAME + "_" + String.join("_", tenantId, appId, account) + code.getCode();
+        //图片验证码忽略大小写
+
+        final String cacheKey = CACHE_NAME + "_" + String.join("_", tenantId, appId, account) + code.getCode().toLowerCase();
 
 //        redisTemplate.opsForValue().
 //                set(cacheKey, "" + System.currentTimeMillis(), frameworkProperties.getVerificationCodeDurationOfMinutes(), TimeUnit.MINUTES);
@@ -104,7 +106,9 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
         Assert.isTrue(frameworkProperties.isEnableCaptchaVerificationCode(), "系统图片验证码关闭");
 
-        final String cacheKey = CACHE_NAME + "_" + String.join("_", tenantId, appId, account) + code;
+        //图片验证码忽略大小写
+
+        final String cacheKey = CACHE_NAME + "_" + String.join("_", tenantId, appId, account) + code.toLowerCase();
 
 //        String value = redisTemplate.opsForValue().getAndDelete(cacheKey);
 //        Long putTime = StringUtils.hasText(value) ? Long.parseLong(value) : null;

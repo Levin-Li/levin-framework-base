@@ -4,28 +4,14 @@
 
 <head>
     <meta charset="utf-8"/>
-    <#--    <meta name="renderer" content="webkit">-->
     <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-    <title>${appName}登录</title>
-    <link type="image/x-icon" rel="shortcut icon" href="${appLogo}"/>
+    <title>登录</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/img/default_logo.png"/>
     <link href="css/index.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
 
-<#--    <link rel="stylesheet" type="text/css" href="css/toastr.min.css">-->
-<#--    <script src="js/toastr.min.js"></script>-->
-
-<#-- 警告框   http://www.bootstrapmb.com/tag/xiaoxitishi-->
-    <#--    toastr.success('Hello world!', 'Toastr fun!'); /success 、 error、info、warning 第二个参数为标题可以省略-->
-
-    <#--    //关闭警告框-->
-    <#--    toastr.clear([toast]);-->
-
-    <#--    //获取当前警告框-->
-    <#--    toastr.active();-->
-
-    <#--    //刷新警告框 第二个参数为超时时间-->
-    <#--    toastr.refreshTimer(toast, 5000);-->
-
+<!--    <link rel="stylesheet" type="text/css" href="css/toastr.min.css">  -->
+<!--    <script src="js/toastr.min.js"></script>-->
 
     <link rel="stylesheet" type="text/css" href="css/simple.message.css">
     <script src="js/simple.message.min.js"></script>
@@ -50,9 +36,9 @@
         <div class="logo_window" style="height: 948px;">
 
             <div class="logo_bar">
-                <img src="${appLogo}" alt=""/>
+                <img src="/img/default_logo.png" alt=""/>
                 <div class="title_bar">
-                    <h1>${appName}</h1>
+                    <h1></h1>
                 </div>
             </div>
 
@@ -66,28 +52,13 @@
                                    id="account" type="text" maxlength="20"/>
                         </div>
 
-                        <#if !enableSmsVerificationCode>
-                            <div class="register_form2" style="position:relative;height:50px;margin-top:0.5rem;">
-                                <input placeholder="密码" class="user-pass" type="password"
-                                       id="password" maxlength="32"/>
-                            </div>
-                        </#if>
 
                         <div class="register_form3" style="margin-top:0.5rem;">
                             <input placeholder="验证码" id="verificationCode" type="text"
-                                   style="width:250px" maxlength="${verificationCodeLen}"/>
-                            <#--   freemark 语法-->
-                            <#if enableSmsVerificationCode>
-                                <a id="smsSendBtn" class="button_btn" style="width:100px;color:#f8f8f8;"
-                                   title="点击发送验证码"
-                                   onclick="updateCode(null,true)">发送验证码</a>
-                            <#else>
-                                <a href="javaScript:updateCode()" style="line-height:40px;text-align:center;"
-                                   title="点击，换一张！">
-                                    <span id="codeImgFailover">点击，换一张</span>
-                                    <img id="codeImg" border="0" width="100" height="40" alt="点击，换一张！">
-                                </a>
-                            </#if>
+                                   style="width:250px" maxlength="4"/>
+                            <a id="smsSendBtn" class="button_btn" style="width:100px;color:#f8f8f8;"
+                               title="点击发送验证码"
+                               onclick="updateCode(null,true)">发送验证码</a>
                         </div>
 
                         <!--<div class="no_pwd">
@@ -101,17 +72,11 @@
 
                     </div>
 
-                    <#--                    <input type="hidden" name="is_cs" value="0"> -->
-                    <#--                    <input type="hidden" id="is_get" name="is_get" value="1"> -->
-                    <#--                    <input type="hidden" id="show_msg" name="show_msg" value=""> -->
-                    <#--                    <input type="hidden" id="jz" name="jz" value="0"> -->
-                    <#--                    <input type="hidden" id="no_new" name="no_new" value="0"> -->
-                    <#--                    <input type="hidden" id="gobuy" name="gobuy" value="0"> -->
 
                 </form>
             </div>
 
-            <h3 class="info_bar">版权所有 ${(tenant.name)!} @Copyright 2023</h3>
+            <h3 class="info_bar">版权所有 默认租户 @Copyright 2023</h3>
 
         </div>
     </div>
@@ -119,11 +84,11 @@
 <div class="windows_bg"></div>
 <script>
 
-    var enableSmsVerificationCode = ${enableSmsVerificationCode?string('true', 'false')};
+    var enableSmsVerificationCode = true;
 
-    var verificationCodeDurationOfMinutes = ${verificationCodeDurationOfMinutes};
+    var verificationCodeDurationOfMinutes = 5;
 
-    var verificationCodeLen = ${verificationCodeLen};
+    var verificationCodeLen = 4;
 
     function toast_simple(mess) {
         var str = '<div class="mess"><span></span></div>';
@@ -148,7 +113,6 @@
 
         Qmsg['info'](msg);
     }
-
     function checkInput(inputView, prompt) {
 
         if ((typeof inputView) === "string") {
@@ -206,7 +170,7 @@
             } else {
                 $("#codeImgFailover").hide()
                 $("#codeImg").show()
-                document.getElementById("codeImg").src = "${captchaApi}?account=" + account + "&t=" + (new Date()).getTime();
+                document.getElementById("codeImg").src = "/com.levin.oak.base/V1/api/rbac/captcha?account=" + account + "&t=" + (new Date()).getTime();
             }
         }
     }
@@ -268,7 +232,7 @@
         console.log("2、sendSmsCode...")
 
         $.ajax({
-            url: "${sendSmsCodeApi}",
+            url: "/com.levin.oak.base/V1/api/rbac/sendSmsCode",
             type: "GET",
             data: {account},
             error: function (xhr, status, error) {
@@ -347,7 +311,7 @@
         window.isLogining = true;
 
         $.ajax({
-            url: "${loginApi}",
+            url: "/com.levin.oak.base/V1/api/rbac/login",
             type: "POST",
             data: {account, password, verificationCode, verificationCodeType},
             error: function (xhr, status, error) {
@@ -404,8 +368,11 @@
         if (canvasBg.length && canvasBg.particleground) {
             canvasBg.particleground({
                 //点和线性的颜色
-                dotColor: '#fff',
-                lineColor: '#f0f0f0'
+                dotColor: '#bd1515',
+                lineColor: '#b77b7b',
+                //点和线性的颜色
+                dotColor: '#e0a0a0',
+                lineColor: '#aaade1'
             });
         }
     });
@@ -434,10 +401,8 @@
     _DynamicParticleEffectClass = "pg-canvas";
 </script>
 
-<#--    动态效果脚本1 -->
-<#--    <script src="js/jquery.particleground.min.js" type="text/javascript"></script>-->
+<!--<script src="js/jquery.particleground.min.js" type="text/javascript"></script>-->
 
-<#--    动态效果脚本2 -->
 <script src="js/simple.particle.effect.js" type="text/javascript"></script>
 
 </body>

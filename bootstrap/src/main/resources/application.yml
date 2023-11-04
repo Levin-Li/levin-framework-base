@@ -175,6 +175,7 @@ plugin:
 #              - exclude-path-patterns: /swagger-ui/**,/webjars/**
 
             enable-mock-sms-send: true
+            enableSmsVerificationCode: false
 
 #日志配置
 logging:
