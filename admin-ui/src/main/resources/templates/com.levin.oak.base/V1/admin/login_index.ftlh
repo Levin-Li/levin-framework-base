@@ -335,7 +335,7 @@
         return checkInput("#account")
             //短信验证码，可以不用密码
             && (enableSmsVerificationCode || checkInput("#password"))
-            && checkInput("#verificationCode", verificationCodeLen, "验证码长度必须为" + verificationCodeLen)
+            && checkInput("#verificationCode", verificationCodeLen, "验证码必须为" + verificationCodeLen + "位")
             && login();
     }
 
