@@ -12,6 +12,8 @@ import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Schema(title = "租户应用")
@@ -44,13 +46,46 @@ public class TenantApp
     @Column(length = 64)
     String id;
 
-    @Schema(title = "名称")
+    @Schema(title = "应用名称")
     @Column(length = 64, nullable = false)
     String name;
+
+    @Schema(title = "应用Logo", description = "")
+    @Column
+    String logo;
+
+    @Schema(title = "应用入口", description = "")
+    @Column
+    String entryUrl;
+
+    @Schema(title = "应用说明页", description = "")
+    @Column
+    String infoUrl;
 
     @Schema(title = "模块列表")
     @Column(length = 1800)
     @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {String.class}, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     String modules;
+
+    @Schema(title = "应用密钥", description = "租户安装后获得的应用密钥")
+    @Column
+    String appSecret;
+
+    @Schema(title = "销售价格", description = "为空或是为0表示免费")
+    @Column
+    BigDecimal salePrice;
+
+    @Schema(title = "采购价格", description = "购买价格")
+    @Column
+    BigDecimal purchasePrice;
+
+    @Schema(title = "订单编号", description = "购买的订单编号")
+    @Column
+    String orderNo;
+
+    @Schema(title = "到期时间", description = "为空表示永不过期")
+    @Column
+    @Temporal(value = TemporalType.TIMESTAMP)
+    Date expiredTime;
 
 }

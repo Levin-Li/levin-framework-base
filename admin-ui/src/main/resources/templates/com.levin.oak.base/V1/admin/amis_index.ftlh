@@ -13,15 +13,12 @@
     <link rel="stylesheet" title="default"
           href="https://unpkg.com/amis/sdk/sdk.css"
     />
-
     <link rel="stylesheet"
           href="https://unpkg.com/amis/sdk/helper.css"
     />
-
     <link rel="stylesheet"
           href="https://unpkg.com/amis/sdk/iconfont.css"
     />
-
     <script src="https://unpkg.com/amis/sdk/sdk.js"></script>
     <script src="https://unpkg.com/vue@2"></script>
     <script src="https://unpkg.com/history@4.10.1/umd/history.js"></script>
@@ -339,7 +336,16 @@
             '#root',
             app,
             {
-                location: history.location
+                location: history.location,
+
+                data: {
+                    // 全局数据，是受控的数据
+                },
+                context: {
+                    // 全局上下文数据, 非受控的数据，无论哪一层都能获取到，包括弹窗自定义数据映射后都能获取到。
+                    // 可以用来放一下全局配置等。比如 API_HOST, 这样页面配置里面可以通过 $/{API_HOST} 来获取到。
+                  //  API_HOST: 'https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com'
+                }
             },
             {
                 // watchRouteChange: fn => {
