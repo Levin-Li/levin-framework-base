@@ -11,10 +11,10 @@
     <link href="css/index.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
 
-<#--    <link rel="stylesheet" type="text/css" href="css/toastr.min.css">-->
-<#--    <script src="js/toastr.min.js"></script>-->
+    <#--    <link rel="stylesheet" type="text/css" href="css/toastr.min.css">-->
+    <#--    <script src="js/toastr.min.js"></script>-->
 
-<#-- 警告框   http://www.bootstrapmb.com/tag/xiaoxitishi-->
+    <#-- 警告框   http://www.bootstrapmb.com/tag/xiaoxitishi-->
     <#--    toastr.success('Hello world!', 'Toastr fun!'); /success 、 error、info、warning 第二个参数为标题可以省略-->
 
     <#--    //关闭警告框-->
@@ -58,12 +58,13 @@
 
             <div class="logo_window1">
                 <form name="userLoginActionForm" id="userLoginActionForm" method="POST" action="" target="_parent">
-                    <div class="logo_window_L" style="margin: 0 auto;float: inherit;box-shadow: 0 2px 6px rgba(92, 110, 136, .32);">
+                    <div class="logo_window_L"
+                         style="margin: 0 auto;float: inherit;box-shadow: 0 2px 6px rgba(92, 110, 136, .32);">
                         <span class="logo-form-title">用户登录</span>
 
                         <div class="register_form2">
                             <input placeholder="帐号/手机号/邮箱" class="user-name" onblur="updateCode(this)"
-                                   id="account" type="text" maxlength="20"/>
+                                   id="account" type="text" maxlength="32"/>
                         </div>
 
                         <#if !enableSmsVerificationCode>
@@ -149,28 +150,38 @@
         Qmsg['info'](msg);
     }
 
-    function checkInput(inputView, prompt) {
+    function checkInput(inputView, reqLen, prompt) {
 
         if ((typeof inputView) === "string") {
             inputView = $(inputView)
         }
 
-        if (inputView.val().trim() === "") {
+        let placeholder = "" + inputView.attr('placeholder');
 
-            let placeholder = "" + inputView.attr('placeholder');
+        if (!placeholder.startsWith("请输入")) {
+            placeholder = placeholder + "不能为空！";
+        }
 
-            if (!placeholder.startsWith("请输入")) {
-                placeholder = placeholder + "不能为空！";
-            }
+        let inputValue = inputView.val().trim();
+
+        if (inputValue === "") {
 
             showError(prompt || placeholder);
 
             inputView.focus();
 
-            return false
+            return false;
+        } else if (reqLen && inputValue.length !== reqLen) {
+
+            showError(prompt || placeholder);
+
+            inputView.focus();
+
+            return false;
         }
 
-        return inputView.val().trim()
+
+        return inputValue;
     }
 
     var oldAccount = "";
@@ -324,7 +335,7 @@
         return checkInput("#account")
             //短信验证码，可以不用密码
             && (enableSmsVerificationCode || checkInput("#password"))
-            && checkInput("#verificationCode")
+            && checkInput("#verificationCode", verificationCodeLen, "验证码长度必须为" + verificationCodeLen)
             && login();
     }
 
