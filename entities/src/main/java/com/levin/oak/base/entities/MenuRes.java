@@ -2,8 +2,6 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
-import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
-import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.dao.domain.support.AbstractTreeObject;
 import com.levin.commons.rbac.MenuItem;
 import com.levin.commons.service.domain.InjectVar;

@@ -28,6 +28,7 @@ import static com.levin.oak.base.entities.E_SimplePage.*;
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -36,7 +37,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:44, 代码生成哈希校验码：[e5f586a931328419e3d7760a873e0dbf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:12, 代码生成哈希校验码：[29f01c755637a849b9f71d952d9617bb]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -97,6 +98,7 @@ public class SimpleSimplePageInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
+    @JsonIgnore(value=true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 

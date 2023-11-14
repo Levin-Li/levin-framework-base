@@ -33,6 +33,7 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.oak.base.entities.Setting.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -41,7 +42,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:40, 代码生成哈希校验码：[bc652397db988a00783528a84e978359]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[2fa62e4d271bf07658ded7e0fe28fc4c]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -101,6 +102,7 @@ public class SimpleUpdateSettingReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
+    @JsonIgnore(value=true)
     @Eq(desc = "乐观锁更新条件")
     @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
     @Schema(title = L_optimisticLock)

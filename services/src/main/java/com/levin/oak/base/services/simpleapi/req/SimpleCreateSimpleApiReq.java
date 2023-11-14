@@ -32,6 +32,7 @@ import com.levin.oak.base.services.commons.req.*;
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.SimpleApi.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -41,7 +42,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:37, 代码生成哈希校验码：[523892e8783a420d50229a56d29656b6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[66d8a1ab5394b7bc8a504ab62c9af87c]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -107,6 +108,7 @@ public class SimpleCreateSimpleApiReq extends MultiTenantOrgReq {
     String name;
 
     @Schema(title = L_optimisticLock )
+    @JsonIgnore(value=true)
     Integer optimisticLock;
 
 

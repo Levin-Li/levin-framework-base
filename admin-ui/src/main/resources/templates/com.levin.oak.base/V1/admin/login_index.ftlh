@@ -85,7 +85,7 @@
                             <#else>
                                 <a href="javaScript:updateCode()" style="line-height:40px;text-align:center;"
                                    title="点击，换一张！">
-                                    <span id="codeImgFailover">点击，换一张</span>
+                                    <span style="color: #2288ff;font-style:italic;font-weight: bold" id="codeImgFailover">点击，换一张</span>
                                     <img id="codeImg" border="0" width="100" height="40" alt="点击，换一张！">
                                 </a>
                             </#if>

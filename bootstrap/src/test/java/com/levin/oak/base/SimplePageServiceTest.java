@@ -14,6 +14,7 @@ import com.levin.oak.base.services.simplepage.info.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -57,7 +58,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 简单页面测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:46, 代码生成哈希校验码：[9a68c843d08085f25ecc8a8419aaf142]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:13, 代码生成哈希校验码：[7f1c77bf343149768026c81b51b7a131]，请不要修改和删除此行内容。
  *
  */
 

@@ -32,6 +32,7 @@ import com.levin.oak.base.services.commons.req.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.Notice.*;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
@@ -39,7 +40,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:41, 代码生成哈希校验码：[4b6e4ee8c1297cbae6151bf85ca8c722]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:12, 代码生成哈希校验码：[0303917bc548f9480984d65ceeac1cbf]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -79,6 +80,7 @@ public class SimpleCreateNoticeReq extends MultiTenantOrgReq {
     String name;
 
     @Schema(title = L_optimisticLock )
+    @JsonIgnore(value=true)
     Integer optimisticLock;
 
 

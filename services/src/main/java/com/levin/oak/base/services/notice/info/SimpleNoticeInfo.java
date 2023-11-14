@@ -28,6 +28,7 @@ import static com.levin.oak.base.entities.E_Notice.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.Notice.*;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
@@ -35,7 +36,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:41, 代码生成哈希校验码：[df6dc59fe8081c624884d37bab4bd72b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:12, 代码生成哈希校验码：[523443e530414ebc2988e5c4a9ab9fb3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -78,6 +79,7 @@ public class SimpleNoticeInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
+    @JsonIgnore(value=true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 

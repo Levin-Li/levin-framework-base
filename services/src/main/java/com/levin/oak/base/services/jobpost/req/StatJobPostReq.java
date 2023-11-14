@@ -39,6 +39,7 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.oak.base.entities.JobPost.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -47,7 +48,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:43, 代码生成哈希校验码：[f5474a9cf44567f2562256cad51a2460]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:12, 代码生成哈希校验码：[69facb46d4303d80d7aa41bcf52a9f49]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
@@ -96,6 +97,7 @@ public class StatJobPostReq extends MultiTenantOrgReq{
     @Schema(title = L_name)
     String name;
 
+    @JsonIgnore(value=true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 

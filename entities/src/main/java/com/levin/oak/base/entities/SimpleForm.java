@@ -2,8 +2,6 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
-import com.levin.commons.dao.domain.support.E_AbstractMultiTenantObject;
-import com.levin.commons.dao.domain.support.E_AbstractMultiTenantOrgObject;
 import com.levin.commons.service.support.InjectConsts;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

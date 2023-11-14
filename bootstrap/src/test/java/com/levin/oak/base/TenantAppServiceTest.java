@@ -13,7 +13,9 @@ import com.levin.oak.base.services.tenantapp.info.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -57,7 +59,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 租户应用测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:46, 代码生成哈希校验码：[dd992b7f034b3e3728edc8bdc064e218]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:13, 代码生成哈希校验码：[6a9ac5efba0c8af255e0ae7215841597]，请不要修改和删除此行内容。
  *
  */
 
@@ -100,7 +102,19 @@ public class TenantAppServiceTest {
 
             // req.setName("这是文本64");// 必填
 
+            // req.setLogo("应用Logo_1");// 
+
+            // req.setEntryUrl("应用入口_1");// 
+
+            // req.setInfoUrl("应用说明页_1");// 
+
             // req.setModules("这是文本1800");// 
+
+            // req.setAppSecret("应用密钥_1");//租户安装后获得的应用密钥 
+
+            // req.setOrderNo("订单编号_1");//购买的订单编号 
+
+            // req.setExpiredTime(new Date());//为空表示永不过期 
 
             // req.setTenantId("这是文本128");// 
 
@@ -129,7 +143,16 @@ public class TenantAppServiceTest {
 
         // req.setId(null);//
         // req.setName("这是文本64");//
+        // req.setLogo("应用Logo_1");//
+        // req.setEntryUrl("应用入口_1");//
+        // req.setInfoUrl("应用说明页_1");//
         // req.setModules("这是文本1800");//
+        // req.setAppSecret("应用密钥_1");//租户安装后获得的应用密钥
+        // req.setSalePrice(null);//为空或是为0表示免费
+        // req.setPurchasePrice(null);//购买价格
+        // req.setOrderNo("订单编号_1");//购买的订单编号
+        // req.setGteExpiredTime(DateUtils.getZoneHour(new Date()));//最小为空表示永不过期
+        // req.setLteExpiredTime(DateUtils.getEndHour(new Date()));//最大为空表示永不过期
         // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
         // req.setOrderCode(1);//
@@ -153,7 +176,13 @@ public class TenantAppServiceTest {
 
 
            // req.setName("这是文本64");// 必填
+           // req.setLogo("应用Logo_1");// 
+           // req.setEntryUrl("应用入口_1");// 
+           // req.setInfoUrl("应用说明页_1");// 
            // req.setModules("这是文本1800");// 
+           // req.setAppSecret("应用密钥_1");//租户安装后获得的应用密钥 
+           // req.setOrderNo("订单编号_1");//购买的订单编号 
+           // req.setExpiredTime(new Date());//为空表示永不过期 
            // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填

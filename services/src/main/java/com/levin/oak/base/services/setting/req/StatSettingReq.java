@@ -39,6 +39,7 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.oak.base.entities.Setting.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -47,7 +48,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:40, 代码生成哈希校验码：[89f08e4860f81dbcd21c17522b99a33a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[77c566fe4f122d07bb182469f86a8d4f]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
@@ -115,6 +116,7 @@ public class StatSettingReq extends MultiTenantOrgReq{
     @Schema(title = L_name)
     String name;
 
+    @JsonIgnore(value=true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 

@@ -35,6 +35,7 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.levin.oak.base.entities.Dict.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -43,7 +44,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:40, 代码生成哈希校验码：[1a4e9263c9a56389cf6440e8a15ea5dd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[f70d726bae7c317c37341881f4820569]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -88,6 +89,7 @@ public class SimpleUpdateDictReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
+    @JsonIgnore(value=true)
     @Eq(desc = "乐观锁更新条件")
     @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
     @Schema(title = L_optimisticLock)

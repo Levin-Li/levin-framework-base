@@ -1,8 +1,6 @@
 package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.annotation.Contains;
-import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
-import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.dao.domain.support.E_AbstractMultiTenantObject;
 import com.levin.commons.service.domain.EnumDesc;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,9 +10,6 @@ import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
-
-import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.FetchType.LAZY;
 
 @Entity(name = EntityConst.PREFIX + "Setting")
 @Data

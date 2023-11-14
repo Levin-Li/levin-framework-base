@@ -32,6 +32,7 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
@@ -39,7 +40,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 调度任务 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:42, 代码生成哈希校验码：[c6441af89438a3692b825f80752a60fd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:12, 代码生成哈希校验码：[3ce5fbe7f1b21c045a1c7b66965bc1ed]，请不要修改和删除此行内容。
  *
  */
 

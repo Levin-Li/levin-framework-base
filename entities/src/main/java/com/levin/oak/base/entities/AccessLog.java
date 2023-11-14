@@ -2,7 +2,6 @@ package com.levin.oak.base.entities;
 
 
 import com.levin.commons.dao.annotation.Contains;
-import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.support.E_SimpleTenantOrgObject;
 import com.levin.commons.dao.domain.support.SimpleTenantOrgObject;
 import com.levin.commons.service.domain.InjectVar;

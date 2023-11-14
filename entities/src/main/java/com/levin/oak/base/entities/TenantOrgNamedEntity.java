@@ -1,7 +1,9 @@
 package com.levin.oak.base.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.dao.domain.NamedObject;
 import com.levin.commons.dao.domain.support.AbstractMultiTenantOrgObject;
+import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -19,8 +21,9 @@ import javax.persistence.Version;
 public abstract class TenantOrgNamedEntity
         extends AbstractMultiTenantOrgObject implements NamedObject {
 
-    @Schema(title = "系统域", description = "归属的子系统或应用")
+    @Schema(title = "系统域", hidden = true, description = "归属的子系统或应用")
     @Column(length = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
     protected String domain;
 
     @Schema(title = "名称")
@@ -29,5 +32,7 @@ public abstract class TenantOrgNamedEntity
 
     @Schema(title = "乐观锁")
     @Version
+    @JsonIgnore
     protected Integer optimisticLock;
+
 }

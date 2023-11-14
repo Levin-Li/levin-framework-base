@@ -46,6 +46,7 @@ import com.levin.oak.base.services.*;
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
@@ -53,7 +54,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 应用接入-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:38, 代码生成哈希校验码：[1f70a76c03f83f2b051579bc9d2a4ef3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[35dc7dfe80b2d59f2e3d1ed822165529]，请不要修改和删除此行内容。
  *
  */
 

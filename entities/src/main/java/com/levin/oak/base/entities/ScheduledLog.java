@@ -9,7 +9,6 @@ import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity(name = EntityConst.PREFIX + "ScheduledLog")
 @Data

@@ -27,6 +27,7 @@ import static com.levin.oak.base.entities.E_Setting.*;
 ////////////////////////////////////
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.oak.base.entities.Setting.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -35,7 +36,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:40, 代码生成哈希校验码：[563dd3db2eb8235dda6cdf2d37a2338e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[0c0566f691d69c105adc6434bc479081]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -93,6 +94,7 @@ public class SimpleSettingInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
+    @JsonIgnore(value=true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 

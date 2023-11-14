@@ -30,6 +30,7 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
@@ -40,7 +41,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:39, 代码生成哈希校验码：[e6daab475a25cea762918845081d23bf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[ce2710d12340c8c0da16c00a5fde9ddf]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -62,10 +63,34 @@ public class SimpleCreateTenantAppReq extends MultiTenantReq {
     @Size(max = 64)
     String name;
 
+    @Schema(title = L_logo )
+    String logo;
+
+    @Schema(title = L_entryUrl )
+    String entryUrl;
+
+    @Schema(title = L_infoUrl )
+    String infoUrl;
+
     @Schema(title = L_modules )
     @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     List<String> modules;
+
+    @Schema(title = L_appSecret , description = D_appSecret )
+    String appSecret;
+
+    @Schema(title = L_salePrice , description = D_salePrice )
+    BigDecimal salePrice;
+
+    @Schema(title = L_purchasePrice , description = D_purchasePrice )
+    BigDecimal purchasePrice;
+
+    @Schema(title = L_orderNo , description = D_orderNo )
+    String orderNo;
+
+    @Schema(title = L_expiredTime , description = D_expiredTime )
+    Date expiredTime;
 
 
     @PostConstruct

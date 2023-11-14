@@ -1,8 +1,5 @@
 package com.levin.oak.base.entities;
 
-import com.levin.commons.dao.domain.MultiTenantObject;
-import com.levin.commons.dao.domain.OrganizedObject;
-import com.levin.commons.dao.domain.PersonalObject;
 import com.levin.commons.dao.domain.support.SimpleTenantOrgObject;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConsts;
@@ -42,7 +39,7 @@ import java.util.Date;
 //                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
         }
 )
-public class NoticeProcessLog extends SimpleTenantOrgObject{
+public class NoticeProcessLog extends SimpleTenantOrgObject {
 
     @Id
     @GeneratedValue(generator = "default_id")

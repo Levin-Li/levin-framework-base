@@ -1,13 +1,8 @@
 package com.levin.oak.base.entities;
 
-import com.levin.commons.dao.domain.MultiTenantObject;
-import com.levin.commons.dao.domain.OrganizedObject;
-import com.levin.commons.dao.domain.PersonalObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.service.domain.EnumDesc;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConsts;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -57,7 +52,7 @@ import java.util.Date;
  *
  */
 public class Notice
-        extends TenantOrgNamedEntity  {
+        extends TenantOrgNamedEntity {
 
     @Schema(title = "通知内容类型")
     public enum ContentType implements EnumDesc {

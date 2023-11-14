@@ -13,6 +13,7 @@ import com.levin.oak.base.services.jobpost.info.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.commons.service.support.InjectConsts;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.oak.base.entities.JobPost.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -56,7 +57,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 工作岗位测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:46, 代码生成哈希校验码：[75dfefa8b584a9eeabd6251b5adadef3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:13, 代码生成哈希校验码：[2403cc986953cd45465024873bc71046]，请不要修改和删除此行内容。
  *
  */
 

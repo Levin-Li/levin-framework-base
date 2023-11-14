@@ -15,6 +15,7 @@ import com.levin.oak.base.services.notice.info.*;
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.Notice.*;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
@@ -57,7 +58,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 通知测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:46, 代码生成哈希校验码：[8de17c8ce2239d41a347344f0cd96085]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:13, 代码生成哈希校验码：[220e9d01b4aed47743ca0064c5f951b4]，请不要修改和删除此行内容。
  *
  */
 
