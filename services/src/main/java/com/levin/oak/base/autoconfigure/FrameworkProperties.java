@@ -31,6 +31,12 @@ public class FrameworkProperties
         implements Serializable {
 
     /**
+     * Validator fail fast
+     * 只要有一个校验不通过，则立即返回
+     */
+//    private boolean validatorFailFast = true;
+
+    /**
      * 验证码长度
      * <p>
      * 目前多种验证码长度共用

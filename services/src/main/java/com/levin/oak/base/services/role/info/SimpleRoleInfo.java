@@ -33,13 +33,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[1d3211360492233bda5650789cee4683]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:14, 代码生成哈希校验码：[1d3211360492233bda5650789cee4683]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -68,19 +68,19 @@ public class SimpleRoleInfo implements Serializable {
     String icon;
 
     @NotNull
-    @Schema(title = L_orgDataScope , description = D_orgDataScope)
+    @Schema(title = L_orgDataScope, description = D_orgDataScope)
     OrgDataScope orgDataScope;
 
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    @Schema(title = L_assignedOrgIdList , description = D_assignedOrgIdList)
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @Schema(title = L_assignedOrgIdList, description = D_assignedOrgIdList)
     List<String> assignedOrgIdList;
 
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-    @Schema(title = L_permissionList , description = D_permissionList)
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @Schema(title = L_permissionList, description = D_permissionList)
     List<String> permissionList;
 
     @Size(max = 128)
-    @Schema(title = L_domain , description = D_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank
@@ -88,7 +88,7 @@ public class SimpleRoleInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value=true)
+    @JsonIgnore(value = true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
@@ -99,6 +99,4 @@ public class SimpleRoleInfo implements Serializable {
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
-
-
 }

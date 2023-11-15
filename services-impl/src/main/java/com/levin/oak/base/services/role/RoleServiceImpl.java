@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.role;
 
-import com.levin.commons.dao.DaoSecurityException;
+import com.levin.commons.dao.exception.DaoSecurityException;
 import com.levin.commons.dao.Paging;
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.dao.support.PagingData;

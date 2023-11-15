@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.tenantapp.req;
 
-//import static com.levin.oak.base.ModuleOption.*;
+// import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,7 +28,7 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_TenantApp.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.math.BigDecimal;
 import java.util.List;
@@ -36,19 +36,19 @@ import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 新增租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[ce2710d12340c8c0da16c00a5fde9ddf]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:15, 代码生成哈希校验码：[ce2710d12340c8c0da16c00a5fde9ddf]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor
 @NoArgsConstructor
@@ -58,43 +58,46 @@ public class SimpleCreateTenantAppReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1292984857L;
 
-    @Schema(title = L_name )
+    @Schema(title = L_name)
     @NotBlank
     @Size(max = 64)
     String name;
 
-    @Schema(title = L_logo )
+    @Schema(title = L_logo)
     String logo;
 
-    @Schema(title = L_entryUrl )
+    @Schema(title = L_entryUrl)
     String entryUrl;
 
-    @Schema(title = L_infoUrl )
+    @Schema(title = L_infoUrl)
     String infoUrl;
 
-    @Schema(title = L_modules )
-    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @Schema(title = L_modules)
+    @InjectVar(
+            domain = "dao",
+            expectBaseType = String.class,
+            converter = PrimitiveArrayJsonConverter.class,
+            isRequired = "false")
     @Size(max = 1800)
     List<String> modules;
 
-    @Schema(title = L_appSecret , description = D_appSecret )
+    @Schema(title = L_appSecret, description = D_appSecret)
     String appSecret;
 
-    @Schema(title = L_salePrice , description = D_salePrice )
+    @Schema(title = L_salePrice, description = D_salePrice)
     BigDecimal salePrice;
 
-    @Schema(title = L_purchasePrice , description = D_purchasePrice )
+    @Schema(title = L_purchasePrice, description = D_purchasePrice)
     BigDecimal purchasePrice;
 
-    @Schema(title = L_orderNo , description = D_orderNo )
+    @Schema(title = L_orderNo, description = D_orderNo)
     String orderNo;
 
-    @Schema(title = L_expiredTime , description = D_expiredTime )
+    @Schema(title = L_expiredTime, description = D_expiredTime)
     Date expiredTime;
-
 
     @PostConstruct
     public void prePersist() {
-       //@todo 保存之前初始化数据，比如时间，初始状态等
+        // @todo 保存之前初始化数据，比如时间，初始状态等
     }
 }

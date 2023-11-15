@@ -36,7 +36,7 @@ import static com.levin.oak.base.entities.E_SimpleApi.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
@@ -45,35 +45,36 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.SimpleApi.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 统计简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[46beb2af1927a896470ede3638d0eddb]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:14, 代码生成哈希校验码：[46beb2af1927a896470ede3638d0eddb]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS,
-     //连接统计
-    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
-    resultClass = StatSimpleApiReq.Result.class
-)
-public class StatSimpleApiReq extends MultiTenantOrgReq{
+@TargetOption(
+        entityClass = SimpleApi.class,
+        alias = E_SimpleApi.ALIAS,
+        // 连接统计
+        // joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn =
+        // E_XXX.joinColumn)},
+        resultClass = StatSimpleApiReq.Result.class)
+public class StatSimpleApiReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1021385738L;
 
-
     @Size(max = 16)
-    @Schema(title = L_methods , description = D_methods)
+    @Schema(title = L_methods, description = D_methods)
     String methods;
 
     @NotNull
@@ -123,7 +124,7 @@ public class StatSimpleApiReq extends MultiTenantOrgReq{
     String content;
 
     @Size(max = 128)
-    @Schema(title = L_domain , description = D_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank
@@ -131,7 +132,7 @@ public class StatSimpleApiReq extends MultiTenantOrgReq{
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value=true)
+    @JsonIgnore(value = true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
@@ -140,29 +141,29 @@ public class StatSimpleApiReq extends MultiTenantOrgReq{
     String creator;
 
     @NotNull
-    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
     @Lte
     Date lteCreateTime;
 
-    //@Schema(title = L_createTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenCreateTime;
+    // @Schema(title = L_createTime + "-日期范围")
+    // @Between(paramDelimiter = "-")
+    // String betweenCreateTime;
 
-    @Schema(title = L_lastUpdateTime , description = "大于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = L_lastUpdateTime , description = "小于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
     @Lte
     Date lteLastUpdateTime;
 
-    //@Schema(title = L_lastUpdateTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenLastUpdateTime;
+    // @Schema(title = L_lastUpdateTime + "-日期范围")
+    // @Between(paramDelimiter = "-")
+    // String betweenLastUpdateTime;
 
     @Schema(title = L_orderCode)
     Integer orderCode;
@@ -179,53 +180,53 @@ public class StatSimpleApiReq extends MultiTenantOrgReq{
     @Schema(title = L_remark)
     String remark;
 
-
     public StatSimpleApiReq(String id) {
         this.id = id;
     }
 
     //
-    //@Schema(description = "是否按状态分组统计")
-    //@CtxVar //增加当前字段名称和字段值到环境变量中
-    //@Ignore
-    //private boolean isGroupByStatus;
+    // @Schema(description = "是否按状态分组统计")
+    // @CtxVar //增加当前字段名称和字段值到环境变量中
+    // @Ignore
+    // private boolean isGroupByStatus;
 
-    //@Schema(description = "是否按日期分组统计")
-    //@CtxVar //增加当前字段名称和字段值到环境变量中
-    //@Ignore //
-    //private boolean isGroupByDate;
+    // @Schema(description = "是否按日期分组统计")
+    // @CtxVar //增加当前字段名称和字段值到环境变量中
+    // @Ignore //
+    // private boolean isGroupByDate;
 
     @PostConstruct
     public void preStat() {
-    //@todo 统计之前初始化数据
+        // @todo 统计之前初始化数据
     }
 
     @Schema(description = BIZ_NAME + "统计结果")
     @Data
     @Accessors(chain = true)
     @FieldNameConstants
-    public static class Result
-            implements Serializable {
+    public static class Result implements Serializable {
 
-        //@Schema(description = "状态分组统计")
-        //@GroupBy(condition = "#isGroupByStatus")
-        //Status status;
+        // @Schema(description = "状态分组统计")
+        // @GroupBy(condition = "#isGroupByStatus")
+        // Status status;
 
-        //@Schema(description = "时间分组统计")
-        //@GroupBy(condition = "#isGroupByDate", value = "date_format(" + E_SimpleApi.createDate + ",'%Y-%m-%d')", orderBy = @OrderBy(type = OrderBy.Type.Asc))
-        //String createDate;
+        // @Schema(description = "时间分组统计")
+        // @GroupBy(condition = "#isGroupByDate", value = "date_format(" + E_SimpleApi.createDate +
+        // ",'%Y-%m-%d')", orderBy = @OrderBy(type = OrderBy.Type.Asc))
+        // String createDate;
 
         @Schema(description = "记录数")
         @Count
         Integer cnt;
 
-        //@Schema(description = "分类记录数")
-        //@Count(fieldCases = {@Case(column = E_SimpleApi.status, whenOptions = {@Case.When(whenExpr = "OFF", thenExpr = "1")}, elseExpr = "NULL")})
-        //Integer caseCnt;
+        // @Schema(description = "分类记录数")
+        // @Count(fieldCases = {@Case(column = E_SimpleApi.status, whenOptions =
+        // {@Case.When(whenExpr = "OFF", thenExpr = "1")}, elseExpr = "NULL")})
+        // Integer caseCnt;
 
-        //@Schema(description = "累计" , havingOp=Op.Gt)
-        //@Sum
-        //Double sumGmv;
+        // @Schema(description = "累计" , havingOp=Op.Gt)
+        // @Sum
+        // Double sumGmv;
 
     }
 }

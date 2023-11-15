@@ -31,10 +31,10 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -43,7 +43,6 @@
             <artifactId>hutool-all</artifactId>
             <scope>provided</scope>
         </dependency>
-
 
         <dependency>
             <artifactId>framework-base-services</artifactId>

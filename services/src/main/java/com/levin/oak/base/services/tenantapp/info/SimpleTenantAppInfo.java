@@ -32,13 +32,13 @@ import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[ea86bf7f9a3d94b4a5c0316a61514fd8]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:15, 代码生成哈希校验码：[ea86bf7f9a3d94b4a5c0316a61514fd8]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -72,29 +72,27 @@ public class SimpleTenantAppInfo implements Serializable {
     @Schema(title = L_infoUrl)
     String infoUrl;
 
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_modules)
     List<String> modules;
 
-    @Schema(title = L_appSecret , description = D_appSecret)
+    @Schema(title = L_appSecret, description = D_appSecret)
     String appSecret;
 
-    @Schema(title = L_salePrice , description = D_salePrice)
+    @Schema(title = L_salePrice, description = D_salePrice)
     BigDecimal salePrice;
 
-    @Schema(title = L_purchasePrice , description = D_purchasePrice)
+    @Schema(title = L_purchasePrice, description = D_purchasePrice)
     BigDecimal purchasePrice;
 
-    @Schema(title = L_orderNo , description = D_orderNo)
+    @Schema(title = L_orderNo, description = D_orderNo)
     String orderNo;
 
-    @Schema(title = L_expiredTime , description = D_expiredTime)
+    @Schema(title = L_expiredTime, description = D_expiredTime)
     Date expiredTime;
 
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
-
-
 }

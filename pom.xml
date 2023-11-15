@@ -669,7 +669,7 @@
 
                     <isCreateBizController>false</isCreateBizController>
 
-                    <isOutputFormatCode>false</isOutputFormatCode>
+                    <isOutputFormatCode>true</isOutputFormatCode>
 
                     <isIgnoreCodeCommentChange>true</isIgnoreCodeCommentChange>
 

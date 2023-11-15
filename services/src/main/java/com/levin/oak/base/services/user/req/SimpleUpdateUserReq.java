@@ -30,7 +30,7 @@ import static com.levin.oak.base.entities.E_User.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.User.*;
 import java.util.List;
@@ -41,45 +41,44 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 更新用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:12, 代码生成哈希校验码：[9546016be267db97a3dcfc8b23f94416]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:15, 代码生成哈希校验码：[9546016be267db97a3dcfc8b23f94416]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class SimpleUpdateUserReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445263479L;
 
-    @Schema(description = "可编辑条件" , hidden = true)
+    @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
-
     @Size(max = 20)
-    @Schema(title = L_telephone , description = D_telephone)
+    @Schema(title = L_telephone, description = D_telephone)
     String telephone;
 
     @Size(max = 32)
-    @Schema(title = L_email , description = D_email)
+    @Schema(title = L_email, description = D_email)
     String email;
 
     @Size(max = 256)
-    @JsonIgnore(value=true)
+    @JsonIgnore(value = true)
     @Schema(title = L_password)
     String password;
 
@@ -93,7 +92,11 @@ public class SimpleUpdateUserReq extends MultiTenantOrgReq {
     @Schema(title = L_sex)
     Sex sex;
 
-    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(
+            domain = "dao",
+            expectBaseType = String.class,
+            converter = PrimitiveArrayJsonConverter.class,
+            isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_tagList)
     List<String> tagList;
@@ -115,7 +118,11 @@ public class SimpleUpdateUserReq extends MultiTenantOrgReq {
     @Schema(title = L_jobPostCode)
     String jobPostCode;
 
-    @InjectVar(domain = "dao",  expectBaseType = String.class,  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(
+            domain = "dao",
+            expectBaseType = String.class,
+            converter = PrimitiveArrayJsonConverter.class,
+            isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_roleList)
     List<String> roleList;
@@ -129,7 +136,7 @@ public class SimpleUpdateUserReq extends MultiTenantOrgReq {
     String aliOpenId;
 
     @Size(max = 128)
-    @Schema(title = L_domain , description = D_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank
@@ -137,21 +144,20 @@ public class SimpleUpdateUserReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value=true)
+    @JsonIgnore(value = true)
     @Eq(desc = "乐观锁更新条件")
     @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
-        @Schema(title = L_lastUpdateTime)
-        Date lastUpdateTime;
-
+    @Schema(title = L_lastUpdateTime)
+    Date lastUpdateTime;
 
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
 
-        if(getLastUpdateTime() == null){
+        if (getLastUpdateTime() == null) {
             setLastUpdateTime(new Date());
         }
     }

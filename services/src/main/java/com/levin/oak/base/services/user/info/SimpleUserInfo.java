@@ -35,20 +35,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:12, 代码生成哈希校验码：[334d4b3258f5c62bf39cf971b43cc59d]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:15, 代码生成哈希校验码：[334d4b3258f5c62bf39cf971b43cc59d]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(exclude = {"org",})
+@ToString(
+        exclude = {
+            "org",
+        })
 @FieldNameConstants
 @JsonIgnoreProperties({"tenantId"})
 @Select
@@ -62,15 +65,15 @@ public class SimpleUserInfo implements Serializable {
     String id;
 
     @Size(max = 20)
-    @Schema(title = L_telephone , description = D_telephone)
+    @Schema(title = L_telephone, description = D_telephone)
     String telephone;
 
     @Size(max = 32)
-    @Schema(title = L_email , description = D_email)
+    @Schema(title = L_email, description = D_email)
     String email;
 
     @Size(max = 256)
-    @JsonIgnore(value=true)
+    @JsonIgnore(value = true)
     @Schema(title = L_password)
     String password;
 
@@ -84,7 +87,7 @@ public class SimpleUserInfo implements Serializable {
     @Schema(title = L_sex)
     Sex sex;
 
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_tagList)
     List<String> tagList;
@@ -107,12 +110,12 @@ public class SimpleUserInfo implements Serializable {
     @Schema(title = L_jobPostCode)
     String jobPostCode;
 
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
     @Schema(title = L_roleList)
     List<String> roleList;
 
-    //@Fetch //默认不加载，请通过查询对象控制
+    // @Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_org)
     OrgInfo org;
 
@@ -125,7 +128,7 @@ public class SimpleUserInfo implements Serializable {
     String aliOpenId;
 
     @Size(max = 128)
-    @Schema(title = L_domain , description = D_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank
@@ -133,7 +136,7 @@ public class SimpleUserInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value=true)
+    @JsonIgnore(value = true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
@@ -144,6 +147,4 @@ public class SimpleUserInfo implements Serializable {
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
-
-
 }
