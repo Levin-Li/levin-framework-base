@@ -35,31 +35,30 @@ import static com.levin.oak.base.entities.E_Tenant.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 查询平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:39, 代码生成哈希校验码：[a5776498172ed2f21ec2688241aa322c]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:18, 代码生成哈希校验码：[8693c944bfcbdbbdedec95c273583fe2]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Tenant.class, alias = E_Tenant.ALIAS, resultClass = TenantInfo.class)
-public class QueryTenantReq extends BaseReq{
+public class QueryTenantReq extends BaseReq {
 
     private static final long serialVersionUID = 1557223144L;
 
@@ -67,12 +66,18 @@ public class QueryTenantReq extends BaseReq{
     @Schema(title = "排序字段")
     String orderBy;
 
-    //@Ignore
+    // @Ignore
     @Schema(title = "排序方向")
-    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
-    @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
+    @SimpleOrderBy(
+            expr = "orderBy + ' ' + orderDir",
+            condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)",
+            remark = "生成排序表达式")
+    @OrderBy(
+            value = createTime,
+            condition = "#isEmpty(orderBy) || #isEmpty(orderDir)",
+            order = Integer.MAX_VALUE,
+            desc = "默认按时间排序")
     OrderBy.Type orderDir;
-
 
     @NotBlank
     @Size(max = 64)
@@ -106,18 +111,17 @@ public class QueryTenantReq extends BaseReq{
     @Schema(title = L_remainingLicenseCnt)
     Integer remainingLicenseCnt;
 
-    @Schema(title = L_licenseExpire , description = "大于等于" + L_licenseExpire)
+    @Schema(title = L_licenseExpire, description = "大于等于" + L_licenseExpire)
     @Gte
     Date gteLicenseExpire;
 
-    @Schema(title = L_licenseExpire , description = "小于等于" + L_licenseExpire)
+    @Schema(title = L_licenseExpire, description = "小于等于" + L_licenseExpire)
     @Lte
     Date lteLicenseExpire;
 
-    //@Schema(title = L_licenseExpire + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenLicenseExpire;
-
+    // @Schema(title = L_licenseExpire + "-日期范围")
+    // @Between(paramDelimiter = "-")
+    // String betweenLicenseExpire;
 
     @Size(max = 32)
     @Schema(title = L_contractPerson)
@@ -128,9 +132,7 @@ public class QueryTenantReq extends BaseReq{
     String contractPhone;
 
     @Size(max = 1200)
-    @OR(autoClose = true)
-    @Contains
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", isRequired = "false")
     @Schema(title = L_domainList)
     List<String> domainList;
 
@@ -156,43 +158,42 @@ public class QueryTenantReq extends BaseReq{
     String containsName;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
+    @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
-    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
+    @Schema(title = "模糊匹配-" + L_pinyinName, description = D_pinyinName)
     @Contains
     String containsPinyinName;
 
     @Size(max = 128)
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 
     @NotNull
-    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
     @Lte
     Date lteCreateTime;
 
-    //@Schema(title = L_createTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenCreateTime;
+    // @Schema(title = L_createTime + "-日期范围")
+    // @Between(paramDelimiter = "-")
+    // String betweenCreateTime;
 
-
-    @Schema(title = L_lastUpdateTime , description = "大于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = L_lastUpdateTime , description = "小于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
     @Lte
     Date lteLastUpdateTime;
 
-    //@Schema(title = L_lastUpdateTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenLastUpdateTime;
-
+    // @Schema(title = L_lastUpdateTime + "-日期范围")
+    // @Between(paramDelimiter = "-")
+    // String betweenLastUpdateTime;
 
     @Schema(title = L_orderCode)
     Integer orderCode;
@@ -212,8 +213,9 @@ public class QueryTenantReq extends BaseReq{
     public QueryTenantReq(String id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
-        //@todo 查询之前初始化数据
+        // @todo 查询之前初始化数据
     }
 }

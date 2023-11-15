@@ -31,14 +31,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.oak.base.entities.Setting.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-////////////////////////////////////
 
+////////////////////////////////////
 
 /**
  * 系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[773097d5e829914edd75a62bf62d8b30]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:14:18, 代码生成哈希校验码：[3c798486beab4ca425c8e215e8c09b29]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -51,7 +50,6 @@ import com.levin.commons.service.domain.InjectVar;
 public class SettingInfo implements Serializable {
 
     private static final long serialVersionUID = 147875794L;
-
 
     @NotBlank
     @Size(max = 64)
@@ -87,7 +85,8 @@ public class SettingInfo implements Serializable {
     String inputPlaceholder;
 
     @Size(max = 128)
-    @Schema(title = L_domain , description = D_domain)
+    @InjectVar(value = "sysDomain", isRequired = "false")
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank
@@ -95,19 +94,22 @@ public class SettingInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value=true)
+    @JsonIgnore(value = true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
     @Size(max = 128)
+    @InjectVar(value = InjectConsts.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 
+    @InjectVar(value = InjectConsts.TENANT_ID)
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
 
     @Size(max = 128)
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 
@@ -132,5 +134,4 @@ public class SettingInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
-
 }

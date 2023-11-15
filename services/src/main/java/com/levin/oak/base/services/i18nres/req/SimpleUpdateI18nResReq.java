@@ -30,40 +30,39 @@ import static com.levin.oak.base.entities.E_I18nRes.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 更新国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:12, 代码生成哈希校验码：[390461aa6fcb73b333982356ceb651a7]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:12, 代码生成哈希校验码：[b8b89fed7d34f56cd4244d065dd04d52]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class SimpleUpdateI18nResReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1681554652L;
 
-    @Schema(description = "可编辑条件" , hidden = true)
+    @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
-
 
     @NotBlank
     @Size(max = 128)
@@ -81,7 +80,8 @@ public class SimpleUpdateI18nResReq extends MultiTenantOrgReq {
     String label;
 
     @Size(max = 128)
-    @Schema(title = L_domain , description = D_domain)
+    @InjectVar(value = "sysDomain", isRequired = "false")
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank
@@ -89,21 +89,20 @@ public class SimpleUpdateI18nResReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value=true)
+    @JsonIgnore(value = true)
     @Eq(desc = "乐观锁更新条件")
     @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
-        @Schema(title = L_lastUpdateTime)
-        Date lastUpdateTime;
-
+    @Schema(title = L_lastUpdateTime)
+    Date lastUpdateTime;
 
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
 
-        if(getLastUpdateTime() == null){
+        if (getLastUpdateTime() == null) {
             setLastUpdateTime(new Date());
         }
     }

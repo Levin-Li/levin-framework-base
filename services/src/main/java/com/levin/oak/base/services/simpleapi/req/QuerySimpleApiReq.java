@@ -40,7 +40,6 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.SimpleApi.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -50,7 +49,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:14, 代码生成哈希校验码：[1be5c3c50d542dd0fd4819ab615ed694]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:18, 代码生成哈希校验码：[355282deb463d2c1ceeb535dda48aa0e]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -126,10 +125,8 @@ public class QuerySimpleApiReq extends MultiTenantOrgReq {
     @Schema(title = L_path)
     String path;
 
-    @OR(autoClose = true)
-    @Contains
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Size(max = 1800)
+    @InjectVar(domain = "dao", isRequired = "false")
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
 
@@ -137,6 +134,7 @@ public class QuerySimpleApiReq extends MultiTenantOrgReq {
     String content;
 
     @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -150,6 +148,7 @@ public class QuerySimpleApiReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @Size(max = 128)
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

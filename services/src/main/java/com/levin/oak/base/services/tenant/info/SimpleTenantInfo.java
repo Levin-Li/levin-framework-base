@@ -28,7 +28,6 @@ import static com.levin.oak.base.entities.E_Tenant.*;
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
@@ -36,7 +35,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:14, 代码生成哈希校验码：[032dba7187992e0619227a1445979e88]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:18, 代码生成哈希校验码：[c9492f9a99cb669f44fe0f5eb25060bf]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -94,7 +93,7 @@ public class SimpleTenantInfo implements Serializable {
     String contractPhone;
 
     @Size(max = 1200)
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", isRequired = "false")
     @Schema(title = L_domainList)
     List<String> domainList;
 

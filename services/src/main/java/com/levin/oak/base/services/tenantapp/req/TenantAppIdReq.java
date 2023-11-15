@@ -29,52 +29,52 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_TenantApp.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 租户应用 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[d7ecc20bd9e12e379a93f7f4916e364a]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:10, 代码生成哈希校验码：[b0c4cb23c733b1a4c6a97147bab28cde]，请不要修改和删除此行内容。
  */
-
-@Schema(title =  BIZ_NAME + " 主键通用查询")
+@Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = TenantApp.class, alias = E_TenantApp.ALIAS, resultClass = TenantAppInfo.class)
+@TargetOption(
+        entityClass = TenantApp.class,
+        alias = E_TenantApp.ALIAS,
+        resultClass = TenantAppInfo.class)
 public class TenantAppIdReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1292984857L;
 
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    //@NotNull
+    // @NotNull
     protected String id;
 
-    public TenantAppIdReq updateIdWhenNotBlank(String id){
-        if(isNotBlank(id)){
+    public TenantAppIdReq updateIdWhenNotBlank(String id) {
+        if (isNotBlank(id)) {
             this.id = id;
         }
         return this;
     }
 
-
     @PostConstruct
     public void preQuery() {
-        //@todo ID 查询之前初始化数据
+        // @todo ID 查询之前初始化数据
     }
 }

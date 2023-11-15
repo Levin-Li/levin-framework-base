@@ -30,31 +30,31 @@ import static com.levin.oak.base.entities.E_AppClientFile.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 更新客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:12, 代码生成哈希校验码：[f90ce065938ee9821ec40cf4b14235f6]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:11, 代码生成哈希校验码：[5b76864857f9f5f5e219e217a610eb51]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppClientFile.class, alias = E_AppClientFile.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class UpdateAppClientFileReq extends MultiTenantOrgReq {
 
@@ -65,7 +65,7 @@ public class UpdateAppClientFileReq extends MultiTenantOrgReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件" , hidden = true)
+    @Schema(description = "可编辑条件", hidden = true)
     @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
@@ -78,14 +78,15 @@ public class UpdateAppClientFileReq extends MultiTenantOrgReq {
     String mimeType;
 
     @NotBlank
-    @Schema(title = L_path , description = D_path)
+    @Schema(title = L_path, description = D_path)
     String path;
 
-    @Schema(title = L_content , description = D_content)
+    @Schema(title = L_content, description = D_content)
     byte[] content;
 
     @Size(max = 128)
-    @Schema(title = L_domain , description = D_domain)
+    @InjectVar(value = "sysDomain", isRequired = "false")
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
     @NotBlank
@@ -93,7 +94,7 @@ public class UpdateAppClientFileReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value=true)
+    @JsonIgnore(value = true)
     @Eq(desc = "乐观锁更新条件")
     @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
     @Schema(title = L_optimisticLock)
@@ -115,23 +116,22 @@ public class UpdateAppClientFileReq extends MultiTenantOrgReq {
     @Schema(title = L_remark)
     String remark;
 
-
     public UpdateAppClientFileReq(String id) {
         this.id = id;
     }
 
-    public UpdateAppClientFileReq updateIdWhenNotBlank(String id){
-        if(isNotBlank(id)){
-        this.id = id;
+    public UpdateAppClientFileReq updateIdWhenNotBlank(String id) {
+        if (isNotBlank(id)) {
+            this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
 
-        if(getLastUpdateTime() == null){
+        if (getLastUpdateTime() == null) {
             setLastUpdateTime(new Date());
         }
     }

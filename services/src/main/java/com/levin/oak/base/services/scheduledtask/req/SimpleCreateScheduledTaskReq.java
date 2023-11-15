@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.scheduledtask.req;
 
-//import static com.levin.oak.base.ModuleOption.*;
+// import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,25 +28,25 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_ScheduledTask.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 新增调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:12, 代码生成哈希校验码：[7929e87910921df785e929c451e5df70]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:11, 代码生成哈希校验码：[702d8c03af532c369cc7504c4a99fd92]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor
 @NoArgsConstructor
@@ -56,51 +56,51 @@ public class SimpleCreateScheduledTaskReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -2056389676L;
 
-    @Schema(title = L_category )
+    @Schema(title = L_category)
     @NotBlank
     @Size(max = 128)
     String category;
 
-    @Schema(title = L_groupName )
+    @Schema(title = L_groupName)
     @NotBlank
     @Size(max = 128)
     String groupName;
 
-    @Schema(title = L_cron )
+    @Schema(title = L_cron)
     @NotBlank
     String cron;
 
-    @Schema(title = L_invokeExpr , description = D_invokeExpr )
+    @Schema(title = L_invokeExpr, description = D_invokeExpr)
     String invokeExpr;
 
-    @Schema(title = L_parallelInvoke )
+    @Schema(title = L_parallelInvoke)
     Boolean parallelInvoke;
 
-    @Schema(title = L_invokedCount )
+    @Schema(title = L_invokedCount)
     Integer invokedCount;
 
-    @Schema(title = L_lastInvokedTime )
+    @Schema(title = L_lastInvokedTime)
     Date lastInvokedTime;
 
-    @Schema(title = L_nextInvokeTime )
+    @Schema(title = L_nextInvokeTime)
     Date nextInvokeTime;
 
-    @Schema(title = L_domain , description = D_domain )
+    @Schema(title = L_domain, description = D_domain)
     @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
     String domain;
 
-    @Schema(title = L_name )
+    @Schema(title = L_name)
     @NotBlank
     @Size(max = 64)
     String name;
 
-    @Schema(title = L_optimisticLock )
-    @JsonIgnore(value=true)
+    @Schema(title = L_optimisticLock)
+    @JsonIgnore(value = true)
     Integer optimisticLock;
-
 
     @PostConstruct
     public void prePersist() {
-       //@todo 保存之前初始化数据，比如时间，初始状态等
+        // @todo 保存之前初始化数据，比如时间，初始状态等
     }
 }

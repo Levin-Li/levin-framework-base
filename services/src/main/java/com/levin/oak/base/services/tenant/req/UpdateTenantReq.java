@@ -34,7 +34,6 @@ import com.levin.oak.base.services.commons.req.*;
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
@@ -42,7 +41,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:14, 代码生成哈希校验码：[f59a4f12dd62bd75903dc9f39d2a7187]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:18, 代码生成哈希校验码：[c29fb12f02e584f59eaf59ae5d58890d]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -108,11 +107,7 @@ public class UpdateTenantReq extends BaseReq {
     String contractPhone;
 
     @Size(max = 1200)
-    @InjectVar(
-            domain = "dao",
-            expectBaseType = String.class,
-            converter = PrimitiveArrayJsonConverter.class,
-            isRequired = "false")
+    @InjectVar(domain = "dao", isRequired = "false")
     @Schema(title = L_domainList)
     List<String> domainList;
 

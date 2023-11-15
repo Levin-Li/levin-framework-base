@@ -29,7 +29,6 @@ import com.levin.commons.service.support.InjectConsts;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -38,7 +37,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:15, 代码生成哈希校验码：[fad9b6ad2658b11fae7b0dee31e8dc09]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:19, 代码生成哈希校验码：[f94d50127ab4b05ffc36a847b0104a0e]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -71,8 +70,8 @@ public class TenantAppInfo implements Serializable {
     @Schema(title = L_infoUrl)
     String infoUrl;
 
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
+    @InjectVar(domain = "dao", isRequired = "false")
     @Schema(title = L_modules)
     List<String> modules;
 
@@ -91,11 +90,13 @@ public class TenantAppInfo implements Serializable {
     @Schema(title = L_expiredTime, description = D_expiredTime)
     Date expiredTime;
 
+    @InjectVar(value = InjectConsts.TENANT_ID)
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
 
     @Size(max = 128)
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

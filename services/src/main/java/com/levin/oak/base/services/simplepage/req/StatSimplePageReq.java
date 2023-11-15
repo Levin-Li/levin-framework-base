@@ -41,7 +41,6 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -50,7 +49,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:16, 代码生成哈希校验码：[535a683a5851ba35b739d6eb3fbfd349]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:21, 代码生成哈希校验码：[8aca0e3623e9f28f74699d5e92372778]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -104,10 +103,8 @@ public class StatSimplePageReq extends MultiTenantOrgReq {
     @Schema(title = L_path)
     String path;
 
-    @OR(autoClose = true)
-    @Contains
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Size(max = 1800)
+    @InjectVar(domain = "dao", isRequired = "false")
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
 
@@ -115,6 +112,7 @@ public class StatSimplePageReq extends MultiTenantOrgReq {
     String content;
 
     @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -128,6 +126,7 @@ public class StatSimplePageReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @Size(max = 128)
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

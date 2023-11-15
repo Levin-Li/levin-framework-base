@@ -30,7 +30,6 @@ import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -39,7 +38,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:14, 代码生成哈希校验码：[2b7caf6cd2902984cf538acf28694dc3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:17, 代码生成哈希校验码：[1641df402ee340f61a09d3b6bc38b334]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -70,15 +69,16 @@ public class RoleInfo implements Serializable {
     @Schema(title = L_orgDataScope, description = D_orgDataScope)
     OrgDataScope orgDataScope;
 
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", isRequired = "false")
     @Schema(title = L_assignedOrgIdList, description = D_assignedOrgIdList)
     List<String> assignedOrgIdList;
 
-    @InjectVar(domain = "dao", converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", isRequired = "false")
     @Schema(title = L_permissionList, description = D_permissionList)
     List<String> permissionList;
 
     @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -92,14 +92,17 @@ public class RoleInfo implements Serializable {
     Integer optimisticLock;
 
     @Size(max = 128)
+    @InjectVar(value = InjectConsts.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 
+    @InjectVar(value = InjectConsts.TENANT_ID)
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
 
     @Size(max = 128)
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

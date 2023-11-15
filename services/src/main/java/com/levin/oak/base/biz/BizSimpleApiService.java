@@ -22,27 +22,22 @@ import com.levin.oak.base.services.simpleapi.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.SimpleApi.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
- *  简单动态接口-业务服务
+ * 简单动态接口-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[de9cb284a452484c2518a3e03e05855e]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:10, 代码生成哈希校验码：[88cb723c7d9ef4e7e120d38509a25cf4]，请不要修改和删除此行内容。
  */
-
 @Tag(name = E_SimpleApi.BIZ_NAME + "-业务服务", description = "")
-public interface BizSimpleApiService {
-
-}
+public interface BizSimpleApiService {}

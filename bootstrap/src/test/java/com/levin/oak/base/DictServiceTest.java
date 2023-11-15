@@ -9,14 +9,12 @@ import com.levin.oak.base.services.dict.*;
 import com.levin.oak.base.services.dict.req.*;
 import com.levin.oak.base.services.dict.info.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import com.levin.oak.base.entities.Dict.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
@@ -52,87 +50,76 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 字典测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:13, 代码生成哈希校验码：[1d22a7d7cf24482236ce24d94522e3c0]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:12, 代码生成哈希校验码：[be9ecf2bf78a65360dde9864e1a2b103]，请不要修改和删除此行内容。
  */
 
-//@ActiveProfiles("test")
-//@RunWith(SpringRunner.class)
+// @ActiveProfiles("test")
+// @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@Transactional(rollbackFor = {Throwable.class})
+// @Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class DictServiceTest {
 
-    @Autowired
-    private DictService dictService;
+    @Autowired private DictService dictService;
 
-    @Autowired
-    private BizDictService bizDictService;
+    @Autowired private BizDictService bizDictService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {
-    }
+    public static void beforeAll() throws Exception {}
 
     @AfterAll
-    public static void afterAll() throws Exception {
-    }
+    public static void afterAll() throws Exception {}
 
     @BeforeEach
-    public void beforeEach() throws Exception {
-    }
+    public void beforeEach() throws Exception {}
 
     @AfterEach
-    public void afterEach() throws Exception {
-    }
+    public void afterEach() throws Exception {}
 
     @Test
     public void createDictTest() {
 
         CreateDictReq req = new CreateDictReq();
 
-            // req.setType(Type.System);// 必填
+        // req.setType(Type.System);// 必填
 
-            // req.setCode("这是文本256");// 必填
+        // req.setCode("这是文本256");// 必填
 
-            // req.setItemList("编码项_1");//Json 存储 
+        // req.setItemList("编码项_1");//Json 存储
 
-            // req.setDomain("这是文本128");//归属的子系统或应用 
+        // req.setDomain("这是文本128");//归属的子系统或应用
 
-            // req.setName("这是文本64");// 必填
+        // req.setName("这是文本64");// 必填
 
-            // req.setOptimisticLock(1);// 
+        // req.setOptimisticLock(1);//
 
-            // req.setOrgId("这是文本128");// 
+        // req.setOrgId("这是文本128");//
 
-            // req.setTenantId("这是文本128");// 
+        // req.setTenantId("这是文本128");//
 
-            // req.setOrderCode(1);// 
+        // req.setOrderCode(1);//
 
-            // req.setEnable(true);// 必填
+        // req.setEnable(true);// 必填
 
-            // req.setEditable(true);// 必填
+        // req.setEditable(true);// 必填
 
-            // req.setRemark("这是文本512");// 
+        // req.setRemark("这是文本512");//
 
-
-       String id  = dictService.create(req);
+        String id = dictService.create(req);
 
         log.debug("新增字典->" + id);
 
         Assert.isTrue(id != null, "字典");
-
     }
-
 
     @Test
     public void queryDictTest() {
@@ -154,7 +141,7 @@ public class DictServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<DictInfo> resp = dictService.query(req,null);
+        PagingData<DictInfo> resp = dictService.query(req, null);
 
         log.debug("查询字典->" + resp);
 
@@ -164,29 +151,28 @@ public class DictServiceTest {
     @Test
     public void updateDictTest() {
 
-         UpdateDictReq req = new UpdateDictReq();
+        UpdateDictReq req = new UpdateDictReq();
 
-         req.setId(id);
+        req.setId(id);
 
+        // req.setType(Type.System);// 必填
+        // req.setCode("这是文本256");// 必填
+        // req.setItemList("编码项_1");//Json 存储
+        // req.setDomain("这是文本128");//归属的子系统或应用
+        // req.setName("这是文本64");// 必填
+        // req.setOptimisticLock(1);//
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
+        // req.setOrderCode(1);//
+        // req.setEnable(true);// 必填
+        // req.setEditable(true);// 必填
+        // req.setRemark("这是文本512");//
 
-           // req.setType(Type.System);// 必填
-           // req.setCode("这是文本256");// 必填
-           // req.setItemList("编码项_1");//Json 存储 
-           // req.setDomain("这是文本128");//归属的子系统或应用 
-           // req.setName("这是文本64");// 必填
-           // req.setOptimisticLock(1);// 
-           // req.setOrgId("这是文本128");// 
-           // req.setTenantId("这是文本128");// 
-           // req.setOrderCode(1);// 
-           // req.setEnable(true);// 必填
-           // req.setEditable(true);// 必填
-           // req.setRemark("这是文本512");// 
+        boolean ok = dictService.update(req);
 
-          boolean ok = dictService.update(req);
+        log.debug("更新字典-> " + ok);
 
-          log.debug("更新字典-> " + ok);
-
-          Assert.isTrue(ok, "字典");
+        Assert.isTrue(ok, "字典");
     }
 
     @Test
@@ -200,6 +186,6 @@ public class DictServiceTest {
 
         log.debug("删除字典->" + ok);
 
-        Assert.isTrue(ok , "字典");
+        Assert.isTrue(ok, "字典");
     }
 }

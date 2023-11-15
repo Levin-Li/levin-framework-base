@@ -35,7 +35,6 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -44,7 +43,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:16, 代码生成哈希校验码：[973a49ebac382965122291e60567e9bb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:20, 代码生成哈希校验码：[c44067854a70cae2c547bb9085e5b085]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -94,12 +93,8 @@ public class UpdateSimplePageReq extends MultiTenantOrgReq {
     @Schema(title = L_path)
     String path;
 
-    @InjectVar(
-            domain = "dao",
-            expectBaseType = String.class,
-            converter = PrimitiveArrayJsonConverter.class,
-            isRequired = "false")
     @Size(max = 1800)
+    @InjectVar(domain = "dao", isRequired = "false")
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
 
@@ -107,6 +102,7 @@ public class UpdateSimplePageReq extends MultiTenantOrgReq {
     String content;
 
     @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 

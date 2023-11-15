@@ -29,13 +29,13 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:39, 代码生成哈希校验码：[03dd3b862c26408a2979c47b1ee83060]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:14:18, 代码生成哈希校验码：[65ceefd129b4fbd29715357615d93407]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -63,7 +63,7 @@ public class SimpleScheduledLogInfo implements Serializable {
     @Schema(title = L_invokeCycle)
     String invokeCycle;
 
-    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot)
+    @Schema(title = L_invokeSnapshot, description = D_invokeSnapshot)
     String invokeSnapshot;
 
     @Schema(title = L_isError)
@@ -72,17 +72,17 @@ public class SimpleScheduledLogInfo implements Serializable {
     @Schema(title = L_invokeResult)
     String invokeResult;
 
+    @InjectVar(value = InjectConsts.TENANT_ID)
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
 
     @Size(max = 128)
+    @InjectVar(value = InjectConsts.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 
     @NotNull
     @Schema(title = L_createTime)
     Date createTime;
-
-
 }

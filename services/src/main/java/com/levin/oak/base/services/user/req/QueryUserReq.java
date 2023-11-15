@@ -43,7 +43,6 @@ import com.levin.oak.base.services.org.info.*;
 import java.util.Date;
 import com.levin.oak.base.entities.Org;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -52,7 +51,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:15, 代码生成哈希校验码：[03b09e08e8f7730e93cb95917b1ce07f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:19, 代码生成哈希校验码：[4b9ead29ff52cf8a2f4294d21c579f5b]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -121,10 +120,8 @@ public class QueryUserReq extends MultiTenantOrgReq {
     @Schema(title = L_sex)
     Sex sex;
 
-    @OR(autoClose = true)
-    @Contains
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Size(max = 1800)
+    @InjectVar(domain = "dao", isRequired = "false")
     @Schema(title = L_tagList)
     List<String> tagList;
 
@@ -159,10 +156,8 @@ public class QueryUserReq extends MultiTenantOrgReq {
     @Schema(title = L_jobPostCode)
     String jobPostCode;
 
-    @OR(autoClose = true)
-    @Contains
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Size(max = 1800)
+    @InjectVar(domain = "dao", isRequired = "false")
     @Schema(title = L_roleList)
     List<String> roleList;
 
@@ -179,6 +174,7 @@ public class QueryUserReq extends MultiTenantOrgReq {
     String aliOpenId;
 
     @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -192,6 +188,7 @@ public class QueryUserReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @Size(max = 128)
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

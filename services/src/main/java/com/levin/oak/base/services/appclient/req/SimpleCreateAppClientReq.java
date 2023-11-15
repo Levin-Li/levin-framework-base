@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.appclient.req;
 
-//import static com.levin.oak.base.ModuleOption.*;
+// import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,25 +28,25 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_AppClient.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 新增应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[384dd80749fa5f3199acc854aa886677]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:10, 代码生成哈希校验码：[4edf49d94a1c14d8571236f6edf9d1f8]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor
 @NoArgsConstructor
@@ -56,36 +56,36 @@ public class SimpleCreateAppClientReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -115048882L;
 
-    @Schema(title = L_appId )
+    @Schema(title = L_appId)
     @NotBlank
     @Size(max = 64)
     String appId;
 
-    @Schema(title = L_appSecret )
+    @Schema(title = L_appSecret)
     @NotBlank
     @Size(max = 512)
     String appSecret;
 
-    @Schema(title = L_appToken )
+    @Schema(title = L_appToken)
     @Size(max = 512)
     String appToken;
 
-    @Schema(title = L_domain , description = D_domain )
+    @Schema(title = L_domain, description = D_domain)
     @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
     String domain;
 
-    @Schema(title = L_name )
+    @Schema(title = L_name)
     @NotBlank
     @Size(max = 64)
     String name;
 
-    @Schema(title = L_optimisticLock )
-    @JsonIgnore(value=true)
+    @Schema(title = L_optimisticLock)
+    @JsonIgnore(value = true)
     Integer optimisticLock;
-
 
     @PostConstruct
     public void prePersist() {
-       //@todo 保存之前初始化数据，比如时间，初始状态等
+        // @todo 保存之前初始化数据，比如时间，初始状态等
     }
 }

@@ -35,30 +35,33 @@ import static com.levin.oak.base.entities.E_AccessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 查询访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:42, 代码生成哈希校验码：[a7e52dc2129388b5432050cccfe9a78c]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:11, 代码生成哈希校验码：[c95739a2439258b7831c5d36956774e3]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS, resultClass = AccessLogInfo.class)
-public class QueryAccessLogReq extends MultiTenantOrgReq{
+@TargetOption(
+        entityClass = AccessLog.class,
+        alias = E_AccessLog.ALIAS,
+        resultClass = AccessLogInfo.class)
+public class QueryAccessLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1030736962L;
 
@@ -66,32 +69,39 @@ public class QueryAccessLogReq extends MultiTenantOrgReq{
     @Schema(title = "排序字段")
     String orderBy;
 
-    //@Ignore
+    // @Ignore
     @Schema(title = "排序方向")
-    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
-    @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
+    @SimpleOrderBy(
+            expr = "orderBy + ' ' + orderDir",
+            condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)",
+            remark = "生成排序表达式")
+    @OrderBy(
+            value = createTime,
+            condition = "#isEmpty(orderBy) || #isEmpty(orderDir)",
+            order = Integer.MAX_VALUE,
+            desc = "默认按时间排序")
     OrderBy.Type orderDir;
-
 
     @NotNull
     @Schema(title = L_id)
     Long id;
 
-    @Schema(title = L_domain , description = D_domain)
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
-    @Schema(title = "模糊匹配-" + L_domain , description = D_domain)
+    @Schema(title = "模糊匹配-" + L_domain, description = D_domain)
     @Contains
     String containsDomain;
 
-    @Schema(title = L_module , description = D_module)
+    @Schema(title = L_module, description = D_module)
     String module;
 
-    @Schema(title = "模糊匹配-" + L_module , description = D_module)
+    @Schema(title = "模糊匹配-" + L_module, description = D_module)
     @Contains
     String containsModule;
 
     @Size(max = 64)
+    @InjectVar(value = InjectConsts.USER_NAME, isRequired = "false")
     @Schema(title = L_visitor)
     String visitor;
 
@@ -198,24 +208,24 @@ public class QueryAccessLogReq extends MultiTenantOrgReq{
     Long executeTime;
 
     @NotNull
-    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
     @Lte
     Date lteCreateTime;
 
-    //@Schema(title = L_createTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenCreateTime;
-
+    // @Schema(title = L_createTime + "-日期范围")
+    // @Between(paramDelimiter = "-")
+    // String betweenCreateTime;
 
     public QueryAccessLogReq(Long id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
-        //@todo 查询之前初始化数据
+        // @todo 查询之前初始化数据
     }
 }

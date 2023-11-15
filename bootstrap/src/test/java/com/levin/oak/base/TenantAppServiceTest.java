@@ -9,14 +9,12 @@ import com.levin.oak.base.services.tenantapp.*;
 import com.levin.oak.base.services.tenantapp.req.*;
 import com.levin.oak.base.services.tenantapp.info.*;
 
-
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
@@ -52,89 +50,78 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 租户应用测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:13, 代码生成哈希校验码：[6a9ac5efba0c8af255e0ae7215841597]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:12, 代码生成哈希校验码：[708ad89c5ee377dd70603b35058a562b]，请不要修改和删除此行内容。
  */
 
-//@ActiveProfiles("test")
-//@RunWith(SpringRunner.class)
+// @ActiveProfiles("test")
+// @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@Transactional(rollbackFor = {Throwable.class})
+// @Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class TenantAppServiceTest {
 
-    @Autowired
-    private TenantAppService tenantAppService;
+    @Autowired private TenantAppService tenantAppService;
 
-    @Autowired
-    private BizTenantAppService bizTenantAppService;
+    @Autowired private BizTenantAppService bizTenantAppService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {
-    }
+    public static void beforeAll() throws Exception {}
 
     @AfterAll
-    public static void afterAll() throws Exception {
-    }
+    public static void afterAll() throws Exception {}
 
     @BeforeEach
-    public void beforeEach() throws Exception {
-    }
+    public void beforeEach() throws Exception {}
 
     @AfterEach
-    public void afterEach() throws Exception {
-    }
+    public void afterEach() throws Exception {}
 
     @Test
     public void createTenantAppTest() {
 
         CreateTenantAppReq req = new CreateTenantAppReq();
 
-            // req.setName("这是文本64");// 必填
+        // req.setName("这是文本64");// 必填
 
-            // req.setLogo("应用Logo_1");// 
+        // req.setLogo("应用Logo_1");//
 
-            // req.setEntryUrl("应用入口_1");// 
+        // req.setEntryUrl("应用入口_1");//
 
-            // req.setInfoUrl("应用说明页_1");// 
+        // req.setInfoUrl("应用说明页_1");//
 
-            // req.setModules("这是文本1800");// 
+        // req.setModules("这是文本1800");//
 
-            // req.setAppSecret("应用密钥_1");//租户安装后获得的应用密钥 
+        // req.setAppSecret("应用密钥_1");//租户安装后获得的应用密钥
 
-            // req.setOrderNo("订单编号_1");//购买的订单编号 
+        // req.setOrderNo("订单编号_1");//购买的订单编号
 
-            // req.setExpiredTime(new Date());//为空表示永不过期 
+        // req.setExpiredTime(new Date());//为空表示永不过期
 
-            // req.setTenantId("这是文本128");// 
+        // req.setTenantId("这是文本128");//
 
-            // req.setOrderCode(1);// 
+        // req.setOrderCode(1);//
 
-            // req.setEnable(true);// 必填
+        // req.setEnable(true);// 必填
 
-            // req.setEditable(true);// 必填
+        // req.setEditable(true);// 必填
 
-            // req.setRemark("这是文本512");// 
+        // req.setRemark("这是文本512");//
 
-
-       String id  = tenantAppService.create(req);
+        String id = tenantAppService.create(req);
 
         log.debug("新增租户应用->" + id);
 
         Assert.isTrue(id != null, "租户应用");
-
     }
-
 
     @Test
     public void queryTenantAppTest() {
@@ -160,7 +147,7 @@ public class TenantAppServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<TenantAppInfo> resp = tenantAppService.query(req,null);
+        PagingData<TenantAppInfo> resp = tenantAppService.query(req, null);
 
         log.debug("查询租户应用->" + resp);
 
@@ -170,30 +157,29 @@ public class TenantAppServiceTest {
     @Test
     public void updateTenantAppTest() {
 
-         UpdateTenantAppReq req = new UpdateTenantAppReq();
+        UpdateTenantAppReq req = new UpdateTenantAppReq();
 
-         req.setId(id);
+        req.setId(id);
 
+        // req.setName("这是文本64");// 必填
+        // req.setLogo("应用Logo_1");//
+        // req.setEntryUrl("应用入口_1");//
+        // req.setInfoUrl("应用说明页_1");//
+        // req.setModules("这是文本1800");//
+        // req.setAppSecret("应用密钥_1");//租户安装后获得的应用密钥
+        // req.setOrderNo("订单编号_1");//购买的订单编号
+        // req.setExpiredTime(new Date());//为空表示永不过期
+        // req.setTenantId("这是文本128");//
+        // req.setOrderCode(1);//
+        // req.setEnable(true);// 必填
+        // req.setEditable(true);// 必填
+        // req.setRemark("这是文本512");//
 
-           // req.setName("这是文本64");// 必填
-           // req.setLogo("应用Logo_1");// 
-           // req.setEntryUrl("应用入口_1");// 
-           // req.setInfoUrl("应用说明页_1");// 
-           // req.setModules("这是文本1800");// 
-           // req.setAppSecret("应用密钥_1");//租户安装后获得的应用密钥 
-           // req.setOrderNo("订单编号_1");//购买的订单编号 
-           // req.setExpiredTime(new Date());//为空表示永不过期 
-           // req.setTenantId("这是文本128");// 
-           // req.setOrderCode(1);// 
-           // req.setEnable(true);// 必填
-           // req.setEditable(true);// 必填
-           // req.setRemark("这是文本512");// 
+        boolean ok = tenantAppService.update(req);
 
-          boolean ok = tenantAppService.update(req);
+        log.debug("更新租户应用-> " + ok);
 
-          log.debug("更新租户应用-> " + ok);
-
-          Assert.isTrue(ok, "租户应用");
+        Assert.isTrue(ok, "租户应用");
     }
 
     @Test
@@ -207,6 +193,6 @@ public class TenantAppServiceTest {
 
         log.debug("删除租户应用->" + ok);
 
-        Assert.isTrue(ok , "租户应用");
+        Assert.isTrue(ok, "租户应用");
     }
 }

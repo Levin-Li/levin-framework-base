@@ -41,7 +41,6 @@ import com.levin.commons.service.support.InjectConsts;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -50,7 +49,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午5:27:15, 代码生成哈希校验码：[3140d5308ebc195af4a4f39238675b2e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:19, 代码生成哈希校验码：[43963f5fab011a62312746eb3333eed4]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
@@ -91,10 +90,8 @@ public class StatTenantAppReq extends MultiTenantReq {
     @Schema(title = L_infoUrl)
     String infoUrl;
 
-    @OR(autoClose = true)
-    @Contains
-    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Size(max = 1800)
+    @InjectVar(domain = "dao", isRequired = "false")
     @Schema(title = L_modules)
     List<String> modules;
 
@@ -123,6 +120,7 @@ public class StatTenantAppReq extends MultiTenantReq {
     // String betweenExpiredTime;
 
     @Size(max = 128)
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 
