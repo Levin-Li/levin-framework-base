@@ -30,18 +30,18 @@ import static com.levin.oak.base.entities.E_Tenant.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 平台租户 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:19, 代码生成哈希校验码：[fd9efceb42e6d223040abef88f8463ef]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[5594c015551f880203cc092b05c09970]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data

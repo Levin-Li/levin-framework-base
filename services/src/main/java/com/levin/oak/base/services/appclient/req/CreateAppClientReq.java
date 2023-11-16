@@ -29,18 +29,18 @@ import static com.levin.oak.base.entities.E_AppClient.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 新增应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:06, 代码生成哈希校验码：[9a5eeb9f5047957ccd97057d03e36a26]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:19, 代码生成哈希校验码：[875c1b941e16123785ced07f49c89135]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -85,8 +85,8 @@ public class CreateAppClientReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @Schema(title = L_creator, hidden = true)
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     // @Size(max = 128)
-    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     String creator;
 
     @Schema(title = L_createTime, hidden = true)

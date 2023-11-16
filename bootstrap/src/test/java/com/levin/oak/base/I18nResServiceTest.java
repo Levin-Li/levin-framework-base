@@ -9,13 +9,12 @@ import com.levin.oak.base.services.i18nres.*;
 import com.levin.oak.base.services.i18nres.req.*;
 import com.levin.oak.base.services.i18nres.info.*;
 
-
 ////////////////////////////////////
-//自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+// 自动导入列表
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -49,87 +48,76 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 国际化资源测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:13, 代码生成哈希校验码：[b5bfb22ba5036fb934b5b4d3227fd894]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:23, 代码生成哈希校验码：[eea1f3d41ec7d66027746fa71ec7747e]，请不要修改和删除此行内容。
  */
 
-//@ActiveProfiles("test")
-//@RunWith(SpringRunner.class)
+// @ActiveProfiles("test")
+// @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@Transactional(rollbackFor = {Throwable.class})
+// @Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class I18nResServiceTest {
 
-    @Autowired
-    private I18nResService i18nResService;
+    @Autowired private I18nResService i18nResService;
 
-    @Autowired
-    private BizI18nResService bizI18nResService;
+    @Autowired private BizI18nResService bizI18nResService;
 
     private Long id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {
-    }
+    public static void beforeAll() throws Exception {}
 
     @AfterAll
-    public static void afterAll() throws Exception {
-    }
+    public static void afterAll() throws Exception {}
 
     @BeforeEach
-    public void beforeEach() throws Exception {
-    }
+    public void beforeEach() throws Exception {}
 
     @AfterEach
-    public void afterEach() throws Exception {
-    }
+    public void afterEach() throws Exception {}
 
     @Test
     public void createI18nResTest() {
 
         CreateI18nResReq req = new CreateI18nResReq();
 
-            // req.setCategory("这是文本128");// 必填
+        // req.setCategory("这是文本128");// 必填
 
-            // req.setLang("这是文本64");// 必填
+        // req.setLang("这是文本64");// 必填
 
-            // req.setLabel("这是文本768");// 必填
+        // req.setLabel("这是文本768");// 必填
 
-            // req.setDomain("这是文本128");//归属的子系统或应用 
+        // req.setDomain("这是文本128");//归属的子系统或应用
 
-            // req.setName("这是文本64");// 必填
+        // req.setName("这是文本64");// 必填
 
-            // req.setOptimisticLock(1);// 
+        // req.setOptimisticLock(1);//
 
-            // req.setOrgId("这是文本128");// 
+        // req.setOrgId("这是文本128");//
 
-            // req.setTenantId("这是文本128");// 
+        // req.setTenantId("这是文本128");//
 
-            // req.setOrderCode(1);// 
+        // req.setOrderCode(1);//
 
-            // req.setEnable(true);// 必填
+        // req.setEnable(true);// 必填
 
-            // req.setEditable(true);// 必填
+        // req.setEditable(true);// 必填
 
-            // req.setRemark("这是文本512");// 
+        // req.setRemark("这是文本512");//
 
-
-       Long id  = i18nResService.create(req);
+        Long id = i18nResService.create(req);
 
         log.debug("新增国际化资源->" + id);
 
         Assert.isTrue(id != null, "国际化资源");
-
     }
-
 
     @Test
     public void queryI18nResTest() {
@@ -151,7 +139,7 @@ public class I18nResServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<I18nResInfo> resp = i18nResService.query(req,null);
+        PagingData<I18nResInfo> resp = i18nResService.query(req, null);
 
         log.debug("查询国际化资源->" + resp);
 
@@ -161,29 +149,28 @@ public class I18nResServiceTest {
     @Test
     public void updateI18nResTest() {
 
-         UpdateI18nResReq req = new UpdateI18nResReq();
+        UpdateI18nResReq req = new UpdateI18nResReq();
 
-         req.setId(id);
+        req.setId(id);
 
+        // req.setCategory("这是文本128");// 必填
+        // req.setLang("这是文本64");// 必填
+        // req.setLabel("这是文本768");// 必填
+        // req.setDomain("这是文本128");//归属的子系统或应用
+        // req.setName("这是文本64");// 必填
+        // req.setOptimisticLock(1);//
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
+        // req.setOrderCode(1);//
+        // req.setEnable(true);// 必填
+        // req.setEditable(true);// 必填
+        // req.setRemark("这是文本512");//
 
-           // req.setCategory("这是文本128");// 必填
-           // req.setLang("这是文本64");// 必填
-           // req.setLabel("这是文本768");// 必填
-           // req.setDomain("这是文本128");//归属的子系统或应用 
-           // req.setName("这是文本64");// 必填
-           // req.setOptimisticLock(1);// 
-           // req.setOrgId("这是文本128");// 
-           // req.setTenantId("这是文本128");// 
-           // req.setOrderCode(1);// 
-           // req.setEnable(true);// 必填
-           // req.setEditable(true);// 必填
-           // req.setRemark("这是文本512");// 
+        boolean ok = i18nResService.update(req);
 
-          boolean ok = i18nResService.update(req);
+        log.debug("更新国际化资源-> " + ok);
 
-          log.debug("更新国际化资源-> " + ok);
-
-          Assert.isTrue(ok, "国际化资源");
+        Assert.isTrue(ok, "国际化资源");
     }
 
     @Test
@@ -197,6 +184,6 @@ public class I18nResServiceTest {
 
         log.debug("删除国际化资源->" + ok);
 
-        Assert.isTrue(ok , "国际化资源");
+        Assert.isTrue(ok, "国际化资源");
     }
 }

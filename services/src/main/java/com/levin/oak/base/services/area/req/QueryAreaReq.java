@@ -36,12 +36,12 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.Area.*;
 
 ////////////////////////////////////
@@ -49,7 +49,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 查询区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:09, 代码生成哈希校验码：[08fe347f9852b19ef2b4f9d660f18413]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[43613ce9a77a366dc742ca325c09cafa]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -127,8 +127,8 @@ public class QueryAreaReq extends BaseReq {
     @Contains
     String containsPinyinName;
 
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

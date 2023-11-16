@@ -37,12 +37,12 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.Area.*;
 
 ////////////////////////////////////
@@ -50,7 +50,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 统计区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午8:23:50, 代码生成哈希校验码：[5bc9b8f7908f7c2d1e0d20445b8d9a31]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[115038b19108d14f6feb0ae96577d08d]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

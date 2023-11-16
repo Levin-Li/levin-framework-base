@@ -36,20 +36,20 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 查询简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:09, 代码生成哈希校验码：[e2cc6c0475b8f5fcb33464407f9e6fba]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[ac8a7f6cfb604d9294a2e6fe03002dee]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -144,8 +144,8 @@ public class QuerySimpleFormReq extends MultiTenantOrgReq {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

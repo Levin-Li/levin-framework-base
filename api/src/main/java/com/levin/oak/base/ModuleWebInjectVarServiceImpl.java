@@ -11,7 +11,7 @@ import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.InjectVarService;
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.RbacUserInfo;
-import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.support.InjectConst;
 import com.levin.commons.service.support.VariableInjector;
 import com.levin.commons.service.support.VariableResolverManager;
 import com.levin.commons.utils.MapUtils;
@@ -185,15 +185,15 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
             //获取登录信息
             UserInfo userInfo = baseAuthService.getUserInfo();
 
-            builder.put(InjectConsts.USER_ID, userInfo.getId())
-                    .put(InjectConsts.USER_NAME, userInfo.getName())
-                    .put(InjectConsts.USER, userInfo)
+            builder.put(InjectConst.USER_ID, userInfo.getId())
+                    .put(InjectConst.USER_NAME, userInfo.getName())
+                    .put(InjectConst.USER, userInfo)
 
-                    .put(InjectConsts.IS_SUPER_ADMIN, userInfo.isSuperAdmin())
-                    .put(InjectConsts.IS_TENANT_ADMIN, userInfo.isTenantAdmin())
+                    .put(InjectConst.IS_SUPER_ADMIN, userInfo.isSuperAdmin())
+                    .put(InjectConst.IS_TENANT_ADMIN, userInfo.isTenantAdmin())
 
-                    .put(InjectConsts.ORG, userInfo.getOrg())
-                    .put(InjectConsts.ORG_ID, userInfo.getOrgId());
+                    .put(InjectConst.ORG, userInfo.getOrg())
+                    .put(InjectConst.ORG_ID, userInfo.getOrgId());
 
             if (log.isDebugEnabled()) {
                 log.debug("当前登录用户：{}, {}", userInfo, getBizStack());
@@ -201,24 +201,24 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
 
         } else {
             //匿名用户
-            builder.put(InjectConsts.USER_ID, anonymous.getId())
-                    .put(InjectConsts.USER_NAME, anonymous.getName())
-                    .put(InjectConsts.USER, anonymous)
+            builder.put(InjectConst.USER_ID, anonymous.getId())
+                    .put(InjectConst.USER_NAME, anonymous.getName())
+                    .put(InjectConst.USER, anonymous)
 
-                    .put(InjectConsts.IS_SUPER_ADMIN, false)
-                    .put(InjectConsts.IS_TENANT_ADMIN, false)
+                    .put(InjectConst.IS_SUPER_ADMIN, false)
+                    .put(InjectConst.IS_TENANT_ADMIN, false)
 
-                    .put(InjectConsts.ORG, null)
-                    .put(InjectConsts.ORG_ID_LIST, null)
-                    .put(InjectConsts.ORG_ID, null);
+                    .put(InjectConst.ORG, null)
+                    .put(InjectConst.ORG_ID_LIST, null)
+                    .put(InjectConst.ORG_ID, null);
 
             log.debug("当前登录用户未登录");
         }
 
         //租户信息
         if (tenantInfo != null) {
-            builder.put(InjectConsts.TENANT, tenantInfo)
-                    .put(InjectConsts.TENANT_ID, tenantInfo.getId());
+            builder.put(InjectConst.TENANT, tenantInfo)
+                    .put(InjectConst.TENANT_ID, tenantInfo.getId());
         }
 
         final Map<String, Object> ctx = builder.build();

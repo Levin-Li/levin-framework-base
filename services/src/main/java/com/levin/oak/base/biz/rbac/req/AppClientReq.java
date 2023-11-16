@@ -3,7 +3,7 @@ package com.levin.oak.base.biz.rbac.req;
 import com.levin.commons.dao.annotation.Ignore;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.domain.ServiceReq;
-import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.support.InjectConst;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -27,7 +27,7 @@ public class AppClientReq implements ServiceReq {
     protected String tenantId;
 
     @Schema(title = "客户端类型", hidden = true)
-    @InjectVar(InjectConsts.USER_AGENT)
+    @InjectVar(InjectConst.USER_AGENT)
     protected String ua;
 
     @Schema(title = "客户端类型", hidden = true)

@@ -29,27 +29,27 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_NoticeProcessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-//自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+// 自动导入列表
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
+
 ////////////////////////////////////
 
 /**
  * 删除通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:43, 代码生成哈希校验码：[7abc30648d047da66947297dd6206c7c]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[dd8186dd064d8dc34b852b5fa1371c20]，请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
 
-//@AllArgsConstructor
+// @AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
@@ -57,7 +57,6 @@ import com.levin.commons.service.domain.InjectVar;
 public class DeleteNoticeProcessLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -1991983093L;
-
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_NoticeProcessLog.id)
@@ -73,10 +72,8 @@ public class DeleteNoticeProcessLogReq extends MultiTenantOrgReq {
         return this;
     }
 
-
     @PostConstruct
     public void preDelete() {
-        //@todo 删除之前初始化数据
+        // @todo 删除之前初始化数据
     }
-
 }

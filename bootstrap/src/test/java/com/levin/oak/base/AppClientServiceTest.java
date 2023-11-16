@@ -9,13 +9,12 @@ import com.levin.oak.base.services.appclient.*;
 import com.levin.oak.base.services.appclient.req.*;
 import com.levin.oak.base.services.appclient.info.*;
 
-
 ////////////////////////////////////
-//自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+// 自动导入列表
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -49,87 +48,76 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 应用接入测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:12, 代码生成哈希校验码：[96a4bd9c21ec4a5d255a31223dd19047]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[5b06c8e794c7e28601a3d2af03ee8971]，请不要修改和删除此行内容。
  */
 
-//@ActiveProfiles("test")
-//@RunWith(SpringRunner.class)
+// @ActiveProfiles("test")
+// @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@Transactional(rollbackFor = {Throwable.class})
+// @Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class AppClientServiceTest {
 
-    @Autowired
-    private AppClientService appClientService;
+    @Autowired private AppClientService appClientService;
 
-    @Autowired
-    private BizAppClientService bizAppClientService;
+    @Autowired private BizAppClientService bizAppClientService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {
-    }
+    public static void beforeAll() throws Exception {}
 
     @AfterAll
-    public static void afterAll() throws Exception {
-    }
+    public static void afterAll() throws Exception {}
 
     @BeforeEach
-    public void beforeEach() throws Exception {
-    }
+    public void beforeEach() throws Exception {}
 
     @AfterEach
-    public void afterEach() throws Exception {
-    }
+    public void afterEach() throws Exception {}
 
     @Test
     public void createAppClientTest() {
 
         CreateAppClientReq req = new CreateAppClientReq();
 
-            // req.setAppId("这是文本64");// 必填
+        // req.setAppId("这是文本64");// 必填
 
-            // req.setAppSecret("这是文本512");// 必填
+        // req.setAppSecret("这是文本512");// 必填
 
-            // req.setAppToken("这是文本512");// 
+        // req.setAppToken("这是文本512");//
 
-            // req.setDomain("这是文本128");//归属的子系统或应用 
+        // req.setDomain("这是文本128");//归属的子系统或应用
 
-            // req.setName("这是文本64");// 必填
+        // req.setName("这是文本64");// 必填
 
-            // req.setOptimisticLock(1);// 
+        // req.setOptimisticLock(1);//
 
-            // req.setOrgId("这是文本128");// 
+        // req.setOrgId("这是文本128");//
 
-            // req.setTenantId("这是文本128");// 
+        // req.setTenantId("这是文本128");//
 
-            // req.setOrderCode(1);// 
+        // req.setOrderCode(1);//
 
-            // req.setEnable(true);// 必填
+        // req.setEnable(true);// 必填
 
-            // req.setEditable(true);// 必填
+        // req.setEditable(true);// 必填
 
-            // req.setRemark("这是文本512");// 
+        // req.setRemark("这是文本512");//
 
-
-       String id  = appClientService.create(req);
+        String id = appClientService.create(req);
 
         log.debug("新增应用接入->" + id);
 
         Assert.isTrue(id != null, "应用接入");
-
     }
-
 
     @Test
     public void queryAppClientTest() {
@@ -151,7 +139,7 @@ public class AppClientServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<AppClientInfo> resp = appClientService.query(req,null);
+        PagingData<AppClientInfo> resp = appClientService.query(req, null);
 
         log.debug("查询应用接入->" + resp);
 
@@ -161,29 +149,28 @@ public class AppClientServiceTest {
     @Test
     public void updateAppClientTest() {
 
-         UpdateAppClientReq req = new UpdateAppClientReq();
+        UpdateAppClientReq req = new UpdateAppClientReq();
 
-         req.setId(id);
+        req.setId(id);
 
+        // req.setAppId("这是文本64");// 必填
+        // req.setAppSecret("这是文本512");// 必填
+        // req.setAppToken("这是文本512");//
+        // req.setDomain("这是文本128");//归属的子系统或应用
+        // req.setName("这是文本64");// 必填
+        // req.setOptimisticLock(1);//
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
+        // req.setOrderCode(1);//
+        // req.setEnable(true);// 必填
+        // req.setEditable(true);// 必填
+        // req.setRemark("这是文本512");//
 
-           // req.setAppId("这是文本64");// 必填
-           // req.setAppSecret("这是文本512");// 必填
-           // req.setAppToken("这是文本512");// 
-           // req.setDomain("这是文本128");//归属的子系统或应用 
-           // req.setName("这是文本64");// 必填
-           // req.setOptimisticLock(1);// 
-           // req.setOrgId("这是文本128");// 
-           // req.setTenantId("这是文本128");// 
-           // req.setOrderCode(1);// 
-           // req.setEnable(true);// 必填
-           // req.setEditable(true);// 必填
-           // req.setRemark("这是文本512");// 
+        boolean ok = appClientService.update(req);
 
-          boolean ok = appClientService.update(req);
+        log.debug("更新应用接入-> " + ok);
 
-          log.debug("更新应用接入-> " + ok);
-
-          Assert.isTrue(ok, "应用接入");
+        Assert.isTrue(ok, "应用接入");
     }
 
     @Test
@@ -197,6 +184,6 @@ public class AppClientServiceTest {
 
         log.debug("删除应用接入->" + ok);
 
-        Assert.isTrue(ok , "应用接入");
+        Assert.isTrue(ok, "应用接入");
     }
 }

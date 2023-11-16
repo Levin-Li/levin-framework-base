@@ -9,12 +9,11 @@ import com.levin.oak.base.services.noticeprocesslog.*;
 import com.levin.oak.base.services.noticeprocesslog.req.*;
 import com.levin.oak.base.services.noticeprocesslog.info.*;
 
-
 ////////////////////////////////////
-//自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+// 自动导入列表
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -48,73 +47,62 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 通知处理日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:46, 代码生成哈希校验码：[3f37e488cd3f9134dc068acd32756ff4]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:23, 代码生成哈希校验码：[9870b7ec76a15a455b083ed6623bcd85]，请不要修改和删除此行内容。
  */
 
-//@ActiveProfiles("test")
-//@RunWith(SpringRunner.class)
+// @ActiveProfiles("test")
+// @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@Transactional(rollbackFor = {Throwable.class})
+// @Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class NoticeProcessLogServiceTest {
 
-    @Autowired
-    private NoticeProcessLogService noticeProcessLogService;
+    @Autowired private NoticeProcessLogService noticeProcessLogService;
 
-    @Autowired
-    private BizNoticeProcessLogService bizNoticeProcessLogService;
+    @Autowired private BizNoticeProcessLogService bizNoticeProcessLogService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {
-    }
+    public static void beforeAll() throws Exception {}
 
     @AfterAll
-    public static void afterAll() throws Exception {
-    }
+    public static void afterAll() throws Exception {}
 
     @BeforeEach
-    public void beforeEach() throws Exception {
-    }
+    public void beforeEach() throws Exception {}
 
     @AfterEach
-    public void afterEach() throws Exception {
-    }
+    public void afterEach() throws Exception {}
 
     @Test
     public void createNoticeProcessLogTest() {
 
         CreateNoticeProcessLogReq req = new CreateNoticeProcessLogReq();
 
-            // req.setNoticeId("这是文本128");// 必填
+        // req.setNoticeId("这是文本128");// 必填
 
-            // req.setStatus("这是文本128");// 
+        // req.setStatus("这是文本128");//
 
-            // req.setRemark("这是文本512");// 
+        // req.setRemark("这是文本512");//
 
-            // req.setTenantId("这是文本128");// 
+        // req.setTenantId("这是文本128");//
 
-            // req.setOrgId("这是文本128");// 
+        // req.setOrgId("这是文本128");//
 
-
-       String id  = noticeProcessLogService.create(req);
+        String id = noticeProcessLogService.create(req);
 
         log.debug("新增通知处理日志->" + id);
 
         Assert.isTrue(id != null, "通知处理日志");
-
     }
-
 
     @Test
     public void queryNoticeProcessLogTest() {
@@ -129,7 +117,7 @@ public class NoticeProcessLogServiceTest {
         // req.setTenantId("这是文本128");//
         // req.setOrgId("这是文本128");//
 
-        PagingData<NoticeProcessLogInfo> resp = noticeProcessLogService.query(req,null);
+        PagingData<NoticeProcessLogInfo> resp = noticeProcessLogService.query(req, null);
 
         log.debug("查询通知处理日志->" + resp);
 
@@ -139,22 +127,21 @@ public class NoticeProcessLogServiceTest {
     @Test
     public void updateNoticeProcessLogTest() {
 
-         UpdateNoticeProcessLogReq req = new UpdateNoticeProcessLogReq();
+        UpdateNoticeProcessLogReq req = new UpdateNoticeProcessLogReq();
 
-         req.setId(id);
+        req.setId(id);
 
+        // req.setNoticeId("这是文本128");// 必填
+        // req.setStatus("这是文本128");//
+        // req.setRemark("这是文本512");//
+        // req.setTenantId("这是文本128");//
+        // req.setOrgId("这是文本128");//
 
-           // req.setNoticeId("这是文本128");// 必填
-           // req.setStatus("这是文本128");// 
-           // req.setRemark("这是文本512");// 
-           // req.setTenantId("这是文本128");// 
-           // req.setOrgId("这是文本128");// 
+        boolean ok = noticeProcessLogService.update(req);
 
-          boolean ok = noticeProcessLogService.update(req);
+        log.debug("更新通知处理日志-> " + ok);
 
-          log.debug("更新通知处理日志-> " + ok);
-
-          Assert.isTrue(ok, "通知处理日志");
+        Assert.isTrue(ok, "通知处理日志");
     }
 
     @Test
@@ -168,6 +155,6 @@ public class NoticeProcessLogServiceTest {
 
         log.debug("删除通知处理日志->" + ok);
 
-        Assert.isTrue(ok , "通知处理日志");
+        Assert.isTrue(ok, "通知处理日志");
     }
 }

@@ -30,8 +30,7 @@ import static com.levin.oak.base.entities.E_Org.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+// 自动导入列表
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 import java.util.Date;
@@ -41,25 +40,26 @@ import java.util.Set;
 import com.levin.oak.base.entities.Org.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
+
 ////////////////////////////////////
 
 /**
  * 更新机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:43, 代码生成哈希校验码：[6d6a6b38bbaad72b151389ee10f6a250]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[26b786bae3dda60188eb3a0f3647ef53]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Org.class, alias = E_Org.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class UpdateOrgReq extends MultiTenantReq {
 
@@ -70,8 +70,8 @@ public class UpdateOrgReq extends MultiTenantReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition = "!#" + InjectConst.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Size(max = 64)
@@ -79,7 +79,7 @@ public class UpdateOrgReq extends MultiTenantReq {
     String parentId;
 
     @Size(max = 64)
-    @Schema(title = L_code , description = D_code)
+    @Schema(title = L_code, description = D_code)
     String code;
 
     @Schema(title = L_icon)
@@ -100,15 +100,15 @@ public class UpdateOrgReq extends MultiTenantReq {
     String areaCode;
 
     @Size(max = 128)
-    @Schema(title = L_level , description = D_level)
+    @Schema(title = L_level, description = D_level)
     String level;
 
     @NotBlank
     @Size(max = 128)
-    @Schema(title = L_category , description = D_category)
+    @Schema(title = L_category, description = D_category)
     String category;
 
-    @Schema(title = L_isExternal , description = D_isExternal)
+    @Schema(title = L_isExternal, description = D_isExternal)
     Boolean isExternal;
 
     @Size(max = 64)
@@ -134,7 +134,7 @@ public class UpdateOrgReq extends MultiTenantReq {
     String extInfo;
 
     @Size(max = 1800)
-    @Schema(title = L_idPath , description = D_idPath)
+    @Schema(title = L_idPath, description = D_idPath)
     String idPath;
 
     @NotBlank
@@ -143,7 +143,7 @@ public class UpdateOrgReq extends MultiTenantReq {
     String name;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName , description = D_pinyinName)
+    @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
@@ -162,23 +162,22 @@ public class UpdateOrgReq extends MultiTenantReq {
     @Schema(title = L_remark)
     String remark;
 
-
     public UpdateOrgReq(String id) {
         this.id = id;
     }
 
-    public UpdateOrgReq updateIdWhenNotBlank(String id){
-        if(isNotBlank(id)){
-        this.id = id;
+    public UpdateOrgReq updateIdWhenNotBlank(String id) {
+        if (isNotBlank(id)) {
+            this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
 
-        if(getLastUpdateTime() == null){
+        if (getLastUpdateTime() == null) {
             setLastUpdateTime(new Date());
         }
     }

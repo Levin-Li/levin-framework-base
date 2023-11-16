@@ -29,49 +29,50 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_AccessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-//自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+// 自动导入列表
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
+
 ////////////////////////////////////
 
 /**
  * 访问日志 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:42, 代码生成哈希校验码：[0e33b5b1ea1a14253570f4a0da7ae004]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[7aac429ebab412da9ec0d16dba68c0a5]，请不要修改和删除此行内容。
  */
-
-@Schema(title =  BIZ_NAME + " 主键通用查询")
+@Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS, resultClass = AccessLogInfo.class)
+@TargetOption(
+        entityClass = AccessLog.class,
+        alias = E_AccessLog.ALIAS,
+        resultClass = AccessLogInfo.class)
 public class AccessLogIdReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1030736962L;
 
-    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    //@NotNull
+    // @NotNull
     protected Long id;
 
-    public AccessLogIdReq updateIdWhenNotBlank(Long id){
-        if(isNotBlank(id)){
+    public AccessLogIdReq updateIdWhenNotBlank(Long id) {
+        if (isNotBlank(id)) {
             this.id = id;
         }
         return this;
     }
 
-
     @PostConstruct
     public void preQuery() {
-        //@todo ID 查询之前初始化数据
+        // @todo ID 查询之前初始化数据
     }
 }

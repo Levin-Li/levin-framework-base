@@ -29,19 +29,19 @@ import static com.levin.oak.base.entities.E_JobPost.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.oak.base.entities.JobPost.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 新增工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:08, 代码生成哈希校验码：[68b1e1ddaad0943f05dacefb50ddb50a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[9c15f07a3cd0914629c08632d8a61b2a]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -81,8 +81,8 @@ public class CreateJobPostReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @Schema(title = L_creator, hidden = true)
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     // @Size(max = 128)
-    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     String creator;
 
     @Schema(title = L_createTime, hidden = true)

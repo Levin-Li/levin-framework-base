@@ -29,7 +29,6 @@ import static com.levin.oak.base.entities.E_Role.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
@@ -37,13 +36,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 新增角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:06, 代码生成哈希校验码：[2d28ce72d1e51d45ce99515c4df4e260]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:19, 代码生成哈希校验码：[946860cc961b90becb40aeef8e267501]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -102,8 +102,8 @@ public class CreateRoleReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @Schema(title = L_creator, hidden = true)
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     // @Size(max = 128)
-    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     String creator;
 
     @Schema(title = L_createTime, hidden = true)

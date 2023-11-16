@@ -30,35 +30,34 @@ import static com.levin.oak.base.entities.E_AppErrorLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+// 自动导入列表
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
+
 ////////////////////////////////////
 
 /**
  * 更新应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:41, 代码生成哈希校验码：[a41e498a621349c152646b381df9ac60]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[19052589ed60560dd863d2948d21a601]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppErrorLog.class, alias = E_AppErrorLog.ALIAS)
-//默认更新注解
+// 默认更新注解
 @Update
 public class SimpleUpdateAppErrorLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1594864095L;
-
 
     @Size(max = 64)
     @Schema(title = L_moduleId)
@@ -81,9 +80,8 @@ public class SimpleUpdateAppErrorLogReq extends MultiTenantReq {
     @Schema(title = L_exceptionFullInfo)
     String exceptionFullInfo;
 
-
     @PostConstruct
     public void preUpdate() {
-        //@todo 更新之前初始化数据
+        // @todo 更新之前初始化数据
     }
 }

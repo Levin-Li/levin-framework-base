@@ -6,7 +6,7 @@ import com.levin.commons.dao.annotation.update.Update;
 import com.levin.commons.service.support.*;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.*;
-import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
 import com.levin.oak.base.services.commons.req.MultiTenantReq;
@@ -48,7 +48,7 @@ public class UpdateUserPwdReq extends MultiTenantReq {
     @Schema(title = "id", hidden = true)
     @NotNull
     @Eq(require = true)
-    @InjectVar(InjectConsts.USER_ID)
+    @InjectVar(InjectConst.USER_ID)
     private String id;
 
     @Size(max = 128)

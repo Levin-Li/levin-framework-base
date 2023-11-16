@@ -29,19 +29,19 @@ import static com.levin.oak.base.entities.E_JobPost.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.oak.base.entities.JobPost.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 新增工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:08, 代码生成哈希校验码：[25aeb9f44f70855ed0bd493e41e595c4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[a6ddab7cb77f73509748a500dee799b4]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data

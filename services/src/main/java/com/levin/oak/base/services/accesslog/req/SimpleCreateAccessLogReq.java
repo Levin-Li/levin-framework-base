@@ -29,17 +29,17 @@ import static com.levin.oak.base.entities.E_AccessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 新增访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:08, 代码生成哈希校验码：[e0f486bf248a8aa0be569d43ddad0fa1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[ce89437cfa358233717032fbc26c7fc1]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -63,7 +63,7 @@ public class SimpleCreateAccessLogReq extends MultiTenantOrgReq {
 
     @Schema(title = L_visitor)
     @Size(max = 64)
-    @InjectVar(value = InjectConsts.USER_NAME, isRequired = "false")
+    @InjectVar(value = InjectConst.USER_NAME, isRequired = "false")
     String visitor;
 
     @Schema(title = L_title)

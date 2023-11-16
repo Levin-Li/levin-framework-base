@@ -2,7 +2,7 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.domain.support.SimpleTenantOrgObject;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.support.InjectConst;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -48,7 +48,7 @@ public class NoticeProcessLog extends SimpleTenantOrgObject {
 
     @Schema(title = "创建者")
     @Column(length = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     String creator;
 
     @Schema(title = "消息ID")

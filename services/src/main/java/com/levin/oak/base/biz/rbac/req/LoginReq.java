@@ -9,7 +9,7 @@ import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.rbac.AuthReq;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.domain.ServiceReq;
-import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.E_User;
 import com.levin.oak.base.entities.User;
 import com.levin.oak.base.services.user.info.UserInfo;
@@ -74,7 +74,7 @@ public class LoginReq implements AuthReq, ServiceReq {
 
     @Schema(title = "客户端类型", hidden = true)
     @Ignore
-    @InjectVar(value = InjectConsts.USER_AGENT, isRequired = "false")
+    @InjectVar(value = InjectConst.USER_AGENT, isRequired = "false")
     protected String ua;
 
     @Schema(title = "客户端类型", hidden = true)

@@ -29,19 +29,19 @@ import static com.levin.oak.base.entities.E_Setting.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.oak.base.entities.Setting.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 新增系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:07, 代码生成哈希校验码：[539c082249dde9ee87c8b74a40963b26]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[e643bbf0a02fc2f57617b25e9f113fc3]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -100,8 +100,8 @@ public class CreateSettingReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @Schema(title = L_creator, hidden = true)
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     // @Size(max = 128)
-    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     String creator;
 
     @Schema(title = L_createTime, hidden = true)

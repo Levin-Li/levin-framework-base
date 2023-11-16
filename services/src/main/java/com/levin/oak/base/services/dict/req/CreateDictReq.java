@@ -29,7 +29,6 @@ import static com.levin.oak.base.entities.E_Dict.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.levin.oak.base.entities.Dict.*;
@@ -37,13 +36,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 新增字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:07, 代码生成哈希校验码：[5be721b11b31ef8fcf98f8a876dd3246]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[2a456923e236392d23fee6f91ee96251]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -91,8 +91,8 @@ public class CreateDictReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @Schema(title = L_creator, hidden = true)
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     // @Size(max = 128)
-    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     String creator;
 
     @Schema(title = L_createTime, hidden = true)

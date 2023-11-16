@@ -9,14 +9,13 @@ import com.levin.oak.base.services.scheduledtask.*;
 import com.levin.oak.base.services.scheduledtask.req.*;
 import com.levin.oak.base.services.scheduledtask.info.*;
 
-
 ////////////////////////////////////
-//自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+// 自动导入列表
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -50,97 +49,86 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 调度任务测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:13, 代码生成哈希校验码：[f6c72721e2b20e86ba2939009b63d576]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:23, 代码生成哈希校验码：[3e6328217d71c44e87abdec17c6a74a9]，请不要修改和删除此行内容。
  */
 
-//@ActiveProfiles("test")
-//@RunWith(SpringRunner.class)
+// @ActiveProfiles("test")
+// @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@Transactional(rollbackFor = {Throwable.class})
+// @Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class ScheduledTaskServiceTest {
 
-    @Autowired
-    private ScheduledTaskService scheduledTaskService;
+    @Autowired private ScheduledTaskService scheduledTaskService;
 
-    @Autowired
-    private BizScheduledTaskService bizScheduledTaskService;
+    @Autowired private BizScheduledTaskService bizScheduledTaskService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {
-    }
+    public static void beforeAll() throws Exception {}
 
     @AfterAll
-    public static void afterAll() throws Exception {
-    }
+    public static void afterAll() throws Exception {}
 
     @BeforeEach
-    public void beforeEach() throws Exception {
-    }
+    public void beforeEach() throws Exception {}
 
     @AfterEach
-    public void afterEach() throws Exception {
-    }
+    public void afterEach() throws Exception {}
 
     @Test
     public void createScheduledTaskTest() {
 
         CreateScheduledTaskReq req = new CreateScheduledTaskReq();
 
-            // req.setCategory("这是文本128");// 必填
+        // req.setCategory("这是文本128");// 必填
 
-            // req.setGroupName("这是文本128");// 必填
+        // req.setGroupName("这是文本128");// 必填
 
-            // req.setCron("调度表达式_1");// 必填
+        // req.setCron("调度表达式_1");// 必填
 
-            // req.setInvokeExpr("执行表达式_1");//可以是 Groovy 
+        // req.setInvokeExpr("执行表达式_1");//可以是 Groovy
 
-            // req.setParallelInvoke(true);// 
+        // req.setParallelInvoke(true);//
 
-            // req.setInvokedCount(1);// 
+        // req.setInvokedCount(1);//
 
-            // req.setLastInvokedTime(new Date());// 
+        // req.setLastInvokedTime(new Date());//
 
-            // req.setNextInvokeTime(new Date());// 
+        // req.setNextInvokeTime(new Date());//
 
-            // req.setDomain("这是文本128");//归属的子系统或应用 
+        // req.setDomain("这是文本128");//归属的子系统或应用
 
-            // req.setName("这是文本64");// 必填
+        // req.setName("这是文本64");// 必填
 
-            // req.setOptimisticLock(1);// 
+        // req.setOptimisticLock(1);//
 
-            // req.setOrgId("这是文本128");// 
+        // req.setOrgId("这是文本128");//
 
-            // req.setTenantId("这是文本128");// 
+        // req.setTenantId("这是文本128");//
 
-            // req.setOrderCode(1);// 
+        // req.setOrderCode(1);//
 
-            // req.setEnable(true);// 必填
+        // req.setEnable(true);// 必填
 
-            // req.setEditable(true);// 必填
+        // req.setEditable(true);// 必填
 
-            // req.setRemark("这是文本512");// 
+        // req.setRemark("这是文本512");//
 
-
-       String id  = scheduledTaskService.create(req);
+        String id = scheduledTaskService.create(req);
 
         log.debug("新增调度任务->" + id);
 
         Assert.isTrue(id != null, "调度任务");
-
     }
-
 
     @Test
     public void queryScheduledTaskTest() {
@@ -169,7 +157,7 @@ public class ScheduledTaskServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<ScheduledTaskInfo> resp = scheduledTaskService.query(req,null);
+        PagingData<ScheduledTaskInfo> resp = scheduledTaskService.query(req, null);
 
         log.debug("查询调度任务->" + resp);
 
@@ -179,34 +167,33 @@ public class ScheduledTaskServiceTest {
     @Test
     public void updateScheduledTaskTest() {
 
-         UpdateScheduledTaskReq req = new UpdateScheduledTaskReq();
+        UpdateScheduledTaskReq req = new UpdateScheduledTaskReq();
 
-         req.setId(id);
+        req.setId(id);
 
+        // req.setCategory("这是文本128");// 必填
+        // req.setGroupName("这是文本128");// 必填
+        // req.setCron("调度表达式_1");// 必填
+        // req.setInvokeExpr("执行表达式_1");//可以是 Groovy
+        // req.setParallelInvoke(true);//
+        // req.setInvokedCount(1);//
+        // req.setLastInvokedTime(new Date());//
+        // req.setNextInvokeTime(new Date());//
+        // req.setDomain("这是文本128");//归属的子系统或应用
+        // req.setName("这是文本64");// 必填
+        // req.setOptimisticLock(1);//
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
+        // req.setOrderCode(1);//
+        // req.setEnable(true);// 必填
+        // req.setEditable(true);// 必填
+        // req.setRemark("这是文本512");//
 
-           // req.setCategory("这是文本128");// 必填
-           // req.setGroupName("这是文本128");// 必填
-           // req.setCron("调度表达式_1");// 必填
-           // req.setInvokeExpr("执行表达式_1");//可以是 Groovy 
-           // req.setParallelInvoke(true);// 
-           // req.setInvokedCount(1);// 
-           // req.setLastInvokedTime(new Date());// 
-           // req.setNextInvokeTime(new Date());// 
-           // req.setDomain("这是文本128");//归属的子系统或应用 
-           // req.setName("这是文本64");// 必填
-           // req.setOptimisticLock(1);// 
-           // req.setOrgId("这是文本128");// 
-           // req.setTenantId("这是文本128");// 
-           // req.setOrderCode(1);// 
-           // req.setEnable(true);// 必填
-           // req.setEditable(true);// 必填
-           // req.setRemark("这是文本512");// 
+        boolean ok = scheduledTaskService.update(req);
 
-          boolean ok = scheduledTaskService.update(req);
+        log.debug("更新调度任务-> " + ok);
 
-          log.debug("更新调度任务-> " + ok);
-
-          Assert.isTrue(ok, "调度任务");
+        Assert.isTrue(ok, "调度任务");
     }
 
     @Test
@@ -220,6 +207,6 @@ public class ScheduledTaskServiceTest {
 
         log.debug("删除调度任务->" + ok);
 
-        Assert.isTrue(ok , "调度任务");
+        Assert.isTrue(ok, "调度任务");
     }
 }

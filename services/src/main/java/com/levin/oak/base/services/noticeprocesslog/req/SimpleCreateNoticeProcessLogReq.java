@@ -29,17 +29,17 @@ import static com.levin.oak.base.entities.E_NoticeProcessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 新增通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:08, 代码生成哈希校验码：[19ba091386f7ec026690cc41fd3786cc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[08e39e9630de8f3a0979c93646d8f8de]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -56,8 +56,8 @@ public class SimpleCreateNoticeProcessLogReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -1991983093L;
 
     @Schema(title = L_creator)
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     String creator;
 
     @Schema(title = L_noticeId)

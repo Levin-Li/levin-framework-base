@@ -49,7 +49,7 @@ import com.levin.oak.base.services.*;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.support.InjectConst;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Setting.*;
 

@@ -25,20 +25,20 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_SimplePage.*;
 ////////////////////////////////////
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:09, 代码生成哈希校验码：[592b8caab49fe9181dd437e244c3ce52]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[c7f06a25f8426f3d9e4c6925826cc8b5]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -107,17 +107,17 @@ public class SimplePageInfo implements Serializable {
     Integer optimisticLock;
 
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.ORG_ID)
+    @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 
-    @InjectVar(value = InjectConsts.TENANT_ID)
     @Size(max = 128)
+    @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
 
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

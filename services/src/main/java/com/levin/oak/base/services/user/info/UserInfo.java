@@ -27,7 +27,7 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_User.*;
 ////////////////////////////////////
-import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.support.InjectConst;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.User.*;
 import java.util.List;

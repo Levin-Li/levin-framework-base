@@ -36,20 +36,20 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 查询租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:07, 代码生成哈希校验码：[407f328fb6df2c41c2c490c4c459605d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[11300a60396b9c6808e975cb4a47c8d0]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -135,8 +135,8 @@ public class QueryTenantAppReq extends MultiTenantReq {
     @Between
     String betweenExpiredTime;
 
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

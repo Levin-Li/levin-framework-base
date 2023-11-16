@@ -25,20 +25,20 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_TenantApp.*;
 ////////////////////////////////////
-import com.levin.commons.service.support.InjectConsts;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:07, 代码生成哈希校验码：[084d0af69e2811a3453bae388b5fb041]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[facf6a1f6432ebb2658cc5a2c082b74f]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -96,8 +96,8 @@ public class SimpleTenantAppInfo implements Serializable {
     @Schema(title = L_expiredTime, description = D_expiredTime)
     Date expiredTime;
 
-    @InjectVar(value = InjectConsts.TENANT_ID)
     @Size(max = 128)
+    @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
 }

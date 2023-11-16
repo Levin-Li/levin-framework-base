@@ -31,18 +31,18 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 更新国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:08, 代码生成哈希校验码：[b8b89fed7d34f56cd4244d065dd04d52]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[c6670f2d0241f069aa5e7468c0313863]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -61,7 +61,7 @@ public class SimpleUpdateI18nResReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -1681554652L;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    @Eq(condition = "!#" + InjectConst.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @NotBlank

@@ -5,7 +5,7 @@ import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.E_SimpleTenantOrgObject;
 import com.levin.commons.dao.domain.support.SimpleTenantOrgObject;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.support.InjectConst;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -51,7 +51,7 @@ public class AccessLog extends SimpleTenantOrgObject {
 
     @Schema(title = "访问者")
     @Column(length = 64)
-    @InjectVar(value = InjectConsts.USER_NAME, isRequired = "false")
+    @InjectVar(value = InjectConst.USER_NAME, isRequired = "false")
     @Contains
     protected String visitor;
 

@@ -25,18 +25,18 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_AppClient.*;
 ////////////////////////////////////
-import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:06, 代码生成哈希校验码：[534b135de0f38dcac4fd01c8b404ec54]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:19, 代码生成哈希校验码：[4f565e9eb2bb90c51ee5c978d2b09696]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -85,12 +85,12 @@ public class SimpleAppClientInfo implements Serializable {
     Integer optimisticLock;
 
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.ORG_ID)
+    @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 
-    @InjectVar(value = InjectConsts.TENANT_ID)
     @Size(max = 128)
+    @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
 }

@@ -43,18 +43,18 @@ import com.levin.oak.base.services.*;
 
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 平台租户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:19, 代码生成哈希校验码：[d7ea8bb3bb061865d50390c5cdf3cde4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[bc88b0a232991f8ad7b4ac6679f2b34d]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "TenantService")
 @DubboService

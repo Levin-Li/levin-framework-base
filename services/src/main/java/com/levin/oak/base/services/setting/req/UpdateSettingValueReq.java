@@ -3,7 +3,7 @@ package com.levin.oak.base.services.setting.req;
 import com.levin.commons.dao.TargetOption;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.update.Update;
-import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.E_Setting;
 import com.levin.oak.base.entities.Setting;
 import com.levin.oak.base.entities.Setting.ValueType;
@@ -47,7 +47,7 @@ public class UpdateSettingValueReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = 147875794L;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    @Eq(condition = "!#" + InjectConst.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @NotBlank

@@ -29,28 +29,28 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_AppClient.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-//自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+// 自动导入列表
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
+
 ////////////////////////////////////
 
 /**
  * 删除应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:11, 代码生成哈希校验码：[00dde6603ce0a658f6609dffe3bf5e94]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:19, 代码生成哈希校验码：[f62029ddbba8155fe0591938ea15d1fa]，请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
 
-//@AllArgsConstructor
+// @AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
@@ -59,10 +59,9 @@ public class DeleteAppClientReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -115048882L;
 
-    @Schema(description = "可编辑条件" , hidden = true)
-    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    @Schema(description = "可编辑条件", hidden = true)
+    @Eq(condition = "!#" + InjectConst.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
-
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_AppClient.id)
@@ -78,10 +77,8 @@ public class DeleteAppClientReq extends MultiTenantOrgReq {
         return this;
     }
 
-
     @PostConstruct
     public void preDelete() {
-        //@todo 删除之前初始化数据
+        // @todo 删除之前初始化数据
     }
-
 }

@@ -25,18 +25,18 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_Tenant.*;
 ////////////////////////////////////
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:07, 代码生成哈希校验码：[1219e9b663e11280dfe9af9fe5f34267]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:19, 代码生成哈希校验码：[90780b6136e2e5e367dcdeca2b9a645b]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -122,8 +122,8 @@ public class TenantInfo implements Serializable {
     @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

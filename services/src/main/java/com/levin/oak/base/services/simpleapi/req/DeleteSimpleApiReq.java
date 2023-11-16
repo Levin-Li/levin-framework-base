@@ -30,7 +30,6 @@ import static com.levin.oak.base.entities.E_SimpleApi.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,13 +37,14 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.SimpleApi.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 删除简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:18, 代码生成哈希校验码：[9db475f3417519c4e8f4f53570fbbf2c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:19, 代码生成哈希校验码：[45c5e697659d566b6e52a2a05edd5155]，请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -63,7 +63,7 @@ public class DeleteSimpleApiReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = 1021385738L;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    @Eq(condition = "!#" + InjectConst.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)

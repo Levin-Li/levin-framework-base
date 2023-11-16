@@ -11,11 +11,11 @@ import com.levin.oak.base.services.tenant.info.*;
 
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 平台租户测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:21, 代码生成哈希校验码：[ccf8ccb165dc1a9dfd5925a9cb55a499]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[1184b11fc9ebb7bb918c24aa6b3bcb2c]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

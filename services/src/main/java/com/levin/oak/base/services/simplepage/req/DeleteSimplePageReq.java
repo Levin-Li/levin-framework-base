@@ -30,20 +30,20 @@ import static com.levin.oak.base.entities.E_SimplePage.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 删除简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:21, 代码生成哈希校验码：[e72e630a6d141f7f6081e912250424ec]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[f2abe3907443037f3f7500e14b578f67]，请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -62,7 +62,7 @@ public class DeleteSimplePageReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = 1598619295L;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    @Eq(condition = "!#" + InjectConst.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)

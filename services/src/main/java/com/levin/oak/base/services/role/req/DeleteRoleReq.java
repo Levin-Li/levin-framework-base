@@ -33,7 +33,7 @@ import static com.levin.oak.base.entities.E_Role.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.support.InjectConst;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Role.*;
 
@@ -66,7 +66,7 @@ public class DeleteRoleReq extends MultiTenantReq {
     private static final long serialVersionUID = -445356492L;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#" + InjectConsts.IS_SUPER_ADMIN)
+    @Eq(condition = "!#" + InjectConst.IS_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     //不允许删除SA角色

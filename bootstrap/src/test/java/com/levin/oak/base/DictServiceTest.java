@@ -11,13 +11,13 @@ import com.levin.oak.base.services.dict.info.*;
 
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import com.levin.oak.base.entities.Dict.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -57,7 +57,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 字典测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:21, 代码生成哈希校验码：[1d22a7d7cf24482236ce24d94522e3c0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[91be98c844917d58b9483c56e3ead34c]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

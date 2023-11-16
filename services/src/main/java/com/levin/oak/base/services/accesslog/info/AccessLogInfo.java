@@ -25,17 +25,17 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_AccessLog.*;
 ////////////////////////////////////
-import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:08, 代码生成哈希校验码：[eea198db6c8a218fd18cf3667fad136b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[28b7aae65c41baed2942231b70002b3f]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -60,7 +60,7 @@ public class AccessLogInfo implements Serializable {
     String module;
 
     @Size(max = 64)
-    @InjectVar(value = InjectConsts.USER_NAME, isRequired = "false")
+    @InjectVar(value = InjectConst.USER_NAME, isRequired = "false")
     @Schema(title = L_visitor)
     String visitor;
 
@@ -134,13 +134,13 @@ public class AccessLogInfo implements Serializable {
     @Schema(title = L_executeTime)
     Long executeTime;
 
-    @InjectVar(value = InjectConsts.TENANT_ID)
     @Size(max = 128)
+    @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
 
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.ORG_ID)
+    @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 

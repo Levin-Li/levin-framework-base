@@ -37,7 +37,6 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
@@ -45,13 +44,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 统计角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:18, 代码生成哈希校验码：[d14cf7b705be1d3dc6850680d9f80495]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:19, 代码生成哈希校验码：[d3d5acb8b9439f9534044897a80c052a]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data

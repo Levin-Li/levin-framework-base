@@ -22,24 +22,20 @@ import com.levin.oak.base.services.scheduledtask.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
-
 ////////////////////////////////////
-//自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+// 自动导入列表
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
+
 ////////////////////////////////////
 
 /**
- *  调度任务-业务服务
+ * 调度任务-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:12, 代码生成哈希校验码：[7ecebd86ae44364bfbafd92d62b4afbc]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[cabb895a37d1ca96607c4b2442ba6a3d]，请不要修改和删除此行内容。
  */
-
 @Tag(name = E_ScheduledTask.BIZ_NAME + "-业务服务", description = "")
-public interface BizScheduledTaskService {
-
-}
+public interface BizScheduledTaskService {}

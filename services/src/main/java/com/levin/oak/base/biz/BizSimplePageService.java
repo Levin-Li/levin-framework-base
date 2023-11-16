@@ -25,7 +25,7 @@ import com.levin.oak.base.services.*;
 
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.support.InjectConst;
 
 import java.util.List;
 import java.util.Date;

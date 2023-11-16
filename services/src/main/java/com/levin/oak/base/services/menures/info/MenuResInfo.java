@@ -25,7 +25,6 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_MenuRes.*;
 ////////////////////////////////////
-import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.MenuRes;
 import java.util.Date;
 import com.levin.commons.rbac.MenuItem.*;
@@ -33,13 +32,14 @@ import java.util.Set;
 import com.levin.oak.base.services.menures.info.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:09, 代码生成哈希校验码：[cb25134012445096f7b80bb93ad5ca7b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[834b1d13c6090b1368200f75833efbdd]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -66,8 +66,8 @@ public class MenuResInfo implements Serializable {
     @Schema(title = L_parentId)
     String parentId;
 
-    @InjectVar(value = InjectConsts.TENANT_ID)
     @Size(max = 64)
+    @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
 
@@ -123,8 +123,8 @@ public class MenuResInfo implements Serializable {
     @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

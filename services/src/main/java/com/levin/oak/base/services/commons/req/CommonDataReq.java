@@ -3,7 +3,7 @@ package com.levin.oak.base.services.commons.req;
 import com.levin.commons.dao.annotation.Ignore;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConsts;
+import com.levin.commons.service.support.InjectConst;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -24,7 +24,7 @@ public final class CommonDataReq
         implements OrganizedObject {
 
     @Schema(title = "组织ID", hidden = true)
-    @InjectVar(value = InjectConsts.ORG_ID, isRequired = "false")
+    @InjectVar(value = InjectConst.ORG_ID, isRequired = "false")
     private String orgId;
 
     @Schema(title = "是否包含公共数据")

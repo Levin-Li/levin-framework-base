@@ -11,12 +11,12 @@ import com.levin.oak.base.services.simpleform.info.*;
 
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 简单表单测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:21, 代码生成哈希校验码：[1a2dfe88608b0a2ecddc350fb27819ef]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:23, 代码生成哈希校验码：[3c67ec29b7ed15ed0413fe4a40c475ba]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

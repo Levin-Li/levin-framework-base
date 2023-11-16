@@ -25,7 +25,6 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_User.*;
 ////////////////////////////////////
-import com.levin.commons.service.support.InjectConsts;
 import com.levin.oak.base.entities.User.*;
 import java.util.List;
 import com.levin.oak.base.services.org.info.*;
@@ -35,13 +34,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:08, 代码生成哈希校验码：[0b52ca1d9754676892f4f68f4081d27f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[ba92c8ce36df0613f02876c632eb03c4]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -150,12 +150,12 @@ public class SimpleUserInfo implements Serializable {
     Integer optimisticLock;
 
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.ORG_ID)
+    @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 
-    @InjectVar(value = InjectConsts.TENANT_ID)
     @Size(max = 128)
+    @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
 }

@@ -9,14 +9,13 @@ import com.levin.oak.base.services.setting.*;
 import com.levin.oak.base.services.setting.req.*;
 import com.levin.oak.base.services.setting.info.*;
 
-
 ////////////////////////////////////
-//自动导入列表
-import com.levin.commons.service.support.InjectConsts;
+// 自动导入列表
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.oak.base.entities.Setting.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -50,95 +49,84 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 系统设置测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月14日 下午3:54:13, 代码生成哈希校验码：[c7eec44b92dec775b898a7d4a792ffb0]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[6f7a92c0e168e1b643e15e3fd64cfcc0]，请不要修改和删除此行内容。
  */
 
-//@ActiveProfiles("test")
-//@RunWith(SpringRunner.class)
+// @ActiveProfiles("test")
+// @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@Transactional(rollbackFor = {Throwable.class})
+// @Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class SettingServiceTest {
 
-    @Autowired
-    private SettingService settingService;
+    @Autowired private SettingService settingService;
 
-    @Autowired
-    private BizSettingService bizSettingService;
+    @Autowired private BizSettingService bizSettingService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {
-    }
+    public static void beforeAll() throws Exception {}
 
     @AfterAll
-    public static void afterAll() throws Exception {
-    }
+    public static void afterAll() throws Exception {}
 
     @BeforeEach
-    public void beforeEach() throws Exception {
-    }
+    public void beforeEach() throws Exception {}
 
     @AfterEach
-    public void afterEach() throws Exception {
-    }
+    public void afterEach() throws Exception {}
 
     @Test
     public void createSettingTest() {
 
         CreateSettingReq req = new CreateSettingReq();
 
-            // req.setCategoryName("这是文本64");// 必填
+        // req.setCategoryName("这是文本64");// 必填
 
-            // req.setGroupName("这是文本64");// 
+        // req.setGroupName("这是文本64");//
 
-            // req.setCode("这是文本64");// 必填
+        // req.setCode("这是文本64");// 必填
 
-            // req.setValueType(ValueType.Html);// 必填
+        // req.setValueType(ValueType.Html);// 必填
 
-            // req.setValueContent("值_1");// 
+        // req.setValueContent("值_1");//
 
-            // req.setNullable(true);// 
+        // req.setNullable(true);//
 
-            // req.setInputPlaceholder("这是文本128");// 
+        // req.setInputPlaceholder("这是文本128");//
 
-            // req.setDomain("这是文本128");//归属的子系统或应用 
+        // req.setDomain("这是文本128");//归属的子系统或应用
 
-            // req.setName("这是文本64");// 必填
+        // req.setName("这是文本64");// 必填
 
-            // req.setOptimisticLock(1);// 
+        // req.setOptimisticLock(1);//
 
-            // req.setOrgId("这是文本128");// 
+        // req.setOrgId("这是文本128");//
 
-            // req.setTenantId("这是文本128");// 
+        // req.setTenantId("这是文本128");//
 
-            // req.setOrderCode(1);// 
+        // req.setOrderCode(1);//
 
-            // req.setEnable(true);// 必填
+        // req.setEnable(true);// 必填
 
-            // req.setEditable(true);// 必填
+        // req.setEditable(true);// 必填
 
-            // req.setRemark("这是文本512");// 
+        // req.setRemark("这是文本512");//
 
-
-       String id  = settingService.create(req);
+        String id = settingService.create(req);
 
         log.debug("新增系统设置->" + id);
 
         Assert.isTrue(id != null, "系统设置");
-
     }
-
 
     @Test
     public void querySettingTest() {
@@ -164,7 +152,7 @@ public class SettingServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<SettingInfo> resp = settingService.query(req,null);
+        PagingData<SettingInfo> resp = settingService.query(req, null);
 
         log.debug("查询系统设置->" + resp);
 
@@ -174,33 +162,32 @@ public class SettingServiceTest {
     @Test
     public void updateSettingTest() {
 
-         UpdateSettingReq req = new UpdateSettingReq();
+        UpdateSettingReq req = new UpdateSettingReq();
 
-         req.setId(id);
+        req.setId(id);
 
+        // req.setCategoryName("这是文本64");// 必填
+        // req.setGroupName("这是文本64");//
+        // req.setCode("这是文本64");// 必填
+        // req.setValueType(ValueType.Html);// 必填
+        // req.setValueContent("值_1");//
+        // req.setNullable(true);//
+        // req.setInputPlaceholder("这是文本128");//
+        // req.setDomain("这是文本128");//归属的子系统或应用
+        // req.setName("这是文本64");// 必填
+        // req.setOptimisticLock(1);//
+        // req.setOrgId("这是文本128");//
+        // req.setTenantId("这是文本128");//
+        // req.setOrderCode(1);//
+        // req.setEnable(true);// 必填
+        // req.setEditable(true);// 必填
+        // req.setRemark("这是文本512");//
 
-           // req.setCategoryName("这是文本64");// 必填
-           // req.setGroupName("这是文本64");// 
-           // req.setCode("这是文本64");// 必填
-           // req.setValueType(ValueType.Html);// 必填
-           // req.setValueContent("值_1");// 
-           // req.setNullable(true);// 
-           // req.setInputPlaceholder("这是文本128");// 
-           // req.setDomain("这是文本128");//归属的子系统或应用 
-           // req.setName("这是文本64");// 必填
-           // req.setOptimisticLock(1);// 
-           // req.setOrgId("这是文本128");// 
-           // req.setTenantId("这是文本128");// 
-           // req.setOrderCode(1);// 
-           // req.setEnable(true);// 必填
-           // req.setEditable(true);// 必填
-           // req.setRemark("这是文本512");// 
+        boolean ok = settingService.update(req);
 
-          boolean ok = settingService.update(req);
+        log.debug("更新系统设置-> " + ok);
 
-          log.debug("更新系统设置-> " + ok);
-
-          Assert.isTrue(ok, "系统设置");
+        Assert.isTrue(ok, "系统设置");
     }
 
     @Test
@@ -214,6 +201,6 @@ public class SettingServiceTest {
 
         log.debug("删除系统设置->" + ok);
 
-        Assert.isTrue(ok , "系统设置");
+        Assert.isTrue(ok, "系统设置");
     }
 }

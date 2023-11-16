@@ -30,7 +30,6 @@ import static com.levin.oak.base.entities.E_Dict.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 // 自动导入列表
-import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.levin.oak.base.entities.Dict.*;
@@ -38,13 +37,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 
 ////////////////////////////////////
 
 /**
  * 字典 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:19, 代码生成哈希校验码：[0b3df1103fb13ec9dcbb6dff21cf13da]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[f90b7f30c5881ac8211c3d15e5ae5d14]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
