@@ -46,7 +46,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:20, 代码生成哈希校验码：[b139a885c50277558af102c50b4a74a6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:08, 代码生成哈希校验码：[2e5fec464bb4498dbe8116ecdbb502a9]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -101,7 +101,7 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
     String containsModule;
 
     @Size(max = 64)
-    @InjectVar(value = InjectConsts.USER_NAME, isRequired = "false", expectBaseType = String.class)
+    @InjectVar(value = InjectConsts.USER_NAME, isRequired = "false")
     @Schema(title = L_visitor)
     String visitor;
 

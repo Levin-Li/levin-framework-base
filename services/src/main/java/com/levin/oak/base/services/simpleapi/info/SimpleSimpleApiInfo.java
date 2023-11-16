@@ -39,7 +39,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午10:28:57, 代码生成哈希校验码：[a013897ff60dcdfc138a2ff17e06a28f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:06, 代码生成哈希校验码：[bb9302e1fdeb2b85dbe020330db03a5a]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -102,8 +102,8 @@ public class SimpleSimpleApiInfo implements Serializable {
     @Schema(title = L_content)
     String content;
 
-    @InjectVar(value = "sysDomain", isRequired = "false", expectBaseType = String.class)
     @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -116,12 +116,12 @@ public class SimpleSimpleApiInfo implements Serializable {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
-    @InjectVar(value = InjectConsts.ORG_ID, expectBaseType = String.class)
     @Size(max = 128)
+    @InjectVar(value = InjectConsts.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 
-    @InjectVar(value = InjectConsts.TENANT_ID, expectBaseType = String.class)
+    @InjectVar(value = InjectConsts.TENANT_ID)
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;

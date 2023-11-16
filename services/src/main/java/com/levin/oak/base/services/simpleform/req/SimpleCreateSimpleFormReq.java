@@ -42,7 +42,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:44:36, 代码生成哈希校验码：[067d17a2f1b17535c8770a7c11753d52]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:09, 代码生成哈希校验码：[c8471388ec6f6542ce6d1e5435b029a7]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -97,8 +97,8 @@ public class SimpleCreateSimpleFormReq extends MultiTenantOrgReq {
     String content;
 
     @Schema(title = L_domain, description = D_domain)
-    @InjectVar(value = "sysDomain", isRequired = "false", expectBaseType = String.class)
     @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
     String domain;
 
     @Schema(title = L_name)

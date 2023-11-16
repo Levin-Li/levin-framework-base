@@ -37,7 +37,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午10:28:59, 代码生成哈希校验码：[d1274bb0c11ae6b820cf89cc42579aca]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:08, 代码生成哈希校验码：[7723f0ce98af6c0813913fcd794e70fd]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -66,8 +66,8 @@ public class SimpleJobPostInfo implements Serializable {
     @Schema(title = L_type)
     Type type;
 
-    @InjectVar(value = "sysDomain", isRequired = "false", expectBaseType = String.class)
     @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -80,12 +80,12 @@ public class SimpleJobPostInfo implements Serializable {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
-    @InjectVar(value = InjectConsts.ORG_ID, expectBaseType = String.class)
     @Size(max = 128)
+    @InjectVar(value = InjectConsts.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 
-    @InjectVar(value = InjectConsts.TENANT_ID, expectBaseType = String.class)
+    @InjectVar(value = InjectConsts.TENANT_ID)
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;

@@ -41,7 +41,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:20, 代码生成哈希校验码：[00ea06e47df7d3322f1dfad477e099ae]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:08, 代码生成哈希校验码：[0b6161ab21c46c742d29593e2cf9dc2a]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -66,7 +66,7 @@ public class SimpleUpdateAccessLogReq extends MultiTenantOrgReq {
     String module;
 
     @Size(max = 64)
-    @InjectVar(value = InjectConsts.USER_NAME, isRequired = "false", expectBaseType = String.class)
+    @InjectVar(value = InjectConsts.USER_NAME, isRequired = "false")
     @Schema(title = L_visitor)
     String visitor;
 

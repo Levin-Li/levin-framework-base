@@ -39,7 +39,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午10:28:59, 代码生成哈希校验码：[88261ace2e8afdc38839760045b0fb05]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午11:01:09, 代码生成哈希校验码：[cb25134012445096f7b80bb93ad5ca7b]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -66,8 +66,8 @@ public class MenuResInfo implements Serializable {
     @Schema(title = L_parentId)
     String parentId;
 
+    @InjectVar(value = InjectConsts.TENANT_ID)
     @Size(max = 64)
-    @InjectVar(value = InjectConsts.TENANT_ID, expectBaseType = String.class)
     @Schema(title = L_tenantId)
     String tenantId;
 
@@ -124,7 +124,7 @@ public class MenuResInfo implements Serializable {
     String pinyinName;
 
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false", expectBaseType = String.class)
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 
