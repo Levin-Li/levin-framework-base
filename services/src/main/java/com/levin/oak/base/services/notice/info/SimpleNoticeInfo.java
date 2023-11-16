@@ -37,7 +37,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:14:19, 代码生成哈希校验码：[46f62d462c8556043b104c902dba6725]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午10:28:58, 代码生成哈希校验码：[16bc6ecaf2dd634ba46dc2eed53676c6]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -70,8 +70,8 @@ public class SimpleNoticeInfo implements Serializable {
     @Schema(title = L_expiredDate)
     Date expiredDate;
 
+    @InjectVar(value = "sysDomain", isRequired = "false", expectBaseType = String.class)
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -84,12 +84,12 @@ public class SimpleNoticeInfo implements Serializable {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
+    @InjectVar(value = InjectConsts.ORG_ID, expectBaseType = String.class)
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 
-    @InjectVar(value = InjectConsts.TENANT_ID)
+    @InjectVar(value = InjectConsts.TENANT_ID, expectBaseType = String.class)
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;

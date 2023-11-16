@@ -39,7 +39,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:32:44, 代码生成哈希校验码：[a1c30abb7ee8719d9b70b2d12efa4ecd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午10:28:57, 代码生成哈希校验码：[296e95cb39d0fef4d352efe37bc59a0a]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -89,21 +89,20 @@ public class SimpleApiInfo implements Serializable {
     @Schema(title = L_path)
     String path;
 
+    @Size(max = 1800)
     @InjectVar(
             domain = "dao",
             isRequired = "false",
-            expectBaseType = List.class,
-            expectGenericTypes = {String.class},
-            converter = PrimitiveArrayJsonConverter.class)
-    @Size(max = 1800)
+            converter = PrimitiveArrayJsonConverter.class,
+            expectBaseType = String.class)
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
 
     @Schema(title = L_content)
     String content;
 
+    @InjectVar(value = "sysDomain", isRequired = "false", expectBaseType = String.class)
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -116,18 +115,18 @@ public class SimpleApiInfo implements Serializable {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
+    @InjectVar(value = InjectConsts.ORG_ID, expectBaseType = String.class)
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 
-    @InjectVar(value = InjectConsts.TENANT_ID)
+    @InjectVar(value = InjectConsts.TENANT_ID, expectBaseType = String.class)
     @Size(max = 128)
     @Schema(title = L_tenantId)
     String tenantId;
 
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false", expectBaseType = String.class)
     @Schema(title = L_creator)
     String creator;
 
