@@ -48,13 +48,13 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:11, 代码生成哈希校验码：[31dd8de02769e27f2b3cb132468812de]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午8:23:50, 代码生成哈希校验码：[f112f53ebc536298ed670adef679dac7]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
-@AllArgsConstructor
+// @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+// @Builder
 // @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
@@ -66,128 +66,9 @@ import com.levin.commons.service.domain.InjectVar;
         // joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn =
         // E_XXX.joinColumn)},
         resultClass = StatScheduledTaskReq.Result.class)
-public class StatScheduledTaskReq extends MultiTenantOrgReq {
+public class StatScheduledTaskReq extends QueryScheduledTaskReq {
 
     private static final long serialVersionUID = -2056389676L;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_id)
-    String id;
-
-    @NotBlank
-    @Size(max = 128)
-    @Schema(title = L_category)
-    String category;
-
-    @NotBlank
-    @Size(max = 128)
-    @Schema(title = L_groupName)
-    String groupName;
-
-    @Schema(title = "模糊匹配-" + L_groupName)
-    @Contains
-    String containsGroupName;
-
-    @NotBlank
-    @Schema(title = L_cron)
-    String cron;
-
-    @Schema(title = L_invokeExpr, description = D_invokeExpr)
-    String invokeExpr;
-
-    @Schema(title = L_parallelInvoke)
-    Boolean parallelInvoke;
-
-    @Schema(title = L_invokedCount)
-    Integer invokedCount;
-
-    @Schema(title = L_lastInvokedTime, description = "大于等于" + L_lastInvokedTime)
-    @Gte
-    Date gteLastInvokedTime;
-
-    @Schema(title = L_lastInvokedTime, description = "小于等于" + L_lastInvokedTime)
-    @Lte
-    Date lteLastInvokedTime;
-
-    // @Schema(title = L_lastInvokedTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenLastInvokedTime;
-
-    @Schema(title = L_nextInvokeTime, description = "大于等于" + L_nextInvokeTime)
-    @Gte
-    Date gteNextInvokeTime;
-
-    @Schema(title = L_nextInvokeTime, description = "小于等于" + L_nextInvokeTime)
-    @Lte
-    Date lteNextInvokeTime;
-
-    // @Schema(title = L_nextInvokeTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenNextInvokeTime;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain, description = D_domain)
-    String domain;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_name)
-    String name;
-
-    @JsonIgnore(value = true)
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
-    @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
-    @Schema(title = L_creator)
-    String creator;
-
-    @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
-    @Gte
-    Date gteCreateTime;
-
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
-    @Lte
-    Date lteCreateTime;
-
-    // @Schema(title = L_createTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenCreateTime;
-
-    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
-    @Gte
-    Date gteLastUpdateTime;
-
-    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
-    @Lte
-    Date lteLastUpdateTime;
-
-    // @Schema(title = L_lastUpdateTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenLastUpdateTime;
-
-    @Schema(title = L_orderCode)
-    Integer orderCode;
-
-    @NotNull
-    @Schema(title = L_enable)
-    Boolean enable;
-
-    @NotNull
-    @Schema(title = L_editable)
-    Boolean editable;
-
-    @Size(max = 512)
-    @Schema(title = L_remark)
-    String remark;
-
-    public StatScheduledTaskReq(String id) {
-        this.id = id;
-    }
 
     //
     // @Schema(description = "是否按状态分组统计")

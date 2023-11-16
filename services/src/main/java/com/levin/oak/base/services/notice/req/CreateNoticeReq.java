@@ -41,7 +41,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:11, 代码生成哈希校验码：[0c5062c2386892424988716202f26d77]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:20, 代码生成哈希校验码：[9367f3ae0fc04c6d26ea56e08878095b]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -71,8 +71,8 @@ public class CreateNoticeReq extends MultiTenantOrgReq {
     Date expiredDate;
 
     @Schema(title = L_domain, description = D_domain)
+    @InjectVar(value = "sysDomain", isRequired = "false", expectBaseType = String.class)
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
     String domain;
 
     @Schema(title = L_name)
@@ -86,7 +86,7 @@ public class CreateNoticeReq extends MultiTenantOrgReq {
 
     @Schema(title = L_creator, hidden = true)
     // @Size(max = 128)
-    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
+    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false", expectBaseType = String.class)
     String creator;
 
     @Schema(title = L_createTime, hidden = true)

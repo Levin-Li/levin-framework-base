@@ -53,13 +53,13 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:11, 代码生成哈希校验码：[7727cdc51f68886e0420343b9ab06c83]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午8:23:50, 代码生成哈希校验码：[fea0de9293710ac89fd03638a61a82e5]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
-@AllArgsConstructor
+// @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+// @Builder
 // @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
@@ -71,178 +71,9 @@ import com.levin.commons.service.domain.InjectVar;
         // joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn =
         // E_XXX.joinColumn)},
         resultClass = StatOrgReq.Result.class)
-public class StatOrgReq extends MultiTenantReq {
+public class StatOrgReq extends QueryOrgReq {
 
     private static final long serialVersionUID = -1399842458L;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_id)
-    String id;
-
-    @Size(max = 64)
-    @Schema(title = L_parentId)
-    String parentId;
-
-    @Size(max = 64)
-    @Schema(title = L_code, description = D_code)
-    String code;
-
-    @Schema(title = "模糊匹配-" + L_code, description = D_code)
-    @Contains
-    String containsCode;
-
-    @Schema(title = L_icon)
-    String icon;
-
-    @NotNull
-    @Schema(title = L_state)
-    State state;
-
-    @NotNull
-    @Schema(title = L_type)
-    Type type;
-
-    @Size(max = 64)
-    @Schema(title = L_industries)
-    String industries;
-
-    @Size(max = 64)
-    @Schema(title = L_areaCode)
-    String areaCode;
-
-    @Schema(title = "模糊匹配-" + L_areaCode)
-    @Contains
-    String containsAreaCode;
-
-    @Schema(title = "是否加载" + L_area)
-    @Fetch(attrs = E_Org.area, condition = "#_val == true")
-    Boolean loadArea;
-
-    @Size(max = 128)
-    @Schema(title = L_level, description = D_level)
-    String level;
-
-    @NotBlank
-    @Size(max = 128)
-    @Schema(title = L_category, description = D_category)
-    String category;
-
-    @NotNull
-    @Schema(title = L_isExternal, description = D_isExternal)
-    Boolean isExternal;
-
-    @Size(max = 64)
-    @Schema(title = L_contacts)
-    String contacts;
-
-    @Schema(title = "模糊匹配-" + L_contacts)
-    @Contains
-    String containsContacts;
-
-    @Size(max = 20)
-    @Schema(title = L_phones)
-    String phones;
-
-    @Schema(title = "模糊匹配-" + L_phones)
-    @Contains
-    String containsPhones;
-
-    @Size(max = 32)
-    @Schema(title = L_emails)
-    String emails;
-
-    @Schema(title = L_address)
-    String address;
-
-    @Schema(title = "模糊匹配-" + L_address)
-    @Contains
-    String containsAddress;
-
-    @Size(max = 32)
-    @Schema(title = L_zipCode)
-    String zipCode;
-
-    @Schema(title = L_extInfo)
-    String extInfo;
-
-    @Schema(title = "是否加载" + L_parent)
-    @Fetch(attrs = E_Org.parent, condition = "#_val == true")
-    Boolean loadParent;
-
-    @Schema(title = "是否加载" + L_children)
-    @Fetch(attrs = E_Org.children, condition = "#_val == true")
-    Boolean loadChildren;
-
-    @Size(max = 1800)
-    @Schema(title = L_idPath, description = D_idPath)
-    String idPath;
-
-    @NotBlank
-    @Size(max = 128)
-    @Schema(title = L_name)
-    String name;
-
-    @Schema(title = "模糊匹配-" + L_name)
-    @Contains
-    String containsName;
-
-    @Size(max = 128)
-    @Schema(title = L_pinyinName, description = D_pinyinName)
-    String pinyinName;
-
-    @Schema(title = "模糊匹配-" + L_pinyinName, description = D_pinyinName)
-    @Contains
-    String containsPinyinName;
-
-    @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
-    @Schema(title = L_creator)
-    String creator;
-
-    @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
-    @Gte
-    Date gteCreateTime;
-
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
-    @Lte
-    Date lteCreateTime;
-
-    // @Schema(title = L_createTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenCreateTime;
-
-    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
-    @Gte
-    Date gteLastUpdateTime;
-
-    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
-    @Lte
-    Date lteLastUpdateTime;
-
-    // @Schema(title = L_lastUpdateTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenLastUpdateTime;
-
-    @Schema(title = L_orderCode)
-    Integer orderCode;
-
-    @NotNull
-    @Schema(title = L_enable)
-    Boolean enable;
-
-    @NotNull
-    @Schema(title = L_editable)
-    Boolean editable;
-
-    @Size(max = 512)
-    @Schema(title = L_remark)
-    String remark;
-
-    public StatOrgReq(String id) {
-        this.id = id;
-    }
 
     //
     // @Schema(description = "是否按状态分组统计")

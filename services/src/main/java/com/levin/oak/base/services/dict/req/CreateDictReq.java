@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Date;
 import com.levin.oak.base.entities.Dict.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -42,7 +43,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:19, 代码生成哈希校验码：[620957909525ec3dd022d89268b5fd09]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:44:34, 代码生成哈希校验码：[ef04db9f1753adb0189654d594ede164]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -68,12 +69,16 @@ public class CreateDictReq extends MultiTenantOrgReq {
     String code;
 
     @Schema(title = L_itemList, description = D_itemList)
-    @InjectVar(domain = "dao", isRequired = "false")
+    @InjectVar(
+            domain = "dao",
+            isRequired = "false",
+            converter = DefaultJsonConverter.class,
+            expectBaseType = String.class)
     List<Item> itemList;
 
     @Schema(title = L_domain, description = D_domain)
+    @InjectVar(value = "sysDomain", isRequired = "false", expectBaseType = String.class)
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
     String domain;
 
     @Schema(title = L_name)
@@ -87,7 +92,7 @@ public class CreateDictReq extends MultiTenantOrgReq {
 
     @Schema(title = L_creator, hidden = true)
     // @Size(max = 128)
-    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
+    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false", expectBaseType = String.class)
     String creator;
 
     @Schema(title = L_createTime, hidden = true)

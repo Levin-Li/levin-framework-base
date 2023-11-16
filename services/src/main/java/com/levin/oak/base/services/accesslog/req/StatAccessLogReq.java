@@ -47,13 +47,13 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:11, 代码生成哈希校验码：[c91670761cb5e37a148a9263c424e018]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午8:23:49, 代码生成哈希校验码：[4d4f4226885ce984d6b15660e4718085]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
-@AllArgsConstructor
+// @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+// @Builder
 // @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
@@ -65,151 +65,9 @@ import com.levin.commons.service.domain.InjectVar;
         // joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn =
         // E_XXX.joinColumn)},
         resultClass = StatAccessLogReq.Result.class)
-public class StatAccessLogReq extends MultiTenantOrgReq {
+public class StatAccessLogReq extends QueryAccessLogReq {
 
     private static final long serialVersionUID = 1030736962L;
-
-    @NotNull
-    @Schema(title = L_id)
-    Long id;
-
-    @Schema(title = L_domain, description = D_domain)
-    String domain;
-
-    @Schema(title = "模糊匹配-" + L_domain, description = D_domain)
-    @Contains
-    String containsDomain;
-
-    @Schema(title = L_module, description = D_module)
-    String module;
-
-    @Schema(title = "模糊匹配-" + L_module, description = D_module)
-    @Contains
-    String containsModule;
-
-    @Size(max = 64)
-    @InjectVar(value = InjectConsts.USER_NAME, isRequired = "false")
-    @Schema(title = L_visitor)
-    String visitor;
-
-    @Schema(title = "模糊匹配-" + L_visitor)
-    @Contains
-    String containsVisitor;
-
-    @NotBlank
-    @Schema(title = L_title)
-    String title;
-
-    @Schema(title = "模糊匹配-" + L_title)
-    @Contains
-    String containsTitle;
-
-    @Size(max = 64)
-    @Schema(title = L_logType)
-    String logType;
-
-    @Schema(title = L_diffModifyData)
-    String diffModifyData;
-
-    @Schema(title = L_bizKey)
-    String bizKey;
-
-    @Schema(title = "模糊匹配-" + L_bizKey)
-    @Contains
-    String containsBizKey;
-
-    @Schema(title = L_bizType)
-    String bizType;
-
-    @Schema(title = "模糊匹配-" + L_bizType)
-    @Contains
-    String containsBizType;
-
-    @Size(max = 768)
-    @Schema(title = L_requestUri)
-    String requestUri;
-
-    @Schema(title = "模糊匹配-" + L_requestUri)
-    @Contains
-    String containsRequestUri;
-
-    @Size(max = 32)
-    @Schema(title = L_requestMethod)
-    String requestMethod;
-
-    @Schema(title = L_headInfo)
-    String headInfo;
-
-    @Schema(title = L_requestParams)
-    String requestParams;
-
-    @Schema(title = L_requestBody)
-    String requestBody;
-
-    @Schema(title = L_responseBody)
-    String responseBody;
-
-    @Size(max = 128)
-    @Schema(title = L_remoteAddr)
-    String remoteAddr;
-
-    @Schema(title = "模糊匹配-" + L_remoteAddr)
-    @Contains
-    String containsRemoteAddr;
-
-    @Size(max = 256)
-    @Schema(title = L_accessRegion)
-    String accessRegion;
-
-    @Schema(title = "模糊匹配-" + L_accessRegion)
-    @Contains
-    String containsAccessRegion;
-
-    @Size(max = 64)
-    @Schema(title = L_serverAddr)
-    String serverAddr;
-
-    @Schema(title = L_isException)
-    Boolean isException;
-
-    @Schema(title = L_exceptionInfo)
-    String exceptionInfo;
-
-    @Size(max = 1800)
-    @Schema(title = L_userAgent)
-    String userAgent;
-
-    @Schema(title = "模糊匹配-" + L_userAgent)
-    @Contains
-    String containsUserAgent;
-
-    @Size(max = 128)
-    @Schema(title = L_deviceName)
-    String deviceName;
-
-    @Size(max = 128)
-    @Schema(title = L_browserName)
-    String browserName;
-
-    @Schema(title = L_executeTime)
-    Long executeTime;
-
-    @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
-    @Gte
-    Date gteCreateTime;
-
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
-    @Lte
-    Date lteCreateTime;
-
-    // @Schema(title = L_createTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenCreateTime;
-
-    public StatAccessLogReq(Long id) {
-        this.id = id;
-    }
 
     //
     // @Schema(description = "是否按状态分组统计")

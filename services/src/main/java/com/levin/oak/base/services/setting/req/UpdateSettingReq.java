@@ -43,7 +43,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:10, 代码生成哈希校验码：[86e3d8553f11a941092e445b2a703500]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:19, 代码生成哈希校验码：[e0f3250f380b1a6f6054b4e8bd5879fa]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -97,8 +97,8 @@ public class UpdateSettingReq extends MultiTenantOrgReq {
     @Schema(title = L_inputPlaceholder)
     String inputPlaceholder;
 
+    @InjectVar(value = "sysDomain", isRequired = "false", expectBaseType = String.class)
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 

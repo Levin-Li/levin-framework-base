@@ -41,7 +41,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:11, 代码生成哈希校验码：[68b1e1ddaad0943f05dacefb50ddb50a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:20, 代码生成哈希校验码：[0ae76904f8c06320c9698dc4f8adc79f]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -67,8 +67,8 @@ public class CreateJobPostReq extends MultiTenantOrgReq {
     Type type;
 
     @Schema(title = L_domain, description = D_domain)
+    @InjectVar(value = "sysDomain", isRequired = "false", expectBaseType = String.class)
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
     String domain;
 
     @Schema(title = L_name)
@@ -82,7 +82,7 @@ public class CreateJobPostReq extends MultiTenantOrgReq {
 
     @Schema(title = L_creator, hidden = true)
     // @Size(max = 128)
-    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
+    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false", expectBaseType = String.class)
     String creator;
 
     @Schema(title = L_createTime, hidden = true)

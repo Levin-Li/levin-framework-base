@@ -28,6 +28,7 @@ import com.levin.commons.service.support.InjectConsts;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -36,7 +37,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 租户应用-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:10, 代码生成哈希校验码：[29a4bde6ef070a6dd8a515ab87cc3abe]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:19, 代码生成哈希校验码：[9c819afe4a359d0237c007b250b981e0]，请不要修改和删除此行内容。
  */
 @Tag(name = E_TenantApp.BIZ_NAME + "-业务服务", description = "")
 public interface BizTenantAppService {}

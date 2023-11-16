@@ -47,7 +47,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:11, 代码生成哈希校验码：[2cfe8b9b3aaef4f676f4b94465db4da1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:20, 代码生成哈希校验码：[b67a7b868dcf2e6deba5fc912c44d36f]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -115,32 +115,32 @@ public class QueryScheduledTaskReq extends MultiTenantOrgReq {
     @Schema(title = L_invokedCount)
     Integer invokedCount;
 
-    @Schema(title = L_lastInvokedTime, description = "大于等于" + L_lastInvokedTime)
+    @Schema(title = L_lastInvokedTime, description = L_lastInvokedTime + "大于等于字段值")
     @Gte
     Date gteLastInvokedTime;
 
-    @Schema(title = L_lastInvokedTime, description = "小于等于" + L_lastInvokedTime)
+    @Schema(title = L_lastInvokedTime, description = L_lastInvokedTime + "小于等于字段值")
     @Lte
     Date lteLastInvokedTime;
 
-    // @Schema(title = L_lastInvokedTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenLastInvokedTime;
+    @Schema(title = L_lastInvokedTime + "-日期范围")
+    @Between
+    String betweenLastInvokedTime;
 
-    @Schema(title = L_nextInvokeTime, description = "大于等于" + L_nextInvokeTime)
+    @Schema(title = L_nextInvokeTime, description = L_nextInvokeTime + "大于等于字段值")
     @Gte
     Date gteNextInvokeTime;
 
-    @Schema(title = L_nextInvokeTime, description = "小于等于" + L_nextInvokeTime)
+    @Schema(title = L_nextInvokeTime, description = L_nextInvokeTime + "小于等于字段值")
     @Lte
     Date lteNextInvokeTime;
 
-    // @Schema(title = L_nextInvokeTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenNextInvokeTime;
+    @Schema(title = L_nextInvokeTime + "-日期范围")
+    @Between
+    String betweenNextInvokeTime;
 
+    @InjectVar(value = "sysDomain", isRequired = "false", expectBaseType = String.class)
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -154,34 +154,34 @@ public class QueryScheduledTaskReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false", expectBaseType = String.class)
     @Schema(title = L_creator)
     String creator;
 
     @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime, description = L_createTime + "小于等于字段值")
     @Lte
     Date lteCreateTime;
 
-    // @Schema(title = L_createTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenCreateTime;
+    @Schema(title = L_createTime + "-日期范围")
+    @Between
+    String betweenCreateTime;
 
-    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "大于等于字段值")
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "小于等于字段值")
     @Lte
     Date lteLastUpdateTime;
 
-    // @Schema(title = L_lastUpdateTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenLastUpdateTime;
+    @Schema(title = L_lastUpdateTime + "-日期范围")
+    @Between
+    String betweenLastUpdateTime;
 
     @Schema(title = L_orderCode)
     Integer orderCode;

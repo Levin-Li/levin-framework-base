@@ -36,128 +36,82 @@ import static com.levin.oak.base.entities.E_AppErrorLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 统计应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:41, 代码生成哈希校验码：[a11e0058989651637a4cf955f7a5c74e]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午8:23:49, 代码生成哈希校验码：[456855717de7601fd490b5284370fe07]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
-@AllArgsConstructor
+// @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-//@EqualsAndHashCode(callSuper = true)
+// @Builder
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = AppErrorLog.class, alias = E_AppErrorLog.ALIAS,
-     //连接统计
-    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
-    resultClass = StatAppErrorLogReq.Result.class
-)
-public class StatAppErrorLogReq extends MultiTenantReq{
+@TargetOption(
+        entityClass = AppErrorLog.class,
+        alias = E_AppErrorLog.ALIAS,
+        // 连接统计
+        // joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn =
+        // E_XXX.joinColumn)},
+        resultClass = StatAppErrorLogReq.Result.class)
+public class StatAppErrorLogReq extends QueryAppErrorLogReq {
 
     private static final long serialVersionUID = 1594864095L;
 
-
-    @NotNull
-    @Schema(title = L_id)
-    Long id;
-
-    @Size(max = 64)
-    @Schema(title = L_moduleId)
-    String moduleId;
-
-    @NotNull
-    @Schema(title = L_occurTime , description = "大于等于" + L_occurTime)
-    @Gte
-    Date gteOccurTime;
-
-    @Schema(title = L_occurTime , description = "小于等于" + L_occurTime)
-    @Lte
-    Date lteOccurTime;
-
-    //@Schema(title = L_occurTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenOccurTime;
-
-    @NotBlank
-    @Size(max = 768)
-    @Schema(title = L_title)
-    String title;
-
-    @Schema(title = "模糊匹配-" + L_title)
-    @Contains
-    String containsTitle;
-
-    @Schema(title = L_errorLevel)
-    String errorLevel;
-
-    @Schema(title = L_rootExceptionType)
-    String rootExceptionType;
-
-    @Schema(title = "模糊匹配-" + L_rootExceptionType)
-    @Contains
-    String containsRootExceptionType;
-
-    @Schema(title = L_exceptionFullInfo)
-    String exceptionFullInfo;
-
-
-    public StatAppErrorLogReq(Long id) {
-        this.id = id;
-    }
-
     //
-    //@Schema(description = "是否按状态分组统计")
-    //@CtxVar //增加当前字段名称和字段值到环境变量中
-    //@Ignore
-    //private boolean isGroupByStatus;
+    // @Schema(description = "是否按状态分组统计")
+    // @CtxVar //增加当前字段名称和字段值到环境变量中
+    // @Ignore
+    // private boolean isGroupByStatus;
 
-    //@Schema(description = "是否按日期分组统计")
-    //@CtxVar //增加当前字段名称和字段值到环境变量中
-    //@Ignore //
-    //private boolean isGroupByDate;
+    // @Schema(description = "是否按日期分组统计")
+    // @CtxVar //增加当前字段名称和字段值到环境变量中
+    // @Ignore //
+    // private boolean isGroupByDate;
 
     @PostConstruct
     public void preStat() {
-    //@todo 统计之前初始化数据
+        // @todo 统计之前初始化数据
     }
 
     @Schema(description = BIZ_NAME + "统计结果")
     @Data
     @Accessors(chain = true)
     @FieldNameConstants
-    public static class Result
-            implements Serializable {
+    public static class Result implements Serializable {
 
-        //@Schema(description = "状态分组统计")
-        //@GroupBy(condition = "#isGroupByStatus")
-        //Status status;
+        // @Schema(description = "状态分组统计")
+        // @GroupBy(condition = "#isGroupByStatus")
+        // Status status;
 
-        //@Schema(description = "时间分组统计")
-        //@GroupBy(condition = "#isGroupByDate", value = "date_format(" + E_AppErrorLog.createDate + ",'%Y-%m-%d')", orderBy = @OrderBy(type = OrderBy.Type.Asc))
-        //String createDate;
+        // @Schema(description = "时间分组统计")
+        // @GroupBy(condition = "#isGroupByDate", value = "date_format(" + E_AppErrorLog.createDate
+        // + ",'%Y-%m-%d')", orderBy = @OrderBy(type = OrderBy.Type.Asc))
+        // String createDate;
 
         @Schema(description = "记录数")
         @Count
         Integer cnt;
 
-        //@Schema(description = "分类记录数")
-        //@Count(fieldCases = {@Case(column = E_AppErrorLog.status, whenOptions = {@Case.When(whenExpr = "OFF", thenExpr = "1")}, elseExpr = "NULL")})
-        //Integer caseCnt;
+        // @Schema(description = "分类记录数")
+        // @Count(fieldCases = {@Case(column = E_AppErrorLog.status, whenOptions =
+        // {@Case.When(whenExpr = "OFF", thenExpr = "1")}, elseExpr = "NULL")})
+        // Integer caseCnt;
 
-        //@Schema(description = "累计" , havingOp=Op.Gt)
-        //@Sum
-        //Double sumGmv;
+        // @Schema(description = "累计" , havingOp=Op.Gt)
+        // @Sum
+        // Double sumGmv;
 
     }
 }

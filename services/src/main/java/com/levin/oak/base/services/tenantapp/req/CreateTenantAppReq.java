@@ -33,6 +33,7 @@ import com.levin.commons.service.support.InjectConsts;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -41,7 +42,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:19, 代码生成哈希校验码：[6d9dc68dd0bbdb30e2a88d263db5f283]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:44:34, 代码生成哈希校验码：[63990bacb45bad364c9afb7028e6cced]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -73,7 +74,11 @@ public class CreateTenantAppReq extends MultiTenantReq {
 
     @Schema(title = L_modules)
     @Size(max = 1800)
-    @InjectVar(domain = "dao", isRequired = "false")
+    @InjectVar(
+            domain = "dao",
+            isRequired = "false",
+            converter = PrimitiveArrayJsonConverter.class,
+            expectBaseType = String.class)
     List<String> modules;
 
     @Schema(title = L_appSecret, description = D_appSecret)
@@ -93,7 +98,7 @@ public class CreateTenantAppReq extends MultiTenantReq {
 
     @Schema(title = L_creator, hidden = true)
     // @Size(max = 128)
-    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
+    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false", expectBaseType = String.class)
     String creator;
 
     @Schema(title = L_createTime, hidden = true)

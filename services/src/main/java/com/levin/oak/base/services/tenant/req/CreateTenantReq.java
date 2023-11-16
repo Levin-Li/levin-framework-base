@@ -32,6 +32,7 @@ import com.levin.oak.base.services.commons.req.*;
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
@@ -39,7 +40,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:18, 代码生成哈希校验码：[635ee21eec43a5f244b0a21599a6b669]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:44:34, 代码生成哈希校验码：[ff5e10638b7e2677736f9d2cdd3618ce]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -95,7 +96,11 @@ public class CreateTenantReq extends BaseReq {
 
     @Schema(title = L_domainList)
     @Size(max = 1200)
-    @InjectVar(domain = "dao", isRequired = "false")
+    @InjectVar(
+            domain = "dao",
+            isRequired = "false",
+            converter = PrimitiveArrayJsonConverter.class,
+            expectBaseType = String.class)
     List<String> domainList;
 
     @Schema(title = L_appId)
@@ -121,7 +126,7 @@ public class CreateTenantReq extends BaseReq {
 
     @Schema(title = L_creator, hidden = true)
     // @Size(max = 128)
-    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
+    // @InjectVar(value = InjectConsts.USER_ID, isRequired = "false", expectBaseType = String.class)
     String creator;
 
     @Schema(title = L_createTime, hidden = true)

@@ -48,13 +48,13 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:10, 代码生成哈希校验码：[7f4ef17217deb60b82c63f39eece8749]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午8:23:48, 代码生成哈希校验码：[003b10db13817ff64b928776f2785bfe]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
-@AllArgsConstructor
+// @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+// @Builder
 // @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
@@ -66,91 +66,9 @@ import com.levin.commons.service.domain.InjectVar;
         // joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn =
         // E_XXX.joinColumn)},
         resultClass = StatAppClientReq.Result.class)
-public class StatAppClientReq extends MultiTenantOrgReq {
+public class StatAppClientReq extends QueryAppClientReq {
 
     private static final long serialVersionUID = -115048882L;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_id)
-    String id;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_appId)
-    String appId;
-
-    @NotBlank
-    @Size(max = 512)
-    @Schema(title = L_appSecret)
-    String appSecret;
-
-    @Size(max = 512)
-    @Schema(title = L_appToken)
-    String appToken;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain, description = D_domain)
-    String domain;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_name)
-    String name;
-
-    @JsonIgnore(value = true)
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
-    @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
-    @Schema(title = L_creator)
-    String creator;
-
-    @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
-    @Gte
-    Date gteCreateTime;
-
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
-    @Lte
-    Date lteCreateTime;
-
-    // @Schema(title = L_createTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenCreateTime;
-
-    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
-    @Gte
-    Date gteLastUpdateTime;
-
-    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
-    @Lte
-    Date lteLastUpdateTime;
-
-    // @Schema(title = L_lastUpdateTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenLastUpdateTime;
-
-    @Schema(title = L_orderCode)
-    Integer orderCode;
-
-    @NotNull
-    @Schema(title = L_enable)
-    Boolean enable;
-
-    @NotNull
-    @Schema(title = L_editable)
-    Boolean editable;
-
-    @Size(max = 512)
-    @Schema(title = L_remark)
-    String remark;
-
-    public StatAppClientReq(String id) {
-        this.id = id;
-    }
 
     //
     // @Schema(description = "是否按状态分组统计")

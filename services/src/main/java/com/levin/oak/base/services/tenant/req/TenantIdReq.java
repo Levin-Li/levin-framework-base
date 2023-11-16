@@ -33,6 +33,7 @@ import com.levin.oak.base.services.commons.req.*;
 import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.commons.service.domain.InjectVar;
 
 ////////////////////////////////////
@@ -40,7 +41,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 平台租户 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:10, 代码生成哈希校验码：[7cfa8aed57e7d12ed317eea12c35282a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:19, 代码生成哈希校验码：[fd9efceb42e6d223040abef88f8463ef]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data

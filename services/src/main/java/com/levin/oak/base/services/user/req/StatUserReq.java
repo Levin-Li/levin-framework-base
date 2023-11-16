@@ -44,6 +44,7 @@ import com.levin.oak.base.services.org.info.*;
 import java.util.Date;
 import com.levin.oak.base.entities.Org;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -52,13 +53,13 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:19, 代码生成哈希校验码：[cdbf8f159efc6cb073f8dd0c23e8219c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:20, 代码生成哈希校验码：[6d23d87b62a908744fc2d8d4627dfa6f]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
-@AllArgsConstructor
+// @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+// @Builder
 // @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
@@ -70,161 +71,9 @@ import com.levin.commons.service.domain.InjectVar;
         // joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn =
         // E_XXX.joinColumn)},
         resultClass = StatUserReq.Result.class)
-public class StatUserReq extends MultiTenantOrgReq {
+public class StatUserReq extends QueryUserReq {
 
     private static final long serialVersionUID = -445263479L;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_id)
-    String id;
-
-    @Size(max = 20)
-    @Schema(title = L_telephone, description = D_telephone)
-    String telephone;
-
-    @Schema(title = "模糊匹配-" + L_telephone, description = D_telephone)
-    @Contains
-    String containsTelephone;
-
-    @Size(max = 32)
-    @Schema(title = L_email, description = D_email)
-    String email;
-
-    @Size(max = 256)
-    @JsonIgnore(value = true)
-    @Schema(title = L_password)
-    String password;
-
-    @Size(max = 32)
-    @Schema(title = L_nickname)
-    String nickname;
-
-    @Schema(title = "模糊匹配-" + L_nickname)
-    @Contains
-    String containsNickname;
-
-    @Schema(title = L_avatar)
-    String avatar;
-
-    @Schema(title = L_sex)
-    Sex sex;
-
-    @Size(max = 1800)
-    @InjectVar(domain = "dao", isRequired = "false")
-    @Schema(title = L_tagList)
-    List<String> tagList;
-
-    @Schema(title = L_category)
-    Category category;
-
-    @Schema(title = L_expiredDate, description = "大于等于" + L_expiredDate)
-    @Gte
-    Date gteExpiredDate;
-
-    @Schema(title = L_expiredDate, description = "小于等于" + L_expiredDate)
-    @Lte
-    Date lteExpiredDate;
-
-    // @Schema(title = L_expiredDate + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenExpiredDate;
-
-    @NotNull
-    @Schema(title = L_state)
-    State state;
-
-    @Size(max = 32)
-    @Schema(title = L_staffNo)
-    String staffNo;
-
-    @Schema(title = "模糊匹配-" + L_staffNo)
-    @Contains
-    String containsStaffNo;
-
-    @Size(max = 128)
-    @Schema(title = L_jobPostCode)
-    String jobPostCode;
-
-    @Size(max = 1800)
-    @InjectVar(domain = "dao", isRequired = "false")
-    @Schema(title = L_roleList)
-    List<String> roleList;
-
-    @Schema(title = "是否加载" + L_org)
-    @Fetch(attrs = E_User.org, condition = "#_val == true")
-    Boolean loadOrg;
-
-    @Size(max = 64)
-    @Schema(title = L_wxOpenId)
-    String wxOpenId;
-
-    @Size(max = 64)
-    @Schema(title = L_aliOpenId)
-    String aliOpenId;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain, description = D_domain)
-    String domain;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_name)
-    String name;
-
-    @JsonIgnore(value = true)
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
-    @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
-    @Schema(title = L_creator)
-    String creator;
-
-    @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
-    @Gte
-    Date gteCreateTime;
-
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
-    @Lte
-    Date lteCreateTime;
-
-    // @Schema(title = L_createTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenCreateTime;
-
-    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
-    @Gte
-    Date gteLastUpdateTime;
-
-    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
-    @Lte
-    Date lteLastUpdateTime;
-
-    // @Schema(title = L_lastUpdateTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenLastUpdateTime;
-
-    @Schema(title = L_orderCode)
-    Integer orderCode;
-
-    @NotNull
-    @Schema(title = L_enable)
-    Boolean enable;
-
-    @NotNull
-    @Schema(title = L_editable)
-    Boolean editable;
-
-    @Size(max = 512)
-    @Schema(title = L_remark)
-    String remark;
-
-    public StatUserReq(String id) {
-        this.id = id;
-    }
 
     //
     // @Schema(description = "是否按状态分组统计")

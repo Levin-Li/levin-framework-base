@@ -36,6 +36,7 @@ import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -44,7 +45,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:18, 代码生成哈希校验码：[910e62656fb8933b0ffc63031aef2ba1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:44:33, 代码生成哈希校验码：[9cf5b4569f90d08e74897094fe01f931]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -77,16 +78,24 @@ public class SimpleUpdateRoleReq extends MultiTenantOrgReq {
     @Schema(title = L_orgDataScope, description = D_orgDataScope)
     OrgDataScope orgDataScope;
 
-    @InjectVar(domain = "dao", isRequired = "false")
+    @InjectVar(
+            domain = "dao",
+            isRequired = "false",
+            converter = PrimitiveArrayJsonConverter.class,
+            expectBaseType = String.class)
     @Schema(title = L_assignedOrgIdList, description = D_assignedOrgIdList)
     List<String> assignedOrgIdList;
 
-    @InjectVar(domain = "dao", isRequired = "false")
+    @InjectVar(
+            domain = "dao",
+            isRequired = "false",
+            converter = PrimitiveArrayJsonConverter.class,
+            expectBaseType = String.class)
     @Schema(title = L_permissionList, description = D_permissionList)
     List<String> permissionList;
 
+    @InjectVar(value = "sysDomain", isRequired = "false", expectBaseType = String.class)
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 

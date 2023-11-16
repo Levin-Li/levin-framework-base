@@ -52,7 +52,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:11, 代码生成哈希校验码：[d6660756c1212b28430ac14fe80886d7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:20, 代码生成哈希校验码：[4510592b4b51222125de25426a08c25c]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -206,34 +206,34 @@ public class QueryOrgReq extends MultiTenantReq {
     String containsPinyinName;
 
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false", expectBaseType = String.class)
     @Schema(title = L_creator)
     String creator;
 
     @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime, description = L_createTime + "小于等于字段值")
     @Lte
     Date lteCreateTime;
 
-    // @Schema(title = L_createTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenCreateTime;
+    @Schema(title = L_createTime + "-日期范围")
+    @Between
+    String betweenCreateTime;
 
-    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "大于等于字段值")
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "小于等于字段值")
     @Lte
     Date lteLastUpdateTime;
 
-    // @Schema(title = L_lastUpdateTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenLastUpdateTime;
+    @Schema(title = L_lastUpdateTime + "-日期范围")
+    @Between
+    String betweenLastUpdateTime;
 
     @Schema(title = L_orderCode)
     Integer orderCode;

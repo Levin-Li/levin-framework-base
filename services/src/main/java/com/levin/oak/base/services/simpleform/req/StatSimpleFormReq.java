@@ -41,6 +41,7 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -49,13 +50,13 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:21, 代码生成哈希校验码：[a36be50d3afc55f4a272cf6c2d1c90a6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:21, 代码生成哈希校验码：[d6c9f2bcb9002bd0a4521428e4f777ec]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
-@AllArgsConstructor
+// @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+// @Builder
 // @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
@@ -67,115 +68,9 @@ import com.levin.commons.service.domain.InjectVar;
         // joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn =
         // E_XXX.joinColumn)},
         resultClass = StatSimpleFormReq.Result.class)
-public class StatSimpleFormReq extends MultiTenantOrgReq {
+public class StatSimpleFormReq extends QuerySimpleFormReq {
 
     private static final long serialVersionUID = 1598335188L;
-
-    @Schema(title = L_commitApi)
-    String commitApi;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_id)
-    String id;
-
-    @NotBlank
-    @Size(max = 128)
-    @Schema(title = L_type)
-    String type;
-
-    @NotBlank
-    @Size(max = 128)
-    @Schema(title = L_category)
-    String category;
-
-    @NotBlank
-    @Size(max = 128)
-    @Schema(title = L_groupName)
-    String groupName;
-
-    @Schema(title = "模糊匹配-" + L_groupName)
-    @Contains
-    String containsGroupName;
-
-    @Schema(title = L_icon)
-    String icon;
-
-    @NotBlank
-    @Size(max = 800)
-    @Schema(title = L_path)
-    String path;
-
-    @Size(max = 1800)
-    @InjectVar(domain = "dao", isRequired = "false")
-    @Schema(title = L_requireAuthorizations)
-    List<String> requireAuthorizations;
-
-    @Schema(title = L_content)
-    String content;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain, description = D_domain)
-    String domain;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_name)
-    String name;
-
-    @JsonIgnore(value = true)
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
-    @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
-    @Schema(title = L_creator)
-    String creator;
-
-    @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
-    @Gte
-    Date gteCreateTime;
-
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
-    @Lte
-    Date lteCreateTime;
-
-    // @Schema(title = L_createTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenCreateTime;
-
-    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
-    @Gte
-    Date gteLastUpdateTime;
-
-    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
-    @Lte
-    Date lteLastUpdateTime;
-
-    // @Schema(title = L_lastUpdateTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenLastUpdateTime;
-
-    @Schema(title = L_orderCode)
-    Integer orderCode;
-
-    @NotNull
-    @Schema(title = L_enable)
-    Boolean enable;
-
-    @NotNull
-    @Schema(title = L_editable)
-    Boolean editable;
-
-    @Size(max = 512)
-    @Schema(title = L_remark)
-    String remark;
-
-    public StatSimpleFormReq(String id) {
-        this.id = id;
-    }
 
     //
     // @Schema(description = "是否按状态分组统计")

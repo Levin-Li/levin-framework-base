@@ -29,6 +29,7 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -37,7 +38,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:20, 代码生成哈希校验码：[bcd1f3010ae9cb5131f83dfc0cc38e76]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:32:47, 代码生成哈希校验码：[a2e39f9421b9abe5126dfcd0c9d6d201]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -79,8 +80,13 @@ public class SimplePageInfo implements Serializable {
     @Schema(title = L_path)
     String path;
 
+    @InjectVar(
+            domain = "dao",
+            isRequired = "false",
+            expectBaseType = List.class,
+            expectGenericTypes = {String.class},
+            converter = PrimitiveArrayJsonConverter.class)
     @Size(max = 1800)
-    @InjectVar(domain = "dao", isRequired = "false")
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
 

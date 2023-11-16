@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Date;
 import com.levin.oak.base.entities.Dict.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -38,7 +39,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:19, 代码生成哈希校验码：[fcd31a06372e9e1b368238232e8aaeb8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:32:45, 代码生成哈希校验码：[47da96ea2873ce9ab8a49750e903258e]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -66,7 +67,12 @@ public class DictInfo implements Serializable {
     @Schema(title = L_code)
     String code;
 
-    @InjectVar(domain = "dao", isRequired = "false")
+    @InjectVar(
+            domain = "dao",
+            isRequired = "false",
+            expectBaseType = List.class,
+            expectGenericTypes = {Item.class},
+            converter = DefaultJsonConverter.class)
     @Schema(title = L_itemList, description = D_itemList)
     List<Item> itemList;
 

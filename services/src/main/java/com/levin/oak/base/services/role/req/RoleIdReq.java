@@ -35,6 +35,7 @@ import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -43,7 +44,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 角色 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:10, 代码生成哈希校验码：[52a1279bc49cf44243b00e1e049f3260]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:18, 代码生成哈希校验码：[67e2c1cb3aa04502f410786d5e2b9a14]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data

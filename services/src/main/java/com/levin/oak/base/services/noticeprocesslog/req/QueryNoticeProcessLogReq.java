@@ -46,7 +46,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:11, 代码生成哈希校验码：[c6549100767459f1eedb865e13b92bb5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:20, 代码生成哈希校验码：[0cdd95bd545fa9a5cc7aee6f1884d4a0]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -88,7 +88,7 @@ public class QueryNoticeProcessLogReq extends MultiTenantOrgReq {
     String id;
 
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false", expectBaseType = String.class)
     @Schema(title = L_creator)
     String creator;
 
@@ -106,17 +106,17 @@ public class QueryNoticeProcessLogReq extends MultiTenantOrgReq {
     String remark;
 
     @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime, description = L_createTime + "小于等于字段值")
     @Lte
     Date lteCreateTime;
 
-    // @Schema(title = L_createTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenCreateTime;
+    @Schema(title = L_createTime + "-日期范围")
+    @Between
+    String betweenCreateTime;
 
     public QueryNoticeProcessLogReq(String id) {
         this.id = id;

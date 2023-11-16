@@ -43,6 +43,7 @@ import com.levin.oak.base.services.org.info.*;
 import java.util.Date;
 import com.levin.oak.base.entities.Org;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -51,7 +52,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:19, 代码生成哈希校验码：[4b9ead29ff52cf8a2f4294d21c579f5b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:44:35, 代码生成哈希校验码：[49add7841cdf67340ef2061f9dc8a32f]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -121,24 +122,26 @@ public class QueryUserReq extends MultiTenantOrgReq {
     Sex sex;
 
     @Size(max = 1800)
-    @InjectVar(domain = "dao", isRequired = "false")
+    @OR(autoClose = true)
+    @Contains
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Schema(title = L_tagList)
     List<String> tagList;
 
     @Schema(title = L_category)
     Category category;
 
-    @Schema(title = L_expiredDate, description = "大于等于" + L_expiredDate)
+    @Schema(title = L_expiredDate, description = L_expiredDate + "大于等于字段值")
     @Gte
     Date gteExpiredDate;
 
-    @Schema(title = L_expiredDate, description = "小于等于" + L_expiredDate)
+    @Schema(title = L_expiredDate, description = L_expiredDate + "小于等于字段值")
     @Lte
     Date lteExpiredDate;
 
-    // @Schema(title = L_expiredDate + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenExpiredDate;
+    @Schema(title = L_expiredDate + "-日期范围")
+    @Between
+    String betweenExpiredDate;
 
     @NotNull
     @Schema(title = L_state)
@@ -157,7 +160,9 @@ public class QueryUserReq extends MultiTenantOrgReq {
     String jobPostCode;
 
     @Size(max = 1800)
-    @InjectVar(domain = "dao", isRequired = "false")
+    @OR(autoClose = true)
+    @Contains
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Schema(title = L_roleList)
     List<String> roleList;
 
@@ -173,8 +178,8 @@ public class QueryUserReq extends MultiTenantOrgReq {
     @Schema(title = L_aliOpenId)
     String aliOpenId;
 
+    @InjectVar(value = "sysDomain", isRequired = "false", expectBaseType = String.class)
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -188,34 +193,34 @@ public class QueryUserReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false", expectBaseType = String.class)
     @Schema(title = L_creator)
     String creator;
 
     @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime, description = L_createTime + "小于等于字段值")
     @Lte
     Date lteCreateTime;
 
-    // @Schema(title = L_createTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenCreateTime;
+    @Schema(title = L_createTime + "-日期范围")
+    @Between
+    String betweenCreateTime;
 
-    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "大于等于字段值")
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "小于等于字段值")
     @Lte
     Date lteLastUpdateTime;
 
-    // @Schema(title = L_lastUpdateTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenLastUpdateTime;
+    @Schema(title = L_lastUpdateTime + "-日期范围")
+    @Between
+    String betweenLastUpdateTime;
 
     @Schema(title = L_orderCode)
     Integer orderCode;

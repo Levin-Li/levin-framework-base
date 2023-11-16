@@ -35,30 +35,33 @@ import static com.levin.oak.base.entities.E_AppErrorLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
+// 自动导入列表
 import com.levin.commons.service.support.InjectConsts;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
+
 ////////////////////////////////////
 
 /**
  * 查询应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:41, 代码生成哈希校验码：[a62bf4fa809bcf059eec2532f2aa91aa]，请不要修改和删除此行内容。
- *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午8:23:49, 代码生成哈希校验码：[f6792ba7c315d2eaa7907b44a5cf34c0]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(entityClass = AppErrorLog.class, alias = E_AppErrorLog.ALIAS, resultClass = AppErrorLogInfo.class)
-public class QueryAppErrorLogReq extends MultiTenantReq{
+@TargetOption(
+        entityClass = AppErrorLog.class,
+        alias = E_AppErrorLog.ALIAS,
+        resultClass = AppErrorLogInfo.class)
+public class QueryAppErrorLogReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1594864095L;
 
@@ -66,12 +69,18 @@ public class QueryAppErrorLogReq extends MultiTenantReq{
     @Schema(title = "排序字段")
     String orderBy;
 
-    //@Ignore
+    // @Ignore
     @Schema(title = "排序方向")
-    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
-    @OrderBy(value = occurTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
+    @SimpleOrderBy(
+            expr = "orderBy + ' ' + orderDir",
+            condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)",
+            remark = "生成排序表达式")
+    @OrderBy(
+            value = occurTime,
+            condition = "#isEmpty(orderBy) || #isEmpty(orderDir)",
+            order = Integer.MAX_VALUE,
+            desc = "默认按时间排序")
     OrderBy.Type orderDir;
-
 
     @NotNull
     @Schema(title = L_id)
@@ -82,18 +91,17 @@ public class QueryAppErrorLogReq extends MultiTenantReq{
     String moduleId;
 
     @NotNull
-    @Schema(title = L_occurTime , description = "大于等于" + L_occurTime)
+    @Schema(title = L_occurTime, description = L_occurTime + "大于等于字段值")
     @Gte
     Date gteOccurTime;
 
-    @Schema(title = L_occurTime , description = "小于等于" + L_occurTime)
+    @Schema(title = L_occurTime, description = L_occurTime + "小于等于字段值")
     @Lte
     Date lteOccurTime;
 
-    //@Schema(title = L_occurTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenOccurTime;
-
+    @Schema(title = L_occurTime + "-日期范围")
+    @Between
+    String betweenOccurTime;
 
     @NotBlank
     @Size(max = 768)
@@ -120,8 +128,9 @@ public class QueryAppErrorLogReq extends MultiTenantReq{
     public QueryAppErrorLogReq(Long id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
-        //@todo 查询之前初始化数据
+        // @todo 查询之前初始化数据
     }
 }

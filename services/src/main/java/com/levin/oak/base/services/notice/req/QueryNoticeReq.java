@@ -48,7 +48,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:11, 代码生成哈希校验码：[01843d3f28849771882b53a98e23848e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:20, 代码生成哈希校验码：[cab085acf95fa42a0ad8f615a6a6614e]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -96,20 +96,20 @@ public class QueryNoticeReq extends MultiTenantOrgReq {
     @Schema(title = L_content)
     String content;
 
-    @Schema(title = L_expiredDate, description = "大于等于" + L_expiredDate)
+    @Schema(title = L_expiredDate, description = L_expiredDate + "大于等于字段值")
     @Gte
     Date gteExpiredDate;
 
-    @Schema(title = L_expiredDate, description = "小于等于" + L_expiredDate)
+    @Schema(title = L_expiredDate, description = L_expiredDate + "小于等于字段值")
     @Lte
     Date lteExpiredDate;
 
-    // @Schema(title = L_expiredDate + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenExpiredDate;
+    @Schema(title = L_expiredDate + "-日期范围")
+    @Between
+    String betweenExpiredDate;
 
+    @InjectVar(value = "sysDomain", isRequired = "false", expectBaseType = String.class)
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -123,34 +123,34 @@ public class QueryNoticeReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
+    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false", expectBaseType = String.class)
     @Schema(title = L_creator)
     String creator;
 
     @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime, description = L_createTime + "小于等于字段值")
     @Lte
     Date lteCreateTime;
 
-    // @Schema(title = L_createTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenCreateTime;
+    @Schema(title = L_createTime + "-日期范围")
+    @Between
+    String betweenCreateTime;
 
-    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "大于等于字段值")
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "小于等于字段值")
     @Lte
     Date lteLastUpdateTime;
 
-    // @Schema(title = L_lastUpdateTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenLastUpdateTime;
+    @Schema(title = L_lastUpdateTime + "-日期范围")
+    @Between
+    String betweenLastUpdateTime;
 
     @Schema(title = L_orderCode)
     Integer orderCode;

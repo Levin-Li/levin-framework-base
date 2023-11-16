@@ -41,6 +41,7 @@ import com.levin.commons.service.support.InjectConsts;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 
@@ -49,13 +50,13 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:31:19, 代码生成哈希校验码：[43963f5fab011a62312746eb3333eed4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:19, 代码生成哈希校验码：[0b3785345bf2a1c5de83128cd2efe14b]，请不要修改和删除此行内容。
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
-@AllArgsConstructor
+// @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+// @Builder
 // @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
@@ -67,106 +68,9 @@ import com.levin.commons.service.domain.InjectVar;
         // joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn =
         // E_XXX.joinColumn)},
         resultClass = StatTenantAppReq.Result.class)
-public class StatTenantAppReq extends MultiTenantReq {
+public class StatTenantAppReq extends QueryTenantAppReq {
 
     private static final long serialVersionUID = 1292984857L;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_id)
-    String id;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_name)
-    String name;
-
-    @Schema(title = L_logo)
-    String logo;
-
-    @Schema(title = L_entryUrl)
-    String entryUrl;
-
-    @Schema(title = L_infoUrl)
-    String infoUrl;
-
-    @Size(max = 1800)
-    @InjectVar(domain = "dao", isRequired = "false")
-    @Schema(title = L_modules)
-    List<String> modules;
-
-    @Schema(title = L_appSecret, description = D_appSecret)
-    String appSecret;
-
-    @Schema(title = L_salePrice, description = D_salePrice)
-    BigDecimal salePrice;
-
-    @Schema(title = L_purchasePrice, description = D_purchasePrice)
-    BigDecimal purchasePrice;
-
-    @Schema(title = L_orderNo, description = D_orderNo)
-    String orderNo;
-
-    @Schema(title = L_expiredTime, description = "大于等于" + L_expiredTime)
-    @Gte
-    Date gteExpiredTime;
-
-    @Schema(title = L_expiredTime, description = "小于等于" + L_expiredTime)
-    @Lte
-    Date lteExpiredTime;
-
-    // @Schema(title = L_expiredTime + "-日期范围" , description = D_expiredTime)
-    // @Between(paramDelimiter = "-")
-    // String betweenExpiredTime;
-
-    @Size(max = 128)
-    @InjectVar(value = InjectConsts.USER_ID, isRequired = "false")
-    @Schema(title = L_creator)
-    String creator;
-
-    @NotNull
-    @Schema(title = L_createTime, description = "大于等于" + L_createTime)
-    @Gte
-    Date gteCreateTime;
-
-    @Schema(title = L_createTime, description = "小于等于" + L_createTime)
-    @Lte
-    Date lteCreateTime;
-
-    // @Schema(title = L_createTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenCreateTime;
-
-    @Schema(title = L_lastUpdateTime, description = "大于等于" + L_lastUpdateTime)
-    @Gte
-    Date gteLastUpdateTime;
-
-    @Schema(title = L_lastUpdateTime, description = "小于等于" + L_lastUpdateTime)
-    @Lte
-    Date lteLastUpdateTime;
-
-    // @Schema(title = L_lastUpdateTime + "-日期范围")
-    // @Between(paramDelimiter = "-")
-    // String betweenLastUpdateTime;
-
-    @Schema(title = L_orderCode)
-    Integer orderCode;
-
-    @NotNull
-    @Schema(title = L_enable)
-    Boolean enable;
-
-    @NotNull
-    @Schema(title = L_editable)
-    Boolean editable;
-
-    @Size(max = 512)
-    @Schema(title = L_remark)
-    String remark;
-
-    public StatTenantAppReq(String id) {
-        this.id = id;
-    }
 
     //
     // @Schema(description = "是否按状态分组统计")

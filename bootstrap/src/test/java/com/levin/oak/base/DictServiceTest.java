@@ -15,6 +15,7 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import com.levin.oak.base.entities.Dict.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 ////////////////////////////////////
@@ -56,7 +57,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 字典测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:12, 代码生成哈希校验码：[be9ecf2bf78a65360dde9864e1a2b103]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:21, 代码生成哈希校验码：[1d22a7d7cf24482236ce24d94522e3c0]，请不要修改和删除此行内容。
  */
 
 // @ActiveProfiles("test")

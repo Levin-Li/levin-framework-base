@@ -47,6 +47,7 @@ import com.levin.commons.service.support.InjectConsts;
 import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.SimpleApi.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -56,7 +57,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 简单动态接口-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月15日 下午6:26:10, 代码生成哈希校验码：[1422ed34f38e78857a1c4f6e4e7618da]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月16日 下午9:16:18, 代码生成哈希校验码：[09beaaec821146522185052105c0215f]，请不要修改和删除此行内容。
  */
 @Service(PLUGIN_PREFIX + "SimpleApiService")
 @DubboService
