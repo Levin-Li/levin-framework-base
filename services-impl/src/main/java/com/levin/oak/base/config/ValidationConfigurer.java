@@ -24,7 +24,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Slf4j
 @Configuration(PLUGIN_PREFIX + "ValidationConfigurer")
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ValidationConfigurer", matchIfMissing = true)
-@ConditionalOnClass({Validator.class,})
+@ConditionalOnClass({Validator.class, HibernateValidator.class})
 @ConditionalOnMissingBean({Validator.class,})
 public class ValidationConfigurer {
 
