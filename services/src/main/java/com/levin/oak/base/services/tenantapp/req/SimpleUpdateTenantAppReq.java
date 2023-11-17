@@ -44,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[4473291112e4457cf45e50a003a338ae]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:50, 代码生成哈希校验码：[6a1c12d8ccb81181fdd57e091c1253b8]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -71,12 +71,15 @@ public class SimpleUpdateTenantAppReq extends MultiTenantReq {
     @Schema(title = L_name)
     String name;
 
+    @Size(max = 255)
     @Schema(title = L_logo)
     String logo;
 
+    @Size(max = 255)
     @Schema(title = L_entryUrl)
     String entryUrl;
 
+    @Size(max = 255)
     @Schema(title = L_infoUrl)
     String infoUrl;
 
@@ -89,6 +92,7 @@ public class SimpleUpdateTenantAppReq extends MultiTenantReq {
     @Schema(title = L_modules)
     List<String> modules;
 
+    @Size(max = 255)
     @Schema(title = L_appSecret, description = D_appSecret)
     String appSecret;
 
@@ -98,6 +102,7 @@ public class SimpleUpdateTenantAppReq extends MultiTenantReq {
     @Schema(title = L_purchasePrice, description = D_purchasePrice)
     BigDecimal purchasePrice;
 
+    @Size(max = 255)
     @Schema(title = L_orderNo, description = D_orderNo)
     String orderNo;
 

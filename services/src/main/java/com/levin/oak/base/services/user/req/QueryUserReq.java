@@ -52,7 +52,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[c827e0aeff8aff95209a693838aae88d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:51, 代码生成哈希校验码：[5492e3efc6d76ff854e01c026f00e9f8]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -85,12 +85,9 @@ public class QueryUserReq extends MultiTenantOrgReq {
             desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_id)
     String id;
 
-    @Size(max = 20)
     @Schema(title = L_telephone, description = D_telephone)
     String telephone;
 
@@ -98,16 +95,13 @@ public class QueryUserReq extends MultiTenantOrgReq {
     @Contains
     String containsTelephone;
 
-    @Size(max = 32)
     @Schema(title = L_email, description = D_email)
     String email;
 
-    @Size(max = 256)
     @JsonIgnore(value = true)
     @Schema(title = L_password)
     String password;
 
-    @Size(max = 32)
     @Schema(title = L_nickname)
     String nickname;
 
@@ -121,7 +115,6 @@ public class QueryUserReq extends MultiTenantOrgReq {
     @Schema(title = L_sex)
     Sex sex;
 
-    @Size(max = 1800)
     @OR(autoClose = true)
     @Contains
     @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
@@ -143,11 +136,9 @@ public class QueryUserReq extends MultiTenantOrgReq {
     @Between
     String betweenExpiredDate;
 
-    @NotNull
     @Schema(title = L_state)
     State state;
 
-    @Size(max = 32)
     @Schema(title = L_staffNo)
     String staffNo;
 
@@ -155,11 +146,9 @@ public class QueryUserReq extends MultiTenantOrgReq {
     @Contains
     String containsStaffNo;
 
-    @Size(max = 128)
     @Schema(title = L_jobPostCode)
     String jobPostCode;
 
-    @Size(max = 1800)
     @OR(autoClose = true)
     @Contains
     @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
@@ -170,21 +159,16 @@ public class QueryUserReq extends MultiTenantOrgReq {
     @Fetch(attrs = E_User.org, condition = "#_val == true")
     Boolean loadOrg;
 
-    @Size(max = 64)
     @Schema(title = L_wxOpenId)
     String wxOpenId;
 
-    @Size(max = 64)
     @Schema(title = L_aliOpenId)
     String aliOpenId;
 
-    @Size(max = 128)
     @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_name)
     String name;
 
@@ -193,11 +177,9 @@ public class QueryUserReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
-    @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
 
-    @NotNull
     @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
@@ -225,15 +207,12 @@ public class QueryUserReq extends MultiTenantOrgReq {
     @Schema(title = L_orderCode)
     Integer orderCode;
 
-    @NotNull
     @Schema(title = L_enable)
     Boolean enable;
 
-    @NotNull
     @Schema(title = L_editable)
     Boolean editable;
 
-    @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
 

@@ -49,7 +49,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 查询区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[43613ce9a77a366dc742ca325c09cafa]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:52, 代码生成哈希校验码：[36d4515f4f7c0c46c0d236763358d5e5]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -82,8 +82,6 @@ public class QueryAreaReq extends BaseReq {
             desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_code)
     String code;
 
@@ -94,7 +92,6 @@ public class QueryAreaReq extends BaseReq {
     @Schema(title = L_icon)
     String icon;
 
-    @Size(max = 64)
     @Schema(title = L_parentCode)
     String parentCode;
 
@@ -106,12 +103,9 @@ public class QueryAreaReq extends BaseReq {
     @Fetch(attrs = E_Area.children, condition = "#_val == true")
     Boolean loadChildren;
 
-    @NotNull
     @Schema(title = L_type)
     Type type;
 
-    @NotBlank
-    @Size(max = 128)
     @Schema(title = L_name)
     String name;
 
@@ -119,7 +113,6 @@ public class QueryAreaReq extends BaseReq {
     @Contains
     String containsName;
 
-    @Size(max = 128)
     @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
@@ -128,11 +121,9 @@ public class QueryAreaReq extends BaseReq {
     String containsPinyinName;
 
     @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
-    @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
 
-    @NotNull
     @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
@@ -160,15 +151,12 @@ public class QueryAreaReq extends BaseReq {
     @Schema(title = L_orderCode)
     Integer orderCode;
 
-    @NotNull
     @Schema(title = L_enable)
     Boolean enable;
 
-    @NotNull
     @Schema(title = L_editable)
     Boolean editable;
 
-    @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
 

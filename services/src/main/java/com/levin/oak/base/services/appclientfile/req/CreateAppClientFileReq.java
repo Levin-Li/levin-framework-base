@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[c91ea3124d4bf6416ca365e6f80ec0c4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:51, 代码生成哈希校验码：[334b66ea5a2b25e99ee2df2c7099fd0b]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -66,6 +66,7 @@ public class CreateAppClientFileReq extends MultiTenantOrgReq {
 
     @Schema(title = L_path, description = D_path)
     @NotBlank
+    @Size(max = 255)
     String path;
 
     @Schema(title = L_content, description = D_content)

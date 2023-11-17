@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[ce89437cfa358233717032fbc26c7fc1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:51, 代码生成哈希校验码：[cb1f53353d94bbf8afdd1f31914ac3f3]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -68,6 +68,7 @@ public class SimpleCreateAccessLogReq extends MultiTenantOrgReq {
 
     @Schema(title = L_title)
     @NotBlank
+    @Size(max = 255)
     String title;
 
     @Schema(title = L_logType)

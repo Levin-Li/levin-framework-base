@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[6dd80f2b23561d8eeac5a0ed7257a051]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:51, 代码生成哈希校验码：[22da7d4123ac6c480116b11776bb80ab]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -82,15 +82,12 @@ public class QueryAppErrorLogReq extends MultiTenantReq {
             desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
-    @NotNull
     @Schema(title = L_id)
     Long id;
 
-    @Size(max = 64)
     @Schema(title = L_moduleId)
     String moduleId;
 
-    @NotNull
     @Schema(title = L_occurTime, description = L_occurTime + "大于等于字段值")
     @Gte
     Date gteOccurTime;
@@ -103,8 +100,6 @@ public class QueryAppErrorLogReq extends MultiTenantReq {
     @Between
     String betweenOccurTime;
 
-    @NotBlank
-    @Size(max = 768)
     @Schema(title = L_title)
     String title;
 

@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[488b2e722816c670a42227a7bdf066ad]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:51, 代码生成哈希校验码：[547de4a2eb33f0c7023267527f3978d5]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -82,30 +82,22 @@ public class QueryNoticeProcessLogReq extends MultiTenantOrgReq {
             desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_id)
     String id;
 
     @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
-    @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
 
-    @NotBlank
-    @Size(max = 128)
     @Schema(title = L_noticeId)
     String noticeId;
 
-    @Size(max = 128)
     @Schema(title = L_status)
     String status;
 
-    @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
 
-    @NotNull
     @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;

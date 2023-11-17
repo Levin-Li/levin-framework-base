@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[125b95f44d54488a7f46af77761a31aa]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:51, 代码生成哈希校验码：[3942af039512968bbc52514bc9ec227d]，请不要修改和删除此行内容。
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
@@ -68,6 +68,7 @@ public class CreateScheduledTaskReq extends MultiTenantOrgReq {
 
     @Schema(title = L_cron)
     @NotBlank
+    @Size(max = 255)
     String cron;
 
     @Schema(title = L_invokeExpr, description = D_invokeExpr)

@@ -49,7 +49,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[ac8a7f6cfb604d9294a2e6fe03002dee]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:52, 代码生成哈希校验码：[d627b196f2e8c0f003e13a968df2ca05]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -88,23 +88,15 @@ public class QuerySimpleFormReq extends MultiTenantOrgReq {
     @Schema(title = L_commitApi)
     String commitApi;
 
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_id)
     String id;
 
-    @NotBlank
-    @Size(max = 128)
     @Schema(title = L_type)
     String type;
 
-    @NotBlank
-    @Size(max = 128)
     @Schema(title = L_category)
     String category;
 
-    @NotBlank
-    @Size(max = 128)
     @Schema(title = L_groupName)
     String groupName;
 
@@ -115,12 +107,9 @@ public class QuerySimpleFormReq extends MultiTenantOrgReq {
     @Schema(title = L_icon)
     String icon;
 
-    @NotBlank
-    @Size(max = 800)
     @Schema(title = L_path)
     String path;
 
-    @Size(max = 1800)
     @OR(autoClose = true)
     @Contains
     @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
@@ -130,13 +119,10 @@ public class QuerySimpleFormReq extends MultiTenantOrgReq {
     @Schema(title = L_content)
     String content;
 
-    @Size(max = 128)
     @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_name)
     String name;
 
@@ -145,11 +131,9 @@ public class QuerySimpleFormReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
-    @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
 
-    @NotNull
     @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
@@ -177,15 +161,12 @@ public class QuerySimpleFormReq extends MultiTenantOrgReq {
     @Schema(title = L_orderCode)
     Integer orderCode;
 
-    @NotNull
     @Schema(title = L_enable)
     Boolean enable;
 
-    @NotNull
     @Schema(title = L_editable)
     Boolean editable;
 
-    @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
 

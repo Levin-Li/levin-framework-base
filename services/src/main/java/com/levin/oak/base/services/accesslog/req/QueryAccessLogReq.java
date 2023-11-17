@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[598567f7946b18de5108f39e4c2ac8f2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:51, 代码生成哈希校验码：[ae423ea823514fc6d73bc1a691d354e1]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -82,7 +82,6 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
             desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
-    @NotNull
     @Schema(title = L_id)
     Long id;
 
@@ -100,7 +99,6 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
     @Contains
     String containsModule;
 
-    @Size(max = 64)
     @InjectVar(value = InjectConst.USER_NAME, isRequired = "false")
     @Schema(title = L_visitor)
     String visitor;
@@ -109,7 +107,6 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
     @Contains
     String containsVisitor;
 
-    @NotBlank
     @Schema(title = L_title)
     String title;
 
@@ -117,7 +114,6 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
     @Contains
     String containsTitle;
 
-    @Size(max = 64)
     @Schema(title = L_logType)
     String logType;
 
@@ -138,7 +134,6 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
     @Contains
     String containsBizType;
 
-    @Size(max = 768)
     @Schema(title = L_requestUri)
     String requestUri;
 
@@ -146,7 +141,6 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
     @Contains
     String containsRequestUri;
 
-    @Size(max = 32)
     @Schema(title = L_requestMethod)
     String requestMethod;
 
@@ -162,7 +156,6 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
     @Schema(title = L_responseBody)
     String responseBody;
 
-    @Size(max = 128)
     @Schema(title = L_remoteAddr)
     String remoteAddr;
 
@@ -170,7 +163,6 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
     @Contains
     String containsRemoteAddr;
 
-    @Size(max = 256)
     @Schema(title = L_accessRegion)
     String accessRegion;
 
@@ -178,7 +170,6 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
     @Contains
     String containsAccessRegion;
 
-    @Size(max = 64)
     @Schema(title = L_serverAddr)
     String serverAddr;
 
@@ -188,7 +179,6 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
     @Schema(title = L_exceptionInfo)
     String exceptionInfo;
 
-    @Size(max = 1800)
     @Schema(title = L_userAgent)
     String userAgent;
 
@@ -196,18 +186,15 @@ public class QueryAccessLogReq extends MultiTenantOrgReq {
     @Contains
     String containsUserAgent;
 
-    @Size(max = 128)
     @Schema(title = L_deviceName)
     String deviceName;
 
-    @Size(max = 128)
     @Schema(title = L_browserName)
     String browserName;
 
     @Schema(title = L_executeTime)
     Long executeTime;
 
-    @NotNull
     @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;

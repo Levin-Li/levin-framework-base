@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[40dd8b8c63232651c4d19781765b60b1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:50, 代码生成哈希校验码：[9ea0938274e978949b4ce9020da37f47]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -84,6 +84,7 @@ public class UpdateTenantReq extends BaseReq {
     String code;
 
     @NotBlank
+    @Size(max = 255)
     @Schema(title = L_tenantKey)
     String tenantKey;
 

@@ -48,7 +48,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[461f988473c9f923424a809cad25c1e6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:52, 代码生成哈希校验码：[17c395f3ad3534b994ae5eaef0bf870b]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -81,13 +81,9 @@ public class QueryJobPostReq extends MultiTenantOrgReq {
             desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_id)
     String id;
 
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_code)
     String code;
 
@@ -95,17 +91,13 @@ public class QueryJobPostReq extends MultiTenantOrgReq {
     @Contains
     String containsCode;
 
-    @NotNull
     @Schema(title = L_type)
     Type type;
 
-    @Size(max = 128)
     @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_name)
     String name;
 
@@ -114,11 +106,9 @@ public class QueryJobPostReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
     @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
-    @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
 
-    @NotNull
     @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
@@ -146,15 +136,12 @@ public class QueryJobPostReq extends MultiTenantOrgReq {
     @Schema(title = L_orderCode)
     Integer orderCode;
 
-    @NotNull
     @Schema(title = L_enable)
     Boolean enable;
 
-    @NotNull
     @Schema(title = L_editable)
     Boolean editable;
 
-    @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
 

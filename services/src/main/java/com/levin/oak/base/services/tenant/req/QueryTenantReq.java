@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[a50086cbf4402140739cb72f25f49e34]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:50, 代码生成哈希校验码：[db656aaab9852b76f4c9eb6ee01faf84]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -80,12 +80,9 @@ public class QueryTenantReq extends BaseReq {
             desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_id)
     String id;
 
-    @Size(max = 128)
     @Schema(title = L_sysName)
     String sysName;
 
@@ -95,11 +92,9 @@ public class QueryTenantReq extends BaseReq {
     @Schema(title = L_logo)
     String logo;
 
-    @Size(max = 128)
     @Schema(title = L_code)
     String code;
 
-    @NotBlank
     @Schema(title = L_tenantKey)
     String tenantKey;
 
@@ -124,35 +119,27 @@ public class QueryTenantReq extends BaseReq {
     @Between
     String betweenLicenseExpire;
 
-    @Size(max = 32)
     @Schema(title = L_contractPerson)
     String contractPerson;
 
-    @Size(max = 32)
     @Schema(title = L_contractPhone)
     String contractPhone;
 
-    @Size(max = 1200)
     @OR(autoClose = true)
     @Contains
     @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Schema(title = L_domainList)
     List<String> domainList;
 
-    @Size(max = 64)
     @Schema(title = L_appId)
     String appId;
 
-    @Size(max = 512)
     @Schema(title = L_appSecret)
     String appSecret;
 
-    @Size(max = 512)
     @Schema(title = L_encryptKey)
     String encryptKey;
 
-    @NotBlank
-    @Size(max = 128)
     @Schema(title = L_name)
     String name;
 
@@ -160,7 +147,6 @@ public class QueryTenantReq extends BaseReq {
     @Contains
     String containsName;
 
-    @Size(max = 128)
     @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
@@ -169,11 +155,9 @@ public class QueryTenantReq extends BaseReq {
     String containsPinyinName;
 
     @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
-    @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
 
-    @NotNull
     @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
@@ -201,15 +185,12 @@ public class QueryTenantReq extends BaseReq {
     @Schema(title = L_orderCode)
     Integer orderCode;
 
-    @NotNull
     @Schema(title = L_enable)
     Boolean enable;
 
-    @NotNull
     @Schema(title = L_editable)
     Boolean editable;
 
-    @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
 

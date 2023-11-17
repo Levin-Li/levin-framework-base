@@ -35,7 +35,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[28b7aae65c41baed2942231b70002b3f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:51, 代码生成哈希校验码：[9d023cd37773165cc4bfe2fa4f2aadb7]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -65,6 +65,7 @@ public class AccessLogInfo implements Serializable {
     String visitor;
 
     @NotBlank
+    @Size(max = 255)
     @Schema(title = L_title)
     String title;
 

@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[bf695c4be1087981ef81745611c51031]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:51, 代码生成哈希校验码：[6b1cd40cba37fe50938c70b559b1cefd]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -73,6 +73,7 @@ public class SimpleUpdateAppClientFileReq extends MultiTenantOrgReq {
     String mimeType;
 
     @NotBlank
+    @Size(max = 255)
     @Schema(title = L_path, description = D_path)
     String path;
 

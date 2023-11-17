@@ -36,7 +36,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:19, 代码生成哈希校验码：[11ec9b642787b1e7a02d505ffc60a46a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:50, 代码生成哈希校验码：[0939172e52f21cb069d3c2cea74dde17]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -70,6 +70,7 @@ public class SimpleTenantInfo implements Serializable {
     String code;
 
     @NotBlank
+    @Size(max = 255)
     @Schema(title = L_tenantKey)
     String tenantKey;
 
