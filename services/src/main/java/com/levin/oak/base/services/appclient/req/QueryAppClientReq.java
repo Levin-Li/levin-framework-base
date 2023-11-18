@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 下午2:38:09, 代码生成哈希校验码：[a4c607c968471dbd11722b94b3dd9ef5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:49:36, 代码生成哈希校验码：[a4c607c968471dbd11722b94b3dd9ef5]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -95,6 +95,7 @@ public class QueryAppClientReq extends MultiTenantOrgReq {
     @Schema(title = L_appToken)
     String appToken;
 
+    // @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -105,6 +106,7 @@ public class QueryAppClientReq extends MultiTenantOrgReq {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

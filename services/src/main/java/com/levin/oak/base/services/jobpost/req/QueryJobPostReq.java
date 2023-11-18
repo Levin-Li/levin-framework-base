@@ -48,7 +48,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 下午2:38:10, 代码生成哈希校验码：[6853a9529bdf6649eb8696eb51f97318]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:49:38, 代码生成哈希校验码：[6853a9529bdf6649eb8696eb51f97318]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -94,6 +94,7 @@ public class QueryJobPostReq extends MultiTenantOrgReq {
     @Schema(title = L_type)
     Type type;
 
+    // @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -104,6 +105,7 @@ public class QueryJobPostReq extends MultiTenantOrgReq {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

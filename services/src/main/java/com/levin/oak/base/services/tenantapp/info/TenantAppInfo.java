@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:50, 代码生成哈希校验码：[867b05b280d5cfe3d31142353a156897]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:53:15, 代码生成哈希校验码：[38e7d6846a0013ce2fb9c114a629f18f]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -74,12 +74,9 @@ public class TenantAppInfo implements Serializable {
     @Schema(title = L_infoUrl)
     String infoUrl;
 
+    // @InjectVar(domain = "dao", isRequired = "false", converter =
+    // PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
     @Size(max = 1800)
-    @InjectVar(
-            domain = "dao",
-            isRequired = "false",
-            converter = PrimitiveArrayJsonConverter.class,
-            expectBaseType = String.class)
     @Schema(title = L_modules)
     List<String> modules;
 
@@ -100,12 +97,12 @@ public class TenantAppInfo implements Serializable {
     @Schema(title = L_expiredTime, description = D_expiredTime)
     Date expiredTime;
 
+    // @InjectVar(value = InjectConst.TENANT_ID)
     @Size(max = 128)
-    @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
 
-    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
     @Schema(title = L_creator)
     String creator;

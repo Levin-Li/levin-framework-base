@@ -37,7 +37,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[e8c5c866ab7600b6055195c3ef0394e1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:53:16, 代码生成哈希校验码：[c2864c29fb89ce1f71e35d37e8d85b8a]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -65,8 +65,8 @@ public class JobPostInfo implements Serializable {
     @Schema(title = L_type)
     Type type;
 
+    // @InjectVar(value = "sysDomain", isRequired = "false")
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -79,17 +79,17 @@ public class JobPostInfo implements Serializable {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
+    // @InjectVar(value = InjectConst.ORG_ID)
     @Size(max = 128)
-    @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 
+    // @InjectVar(value = InjectConst.TENANT_ID)
     @Size(max = 128)
-    @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
 
-    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
     @Schema(title = L_creator)
     String creator;

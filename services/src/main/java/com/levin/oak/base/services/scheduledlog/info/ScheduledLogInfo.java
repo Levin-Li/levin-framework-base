@@ -35,7 +35,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[b64b150eb1399086ee6c0161f8fd47d8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:53:15, 代码生成哈希校验码：[bfdf9c4c9e7db82cd6a9082975965e42]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -71,13 +71,13 @@ public class ScheduledLogInfo implements Serializable {
     @Schema(title = L_invokeResult)
     String invokeResult;
 
+    // @InjectVar(value = InjectConst.TENANT_ID)
     @Size(max = 128)
-    @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
 
+    // @InjectVar(value = InjectConst.ORG_ID)
     @Size(max = 128)
-    @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 

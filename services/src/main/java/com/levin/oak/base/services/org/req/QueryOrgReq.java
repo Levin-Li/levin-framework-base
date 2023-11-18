@@ -52,7 +52,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 下午2:38:10, 代码生成哈希校验码：[68b8d1c2874225cbaa671795740574f4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:43:15, 代码生成哈希校验码：[68b8d1c2874225cbaa671795740574f4]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -185,6 +185,7 @@ public class QueryOrgReq extends MultiTenantReq {
     @Contains
     String containsPinyinName;
 
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

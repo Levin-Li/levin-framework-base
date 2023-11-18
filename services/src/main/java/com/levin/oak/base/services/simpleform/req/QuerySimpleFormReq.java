@@ -49,7 +49,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 下午2:38:11, 代码生成哈希校验码：[a89ebd66474b58ce58d095acaa1da0ee]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:49:38, 代码生成哈希校验码：[ea13821a9d8bcb5e1648c0e7afd562c0]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -110,12 +110,16 @@ public class QuerySimpleFormReq extends MultiTenantOrgReq {
     @Schema(title = L_path)
     String path;
 
+    @OR(autoClose = true)
+    @Contains
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
 
     @Schema(title = L_content)
     String content;
 
+    // @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -126,6 +130,7 @@ public class QuerySimpleFormReq extends MultiTenantOrgReq {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

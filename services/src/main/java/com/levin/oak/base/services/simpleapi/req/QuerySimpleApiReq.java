@@ -50,7 +50,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 下午2:38:08, 代码生成哈希校验码：[a92e773df11a1469fa64941b61a0b5e4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:49:36, 代码生成哈希校验码：[489d8d985004449204629652d892e350]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -114,12 +114,16 @@ public class QuerySimpleApiReq extends MultiTenantOrgReq {
     @Schema(title = L_path)
     String path;
 
+    @OR(autoClose = true)
+    @Contains
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
 
     @Schema(title = L_content)
     String content;
 
+    // @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -130,6 +134,7 @@ public class QuerySimpleApiReq extends MultiTenantOrgReq {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

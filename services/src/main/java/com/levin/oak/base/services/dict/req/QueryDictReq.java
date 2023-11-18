@@ -50,7 +50,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 下午2:38:09, 代码生成哈希校验码：[fd3b4211f6d3f9c7f66d2cb6e69bd888]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:49:37, 代码生成哈希校验码：[fd3b4211f6d3f9c7f66d2cb6e69bd888]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -96,9 +96,12 @@ public class QueryDictReq extends MultiTenantOrgReq {
     @Contains
     String containsCode;
 
+    // @InjectVar(domain = "dao", isRequired = "false", converter = DefaultJsonConverter.class,
+    // expectBaseType = String.class)
     @Schema(title = L_itemList, description = D_itemList)
     List<Item> itemList;
 
+    // @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -109,6 +112,7 @@ public class QueryDictReq extends MultiTenantOrgReq {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 

@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[88a658096808436cee33510d9961a90f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:53:16, 代码生成哈希校验码：[62c79a6ca0b202268abcab66b918e4d2]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -156,7 +156,7 @@ public class OrgInfo implements Serializable {
     @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
-    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
