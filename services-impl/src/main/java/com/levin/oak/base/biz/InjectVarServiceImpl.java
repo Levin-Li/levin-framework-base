@@ -35,6 +35,7 @@ import java.util.stream.Stream;
  * 注入服务
  * 正常情况下该服务不需要应用，注入操作在web控制器中完成。
  * 正常情况下，一个项目只需要一个注入服务，为项目提供注入上下文。
+ *
  * @author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午3:13:28, 请不要修改和删除此行内容。
  * 代码生成哈希校验码：[85874579771b0a114fb0ab09f87404f1], 请不要修改和删除此行内容。
  */
@@ -107,7 +108,7 @@ public class InjectVarServiceImpl implements InjectVarService {
     public void init() {
         log.info("启用模块注入服务...");
         //设置上下文
-        variableResolverManager.add(VariableInjector.newResolverByMap(() -> Arrays.asList(getInjectVars())));
+        variableResolverManager.addSuppliers(() -> VariableInjector.newResolverByMap(() -> Arrays.asList(getInjectVars())));
     }
 
 
@@ -177,9 +178,6 @@ public class InjectVarServiceImpl implements InjectVarService {
         final Map<String, Object> ctx = builder.build();
 
         result = ctx;
-
-        //设置注入变量到Dao上下文中
-        DaoContext.threadContext.putAll(ctx);
 
         //缓存到请求对象重
         varCache.set(result);

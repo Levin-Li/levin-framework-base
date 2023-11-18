@@ -128,7 +128,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
         //重要逻辑点
 
         //1、设置上下文
-        variableResolverManager.add(VariableInjector.newResolverByMap(() -> Arrays.asList(getInjectVars())));
+        variableResolverManager.addSuppliers(() -> VariableInjector.newResolverByMap(() -> Arrays.asList(getInjectVars())));
 
         //2、动态加入用户相关的动态的会变的数据，如用户能访问的机构列表，用户权限列表
 
@@ -225,9 +225,6 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
         final Map<String, Object> ctx = builder.build();
 
         result = ctx;
-
-        //设置注入变量到Dao上下文中
-        DaoContext.threadContext.putAll(ctx);
 
         //缓存到请求对象重
         httpServletRequest.setAttribute(INJECT_VAR_CACHE_KEY, result);
