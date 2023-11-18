@@ -2,6 +2,7 @@ package com.levin.oak.base;
 
 import static com.levin.oak.base.ModuleOption.*;
 
+import com.levin.commons.dao.DaoContext;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.utils.ExceptionUtils;
@@ -224,6 +225,9 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
         final Map<String, Object> ctx = builder.build();
 
         result = ctx;
+
+        //设置注入变量到Dao上下文中
+        DaoContext.threadContext.putAll(ctx);
 
         //缓存到请求对象重
         httpServletRequest.setAttribute(INJECT_VAR_CACHE_KEY, result);

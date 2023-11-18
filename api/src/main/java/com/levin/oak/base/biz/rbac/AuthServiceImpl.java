@@ -297,7 +297,16 @@ public class AuthServiceImpl
 
     @Override
     public boolean isLogin() {
-        return StpUtil.isLogin();
+
+        if (!StpUtil.isLogin()) {
+            return false;
+        }
+
+        try {
+            return getUserInfo() != null;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 
