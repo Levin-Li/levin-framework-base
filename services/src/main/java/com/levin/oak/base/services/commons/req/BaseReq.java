@@ -1,7 +1,11 @@
 package com.levin.oak.base.services.commons.req;
 
-import com.levin.commons.dao.domain.OrganizedObject;
-import com.levin.commons.service.support.InjectConst;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.domain.*;
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.dao.*;
@@ -27,7 +31,7 @@ import java.util.*;
 /**
  * 基本查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:32:29, 代码生成哈希校验码：[16424e2352e5069d5f680d3e3be0dce9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 下午2:48:13, 代码生成哈希校验码：[82d6ab0af644c13dbe23088ab5fceeb3]，请不要修改和删除此行内容。
  */
 @Schema(title = "基本查询对象")
 @Data

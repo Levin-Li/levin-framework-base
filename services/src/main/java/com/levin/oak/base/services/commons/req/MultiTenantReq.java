@@ -1,12 +1,10 @@
 package com.levin.oak.base.services.commons.req;
 
-import com.levin.commons.dao.annotation.Eq;
-import com.levin.commons.dao.annotation.IsNull;
-import com.levin.commons.dao.annotation.logic.OR;
-import com.levin.commons.dao.domain.MultiTenantObject;
-import com.levin.commons.dao.domain.OrganizedObject;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.domain.*;
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +16,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:32:29, 代码生成哈希校验码：[76b000eb140015207739788490a475c8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 下午2:42:21, 代码生成哈希校验码：[31c2254345f846b0940623ce690fcf50]，请不要修改和删除此行内容。
  */
 @Schema(title = "多租户查询对象")
 @Data

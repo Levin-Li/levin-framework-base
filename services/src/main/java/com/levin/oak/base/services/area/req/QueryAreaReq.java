@@ -49,7 +49,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 查询区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:52, 代码生成哈希校验码：[36d4515f4f7c0c46c0d236763358d5e5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 下午2:38:11, 代码生成哈希校验码：[2734eaf838c29e6bd417a1783f015bcf]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -120,7 +120,6 @@ public class QueryAreaReq extends BaseReq {
     @Contains
     String containsPinyinName;
 
-    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 
