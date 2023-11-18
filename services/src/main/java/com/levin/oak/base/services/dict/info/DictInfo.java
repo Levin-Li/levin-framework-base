@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:53:15, 代码生成哈希校验码：[998c8c63b4f18093fd1f833b649c55d6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:34, 代码生成哈希校验码：[b055291f3ea17643eb7e5738ef7bda8f]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -67,13 +67,16 @@ public class DictInfo implements Serializable {
     @Schema(title = L_code)
     String code;
 
-    // @InjectVar(domain = "dao", isRequired = "false", converter = DefaultJsonConverter.class,
-    // expectBaseType = String.class)
+    @InjectVar(
+            domain = "dao",
+            isRequired = "false",
+            converter = DefaultJsonConverter.class,
+            expectBaseType = String.class)
     @Schema(title = L_itemList, description = D_itemList)
     List<Item> itemList;
 
-    // @InjectVar(value = "sysDomain", isRequired = "false")
     @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -86,17 +89,17 @@ public class DictInfo implements Serializable {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
-    // @InjectVar(value = InjectConst.ORG_ID)
     @Size(max = 128)
+    @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 
-    // @InjectVar(value = InjectConst.TENANT_ID)
     @Size(max = 128)
+    @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
 
-    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
     @Schema(title = L_creator)
     String creator;

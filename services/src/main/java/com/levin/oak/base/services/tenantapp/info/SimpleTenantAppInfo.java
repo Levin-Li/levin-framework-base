@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:53:15, 代码生成哈希校验码：[ee15ede1a316eb8e56b2b7eaf3cae5b1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:34, 代码生成哈希校验码：[ea885110899d5e303362b41dbdd0ea98]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -75,9 +75,12 @@ public class SimpleTenantAppInfo implements Serializable {
     @Schema(title = L_infoUrl)
     String infoUrl;
 
-    // @InjectVar(domain = "dao", isRequired = "false", converter =
-    // PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
     @Size(max = 1800)
+    @InjectVar(
+            domain = "dao",
+            isRequired = "false",
+            converter = PrimitiveArrayJsonConverter.class,
+            expectBaseType = String.class)
     @Schema(title = L_modules)
     List<String> modules;
 
@@ -98,8 +101,8 @@ public class SimpleTenantAppInfo implements Serializable {
     @Schema(title = L_expiredTime, description = D_expiredTime)
     Date expiredTime;
 
-    // @InjectVar(value = InjectConst.TENANT_ID)
     @Size(max = 128)
+    @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
 }

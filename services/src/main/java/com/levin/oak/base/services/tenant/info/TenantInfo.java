@@ -36,7 +36,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:53:15, 代码生成哈希校验码：[063924bb7363ac4caae1d936832c3a08]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:34, 代码生成哈希校验码：[6f1c5d0300aca6f0586e2965d26f155d]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -93,9 +93,12 @@ public class TenantInfo implements Serializable {
     @Schema(title = L_contractPhone)
     String contractPhone;
 
-    // @InjectVar(domain = "dao", isRequired = "false", converter =
-    // PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
     @Size(max = 1200)
+    @InjectVar(
+            domain = "dao",
+            isRequired = "false",
+            converter = PrimitiveArrayJsonConverter.class,
+            expectBaseType = String.class)
     @Schema(title = L_domainList)
     List<String> domainList;
 
@@ -120,7 +123,7 @@ public class TenantInfo implements Serializable {
     @Schema(title = L_pinyinName, description = D_pinyinName)
     String pinyinName;
 
-    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
     @Schema(title = L_creator)
     String creator;

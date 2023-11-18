@@ -35,7 +35,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:53:16, 代码生成哈希校验码：[e36948a996b342253130c459a563bc08]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:35, 代码生成哈希校验码：[2e75a23e138d7b19d0e7b89dfb40753d]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -55,7 +55,7 @@ public class SimpleNoticeProcessLogInfo implements Serializable {
     @Schema(title = L_id)
     String id;
 
-    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
@@ -73,13 +73,13 @@ public class SimpleNoticeProcessLogInfo implements Serializable {
     @Schema(title = L_remark)
     String remark;
 
-    // @InjectVar(value = InjectConst.TENANT_ID)
     @Size(max = 128)
+    @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
 
-    // @InjectVar(value = InjectConst.ORG_ID)
     @Size(max = 128)
+    @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 

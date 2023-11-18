@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:53:14, 代码生成哈希校验码：[7e33a8a029525ca3e5c2bd7022c7e3b0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:33, 代码生成哈希校验码：[3174b736b4fd1359816eec0d9eb18efb]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -71,18 +71,24 @@ public class SimpleRoleInfo implements Serializable {
     @Schema(title = L_orgDataScope, description = D_orgDataScope)
     OrgDataScope orgDataScope;
 
-    // @InjectVar(domain = "dao", isRequired = "false", converter =
-    // PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
+    @InjectVar(
+            domain = "dao",
+            isRequired = "false",
+            converter = PrimitiveArrayJsonConverter.class,
+            expectBaseType = String.class)
     @Schema(title = L_assignedOrgIdList, description = D_assignedOrgIdList)
     List<String> assignedOrgIdList;
 
-    // @InjectVar(domain = "dao", isRequired = "false", converter =
-    // PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
+    @InjectVar(
+            domain = "dao",
+            isRequired = "false",
+            converter = PrimitiveArrayJsonConverter.class,
+            expectBaseType = String.class)
     @Schema(title = L_permissionList, description = D_permissionList)
     List<String> permissionList;
 
-    // @InjectVar(value = "sysDomain", isRequired = "false")
     @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
     @Schema(title = L_domain, description = D_domain)
     String domain;
 
@@ -95,13 +101,13 @@ public class SimpleRoleInfo implements Serializable {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
-    // @InjectVar(value = InjectConst.ORG_ID)
     @Size(max = 128)
+    @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
     String orgId;
 
-    // @InjectVar(value = InjectConst.TENANT_ID)
     @Size(max = 128)
+    @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
 }
