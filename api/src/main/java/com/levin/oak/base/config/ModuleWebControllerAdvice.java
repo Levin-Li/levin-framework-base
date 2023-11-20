@@ -24,6 +24,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -135,7 +137,7 @@ public class ModuleWebControllerAdvice {
 
                     if (fieldError != null && target != null) {
 
-                        Field field = ClassUtil.getDeclaredField(target.getClass(), fieldError.getField());
+                        Field field = ReflectionUtils.findField(target.getClass(), fieldError.getField());
 
                         Schema schema = field.getAnnotation(Schema.class);
 
