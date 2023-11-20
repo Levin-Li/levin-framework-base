@@ -137,20 +137,23 @@ public class ModuleWebControllerAdvice {
 
                     if (fieldError != null && target != null) {
 
-                        Field field = ReflectionUtils.findField(target.getClass(), fieldError.getField());
-
-                        Schema schema = field.getAnnotation(Schema.class);
-
                         String errorMessage = fieldError.getField();
 
-                        if (schema != null) {
-                            errorMessage = Stream.of(schema.title(), schema.description())
-                                    .filter(StringUtils::hasText).findFirst().orElse(fieldError.getField());
+                        Field field = ReflectionUtils.findField(target.getClass(), fieldError.getField());
+
+                        if (field != null) {
+                            Schema schema = field.getAnnotation(Schema.class);
+                            if (schema != null) {
+                                errorMessage = Stream.of(schema.title(), schema.description())
+                                        .filter(StringUtils::hasText).findFirst().orElse(fieldError.getField());
+                            }
                         }
 
                         return errorMessage + "-" + fieldError.getDefaultMessage();
 
                     }
+
+
                 } else if (exception instanceof HttpMessageConversionException) {
                     return "数据转换异常";
                 }
