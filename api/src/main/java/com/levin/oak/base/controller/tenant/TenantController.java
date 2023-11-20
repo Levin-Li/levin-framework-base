@@ -90,10 +90,10 @@ public class TenantController extends BaseController {
      * @param req QueryTenantReq
      * @return ApiResp<PagingData<TenantInfo>>
      */
-    @GetMapping("/queryList")
+    @GetMapping("/list")
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
-    public ApiResp<PagingData<TenantInfo>> queryList(
+    public ApiResp<PagingData<TenantInfo>> list(
             @Form @Valid QueryTenantReq req, SimplePaging paging) {
         return ApiResp.ok(tenantService.query(req, paging));
     }

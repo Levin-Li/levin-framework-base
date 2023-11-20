@@ -17,7 +17,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户个人查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 下午2:48:13, 代码生成哈希校验码：[012e9ecfa904b85254e9c1959a7386bc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午11:35:33, 代码生成哈希校验码：[4f0f6b06535a37223c74a75b884eab4b]，请不要修改和删除此行内容。
  */
 @Schema(title = "多租户个人查询对象")
 @Data
@@ -30,17 +30,11 @@ public class MultiTenantOrgPersonalReq extends MultiTenantOrgReq implements Pers
             value = InjectConst.USER_ID,
             isOverride =
                     InjectVar.SPEL_PREFIX
-                            + "!#"
-                            + InjectConst.IS_SUPER_ADMIN
-                            + " && !#"
-                            + InjectConst.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员, 那么覆盖必须的
+                            + NOT_SUPER_ADMIN_AND_NOT_TENANT_ADMIN // 如果不是超管 也不是 租户管理员, 那么覆盖必须的
             ,
             isRequired =
                     InjectVar.SPEL_PREFIX
-                            + "!#"
-                            + InjectConst.IS_SUPER_ADMIN
-                            + " && !#"
-                            + InjectConst.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员，那么值是必须的
+                            + NOT_SUPER_ADMIN_AND_NOT_TENANT_ADMIN // 如果不是超管 也不是 租户管理员，那么值是必须的
             )
     @Schema(title = "拥有者Id", hidden = true)
     @Eq

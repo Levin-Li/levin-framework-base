@@ -31,13 +31,21 @@ import java.util.*;
 /**
  * 基本查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 下午2:48:13, 代码生成哈希校验码：[82d6ab0af644c13dbe23088ab5fceeb3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午11:35:33, 代码生成哈希校验码：[f40038d7d75fe63e60bd8ef41b73c55b]，请不要修改和删除此行内容。
  */
 @Schema(title = "基本查询对象")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
 public abstract class BaseReq implements ServiceReq {
+
+    public static final String NOT_SUPER_ADMIN = " !(#" + InjectConst.IS_SUPER_ADMIN + "?:false) ";
+
+    public static final String NOT_TENANT_ADMIN =
+            " !(#" + InjectConst.IS_TENANT_ADMIN + "?:false) ";
+
+    public static final String NOT_SUPER_ADMIN_AND_NOT_TENANT_ADMIN =
+            NOT_SUPER_ADMIN + " && " + NOT_TENANT_ADMIN;
 
     /**
      * 是否非空

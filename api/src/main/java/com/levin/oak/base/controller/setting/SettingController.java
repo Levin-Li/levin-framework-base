@@ -87,10 +87,10 @@ public class SettingController extends BaseController{
      * @param req QuerySettingReq
      * @return  ApiResp<PagingData<SettingInfo>>
      */
-    @GetMapping("/queryList")
+    @GetMapping("/list")
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
-    public ApiResp<PagingData<SettingInfo>> queryList(@Form QuerySettingReq req, SimplePaging paging) {
+    public ApiResp<PagingData<SettingInfo>> list(@Form QuerySettingReq req, SimplePaging paging) {
         return ApiResp.ok(settingService.query(req,paging));
     }
 

@@ -17,7 +17,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 下午2:48:13, 代码生成哈希校验码：[f864abc9c634b290adc6c2e14296ac52]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午11:35:33, 代码生成哈希校验码：[0be37114eb090006fe9f26292ec10022]，请不要修改和删除此行内容。
  */
 @Schema(title = "多租户查询对象")
 @Data
@@ -30,17 +30,11 @@ public class MultiTenantOrgReq extends MultiTenantReq implements MultiTenantObje
             value = InjectConst.ORG_ID,
             isOverride =
                     InjectVar.SPEL_PREFIX
-                            + "!#"
-                            + InjectConst.IS_SUPER_ADMIN
-                            + " && !#"
-                            + InjectConst.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员, 那么覆盖必须的
+                            + NOT_SUPER_ADMIN_AND_NOT_TENANT_ADMIN // 如果不是超管 也不是 租户管理员, 那么覆盖必须的
             ,
             isRequired =
                     InjectVar.SPEL_PREFIX
-                            + "!#"
-                            + InjectConst.IS_SUPER_ADMIN
-                            + " && !#"
-                            + InjectConst.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员，那么值是必须的
+                            + NOT_SUPER_ADMIN_AND_NOT_TENANT_ADMIN // 如果不是超管 也不是 租户管理员，那么值是必须的
             )
     @Schema(title = "机构ID", hidden = true)
     @Eq

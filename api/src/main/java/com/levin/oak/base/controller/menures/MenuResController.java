@@ -87,10 +87,10 @@ public class MenuResController extends BaseController{
      * @param req QueryMenuResReq
      * @return  ApiResp<PagingData<MenuResInfo>>
      */
-    @GetMapping("/queryList")
+    @GetMapping("/list")
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
-    public ApiResp<PagingData<MenuResInfo>> queryList(@Form QueryMenuResReq req, SimplePaging paging) {
+    public ApiResp<PagingData<MenuResInfo>> list(@Form QueryMenuResReq req, SimplePaging paging) {
         return ApiResp.ok(menuResService.query(req,paging));
     }
 

@@ -1,9 +1,11 @@
 package com.levin.oak.base.services.commons.req;
 
-import com.levin.commons.dao.annotation.Eq;
-import com.levin.commons.dao.domain.PersonalObject;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
+import com.levin.commons.dao.annotation.*;
+import com.levin.commons.dao.annotation.logic.*;
+import com.levin.commons.dao.domain.*;
+import com.levin.commons.service.domain.*;
+import com.levin.commons.service.support.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +17,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户个人查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 下午2:38:08, 代码生成哈希校验码：[4ed0996696b2cc6fc030c8ab7e7f982b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午11:39:21, 代码生成哈希校验码：[d221be55d066e544456736273df20eaa]，请不要修改和删除此行内容。
  */
 @Schema(title = "多租户个人查询对象")
 @Data
@@ -28,17 +30,11 @@ public class PersonalReq extends MultiTenantReq implements PersonalObject {
             value = InjectConst.USER_ID,
             isOverride =
                     InjectVar.SPEL_PREFIX
-                            + "!#"
-                            + InjectConst.IS_SUPER_ADMIN
-                            + " && !#"
-                            + InjectConst.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员, 那么覆盖必须的
+                            + NOT_SUPER_ADMIN_AND_NOT_TENANT_ADMIN // 如果不是超管 也不是 租户管理员, 那么覆盖必须的
             ,
             isRequired =
                     InjectVar.SPEL_PREFIX
-                            + "!#"
-                            + InjectConst.IS_SUPER_ADMIN
-                            + " && !#"
-                            + InjectConst.IS_TENANT_ADMIN // 如果不是超管 也不是 租户管理员，那么值是必须的
+                            + NOT_SUPER_ADMIN_AND_NOT_TENANT_ADMIN // 如果不是超管 也不是 租户管理员，那么值是必须的
             )
     @Schema(title = "拥有者Id", hidden = true)
     @Eq
