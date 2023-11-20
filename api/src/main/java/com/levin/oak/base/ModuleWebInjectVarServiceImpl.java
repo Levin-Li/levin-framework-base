@@ -172,6 +172,9 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
 
         //如果当前不是web请求，则不注入
         if (RequestContextHolder.getRequestAttributes() == null) {
+            if (log.isDebugEnabled()) {
+                log.debug("当前不是web请求");
+            }
             return Collections.emptyMap();
         }
 

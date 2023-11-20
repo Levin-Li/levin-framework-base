@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[16e53e69fbc41502d965907e34eb7b7c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午10:19:21, 代码生成哈希校验码：[ec2a5adc7ee530b21ddfbd6062b68f11]，请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -60,7 +60,7 @@ public class DeleteScheduledTaskReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -2056389676L;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#" + InjectConst.IS_SUPER_ADMIN)
+    @Eq(condition = "!#" + InjectConst.IS_SUPER_ADMIN + "?:false")
     final boolean eqEditable = true;
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)

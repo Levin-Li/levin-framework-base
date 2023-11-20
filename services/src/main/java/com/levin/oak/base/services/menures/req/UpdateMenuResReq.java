@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[6cc7a7721bd05a3fe54e24783178e21b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午10:19:21, 代码生成哈希校验码：[9996f74e2da6eaf3a025bfd0cf419865]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -69,7 +69,7 @@ public class UpdateMenuResReq extends MultiTenantReq {
     String id;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#" + InjectConst.IS_SUPER_ADMIN)
+    @Eq(condition = "!(#" + InjectConst.IS_SUPER_ADMIN + "?:false)")
     final boolean eqEditable = true;
 
     @Size(max = 64)
