@@ -18,14 +18,4 @@ public interface EntityConst
      */
     String PREFIX = "com.levin.oak.base-";
 
-    /**
-     * 通用功能，通常登录就可使用
-     */
-    String COMMON_TYPE_NAME = "系统通用";
-
-    /**
-     * 需要有管理员角色
-     */
-    String SYS_TYPE_NAME = "系统管理";
-
 }

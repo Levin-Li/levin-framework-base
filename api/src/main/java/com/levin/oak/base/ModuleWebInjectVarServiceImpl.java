@@ -26,11 +26,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -167,6 +170,11 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
     @Override
     public Map<String, ?> getInjectVars() {
 
+        //如果当前不是web请求，则不注入
+        if (RequestContextHolder.getRequestAttributes() == null) {
+            return Collections.emptyMap();
+        }
+
         //缓存在请求中
         Map<String, ?> result = (Map<String, ?>) httpServletRequest.getAttribute(INJECT_VAR_CACHE_KEY);
 
@@ -178,6 +186,8 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
 
         MapUtils.Builder<String, Object> builder
                 = MapUtils.putFirst("tenantBindDomainEnable", frameworkProperties.getTenantBindDomain().isEnable());
+
+        builder.put("isWebContext", true);
 
         //当前登录用户
         if (baseAuthService.isLogin()) {
