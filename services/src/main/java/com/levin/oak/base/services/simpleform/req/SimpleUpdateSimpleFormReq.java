@@ -44,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午10:19:21, 代码生成哈希校验码：[f59d8c4f5bef1e5774c29809eebcd056]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午4:56:56, 代码生成哈希校验码：[993a4fd8637f2ad35af4cc104603a590]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -62,8 +62,8 @@ public class SimpleUpdateSimpleFormReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1598335188L;
 
-    @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!(#" + InjectConst.IS_SUPER_ADMIN + "?:false)")
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件", hidden = true)
+    @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Schema(title = L_commitApi)

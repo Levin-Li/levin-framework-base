@@ -190,7 +190,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
         MapUtils.Builder<String, Object> builder
                 = MapUtils.putFirst("tenantBindDomainEnable", frameworkProperties.getTenantBindDomain().isEnable());
 
-        builder.put("isWebContext", true);
+        builder.put(InjectConst.IS_WEB_CONTEXT, true);
 
         //当前登录用户
         if (baseAuthService.isLogin()) {

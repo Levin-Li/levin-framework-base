@@ -31,7 +31,7 @@ import java.util.*;
 /**
  * 基本查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午11:35:33, 代码生成哈希校验码：[f40038d7d75fe63e60bd8ef41b73c55b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午4:56:53, 代码生成哈希校验码：[311369b4468551979c43ad01be41c7a4]，请不要修改和删除此行内容。
  */
 @Schema(title = "基本查询对象")
 @Data
@@ -39,10 +39,12 @@ import java.util.*;
 @FieldNameConstants
 public abstract class BaseReq implements ServiceReq {
 
-    public static final String NOT_SUPER_ADMIN = " !(#" + InjectConst.IS_SUPER_ADMIN + "?:false) ";
+    //
+    public static final String IS_WEB_CONTEXT = " (#" + InjectConst.IS_WEB_CONTEXT + "?:false) ";
 
-    public static final String NOT_TENANT_ADMIN =
-            " !(#" + InjectConst.IS_TENANT_ADMIN + "?:false) ";
+    public static final String NOT_SUPER_ADMIN = " !(#" + InjectConst.IS_SUPER_ADMIN + ") ";
+
+    public static final String NOT_TENANT_ADMIN = " !(#" + InjectConst.IS_TENANT_ADMIN + ") ";
 
     public static final String NOT_SUPER_ADMIN_AND_NOT_TENANT_ADMIN =
             NOT_SUPER_ADMIN + " && " + NOT_TENANT_ADMIN;

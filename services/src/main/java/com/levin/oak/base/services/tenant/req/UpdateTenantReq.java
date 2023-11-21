@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午1:06:37, 代码生成哈希校验码：[f1b9f1fef62f4beefddf4b9e43ddc1f1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午4:56:54, 代码生成哈希校验码：[1d52dd12496711b5c9f67a1b7b4acdfc]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -65,8 +65,8 @@ public class UpdateTenantReq extends BaseReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = NOT_SUPER_ADMIN)
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件", hidden = true)
+    @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Size(max = 128)

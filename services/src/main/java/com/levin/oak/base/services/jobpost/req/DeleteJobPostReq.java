@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:39, 代码生成哈希校验码：[1d36a6266b6f8010e94958df0619a425]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午4:56:55, 代码生成哈希校验码：[ed24a7f2ddd4bf53ab9b3fc40aebdf1a]，请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -60,8 +60,8 @@ public class DeleteJobPostReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1018878847L;
 
-    @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = NOT_SUPER_ADMIN)
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件", hidden = true)
+    @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
