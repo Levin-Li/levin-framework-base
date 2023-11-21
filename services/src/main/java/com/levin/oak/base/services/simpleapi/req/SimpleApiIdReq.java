@@ -44,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单动态接口 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:19, 代码生成哈希校验码：[5889a81c423c35169199befbfa562275]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:37, 代码生成哈希校验码：[32ce7a95f31ad3a5855bbe469c3ae58a]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
@@ -65,7 +65,7 @@ public class SimpleApiIdReq extends MultiTenantOrgReq {
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    // @NotNull
+    @NotBlank
     protected String id;
 
     public SimpleApiIdReq updateIdWhenNotBlank(String id) {

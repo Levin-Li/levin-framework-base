@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午10:19:19, 代码生成哈希校验码：[2653ec7923d1543b6450d49c15f48137]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:37, 代码生成哈希校验码：[0e747a81cd3e633185579a40bfb44cfb]，请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -60,7 +60,7 @@ public class DeleteAppClientReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -115048882L;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#" + InjectConst.IS_SUPER_ADMIN + "?:false")
+    @Eq(condition = NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)

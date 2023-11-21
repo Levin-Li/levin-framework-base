@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 国际化资源 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[b247e0bdee486ef0757555e99d97167e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:39, 代码生成哈希校验码：[255c11712466d311bb480f40edcccee8]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
@@ -59,7 +59,7 @@ public class I18nResIdReq extends MultiTenantOrgReq {
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    // @NotNull
+    @NotNull
     protected Long id;
 
     public I18nResIdReq updateIdWhenNotBlank(Long id) {

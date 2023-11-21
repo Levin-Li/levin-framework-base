@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 平台租户 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[5594c015551f880203cc092b05c09970]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:37, 代码生成哈希校验码：[3ae806b4678231a5a61b63a7e3cf9d37]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
@@ -59,7 +59,7 @@ public class TenantIdReq extends BaseReq {
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    // @NotNull
+    @NotBlank
     protected String id;
 
     public TenantIdReq updateIdWhenNotBlank(String id) {

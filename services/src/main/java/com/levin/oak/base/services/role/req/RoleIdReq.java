@@ -44,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:19, 代码生成哈希校验码：[ba5230afe3522d077f2c755959a2b2f1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:37, 代码生成哈希校验码：[c5a8f6209d28ea5b4473a060508f533c]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
@@ -62,7 +62,7 @@ public class RoleIdReq extends MultiTenantOrgReq {
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    // @NotNull
+    @NotBlank
     protected String id;
 
     public RoleIdReq updateIdWhenNotBlank(String id) {

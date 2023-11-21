@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 工作岗位 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[e4ef0e7f3ee136802ca832081da6d981]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:39, 代码生成哈希校验码：[cdbc464ddd7b52504620c8c60784c464]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
@@ -60,7 +60,7 @@ public class JobPostIdReq extends MultiTenantOrgReq {
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    // @NotNull
+    @NotBlank
     protected String id;
 
     public JobPostIdReq updateIdWhenNotBlank(String id) {

@@ -43,7 +43,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[83070114e3a1c566d3987ec24addb856]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:39, 代码生成哈希校验码：[f07c05c74fed3dac5b44ab6de45fcbf3]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
@@ -61,7 +61,7 @@ public class AreaIdReq extends BaseReq {
 
     @Schema(title = L_code, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    // @NotNull
+    @NotBlank
     protected String code;
 
     public AreaIdReq updateCodeWhenNotBlank(String code) {

@@ -44,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 字典 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[f90b7f30c5881ac8211c3d15e5ae5d14]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:38, 代码生成哈希校验码：[bf639d199c6739a8dd6fa539279da4bb]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
@@ -62,7 +62,7 @@ public class DictIdReq extends MultiTenantOrgReq {
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    // @NotNull
+    @NotBlank
     protected String id;
 
     public DictIdReq updateIdWhenNotBlank(String id) {

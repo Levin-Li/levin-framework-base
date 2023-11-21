@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 客户端文件 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[f452096712b8edfca63da6b7b92b8e37]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:38, 代码生成哈希校验码：[201a62896945d8f73493d2de62e710ba]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
@@ -62,7 +62,7 @@ public class AppClientFileIdReq extends MultiTenantOrgReq {
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    // @NotNull
+    @NotBlank
     protected String id;
 
     public AppClientFileIdReq updateIdWhenNotBlank(String id) {

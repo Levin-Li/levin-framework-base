@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单页面 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[d29e6f2711ca68159529fcb7fb5caec8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:39, 代码生成哈希校验码：[1d0390a718b0f715b1a3dc3122122795]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
@@ -64,7 +64,7 @@ public class SimplePageIdReq extends MultiTenantOrgReq {
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    // @NotNull
+    @NotBlank
     protected String id;
 
     public SimplePageIdReq updateIdWhenNotBlank(String id) {

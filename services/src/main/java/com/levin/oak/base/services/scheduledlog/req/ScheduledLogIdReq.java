@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度日志 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[da24e4e5bb28e44e237bebc10d053038]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:37, 代码生成哈希校验码：[efc5d2b11d6b67a2c85af211c21be6e5]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
@@ -61,7 +61,7 @@ public class ScheduledLogIdReq extends MultiTenantOrgReq {
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    // @NotNull
+    @NotBlank
     protected String id;
 
     public ScheduledLogIdReq updateIdWhenNotBlank(String id) {

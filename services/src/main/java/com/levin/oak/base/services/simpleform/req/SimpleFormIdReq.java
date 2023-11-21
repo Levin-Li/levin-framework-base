@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单表单 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[81447561c3e14275a877260eeea2e206]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:39, 代码生成哈希校验码：[c52b109247932c367ac21b5a8448e3f4]，请不要修改和删除此行内容。
  */
 @Schema(title = BIZ_NAME + " 主键通用查询")
 @Data
@@ -64,7 +64,7 @@ public class SimpleFormIdReq extends MultiTenantOrgReq {
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    // @NotNull
+    @NotBlank
     protected String id;
 
     public SimpleFormIdReq updateIdWhenNotBlank(String id) {

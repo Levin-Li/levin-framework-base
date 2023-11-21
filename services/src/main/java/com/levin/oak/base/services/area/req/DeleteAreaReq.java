@@ -43,7 +43,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 删除区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午10:19:21, 代码生成哈希校验码：[551bf0721fa0d0ec59cb2b26c6a875f3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:39, 代码生成哈希校验码：[0cfffc1aafe40f739ccb38908168bc40]，请不要修改和删除此行内容。
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -62,7 +62,7 @@ public class DeleteAreaReq extends BaseReq {
     private static final long serialVersionUID = -445860277L;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#" + InjectConst.IS_SUPER_ADMIN + "?:false")
+    @Eq(condition = NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Schema(title = L_code + "集合", required = true, requiredMode = REQUIRED)
