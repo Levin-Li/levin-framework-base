@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午10:19:20, 代码生成哈希校验码：[265eaa26ea7beed61cbc5f0e65b26db1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午1:06:38, 代码生成哈希校验码：[17f949c011ea744c8f294150dfaeae3b]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -61,12 +61,12 @@ public class UpdateAppClientFileReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -1155395350L;
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
-    @NotNull
+    @NotBlank
     @Eq(require = true)
     String id;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!(#" + InjectConst.IS_SUPER_ADMIN + "?:false)")
+    @Eq(condition = NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Size(max = 64)

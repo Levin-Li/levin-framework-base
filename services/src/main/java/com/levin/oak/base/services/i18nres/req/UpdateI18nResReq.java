@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午10:19:21, 代码生成哈希校验码：[0b6e618264e774aba73b5d58567164e8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午1:06:38, 代码生成哈希校验码：[bbe54586305b502f5685c0ecb95297dc]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -66,7 +66,7 @@ public class UpdateI18nResReq extends MultiTenantOrgReq {
     Long id;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!(#" + InjectConst.IS_SUPER_ADMIN + "?:false)")
+    @Eq(condition = NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @NotBlank

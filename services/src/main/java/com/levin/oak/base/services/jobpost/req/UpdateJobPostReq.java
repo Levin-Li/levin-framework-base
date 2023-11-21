@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午10:19:21, 代码生成哈希校验码：[a1b1fd5ca77791316048fdf57bd2ccee]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午1:06:38, 代码生成哈希校验码：[332ee632593badc0a7fb640b193a7202]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -62,12 +62,12 @@ public class UpdateJobPostReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = 1018878847L;
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
-    @NotNull
+    @NotBlank
     @Eq(require = true)
     String id;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!(#" + InjectConst.IS_SUPER_ADMIN + "?:false)")
+    @Eq(condition = NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @NotBlank

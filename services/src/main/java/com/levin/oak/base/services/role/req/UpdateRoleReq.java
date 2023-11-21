@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月20日 下午10:19:19, 代码生成哈希校验码：[630f21f9c9ae673e6c5004d2331fcff9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午1:06:36, 代码生成哈希校验码：[c805629cf9b1b3ba522308f599c01d6f]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -64,12 +64,12 @@ public class UpdateRoleReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -445356492L;
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
-    @NotNull
+    @NotBlank
     @Eq(require = true)
     String id;
 
     @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!(#" + InjectConst.IS_SUPER_ADMIN + "?:false)")
+    @Eq(condition = NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @NotBlank

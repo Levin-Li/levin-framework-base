@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[c4bd3776059a00e24e31a0c6d663b4ca]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午1:06:38, 代码生成哈希校验码：[93fc04aaf54c9ac7bc19eeeec3613aa4]，请不要修改和删除此行内容。
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
@@ -60,7 +60,7 @@ public class UpdateNoticeProcessLogReq extends MultiTenantOrgReq {
     private static final long serialVersionUID = -1991983093L;
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
-    @NotNull
+    @NotBlank
     @Eq(require = true)
     String id;
 
