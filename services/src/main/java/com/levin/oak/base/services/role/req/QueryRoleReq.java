@@ -64,6 +64,9 @@ public class QueryRoleReq extends MultiTenantReq{
 
     private static final long serialVersionUID = -445356492L;
 
+    @Schema(title = "是否包含公共数据")
+    @Ignore
+    boolean isContainsPublicData = true;
 
     //不允许查询出 SA 角色
     @Schema(title = "无需设置", hidden = true)

@@ -1,6 +1,7 @@
 package com.levin.oak.base.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import com.levin.commons.dao.domain.NamedObject;
 import com.levin.commons.dao.domain.support.AbstractMultiTenantOrgObject;
 import com.levin.commons.service.domain.InjectVar;
@@ -19,7 +20,7 @@ import javax.persistence.Version;
 @Accessors(chain = true)
 @FieldNameConstants
 public abstract class TenantOrgNamedEntity
-        extends AbstractMultiTenantOrgObject implements NamedObject {
+        extends AbstractMultiTenantOrgObject implements MultiTenantPublicObject, NamedObject {
 
     @Schema(title = "系统域", hidden = true, description = "归属的子系统或应用")
     @Column(length = 128)

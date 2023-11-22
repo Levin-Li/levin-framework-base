@@ -35,56 +35,62 @@ import static com.levin.oak.base.entities.E_Setting.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-//自动导入列表
-import com.levin.commons.service.support.InjectConst;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.oak.base.entities.Setting.*;
+// 自动导入列表
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.oak.base.entities.Setting.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
+
 ////////////////////////////////////
 
 /**
- *  查询系统设置
- *  @author Auto gen by simple-dao-codegen, @time: 2023年7月6日 下午3:14:49, 请不要修改和删除此行内容。
- *  代码生成哈希校验码：[b4f5ec755ebb59aa56a8659a6f62abc6], 请不要修改和删除此行内容。
+ * 查询系统设置
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月22日 下午1:37:17, 代码生成哈希校验码：[eade595a618ed93ef32795e33cb8b769]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@EqualsAndHashCode(callSuper = true)
+// @EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Setting.class, alias = E_Setting.ALIAS, resultClass = SettingInfo.class)
-public class QuerySettingReq extends MultiTenantOrgReq{
+public class QuerySettingReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 147875794L;
+
+    @Schema(title = "是否包含公共数据")
+    @Ignore
+    boolean isContainsPublicData = true;
 
     @Ignore
     @Schema(title = "排序字段")
     String orderBy;
 
-    //@Ignore
+    // @Ignore
     @Schema(title = "排序方向")
-    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
+    @SimpleOrderBy(
+            expr = "orderBy + ' ' + orderDir",
+            condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)",
+            remark = "生成排序表达式")
+    @OrderBy(
+            value = createTime,
+            condition = "#isEmpty(orderBy) || #isEmpty(orderDir)",
+            order = Integer.MAX_VALUE,
+            desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
-    @Schema(title = "是否包含公共数据")
-    @Ignore
-    private boolean isContainsPublicData = true;
-
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_id)
     String id;
 
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_categoryName)
     String categoryName;
 
-    @Size(max = 64)
     @Schema(title = L_groupName)
     String groupName;
 
@@ -92,12 +98,9 @@ public class QuerySettingReq extends MultiTenantOrgReq{
     @Contains
     String containsGroupName;
 
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_code)
     String code;
 
-    @NotNull
     @Schema(title = L_valueType)
     ValueType valueType;
 
@@ -107,71 +110,66 @@ public class QuerySettingReq extends MultiTenantOrgReq{
     @Schema(title = L_nullable)
     Boolean nullable;
 
-    @Size(max = 128)
     @Schema(title = L_inputPlaceholder)
     String inputPlaceholder;
 
-    @Size(max = 128)
-    @Schema(title = L_domain)
+    // @InjectVar(value = "sysDomain", isRequired = "false")
+    @Schema(title = L_domain, description = D_domain)
     String domain;
 
-    @NotBlank
-    @Size(max = 64)
     @Schema(title = L_name)
     String name;
 
-    @Size(max = 128)
+    @JsonIgnore(value = true)
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
+
+    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Schema(title = L_creator)
     String creator;
 
-    @NotNull
-    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime, description = L_createTime + "小于等于字段值")
     @Lte
     Date lteCreateTime;
 
-    //@Schema(title = L_createTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenCreateTime;
+    @Schema(title = L_createTime + "-日期范围")
+    @Between
+    String betweenCreateTime;
 
-
-    @Schema(title = L_lastUpdateTime , description = "大于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "大于等于字段值")
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = L_lastUpdateTime , description = "小于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "小于等于字段值")
     @Lte
     Date lteLastUpdateTime;
 
-    //@Schema(title = L_lastUpdateTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenLastUpdateTime;
-
+    @Schema(title = L_lastUpdateTime + "-日期范围")
+    @Between
+    String betweenLastUpdateTime;
 
     @Schema(title = L_orderCode)
     Integer orderCode;
 
-    @NotNull
     @Schema(title = L_enable)
     Boolean enable;
 
-    @NotNull
     @Schema(title = L_editable)
     Boolean editable;
 
-    @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
 
     public QuerySettingReq(String id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
-        //@todo 查询之前初始化数据
+        // @todo 查询之前初始化数据
     }
-
 }

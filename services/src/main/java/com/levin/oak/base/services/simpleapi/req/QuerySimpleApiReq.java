@@ -50,7 +50,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:49:36, 代码生成哈希校验码：[489d8d985004449204629652d892e350]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月22日 下午1:37:16, 代码生成哈希校验码：[139448e8b435e4d29c11ae1e13698ade]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -68,6 +68,10 @@ import com.levin.commons.service.support.InjectConst;
 public class QuerySimpleApiReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1021385738L;
+
+    @Schema(title = "是否包含公共数据")
+    @Ignore
+    boolean isContainsPublicData = true;
 
     @Ignore
     @Schema(title = "排序字段")

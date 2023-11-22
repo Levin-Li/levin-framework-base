@@ -187,5 +187,5 @@ plugin:
 logging:
   level:
     root: warn
-    com.levin: info
+    com.levin: debug
     com.levin.oak.base: debug

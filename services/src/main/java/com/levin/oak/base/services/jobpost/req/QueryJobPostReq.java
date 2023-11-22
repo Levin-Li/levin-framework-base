@@ -48,7 +48,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:49:38, 代码生成哈希校验码：[6853a9529bdf6649eb8696eb51f97318]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月22日 下午1:37:18, 代码生成哈希校验码：[76deeb21f61d1fa05febed0110d26aed]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -63,6 +63,10 @@ import com.levin.commons.service.support.InjectConst;
 public class QueryJobPostReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1018878847L;
+
+    @Schema(title = "是否包含公共数据")
+    @Ignore
+    boolean isContainsPublicData = true;
 
     @Ignore
     @Schema(title = "排序字段")

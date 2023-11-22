@@ -48,7 +48,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午12:49:37, 代码生成哈希校验码：[d5796d5d3b54c034b0fa418365db6575]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月22日 下午1:37:17, 代码生成哈希校验码：[871893a6aba2fdea6eae9a36a74ffa5d]，请不要修改和删除此行内容。
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -63,6 +63,10 @@ import com.levin.commons.service.support.InjectConst;
 public class QueryNoticeReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1394869526L;
+
+    @Schema(title = "是否包含公共数据")
+    @Ignore
+    boolean isContainsPublicData = true;
 
     @Ignore
     @Schema(title = "排序字段")

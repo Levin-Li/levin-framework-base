@@ -1,11 +1,10 @@
 package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.annotation.Contains;
-import com.levin.commons.dao.domain.MultiTenantObject;
+import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import com.levin.commons.dao.domain.support.AbstractTreeObject;
 import com.levin.commons.rbac.MenuItem;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 import com.levin.commons.service.support.InjectConst;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -42,7 +41,7 @@ import javax.persistence.*;
 )
 public class MenuRes
         extends AbstractTreeObject<String, MenuRes>
-        implements MenuItem<MenuRes, MenuRes>, MultiTenantObject {
+        implements MenuItem<MenuRes, MenuRes>, MultiTenantPublicObject {
 
     @Id
     @GeneratedValue(generator = "default_id")
