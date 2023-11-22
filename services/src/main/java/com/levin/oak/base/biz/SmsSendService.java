@@ -11,6 +11,19 @@ public interface SmsSendService {
      * <p>
      * 如果发送成功返回code，否则返回错误原因
      *
+     * @param phone
+     * @param code
+     * @return
+     */
+    default String sendCode(String phone, String code) {
+        return sendCode(null, phone, code);
+    }
+
+    /**
+     * 发送验证码
+     * <p>
+     * 如果发送成功返回code，否则返回错误原因
+     *
      * @param tenantId
      * @param phone
      * @param code
