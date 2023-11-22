@@ -9,7 +9,6 @@ import com.levin.commons.service.domain.ApiResp;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
-import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacResService;
 import com.levin.oak.base.controller.BaseController;
@@ -71,9 +70,6 @@ public class EnumController extends BaseController {
 
     @Autowired
     AuthService authService;
-
-    @Autowired
-    BizTenantService bizTenantService;
 
     @Autowired
     FrameworkProperties frameworkProperties;

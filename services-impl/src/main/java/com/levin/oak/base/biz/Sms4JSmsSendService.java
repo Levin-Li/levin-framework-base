@@ -111,12 +111,12 @@ public class Sms4JSmsSendService
                 .put("channelType可选项", Stream.of(SupplierType.values()).collect(Collectors.toList()))
                 .put("channelType", SupplierType.ALIBABA.name())
                 .put("配置说明", "")
-
                 .build();
+
         return new SettingInfo().setCategoryName(CFG_CODE)
                 .setCode(code)
                 .setValueType(Setting.ValueType.Json)
-                .setInputPlaceholder("Json格式,channelType属性配置通道类型")
+                .setInputPlaceholder("Json格式, channelType属性配置通道类型")
                 .setValueContent(gson.toJson(config))
                 .setName(CFG_CODE)
                 .setRemark("内容必须为Json格式，channelType属性配置通道类型：" +

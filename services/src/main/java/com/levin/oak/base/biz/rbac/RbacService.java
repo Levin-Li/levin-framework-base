@@ -25,7 +25,7 @@ import static org.springframework.util.StringUtils.*;
  * 2、获取可以使用的菜单清单
  * 3、方法授权检查
  */
-public interface RbacService {
+public interface RbacService extends RbacPermissionService<Object> {
 
     /**
      * 获取权限分隔符

@@ -34,7 +34,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
-import static org.springframework.util.StringUtils.*;
+import static org.springframework.util.StringUtils.hasText;
+import static org.springframework.util.StringUtils.trimWhitespace;
 
 
 /**
@@ -199,11 +200,9 @@ public class RbacServiceImpl implements RbacService {
     @Override
     public boolean isAuthorized(Object userId, ResAuthorize resAuthorize) {
         return isAuthorized(
+                userId,
                 String.join(getPermissionDelimiter(), resAuthorize.domain(), resAuthorize.type(), resAuthorize.res()),
-                SimpleResAction.newAction(resAuthorize),
-                getRoleList(userId),
-                getPermissionList(userId),
-                getAuthorizeContext()
+                SimpleResAction.newAction(resAuthorize)
         );
     }
 

@@ -2,15 +2,11 @@ package com.levin.oak.base;
 
 import static com.levin.oak.base.ModuleOption.*;
 
-import com.levin.commons.dao.DaoContext;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
-import com.levin.commons.utils.ExceptionUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
-import com.levin.oak.base.biz.BizOrgService;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.InjectVarService;
-import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.support.InjectConst;
 import com.levin.commons.service.support.VariableInjector;
@@ -27,7 +23,6 @@ import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -185,7 +180,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
             return result;
         }
 
-        TenantInfo tenantInfo = bizTenantService.checkAndGetCurrentUserTenant();
+        TenantInfo tenantInfo = bizTenantService.checkCurrentUserTenantInfo();
 
         MapUtils.Builder<String, Object> builder
                 = MapUtils.putFirst("tenantBindDomainEnable", frameworkProperties.getTenantBindDomain().isEnable());

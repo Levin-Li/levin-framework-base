@@ -50,6 +50,7 @@ public class HappyCaptchaServiceImpl extends AbstractCaptchaService implements C
             captcha.setHeight(Integer.parseInt(h.trim()));
         }
 
+
         //
         captcha.setFont(new Font(null, Font.PLAIN, (int) (captcha.getHeight() * 0.75)));
 

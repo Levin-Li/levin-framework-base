@@ -13,7 +13,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -99,11 +98,11 @@ public class ResourceAuthorizeInterceptor
 
         Assert.isTrue(authService.isLogin(), () -> new AuthorizationException(401, "未登录"));
 
+        bizTenantService.checkCurrentUserTenantInfo();
+
         if (resCfg.isOnlyRequireAuthenticated()) {
             return true;
         }
-
-        bizTenantService.checkAndGetCurrentUserTenant();
 
         boolean ok = rbacService.isAuthorized(authService.getLoginId(), resCfg.isAndMode(), resCfg.getRequiredPermissions(), (rp, info) -> {
             throw new AuthorizationException(403, "res-" + rp, "未授权的资源：" + info);

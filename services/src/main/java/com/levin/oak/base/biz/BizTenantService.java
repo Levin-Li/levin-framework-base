@@ -1,37 +1,15 @@
 package com.levin.oak.base.biz;
 
-import static com.levin.oak.base.ModuleOption.*;
-import static com.levin.oak.base.entities.EntityConst.*;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.support.*;
-import com.levin.commons.service.domain.*;
-
-import java.util.*;
-
-import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
 
 import com.levin.oak.base.entities.*;
-import com.levin.oak.base.entities.Tenant;
 
-import com.levin.oak.base.services.tenant.*;
-import com.levin.oak.base.services.tenant.req.*;
 import com.levin.oak.base.services.tenant.info.*;
-
-import com.levin.oak.base.*;
-import com.levin.oak.base.services.*;
 
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.support.InjectConst;
-import com.levin.commons.service.domain.InjectVar;
 
-import java.util.Date;
-import java.util.List;
-
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 ////////////////////////////////////
 
 /**
@@ -49,12 +27,15 @@ public interface BizTenantService {
      */
     void clearThreadCacheData();
 
+
     /**
      * 检查和比对当前域名和用户的租户是否正确
+     * <p>
+     * 用户的租户必须和域名的租户一致
      *
      * @return nullable
      */
-    TenantInfo checkAndGetCurrentUserTenant();
+    TenantInfo checkCurrentUserTenantInfo();
 
     /**
      * 获取当前的租户信息
@@ -63,27 +44,12 @@ public interface BizTenantService {
      */
     TenantInfo setCurrentTenantByDomain(String domain);
 
-
     /**
      * 获取当前的租户信息
      *
      * @return
      */
     TenantInfo setCurrentTenant(TenantInfo tenantInfo);
-
-    /**
-     * 获取当前域名
-     *
-     * @return
-     */
-    void setCurrentDomain(String domain);
-
-    /**
-     * 获取当前域名
-     *
-     * @return
-     */
-    String getCurrentDomain();
 
     /**
      * 获取当前的租户信息
@@ -106,20 +72,20 @@ public interface BizTenantService {
      * @param tenantId
      * @return
      */
-    TenantInfo getTenantInfo(String tenantId);
+    TenantInfo loadTenant(String tenantId);
 
     /**
      * 获取租户
      *
      * @return
      */
-    TenantInfo getTenantByDomain(String domain);
+    TenantInfo loadTenantByDomain(String domain);
 
     /**
      * 获取租户
      *
      * @return
      */
-    TenantInfo getTenantByTenantKey(String tenantKey);
+    TenantInfo loadTenantByTenantKey(String tenantKey);
 
 }

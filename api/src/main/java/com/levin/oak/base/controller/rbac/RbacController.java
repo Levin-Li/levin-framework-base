@@ -159,7 +159,7 @@ public class RbacController extends BaseController {
         Assert.hasText(password, "密码不能为空");
         Assert.hasText(tenantId, "租户不能为空");
 
-        TenantInfo tenantInfo = bizTenantService.getTenantInfo(tenantId);
+        TenantInfo tenantInfo = bizTenantService.loadTenant(tenantId);
 
         Assert.notNull(tenantInfo, "租户不存在");
 
@@ -201,7 +201,7 @@ public class RbacController extends BaseController {
     @GetMapping("tenantInfo")
     @Operation(tags = {"授权管理"}, summary = "获取租户信息")
     public ApiResp<TenantInfo> getTenantInfo() {
-        return ApiResp.ok(bizTenantService.getTenantInfo(authService.getUserInfo().getTenantId()));
+        return ApiResp.ok(bizTenantService.loadTenant(authService.getUserInfo().getTenantId()));
     }
 
     /**

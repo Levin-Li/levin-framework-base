@@ -48,12 +48,33 @@ public interface BizSettingService {
     /**
      * 更新系统设置
      *
+     * @param code
+     * @param valueContent
+     * @return
+     */
+    default boolean updateValue(@NotNull String code, String valueContent) {
+        return updateValue(null, code, valueContent);
+    }
+
+    /**
+     * 更新系统设置
+     *
      * @param tenantId
      * @param code
      * @param valueContent
      * @return
      */
     boolean updateValue(@Nullable String tenantId, @NotNull String code, String valueContent);
+
+    /**
+     * 获取系统设置
+     *
+     * @param code
+     * @return
+     */
+    default String getValue(@NotNull String code) {
+        return getValue(null, code);
+    }
 
     /**
      * 获取系统设置

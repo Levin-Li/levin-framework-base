@@ -1,7 +1,6 @@
 package com.levin.oak.base.biz;
 
 import cn.hutool.core.lang.Assert;
-import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.service.domain.SignatureReq;
 import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.exception.ServiceException;
@@ -18,9 +17,7 @@ import com.levin.oak.base.services.tenant.req.QueryTenantReq;
 import com.levin.oak.base.services.user.info.UserInfo;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -69,7 +66,6 @@ public class BizTenantServiceImpl
 
     final static ThreadLocal<TenantInfo> currentTenant = new ThreadLocal<>();
 
-    final static ThreadLocal<String> currentDomain = new ThreadLocal<>();
 
     @PostConstruct
     void init() {
@@ -93,79 +89,85 @@ public class BizTenantServiceImpl
     @Override
     public void clearThreadCacheData() {
         currentTenant.set(null);
-        currentDomain.set(null);
     }
 
     @Override
-    public TenantInfo checkAndGetCurrentUserTenant() {
+    public TenantInfo checkCurrentUserTenantInfo() {
 
         //获取当前租户
         TenantInfo tenantInfo = getCurrentTenant();
 
-        final String domain = getData(getCurrentDomain(), StringUtils::hasText, () -> request.getServerName());
+        // 获取域名
+        final String domain = request.getServerName();
 
         //如果当前没有域名，获取域名关联的租户
         if (tenantInfo == null
                 && frameworkProperties.getTenantBindDomain().isEnable()) {
 
+            //尝试设置租户信息
             tenantInfo = setCurrentTenantByDomain(domain);
 
             log.warn("当前请求的域名[ {} ]未关联租户, URL:{}, 调用堆栈：{}", domain, request.getRequestURL(), injectVarService.getBizStack());
 
         }
 
-        //当前登录用户
-        if (authService.isLogin()) {
-            //暂时兼容
-            //获取登录信息
-            UserInfo userInfo = authService.getUserInfo();
-
-            //加载用户租户信息
-            if (StringUtils.hasText(userInfo.getTenantId())) {
-
-                TenantInfo tenantInfo2 = getTenantInfo(userInfo.getTenantId());
-
-                if (tenantInfo2 != null) {
-
-                    if (tenantInfo != null
-                            && !tenantInfo.getId().contentEquals(tenantInfo2.getId())) {
-
-                        //如果用户的租户和域名的租户不匹配，则抛出异常
-                        throw new AccessDeniedException(400, "当前用户的租户和当前域名的租户不匹配");
-                    }
-
-                    tenantInfo = tenantInfo2;
-                }
-            }
-
-            //除了超管，其它用户必须要有归属于指定的租户
-            if (!userInfo.isSuperAdmin() && tenantInfo == null) {
-                throw new AccessDeniedException(403, "非法的无租户用户");
-            }
+        //如果还没有登录
+        if (!authService.isLogin()) {
+            return tenantInfo;
         }
 
+        //当前登录用户
+        //暂时兼容
+        //获取登录信息
+        UserInfo userInfo = authService.getUserInfo();
+
+        Assert.notNull(userInfo, "当前登录用户信息无法加载");
+
+        //超管可以访问所有租户
+        if (userInfo.isSuperAdmin()) {
+
+            if (tenantInfo == null && StringUtils.hasText(userInfo.getTenantId())) {
+                //加载超管的租户信息，并且设置为当前租户
+                tenantInfo = setCurrentTenant(loadTenant(userInfo.getTenantId()));
+            }
+
+            return tenantInfo;
+        }
+
+        //普通用户必须有归属的租户
+        Assert.notBlank(userInfo.getTenantId(), () -> new AccessDeniedException(403, "登录用户无归属的租户"));
+
+        if (tenantInfo != null) {
+
+            if (!tenantInfo.getId().contentEquals(userInfo.getTenantId())) {
+                //如果用户的租户和域名的租户不匹配，则抛出异常
+                throw new AccessDeniedException(400, "登录用户的租户和当前租户不匹配");
+            }
+
+            //当前租户和用户的租户一致
+            return tenantInfo;
+        }
+
+        //加载用户的租户信息，并且设置为当前租户
+        return setCurrentTenant(loadTenant(userInfo.getTenantId()));
+
+    }
+
+
+    @Override
+    public TenantInfo setCurrentTenant(TenantInfo tenantInfo) {
+        currentTenant.set(auditTenant(tenantInfo));
         return tenantInfo;
     }
 
     /**
-     * 获取当前域名
-     *
-     * @param domain
-     * @return
-     */
-    @Override
-    public void setCurrentDomain(String domain) {
-        currentDomain.set(domain);
-    }
-
-    /**
-     * 获取当前域名
+     * 获取当前的租户信息
      *
      * @return
      */
     @Override
-    public String getCurrentDomain() {
-        return currentDomain.get();
+    public TenantInfo getCurrentTenant() {
+        return (currentTenant.get());
     }
 
     /**
@@ -179,11 +181,12 @@ public class BizTenantServiceImpl
 
         Assert.notBlank(domain, () -> new IllegalArgumentException("domain is blank"));
 
-        setCurrentDomain(domain);
+        TenantInfo tenantInfo = getCurrentTenant();
 
-        TenantInfo tenantInfo = getTenantByDomain(domain);
-
-        setCurrentTenant(tenantInfo);
+        if (tenantInfo == null) {
+            //自动加载域名
+            tenantInfo = setCurrentTenant(loadTenantByDomain(domain));
+        }
 
         FrameworkProperties.Cfg sign = frameworkProperties.getSign();
 
@@ -203,11 +206,6 @@ public class BizTenantServiceImpl
         return txt == null ? 0 : txt.length();
     }
 
-    @Override
-    public TenantInfo setCurrentTenant(TenantInfo tenantInfo) {
-        currentTenant.set(tenantInfo);
-        return tenantInfo;
-    }
 
     /**
      * 检查当前租户应用签名
@@ -250,19 +248,6 @@ public class BizTenantServiceImpl
 
 
     /**
-     * 获取当前的租户信息
-     *
-     * @return
-     */
-    @Override
-    public TenantInfo getCurrentTenant() {
-
-        TenantInfo tenantInfo = auditTenant(currentTenant.get());
-
-        return tenantInfo;
-    }
-
-    /**
      * 检查租户状态
      *
      * @param tenantInfo
@@ -289,7 +274,7 @@ public class BizTenantServiceImpl
     }
 
     @Override
-    public TenantInfo getTenantInfo(String tenantId) {
+    public TenantInfo loadTenant(String tenantId) {
 
         Assert.isTrue(StringUtils.hasText(tenantId), "租户Id不能为空");
 
@@ -303,7 +288,7 @@ public class BizTenantServiceImpl
      * @return
      */
     @Override
-    public TenantInfo getTenantByDomain(String domain) {
+    public TenantInfo loadTenantByDomain(String domain) {
 
         Assert.notBlank(domain, () -> new IllegalArgumentException("domain is blank"));
 
@@ -319,7 +304,7 @@ public class BizTenantServiceImpl
      * @return
      */
     @Override
-    public TenantInfo getTenantByTenantKey(String tenantKey) {
+    public TenantInfo loadTenantByTenantKey(String tenantKey) {
 
         Assert.isTrue(StringUtils.hasText(tenantKey), "租户Key不能为空");
 

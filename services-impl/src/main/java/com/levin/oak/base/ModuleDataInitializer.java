@@ -4,6 +4,9 @@ import static com.levin.oak.base.ModuleOption.*;
 
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.plugin.PluginManager;
+import com.levin.oak.base.biz.BizSettingService;
+import com.levin.oak.base.biz.Sms4JSmsSendService;
+import com.levin.oak.base.services.setting.info.SettingInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +52,6 @@ import com.levin.oak.base.entities.SimpleForm;
  * 模块初始化器
  *
  * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:46, 代码生成哈希校验码：[b8d15df8ed4b76b786beb474e36f4257]，请不要修改和删除此行内容。
- * 
  */
 @Slf4j
 @Component(PLUGIN_PREFIX + "ModuleDataInitializer")
@@ -64,10 +66,13 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
 
     private ApplicationContext applicationContext;
 
+    @Autowired
+    private BizSettingService bizSettingService;
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
-        log.info("[ {} ] on applicationContext ..." , ModuleOption.ID);
+        log.info("[ {} ] on applicationContext ...", ModuleOption.ID);
     }
 
     @Override
@@ -80,13 +85,13 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
 
     void initData() {
 
-        log.info("[ {} ] on init ..." , ModuleOption.ID);
+        log.info("[ {} ] on init ...", ModuleOption.ID);
 
         Random random = new Random(this.hashCode());
 
         //@todo 初始化数据
 
-        log.info("***** {} 数据初始化完成 ******" , ModuleOption.ID);
+        log.info("***** {} 数据初始化完成 ******", ModuleOption.ID);
     }
 
 }

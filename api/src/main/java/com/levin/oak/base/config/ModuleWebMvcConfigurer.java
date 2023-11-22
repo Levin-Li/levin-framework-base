@@ -21,14 +21,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.WebProperties;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.util.ClassUtils;
-import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.method.HandlerMethod;
@@ -45,7 +43,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -292,13 +289,16 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         //要求租户绑定域名
         if (frameworkProperties.getTenantBindDomain().isEnable()) {
 
-            HandlerInterceptor handlerInterceptor = new DomainInterceptor((domain) -> bizTenantService.setCurrentTenantByDomain(domain)
-                    , (className) -> frameworkProperties.getTenantBindDomain().isPackageMatched(className));
+            HandlerInterceptor handlerInterceptor = new DomainInterceptor(
+                    (domain) -> bizTenantService.setCurrentTenantByDomain(domain)
+                    , (className) -> frameworkProperties.getTenantBindDomain().isPackageMatched(className)
+            );
 
             processDefaultPath(registry.addInterceptor(handlerInterceptor)
                     , frameworkProperties.getTenantBindDomain().getExcludePathPatterns()
                     , frameworkProperties.getTenantBindDomain().getIncludePathPatterns()
             ).order(Ordered.HIGHEST_PRECEDENCE + 1000);
+
         }
 
         //检查租户信息，要求所有的访问都必须有租户
@@ -306,7 +306,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     @Override
                     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
                         if ((handler instanceof HandlerMethod)) {
-                            bizTenantService.checkAndGetCurrentUserTenant();
+                            bizTenantService.checkCurrentUserTenantInfo();
                         }
                         return true;
                     }
