@@ -71,7 +71,7 @@ public class CreateUserReq extends MultiTenantOrgReq {
 
     @Schema(title = L_password)
     @Size(max = 256)
-    @JsonIgnore(value = true)
+//    @JsonIgnore(value = true)
     String password;
 
     @Schema(title = L_nickname)

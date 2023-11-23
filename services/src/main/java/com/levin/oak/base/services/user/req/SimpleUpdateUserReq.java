@@ -78,7 +78,7 @@ public class SimpleUpdateUserReq extends MultiTenantOrgReq {
     String email;
 
     @Size(max = 256)
-    @JsonIgnore(value = true)
+//    @JsonIgnore(value = true)
     @Schema(title = L_password)
     String password;
 
