@@ -12,6 +12,7 @@ import lombok.experimental.FieldNameConstants;
 import javax.persistence.*;
 
 @Entity(name = EntityConst.PREFIX + "AppClientFile")
+//@Cacheable
 @Data
 @EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)

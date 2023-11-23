@@ -1,4 +1,4 @@
-package com.levin.oak.base.services.user.req;
+package com.levin.oak.base.biz.dto.user;
 
 import com.levin.commons.dao.annotation.NotEq;
 import com.levin.commons.dao.annotation.logic.AND;

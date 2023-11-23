@@ -6,11 +6,15 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.StrUtil;
 
-import cn.xuyanwu.spring.file.storage.FileStorageProperties;
-import cn.xuyanwu.spring.file.storage.FileStorageService;
-import cn.xuyanwu.spring.file.storage.FileStorageServiceBuilder;
-import cn.xuyanwu.spring.file.storage.platform.FileStorage;
-import cn.xuyanwu.spring.file.storage.spring.file.MultipartFileWrapperAdapter;
+//import cn.xuyanwu.spring.file.storage.FileStorageProperties;
+//import cn.xuyanwu.spring.file.storage.FileStorageService;
+//import cn.xuyanwu.spring.file.storage.FileStorageServiceBuilder;
+//import cn.xuyanwu.spring.file.storage.platform.FileStorage;
+//import cn.xuyanwu.spring.file.storage.spring.file.MultipartFileWrapperAdapter;
+
+import org.dromara.x.file.storage.core.*;
+import org.dromara.x.file.storage.core.platform.FileStorage;
+import org.dromara.x.file.storage.spring.file.MultipartFileWrapperAdapter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,6 +26,8 @@ import com.levin.oak.base.services.setting.req.CreateSettingReq;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
+
+
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;

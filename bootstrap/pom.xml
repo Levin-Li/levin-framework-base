@@ -249,8 +249,18 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.xuyanwu</groupId>
-            <artifactId>spring-file-storage</artifactId>
+            <groupId>net.oschina.j2cache</groupId>
+            <artifactId>j2cache-core</artifactId>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>cn.xuyanwu</groupId>-->
+        <!--            <artifactId>spring-file-storage</artifactId>-->
+        <!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.dromara.x-file-storage</groupId>
+            <artifactId>x-file-storage-spring</artifactId>
         </dependency>
 
     </dependencies>

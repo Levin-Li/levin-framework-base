@@ -2,6 +2,7 @@ package com.levin.oak.base.biz;
 
 import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.dao.support.SimplePaging;
+import com.levin.oak.base.biz.dto.user.UpdateUserPwdReq;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
 import io.swagger.v3.oas.annotations.tags.*;
 

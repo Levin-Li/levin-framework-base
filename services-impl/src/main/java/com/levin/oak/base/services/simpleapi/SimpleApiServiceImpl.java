@@ -29,7 +29,7 @@ import cn.hutool.core.lang.*;
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
-// import org.apache.dubbo.config.spring.context.annotation.*;
+//import org.apache.dubbo.config.spring.context.annotation.*;
 import org.apache.dubbo.config.annotation.*;
 
 import com.levin.oak.base.entities.*;
@@ -41,8 +41,9 @@ import com.levin.oak.base.services.simpleapi.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -51,52 +52,53 @@ import com.levin.oak.base.entities.SimpleApi.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 简单动态接口-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:19, 代码生成哈希校验码：[db5421d26c7823415c9ae452a2f32110]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月23日 下午11:55:35, 代码生成哈希校验码：[5f2e5ce37ae4f5a2c9a8248d2708e2e5]，请不要修改和删除此行内容。
+ *
  */
+
 @Service(PLUGIN_PREFIX + "SimpleApiService")
 @DubboService
-@ConditionalOnMissingBean({SimpleApiService.class}) // 默认只有在无对应服务才启用
+
+@ConditionalOnMissingBean({SimpleApiService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimpleApiService", matchIfMissing = true)
 @Slf4j
 
-// @Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
-// @Validated
+//@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
+//@Validated
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleApi.SIMPLE_CLASS_NAME})
 public class SimpleApiServiceImpl extends BaseService implements SimpleApiService {
 
-    protected SimpleApiService getSelfProxy() {
+    protected SimpleApiService getSelfProxy(){
         return getSelfProxy(SimpleApiService.class);
     }
 
     @Operation(summary = CREATE_ACTION)
-    @Transactional(rollbackFor = {RuntimeException.class})
+    @Transactional
     @Override
-    public String create(CreateSimpleApiReq req) {
-        // 保存自动先查询唯一约束，并给出错误信息
+    public String create(CreateSimpleApiReq req){
+        //保存自动先查询唯一约束，并给出错误信息
         SimpleApi entity = simpleDao.create(req, true);
         return entity.getId();
     }
 
     @Operation(summary = BATCH_CREATE_ACTION)
-    // @Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
-    @Transactional(rollbackFor = RuntimeException.class)
+    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
+    @Transactional
     @Override
-    public List<String> batchCreate(List<CreateSimpleApiReq> reqList) {
+    public List<String> batchCreate(List<CreateSimpleApiReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_SimpleApi.CACHE_KEY_PREFIX +
-    // "#req.id")
-    @Transactional(rollbackFor = RuntimeException.class)
+    //@CacheEvict(condition = "#isNotEmpty(#req.id) && #result", key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
+    @Transactional
     public boolean update(UpdateSimpleApiReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleUpdateByQueryObj(req);
@@ -104,41 +106,40 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    public int update(SimpleUpdateSimpleApiReq setReq, QuerySimpleApiReq whereReq) {
-        return simpleDao.updateByQueryObj(setReq, whereReq);
+    //@CacheEvict(allEntries = true, condition = "#result > 0") //Spring 缓存设计问题
+    public int update(SimpleUpdateSimpleApiReq setReq, QuerySimpleApiReq whereReq){
+       return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
-    @Transactional(rollbackFor = RuntimeException.class)
+    @Transactional
     @Override
-    public int batchUpdate(List<UpdateSimpleApiReq> reqList) {
-        // @Todo 优化批量提交
-        return reqList.stream()
-                .map(req -> getSelfProxy().update(req))
-                .mapToInt(n -> n ? 1 : 0)
-                .sum();
+    //@CacheEvict(allEntries = true, condition = "#isNotEmpty(#reqList)  && #result > 0")
+    public int batchUpdate(List<UpdateSimpleApiReq> reqList){
+        //@Todo 优化批量提交
+        return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
     }
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_SimpleApi.CACHE_KEY_PREFIX +
-    // "#req.id")
-    @Transactional(rollbackFor = RuntimeException.class)
+    //@CacheEvict(condition = "#isNotEmpty(#req.id) && #result", key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
+    @Transactional
     public boolean delete(SimpleApiIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(summary = BATCH_DELETE_ACTION)
-    @Transactional(rollbackFor = RuntimeException.class)
+    @Transactional
     @Override
-    public int batchDelete(DeleteSimpleApiReq req) {
-        // @Todo 优化批量提交
+                //@CacheEvict(allEntries = true, condition = "#isNotEmpty(#req.idList) && #result > 0")
+    public int batchDelete(DeleteSimpleApiReq req){
+        //@Todo 优化批量提交
         return Stream.of(req.getIdList())
-                .map(id -> simpleDao.copy(req, new SimpleApiIdReq().setId(id)))
-                .map(idReq -> getSelfProxy().delete(idReq))
-                .mapToInt(n -> n ? 1 : 0)
-                .sum();
+            .map(id -> simpleDao.copy(req, new SimpleApiIdReq().setId(id)))
+            .map(idReq -> getSelfProxy().delete(idReq))
+            .mapToInt(n -> n ? 1 : 0)
+            .sum();
     }
 
     @Operation(summary = QUERY_ACTION)
@@ -148,36 +149,33 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    public PagingData<SimpleSimpleApiInfo> simpleQuery(QuerySimpleApiReq req, Paging paging) {
+    public PagingData<SimpleSimpleApiInfo> simpleQuery(QuerySimpleApiReq req, Paging paging){
         return simpleDao.findPagingDataByQueryObj(SimpleSimpleApiInfo.class, req, paging);
     }
 
     @Operation(summary = STAT_ACTION)
     @Override
-    public PagingData<StatSimpleApiReq.Result> stat(StatSimpleApiReq req, Paging paging) {
+    public PagingData<StatSimpleApiReq.Result> stat(StatSimpleApiReq req , Paging paging){
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QuerySimpleApiReq req) {
+    public int count(QuerySimpleApiReq req){
         return (int) simpleDao.countByQueryObj(req);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    // Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    // @Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key =
-    // E_SimpleApi.CACHE_KEY_PREFIX + "#id")
+    //@Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key = E_SimpleApi.CACHE_KEY_PREFIX + "#id")
     public SimpleApiInfo findById(String id) {
         return findById(new SimpleApiIdReq().setId(id));
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    // 只更新缓存
-    // @CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key =
-    // E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
+    //只更新缓存
+    //@CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
     public SimpleApiInfo findById(SimpleApiIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findUnique(req);
@@ -185,18 +183,20 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public SimpleApiInfo findOne(QuerySimpleApiReq req) {
+    public SimpleApiInfo findOne(QuerySimpleApiReq req){
         return simpleDao.findOneByQueryObj(req);
     }
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public SimpleApiInfo findUnique(QuerySimpleApiReq req) {
+    public SimpleApiInfo findUnique(QuerySimpleApiReq req){
         return simpleDao.findUnique(req);
     }
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#isNotEmpty(#key)", key = E_SimpleApi.CACHE_KEY_PREFIX + "#key")
-    public void clearCache(Object key) {}
+    public void clearCache(Object key) {
+    }
+
 }

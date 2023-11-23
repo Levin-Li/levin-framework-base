@@ -1,8 +1,11 @@
 package com.levin.oak.base;
 
 import com.levin.commons.service.support.*;
+import net.oschina.j2cache.J2CacheBuilder;
+import net.oschina.j2cache.J2CacheConfig;
 import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.spring.starter.RedissonAutoConfigurationCustomizer;
+import org.springframework.cache.CacheManager;
 import org.springframework.core.env.*;
 import org.springframework.beans.factory.annotation.*;
 
@@ -36,6 +39,7 @@ import org.springframework.web.filter.CorsFilter;
 
 import org.apache.dubbo.config.spring.context.annotation.*;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;

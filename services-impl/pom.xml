@@ -124,6 +124,12 @@
             <scope>provided</scope>
         </dependency>
 
+<!--        <dependency>
+            <groupId>org.dromara.x-file-storage</groupId>
+            <artifactId>x-file-storage-spring</artifactId>
+            <scope>provided</scope>
+        </dependency>-->
+
         <dependency>
             <groupId>com.github.javen205</groupId>
             <artifactId>IJPay-All</artifactId>

@@ -10,6 +10,7 @@ import com.levin.commons.service.domain.*;
 import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
+
 import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
@@ -25,7 +26,9 @@ import io.swagger.v3.oas.annotations.tags.*;
 import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
+
 import cn.hutool.core.lang.*;
+
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
@@ -44,6 +47,7 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 // 自动导入列表
 import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -97,8 +101,7 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_AppClient.CACHE_KEY_PREFIX +
-    // "#req.id")
+    @CacheEvict(condition = "#result", key = E_AppClient.CACHE_KEY_PREFIX +  "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean update(UpdateAppClientReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -124,8 +127,7 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    // @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_AppClient.CACHE_KEY_PREFIX +
-    // "#req.id")
+    @CacheEvict(condition = "#isNotEmpty(#req.id)", key = E_AppClient.CACHE_KEY_PREFIX + "#req.id")
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(AppClientIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -135,6 +137,7 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
     @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
+    @CacheEvict(allEntries = true, condition = "#isNotEmpty(#req.idList)")
     public int batchDelete(DeleteAppClientReq req) {
         // @Todo 优化批量提交
         return Stream.of(req.getIdList())
@@ -170,8 +173,8 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // Srping 4.3提供了一个sync参数。是当缓存失效后，为了避免多个请求打到数据库,系统做了一个并发控制优化，同时只有一个线程会去数据库取数据其它线程会被阻塞。
-    // @Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key =
-    // E_AppClient.CACHE_KEY_PREFIX + "#id")
+    @Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key = E_AppClient.CACHE_KEY_PREFIX + "#id")
+
     public AppClientInfo findById(String id) {
         return findById(new AppClientIdReq().setId(id));
     }
@@ -179,8 +182,7 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     // 只更新缓存
-    // @CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key =
-    // E_AppClient.CACHE_KEY_PREFIX + "#req.id")
+    @CachePut(unless = "#result == null", condition = "#isNotEmpty(#req.id)", key = E_AppClient.CACHE_KEY_PREFIX + "#req.id")
     public AppClientInfo findById(AppClientIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findUnique(req);
@@ -201,5 +203,6 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "#isNotEmpty(#key)", key = E_AppClient.CACHE_KEY_PREFIX + "#key")
-    public void clearCache(Object key) {}
+    public void clearCache(Object key) {
+    }
 }

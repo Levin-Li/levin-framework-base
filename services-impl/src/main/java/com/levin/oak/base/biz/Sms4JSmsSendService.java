@@ -25,7 +25,6 @@ import org.dromara.sms4j.jdcloud.config.JdCloudConfig;
 import org.dromara.sms4j.provider.enumerate.SupplierType;
 import org.dromara.sms4j.tencent.config.TencentConfig;
 import org.dromara.sms4j.yunpian.config.YunpianConfig;
-import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
