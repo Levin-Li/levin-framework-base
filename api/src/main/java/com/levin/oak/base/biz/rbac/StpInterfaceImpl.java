@@ -26,12 +26,12 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Service(PLUGIN_PREFIX + "StpInterface")
 @Slf4j
 @ConditionalOnClass(StpInterface.class)
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "StpInterface",  matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "StpInterface", matchIfMissing = true)
 public class StpInterfaceImpl
         implements StpInterface {
 
     @Autowired
-    RbacPermissionThreadCachedService permissionThreadCachedService;
+    RbacPermissionService<Object> rbacPermissionService;
 
     @PostConstruct
     void init() {
@@ -41,13 +41,13 @@ public class StpInterfaceImpl
     }
 
     @Override
-    public List<String> getPermissionList(Object loginId, String loginType) {
-        return permissionThreadCachedService.getPermissionList(loginId.toString());
+    public List<String> getPermissionList(Object principal, String loginType) {
+        return rbacPermissionService.getPermissionList(principal.toString());
     }
 
     @Override
-    public List<String> getRoleList(Object loginId, String loginType) {
-        return permissionThreadCachedService.getRoleList(loginId.toString());
+    public List<String> getRoleList(Object principal, String loginType) {
+        return rbacPermissionService.getRoleList(principal.toString());
     }
 
 }

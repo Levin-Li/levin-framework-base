@@ -7,6 +7,7 @@ import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.plugin.Res;
 import com.levin.commons.plugin.ResLoader;
 import com.levin.commons.rbac.RbacUserInfo;
+import com.levin.commons.rbac.RbacUserObject;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.Identifiable;
 import com.levin.commons.utils.JsonStrArrayUtils;
@@ -42,7 +43,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 //@ConditionalOnMissingBean(RbacResService.class)
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacResService", matchIfMissing = true)
 @ResAuthorize(ignored = true)
-public class RbacResServiceImpl implements RbacResService<String> {
+public class RbacResServiceImpl implements RbacResService<Object> {
 
     @Autowired
     ApplicationContext context;
@@ -63,15 +64,15 @@ public class RbacResServiceImpl implements RbacResService<String> {
     /**
      * 获取授权的菜单列表
      *
-     * @param userId
+     * @param principal
      * @return
      */
     @Override
-    public List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, String userId) {
+    public List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, Object principal) {
 
-        Assert.notNull(userId, "无效的用户标识");
+        Assert.notNull(principal, "无效的用户标识");
 
-        RbacUserInfo<String> userInfo = rbacService.getUserInfo(userId);
+        RbacUserObject<String> userInfo = rbacService.getUserInfo(principal);
 
         Assert.notNull(userInfo, "无效的用户标识");
 
@@ -126,8 +127,8 @@ public class RbacResServiceImpl implements RbacResService<String> {
         ///////////////////////////////////////////////////////////////////////////
         //过滤出有权限的菜单，或是设置为enable = false
 
-        List<String> roleList = rbacService.getRoleList(userId);
-        List<String> permissionList = rbacService.getPermissionList(userId);
+        List<String> roleList = rbacService.getRoleList(principal);
+        List<String> permissionList = rbacService.getPermissionList(principal);
 
         for (Map.Entry<String, MenuResInfo> entry : cacheMap2.entrySet()) {
             //
@@ -189,17 +190,17 @@ public class RbacResServiceImpl implements RbacResService<String> {
     /**
      * 获取资源授权清单
      *
-     * @param userId 如果 userId 为null，则表示获取全部的
+     * @param principal 如果 principal 为null，则表示获取全部的
      * @return
      */
     @Override
-    public List<ModuleInfo> getAuthorizedResList(String userId) {
+    public List<ModuleInfo> getAuthorizedResList(Object principal) {
 
-        //
-        boolean hasUser = userId != null && (!(userId instanceof CharSequence) || StringUtils.hasText(userId.toString()));
+        //非Null并且是非空字符串
+        boolean hasUser = principal != null && (!(principal instanceof CharSequence) || StringUtils.hasText(principal.toString()));
 
-        List<String> roleList = hasUser ? rbacService.getRoleList(userId) : Collections.emptyList();
-        List<String> permissionList = hasUser ? rbacService.getPermissionList(userId) : Collections.emptyList();
+        List<String> roleList = hasUser ? rbacService.getRoleList(principal) : Collections.emptyList();
+        List<String> permissionList = hasUser ? rbacService.getPermissionList(principal) : Collections.emptyList();
 
         //返回结果
         List<ModuleInfo> result = new LinkedList<>();

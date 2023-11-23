@@ -66,7 +66,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", matchIfMissing = true)
 @ResAuthorize(ignored = true)
 public class AuthServiceImpl
-        implements AuthService, RbacPermissionThreadCachedService<String>, ApplicationListener<ContextRefreshedEvent> {
+        implements AuthService, ApplicationListener<ContextRefreshedEvent> {
 
     final ResAuthorize defaultResAuthorize = getClass().getAnnotation(ResAuthorize.class);
 
@@ -123,12 +123,6 @@ public class AuthServiceImpl
 
 
     static final ContextHolder<Method, ResAuthorize> cache = ContextHolder.buildContext(true);
-
-
-    /**
-     * 用户权限的线程级别缓存
-     */
-    final ContextHolder<String, List<String>> permissionListThreadCache = ContextHolder.buildThreadContext(false, true);
 
     final static ThreadLocal<UserInfo> currentUser = new ThreadLocal<>();
 
@@ -263,19 +257,19 @@ public class AuthServiceImpl
     /**
      * 直接认证，并返回token
      *
-     * @param loginId
+     * @param principal
      * @param params
      * @return 认证成功后的token
      */
     @Override
-    public String auth(String loginId, Map<String, Object>... params) {
+    public String auth(Object principal, Map<String, Object>... params) {
 
-//        Assert.notNull(loginId, "loginId is null");
+        Assert.notNull(principal, "principal is null");
 
-        Assert.hasText(loginId, "loginId is empty");
+//        Assert.hasText(principal, "principal is empty");
 
         //默认登录
-        StpUtil.login(loginId, getDeviceType(getValue("user-agent", params)));
+        StpUtil.login(principal, getDeviceType(getValue("user-agent", params)));
 
         return StpUtil.getTokenValue();
     }
@@ -321,7 +315,7 @@ public class AuthServiceImpl
         UserInfo userInfo = currentUser.get();
 
         if (userInfo == null) {
-            userInfo = (UserInfo) getUserInfo(getLoginId());
+            userInfo = (UserInfo) loadUserInfo(getLoginId());
             currentUser.set(userInfo);
         }
 
@@ -331,12 +325,12 @@ public class AuthServiceImpl
     /**
      * 获取当前登录用户信息
      *
-     * @param loginId
+     * @param principal
      * @return
      */
     @Override
-    public RbacUserInfo<String> getUserInfo(String loginId) {
-        return auditUser(userService.findById(loginId).setPassword(null));
+    public RbacUserInfo<String> loadUserInfo(String principal) {
+        return auditUser(userService.findById(principal).setPassword(null));
     }
 
     @Override
@@ -344,13 +338,13 @@ public class AuthServiceImpl
 
         Assert.hasText(token, "token is empty");
 
-        String loginId = (String) StpUtil.getLoginIdByToken(token);
+        String principal = (String) StpUtil.getLoginIdByToken(token);
 
-        if (!StringUtils.hasText(loginId)) {
+        if (!StringUtils.hasText(principal)) {
             throw new AuthorizationException(NotLoginException.INVALID_TOKEN_MESSAGE);
         }
 
-        return loginId;
+        return principal;
     }
 
     @Override
@@ -399,53 +393,13 @@ public class AuthServiceImpl
     @Override
     public String getLoginId() {
 
-        Object loginId = StpUtil.getLoginId();
+        Object principal = StpUtil.getLoginId();
 
-        if (loginId == null) {
+        if (principal == null) {
             throw new NotLoginException(NotLoginException.NOT_TOKEN_MESSAGE, StpUtil.getLoginType(), StpUtil.getLoginDevice());
         }
 
-        return (String) loginId;
-    }
-
-
-    @Override
-    public List<String> getRoleList(String userId) {
-
-        Assert.notNull(userId, "userId is null");
-
-        return permissionListThreadCache.getAndAutoPut("R-" + userId, null,
-                () -> {
-                    List<String> roleList = rbacService.getRoleList(userId);
-
-                    if (roleList == null || roleList.isEmpty()) {
-                        return Collections.emptyList();
-                    }
-
-                    UserInfo userInfo = (UserInfo) getUserInfo(userId);
-
-                    return userInfo.getRoleList();
-                }
-        );
-    }
-
-    public List<String> getPermissionList(String userId) {
-
-        Assert.notNull(userId, "userId is null");
-
-        return permissionListThreadCache.getAndAutoPut("P-" + userId, null,
-                () -> {
-                    List<String> roleList = rbacService.getRoleList(userId);
-
-                    if (roleList == null || roleList.isEmpty()) {
-                        return Collections.emptyList();
-                    }
-
-                    UserInfo userInfo = (UserInfo) getUserInfo(userId);
-
-                    return bizRoleService.getRolePermissionList(userInfo.getTenantId(), roleList);
-                }
-        );
+        return (String) principal;
     }
 
     @Override
@@ -477,10 +431,8 @@ public class AuthServiceImpl
 
     @Override
     public void clearThreadCacheData() {
-        permissionListThreadCache.clear();
         currentUser.set(null);
     }
-
 
     /**
      * 检查访问权限
@@ -552,17 +504,15 @@ public class AuthServiceImpl
 
         ///////////////////////// 构建权限检查逻辑的闭包 //////////////////////////////////////
 
-        String loginId = getLoginId();
-
 //        boolean ok = rbacService.isAuthorized(
 //                String.join(rbacService.getPermissionDelimiter(), resAuthorize.domain(), resAuthorize.type(), resAuthorize.res()),
 //                SimpleResAction.newAction(resAuthorize),
-//                rbacService.getRoleList(loginId),
-//                getPermissionList(loginId),
+//                rbacService.getRoleList(principal),
+//                getPermissionList(principal),
 //                rbacService.getAuthorizeContext()
 //        );
 
-        boolean ok = rbacService.isAuthorized(loginId, resAuthorize);
+        boolean ok = rbacService.isAuthorized(getUserInfo(), resAuthorize);
 
         if (!ok) {
             throw new AuthorizationException(401, "未授权的操作");

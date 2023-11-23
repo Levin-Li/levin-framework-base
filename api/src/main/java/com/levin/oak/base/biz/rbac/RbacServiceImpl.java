@@ -4,14 +4,13 @@ import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.plugin.Res;
 import com.levin.commons.plugin.ResLoader;
-import com.levin.commons.rbac.RbacUserInfo;
+import com.levin.commons.rbac.RbacUserObject;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.rbac.SimpleResAction;
 import com.levin.commons.service.domain.Identifiable;
 import com.levin.commons.service.support.ContextHolder;
 import com.levin.commons.utils.ExpressionUtils;
 import com.levin.oak.base.biz.BizRoleService;
-import com.levin.oak.base.services.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +57,10 @@ public class RbacServiceImpl implements RbacService {
     @DubboReference
     BizRoleService bizRoleService;
 
-    @DubboReference
-    UserService userService;
+    @Autowired
+    UserLoadService<Object> defaultUserLoadService;
+
+    final InheritableThreadLocal<UserLoadService<Object>> userLoadServiceHolder = new InheritableThreadLocal<>();
 
     final ContextHolder<String, Res.Action> actionContextHolder = ContextHolder.buildContext(true);
 
@@ -168,15 +169,36 @@ public class RbacServiceImpl implements RbacService {
         ).orElse(false);
     }
 
+    /**
+     * 设置用户加载服务
+     *
+     * @param userLoadService
+     * @return
+     */
     @Override
-    public RbacUserInfo<String> getUserInfo(Object userId) {
-        return userService.findById((String) userId);
+    public RbacService setUserLoadService(UserLoadService<Object> userLoadService) {
+        this.userLoadServiceHolder.set(userLoadService);
+        return this;
     }
 
     @Override
-    public List<String> getPermissionList(Object userId) {
+    public RbacUserObject<String> getUserInfo(Object principal) {
 
-        RbacUserInfo<String> userInfo = getUserInfo(userId);
+        UserLoadService<Object> userLoadService = this.userLoadServiceHolder.get();
+
+        if (userLoadService == null) {
+            userLoadService = defaultUserLoadService;
+        }
+
+        Assert.notNull(userLoadService, "用户加载服务未配置");
+
+        return userLoadService.loadUser(principal);
+    }
+
+    @Override
+    public List<String> getPermissionList(Object principal) {
+
+        RbacUserObject<String> userInfo = getUserInfo(principal);
 
         List<String> roleList = userInfo.getRoleList();
 
@@ -188,30 +210,30 @@ public class RbacServiceImpl implements RbacService {
     }
 
     @Override
-    public List<String> getRoleList(Object userId) {
-        return getUserInfo(userId).getRoleList();
+    public List<String> getRoleList(Object principal) {
+        return getUserInfo(principal).getRoleList();
     }
 
     @Override
-    public List<String> getCanAcccessOrgIdList(Object userId) {
+    public List<String> getCanAcccessOrgIdList(Object principal) {
         return null;
     }
 
     @Override
-    public boolean isAuthorized(Object userId, ResAuthorize resAuthorize) {
+    public boolean isAuthorized(Object principal, ResAuthorize resAuthorize) {
         return isAuthorized(
-                userId,
+                principal,
                 String.join(getPermissionDelimiter(), resAuthorize.domain(), resAuthorize.type(), resAuthorize.res()),
                 SimpleResAction.newAction(resAuthorize)
         );
     }
 
-    public boolean isAuthorized(Object userId, String resPrefix, Res.Action action) {
+    public boolean isAuthorized(Object principal, String resPrefix, Res.Action action) {
         return isAuthorized(
                 resPrefix,
                 action,
-                getRoleList(userId),
-                getPermissionList(userId),
+                getRoleList(principal),
+                getPermissionList(principal),
                 getAuthorizeContext()
         );
     }
@@ -219,17 +241,17 @@ public class RbacServiceImpl implements RbacService {
     /**
      * 当前用户是否能给目标用户分配指定的角色
      *
-     * @param targetUserId
+     * @param targetPrincipal
      * @param requireRoleCode
      * @param matchErrorConsumer 匹配错误回调 参数1为请求的角色，参数2为没有匹配的权限
      * @return
      */
     @Override
-    public boolean canAssignRole(Object sourceUserId, Object targetUserId, String requireRoleCode, BiConsumer<String, String> matchErrorConsumer) {
+    public boolean canAssignRole(Object sourcePrincipal, Object targetPrincipal, String requireRoleCode, BiConsumer<String, String> matchErrorConsumer) {
 
-        Assert.notNull(sourceUserId, "用户未登录");
+        Assert.notNull(sourcePrincipal, "用户未登录");
 
-        RbacUserInfo<String> userInfo = getUserInfo(sourceUserId);
+        RbacUserObject<String> userInfo = getUserInfo(sourcePrincipal);
 
         //1、如果是超级管理员，可以分配任何角色
         if (userInfo.isSuperAdmin()) {
@@ -281,7 +303,7 @@ public class RbacServiceImpl implements RbacService {
      * @return
      */
     @Override
-    public boolean isAuthorized(Object userId, boolean isRequireAllPermission, List<String> requirePermissionList, BiConsumer<String, String> matchErrorConsumer) {
+    public boolean isAuthorized(Object principal, boolean isRequireAllPermission, List<String> requirePermissionList, BiConsumer<String, String> matchErrorConsumer) {
 
         //Assert.isTrue(authService.isLogin(), "用户未登录");
 
@@ -297,7 +319,7 @@ public class RbacServiceImpl implements RbacService {
             return true;
         }
 
-        RbacUserInfo<String> userInfo = getUserInfo(userId);
+        RbacUserObject<String> userInfo = getUserInfo(principal);
 
         //如果是超级管理员
         if (userInfo.isSuperAdmin()) {

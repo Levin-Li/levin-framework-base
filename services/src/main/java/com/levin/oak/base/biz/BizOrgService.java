@@ -43,4 +43,8 @@ import com.levin.commons.service.support.InjectConst;
  * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[c4403239d15b7083d23d2104fb8fa738]，请不要修改和删除此行内容。
  */
 @Tag(name = E_Org.BIZ_NAME + "-业务服务", description = "")
-public interface BizOrgService {}
+public interface BizOrgService {
+
+    //@todo 加载所有的机构，统一管理变更
+
+}

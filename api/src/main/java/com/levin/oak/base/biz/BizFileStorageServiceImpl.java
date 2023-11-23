@@ -83,7 +83,6 @@ public class BizFileStorageServiceImpl
 
     @PostConstruct
     public void init() {
-
         log.info("文件存储服务初始完成");
     }
 

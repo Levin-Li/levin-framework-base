@@ -37,7 +37,6 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
 
     private PluginManager pluginManager;
 
-
     @Override
     public String getId() {
         return getPackageName();

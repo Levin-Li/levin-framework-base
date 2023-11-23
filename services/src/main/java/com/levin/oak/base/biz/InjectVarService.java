@@ -18,6 +18,11 @@ public interface InjectVarService {
      */
     void clearCache();
 
+    /**
+     * 获取业务堆栈
+     *
+     * @return
+     */
     default String getBizStack() {
         return getBizStack(null).stream().collect(Collectors.joining(" -> "));
     }

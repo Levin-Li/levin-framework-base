@@ -36,6 +36,7 @@ public class BizRoleServiceImpl implements BizRoleService {
     @Autowired
     protected SimpleDao simpleDao;
 
+
     /**
      * 获取指定角色的权限列表
      *
@@ -45,6 +46,9 @@ public class BizRoleServiceImpl implements BizRoleService {
      */
     @Override
     public List<String> getRolePermissionList(String tenantId, List<String> roleCodeList) {
+
+        //@todo 优化，使用缓存
+
         boolean hasTenant = StringUtils.hasText(tenantId);
         return new ArrayList<>(
                 //获取指定用户的权限列表

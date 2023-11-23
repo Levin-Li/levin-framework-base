@@ -12,52 +12,7 @@ import java.util.function.BiConsumer;
 
 class RbacServiceTest {
 
-    RbacService rbacService = new RbacService() {
-        @Override
-        public RbacUserInfo<String> getUserInfo(Object userId) {
-            return null;
-        }
-
-        @Override
-        public List<String> getRoleList(Object userId) {
-            return null;
-        }
-
-        @Override
-        public List<String> getPermissionList(Object userId) {
-            return null;
-        }
-
-        @Override
-        public List<String> getCanAcccessOrgIdList(Object userId) {
-            return null;
-        }
-
-        @Override
-        public boolean isAuthorized(Object userId, ResAuthorize resAuthorize) {
-            return false;
-        }
-
-        @Override
-        public boolean isAuthorized(Object userId, String resPrefix, Res.Action action) {
-            return false;
-        }
-
-        @Override
-        public boolean canAssignRole(Object sourceUserId, Object targetUserId, String requireRoleCode, BiConsumer<String, String> matchErrorConsumer) {
-            return false;
-        }
-
-        @Override
-        public boolean isAuthorized(Object userId, boolean isRequireAllPermission, List<String> requirePermissionList, BiConsumer<String, String> matchErrorConsumer) {
-            return false;
-        }
-
-        @Override
-        public boolean isAuthorized(List<String> ownerRoleList, List<String> ownerPermissionList, String requirePermission, BiConsumer<String, String> matchErrorConsumer) {
-            return false;
-        }
-    };
+    RbacService rbacService =  null;
 
     @Test
     public void testMatch() {

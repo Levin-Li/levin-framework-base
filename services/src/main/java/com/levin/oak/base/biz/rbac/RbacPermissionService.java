@@ -6,20 +6,20 @@ import java.util.List;
 /**
  * Rbac 权限列表服务
  */
-public interface RbacPermissionService<UID> {
+public interface RbacPermissionService<U> {
     /**
      * 获取用户的角色列表
      *
-     * @param userId
+     * @param principal
      * @return
      */
-    List<String> getRoleList(@NotNull UID userId);
+    List<String> getRoleList(@NotNull U principal);
 
     /**
      * 获取用户的权限列表
      *
-     * @param userId
+     * @param principal
      * @return
      */
-    List<String> getPermissionList(@NotNull UID userId);
+    List<String> getPermissionList(@NotNull U principal);
 }

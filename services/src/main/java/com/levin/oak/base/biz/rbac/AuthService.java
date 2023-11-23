@@ -3,9 +3,7 @@ package com.levin.oak.base.biz.rbac;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.SimpleAuthService;
 import com.levin.commons.service.exception.AuthorizationException;
-import com.levin.oak.base.biz.BizUserService;
 import org.springframework.lang.NonNull;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 
@@ -15,7 +13,7 @@ import java.lang.reflect.Method;
  * <p>
  * 务必注意：本接口和当前登录用户有关，实现类必须和使用方在同一个虚拟机中。
  */
-public interface AuthService extends SimpleAuthService<String, String> {
+public interface AuthService extends SimpleAuthService<String, Object> {
 
     /**
      * 清除线程缓存数据
@@ -61,7 +59,7 @@ public interface AuthService extends SimpleAuthService<String, String> {
      *
      * @return
      */
-    <U extends RbacUserInfo<String>> U getUserInfo(String loginId);
+    <U extends RbacUserInfo<String>> U loadUserInfo(String principal);
 
     /**
      * 用户登出

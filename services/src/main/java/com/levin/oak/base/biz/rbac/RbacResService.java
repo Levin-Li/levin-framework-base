@@ -12,22 +12,22 @@ import java.util.List;
  * <p>
  * 1、获取可以使用的菜单清单
  */
-public interface RbacResService<UID> {
+public interface RbacResService<U> {
 
     /**
      * 获取指定用户的授权菜单列表
      *
-     * @param userId 不允许为空
+     * @param principal 不允许为空
      * @return
      */
-    List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, @NotNull UID userId);
+    List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, @NotNull U principal);
 
     /**
      * 获取资源授权清单
      *
-     * @param userId 为null返回所有的资源授权清单
+     * @param principal 为null返回所有的资源授权清单
      * @return
      */
-    List<ModuleInfo> getAuthorizedResList(@Nullable UID userId);
+    List<ModuleInfo> getAuthorizedResList(@Nullable U principal);
 
 }
