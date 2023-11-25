@@ -51,7 +51,7 @@ import static com.levin.oak.base.ModuleOption.*;
 // @Valid只能用在controller。@Validated可以用在其他被spring管理的类上。
 
 @RestController(PLUGIN_PREFIX + "FileStorageController")
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "FileStorageController", matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "FileStorageController", havingValue = "true", matchIfMissing = true)
 @RequestMapping(API_PATH + "fss")
 @Tag(name = "文件存储", description = "文件存储服务")
 @Slf4j

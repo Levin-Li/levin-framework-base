@@ -5,17 +5,6 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.StrUtil;
-
-//import cn.xuyanwu.spring.file.storage.FileStorageProperties;
-//import cn.xuyanwu.spring.file.storage.FileStorageService;
-//import cn.xuyanwu.spring.file.storage.FileStorageServiceBuilder;
-//import cn.xuyanwu.spring.file.storage.platform.FileStorage;
-//import cn.xuyanwu.spring.file.storage.spring.file.MultipartFileWrapperAdapter;
-
-import org.dromara.x.file.storage.core.*;
-import org.dromara.x.file.storage.core.platform.FileStorage;
-import org.dromara.x.file.storage.spring.file.MultipartFileWrapperAdapter;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
@@ -25,9 +14,11 @@ import com.levin.oak.base.services.setting.info.SettingInfo;
 import com.levin.oak.base.services.setting.req.CreateSettingReq;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboReference;
-
-
+import org.dromara.x.file.storage.core.FileStorageProperties;
+import org.dromara.x.file.storage.core.FileStorageService;
+import org.dromara.x.file.storage.core.FileStorageServiceBuilder;
+import org.dromara.x.file.storage.core.platform.FileStorage;
+import org.dromara.x.file.storage.spring.file.MultipartFileWrapperAdapter;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -54,8 +45,8 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 @Service(PLUGIN_PREFIX + "BizFileStorageService")
 @ConditionalOnClass({FileStorageService.class})
-//@ConditionalOnMissingBean({BizFileStorageService.class}) //默认只有在无对应服务才启用
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizFileStorageService", matchIfMissing = true)
+
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizFileStorageService", havingValue = "true", matchIfMissing = true)
 @Slf4j
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated

@@ -29,7 +29,6 @@ import com.levin.oak.base.services.user.info.UserInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -47,7 +46,10 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -62,8 +64,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Slf4j
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 @Service(PLUGIN_PREFIX + "DefaultAuthService")
-//@ConditionalOnMissingBean(AuthService.class)
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultAuthService", havingValue = "true", matchIfMissing = true)
 @ResAuthorize(ignored = true)
 public class AuthServiceImpl
         implements AuthService, ApplicationListener<ContextRefreshedEvent> {

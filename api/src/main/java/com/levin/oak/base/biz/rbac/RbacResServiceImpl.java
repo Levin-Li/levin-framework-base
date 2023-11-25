@@ -6,7 +6,6 @@ import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.plugin.Res;
 import com.levin.commons.plugin.ResLoader;
-import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.RbacUserObject;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.Identifiable;
@@ -40,8 +39,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Service(PLUGIN_PREFIX + "RbacResService")
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 @Slf4j
-//@ConditionalOnMissingBean(RbacResService.class)
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacResService", matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacResService", havingValue = "true", matchIfMissing = true)
 @ResAuthorize(ignored = true)
 public class RbacResServiceImpl implements RbacResService<Object> {
 

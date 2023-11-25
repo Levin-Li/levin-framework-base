@@ -27,7 +27,6 @@ import com.levin.oak.base.services.user.UserService;
 import com.levin.oak.base.services.user.req.CreateUserReq;
 import com.levin.oak.base.utils.AmisUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -55,8 +54,7 @@ import static com.levin.oak.base.biz.BizUserService.SA_ACCOUNT;
 @Slf4j
 //@org.springframework.context.annotation.Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 @Service(PLUGIN_PREFIX + "DefaultRbacInitService")
-//@ConditionalOnMissingBean(RbacInitService.class)
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultRbacInitService", matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "DefaultRbacInitService", havingValue = "true", matchIfMissing = true)
 public class DefaultRbacInitServiceImpl
         implements RbacInitService, ApplicationListener<ContextRefreshedEvent> {
 

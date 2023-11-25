@@ -12,7 +12,6 @@ import com.levin.commons.service.support.ContextHolder;
 import com.levin.commons.utils.ExpressionUtils;
 import com.levin.oak.base.biz.BizRoleService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -42,9 +41,8 @@ import static org.springframework.util.StringUtils.trimWhitespace;
  */
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 @Service(PLUGIN_PREFIX + "RbacService")
-//@ConditionalOnMissingBean(RbacService.class)
 @Slf4j
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacService", matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacService", havingValue = "true", matchIfMissing = true)
 @ResAuthorize(ignored = true)
 public class RbacServiceImpl implements RbacService {
 

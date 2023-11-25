@@ -26,7 +26,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Service(PLUGIN_PREFIX + "StpInterface")
 @Slf4j
 @ConditionalOnClass(StpInterface.class)
-@ConditionalOnProperty(value = PLUGIN_PREFIX + "StpInterface", matchIfMissing = true)
+@ConditionalOnProperty(value = PLUGIN_PREFIX + "StpInterface", havingValue = "true", matchIfMissing = true)
 public class StpInterfaceImpl
         implements StpInterface {
 
