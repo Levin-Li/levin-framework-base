@@ -64,7 +64,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ScheduledTaskController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
 
 //类注解
 
@@ -74,7 +74,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 调度任务控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[5bf7099174c7a1f441f1fb0f8cfe5485]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午11:48:31, 代码生成哈希校验码：[f940eb0b6765e61263db98a4df5a96d3]，请不要修改和删除此行内容。
  *
  */
 public class ScheduledTaskController extends BaseController{

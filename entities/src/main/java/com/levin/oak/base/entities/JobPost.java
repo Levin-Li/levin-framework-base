@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
@@ -37,7 +39,7 @@ import javax.persistence.*;
                 @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_TenantOrgNamedEntity.name}),
         }
 )
-
+@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class JobPost
         extends TenantOrgNamedEntity {
 

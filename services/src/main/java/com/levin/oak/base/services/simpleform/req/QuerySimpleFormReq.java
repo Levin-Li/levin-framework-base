@@ -48,7 +48,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[074fd5d59938c466fa0f16079c7d160a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午11:48:32, 代码生成哈希校验码：[b0832b0d69bb0709f36c450d4a97793d]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -176,6 +176,10 @@ public class QuerySimpleFormReq extends MultiTenantOrgReq{
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Schema(title = "模糊匹配-" + L_remark)
+    @Contains
+    String containsRemark;
 
     public QuerySimpleFormReq(String id) {
         this.id = id;

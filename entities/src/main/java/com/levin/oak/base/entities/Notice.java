@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.service.domain.EnumDesc;
@@ -51,6 +53,7 @@ import java.util.Date;
  * 内容类型：contentType
  *
  */
+@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class Notice
         extends TenantOrgNamedEntity {
 

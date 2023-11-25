@@ -64,7 +64,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "TenantController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
+@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME)
 
 //类注解
 

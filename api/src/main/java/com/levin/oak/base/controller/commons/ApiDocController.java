@@ -49,7 +49,7 @@ import static com.levin.oak.base.ModuleOption.*;
 @Tag(name = "ApiDoc", description = "API文档")
 @Slf4j
 @Valid
-@ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME, ignored = true)
+//@ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME, ignored = true)
 @MenuResTag(false)
 public class ApiDocController extends BaseController {
 

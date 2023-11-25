@@ -39,15 +39,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
  */
 @Slf4j
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
 @MenuResTag(domain = ID)
 public abstract class BaseController {
+
     @Autowired
     protected HttpServletRequest httpRequest;
+
     @Autowired
     protected HttpServletResponse httpResponse;
+
     @Autowired
     protected ApplicationContext applicationContext;
+
     protected Object selfProxy = null;
 
     public final String getModuleId() {
@@ -82,6 +86,7 @@ public abstract class BaseController {
 
     /**
      * null2Empty
+     *
      * @param txt
      * @return
      */
@@ -91,6 +96,7 @@ public abstract class BaseController {
 
     /**
      * null2Empty
+     *
      * @param txt
      * @param prefix
      * @param suffix

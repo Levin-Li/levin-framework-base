@@ -64,7 +64,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "TenantAppController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
 
 //类注解
 
@@ -74,7 +74,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 租户应用控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:23, 代码生成哈希校验码：[717c8f668e939480d1565629b2493532]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午11:48:31, 代码生成哈希校验码：[d1cbc1a9a2b51b45f4abb20fa6b9c264]，请不要修改和删除此行内容。
  *
  */
 public class TenantAppController extends BaseController{

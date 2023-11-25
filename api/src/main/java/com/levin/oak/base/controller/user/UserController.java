@@ -2,6 +2,7 @@ package com.levin.oak.base.controller.user;
 
 import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.dao.support.SimplePaging;
+import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.biz.BizUserService;
@@ -25,8 +26,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-import static com.levin.oak.base.ModuleOption.API_PATH;
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 //Auto gen by simple-dao-codegen 2022-4-2 20:07:02
@@ -51,7 +51,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "UserController", matchIfMissing = true)
 
 //默认需要权限访问
-//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
 @Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
 
 @Valid

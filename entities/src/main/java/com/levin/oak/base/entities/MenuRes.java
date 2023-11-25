@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import com.levin.commons.dao.domain.support.AbstractTreeObject;
@@ -39,6 +41,7 @@ import javax.persistence.*;
 //                @UniqueConstraint(columnNames = {AbstractMultiTenantObject.Fields.tenantId, Setting.Fields.code}),
 //        }
 )
+@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class MenuRes
         extends AbstractTreeObject<String, MenuRes>
         implements MenuItem<MenuRes, MenuRes>, MultiTenantPublicObject {

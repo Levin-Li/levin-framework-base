@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.domain.support.SimpleTenantOrgObject;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -39,6 +41,7 @@ import java.util.Date;
 //                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
         }
 )
+@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class NoticeProcessLog extends SimpleTenantOrgObject {
 
     @Id

@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[42787ea38e671841eb586e20aefec60e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午11:48:31, 代码生成哈希校验码：[95a1ac9d0a199e8bf00f1bf9d37796b3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -153,6 +153,10 @@ public class QueryI18nResReq extends MultiTenantOrgReq{
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Schema(title = "模糊匹配-" + L_remark)
+    @Contains
+    String containsRemark;
 
     public QueryI18nResReq(Long id) {
         this.id = id;

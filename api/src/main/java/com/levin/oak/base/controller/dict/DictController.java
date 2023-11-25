@@ -64,7 +64,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "DictController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
 
 //类注解
 
@@ -74,7 +74,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 字典控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:23, 代码生成哈希校验码：[ca79a8dbcf73648ab228af8ffb54c673]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午11:48:31, 代码生成哈希校验码：[127bf54d9477c35847622ecdb0493d2e]，请不要修改和删除此行内容。
  *
  */
 public class DictController extends BaseController{

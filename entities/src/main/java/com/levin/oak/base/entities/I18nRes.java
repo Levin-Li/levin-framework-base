@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.Contains;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -38,6 +40,7 @@ import javax.persistence.*;
 //                @UniqueConstraint(columnNames = {E_AbstractMultiTenantObject.tenantId, E_I18nRes.label}),
         }
 )
+@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class I18nRes
         extends TenantOrgNamedEntity {
 

@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.E_AbstractMultiTenantObject;
 import com.levin.commons.service.domain.EnumDesc;
@@ -42,6 +44,7 @@ import javax.persistence.*;
                 @UniqueConstraint(columnNames = {E_AbstractMultiTenantObject.tenantId, E_Setting.code}),
         }
 )
+@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class Setting
         extends TenantOrgNamedEntity {
     public enum ValueType implements EnumDesc {

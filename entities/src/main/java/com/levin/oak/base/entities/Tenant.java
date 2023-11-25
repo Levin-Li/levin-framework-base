@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
@@ -54,7 +56,7 @@ import java.util.UUID;
                 @UniqueConstraint(columnNames = {E_Tenant.tenantKey})
         }
 )
-
+@EntityCategory(EntityOpConst.PLATFORM_TYPE_NAME)
 public class Tenant extends AbstractNamedEntityObject {
 
     @Schema(title = "ID")

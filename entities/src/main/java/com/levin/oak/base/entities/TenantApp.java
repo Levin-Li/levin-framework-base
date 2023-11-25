@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.domain.NamedObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractMultiTenantObject;
@@ -37,6 +39,7 @@ import java.util.List;
                 @UniqueConstraint(columnNames = {E_TenantApp.name})
         }
 )
+@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class TenantApp
         extends AbstractMultiTenantObject implements NamedObject {
 

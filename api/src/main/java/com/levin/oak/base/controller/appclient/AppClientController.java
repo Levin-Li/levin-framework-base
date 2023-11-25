@@ -64,7 +64,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppClientController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
 
 //类注解
 
@@ -74,7 +74,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 应用接入控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:23, 代码生成哈希校验码：[6c7f0022f4035c38f060a541585f8f9c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午11:48:30, 代码生成哈希校验码：[2831b61a20f546f4bb14df6f9fadc6ee]，请不要修改和删除此行内容。
  *
  */
 public class AppClientController extends BaseController{

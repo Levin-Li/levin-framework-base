@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.StatefulObject;
@@ -62,6 +64,7 @@ import javax.persistence.*;
 //不过，使用@Embeddabletypes可以达到几乎相同的目标。 唯一的区别是你不能重复@Embeddable的@Id定义，但你可以用@MappedSuperclass 。
 
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class Org
         extends AbstractTreeObject<String, Org>
         implements MultiTenantObject, StatefulObject {

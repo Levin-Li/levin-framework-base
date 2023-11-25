@@ -1,6 +1,8 @@
 package com.levin.oak.base.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
@@ -56,6 +58,7 @@ import java.util.List;
                 @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
         }
 )
+@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class User
         extends TenantOrgNamedEntity
         implements OrganizedObject, MultiTenantObject, StatefulObject {

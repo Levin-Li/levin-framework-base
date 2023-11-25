@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.service.support.InjectConst;
@@ -45,6 +47,7 @@ import javax.persistence.Table;
 //                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_Setting.code}),
 //        }
 )
+@EntityCategory(EntityOpConst.PLATFORM_TYPE_NAME)
 public class SimpleForm extends SimpleEntity {
 
     @Schema(title = "提交地址")

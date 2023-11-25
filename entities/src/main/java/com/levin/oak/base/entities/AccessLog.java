@@ -1,6 +1,8 @@
 package com.levin.oak.base.entities;
 
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.E_SimpleTenantOrgObject;
 import com.levin.commons.dao.domain.support.SimpleTenantOrgObject;
@@ -34,6 +36,7 @@ import java.util.Date;
         }
 )
 @Schema(title = "访问日志")
+@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class AccessLog extends SimpleTenantOrgObject {
 
     @Id

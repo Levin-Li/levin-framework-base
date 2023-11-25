@@ -154,7 +154,7 @@ public class IndexController extends BaseController {
      */
     @SneakyThrows
     @GetMapping({"index"})
-    @Operation(summary = "首页", description = "首页")
+    @Operation(summary = "首页", description = "首页", hidden = true)
     public String index(Model modelMap) throws IOException {
 
         modelMap.addAttribute("request", httpRequest);
@@ -295,7 +295,7 @@ public class IndexController extends BaseController {
     }
 
     @GetMapping({"editor"})
-    @Operation(summary = "首页", description = "首页")
+    @Operation(summary = "页面编辑", description = "页面编辑")
     public String editor0(Model modelMap) throws IOException {
         return "redirect:" + UrlPathUtils.safeUrl(completeUrlParams(httpRequest.getRequestURI() + "/index"));
     }
@@ -307,7 +307,7 @@ public class IndexController extends BaseController {
      */
     @SneakyThrows
     @GetMapping("editor/index")
-    @Operation(summary = "页面编辑", description = "页面编辑")
+    @Operation(summary = "页面编辑", description = "页面编辑", hidden = true)
     @ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME)
     public String editor(Model modelMap) {
 

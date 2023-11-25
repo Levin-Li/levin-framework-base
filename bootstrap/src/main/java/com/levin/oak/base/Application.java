@@ -113,6 +113,7 @@ public class Application {
                 .cacheDefaults(RedisCacheConfiguration.defaultCacheConfig()
                         //redis 默认缓存 60 分钟
                         .entryTtl(Duration.of(60, ChronoUnit.MINUTES))
+                        .disableCachingNullValues()
                         .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(RedisSerializer.json())));
     }
 

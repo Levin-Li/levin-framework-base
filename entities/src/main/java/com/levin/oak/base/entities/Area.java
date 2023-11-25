@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.StartsWith;
 import com.levin.commons.dao.domain.TreeObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
@@ -30,6 +32,7 @@ import java.util.Set;
                 @Index(columnList = E_Area.type),
         }
 )
+@EntityCategory(EntityOpConst.PLATFORM_TYPE_NAME)
 public class Area
         extends AbstractNamedEntityObject
         implements

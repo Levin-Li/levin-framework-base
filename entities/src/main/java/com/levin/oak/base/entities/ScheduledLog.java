@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.domain.support.SimpleTenantOrgObject;
 import com.levin.commons.service.domain.Identifiable;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,6 +27,7 @@ import javax.persistence.*;
                 @Index(columnList = E_ScheduledLog.invokeCycle),
         }
 )
+@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class ScheduledLog
         extends SimpleTenantOrgObject implements Identifiable {
 

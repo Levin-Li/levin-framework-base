@@ -1,5 +1,7 @@
 package com.levin.oak.base.entities;
 
+import com.levin.commons.dao.EntityCategory;
+import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.service.domain.EnumDesc;
@@ -45,7 +47,7 @@ import java.util.List;
 //                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_TenantOrgNamedEntity.name}),
         }
 )
-
+@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class Dict
         extends TenantOrgNamedEntity {
 
