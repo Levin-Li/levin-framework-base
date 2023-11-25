@@ -46,7 +46,7 @@ import com.levin.oak.base.services.*;
 @Service(PLUGIN_PREFIX + "BizUserServiceImpl")
 //@DubboService
 
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizUserServiceImpl", matchIfMissing = true)
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizUserServiceImpl", havingValue = "true", matchIfMissing = true)
 @Slf4j
 
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。

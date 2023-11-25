@@ -27,9 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 
 
 @Service(PLUGIN_PREFIX + "BizRoleService")
-//@DubboService
-//@ConditionalOn(action = OnMissingBean, types = {BizRoleService.class}) //默认只有在无对应服务才启用
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizRoleService", matchIfMissing = true)
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizRoleService",havingValue = "true",  matchIfMissing = true)
 @Slf4j
 //@Validated
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)

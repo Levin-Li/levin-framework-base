@@ -66,7 +66,7 @@ import java.util.Date;
 //@DubboService
 @Service(PLUGIN_PREFIX + "BizSettingServiceImpl")
 
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizSettingServiceImpl", matchIfMissing = true)
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizSettingServiceImpl",havingValue = "true",  matchIfMissing = true)
 @Slf4j
 
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
