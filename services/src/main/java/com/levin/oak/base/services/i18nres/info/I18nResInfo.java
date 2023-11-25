@@ -30,13 +30,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
+
 
 /**
  * 国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:36, 代码生成哈希校验码：[dd32a970a59e8b9625b4bac0960ba61a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[dd32a970a59e8b9625b4bac0960ba61a]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -49,6 +50,7 @@ import com.levin.commons.service.support.InjectConst;
 public class I18nResInfo implements Serializable {
 
     private static final long serialVersionUID = -1681554652L;
+
 
     @NotNull
     @Schema(title = L_id)
@@ -71,7 +73,7 @@ public class I18nResInfo implements Serializable {
 
     @Size(max = 128)
     @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -79,7 +81,7 @@ public class I18nResInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value = true)
+    @JsonIgnore(value=true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
@@ -119,4 +121,5 @@ public class I18nResInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
 }

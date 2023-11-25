@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.area;
 
+import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -23,13 +24,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 区域-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:44, 代码生成哈希校验码：[e45a0156be0f0a6908c68e0e31688e12]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:56, 代码生成哈希校验码：[3621670cf9dcf09a3e1ca5f0694a4c23]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
 public interface AreaService {
 
     String BIZ_NAME = E_Area.BIZ_NAME;
+
+    String CK_PREFIX = E_Area.CACHE_KEY_PREFIX;
+
+    String SERVICE_NAME = "AreaService";
+
+    String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
 
     /**
      * 创建记录，返回主键ID

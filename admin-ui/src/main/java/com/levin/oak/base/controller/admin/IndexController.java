@@ -86,7 +86,7 @@ public class IndexController extends BaseController {
     @Autowired
     ApplicationContext applicationContext;
 
-    @DubboReference
+    @Autowired //@DubboReference
     RoleService roleService;
 
     @Autowired
@@ -107,7 +107,7 @@ public class IndexController extends BaseController {
     @Autowired
     FrameworkProperties frameworkProperties;
 
-    @DubboReference
+    @Autowired //@DubboReference
     SettingService settingService;
 
     @PostConstruct

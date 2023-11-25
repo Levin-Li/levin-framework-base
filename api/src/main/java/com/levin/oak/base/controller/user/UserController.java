@@ -59,7 +59,8 @@ public class UserController extends BaseController {
 
     private static final String BIZ_NAME = E_User.BIZ_NAME;
 
-    @DubboReference
+//    @DubboReference
+    @Autowired
     BizUserService bizUserService;
 
     @Autowired

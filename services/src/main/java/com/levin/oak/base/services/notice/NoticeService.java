@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.notice;
 
+import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -23,13 +24,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 通知-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:41, 代码生成哈希校验码：[f3e891eabdaafa340b92bce03b4f070e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:56, 代码生成哈希校验码：[48cf0ee1ea0e8d7b31062ed7980f2dfa]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_Notice.BIZ_NAME, description = E_Notice.BIZ_NAME + MAINTAIN_ACTION)
 public interface NoticeService {
 
     String BIZ_NAME = E_Notice.BIZ_NAME;
+
+    String CK_PREFIX = E_Notice.CACHE_KEY_PREFIX;
+
+    String SERVICE_NAME = "NoticeService";
+
+    String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
 
     /**
      * 创建记录，返回主键ID

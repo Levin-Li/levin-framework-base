@@ -31,13 +31,13 @@ import com.levin.oak.base.entities.JobPost.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:35, 代码生成哈希校验码：[b7a4bfca1f3423265ff18ebfed29189b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[b7a4bfca1f3423265ff18ebfed29189b]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -68,7 +68,7 @@ public class SimpleJobPostInfo implements Serializable {
 
     @Size(max = 128)
     @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -76,7 +76,7 @@ public class SimpleJobPostInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value = true)
+    @JsonIgnore(value=true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
@@ -89,4 +89,6 @@ public class SimpleJobPostInfo implements Serializable {
     @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
+
+
 }

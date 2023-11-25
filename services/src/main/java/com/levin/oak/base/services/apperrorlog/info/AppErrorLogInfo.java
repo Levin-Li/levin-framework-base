@@ -29,13 +29,14 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
+
 
 /**
  * 应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[ad29083fc7fd74de14b052526fc686ff]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[ad29083fc7fd74de14b052526fc686ff]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -48,6 +49,7 @@ import com.levin.commons.service.support.InjectConst;
 public class AppErrorLogInfo implements Serializable {
 
     private static final long serialVersionUID = 1594864095L;
+
 
     @NotNull
     @Schema(title = L_id)
@@ -77,4 +79,5 @@ public class AppErrorLogInfo implements Serializable {
 
     @Schema(title = L_exceptionFullInfo)
     String exceptionFullInfo;
+
 }

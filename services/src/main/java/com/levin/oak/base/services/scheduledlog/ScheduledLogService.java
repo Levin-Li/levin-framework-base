@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.scheduledlog;
 
+import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -23,13 +24,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 调度日志-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:39, 代码生成哈希校验码：[6b66aac3fc3e82a4c6e8636a04c043bd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:55, 代码生成哈希校验码：[4b4fe0399c69744e16cd8bc285d70993]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_ScheduledLog.BIZ_NAME, description = E_ScheduledLog.BIZ_NAME + MAINTAIN_ACTION)
 public interface ScheduledLogService {
 
     String BIZ_NAME = E_ScheduledLog.BIZ_NAME;
+
+    String CK_PREFIX = E_ScheduledLog.CACHE_KEY_PREFIX;
+
+    String SERVICE_NAME = "ScheduledLogService";
+
+    String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
 
     /**
      * 创建记录，返回主键ID

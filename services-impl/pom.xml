@@ -152,7 +152,8 @@
         <dependency>
             <!--    https://wind.kim/     https://gitee.com/dromara/sms4j  -->
             <groupId>org.dromara.sms4j</groupId>
-            <artifactId>sms4j-spring-boot-starter</artifactId>
+<!--            <artifactId>sms4j-spring-boot-starter</artifactId>-->
+            <artifactId>sms4j-core</artifactId>
         </dependency>
 
     </dependencies>

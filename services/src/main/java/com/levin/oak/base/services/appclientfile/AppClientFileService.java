@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.appclientfile;
 
+import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -23,13 +24,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 客户端文件-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:41, 代码生成哈希校验码：[94d22bfb81813cf7a21ba10c82ef8e70]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:56, 代码生成哈希校验码：[438bbd1c36e08bd84bd724f2684044e4]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_AppClientFile.BIZ_NAME, description = E_AppClientFile.BIZ_NAME + MAINTAIN_ACTION)
 public interface AppClientFileService {
 
     String BIZ_NAME = E_AppClientFile.BIZ_NAME;
+
+    String CK_PREFIX = E_AppClientFile.CACHE_KEY_PREFIX;
+
+    String SERVICE_NAME = "AppClientFileService";
+
+    String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
 
     /**
      * 创建记录，返回主键ID

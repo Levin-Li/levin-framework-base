@@ -32,13 +32,13 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:34, 代码生成哈希校验码：[ea885110899d5e303362b41dbdd0ea98]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[ea885110899d5e303362b41dbdd0ea98]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -76,33 +76,31 @@ public class SimpleTenantAppInfo implements Serializable {
     String infoUrl;
 
     @Size(max = 1800)
-    @InjectVar(
-            domain = "dao",
-            isRequired = "false",
-            converter = PrimitiveArrayJsonConverter.class,
-            expectBaseType = String.class)
+    @InjectVar(domain = "dao", isRequired = "false", converter = PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
     @Schema(title = L_modules)
     List<String> modules;
 
     @Size(max = 255)
-    @Schema(title = L_appSecret, description = D_appSecret)
+    @Schema(title = L_appSecret , description = D_appSecret)
     String appSecret;
 
-    @Schema(title = L_salePrice, description = D_salePrice)
+    @Schema(title = L_salePrice , description = D_salePrice)
     BigDecimal salePrice;
 
-    @Schema(title = L_purchasePrice, description = D_purchasePrice)
+    @Schema(title = L_purchasePrice , description = D_purchasePrice)
     BigDecimal purchasePrice;
 
     @Size(max = 255)
-    @Schema(title = L_orderNo, description = D_orderNo)
+    @Schema(title = L_orderNo , description = D_orderNo)
     String orderNo;
 
-    @Schema(title = L_expiredTime, description = D_expiredTime)
+    @Schema(title = L_expiredTime , description = D_expiredTime)
     Date expiredTime;
 
     @Size(max = 128)
     @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
+
+
 }

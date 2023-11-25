@@ -35,33 +35,30 @@ import static com.levin.oak.base.entities.E_ScheduledLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 查询调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:50, 代码生成哈希校验码：[7180081c1d198a8e3c9e9aad6df8428c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[8a9c1616503c12c58c63e09ca81a1848]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(
-        entityClass = ScheduledLog.class,
-        alias = E_ScheduledLog.ALIAS,
-        resultClass = ScheduledLogInfo.class)
-public class QueryScheduledLogReq extends MultiTenantOrgReq {
+@TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS, resultClass = ScheduledLogInfo.class)
+public class QueryScheduledLogReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = 1319130901L;
 
@@ -69,29 +66,25 @@ public class QueryScheduledLogReq extends MultiTenantOrgReq {
     @Schema(title = "排序字段")
     String orderBy;
 
-    // @Ignore
+    //@Ignore
     @Schema(title = "排序方向")
-    @SimpleOrderBy(
-            expr = "orderBy + ' ' + orderDir",
-            condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)",
-            remark = "生成排序表达式")
-    @OrderBy(
-            value = createTime,
-            condition = "#isEmpty(orderBy) || #isEmpty(orderDir)",
-            order = Integer.MAX_VALUE,
-            desc = "默认按时间排序")
+    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
+    @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
     OrderBy.Type orderDir;
+
 
     @Schema(title = L_id)
     String id;
 
+    @Size(max = 64)
     @Schema(title = L_taskId)
     String taskId;
 
+    @Size(max = 128)
     @Schema(title = L_invokeCycle)
     String invokeCycle;
 
-    @Schema(title = L_invokeSnapshot, description = D_invokeSnapshot)
+    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot)
     String invokeSnapshot;
 
     @Schema(title = L_isError)
@@ -100,11 +93,11 @@ public class QueryScheduledLogReq extends MultiTenantOrgReq {
     @Schema(title = L_invokeResult)
     String invokeResult;
 
-    @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
+    @Schema(title = L_createTime , description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime, description = L_createTime + "小于等于字段值")
+    @Schema(title = L_createTime , description = L_createTime + "小于等于字段值")
     @Lte
     Date lteCreateTime;
 
@@ -112,12 +105,12 @@ public class QueryScheduledLogReq extends MultiTenantOrgReq {
     @Between
     String betweenCreateTime;
 
+
     public QueryScheduledLogReq(String id) {
         this.id = id;
     }
-
     @PostConstruct
     public void preQuery() {
-        // @todo 查询之前初始化数据
+        //@todo 查询之前初始化数据
     }
 }

@@ -44,10 +44,10 @@ import java.util.stream.Stream;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @Service(PLUGIN_PREFIX + "SmsSendService")
-@DubboService
+//@DubboService
 @ConditionalOnClass({SmsFactory.class, SmsBlend.class, RedissonClient.class})
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SmsSendService", matchIfMissing = true)
-@ConditionalOnMissingBean(SmsSendService.class)
+
 @Slf4j
 @CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "SmsSendService"})
 public class Sms4JSmsSendService

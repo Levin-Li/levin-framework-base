@@ -31,13 +31,14 @@ import com.levin.oak.base.entities.JobPost.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
+
 
 /**
  * 工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:35, 代码生成哈希校验码：[e8c5c866ab7600b6055195c3ef0394e1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[e8c5c866ab7600b6055195c3ef0394e1]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -50,6 +51,7 @@ import com.levin.commons.service.support.InjectConst;
 public class JobPostInfo implements Serializable {
 
     private static final long serialVersionUID = 1018878847L;
+
 
     @NotBlank
     @Size(max = 64)
@@ -67,7 +69,7 @@ public class JobPostInfo implements Serializable {
 
     @Size(max = 128)
     @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -75,7 +77,7 @@ public class JobPostInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value = true)
+    @JsonIgnore(value=true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
@@ -115,4 +117,5 @@ public class JobPostInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
 }

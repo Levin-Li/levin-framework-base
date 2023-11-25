@@ -32,13 +32,14 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
+
 
 /**
  * 简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:36, 代码生成哈希校验码：[c7f06a25f8426f3d9e4c6925826cc8b5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[c7f06a25f8426f3d9e4c6925826cc8b5]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -51,6 +52,7 @@ import com.levin.commons.service.support.InjectConst;
 public class SimplePageInfo implements Serializable {
 
     private static final long serialVersionUID = 1598619295L;
+
 
     @NotBlank
     @Size(max = 64)
@@ -81,11 +83,7 @@ public class SimplePageInfo implements Serializable {
     String path;
 
     @Size(max = 1800)
-    @InjectVar(
-            domain = "dao",
-            isRequired = "false",
-            converter = PrimitiveArrayJsonConverter.class,
-            expectBaseType = String.class)
+    @InjectVar(domain = "dao", isRequired = "false", converter = PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
 
@@ -94,7 +92,7 @@ public class SimplePageInfo implements Serializable {
 
     @Size(max = 128)
     @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -102,7 +100,7 @@ public class SimplePageInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value = true)
+    @JsonIgnore(value=true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
@@ -142,4 +140,5 @@ public class SimplePageInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
 }

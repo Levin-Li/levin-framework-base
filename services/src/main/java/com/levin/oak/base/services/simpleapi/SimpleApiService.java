@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.simpleapi;
 
+import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -23,13 +24,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 简单动态接口-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:38, 代码生成哈希校验码：[c94e9b1e34a390cf0c4f90b4d0bfdabc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:55, 代码生成哈希校验码：[edf83fd8e04443db26cfc6ec541dbddb]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimpleApiService {
 
     String BIZ_NAME = E_SimpleApi.BIZ_NAME;
+
+    String CK_PREFIX = E_SimpleApi.CACHE_KEY_PREFIX;
+
+    String SERVICE_NAME = "SimpleApiService";
+
+    String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
 
     /**
      * 创建记录，返回主键ID

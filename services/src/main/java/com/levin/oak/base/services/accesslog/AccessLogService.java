@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.accesslog;
 
+import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -23,13 +24,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 访问日志-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:42, 代码生成哈希校验码：[9eec62f5879f67c1b11a51668188fcd7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:56, 代码生成哈希校验码：[a70624d57e4d14645b67a0476f265a2c]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_AccessLog.BIZ_NAME, description = E_AccessLog.BIZ_NAME + MAINTAIN_ACTION)
 public interface AccessLogService {
 
     String BIZ_NAME = E_AccessLog.BIZ_NAME;
+
+    String CK_PREFIX = E_AccessLog.CACHE_KEY_PREFIX;
+
+    String SERVICE_NAME = "AccessLogService";
+
+    String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
 
     /**
      * 创建记录，返回主键ID

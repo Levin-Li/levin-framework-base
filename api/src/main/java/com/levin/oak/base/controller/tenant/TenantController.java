@@ -1,5 +1,6 @@
 package com.levin.oak.base.controller.tenant;
 
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +16,7 @@ import javax.annotation.*;
 
 import javax.servlet.http.*;
 
-import org.apache.dubbo.config.annotation.*;
+//import org.apache.dubbo.config.annotation.*;
 
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.dao.*;
@@ -55,61 +56,61 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // @NotNull(groups = AdvanceInfo.class)
 // private UserAddress useraddress;
 
-// 生成的控制器
+//生成的控制器
 @RestController(PLUGIN_PREFIX + "TenantController")
-@RequestMapping(API_PATH + "Tenant") // tenant
+@RequestMapping(API_PATH + "Tenant") //tenant
+
 @Slf4j
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "TenantController", matchIfMissing = true)
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "TenantController", havingValue = "true",  matchIfMissing = true)
 
-// 默认需要权限访问，默认从父类继承
-// @ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
+//默认需要权限访问，默认从父类继承
+//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
-// 类注解
+//类注解
 
 @Tag(name = E_Tenant.BIZ_NAME, description = E_Tenant.BIZ_NAME + MAINTAIN_ACTION)
-@Validated // @Valid
+@Validated //@Valid
 @CRUD
 /**
  * 平台租户控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年8月25日 上午2:07:47, 代码生成哈希校验码：[b1d68ae61dde2967efae9a404f8c28e0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:23, 代码生成哈希校验码：[c55c67784234152df3454705c04e9702]，请不要修改和删除此行内容。
+ *
  */
-public class TenantController extends BaseController {
+public class TenantController extends BaseController{
 
     protected static final String BIZ_NAME = E_Tenant.BIZ_NAME;
 
-    @DubboReference // @Autowired
+    @Autowired
     protected TenantService tenantService;
 
     @Autowired
-    protected BizTenantService bizTenantService;
+    protected BizTenantService biztenantService;
 
     /**
      * 分页列表查找
      *
      * @param req QueryTenantReq
-     * @return ApiResp<PagingData<TenantInfo>>
+     * @return  ApiResp<PagingData<TenantInfo>>
      */
     @GetMapping("/list")
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
-    public ApiResp<PagingData<TenantInfo>> list(
-            @Form @Valid QueryTenantReq req, SimplePaging paging) {
-        return ApiResp.ok(tenantService.query(req, paging));
+    public ApiResp<PagingData<TenantInfo>> list(@Form @Valid QueryTenantReq req, SimplePaging paging) {
+        return ApiResp.ok(tenantService.query(req,paging));
     }
 
-    /**
-     * 简单统计
-     *
-     * @param req QueryTenantReq
-     * @return ApiResp<PagingData<StatTenantReq.Result>>
-     */
-    // @GetMapping("/stat") //默认不开放
-    @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatTenantReq.Result>> stat(
-            @Valid StatTenantReq req, SimplePaging paging) {
-        return ApiResp.ok(tenantService.stat(req, paging));
-    }
+     /**
+      * 简单统计
+      *
+      * @param req QueryTenantReq
+      * @return  ApiResp<PagingData<StatTenantReq.Result>>
+      */
+     //@GetMapping("/stat") //默认不开放
+     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
+     public ApiResp<PagingData<StatTenantReq.Result>> stat(@Valid StatTenantReq req, SimplePaging paging) {
+         return ApiResp.ok(tenantService.stat(req,paging));
+     }
 
     /**
      * 新增
@@ -129,65 +130,56 @@ public class TenantController extends BaseController {
      *
      * @param req QueryTenantByIdReq
      */
-    @GetMapping({"", "{id}"})
+    @GetMapping({"","{id}"})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
-    public ApiResp<TenantInfo> retrieve(
-            @NotNull @Valid TenantIdReq req, @PathVariable(required = false) String id) {
-        req.updateIdWhenNotBlank(id);
-        return ApiResp.ok(tenantService.findById(req));
-    }
+    public ApiResp<TenantInfo> retrieve(@NotNull @Valid TenantIdReq req, @PathVariable(required = false) String id) {
+         req.updateIdWhenNotBlank(id);
+
+         TenantInfo info = tenantService.findById(req);
+         Assert.notNull(info, "记录不存在");
+         // 租户校验，因为数据可能是从缓存加载的
+         //Assert.isTrue(!StringUtils.hasText(req.getTenantId()) || req.getTenantId().equals(info.getTenantId()), "非法访问，租户不匹配");
+
+         return ApiResp.ok(info);
+     }
 
     /**
      * 更新
-     *
      * @param req UpdateTenantReq
      */
-    @PutMapping({"", "{id}"})
-    @Operation(
-            summary = UPDATE_ACTION + "(RequestBody方式)",
-            description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @PutMapping({"","{id}"})
+    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<Boolean> update(
-            @RequestBody @Valid UpdateTenantReq req, @PathVariable(required = false) String id) {
+    public ApiResp<Boolean> update(@RequestBody @Valid UpdateTenantReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(assertTrue(tenantService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 删除
-     *
      * @param req TenantIdReq
      */
-    @DeleteMapping({"", "{id}"})
-    @Operation(
-            summary = DELETE_ACTION,
-            description = DELETE_ACTION + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
+    @DeleteMapping({"","{id}"})
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<Boolean> delete(
-            @Valid TenantIdReq req, @PathVariable(required = false) String id) {
+    public ApiResp<Boolean> delete(@Valid TenantIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return ApiResp.ok(assertTrue(tenantService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 删除
-     *
      * @param req TenantIdReq
      */
-    @DeleteMapping(
-            value = {"", "{id}"},
-            consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(
-            summary = DELETE_ACTION + "(RequestBody方式)",
-            description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
-    public ApiResp<Boolean> delete2(
-            @RequestBody @Valid TenantIdReq req, @PathVariable(required = false) String id) {
+    @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    public ApiResp<Boolean> delete2(@RequestBody @Valid TenantIdReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         return delete(req, id);
     }
 
-    ////////////////////////////////////// 以下是批量操作//////////////////////////////////////
+    //////////////////////////////////////以下是批量操作//////////////////////////////////////
 
     /**
      * 批量新增
@@ -201,36 +193,31 @@ public class TenantController extends BaseController {
         return ApiResp.ok(tenantService.batchCreate(reqList));
     }
 
-    /** 批量更新 */
+    /**
+     * 批量更新
+     */
     @PutMapping("/batchUpdate")
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateTenantReq> reqList) {
-        return ApiResp.ok(
-                assertTrue(
-                        tenantService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(tenantService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 批量删除
-     *
      * @param req DeleteTenantReq
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteTenantReq req) {
-        return ApiResp.ok(
-                assertTrue(tenantService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(tenantService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 批量删除2
-     *
      * @param req @RequestBody DeleteTenantReq
      */
-    @DeleteMapping(
-            value = {"/batchDelete"},
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = {"/batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete2(@RequestBody @Valid DeleteTenantReq req) {
         return batchDelete(req);

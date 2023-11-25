@@ -81,7 +81,7 @@ import static com.levin.oak.base.ModuleOption.*;
 @ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME, onlyRequireAuthenticated = true)
 public class AmisController extends BaseController {
 
-    @DubboReference // @DubboReference
+    @Autowired //@DubboReference // @Autowired //@DubboReference
     RoleService roleService;
 
     @Autowired
@@ -93,7 +93,7 @@ public class AmisController extends BaseController {
     @Autowired
     AuthService authService;
 
-    @DubboReference // @Autowired
+    @Autowired //@DubboReference // @Autowired
     MenuResService menuResService;
 
     @Autowired
@@ -105,10 +105,10 @@ public class AmisController extends BaseController {
     @Autowired
     FrameworkProperties frameworkProperties;
 
-    @DubboReference // @Autowired
+    @Autowired //@DubboReference // @Autowired
     SimplePageService simplePageService;
 
-    @DubboReference // @Autowired
+    @Autowired //@DubboReference // @Autowired
     BizSimplePageService bizSimplePageService;
 
     final LRUCache<String, Page> lruCache = CacheUtil.newLRUCache(10 * 1000, 5 * 60 * 1000);

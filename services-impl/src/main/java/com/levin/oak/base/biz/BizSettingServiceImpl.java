@@ -63,10 +63,9 @@ import java.util.Date;
  * 代码生成哈希校验码：[c2765b51f028d3f4c1e4331ed59da1d9], 请不要修改和删除此行内容。
  */
 
-@DubboService
+//@DubboService
 @Service(PLUGIN_PREFIX + "BizSettingServiceImpl")
 
-@ConditionalOnMissingBean({BizSettingService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizSettingServiceImpl", matchIfMissing = true)
 @Slf4j
 

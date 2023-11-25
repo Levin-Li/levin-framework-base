@@ -30,7 +30,7 @@ import static com.levin.oak.base.entities.E_Role.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
@@ -39,25 +39,25 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 更新角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午4:56:54, 代码生成哈希校验码：[7f33d2a693b79913cad755944c00699b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:09, 代码生成哈希校验码：[26983b4ca04d0baeb69707fb0a79d359]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Role.class, alias = E_Role.ALIAS)
-// 默认更新注解
+//默认更新注解
 @Update
 public class UpdateRoleReq extends MultiTenantOrgReq {
 
@@ -68,11 +68,10 @@ public class UpdateRoleReq extends MultiTenantOrgReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件", hidden = true)
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
     @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
-    @NotBlank
     @Size(max = 128)
     @Schema(title = L_code)
     String code;
@@ -80,36 +79,27 @@ public class UpdateRoleReq extends MultiTenantOrgReq {
     @Schema(title = L_icon)
     String icon;
 
-    @Schema(title = L_orgDataScope, description = D_orgDataScope)
+    @Schema(title = L_orgDataScope , description = D_orgDataScope)
     OrgDataScope orgDataScope;
 
-    @InjectVar(
-            domain = "dao",
-            isRequired = "false",
-            converter = PrimitiveArrayJsonConverter.class,
-            expectBaseType = String.class)
-    @Schema(title = L_assignedOrgIdList, description = D_assignedOrgIdList)
+    @InjectVar(domain = "dao", isRequired = "false", converter = PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
+    @Schema(title = L_assignedOrgIdList , description = D_assignedOrgIdList)
     List<String> assignedOrgIdList;
 
-    @InjectVar(
-            domain = "dao",
-            isRequired = "false",
-            converter = PrimitiveArrayJsonConverter.class,
-            expectBaseType = String.class)
-    @Schema(title = L_permissionList, description = D_permissionList)
+    @InjectVar(domain = "dao", isRequired = "false", converter = PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
+    @Schema(title = L_permissionList , description = D_permissionList)
     List<String> permissionList;
 
     @Size(max = 128)
     @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
-    @NotBlank
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value = true)
+    @JsonIgnore(value=true)
     @Eq(desc = "乐观锁更新条件")
     @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
     @Schema(title = L_optimisticLock)
@@ -131,22 +121,23 @@ public class UpdateRoleReq extends MultiTenantOrgReq {
     @Schema(title = L_remark)
     String remark;
 
+
     public UpdateRoleReq(String id) {
         this.id = id;
     }
 
-    public UpdateRoleReq updateIdWhenNotBlank(String id) {
-        if (isNotBlank(id)) {
-            this.id = id;
+    public UpdateRoleReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+        this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        // @todo 更新之前初始化数据
+        //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }

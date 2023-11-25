@@ -64,7 +64,7 @@ public class DefaultUserLoadService
     @Autowired
     ApplicationContext context;
 
-    @DubboReference
+    @Autowired //@DubboReference
     UserService userService;
 
 //    @DubboReference

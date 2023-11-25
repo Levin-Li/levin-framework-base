@@ -118,7 +118,7 @@ public class AuthServiceImpl
     RbacService rbacService;
 
 
-    @DubboReference
+    @Autowired //@DubboReference
     BizUserService bizUserService;
 
 

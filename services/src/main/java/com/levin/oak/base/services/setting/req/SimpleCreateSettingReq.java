@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.setting.req;
 
-// import static com.levin.oak.base.ModuleOption.*;
+//import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,26 +28,26 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_Setting.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.oak.base.entities.Setting.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 新增系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[b5aaa128bdf86632cc58f2e10df65650]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[b5aaa128bdf86632cc58f2e10df65650]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor
 @NoArgsConstructor
@@ -57,50 +57,51 @@ public class SimpleCreateSettingReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 147875794L;
 
-    @Schema(title = L_categoryName)
+    @Schema(title = L_categoryName )
     @NotBlank
     @Size(max = 64)
     String categoryName;
 
-    @Schema(title = L_groupName)
+    @Schema(title = L_groupName )
     @Size(max = 64)
     String groupName;
 
-    @Schema(title = L_code)
+    @Schema(title = L_code )
     @NotBlank
     @Size(max = 64)
     String code;
 
-    @Schema(title = L_valueType)
+    @Schema(title = L_valueType )
     @NotNull
     ValueType valueType;
 
-    @Schema(title = L_valueContent)
+    @Schema(title = L_valueContent )
     String valueContent;
 
-    @Schema(title = L_nullable)
+    @Schema(title = L_nullable )
     Boolean nullable;
 
-    @Schema(title = L_inputPlaceholder)
+    @Schema(title = L_inputPlaceholder )
     @Size(max = 128)
     String inputPlaceholder;
 
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain )
     @Size(max = 128)
     @InjectVar(value = "sysDomain", isRequired = "false")
     String domain;
 
-    @Schema(title = L_name)
+    @Schema(title = L_name )
     @NotBlank
     @Size(max = 64)
     String name;
 
-    @Schema(title = L_optimisticLock)
-    @JsonIgnore(value = true)
+    @Schema(title = L_optimisticLock )
+    @JsonIgnore(value=true)
     Integer optimisticLock;
+
 
     @PostConstruct
     public void prePersist() {
-        // @todo 保存之前初始化数据，比如时间，初始状态等
+       //@todo 保存之前初始化数据，比如时间，初始状态等
     }
 }

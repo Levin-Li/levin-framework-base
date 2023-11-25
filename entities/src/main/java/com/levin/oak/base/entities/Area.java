@@ -15,6 +15,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity(name = EntityConst.PREFIX + "Area")
+@Cacheable
 @Data
 @EqualsAndHashCode(of = {"code"})
 @Accessors(chain = true)

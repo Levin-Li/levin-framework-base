@@ -73,12 +73,12 @@ public class MenuResController extends BaseController{
 
     protected static final String BIZ_NAME = E_MenuRes.BIZ_NAME;
 
-    //@Autowired
-    @DubboReference
+    @Autowired
+//    @DubboReference
     protected MenuResService menuResService;
 
-    //@Autowired
-    @DubboReference
+    @Autowired
+//    @DubboReference
     protected BizMenuResService bizMenuResService;
 
     /**

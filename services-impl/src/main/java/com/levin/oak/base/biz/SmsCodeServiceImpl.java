@@ -25,9 +25,8 @@ import java.util.stream.Stream;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @Service(PLUGIN_PREFIX + "SmsCodeService")
-@DubboService
+//@DubboService
 @ConditionalOnClass({RedissonClient.class})
-@ConditionalOnMissingBean(SmsCodeService.class)
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SmsCodeService", matchIfMissing = true)
 @Slf4j
 @CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "SmsCodeService"})

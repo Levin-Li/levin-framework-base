@@ -33,24 +33,20 @@ import com.levin.oak.base.services.menures.info.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:36, 代码生成哈希校验码：[69f39c42dcfa708b7301f5cfeba6ad07]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[69f39c42dcfa708b7301f5cfeba6ad07]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@ToString(
-        exclude = {
-            "parent",
-            "children",
-        })
+@ToString(exclude = {"parent","children",})
 @FieldNameConstants
 @JsonIgnoreProperties({"tenantId"})
 @Select
@@ -72,10 +68,10 @@ public class SimpleMenuResInfo implements Serializable {
     @Schema(title = L_tenantId)
     String tenantId;
 
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
-    @Schema(title = L_module, description = D_module)
+    @Schema(title = L_module , description = D_module)
     String module;
 
     @Size(max = 1800)
@@ -103,16 +99,16 @@ public class SimpleMenuResInfo implements Serializable {
     @Schema(title = L_params)
     String params;
 
-    // @Fetch //默认不加载，请通过查询对象控制
+    //@Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_parent)
     MenuResInfo parent;
 
-    // @Fetch //默认不加载，请通过查询对象控制
+    //@Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_children)
     Set<MenuResInfo> children;
 
     @Size(max = 1800)
-    @Schema(title = L_idPath, description = D_idPath)
+    @Schema(title = L_idPath , description = D_idPath)
     String idPath;
 
     @NotBlank
@@ -121,6 +117,8 @@ public class SimpleMenuResInfo implements Serializable {
     String name;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName, description = D_pinyinName)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
+
+
 }

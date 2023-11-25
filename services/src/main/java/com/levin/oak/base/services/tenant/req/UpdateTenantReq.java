@@ -30,31 +30,31 @@ import static com.levin.oak.base.entities.E_Tenant.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 更新平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午4:56:54, 代码生成哈希校验码：[1d52dd12496711b5c9f67a1b7b4acdfc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[1d9a8a4321d3ce849977ddb1a07681ab]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Tenant.class, alias = E_Tenant.ALIAS)
-// 默认更新注解
+//默认更新注解
 @Update
 public class UpdateTenantReq extends BaseReq {
 
@@ -65,7 +65,7 @@ public class UpdateTenantReq extends BaseReq {
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件", hidden = true)
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
     @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
@@ -83,7 +83,6 @@ public class UpdateTenantReq extends BaseReq {
     @Schema(title = L_code)
     String code;
 
-    @NotBlank
     @Size(max = 255)
     @Schema(title = L_tenantKey)
     String tenantKey;
@@ -109,11 +108,7 @@ public class UpdateTenantReq extends BaseReq {
     String contractPhone;
 
     @Size(max = 1200)
-    @InjectVar(
-            domain = "dao",
-            isRequired = "false",
-            converter = PrimitiveArrayJsonConverter.class,
-            expectBaseType = String.class)
+    @InjectVar(domain = "dao", isRequired = "false", converter = PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
     @Schema(title = L_domainList)
     List<String> domainList;
 
@@ -129,13 +124,12 @@ public class UpdateTenantReq extends BaseReq {
     @Schema(title = L_encryptKey)
     String encryptKey;
 
-    @NotBlank
     @Size(max = 128)
     @Schema(title = L_name)
     String name;
 
     @Size(max = 128)
-    @Schema(title = L_pinyinName, description = D_pinyinName)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
     String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
@@ -154,22 +148,23 @@ public class UpdateTenantReq extends BaseReq {
     @Schema(title = L_remark)
     String remark;
 
+
     public UpdateTenantReq(String id) {
         this.id = id;
     }
 
-    public UpdateTenantReq updateIdWhenNotBlank(String id) {
-        if (isNotBlank(id)) {
-            this.id = id;
+    public UpdateTenantReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+        this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        // @todo 更新之前初始化数据
+        //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }

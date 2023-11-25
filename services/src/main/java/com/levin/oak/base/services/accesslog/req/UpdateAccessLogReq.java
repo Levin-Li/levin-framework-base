@@ -30,30 +30,30 @@ import static com.levin.oak.base.entities.E_AccessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 更新访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 下午5:31:51, 代码生成哈希校验码：[db65e3637ccc8a8410d0412f1107c067]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[fdebc9001391d3a0e0c6c8987860fe2f]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS)
-// 默认更新注解
+//默认更新注解
 @Update
 public class UpdateAccessLogReq extends MultiTenantOrgReq {
 
@@ -64,10 +64,10 @@ public class UpdateAccessLogReq extends MultiTenantOrgReq {
     @Eq(require = true)
     Long id;
 
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
-    @Schema(title = L_module, description = D_module)
+    @Schema(title = L_module , description = D_module)
     String module;
 
     @Size(max = 64)
@@ -75,7 +75,6 @@ public class UpdateAccessLogReq extends MultiTenantOrgReq {
     @Schema(title = L_visitor)
     String visitor;
 
-    @NotBlank
     @Size(max = 255)
     @Schema(title = L_title)
     String title;
@@ -146,19 +145,20 @@ public class UpdateAccessLogReq extends MultiTenantOrgReq {
     @Schema(title = L_executeTime)
     Long executeTime;
 
+
     public UpdateAccessLogReq(Long id) {
         this.id = id;
     }
 
-    public UpdateAccessLogReq updateIdWhenNotBlank(Long id) {
-        if (isNotBlank(id)) {
-            this.id = id;
+    public UpdateAccessLogReq updateIdWhenNotBlank(Long id){
+        if(isNotBlank(id)){
+        this.id = id;
         }
         return this;
     }
 
     @PostConstruct
     public void preUpdate() {
-        // @todo 更新之前初始化数据
+        //@todo 更新之前初始化数据
     }
 }

@@ -30,10 +30,11 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
 //import org.apache.dubbo.config.spring.context.annotation.*;
-import org.apache.dubbo.config.annotation.*;
+//import org.apache.dubbo.config.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.Area;
+import static com.levin.oak.base.entities.E_Area.*;
 
 import com.levin.oak.base.services.area.req.*;
 import com.levin.oak.base.services.area.info.*;
@@ -56,15 +57,13 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月23日 下午11:55:36, 代码生成哈希校验码：[29d49b770b0cd3c15ef0d52bd95f77fc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[dd557c6cfd20de6b910fc439cf5a9c7a]，请不要修改和删除此行内容。
  *
  */
 
-@Service(PLUGIN_PREFIX + "AreaService")
-@DubboService
+@Service(AreaService.SERVICE_BEAN_NAME)
 
-@ConditionalOnMissingBean({AreaService.class}) //默认只有在无对应服务才启用
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AreaService", matchIfMissing = true)
+@ConditionalOnProperty(name = AreaService.SERVICE_BEAN_NAME, havingValue = "true", matchIfMissing = true)
 @Slf4j
 
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
@@ -74,7 +73,8 @@ import com.levin.oak.base.entities.Area.*;
 public class AreaServiceImpl extends BaseService implements AreaService {
 
     protected AreaService getSelfProxy(){
-        return getSelfProxy(AreaService.class);
+        //return getSelfProxy(AreaService.class);
+        return getSelfProxy(AreaServiceImpl.class);
     }
 
     @Operation(summary = CREATE_ACTION)
@@ -94,9 +94,10 @@ public class AreaServiceImpl extends BaseService implements AreaService {
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
+
     @Operation(summary = UPDATE_ACTION)
     @Override
-    //@CacheEvict(condition = "#isNotEmpty(#req.code) && #result", key = E_Area.CACHE_KEY_PREFIX + "#req.code")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.code) && #result", key = CK_PREFIX + "#req.code")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdateAreaReq req) {
         Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
@@ -105,7 +106,8 @@ public class AreaServiceImpl extends BaseService implements AreaService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    //@CacheEvict(allEntries = true, condition = "#result > 0") //Spring 缓存设计问题
+    @Transactional
+    @CacheEvict(allEntries = true, condition = "#result > 0")
     public int update(SimpleUpdateAreaReq setReq, QueryAreaReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
@@ -113,7 +115,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional
     @Override
-    //@CacheEvict(allEntries = true, condition = "#isNotEmpty(#reqList)  && #result > 0")
+    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#reqList)  && #result > 0")
     public int batchUpdate(List<UpdateAreaReq> reqList){
         //@Todo 优化批量提交
         return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
@@ -121,7 +123,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    //@CacheEvict(condition = "#isNotEmpty(#req.code) && #result", key = E_Area.CACHE_KEY_PREFIX + "#req.code")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.code) && #result", key = CK_PREFIX + "#req.code") // , beforeInvocation = true
     @Transactional
     public boolean delete(AreaIdReq req) {
         Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
@@ -131,7 +133,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional
     @Override
-                //@CacheEvict(allEntries = true, condition = "#isNotEmpty(#req.idList) && #result > 0")
+    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#req.codeList) && #result > 0")
     public int batchDelete(DeleteAreaReq req){
         //@Todo 优化批量提交
         return Stream.of(req.getCodeList())
@@ -166,15 +168,16 @@ public class AreaServiceImpl extends BaseService implements AreaService {
 
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    //@Cacheable(condition = "#isNotEmpty(#code)", unless = "#result == null ", key = E_Area.CACHE_KEY_PREFIX + "#code")
+    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#code)", key = CK_PREFIX + "#code")
     public AreaInfo findById(String code) {
         return findById(new AreaIdReq().setCode(code));
     }
 
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    //只更新缓存
-    //@CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.code)" , key = E_Area.CACHE_KEY_PREFIX + "#req.code")
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.code)" , key = CK_PREFIX + "#req.code") //
     public AreaInfo findById(AreaIdReq req) {
         Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
         return simpleDao.findUnique(req);
@@ -194,7 +197,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "#isNotEmpty(#key)", key = E_Area.CACHE_KEY_PREFIX + "#key")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
     public void clearCache(Object key) {
     }
 

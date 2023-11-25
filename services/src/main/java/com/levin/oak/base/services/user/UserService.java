@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.user;
 
+import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -23,13 +24,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 用户-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:42, 代码生成哈希校验码：[c6658e9d779f39dfdce8e055abe63e60]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:56, 代码生成哈希校验码：[b6340dfd01a2d3de75c1df053211cef6]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
 public interface UserService {
 
     String BIZ_NAME = E_User.BIZ_NAME;
+
+    String CK_PREFIX = E_User.CACHE_KEY_PREFIX;
+
+    String SERVICE_NAME = "UserService";
+
+    String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
 
     /**
      * 创建记录，返回主键ID

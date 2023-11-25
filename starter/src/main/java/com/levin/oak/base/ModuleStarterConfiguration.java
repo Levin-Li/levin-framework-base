@@ -20,7 +20,9 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.apache.dubbo.config.spring.context.annotation.*;
+
+//import org.apache.dubbo.config.spring.context.annotation.*;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 模块自举配置
  *
  * 模块需要自举加载的内容都需要配置在该类中
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:46, 代码生成哈希校验码：[6420a4c6090c8e62dcac9ce29d1797c8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午2:15:44, 代码生成哈希校验码：[8c0f59e2f08c92811a68a6e6cc4d55f8]，请不要修改和删除此行内容。
  *
  */
 @Configuration(PLUGIN_PREFIX + "ModuleStarterConfiguration")
@@ -48,7 +50,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableFeignClients({PACKAGE_NAME})
 
 // Dubbo 扫描，根据现有的 Dubbo 3.1.x 版本的机制， DubboComponentScan 会先自动先扫描 Spring 的注解, 所以 @ComponentScan 可以注释。
-@DubboComponentScan({PACKAGE_NAME})
+//@DubboComponentScan({PACKAGE_NAME})
 
 public class ModuleStarterConfiguration {
 

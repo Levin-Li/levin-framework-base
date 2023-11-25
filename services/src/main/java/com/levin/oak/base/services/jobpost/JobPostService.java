@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.jobpost;
 
+import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -23,13 +24,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 工作岗位-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:44, 代码生成哈希校验码：[87246c0e86ae290350ef7d3a96ea9bee]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:56, 代码生成哈希校验码：[3953f7ba06041f0008c7bd8c4d313bdf]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_JobPost.BIZ_NAME, description = E_JobPost.BIZ_NAME + MAINTAIN_ACTION)
 public interface JobPostService {
 
     String BIZ_NAME = E_JobPost.BIZ_NAME;
+
+    String CK_PREFIX = E_JobPost.CACHE_KEY_PREFIX;
+
+    String SERVICE_NAME = "JobPostService";
+
+    String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
 
     /**
      * 创建记录，返回主键ID

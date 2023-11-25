@@ -1,5 +1,6 @@
 package com.levin.oak.base.biz;
 
+import com.levin.commons.conditional.ConditionalOn;
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.IsNull;
@@ -20,13 +21,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.levin.commons.conditional.ConditionalOn.Action.OnMissingBean;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 
 
 @Service(PLUGIN_PREFIX + "BizRoleService")
-@DubboService
-@ConditionalOnMissingBean({BizRoleService.class}) //默认只有在无对应服务才启用
+//@DubboService
+//@ConditionalOn(action = OnMissingBean, types = {BizRoleService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizRoleService", matchIfMissing = true)
 @Slf4j
 //@Validated

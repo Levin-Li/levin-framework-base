@@ -1,6 +1,6 @@
 package com.levin.oak.base.services.simpleapi.req;
 
-// import static com.levin.oak.base.ModuleOption.*;
+//import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,7 +28,7 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_SimpleApi.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -37,19 +37,19 @@ import com.levin.oak.base.entities.SimpleApi.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 新增简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:19, 代码生成哈希校验码：[9c9f82d46d08d0515ecebb2e62941095]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:09, 代码生成哈希校验码：[9c9f82d46d08d0515ecebb2e62941095]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @ToString
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,65 +59,62 @@ public class SimpleCreateSimpleApiReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1021385738L;
 
-    @Schema(title = L_methods, description = D_methods)
+    @Schema(title = L_methods , description = D_methods )
     @Size(max = 16)
     String methods;
 
-    @Schema(title = L_language)
+    @Schema(title = L_language )
     @NotNull
     Language language;
 
-    @Schema(title = L_type)
+    @Schema(title = L_type )
     @NotBlank
     @Size(max = 128)
     String type;
 
-    @Schema(title = L_category)
+    @Schema(title = L_category )
     @NotBlank
     @Size(max = 128)
     String category;
 
-    @Schema(title = L_groupName)
+    @Schema(title = L_groupName )
     @NotBlank
     @Size(max = 128)
     String groupName;
 
-    @Schema(title = L_icon)
+    @Schema(title = L_icon )
     String icon;
 
-    @Schema(title = L_path)
+    @Schema(title = L_path )
     @NotBlank
     @Size(max = 800)
     String path;
 
-    @Schema(title = L_requireAuthorizations)
+    @Schema(title = L_requireAuthorizations )
     @Size(max = 1800)
-    @InjectVar(
-            domain = "dao",
-            isRequired = "false",
-            converter = PrimitiveArrayJsonConverter.class,
-            expectBaseType = String.class)
+    @InjectVar(domain = "dao", isRequired = "false", converter = PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
     List<String> requireAuthorizations;
 
-    @Schema(title = L_content)
+    @Schema(title = L_content )
     String content;
 
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain )
     @Size(max = 128)
     @InjectVar(value = "sysDomain", isRequired = "false")
     String domain;
 
-    @Schema(title = L_name)
+    @Schema(title = L_name )
     @NotBlank
     @Size(max = 64)
     String name;
 
-    @Schema(title = L_optimisticLock)
-    @JsonIgnore(value = true)
+    @Schema(title = L_optimisticLock )
+    @JsonIgnore(value=true)
     Integer optimisticLock;
+
 
     @PostConstruct
     public void prePersist() {
-        // @todo 保存之前初始化数据，比如时间，初始状态等
+       //@todo 保存之前初始化数据，比如时间，初始状态等
     }
 }

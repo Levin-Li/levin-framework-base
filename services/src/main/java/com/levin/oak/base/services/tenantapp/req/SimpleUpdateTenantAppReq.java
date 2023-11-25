@@ -30,7 +30,7 @@ import static com.levin.oak.base.entities.E_TenantApp.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
@@ -38,35 +38,35 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 更新租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午4:56:54, 代码生成哈希校验码：[eb9c7ef3e1e0af1546ca9c816026cc20]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[98796e4410cbd23194f5241cb87330ba]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = TenantApp.class, alias = E_TenantApp.ALIAS)
-// 默认更新注解
+//默认更新注解
 @Update
 public class SimpleUpdateTenantAppReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1292984857L;
 
-    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件", hidden = true)
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
     @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
-    @NotBlank
+
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
@@ -84,39 +84,36 @@ public class SimpleUpdateTenantAppReq extends MultiTenantReq {
     String infoUrl;
 
     @Size(max = 1800)
-    @InjectVar(
-            domain = "dao",
-            isRequired = "false",
-            converter = PrimitiveArrayJsonConverter.class,
-            expectBaseType = String.class)
+    @InjectVar(domain = "dao", isRequired = "false", converter = PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
     @Schema(title = L_modules)
     List<String> modules;
 
     @Size(max = 255)
-    @Schema(title = L_appSecret, description = D_appSecret)
+    @Schema(title = L_appSecret , description = D_appSecret)
     String appSecret;
 
-    @Schema(title = L_salePrice, description = D_salePrice)
+    @Schema(title = L_salePrice , description = D_salePrice)
     BigDecimal salePrice;
 
-    @Schema(title = L_purchasePrice, description = D_purchasePrice)
+    @Schema(title = L_purchasePrice , description = D_purchasePrice)
     BigDecimal purchasePrice;
 
     @Size(max = 255)
-    @Schema(title = L_orderNo, description = D_orderNo)
+    @Schema(title = L_orderNo , description = D_orderNo)
     String orderNo;
 
-    @Schema(title = L_expiredTime, description = D_expiredTime)
+    @Schema(title = L_expiredTime , description = D_expiredTime)
     Date expiredTime;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
+
     @PostConstruct
     public void preUpdate() {
-        // @todo 更新之前初始化数据
+        //@todo 更新之前初始化数据
 
-        if (getLastUpdateTime() == null) {
+        if(getLastUpdateTime() == null){
             setLastUpdateTime(new Date());
         }
     }

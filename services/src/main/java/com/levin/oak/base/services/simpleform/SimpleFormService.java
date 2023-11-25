@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.simpleform;
 
+import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -23,13 +24,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 简单表单-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:45, 代码生成哈希校验码：[4e12770d90c2aca7d00b3a9f8e3a4a00]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:57, 代码生成哈希校验码：[ed36d88d4ae40077b04732529bdd7efb]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_SimpleForm.BIZ_NAME, description = E_SimpleForm.BIZ_NAME + MAINTAIN_ACTION)
 public interface SimpleFormService {
 
     String BIZ_NAME = E_SimpleForm.BIZ_NAME;
+
+    String CK_PREFIX = E_SimpleForm.CACHE_KEY_PREFIX;
+
+    String SERVICE_NAME = "SimpleFormService";
+
+    String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
 
     /**
      * 创建记录，返回主键ID

@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.noticeprocesslog;
 
+import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -23,13 +24,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 通知处理日志-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:43, 代码生成哈希校验码：[17e44811f25fe2c65d3b31b3e61ff201]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:56, 代码生成哈希校验码：[7a8e45bedfa2c64111c216e0972767cf]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_NoticeProcessLog.BIZ_NAME, description = E_NoticeProcessLog.BIZ_NAME + MAINTAIN_ACTION)
 public interface NoticeProcessLogService {
 
     String BIZ_NAME = E_NoticeProcessLog.BIZ_NAME;
+
+    String CK_PREFIX = E_NoticeProcessLog.CACHE_KEY_PREFIX;
+
+    String SERVICE_NAME = "NoticeProcessLogService";
+
+    String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
 
     /**
      * 创建记录，返回主键ID

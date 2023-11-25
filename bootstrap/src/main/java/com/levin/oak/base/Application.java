@@ -1,11 +1,9 @@
 package com.levin.oak.base;
 
+
 import com.levin.commons.service.support.*;
-import net.oschina.j2cache.J2CacheBuilder;
-import net.oschina.j2cache.J2CacheConfig;
 import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.spring.starter.RedissonAutoConfigurationCustomizer;
-import org.springframework.cache.CacheManager;
 import org.springframework.core.env.*;
 import org.springframework.beans.factory.annotation.*;
 
@@ -37,9 +35,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import org.apache.dubbo.config.spring.context.annotation.*;
+//import org.apache.dubbo.config.spring.context.annotation.*;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -47,7 +44,7 @@ import java.time.temporal.ChronoUnit;
 
 /**
  *  启动类
- *  @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:25:25, 代码生成哈希校验码：[34ca859d1bec11abe138195d5af31fc4]，请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午2:15:43, 代码生成哈希校验码：[00cfe5cfc3af43567eef530c0223d981]，请不要修改和删除此行内容。
  *
  */
 @Slf4j
@@ -58,7 +55,7 @@ import java.time.temporal.ChronoUnit;
 @EnableScheduling
 @EnableCaching
 @EnableAsync
-@EnableDubboConfig
+//@EnableDubboConfig
 public class Application {
 
     public static void main(String... args) {

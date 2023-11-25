@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.menures;
 
+import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -23,13 +24,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 菜单-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:45, 代码生成哈希校验码：[c7863d655c72d069d80ad04ed639437d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:56, 代码生成哈希校验码：[0da9b94f412e51bfcd8cc00457701248]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_MenuRes.BIZ_NAME, description = E_MenuRes.BIZ_NAME + MAINTAIN_ACTION)
 public interface MenuResService {
 
     String BIZ_NAME = E_MenuRes.BIZ_NAME;
+
+    String CK_PREFIX = E_MenuRes.CACHE_KEY_PREFIX;
+
+    String SERVICE_NAME = "MenuResService";
+
+    String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
 
     /**
      * 创建记录，返回主键ID

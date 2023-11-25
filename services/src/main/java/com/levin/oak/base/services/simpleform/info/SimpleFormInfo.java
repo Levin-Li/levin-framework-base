@@ -32,13 +32,14 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
+
 
 /**
  * 简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:36, 代码生成哈希校验码：[e5abcf9ac51ed64f58cc3eba17715b95]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[e5abcf9ac51ed64f58cc3eba17715b95]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -51,6 +52,7 @@ import com.levin.commons.service.support.InjectConst;
 public class SimpleFormInfo implements Serializable {
 
     private static final long serialVersionUID = 1598335188L;
+
 
     @Schema(title = L_commitApi)
     String commitApi;
@@ -84,11 +86,7 @@ public class SimpleFormInfo implements Serializable {
     String path;
 
     @Size(max = 1800)
-    @InjectVar(
-            domain = "dao",
-            isRequired = "false",
-            converter = PrimitiveArrayJsonConverter.class,
-            expectBaseType = String.class)
+    @InjectVar(domain = "dao", isRequired = "false", converter = PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
     @Schema(title = L_requireAuthorizations)
     List<String> requireAuthorizations;
 
@@ -97,7 +95,7 @@ public class SimpleFormInfo implements Serializable {
 
     @Size(max = 128)
     @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -105,7 +103,7 @@ public class SimpleFormInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value = true)
+    @JsonIgnore(value=true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
@@ -145,4 +143,5 @@ public class SimpleFormInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
 }

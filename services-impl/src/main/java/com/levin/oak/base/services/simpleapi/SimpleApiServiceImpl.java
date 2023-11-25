@@ -30,10 +30,11 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
 //import org.apache.dubbo.config.spring.context.annotation.*;
-import org.apache.dubbo.config.annotation.*;
+//import org.apache.dubbo.config.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.SimpleApi;
+import static com.levin.oak.base.entities.E_SimpleApi.*;
 
 import com.levin.oak.base.services.simpleapi.req.*;
 import com.levin.oak.base.services.simpleapi.info.*;
@@ -57,15 +58,13 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单动态接口-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月23日 下午11:55:35, 代码生成哈希校验码：[5f2e5ce37ae4f5a2c9a8248d2708e2e5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:23, 代码生成哈希校验码：[531a4d2a667f7bbc5aef4e29ab501908]，请不要修改和删除此行内容。
  *
  */
 
-@Service(PLUGIN_PREFIX + "SimpleApiService")
-@DubboService
+@Service(SimpleApiService.SERVICE_BEAN_NAME)
 
-@ConditionalOnMissingBean({SimpleApiService.class}) //默认只有在无对应服务才启用
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimpleApiService", matchIfMissing = true)
+@ConditionalOnProperty(name = SimpleApiService.SERVICE_BEAN_NAME, havingValue = "true", matchIfMissing = true)
 @Slf4j
 
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
@@ -75,7 +74,8 @@ import com.levin.commons.service.support.InjectConst;
 public class SimpleApiServiceImpl extends BaseService implements SimpleApiService {
 
     protected SimpleApiService getSelfProxy(){
-        return getSelfProxy(SimpleApiService.class);
+        //return getSelfProxy(SimpleApiService.class);
+        return getSelfProxy(SimpleApiServiceImpl.class);
     }
 
     @Operation(summary = CREATE_ACTION)
@@ -95,9 +95,10 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
+
     @Operation(summary = UPDATE_ACTION)
     @Override
-    //@CacheEvict(condition = "#isNotEmpty(#req.id) && #result", key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdateSimpleApiReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -106,7 +107,8 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    //@CacheEvict(allEntries = true, condition = "#result > 0") //Spring 缓存设计问题
+    @Transactional
+    @CacheEvict(allEntries = true, condition = "#result > 0")
     public int update(SimpleUpdateSimpleApiReq setReq, QuerySimpleApiReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
@@ -114,7 +116,7 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
     @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional
     @Override
-    //@CacheEvict(allEntries = true, condition = "#isNotEmpty(#reqList)  && #result > 0")
+    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#reqList)  && #result > 0")
     public int batchUpdate(List<UpdateSimpleApiReq> reqList){
         //@Todo 优化批量提交
         return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
@@ -122,7 +124,7 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    //@CacheEvict(condition = "#isNotEmpty(#req.id) && #result", key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(SimpleApiIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -132,7 +134,7 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
     @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional
     @Override
-                //@CacheEvict(allEntries = true, condition = "#isNotEmpty(#req.idList) && #result > 0")
+    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#req.idList) && #result > 0")
     public int batchDelete(DeleteSimpleApiReq req){
         //@Todo 优化批量提交
         return Stream.of(req.getIdList())
@@ -167,15 +169,16 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
 
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    //@Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key = E_SimpleApi.CACHE_KEY_PREFIX + "#id")
+    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
     public SimpleApiInfo findById(String id) {
         return findById(new SimpleApiIdReq().setId(id));
     }
 
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    //只更新缓存
-    //@CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key = E_SimpleApi.CACHE_KEY_PREFIX + "#req.id")
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
     public SimpleApiInfo findById(SimpleApiIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findUnique(req);
@@ -195,7 +198,7 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "#isNotEmpty(#key)", key = E_SimpleApi.CACHE_KEY_PREFIX + "#key")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
     public void clearCache(Object key) {
     }
 

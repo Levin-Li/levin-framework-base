@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.tenant;
 
+import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -23,13 +24,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 平台租户-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:39, 代码生成哈希校验码：[e8f6fc8239e58dc0b211c871661bcef7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:55, 代码生成哈希校验码：[0c5697a6dd0923237eff1e7771e679c6]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_Tenant.BIZ_NAME, description = E_Tenant.BIZ_NAME + MAINTAIN_ACTION)
 public interface TenantService {
 
     String BIZ_NAME = E_Tenant.BIZ_NAME;
+
+    String CK_PREFIX = E_Tenant.CACHE_KEY_PREFIX;
+
+    String SERVICE_NAME = "TenantService";
+
+    String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
 
     /**
      * 创建记录，返回主键ID

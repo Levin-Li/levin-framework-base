@@ -19,12 +19,12 @@ import static com.levin.oak.base.ModuleOption.*;
 
 /**
  * 应用MVC配置
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:21:53, 代码生成哈希校验码：[63e361e50b185bd96cb716759f5f27e7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午2:15:43, 代码生成哈希校验码：[438673839905c7cda91caa7d6b8c6466]，请不要修改和删除此行内容。
  * 
  */
 @Slf4j
 @Configuration(PLUGIN_PREFIX + "AppWebMvcConfigurer")
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppWebMvcConfigurer", matchIfMissing = true)
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppWebMvcConfigurer", havingValue = "true", matchIfMissing = true)
 public class AppWebMvcConfigurer implements WebMvcConfigurer {
     @PostConstruct
     void init() {

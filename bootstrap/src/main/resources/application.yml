@@ -14,7 +14,17 @@ spring:
       pool:
         size: 100
   cache:
-    type: redis
+#    type: redis
+    type: GENERIC
+
+  redis:
+    client-type: lettuce
+    lettuce:
+      pool:
+        enabled: true
+        min-idle: 8
+        max-idle: 50
+        max-active: 300
 
   main:
     allow-circular-references: true
@@ -116,6 +126,57 @@ management:
       enabled: true
       #====================== spring-boot-admin ===============
 
+###############################  j2cache ###################
+j2cache:
+  #  config-location: /j2cache.properties
+  #  开启对spring cache 的支持
+  open-spring-cache: true
+
+  #  缓存清除模式
+  #  active:主动清除，二级缓存过期主动通知各节点清除，优点在于所有节点可以同时收到缓存清除
+  #  passive:被动清除，一级缓存过期进行通知各节点清除一二级缓存
+  #  blend:两种模式一起运作，对于各个节点缓存准确性以及及时性要求高的可以使用（推荐使用前面两种模式中一种）
+  cache-clean-mode: passive
+
+  #尽量不要允许空值，虽然会导致缓存不命中，但是可以避免数据更新问题
+  allow-null-values: false
+  default_cache_null_object: false
+
+  redis-client: lettuce #指定redis客户端使用lettuce，也可以使用Jedis
+
+  l2-cache-open: true #开启二级缓存
+
+  #SpringJ2CacheConfigUtil
+  sync_ttl_to_redis: false
+
+  serialization: fst
+  #广播器
+  broadcast: net.oschina.j2cache.cache.support.redis.SpringRedisPubSubPolicy
+  #  broadcast: jgroups
+  L1: #指定一级缓存提供者为caffeine
+    provider_class: caffeine
+
+  L2: #指定二级缓存提供者为redis
+    provider_class: net.oschina.j2cache.cache.support.redis.SpringRedisProvider
+    config_section: lettuce
+
+caffeine:
+  properties: /caffeine.properties   # 这个配置文件需要放在项目中
+
+lettuce:
+  mode: single
+  namespace:
+  storage: generic
+  channel: j2cache
+  scheme: redis
+  hosts: ${spring.redis.host:localhost}:${spring.redis.port:6379}
+  password: ${spring.redis.password:}
+  database: ${spring.redis.database:0}
+  sentinelMasterId:
+  maxTotal: 100
+  maxIdle: 10
+  minIdle: 10
+  timeout: 10000
 ############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
 sa-token:
   # token 名称（同时也是 cookie 名称）

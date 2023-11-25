@@ -33,13 +33,14 @@ import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
+
 
 /**
  * 字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:34, 代码生成哈希校验码：[b055291f3ea17643eb7e5738ef7bda8f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[b055291f3ea17643eb7e5738ef7bda8f]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -52,6 +53,7 @@ import com.levin.commons.service.support.InjectConst;
 public class DictInfo implements Serializable {
 
     private static final long serialVersionUID = -445779596L;
+
 
     @NotBlank
     @Size(max = 64)
@@ -67,17 +69,13 @@ public class DictInfo implements Serializable {
     @Schema(title = L_code)
     String code;
 
-    @InjectVar(
-            domain = "dao",
-            isRequired = "false",
-            converter = DefaultJsonConverter.class,
-            expectBaseType = String.class)
-    @Schema(title = L_itemList, description = D_itemList)
+    @InjectVar(domain = "dao", isRequired = "false", converter = DefaultJsonConverter.class, expectBaseType = String.class)
+    @Schema(title = L_itemList , description = D_itemList)
     List<Item> itemList;
 
     @Size(max = 128)
     @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain, description = D_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
     @NotBlank
@@ -85,7 +83,7 @@ public class DictInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value = true)
+    @JsonIgnore(value=true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
@@ -125,4 +123,5 @@ public class DictInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
 }

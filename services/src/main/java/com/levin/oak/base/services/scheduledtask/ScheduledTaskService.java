@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.scheduledtask;
 
+import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -23,13 +24,19 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 调度任务-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:43, 代码生成哈希校验码：[6db852ded6c573c0a8cd7596236002ee]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:56, 代码生成哈希校验码：[4ab44e5ee443c323197f499f8ba8ad30]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_ScheduledTask.BIZ_NAME, description = E_ScheduledTask.BIZ_NAME + MAINTAIN_ACTION)
 public interface ScheduledTaskService {
 
     String BIZ_NAME = E_ScheduledTask.BIZ_NAME;
+
+    String CK_PREFIX = E_ScheduledTask.CACHE_KEY_PREFIX;
+
+    String SERVICE_NAME = "ScheduledTaskService";
+
+    String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
 
     /**
      * 创建记录，返回主键ID

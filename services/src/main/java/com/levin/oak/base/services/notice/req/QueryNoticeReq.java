@@ -35,32 +35,32 @@ import static com.levin.oak.base.entities.E_Notice.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.oak.base.entities.Notice.*;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 查询通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月22日 下午1:37:17, 代码生成哈希校验码：[871893a6aba2fdea6eae9a36a74ffa5d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[879a39d046004b951bf421e713c34eb7]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Notice.class, alias = E_Notice.ALIAS, resultClass = NoticeInfo.class)
-public class QueryNoticeReq extends MultiTenantOrgReq {
+public class QueryNoticeReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = 1394869526L;
 
@@ -72,22 +72,18 @@ public class QueryNoticeReq extends MultiTenantOrgReq {
     @Schema(title = "排序字段")
     String orderBy;
 
-    // @Ignore
+    //@Ignore
     @Schema(title = "排序方向")
-    @SimpleOrderBy(
-            expr = "orderBy + ' ' + orderDir",
-            condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)",
-            remark = "生成排序表达式")
-    @OrderBy(
-            value = createTime,
-            condition = "#isEmpty(orderBy) || #isEmpty(orderDir)",
-            order = Integer.MAX_VALUE,
-            desc = "默认按时间排序")
+    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
+    @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
+
+    @Size(max = 64)
     @Schema(title = L_id)
     String id;
 
+    @Size(max = 64)
     @Schema(title = L_category)
     String category;
 
@@ -97,11 +93,11 @@ public class QueryNoticeReq extends MultiTenantOrgReq {
     @Schema(title = L_content)
     String content;
 
-    @Schema(title = L_expiredDate, description = L_expiredDate + "大于等于字段值")
+    @Schema(title = L_expiredDate , description = L_expiredDate + "大于等于字段值")
     @Gte
     Date gteExpiredDate;
 
-    @Schema(title = L_expiredDate, description = L_expiredDate + "小于等于字段值")
+    @Schema(title = L_expiredDate , description = L_expiredDate + "小于等于字段值")
     @Lte
     Date lteExpiredDate;
 
@@ -109,26 +105,30 @@ public class QueryNoticeReq extends MultiTenantOrgReq {
     @Between
     String betweenExpiredDate;
 
-    // @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain, description = D_domain)
+
+    //@InjectVar(value = "sysDomain", isRequired = "false")
+    @Size(max = 128)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value = true)
+    @JsonIgnore(value=true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
-    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
 
-    @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
+    @Schema(title = L_createTime , description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime, description = L_createTime + "小于等于字段值")
+    @Schema(title = L_createTime , description = L_createTime + "小于等于字段值")
     @Lte
     Date lteCreateTime;
 
@@ -136,17 +136,19 @@ public class QueryNoticeReq extends MultiTenantOrgReq {
     @Between
     String betweenCreateTime;
 
-    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "大于等于字段值")
+
+    @Schema(title = L_lastUpdateTime , description = L_lastUpdateTime + "大于等于字段值")
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "小于等于字段值")
+    @Schema(title = L_lastUpdateTime , description = L_lastUpdateTime + "小于等于字段值")
     @Lte
     Date lteLastUpdateTime;
 
     @Schema(title = L_lastUpdateTime + "-日期范围")
     @Between
     String betweenLastUpdateTime;
+
 
     @Schema(title = L_orderCode)
     Integer orderCode;
@@ -157,15 +159,15 @@ public class QueryNoticeReq extends MultiTenantOrgReq {
     @Schema(title = L_editable)
     Boolean editable;
 
+    @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
 
     public QueryNoticeReq(String id) {
         this.id = id;
     }
-
     @PostConstruct
     public void preQuery() {
-        // @todo 查询之前初始化数据
+        //@todo 查询之前初始化数据
     }
 }

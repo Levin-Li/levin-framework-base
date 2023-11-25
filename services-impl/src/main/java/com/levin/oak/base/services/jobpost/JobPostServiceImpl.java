@@ -30,10 +30,11 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
 //import org.apache.dubbo.config.spring.context.annotation.*;
-import org.apache.dubbo.config.annotation.*;
+//import org.apache.dubbo.config.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.JobPost;
+import static com.levin.oak.base.entities.E_JobPost.*;
 
 import com.levin.oak.base.services.jobpost.req.*;
 import com.levin.oak.base.services.jobpost.info.*;
@@ -55,15 +56,13 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 工作岗位-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月23日 下午11:55:36, 代码生成哈希校验码：[cedd9335c0cb80cf949402c1635ed533]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[dcd8e261b7e04c567f5a48b5b82105b1]，请不要修改和删除此行内容。
  *
  */
 
-@Service(PLUGIN_PREFIX + "JobPostService")
-@DubboService
+@Service(JobPostService.SERVICE_BEAN_NAME)
 
-@ConditionalOnMissingBean({JobPostService.class}) //默认只有在无对应服务才启用
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "JobPostService", matchIfMissing = true)
+@ConditionalOnProperty(name = JobPostService.SERVICE_BEAN_NAME, havingValue = "true", matchIfMissing = true)
 @Slf4j
 
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
@@ -73,7 +72,8 @@ import com.levin.commons.service.support.InjectConst;
 public class JobPostServiceImpl extends BaseService implements JobPostService {
 
     protected JobPostService getSelfProxy(){
-        return getSelfProxy(JobPostService.class);
+        //return getSelfProxy(JobPostService.class);
+        return getSelfProxy(JobPostServiceImpl.class);
     }
 
     @Operation(summary = CREATE_ACTION)
@@ -93,9 +93,10 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
+
     @Operation(summary = UPDATE_ACTION)
     @Override
-    //@CacheEvict(condition = "#isNotEmpty(#req.id) && #result", key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdateJobPostReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -104,7 +105,8 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    //@CacheEvict(allEntries = true, condition = "#result > 0") //Spring 缓存设计问题
+    @Transactional
+    @CacheEvict(allEntries = true, condition = "#result > 0")
     public int update(SimpleUpdateJobPostReq setReq, QueryJobPostReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
@@ -112,7 +114,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional
     @Override
-    //@CacheEvict(allEntries = true, condition = "#isNotEmpty(#reqList)  && #result > 0")
+    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#reqList)  && #result > 0")
     public int batchUpdate(List<UpdateJobPostReq> reqList){
         //@Todo 优化批量提交
         return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
@@ -120,7 +122,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    //@CacheEvict(condition = "#isNotEmpty(#req.id) && #result", key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(JobPostIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -130,7 +132,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional
     @Override
-                //@CacheEvict(allEntries = true, condition = "#isNotEmpty(#req.idList) && #result > 0")
+    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#req.idList) && #result > 0")
     public int batchDelete(DeleteJobPostReq req){
         //@Todo 优化批量提交
         return Stream.of(req.getIdList())
@@ -165,15 +167,16 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
 
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    //@Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key = E_JobPost.CACHE_KEY_PREFIX + "#id")
+    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
     public JobPostInfo findById(String id) {
         return findById(new JobPostIdReq().setId(id));
     }
 
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    //只更新缓存
-    //@CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key = E_JobPost.CACHE_KEY_PREFIX + "#req.id")
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
     public JobPostInfo findById(JobPostIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findUnique(req);
@@ -193,7 +196,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "#isNotEmpty(#key)", key = E_JobPost.CACHE_KEY_PREFIX + "#key")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
     public void clearCache(Object key) {
     }
 

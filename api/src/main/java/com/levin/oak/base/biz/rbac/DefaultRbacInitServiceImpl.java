@@ -80,7 +80,7 @@ public class DefaultRbacInitServiceImpl
     @Autowired
     RbacService rbacService;
 
-    @DubboReference
+    @Autowired //@DubboReference
     BizUserService bizUserService;
 
     @Autowired
@@ -92,7 +92,7 @@ public class DefaultRbacInitServiceImpl
     @Autowired
     PluginManager pluginManager;
 
-    @DubboReference
+    @Autowired //@DubboReference
     TenantService tenantService;
 
     @Autowired

@@ -54,7 +54,7 @@ public class RbacServiceImpl implements RbacService {
     @Autowired
     PluginManager pluginManager;
 
-    @DubboReference
+    @Autowired //@DubboReference
     BizRoleService bizRoleService;
 
     @Autowired

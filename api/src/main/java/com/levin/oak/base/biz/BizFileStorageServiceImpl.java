@@ -69,10 +69,10 @@ public class BizFileStorageServiceImpl
     @Autowired
     FrameworkProperties frameworkProperties;
 
-    @DubboReference
+    @Autowired //@DubboReference
     SettingService settingService;
 
-    @DubboReference
+    @Autowired //@DubboReference
     BizSettingService bizSettingService;
 
     private static Gson gson = new GsonBuilder().setPrettyPrinting().setLenient().create();

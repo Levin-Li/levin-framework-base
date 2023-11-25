@@ -29,13 +29,14 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
+
 
 /**
  * 调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月19日 上午1:05:34, 代码生成哈希校验码：[b64b150eb1399086ee6c0161f8fd47d8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[b64b150eb1399086ee6c0161f8fd47d8]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -48,6 +49,7 @@ import com.levin.commons.service.support.InjectConst;
 public class ScheduledLogInfo implements Serializable {
 
     private static final long serialVersionUID = 1319130901L;
+
 
     @NotBlank
     @Schema(title = L_id)
@@ -62,7 +64,7 @@ public class ScheduledLogInfo implements Serializable {
     @Schema(title = L_invokeCycle)
     String invokeCycle;
 
-    @Schema(title = L_invokeSnapshot, description = D_invokeSnapshot)
+    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot)
     String invokeSnapshot;
 
     @Schema(title = L_isError)
@@ -84,4 +86,5 @@ public class ScheduledLogInfo implements Serializable {
     @NotNull
     @Schema(title = L_createTime)
     Date createTime;
+
 }

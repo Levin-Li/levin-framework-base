@@ -35,34 +35,31 @@ import static com.levin.oak.base.entities.E_ScheduledTask.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 查询调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月22日 下午1:37:17, 代码生成哈希校验码：[d1a40dd1e5f1a8361656fbb846b6038b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[df715675658114a89f1b49eef70bd3d4]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(
-        entityClass = ScheduledTask.class,
-        alias = E_ScheduledTask.ALIAS,
-        resultClass = ScheduledTaskInfo.class)
-public class QueryScheduledTaskReq extends MultiTenantOrgReq {
+@TargetOption(entityClass = ScheduledTask.class, alias = E_ScheduledTask.ALIAS, resultClass = ScheduledTaskInfo.class)
+public class QueryScheduledTaskReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = -2056389676L;
 
@@ -74,25 +71,22 @@ public class QueryScheduledTaskReq extends MultiTenantOrgReq {
     @Schema(title = "排序字段")
     String orderBy;
 
-    // @Ignore
+    //@Ignore
     @Schema(title = "排序方向")
-    @SimpleOrderBy(
-            expr = "orderBy + ' ' + orderDir",
-            condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)",
-            remark = "生成排序表达式")
-    @OrderBy(
-            value = createTime,
-            condition = "#isEmpty(orderBy) || #isEmpty(orderDir)",
-            order = Integer.MAX_VALUE,
-            desc = "默认按时间排序")
+    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
+    @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
+
+    @Size(max = 64)
     @Schema(title = L_id)
     String id;
 
+    @Size(max = 128)
     @Schema(title = L_category)
     String category;
 
+    @Size(max = 128)
     @Schema(title = L_groupName)
     String groupName;
 
@@ -100,10 +94,11 @@ public class QueryScheduledTaskReq extends MultiTenantOrgReq {
     @Contains
     String containsGroupName;
 
+    @Size(max = 255)
     @Schema(title = L_cron)
     String cron;
 
-    @Schema(title = L_invokeExpr, description = D_invokeExpr)
+    @Schema(title = L_invokeExpr , description = D_invokeExpr)
     String invokeExpr;
 
     @Schema(title = L_parallelInvoke)
@@ -112,11 +107,11 @@ public class QueryScheduledTaskReq extends MultiTenantOrgReq {
     @Schema(title = L_invokedCount)
     Integer invokedCount;
 
-    @Schema(title = L_lastInvokedTime, description = L_lastInvokedTime + "大于等于字段值")
+    @Schema(title = L_lastInvokedTime , description = L_lastInvokedTime + "大于等于字段值")
     @Gte
     Date gteLastInvokedTime;
 
-    @Schema(title = L_lastInvokedTime, description = L_lastInvokedTime + "小于等于字段值")
+    @Schema(title = L_lastInvokedTime , description = L_lastInvokedTime + "小于等于字段值")
     @Lte
     Date lteLastInvokedTime;
 
@@ -124,11 +119,12 @@ public class QueryScheduledTaskReq extends MultiTenantOrgReq {
     @Between
     String betweenLastInvokedTime;
 
-    @Schema(title = L_nextInvokeTime, description = L_nextInvokeTime + "大于等于字段值")
+
+    @Schema(title = L_nextInvokeTime , description = L_nextInvokeTime + "大于等于字段值")
     @Gte
     Date gteNextInvokeTime;
 
-    @Schema(title = L_nextInvokeTime, description = L_nextInvokeTime + "小于等于字段值")
+    @Schema(title = L_nextInvokeTime , description = L_nextInvokeTime + "小于等于字段值")
     @Lte
     Date lteNextInvokeTime;
 
@@ -136,26 +132,30 @@ public class QueryScheduledTaskReq extends MultiTenantOrgReq {
     @Between
     String betweenNextInvokeTime;
 
-    // @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain, description = D_domain)
+
+    //@InjectVar(value = "sysDomain", isRequired = "false")
+    @Size(max = 128)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value = true)
+    @JsonIgnore(value=true)
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
-    // @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
 
-    @Schema(title = L_createTime, description = L_createTime + "大于等于字段值")
+    @Schema(title = L_createTime , description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime, description = L_createTime + "小于等于字段值")
+    @Schema(title = L_createTime , description = L_createTime + "小于等于字段值")
     @Lte
     Date lteCreateTime;
 
@@ -163,17 +163,19 @@ public class QueryScheduledTaskReq extends MultiTenantOrgReq {
     @Between
     String betweenCreateTime;
 
-    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "大于等于字段值")
+
+    @Schema(title = L_lastUpdateTime , description = L_lastUpdateTime + "大于等于字段值")
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = L_lastUpdateTime, description = L_lastUpdateTime + "小于等于字段值")
+    @Schema(title = L_lastUpdateTime , description = L_lastUpdateTime + "小于等于字段值")
     @Lte
     Date lteLastUpdateTime;
 
     @Schema(title = L_lastUpdateTime + "-日期范围")
     @Between
     String betweenLastUpdateTime;
+
 
     @Schema(title = L_orderCode)
     Integer orderCode;
@@ -184,15 +186,15 @@ public class QueryScheduledTaskReq extends MultiTenantOrgReq {
     @Schema(title = L_editable)
     Boolean editable;
 
+    @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
 
     public QueryScheduledTaskReq(String id) {
         this.id = id;
     }
-
     @PostConstruct
     public void preQuery() {
-        // @todo 查询之前初始化数据
+        //@todo 查询之前初始化数据
     }
 }

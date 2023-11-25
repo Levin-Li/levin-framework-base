@@ -1,5 +1,6 @@
 package com.levin.oak.base.controller.area;
 
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +16,7 @@ import javax.annotation.*;
 
 import javax.servlet.http.*;
 
-import org.apache.dubbo.config.annotation.*;
+//import org.apache.dubbo.config.annotation.*;
 
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.dao.*;
@@ -55,60 +56,61 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // @NotNull(groups = AdvanceInfo.class)
 // private UserAddress useraddress;
 
-// 生成的控制器
+//生成的控制器
 @RestController(PLUGIN_PREFIX + "AreaController")
-@RequestMapping(API_PATH + "Area") // area
+@RequestMapping(API_PATH + "Area") //area
+
 @Slf4j
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AreaController", matchIfMissing = true)
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AreaController", havingValue = "true",  matchIfMissing = true)
 
-// 默认需要权限访问，默认从父类继承
-// @ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
+//默认需要权限访问，默认从父类继承
+//@ResAuthorize(domain = ID, type = ENTITY_TYPE_NAME)
 
-// 类注解
+//类注解
 
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
-@Validated // @Valid
+@Validated //@Valid
 @CRUD
 /**
  * 区域控制器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月18日 上午12:26:21, 代码生成哈希校验码：[0d900979807eada35362d843404f9d96]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[47717d565aba65bd587d2757093272cd]，请不要修改和删除此行内容。
+ *
  */
-public class AreaController extends BaseController {
+public class AreaController extends BaseController{
 
     protected static final String BIZ_NAME = E_Area.BIZ_NAME;
 
-    @DubboReference // @Autowired
+    @Autowired
     protected AreaService areaService;
 
-    @DubboReference // @Autowired
-    protected BizAreaService bizAreaService;
+    @Autowired
+    protected BizAreaService bizareaService;
 
     /**
      * 分页列表查找
      *
      * @param req QueryAreaReq
-     * @return ApiResp<PagingData<AreaInfo>>
+     * @return  ApiResp<PagingData<AreaInfo>>
      */
     @GetMapping("/list")
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<AreaInfo>> list(@Form @Valid QueryAreaReq req, SimplePaging paging) {
-        return ApiResp.ok(areaService.query(req, paging));
+        return ApiResp.ok(areaService.query(req,paging));
     }
 
-    /**
-     * 简单统计
-     *
-     * @param req QueryAreaReq
-     * @return ApiResp<PagingData<StatAreaReq.Result>>
-     */
-    // @GetMapping("/stat") //默认不开放
-    @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatAreaReq.Result>> stat(
-            @Valid StatAreaReq req, SimplePaging paging) {
-        return ApiResp.ok(areaService.stat(req, paging));
-    }
+     /**
+      * 简单统计
+      *
+      * @param req QueryAreaReq
+      * @return  ApiResp<PagingData<StatAreaReq.Result>>
+      */
+     //@GetMapping("/stat") //默认不开放
+     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
+     public ApiResp<PagingData<StatAreaReq.Result>> stat(@Valid StatAreaReq req, SimplePaging paging) {
+         return ApiResp.ok(areaService.stat(req,paging));
+     }
 
     /**
      * 新增
@@ -128,65 +130,56 @@ public class AreaController extends BaseController {
      *
      * @param req QueryAreaByIdReq
      */
-    @GetMapping({"", "{code}"})
+    @GetMapping({"","{code}"})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
-    public ApiResp<AreaInfo> retrieve(
-            @NotNull @Valid AreaIdReq req, @PathVariable(required = false) String code) {
-        req.updateCodeWhenNotBlank(code);
-        return ApiResp.ok(areaService.findById(req));
-    }
+    public ApiResp<AreaInfo> retrieve(@NotNull @Valid AreaIdReq req, @PathVariable(required = false) String code) {
+         req.updateCodeWhenNotBlank(code);
+
+         AreaInfo info = areaService.findById(req);
+         Assert.notNull(info, "记录不存在");
+         // 租户校验，因为数据可能是从缓存加载的
+         //Assert.isTrue(!StringUtils.hasText(req.getTenantId()) || req.getTenantId().equals(info.getTenantId()), "非法访问，租户不匹配");
+
+         return ApiResp.ok(info);
+     }
 
     /**
      * 更新
-     *
      * @param req UpdateAreaReq
      */
-    @PutMapping({"", "{code}"})
-    @Operation(
-            summary = UPDATE_ACTION + "(RequestBody方式)",
-            description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @PutMapping({"","{code}"})
+    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<Boolean> update(
-            @RequestBody @Valid UpdateAreaReq req, @PathVariable(required = false) String code) {
+    public ApiResp<Boolean> update(@RequestBody @Valid UpdateAreaReq req, @PathVariable(required = false) String code) {
         req.updateCodeWhenNotBlank(code);
         return ApiResp.ok(assertTrue(areaService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 删除
-     *
      * @param req AreaIdReq
      */
-    @DeleteMapping({"", "{code}"})
-    @Operation(
-            summary = DELETE_ACTION,
-            description = DELETE_ACTION + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
+    @DeleteMapping({"","{code}"})
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<Boolean> delete(
-            @Valid AreaIdReq req, @PathVariable(required = false) String code) {
+    public ApiResp<Boolean> delete(@Valid AreaIdReq req, @PathVariable(required = false) String code) {
         req.updateCodeWhenNotBlank(code);
         return ApiResp.ok(assertTrue(areaService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 删除
-     *
      * @param req AreaIdReq
      */
-    @DeleteMapping(
-            value = {"", "{code}"},
-            consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(
-            summary = DELETE_ACTION + "(RequestBody方式)",
-            description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
-    public ApiResp<Boolean> delete2(
-            @RequestBody @Valid AreaIdReq req, @PathVariable(required = false) String code) {
+    @DeleteMapping(value = {"","{code}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    public ApiResp<Boolean> delete2(@RequestBody @Valid AreaIdReq req, @PathVariable(required = false) String code) {
         req.updateCodeWhenNotBlank(code);
         return delete(req, code);
     }
 
-    ////////////////////////////////////// 以下是批量操作//////////////////////////////////////
+    //////////////////////////////////////以下是批量操作//////////////////////////////////////
 
     /**
      * 批量新增
@@ -200,36 +193,31 @@ public class AreaController extends BaseController {
         return ApiResp.ok(areaService.batchCreate(reqList));
     }
 
-    /** 批量更新 */
+    /**
+     * 批量更新
+     */
     @PutMapping("/batchUpdate")
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateAreaReq> reqList) {
-        return ApiResp.ok(
-                assertTrue(
-                        areaService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(areaService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 批量删除
-     *
      * @param req DeleteAreaReq
      */
     @DeleteMapping({"/batchDelete"})
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteAreaReq req) {
-        return ApiResp.ok(
-                assertTrue(areaService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(areaService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
      * 批量删除2
-     *
      * @param req @RequestBody DeleteAreaReq
      */
-    @DeleteMapping(
-            value = {"/batchDelete"},
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = {"/batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete2(@RequestBody @Valid DeleteAreaReq req) {
         return batchDelete(req);

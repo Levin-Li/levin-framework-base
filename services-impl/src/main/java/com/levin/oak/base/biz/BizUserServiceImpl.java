@@ -44,9 +44,8 @@ import com.levin.oak.base.services.*;
  */
 
 @Service(PLUGIN_PREFIX + "BizUserServiceImpl")
-@DubboService
+//@DubboService
 
-@ConditionalOnMissingBean({BizUserService.class}) //默认只有在无对应服务才启用
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizUserServiceImpl", matchIfMissing = true)
 @Slf4j
 

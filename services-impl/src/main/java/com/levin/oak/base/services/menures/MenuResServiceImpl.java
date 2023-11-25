@@ -30,10 +30,11 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
 //import org.apache.dubbo.config.spring.context.annotation.*;
-import org.apache.dubbo.config.annotation.*;
+//import org.apache.dubbo.config.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.MenuRes;
+import static com.levin.oak.base.entities.E_MenuRes.*;
 
 import com.levin.oak.base.services.menures.req.*;
 import com.levin.oak.base.services.menures.info.*;
@@ -57,15 +58,13 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 菜单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月23日 下午11:55:36, 代码生成哈希校验码：[ee4e1822d05b4626466529eee91ae4cd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[55172b5e4ed8d057333ef8db5abbc291]，请不要修改和删除此行内容。
  *
  */
 
-@Service(PLUGIN_PREFIX + "MenuResService")
-@DubboService
+@Service(MenuResService.SERVICE_BEAN_NAME)
 
-@ConditionalOnMissingBean({MenuResService.class}) //默认只有在无对应服务才启用
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "MenuResService", matchIfMissing = true)
+@ConditionalOnProperty(name = MenuResService.SERVICE_BEAN_NAME, havingValue = "true", matchIfMissing = true)
 @Slf4j
 
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
@@ -75,7 +74,8 @@ import com.levin.commons.service.support.InjectConst;
 public class MenuResServiceImpl extends BaseService implements MenuResService {
 
     protected MenuResService getSelfProxy(){
-        return getSelfProxy(MenuResService.class);
+        //return getSelfProxy(MenuResService.class);
+        return getSelfProxy(MenuResServiceImpl.class);
     }
 
     @Operation(summary = CREATE_ACTION)
@@ -95,9 +95,10 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
+
     @Operation(summary = UPDATE_ACTION)
     @Override
-    //@CacheEvict(condition = "#isNotEmpty(#req.id) && #result", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdateMenuResReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -106,7 +107,8 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    //@CacheEvict(allEntries = true, condition = "#result > 0") //Spring 缓存设计问题
+    @Transactional
+    @CacheEvict(allEntries = true, condition = "#result > 0")
     public int update(SimpleUpdateMenuResReq setReq, QueryMenuResReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
@@ -114,7 +116,7 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional
     @Override
-    //@CacheEvict(allEntries = true, condition = "#isNotEmpty(#reqList)  && #result > 0")
+    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#reqList)  && #result > 0")
     public int batchUpdate(List<UpdateMenuResReq> reqList){
         //@Todo 优化批量提交
         return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
@@ -122,7 +124,7 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    //@CacheEvict(condition = "#isNotEmpty(#req.id) && #result", key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(MenuResIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -132,7 +134,7 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional
     @Override
-                //@CacheEvict(allEntries = true, condition = "#isNotEmpty(#req.idList) && #result > 0")
+    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#req.idList) && #result > 0")
     public int batchDelete(DeleteMenuResReq req){
         //@Todo 优化批量提交
         return Stream.of(req.getIdList())
@@ -167,15 +169,16 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
 
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    //@Cacheable(condition = "#isNotEmpty(#id)", unless = "#result == null ", key = E_MenuRes.CACHE_KEY_PREFIX + "#id")
+    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
     public MenuResInfo findById(String id) {
         return findById(new MenuResIdReq().setId(id));
     }
 
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    //只更新缓存
-    //@CachePut(unless = "#result == null" , condition = "#isNotEmpty(#req.id)" , key = E_MenuRes.CACHE_KEY_PREFIX + "#req.id")
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
     public MenuResInfo findById(MenuResIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findUnique(req);
@@ -195,7 +198,7 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
 
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "#isNotEmpty(#key)", key = E_MenuRes.CACHE_KEY_PREFIX + "#key")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
     public void clearCache(Object key) {
     }
 
