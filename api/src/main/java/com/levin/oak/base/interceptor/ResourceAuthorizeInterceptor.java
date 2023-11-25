@@ -72,21 +72,30 @@ public class ResourceAuthorizeInterceptor
         //检查权限
 
         //去除上下文路径
-        String path = request.getRequestURI().substring(getLen(request.getContextPath()));
+        final String path = request.getRequestURI().substring(getLen(request.getContextPath()));
 
         boolean pass = frameworkProperties.getResourcesAcl()
                 .stream()
                 .filter(resCfg -> resCfg.isEnable() && resCfg.isPathMatched(path))
-                .allMatch(this::isAuthorized);
+                .allMatch(resCfg -> isAuthorized(response, resCfg));
 
         if (!pass) {
-            log.debug("资源许可匹配：{} --> {}", path, pass);
+            log.warn("*** 非法的资源访问*** 资源匹配路径：{} ，完整路径：{}", path, request.getRequestURL());
         }
 
         return pass;
     }
 
-    protected boolean isAuthorized(FrameworkProperties.ResCfg resCfg) {
+    /**
+     * 资源权限校验
+     * <p>
+     * 资源访问，不跑出异常
+     *
+     * @param response
+     * @param resCfg
+     * @return
+     */
+    protected boolean isAuthorized(HttpServletResponse response, FrameworkProperties.ResCfg resCfg) {
 
         if (!resCfg.isEnable()) {
             return true;
@@ -96,7 +105,12 @@ public class ResourceAuthorizeInterceptor
             return false;
         }
 
-        Assert.isTrue(authService.isLogin(), () -> new AuthorizationException(401, "未登录"));
+        // Assert.isTrue(authService.isLogin(), () -> new AuthorizationException(401, "未登录", path));
+
+        if (!authService.isLogin()) {
+            response.setStatus(401);
+            return false;
+        }
 
         bizTenantService.checkCurrentUserTenantInfo();
 
@@ -105,10 +119,11 @@ public class ResourceAuthorizeInterceptor
         }
 
         boolean ok = rbacService.isAuthorized(authService.getLoginId(), resCfg.isAndMode(), resCfg.getRequiredPermissions(), (rp, info) -> {
-            throw new AuthorizationException(403, "res-" + rp, "未授权的资源：" + info);
+            //throw new AuthorizationException(403, "res-" + rp, "未授权的资源：" + info);
         });
 
-        Assert.isTrue(ok, () -> new AuthorizationException(403, "未授权的操作"));
+        //Assert.isTrue(ok, () -> new AuthorizationException(403, "未授权的操作"));
+        response.setStatus(403);
 
         return ok;
     }
