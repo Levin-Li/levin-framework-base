@@ -86,9 +86,6 @@ public class RbacMethodServiceImpl implements RbacMethodService<Serializable> {
         Class<?> controllerClass = beanOrClass != null ? (beanOrClass instanceof Class ? (Class) beanOrClass : beanOrClass.getClass())
                 : method.getDeclaringClass();
 
-        //去除代理
-        controllerClass = AopProxyUtils.ultimateTargetClass(controllerClass);
-
         ///////////////////////////////获取 res 和 action 用于权限验证 //////////////////////////////////////////
         //
         Tag tag = controllerClass.getAnnotation(Tag.class);
