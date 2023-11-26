@@ -736,7 +736,7 @@
                     <!-- 生成的控制器代码是否包括目录-->
                     <isCreateControllerSubDir>true</isCreateControllerSubDir>
 
-                    <isCreateBizController>false</isCreateBizController>
+                    <isCreateBizController>true</isCreateBizController>
 
                     <isOutputFormatCode>false</isOutputFormatCode>
 

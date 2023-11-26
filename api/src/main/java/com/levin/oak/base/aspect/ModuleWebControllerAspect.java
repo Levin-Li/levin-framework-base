@@ -13,7 +13,7 @@ import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.rbac.AuthService;
-import com.levin.oak.base.controller.accesslog.AccessLogController;
+import com.levin.oak.base.controller.base.accesslog.AccessLogController;
 import com.levin.oak.base.services.accesslog.AccessLogService;
 import com.levin.oak.base.services.accesslog.req.CreateAccessLogReq;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
