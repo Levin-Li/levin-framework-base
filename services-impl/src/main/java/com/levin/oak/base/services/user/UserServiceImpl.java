@@ -67,7 +67,7 @@ import com.levin.commons.service.support.InjectConst;
 @Service(UserService.SERVICE_BEAN_NAME)
 
 @ConditionalOnProperty(name = UserService.SERVICE_BEAN_NAME, havingValue = "true", matchIfMissing = true)
-@Slf4j
+//@Slf4j
 
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
 //@Validated

@@ -4,6 +4,7 @@ import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.plugin.Res;
 import com.levin.commons.plugin.ResLoader;
+import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.RbacUserObject;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.rbac.SimpleResAction;
@@ -254,6 +255,11 @@ public class RbacServiceImpl implements RbacService {
         //1、如果是超级管理员，可以分配任何角色
         if (userInfo.isSuperAdmin()) {
             return true;
+        }
+
+        //只有超级管理员才能分配超级管理员
+        if (RbacRoleObject.SA_ROLE.equals(requireRoleCode)) {
+            return userInfo.isSuperAdmin();
         }
 
         //2、如果当前用户已经拥有这个角色
