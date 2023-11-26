@@ -11,7 +11,6 @@ import com.levin.commons.rbac.SimpleResAction;
 import com.levin.commons.service.domain.Identifiable;
 import com.levin.commons.service.support.ContextHolder;
 import com.levin.commons.utils.ExpressionUtils;
-import com.levin.oak.base.biz.BizRoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -24,6 +23,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
+import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
@@ -45,7 +45,7 @@ import static org.springframework.util.StringUtils.trimWhitespace;
 @Slf4j
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacService", havingValue = "true", matchIfMissing = true)
 @ResAuthorize(ignored = true)
-public class RbacServiceImpl implements RbacService {
+public class RbacServiceImpl implements RbacService<Serializable> {
 
     @Autowired
     ApplicationContext context;
@@ -53,13 +53,10 @@ public class RbacServiceImpl implements RbacService {
     @Autowired
     PluginManager pluginManager;
 
-    @Autowired //@DubboReference
-    BizRoleService bizRoleService;
-
     @Autowired
-    UserLoadService<Object> defaultUserLoadService;
+    RbacLoadService<Serializable> defaultRbacLoadService;
 
-    final InheritableThreadLocal<UserLoadService<Object>> userLoadServiceHolder = new InheritableThreadLocal<>();
+    final InheritableThreadLocal<RbacLoadService<Serializable>> userLoadServiceHolder = new InheritableThreadLocal<>();
 
     final ContextHolder<String, Res.Action> actionContextHolder = ContextHolder.buildContext(true);
 
@@ -171,55 +168,45 @@ public class RbacServiceImpl implements RbacService {
     /**
      * 设置用户加载服务
      *
-     * @param userLoadService
+     * @param rbacLoadService
      * @return
      */
     @Override
-    public RbacService setUserLoadService(UserLoadService<Object> userLoadService) {
-        this.userLoadServiceHolder.set(userLoadService);
+    public RbacService setUserLoadService(RbacLoadService<Serializable> rbacLoadService) {
+        this.userLoadServiceHolder.set(rbacLoadService);
         return this;
     }
 
-    @Override
-    public RbacUserObject<String> getUserInfo(Object principal) {
 
-        UserLoadService<Object> userLoadService = this.userLoadServiceHolder.get();
+    /**
+     * 获取用户加载服务
+     *
+     * @return
+     */
+    protected RbacLoadService<Serializable> getRbacLoadService() {
 
-        if (userLoadService == null) {
-            userLoadService = defaultUserLoadService;
+        RbacLoadService<Serializable> rbacLoadService = this.userLoadServiceHolder.get();
+
+        if (rbacLoadService == null) {
+            rbacLoadService = defaultRbacLoadService;
         }
 
-        Assert.notNull(userLoadService, "用户加载服务未配置");
+        Assert.notNull(rbacLoadService, "用户加载服务未配置");
 
-        return userLoadService.loadUser(principal);
+        return rbacLoadService;
+    }
+
+    protected RbacUserObject<String> loadUserInfo(Serializable principal) {
+        return getRbacLoadService().loadUser(principal);
     }
 
     @Override
-    public List<String> getPermissionList(Object principal) {
-
-        RbacUserObject<String> userInfo = getUserInfo(principal);
-
-        List<String> roleList = userInfo.getRoleList();
-
-        if (roleList == null || roleList.isEmpty()) {
-            return Collections.emptyList();
-        }
-
-        return bizRoleService.getRolePermissionList(userInfo.getTenantId(), roleList);
-    }
-
-    @Override
-    public List<String> getRoleList(Object principal) {
-        return getUserInfo(principal).getRoleList();
-    }
-
-    @Override
-    public List<String> getCanAcccessOrgIdList(Object principal) {
+    public List<String> getCanAcccessOrgIdList(Serializable principal) {
         return null;
     }
 
     @Override
-    public boolean isAuthorized(Object principal, ResAuthorize resAuthorize) {
+    public boolean isAuthorized(Serializable principal, ResAuthorize resAuthorize) {
         return isAuthorized(
                 principal,
                 String.join(getPermissionDelimiter(), resAuthorize.domain(), resAuthorize.type(), resAuthorize.res()),
@@ -227,12 +214,12 @@ public class RbacServiceImpl implements RbacService {
         );
     }
 
-    public boolean isAuthorized(Object principal, String resPrefix, Res.Action action) {
+    public boolean isAuthorized(Serializable principal, String resPrefix, Res.Action action) {
         return isAuthorized(
                 resPrefix,
                 action,
-                getRoleList(principal),
-                getPermissionList(principal),
+                getRbacLoadService().getRoleList(principal),
+                getRbacLoadService().getPermissionList(principal),
                 getAuthorizeContext()
         );
     }
@@ -246,11 +233,11 @@ public class RbacServiceImpl implements RbacService {
      * @return
      */
     @Override
-    public boolean canAssignRole(Object sourcePrincipal, Object targetPrincipal, String requireRoleCode, BiConsumer<String, String> matchErrorConsumer) {
+    public boolean canAssignRole(Serializable sourcePrincipal, Serializable targetPrincipal, String requireRoleCode, BiConsumer<String, String> matchErrorConsumer) {
 
         Assert.notNull(sourcePrincipal, "用户未登录");
 
-        RbacUserObject<String> userInfo = getUserInfo(sourcePrincipal);
+        RbacUserObject<String> userInfo = loadUserInfo(sourcePrincipal);
 
         //1、如果是超级管理员，可以分配任何角色
         if (userInfo.isSuperAdmin()) {
@@ -268,7 +255,7 @@ public class RbacServiceImpl implements RbacService {
         }
 
         //3、角色的权限列表
-        List<String> rolePermissionList = bizRoleService.getRolePermissionList(userInfo.getTenantId(), requireRoleCode);
+        List<String> rolePermissionList = getRbacLoadService().loadRolePermissionList(userInfo.getTenantId(), requireRoleCode);
 
         //如果角色不需要权限
         if (rolePermissionList == null
@@ -277,7 +264,7 @@ public class RbacServiceImpl implements RbacService {
         }
 
         //4、用户全部的权限
-        List<String> ownerPermissionList = getPermissionList(userInfo.getId());
+        List<String> ownerPermissionList = getRbacLoadService().getPermissionList(userInfo.getId());
 
         //如果源用户没有权限
         if (ownerPermissionList == null
@@ -307,7 +294,7 @@ public class RbacServiceImpl implements RbacService {
      * @return
      */
     @Override
-    public boolean isAuthorized(Object principal, boolean isRequireAllPermission, List<String> requirePermissionList, BiConsumer<String, String> matchErrorConsumer) {
+    public boolean isAuthorized(Serializable principal, boolean isRequireAllPermission, List<String> requirePermissionList, BiConsumer<String, String> matchErrorConsumer) {
 
         //Assert.isTrue(authService.isLogin(), "用户未登录");
 
@@ -323,7 +310,7 @@ public class RbacServiceImpl implements RbacService {
             return true;
         }
 
-        RbacUserObject<String> userInfo = getUserInfo(principal);
+        RbacUserObject<String> userInfo = loadUserInfo(principal);
 
         //如果是超级管理员
         if (userInfo.isSuperAdmin()) {
@@ -331,7 +318,7 @@ public class RbacServiceImpl implements RbacService {
             // return true;
         }
 
-        return isAuthorized(userInfo.getRoleList(), getPermissionList(userInfo.getId()),
+        return isAuthorized(userInfo.getRoleList(), getRbacLoadService().getPermissionList(userInfo.getId()),
                 isRequireAllPermission, requirePermissionList, matchErrorConsumer);
     }
 

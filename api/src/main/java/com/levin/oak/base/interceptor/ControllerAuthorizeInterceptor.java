@@ -1,15 +1,18 @@
 package com.levin.oak.base.interceptor;
 
+import cn.hutool.core.lang.Assert;
+import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.RbacMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.Serializable;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -21,19 +24,18 @@ public class ControllerAuthorizeInterceptor implements HandlerInterceptor {
     @Autowired
     AuthService authService;
 
+    @Autowired
+    RbacMethodService<Serializable> rbacMethodService;
+
     Supplier<AuthService> supplier;
 
     Predicate<String> classNameFilter;
 
-    public ControllerAuthorizeInterceptor(AuthService authService, Predicate<String> classNameFilter) {
-        Assert.notNull(authService, "authService is null");
-        this.authService = authService;
-        this.classNameFilter = classNameFilter;
-    }
 
-    public ControllerAuthorizeInterceptor(Supplier<AuthService> supplier, Predicate<String> classNameFilter) {
-        Assert.notNull(supplier, "supplier is null");
-        this.supplier = supplier;
+    public ControllerAuthorizeInterceptor(AuthService authService, RbacMethodService<Serializable> rbacMethodService, Predicate<String> classNameFilter) {
+        Assert.notNull(authService, "authService is null");
+        Assert.notNull(rbacMethodService, "rbacMethodService is null");
+        this.authService = authService;
         this.classNameFilter = classNameFilter;
     }
 
@@ -64,7 +66,9 @@ public class ControllerAuthorizeInterceptor implements HandlerInterceptor {
         }
 
         //检查权限
-        authService.checkAuthorize(handlerMethod.getBeanType(), handlerMethod.getMethod());
+        boolean ok = rbacMethodService.canAccess(authService.getUserInfo(), handlerMethod.getBeanType(), handlerMethod.getMethod());
+
+        Assert.isTrue(ok, () -> new AuthorizationException("未授权的操作"));
 
         return true;
     }

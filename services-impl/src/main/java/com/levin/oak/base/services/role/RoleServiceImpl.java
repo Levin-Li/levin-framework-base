@@ -5,7 +5,6 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.support.*;
-import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.service.domain.*;
 
 import javax.annotation.*;
@@ -59,14 +58,13 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:51:47, 代码生成哈希校验码：[24d9bcb12b7972b955388c5cc79dd336]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 下午11:21:46, 代码生成哈希校验码：[e5222c9e9f5678a9a2b6c20c4507320a]，请不要修改和删除此行内容。
  *
  */
 
-@Service(PLUGIN_PREFIX + "RoleService")
-//@DubboService
+@Service(RoleService.SERVICE_BEAN_NAME)
 
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "RoleService", matchIfMissing = true)
+@ConditionalOnProperty(name = RoleService.SERVICE_BEAN_NAME, havingValue = "true", matchIfMissing = true)
 @Slf4j
 
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
@@ -83,27 +81,10 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Operation(summary = CREATE_ACTION)
     @Transactional
     @Override
-    public String create(CreateRoleReq req) {
-
-        checkRoleCode(req.getCode());
-
-        //不允许创建SA角色
-        Assert.isTrue(!RbacRoleObject.SA_ROLE.equalsIgnoreCase(StringUtils.trimAllWhitespace(req.getCode())),
-                "角色编码[" + RbacRoleObject.SA_ROLE + "]已经被系统使用");
-
-        long cnt = simpleDao.countByQueryObj(new QueryRoleReq().setCode(req.getCode()).setTenantId(req.getTenantId()));
-
-        //
-        Assert.isTrue(cnt < 1, "角色编码" + req.getCode() + "已经存在");
-
-        Role entity = simpleDao.create(req);
-
+    public String create(CreateRoleReq req){
+        //保存自动先查询唯一约束，并给出错误信息
+        Role entity = simpleDao.create(req, true);
         return entity.getId();
-    }
-
-    private void checkRoleCode(String code) {
-        Assert.notBlank(code, "角色编码不能为空");
-        Assert.isTrue(code.startsWith("R_"), "角色编码必须以 R_ 开头");
     }
 
     @Operation(summary = BATCH_CREATE_ACTION)
@@ -117,7 +98,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdateRoleReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -126,6 +107,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
+    @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
     public int update(SimpleUpdateRoleReq setReq, QueryRoleReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
@@ -134,7 +116,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional
     @Override
-    @CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#reqList)  && #result > 0")
+    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#reqList)  && #result > 0")
     public int batchUpdate(List<UpdateRoleReq> reqList){
         //@Todo 优化批量提交
         return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
@@ -142,7 +124,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.tenantId + #req.id")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(RoleIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -152,7 +134,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional
     @Override
-    @CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#req.idList) && #result > 0")
+    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#req.idList) && #result > 0")
     public int batchDelete(DeleteRoleReq req){
         //@Todo 优化批量提交
         return Stream.of(req.getIdList())
@@ -193,9 +175,10 @@ public class RoleServiceImpl extends BaseService implements RoleService {
         return findById(new RoleIdReq().setId(id));
     }
 
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    @CachePut(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.tenantId + #req.id")
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
     public RoleInfo findById(RoleIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findUnique(req);

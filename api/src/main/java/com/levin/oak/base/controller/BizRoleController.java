@@ -1,45 +1,27 @@
 package com.levin.oak.base.controller;
 
-import com.levin.commons.rbac.RbacRoleObject;
-import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.validation.annotation.*;
-import org.springframework.util.*;
 
-import javax.validation.*;
-import java.util.*;
 import java.util.stream.Collectors;
-import javax.annotation.*;
-
-import javax.servlet.http.*;
 
 //import org.apache.dubbo.config.annotation.*;
 
-import com.levin.commons.dao.*;
 import com.levin.commons.service.domain.*;
 import com.levin.commons.dao.support.*;
 import com.levin.commons.ui.annotation.*;
 import com.levin.commons.rbac.ResAuthorize;
 
-import javax.validation.constraints.*;
-
-import com.levin.oak.base.controller.*;
 import com.levin.oak.base.controller.base.role.*;
 
-import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
 
-import com.levin.oak.base.biz.*;
-
-import com.levin.oak.base.services.role.*;
 import com.levin.oak.base.services.role.req.*;
 import com.levin.oak.base.services.role.info.*;
 
@@ -87,7 +69,6 @@ public class BizRoleController extends RoleController {
     @Autowired
     RbacService rbacService;
 
-
     /**
      * 分页列表查找
      *
@@ -98,6 +79,8 @@ public class BizRoleController extends RoleController {
     @Override
     public ApiResp<PagingData<RoleInfo>> list(QueryRoleReq req, SimplePaging paging) {
 
+        req = checkRequest(QUERY_LIST_ACTION, req);
+
         PagingData<RoleInfo> pagingData = roleService.query(req, paging);
 
         //只过滤出当前用户完全拥有权限的角色
@@ -105,13 +88,14 @@ public class BizRoleController extends RoleController {
             //@todo 只过滤出当前用户完全拥有权限的角色
             pagingData.setItems(
                     pagingData.getItems().stream()
-                            .filter(roleInfo -> rbacService.canAssignRole(authService.getLoginId(), null, roleInfo.getCode(), null))
+                            .filter(roleInfo -> rbacService.canAssignRole(authService.getUserInfo(), null, roleInfo.getCode(), null))
                             .collect(Collectors.toList())
             );
 
         }
 
-        return ApiResp.ok(pagingData);
+
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, pagingData));
     }
 
     /**
@@ -122,8 +106,10 @@ public class BizRoleController extends RoleController {
      */
     @Override
     public ApiResp<String> create(CreateRoleReq req) {
-        checkCurrentUserCreateOrUpdateRolePermissions(req.getCode(), req.getPermissionList());
-        return super.create(req);
+
+        req = checkRequest(CREATE_ACTION, req);
+
+        return ApiResp.ok(bizroleService.create(authService.getUserInfo(), req));
     }
 
     /**
@@ -134,61 +120,12 @@ public class BizRoleController extends RoleController {
      */
     @Override
     public ApiResp<Boolean> update(UpdateRoleReq req, String id) {
-        checkCurrentUserCreateOrUpdateRolePermissions(null, req.getPermissionList());
-        return super.update(req, id);
-    }
 
-    /**
-     * 批量新增
-     *
-     * @param reqList List<CreateRoleEvt>
-     * @return ApiResp
-     */
-    @Override
-    public ApiResp<List<String>> batchCreate(List<CreateRoleReq> reqList) {
-        reqList.stream().forEach(req -> checkCurrentUserCreateOrUpdateRolePermissions(req.getCode(), req.getPermissionList()));
-        return super.batchCreate(reqList);
-    }
+        req.updateIdWhenNotBlank(id);
 
-    /**
-     * 批量更新
-     *
-     * @param reqList
-     */
-    @Override
-    public ApiResp<Integer> batchUpdate(List<UpdateRoleReq> reqList) {
-        reqList.stream().forEach(req -> checkCurrentUserCreateOrUpdateRolePermissions(null, req.getPermissionList()));
-        return super.batchUpdate(reqList);
-    }
+        req = checkRequest(UPDATE_ACTION, req);
 
-    /**
-     * 检查当前用户是否有权限使用指定的权限
-     *
-     * @param permissionList
-     */
-    protected void checkCurrentUserCreateOrUpdateRolePermissions(String roleCode, List<String> permissionList) {
-
-        Assert.hasText(roleCode, "角色编码不能为空");
-
-        Assert.isTrue(roleCode.startsWith("R_"), "角色编码必须以 R_ 开头");
-        Assert.isTrue(!roleCode.equals(RbacRoleObject.SA_ROLE), "角色编码 R_SA 不可使用");
-
-        if (StringUtils.hasText(roleCode)) {
-            //@todo 检查角色编码是否已经存在
-        }
-
-        if (permissionList == null || permissionList.isEmpty()) {
-            return;
-        }
-
-
-        boolean isAuthorized = rbacService.isAuthorized(authService.getLoginId(), true, permissionList, (rp, info) -> {
-            throw new AuthorizationException("未授权的资源：" + rp + "-" + roleCode);
-        });
-
-        if (!isAuthorized) {
-            throw new AuthorizationException("角色非法使用未授权的资源-" + roleCode);
-        }
+        return ApiResp.ok(bizroleService.update(authService.getUserInfo(), req));
     }
 
 }

@@ -9,6 +9,7 @@ import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
@@ -25,16 +26,15 @@ import static org.springframework.util.StringUtils.*;
  * 2、获取可以使用的菜单清单
  * 3、方法授权检查
  */
-public interface RbacService extends RbacPermissionService<Object> {
+public interface RbacService<U> {
 
     /**
      * 设置用户加载服务
      *
-     *
-     * @param userLoadService
+     * @param rbacLoadService
      * @return
      */
-    RbacService setUserLoadService(UserLoadService<Object> userLoadService);
+    RbacService setUserLoadService(RbacLoadService<U> rbacLoadService);
 
     /**
      * 获取权限分隔符
@@ -79,8 +79,7 @@ public interface RbacService extends RbacPermissionService<Object> {
      */
     default boolean isRole(String requirePermission) {
         return hasText(requirePermission)
-                && !isPermission(requirePermission)
-                ;
+                && !isPermission(requirePermission);
     }
 
 
@@ -208,36 +207,12 @@ public interface RbacService extends RbacPermissionService<Object> {
     }
 
     /**
-     * 获取用户信息
-     *
-     * @param principal
-     * @return
-     */
-    RbacUserObject<String> getUserInfo(Object principal);
-
-    /**
-     * 获取用户的角色列表
-     *
-     * @param principal
-     * @return
-     */
-    List<String> getRoleList(@NotNull Object principal);
-
-    /**
-     * 获取用户的权限列表
-     *
-     * @param principal
-     * @return
-     */
-    List<String> getPermissionList(@NotNull Object principal);
-
-    /**
      * 获取一个用户有权限访问的组织ID列表
      *
      * @param principal
      * @return
      */
-    List<String> getCanAcccessOrgIdList(@NotNull Object principal);
+    List<String> getCanAcccessOrgIdList(@NotNull U principal);
 
     /**
      * 用户对指定的注解是否有权限
@@ -246,7 +221,7 @@ public interface RbacService extends RbacPermissionService<Object> {
      * @param resAuthorize
      * @return
      */
-    boolean isAuthorized(@NotNull Object principal, ResAuthorize resAuthorize);
+    boolean isAuthorized(@NotNull U principal, ResAuthorize resAuthorize);
 
     /**
      * 用户对指定资源的动作是否有权限
@@ -256,7 +231,7 @@ public interface RbacService extends RbacPermissionService<Object> {
      * @param action
      * @return
      */
-    boolean isAuthorized(@NotNull Object principal, String resPrefix, Res.Action action);
+    boolean isAuthorized(@NotNull U principal, String resPrefix, Res.Action action);
 
     /**
      * 当前用户是否能给目标用户分配指定的角色
@@ -266,7 +241,7 @@ public interface RbacService extends RbacPermissionService<Object> {
      * @param matchErrorConsumer  匹配错误回调 参数1为请求的角色，参数2为没有匹配的权限
      * @return
      */
-    default boolean canAssignRole(Object sourcePrincipal, Object targetPrincipal, List<String> requireRoleCodeList
+    default boolean canAssignRole(U sourcePrincipal, U targetPrincipal, List<String> requireRoleCodeList
             , BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer) {
         return requireRoleCodeList.stream().filter(StringUtils::hasText)
                 .allMatch(requireRoleCode -> canAssignRole(sourcePrincipal, targetPrincipal, requireRoleCode, matchErrorConsumer));
@@ -281,7 +256,7 @@ public interface RbacService extends RbacPermissionService<Object> {
      * @param matchErrorConsumer 匹配错误回调 参数1为请求的角色，参数2为没有匹配的权限
      * @return
      */
-    boolean canAssignRole(Object sourcePrincipal, Object targetPrincipal, String requireRoleCode
+    boolean canAssignRole(U sourcePrincipal, U targetPrincipal, String requireRoleCode
             , BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer);
 
     /**
@@ -292,7 +267,7 @@ public interface RbacService extends RbacPermissionService<Object> {
      * @param requirePermissionList
      * @return
      */
-    default boolean isAuthorized(Object principal, BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer,
+    default boolean isAuthorized(U principal, BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer,
                                  boolean isRequireAllPermission, String... requirePermissionList) {
         return isAuthorized(principal, isRequireAllPermission, Arrays.asList(requirePermissionList), matchErrorConsumer);
     }
@@ -305,7 +280,7 @@ public interface RbacService extends RbacPermissionService<Object> {
      * @param matchErrorConsumer
      * @return
      */
-    boolean isAuthorized(Object principal, boolean isRequireAllPermission, List<String> requirePermissionList,
+    boolean isAuthorized(U principal, boolean isRequireAllPermission, List<String> requirePermissionList,
                          BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer);
 
     /**
@@ -323,7 +298,6 @@ public interface RbacService extends RbacPermissionService<Object> {
     default boolean isAuthorized(List<String> ownerRoleList, List<String> ownerPermissionList,
                                  boolean isRequireAllPermission, List<String> requirePermissionList,
                                  BiConsumer<String/*参数1为请求的权限*/, String/*参数2为错误原因*/> matchErrorConsumer) {
-
         {
             //如果不需要权限
             if (requirePermissionList == null

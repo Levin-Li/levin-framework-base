@@ -7,7 +7,9 @@ import com.levin.commons.dao.*;
 import com.levin.commons.dao.support.*;
 import com.levin.commons.service.domain.*;
 
+import java.io.Serializable;
 import java.util.*;
+
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
 
@@ -27,13 +29,17 @@ import com.levin.oak.base.services.*;
 import com.levin.commons.service.support.InjectConst;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.Role.*;
+
 import java.util.List;
+
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 ////////////////////////////////////
 
 /**
- *  角色-业务服务
+ * 角色-业务服务
  *
  * @author auto gen by simple-dao-codegen 2023年6月26日 下午6:06:01
  * 代码生成哈希校验码：[b925f45c4ab6d774c1676c55e0ff4d6b]
@@ -43,23 +49,30 @@ import java.util.Date;
 public interface BizRoleService {
 
     /**
-     * 获取指定角色的权限列表
+     * 创建记录，返回主键ID
      *
-     * @param tenantId
-     * @param roleCodeList
-     * @return
+     * @param req
+     * @return pkId 主键ID
      */
-    default List<String> getRolePermissionList(String tenantId, String... roleCodeList) {
-        return getRolePermissionList(tenantId, Arrays.asList(roleCodeList));
-    }
+    @Operation(summary = CREATE_ACTION)
+    String create(Serializable userPrincipal, @NotNull CreateRoleReq req);
 
     /**
-     * 获取指定角色的权限列表
+     * 更新记录，并返回更新是否成功
      *
-     * @param tenantId
-     * @param roleCodeList
-     * @return
+     * @param req
+     * @return boolean 是否成功
      */
-    List<String> getRolePermissionList(String tenantId, List<String> roleCodeList);
+    @Operation(summary = UPDATE_ACTION)
+    boolean update(Serializable userPrincipal, @NotNull UpdateRoleReq req);
+
+    /**
+     * 删除记录，并返回删除是否成功
+     *
+     * @param req
+     * @return boolean 删除是否成功
+     */
+    @Operation(summary = DELETE_ACTION)
+    boolean delete(Serializable userPrincipal, @NotNull RoleIdReq req);
 
 }

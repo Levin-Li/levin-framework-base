@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Role;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.Serializable;
 import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -31,7 +32,7 @@ public class StpInterfaceImpl
         implements StpInterface {
 
     @Autowired
-    RbacPermissionService<Object> rbacPermissionService;
+    RbacLoadService<Serializable> rbacLoadService;
 
     @PostConstruct
     void init() {
@@ -42,12 +43,12 @@ public class StpInterfaceImpl
 
     @Override
     public List<String> getPermissionList(Object principal, String loginType) {
-        return rbacPermissionService.getPermissionList(principal.toString());
+        return rbacLoadService.getPermissionList(principal.toString());
     }
 
     @Override
     public List<String> getRoleList(Object principal, String loginType) {
-        return rbacPermissionService.getRoleList(principal.toString());
+        return rbacLoadService.getRoleList(principal.toString());
     }
 
 }

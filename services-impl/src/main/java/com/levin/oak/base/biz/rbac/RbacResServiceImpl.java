@@ -41,7 +41,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @Slf4j
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "RbacResService", havingValue = "true", matchIfMissing = true)
 @ResAuthorize(ignored = true)
-public class RbacResServiceImpl implements RbacResService<Object> {
+public class RbacResServiceImpl implements RbacResService<Serializable> {
 
     @Autowired
     ApplicationContext context;
@@ -56,8 +56,10 @@ public class RbacResServiceImpl implements RbacResService<Object> {
     BizRoleService bizRoleService;
 
     @Autowired
-    RbacService rbacService;
+    RbacService<Serializable> rbacService;
 
+    @Autowired
+    RbacLoadService<Serializable> rbacLoadService;
 
     /**
      * 获取授权的菜单列表
@@ -66,11 +68,11 @@ public class RbacResServiceImpl implements RbacResService<Object> {
      * @return
      */
     @Override
-    public List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, Object principal) {
+    public List<MenuResInfo> getAuthorizedMenuList(boolean isShowNotPermissionMenu, Serializable principal) {
 
         Assert.notNull(principal, "无效的用户标识");
 
-        RbacUserObject<String> userInfo = rbacService.getUserInfo(principal);
+        RbacUserObject<String> userInfo = rbacLoadService.loadUser(principal);
 
         Assert.notNull(userInfo, "无效的用户标识");
 
@@ -125,8 +127,8 @@ public class RbacResServiceImpl implements RbacResService<Object> {
         ///////////////////////////////////////////////////////////////////////////
         //过滤出有权限的菜单，或是设置为enable = false
 
-        List<String> roleList = rbacService.getRoleList(principal);
-        List<String> permissionList = rbacService.getPermissionList(principal);
+        List<String> roleList = rbacLoadService.getRoleList(principal);
+        List<String> permissionList = rbacLoadService.getPermissionList(principal);
 
         for (Map.Entry<String, MenuResInfo> entry : cacheMap2.entrySet()) {
             //
@@ -192,13 +194,13 @@ public class RbacResServiceImpl implements RbacResService<Object> {
      * @return
      */
     @Override
-    public List<ModuleInfo> getAuthorizedResList(Object principal) {
+    public List<ModuleInfo> getAuthorizedResList(Serializable principal) {
 
         //非Null并且是非空字符串
         boolean hasUser = principal != null && (!(principal instanceof CharSequence) || StringUtils.hasText(principal.toString()));
 
-        List<String> roleList = hasUser ? rbacService.getRoleList(principal) : Collections.emptyList();
-        List<String> permissionList = hasUser ? rbacService.getPermissionList(principal) : Collections.emptyList();
+        List<String> roleList = hasUser ? rbacLoadService.getRoleList(principal) : Collections.emptyList();
+        List<String> permissionList = hasUser ? rbacLoadService.getPermissionList(principal) : Collections.emptyList();
 
         //返回结果
         List<ModuleInfo> result = new LinkedList<>();

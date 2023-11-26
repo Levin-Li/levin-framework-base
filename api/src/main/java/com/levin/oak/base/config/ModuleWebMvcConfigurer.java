@@ -6,6 +6,7 @@ import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.InjectVarService;
 import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.biz.rbac.RbacMethodService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.interceptor.ControllerAuthorizeInterceptor;
 import com.levin.oak.base.interceptor.DevInterceptor;
@@ -40,6 +41,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.List;
@@ -59,10 +61,13 @@ import static com.levin.oak.base.ModuleOption.*;
 public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
     @Autowired
-    RbacService rbacService;
+    RbacService<Serializable> rbacService;
 
     @Autowired
     AuthService authService;
+
+    @Autowired
+    RbacMethodService<Serializable> rbacMethodService;
 
     @Autowired
     BizTenantService bizTenantService;
@@ -318,7 +323,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         //控制访问控制
         if (frameworkProperties.getControllerAcl().isEnable()) {
 
-            HandlerInterceptor handlerInterceptor = new ControllerAuthorizeInterceptor(authService
+            HandlerInterceptor handlerInterceptor = new ControllerAuthorizeInterceptor(authService, rbacMethodService
                     , (className) -> frameworkProperties.getControllerAcl().isPackageMatched(className));
 
             processDefaultPath(registry.addInterceptor(handlerInterceptor)

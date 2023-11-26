@@ -5,6 +5,7 @@ import com.levin.commons.rbac.SimpleAuthService;
 import com.levin.commons.service.exception.AuthorizationException;
 import org.springframework.lang.NonNull;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 
 
@@ -13,7 +14,7 @@ import java.lang.reflect.Method;
  * <p>
  * 务必注意：本接口和当前登录用户有关，实现类必须和使用方在同一个虚拟机中。
  */
-public interface AuthService extends SimpleAuthService<String, Object> {
+public interface AuthService extends SimpleAuthService<String, Serializable> {
 
     /**
      * 清除线程缓存数据
@@ -45,7 +46,7 @@ public interface AuthService extends SimpleAuthService<String, Object> {
      *
      * @return
      */
-    String getLoginId();
+    Serializable getLoginId();
 
     /**
      * 获取当前登录用户信息
@@ -53,13 +54,6 @@ public interface AuthService extends SimpleAuthService<String, Object> {
      * @return
      */
     <U extends RbacUserInfo<String>> U getUserInfo();
-
-    /**
-     * 获取用户信息
-     *
-     * @return
-     */
-    <U extends RbacUserInfo<String>> U loadUserInfo(String principal);
 
     /**
      * 用户登出
@@ -73,12 +67,5 @@ public interface AuthService extends SimpleAuthService<String, Object> {
      * @return
      */
     String getDeviceType(String ua);
-
-    /**
-     * 检查当前用户的方法调用授权
-     *
-     * @param method 控制器或是服务的方法
-     */
-    void checkAuthorize(Object beanOrClass, @NonNull Method method) throws AuthorizationException;
 
 }

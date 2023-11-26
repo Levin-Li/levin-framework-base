@@ -118,7 +118,7 @@ public class ResourceAuthorizeInterceptor
             return true;
         }
 
-        boolean ok = rbacService.isAuthorized(authService.getLoginId(), resCfg.isAndMode(), resCfg.getRequiredPermissions(), (rp, info) -> {
+        boolean ok = rbacService.isAuthorized(authService.getUserInfo(), resCfg.isAndMode(), resCfg.getRequiredPermissions(), (rp, info) -> {
             //throw new AuthorizationException(403, "res-" + rp, "未授权的资源：" + info);
         });
 

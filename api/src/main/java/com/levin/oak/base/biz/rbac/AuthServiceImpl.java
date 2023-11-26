@@ -29,6 +29,7 @@ import com.levin.oak.base.services.user.info.UserInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -45,6 +46,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -69,7 +71,6 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 public class AuthServiceImpl
         implements AuthService, ApplicationListener<ContextRefreshedEvent> {
 
-    final ResAuthorize defaultResAuthorize = getClass().getAnnotation(ResAuthorize.class);
 
 //    static final Gson gson = new Gson();
 //
@@ -116,14 +117,14 @@ public class AuthServiceImpl
     SmsCodeService smsCodeService;
 
     @Autowired
-    RbacService rbacService;
+    RbacService<Serializable> rbacService;
 
+    @Autowired
+    RbacLoadService<Serializable> rbacLoadService;
 
-    @Autowired //@DubboReference
+    @Autowired
     BizUserService bizUserService;
 
-
-    static final ContextHolder<Method, ResAuthorize> cache = ContextHolder.buildContext(true);
 
     final static ThreadLocal<UserInfo> currentUser = new ThreadLocal<>();
 
@@ -263,7 +264,7 @@ public class AuthServiceImpl
      * @return 认证成功后的token
      */
     @Override
-    public String auth(Object principal, Map<String, Object>... params) {
+    public String auth(Serializable principal, Map<String, Object>... params) {
 
         Assert.notNull(principal, "principal is null");
 
@@ -316,22 +317,11 @@ public class AuthServiceImpl
         UserInfo userInfo = currentUser.get();
 
         if (userInfo == null) {
-            userInfo = (UserInfo) loadUserInfo(getLoginId());
+            userInfo = auditUser((UserInfo) rbacLoadService.loadUser(getLoginId())).setPassword(null);
             currentUser.set(userInfo);
         }
 
         return userInfo;
-    }
-
-    /**
-     * 获取当前登录用户信息
-     *
-     * @param principal
-     * @return
-     */
-    @Override
-    public RbacUserInfo<String> loadUserInfo(String principal) {
-        return auditUser(userService.findById(principal).setPassword(null));
     }
 
     @Override
@@ -392,7 +382,7 @@ public class AuthServiceImpl
     }
 
     @Override
-    public String getLoginId() {
+    public Serializable getLoginId() {
 
         Object principal = StpUtil.getLoginId();
 
@@ -400,7 +390,7 @@ public class AuthServiceImpl
             throw new NotLoginException(NotLoginException.NOT_TOKEN_MESSAGE, StpUtil.getLoginType(), StpUtil.getLoginDevice());
         }
 
-        return (String) principal;
+        return (Serializable) principal;
     }
 
     @Override
@@ -435,88 +425,4 @@ public class AuthServiceImpl
         currentUser.set(null);
     }
 
-    /**
-     * 检查访问权限
-     *
-     * @return
-     */
-    @Override
-    public void checkAuthorize(Object beanOrClass, @NonNull Method method) throws AuthorizationException {
-
-        if (method == null) {
-            return;
-        }
-
-        Class<?> controllerClass = beanOrClass != null ? (beanOrClass instanceof Class ? (Class) beanOrClass : beanOrClass.getClass())
-                : method.getDeclaringClass();// AopProxyUtils.ultimateTargetClass(method.getDeclaringClass());
-
-        ///////////////////////////////获取 res 和 action 用于权限验证 //////////////////////////////////////////
-        //
-        Tag tag = controllerClass.getAnnotation(Tag.class);
-        Operation operation = method.getAnnotation(Operation.class);
-
-        String res = controllerClass.getSimpleName().replace("Controller", "");
-
-        if (tag != null) {
-            res = Arrays.asList(tag.name(), tag.description())
-                    .stream().filter(StringUtils::hasText).findFirst().orElse(res);
-        }
-
-        String action = method.getName();
-        if (operation != null) {
-            action = Arrays.asList(operation.summary(), operation.operationId(), operation.description())
-                    .stream().filter(StringUtils::hasText).findFirst().orElse(action);
-        }
-        /////////////////////////////// 获取注解 ///////////////////////////////////////////////////
-        ResAuthorize resAuthorize = cache.get(method);
-        //如果没有放入
-        if (resAuthorize == null
-                && !cache.containsKey(method)) {
-
-            resAuthorize = ClassUtils.merge(MapUtils.putFirst(ResPermission.Fields.res, res)
-                            .put(ResPermission.Fields.action, action).build()
-                    //默认条件为不空或是不是空字符串则覆盖
-                    , (k, v) -> v != null && (!(v instanceof CharSequence) || StringUtils.hasText((CharSequence) v))
-
-                    , ResAuthorize.class,
-                    AnnotatedElementUtils.getMergedAnnotation(controllerClass, ResAuthorize.class),
-                    AnnotatedElementUtils.getMergedAnnotation(method, ResAuthorize.class)
-            );
-
-            if (resAuthorize == null) {
-                resAuthorize = defaultResAuthorize;
-            }
-
-            cache.put(method, resAuthorize);
-        }
-
-        if (resAuthorize == null
-                || resAuthorize.ignored()) {
-            return;
-        }
-
-        if (getUserInfo() == null) {
-            throw new AuthorizationException(401, "未登录");
-        }
-
-        if (resAuthorize.onlyRequireAuthenticated()) {
-            return;
-        }
-
-        ///////////////////////// 构建权限检查逻辑的闭包 //////////////////////////////////////
-
-//        boolean ok = rbacService.isAuthorized(
-//                String.join(rbacService.getPermissionDelimiter(), resAuthorize.domain(), resAuthorize.type(), resAuthorize.res()),
-//                SimpleResAction.newAction(resAuthorize),
-//                rbacService.getRoleList(principal),
-//                getPermissionList(principal),
-//                rbacService.getAuthorizeContext()
-//        );
-
-        boolean ok = rbacService.isAuthorized(getUserInfo(), resAuthorize);
-
-        if (!ok) {
-            throw new AuthorizationException(401, "未授权的操作");
-        }
-    }
 }
