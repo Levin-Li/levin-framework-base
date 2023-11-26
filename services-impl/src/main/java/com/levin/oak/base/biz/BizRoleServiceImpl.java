@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 
 
 @Service(PLUGIN_PREFIX + "BizRoleService")
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizRoleService",havingValue = "true",  matchIfMissing = true)
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizRoleService", havingValue = "true", matchIfMissing = true)
 @Slf4j
 //@Validated
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)
@@ -56,9 +56,15 @@ public class BizRoleServiceImpl implements BizRoleService {
                         .select("distinct " + E_Role.permissionList)
                         .eq(E_Role.enable, true)
                         .in(E_Role.code, roleCodeList)
-                        //公共角色和自有角色，只能二选一
-                        .appendByAnnotations(hasTenant, E_Role.tenantId, tenantId, Eq.class)
-                        .appendByAnnotations(!hasTenant, E_Role.tenantId, null, IsNull.class)
+
+                        .or()
+                        .eq(E_Role.tenantId, tenantId)
+                        .isNull(E_Role.tenantId)
+
+//                        .appendByAnnotations(hasTenant, E_Role.tenantId, tenantId, Eq.class)
+//                        .appendByAnnotations(!hasTenant, E_Role.tenantId, null, IsNull.class)
+                        .end()
+
                         .find(String.class)
                         .stream()
                         .filter(StringUtils::hasText)
