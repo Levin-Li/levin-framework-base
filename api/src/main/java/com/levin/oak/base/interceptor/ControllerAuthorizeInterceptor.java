@@ -36,6 +36,7 @@ public class ControllerAuthorizeInterceptor implements HandlerInterceptor {
         Assert.notNull(authService, "authService is null");
         Assert.notNull(rbacMethodService, "rbacMethodService is null");
         this.authService = authService;
+        this.rbacMethodService = rbacMethodService;
         this.classNameFilter = classNameFilter;
     }
 
@@ -66,7 +67,7 @@ public class ControllerAuthorizeInterceptor implements HandlerInterceptor {
         }
 
         //检查权限
-        boolean ok = rbacMethodService.canAccess(authService.getUserInfo(), handlerMethod.getBeanType(), handlerMethod.getMethod());
+        boolean ok = rbacMethodService.canAccess(authService.isLogin() ? authService.getUserInfo() : null, handlerMethod.getBeanType(), handlerMethod.getMethod());
 
         Assert.isTrue(ok, () -> new AuthorizationException("未授权的操作"));
 
