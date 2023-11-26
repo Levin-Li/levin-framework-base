@@ -2,7 +2,6 @@ package com.levin.oak.base.services.role.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
-import com.levin.commons.rbac.RbacRoleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import com.levin.commons.dao.annotation.Ignore;
 
@@ -37,18 +36,21 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.support.InjectConst;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.oak.base.entities.Role.*;
 import java.util.List;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 /**
- *  查询角色
- *  @Author Auto gen by simple-dao-codegen 2023年6月28日 上午9:06:28
- *  代码生成哈希校验码：[4d03dfa2ca5b11ea9cd43238b77a29d1]
+ * 查询角色
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午10:38:27, 代码生成哈希校验码：[e665e476c1cc0fda3a4a94cb27bd1045]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
 @Data
@@ -60,7 +62,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Role.class, alias = E_Role.ALIAS, resultClass = RoleInfo.class)
-public class QueryRoleReq extends MultiTenantReq{
+public class QueryRoleReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = -445356492L;
 
@@ -68,27 +70,21 @@ public class QueryRoleReq extends MultiTenantReq{
     @Ignore
     boolean isContainsPublicData = true;
 
-    //不允许查询出 SA 角色
-    @Schema(title = "无需设置", hidden = true)
-    @NotEq(require = true)
-    private final String notEqCode = RbacRoleObject.SA_ROLE;
-
     @Ignore
     @Schema(title = "排序字段")
     String orderBy;
 
     //@Ignore
     @Schema(title = "排序方向")
-    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "orderBy != null && orderDir != null", remark = "生成排序表达式")
+    @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
+    @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
 
-    @NotBlank
     @Size(max = 64)
     @Schema(title = L_id)
     String id;
 
-    @NotBlank
     @Size(max = 128)
     @Schema(title = L_code)
     String code;
@@ -100,80 +96,81 @@ public class QueryRoleReq extends MultiTenantReq{
     @Schema(title = L_icon)
     String icon;
 
-    @NotNull
-    @Schema(title = L_orgDataScope)
+    @Schema(title = L_orgDataScope , description = D_orgDataScope)
     OrgDataScope orgDataScope;
 
     @OR(autoClose = true)
     @Contains
-    @InjectVar(domain = "dao",  converter = JsonStrLikeConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Schema(title = L_assignedOrgIdList , description = D_assignedOrgIdList)
     List<String> assignedOrgIdList;
 
     @OR(autoClose = true)
     @Contains
-    @InjectVar(domain = "dao",  converter = JsonStrLikeConverter.class, isRequired = "false")
+    @InjectVar(domain = "dao", converter = JsonStrLikeConverter.class, isRequired = "false")
     @Schema(title = L_permissionList , description = D_permissionList)
     List<String> permissionList;
 
+    //@InjectVar(value = "sysDomain", isRequired = "false")
     @Size(max = 128)
-    @Schema(title = L_domain)
+    @Schema(title = L_domain , description = D_domain)
     String domain;
 
-    @NotBlank
-    @Size(max = 128)
+    @Size(max = 64)
     @Schema(title = L_name)
     String name;
 
-    @Schema(title = "模糊匹配-" + L_name)
-    @Contains
-    String containsName;
+    @JsonIgnore(value=true)
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
+    //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
 
-    @NotNull
-    @Schema(title = L_createTime , description = "大于等于" + L_createTime)
+    @Schema(title = L_createTime , description = L_createTime + "大于等于字段值")
     @Gte
     Date gteCreateTime;
 
-    @Schema(title = L_createTime , description = "小于等于" + L_createTime)
+    @Schema(title = L_createTime , description = L_createTime + "小于等于字段值")
     @Lte
     Date lteCreateTime;
 
-    //@Schema(title = L_createTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenCreateTime;
+    @Schema(title = L_createTime + "-日期范围")
+    @Between
+    String betweenCreateTime;
 
 
-    @Schema(title = L_lastUpdateTime , description = "大于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime , description = L_lastUpdateTime + "大于等于字段值")
     @Gte
     Date gteLastUpdateTime;
 
-    @Schema(title = L_lastUpdateTime , description = "小于等于" + L_lastUpdateTime)
+    @Schema(title = L_lastUpdateTime , description = L_lastUpdateTime + "小于等于字段值")
     @Lte
     Date lteLastUpdateTime;
 
-    //@Schema(title = L_lastUpdateTime + "-日期范围")
-    //@Between(paramDelimiter = "-")
-    //String betweenLastUpdateTime;
+    @Schema(title = L_lastUpdateTime + "-日期范围")
+    @Between
+    String betweenLastUpdateTime;
 
 
     @Schema(title = L_orderCode)
     Integer orderCode;
 
-    @NotNull
     @Schema(title = L_enable)
     Boolean enable;
 
-    @NotNull
     @Schema(title = L_editable)
     Boolean editable;
 
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Schema(title = "模糊匹配-" + L_remark)
+    @Contains
+    String containsRemark;
 
     public QueryRoleReq(String id) {
         this.id = id;
@@ -182,5 +179,4 @@ public class QueryRoleReq extends MultiTenantReq{
     public void preQuery() {
         //@todo 查询之前初始化数据
     }
-
 }

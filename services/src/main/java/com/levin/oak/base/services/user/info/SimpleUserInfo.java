@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[ba92c8ce36df0613f02876c632eb03c4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午10:31:25, 代码生成哈希校验码：[b2694bd6d913c09fc190a39b894ed596]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -60,6 +60,11 @@ public class SimpleUserInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_id)
     String id;
+
+    @Size(max = 128)
+    @InjectVar(value = InjectConst.ORG_ID)
+    @Schema(title = L_orgId)
+    String orgId;
 
     @Size(max = 20)
     @Schema(title = L_telephone , description = D_telephone)
@@ -125,28 +130,22 @@ public class SimpleUserInfo implements Serializable {
     String aliOpenId;
 
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_name)
-    String name;
-
-    @JsonIgnore(value=true)
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
-    @Size(max = 128)
-    @InjectVar(value = InjectConst.ORG_ID)
-    @Schema(title = L_orgId)
-    String orgId;
-
-    @Size(max = 128)
     @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
+
+    @Size(max = 128)
+    @Schema(title = L_domain)
+    String domain;
+
+    @NotBlank
+    @Size(max = 128)
+    @Schema(title = L_name)
+    String name;
+
+    @Size(max = 128)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
 
 
 }

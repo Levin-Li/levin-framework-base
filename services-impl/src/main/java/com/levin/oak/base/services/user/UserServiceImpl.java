@@ -3,7 +3,6 @@ package com.levin.oak.base.services.user;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
-import com.levin.commons.conditional.ConditionalOn;
 import com.levin.commons.dao.*;
 import com.levin.commons.dao.support.*;
 import com.levin.commons.service.domain.*;
@@ -61,15 +60,14 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 用户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午11:00:11, 代码生成哈希校验码：[1aed75ed98565f632aee54cd506b2a20]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午10:20:06, 代码生成哈希校验码：[5515ef4f3df4bffead90c094568fabe5]，请不要修改和删除此行内容。
  *
  */
 
-@Service(PLUGIN_PREFIX + "UserService")
-//@DubboService
+@Service(UserService.SERVICE_BEAN_NAME)
 
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "UserService",havingValue = "", matchIfMissing = true)
-//@Slf4j
+@ConditionalOnProperty(name = UserService.SERVICE_BEAN_NAME, havingValue = "true", matchIfMissing = true)
+@Slf4j
 
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
 //@Validated
@@ -102,7 +100,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdateUserReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -111,6 +109,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
+    @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
     public int update(SimpleUpdateUserReq setReq, QueryUserReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
@@ -119,7 +118,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Operation(summary = BATCH_UPDATE_ACTION)
     @Transactional
     @Override
-    @CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#reqList)  && #result > 0")
+    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#reqList)  && #result > 0")
     public int batchUpdate(List<UpdateUserReq> reqList){
         //@Todo 优化批量提交
         return reqList.stream().map(req -> getSelfProxy().update(req)).mapToInt(n -> n ? 1 : 0).sum();
@@ -127,7 +126,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.tenantId + #req.id")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(UserIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -137,7 +136,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional
     @Override
-    @CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#req.idList) && #result > 0")
+    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#req.idList) && #result > 0")
     public int batchDelete(DeleteUserReq req){
         //@Todo 优化批量提交
         return Stream.of(req.getIdList())
@@ -178,9 +177,10 @@ public class UserServiceImpl extends BaseService implements UserService {
         return findById(new UserIdReq().setId(id));
     }
 
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    @CachePut(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.tenantId + #req.id")
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
     public UserInfo findById(UserIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findUnique(req);

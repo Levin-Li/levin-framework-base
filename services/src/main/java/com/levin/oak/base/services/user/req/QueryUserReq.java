@@ -51,7 +51,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午11:48:31, 代码生成哈希校验码：[fe9cf4d60ca21cbcc856d1f0c6f6583e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午10:36:40, 代码生成哈希校验码：[270d58c230130588efed8b0cabf49144]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -67,10 +67,6 @@ import com.levin.commons.service.support.InjectConst;
 public class QueryUserReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = -445263479L;
-
-    @Schema(title = "是否包含公共数据")
-    @Ignore
-    boolean isContainsPublicData = true;
 
     @Ignore
     @Schema(title = "排序字段")
@@ -176,18 +172,25 @@ public class QueryUserReq extends MultiTenantOrgReq{
     @Schema(title = L_aliOpenId)
     String aliOpenId;
 
-    //@InjectVar(value = "sysDomain", isRequired = "false")
     @Size(max = 128)
-    @Schema(title = L_domain , description = D_domain)
+    @Schema(title = L_domain)
     String domain;
 
-    @Size(max = 64)
+    @Size(max = 128)
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value=true)
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
+    @Schema(title = "模糊匹配-" + L_name)
+    @Contains
+    String containsName;
+
+    @Size(max = 128)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
+
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
+    @Contains
+    String containsPinyinName;
 
     //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)

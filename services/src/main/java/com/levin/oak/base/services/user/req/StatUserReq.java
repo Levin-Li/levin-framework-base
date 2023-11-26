@@ -36,7 +36,7 @@ import static com.levin.oak.base.entities.E_User.*;
 import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.oak.base.entities.User.*;
 import java.util.List;
 import com.levin.oak.base.services.org.info.*;
@@ -47,77 +47,74 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 统计用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[cb9ef9e97cba1cc1558d75f10e719ab8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午10:36:40, 代码生成哈希校验码：[cb9ef9e97cba1cc1558d75f10e719ab8]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)
 @Data
-// @AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
-// @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@Builder
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(
-        entityClass = User.class,
-        alias = E_User.ALIAS,
-        // 连接统计
-        // joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn =
-        // E_XXX.joinColumn)},
-        resultClass = StatUserReq.Result.class)
-public class StatUserReq extends QueryUserReq {
+@TargetOption(entityClass = User.class, alias = E_User.ALIAS,
+     //连接统计
+    //joinOptions = { @JoinOption(entityClass = XXX.class,alias = E_XXX.ALIAS,joinColumn = E_XXX.joinColumn)},
+    resultClass = StatUserReq.Result.class
+)
+public class StatUserReq extends QueryUserReq{
 
     private static final long serialVersionUID = -445263479L;
 
     //
-    // @Schema(description = "是否按状态分组统计")
-    // @CtxVar //增加当前字段名称和字段值到环境变量中
-    // @Ignore
-    // private boolean isGroupByStatus;
+    //@Schema(description = "是否按状态分组统计")
+    //@CtxVar //增加当前字段名称和字段值到环境变量中
+    //@Ignore
+    //private boolean isGroupByStatus;
 
-    // @Schema(description = "是否按日期分组统计")
-    // @CtxVar //增加当前字段名称和字段值到环境变量中
-    // @Ignore //
-    // private boolean isGroupByDate;
+    //@Schema(description = "是否按日期分组统计")
+    //@CtxVar //增加当前字段名称和字段值到环境变量中
+    //@Ignore //
+    //private boolean isGroupByDate;
 
     @PostConstruct
     public void preStat() {
-        // @todo 统计之前初始化数据
+    //@todo 统计之前初始化数据
     }
 
     @Schema(description = BIZ_NAME + "统计结果")
     @Data
     @Accessors(chain = true)
     @FieldNameConstants
-    public static class Result implements Serializable {
+    public static class Result
+            implements Serializable {
 
-        // @Schema(description = "状态分组统计")
-        // @GroupBy(condition = "#isGroupByStatus")
-        // Status status;
+        //@Schema(description = "状态分组统计")
+        //@GroupBy(condition = "#isGroupByStatus")
+        //Status status;
 
-        // @Schema(description = "时间分组统计")
-        // @GroupBy(condition = "#isGroupByDate", value = "date_format(" + E_User.createDate +
-        // ",'%Y-%m-%d')", orderBy = @OrderBy(type = OrderBy.Type.Asc))
-        // String createDate;
+        //@Schema(description = "时间分组统计")
+        //@GroupBy(condition = "#isGroupByDate", value = "date_format(" + E_User.createDate + ",'%Y-%m-%d')", orderBy = @OrderBy(type = OrderBy.Type.Asc))
+        //String createDate;
 
         @Schema(description = "记录数")
         @Count
         Integer cnt;
 
-        // @Schema(description = "分类记录数")
-        // @Count(fieldCases = {@Case(column = E_User.status, whenOptions = {@Case.When(whenExpr =
-        // "OFF", thenExpr = "1")}, elseExpr = "NULL")})
-        // Integer caseCnt;
+        //@Schema(description = "分类记录数")
+        //@Count(fieldCases = {@Case(column = E_User.status, whenOptions = {@Case.When(whenExpr = "OFF", thenExpr = "1")}, elseExpr = "NULL")})
+        //Integer caseCnt;
 
-        // @Schema(description = "累计" , havingOp=Op.Gt)
-        // @Sum
-        // Double sumGmv;
+        //@Schema(description = "累计" , havingOp=Op.Gt)
+        //@Sum
+        //Double sumGmv;
 
     }
 }

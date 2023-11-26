@@ -7,8 +7,12 @@ import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.StatefulObject;
+import com.levin.commons.dao.domain.support.AbstractMultiTenantOrgObject;
+import com.levin.commons.dao.domain.support.AbstractNamedMultiTenantObject;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
+import com.levin.commons.service.support.InjectConsts;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -60,7 +64,7 @@ import java.util.List;
 )
 @EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class User
-        extends TenantOrgNamedEntity
+        extends AbstractNamedMultiTenantObject
         implements OrganizedObject, MultiTenantObject, StatefulObject {
 
     public enum State implements EnumDesc {
@@ -93,6 +97,11 @@ public class User
     @GeneratedValue(generator = "default_id")
     @Column(length = 64)
     String id;
+
+    @Schema(title = "组织机构ID")
+    @Column(length = 128)
+    @InjectVar(InjectConst.ORG_ID)
+    String orgId;
 
     @Schema(title = "手机号", description = "可做为登录帐号")
     @Column(length = 20)

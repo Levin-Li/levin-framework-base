@@ -2,7 +2,7 @@ package com.levin.oak.base.services.role.req;
 
 import static com.levin.oak.base.entities.EntityConst.*;
 
-import com.levin.commons.rbac.RbacRoleObject;
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import com.levin.commons.service.domain.*;
@@ -22,32 +22,29 @@ import javax.validation.constraints.*;
 
 import lombok.*;
 import lombok.experimental.*;
-
 import java.util.*;
 
 import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.entities.*;
-
 import static com.levin.oak.base.entities.E_Role.*;
-
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.support.InjectConst;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.oak.base.entities.Role.*;
-
 import java.util.List;
-
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-
+import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 /**
  * 删除角色
- * //Auto gen by simple-dao-codegen 2023年6月28日 上午9:06:27
- * 代码生成哈希校验码：[c733cf16bfc7348d3493ee0907132ba0]
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午10:38:27, 代码生成哈希校验码：[6a57b12413f8e08997c3e6276faa70db]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
@@ -61,20 +58,16 @@ import java.util.Date;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Role.class, alias = E_Role.ALIAS)
-public class DeleteRoleReq extends MultiTenantReq {
+public class DeleteRoleReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445356492L;
 
-    @Schema(description = "可编辑条件", hidden = true)
-    @Eq(condition = "!#" + InjectConst.IS_SUPER_ADMIN)
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
+    @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
-    //不允许删除SA角色
-    @Schema(title = "无需设置", hidden = true)
-    @NotEq(require = true)
-    final String notEqCode = RbacRoleObject.SA_ROLE;
 
-    @Schema(title = L_id + "集合", required = true, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_Role.id)
     @NotEmpty
     private String[] idList;
