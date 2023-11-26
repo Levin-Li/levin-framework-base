@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.validation.annotation.*;
 import org.springframework.util.*;
+
 import javax.validation.*;
 import java.util.*;
 import javax.annotation.*;
@@ -53,11 +54,10 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // private UserAddress userAddress;
 
 /**
-* 平台租户业务控制器
-*
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午8:12:21, 代码生成哈希校验码：[60bc04aa124fb7e9cdc797467d12d618]，请不要修改和删除此行内容。
-*
-*/
+ * 平台租户业务控制器
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午8:12:21, 代码生成哈希校验码：[60bc04aa124fb7e9cdc797467d12d618]，请不要修改和删除此行内容。
+ */
 
 //生成的控制器
 @RestController(PLUGIN_PREFIX + "BizTenantController")
@@ -74,6 +74,22 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @CRUD
 
 @Slf4j
-public class BizTenantController extends TenantController{
+public class BizTenantController extends TenantController {
 
+    /**
+     * 检查请求
+     *
+     * @param action
+     * @param req
+     * @return
+     */
+    @Override
+    protected <T> T checkRequest(String action, T req) {
+
+        //租户不支持删除
+        //租户不支持删除
+        Assert.isTrue(!action.contains(DELETE_ACTION) && !action.contains(UPDATE_ACTION), "不支持的操作");
+
+        return super.checkRequest(action, req);
+    }
 }

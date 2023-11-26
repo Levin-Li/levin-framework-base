@@ -35,11 +35,11 @@ import static com.levin.oak.base.entities.EntityConst.*;
  * 抽象控制器
  *
  * @author lilw
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午4:26:57, 代码生成哈希校验码：[c2649949ef140b840a2cf2bc177802f6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午9:38:40, 代码生成哈希校验码：[2b2918f684f7641c3552644e731b8f86]，请不要修改和删除此行内容。
  */
 @Slf4j
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
+@ResAuthorize(domain = ID, type = BIZ_TYPE_NAME)
 @MenuResTag(domain = ID)
 public abstract class BaseController {
 
@@ -77,16 +77,58 @@ public abstract class BaseController {
     }
 
     /**
+     * 获取调用方法名
+     *
+     * @return
+     */
+    public static String getInvokeMethodName(int level) {
+        return (new Exception()).getStackTrace()[level].getMethodName();
+    }
+
+    /**
      * @return
      */
     protected String getContextPath() {
         return httpRequest.getServletContext().getContextPath();
     }
 
+    /**
+     * 不支持的操作
+     *
+     * @param info
+     */
+    protected void unsupportedOperation(String info) {
+        throw new UnsupportedOperationException(StringUtils.hasText(info) ? info : "不支持的操作");
+    }
+
+    /**
+     * 检查请求
+     *
+     * @param action
+     * @param req
+     * @return
+     */
+    protected <T> T checkRequest(String action, T req) {
+
+        //控制器方法名
+        //String methodName = getInvokeMethodName(2);
+
+        return req;
+    }
+
+    /**
+     * 检查响应
+     *
+     * @param action
+     * @param resp
+     * @return
+     */
+    protected <T> T checkResponse(String action, T resp) {
+        return resp;
+    }
 
     /**
      * null2Empty
-     *
      * @param txt
      * @return
      */
@@ -96,7 +138,6 @@ public abstract class BaseController {
 
     /**
      * null2Empty
-     *
      * @param txt
      * @param prefix
      * @param suffix

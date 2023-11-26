@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 菜单控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午8:27:06, 代码生成哈希校验码：[7fea7ed35d807f8366587c324e6434b5]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午9:43:52, 代码生成哈希校验码：[dc0a0be40cdff07e1b36aa863131d23a]，请不要修改和删除此行内容。
 *
 */
 
@@ -93,7 +93,10 @@ public abstract class MenuResController extends BaseController{
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<MenuResInfo>> list(@Form @Valid QueryMenuResReq req, SimplePaging paging) {
-        return ApiResp.ok(menuResService.query(req,paging));
+
+        req = checkRequest(QUERY_LIST_ACTION, req);
+
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, menuResService.query(req,paging)));
     }
 
      /**
@@ -105,7 +108,10 @@ public abstract class MenuResController extends BaseController{
      //@GetMapping("/stat") //默认不开放
      @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
      public ApiResp<PagingData<StatMenuResReq.Result>> stat(@Valid StatMenuResReq req, SimplePaging paging) {
-         return ApiResp.ok(menuResService.stat(req,paging));
+
+         req = checkRequest(STAT_ACTION, req);
+
+         return ApiResp.ok(checkResponse(STAT_ACTION, menuResService.stat(req,paging)));
      }
 
     /**
@@ -118,6 +124,9 @@ public abstract class MenuResController extends BaseController{
     @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
     public ApiResp<String> create(@RequestBody @Valid CreateMenuResReq req) {
+
+        req = checkRequest(CREATE_ACTION, req);
+
         return ApiResp.ok(menuResService.create(req));
     }
 
@@ -130,14 +139,17 @@ public abstract class MenuResController extends BaseController{
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
     public ApiResp<MenuResInfo> retrieve(@NotNull @Valid MenuResIdReq req, @PathVariable(required = false) String id) {
+
          req.updateIdWhenNotBlank(id);
+
+         req = checkRequest(VIEW_DETAIL_ACTION, req);
 
          MenuResInfo info = menuResService.findById(req);
          Assert.notNull(info, "记录不存在");
          // 租户校验，因为数据可能是从缓存加载的
          Assert.isTrue(!StringUtils.hasText(req.getTenantId()) || req.getTenantId().equals(info.getTenantId()), "非法访问，租户不匹配");
 
-         return ApiResp.ok(info);
+         return ApiResp.ok(checkResponse(VIEW_DETAIL_ACTION, info));
      }
 
     /**
@@ -148,7 +160,11 @@ public abstract class MenuResController extends BaseController{
     @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateMenuResReq req, @PathVariable(required = false) String id) {
+
         req.updateIdWhenNotBlank(id);
+
+        req = checkRequest(UPDATE_ACTION, req);
+
         return ApiResp.ok(assertTrue(menuResService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -160,7 +176,11 @@ public abstract class MenuResController extends BaseController{
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> delete(@Valid MenuResIdReq req, @PathVariable(required = false) String id) {
+
         req.updateIdWhenNotBlank(id);
+
+        req = checkRequest(DELETE_ACTION, req);
+
         return ApiResp.ok(assertTrue(menuResService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -171,7 +191,11 @@ public abstract class MenuResController extends BaseController{
     @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     public ApiResp<Boolean> delete2(@RequestBody @Valid MenuResIdReq req, @PathVariable(required = false) String id) {
+
         req.updateIdWhenNotBlank(id);
+
+        req = checkRequest(DELETE_ACTION, req);
+
         return delete(req, id);
     }
 
@@ -186,6 +210,9 @@ public abstract class MenuResController extends BaseController{
     @PostMapping("/batchCreate")
     @Operation(summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody @Valid List<CreateMenuResReq> reqList) {
+
+        reqList = checkRequest(BATCH_CREATE_ACTION, reqList);
+
         return ApiResp.ok(menuResService.batchCreate(reqList));
     }
 
@@ -195,6 +222,9 @@ public abstract class MenuResController extends BaseController{
     @PutMapping("/batchUpdate")
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateMenuResReq> reqList) {
+
+        reqList = checkRequest(BATCH_UPDATE_ACTION, reqList);
+
         return ApiResp.ok(assertTrue(menuResService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -206,6 +236,9 @@ public abstract class MenuResController extends BaseController{
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteMenuResReq req) {
+
+        req = checkRequest(BATCH_DELETE_ACTION, req);
+
         return ApiResp.ok(assertTrue(menuResService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -216,6 +249,9 @@ public abstract class MenuResController extends BaseController{
     @DeleteMapping(value = {"/batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete2(@RequestBody @Valid DeleteMenuResReq req) {
+
+        req = checkRequest(BATCH_DELETE_ACTION, req);
+
         return batchDelete(req);
     }
 }

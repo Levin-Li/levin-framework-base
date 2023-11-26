@@ -76,4 +76,21 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 public class BizAreaController extends AreaController{
 
+    /**
+     * 检查请求
+     *
+     * @param action
+     * @param req
+     * @return
+     */
+    @Override
+    protected <T> T checkRequest(String action, T req) {
+
+        //租户不支持删除
+        //租户不支持删除
+        Assert.isTrue(!action.contains(DELETE_ACTION) && !action.contains(UPDATE_ACTION), "不支持的操作");
+
+        return super.checkRequest(action, req);
+    }
+
 }

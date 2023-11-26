@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 调度任务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午8:27:05, 代码生成哈希校验码：[e31929348d6cae8a12a25bad77c511d3]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午9:43:51, 代码生成哈希校验码：[be03a4f4d608ba012e423aabbf30b9cf]，请不要修改和删除此行内容。
 *
 */
 
@@ -93,7 +93,10 @@ public abstract class ScheduledTaskController extends BaseController{
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<ScheduledTaskInfo>> list(@Form @Valid QueryScheduledTaskReq req, SimplePaging paging) {
-        return ApiResp.ok(scheduledTaskService.query(req,paging));
+
+        req = checkRequest(QUERY_LIST_ACTION, req);
+
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, scheduledTaskService.query(req,paging)));
     }
 
      /**
@@ -105,7 +108,10 @@ public abstract class ScheduledTaskController extends BaseController{
      //@GetMapping("/stat") //默认不开放
      @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
      public ApiResp<PagingData<StatScheduledTaskReq.Result>> stat(@Valid StatScheduledTaskReq req, SimplePaging paging) {
-         return ApiResp.ok(scheduledTaskService.stat(req,paging));
+
+         req = checkRequest(STAT_ACTION, req);
+
+         return ApiResp.ok(checkResponse(STAT_ACTION, scheduledTaskService.stat(req,paging)));
      }
 
     /**
@@ -118,6 +124,9 @@ public abstract class ScheduledTaskController extends BaseController{
     @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
     public ApiResp<String> create(@RequestBody @Valid CreateScheduledTaskReq req) {
+
+        req = checkRequest(CREATE_ACTION, req);
+
         return ApiResp.ok(scheduledTaskService.create(req));
     }
 
@@ -130,14 +139,17 @@ public abstract class ScheduledTaskController extends BaseController{
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
     public ApiResp<ScheduledTaskInfo> retrieve(@NotNull @Valid ScheduledTaskIdReq req, @PathVariable(required = false) String id) {
+
          req.updateIdWhenNotBlank(id);
+
+         req = checkRequest(VIEW_DETAIL_ACTION, req);
 
          ScheduledTaskInfo info = scheduledTaskService.findById(req);
          Assert.notNull(info, "记录不存在");
          // 租户校验，因为数据可能是从缓存加载的
          Assert.isTrue(!StringUtils.hasText(req.getTenantId()) || req.getTenantId().equals(info.getTenantId()), "非法访问，租户不匹配");
 
-         return ApiResp.ok(info);
+         return ApiResp.ok(checkResponse(VIEW_DETAIL_ACTION, info));
      }
 
     /**
@@ -148,7 +160,11 @@ public abstract class ScheduledTaskController extends BaseController{
     @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateScheduledTaskReq req, @PathVariable(required = false) String id) {
+
         req.updateIdWhenNotBlank(id);
+
+        req = checkRequest(UPDATE_ACTION, req);
+
         return ApiResp.ok(assertTrue(scheduledTaskService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -160,7 +176,11 @@ public abstract class ScheduledTaskController extends BaseController{
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> delete(@Valid ScheduledTaskIdReq req, @PathVariable(required = false) String id) {
+
         req.updateIdWhenNotBlank(id);
+
+        req = checkRequest(DELETE_ACTION, req);
+
         return ApiResp.ok(assertTrue(scheduledTaskService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -171,7 +191,11 @@ public abstract class ScheduledTaskController extends BaseController{
     @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     public ApiResp<Boolean> delete2(@RequestBody @Valid ScheduledTaskIdReq req, @PathVariable(required = false) String id) {
+
         req.updateIdWhenNotBlank(id);
+
+        req = checkRequest(DELETE_ACTION, req);
+
         return delete(req, id);
     }
 
@@ -186,6 +210,9 @@ public abstract class ScheduledTaskController extends BaseController{
     @PostMapping("/batchCreate")
     @Operation(summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody @Valid List<CreateScheduledTaskReq> reqList) {
+
+        reqList = checkRequest(BATCH_CREATE_ACTION, reqList);
+
         return ApiResp.ok(scheduledTaskService.batchCreate(reqList));
     }
 
@@ -195,6 +222,9 @@ public abstract class ScheduledTaskController extends BaseController{
     @PutMapping("/batchUpdate")
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateScheduledTaskReq> reqList) {
+
+        reqList = checkRequest(BATCH_UPDATE_ACTION, reqList);
+
         return ApiResp.ok(assertTrue(scheduledTaskService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -206,6 +236,9 @@ public abstract class ScheduledTaskController extends BaseController{
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteScheduledTaskReq req) {
+
+        req = checkRequest(BATCH_DELETE_ACTION, req);
+
         return ApiResp.ok(assertTrue(scheduledTaskService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
@@ -216,6 +249,9 @@ public abstract class ScheduledTaskController extends BaseController{
     @DeleteMapping(value = {"/batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete2(@RequestBody @Valid DeleteScheduledTaskReq req) {
+
+        req = checkRequest(BATCH_DELETE_ACTION, req);
+
         return batchDelete(req);
     }
 }
