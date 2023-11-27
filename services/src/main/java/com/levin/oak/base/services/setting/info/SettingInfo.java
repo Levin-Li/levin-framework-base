@@ -37,7 +37,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[dfa4d962fbef4286fcc1e65f0eeca758]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:43, 代码生成哈希校验码：[d58c072cfe247539015693a6d94e6614]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -96,7 +96,7 @@ public class SettingInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value=true)
+    @JsonIgnore
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 

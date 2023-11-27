@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  工作岗位-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[4e4cde737ba8e33876ddac6bc2249f8a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:04, 代码生成哈希校验码：[4e4cde737ba8e33876ddac6bc2249f8a]，请不要修改和删除此行内容。
  *
  */
 
@@ -79,7 +79,6 @@ import com.levin.commons.service.support.InjectConst;
 @Tag(name = E_JobPost.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_JobPost.SIMPLE_CLASS_NAME})
 public class BizJobPostServiceImpl extends BaseService implements BizJobPostService {
-
 
     @Autowired
     JobPostService jobPostService;

@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 工作岗位-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[dcd8e261b7e04c567f5a48b5b82105b1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:04, 代码生成哈希校验码：[dcd8e261b7e04c567f5a48b5b82105b1]，请不要修改和删除此行内容。
  *
  */
 

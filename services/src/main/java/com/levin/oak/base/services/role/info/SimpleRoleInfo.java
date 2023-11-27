@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:09, 代码生成哈希校验码：[3174b736b4fd1359816eec0d9eb18efb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:42, 代码生成哈希校验码：[243d051673bcfcc8bdb5d228b1d6c508]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -89,7 +89,7 @@ public class SimpleRoleInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value=true)
+    @JsonIgnore
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 

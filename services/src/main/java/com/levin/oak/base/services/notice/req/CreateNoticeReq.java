@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[b2adb6a16ecabfc3a7ae2c930204e18a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[0975e1e8af466d745a21b5655a70ea8f]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -81,7 +81,7 @@ public class CreateNoticeReq extends MultiTenantOrgReq {
     String name;
 
     @Schema(title = L_optimisticLock )
-    @JsonIgnore(value=true)
+    @JsonIgnore
     Integer optimisticLock;
 
     @Schema(title = L_creator , hidden = true)

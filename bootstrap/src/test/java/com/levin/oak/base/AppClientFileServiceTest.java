@@ -9,8 +9,9 @@ import com.levin.oak.base.services.appclientfile.*;
 import com.levin.oak.base.services.appclientfile.req.*;
 import com.levin.oak.base.services.appclientfile.info.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -48,76 +49,87 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 客户端文件测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:23, 代码生成哈希校验码：[255c80a7f232bba18f8b1948c2dc696d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:05, 代码生成哈希校验码：[255c80a7f232bba18f8b1948c2dc696d]，请不要修改和删除此行内容。
+ *
  */
 
-// @ActiveProfiles("test")
-// @RunWith(SpringRunner.class)
+//@ActiveProfiles("test")
+//@RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-// @Transactional(rollbackFor = {Throwable.class})
+//@Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class AppClientFileServiceTest {
 
-    @Autowired private AppClientFileService appClientFileService;
+    @Autowired
+    private AppClientFileService appClientFileService;
 
-    @Autowired private BizAppClientFileService bizAppClientFileService;
+    @Autowired
+    private BizAppClientFileService bizAppClientFileService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {}
+    public static void beforeAll() throws Exception {
+    }
 
     @AfterAll
-    public static void afterAll() throws Exception {}
+    public static void afterAll() throws Exception {
+    }
 
     @BeforeEach
-    public void beforeEach() throws Exception {}
+    public void beforeEach() throws Exception {
+    }
 
     @AfterEach
-    public void afterEach() throws Exception {}
+    public void afterEach() throws Exception {
+    }
 
     @Test
     public void createAppClientFileTest() {
 
         CreateAppClientFileReq req = new CreateAppClientFileReq();
 
-        // req.setClientType("这是文本64");//
+            // req.setClientType("这是文本64");// 
 
-        // req.setMimeType("这是文本128");//
+            // req.setMimeType("这是文本128");// 
 
-        // req.setPath("文件路径_1");//本地路径或是网络路径 必填
+            // req.setPath("这是文本255");//本地路径或是网络路径 必填
 
-        // req.setDomain("这是文本128");//归属的子系统或应用
+            // req.setDomain("这是文本128");//归属的子系统或应用 
 
-        // req.setName("这是文本64");// 必填
+            // req.setName("这是文本64");// 必填
 
-        // req.setOptimisticLock(1);//
+            // req.setOptimisticLock(1);// 
 
-        // req.setOrgId("这是文本128");//
+            // req.setOrgId("这是文本128");// 
 
-        // req.setTenantId("这是文本128");//
+            // req.setTenantId("这是文本128");// 
 
-        // req.setOrderCode(1);//
+            // req.setOrderCode(1);// 
 
-        // req.setEnable(true);// 必填
+            // req.setEnable(true);// 必填
 
-        // req.setEditable(true);// 必填
+            // req.setEditable(true);// 必填
 
-        // req.setRemark("这是文本512");//
+            // req.setRemark("这是文本512");// 
 
-        String id = appClientFileService.create(req);
+
+       String id  = appClientFileService.create(req);
 
         log.debug("新增客户端文件->" + id);
 
         Assert.isTrue(id != null, "客户端文件");
+
     }
+
 
     @Test
     public void queryAppClientFileTest() {
@@ -127,7 +139,7 @@ public class AppClientFileServiceTest {
         // req.setId(null);//
         // req.setClientType("这是文本64");//
         // req.setMimeType("这是文本128");//
-        // req.setPath("文件路径_1");//本地路径或是网络路径
+        // req.setPath("这是文本255");//本地路径或是网络路径
         // req.setContent(null);//一般不建议存储在数据库
         // req.setDomain("这是文本128");//归属的子系统或应用
         // req.setName("这是文本64");//
@@ -140,7 +152,7 @@ public class AppClientFileServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<AppClientFileInfo> resp = appClientFileService.query(req, null);
+        PagingData<AppClientFileInfo> resp = appClientFileService.query(req,null);
 
         log.debug("查询客户端文件->" + resp);
 
@@ -150,28 +162,29 @@ public class AppClientFileServiceTest {
     @Test
     public void updateAppClientFileTest() {
 
-        UpdateAppClientFileReq req = new UpdateAppClientFileReq();
+         UpdateAppClientFileReq req = new UpdateAppClientFileReq();
 
-        req.setId(id);
+         req.setId(id);
 
-        // req.setClientType("这是文本64");//
-        // req.setMimeType("这是文本128");//
-        // req.setPath("文件路径_1");//本地路径或是网络路径 必填
-        // req.setDomain("这是文本128");//归属的子系统或应用
-        // req.setName("这是文本64");// 必填
-        // req.setOptimisticLock(1);//
-        // req.setOrgId("这是文本128");//
-        // req.setTenantId("这是文本128");//
-        // req.setOrderCode(1);//
-        // req.setEnable(true);// 必填
-        // req.setEditable(true);// 必填
-        // req.setRemark("这是文本512");//
 
-        boolean ok = appClientFileService.update(req);
+           // req.setClientType("这是文本64");// 
+           // req.setMimeType("这是文本128");// 
+           // req.setPath("这是文本255");//本地路径或是网络路径 必填
+           // req.setDomain("这是文本128");//归属的子系统或应用 
+           // req.setName("这是文本64");// 必填
+           // req.setOptimisticLock(1);// 
+           // req.setOrgId("这是文本128");// 
+           // req.setTenantId("这是文本128");// 
+           // req.setOrderCode(1);// 
+           // req.setEnable(true);// 必填
+           // req.setEditable(true);// 必填
+           // req.setRemark("这是文本512");// 
 
-        log.debug("更新客户端文件-> " + ok);
+          boolean ok = appClientFileService.update(req);
 
-        Assert.isTrue(ok, "客户端文件");
+          log.debug("更新客户端文件-> " + ok);
+
+          Assert.isTrue(ok, "客户端文件");
     }
 
     @Test
@@ -185,6 +198,6 @@ public class AppClientFileServiceTest {
 
         log.debug("删除客户端文件->" + ok);
 
-        Assert.isTrue(ok, "客户端文件");
+        Assert.isTrue(ok , "客户端文件");
     }
 }

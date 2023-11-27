@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:09, 代码生成哈希校验码：[9c9f82d46d08d0515ecebb2e62941095]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[8dbcea8e7969aed3ccedf6e2c4ca587a]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -109,7 +109,7 @@ public class SimpleCreateSimpleApiReq extends MultiTenantOrgReq {
     String name;
 
     @Schema(title = L_optimisticLock )
-    @JsonIgnore(value=true)
+    @JsonIgnore
     Integer optimisticLock;
 
 

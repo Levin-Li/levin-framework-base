@@ -36,7 +36,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[f3b4a6b41799dbd906e5f10fd5ae4a91]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:44, 代码生成哈希校验码：[a34641ca04873dbd73f9931fe3def25e]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -97,7 +97,7 @@ public class ScheduledTaskInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value=true)
+    @JsonIgnore
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 

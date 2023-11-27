@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  应用接入-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:23, 代码生成哈希校验码：[0d348eefb75e06ef2dd92ddd1a79a27b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[0d348eefb75e06ef2dd92ddd1a79a27b]，请不要修改和删除此行内容。
  *
  */
 
@@ -78,7 +78,6 @@ import com.levin.commons.service.support.InjectConst;
 @Tag(name = E_AppClient.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_AppClient.SIMPLE_CLASS_NAME})
 public class BizAppClientServiceImpl extends BaseService implements BizAppClientService {
-
 
     @Autowired
     AppClientService appClientService;

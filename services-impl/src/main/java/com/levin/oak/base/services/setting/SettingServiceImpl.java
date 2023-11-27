@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 系统设置-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:23, 代码生成哈希校验码：[2eb33230237d5e1b65d7cac656008af9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[2eb33230237d5e1b65d7cac656008af9]，请不要修改和删除此行内容。
  *
  */
 

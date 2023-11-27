@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  简单表单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[baa0f06d4d57b3fbf6b86a5d177d2269]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:04, 代码生成哈希校验码：[baa0f06d4d57b3fbf6b86a5d177d2269]，请不要修改和删除此行内容。
  *
  */
 
@@ -80,7 +80,6 @@ import com.levin.commons.service.support.InjectConst;
 @Tag(name = E_SimpleForm.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleForm.SIMPLE_CLASS_NAME})
 public class BizSimpleFormServiceImpl extends BaseService implements BizSimpleFormService {
-
 
     @Autowired
     SimpleFormService simpleFormService;

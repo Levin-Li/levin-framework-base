@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[e5abcf9ac51ed64f58cc3eba17715b95]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:44, 代码生成哈希校验码：[ea8755a6a22b95d94a485d28f46d6ff7]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -103,7 +103,7 @@ public class SimpleFormInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore(value=true)
+    @JsonIgnore
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 

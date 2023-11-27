@@ -71,6 +71,7 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
 
     @Size(max = 256)
     @Schema(title = L_password)
+    @JsonIgnore
     String password;
 
     @Size(max = 32)

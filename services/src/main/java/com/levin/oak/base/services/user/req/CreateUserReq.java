@@ -34,7 +34,6 @@ import java.util.List;
 import com.levin.oak.base.services.org.info.*;
 import java.util.Date;
 import com.levin.oak.base.entities.Org;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -44,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午10:36:40, 代码生成哈希校验码：[38e4a58ab7aa7f9cc493d3ba1b1bb737]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午9:45:39, 代码生成哈希校验码：[4c30c5c2b7c992c8d55c802b48526061]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -71,7 +70,6 @@ public class CreateUserReq extends MultiTenantOrgReq {
 
     @Schema(title = L_password )
     @Size(max = 256)
-    @JsonIgnore(value=true)
     String password;
 
     @Schema(title = L_nickname )

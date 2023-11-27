@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 字典-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:23, 代码生成哈希校验码：[683ff15c5f64b3d93078e01d3838865b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[683ff15c5f64b3d93078e01d3838865b]，请不要修改和删除此行内容。
  *
  */
 

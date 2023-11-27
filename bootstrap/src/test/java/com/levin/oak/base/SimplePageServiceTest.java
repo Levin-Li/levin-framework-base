@@ -9,8 +9,9 @@ import com.levin.oak.base.services.simplepage.*;
 import com.levin.oak.base.services.simplepage.req.*;
 import com.levin.oak.base.services.simplepage.info.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
@@ -50,84 +51,95 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 简单页面测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:23, 代码生成哈希校验码：[83448912f7543eaf81e13e2b2782a29f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:05, 代码生成哈希校验码：[83448912f7543eaf81e13e2b2782a29f]，请不要修改和删除此行内容。
+ *
  */
 
-// @ActiveProfiles("test")
-// @RunWith(SpringRunner.class)
+//@ActiveProfiles("test")
+//@RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-// @Transactional(rollbackFor = {Throwable.class})
+//@Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class SimplePageServiceTest {
 
-    @Autowired private SimplePageService simplePageService;
+    @Autowired
+    private SimplePageService simplePageService;
 
-    @Autowired private BizSimplePageService bizSimplePageService;
+    @Autowired
+    private BizSimplePageService bizSimplePageService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {}
+    public static void beforeAll() throws Exception {
+    }
 
     @AfterAll
-    public static void afterAll() throws Exception {}
+    public static void afterAll() throws Exception {
+    }
 
     @BeforeEach
-    public void beforeEach() throws Exception {}
+    public void beforeEach() throws Exception {
+    }
 
     @AfterEach
-    public void afterEach() throws Exception {}
+    public void afterEach() throws Exception {
+    }
 
     @Test
     public void createSimplePageTest() {
 
         CreateSimplePageReq req = new CreateSimplePageReq();
 
-        // req.setType("这是文本128");// 必填
+            // req.setType("这是文本128");// 必填
 
-        // req.setCategory("这是文本128");// 必填
+            // req.setCategory("这是文本128");// 必填
 
-        // req.setGroupName("这是文本128");// 必填
+            // req.setGroupName("这是文本128");// 必填
 
-        // req.setIcon("图标_1");//
+            // req.setIcon("图标_1");// 
 
-        // req.setPath("这是文本800");// 必填
+            // req.setPath("这是文本800");// 必填
 
-        // req.setRequireAuthorizations("这是文本1800");//
+            // req.setRequireAuthorizations("这是文本1800");// 
 
-        // req.setContent("内容_1");//
+            // req.setContent("内容_1");// 
 
-        // req.setDomain("这是文本128");//归属的子系统或应用
+            // req.setDomain("这是文本128");//归属的子系统或应用 
 
-        // req.setName("这是文本64");// 必填
+            // req.setName("这是文本64");// 必填
 
-        // req.setOptimisticLock(1);//
+            // req.setOptimisticLock(1);// 
 
-        // req.setOrgId("这是文本128");//
+            // req.setOrgId("这是文本128");// 
 
-        // req.setTenantId("这是文本128");//
+            // req.setTenantId("这是文本128");// 
 
-        // req.setOrderCode(1);//
+            // req.setOrderCode(1);// 
 
-        // req.setEnable(true);// 必填
+            // req.setEnable(true);// 必填
 
-        // req.setEditable(true);// 必填
+            // req.setEditable(true);// 必填
 
-        // req.setRemark("这是文本512");//
+            // req.setRemark("这是文本512");// 
 
-        String id = simplePageService.create(req);
+
+       String id  = simplePageService.create(req);
 
         log.debug("新增简单页面->" + id);
 
         Assert.isTrue(id != null, "简单页面");
+
     }
+
 
     @Test
     public void querySimplePageTest() {
@@ -153,7 +165,7 @@ public class SimplePageServiceTest {
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
 
-        PagingData<SimplePageInfo> resp = simplePageService.query(req, null);
+        PagingData<SimplePageInfo> resp = simplePageService.query(req,null);
 
         log.debug("查询简单页面->" + resp);
 
@@ -163,32 +175,33 @@ public class SimplePageServiceTest {
     @Test
     public void updateSimplePageTest() {
 
-        UpdateSimplePageReq req = new UpdateSimplePageReq();
+         UpdateSimplePageReq req = new UpdateSimplePageReq();
 
-        req.setId(id);
+         req.setId(id);
 
-        // req.setType("这是文本128");// 必填
-        // req.setCategory("这是文本128");// 必填
-        // req.setGroupName("这是文本128");// 必填
-        // req.setIcon("图标_1");//
-        // req.setPath("这是文本800");// 必填
-        // req.setRequireAuthorizations("这是文本1800");//
-        // req.setContent("内容_1");//
-        // req.setDomain("这是文本128");//归属的子系统或应用
-        // req.setName("这是文本64");// 必填
-        // req.setOptimisticLock(1);//
-        // req.setOrgId("这是文本128");//
-        // req.setTenantId("这是文本128");//
-        // req.setOrderCode(1);//
-        // req.setEnable(true);// 必填
-        // req.setEditable(true);// 必填
-        // req.setRemark("这是文本512");//
 
-        boolean ok = simplePageService.update(req);
+           // req.setType("这是文本128");// 必填
+           // req.setCategory("这是文本128");// 必填
+           // req.setGroupName("这是文本128");// 必填
+           // req.setIcon("图标_1");// 
+           // req.setPath("这是文本800");// 必填
+           // req.setRequireAuthorizations("这是文本1800");// 
+           // req.setContent("内容_1");// 
+           // req.setDomain("这是文本128");//归属的子系统或应用 
+           // req.setName("这是文本64");// 必填
+           // req.setOptimisticLock(1);// 
+           // req.setOrgId("这是文本128");// 
+           // req.setTenantId("这是文本128");// 
+           // req.setOrderCode(1);// 
+           // req.setEnable(true);// 必填
+           // req.setEditable(true);// 必填
+           // req.setRemark("这是文本512");// 
 
-        log.debug("更新简单页面-> " + ok);
+          boolean ok = simplePageService.update(req);
 
-        Assert.isTrue(ok, "简单页面");
+          log.debug("更新简单页面-> " + ok);
+
+          Assert.isTrue(ok, "简单页面");
     }
 
     @Test
@@ -202,6 +215,6 @@ public class SimplePageServiceTest {
 
         log.debug("删除简单页面->" + ok);
 
-        Assert.isTrue(ok, "简单页面");
+        Assert.isTrue(ok , "简单页面");
     }
 }
