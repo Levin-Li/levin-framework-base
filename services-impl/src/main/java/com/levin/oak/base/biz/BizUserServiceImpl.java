@@ -175,8 +175,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService {
      */
     @Override
     public PagingData<UserInfo> query(QueryUserReq req, SimplePaging paging) {
-        //
-        return simpleDao.findPagingDataByQueryObj(req, new NotReq().setAccount(SA_ACCOUNT), paging);
+        return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
 }

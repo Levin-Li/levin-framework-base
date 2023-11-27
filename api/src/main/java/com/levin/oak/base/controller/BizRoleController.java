@@ -94,7 +94,6 @@ public class BizRoleController extends RoleController {
 
         }
 
-
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, pagingData));
     }
 
