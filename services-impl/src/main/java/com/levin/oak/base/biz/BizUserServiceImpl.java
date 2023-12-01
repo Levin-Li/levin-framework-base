@@ -27,6 +27,8 @@ import com.levin.oak.base.services.user.info.*;
 
 import com.levin.oak.base.services.*;
 
+import java.io.Serializable;
+
 
 ////////////////////////////////////
 //自动导入列表
@@ -50,7 +52,7 @@ import com.levin.oak.base.services.*;
 //@Validated
 @Tag(name = E_User.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_User.SIMPLE_CLASS_NAME})
-public class BizUserServiceImpl extends BaseService implements BizUserService<String> {
+public class BizUserServiceImpl extends BaseService implements BizUserService<Serializable> {
 
     @Autowired
     UserService userService;
@@ -98,7 +100,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService<St
 
     @Override
     @Transactional(rollbackFor = {RuntimeException.class})
-    public boolean updatePwd(String userPrincipal, UpdateUserPwdReq req) {
+    public boolean updatePwd(Serializable userPrincipal, UpdateUserPwdReq req) {
 
         Assert.notNull(req.getId(), E_User.BIZ_NAME + " id 不能为空");
         Assert.notBlank(req.getOldPassword(), "旧密码不能为空");
@@ -115,7 +117,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService<St
      * @return
      */
     @Override
-    public String create(String userPrincipal, CreateUserReq req) {
+    public String create(Serializable userPrincipal, CreateUserReq req) {
 
         checkCreateOrUpdateAccount(req.getEmail(), req.getTelephone());
 
@@ -129,7 +131,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService<St
      * @return
      */
     @Override
-    public boolean delete(String userPrincipal, UserIdReq req) {
+    public boolean delete(Serializable userPrincipal, UserIdReq req) {
         return userService.delete(req);
     }
 
@@ -138,7 +140,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService<St
      * @return
      */
     @Override
-    public boolean update(String userPrincipal, UpdateUserReq req) {
+    public boolean update(Serializable userPrincipal, UpdateUserReq req) {
         checkCreateOrUpdateAccount(req.getEmail(), req.getTelephone());
         //@todo 暂时允许设置密码
         return userService.update(req.setPassword(encryptPwd(req.getPassword())));
@@ -151,7 +153,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService<St
      * @return
      */
     @Override
-    public UserInfo findById(String userPrincipal, UserIdReq req) {
+    public UserInfo findById(Serializable userPrincipal, UserIdReq req) {
         Assert.notBlank(req.getId(), "用户ID必须指定");
         return userService.findById(req);
     }
@@ -161,7 +163,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService<St
      * @return
      */
     @Override
-    public UserInfo findUnique(String userPrincipal, QueryUserReq req) {
+    public UserInfo findUnique(Serializable userPrincipal, QueryUserReq req) {
         return simpleDao.findUnique(req);
     }
 
@@ -171,7 +173,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService<St
      * @return
      */
     @Override
-    public PagingData<UserInfo> query(String userPrincipal, QueryUserReq req, SimplePaging paging) {
+    public PagingData<UserInfo> query(Serializable userPrincipal, QueryUserReq req, SimplePaging paging) {
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
