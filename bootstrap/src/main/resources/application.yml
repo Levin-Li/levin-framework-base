@@ -12,7 +12,8 @@ spring:
     #调度器线程
     scheduling:
       pool:
-        size: 100
+        size: 200
+
   cache:
 #    type: redis
     type: GENERIC
@@ -96,8 +97,6 @@ spring:
       date: yyyy-MM-dd
       date-time: yyyy-MM-dd HH:mm:ss
       time: HH:mm:ss
-
-
 
   #====================== spring-boot-admin ===============
   #被管理节点的配置

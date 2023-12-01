@@ -1,6 +1,8 @@
 package com.levin.oak.base;
 
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.levin.commons.service.support.*;
 import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.spring.starter.RedissonAutoConfigurationCustomizer;
@@ -26,6 +28,8 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -43,9 +47,9 @@ import java.time.temporal.ChronoUnit;
 
 
 /**
- *  启动类
- *  @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午2:15:43, 代码生成哈希校验码：[00cfe5cfc3af43567eef530c0223d981]，请不要修改和删除此行内容。
+ * 启动类
  *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午2:15:43, 代码生成哈希校验码：[00cfe5cfc3af43567eef530c0223d981]，请不要修改和删除此行内容。
  */
 @Slf4j
 
@@ -109,22 +113,29 @@ public class Application {
      */
     @Bean
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
-        return builder -> builder
-                .cacheDefaults(RedisCacheConfiguration.defaultCacheConfig()
-                        //redis 默认缓存 60 分钟
-                        .entryTtl(Duration.of(60, ChronoUnit.MINUTES))
-                        .disableCachingNullValues()
-                        .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(RedisSerializer.json())));
+        return builder -> {
+            builder
+                    .cacheDefaults(RedisCacheConfiguration.defaultCacheConfig()
+                            //redis 默认缓存 60 分钟
+                            .entryTtl(Duration.of(60, ChronoUnit.MINUTES))
+                            .disableCachingNullValues()
+                            .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(
+                                    new GenericJackson2JsonRedisSerializer(
+                                            new ObjectMapper()
+                                                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false))
+                            )));
+        };
     }
 
     /**
      * redisson 序列化
+     *
      * @return
      */
     @Bean
     public RedissonAutoConfigurationCustomizer redissonAutoConfigurationCustomizer() {
         return config -> config
-                .setCodec(JsonJacksonCodec.INSTANCE);
+                .setCodec(new JsonJacksonCodec(getClass().getClassLoader()));
     }
 
 //    @Bean
@@ -150,7 +161,7 @@ public class Application {
 
             //@todo 增加自定义变量解析器
             //加入
-            variableResolverManager.add( new VariableResolver() {
+            variableResolverManager.add(new VariableResolver() {
                 /**
                  * 获取变量
                  * <p>
