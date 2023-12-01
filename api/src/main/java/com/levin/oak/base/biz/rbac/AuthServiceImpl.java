@@ -302,6 +302,7 @@ public class AuthServiceImpl
         try {
             return getUserInfo() != null;
         } catch (Exception e) {
+            log.error("获取用户信息失败,{}", e.getMessage(), e);
             return false;
         }
     }
