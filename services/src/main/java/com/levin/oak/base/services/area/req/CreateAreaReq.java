@@ -41,7 +41,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 新增区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[76065d132f169409e8e361f296736603]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[93fff63a8771c2a6e85ff9affa849644]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -109,6 +109,9 @@ public class CreateAreaReq extends BaseReq {
     @Schema(title = L_remark , hidden = true)
     //@Size(max = 512)
     String remark;
+
+    @Schema(title = L_optimisticLock , hidden = true)
+    Integer optimisticLock;
 
 
     @PostConstruct

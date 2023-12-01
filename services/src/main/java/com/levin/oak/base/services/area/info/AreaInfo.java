@@ -38,7 +38,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[de0a4ec834bd45806978ade24f4d3d9e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[0b55a0ed09e9814ac4ddd9b904a51f17]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -112,5 +112,8 @@ public class AreaInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 }

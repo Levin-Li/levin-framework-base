@@ -46,7 +46,7 @@ import java.util.Date;
  */
 
 @Tag(name = E_Role.BIZ_NAME + "-业务服务", description = "")
-public interface BizRoleService {
+public interface BizRoleService<U> {
 
     /**
      * 创建记录，返回主键ID
@@ -55,7 +55,7 @@ public interface BizRoleService {
      * @return pkId 主键ID
      */
     @Operation(summary = CREATE_ACTION)
-    String create(Serializable userPrincipal, @NotNull CreateRoleReq req);
+    String create(U userPrincipal, @NotNull CreateRoleReq req);
 
     /**
      * 更新记录，并返回更新是否成功
@@ -64,7 +64,7 @@ public interface BizRoleService {
      * @return boolean 是否成功
      */
     @Operation(summary = UPDATE_ACTION)
-    boolean update(Serializable userPrincipal, @NotNull UpdateRoleReq req);
+    boolean update(U userPrincipal, @NotNull UpdateRoleReq req);
 
     /**
      * 删除记录，并返回删除是否成功
@@ -73,6 +73,6 @@ public interface BizRoleService {
      * @return boolean 删除是否成功
      */
     @Operation(summary = DELETE_ACTION)
-    boolean delete(Serializable userPrincipal, @NotNull RoleIdReq req);
+    boolean delete(U userPrincipal, @NotNull RoleIdReq req);
 
 }

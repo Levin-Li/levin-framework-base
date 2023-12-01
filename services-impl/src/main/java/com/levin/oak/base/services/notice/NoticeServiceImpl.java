@@ -47,7 +47,6 @@ import com.levin.oak.base.services.*;
 //自动导入列表
 import com.levin.oak.base.entities.Notice.*;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -56,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[de2df392d8fe2526547ca11dc84b00b3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:54, 代码生成哈希校验码：[e7cd8adeb8f01fbe0e8e686b82ae86cb]，请不要修改和删除此行内容。
  *
  */
 
@@ -76,11 +75,17 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
         return getSelfProxy(NoticeServiceImpl.class);
     }
 
+    /**
+    * 创建记录，返回主键ID
+    * @param req
+    * @return pkId 主键ID
+    */
     @Operation(summary = CREATE_ACTION)
     @Transactional
     @Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
     public String create(CreateNoticeReq req){
-        //保存自动先查询唯一约束，并给出错误信息
+        //dao支持保存前先自动查询唯一约束，并给出错误信息
         Notice entity = simpleDao.create(req, true);
         return entity.getId();
     }

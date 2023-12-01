@@ -257,6 +257,8 @@ public class ModuleWebControllerAdvice {
     @ExceptionHandler({NotLoginException.class,})
     public ApiResp onNotLoginException(Exception e) {
 
+        log.error("{} 授权异常", request.getRequestURL(), e);
+
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
 
         return ApiResp.error(AuthenticationError.getBaseErrorCode(), "未登录：" + getExMsg(e));
@@ -264,6 +266,8 @@ public class ModuleWebControllerAdvice {
 
     @ExceptionHandler({SaTokenException.class, UnauthorizedException.class})
     public ApiResp onAuthorizedException(Exception e) {
+
+        log.error("{} 授权异常", request.getRequestURL(), e);
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
 
@@ -273,6 +277,8 @@ public class ModuleWebControllerAdvice {
 
     @ExceptionHandler({AccessDeniedException.class,})
     public ApiResp onAccessDeniedException(Exception e) {
+
+        log.error("{} 授权异常", request.getRequestURL(), e);
 
         response.setStatus(HttpStatus.FORBIDDEN.value());
 
@@ -311,6 +317,8 @@ public class ModuleWebControllerAdvice {
 
     @ExceptionHandler(ServiceException.class)
     public ApiResp onServiceException(Exception e) {
+
+        log.error("{} 服务异常", request.getRequestURL(), e);
 
         response.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
 

@@ -14,7 +14,6 @@ import com.levin.oak.base.services.role.info.*;
 //自动导入列表
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -59,7 +58,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 角色测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:04, 代码生成哈希校验码：[7bf7d6fd0dd2e10d9bb2774cb02748eb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[959cc216971bfab239600fc13a4847bc]，请不要修改和删除此行内容。
  *
  */
 
@@ -114,8 +113,6 @@ public class RoleServiceTest {
 
             // req.setName("这是文本64");// 必填
 
-            // req.setOptimisticLock(1);// 
-
             // req.setOrgId("这是文本128");// 
 
             // req.setTenantId("这是文本128");// 
@@ -127,6 +124,8 @@ public class RoleServiceTest {
             // req.setEditable(true);// 必填
 
             // req.setRemark("这是文本512");// 
+
+            // req.setOptimisticLock(1);// 
 
 
        String id  = roleService.create(req);
@@ -151,7 +150,6 @@ public class RoleServiceTest {
         // req.setPermissionList("资源权限列表_1");//Json数组
         // req.setDomain("这是文本128");//归属的子系统或应用
         // req.setName("这是文本64");//
-        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
@@ -159,6 +157,7 @@ public class RoleServiceTest {
         // req.setEnable(true);//
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
+        // req.setOptimisticLock(1);//
 
         PagingData<RoleInfo> resp = roleService.query(req,null);
 
@@ -182,13 +181,13 @@ public class RoleServiceTest {
            // req.setPermissionList("资源权限列表_1");//Json数组 
            // req.setDomain("这是文本128");//归属的子系统或应用 
            // req.setName("这是文本64");// 必填
-           // req.setOptimisticLock(1);// 
            // req.setOrgId("这是文本128");// 
            // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填
            // req.setRemark("这是文本512");// 
+           // req.setOptimisticLock(1);// 
 
           boolean ok = roleService.update(req);
 

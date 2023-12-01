@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[834b1d13c6090b1368200f75833efbdd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[e29f1fe22b4e5933f62f450beb6516de]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -147,5 +147,8 @@ public class MenuResInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 }

@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午10:31:25, 代码生成哈希校验码：[b2694bd6d913c09fc190a39b894ed596]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:10:53, 代码生成哈希校验码：[b2694bd6d913c09fc190a39b894ed596]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)

@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[c90bc6de319a28079d8891f86fa959ff]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[9e9aa9c8bff38f8c9e3892276e4bf8e3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -159,6 +159,11 @@ public class UpdateOrgReq extends MultiTenantReq {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Eq(desc = "乐观锁更新条件")
+    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 
     public UpdateOrgReq(String id) {

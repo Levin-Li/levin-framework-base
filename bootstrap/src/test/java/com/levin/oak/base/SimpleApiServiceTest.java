@@ -13,7 +13,6 @@ import com.levin.oak.base.services.simpleapi.info.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.SimpleApi.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -59,7 +58,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 简单动态接口测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:05, 代码生成哈希校验码：[af1a256b418d1c903a78d808e4e7345b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[2d0dc38a727a9e03154a5ca931f3e461]，请不要修改和删除此行内容。
  *
  */
 
@@ -122,8 +121,6 @@ public class SimpleApiServiceTest {
 
             // req.setName("这是文本64");// 必填
 
-            // req.setOptimisticLock(1);// 
-
             // req.setOrgId("这是文本128");// 
 
             // req.setTenantId("这是文本128");// 
@@ -135,6 +132,8 @@ public class SimpleApiServiceTest {
             // req.setEditable(true);// 必填
 
             // req.setRemark("这是文本512");// 
+
+            // req.setOptimisticLock(1);// 
 
 
        String id  = simpleApiService.create(req);
@@ -163,7 +162,6 @@ public class SimpleApiServiceTest {
         // req.setContent("内容_1");//
         // req.setDomain("这是文本128");//归属的子系统或应用
         // req.setName("这是文本64");//
-        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
@@ -171,6 +169,7 @@ public class SimpleApiServiceTest {
         // req.setEnable(true);//
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
+        // req.setOptimisticLock(1);//
 
         PagingData<SimpleApiInfo> resp = simpleApiService.query(req,null);
 
@@ -198,13 +197,13 @@ public class SimpleApiServiceTest {
            // req.setContent("内容_1");// 
            // req.setDomain("这是文本128");//归属的子系统或应用 
            // req.setName("这是文本64");// 必填
-           // req.setOptimisticLock(1);// 
            // req.setOrgId("这是文本128");// 
            // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填
            // req.setRemark("这是文本512");// 
+           // req.setOptimisticLock(1);// 
 
           boolean ok = simpleApiService.update(req);
 

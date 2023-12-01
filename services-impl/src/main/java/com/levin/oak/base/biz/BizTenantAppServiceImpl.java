@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.TenantApp;
 
 import com.levin.oak.base.services.tenantapp.*;
+import static com.levin.oak.base.services.tenantapp.TenantAppService.*;
 import com.levin.oak.base.services.tenantapp.req.*;
 import com.levin.oak.base.services.tenantapp.info.*;
 
@@ -57,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  租户应用-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:23, 代码生成哈希校验码：[8681967981c1c1ceb4d2397339484470]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:03, 代码生成哈希校验码：[4506042efd681f57afa51bd7da96e9ec]，请不要修改和删除此行内容。
  *
  */
 
@@ -81,7 +82,6 @@ import com.levin.commons.service.support.InjectConst;
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_TenantApp.SIMPLE_CLASS_NAME})
 public class BizTenantAppServiceImpl extends BaseService implements BizTenantAppService {
 
-
     @Autowired
     TenantAppService tenantAppService;
 
@@ -89,9 +89,52 @@ public class BizTenantAppServiceImpl extends BaseService implements BizTenantApp
         return getSelfProxy(BizTenantAppServiceImpl.class);
     }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
-    //    tenantAppService.update(req);
-    //}
+    @Operation(summary = CREATE_ACTION)
+    @Transactional
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    public String create(CreateTenantAppReq req){
+        return tenantAppService.create(req);
+    }
+
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    public TenantAppInfo findById(String id) {
+        return tenantAppService.findById(id);
+    }
+
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
+    public TenantAppInfo findById(TenantAppIdReq req) {
+        return tenantAppService.findById(req);
+    }
+
+    @Operation(summary = UPDATE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
+    @Transactional
+    public boolean update(UpdateTenantAppReq req) {
+        return tenantAppService.update(req);
+    }
+
+
+    @Operation(summary = DELETE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
+    @Transactional
+    public boolean delete(TenantAppIdReq req) {
+        return tenantAppService.delete(req);
+    }
+
+    //@Override
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    public void clearCache(Object key) {
+        tenantAppService.clearCache(key);
+    }
 
 }

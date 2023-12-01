@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 访问日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午9:43:51, 代码生成哈希校验码：[0d4264a9e06374a90caf618f5043e101]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:16, 代码生成哈希校验码：[0d4264a9e06374a90caf618f5043e101]，请不要修改和删除此行内容。
 *
 */
 

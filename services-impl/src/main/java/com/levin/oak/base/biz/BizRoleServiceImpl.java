@@ -47,7 +47,7 @@ import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleApi.SIMPLE_CLASS_NAME})
 
-public class BizRoleServiceImpl implements BizRoleService {
+public class BizRoleServiceImpl implements BizRoleService<Serializable> {
 
     @Autowired
     protected SimpleDao simpleDao;

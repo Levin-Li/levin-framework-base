@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 平台租户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:23, 代码生成哈希校验码：[7c5335b77f936a12b941579638af77e9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:54, 代码生成哈希校验码：[9d9241455456c5079faf633f2218badd]，请不要修改和删除此行内容。
  *
  */
 
@@ -75,11 +75,17 @@ public class TenantServiceImpl extends BaseService implements TenantService {
         return getSelfProxy(TenantServiceImpl.class);
     }
 
+    /**
+    * 创建记录，返回主键ID
+    * @param req
+    * @return pkId 主键ID
+    */
     @Operation(summary = CREATE_ACTION)
     @Transactional
     @Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
     public String create(CreateTenantReq req){
-        //保存自动先查询唯一约束，并给出错误信息
+        //dao支持保存前先自动查询唯一约束，并给出错误信息
         Tenant entity = simpleDao.create(req, true);
         return entity.getId();
     }

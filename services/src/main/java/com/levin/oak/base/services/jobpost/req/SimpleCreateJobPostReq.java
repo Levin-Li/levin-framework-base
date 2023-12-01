@@ -30,7 +30,6 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.oak.base.entities.JobPost.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -40,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:04, 代码生成哈希校验码：[9b0952deb79ea0137a01eb8f0ef19e09]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[ccb2b6c62d2e0bab2be5596115bf0141]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -75,10 +74,6 @@ public class SimpleCreateJobPostReq extends MultiTenantOrgReq {
     @NotBlank
     @Size(max = 64)
     String name;
-
-    @Schema(title = L_optimisticLock )
-    @JsonIgnore
-    Integer optimisticLock;
 
 
     @PostConstruct

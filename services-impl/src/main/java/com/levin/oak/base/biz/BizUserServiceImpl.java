@@ -5,7 +5,7 @@ import static com.levin.oak.base.ModuleOption.*;
 import cn.hutool.crypto.SecureUtil;
 import com.levin.commons.dao.support.*;
 
-import com.levin.oak.base.biz.dto.user.UpdateUserPwdReq;
+import com.levin.oak.base.biz.bo.user.UpdateUserPwdReq;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
 import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.*;
@@ -18,8 +18,6 @@ import org.springframework.stereotype.Service;
 import io.swagger.v3.oas.annotations.tags.*;
 
 import cn.hutool.core.lang.*;
-
-import org.apache.dubbo.config.annotation.*;
 
 import com.levin.oak.base.entities.*;
 
@@ -52,7 +50,7 @@ import com.levin.oak.base.services.*;
 //@Validated
 @Tag(name = E_User.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_User.SIMPLE_CLASS_NAME})
-public class BizUserServiceImpl extends BaseService implements BizUserService {
+public class BizUserServiceImpl extends BaseService implements BizUserService<String> {
 
     @Autowired
     UserService userService;
@@ -100,7 +98,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService {
 
     @Override
     @Transactional(rollbackFor = {RuntimeException.class})
-    public boolean updatePwd(UpdateUserPwdReq req) {
+    public boolean updatePwd(String userPrincipal, UpdateUserPwdReq req) {
 
         Assert.notNull(req.getId(), E_User.BIZ_NAME + " id 不能为空");
         Assert.notBlank(req.getOldPassword(), "旧密码不能为空");
@@ -117,7 +115,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService {
      * @return
      */
     @Override
-    public String create(CreateUserReq req) {
+    public String create(String userPrincipal, CreateUserReq req) {
 
         checkCreateOrUpdateAccount(req.getEmail(), req.getTelephone());
 
@@ -131,7 +129,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService {
      * @return
      */
     @Override
-    public boolean delete(UserIdReq req) {
+    public boolean delete(String userPrincipal, UserIdReq req) {
         return userService.delete(req);
     }
 
@@ -140,7 +138,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService {
      * @return
      */
     @Override
-    public boolean update(UpdateUserReq req) {
+    public boolean update(String userPrincipal, UpdateUserReq req) {
         checkCreateOrUpdateAccount(req.getEmail(), req.getTelephone());
         //@todo 暂时允许设置密码
         return userService.update(req.setPassword(encryptPwd(req.getPassword())));
@@ -153,7 +151,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService {
      * @return
      */
     @Override
-    public UserInfo findById(UserIdReq req) {
+    public UserInfo findById(String userPrincipal, UserIdReq req) {
         Assert.notBlank(req.getId(), "用户ID必须指定");
         return userService.findById(req);
     }
@@ -163,7 +161,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService {
      * @return
      */
     @Override
-    public UserInfo findUnique(QueryUserReq req) {
+    public UserInfo findUnique(String userPrincipal, QueryUserReq req) {
         return simpleDao.findUnique(req);
     }
 
@@ -173,7 +171,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService {
      * @return
      */
     @Override
-    public PagingData<UserInfo> query(QueryUserReq req, SimplePaging paging) {
+    public PagingData<UserInfo> query(String userPrincipal, QueryUserReq req, SimplePaging paging) {
         return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 

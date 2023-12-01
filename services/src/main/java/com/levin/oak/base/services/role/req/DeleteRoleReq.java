@@ -33,7 +33,6 @@ import com.levin.oak.base.services.commons.req.*;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -43,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[6a57b12413f8e08997c3e6276faa70db]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[1423a6680a800a1bcf394511d6bf84f6]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)

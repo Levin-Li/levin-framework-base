@@ -33,7 +33,6 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import java.util.List;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.SimpleApi.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -44,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[963373eda59370c3e575e8138017a9c8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[cf52e2d728aa21b9d20aeb90098988a3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -110,12 +109,6 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @JsonIgnore
-    @Eq(desc = "乐观锁更新条件")
-    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;

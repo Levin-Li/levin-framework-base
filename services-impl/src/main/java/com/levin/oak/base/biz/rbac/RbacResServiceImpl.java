@@ -53,7 +53,7 @@ public class RbacResServiceImpl implements RbacResService<Serializable> {
     MenuResService menuResService;
 
     @Autowired
-    BizRoleService bizRoleService;
+    BizRoleService<Serializable> bizRoleService;
 
     @Autowired
     RbacService<Serializable> rbacService;

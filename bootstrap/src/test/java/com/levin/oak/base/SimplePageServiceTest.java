@@ -13,7 +13,6 @@ import com.levin.oak.base.services.simplepage.info.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -58,7 +57,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 简单页面测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:05, 代码生成哈希校验码：[83448912f7543eaf81e13e2b2782a29f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[e345898ecad865e09cc82faf2d1aa489]，请不要修改和删除此行内容。
  *
  */
 
@@ -117,8 +116,6 @@ public class SimplePageServiceTest {
 
             // req.setName("这是文本64");// 必填
 
-            // req.setOptimisticLock(1);// 
-
             // req.setOrgId("这是文本128");// 
 
             // req.setTenantId("这是文本128");// 
@@ -130,6 +127,8 @@ public class SimplePageServiceTest {
             // req.setEditable(true);// 必填
 
             // req.setRemark("这是文本512");// 
+
+            // req.setOptimisticLock(1);// 
 
 
        String id  = simplePageService.create(req);
@@ -156,7 +155,6 @@ public class SimplePageServiceTest {
         // req.setContent("内容_1");//
         // req.setDomain("这是文本128");//归属的子系统或应用
         // req.setName("这是文本64");//
-        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
@@ -164,6 +162,7 @@ public class SimplePageServiceTest {
         // req.setEnable(true);//
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
+        // req.setOptimisticLock(1);//
 
         PagingData<SimplePageInfo> resp = simplePageService.query(req,null);
 
@@ -189,13 +188,13 @@ public class SimplePageServiceTest {
            // req.setContent("内容_1");// 
            // req.setDomain("这是文本128");//归属的子系统或应用 
            // req.setName("这是文本64");// 必填
-           // req.setOptimisticLock(1);// 
            // req.setOrgId("这是文本128");// 
            // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填
            // req.setRemark("这是文本512");// 
+           // req.setOptimisticLock(1);// 
 
           boolean ok = simplePageService.update(req);
 

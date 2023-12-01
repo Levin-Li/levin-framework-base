@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.Area;
 
 import com.levin.oak.base.services.area.*;
+import static com.levin.oak.base.services.area.AreaService.*;
 import com.levin.oak.base.services.area.req.*;
 import com.levin.oak.base.services.area.info.*;
 
@@ -57,7 +58,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  *  区域-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[eb218556da525d7d370b35b130f72635]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:04, 代码生成哈希校验码：[a082cd69b1a75c9fb9194b192f5c67b7]，请不要修改和删除此行内容。
  *
  */
 
@@ -81,7 +82,6 @@ import com.levin.oak.base.entities.Area.*;
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Area.SIMPLE_CLASS_NAME})
 public class BizAreaServiceImpl extends BaseService implements BizAreaService {
 
-
     @Autowired
     AreaService areaService;
 
@@ -89,9 +89,52 @@ public class BizAreaServiceImpl extends BaseService implements BizAreaService {
         return getSelfProxy(BizAreaServiceImpl.class);
     }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
-    //    areaService.update(req);
-    //}
+    @Operation(summary = CREATE_ACTION)
+    @Transactional
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    public String create(CreateAreaReq req){
+        return areaService.create(req);
+    }
+
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#code)", key = CK_PREFIX + "#code")
+    public AreaInfo findById(String code) {
+        return areaService.findById(code);
+    }
+
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.code)" , key = CK_PREFIX + "#req.code") //
+    public AreaInfo findById(AreaIdReq req) {
+        return areaService.findById(req);
+    }
+
+    @Operation(summary = UPDATE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.code) && #result", key = CK_PREFIX + "#req.code")//, beforeInvocation = true
+    @Transactional
+    public boolean update(UpdateAreaReq req) {
+        return areaService.update(req);
+    }
+
+
+    @Operation(summary = DELETE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.code) && #result", key = CK_PREFIX + "#req.code") // , beforeInvocation = true
+    @Transactional
+    public boolean delete(AreaIdReq req) {
+        return areaService.delete(req);
+    }
+
+    //@Override
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    public void clearCache(Object key) {
+        areaService.clearCache(key);
+    }
 
 }

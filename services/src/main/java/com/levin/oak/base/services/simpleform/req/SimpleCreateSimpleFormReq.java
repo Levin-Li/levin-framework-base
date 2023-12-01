@@ -31,7 +31,6 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import java.util.List;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -41,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:04, 代码生成哈希校验码：[d9e8a460d28a8c21be97ac1eb3789485]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[664ac05ff224e8241e097d0271376a35]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -101,10 +100,6 @@ public class SimpleCreateSimpleFormReq extends MultiTenantOrgReq {
     @NotBlank
     @Size(max = 64)
     String name;
-
-    @Schema(title = L_optimisticLock )
-    @JsonIgnore
-    Integer optimisticLock;
 
 
     @PostConstruct

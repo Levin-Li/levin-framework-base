@@ -13,7 +13,6 @@ import com.levin.oak.base.services.scheduledtask.info.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -57,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 调度任务测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:05, 代码生成哈希校验码：[3e6328217d71c44e87abdec17c6a74a9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[4163ccff913b484b54acdf246d9ff73a]，请不要修改和删除此行内容。
  *
  */
 
@@ -118,8 +117,6 @@ public class ScheduledTaskServiceTest {
 
             // req.setName("这是文本64");// 必填
 
-            // req.setOptimisticLock(1);// 
-
             // req.setOrgId("这是文本128");// 
 
             // req.setTenantId("这是文本128");// 
@@ -131,6 +128,8 @@ public class ScheduledTaskServiceTest {
             // req.setEditable(true);// 必填
 
             // req.setRemark("这是文本512");// 
+
+            // req.setOptimisticLock(1);// 
 
 
        String id  = scheduledTaskService.create(req);
@@ -160,7 +159,6 @@ public class ScheduledTaskServiceTest {
         // req.setLteNextInvokeTime(DateUtils.getEndHour(new Date()));//最大
         // req.setDomain("这是文本128");//归属的子系统或应用
         // req.setName("这是文本64");//
-        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
@@ -168,6 +166,7 @@ public class ScheduledTaskServiceTest {
         // req.setEnable(true);//
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
+        // req.setOptimisticLock(1);//
 
         PagingData<ScheduledTaskInfo> resp = scheduledTaskService.query(req,null);
 
@@ -194,13 +193,13 @@ public class ScheduledTaskServiceTest {
            // req.setNextInvokeTime(new Date());// 
            // req.setDomain("这是文本128");//归属的子系统或应用 
            // req.setName("这是文本64");// 必填
-           // req.setOptimisticLock(1);// 
            // req.setOrgId("这是文本128");// 
            // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填
            // req.setRemark("这是文本512");// 
+           // req.setOptimisticLock(1);// 
 
           boolean ok = scheduledTaskService.update(req);
 

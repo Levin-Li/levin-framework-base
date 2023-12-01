@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[4ec03abb9c98cbb88dbae29535ba7b49]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[5110dd7315a8374dfcc1eb52b1e2393c]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -76,6 +76,9 @@ public class CreateNoticeProcessLogReq extends MultiTenantOrgReq {
     @Schema(title = L_createTime )
     @NotNull
     Date createTime;
+
+    @Schema(title = L_optimisticLock )
+    Integer optimisticLock;
 
 
     @PostConstruct

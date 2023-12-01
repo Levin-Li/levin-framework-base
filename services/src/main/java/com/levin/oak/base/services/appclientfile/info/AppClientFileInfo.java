@@ -26,7 +26,6 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_AppClientFile.*;
 ////////////////////////////////////
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -36,7 +35,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:43, 代码生成哈希校验码：[89dc8ca50c941b9465bfbc21f29cdbef]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[a1074497b5ac27b7576d880c330e9284]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -83,10 +82,6 @@ public class AppClientFileInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
     @Size(max = 128)
     @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
@@ -123,5 +118,8 @@ public class AppClientFileInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 }

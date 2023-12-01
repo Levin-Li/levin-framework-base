@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午9:45:39, 代码生成哈希校验码：[8ab3a47b0e3e35c7eac09ab9b3e56ba2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:10:53, 代码生成哈希校验码：[8ab3a47b0e3e35c7eac09ab9b3e56ba2]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)

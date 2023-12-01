@@ -112,9 +112,9 @@ public class User
     @Column(length = 32)
     String email;
 
-    @JsonIgnore
     @Schema(title = "登录密码")
     @Column(length = 256)
+    @JsonIgnore
     String password;
 
     @Schema(title = "昵称")

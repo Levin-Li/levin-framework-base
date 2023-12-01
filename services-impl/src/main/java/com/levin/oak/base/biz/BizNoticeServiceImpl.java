@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.Notice;
 
 import com.levin.oak.base.services.notice.*;
+import static com.levin.oak.base.services.notice.NoticeService.*;
 import com.levin.oak.base.services.notice.req.*;
 import com.levin.oak.base.services.notice.info.*;
 
@@ -47,7 +48,6 @@ import com.levin.oak.base.services.*;
 //自动导入列表
 import com.levin.oak.base.entities.Notice.*;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  通知-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[08e2dee23959132e49a5d7e23eece85c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:03, 代码生成哈希校验码：[3f3eddef4ad23b3c03bb1b83dae54fe4]，请不要修改和删除此行内容。
  *
  */
 
@@ -87,9 +87,52 @@ public class BizNoticeServiceImpl extends BaseService implements BizNoticeServic
         return getSelfProxy(BizNoticeServiceImpl.class);
     }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
-    //    noticeService.update(req);
-    //}
+    @Operation(summary = CREATE_ACTION)
+    @Transactional
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    public String create(CreateNoticeReq req){
+        return noticeService.create(req);
+    }
+
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    public NoticeInfo findById(String id) {
+        return noticeService.findById(id);
+    }
+
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
+    public NoticeInfo findById(NoticeIdReq req) {
+        return noticeService.findById(req);
+    }
+
+    @Operation(summary = UPDATE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
+    @Transactional
+    public boolean update(UpdateNoticeReq req) {
+        return noticeService.update(req);
+    }
+
+
+    @Operation(summary = DELETE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
+    @Transactional
+    public boolean delete(NoticeIdReq req) {
+        return noticeService.delete(req);
+    }
+
+    //@Override
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    public void clearCache(Object key) {
+        noticeService.clearCache(key);
+    }
 
 }

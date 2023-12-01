@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午10:36:40, 代码生成哈希校验码：[8d260bdf5b2ecb089ff4ed76f6460d8f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:10:53, 代码生成哈希校验码：[8d260bdf5b2ecb089ff4ed76f6460d8f]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)

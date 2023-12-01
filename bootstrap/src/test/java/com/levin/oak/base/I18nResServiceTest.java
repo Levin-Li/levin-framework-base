@@ -12,7 +12,6 @@ import com.levin.oak.base.services.i18nres.info.*;
 
 ////////////////////////////////////
 //自动导入列表
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -56,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 国际化资源测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:05, 代码生成哈希校验码：[eea1f3d41ec7d66027746fa71ec7747e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[e8ce83450620b0583491912afd57d8a5]，请不要修改和删除此行内容。
  *
  */
 
@@ -107,8 +106,6 @@ public class I18nResServiceTest {
 
             // req.setName("这是文本64");// 必填
 
-            // req.setOptimisticLock(1);// 
-
             // req.setOrgId("这是文本128");// 
 
             // req.setTenantId("这是文本128");// 
@@ -120,6 +117,8 @@ public class I18nResServiceTest {
             // req.setEditable(true);// 必填
 
             // req.setRemark("这是文本512");// 
+
+            // req.setOptimisticLock(1);// 
 
 
        Long id  = i18nResService.create(req);
@@ -142,7 +141,6 @@ public class I18nResServiceTest {
         // req.setLabel("这是文本768");//
         // req.setDomain("这是文本128");//归属的子系统或应用
         // req.setName("这是文本64");//
-        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
@@ -150,6 +148,7 @@ public class I18nResServiceTest {
         // req.setEnable(true);//
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
+        // req.setOptimisticLock(1);//
 
         PagingData<I18nResInfo> resp = i18nResService.query(req,null);
 
@@ -171,13 +170,13 @@ public class I18nResServiceTest {
            // req.setLabel("这是文本768");// 必填
            // req.setDomain("这是文本128");//归属的子系统或应用 
            // req.setName("这是文本64");// 必填
-           // req.setOptimisticLock(1);// 
            // req.setOrgId("这是文本128");// 
            // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填
            // req.setRemark("这是文本512");// 
+           // req.setOptimisticLock(1);// 
 
           boolean ok = i18nResService.update(req);
 

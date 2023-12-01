@@ -26,7 +26,6 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_I18nRes.*;
 ////////////////////////////////////
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -35,7 +34,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:44, 代码生成哈希校验码：[7ec6cf7f30a879f9fc60aa3722acb617]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[e6c092f4098749c897a8cf187b509080]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -79,10 +78,6 @@ public class SimpleI18nResInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @JsonIgnore
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
 
     @Size(max = 128)
     @InjectVar(value = InjectConst.ORG_ID)

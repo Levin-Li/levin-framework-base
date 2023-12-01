@@ -90,7 +90,7 @@ public class AuthServiceImpl
     RoleService roleService;
 
     @Autowired
-    BizRoleService bizRoleService;
+    BizRoleService<Serializable> bizRoleService;
 
     @Autowired
     MenuResService menuResService;

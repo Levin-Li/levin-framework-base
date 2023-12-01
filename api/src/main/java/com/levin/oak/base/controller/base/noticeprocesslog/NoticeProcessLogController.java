@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 通知处理日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午9:43:51, 代码生成哈希校验码：[6254f3a82ff0fd18434da6ba8d5a6886]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:16, 代码生成哈希校验码：[6254f3a82ff0fd18434da6ba8d5a6886]，请不要修改和删除此行内容。
 *
 */
 

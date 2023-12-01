@@ -30,7 +30,6 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -39,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[e70903481155fd9ac001fb2452e48bba]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[5a3b4cc25c26b40f9e3c2048189102f8]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -80,10 +79,6 @@ public class CreateAppClientReq extends MultiTenantOrgReq {
     @Size(max = 64)
     String name;
 
-    @Schema(title = L_optimisticLock )
-    @JsonIgnore
-    Integer optimisticLock;
-
     @Schema(title = L_creator , hidden = true)
     //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     //@Size(max = 128)
@@ -110,6 +105,9 @@ public class CreateAppClientReq extends MultiTenantOrgReq {
     @Schema(title = L_remark , hidden = true)
     //@Size(max = 512)
     String remark;
+
+    @Schema(title = L_optimisticLock , hidden = true)
+    Integer optimisticLock;
 
 
     @PostConstruct

@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.Org;
 
 import com.levin.oak.base.services.org.*;
+import static com.levin.oak.base.services.org.OrgService.*;
 import com.levin.oak.base.services.org.req.*;
 import com.levin.oak.base.services.org.info.*;
 
@@ -60,7 +61,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  机构-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[2bb1cb36b3363ae12d248bd918afe7f9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:03, 代码生成哈希校验码：[beb7ec561fc4d33fe1cd7e6ba28a7e6b]，请不要修改和删除此行内容。
  *
  */
 
@@ -84,7 +85,6 @@ import com.levin.commons.service.support.InjectConst;
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Org.SIMPLE_CLASS_NAME})
 public class BizOrgServiceImpl extends BaseService implements BizOrgService {
 
-
     @Autowired
     OrgService orgService;
 
@@ -92,9 +92,52 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
         return getSelfProxy(BizOrgServiceImpl.class);
     }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
-    //    orgService.update(req);
-    //}
+    @Operation(summary = CREATE_ACTION)
+    @Transactional
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    public String create(CreateOrgReq req){
+        return orgService.create(req);
+    }
+
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    public OrgInfo findById(String id) {
+        return orgService.findById(id);
+    }
+
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
+    public OrgInfo findById(OrgIdReq req) {
+        return orgService.findById(req);
+    }
+
+    @Operation(summary = UPDATE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
+    @Transactional
+    public boolean update(UpdateOrgReq req) {
+        return orgService.update(req);
+    }
+
+
+    @Operation(summary = DELETE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
+    @Transactional
+    public boolean delete(OrgIdReq req) {
+        return orgService.delete(req);
+    }
+
+    //@Override
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    public void clearCache(Object key) {
+        orgService.clearCache(key);
+    }
 
 }

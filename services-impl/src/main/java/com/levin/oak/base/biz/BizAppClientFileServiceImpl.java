@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.AppClientFile;
 
 import com.levin.oak.base.services.appclientfile.*;
+import static com.levin.oak.base.services.appclientfile.AppClientFileService.*;
 import com.levin.oak.base.services.appclientfile.req.*;
 import com.levin.oak.base.services.appclientfile.info.*;
 
@@ -46,7 +47,6 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  客户端文件-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:04, 代码生成哈希校验码：[bd14e36f2ce4d1368b641b9b89e25294]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:03, 代码生成哈希校验码：[2bb7d0752c071a9cd4611599e19a11e5]，请不要修改和删除此行内容。
  *
  */
 
@@ -86,9 +86,52 @@ public class BizAppClientFileServiceImpl extends BaseService implements BizAppCl
         return getSelfProxy(BizAppClientFileServiceImpl.class);
     }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
-    //    appClientFileService.update(req);
-    //}
+    @Operation(summary = CREATE_ACTION)
+    @Transactional
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    public String create(CreateAppClientFileReq req){
+        return appClientFileService.create(req);
+    }
+
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    public AppClientFileInfo findById(String id) {
+        return appClientFileService.findById(id);
+    }
+
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
+    public AppClientFileInfo findById(AppClientFileIdReq req) {
+        return appClientFileService.findById(req);
+    }
+
+    @Operation(summary = UPDATE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
+    @Transactional
+    public boolean update(UpdateAppClientFileReq req) {
+        return appClientFileService.update(req);
+    }
+
+
+    @Operation(summary = DELETE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
+    @Transactional
+    public boolean delete(AppClientFileIdReq req) {
+        return appClientFileService.delete(req);
+    }
+
+    //@Override
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    public void clearCache(Object key) {
+        appClientFileService.clearCache(key);
+    }
 
 }

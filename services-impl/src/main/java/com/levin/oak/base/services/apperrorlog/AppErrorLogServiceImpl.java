@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 应用错误日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[7dbe55a352801621a0ae1e8627c4c71a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:54, 代码生成哈希校验码：[a57dc4c7168d557a90f18bfcda3d53ef]，请不要修改和删除此行内容。
  *
  */
 
@@ -74,11 +74,17 @@ public class AppErrorLogServiceImpl extends BaseService implements AppErrorLogSe
         return getSelfProxy(AppErrorLogServiceImpl.class);
     }
 
+    /**
+    * 创建记录，返回主键ID
+    * @param req
+    * @return pkId 主键ID
+    */
     @Operation(summary = CREATE_ACTION)
     @Transactional
     @Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
     public Long create(CreateAppErrorLogReq req){
-        //保存自动先查询唯一约束，并给出错误信息
+        //dao支持保存前先自动查询唯一约束，并给出错误信息
         AppErrorLog entity = simpleDao.create(req, true);
         return entity.getId();
     }

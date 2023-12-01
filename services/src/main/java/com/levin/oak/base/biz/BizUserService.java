@@ -2,7 +2,7 @@ package com.levin.oak.base.biz;
 
 import com.levin.commons.dao.support.PagingData;
 import com.levin.commons.dao.support.SimplePaging;
-import com.levin.oak.base.biz.dto.user.UpdateUserPwdReq;
+import com.levin.oak.base.biz.bo.user.UpdateUserPwdReq;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
 import io.swagger.v3.oas.annotations.tags.*;
 
@@ -26,7 +26,7 @@ import org.springframework.util.StringUtils;
  */
 
 @Tag(name = E_User.BIZ_NAME + "-业务服务", description = "")
-public interface BizUserService {
+public interface BizUserService<U> {
 
     /**
      * 超管帐号
@@ -61,32 +61,43 @@ public interface BizUserService {
 
 
     /**
+     * 创建必须是否有权限分配角色列表
+     *
      * @param req
      * @return
      */
-    String create(CreateUserReq req);
+    String create(U userPrincipal, CreateUserReq req);
 
     /**
      * 修改密码
+     * <p>
+     * 必须考虑的2点：
+     * 1-修改本人密码
+     * 2-修改他人密码
      *
      * @param req
      * @return
      */
-    boolean updatePwd(UpdateUserPwdReq req);
+    boolean updatePwd(U userPrincipal, UpdateUserPwdReq req);
 
     /**
      * 删除
+     * <p>
+     * 只能删除同级部门或是下级部门的用户
      *
      * @param req
      * @return
      */
-    boolean delete(UserIdReq req);
+    boolean delete(U userPrincipal, UserIdReq req);
 
     /**
+     * 修改
+     * 只能修改同级部门或是下级部门的用户
+     *
      * @param req
      * @return
      */
-    boolean update(UpdateUserReq req);
+    boolean update(U userPrincipal, UpdateUserReq req);
 
     /**
      * 查找用户
@@ -94,19 +105,23 @@ public interface BizUserService {
      * @param req
      * @return
      */
-    UserInfo findById(UserIdReq req);
+    UserInfo findById(U userPrincipal, UserIdReq req);
 
     /**
+     * 查询用户
      *
      * @param req
      * @return
      */
-    UserInfo findUnique(QueryUserReq req);
+    UserInfo findUnique(U userPrincipal, QueryUserReq req);
+
     /**
+     * 查询用户
+     *
      * @param req
      * @param paging
      * @return
      */
-    PagingData<UserInfo> query(QueryUserReq req, SimplePaging paging);
+    PagingData<UserInfo> query(U userPrincipal, QueryUserReq req, SimplePaging paging);
 
 }

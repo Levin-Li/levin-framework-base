@@ -48,7 +48,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午11:48:31, 代码生成哈希校验码：[a3610740e3a8d7609ef39c41cbfe0a95]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[c987e1b6ac9fe7130c6b83f033a50e84]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -177,6 +177,9 @@ public class QueryTenantAppReq extends MultiTenantReq{
     @Schema(title = "模糊匹配-" + L_remark)
     @Contains
     String containsRemark;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     public QueryTenantAppReq(String id) {
         this.id = id;

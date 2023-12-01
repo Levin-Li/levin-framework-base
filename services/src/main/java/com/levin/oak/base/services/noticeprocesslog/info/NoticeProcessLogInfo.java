@@ -35,7 +35,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[d239f2c4fc9ef7a2243dff176ecea212]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[6f7197152310533f884474d79e5d047a]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -87,5 +87,8 @@ public class NoticeProcessLogInfo implements Serializable {
     @NotNull
     @Schema(title = L_createTime)
     Date createTime;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 }

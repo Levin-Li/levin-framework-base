@@ -38,7 +38,6 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import java.util.List;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -48,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:44, 代码生成哈希校验码：[25a1983cf7b7cf0aff3bef2f3114bc80]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[e0db6136ad83201f968f081a3edd3656]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -126,10 +125,6 @@ public class QuerySimplePageReq extends MultiTenantOrgReq{
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
     //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
     @Schema(title = L_creator)
@@ -177,6 +172,9 @@ public class QuerySimplePageReq extends MultiTenantOrgReq{
     @Schema(title = "模糊匹配-" + L_remark)
     @Contains
     String containsRemark;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     public QuerySimplePageReq(String id) {
         this.id = id;

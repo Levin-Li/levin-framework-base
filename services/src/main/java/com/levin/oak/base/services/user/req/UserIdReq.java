@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 用户 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午10:36:40, 代码生成哈希校验码：[6943abcd1b2e6c13ee71e66eb5f8b2f9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:10:53, 代码生成哈希校验码：[6943abcd1b2e6c13ee71e66eb5f8b2f9]，请不要修改和删除此行内容。
  *
  */
 

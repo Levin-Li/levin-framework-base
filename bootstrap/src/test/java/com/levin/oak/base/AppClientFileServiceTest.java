@@ -12,7 +12,6 @@ import com.levin.oak.base.services.appclientfile.info.*;
 
 ////////////////////////////////////
 //自动导入列表
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -56,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 客户端文件测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:05, 代码生成哈希校验码：[255c80a7f232bba18f8b1948c2dc696d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[cc9a72607760b97b8f39e8194f7d269e]，请不要修改和删除此行内容。
  *
  */
 
@@ -107,8 +106,6 @@ public class AppClientFileServiceTest {
 
             // req.setName("这是文本64");// 必填
 
-            // req.setOptimisticLock(1);// 
-
             // req.setOrgId("这是文本128");// 
 
             // req.setTenantId("这是文本128");// 
@@ -120,6 +117,8 @@ public class AppClientFileServiceTest {
             // req.setEditable(true);// 必填
 
             // req.setRemark("这是文本512");// 
+
+            // req.setOptimisticLock(1);// 
 
 
        String id  = appClientFileService.create(req);
@@ -143,7 +142,6 @@ public class AppClientFileServiceTest {
         // req.setContent(null);//一般不建议存储在数据库
         // req.setDomain("这是文本128");//归属的子系统或应用
         // req.setName("这是文本64");//
-        // req.setOptimisticLock(1);//
         // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
@@ -151,6 +149,7 @@ public class AppClientFileServiceTest {
         // req.setEnable(true);//
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
+        // req.setOptimisticLock(1);//
 
         PagingData<AppClientFileInfo> resp = appClientFileService.query(req,null);
 
@@ -172,13 +171,13 @@ public class AppClientFileServiceTest {
            // req.setPath("这是文本255");//本地路径或是网络路径 必填
            // req.setDomain("这是文本128");//归属的子系统或应用 
            // req.setName("这是文本64");// 必填
-           // req.setOptimisticLock(1);// 
            // req.setOrgId("这是文本128");// 
            // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填
            // req.setRemark("这是文本512");// 
+           // req.setOptimisticLock(1);// 
 
           boolean ok = appClientFileService.update(req);
 

@@ -39,7 +39,6 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import java.util.List;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -49,7 +48,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 统计简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:04, 代码生成哈希校验码：[50e0ba8cbc3954a36328c9cdc1c93878]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[fb2cfb74aba4f52295fad03ae99fab56]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)

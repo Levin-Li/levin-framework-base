@@ -28,7 +28,6 @@ import static com.levin.oak.base.entities.E_Role.*;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -39,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:42, 代码生成哈希校验码：[dc45a858dee4bdb89b9abd18cca7c46b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[35cef91bb0fdcb4da252342c91f34de8]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -90,10 +89,6 @@ public class RoleInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
     @Size(max = 128)
     @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
@@ -130,5 +125,8 @@ public class RoleInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 }

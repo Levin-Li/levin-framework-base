@@ -34,7 +34,6 @@ import com.levin.oak.base.services.commons.req.*;
 import java.util.List;
 import java.util.Date;
 import com.levin.oak.base.entities.Dict.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -44,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[3ee030d3bdfdde64287770cf984d0223]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[550c0b7cae234f4d9123449be1f83c1b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -92,12 +91,6 @@ public class UpdateDictReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore
-    @Eq(desc = "乐观锁更新条件")
-    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
@@ -113,6 +106,11 @@ public class UpdateDictReq extends MultiTenantOrgReq {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Eq(desc = "乐观锁更新条件")
+    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 
     public UpdateDictReq(String id) {

@@ -52,7 +52,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 统计用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午10:36:40, 代码生成哈希校验码：[cb9ef9e97cba1cc1558d75f10e719ab8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:10:53, 代码生成哈希校验码：[cb9ef9e97cba1cc1558d75f10e719ab8]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)

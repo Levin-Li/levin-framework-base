@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.NoticeProcessLog;
 
 import com.levin.oak.base.services.noticeprocesslog.*;
+import static com.levin.oak.base.services.noticeprocesslog.NoticeProcessLogService.*;
 import com.levin.oak.base.services.noticeprocesslog.req.*;
 import com.levin.oak.base.services.noticeprocesslog.info.*;
 
@@ -54,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  通知处理日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[8ddf2711264eb4e7bcbf4de0f198fdd6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:03, 代码生成哈希校验码：[f0fd53967b131a297d90dfe5fa86323a]，请不要修改和删除此行内容。
  *
  */
 
@@ -78,7 +79,6 @@ import com.levin.commons.service.support.InjectConst;
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_NoticeProcessLog.SIMPLE_CLASS_NAME})
 public class BizNoticeProcessLogServiceImpl extends BaseService implements BizNoticeProcessLogService {
 
-
     @Autowired
     NoticeProcessLogService noticeProcessLogService;
 
@@ -86,9 +86,52 @@ public class BizNoticeProcessLogServiceImpl extends BaseService implements BizNo
         return getSelfProxy(BizNoticeProcessLogServiceImpl.class);
     }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
-    //    noticeProcessLogService.update(req);
-    //}
+    @Operation(summary = CREATE_ACTION)
+    @Transactional
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    public String create(CreateNoticeProcessLogReq req){
+        return noticeProcessLogService.create(req);
+    }
+
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    public NoticeProcessLogInfo findById(String id) {
+        return noticeProcessLogService.findById(id);
+    }
+
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
+    public NoticeProcessLogInfo findById(NoticeProcessLogIdReq req) {
+        return noticeProcessLogService.findById(req);
+    }
+
+    @Operation(summary = UPDATE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
+    @Transactional
+    public boolean update(UpdateNoticeProcessLogReq req) {
+        return noticeProcessLogService.update(req);
+    }
+
+
+    @Operation(summary = DELETE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
+    @Transactional
+    public boolean delete(NoticeProcessLogIdReq req) {
+        return noticeProcessLogService.delete(req);
+    }
+
+    //@Override
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    public void clearCache(Object key) {
+        noticeProcessLogService.clearCache(key);
+    }
 
 }

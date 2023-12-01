@@ -39,7 +39,6 @@ import com.levin.oak.base.services.commons.req.*;
 import java.util.List;
 import java.util.Date;
 import com.levin.oak.base.entities.Dict.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -49,7 +48,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:43, 代码生成哈希校验码：[11e999457a8386fadb7eccdf2da17ef9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[bb82f38eeb081523fc4c75c419abab1c]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -109,10 +108,6 @@ public class QueryDictReq extends MultiTenantOrgReq{
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
     //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
     @Schema(title = L_creator)
@@ -160,6 +155,9 @@ public class QueryDictReq extends MultiTenantOrgReq{
     @Schema(title = "模糊匹配-" + L_remark)
     @Contains
     String containsRemark;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     public QueryDictReq(String id) {
         this.id = id;

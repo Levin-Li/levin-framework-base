@@ -35,7 +35,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[9d023cd37773165cc4bfe2fa4f2aadb7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[8c55fce234f1b6433be0c600c4673ea9]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -150,5 +150,8 @@ public class AccessLogInfo implements Serializable {
     @NotNull
     @Schema(title = L_createTime)
     Date createTime;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 }

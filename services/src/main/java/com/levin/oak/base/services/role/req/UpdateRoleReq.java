@@ -34,7 +34,6 @@ import com.levin.oak.base.services.commons.req.*;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -44,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[4da119923d979a2b6fb74ed88d6e2288]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[080a870b7e0edad889d212e1db248943]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -99,12 +98,6 @@ public class UpdateRoleReq extends MultiTenantOrgReq {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore
-    @Eq(desc = "乐观锁更新条件")
-    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
@@ -120,6 +113,11 @@ public class UpdateRoleReq extends MultiTenantOrgReq {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Eq(desc = "乐观锁更新条件")
+    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 
     public UpdateRoleReq(String id) {

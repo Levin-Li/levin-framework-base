@@ -1,49 +1,25 @@
 package com.levin.oak.base.biz.rbac;
 
-import com.levin.commons.dao.annotation.order.OrderBy;
-import com.levin.commons.dao.support.SimplePaging;
-import com.levin.commons.plugin.Plugin;
-import com.levin.commons.plugin.PluginManager;
-import com.levin.commons.plugin.Res;
-import com.levin.commons.plugin.ResLoader;
 import com.levin.commons.rbac.RbacUserObject;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.rbac.ResPermission;
-import com.levin.commons.service.domain.Identifiable;
-import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.commons.service.support.ContextHolder;
 import com.levin.commons.utils.ClassUtils;
-import com.levin.commons.utils.JsonStrArrayUtils;
 import com.levin.commons.utils.MapUtils;
-import com.levin.oak.base.biz.BizRoleService;
-import com.levin.oak.base.biz.rbac.info.ActionInfo;
-import com.levin.oak.base.biz.rbac.info.ModuleInfo;
-import com.levin.oak.base.biz.rbac.info.ResInfo;
-import com.levin.oak.base.biz.rbac.info.ResTypeInfo;
-import com.levin.oak.base.entities.E_MenuRes;
-import com.levin.oak.base.services.menures.MenuResService;
-import com.levin.oak.base.services.menures.info.MenuResInfo;
-import com.levin.oak.base.services.menures.req.QueryMenuResReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.aop.framework.AopProxyUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Role;
 import org.springframework.core.annotation.AnnotatedElementUtils;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 

@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[ddc697b5449b91da04d7e5ba00e7c240]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[529b28fe5c00313e07add6964aa51808]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -123,6 +123,9 @@ public class CreateTenantAppReq extends MultiTenantReq {
     @Schema(title = L_remark , hidden = true)
     //@Size(max = 512)
     String remark;
+
+    @Schema(title = L_optimisticLock , hidden = true)
+    Integer optimisticLock;
 
 
     @PostConstruct

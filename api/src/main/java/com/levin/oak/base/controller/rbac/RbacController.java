@@ -19,7 +19,7 @@ import com.levin.oak.base.entities.EntityConst;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
-import com.levin.oak.base.biz.dto.user.UpdateUserPwdReq;
+import com.levin.oak.base.biz.bo.user.UpdateUserPwdReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.SneakyThrows;
@@ -212,7 +212,7 @@ public class RbacController extends BaseController {
     @PutMapping({"updatePwd"})
     @Operation(tags = {"授权管理"}, summary = "修改密码")
     public ApiResp<Void> updatePwd(@RequestBody UpdateUserPwdReq req) {
-        return bizUserService.updatePwd(req) ? ApiResp.ok() : ApiResp.error("修改密码失败,请确认原密码是否正确");
+        return bizUserService.updatePwd(authService.getUserInfo(), req) ? ApiResp.ok() : ApiResp.error("修改密码失败,请确认原密码是否正确");
     }
 
     /**

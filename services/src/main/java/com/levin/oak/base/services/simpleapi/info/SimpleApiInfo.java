@@ -27,7 +27,6 @@ import static com.levin.oak.base.entities.E_SimpleApi.*;
 ////////////////////////////////////
 import java.util.List;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.SimpleApi.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:42, 代码生成哈希校验码：[31f4990d2bcb3e4a2b10b5c14b5cce3b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[04873c2ffdbc450309dbc0a1cb68ac59]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -109,10 +108,6 @@ public class SimpleApiInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
     @Size(max = 128)
     @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
@@ -149,5 +144,8 @@ public class SimpleApiInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 }

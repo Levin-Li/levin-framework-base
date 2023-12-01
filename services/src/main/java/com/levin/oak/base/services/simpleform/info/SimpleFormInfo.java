@@ -27,7 +27,6 @@ import static com.levin.oak.base.entities.E_SimpleForm.*;
 ////////////////////////////////////
 import java.util.List;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -38,7 +37,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:44, 代码生成哈希校验码：[ea8755a6a22b95d94a485d28f46d6ff7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[d43b3df692e62490f4f0b579a6cceb74]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -103,10 +102,6 @@ public class SimpleFormInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
     @Size(max = 128)
     @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
@@ -143,5 +138,8 @@ public class SimpleFormInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 }

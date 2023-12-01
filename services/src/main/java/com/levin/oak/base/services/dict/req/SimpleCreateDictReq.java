@@ -32,7 +32,6 @@ import com.levin.oak.base.services.commons.req.*;
 import java.util.List;
 import java.util.Date;
 import com.levin.oak.base.entities.Dict.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -42,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[69936c66d67824e861b11c3e596c9248]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[14fa39a4f86e5404521360e3f1f5596a]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -81,10 +80,6 @@ public class SimpleCreateDictReq extends MultiTenantOrgReq {
     @NotBlank
     @Size(max = 64)
     String name;
-
-    @Schema(title = L_optimisticLock )
-    @JsonIgnore
-    Integer optimisticLock;
 
 
     @PostConstruct

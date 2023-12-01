@@ -28,7 +28,6 @@ import static com.levin.oak.base.entities.E_Dict.*;
 import java.util.List;
 import java.util.Date;
 import com.levin.oak.base.entities.Dict.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -38,7 +37,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:43, 代码生成哈希校验码：[22185952a4f43e160c217741a0a2ef85]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[4379d05078755cf298d81a6997396fa4]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -81,10 +80,6 @@ public class SimpleDictInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @JsonIgnore
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
 
     @Size(max = 128)
     @InjectVar(value = InjectConst.ORG_ID)

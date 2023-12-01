@@ -26,7 +26,6 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_ScheduledTask.*;
 ////////////////////////////////////
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -36,7 +35,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:44, 代码生成哈希校验码：[a34641ca04873dbd73f9931fe3def25e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[93d2d85f2a8252e1def14d04661255e9]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -97,10 +96,6 @@ public class ScheduledTaskInfo implements Serializable {
     @Schema(title = L_name)
     String name;
 
-    @JsonIgnore
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
     @Size(max = 128)
     @InjectVar(value = InjectConst.ORG_ID)
     @Schema(title = L_orgId)
@@ -137,5 +132,8 @@ public class ScheduledTaskInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 }

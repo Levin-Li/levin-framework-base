@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[867b05b280d5cfe3d31142353a156897]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[d38d4d4008c704c43c2eecc68c616695]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -129,5 +129,8 @@ public class TenantAppInfo implements Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 }

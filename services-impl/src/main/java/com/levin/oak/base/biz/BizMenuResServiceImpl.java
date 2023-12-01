@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.MenuRes;
 
 import com.levin.oak.base.services.menures.*;
+import static com.levin.oak.base.services.menures.MenuResService.*;
 import com.levin.oak.base.services.menures.req.*;
 import com.levin.oak.base.services.menures.info.*;
 
@@ -58,7 +59,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  菜单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[231c686dfc50c5e6d485b54143f9635e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:04, 代码生成哈希校验码：[0c08350417e05731240b06c82762e1e8]，请不要修改和删除此行内容。
  *
  */
 
@@ -82,7 +83,6 @@ import com.levin.commons.service.support.InjectConst;
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_MenuRes.SIMPLE_CLASS_NAME})
 public class BizMenuResServiceImpl extends BaseService implements BizMenuResService {
 
-
     @Autowired
     MenuResService menuResService;
 
@@ -90,9 +90,52 @@ public class BizMenuResServiceImpl extends BaseService implements BizMenuResServ
         return getSelfProxy(BizMenuResServiceImpl.class);
     }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
-    //    menuResService.update(req);
-    //}
+    @Operation(summary = CREATE_ACTION)
+    @Transactional
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    public String create(CreateMenuResReq req){
+        return menuResService.create(req);
+    }
+
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    public MenuResInfo findById(String id) {
+        return menuResService.findById(id);
+    }
+
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
+    public MenuResInfo findById(MenuResIdReq req) {
+        return menuResService.findById(req);
+    }
+
+    @Operation(summary = UPDATE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
+    @Transactional
+    public boolean update(UpdateMenuResReq req) {
+        return menuResService.update(req);
+    }
+
+
+    @Operation(summary = DELETE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
+    @Transactional
+    public boolean delete(MenuResIdReq req) {
+        return menuResService.delete(req);
+    }
+
+    //@Override
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    public void clearCache(Object key) {
+        menuResService.clearCache(key);
+    }
 
 }

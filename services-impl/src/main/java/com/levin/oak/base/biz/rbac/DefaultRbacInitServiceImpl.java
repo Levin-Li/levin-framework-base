@@ -37,6 +37,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
@@ -82,7 +83,7 @@ public class DefaultRbacInitServiceImpl
     BizUserService bizUserService;
 
     @Autowired
-    BizRoleService bizRoleService;
+    BizRoleService<Serializable> bizRoleService;
 
     @Autowired
     MenuResService menuResService;

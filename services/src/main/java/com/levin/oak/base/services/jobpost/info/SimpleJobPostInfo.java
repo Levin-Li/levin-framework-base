@@ -26,7 +26,6 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_JobPost.*;
 ////////////////////////////////////
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.oak.base.entities.JobPost.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -36,7 +35,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:04:44, 代码生成哈希校验码：[8ab28f7c0a39cbee6bac16ddfcae10ca]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[b71f31ed68cbcf8035310aeed72ffd42]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -75,10 +74,6 @@ public class SimpleJobPostInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_name)
     String name;
-
-    @JsonIgnore
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
 
     @Size(max = 128)
     @InjectVar(value = InjectConst.ORG_ID)

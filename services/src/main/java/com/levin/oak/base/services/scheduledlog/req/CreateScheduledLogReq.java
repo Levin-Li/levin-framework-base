@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[3f0e96721011468835a1db66a3ae9777]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[a381e0f9380dfde1a13bc5ebc86484c8]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -76,6 +76,9 @@ public class CreateScheduledLogReq extends MultiTenantOrgReq {
     @Schema(title = L_createTime )
     @NotNull
     Date createTime;
+
+    @Schema(title = L_optimisticLock )
+    Integer optimisticLock;
 
 
     @PostConstruct

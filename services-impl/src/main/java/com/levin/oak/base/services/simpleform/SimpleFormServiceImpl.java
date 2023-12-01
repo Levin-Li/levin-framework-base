@@ -47,7 +47,6 @@ import com.levin.oak.base.services.*;
 //自动导入列表
 import java.util.List;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -57,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单表单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:04, 代码生成哈希校验码：[10e2181198dc619a23720346ca73ad62]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:55, 代码生成哈希校验码：[496fab83b30b1593e5c367c15ad58539]，请不要修改和删除此行内容。
  *
  */
 
@@ -77,11 +76,17 @@ public class SimpleFormServiceImpl extends BaseService implements SimpleFormServ
         return getSelfProxy(SimpleFormServiceImpl.class);
     }
 
+    /**
+    * 创建记录，返回主键ID
+    * @param req
+    * @return pkId 主键ID
+    */
     @Operation(summary = CREATE_ACTION)
     @Transactional
     @Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
     public String create(CreateSimpleFormReq req){
-        //保存自动先查询唯一约束，并给出错误信息
+        //dao支持保存前先自动查询唯一约束，并给出错误信息
         SimpleForm entity = simpleDao.create(req, true);
         return entity.getId();
     }

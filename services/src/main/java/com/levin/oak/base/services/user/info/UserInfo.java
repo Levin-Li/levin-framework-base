@@ -27,21 +27,24 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_User.*;
 ////////////////////////////////////
-import com.levin.commons.service.support.InjectConst;
-import com.levin.commons.service.domain.InjectVar;
 import com.levin.oak.base.entities.User.*;
 import java.util.List;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import java.util.Date;
 import com.levin.oak.base.services.org.info.*;
+import java.util.Date;
 import com.levin.oak.base.entities.Org;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.levin.commons.service.domain.InjectVar;
+import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
+
 
 /**
  * 用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年7月25日 13:59:26, 请不要修改和删除此行内容。
- * 代码生成哈希校验码：[bd7caec2718bd3201de704cb61dd68c3], 请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[7d6f62a06f00ce631d8e44757a177bb5]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = BIZ_NAME)
 @Data
@@ -50,7 +53,7 @@ import com.levin.oak.base.entities.Org;
 @EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"org",})
 @FieldNameConstants
-@JsonIgnoreProperties({tenantId, password})
+@JsonIgnoreProperties({"tenantId"})
 public class UserInfo implements RbacUserInfo<String>, Serializable {
 
     private static final long serialVersionUID = -445263479L;
@@ -61,6 +64,11 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
     @Schema(title = L_id)
     String id;
 
+    @Size(max = 128)
+    @InjectVar(value = InjectConst.ORG_ID)
+    @Schema(title = L_orgId)
+    String orgId;
+
     @Size(max = 20)
     @Schema(title = L_telephone , description = D_telephone)
     String telephone;
@@ -70,8 +78,8 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
     String email;
 
     @Size(max = 256)
+    @JsonIgnore(value=true)
     @Schema(title = L_password)
-    @JsonIgnore
     String password;
 
     @Size(max = 32)
@@ -84,8 +92,8 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
     @Schema(title = L_sex)
     Sex sex;
 
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
+    @InjectVar(domain = "dao", isRequired = "false", converter = PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
     @Schema(title = L_tagList)
     List<String> tagList;
 
@@ -107,8 +115,8 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
     @Schema(title = L_jobPostCode)
     String jobPostCode;
 
-    @InjectVar(domain = "dao",  converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
     @Size(max = 1800)
+    @InjectVar(domain = "dao", isRequired = "false", converter = PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
     @Schema(title = L_roleList)
     List<String> roleList;
 
@@ -125,22 +133,24 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
     String aliOpenId;
 
     @Size(max = 128)
+    @InjectVar(value = InjectConst.TENANT_ID)
+    @Schema(title = L_tenantId)
+    String tenantId;
+
+    @Size(max = 128)
     @Schema(title = L_domain)
     String domain;
 
     @NotBlank
-    @Size(max = 64)
+    @Size(max = 128)
     @Schema(title = L_name)
     String name;
 
     @Size(max = 128)
-    @Schema(title = L_orgId)
-    String orgId;
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
 
-    @Size(max = 128)
-    @Schema(title = L_tenantId)
-    String tenantId;
-
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)
     @Schema(title = L_creator)
     String creator;
@@ -166,5 +176,8 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
     @Size(max = 512)
     @Schema(title = L_remark)
     String remark;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 }

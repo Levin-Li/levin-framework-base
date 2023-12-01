@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.AccessLog;
 
 import com.levin.oak.base.services.accesslog.*;
+import static com.levin.oak.base.services.accesslog.AccessLogService.*;
 import com.levin.oak.base.services.accesslog.req.*;
 import com.levin.oak.base.services.accesslog.info.*;
 
@@ -54,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  访问日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[b1a1da9cc3310ac5b31e598ff4ae7533]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:03, 代码生成哈希校验码：[4a0eefb0cc7a553266d64a13abdde98f]，请不要修改和删除此行内容。
  *
  */
 
@@ -78,7 +79,6 @@ import com.levin.commons.service.support.InjectConst;
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_AccessLog.SIMPLE_CLASS_NAME})
 public class BizAccessLogServiceImpl extends BaseService implements BizAccessLogService {
 
-
     @Autowired
     AccessLogService accessLogService;
 
@@ -86,9 +86,52 @@ public class BizAccessLogServiceImpl extends BaseService implements BizAccessLog
         return getSelfProxy(BizAccessLogServiceImpl.class);
     }
 
-    //@Transactional(rollbackFor = RuntimeException.class)
-    //public void update(UpdateReq req){
-    //    accessLogService.update(req);
-    //}
+    @Operation(summary = CREATE_ACTION)
+    @Transactional
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    public Long create(CreateAccessLogReq req){
+        return accessLogService.create(req);
+    }
+
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    public AccessLogInfo findById(Long id) {
+        return accessLogService.findById(id);
+    }
+
+    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
+    @Operation(summary = VIEW_DETAIL_ACTION)
+    //@Override
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
+    public AccessLogInfo findById(AccessLogIdReq req) {
+        return accessLogService.findById(req);
+    }
+
+    @Operation(summary = UPDATE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
+    @Transactional
+    public boolean update(UpdateAccessLogReq req) {
+        return accessLogService.update(req);
+    }
+
+
+    @Operation(summary = DELETE_ACTION)
+    //@Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
+    @Transactional
+    public boolean delete(AccessLogIdReq req) {
+        return accessLogService.delete(req);
+    }
+
+    //@Override
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    public void clearCache(Object key) {
+        accessLogService.clearCache(key);
+    }
 
 }

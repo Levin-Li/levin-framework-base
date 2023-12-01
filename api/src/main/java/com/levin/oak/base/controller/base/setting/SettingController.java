@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 系统设置控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午9:43:51, 代码生成哈希校验码：[eb30ac27596a6d46321c03c5f2d7c144]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:15, 代码生成哈希校验码：[eb30ac27596a6d46321c03c5f2d7c144]，请不要修改和删除此行内容。
 *
 */
 

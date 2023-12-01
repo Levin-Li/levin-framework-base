@@ -51,7 +51,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午10:36:40, 代码生成哈希校验码：[270d58c230130588efed8b0cabf49144]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[7afb4500eb858a5ba318557be2959cd8]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -239,6 +239,9 @@ public class QueryUserReq extends MultiTenantOrgReq{
     @Schema(title = "模糊匹配-" + L_remark)
     @Contains
     String containsRemark;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
     public QueryUserReq(String id) {
         this.id = id;

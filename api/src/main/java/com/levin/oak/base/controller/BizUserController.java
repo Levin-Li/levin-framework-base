@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.validation.annotation.*;
 import org.springframework.util.*;
+
 import javax.validation.*;
 import java.util.*;
 import javax.annotation.*;
@@ -56,11 +57,10 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // private UserAddress userAddress;
 
 /**
-* 用户业务控制器
-*
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午8:12:21, 代码生成哈希校验码：[418ba6133de554435b1c8c77c1677bfb]，请不要修改和删除此行内容。
-*
-*/
+ * 用户业务控制器
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午8:12:21, 代码生成哈希校验码：[418ba6133de554435b1c8c77c1677bfb]，请不要修改和删除此行内容。
+ */
 
 //生成的控制器
 @RestController(PLUGIN_PREFIX + "BizUserController")
@@ -77,7 +77,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @CRUD
 
 @Slf4j
-public class BizUserController extends BaseController{
+public class BizUserController extends BaseController {
 
     private static final String BIZ_NAME = E_User.BIZ_NAME;
 
@@ -134,7 +134,7 @@ public class BizUserController extends BaseController{
     @Operation(summary = QUERY_LIST_ACTION)
     public ApiResp<PagingData<UserInfo>> query(QueryUserReq req, SimplePaging paging) {
 
-        PagingData<UserInfo> pagingData = bizUserService.query(req, paging);
+        PagingData<UserInfo> pagingData = bizUserService.query(authService.getUserInfo(), req, paging);
 
         //清楚密码
         if (pagingData.getItems() != null) {
@@ -155,7 +155,7 @@ public class BizUserController extends BaseController{
     @Operation(summary = CREATE_ACTION)
     public ApiResp<String> create(@RequestBody CreateUserReq req) {
         checkCurrentUserCreateOrUpdateUserRole(null, req.getRoleList());
-        return ApiResp.ok(bizUserService.create(req));
+        return ApiResp.ok(bizUserService.create(authService.getUserInfo(), req));
     }
 
 
@@ -167,7 +167,7 @@ public class BizUserController extends BaseController{
     @GetMapping("")
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     public ApiResp<UserInfo> retrieve(@NotNull UserIdReq req) {
-        return ApiResp.ok(desensitize(bizUserService.findById(req)));
+        return ApiResp.ok(desensitize(bizUserService.findById(authService.getUserInfo(), req)));
     }
 
     /**
@@ -179,7 +179,7 @@ public class BizUserController extends BaseController{
     @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Boolean> update(@RequestBody UpdateUserReq req) {
         checkCurrentUserCreateOrUpdateUserRole(req.getId(), req.getRoleList());
-        return ApiResp.ok(assertTrue(bizUserService.update(req), UPDATE_ACTION));
+        return ApiResp.ok(assertTrue(bizUserService.update(authService.getUserInfo(), req), UPDATE_ACTION));
     }
 
     /**
@@ -190,7 +190,7 @@ public class BizUserController extends BaseController{
     @DeleteMapping({""})
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Boolean> delete(@NotNull UserIdReq req) {
-        return ApiResp.ok(assertTrue(bizUserService.delete(req), DELETE_ACTION));
+        return ApiResp.ok(assertTrue(bizUserService.delete(authService.getUserInfo(), req), DELETE_ACTION));
     }
 
 }

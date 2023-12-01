@@ -46,7 +46,6 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -55,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 国际化资源-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:04, 代码生成哈希校验码：[779b1cd173aa0e8a53561716d6b13aaf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:55, 代码生成哈希校验码：[dc352a92b69a2587133d9f8dd62b31e4]，请不要修改和删除此行内容。
  *
  */
 
@@ -75,11 +74,17 @@ public class I18nResServiceImpl extends BaseService implements I18nResService {
         return getSelfProxy(I18nResServiceImpl.class);
     }
 
+    /**
+    * 创建记录，返回主键ID
+    * @param req
+    * @return pkId 主键ID
+    */
     @Operation(summary = CREATE_ACTION)
     @Transactional
     @Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
     public Long create(CreateI18nResReq req){
-        //保存自动先查询唯一约束，并给出错误信息
+        //dao支持保存前先自动查询唯一约束，并给出错误信息
         I18nRes entity = simpleDao.create(req, true);
         return entity.getId();
     }

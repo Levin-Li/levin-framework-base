@@ -48,7 +48,6 @@ import com.levin.oak.base.services.*;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -58,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[e5222c9e9f5678a9a2b6c20c4507320a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:53, 代码生成哈希校验码：[5782313be93e24638035ba9a0a20b99e]，请不要修改和删除此行内容。
  *
  */
 
@@ -78,11 +77,17 @@ public class RoleServiceImpl extends BaseService implements RoleService {
         return getSelfProxy(RoleServiceImpl.class);
     }
 
+    /**
+    * 创建记录，返回主键ID
+    * @param req
+    * @return pkId 主键ID
+    */
     @Operation(summary = CREATE_ACTION)
     @Transactional
     @Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
     public String create(CreateRoleReq req){
-        //保存自动先查询唯一约束，并给出错误信息
+        //dao支持保存前先自动查询唯一约束，并给出错误信息
         Role entity = simpleDao.create(req, true);
         return entity.getId();
     }

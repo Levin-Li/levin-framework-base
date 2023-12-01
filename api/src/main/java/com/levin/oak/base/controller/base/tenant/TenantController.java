@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 平台租户控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午9:43:50, 代码生成哈希校验码：[a524835c226613d2e75cdbf148bd14f0]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:15, 代码生成哈希校验码：[a524835c226613d2e75cdbf148bd14f0]，请不要修改和删除此行内容。
 *
 */
 

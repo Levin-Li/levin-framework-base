@@ -31,9 +31,4 @@ public abstract class TenantOrgNamedEntity
     @Column(length = 64, nullable = false)
     protected String name;
 
-    @Schema(title = "乐观锁")
-    @Version
-    @JsonIgnore
-    protected Integer optimisticLock;
-
 }

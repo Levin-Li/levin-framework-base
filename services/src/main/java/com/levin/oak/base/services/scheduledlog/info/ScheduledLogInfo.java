@@ -35,7 +35,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[b64b150eb1399086ee6c0161f8fd47d8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[8310744081d179701f6cff462526e40e]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -86,5 +86,8 @@ public class ScheduledLogInfo implements Serializable {
     @NotNull
     @Schema(title = L_createTime)
     Date createTime;
+
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
 
 }

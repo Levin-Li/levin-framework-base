@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 国际化资源控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午9:43:52, 代码生成哈希校验码：[7a015912c4e8b64822083c2b61060e9d]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:16, 代码生成哈希校验码：[7a015912c4e8b64822083c2b61060e9d]，请不要修改和删除此行内容。
 *
 */
 

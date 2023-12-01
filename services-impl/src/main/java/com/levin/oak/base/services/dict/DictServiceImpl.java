@@ -48,7 +48,6 @@ import com.levin.oak.base.services.*;
 import java.util.List;
 import java.util.Date;
 import com.levin.oak.base.entities.Dict.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.DefaultJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -58,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 字典-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:03, 代码生成哈希校验码：[683ff15c5f64b3d93078e01d3838865b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:54, 代码生成哈希校验码：[9eb7b0a5471cbed0a77a552bc37d9d3d]，请不要修改和删除此行内容。
  *
  */
 
@@ -78,11 +77,17 @@ public class DictServiceImpl extends BaseService implements DictService {
         return getSelfProxy(DictServiceImpl.class);
     }
 
+    /**
+    * 创建记录，返回主键ID
+    * @param req
+    * @return pkId 主键ID
+    */
     @Operation(summary = CREATE_ACTION)
     @Transactional
     @Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
     public String create(CreateDictReq req){
-        //保存自动先查询唯一约束，并给出错误信息
+        //dao支持保存前先自动查询唯一约束，并给出错误信息
         Dict entity = simpleDao.create(req, true);
         return entity.getId();
     }

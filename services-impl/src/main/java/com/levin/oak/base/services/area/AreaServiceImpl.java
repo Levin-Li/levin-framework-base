@@ -57,7 +57,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:50:24, 代码生成哈希校验码：[dd557c6cfd20de6b910fc439cf5a9c7a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:55, 代码生成哈希校验码：[175f13a72ce9a56a4369ed660acb934f]，请不要修改和删除此行内容。
  *
  */
 
@@ -77,11 +77,17 @@ public class AreaServiceImpl extends BaseService implements AreaService {
         return getSelfProxy(AreaServiceImpl.class);
     }
 
+    /**
+    * 创建记录，返回主键ID
+    * @param req
+    * @return pkId 主键ID
+    */
     @Operation(summary = CREATE_ACTION)
     @Transactional
     @Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
     public String create(CreateAreaReq req){
-        //保存自动先查询唯一约束，并给出错误信息
+        //dao支持保存前先自动查询唯一约束，并给出错误信息
         Area entity = simpleDao.create(req, true);
         return entity.getCode();
     }

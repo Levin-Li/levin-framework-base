@@ -32,7 +32,6 @@ import com.levin.oak.base.services.commons.req.*;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -42,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月27日 下午10:01:02, 代码生成哈希校验码：[4190f25f071e84e0c96ea5c95c753706]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[ae91f84d93ce471e2e43c42d5de1581b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -89,10 +88,6 @@ public class CreateRoleReq extends MultiTenantOrgReq {
     @Size(max = 64)
     String name;
 
-    @Schema(title = L_optimisticLock )
-    @JsonIgnore
-    Integer optimisticLock;
-
     @Schema(title = L_creator , hidden = true)
     //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     //@Size(max = 128)
@@ -119,6 +114,9 @@ public class CreateRoleReq extends MultiTenantOrgReq {
     @Schema(title = L_remark , hidden = true)
     //@Size(max = 512)
     String remark;
+
+    @Schema(title = L_optimisticLock , hidden = true)
+    Integer optimisticLock;
 
 
     @PostConstruct
