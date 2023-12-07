@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 机构控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[5d83cbccbc033230e135275a7ecfde4e]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:56, 代码生成哈希校验码：[3c553394152d5b6f1e4d25ee978c07d8]，请不要修改和删除此行内容。
 *
 */
 
@@ -142,7 +142,7 @@ public abstract class OrgController extends BaseController{
      * @param req UpdateOrgReq
      */
     @PutMapping({"","{id}"})
-    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateOrgReq req, @PathVariable(required = false) String id) {
 
@@ -174,12 +174,8 @@ public abstract class OrgController extends BaseController{
      * @param req OrgIdReq
      */
     @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     public ApiResp<Boolean> delete2(@RequestBody @Valid OrgIdReq req, @PathVariable(required = false) String id) {
-
-        req.updateIdWhenNotBlank(id);
-
-        req = checkRequest(DELETE_ACTION, req);
 
         return delete(req, id);
     }

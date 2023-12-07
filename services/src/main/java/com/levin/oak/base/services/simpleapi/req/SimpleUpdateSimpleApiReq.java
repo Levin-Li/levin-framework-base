@@ -44,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[1fed7a6e2655a4d23786e9f2a8dcecd6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:54, 代码生成哈希校验码：[67eca1675771fe95273815929fad76fb]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -65,6 +65,7 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq {
 
     //需要更新的字段
     @Ignore //dao 忽略
+    @Schema(title = "需要更新的字段", hidden = true)
     protected final List<String> needUpdateFields = new ArrayList<>(5);
 
     @Schema(title = "是否强制更新", description = "强制更新模式时，只要字段被调用set方法，则会被更新，不管是否空值" , hidden = true)

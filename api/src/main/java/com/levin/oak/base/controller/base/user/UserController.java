@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 用户控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[b671c6557deda3b5e48ece445e8a4253]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:55, 代码生成哈希校验码：[02355378e57f48c6aa97f2595897f94b]，请不要修改和删除此行内容。
 *
 */
 
@@ -142,7 +142,7 @@ public abstract class UserController extends BaseController{
      * @param req UpdateUserReq
      */
     @PutMapping({"","{id}"})
-    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateUserReq req, @PathVariable(required = false) String id) {
 
@@ -174,12 +174,8 @@ public abstract class UserController extends BaseController{
      * @param req UserIdReq
      */
     @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     public ApiResp<Boolean> delete2(@RequestBody @Valid UserIdReq req, @PathVariable(required = false) String id) {
-
-        req.updateIdWhenNotBlank(id);
-
-        req = checkRequest(DELETE_ACTION, req);
 
         return delete(req, id);
     }

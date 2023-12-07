@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 应用错误日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[33dfbdd32a537f82d0f3b05dd8568f61]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:55, 代码生成哈希校验码：[30fa1ca37616ec6a7cc769e8bc9f3f1c]，请不要修改和删除此行内容。
 *
 */
 
@@ -142,7 +142,7 @@ public abstract class AppErrorLogController extends BaseController{
      * @param req UpdateAppErrorLogReq
      */
     @PutMapping({"","{id}"})
-    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateAppErrorLogReq req, @PathVariable(required = false) Long id) {
 
@@ -174,12 +174,8 @@ public abstract class AppErrorLogController extends BaseController{
      * @param req AppErrorLogIdReq
      */
     @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     public ApiResp<Boolean> delete2(@RequestBody @Valid AppErrorLogIdReq req, @PathVariable(required = false) Long id) {
-
-        req.updateIdWhenNotBlank(id);
-
-        req = checkRequest(DELETE_ACTION, req);
 
         return delete(req, id);
     }

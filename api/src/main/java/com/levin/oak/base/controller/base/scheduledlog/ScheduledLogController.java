@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 调度日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[3e5f7d4de38d4e9b6f5d62b9311b6df4]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:55, 代码生成哈希校验码：[d6963d077b1539a842d6d876a2d95d3c]，请不要修改和删除此行内容。
 *
 */
 
@@ -142,7 +142,7 @@ public abstract class ScheduledLogController extends BaseController{
      * @param req UpdateScheduledLogReq
      */
     @PutMapping({"","{id}"})
-    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateScheduledLogReq req, @PathVariable(required = false) String id) {
 
@@ -174,12 +174,8 @@ public abstract class ScheduledLogController extends BaseController{
      * @param req ScheduledLogIdReq
      */
     @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     public ApiResp<Boolean> delete2(@RequestBody @Valid ScheduledLogIdReq req, @PathVariable(required = false) String id) {
-
-        req.updateIdWhenNotBlank(id);
-
-        req = checkRequest(DELETE_ACTION, req);
 
         return delete(req, id);
     }

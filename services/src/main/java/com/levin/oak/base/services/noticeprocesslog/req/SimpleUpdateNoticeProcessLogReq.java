@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[acccbafe91733e2502c7bc9bd46ab4c5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:55, 代码生成哈希校验码：[ef824a3905337b5502f4bf2d355163ca]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -62,6 +62,7 @@ public class SimpleUpdateNoticeProcessLogReq extends MultiTenantOrgReq {
 
     //需要更新的字段
     @Ignore //dao 忽略
+    @Schema(title = "需要更新的字段", hidden = true)
     protected final List<String> needUpdateFields = new ArrayList<>(5);
 
     @Schema(title = "是否强制更新", description = "强制更新模式时，只要字段被调用set方法，则会被更新，不管是否空值" , hidden = true)

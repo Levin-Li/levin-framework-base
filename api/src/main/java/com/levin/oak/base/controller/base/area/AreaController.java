@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 区域控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[1357a0cb76768c9244a8e0d215a7baea]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:56, 代码生成哈希校验码：[bae4a10cf3e160d179a4f5c6ae84854f]，请不要修改和删除此行内容。
 *
 */
 
@@ -142,7 +142,7 @@ public abstract class AreaController extends BaseController{
      * @param req UpdateAreaReq
      */
     @PutMapping({"","{code}"})
-    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateAreaReq req, @PathVariable(required = false) String code) {
 
@@ -174,12 +174,8 @@ public abstract class AreaController extends BaseController{
      * @param req AreaIdReq
      */
     @DeleteMapping(value = {"","{code}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     public ApiResp<Boolean> delete2(@RequestBody @Valid AreaIdReq req, @PathVariable(required = false) String code) {
-
-        req.updateCodeWhenNotBlank(code);
-
-        req = checkRequest(DELETE_ACTION, req);
 
         return delete(req, code);
     }

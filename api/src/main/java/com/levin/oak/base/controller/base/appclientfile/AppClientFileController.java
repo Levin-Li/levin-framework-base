@@ -141,7 +141,7 @@ public abstract class AppClientFileController extends BaseController{
      * 更新
      * @param req UpdateAppClientFileReq
      */
-    @PutMapping({"","{id}"})
+    @PutMapping("{id}")
     @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateAppClientFileReq req, @PathVariable(required = false) String id) {
