@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 客户端文件业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[1d080202b3e63533b576abfa42933454]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[ea2d8b2ba9add312a03fb56d4989cf75]，请不要修改和删除此行内容。
 *
 */
 
@@ -68,7 +68,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizAppClientFileController", havingValue = "true", matchIfMissing = true)
 
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME + "-" + E_AppClientFile.BIZ_NAME)
 
 //类注解，@Tag的name属性关联权限的资源标识
 @Tag(name = E_AppClientFile.BIZ_NAME, description = E_AppClientFile.BIZ_NAME + MAINTAIN_ACTION)

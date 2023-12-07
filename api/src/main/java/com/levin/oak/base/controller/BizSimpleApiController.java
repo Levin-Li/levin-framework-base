@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单动态接口业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[1b4bb73bac5474495bf8a7f8d6a9a156]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[3b83e0538ad75ca41b81b08e1e0d3cc8]，请不要修改和删除此行内容。
 *
 */
 
@@ -68,7 +68,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizSimpleApiController", havingValue = "true", matchIfMissing = true)
 
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME)
+@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME + "-" + E_SimpleApi.BIZ_NAME)
 
 //类注解，@Tag的name属性关联权限的资源标识
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)

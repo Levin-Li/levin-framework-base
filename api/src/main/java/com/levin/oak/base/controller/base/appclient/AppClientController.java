@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 应用接入控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:54, 代码生成哈希校验码：[d36ac64e63724ef69a4e6d26fc1d9f14]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[f4fbdc730c1f4300381196d857709791]，请不要修改和删除此行内容。
 *
 */
 
@@ -64,7 +64,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppClientController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME + "-" + E_AppClient.BIZ_NAME)
 
 //类注解
 //默认生成控制器类，@Tag的name属性关联权限的资源标识
@@ -96,7 +96,7 @@ public abstract class AppClientController extends BaseController{
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
-        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, appClientService.query(req,paging)));
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, appClientService.query(req, paging)));
     }
 
     /**

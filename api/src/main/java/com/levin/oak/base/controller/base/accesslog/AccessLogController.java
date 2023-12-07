@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 访问日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:55, 代码生成哈希校验码：[ddf48b55b796145298e47cced00167b3]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:57, 代码生成哈希校验码：[827e5824686f7782f00a4484e82ba816]，请不要修改和删除此行内容。
 *
 */
 
@@ -64,7 +64,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AccessLogController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME + "-" + E_AccessLog.BIZ_NAME)
 
 //类注解
 //默认生成控制器类，@Tag的name属性关联权限的资源标识
@@ -96,7 +96,7 @@ public abstract class AccessLogController extends BaseController{
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
-        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, accessLogService.query(req,paging)));
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, accessLogService.query(req, paging)));
     }
 
     /**

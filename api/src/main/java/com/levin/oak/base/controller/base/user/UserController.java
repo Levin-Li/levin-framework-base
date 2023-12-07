@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 用户控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:55, 代码生成哈希校验码：[02355378e57f48c6aa97f2595897f94b]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:57, 代码生成哈希校验码：[ae9d54754660c1921a5a2ff00a7d8a13]，请不要修改和删除此行内容。
 *
 */
 
@@ -64,7 +64,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "UserController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME + "-" + E_User.BIZ_NAME)
 
 //类注解
 //默认生成控制器类，@Tag的name属性关联权限的资源标识
@@ -96,7 +96,7 @@ public abstract class UserController extends BaseController{
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
-        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, userService.query(req,paging)));
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, userService.query(req, paging)));
     }
 
     /**

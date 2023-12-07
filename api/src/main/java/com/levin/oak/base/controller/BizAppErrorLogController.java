@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 应用错误日志业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[0ec91a4d6f06098189aee54750bf03b1]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[5b6fd7e91e55dfe696649c76f8352954]，请不要修改和删除此行内容。
 *
 */
 
@@ -68,7 +68,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizAppErrorLogController", havingValue = "true", matchIfMissing = true)
 
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = BIZ_TYPE_NAME)
+@ResAuthorize(domain = ID, type = BIZ_TYPE_NAME + "-" + E_AppErrorLog.BIZ_NAME)
 
 //类注解，@Tag的name属性关联权限的资源标识
 @Tag(name = E_AppErrorLog.BIZ_NAME, description = E_AppErrorLog.BIZ_NAME + MAINTAIN_ACTION)

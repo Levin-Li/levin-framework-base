@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 调度日志业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[46ba2ce1813aed463a8417bedeca1aa2]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[98c663fa94de608aaa509295b81145e5]，请不要修改和删除此行内容。
 *
 */
 
@@ -68,7 +68,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizScheduledLogController", havingValue = "true", matchIfMissing = true)
 
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME + "-" + E_ScheduledLog.BIZ_NAME)
 
 //类注解，@Tag的name属性关联权限的资源标识
 @Tag(name = E_ScheduledLog.BIZ_NAME, description = E_ScheduledLog.BIZ_NAME + MAINTAIN_ACTION)

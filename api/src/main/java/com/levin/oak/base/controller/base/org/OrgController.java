@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 机构控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:56, 代码生成哈希校验码：[3c553394152d5b6f1e4d25ee978c07d8]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:57, 代码生成哈希校验码：[ae5f0de747e65d9c6267ca4f92893e98]，请不要修改和删除此行内容。
 *
 */
 
@@ -64,7 +64,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "OrgController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME + "-" + E_Org.BIZ_NAME)
 
 //类注解
 //默认生成控制器类，@Tag的name属性关联权限的资源标识
@@ -96,7 +96,7 @@ public abstract class OrgController extends BaseController{
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
-        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, orgService.query(req,paging)));
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, orgService.query(req, paging)));
     }
 
     /**

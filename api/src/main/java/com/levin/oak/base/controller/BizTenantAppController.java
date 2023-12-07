@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 租户应用业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[c13e9c2aebd739e0d4e2175525a24eca]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[078d2fadf734a1f987df697cfe585894]，请不要修改和删除此行内容。
 *
 */
 
@@ -68,7 +68,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizTenantAppController", havingValue = "true", matchIfMissing = true)
 
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = SYS_TYPE_NAME)
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME + "-" + E_TenantApp.BIZ_NAME)
 
 //类注解，@Tag的name属性关联权限的资源标识
 @Tag(name = E_TenantApp.BIZ_NAME, description = E_TenantApp.BIZ_NAME + MAINTAIN_ACTION)

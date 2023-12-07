@@ -55,7 +55,7 @@ import static com.levin.oak.base.ModuleOption.*;
 @Tag(name = "业务枚举类", description = "业务枚举类服务")
 @Slf4j
 @Valid
-@ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME, onlyRequireAuthenticated = true)
+@ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME + "-枚举", onlyRequireAuthenticated = true)
 @MenuResTag(false)
 public class EnumController extends BaseController {
 

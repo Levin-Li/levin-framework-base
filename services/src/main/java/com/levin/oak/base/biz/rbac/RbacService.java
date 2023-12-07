@@ -1,7 +1,10 @@
 package com.levin.oak.base.biz.rbac;
 
+import cn.hutool.core.text.StrSplitter;
+import cn.hutool.core.util.StrUtil;
 import com.levin.commons.plugin.Res;
 import com.levin.commons.rbac.Permission;
+import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.RbacUserObject;
 import com.levin.commons.rbac.ResAuthorize;
 import org.springframework.lang.Nullable;
@@ -28,6 +31,8 @@ import static org.springframework.util.StringUtils.*;
  */
 public interface RbacService<U> {
 
+    String ROLE_PREFIX = RbacRoleObject.ROLE_PREFIX;
+
     /**
      * 设置用户加载服务
      *
@@ -52,14 +57,13 @@ public interface RbacService<U> {
      * @return
      */
     default boolean isPermission(String requirePermission) {
-
+        //@todo 尽量优化性能
         return hasText(requirePermission)
-                && (
-                requirePermission.contains(getPermissionDelimiter())
-                        //*号也可以是权限
-                        || "*".equals(trimWhitespace(requirePermission))
-        );
-
+                //权限不区分内容
+//                && ( requirePermission.contains(getPermissionDelimiter())
+//                        //*号也可以是权限
+//                        || "*".equals(trimWhitespace(requirePermission)))
+                ;
     }
 
     /**
@@ -68,7 +72,8 @@ public interface RbacService<U> {
      * @return
      */
     default boolean isPattern(String permission) {
-        return StringUtils.hasText(permission) && permission.contains("*");
+        //@todo 尽量优化性能
+        return StringUtils.hasText(permission) && (permission.indexOf('*') >= 0 || permission.indexOf('|') >= 0);
     }
 
     /**
@@ -79,7 +84,7 @@ public interface RbacService<U> {
      */
     default boolean isRole(String requirePermission) {
         return hasText(requirePermission)
-                && !isPermission(requirePermission);
+                && trimWhitespace(requirePermission).startsWith(ROLE_PREFIX);
     }
 
 
@@ -87,6 +92,10 @@ public interface RbacService<U> {
      * 文本*号匹配
      * <p>
      * 注意不支持问号
+     * <p>
+     * 支持按竖线分隔多个或的条件
+     * <p>
+     * 比如 |修改|删除|查询
      *
      * <p>
      * Match a String against the given pattern, supporting the following simple pattern styles: "xxx*", "*xxx", "*xxx*" and "xxx*yyy" matches (with an arbitrary number of pattern parts), as well as direct equality.
@@ -97,7 +106,10 @@ public interface RbacService<U> {
      * @see PatternMatchUtils#simpleMatch
      */
     default boolean textPatternMatch(@Nullable String pattern, @Nullable String str) {
-        return PatternMatchUtils.simpleMatch(pattern, str);
+        //@todo 尽量优化性能
+        //支持按竖线分隔
+        return !StringUtils.hasText(str)
+                || (StringUtils.hasText(pattern) && StrUtil.split(pattern, '|').stream().filter(StringUtils::hasText).anyMatch(p -> PatternMatchUtils.simpleMatch(p, str)));
     }
 
     /**
@@ -114,6 +126,7 @@ public interface RbacService<U> {
 
         //去除所有空字符
         requirePermission = trimWhitespace(requirePermission);
+
         //如果需要去权限为空
         if (!StringUtils.hasText(requirePermission)) {
             return true;
@@ -143,18 +156,21 @@ public interface RbacService<U> {
         if (isPattern(ownerPermission)) {
 
             //拥有的权限 A*:B*:C*:D*
-            final String[] ownerList = ownerPermission.split(getPermissionDelimiter());
+            final String[] ownerList = StrSplitter.splitToArray(ownerPermission, getPermissionDelimiter(), 0, true, false);// ownerPermission.split(getPermissionDelimiter());
 
             final AtomicInteger idx = new AtomicInteger(-1);
 
             //切割出单个比较项目
-            return Stream.of(requirePermission.split(getPermissionDelimiter()))
-                    .allMatch(rp -> textPatternMatch(
-                                    //超过数组长度以后，总是取最后一个
-                                    trimWhitespace(ownerList[idx.updateAndGet(oldValue -> oldValue < ownerList.length - 1 ? oldValue + 1 : oldValue)])
-                                    , trimWhitespace(rp)
-                            )
-                    );
+            return  //Stream.of(requirePermission.split(getPermissionDelimiter()))
+
+                    StrUtil.split(requirePermission, getPermissionDelimiter()).stream()
+
+                            .allMatch(rp -> textPatternMatch(
+                                            //超过数组长度以后，总是取最后一个
+                                            (ownerList[idx.updateAndGet(oldValue -> oldValue < ownerList.length - 1 ? oldValue + 1 : oldValue)])
+                                            , trimWhitespace(rp)
+                                    )
+                            );
         }
 
         return false;

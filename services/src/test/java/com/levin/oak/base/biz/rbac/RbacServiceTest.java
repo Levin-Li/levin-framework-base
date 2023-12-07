@@ -59,9 +59,7 @@ class RbacServiceTest {
         Assert.isTrue(rbacService.simpleMatch("D:T:IDD:A","*:T:*D:*"));
         Assert.isFalse(rbacService.simpleMatch("D:T:IDD:A","*:T:*D:DDD"));
 
-
         Assert.isTrue(rbacService.simpleMatch("R_DDD","R_D*"));
-
 
 
         Assert.isTrue(rbacService.simpleMatch("D:T:I*D:查询列表","*:T:*D:查询*"));

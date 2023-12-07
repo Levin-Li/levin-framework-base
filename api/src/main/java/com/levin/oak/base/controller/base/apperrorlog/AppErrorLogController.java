@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 应用错误日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:55, 代码生成哈希校验码：[30fa1ca37616ec6a7cc769e8bc9f3f1c]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[9b49883632f36b01db55fa772e526c18]，请不要修改和删除此行内容。
 *
 */
 
@@ -64,7 +64,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppErrorLogController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-@ResAuthorize(domain = ID, type = BIZ_TYPE_NAME)
+@ResAuthorize(domain = ID, type = BIZ_TYPE_NAME + "-" + E_AppErrorLog.BIZ_NAME)
 
 //类注解
 //默认生成控制器类，@Tag的name属性关联权限的资源标识
@@ -96,7 +96,7 @@ public abstract class AppErrorLogController extends BaseController{
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
-        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, appErrorLogService.query(req,paging)));
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, appErrorLogService.query(req, paging)));
     }
 
     /**

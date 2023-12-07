@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单动态接口控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:54, 代码生成哈希校验码：[083b27e20b204307e559a25e4d3d599b]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[49ae7d2310063160ed2e0499e989beec]，请不要修改和删除此行内容。
 *
 */
 
@@ -64,7 +64,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimpleApiController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME)
+@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME + "-" + E_SimpleApi.BIZ_NAME)
 
 //类注解
 //默认生成控制器类，@Tag的name属性关联权限的资源标识
@@ -96,7 +96,7 @@ public abstract class SimpleApiController extends BaseController{
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
-        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, simpleApiService.query(req,paging)));
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, simpleApiService.query(req, paging)));
     }
 
     /**
