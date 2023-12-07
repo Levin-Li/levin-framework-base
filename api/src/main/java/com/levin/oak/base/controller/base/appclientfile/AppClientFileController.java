@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 客户端文件控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[19dfa209646a4e7b9c84d0efbf8e7376]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:31:41, 代码生成哈希校验码：[841134cc663c0b39f51ac7604d49656e]，请不要修改和删除此行内容。
 *
 */
 
@@ -141,8 +141,8 @@ public abstract class AppClientFileController extends BaseController{
      * 更新
      * @param req UpdateAppClientFileReq
      */
-    @PutMapping("{id}")
-    @Operation(summary = UPDATE_ACTION + "(RequestBody方式)", description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @PutMapping({"","{id}"})
+    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateAppClientFileReq req, @PathVariable(required = false) String id) {
 
@@ -174,12 +174,8 @@ public abstract class AppClientFileController extends BaseController{
      * @param req AppClientFileIdReq
      */
     @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = DELETE_ACTION + "(RequestBody方式)", description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     public ApiResp<Boolean> delete2(@RequestBody @Valid AppClientFileIdReq req, @PathVariable(required = false) String id) {
-
-        req.updateIdWhenNotBlank(id);
-
-        req = checkRequest(DELETE_ACTION, req);
 
         return delete(req, id);
     }
