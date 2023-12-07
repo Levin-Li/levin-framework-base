@@ -39,13 +39,13 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[e63f6af1f41c8df80de4ac9567a00afc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[39c519ed58aea51d496b1a166d7fab49]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
-@ToString
+@ToString(callSuper = true)
 //@EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor

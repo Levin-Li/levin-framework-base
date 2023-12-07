@@ -4,7 +4,10 @@ import static com.levin.oak.base.ModuleOption.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
+
 //import org.springframework.cache.annotation.*;
+//import org.springframework.dao.*;
+
 import java.util.*;
 import javax.validation.constraints.*;
 
@@ -24,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 工作岗位-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午1:13:56, 代码生成哈希校验码：[3953f7ba06041f0008c7bd8c4d313bdf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[df4f81d2d04688eebcb9371d2684e8d5]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_JobPost.BIZ_NAME, description = E_JobPost.BIZ_NAME + MAINTAIN_ACTION)
@@ -58,13 +61,14 @@ public interface JobPostService {
      * 更新记录，并返回更新是否成功
      *
      * @param req
+     * @param queryObjs 附加的查询条件或是更新内容
      * @return boolean 是否成功
      */
     @Operation(summary = UPDATE_ACTION)
-    boolean update(@NotNull UpdateJobPostReq req);
+    boolean update(@NotNull UpdateJobPostReq req, Object... queryObjs);
 
     /**
-     * 更新记录，并返回更新记录数
+     * 无ID更新记录，并返回更新记录数，请小心使用
      *
      * @param setReq
      * @param whereReq
@@ -103,7 +107,7 @@ public interface JobPostService {
      *
      * @param req
      * @param paging 分页设置，可空
-     * @return pagingData 分页数据
+     * @return defaultPagingData 分页数据
      */
     @Operation(summary = QUERY_ACTION)
     PagingData<JobPostInfo> query(@NotNull QueryJobPostReq req, Paging paging);
@@ -113,20 +117,11 @@ public interface JobPostService {
      *
      * @param req
      * @param paging 分页设置，可空
-     * @return pagingData 分页数据
+     * @param columnNames 列名
+     * @return defaultPagingData 分页数据
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    PagingData<SimpleJobPostInfo> simpleQuery(@NotNull QueryJobPostReq req, Paging paging);
-
-    /**
-     * 简单统计
-     *
-     * @param req
-     * @param paging 分页设置，可空
-     * @return pagingData 分页数据
-     */
-    @Operation(summary = STAT_ACTION)
-    PagingData<StatJobPostReq.Result> stat(@NotNull StatJobPostReq req, Paging paging);
+    PagingData<JobPostInfo> selectQuery(@NotNull QueryJobPostReq req, Paging paging, String... columnNames);
 
     /**
      * 统计记录数
@@ -165,8 +160,10 @@ public interface JobPostService {
     /**
      * 查询并返回唯一一条数据
      * 如果有多余1条数据，将抛出异常
+     *
      * @param req
      * @return data
+     * @throws RuntimeException 多条数据时抛出异常
      */
     @Operation(summary = QUERY_ACTION)
     JobPostInfo findUnique(QueryJobPostReq req);

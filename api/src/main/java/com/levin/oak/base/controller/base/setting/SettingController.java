@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 系统设置控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:15, 代码生成哈希校验码：[eb30ac27596a6d46321c03c5f2d7c144]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[da7ffbe3db9c6b5e3131d07a0819ac5c]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class SettingController extends BaseController{
     protected SettingService settingService;
 
     @Autowired
-    protected BizSettingService bizsettingService;
+    protected BizSettingService bizSettingService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class SettingController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, settingService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QuerySettingReq
-      * @return  ApiResp<PagingData<StatSettingReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatSettingReq.Result>> stat(@Valid StatSettingReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, settingService.stat(req,paging)));
-     }
 
     /**
      * 新增

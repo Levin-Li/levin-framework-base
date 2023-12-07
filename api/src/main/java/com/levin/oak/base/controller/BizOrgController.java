@@ -31,6 +31,8 @@ import com.levin.oak.base.controller.base.org.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
 
+import com.levin.oak.base.biz.bo.org.*;
+
 import com.levin.oak.base.biz.*;
 
 import com.levin.oak.base.services.org.*;
@@ -55,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 机构业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午8:12:22, 代码生成哈希校验码：[257ff57aee6ac302f1f83849695cd8cc]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[1293319030f2bfc20f87d1d0aaccde51]，请不要修改和删除此行内容。
 *
 */
 
@@ -75,5 +77,22 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 @Slf4j
 public class BizOrgController extends OrgController{
+
+    /**
+    * 简单统计
+    *
+    * @param req QueryOrgReq
+    * @return  ApiResp<PagingData<StatOrgReq.Result>>
+    */
+    //@GetMapping("/stat") //默认不开放
+    @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
+    public ApiResp<PagingData<StatOrgReq.Result>> stat(@Valid StatOrgReq req, SimplePaging paging) {
+
+        req = checkRequest(STAT_ACTION, req);
+
+        //return ApiResp.ok(checkResponse(STAT_ACTION, bizOrgService.stat(req, paging)));
+
+        return ApiResp.error("暂不可用");
+    }
 
 }

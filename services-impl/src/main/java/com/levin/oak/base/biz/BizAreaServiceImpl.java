@@ -23,7 +23,7 @@ import org.springframework.validation.annotation.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.Area;
 
 import com.levin.oak.base.services.area.*;
+import com.levin.oak.base.biz.bo.area.*;
 import static com.levin.oak.base.services.area.AreaService.*;
 import com.levin.oak.base.services.area.req.*;
 import com.levin.oak.base.services.area.info.*;
@@ -58,7 +59,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  *  区域-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:04, 代码生成哈希校验码：[a082cd69b1a75c9fb9194b192f5c67b7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[869669a03d04b75215a673e496ef44d0]，请不要修改和删除此行内容。
  *
  */
 
@@ -121,13 +122,24 @@ public class BizAreaServiceImpl extends BaseService implements BizAreaService {
         return areaService.update(req);
     }
 
-
     @Operation(summary = DELETE_ACTION)
     //@Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.code) && #result", key = CK_PREFIX + "#req.code") // , beforeInvocation = true
     @Transactional
     public boolean delete(AreaIdReq req) {
         return areaService.delete(req);
+    }
+
+    /**
+    * 简单统计demo
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return defaultPagingData 分页数据
+    */
+    @Operation(summary = STAT_ACTION)
+    PagingData<StatAreaReq.Result> stat(StatAreaReq req, Paging paging){
+        return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
     //@Override

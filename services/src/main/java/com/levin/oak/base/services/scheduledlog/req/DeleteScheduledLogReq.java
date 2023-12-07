@@ -29,34 +29,35 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_ScheduledLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 删除调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[7f9b29a7e1042b2ebbdf9d81dc92265b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[983b2efad6b7b4d273bb4cff3079ae55]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
 
-// @AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
-@ToString
+//@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS)
 public class DeleteScheduledLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1319130901L;
+
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_ScheduledLog.id)
@@ -72,8 +73,10 @@ public class DeleteScheduledLogReq extends MultiTenantOrgReq {
         return this;
     }
 
+
     @PostConstruct
     public void preDelete() {
-        // @todo 删除之前初始化数据
+        //@todo 删除之前初始化数据
     }
+
 }

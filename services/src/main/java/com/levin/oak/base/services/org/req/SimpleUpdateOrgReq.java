@@ -4,6 +4,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
 
 import com.levin.commons.service.domain.*;
 import com.levin.commons.service.support.*;
@@ -46,29 +47,38 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:11, 代码生成哈希校验码：[dea172ac68bbcb9e9cfadf92ef4b60f0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[49551db6e898afdc52b55efc8e6cb379]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-@Builder
+//@Builder
 //@EqualsAndHashCode(callSuper = true)
-@ToString
+@ToString(callSuper = true)
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Org.class, alias = E_Org.ALIAS)
-//默认更新注解
-@Update
+
+//字段更新策略，强制更新时，只要字段被调用set方法，则会被更新，不管是否空值。否则只有值不为[null，空字符串, 空数组，空集合]时才会被更新。
+@Update(condition = "forceUpdate ? isUpdateField(#_fieldName) : #" + C.VALUE_NOT_EMPTY)
 public class SimpleUpdateOrgReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -1399842458L;
 
+    //需要更新的字段
+    @Ignore //dao 忽略
+    protected final List<String> needUpdateFields = new ArrayList<>(5);
+
+    @Schema(title = "是否强制更新", description = "强制更新模式时，只要字段被调用set方法，则会被更新，不管是否空值" , hidden = true)
+    @Ignore //dao 忽略
+    protected final boolean forceUpdate;
+
+    //////////////////////////////////////////////////////////////////
+
     @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
     @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
-
 
     @Size(max = 64)
     @Schema(title = L_parentId)
@@ -143,6 +153,37 @@ public class SimpleUpdateOrgReq extends MultiTenantReq {
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
+    @Schema(title = L_orderCode)
+    Integer orderCode;
+
+    @Schema(title = L_enable)
+    Boolean enable;
+
+    @Schema(title = L_editable)
+    Boolean editable;
+
+    @Size(max = 512)
+    @Schema(title = L_remark)
+    String remark;
+
+    @Eq(desc = "乐观锁更新条件")
+    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
+
+
+    public SimpleUpdateOrgReq() {
+        this.forceUpdate = false;
+    }
+
+    /**
+    * 强制更新
+    *
+    * @param forceUpdate
+    */
+    public SimpleUpdateOrgReq(boolean forceUpdate) {
+        this.forceUpdate = forceUpdate;
+    }
 
     @PostConstruct
     public void preUpdate() {
@@ -152,4 +193,141 @@ public class SimpleUpdateOrgReq extends MultiTenantReq {
             setLastUpdateTime(new Date());
         }
     }
+
+    public <T extends SimpleUpdateOrgReq> T setParentId(String parentId) {
+        this.parentId = parentId;
+        return addUpdateField(E_Org.parentId);
+    }
+    public <T extends SimpleUpdateOrgReq> T setCode(String code) {
+        this.code = code;
+        return addUpdateField(E_Org.code);
+    }
+    public <T extends SimpleUpdateOrgReq> T setIcon(String icon) {
+        this.icon = icon;
+        return addUpdateField(E_Org.icon);
+    }
+    public <T extends SimpleUpdateOrgReq> T setState(State state) {
+        this.state = state;
+        return addUpdateField(E_Org.state);
+    }
+    public <T extends SimpleUpdateOrgReq> T setType(Type type) {
+        this.type = type;
+        return addUpdateField(E_Org.type);
+    }
+    public <T extends SimpleUpdateOrgReq> T setIndustries(String industries) {
+        this.industries = industries;
+        return addUpdateField(E_Org.industries);
+    }
+    public <T extends SimpleUpdateOrgReq> T setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+        return addUpdateField(E_Org.areaCode);
+    }
+    public <T extends SimpleUpdateOrgReq> T setLevel(String level) {
+        this.level = level;
+        return addUpdateField(E_Org.level);
+    }
+    public <T extends SimpleUpdateOrgReq> T setCategory(String category) {
+        this.category = category;
+        return addUpdateField(E_Org.category);
+    }
+    public <T extends SimpleUpdateOrgReq> T setIsExternal(Boolean isExternal) {
+        this.isExternal = isExternal;
+        return addUpdateField(E_Org.isExternal);
+    }
+    public <T extends SimpleUpdateOrgReq> T setContacts(String contacts) {
+        this.contacts = contacts;
+        return addUpdateField(E_Org.contacts);
+    }
+    public <T extends SimpleUpdateOrgReq> T setPhones(String phones) {
+        this.phones = phones;
+        return addUpdateField(E_Org.phones);
+    }
+    public <T extends SimpleUpdateOrgReq> T setEmails(String emails) {
+        this.emails = emails;
+        return addUpdateField(E_Org.emails);
+    }
+    public <T extends SimpleUpdateOrgReq> T setAddress(String address) {
+        this.address = address;
+        return addUpdateField(E_Org.address);
+    }
+    public <T extends SimpleUpdateOrgReq> T setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+        return addUpdateField(E_Org.zipCode);
+    }
+    public <T extends SimpleUpdateOrgReq> T setExtInfo(String extInfo) {
+        this.extInfo = extInfo;
+        return addUpdateField(E_Org.extInfo);
+    }
+    public <T extends SimpleUpdateOrgReq> T setIdPath(String idPath) {
+        this.idPath = idPath;
+        return addUpdateField(E_Org.idPath);
+    }
+    public <T extends SimpleUpdateOrgReq> T setName(String name) {
+        this.name = name;
+        return addUpdateField(E_Org.name);
+    }
+    public <T extends SimpleUpdateOrgReq> T setPinyinName(String pinyinName) {
+        this.pinyinName = pinyinName;
+        return addUpdateField(E_Org.pinyinName);
+    }
+    public <T extends SimpleUpdateOrgReq> T setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+        return addUpdateField(E_Org.lastUpdateTime);
+    }
+    public <T extends SimpleUpdateOrgReq> T setOrderCode(Integer orderCode) {
+        this.orderCode = orderCode;
+        return addUpdateField(E_Org.orderCode);
+    }
+    public <T extends SimpleUpdateOrgReq> T setEnable(Boolean enable) {
+        this.enable = enable;
+        return addUpdateField(E_Org.enable);
+    }
+    public <T extends SimpleUpdateOrgReq> T setEditable(Boolean editable) {
+        this.editable = editable;
+        return addUpdateField(E_Org.editable);
+    }
+    public <T extends SimpleUpdateOrgReq> T setRemark(String remark) {
+        this.remark = remark;
+        return addUpdateField(E_Org.remark);
+    }
+    public <T extends SimpleUpdateOrgReq> T setOptimisticLock(Integer optimisticLock) {
+        this.optimisticLock = optimisticLock;
+        return addUpdateField(E_Org.optimisticLock);
+    }
+
+
+
+    /**
+    * 是否更新字段
+    *
+    * @param fieldName
+    * @return
+    */
+    public boolean isUpdateField(String fieldName) {
+        return needUpdateFields.contains(fieldName);
+    }
+
+    /**
+    * 是否更新字段，并删除更新标记，下次调用将不再更新
+    *
+    * @param fieldName
+    * @return 需要更新字段返回 true
+    */
+    public <T extends SimpleUpdateOrgReq> T removeUpdateField(String fieldName) {
+          needUpdateFields.remove(fieldName);
+        return (T) this;
+    }
+
+    /**
+    * 添加更新字段
+    *
+    * @param fieldName
+    * @return
+    */
+    public <T extends SimpleUpdateOrgReq> T addUpdateField(String fieldName) {
+        boolean isAdd = needUpdateFields.contains(fieldName) || needUpdateFields.add(fieldName);
+        return (T) this;
+    }
+
+
 }

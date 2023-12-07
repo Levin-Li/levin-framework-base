@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 机构控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:16, 代码生成哈希校验码：[1ee1bd9f2bd0f23bd20d2ac8e34a3c78]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[5d83cbccbc033230e135275a7ecfde4e]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class OrgController extends BaseController{
     protected OrgService orgService;
 
     @Autowired
-    protected BizOrgService bizorgService;
+    protected BizOrgService bizOrgService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class OrgController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, orgService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QueryOrgReq
-      * @return  ApiResp<PagingData<StatOrgReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatOrgReq.Result>> stat(@Valid StatOrgReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, orgService.stat(req,paging)));
-     }
 
     /**
      * 新增

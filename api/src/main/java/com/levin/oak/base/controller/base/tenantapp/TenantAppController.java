@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 租户应用控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:15, 代码生成哈希校验码：[c72ae04d1ecc8be7feb7d151994e8c43]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[2a3142b2fc85102e11b021eff4f81c02]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class TenantAppController extends BaseController{
     protected TenantAppService tenantAppService;
 
     @Autowired
-    protected BizTenantAppService biztenantAppService;
+    protected BizTenantAppService bizTenantAppService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class TenantAppController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, tenantAppService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QueryTenantAppReq
-      * @return  ApiResp<PagingData<StatTenantAppReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatTenantAppReq.Result>> stat(@Valid StatTenantAppReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, tenantAppService.stat(req,paging)));
-     }
 
     /**
      * 新增

@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 用户控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:16, 代码生成哈希校验码：[770f8bf2655fc1bd7e20983c5bfd1796]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[b671c6557deda3b5e48ece445e8a4253]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class UserController extends BaseController{
     protected UserService userService;
 
     @Autowired
-    protected BizUserService bizuserService;
+    protected BizUserService bizUserService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class UserController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, userService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QueryUserReq
-      * @return  ApiResp<PagingData<StatUserReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatUserReq.Result>> stat(@Valid StatUserReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, userService.stat(req,paging)));
-     }
 
     /**
      * 新增

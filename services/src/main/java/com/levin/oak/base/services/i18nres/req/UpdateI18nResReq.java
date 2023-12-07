@@ -40,94 +40,47 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[a715ed90917d35c0d8b53a4471ecc4f6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[08b21fca77db034eaf9d8b5439de8b03]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Builder
 //@EqualsAndHashCode(callSuper = true)
-@ToString
+@ToString(callSuper = true)
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS)
-//默认更新注解
-@Update
-public class UpdateI18nResReq extends MultiTenantOrgReq {
+
+public class UpdateI18nResReq extends SimpleUpdateI18nResReq {
 
     private static final long serialVersionUID = -1681554652L;
+
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @NotNull
     @Eq(require = true)
     Long id;
 
-    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
-    @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
-    final boolean eqEditable = true;
-
-    @Size(max = 128)
-    @Schema(title = L_category)
-    String category;
-
-    @Size(max = 64)
-    @Schema(title = L_lang)
-    String lang;
-
-    @Size(max = 768)
-    @Schema(title = L_label)
-    String label;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
-
-    @Size(max = 64)
-    @Schema(title = L_name)
-    String name;
-
-    @Schema(title = L_lastUpdateTime)
-    Date lastUpdateTime;
-
-    @Schema(title = L_orderCode)
-    Integer orderCode;
-
-    @Schema(title = L_enable)
-    Boolean enable;
-
-    @Schema(title = L_editable)
-    Boolean editable;
-
-    @Size(max = 512)
-    @Schema(title = L_remark)
-    String remark;
-
-    @Eq(desc = "乐观锁更新条件")
-    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
+    public UpdateI18nResReq() {
+    }
 
     public UpdateI18nResReq(Long id) {
         this.id = id;
     }
 
+    public UpdateI18nResReq(Long id, boolean forceUpdate) {
+        super(forceUpdate);
+        this.id = id;
+    }
+
     public UpdateI18nResReq updateIdWhenNotBlank(Long id){
         if(isNotBlank(id)){
-        this.id = id;
+            this.id = id;
         }
         return this;
     }
 
-    @PostConstruct
-    public void preUpdate() {
-        //@todo 更新之前初始化数据
-
-        if(getLastUpdateTime() == null){
-            setLastUpdateTime(new Date());
-        }
-    }
 }

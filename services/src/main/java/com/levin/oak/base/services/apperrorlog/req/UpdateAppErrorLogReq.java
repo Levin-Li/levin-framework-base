@@ -40,64 +40,47 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月24日 下午9:39:10, 代码生成哈希校验码：[8087c1caf8f05c8029bd7c01f1b861a7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[f72003bd2d8ffb0ac0ed313db63d9307]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Builder
 //@EqualsAndHashCode(callSuper = true)
-@ToString
+@ToString(callSuper = true)
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppErrorLog.class, alias = E_AppErrorLog.ALIAS)
-//默认更新注解
-@Update
-public class UpdateAppErrorLogReq extends MultiTenantReq {
+
+public class UpdateAppErrorLogReq extends SimpleUpdateAppErrorLogReq {
 
     private static final long serialVersionUID = 1594864095L;
+
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @NotNull
     @Eq(require = true)
     Long id;
 
-    @Size(max = 64)
-    @Schema(title = L_moduleId)
-    String moduleId;
-
-    @Schema(title = L_occurTime)
-    Date occurTime;
-
-    @Size(max = 768)
-    @Schema(title = L_title)
-    String title;
-
-    @Schema(title = L_errorLevel)
-    String errorLevel;
-
-    @Schema(title = L_rootExceptionType)
-    String rootExceptionType;
-
-    @Schema(title = L_exceptionFullInfo)
-    String exceptionFullInfo;
-
+    public UpdateAppErrorLogReq() {
+    }
 
     public UpdateAppErrorLogReq(Long id) {
         this.id = id;
     }
 
+    public UpdateAppErrorLogReq(Long id, boolean forceUpdate) {
+        super(forceUpdate);
+        this.id = id;
+    }
+
     public UpdateAppErrorLogReq updateIdWhenNotBlank(Long id){
         if(isNotBlank(id)){
-        this.id = id;
+            this.id = id;
         }
         return this;
     }
 
-    @PostConstruct
-    public void preUpdate() {
-        //@todo 更新之前初始化数据
-    }
 }

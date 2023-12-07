@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 应用错误日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:15, 代码生成哈希校验码：[dd322d4098591adc7a2b82b38f39000f]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[33dfbdd32a537f82d0f3b05dd8568f61]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class AppErrorLogController extends BaseController{
     protected AppErrorLogService appErrorLogService;
 
     @Autowired
-    protected BizAppErrorLogService bizappErrorLogService;
+    protected BizAppErrorLogService bizAppErrorLogService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class AppErrorLogController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, appErrorLogService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QueryAppErrorLogReq
-      * @return  ApiResp<PagingData<StatAppErrorLogReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatAppErrorLogReq.Result>> stat(@Valid StatAppErrorLogReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, appErrorLogService.stat(req,paging)));
-     }
 
     /**
      * 新增

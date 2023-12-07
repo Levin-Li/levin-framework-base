@@ -23,7 +23,7 @@ import org.springframework.validation.annotation.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.AppClientFile;
 
 import com.levin.oak.base.services.appclientfile.*;
+import com.levin.oak.base.biz.bo.appclientfile.*;
 import static com.levin.oak.base.services.appclientfile.AppClientFileService.*;
 import com.levin.oak.base.services.appclientfile.req.*;
 import com.levin.oak.base.services.appclientfile.info.*;
@@ -55,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  客户端文件-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:03, 代码生成哈希校验码：[2bb7d0752c071a9cd4611599e19a11e5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[04cb06ca011a6a1f70f5b6eaced52c88]，请不要修改和删除此行内容。
  *
  */
 
@@ -118,13 +119,24 @@ public class BizAppClientFileServiceImpl extends BaseService implements BizAppCl
         return appClientFileService.update(req);
     }
 
-
     @Operation(summary = DELETE_ACTION)
     //@Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(AppClientFileIdReq req) {
         return appClientFileService.delete(req);
+    }
+
+    /**
+    * 简单统计demo
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return defaultPagingData 分页数据
+    */
+    @Operation(summary = STAT_ACTION)
+    PagingData<StatAppClientFileReq.Result> stat(StatAppClientFileReq req, Paging paging){
+        return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
     //@Override

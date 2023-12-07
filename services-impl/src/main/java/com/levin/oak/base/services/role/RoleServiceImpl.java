@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:53, 代码生成哈希校验码：[5782313be93e24638035ba9a0a20b99e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[333d4b0ebb41492b8d68b584fe8c7ea5]，请不要修改和删除此行内容。
  *
  */
 
@@ -93,21 +93,19 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     }
 
     @Operation(summary = BATCH_CREATE_ACTION)
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Transactional
     @Override
     public List<String> batchCreate(List<CreateRoleReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-
     @Operation(summary = UPDATE_ACTION)
     @Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
-    public boolean update(UpdateRoleReq req) {
+    public boolean update(UpdateRoleReq req, Object... queryObjs) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-        return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = UPDATE_ACTION)
@@ -156,14 +154,8 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    public PagingData<SimpleRoleInfo> simpleQuery(QueryRoleReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(SimpleRoleInfo.class, req, paging);
-    }
-
-    @Operation(summary = STAT_ACTION)
-    @Override
-    public PagingData<StatRoleReq.Result> stat(StatRoleReq req , Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<RoleInfo> selectQuery(QueryRoleReq req, Paging paging, String... columnNames){
+        return simpleDao.forSelect(RoleInfo.class, req, paging).select(columnNames).findPaging(null, paging);
     }
 
     @Override
@@ -198,6 +190,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Operation(summary = QUERY_ACTION)
     @Override
     public RoleInfo findUnique(QueryRoleReq req){
+        //记录超过一条时抛出异常 throws IncorrectResultSizeDataAccessException
         return simpleDao.findUnique(req);
     }
 

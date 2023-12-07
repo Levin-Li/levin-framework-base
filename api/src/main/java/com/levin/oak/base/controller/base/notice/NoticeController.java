@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 通知控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:16, 代码生成哈希校验码：[cd38f23210b1074871a3ca6a2ccbbc48]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[2d7f51b46b14ed7b61c152d328968e88]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class NoticeController extends BaseController{
     protected NoticeService noticeService;
 
     @Autowired
-    protected BizNoticeService biznoticeService;
+    protected BizNoticeService bizNoticeService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class NoticeController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, noticeService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QueryNoticeReq
-      * @return  ApiResp<PagingData<StatNoticeReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatNoticeReq.Result>> stat(@Valid StatNoticeReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, noticeService.stat(req,paging)));
-     }
 
     /**
      * 新增

@@ -23,7 +23,7 @@ import org.springframework.validation.annotation.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.JobPost;
 
 import com.levin.oak.base.services.jobpost.*;
+import com.levin.oak.base.biz.bo.jobpost.*;
 import static com.levin.oak.base.services.jobpost.JobPostService.*;
 import com.levin.oak.base.services.jobpost.req.*;
 import com.levin.oak.base.services.jobpost.info.*;
@@ -56,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  工作岗位-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:03, 代码生成哈希校验码：[45a16ce001e8f02344b3f7590ead7023]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[cf9d4786e11160f5d0e153f9c00c021b]，请不要修改和删除此行内容。
  *
  */
 
@@ -119,13 +120,24 @@ public class BizJobPostServiceImpl extends BaseService implements BizJobPostServ
         return jobPostService.update(req);
     }
 
-
     @Operation(summary = DELETE_ACTION)
     //@Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(JobPostIdReq req) {
         return jobPostService.delete(req);
+    }
+
+    /**
+    * 简单统计demo
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return defaultPagingData 分页数据
+    */
+    @Operation(summary = STAT_ACTION)
+    PagingData<StatJobPostReq.Result> stat(StatJobPostReq req, Paging paging){
+        return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
     //@Override

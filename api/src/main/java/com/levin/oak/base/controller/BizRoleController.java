@@ -1,5 +1,6 @@
 package com.levin.oak.base.controller;
 
+import com.levin.commons.dao.PagingData;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -86,12 +87,16 @@ public class BizRoleController extends RoleController {
         //只过滤出当前用户完全拥有权限的角色
         if (pagingData.getItems() != null) {
             //@todo 只过滤出当前用户完全拥有权限的角色
-            pagingData.setItems(
+
+            if (!(pagingData instanceof DefaultPagingData)) {
+                pagingData = new DefaultPagingData<>(pagingData);
+            }
+
+            ((DefaultPagingData) (pagingData)).setItems(
                     pagingData.getItems().stream()
                             .filter(roleInfo -> rbacService.canAssignRole(authService.getUserInfo(), null, roleInfo.getCode(), null))
                             .collect(Collectors.toList())
             );
-
         }
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, pagingData));
@@ -108,7 +113,7 @@ public class BizRoleController extends RoleController {
 
         req = checkRequest(CREATE_ACTION, req);
 
-        return ApiResp.ok(bizroleService.create(authService.getUserInfo(), req));
+        return ApiResp.ok(bizRoleService.create(authService.getUserInfo(), req));
     }
 
     /**
@@ -124,7 +129,7 @@ public class BizRoleController extends RoleController {
 
         req = checkRequest(UPDATE_ACTION, req);
 
-        return ApiResp.ok(bizroleService.update(authService.getUserInfo(), req));
+        return ApiResp.ok(bizRoleService.update(authService.getUserInfo(), req));
     }
 
 }

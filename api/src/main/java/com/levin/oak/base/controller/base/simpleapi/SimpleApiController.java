@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单动态接口控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:15, 代码生成哈希校验码：[eb48f5db7c4c9b7961f481a2c24e176b]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[650f32bda6d49880510ee88b907f0c2c]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class SimpleApiController extends BaseController{
     protected SimpleApiService simpleApiService;
 
     @Autowired
-    protected BizSimpleApiService bizsimpleApiService;
+    protected BizSimpleApiService bizSimpleApiService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class SimpleApiController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, simpleApiService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QuerySimpleApiReq
-      * @return  ApiResp<PagingData<StatSimpleApiReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatSimpleApiReq.Result>> stat(@Valid StatSimpleApiReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, simpleApiService.stat(req,paging)));
-     }
 
     /**
      * 新增

@@ -29,7 +29,7 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_TenantApp.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
@@ -37,23 +37,23 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 删除租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午4:56:54, 代码生成哈希校验码：[1da5a575f7c9a7b390c4b473fc229f5a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[9ac6538ee76bd350e2694d5c6cb79875]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
 
-// @AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
-@ToString
+//@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = TenantApp.class, alias = E_TenantApp.ALIAS)
@@ -61,9 +61,10 @@ public class DeleteTenantAppReq extends MultiTenantReq {
 
     private static final long serialVersionUID = 1292984857L;
 
-    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件", hidden = true)
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
     @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
+
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_TenantApp.id)
@@ -79,8 +80,10 @@ public class DeleteTenantAppReq extends MultiTenantReq {
         return this;
     }
 
+
     @PostConstruct
     public void preDelete() {
-        // @todo 删除之前初始化数据
+        //@todo 删除之前初始化数据
     }
+
 }

@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 调度日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:15, 代码生成哈希校验码：[4a402d8ce6123bdf5545bf0ce8d7adf2]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[3e5f7d4de38d4e9b6f5d62b9311b6df4]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class ScheduledLogController extends BaseController{
     protected ScheduledLogService scheduledLogService;
 
     @Autowired
-    protected BizScheduledLogService bizscheduledLogService;
+    protected BizScheduledLogService bizScheduledLogService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class ScheduledLogController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, scheduledLogService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QueryScheduledLogReq
-      * @return  ApiResp<PagingData<StatScheduledLogReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatScheduledLogReq.Result>> stat(@Valid StatScheduledLogReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, scheduledLogService.stat(req,paging)));
-     }
 
     /**
      * 新增

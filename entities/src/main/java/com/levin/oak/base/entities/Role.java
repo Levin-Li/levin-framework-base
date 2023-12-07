@@ -50,11 +50,17 @@ public class Role
 
     @Schema(title = "数据权限")
     public enum OrgDataScope implements EnumDesc {
+
         @Schema(title = "所有部门") All,
         @Schema(title = "指定部门") Assigned,
         @Schema(title = "仅本部门（不含子部门）") MyDept,
         @Schema(title = "本部门及子部门") MyDeptAndChildren,
-        @Schema(title = "仅本人数据") MySelf,
+        @Schema(title = "仅本人数据") MySelf;
+
+        @Override
+        public String toString() {
+            return nameAndDesc();
+        }
     }
 
     @Id

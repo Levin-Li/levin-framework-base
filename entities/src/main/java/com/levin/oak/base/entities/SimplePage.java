@@ -61,6 +61,12 @@ public class SimplePage extends SimpleEntity {
         @Schema(title = "JavaScript") js,
         @Schema(title = "Groovy") groovy,
         @Schema(title = "Freemark") ftlh,
+
+        ;
+        @Override
+        public String toString() {
+            return nameAndDesc();
+        }
     }
 
     @Override

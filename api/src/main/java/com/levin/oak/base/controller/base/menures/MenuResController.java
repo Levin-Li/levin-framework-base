@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 菜单控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:16, 代码生成哈希校验码：[dc0a0be40cdff07e1b36aa863131d23a]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[bf57085e7c3873c724db6a963d16bd41]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class MenuResController extends BaseController{
     protected MenuResService menuResService;
 
     @Autowired
-    protected BizMenuResService bizmenuResService;
+    protected BizMenuResService bizMenuResService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class MenuResController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, menuResService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QueryMenuResReq
-      * @return  ApiResp<PagingData<StatMenuResReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatMenuResReq.Result>> stat(@Valid StatMenuResReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, menuResService.stat(req,paging)));
-     }
 
     /**
      * 新增

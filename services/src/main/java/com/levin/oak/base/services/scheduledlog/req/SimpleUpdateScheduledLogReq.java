@@ -4,6 +4,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
 
 import com.levin.commons.service.domain.*;
 import com.levin.commons.service.support.*;
@@ -40,25 +41,34 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[96d8e0fda95fe050d12d3629458f305f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[8ab6e1285f04fa3538d93e316416a04c]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-@Builder
+//@Builder
 //@EqualsAndHashCode(callSuper = true)
-@ToString
+@ToString(callSuper = true)
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS)
-//默认更新注解
-@Update
+
+//字段更新策略，强制更新时，只要字段被调用set方法，则会被更新，不管是否空值。否则只有值不为[null，空字符串, 空数组，空集合]时才会被更新。
+@Update(condition = "forceUpdate ? isUpdateField(#_fieldName) : #" + C.VALUE_NOT_EMPTY)
 public class SimpleUpdateScheduledLogReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1319130901L;
 
+    //需要更新的字段
+    @Ignore //dao 忽略
+    protected final List<String> needUpdateFields = new ArrayList<>(5);
+
+    @Schema(title = "是否强制更新", description = "强制更新模式时，只要字段被调用set方法，则会被更新，不管是否空值" , hidden = true)
+    @Ignore //dao 忽略
+    protected final boolean forceUpdate;
+
+    //////////////////////////////////////////////////////////////////
 
     @Size(max = 64)
     @Schema(title = L_taskId)
@@ -83,8 +93,82 @@ public class SimpleUpdateScheduledLogReq extends MultiTenantOrgReq {
     Integer optimisticLock;
 
 
+    public SimpleUpdateScheduledLogReq() {
+        this.forceUpdate = false;
+    }
+
+    /**
+    * 强制更新
+    *
+    * @param forceUpdate
+    */
+    public SimpleUpdateScheduledLogReq(boolean forceUpdate) {
+        this.forceUpdate = forceUpdate;
+    }
+
     @PostConstruct
     public void preUpdate() {
         //@todo 更新之前初始化数据
     }
+
+    public <T extends SimpleUpdateScheduledLogReq> T setTaskId(String taskId) {
+        this.taskId = taskId;
+        return addUpdateField(E_ScheduledLog.taskId);
+    }
+    public <T extends SimpleUpdateScheduledLogReq> T setInvokeCycle(String invokeCycle) {
+        this.invokeCycle = invokeCycle;
+        return addUpdateField(E_ScheduledLog.invokeCycle);
+    }
+    public <T extends SimpleUpdateScheduledLogReq> T setInvokeSnapshot(String invokeSnapshot) {
+        this.invokeSnapshot = invokeSnapshot;
+        return addUpdateField(E_ScheduledLog.invokeSnapshot);
+    }
+    public <T extends SimpleUpdateScheduledLogReq> T setIsError(Boolean isError) {
+        this.isError = isError;
+        return addUpdateField(E_ScheduledLog.isError);
+    }
+    public <T extends SimpleUpdateScheduledLogReq> T setInvokeResult(String invokeResult) {
+        this.invokeResult = invokeResult;
+        return addUpdateField(E_ScheduledLog.invokeResult);
+    }
+    public <T extends SimpleUpdateScheduledLogReq> T setOptimisticLock(Integer optimisticLock) {
+        this.optimisticLock = optimisticLock;
+        return addUpdateField(E_ScheduledLog.optimisticLock);
+    }
+
+
+
+    /**
+    * 是否更新字段
+    *
+    * @param fieldName
+    * @return
+    */
+    public boolean isUpdateField(String fieldName) {
+        return needUpdateFields.contains(fieldName);
+    }
+
+    /**
+    * 是否更新字段，并删除更新标记，下次调用将不再更新
+    *
+    * @param fieldName
+    * @return 需要更新字段返回 true
+    */
+    public <T extends SimpleUpdateScheduledLogReq> T removeUpdateField(String fieldName) {
+          needUpdateFields.remove(fieldName);
+        return (T) this;
+    }
+
+    /**
+    * 添加更新字段
+    *
+    * @param fieldName
+    * @return
+    */
+    public <T extends SimpleUpdateScheduledLogReq> T addUpdateField(String fieldName) {
+        boolean isAdd = needUpdateFields.contains(fieldName) || needUpdateFields.add(fieldName);
+        return (T) this;
+    }
+
+
 }

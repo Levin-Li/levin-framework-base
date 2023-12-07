@@ -1,6 +1,7 @@
 package com.levin.oak.base.biz;
 
-import com.levin.commons.dao.support.PagingData;
+
+import com.levin.commons.dao.PagingData;
 import com.levin.commons.dao.support.SimplePaging;
 import com.levin.oak.base.biz.bo.user.UpdateUserPwdReq;
 import com.levin.oak.base.biz.rbac.req.LoginReq;

@@ -29,7 +29,7 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_Org.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 import java.util.Date;
@@ -40,23 +40,23 @@ import com.levin.oak.base.entities.Org.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 删除机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午4:56:55, 代码生成哈希校验码：[fe70397c5a407bbf080b47d8e205496a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[738bceb2577c55f001569e099d9929e9]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
 
-// @AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
-@ToString
+//@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Org.class, alias = E_Org.ALIAS)
@@ -64,9 +64,10 @@ public class DeleteOrgReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -1399842458L;
 
-    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件", hidden = true)
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
     @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
+
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_Org.id)
@@ -82,8 +83,10 @@ public class DeleteOrgReq extends MultiTenantReq {
         return this;
     }
 
+
     @PostConstruct
     public void preDelete() {
-        // @todo 删除之前初始化数据
+        //@todo 删除之前初始化数据
     }
+
 }

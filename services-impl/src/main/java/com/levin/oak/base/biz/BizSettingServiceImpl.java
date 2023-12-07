@@ -1,59 +1,35 @@
 package com.levin.oak.base.biz;
 
 import static com.levin.oak.base.ModuleOption.*;
-import static com.levin.oak.base.entities.EntityConst.*;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.support.*;
-import com.levin.commons.service.domain.*;
 
 import javax.annotation.*;
-import java.util.*;
 import java.util.function.Supplier;
-import java.util.stream.*;
 
+import com.levin.oak.base.biz.bo.setting.UpdateSettingValueReq;
 import org.springframework.cache.annotation.*;
-import org.springframework.transaction.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.util.StringUtils;
-import org.springframework.beans.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
-
-import javax.persistence.PersistenceException;
 
 import cn.hutool.core.lang.*;
 
-import javax.persistence.EntityExistsException;
-import javax.persistence.PersistenceException;
-
-import org.apache.dubbo.config.annotation.*;
-
 import com.levin.oak.base.entities.*;
-import com.levin.oak.base.entities.Setting;
 
 import com.levin.oak.base.services.setting.*;
 import com.levin.oak.base.services.setting.req.*;
 import com.levin.oak.base.services.setting.info.*;
 
-import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.commons.service.support.InjectConst;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.oak.base.entities.Setting.*;
 
-import java.util.Date;
 ////////////////////////////////////
 
 /**

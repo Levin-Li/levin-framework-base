@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 客户端文件控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:16, 代码生成哈希校验码：[0c75c0bcef32445ca18014bf7804d213]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[19dfa209646a4e7b9c84d0efbf8e7376]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class AppClientFileController extends BaseController{
     protected AppClientFileService appClientFileService;
 
     @Autowired
-    protected BizAppClientFileService bizappClientFileService;
+    protected BizAppClientFileService bizAppClientFileService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class AppClientFileController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, appClientFileService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QueryAppClientFileReq
-      * @return  ApiResp<PagingData<StatAppClientFileReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatAppClientFileReq.Result>> stat(@Valid StatAppClientFileReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, appClientFileService.stat(req,paging)));
-     }
 
     /**
      * 新增

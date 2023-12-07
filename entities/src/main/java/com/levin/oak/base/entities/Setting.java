@@ -68,6 +68,11 @@ public class Setting
         Video,
         @Schema(title = "文件")
         File,
+        ;
+        @Override
+        public String toString() {
+            return nameAndDesc();
+        }
     }
 
     @Id

@@ -43,111 +43,47 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[91714861b4800ffb89b2058c0b873062]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[6901b1b36f53124f3963f4a218926276]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Builder
 //@EqualsAndHashCode(callSuper = true)
-@ToString
+@ToString(callSuper = true)
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = TenantApp.class, alias = E_TenantApp.ALIAS)
-//默认更新注解
-@Update
-public class UpdateTenantAppReq extends MultiTenantReq {
+
+public class UpdateTenantAppReq extends SimpleUpdateTenantAppReq {
 
     private static final long serialVersionUID = 1292984857L;
+
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @NotBlank
     @Eq(require = true)
     String id;
 
-    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
-    @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
-    final boolean eqEditable = true;
-
-    @Size(max = 64)
-    @Schema(title = L_name)
-    String name;
-
-    @Size(max = 255)
-    @Schema(title = L_logo)
-    String logo;
-
-    @Size(max = 255)
-    @Schema(title = L_entryUrl)
-    String entryUrl;
-
-    @Size(max = 255)
-    @Schema(title = L_infoUrl)
-    String infoUrl;
-
-    @Size(max = 1800)
-    @InjectVar(domain = "dao", isRequired = "false", converter = PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
-    @Schema(title = L_modules)
-    List<String> modules;
-
-    @Size(max = 255)
-    @Schema(title = L_appSecret , description = D_appSecret)
-    String appSecret;
-
-    @Schema(title = L_salePrice , description = D_salePrice)
-    BigDecimal salePrice;
-
-    @Schema(title = L_purchasePrice , description = D_purchasePrice)
-    BigDecimal purchasePrice;
-
-    @Size(max = 255)
-    @Schema(title = L_orderNo , description = D_orderNo)
-    String orderNo;
-
-    @Schema(title = L_expiredTime , description = D_expiredTime)
-    Date expiredTime;
-
-    @Schema(title = L_lastUpdateTime)
-    Date lastUpdateTime;
-
-    @Schema(title = L_orderCode)
-    Integer orderCode;
-
-    @Schema(title = L_enable)
-    Boolean enable;
-
-    @Schema(title = L_editable)
-    Boolean editable;
-
-    @Size(max = 512)
-    @Schema(title = L_remark)
-    String remark;
-
-    @Eq(desc = "乐观锁更新条件")
-    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
+    public UpdateTenantAppReq() {
+    }
 
     public UpdateTenantAppReq(String id) {
         this.id = id;
     }
 
+    public UpdateTenantAppReq(String id, boolean forceUpdate) {
+        super(forceUpdate);
+        this.id = id;
+    }
+
     public UpdateTenantAppReq updateIdWhenNotBlank(String id){
         if(isNotBlank(id)){
-        this.id = id;
+            this.id = id;
         }
         return this;
     }
 
-    @PostConstruct
-    public void preUpdate() {
-        //@todo 更新之前初始化数据
-
-        if(getLastUpdateTime() == null){
-            setLastUpdateTime(new Date());
-        }
-    }
 }

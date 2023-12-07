@@ -23,7 +23,7 @@ import org.springframework.validation.annotation.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.MenuRes;
 
 import com.levin.oak.base.services.menures.*;
+import com.levin.oak.base.biz.bo.menures.*;
 import static com.levin.oak.base.services.menures.MenuResService.*;
 import com.levin.oak.base.services.menures.req.*;
 import com.levin.oak.base.services.menures.info.*;
@@ -59,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  菜单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:04, 代码生成哈希校验码：[0c08350417e05731240b06c82762e1e8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[6533851f505ab8a82b76b04b6285f5d4]，请不要修改和删除此行内容。
  *
  */
 
@@ -122,13 +123,24 @@ public class BizMenuResServiceImpl extends BaseService implements BizMenuResServ
         return menuResService.update(req);
     }
 
-
     @Operation(summary = DELETE_ACTION)
     //@Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(MenuResIdReq req) {
         return menuResService.delete(req);
+    }
+
+    /**
+    * 简单统计demo
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return defaultPagingData 分页数据
+    */
+    @Operation(summary = STAT_ACTION)
+    PagingData<StatMenuResReq.Result> stat(StatMenuResReq req, Paging paging){
+        return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
     //@Override

@@ -38,13 +38,13 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[275a32de694a2c54a83d3ef23aba525e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[763fea384f6a9397e4155f01a2384165]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
 @Data
 @Accessors(chain = true)
-@ToString
+@ToString(callSuper = true)
 //@EqualsAndHashCode(callSuper = true)
 @FieldNameConstants
 @AllArgsConstructor

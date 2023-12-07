@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 国际化资源控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:16, 代码生成哈希校验码：[7a015912c4e8b64822083c2b61060e9d]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[6b348284e34ee0b81395e58561005a42]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class I18nResController extends BaseController{
     protected I18nResService i18nResService;
 
     @Autowired
-    protected BizI18nResService bizi18nResService;
+    protected BizI18nResService bizI18nResService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class I18nResController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, i18nResService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QueryI18nResReq
-      * @return  ApiResp<PagingData<StatI18nResReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatI18nResReq.Result>> stat(@Valid StatI18nResReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, i18nResService.stat(req,paging)));
-     }
 
     /**
      * 新增

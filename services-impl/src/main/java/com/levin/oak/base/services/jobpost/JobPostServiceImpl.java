@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 工作岗位-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:55, 代码生成哈希校验码：[f44f9bbde96c647b3ba9e5ff86e94e8d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[19e940faca4cd75f05caebb2d5136c96]，请不要修改和删除此行内容。
  *
  */
 
@@ -91,21 +91,19 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     }
 
     @Operation(summary = BATCH_CREATE_ACTION)
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Transactional
     @Override
     public List<String> batchCreate(List<CreateJobPostReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-
     @Operation(summary = UPDATE_ACTION)
     @Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
-    public boolean update(UpdateJobPostReq req) {
+    public boolean update(UpdateJobPostReq req, Object... queryObjs) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-        return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = UPDATE_ACTION)
@@ -154,14 +152,8 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    public PagingData<SimpleJobPostInfo> simpleQuery(QueryJobPostReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(SimpleJobPostInfo.class, req, paging);
-    }
-
-    @Operation(summary = STAT_ACTION)
-    @Override
-    public PagingData<StatJobPostReq.Result> stat(StatJobPostReq req , Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<JobPostInfo> selectQuery(QueryJobPostReq req, Paging paging, String... columnNames){
+        return simpleDao.forSelect(JobPostInfo.class, req, paging).select(columnNames).findPaging(null, paging);
     }
 
     @Override
@@ -196,6 +188,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Operation(summary = QUERY_ACTION)
     @Override
     public JobPostInfo findUnique(QueryJobPostReq req){
+        //记录超过一条时抛出异常 throws IncorrectResultSizeDataAccessException
         return simpleDao.findUnique(req);
     }
 

@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 区域控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:16, 代码生成哈希校验码：[4b85ee2e54e2b61145a816725afc0bb3]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[1357a0cb76768c9244a8e0d215a7baea]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class AreaController extends BaseController{
     protected AreaService areaService;
 
     @Autowired
-    protected BizAreaService bizareaService;
+    protected BizAreaService bizAreaService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class AreaController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, areaService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QueryAreaReq
-      * @return  ApiResp<PagingData<StatAreaReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatAreaReq.Result>> stat(@Valid StatAreaReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, areaService.stat(req,paging)));
-     }
 
     /**
      * 新增

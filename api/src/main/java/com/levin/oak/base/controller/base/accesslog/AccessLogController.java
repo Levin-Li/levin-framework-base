@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 访问日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:16, 代码生成哈希校验码：[0d4264a9e06374a90caf618f5043e101]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[f8ada82c695cd64af08bf4b4f6334998]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class AccessLogController extends BaseController{
     protected AccessLogService accessLogService;
 
     @Autowired
-    protected BizAccessLogService bizaccessLogService;
+    protected BizAccessLogService bizAccessLogService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class AccessLogController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, accessLogService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QueryAccessLogReq
-      * @return  ApiResp<PagingData<StatAccessLogReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatAccessLogReq.Result>> stat(@Valid StatAccessLogReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, accessLogService.stat(req,paging)));
-     }
 
     /**
      * 新增

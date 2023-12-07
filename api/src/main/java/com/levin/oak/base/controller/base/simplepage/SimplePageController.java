@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单页面控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:16, 代码生成哈希校验码：[2196e4e0c51d52b142e071156fdb030e]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[238a60968ad128e1cd850753d7a2c0ae]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class SimplePageController extends BaseController{
     protected SimplePageService simplePageService;
 
     @Autowired
-    protected BizSimplePageService bizsimplePageService;
+    protected BizSimplePageService bizSimplePageService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class SimplePageController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, simplePageService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QuerySimplePageReq
-      * @return  ApiResp<PagingData<StatSimplePageReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatSimplePageReq.Result>> stat(@Valid StatSimplePageReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, simplePageService.stat(req,paging)));
-     }
 
     /**
      * 新增

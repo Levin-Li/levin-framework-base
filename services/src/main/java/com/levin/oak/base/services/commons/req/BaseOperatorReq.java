@@ -18,13 +18,14 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户操作员请求对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月30日 上午7:36:47, 代码生成哈希校验码：[aea119ff1be1db890b65fdebcba6e5c1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:09, 代码生成哈希校验码：[27ddff957500763352b5b5c7a55d3a0f]，请不要修改和删除此行内容。
  * 
  */
 @Schema(title = "操作员请求")
 @Data
 @Accessors(chain = true)
 @FieldNameConstants
+@ToString(callSuper = true)
 public class BaseOperatorReq
         extends MultiTenantOrgReq {
 

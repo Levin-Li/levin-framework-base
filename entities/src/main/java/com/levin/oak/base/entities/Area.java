@@ -51,6 +51,11 @@ public class Area
         Township,
         @Schema(title = "村庄")
         Village,
+        ;
+        @Override
+        public String toString() {
+            return nameAndDesc();
+        }
     }
 
     @Schema(title = "编码")

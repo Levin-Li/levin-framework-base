@@ -341,7 +341,7 @@ public class DefaultRbacInitServiceImpl
             simpleDao.create(
                     new CreateUserReq()
                             .setEmail(SA_ACCOUNT)
-                            .setTelephone("18895279527")
+                            .setTelephone("18995279527")
                             .setPassword(encryptPassword("123456"))
                             .setName("超级管理员")
                             .setEditable(false)

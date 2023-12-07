@@ -51,6 +51,12 @@ public class JobPost
         Professional,
         @Schema(title = "操作岗")
         Operator,
+
+        ;
+        @Override
+        public String toString() {
+            return nameAndDesc();
+        }
     }
 
     @Id

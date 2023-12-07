@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知处理日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:54, 代码生成哈希校验码：[b306b51c3bda1a71d52f669d540a9e61]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[06030867d8f4e73378c1890b891a94e5]，请不要修改和删除此行内容。
  *
  */
 
@@ -90,21 +90,19 @@ public class NoticeProcessLogServiceImpl extends BaseService implements NoticePr
     }
 
     @Operation(summary = BATCH_CREATE_ACTION)
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Transactional
     @Override
     public List<String> batchCreate(List<CreateNoticeProcessLogReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-
     @Operation(summary = UPDATE_ACTION)
     @Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
-    public boolean update(UpdateNoticeProcessLogReq req) {
+    public boolean update(UpdateNoticeProcessLogReq req, Object... queryObjs) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-        return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = UPDATE_ACTION)
@@ -153,14 +151,8 @@ public class NoticeProcessLogServiceImpl extends BaseService implements NoticePr
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    public PagingData<SimpleNoticeProcessLogInfo> simpleQuery(QueryNoticeProcessLogReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(SimpleNoticeProcessLogInfo.class, req, paging);
-    }
-
-    @Operation(summary = STAT_ACTION)
-    @Override
-    public PagingData<StatNoticeProcessLogReq.Result> stat(StatNoticeProcessLogReq req , Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<NoticeProcessLogInfo> selectQuery(QueryNoticeProcessLogReq req, Paging paging, String... columnNames){
+        return simpleDao.forSelect(NoticeProcessLogInfo.class, req, paging).select(columnNames).findPaging(null, paging);
     }
 
     @Override
@@ -195,6 +187,7 @@ public class NoticeProcessLogServiceImpl extends BaseService implements NoticePr
     @Operation(summary = QUERY_ACTION)
     @Override
     public NoticeProcessLogInfo findUnique(QueryNoticeProcessLogReq req){
+        //记录超过一条时抛出异常 throws IncorrectResultSizeDataAccessException
         return simpleDao.findUnique(req);
     }
 

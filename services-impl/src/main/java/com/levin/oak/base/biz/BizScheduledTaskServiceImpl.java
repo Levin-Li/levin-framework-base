@@ -23,7 +23,7 @@ import org.springframework.validation.annotation.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.ScheduledTask;
 
 import com.levin.oak.base.services.scheduledtask.*;
+import com.levin.oak.base.biz.bo.scheduledtask.*;
 import static com.levin.oak.base.services.scheduledtask.ScheduledTaskService.*;
 import com.levin.oak.base.services.scheduledtask.req.*;
 import com.levin.oak.base.services.scheduledtask.info.*;
@@ -55,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  调度任务-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:03, 代码生成哈希校验码：[1680fcc6828914604cfc82c29051e4e4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[5896ce37531b10be0bf15b876331961c]，请不要修改和删除此行内容。
  *
  */
 
@@ -118,13 +119,24 @@ public class BizScheduledTaskServiceImpl extends BaseService implements BizSched
         return scheduledTaskService.update(req);
     }
 
-
     @Operation(summary = DELETE_ACTION)
     //@Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(ScheduledTaskIdReq req) {
         return scheduledTaskService.delete(req);
+    }
+
+    /**
+    * 简单统计demo
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return defaultPagingData 分页数据
+    */
+    @Operation(summary = STAT_ACTION)
+    PagingData<StatScheduledTaskReq.Result> stat(StatScheduledTaskReq req, Paging paging){
+        return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
     //@Override

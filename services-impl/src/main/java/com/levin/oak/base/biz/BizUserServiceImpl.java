@@ -28,7 +28,7 @@ import com.levin.oak.base.services.user.info.*;
 import com.levin.oak.base.services.*;
 
 import java.io.Serializable;
-
+import com.levin.commons.dao.PagingData;
 
 ////////////////////////////////////
 //自动导入列表

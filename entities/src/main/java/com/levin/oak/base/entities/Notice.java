@@ -68,7 +68,11 @@ public class Notice
         @Schema(title = "MarkDown")
         Markdown,
         @Schema(title = "AmisJsonView")
-        AmisJsonView,
+        AmisJsonView;
+        @Override
+        public String toString() {
+            return nameAndDesc();
+        }
     }
 
     @Id

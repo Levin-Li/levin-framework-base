@@ -29,7 +29,7 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_Area.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.Date;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
@@ -37,23 +37,23 @@ import java.util.Set;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.Area.*;
-
 ////////////////////////////////////
 
 /**
  * 删除区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午4:56:56, 代码生成哈希校验码：[462df205a7d7d101d4205bd253a5bc0d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[8599fb771483d621ed07e0c2cf2dba8d]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
 
-// @AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
-@ToString
+//@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Area.class, alias = E_Area.ALIAS)
@@ -61,9 +61,10 @@ public class DeleteAreaReq extends BaseReq {
 
     private static final long serialVersionUID = -445860277L;
 
-    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件", hidden = true)
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
     @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
+
 
     @Schema(title = L_code + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_Area.code)
@@ -79,8 +80,10 @@ public class DeleteAreaReq extends BaseReq {
         return this;
     }
 
+
     @PostConstruct
     public void preDelete() {
-        // @todo 删除之前初始化数据
+        //@todo 删除之前初始化数据
     }
+
 }

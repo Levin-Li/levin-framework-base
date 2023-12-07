@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:54, 代码生成哈希校验码：[e7cd8adeb8f01fbe0e8e686b82ae86cb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[1f4974d37f102d8418a81e60e0fa4b23]，请不要修改和删除此行内容。
  *
  */
 
@@ -91,21 +91,19 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
     }
 
     @Operation(summary = BATCH_CREATE_ACTION)
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Transactional
     @Override
     public List<String> batchCreate(List<CreateNoticeReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-
     @Operation(summary = UPDATE_ACTION)
     @Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
-    public boolean update(UpdateNoticeReq req) {
+    public boolean update(UpdateNoticeReq req, Object... queryObjs) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-        return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = UPDATE_ACTION)
@@ -154,14 +152,8 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    public PagingData<SimpleNoticeInfo> simpleQuery(QueryNoticeReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(SimpleNoticeInfo.class, req, paging);
-    }
-
-    @Operation(summary = STAT_ACTION)
-    @Override
-    public PagingData<StatNoticeReq.Result> stat(StatNoticeReq req , Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<NoticeInfo> selectQuery(QueryNoticeReq req, Paging paging, String... columnNames){
+        return simpleDao.forSelect(NoticeInfo.class, req, paging).select(columnNames).findPaging(null, paging);
     }
 
     @Override
@@ -196,6 +188,7 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
     @Operation(summary = QUERY_ACTION)
     @Override
     public NoticeInfo findUnique(QueryNoticeReq req){
+        //记录超过一条时抛出异常 throws IncorrectResultSizeDataAccessException
         return simpleDao.findUnique(req);
     }
 

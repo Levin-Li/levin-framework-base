@@ -29,7 +29,7 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_MenuRes.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.oak.base.entities.MenuRes;
 import java.util.Date;
 import com.levin.commons.rbac.MenuItem.*;
@@ -38,23 +38,23 @@ import com.levin.oak.base.services.menures.info.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 删除菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午4:56:56, 代码生成哈希校验码：[b857c8af87d5e5455dee2b4dd4572c8b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[4b51e6ad6e76e1839689fb0a0b6f2387]，请不要修改和删除此行内容。
+ *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
 @Data
 
-// @AllArgsConstructor
+//@AllArgsConstructor
 
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
-@ToString
+//@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = MenuRes.class, alias = E_MenuRes.ALIAS)
@@ -62,9 +62,10 @@ public class DeleteMenuResReq extends MultiTenantReq {
 
     private static final long serialVersionUID = -887712701L;
 
-    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件", hidden = true)
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
     @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
+
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(value = E_MenuRes.id)
@@ -80,8 +81,10 @@ public class DeleteMenuResReq extends MultiTenantReq {
         return this;
     }
 
+
     @PostConstruct
     public void preDelete() {
-        // @todo 删除之前初始化数据
+        //@todo 删除之前初始化数据
     }
+
 }

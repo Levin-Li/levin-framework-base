@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 应用接入-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:53, 代码生成哈希校验码：[a32ddc36d2f7d236ded879404971bb54]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[e2f5249ab1e4bc0376374930d474ce21]，请不要修改和删除此行内容。
  *
  */
 
@@ -90,21 +90,19 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
     }
 
     @Operation(summary = BATCH_CREATE_ACTION)
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Transactional
     @Override
     public List<String> batchCreate(List<CreateAppClientReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-
     @Operation(summary = UPDATE_ACTION)
     @Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
-    public boolean update(UpdateAppClientReq req) {
+    public boolean update(UpdateAppClientReq req, Object... queryObjs) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-        return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = UPDATE_ACTION)
@@ -153,14 +151,8 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    public PagingData<SimpleAppClientInfo> simpleQuery(QueryAppClientReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(SimpleAppClientInfo.class, req, paging);
-    }
-
-    @Operation(summary = STAT_ACTION)
-    @Override
-    public PagingData<StatAppClientReq.Result> stat(StatAppClientReq req , Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<AppClientInfo> selectQuery(QueryAppClientReq req, Paging paging, String... columnNames){
+        return simpleDao.forSelect(AppClientInfo.class, req, paging).select(columnNames).findPaging(null, paging);
     }
 
     @Override
@@ -195,6 +187,7 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
     @Operation(summary = QUERY_ACTION)
     @Override
     public AppClientInfo findUnique(QueryAppClientReq req){
+        //记录超过一条时抛出异常 throws IncorrectResultSizeDataAccessException
         return simpleDao.findUnique(req);
     }
 

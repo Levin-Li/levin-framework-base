@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 角色控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:15, 代码生成哈希校验码：[8b842de5acf7099960a4c2889693c715]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[cdd9de6b567b635b8b19ab52897b1167]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class RoleController extends BaseController{
     protected RoleService roleService;
 
     @Autowired
-    protected BizRoleService bizroleService;
+    protected BizRoleService bizRoleService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class RoleController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, roleService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QueryRoleReq
-      * @return  ApiResp<PagingData<StatRoleReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatRoleReq.Result>> stat(@Valid StatRoleReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, roleService.stat(req,paging)));
-     }
 
     /**
      * 新增

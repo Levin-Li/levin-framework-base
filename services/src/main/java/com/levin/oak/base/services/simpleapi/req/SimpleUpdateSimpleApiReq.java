@@ -4,6 +4,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
+import com.levin.commons.dao.annotation.Ignore;
 
 import com.levin.commons.service.domain.*;
 import com.levin.commons.service.support.*;
@@ -43,29 +44,38 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[cf52e2d728aa21b9d20aeb90098988a3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[1fed7a6e2655a4d23786e9f2a8dcecd6]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-@Builder
+//@Builder
 //@EqualsAndHashCode(callSuper = true)
-@ToString
+@ToString(callSuper = true)
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS)
-//默认更新注解
-@Update
+
+//字段更新策略，强制更新时，只要字段被调用set方法，则会被更新，不管是否空值。否则只有值不为[null，空字符串, 空数组，空集合]时才会被更新。
+@Update(condition = "forceUpdate ? isUpdateField(#_fieldName) : #" + C.VALUE_NOT_EMPTY)
 public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = 1021385738L;
 
+    //需要更新的字段
+    @Ignore //dao 忽略
+    protected final List<String> needUpdateFields = new ArrayList<>(5);
+
+    @Schema(title = "是否强制更新", description = "强制更新模式时，只要字段被调用set方法，则会被更新，不管是否空值" , hidden = true)
+    @Ignore //dao 忽略
+    protected final boolean forceUpdate;
+
+    //////////////////////////////////////////////////////////////////
+
     @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
     @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
-
 
     @Size(max = 16)
     @Schema(title = L_methods , description = D_methods)
@@ -113,6 +123,37 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq {
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
 
+    @Schema(title = L_orderCode)
+    Integer orderCode;
+
+    @Schema(title = L_enable)
+    Boolean enable;
+
+    @Schema(title = L_editable)
+    Boolean editable;
+
+    @Size(max = 512)
+    @Schema(title = L_remark)
+    String remark;
+
+    @Eq(desc = "乐观锁更新条件")
+    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
+    @Schema(title = L_optimisticLock)
+    Integer optimisticLock;
+
+
+    public SimpleUpdateSimpleApiReq() {
+        this.forceUpdate = false;
+    }
+
+    /**
+    * 强制更新
+    *
+    * @param forceUpdate
+    */
+    public SimpleUpdateSimpleApiReq(boolean forceUpdate) {
+        this.forceUpdate = forceUpdate;
+    }
 
     @PostConstruct
     public void preUpdate() {
@@ -122,4 +163,109 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq {
             setLastUpdateTime(new Date());
         }
     }
+
+    public <T extends SimpleUpdateSimpleApiReq> T setMethods(String methods) {
+        this.methods = methods;
+        return addUpdateField(E_SimpleApi.methods);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setLanguage(Language language) {
+        this.language = language;
+        return addUpdateField(E_SimpleApi.language);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setType(String type) {
+        this.type = type;
+        return addUpdateField(E_SimpleApi.type);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setCategory(String category) {
+        this.category = category;
+        return addUpdateField(E_SimpleApi.category);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setGroupName(String groupName) {
+        this.groupName = groupName;
+        return addUpdateField(E_SimpleApi.groupName);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setIcon(String icon) {
+        this.icon = icon;
+        return addUpdateField(E_SimpleApi.icon);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setPath(String path) {
+        this.path = path;
+        return addUpdateField(E_SimpleApi.path);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setRequireAuthorizations(List<String> requireAuthorizations) {
+        this.requireAuthorizations = requireAuthorizations;
+        return addUpdateField(E_SimpleApi.requireAuthorizations);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setContent(String content) {
+        this.content = content;
+        return addUpdateField(E_SimpleApi.content);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setDomain(String domain) {
+        this.domain = domain;
+        return addUpdateField(E_SimpleApi.domain);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setName(String name) {
+        this.name = name;
+        return addUpdateField(E_SimpleApi.name);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+        return addUpdateField(E_SimpleApi.lastUpdateTime);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setOrderCode(Integer orderCode) {
+        this.orderCode = orderCode;
+        return addUpdateField(E_SimpleApi.orderCode);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setEnable(Boolean enable) {
+        this.enable = enable;
+        return addUpdateField(E_SimpleApi.enable);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setEditable(Boolean editable) {
+        this.editable = editable;
+        return addUpdateField(E_SimpleApi.editable);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setRemark(String remark) {
+        this.remark = remark;
+        return addUpdateField(E_SimpleApi.remark);
+    }
+    public <T extends SimpleUpdateSimpleApiReq> T setOptimisticLock(Integer optimisticLock) {
+        this.optimisticLock = optimisticLock;
+        return addUpdateField(E_SimpleApi.optimisticLock);
+    }
+
+
+
+    /**
+    * 是否更新字段
+    *
+    * @param fieldName
+    * @return
+    */
+    public boolean isUpdateField(String fieldName) {
+        return needUpdateFields.contains(fieldName);
+    }
+
+    /**
+    * 是否更新字段，并删除更新标记，下次调用将不再更新
+    *
+    * @param fieldName
+    * @return 需要更新字段返回 true
+    */
+    public <T extends SimpleUpdateSimpleApiReq> T removeUpdateField(String fieldName) {
+          needUpdateFields.remove(fieldName);
+        return (T) this;
+    }
+
+    /**
+    * 添加更新字段
+    *
+    * @param fieldName
+    * @return
+    */
+    public <T extends SimpleUpdateSimpleApiReq> T addUpdateField(String fieldName) {
+        boolean isAdd = needUpdateFields.contains(fieldName) || needUpdateFields.add(fieldName);
+        return (T) this;
+    }
+
+
 }

@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 调度任务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午3:31:16, 代码生成哈希校验码：[be03a4f4d608ba012e423aabbf30b9cf]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[4c93dbb5293075ceb447f106a5510a1c]，请不要修改和删除此行内容。
 *
 */
 
@@ -81,7 +81,7 @@ public abstract class ScheduledTaskController extends BaseController{
     protected ScheduledTaskService scheduledTaskService;
 
     @Autowired
-    protected BizScheduledTaskService bizscheduledTaskService;
+    protected BizScheduledTaskService bizScheduledTaskService;
 
     /**
      * 分页列表查找
@@ -98,21 +98,6 @@ public abstract class ScheduledTaskController extends BaseController{
 
         return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, scheduledTaskService.query(req,paging)));
     }
-
-     /**
-      * 简单统计
-      *
-      * @param req QueryScheduledTaskReq
-      * @return  ApiResp<PagingData<StatScheduledTaskReq.Result>>
-      */
-     //@GetMapping("/stat") //默认不开放
-     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-     public ApiResp<PagingData<StatScheduledTaskReq.Result>> stat(@Valid StatScheduledTaskReq req, SimplePaging paging) {
-
-         req = checkRequest(STAT_ACTION, req);
-
-         return ApiResp.ok(checkResponse(STAT_ACTION, scheduledTaskService.stat(req,paging)));
-     }
 
     /**
      * 新增

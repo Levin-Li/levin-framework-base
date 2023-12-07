@@ -3,7 +3,7 @@ package com.levin.oak.base.controller.admin;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.jwt.JWT;
 import com.levin.commons.dao.annotation.order.OrderBy;
-import com.levin.commons.dao.support.PagingData;
+import com.levin.commons.dao.PagingData;
 import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;

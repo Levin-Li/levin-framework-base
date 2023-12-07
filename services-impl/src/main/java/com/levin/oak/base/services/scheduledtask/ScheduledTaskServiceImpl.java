@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度任务-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:54, 代码生成哈希校验码：[7f6f3d228b8db879afcd1146a09f9a22]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[9782ff96fc4e24726b3790cb0dae27c1]，请不要修改和删除此行内容。
  *
  */
 
@@ -90,21 +90,19 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     }
 
     @Operation(summary = BATCH_CREATE_ACTION)
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Transactional
     @Override
     public List<String> batchCreate(List<CreateScheduledTaskReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-
     @Operation(summary = UPDATE_ACTION)
     @Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
-    public boolean update(UpdateScheduledTaskReq req) {
+    public boolean update(UpdateScheduledTaskReq req, Object... queryObjs) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-        return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = UPDATE_ACTION)
@@ -153,14 +151,8 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    public PagingData<SimpleScheduledTaskInfo> simpleQuery(QueryScheduledTaskReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(SimpleScheduledTaskInfo.class, req, paging);
-    }
-
-    @Operation(summary = STAT_ACTION)
-    @Override
-    public PagingData<StatScheduledTaskReq.Result> stat(StatScheduledTaskReq req , Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<ScheduledTaskInfo> selectQuery(QueryScheduledTaskReq req, Paging paging, String... columnNames){
+        return simpleDao.forSelect(ScheduledTaskInfo.class, req, paging).select(columnNames).findPaging(null, paging);
     }
 
     @Override
@@ -195,6 +187,7 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     @Operation(summary = QUERY_ACTION)
     @Override
     public ScheduledTaskInfo findUnique(QueryScheduledTaskReq req){
+        //记录超过一条时抛出异常 throws IncorrectResultSizeDataAccessException
         return simpleDao.findUnique(req);
     }
 

@@ -71,11 +71,22 @@ public class User
         @Schema(title = "正常") Normal,
         @Schema(title = "冻结") Freeze,
         @Schema(title = "注销") Cancellation,
+        ;
+
+        @Override
+        public String toString() {
+            return nameAndDesc();
+        }
     }
 
     public enum Sex implements EnumDesc {
         @Schema(title = "男") Man,
-        @Schema(title = "女") Women,
+        @Schema(title = "女") Women;
+
+        @Override
+        public String toString() {
+            return nameAndDesc();
+        }
     }
 
     public enum Category implements EnumDesc {
@@ -90,7 +101,12 @@ public class User
         @Schema(title = "VIP访客")
         VipVisitor,
         @Schema(title = "普通访客")
-        Visitor,
+        Visitor;
+
+        @Override
+        public String toString() {
+            return nameAndDesc();
+        }
     }
 
     @Id

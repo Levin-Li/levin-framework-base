@@ -56,6 +56,12 @@ public class Dict
     public enum Type implements EnumDesc {
         @Schema(title = "系统") System,
         @Schema(title = "自定义") Custom,
+
+        ;
+        @Override
+        public String toString() {
+            return nameAndDesc();
+        }
     }
 
     @Data

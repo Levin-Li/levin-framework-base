@@ -23,7 +23,7 @@ import org.springframework.validation.annotation.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.Notice;
 
 import com.levin.oak.base.services.notice.*;
+import com.levin.oak.base.biz.bo.notice.*;
 import static com.levin.oak.base.services.notice.NoticeService.*;
 import com.levin.oak.base.services.notice.req.*;
 import com.levin.oak.base.services.notice.info.*;
@@ -56,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  通知-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:03, 代码生成哈希校验码：[3f3eddef4ad23b3c03bb1b83dae54fe4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[768e3ac44c9dfb185df98b699ff6979a]，请不要修改和删除此行内容。
  *
  */
 
@@ -119,13 +120,24 @@ public class BizNoticeServiceImpl extends BaseService implements BizNoticeServic
         return noticeService.update(req);
     }
 
-
     @Operation(summary = DELETE_ACTION)
     //@Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(NoticeIdReq req) {
         return noticeService.delete(req);
+    }
+
+    /**
+    * 简单统计demo
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return defaultPagingData 分页数据
+    */
+    @Operation(summary = STAT_ACTION)
+    PagingData<StatNoticeReq.Result> stat(StatNoticeReq req, Paging paging){
+        return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
     //@Override

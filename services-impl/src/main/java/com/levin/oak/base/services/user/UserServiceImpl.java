@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 用户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午10:20:06, 代码生成哈希校验码：[5515ef4f3df4bffead90c094568fabe5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:46:16, 代码生成哈希校验码：[affeeb50335a055e22e183b27f4d5229]，请不要修改和删除此行内容。
  *
  */
 
@@ -80,31 +80,35 @@ public class UserServiceImpl extends BaseService implements UserService {
         return getSelfProxy(UserServiceImpl.class);
     }
 
+    /**
+    * 创建记录，返回主键ID
+    * @param req
+    * @return pkId 主键ID
+    */
     @Operation(summary = CREATE_ACTION)
     @Transactional
     @Override
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
     public String create(CreateUserReq req){
-        //保存自动先查询唯一约束，并给出错误信息
+        //dao支持保存前先自动查询唯一约束，并给出错误信息
         User entity = simpleDao.create(req, true);
         return entity.getId();
     }
 
     @Operation(summary = BATCH_CREATE_ACTION)
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Transactional
     @Override
     public List<String> batchCreate(List<CreateUserReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-
     @Operation(summary = UPDATE_ACTION)
     @Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
-    public boolean update(UpdateUserReq req) {
+    public boolean update(UpdateUserReq req, Object... queryObjs) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-        return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = UPDATE_ACTION)
@@ -153,14 +157,8 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    public PagingData<SimpleUserInfo> simpleQuery(QueryUserReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(SimpleUserInfo.class, req, paging);
-    }
-
-    @Operation(summary = STAT_ACTION)
-    @Override
-    public PagingData<StatUserReq.Result> stat(StatUserReq req , Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<UserInfo> selectQuery(QueryUserReq req, Paging paging, String... columnNames){
+        return simpleDao.forSelect(UserInfo.class, req, paging).select(columnNames).findPaging(null, paging);
     }
 
     @Override
@@ -195,6 +193,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Operation(summary = QUERY_ACTION)
     @Override
     public UserInfo findUnique(QueryUserReq req){
+        //记录超过一条时抛出异常 throws IncorrectResultSizeDataAccessException
         return simpleDao.findUnique(req);
     }
 

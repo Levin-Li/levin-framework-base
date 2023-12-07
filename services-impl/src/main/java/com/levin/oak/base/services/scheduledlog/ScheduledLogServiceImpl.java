@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:07:54, 代码生成哈希校验码：[87a30a1544617c4a1f007f76e53910ed]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[211a82518ee75d64663c7fa2bc4797a6]，请不要修改和删除此行内容。
  *
  */
 
@@ -90,21 +90,19 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
     }
 
     @Operation(summary = BATCH_CREATE_ACTION)
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
     @Transactional
     @Override
     public List<String> batchCreate(List<CreateScheduledLogReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
-
     @Operation(summary = UPDATE_ACTION)
     @Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
-    public boolean update(UpdateScheduledLogReq req) {
+    public boolean update(UpdateScheduledLogReq req, Object... queryObjs) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-        return simpleDao.singleUpdateByQueryObj(req);
+        return simpleDao.singleUpdateByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = UPDATE_ACTION)
@@ -153,14 +151,8 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    public PagingData<SimpleScheduledLogInfo> simpleQuery(QueryScheduledLogReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(SimpleScheduledLogInfo.class, req, paging);
-    }
-
-    @Operation(summary = STAT_ACTION)
-    @Override
-    public PagingData<StatScheduledLogReq.Result> stat(StatScheduledLogReq req , Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<ScheduledLogInfo> selectQuery(QueryScheduledLogReq req, Paging paging, String... columnNames){
+        return simpleDao.forSelect(ScheduledLogInfo.class, req, paging).select(columnNames).findPaging(null, paging);
     }
 
     @Override
@@ -195,6 +187,7 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
     @Operation(summary = QUERY_ACTION)
     @Override
     public ScheduledLogInfo findUnique(QueryScheduledLogReq req){
+        //记录超过一条时抛出异常 throws IncorrectResultSizeDataAccessException
         return simpleDao.findUnique(req);
     }
 

@@ -40,66 +40,47 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[d89176a2f39b256b1942ea3b1425edfc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[61246c5cd6b5bdf6097f0255ebfa0c04]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Builder
 //@EqualsAndHashCode(callSuper = true)
-@ToString
+@ToString(callSuper = true)
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS)
-//默认更新注解
-@Update
-public class UpdateScheduledLogReq extends MultiTenantOrgReq {
+
+public class UpdateScheduledLogReq extends SimpleUpdateScheduledLogReq {
 
     private static final long serialVersionUID = 1319130901L;
+
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @NotBlank
     @Eq(require = true)
     String id;
 
-    @Size(max = 64)
-    @Schema(title = L_taskId)
-    String taskId;
-
-    @Size(max = 128)
-    @Schema(title = L_invokeCycle)
-    String invokeCycle;
-
-    @Schema(title = L_invokeSnapshot , description = D_invokeSnapshot)
-    String invokeSnapshot;
-
-    @Schema(title = L_isError)
-    Boolean isError;
-
-    @Schema(title = L_invokeResult)
-    String invokeResult;
-
-    @Eq(desc = "乐观锁更新条件")
-    @Update(incrementMode = true, paramExpr = "1", condition = "", desc = "乐观锁版本号 + 1")
-    @Schema(title = L_optimisticLock)
-    Integer optimisticLock;
-
+    public UpdateScheduledLogReq() {
+    }
 
     public UpdateScheduledLogReq(String id) {
         this.id = id;
     }
 
+    public UpdateScheduledLogReq(String id, boolean forceUpdate) {
+        super(forceUpdate);
+        this.id = id;
+    }
+
     public UpdateScheduledLogReq updateIdWhenNotBlank(String id){
         if(isNotBlank(id)){
-        this.id = id;
+            this.id = id;
         }
         return this;
     }
 
-    @PostConstruct
-    public void preUpdate() {
-        //@todo 更新之前初始化数据
-    }
 }

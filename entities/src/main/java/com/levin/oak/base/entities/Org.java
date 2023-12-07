@@ -78,6 +78,11 @@ public class Org
 
         @Schema(title = "注销")
         canceled,
+        ;
+        @Override
+        public String toString() {
+            return nameAndDesc();
+        }
     }
 
     @Schema(title = "组织类型")

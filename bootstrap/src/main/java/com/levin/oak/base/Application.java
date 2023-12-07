@@ -114,8 +114,7 @@ public class Application {
     @Bean
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
         return builder -> {
-            builder
-                    .cacheDefaults(RedisCacheConfiguration.defaultCacheConfig()
+            builder.cacheDefaults(RedisCacheConfiguration.defaultCacheConfig()
                             //redis 默认缓存 60 分钟
                             .entryTtl(Duration.of(60, ChronoUnit.MINUTES))
                             .disableCachingNullValues()

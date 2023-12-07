@@ -23,7 +23,7 @@ import org.springframework.validation.annotation.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.dao.*;
+//import org.springframework.dao.*;
 
 import javax.persistence.PersistenceException;
 import cn.hutool.core.lang.*;
@@ -36,6 +36,7 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.AccessLog;
 
 import com.levin.oak.base.services.accesslog.*;
+import com.levin.oak.base.biz.bo.accesslog.*;
 import static com.levin.oak.base.services.accesslog.AccessLogService.*;
 import com.levin.oak.base.services.accesslog.req.*;
 import com.levin.oak.base.services.accesslog.info.*;
@@ -55,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  访问日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月1日 下午2:46:03, 代码生成哈希校验码：[4a0eefb0cc7a553266d64a13abdde98f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[e5c161c2af357320c8c5586551d977b1]，请不要修改和删除此行内容。
  *
  */
 
@@ -118,13 +119,24 @@ public class BizAccessLogServiceImpl extends BaseService implements BizAccessLog
         return accessLogService.update(req);
     }
 
-
     @Operation(summary = DELETE_ACTION)
     //@Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(AccessLogIdReq req) {
         return accessLogService.delete(req);
+    }
+
+    /**
+    * 简单统计demo
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return defaultPagingData 分页数据
+    */
+    @Operation(summary = STAT_ACTION)
+    PagingData<StatAccessLogReq.Result> stat(StatAccessLogReq req, Paging paging){
+        return simpleDao.findPagingDataByQueryObj(req, paging);
     }
 
     //@Override
