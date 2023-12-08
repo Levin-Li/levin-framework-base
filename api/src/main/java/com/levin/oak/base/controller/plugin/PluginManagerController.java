@@ -33,7 +33,7 @@ import static com.levin.oak.base.ModuleOption.*;
 @Tag(name = "插件管理", description = "插件管理")
 @Slf4j
 @Valid
-@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME)
+@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME + "-插件")
 public class PluginManagerController extends BaseController {
 
     @Autowired
