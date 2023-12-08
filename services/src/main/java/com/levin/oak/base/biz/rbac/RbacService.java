@@ -8,6 +8,7 @@ import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.RbacUserObject;
 import com.levin.commons.rbac.ResAuthorize;
 import org.springframework.lang.Nullable;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
 
@@ -32,6 +33,23 @@ import static org.springframework.util.StringUtils.*;
 public interface RbacService<U> {
 
     String ROLE_PREFIX = RbacRoleObject.ROLE_PREFIX;
+
+
+    /**
+     * AntPathMatcher
+     *
+     * @return
+     */
+    default AntPathMatcher getAntPathMatcher() {
+
+        AntPathMatcher antPathMatcher = new AntPathMatcher(getPermissionDelimiter());
+
+        antPathMatcher.setTrimTokens(true);
+
+        antPathMatcher.setCachePatterns(true);
+
+        return antPathMatcher;
+    }
 
     /**
      * 设置用户加载服务
@@ -72,6 +90,9 @@ public interface RbacService<U> {
      * @return
      */
     default boolean isPattern(String permission) {
+
+//        return getAntPathMatcher().isPattern(permission);
+
         //@todo 尽量优化性能
         return StringUtils.hasText(permission) && (permission.indexOf('*') >= 0 || permission.indexOf('|') >= 0);
     }
@@ -108,8 +129,12 @@ public interface RbacService<U> {
     default boolean textPatternMatch(@Nullable String pattern, @Nullable String str) {
         //@todo 尽量优化性能
         //支持按竖线分隔
+
+//        return !StringUtils.hasText(str) || (StringUtils.hasText(pattern) && getAntPathMatcher().match(pattern, str));
+
         return !StringUtils.hasText(str)
                 || (StringUtils.hasText(pattern) && StrUtil.split(pattern, '|').stream().filter(StringUtils::hasText).anyMatch(p -> PatternMatchUtils.simpleMatch(p, str)));
+
     }
 
     /**
@@ -117,9 +142,11 @@ public interface RbacService<U> {
      *
      * <p>
      * 重要方法，能提升性能
+     * <p>
+     * 可以支持无限层级
      *
-     * @param requirePermission
-     * @param ownerPermission
+     * @param requirePermission eg. com.oak:系统数据-租户:id2:查询
+     * @param ownerPermission   eg. **:查询
      * @return
      */
     default boolean simpleMatch(String requirePermission, String ownerPermission) {
@@ -150,30 +177,44 @@ public interface RbacService<U> {
         if (opIsRole || rpIsRole) {
             //2、只要是角色，就只能是角色之间比较
             return opIsRole && rpIsRole && textPatternMatch(ownerPermission, requirePermission);
+
+//            return opIsRole && rpIsRole && getAntPathMatcher().match(ownerPermission, requirePermission);
         }
 
-        //3、如果拥有权限是模板
-        if (isPattern(ownerPermission)) {
-
-            //拥有的权限 A*:B*:C*:D*
-            final String[] ownerList = StrSplitter.splitToArray(ownerPermission, getPermissionDelimiter(), 0, true, false);// ownerPermission.split(getPermissionDelimiter());
-
-            final AtomicInteger idx = new AtomicInteger(-1);
-
-            //切割出单个比较项目
-            return  //Stream.of(requirePermission.split(getPermissionDelimiter()))
-
-                    StrUtil.split(requirePermission, getPermissionDelimiter()).stream()
-
-                            .allMatch(rp -> textPatternMatch(
-                                            //超过数组长度以后，总是取最后一个
-                                            (ownerList[idx.updateAndGet(oldValue -> oldValue < ownerList.length - 1 ? oldValue + 1 : oldValue)])
-                                            , trimWhitespace(rp)
-                                    )
-                            );
+        //3、如果拥有权限不是模板
+        if (!isPattern(ownerPermission)) {
+            return false;
         }
 
-        return false;
+//        return getAntPathMatcher().match(ownerPermission, requirePermission);
+
+//        //拥有的权限 A*:B*:C*:D*
+        final String[] ownerList = StrSplitter.splitToArray(ownerPermission, getPermissionDelimiter(), 0, true, false);// ownerPermission.split(getPermissionDelimiter());
+
+        final AtomicInteger idx = new AtomicInteger(-1);
+
+//        //@todo ** 支持
+//        for (String rp : StrUtil.split(requirePermission, getPermissionDelimiter())) {
+//
+//            String op = ownerList[idx.updateAndGet(oldValue -> oldValue < ownerList.length - 1 ? oldValue + 1 : oldValue)];
+//
+//            boolean isLast = idx.get() == ownerList.length - 1;
+//
+//            if (isLast && op.equals("**")) {
+//                //如果是最后一个，直接比较
+//                return true;
+//            }
+//
+//        }
+
+        //切割出单个比较项目
+        return StrUtil.split(requirePermission, getPermissionDelimiter()).stream()
+                .allMatch(rp -> textPatternMatch(
+                                //超过数组长度以后，总是取最后一个
+                                (ownerList[idx.updateAndGet(oldValue -> oldValue < ownerList.length - 1 ? oldValue + 1 : oldValue)])
+                                , trimWhitespace(rp)
+                        )
+                );
     }
 
 

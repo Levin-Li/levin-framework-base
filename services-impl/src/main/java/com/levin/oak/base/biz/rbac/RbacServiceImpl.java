@@ -19,6 +19,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Role;
 import org.springframework.context.expression.BeanFactoryResolver;
 import org.springframework.stereotype.Service;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -33,8 +34,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
-import static org.springframework.util.StringUtils.hasText;
-import static org.springframework.util.StringUtils.trimWhitespace;
+import static org.springframework.util.StringUtils.*;
 
 
 /**
@@ -68,6 +68,24 @@ public class RbacServiceImpl implements RbacService<Serializable> {
         log.info("默认权限控制服务启用...");
     }
 
+
+    protected static AntPathMatcher defaultAntPathMatcher;
+
+    /**
+     * AntPathMatcher
+     *
+     * @return
+     */
+    @Override
+    public AntPathMatcher getAntPathMatcher() {
+
+        if (defaultAntPathMatcher == null) {
+            defaultAntPathMatcher = RbacService.super.getAntPathMatcher();
+        }
+
+        return defaultAntPathMatcher;
+    }
+
     protected ContextHolder<String, Res.Action> getActionContext() {
 
         synchronized (actionContextHolder) {
@@ -90,7 +108,7 @@ public class RbacServiceImpl implements RbacService<Serializable> {
                                     .parallelStream()
                                     .filter(Objects::nonNull)
                                     .forEach(action -> {
-                                        actionContextHolder.put(prefix + getPermissionDelimiter() + action.getId(), action);
+                                        actionContextHolder.put(trimAllWhitespace(prefix + getPermissionDelimiter() + action.getId()), action);
                                     });
                         }
                     }
@@ -127,42 +145,6 @@ public class RbacServiceImpl implements RbacService<Serializable> {
         });
 
         return actionMap;
-    }
-
-    /**
-     * 暂时不用
-     * <p>
-     * 字符串模糊匹配
-     * <p>example:
-     * <p> user* user-add   --  true
-     * <p> user* art-add    --  false
-     *
-     * @param pattern 表达式
-     * @param str     待匹配的字符串
-     * @return 是否可以匹配
-     */
-    @Deprecated
-    private static boolean vagueMatch(String pattern, String str) {
-
-        if (!pattern.contains("*")) {
-            return pattern.equals(str);
-        }
-        return Pattern.matches(pattern.replaceAll("\\*", ".*"), str);
-    }
-
-
-    /**
-     * 暂时不用
-     * <p>
-     * 判断：集合中是否包含指定元素（模糊匹配）
-     */
-    @Deprecated
-    private static boolean hasElement(List<String> ownerPermissionList, String requestPermission) {
-        return Optional.ofNullable(ownerPermissionList).map(patternList ->
-                patternList.stream()
-                        .filter(Objects::nonNull)
-                        .anyMatch(pattern -> pattern.equals(requestPermission) || vagueMatch(pattern, requestPermission))
-        ).orElse(false);
     }
 
     /**
