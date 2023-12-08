@@ -302,21 +302,21 @@ public class DefaultRbacInitServiceImpl
 
                                     new ResPermission()
                                             .setDomain("*")
-                                            .setType(EntityConst.ENTITY_TYPE_NAME)
+                                            .setType(EntityConst.ENTITY_TYPE_NAME + "-*")
                                             .setRes("*")
                                             .setAction("*")
                                             .toString(),
 
                                     new ResPermission()
                                             .setDomain("*")
-                                            .setType(EntityConst.COMMON_TYPE_NAME)
+                                            .setType(EntityConst.COMMON_TYPE_NAME + "-*")
                                             .setRes("*")
                                             .setAction("*")
                                             .toString(),
 
                                     new ResPermission()
                                             .setDomain("*")
-                                            .setType(EntityConst.SYS_TYPE_NAME)
+                                            .setType(EntityConst.SYS_TYPE_NAME + "-*")
                                             .setRes("*")
                                             .setAction("*")
                                             .toString()
