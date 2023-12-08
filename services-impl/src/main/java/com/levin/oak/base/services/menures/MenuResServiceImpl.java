@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 菜单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[94acf76f4c8a8065cc902b8abdf7b5e3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[a7db5b5ffc2162654229c84ea33013db]，请不要修改和删除此行内容。
  *
  */
 
@@ -199,6 +199,12 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
     public void clearCache(Object key) {
+    }
+
+    @Override
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    @CacheEvict(allEntries = true)
+    public void clearAllCache() {
     }
 
 }

@@ -41,13 +41,13 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:55, 代码生成哈希校验码：[8cfea8d24bba56a5f0c51c83af3e027b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[c5b0bcfeedba81a76dd547a41e32f7e8]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
-//@Builder
+@Builder
 //@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Accessors(chain = true)
@@ -135,7 +135,7 @@ public class SimpleUpdateAppErrorLogReq extends MultiTenantReq {
         return addUpdateField(E_AppErrorLog.exceptionFullInfo);
     }
 
-
+   ////////////////////////////////////////////////////////////////////////////////
 
     /**
     * 是否更新字段
@@ -168,6 +168,5 @@ public class SimpleUpdateAppErrorLogReq extends MultiTenantReq {
         boolean isAdd = needUpdateFields.contains(fieldName) || needUpdateFields.add(fieldName);
         return (T) this;
     }
-
 
 }

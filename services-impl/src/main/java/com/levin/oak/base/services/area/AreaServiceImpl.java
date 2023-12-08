@@ -57,7 +57,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[e3a090b9cbaf04d002484f2d1caf1a43]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[92a05066635853e84359c7087be5cfa1]，请不要修改和删除此行内容。
  *
  */
 
@@ -198,6 +198,12 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
     public void clearCache(Object key) {
+    }
+
+    @Override
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    @CacheEvict(allEntries = true)
+    public void clearAllCache() {
     }
 
 }

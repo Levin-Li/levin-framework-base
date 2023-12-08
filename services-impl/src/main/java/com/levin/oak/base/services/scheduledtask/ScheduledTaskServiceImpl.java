@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度任务-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[9782ff96fc4e24726b3790cb0dae27c1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[e84f4e3a6faf461c25bedda33f488544]，请不要修改和删除此行内容。
  *
  */
 
@@ -195,6 +195,12 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
     public void clearCache(Object key) {
+    }
+
+    @Override
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    @CacheEvict(allEntries = true)
+    public void clearAllCache() {
     }
 
 }

@@ -60,19 +60,20 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 用户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:46:16, 代码生成哈希校验码：[affeeb50335a055e22e183b27f4d5229]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:15:00, 代码生成哈希校验码：[d082baa7128f2be3dd92d0e34a5b3a89]，请不要修改和删除此行内容。
  *
  */
 
 @Service(UserService.SERVICE_BEAN_NAME)
 
 @ConditionalOnProperty(name = UserService.SERVICE_BEAN_NAME, havingValue = "true", matchIfMissing = true)
-//@Slf4j
+
 
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_User.SIMPLE_CLASS_NAME})
+
 public class UserServiceImpl extends BaseService implements UserService {
 
     protected UserService getSelfProxy(){
@@ -201,6 +202,12 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
     public void clearCache(Object key) {
+    }
+
+    @Override
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    @CacheEvict(allEntries = true)
+    public void clearAllCache() {
     }
 
 }

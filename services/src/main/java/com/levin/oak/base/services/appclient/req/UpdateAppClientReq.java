@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[cc3aa5a015cbfd4c5803e228525574ad]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[ae78135f958b1fed979a13f0d01ebca5]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -81,6 +81,10 @@ public class UpdateAppClientReq extends SimpleUpdateAppClientReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateAppClientReq of(String id, boolean forceUpdate){
+        return new UpdateAppClientReq(id, forceUpdate);
     }
 
 }

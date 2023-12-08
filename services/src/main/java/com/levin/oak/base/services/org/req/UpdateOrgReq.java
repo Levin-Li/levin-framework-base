@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[2ff1bca658f03ef36c5096978a64ff5c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[0068c87c54944fe487ce743f571652b4]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -87,6 +87,10 @@ public class UpdateOrgReq extends SimpleUpdateOrgReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateOrgReq of(String id, boolean forceUpdate){
+        return new UpdateOrgReq(id, forceUpdate);
     }
 
 }

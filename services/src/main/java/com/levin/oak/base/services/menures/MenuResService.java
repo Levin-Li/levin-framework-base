@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 菜单-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[2e4732c38406ab40c509193e21a5af45]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[a312e5d655a32c4d11aeface2caaa2c7]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_MenuRes.BIZ_NAME, description = E_MenuRes.BIZ_NAME + MAINTAIN_ACTION)
@@ -174,5 +174,13 @@ public interface MenuResService {
      */
     @Operation(summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
+
+
+    /**
+     * 清除所有缓存
+     * 
+     */
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    void clearAllCache();
 
 }

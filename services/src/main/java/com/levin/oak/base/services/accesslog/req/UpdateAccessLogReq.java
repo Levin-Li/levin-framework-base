@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:44:26, 代码生成哈希校验码：[2cf11e65971d4273ccd1c0ffb1d683ed]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[43abaff6fd1d3efef811752bb95f1c6d]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -81,6 +81,10 @@ public class UpdateAccessLogReq extends SimpleUpdateAccessLogReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateAccessLogReq of(Long id, boolean forceUpdate){
+        return new UpdateAccessLogReq(id, forceUpdate);
     }
 
 }

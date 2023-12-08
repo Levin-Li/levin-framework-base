@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[08b21fca77db034eaf9d8b5439de8b03]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[efa60e1784f698417d8d1dafba260c0c]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -81,6 +81,10 @@ public class UpdateI18nResReq extends SimpleUpdateI18nResReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateI18nResReq of(Long id, boolean forceUpdate){
+        return new UpdateI18nResReq(id, forceUpdate);
     }
 
 }

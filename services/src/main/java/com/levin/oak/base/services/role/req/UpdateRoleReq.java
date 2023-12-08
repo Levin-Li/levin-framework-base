@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[b1d53078a9f230d74c841117282df7b1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[e7be136ba9376b2f668d16af19f616a0]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -84,6 +84,10 @@ public class UpdateRoleReq extends SimpleUpdateRoleReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateRoleReq of(String id, boolean forceUpdate){
+        return new UpdateRoleReq(id, forceUpdate);
     }
 
 }

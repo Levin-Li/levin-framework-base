@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[09a9c4b22f89211684df6c12bb9e14ae]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[e0381db2a9256eae636b886d79ef495e]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -86,6 +86,10 @@ public class UpdateUserReq extends SimpleUpdateUserReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateUserReq of(String id, boolean forceUpdate){
+        return new UpdateUserReq(id, forceUpdate);
     }
 
 }

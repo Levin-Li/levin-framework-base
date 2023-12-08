@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 通知-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[39cbe4226e8b8ca261578e63b43327c9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[1fbaa4b65d8e8ae8ec382eb4ca305bd9]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_Notice.BIZ_NAME, description = E_Notice.BIZ_NAME + MAINTAIN_ACTION)
@@ -174,5 +174,13 @@ public interface NoticeService {
      */
     @Operation(summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
+
+
+    /**
+     * 清除所有缓存
+     * 
+     */
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    void clearAllCache();
 
 }

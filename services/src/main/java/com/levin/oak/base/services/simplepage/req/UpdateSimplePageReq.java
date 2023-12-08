@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[d455a7a062c5dbfec190e492ce4e4135]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[22dc61171a129369a8a469b4232ae857]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -83,6 +83,10 @@ public class UpdateSimplePageReq extends SimpleUpdateSimplePageReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateSimplePageReq of(String id, boolean forceUpdate){
+        return new UpdateSimplePageReq(id, forceUpdate);
     }
 
 }

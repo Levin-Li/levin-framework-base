@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 字典-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[bf1235f2f3d274398bc0332adb8ae08d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[8c3ee57870dc5e57b287a1320250d772]，请不要修改和删除此行内容。
  *
  */
 
@@ -198,6 +198,12 @@ public class DictServiceImpl extends BaseService implements DictService {
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
     public void clearCache(Object key) {
+    }
+
+    @Override
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    @CacheEvict(allEntries = true)
+    public void clearAllCache() {
     }
 
 }

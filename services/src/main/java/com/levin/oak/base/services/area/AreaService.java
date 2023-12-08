@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 区域-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[832369a91c9f647b56aa140eb0417655]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[0831c5ae46fdcd229a0f740f8f4f476a]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
@@ -174,5 +174,13 @@ public interface AreaService {
      */
     @Operation(summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
+
+
+    /**
+     * 清除所有缓存
+     * 
+     */
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    void clearAllCache();
 
 }

@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 角色-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[38d10c02ecb6f831db53bb40a6fb0b55]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[0e9b58b99465018195318cc2ea017c8a]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)
@@ -174,5 +174,13 @@ public interface RoleService {
      */
     @Operation(summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
+
+
+    /**
+     * 清除所有缓存
+     * 
+     */
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    void clearAllCache();
 
 }

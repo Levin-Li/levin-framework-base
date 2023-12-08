@@ -44,13 +44,13 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:54, 代码生成哈希校验码：[67eca1675771fe95273815929fad76fb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[f008424f14aa7b535e691b1fb63f3dab]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
-//@Builder
+@Builder
 //@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Accessors(chain = true)
@@ -234,7 +234,7 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq {
         return addUpdateField(E_SimpleApi.optimisticLock);
     }
 
-
+   ////////////////////////////////////////////////////////////////////////////////
 
     /**
     * 是否更新字段
@@ -267,6 +267,5 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq {
         boolean isAdd = needUpdateFields.contains(fieldName) || needUpdateFields.add(fieldName);
         return (T) this;
     }
-
 
 }

@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[61246c5cd6b5bdf6097f0255ebfa0c04]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[b681e201963ab84932d4a5d8b8c00f30]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -81,6 +81,10 @@ public class UpdateScheduledLogReq extends SimpleUpdateScheduledLogReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateScheduledLogReq of(String id, boolean forceUpdate){
+        return new UpdateScheduledLogReq(id, forceUpdate);
     }
 
 }

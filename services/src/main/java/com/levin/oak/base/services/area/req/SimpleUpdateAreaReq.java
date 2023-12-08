@@ -44,13 +44,13 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 更新区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:56, 代码生成哈希校验码：[e754f4ecc2575c7ee3f31b44d1fd1544]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[1dc0c30114fdb3bc7e5ac8cafb292ff3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
-//@Builder
+@Builder
 //@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Accessors(chain = true)
@@ -185,7 +185,7 @@ public class SimpleUpdateAreaReq extends BaseReq {
         return addUpdateField(E_Area.optimisticLock);
     }
 
-
+   ////////////////////////////////////////////////////////////////////////////////
 
     /**
     * 是否更新字段
@@ -218,6 +218,5 @@ public class SimpleUpdateAreaReq extends BaseReq {
         boolean isAdd = needUpdateFields.contains(fieldName) || needUpdateFields.add(fieldName);
         return (T) this;
     }
-
 
 }

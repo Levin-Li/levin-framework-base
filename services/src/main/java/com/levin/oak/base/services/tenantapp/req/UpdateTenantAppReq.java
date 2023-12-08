@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[6901b1b36f53124f3963f4a218926276]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[5dc17a086cb8233660b1366514bf621b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -84,6 +84,10 @@ public class UpdateTenantAppReq extends SimpleUpdateTenantAppReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateTenantAppReq of(String id, boolean forceUpdate){
+        return new UpdateTenantAppReq(id, forceUpdate);
     }
 
 }

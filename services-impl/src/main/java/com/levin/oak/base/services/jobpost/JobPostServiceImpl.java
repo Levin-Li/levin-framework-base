@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 工作岗位-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[19e940faca4cd75f05caebb2d5136c96]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[8ece96418f65a99fb7c371db5666a3ae]，请不要修改和删除此行内容。
  *
  */
 
@@ -196,6 +196,12 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
     public void clearCache(Object key) {
+    }
+
+    @Override
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    @CacheEvict(allEntries = true)
+    public void clearAllCache() {
     }
 
 }

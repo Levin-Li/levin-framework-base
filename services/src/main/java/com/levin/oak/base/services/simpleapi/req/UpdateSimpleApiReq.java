@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[127d845cd3a42164460e86464e789adf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[556e6eea047f50fbedecb7cf15f41aa0]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -84,6 +84,10 @@ public class UpdateSimpleApiReq extends SimpleUpdateSimpleApiReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateSimpleApiReq of(String id, boolean forceUpdate){
+        return new UpdateSimpleApiReq(id, forceUpdate);
     }
 
 }

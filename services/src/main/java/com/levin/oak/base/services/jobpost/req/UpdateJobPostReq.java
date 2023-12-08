@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[7584dbc43adc27daa073928f82d9c66d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[f424fb332e913aa6ecd9a1939ff28443]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -82,6 +82,10 @@ public class UpdateJobPostReq extends SimpleUpdateJobPostReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateJobPostReq of(String id, boolean forceUpdate){
+        return new UpdateJobPostReq(id, forceUpdate);
     }
 
 }

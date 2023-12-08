@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 机构-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[d7f739717080ba6e6fad177ba79fb5b3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[6356286225bfa7aa2022024bc4c44c8f]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_Org.BIZ_NAME, description = E_Org.BIZ_NAME + MAINTAIN_ACTION)
@@ -174,5 +174,13 @@ public interface OrgService {
      */
     @Operation(summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
+
+
+    /**
+     * 清除所有缓存
+     * 
+     */
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    void clearAllCache();
 
 }

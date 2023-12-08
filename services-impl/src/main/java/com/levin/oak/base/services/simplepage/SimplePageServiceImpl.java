@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单页面-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[b1c7bc1f35c36654c8e96c40003a22bf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[08f9d98bb5db4902c67ea7722812f553]，请不要修改和删除此行内容。
  *
  */
 
@@ -197,6 +197,12 @@ public class SimplePageServiceImpl extends BaseService implements SimplePageServ
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
     public void clearCache(Object key) {
+    }
+
+    @Override
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    @CacheEvict(allEntries = true)
+    public void clearAllCache() {
     }
 
 }

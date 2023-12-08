@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[3494f2f2e3ebe40cf21649008f0d8bf9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[228607c03f419d933dc2aee7ef645688]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -82,6 +82,10 @@ public class UpdateNoticeReq extends SimpleUpdateNoticeReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateNoticeReq of(String id, boolean forceUpdate){
+        return new UpdateNoticeReq(id, forceUpdate);
     }
 
 }

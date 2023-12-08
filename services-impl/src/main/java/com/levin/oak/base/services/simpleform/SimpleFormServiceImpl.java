@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单表单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[a200294f160a7af63fe2a462c7f07dd5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:17, 代码生成哈希校验码：[c06d0393ec9ec4d23db51867fe0fbc13]，请不要修改和删除此行内容。
  *
  */
 
@@ -197,6 +197,12 @@ public class SimpleFormServiceImpl extends BaseService implements SimpleFormServ
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
     public void clearCache(Object key) {
+    }
+
+    @Override
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    @CacheEvict(allEntries = true)
+    public void clearAllCache() {
     }
 
 }

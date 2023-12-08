@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[f72003bd2d8ffb0ac0ed313db63d9307]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[8bf9b9c1c971c5f87a4fb6d749feec82]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -81,6 +81,10 @@ public class UpdateAppErrorLogReq extends SimpleUpdateAppErrorLogReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateAppErrorLogReq of(Long id, boolean forceUpdate){
+        return new UpdateAppErrorLogReq(id, forceUpdate);
     }
 
 }

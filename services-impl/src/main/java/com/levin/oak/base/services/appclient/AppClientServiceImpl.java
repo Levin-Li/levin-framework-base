@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 应用接入-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[e2f5249ab1e4bc0376374930d474ce21]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[c602de9bc5780f6e8bce316b0ed07ae6]，请不要修改和删除此行内容。
  *
  */
 
@@ -195,6 +195,12 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
     public void clearCache(Object key) {
+    }
+
+    @Override
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    @CacheEvict(allEntries = true)
+    public void clearAllCache() {
     }
 
 }

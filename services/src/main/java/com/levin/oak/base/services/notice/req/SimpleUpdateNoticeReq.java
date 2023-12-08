@@ -42,13 +42,13 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午2:10:55, 代码生成哈希校验码：[ddce76b04b050ab2cd1dc57ff0765696]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[9da787d4c6256f539a1e62043d7f9f04]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
 @Data
 @AllArgsConstructor
-//@Builder
+@Builder
 //@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Accessors(chain = true)
@@ -191,7 +191,7 @@ public class SimpleUpdateNoticeReq extends MultiTenantOrgReq {
         return addUpdateField(E_Notice.optimisticLock);
     }
 
-
+   ////////////////////////////////////////////////////////////////////////////////
 
     /**
     * 是否更新字段
@@ -224,6 +224,5 @@ public class SimpleUpdateNoticeReq extends MultiTenantOrgReq {
         boolean isAdd = needUpdateFields.contains(fieldName) || needUpdateFields.add(fieldName);
         return (T) this;
     }
-
 
 }

@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:44:27, 代码生成哈希校验码：[73d38f8c747de6a9d515fa496ec5cf1b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:17, 代码生成哈希校验码：[d98c4b9942d0d7273385af84d679a26a]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -83,6 +83,10 @@ public class UpdateSimpleFormReq extends SimpleUpdateSimpleFormReq {
             this.id = id;
         }
         return this;
+    }
+
+    public static UpdateSimpleFormReq of(String id, boolean forceUpdate){
+        return new UpdateSimpleFormReq(id, forceUpdate);
     }
 
 }
