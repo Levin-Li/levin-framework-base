@@ -116,7 +116,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateUserReq setReq, QueryUserReq whereReq){
+    public int batchUpdate(SimpleUpdateUserReq setReq, QueryUserReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

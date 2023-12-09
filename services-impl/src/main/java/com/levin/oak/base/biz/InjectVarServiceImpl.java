@@ -83,6 +83,11 @@ public class InjectVarServiceImpl implements InjectVarService {
         }
 
         @Override
+        public <ID extends Serializable> ID getOrgId() {
+            return null;
+        }
+
+        @Override
         public <ID extends Serializable> ID getId() {
             //throw new IllegalStateException("anonymous user");
             return null;
