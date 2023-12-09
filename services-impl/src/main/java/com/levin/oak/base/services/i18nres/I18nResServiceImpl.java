@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 国际化资源-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[3f502b75ac6af21a169b004af89d8ecf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[12ffcd84cd623b87ff7b1c26cfd30248]，请不要修改和删除此行内容。
  *
  */
 
@@ -109,7 +109,7 @@ public class I18nResServiceImpl extends BaseService implements I18nResService {
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateI18nResReq setReq, QueryI18nResReq whereReq){
+    public int batchUpdate(SimpleUpdateI18nResReq setReq, QueryI18nResReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

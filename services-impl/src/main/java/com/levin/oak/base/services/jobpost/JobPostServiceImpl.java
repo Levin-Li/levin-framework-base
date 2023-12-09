@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 工作岗位-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[8ece96418f65a99fb7c371db5666a3ae]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[f4283076bfca3a8c7891abed0ddca274]，请不要修改和删除此行内容。
  *
  */
 
@@ -110,7 +110,7 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateJobPostReq setReq, QueryJobPostReq whereReq){
+    public int batchUpdate(SimpleUpdateJobPostReq setReq, QueryJobPostReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

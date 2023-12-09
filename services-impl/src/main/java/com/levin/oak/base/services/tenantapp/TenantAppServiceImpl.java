@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 租户应用-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[9580cfabd66e2e21cf9de032570f50c3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:26, 代码生成哈希校验码：[b2d99ed2cc83bde07302b8f2b31c11cc]，请不要修改和删除此行内容。
  *
  */
 
@@ -112,7 +112,7 @@ public class TenantAppServiceImpl extends BaseService implements TenantAppServic
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateTenantAppReq setReq, QueryTenantAppReq whereReq){
+    public int batchUpdate(SimpleUpdateTenantAppReq setReq, QueryTenantAppReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

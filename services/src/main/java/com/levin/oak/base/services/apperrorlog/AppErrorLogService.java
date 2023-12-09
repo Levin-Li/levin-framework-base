@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 应用错误日志-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[457e80d0ddc1508410befcab37c1fd6d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:26, 代码生成哈希校验码：[cb05fe2878f7040cf86adf2e76bf43b2]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_AppErrorLog.BIZ_NAME, description = E_AppErrorLog.BIZ_NAME + MAINTAIN_ACTION)
@@ -68,14 +68,14 @@ public interface AppErrorLogService {
     boolean update(@NotNull UpdateAppErrorLogReq req, Object... queryObjs);
 
     /**
-     * 无ID更新记录，并返回更新记录数，请小心使用
+     * 批量无ID更新记录，并返回更新记录数，请小心使用
      *
      * @param setReq
      * @param whereReq
      * @return int 记录数
      */
     @Operation(summary = UPDATE_ACTION)
-    int update(@NotNull SimpleUpdateAppErrorLogReq setReq, QueryAppErrorLogReq whereReq);
+    int batchUpdate(@NotNull SimpleUpdateAppErrorLogReq setReq, QueryAppErrorLogReq whereReq);
 
     /**
      * 批量更新记录，并返回更新记录数
@@ -174,7 +174,6 @@ public interface AppErrorLogService {
      */
     @Operation(summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
-
 
     /**
      * 清除所有缓存

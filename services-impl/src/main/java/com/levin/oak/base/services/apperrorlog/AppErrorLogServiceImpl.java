@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 应用错误日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[78cf092ca2b56f63ca28b58b93358a6e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:26, 代码生成哈希校验码：[380f8af26a44ef28ca3c958215a6b2ed]，请不要修改和删除此行内容。
  *
  */
 
@@ -109,7 +109,7 @@ public class AppErrorLogServiceImpl extends BaseService implements AppErrorLogSe
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateAppErrorLogReq setReq, QueryAppErrorLogReq whereReq){
+    public int batchUpdate(SimpleUpdateAppErrorLogReq setReq, QueryAppErrorLogReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

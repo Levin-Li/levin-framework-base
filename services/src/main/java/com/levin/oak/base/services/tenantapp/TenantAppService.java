@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 租户应用-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[7532c21bd0d5e9a8b47f318f1fa8fdaa]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:26, 代码生成哈希校验码：[19d431cd6c5fd604356a08b932eda795]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_TenantApp.BIZ_NAME, description = E_TenantApp.BIZ_NAME + MAINTAIN_ACTION)
@@ -68,14 +68,14 @@ public interface TenantAppService {
     boolean update(@NotNull UpdateTenantAppReq req, Object... queryObjs);
 
     /**
-     * 无ID更新记录，并返回更新记录数，请小心使用
+     * 批量无ID更新记录，并返回更新记录数，请小心使用
      *
      * @param setReq
      * @param whereReq
      * @return int 记录数
      */
     @Operation(summary = UPDATE_ACTION)
-    int update(@NotNull SimpleUpdateTenantAppReq setReq, QueryTenantAppReq whereReq);
+    int batchUpdate(@NotNull SimpleUpdateTenantAppReq setReq, QueryTenantAppReq whereReq);
 
     /**
      * 批量更新记录，并返回更新记录数
@@ -174,7 +174,6 @@ public interface TenantAppService {
      */
     @Operation(summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
     void clearCache(@NotNull Object key);
-
 
     /**
      * 清除所有缓存

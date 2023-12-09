@@ -57,7 +57,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[92a05066635853e84359c7087be5cfa1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[a8d830a7d463e4970b3a1d1623fa6e8d]，请不要修改和删除此行内容。
  *
  */
 
@@ -112,7 +112,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateAreaReq setReq, QueryAreaReq whereReq){
+    public int batchUpdate(SimpleUpdateAreaReq setReq, QueryAreaReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

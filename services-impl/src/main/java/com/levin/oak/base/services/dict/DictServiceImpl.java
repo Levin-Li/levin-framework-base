@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 字典-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[8c3ee57870dc5e57b287a1320250d772]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:26, 代码生成哈希校验码：[0725c8e6db8f50a48fb8b1cad44d4988]，请不要修改和删除此行内容。
  *
  */
 
@@ -112,7 +112,7 @@ public class DictServiceImpl extends BaseService implements DictService {
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateDictReq setReq, QueryDictReq whereReq){
+    public int batchUpdate(SimpleUpdateDictReq setReq, QueryDictReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

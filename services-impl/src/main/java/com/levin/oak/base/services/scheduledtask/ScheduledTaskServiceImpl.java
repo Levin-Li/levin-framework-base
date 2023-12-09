@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度任务-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[e84f4e3a6faf461c25bedda33f488544]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[c4ebb3c5dade9fc2c0be35482f82da79]，请不要修改和删除此行内容。
  *
  */
 
@@ -109,7 +109,7 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateScheduledTaskReq setReq, QueryScheduledTaskReq whereReq){
+    public int batchUpdate(SimpleUpdateScheduledTaskReq setReq, QueryScheduledTaskReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

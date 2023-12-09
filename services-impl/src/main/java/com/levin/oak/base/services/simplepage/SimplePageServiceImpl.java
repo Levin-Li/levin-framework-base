@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单页面-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[08f9d98bb5db4902c67ea7722812f553]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[178b1205474884a24dd98f0fd5b7132d]，请不要修改和删除此行内容。
  *
  */
 
@@ -111,7 +111,7 @@ public class SimplePageServiceImpl extends BaseService implements SimplePageServ
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateSimplePageReq setReq, QuerySimplePageReq whereReq){
+    public int batchUpdate(SimpleUpdateSimplePageReq setReq, QuerySimplePageReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

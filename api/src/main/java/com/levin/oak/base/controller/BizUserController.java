@@ -158,7 +158,13 @@ public class BizUserController extends BaseController {
     @PostMapping
     @Operation(summary = CREATE_ACTION)
     public ApiResp<String> create(@RequestBody CreateUserReq req) {
+
         checkCurrentUserCreateOrUpdateUserRole(null, req.getRoleList());
+
+        if(!StringUtils.hasText(req.getOrgId())){
+            req.setOrgId(authService.getUserInfo().getOrgId());
+        }
+
         return ApiResp.ok(bizUserService.create(authService.getUserInfo(), req));
     }
 

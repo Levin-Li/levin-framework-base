@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 菜单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[a7db5b5ffc2162654229c84ea33013db]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[e53f5a368a1c13044f0378b7da9b25e7]，请不要修改和删除此行内容。
  *
  */
 
@@ -113,7 +113,7 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateMenuResReq setReq, QueryMenuResReq whereReq){
+    public int batchUpdate(SimpleUpdateMenuResReq setReq, QueryMenuResReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 访问日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[bd97938cf70362acd082d9db11b6edc5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[ce2d3744a23913a864ada382bd77962f]，请不要修改和删除此行内容。
  *
  */
 
@@ -109,7 +109,7 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateAccessLogReq setReq, QueryAccessLogReq whereReq){
+    public int batchUpdate(SimpleUpdateAccessLogReq setReq, QueryAccessLogReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

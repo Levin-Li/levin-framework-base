@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知处理日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[e46b6ab9d24d9fb0fb37a34fc0a64718]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[fd25ebcbc468047cd9fcd9cbda03cfc1]，请不要修改和删除此行内容。
  *
  */
 
@@ -109,7 +109,7 @@ public class NoticeProcessLogServiceImpl extends BaseService implements NoticePr
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateNoticeProcessLogReq setReq, QueryNoticeProcessLogReq whereReq){
+    public int batchUpdate(SimpleUpdateNoticeProcessLogReq setReq, QueryNoticeProcessLogReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

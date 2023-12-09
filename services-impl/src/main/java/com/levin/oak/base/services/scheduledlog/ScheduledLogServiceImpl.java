@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[b99c71f58b7eeede98bcc942c15b8378]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:26, 代码生成哈希校验码：[b841b9925d8ed6ba0b44f57369afb993]，请不要修改和删除此行内容。
  *
  */
 
@@ -109,7 +109,7 @@ public class ScheduledLogServiceImpl extends BaseService implements ScheduledLog
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateScheduledLogReq setReq, QueryScheduledLogReq whereReq){
+    public int batchUpdate(SimpleUpdateScheduledLogReq setReq, QueryScheduledLogReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

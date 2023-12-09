@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 应用接入-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[c602de9bc5780f6e8bce316b0ed07ae6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:26, 代码生成哈希校验码：[a73c3fe71f27dfaf09c01f69f68eea06]，请不要修改和删除此行内容。
  *
  */
 
@@ -109,7 +109,7 @@ public class AppClientServiceImpl extends BaseService implements AppClientServic
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateAppClientReq setReq, QueryAppClientReq whereReq){
+    public int batchUpdate(SimpleUpdateAppClientReq setReq, QueryAppClientReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 

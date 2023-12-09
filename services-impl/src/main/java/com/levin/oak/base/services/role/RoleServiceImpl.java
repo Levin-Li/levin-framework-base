@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[50ff00239aad8c9d079dde1e2525a29c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:26, 代码生成哈希校验码：[13027dc621cd4ed67b31f1cf926ed99e]，请不要修改和删除此行内容。
  *
  */
 
@@ -112,7 +112,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int update(SimpleUpdateRoleReq setReq, QueryRoleReq whereReq){
+    public int batchUpdate(SimpleUpdateRoleReq setReq, QueryRoleReq whereReq){
        return simpleDao.updateByQueryObj(setReq, whereReq);
     }
 
