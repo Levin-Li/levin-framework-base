@@ -8,6 +8,7 @@ import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.domain.Desc;
 import com.levin.commons.service.support.*;
 import com.levin.commons.utils.ExceptionUtils;
+import com.levin.commons.utils.ExpressionUtils;
 import com.levin.commons.utils.IPAddrUtils;
 import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
@@ -337,7 +338,12 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
                                 tempList.addAll(variableResolverList);
 
-                                variableInjector.injectValues(param, tempList);
+                                try {
+                                    ExpressionUtils.variableResolvers.set(tempList);
+                                    variableInjector.injectValues(param, tempList);
+                                } finally {
+                                    ExpressionUtils.variableResolvers.remove();
+                                }
                             });
 
                 });
