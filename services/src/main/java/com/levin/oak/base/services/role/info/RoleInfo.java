@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:39, 代码生成哈希校验码：[e1b7b9873ec3de544266bcbf5b42bef1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:11:25, 代码生成哈希校验码：[e408873a1b52fdd71c3afc455ace560c]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -61,6 +61,11 @@ public class RoleInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_id)
     String id;
+
+    @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
+    @Schema(title = L_domain , description = D_domain)
+    String domain;
 
     @Size(max = 128)
     @InjectVar(value = InjectConst.TENANT_ID)

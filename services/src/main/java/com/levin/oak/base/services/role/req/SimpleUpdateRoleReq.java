@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:39, 代码生成哈希校验码：[b1a292cea92a6ce07c60f326dd7968cf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:11:25, 代码生成哈希校验码：[5f04edfdecd052a8d5f15ec3c102c108]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -80,6 +80,11 @@ public class SimpleUpdateRoleReq extends MultiTenantOrgReq {
     @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
     @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
+
+    @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
+    @Schema(title = L_domain , description = D_domain)
+    String domain;
 
     @Size(max = 128)
     @Schema(title = L_parentId)
@@ -175,6 +180,10 @@ public class SimpleUpdateRoleReq extends MultiTenantOrgReq {
         }
     }
 
+    public <T extends SimpleUpdateRoleReq> T setDomain(String domain) {
+        this.domain = domain;
+        return addUpdateField(E_Role.domain);
+    }
     public <T extends SimpleUpdateRoleReq> T setParentId(String parentId) {
         this.parentId = parentId;
         return addUpdateField(E_Role.parentId);

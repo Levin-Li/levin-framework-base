@@ -51,7 +51,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:39, 代码生成哈希校验码：[a5e13987f23b1e03ba5d56394f0c83bb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:11:25, 代码生成哈希校验码：[7347c6fa60584a2b68cdcf600cf82752]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -82,6 +82,11 @@ public class QueryRoleReq extends MultiTenantOrgReq{
     @Size(max = 64)
     @Schema(title = L_id)
     String id;
+
+    //@InjectVar(value = "sysDomain", isRequired = "false")
+    @Size(max = 128)
+    @Schema(title = L_domain , description = D_domain)
+    String domain;
 
     @Size(max = 128)
     @Schema(title = L_parentId)

@@ -44,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:39, 代码生成哈希校验码：[e4c8ece53dc9a5a15e4cb1a09c1c1cff]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:11:25, 代码生成哈希校验码：[c620f61d248849de5bb0c8b0e51faa44]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -60,6 +60,11 @@ import com.levin.commons.service.support.InjectConst;
 public class CreateRoleReq extends MultiTenantOrgReq {
 
     private static final long serialVersionUID = -445356492L;
+
+    @Schema(title = L_domain , description = D_domain )
+    @Size(max = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
+    String domain;
 
     @Schema(title = L_parentId )
     @Size(max = 128)

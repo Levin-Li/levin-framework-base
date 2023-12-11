@@ -83,6 +83,11 @@ public class Role
     @Column(length = 64)
     protected String id;
 
+    @Schema(title = "系统域", hidden = true, description = "归属的子系统或应用")
+    @Column(length = 128)
+    @InjectVar(value = "sysDomain", isRequired = "false")
+    protected String domain;
+
     @Schema(title = "租户ID")
     @Column(length = 128)
     @InjectVar(InjectConst.TENANT_ID)
