@@ -1,5 +1,6 @@
 package com.levin.oak.base.services.commons.req;
 
+
 import com.levin.commons.dao.annotation.*;
 import com.levin.commons.dao.annotation.logic.*;
 import com.levin.commons.dao.domain.*;
@@ -28,10 +29,11 @@ import org.springframework.util.StringUtils;
 
 import java.util.*;
 
+
 /**
- * 基本查询对象
- *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月22日 下午1:32:02, 代码生成哈希校验码：[311369b4468551979c43ad01be41c7a4]，请不要修改和删除此行内容。
+ *  基本查询对象
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:21:42, 代码生成哈希校验码：[e90afb237d5e2e3950ff33ca19c77bf0]，请不要修改和删除此行内容。
+ *  
  */
 @Schema(title = "基本查询对象")
 @Data
@@ -46,17 +48,26 @@ public abstract class BaseReq implements ServiceReq {
 
     public static final String NOT_TENANT_ADMIN = " !(#" + InjectConst.IS_TENANT_ADMIN + ") ";
 
-    public static final String NOT_SUPER_ADMIN_AND_NOT_TENANT_ADMIN =
-            NOT_SUPER_ADMIN + " && " + NOT_TENANT_ADMIN;
+    public static final String NOT_SUPER_ADMIN_AND_NOT_TENANT_ADMIN = NOT_SUPER_ADMIN  + " && " + NOT_TENANT_ADMIN;
+
 
     /**
      * 是否非空
-     *
      * @param value
      * @return
      */
-    protected boolean isNotBlank(Object value) {
+    protected boolean isNotBlank(Object value){
         return value != null
                 && (!(value instanceof CharSequence) || StringUtils.hasText((CharSequence) value));
     }
+
+    /**
+     * 强制转换
+     * @param <T>
+     * @return
+     */
+    public <T extends BaseReq> T cast() {
+        return (T) this;
+    }
+
 }
