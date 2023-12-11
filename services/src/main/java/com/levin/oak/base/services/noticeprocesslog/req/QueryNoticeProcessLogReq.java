@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[a8ddd241381eb4293a1bd8d1b23ad8e6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[297fe488db7565847768626e5640c1b1]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = NoticeProcessLog.class, alias = E_NoticeProcessLog.ALIAS, resultClass = NoticeProcessLogInfo.class)
-public class QueryNoticeProcessLogReq extends MultiTenantOrgReq{
+public class QueryNoticeProcessLogReq extends MultiTenantOrgReq<QueryNoticeProcessLogReq> {
 
     private static final long serialVersionUID = -1991983093L;
 

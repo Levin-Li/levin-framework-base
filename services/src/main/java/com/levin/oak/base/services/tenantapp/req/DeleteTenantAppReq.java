@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[9ac6538ee76bd350e2694d5c6cb79875]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[e9d638709bf8517fa274003734c9d42b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = TenantApp.class, alias = E_TenantApp.ALIAS)
-public class DeleteTenantAppReq extends MultiTenantReq {
+public class DeleteTenantAppReq extends MultiTenantReq<DeleteTenantAppReq> {
 
     private static final long serialVersionUID = 1292984857L;
 

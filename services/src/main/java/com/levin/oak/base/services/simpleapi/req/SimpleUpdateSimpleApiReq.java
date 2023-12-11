@@ -44,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[f008424f14aa7b535e691b1fb63f3dab]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[60754d13a8054b36bc347c8bf04a605b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -59,7 +59,7 @@ import com.levin.commons.service.support.InjectConst;
 
 //字段更新策略，强制更新时，只要字段被调用set方法，则会被更新，不管是否空值。否则只有值不为[null，空字符串, 空数组，空集合]时才会被更新。
 @Update(condition = "forceUpdate ? isUpdateField(#_fieldName) : #" + C.VALUE_NOT_EMPTY)
-public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq {
+public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq<SimpleUpdateSimpleApiReq> {
 
     private static final long serialVersionUID = 1021385738L;
 

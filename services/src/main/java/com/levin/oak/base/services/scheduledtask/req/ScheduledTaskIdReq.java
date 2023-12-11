@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度任务 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[b841709b4dc385dd0fc29f967496fb6a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[7199f34dac2fa1c6d7d4023365f24d0c]，请不要修改和删除此行内容。
  *
  */
 
@@ -53,7 +53,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = ScheduledTask.class, alias = E_ScheduledTask.ALIAS, resultClass = ScheduledTaskInfo.class)
-public class ScheduledTaskIdReq extends MultiTenantOrgReq {
+public class ScheduledTaskIdReq extends MultiTenantOrgReq<ScheduledTaskIdReq> {
 
     private static final long serialVersionUID = -2056389676L;
 

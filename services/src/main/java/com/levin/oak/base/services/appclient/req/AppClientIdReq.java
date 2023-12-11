@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 应用接入 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[a07d1b1018ff337fd0be89478af333ec]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[8e84b8054541829bc0a98d38e7d51171]，请不要修改和删除此行内容。
  *
  */
 
@@ -53,7 +53,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppClient.class, alias = E_AppClient.ALIAS, resultClass = AppClientInfo.class)
-public class AppClientIdReq extends MultiTenantOrgReq {
+public class AppClientIdReq extends MultiTenantOrgReq<AppClientIdReq> {
 
     private static final long serialVersionUID = -115048882L;
 

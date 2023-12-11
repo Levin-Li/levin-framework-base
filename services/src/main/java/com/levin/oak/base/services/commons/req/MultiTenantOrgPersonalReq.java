@@ -18,7 +18,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户个人查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:09, 代码生成哈希校验码：[5d33cca2b2eda06d17d667a5ad062ed8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:18, 代码生成哈希校验码：[4f03eee09c4ea413f5752320832a27f8]，请不要修改和删除此行内容。
  * 
  */
 @Schema(title = "多租户个人查询对象")
@@ -26,8 +26,8 @@ import lombok.experimental.FieldNameConstants;
 @Accessors(chain = true)
 @FieldNameConstants
 @ToString(callSuper = true)
-public class MultiTenantOrgPersonalReq
-        extends MultiTenantOrgReq
+public class MultiTenantOrgPersonalReq<T extends MultiTenantOrgPersonalReq>
+        extends MultiTenantOrgReq<T>
         implements PersonalObject {
 
     //注意需要在注入服务中设置isTenantAdmin变量
@@ -43,9 +43,8 @@ public class MultiTenantOrgPersonalReq
      * 设置个人ID
      * @param ownerId
      * @return
-     * @param <T>
      */
-    public <T extends MultiTenantOrgPersonalReq> T setOwnerId(String ownerId) {
+    public T setOwnerId(String ownerId) {
         this.ownerId = ownerId;
         return (T) this;
     }

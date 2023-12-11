@@ -51,7 +51,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:40, 代码生成哈希校验码：[8f28ad87fd3252af81dea7e934e07d4f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[2409fc594d22554fbd7e907c3dc8d929]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -64,7 +64,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Org.class, alias = E_Org.ALIAS, resultClass = OrgInfo.class)
-public class QueryOrgReq extends MultiTenantReq{
+public class QueryOrgReq extends MultiTenantReq<QueryOrgReq> {
 
     private static final long serialVersionUID = -1399842458L;
 

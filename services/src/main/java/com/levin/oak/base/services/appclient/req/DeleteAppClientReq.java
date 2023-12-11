@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[554b9abffbd6f925e4f921a830a0b799]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[88411616ff5273818a1d63abf3ed317f]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppClient.class, alias = E_AppClient.ALIAS)
-public class DeleteAppClientReq extends MultiTenantOrgReq {
+public class DeleteAppClientReq extends MultiTenantOrgReq<DeleteAppClientReq> {
 
     private static final long serialVersionUID = -115048882L;
 

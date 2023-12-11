@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[f5ab02ab8d5496bb7238ccabd9cf202a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[b1cf6648dbae1495a7303a4cde7bd366]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS)
-public class DeleteI18nResReq extends MultiTenantOrgReq {
+public class DeleteI18nResReq extends MultiTenantOrgReq<DeleteI18nResReq> {
 
     private static final long serialVersionUID = -1681554652L;
 

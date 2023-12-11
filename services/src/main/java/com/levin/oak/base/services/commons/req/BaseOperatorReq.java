@@ -18,7 +18,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户操作员请求对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:09, 代码生成哈希校验码：[27ddff957500763352b5b5c7a55d3a0f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:18, 代码生成哈希校验码：[b312a631fb5b5b88cbc38883c0194a03]，请不要修改和删除此行内容。
  * 
  */
 @Schema(title = "操作员请求")
@@ -27,7 +27,7 @@ import lombok.experimental.FieldNameConstants;
 @FieldNameConstants
 @ToString(callSuper = true)
 public class BaseOperatorReq
-        extends MultiTenantOrgReq {
+        extends MultiTenantOrgReq<BaseOperatorReq> {
 
     @InjectVar(value = InjectConst.USER_ID)
     @Schema(title = "操作用户ID" , hidden = true)

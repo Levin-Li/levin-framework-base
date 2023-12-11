@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[9c480f686872ebe62443531513088c3a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[57c5dff0b4c68e3af9ba3fb660d7adee]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -51,7 +51,7 @@ import com.levin.commons.service.support.InjectConst;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = AppErrorLog.class, alias = E_AppErrorLog.ALIAS)
-public class CreateAppErrorLogReq extends MultiTenantReq {
+public class CreateAppErrorLogReq extends MultiTenantReq<CreateAppErrorLogReq> {
 
     private static final long serialVersionUID = 1594864095L;
 

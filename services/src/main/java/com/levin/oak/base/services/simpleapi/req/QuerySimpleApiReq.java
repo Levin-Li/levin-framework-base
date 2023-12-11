@@ -48,7 +48,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[009bc062339988961a3b3cc68e27c983]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[55a1543141ec0326fb431c6192915d87]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -61,7 +61,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS, resultClass = SimpleApiInfo.class)
-public class QuerySimpleApiReq extends MultiTenantOrgReq{
+public class QuerySimpleApiReq extends MultiTenantOrgReq<QuerySimpleApiReq> {
 
     private static final long serialVersionUID = 1021385738L;
 

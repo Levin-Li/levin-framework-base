@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[f8d692ef3d1807155b878520da5b2836]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[080b335285d1b9d2b87e38d981c63924]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Notice.class, alias = E_Notice.ALIAS)
-public class DeleteNoticeReq extends MultiTenantOrgReq {
+public class DeleteNoticeReq extends MultiTenantOrgReq<DeleteNoticeReq> {
 
     private static final long serialVersionUID = 1394869526L;
 

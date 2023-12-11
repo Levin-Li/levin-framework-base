@@ -18,7 +18,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:09, 代码生成哈希校验码：[6988cddb8d4c5ee8438fa1c5377e2771]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:18, 代码生成哈希校验码：[0270448e7f5302661c6aed24d58209dd]，请不要修改和删除此行内容。
  * 
  */
 @Schema(title = "多租户查询对象")
@@ -26,8 +26,8 @@ import lombok.experimental.FieldNameConstants;
 @Accessors(chain = true)
 @FieldNameConstants
 @ToString(callSuper = true)
-public class MultiTenantOrgReq
-        extends MultiTenantReq
+public class MultiTenantOrgReq<T extends MultiTenantOrgReq>
+        extends MultiTenantReq<T>
         implements MultiTenantObject {
 
     //注意需要在注入服务中设置isTenantAdmin变量
@@ -43,9 +43,8 @@ public class MultiTenantOrgReq
      * 设置部门ID
      * @param orgId
      * @return
-     * @param <T>
      */
-    public <T extends MultiTenantOrgReq> T setOrgId(String orgId) {
+    public T setOrgId(String orgId) {
         this.orgId = orgId;
         return (T) this;
     }

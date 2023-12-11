@@ -18,7 +18,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:09, 代码生成哈希校验码：[bd0e4afb764465944cbc0528083d42b8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:18, 代码生成哈希校验码：[97f601eff25efd0e0882a08a1bf7352c]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = "多租户查询对象")
@@ -26,7 +26,7 @@ import lombok.experimental.FieldNameConstants;
 @Accessors(chain = true)
 @FieldNameConstants
 @ToString(callSuper = true)
-public class MultiTenantReq
+public class MultiTenantReq<T extends MultiTenantReq>
         extends BaseReq
         implements MultiTenantObject {
 
@@ -65,9 +65,8 @@ public class MultiTenantReq
      * 设置租户ID
      * @param tenantId
      * @return
-     * @param <T>
      */
-    public <T extends MultiTenantReq> T setTenantId(String tenantId) {
+    public T setTenantId(String tenantId) {
         this.tenantId = tenantId;
         return (T) this;
     }

@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:44:27, 代码生成哈希校验码：[e57032007f6e3e5005588c3ca1322d0c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[280521f2c5bbc8cb36a72656d6c0baa2]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -53,7 +53,7 @@ import com.levin.commons.service.support.InjectConst;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = SimpleForm.class, alias = E_SimpleForm.ALIAS)
-public class CreateSimpleFormReq extends MultiTenantOrgReq {
+public class CreateSimpleFormReq extends MultiTenantOrgReq<CreateSimpleFormReq> {
 
     private static final long serialVersionUID = 1598335188L;
 
@@ -102,33 +102,30 @@ public class CreateSimpleFormReq extends MultiTenantOrgReq {
     String name;
 
     @Schema(title = L_creator , hidden = true)
-    //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
-    //@Size(max = 128)
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    @Size(max = 128)
     String creator;
 
     @Schema(title = L_createTime , hidden = true)
-    //@NotNull
     Date createTime;
 
-    @Schema(title = L_lastUpdateTime , hidden = true)
+    @Schema(title = L_lastUpdateTime )
     Date lastUpdateTime;
 
-    @Schema(title = L_orderCode , hidden = true)
+    @Schema(title = L_orderCode )
     Integer orderCode;
 
-    @Schema(title = L_enable , hidden = true)
-    //@NotNull
+    @Schema(title = L_enable )
     Boolean enable;
 
-    @Schema(title = L_editable , hidden = true)
-    //@NotNull
+    @Schema(title = L_editable )
     Boolean editable;
 
-    @Schema(title = L_remark , hidden = true)
-    //@Size(max = 512)
+    @Schema(title = L_remark )
+    @Size(max = 512)
     String remark;
 
-    @Schema(title = L_optimisticLock , hidden = true)
+    @Schema(title = L_optimisticLock )
     Integer optimisticLock;
 
 

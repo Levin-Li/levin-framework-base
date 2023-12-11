@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[e58ea48005bf14b34bb633b5c30b823d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[fdca37c1a04bb963abcf97e7385a7538]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -59,7 +59,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = JobPost.class, alias = E_JobPost.ALIAS, resultClass = JobPostInfo.class)
-public class QueryJobPostReq extends MultiTenantOrgReq{
+public class QueryJobPostReq extends MultiTenantOrgReq<QueryJobPostReq> {
 
     private static final long serialVersionUID = 1018878847L;
 

@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单表单 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:44:27, 代码生成哈希校验码：[6b5381c82ee673f05322c7a4c4855f0a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[047a2023eb9e48f03b8f8ddce8776401]，请不要修改和删除此行内容。
  *
  */
 
@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimpleForm.class, alias = E_SimpleForm.ALIAS, resultClass = SimpleFormInfo.class)
-public class SimpleFormIdReq extends MultiTenantOrgReq {
+public class SimpleFormIdReq extends MultiTenantOrgReq<SimpleFormIdReq> {
 
     private static final long serialVersionUID = 1598335188L;
 

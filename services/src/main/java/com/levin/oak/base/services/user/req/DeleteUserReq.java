@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[9ca8494b2299ff41a0ef2d4ae9dfe50c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[81fe151cf51672583b3ce27d505e1776]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS)
-public class DeleteUserReq extends MultiTenantOrgReq {
+public class DeleteUserReq extends MultiTenantOrgReq<DeleteUserReq> {
 
     private static final long serialVersionUID = -445263479L;
 

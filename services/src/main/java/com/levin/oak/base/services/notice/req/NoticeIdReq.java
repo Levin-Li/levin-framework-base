@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[6b23d25d4dff2971bb5d5322f6e5fc3e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[18d41e68259abaddfe413eb84e02f294]，请不要修改和删除此行内容。
  *
  */
 
@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Notice.class, alias = E_Notice.ALIAS, resultClass = NoticeInfo.class)
-public class NoticeIdReq extends MultiTenantOrgReq {
+public class NoticeIdReq extends MultiTenantOrgReq<NoticeIdReq> {
 
     private static final long serialVersionUID = 1394869526L;
 

@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:44:27, 代码生成哈希校验码：[1dee8de3bb236cac80a57d6571960913]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[ec77294c1f9c5bc1c64f52fd346876a5]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimpleForm.class, alias = E_SimpleForm.ALIAS)
-public class DeleteSimpleFormReq extends MultiTenantOrgReq {
+public class DeleteSimpleFormReq extends MultiTenantOrgReq<DeleteSimpleFormReq> {
 
     private static final long serialVersionUID = 1598335188L;
 

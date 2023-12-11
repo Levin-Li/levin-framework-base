@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[197d6bb79fb3d0736741169d4e38f97a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[3b9f4e09ad744d93961e4ab98965d4a1]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS)
-public class DeleteSimpleApiReq extends MultiTenantOrgReq {
+public class DeleteSimpleApiReq extends MultiTenantOrgReq<DeleteSimpleApiReq> {
 
     private static final long serialVersionUID = 1021385738L;
 

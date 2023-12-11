@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[e8fc477444e835d5f0dc5c3398518937]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[6d0002bf631e53d85e5b7b750e8b9b1b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS)
-public class CreateSimpleApiReq extends MultiTenantOrgReq {
+public class CreateSimpleApiReq extends MultiTenantOrgReq<CreateSimpleApiReq> {
 
     private static final long serialVersionUID = 1021385738L;
 
@@ -108,33 +108,30 @@ public class CreateSimpleApiReq extends MultiTenantOrgReq {
     String name;
 
     @Schema(title = L_creator , hidden = true)
-    //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
-    //@Size(max = 128)
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    @Size(max = 128)
     String creator;
 
     @Schema(title = L_createTime , hidden = true)
-    //@NotNull
     Date createTime;
 
-    @Schema(title = L_lastUpdateTime , hidden = true)
+    @Schema(title = L_lastUpdateTime )
     Date lastUpdateTime;
 
-    @Schema(title = L_orderCode , hidden = true)
+    @Schema(title = L_orderCode )
     Integer orderCode;
 
-    @Schema(title = L_enable , hidden = true)
-    //@NotNull
+    @Schema(title = L_enable )
     Boolean enable;
 
-    @Schema(title = L_editable , hidden = true)
-    //@NotNull
+    @Schema(title = L_editable )
     Boolean editable;
 
-    @Schema(title = L_remark , hidden = true)
-    //@Size(max = 512)
+    @Schema(title = L_remark )
+    @Size(max = 512)
     String remark;
 
-    @Schema(title = L_optimisticLock , hidden = true)
+    @Schema(title = L_optimisticLock )
     Integer optimisticLock;
 
 

@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:41, 代码生成哈希校验码：[5414b3d5dd4013bb2e7eb7351b13001b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[758ce19c9516347d68bc00a0dd5681b5]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 
 //字段更新策略，强制更新时，只要字段被调用set方法，则会被更新，不管是否空值。否则只有值不为[null，空字符串, 空数组，空集合]时才会被更新。
 @Update(condition = "forceUpdate ? isUpdateField(#_fieldName) : #" + C.VALUE_NOT_EMPTY)
-public class SimpleUpdateI18nResReq extends MultiTenantOrgReq {
+public class SimpleUpdateI18nResReq extends MultiTenantOrgReq<SimpleUpdateI18nResReq> {
 
     private static final long serialVersionUID = -1681554652L;
 

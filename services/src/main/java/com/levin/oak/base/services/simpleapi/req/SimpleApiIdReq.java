@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单动态接口 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[821adc6f66279e0afbdd66a582cb82f9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[3ab9525466b9345b63aa79a0bc9ea429]，请不要修改和删除此行内容。
  *
  */
 
@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimpleApi.class, alias = E_SimpleApi.ALIAS, resultClass = SimpleApiInfo.class)
-public class SimpleApiIdReq extends MultiTenantOrgReq {
+public class SimpleApiIdReq extends MultiTenantOrgReq<SimpleApiIdReq> {
 
     private static final long serialVersionUID = 1021385738L;
 

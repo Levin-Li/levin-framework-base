@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[038c7917b061ab7d7119385159871ba1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[e5c05aec0db661184db5cc401defe1be]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 
 //字段更新策略，强制更新时，只要字段被调用set方法，则会被更新，不管是否空值。否则只有值不为[null，空字符串, 空数组，空集合]时才会被更新。
 @Update(condition = "forceUpdate ? isUpdateField(#_fieldName) : #" + C.VALUE_NOT_EMPTY)
-public class SimpleUpdateScheduledTaskReq extends MultiTenantOrgReq {
+public class SimpleUpdateScheduledTaskReq extends MultiTenantOrgReq<SimpleUpdateScheduledTaskReq> {
 
     private static final long serialVersionUID = -2056389676L;
 

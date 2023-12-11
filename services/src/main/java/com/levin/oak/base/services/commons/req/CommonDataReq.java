@@ -20,7 +20,7 @@ import lombok.experimental.FieldNameConstants;
 @Accessors(chain = true)
 @FieldNameConstants
 public final class CommonDataReq
-        extends MultiTenantReq
+        extends MultiTenantReq<CommonDataReq>
         implements OrganizedObject {
 
     @Schema(title = "组织ID", hidden = true)

@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:44:26, 代码生成哈希校验码：[8fb64231d641995612ce1ceacf6bd7fc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[8ecb2fc95e155a845d8158da9522cefc]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -51,7 +51,7 @@ import com.levin.commons.service.support.InjectConst;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = AccessLog.class, alias = E_AccessLog.ALIAS)
-public class CreateAccessLogReq extends MultiTenantOrgReq {
+public class CreateAccessLogReq extends MultiTenantOrgReq<CreateAccessLogReq> {
 
     private static final long serialVersionUID = 1030736962L;
 

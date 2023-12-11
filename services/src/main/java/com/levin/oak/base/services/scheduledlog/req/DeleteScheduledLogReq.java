@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[983b2efad6b7b4d273bb4cff3079ae55]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[3f0b80d1f3add86ddfe2a28f34084f7e]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS)
-public class DeleteScheduledLogReq extends MultiTenantOrgReq {
+public class DeleteScheduledLogReq extends MultiTenantOrgReq<DeleteScheduledLogReq> {
 
     private static final long serialVersionUID = 1319130901L;
 

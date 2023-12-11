@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[6c14b04481d4a71715f6ad2d769b8462]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[f7b579fe9bc20e3a69ef082dbe598253]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimplePage.class, alias = E_SimplePage.ALIAS, resultClass = SimplePageInfo.class)
-public class QuerySimplePageReq extends MultiTenantOrgReq{
+public class QuerySimplePageReq extends MultiTenantOrgReq<QuerySimplePageReq> {
 
     private static final long serialVersionUID = 1598619295L;
 

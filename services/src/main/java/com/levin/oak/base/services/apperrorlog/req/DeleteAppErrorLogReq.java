@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[ff987102a43b95379b446fa7a209eda2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[bb4d957cf34011c3bd2581f3ec177a58]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = AppErrorLog.class, alias = E_AppErrorLog.ALIAS)
-public class DeleteAppErrorLogReq extends MultiTenantReq {
+public class DeleteAppErrorLogReq extends MultiTenantReq<DeleteAppErrorLogReq> {
 
     private static final long serialVersionUID = 1594864095L;
 

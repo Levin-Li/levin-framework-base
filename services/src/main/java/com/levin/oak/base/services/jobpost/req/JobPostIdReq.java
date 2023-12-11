@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 工作岗位 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[ed6d0e961f3563ee1254a4b6aabfa940]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[771450e27f4999f8cf30ea21e6720e04]，请不要修改和删除此行内容。
  *
  */
 
@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = JobPost.class, alias = E_JobPost.ALIAS, resultClass = JobPostInfo.class)
-public class JobPostIdReq extends MultiTenantOrgReq {
+public class JobPostIdReq extends MultiTenantOrgReq<JobPostIdReq> {
 
     private static final long serialVersionUID = 1018878847L;
 

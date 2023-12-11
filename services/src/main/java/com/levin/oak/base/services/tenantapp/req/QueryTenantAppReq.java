@@ -48,7 +48,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[e8e48b02336e01b22981d7beaf70e88c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[416dd704409c7390b3e7e2a841caf87b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -61,7 +61,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = TenantApp.class, alias = E_TenantApp.ALIAS, resultClass = TenantAppInfo.class)
-public class QueryTenantAppReq extends MultiTenantReq{
+public class QueryTenantAppReq extends MultiTenantReq<QueryTenantAppReq> {
 
     private static final long serialVersionUID = 1292984857L;
 

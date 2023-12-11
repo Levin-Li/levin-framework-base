@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 国际化资源 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[14491c7707da04d1efaf9b22c71ff323]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[97bb6419072ade9a76cf26081c3f840d]，请不要修改和删除此行内容。
  *
  */
 
@@ -53,7 +53,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS, resultClass = I18nResInfo.class)
-public class I18nResIdReq extends MultiTenantOrgReq {
+public class I18nResIdReq extends MultiTenantOrgReq<I18nResIdReq> {
 
     private static final long serialVersionUID = -1681554652L;
 

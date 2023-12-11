@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[39c519ed58aea51d496b1a166d7fab49]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[23812d2412e541b31527730ec8def812]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -52,7 +52,7 @@ import com.levin.commons.service.support.InjectConst;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = JobPost.class, alias = E_JobPost.ALIAS)
-public class CreateJobPostReq extends MultiTenantOrgReq {
+public class CreateJobPostReq extends MultiTenantOrgReq<CreateJobPostReq> {
 
     private static final long serialVersionUID = 1018878847L;
 
@@ -76,33 +76,30 @@ public class CreateJobPostReq extends MultiTenantOrgReq {
     String name;
 
     @Schema(title = L_creator , hidden = true)
-    //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
-    //@Size(max = 128)
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    @Size(max = 128)
     String creator;
 
     @Schema(title = L_createTime , hidden = true)
-    //@NotNull
     Date createTime;
 
-    @Schema(title = L_lastUpdateTime , hidden = true)
+    @Schema(title = L_lastUpdateTime )
     Date lastUpdateTime;
 
-    @Schema(title = L_orderCode , hidden = true)
+    @Schema(title = L_orderCode )
     Integer orderCode;
 
-    @Schema(title = L_enable , hidden = true)
-    //@NotNull
+    @Schema(title = L_enable )
     Boolean enable;
 
-    @Schema(title = L_editable , hidden = true)
-    //@NotNull
+    @Schema(title = L_editable )
     Boolean editable;
 
-    @Schema(title = L_remark , hidden = true)
-    //@Size(max = 512)
+    @Schema(title = L_remark )
+    @Size(max = 512)
     String remark;
 
-    @Schema(title = L_optimisticLock , hidden = true)
+    @Schema(title = L_optimisticLock )
     Integer optimisticLock;
 
 

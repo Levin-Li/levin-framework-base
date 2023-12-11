@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 字典 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[87de1d7850b82afc56e315ca06fbac5d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[4a7e16d0e73307d9b54283d3cf611475]，请不要修改和删除此行内容。
  *
  */
 
@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Dict.class, alias = E_Dict.ALIAS, resultClass = DictInfo.class)
-public class DictIdReq extends MultiTenantOrgReq {
+public class DictIdReq extends MultiTenantOrgReq<DictIdReq> {
 
     private static final long serialVersionUID = -445779596L;
 

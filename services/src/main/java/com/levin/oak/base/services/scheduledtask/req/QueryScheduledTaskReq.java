@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[59b76adc6c40a7e324cccbcbc4d65b2e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[04db08bc104c7b7cefead8f7311f8f96]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = ScheduledTask.class, alias = E_ScheduledTask.ALIAS, resultClass = ScheduledTaskInfo.class)
-public class QueryScheduledTaskReq extends MultiTenantOrgReq{
+public class QueryScheduledTaskReq extends MultiTenantOrgReq<QueryScheduledTaskReq> {
 
     private static final long serialVersionUID = -2056389676L;
 

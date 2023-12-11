@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:39, 代码生成哈希校验码：[1b772ad641064ad961e4bfe59263cc3b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[86f42ad1a09045cf35bf3e7c011ec5a5]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Role.class, alias = E_Role.ALIAS)
-public class DeleteRoleReq extends MultiTenantOrgReq {
+public class DeleteRoleReq extends MultiTenantOrgReq<DeleteRoleReq> {
 
     private static final long serialVersionUID = -445356492L;
 

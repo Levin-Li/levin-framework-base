@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单页面 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[a110d400e43ac0200ec4ed138fb7933b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[ae3b5daca33b1b09cc5db13b02e55e86]，请不要修改和删除此行内容。
  *
  */
 
@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = SimplePage.class, alias = E_SimplePage.ALIAS, resultClass = SimplePageInfo.class)
-public class SimplePageIdReq extends MultiTenantOrgReq {
+public class SimplePageIdReq extends MultiTenantOrgReq<SimplePageIdReq> {
 
     private static final long serialVersionUID = 1598619295L;
 

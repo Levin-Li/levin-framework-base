@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[2735cdaf258bd719a444b1ce8ba30a23]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[6585512122db4fbc42d152a050ff3845]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -51,7 +51,7 @@ import com.levin.commons.service.support.InjectConst;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = ScheduledLog.class, alias = E_ScheduledLog.ALIAS)
-public class CreateScheduledLogReq extends MultiTenantOrgReq {
+public class CreateScheduledLogReq extends MultiTenantOrgReq<CreateScheduledLogReq> {
 
     private static final long serialVersionUID = 1319130901L;
 

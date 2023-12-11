@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:41, 代码生成哈希校验码：[429176435a382a05a5c2dd3a7ca7040d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[7e73b6f55e1295e32d984ce054efc098]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = MenuRes.class, alias = E_MenuRes.ALIAS)
-public class CreateMenuResReq extends MultiTenantReq {
+public class CreateMenuResReq extends MultiTenantReq<CreateMenuResReq> {
 
     private static final long serialVersionUID = -887712701L;
 
@@ -108,33 +108,30 @@ public class CreateMenuResReq extends MultiTenantReq {
     String pinyinName;
 
     @Schema(title = L_creator , hidden = true)
-    //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
-    //@Size(max = 128)
+    @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
+    @Size(max = 128)
     String creator;
 
     @Schema(title = L_createTime , hidden = true)
-    //@NotNull
     Date createTime;
 
-    @Schema(title = L_lastUpdateTime , hidden = true)
+    @Schema(title = L_lastUpdateTime )
     Date lastUpdateTime;
 
-    @Schema(title = L_orderCode , hidden = true)
+    @Schema(title = L_orderCode )
     Integer orderCode;
 
-    @Schema(title = L_enable , hidden = true)
-    //@NotNull
+    @Schema(title = L_enable )
     Boolean enable;
 
-    @Schema(title = L_editable , hidden = true)
-    //@NotNull
+    @Schema(title = L_editable )
     Boolean editable;
 
-    @Schema(title = L_remark , hidden = true)
-    //@Size(max = 512)
+    @Schema(title = L_remark )
+    @Size(max = 512)
     String remark;
 
-    @Schema(title = L_optimisticLock , hidden = true)
+    @Schema(title = L_optimisticLock )
     Integer optimisticLock;
 
 

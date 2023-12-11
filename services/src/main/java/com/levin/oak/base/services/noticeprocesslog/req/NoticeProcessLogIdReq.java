@@ -29,50 +29,49 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_NoticeProcessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 通知处理日志 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:39, 代码生成哈希校验码：[56539c1975019ee99f78c7505d0c1f23]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[a66c3bc6ab5f0a60eea82c59694f77a8]，请不要修改和删除此行内容。
+ *
  */
-@Schema(title = BIZ_NAME + " 主键通用查询")
+
+@Schema(title =  BIZ_NAME + " 主键通用查询")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
-@TargetOption(
-        entityClass = NoticeProcessLog.class,
-        alias = E_NoticeProcessLog.ALIAS,
-        resultClass = NoticeProcessLogInfo.class)
-public class NoticeProcessLogIdReq extends MultiTenantOrgReq {
+@TargetOption(entityClass = NoticeProcessLog.class, alias = E_NoticeProcessLog.ALIAS, resultClass = NoticeProcessLogInfo.class)
+public class NoticeProcessLogIdReq extends MultiTenantOrgReq<NoticeProcessLogIdReq> {
 
     private static final long serialVersionUID = -1991983093L;
 
-    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     @Eq(require = true)
     @NotBlank
     protected String id;
 
-    public NoticeProcessLogIdReq updateIdWhenNotBlank(String id) {
-        if (isNotBlank(id)) {
+    public NoticeProcessLogIdReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
             this.id = id;
         }
         return this;
     }
 
+
     @PostConstruct
     public void preQuery() {
-        // @todo ID 查询之前初始化数据
+        //@todo ID 查询之前初始化数据
     }
 }
