@@ -30,9 +30,12 @@ import static com.levin.oak.base.entities.E_Role.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.oak.base.entities.Role;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
+import com.levin.oak.base.services.role.info.*;
+import java.util.Set;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -42,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[a897d4ed7e99f607cc428d567b6dc414]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:39, 代码生成哈希校验码：[1b772ad641064ad961e4bfe59263cc3b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)

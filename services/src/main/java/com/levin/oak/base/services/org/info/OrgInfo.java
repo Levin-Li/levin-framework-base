@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[747197cb7447b1ca5ced740ba9b7294a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:40, 代码生成哈希校验码：[e1b46e0a4ee8b7acd802bc75fc1d0297]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -141,8 +141,8 @@ public class OrgInfo implements Serializable {
     Set<OrgInfo> children;
 
     @Size(max = 1800)
-    @Schema(title = L_idPath , description = D_idPath)
-    String idPath;
+    @Schema(title = L_nodePath , description = D_nodePath)
+    String nodePath;
 
     @NotBlank
     @Size(max = 128)

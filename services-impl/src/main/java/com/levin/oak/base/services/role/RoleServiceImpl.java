@@ -45,9 +45,12 @@ import com.levin.oak.base.services.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.oak.base.entities.Role;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
+import com.levin.oak.base.services.role.info.*;
+import java.util.Set;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -57,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:26, 代码生成哈希校验码：[13027dc621cd4ed67b31f1cf926ed99e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:39, 代码生成哈希校验码：[60477840a6da85d80439523ed75522bd]，请不要修改和删除此行内容。
  *
  */
 

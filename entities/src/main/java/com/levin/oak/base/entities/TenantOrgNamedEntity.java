@@ -20,7 +20,8 @@ import javax.persistence.Version;
 @Accessors(chain = true)
 @FieldNameConstants
 public abstract class TenantOrgNamedEntity
-        extends AbstractMultiTenantOrgObject implements MultiTenantPublicObject, NamedObject {
+        extends AbstractMultiTenantOrgObject
+        implements MultiTenantPublicObject, NamedObject {
 
     @Schema(title = "系统域", hidden = true, description = "归属的子系统或应用")
     @Column(length = 128)

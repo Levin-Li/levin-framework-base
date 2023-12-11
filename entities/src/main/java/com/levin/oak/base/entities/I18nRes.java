@@ -59,7 +59,7 @@ public class I18nRes
     String lang;
 
     @Schema(title = "标签")
-    @Column(nullable = false, length = 768)
+    @Column(nullable = false, length = 1800)
     @Contains
     String label;
 

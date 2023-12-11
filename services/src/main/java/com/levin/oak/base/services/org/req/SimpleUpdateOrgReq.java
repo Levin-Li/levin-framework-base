@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[4ec6973ed63febd8bf6a97c84dffb366]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:40, 代码生成哈希校验码：[53e32099a95ebc74e98c26811de33805]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -140,8 +140,8 @@ public class SimpleUpdateOrgReq extends MultiTenantReq {
     String extInfo;
 
     @Size(max = 1800)
-    @Schema(title = L_idPath , description = D_idPath)
-    String idPath;
+    @Schema(title = L_nodePath , description = D_nodePath)
+    String nodePath;
 
     @Size(max = 128)
     @Schema(title = L_name)
@@ -259,9 +259,9 @@ public class SimpleUpdateOrgReq extends MultiTenantReq {
         this.extInfo = extInfo;
         return addUpdateField(E_Org.extInfo);
     }
-    public <T extends SimpleUpdateOrgReq> T setIdPath(String idPath) {
-        this.idPath = idPath;
-        return addUpdateField(E_Org.idPath);
+    public <T extends SimpleUpdateOrgReq> T setNodePath(String nodePath) {
+        this.nodePath = nodePath;
+        return addUpdateField(E_Org.nodePath);
     }
     public <T extends SimpleUpdateOrgReq> T setName(String name) {
         this.name = name;

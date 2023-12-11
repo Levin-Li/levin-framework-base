@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[e29f1fe22b4e5933f62f450beb6516de]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:41, 代码生成哈希校验码：[088bc24bbad1600da364b2f4b3d39492]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -109,8 +109,8 @@ public class MenuResInfo implements Serializable {
     Set<MenuResInfo> children;
 
     @Size(max = 1800)
-    @Schema(title = L_idPath , description = D_idPath)
-    String idPath;
+    @Schema(title = L_nodePath , description = D_nodePath)
+    String nodePath;
 
     @NotBlank
     @Size(max = 128)

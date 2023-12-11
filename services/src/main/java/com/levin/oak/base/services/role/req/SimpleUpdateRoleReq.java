@@ -32,9 +32,12 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.oak.base.entities.Role;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
+import com.levin.oak.base.services.role.info.*;
+import java.util.Set;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -44,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:15, 代码生成哈希校验码：[61935150f20ee285f536494bafa4338d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:39, 代码生成哈希校验码：[b1a292cea92a6ce07c60f326dd7968cf]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -79,8 +82,28 @@ public class SimpleUpdateRoleReq extends MultiTenantOrgReq {
     final boolean eqEditable = true;
 
     @Size(max = 128)
+    @Schema(title = L_parentId)
+    String parentId;
+
+    @Schema(title = L_extendable)
+    Boolean extendable;
+
+    @Schema(title = L_mutex)
+    Boolean mutex;
+
+    @Schema(title = L_userLimit)
+    Integer userLimit;
+
+    @Size(max = 1800)
+    @Schema(title = L_precondition , description = D_precondition)
+    String precondition;
+
+    @Size(max = 128)
     @Schema(title = L_code)
     String code;
+
+    @Schema(title = L_expiredDate)
+    Date expiredDate;
 
     @Schema(title = L_icon)
     String icon;
@@ -96,14 +119,17 @@ public class SimpleUpdateRoleReq extends MultiTenantOrgReq {
     @Schema(title = L_permissionList , description = D_permissionList)
     List<String> permissionList;
 
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
+    @Size(max = 1800)
+    @Schema(title = L_nodePath , description = D_nodePath)
+    String nodePath;
 
-    @Size(max = 64)
+    @Size(max = 128)
     @Schema(title = L_name)
     String name;
+
+    @Size(max = 128)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
@@ -149,9 +175,33 @@ public class SimpleUpdateRoleReq extends MultiTenantOrgReq {
         }
     }
 
+    public <T extends SimpleUpdateRoleReq> T setParentId(String parentId) {
+        this.parentId = parentId;
+        return addUpdateField(E_Role.parentId);
+    }
+    public <T extends SimpleUpdateRoleReq> T setExtendable(Boolean extendable) {
+        this.extendable = extendable;
+        return addUpdateField(E_Role.extendable);
+    }
+    public <T extends SimpleUpdateRoleReq> T setMutex(Boolean mutex) {
+        this.mutex = mutex;
+        return addUpdateField(E_Role.mutex);
+    }
+    public <T extends SimpleUpdateRoleReq> T setUserLimit(Integer userLimit) {
+        this.userLimit = userLimit;
+        return addUpdateField(E_Role.userLimit);
+    }
+    public <T extends SimpleUpdateRoleReq> T setPrecondition(String precondition) {
+        this.precondition = precondition;
+        return addUpdateField(E_Role.precondition);
+    }
     public <T extends SimpleUpdateRoleReq> T setCode(String code) {
         this.code = code;
         return addUpdateField(E_Role.code);
+    }
+    public <T extends SimpleUpdateRoleReq> T setExpiredDate(Date expiredDate) {
+        this.expiredDate = expiredDate;
+        return addUpdateField(E_Role.expiredDate);
     }
     public <T extends SimpleUpdateRoleReq> T setIcon(String icon) {
         this.icon = icon;
@@ -169,13 +219,17 @@ public class SimpleUpdateRoleReq extends MultiTenantOrgReq {
         this.permissionList = permissionList;
         return addUpdateField(E_Role.permissionList);
     }
-    public <T extends SimpleUpdateRoleReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_Role.domain);
+    public <T extends SimpleUpdateRoleReq> T setNodePath(String nodePath) {
+        this.nodePath = nodePath;
+        return addUpdateField(E_Role.nodePath);
     }
     public <T extends SimpleUpdateRoleReq> T setName(String name) {
         this.name = name;
         return addUpdateField(E_Role.name);
+    }
+    public <T extends SimpleUpdateRoleReq> T setPinyinName(String pinyinName) {
+        this.pinyinName = pinyinName;
+        return addUpdateField(E_Role.pinyinName);
     }
     public <T extends SimpleUpdateRoleReq> T setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;

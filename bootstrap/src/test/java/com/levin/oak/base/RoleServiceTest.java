@@ -12,8 +12,12 @@ import com.levin.oak.base.services.role.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.oak.base.entities.Role;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
+import java.util.Date;
+import com.levin.oak.base.services.role.info.*;
+import java.util.Set;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -58,7 +62,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 角色测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[959cc216971bfab239600fc13a4847bc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:41, 代码生成哈希校验码：[ce75d887ed67ffa3bf299e92841705b1]，请不要修改和删除此行内容。
  *
  */
 
@@ -99,7 +103,23 @@ public class RoleServiceTest {
 
         CreateRoleReq req = new CreateRoleReq();
 
+            // req.setTenantId("这是文本128");// 
+
+            // req.setOrgId("这是文本128");// 
+
+            // req.setParentId("这是文本128");// 
+
+            // req.setExtendable(true);// 
+
+            // req.setMutex(true);// 
+
+            // req.setUserLimit(1);// 
+
+            // req.setPrecondition("这是文本1800");//支持括号优先级、&&和||操作，如：(R_SA || R_ADMIN) && R_STAFF 
+
             // req.setCode("这是文本128");// 必填
+
+            // req.setExpiredDate(new Date());// 
 
             // req.setIcon("图标_1");// 
 
@@ -109,13 +129,11 @@ public class RoleServiceTest {
 
             // req.setPermissionList("资源权限列表_1");//Json数组 
 
-            // req.setDomain("这是文本128");//归属的子系统或应用 
+            // req.setNodePath("这是文本1800");//建议使用|包围节点ID，如|1|3|15| 
 
-            // req.setName("这是文本64");// 必填
+            // req.setName("这是文本128");// 必填
 
-            // req.setOrgId("这是文本128");// 
-
-            // req.setTenantId("这是文本128");// 
+            // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
 
             // req.setOrderCode(1);// 
 
@@ -143,15 +161,25 @@ public class RoleServiceTest {
         QueryRoleReq req = new QueryRoleReq();
 
         // req.setId(null);//
+        // req.setTenantId("这是文本128");//
+        // req.setOrgId("这是文本128");//
+        // req.setParentId("这是文本128");//
+        // req.setExtendable(true);//
+        // req.setMutex(true);//
+        // req.setUserLimit(1);//
+        // req.setPrecondition("这是文本1800");//支持括号优先级、&&和||操作，如：(R_SA || R_ADMIN) && R_STAFF
         // req.setCode("这是文本128");//
+        // req.setGteExpiredDate(DateUtils.getZoneHour(new Date()));//最小
+        // req.setLteExpiredDate(DateUtils.getEndHour(new Date()));//最大
         // req.setIcon("图标_1");//
         // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表
         // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组
         // req.setPermissionList("资源权限列表_1");//Json数组
-        // req.setDomain("这是文本128");//归属的子系统或应用
-        // req.setName("这是文本64");//
-        // req.setOrgId("这是文本128");//
-        // req.setTenantId("这是文本128");//
+        // req.setLoadParent(true);//加载
+        // req.setLoadChildren(true);//加载
+        // req.setNodePath("这是文本1800");//建议使用|包围节点ID，如|1|3|15|
+        // req.setName("这是文本128");//
+        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
         // req.setCreator("这是文本128");//
         // req.setOrderCode(1);//
         // req.setEnable(true);//
@@ -174,15 +202,22 @@ public class RoleServiceTest {
          req.setId(id);
 
 
+           // req.setTenantId("这是文本128");// 
+           // req.setOrgId("这是文本128");// 
+           // req.setParentId("这是文本128");// 
+           // req.setExtendable(true);// 
+           // req.setMutex(true);// 
+           // req.setUserLimit(1);// 
+           // req.setPrecondition("这是文本1800");//支持括号优先级、&&和||操作，如：(R_SA || R_ADMIN) && R_STAFF 
            // req.setCode("这是文本128");// 必填
+           // req.setExpiredDate(new Date());// 
            // req.setIcon("图标_1");// 
            // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表 必填
            // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组 
            // req.setPermissionList("资源权限列表_1");//Json数组 
-           // req.setDomain("这是文本128");//归属的子系统或应用 
-           // req.setName("这是文本64");// 必填
-           // req.setOrgId("这是文本128");// 
-           // req.setTenantId("这是文本128");// 
+           // req.setNodePath("这是文本1800");//建议使用|包围节点ID，如|1|3|15| 
+           // req.setName("这是文本128");// 必填
+           // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填

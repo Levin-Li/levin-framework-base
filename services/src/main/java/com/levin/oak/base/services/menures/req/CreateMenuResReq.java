@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[9a11a3cd24ab601519bc824e4e34cb50]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:41, 代码生成哈希校验码：[429176435a382a05a5c2dd3a7ca7040d]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -94,9 +94,9 @@ public class CreateMenuResReq extends MultiTenantReq {
     @Size(max = 1800)
     String params;
 
-    @Schema(title = L_idPath , description = D_idPath )
+    @Schema(title = L_nodePath , description = D_nodePath )
     @Size(max = 1800)
-    String idPath;
+    String nodePath;
 
     @Schema(title = L_name )
     @NotBlank

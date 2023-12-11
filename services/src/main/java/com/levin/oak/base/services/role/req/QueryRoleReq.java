@@ -36,9 +36,12 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.oak.base.entities.Role;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
+import com.levin.oak.base.services.role.info.*;
+import java.util.Set;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -48,7 +51,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[bb788cc7788d61482b2726d5cd7118a3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:39, 代码生成哈希校验码：[a5e13987f23b1e03ba5d56394f0c83bb]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -64,10 +67,6 @@ import com.levin.commons.service.support.InjectConst;
 public class QueryRoleReq extends MultiTenantOrgReq{
 
     private static final long serialVersionUID = -445356492L;
-
-    @Schema(title = "是否包含公共数据")
-    @Ignore
-    boolean isContainsPublicData = true;
 
     @Ignore
     @Schema(title = "排序字段")
@@ -85,12 +84,42 @@ public class QueryRoleReq extends MultiTenantOrgReq{
     String id;
 
     @Size(max = 128)
+    @Schema(title = L_parentId)
+    String parentId;
+
+    @Schema(title = L_extendable)
+    Boolean extendable;
+
+    @Schema(title = L_mutex)
+    Boolean mutex;
+
+    @Schema(title = L_userLimit)
+    Integer userLimit;
+
+    @Size(max = 1800)
+    @Schema(title = L_precondition , description = D_precondition)
+    String precondition;
+
+    @Size(max = 128)
     @Schema(title = L_code)
     String code;
 
     @Schema(title = "模糊匹配-" + L_code)
     @Contains
     String containsCode;
+
+    @Schema(title = L_expiredDate , description = L_expiredDate + "大于等于字段值")
+    @Gte
+    Date gteExpiredDate;
+
+    @Schema(title = L_expiredDate , description = L_expiredDate + "小于等于字段值")
+    @Lte
+    Date lteExpiredDate;
+
+    @Schema(title = L_expiredDate + "-日期范围")
+    @Between
+    String betweenExpiredDate;
+
 
     @Schema(title = L_icon)
     String icon;
@@ -110,14 +139,35 @@ public class QueryRoleReq extends MultiTenantOrgReq{
     @Schema(title = L_permissionList , description = D_permissionList)
     List<String> permissionList;
 
-    //@InjectVar(value = "sysDomain", isRequired = "false")
-    @Size(max = 128)
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
-    @Size(max = 64)
+    @Schema(title = "是否加载" + L_parent)
+    @Fetch(attrs = E_Role.parent, condition = "#_val == true")
+    Boolean loadParent;
+
+
+    @Schema(title = "是否加载" + L_children)
+    @Fetch(attrs = E_Role.children, condition = "#_val == true")
+    Boolean loadChildren;
+
+    @Size(max = 1800)
+    @Schema(title = L_nodePath , description = D_nodePath)
+    String nodePath;
+
+    @Size(max = 128)
     @Schema(title = L_name)
     String name;
+
+    @Schema(title = "模糊匹配-" + L_name)
+    @Contains
+    String containsName;
+
+    @Size(max = 128)
+    @Schema(title = L_pinyinName , description = D_pinyinName)
+    String pinyinName;
+
+    @Schema(title = "模糊匹配-" + L_pinyinName , description = D_pinyinName)
+    @Contains
+    String containsPinyinName;
 
     //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)

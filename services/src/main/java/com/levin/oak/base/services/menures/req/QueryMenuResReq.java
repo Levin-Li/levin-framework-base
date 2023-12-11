@@ -49,7 +49,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[2583e7ec4d2f30c05c7821ac64961804]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:41, 代码生成哈希校验码：[eab549c0473c5ebec3fe711c1ee8ec8f]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -142,8 +142,8 @@ public class QueryMenuResReq extends MultiTenantReq{
     Boolean loadChildren;
 
     @Size(max = 1800)
-    @Schema(title = L_idPath , description = D_idPath)
-    String idPath;
+    @Schema(title = L_nodePath , description = D_nodePath)
+    String nodePath;
 
     @Size(max = 128)
     @Schema(title = L_name)

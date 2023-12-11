@@ -166,6 +166,7 @@ public class BizUserController extends BaseController {
         }
 
         return ApiResp.ok(bizUserService.create(authService.getUserInfo(), req));
+
     }
 
 

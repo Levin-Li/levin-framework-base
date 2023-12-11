@@ -99,6 +99,14 @@ public class Org
         Group,
         @Schema(title = "临时组织")
         TempOrg,
+        @Schema(title = "外部驻场")
+        ExternalOrg,
+
+        ;
+        @Override
+        public String toString() {
+            return nameAndDesc();
+        }
     }
 
     @Id

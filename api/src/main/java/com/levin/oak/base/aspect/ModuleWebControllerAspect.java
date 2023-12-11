@@ -234,8 +234,6 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
             //放入一个空，防止解析变量出现错误
             moduleResolverMap.addAll(packageName, Collections.emptyList());
 
-//            Supplier<List<Map<String, ?>>>
-
             //按bean名查找 List<VariableResolver> bean
             SpringContextHolder.<List<VariableResolver>>findBeanByBeanName(context
                             , ResolvableType.forClassWithGenerics(Iterable.class, VariableResolver.class).getType()
@@ -249,11 +247,14 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
                     .stream().filter(Objects::nonNull)
                     .forEach(v -> moduleResolverMap.add(packageName, v));
 
+
             //按包名查找
 //            SpringContextHolder.<VariableResolver>findBeanByPkgName(context
 //                    , ResolvableType.forClass(VariableResolver.class).getType()
 //                    , packageName)
 //                    .forEach(v -> moduleResolverMap.add(packageName, v));
+
+
         }
 
         return moduleResolverMap.getOrDefault(packageName, Collections.emptyList());
@@ -339,10 +340,10 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
                                 tempList.addAll(variableResolverList);
 
                                 try {
-                                    ExpressionUtils.variableResolvers.set(tempList);
+                                    VariableInjector.setVariableResolvers(tempList);
                                     variableInjector.injectValues(param, tempList);
                                 } finally {
-                                    ExpressionUtils.variableResolvers.remove();
+                                    VariableInjector.setVariableResolvers(null);
                                 }
                             });
 

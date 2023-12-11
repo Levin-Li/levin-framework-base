@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[025cb3a97596216087577c84d3191381]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:41, 代码生成哈希校验码：[5414b3d5dd4013bb2e7eb7351b13001b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -83,7 +83,7 @@ public class SimpleUpdateI18nResReq extends MultiTenantOrgReq {
     @Schema(title = L_lang)
     String lang;
 
-    @Size(max = 768)
+    @Size(max = 1800)
     @Schema(title = L_label)
     String label;
 
