@@ -9,6 +9,7 @@ import com.levin.commons.service.domain.*;
 
 import java.util.*;
 
+import com.levin.oak.base.biz.bo.setting.StatSettingReq;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
 
@@ -44,6 +45,15 @@ import java.util.function.Supplier;
 
 @Tag(name = E_Setting.BIZ_NAME + "-业务服务", description = "")
 public interface BizSettingService {
+
+    /**
+     * 统计系统设置
+     *
+     * @param req
+     * @param paging
+     * @return
+     */
+    StatSettingReq.Result stat(StatSettingReq req, SimplePaging paging);
 
     /**
      * 更新系统设置

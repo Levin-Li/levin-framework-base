@@ -35,11 +35,11 @@ import static com.levin.oak.base.entities.EntityConst.*;
  * 抽象控制器
  *
  * @author lilw
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午9:38:40, 代码生成哈希校验码：[2b2918f684f7641c3552644e731b8f86]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:21:55, 代码生成哈希校验码：[dfd3fe3ab5183761488068054d9d3084]，请不要修改和删除此行内容。
  */
 @Slf4j
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = BIZ_TYPE_NAME)
+@ResAuthorize(domain = ID, type = BIZ_TYPE_NAME + "-")
 @MenuResTag(domain = ID)
 public abstract class BaseController {
 

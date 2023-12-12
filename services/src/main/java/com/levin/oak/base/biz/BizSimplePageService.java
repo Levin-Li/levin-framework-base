@@ -9,6 +9,7 @@ import com.levin.commons.service.domain.*;
 
 import java.util.*;
 
+import com.levin.oak.base.biz.bo.simplepage.StatSimplePageReq;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
 import org.springframework.validation.annotation.*;
@@ -52,4 +53,7 @@ public interface BizSimplePageService {
      */
     SimplePageInfo findOnePage(QuerySimplePageReq req);
 
+
+    @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + E_SimplePage.BIZ_NAME)
+    StatSimplePageReq.Result stat(StatSimplePageReq req, SimplePaging paging);
 }

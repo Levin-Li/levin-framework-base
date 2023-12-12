@@ -1,31 +1,26 @@
 package com.levin.oak.base.controller.commons;
 
-import cn.hutool.core.lang.ClassScanner;
-import cn.hutool.core.util.ClassUtil;
-import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
-import com.levin.commons.service.domain.EnumDesc;
-import com.levin.commons.utils.MapUtils;
-import com.levin.oak.base.autoconfigure.FrameworkProperties;
-import com.levin.oak.base.biz.rbac.AuthService;
-import com.levin.oak.base.biz.rbac.RbacResService;
 import com.levin.oak.base.controller.BaseController;
-import com.levin.oak.base.controller.commons.dto.EnumInfo;
 import com.levin.oak.base.entities.EntityConst;
-import com.levin.oak.base.services.role.RoleService;
-import com.levin.oak.base.services.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
 
@@ -48,18 +43,40 @@ import static com.levin.oak.base.ModuleOption.*;
 @RestController(PLUGIN_PREFIX + "CacheController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "CacheController", matchIfMissing = true)
 @RequestMapping(API_PATH + "cache")
-@Tag(name = "缓存", description = "缓存服务")
+
 @Slf4j
 @Valid
-@ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME + "-缓存")
+@ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME + "-")
+@Tag(name = "缓存", description = "缓存服务")
 @MenuResTag(false)
 public class CacheController extends BaseController {
 
+    @Autowired
+    CacheManager cacheManager;
 
-    @PostMapping("clear")
-    @Operation(summary = "清除缓存", description = "清除指定缓存")
-    public ApiResp<Boolean> clear(String cacheKey) {
-        return ApiResp.ok(true);
+    @PostMapping("evict")
+    @Operation(summary = "清除缓存", description = "返回清除成功的缓存Key")
+    public ApiResp<List<String>> evict(@NotNull @RequestBody List<String> cacheKeys) {
+
+        List<String> result = new ArrayList<>(cacheKeys.size());
+
+        cacheManager.getCacheNames().parallelStream().forEach(cacheName -> {
+
+            cacheKeys.stream().filter(cacheKey -> cacheKey.startsWith(cacheName)).forEach(cacheKey -> {
+
+                Cache cache = cacheManager.getCache(cacheName);
+
+                if (cache == null) {
+                    return;
+                }
+
+                if (cache.evictIfPresent(cacheKey)) {
+                    result.add(cacheKey);
+                }
+            });
+        });
+
+        return ApiResp.ok(result);
     }
 
 }

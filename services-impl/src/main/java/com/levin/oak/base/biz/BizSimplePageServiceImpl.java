@@ -12,6 +12,7 @@ import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
 
+import com.levin.oak.base.biz.bo.simplepage.StatSimplePageReq;
 import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
@@ -119,5 +120,10 @@ public class BizSimplePageServiceImpl extends BaseService implements BizSimplePa
                 ).orderBy(OrderBy.Type.Asc, E_SimpleEntity.orderCode)
                 .findOne(SimplePageInfo.class);
 
+    }
+
+    @Override
+    public StatSimplePageReq.Result stat(StatSimplePageReq req, SimplePaging paging) {
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 }

@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单表单业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:37, 代码生成哈希校验码：[ba6eb31fc4de91b49da8fef273c6678f]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:26, 代码生成哈希校验码：[d4aa3dcab40da31de2a41a26070cb664]，请不要修改和删除此行内容。
 *
 */
 
@@ -68,7 +68,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizSimpleFormController", havingValue = "true", matchIfMissing = true)
 
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME + "-" + E_SimpleForm.BIZ_NAME)
+@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME + "-")
 
 //类注解，@Tag的name属性关联权限的资源标识
 @Tag(name = E_SimpleForm.BIZ_NAME, description = E_SimpleForm.BIZ_NAME + MAINTAIN_ACTION)

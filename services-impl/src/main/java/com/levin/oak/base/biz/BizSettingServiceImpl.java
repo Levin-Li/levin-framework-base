@@ -7,6 +7,8 @@ import cn.hutool.core.bean.BeanUtil;
 import javax.annotation.*;
 import java.util.function.Supplier;
 
+import com.levin.commons.dao.support.SimplePaging;
+import com.levin.oak.base.biz.bo.setting.StatSettingReq;
 import com.levin.oak.base.biz.bo.setting.UpdateSettingValueReq;
 import org.springframework.cache.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
@@ -42,7 +44,7 @@ import com.levin.oak.base.services.*;
 //@DubboService
 @Service(PLUGIN_PREFIX + "BizSettingServiceImpl")
 
-@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizSettingServiceImpl",havingValue = "true",  matchIfMissing = true)
+@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizSettingServiceImpl", havingValue = "true", matchIfMissing = true)
 @Slf4j
 
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
@@ -71,6 +73,18 @@ public class BizSettingServiceImpl extends BaseService implements BizSettingServ
     @PostConstruct
     public void init() {
 
+    }
+
+    /**
+     * 统计系统设置
+     *
+     * @param req
+     * @param paging
+     * @return
+     */
+    @Override
+    public StatSettingReq.Result stat(StatSettingReq req, SimplePaging paging) {
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     @CacheEvict(condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "('' + #tenantId + #code)")
