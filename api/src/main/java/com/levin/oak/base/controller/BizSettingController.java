@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 系统设置业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[0e0a8cc2b3e8fdea2c60b252a7061067]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[9924117ff010ed3b4b43c550b53f4190]，请不要修改和删除此行内容。
 *
 */
 
@@ -79,20 +79,18 @@ import static com.levin.oak.base.entities.EntityConst.*;
 public class BizSettingController extends SettingController{
 
     /**
-    * 简单统计
+    * 统计
     *
     * @param req QuerySettingReq
-    * @return  ApiResp<PagingData<StatSettingReq.Result>>
+    * @return  ApiResp<StatSettingReq.Result>
     */
-    //@GetMapping("/stat") //默认不开放
+    @GetMapping("/stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatSettingReq.Result>> stat(@Valid StatSettingReq req, SimplePaging paging) {
+    public ApiResp<StatSettingReq.Result> stat(@Valid StatSettingReq req, SimplePaging paging) {
 
         req = checkRequest(STAT_ACTION, req);
 
-        //return ApiResp.ok(checkResponse(STAT_ACTION, bizSettingService.stat(req, paging)));
-
-        return ApiResp.error("暂不可用");
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizSettingService.stat(req, paging)));
     }
 
 }

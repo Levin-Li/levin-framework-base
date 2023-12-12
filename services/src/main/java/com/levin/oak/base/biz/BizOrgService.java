@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.Org;
-
+import com.levin.oak.base.biz.bo.org.*;
 import com.levin.oak.base.services.org.*;
 import com.levin.oak.base.services.org.req.*;
 import com.levin.oak.base.services.org.info.*;
@@ -22,8 +22,9 @@ import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 import java.util.Date;
@@ -34,17 +35,25 @@ import com.levin.oak.base.entities.Org.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
- * 机构-业务服务
+ *  机构-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:21, 代码生成哈希校验码：[c4403239d15b7083d23d2104fb8fa738]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[ef7606220eff436c006c8d9cea6535b5]，请不要修改和删除此行内容。
+ *
  */
+
 @Tag(name = E_Org.BIZ_NAME + "-业务服务", description = "")
 public interface BizOrgService {
 
-    //@todo 加载所有的机构，统一管理变更
-
+    /**
+    * 统计
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return StatOrgReq.Result
+    */
+    @Operation(summary = STAT_ACTION)
+    StatOrgReq.Result stat(StatOrgReq req, Paging paging);
 }

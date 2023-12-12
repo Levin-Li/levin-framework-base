@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  客户端文件-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[04cb06ca011a6a1f70f5b6eaced52c88]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[9da13e3d92f4d785ada43bc57615767a]，请不要修改和删除此行内容。
  *
  */
 
@@ -128,15 +128,15 @@ public class BizAppClientFileServiceImpl extends BaseService implements BizAppCl
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatAppClientFileReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatAppClientFileReq.Result> stat(StatAppClientFileReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatAppClientFileReq.Result stat(StatAppClientFileReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.Dict;
-
+import com.levin.oak.base.biz.bo.dict.*;
 import com.levin.oak.base.services.dict.*;
 import com.levin.oak.base.services.dict.req.*;
 import com.levin.oak.base.services.dict.info.*;
@@ -37,11 +37,20 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  字典-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[a08dce9bbe28c4cafdbb5100473ee843]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[670f55219a69d337659415388e11b7f7]，请不要修改和删除此行内容。
  *
  */
 
 @Tag(name = E_Dict.BIZ_NAME + "-业务服务", description = "")
 public interface BizDictService {
 
+    /**
+    * 统计
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return StatDictReq.Result
+    */
+    @Operation(summary = STAT_ACTION)
+    StatDictReq.Result stat(StatDictReq req, Paging paging);
 }

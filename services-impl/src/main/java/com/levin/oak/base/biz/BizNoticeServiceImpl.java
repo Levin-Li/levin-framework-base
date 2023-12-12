@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  通知-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[768e3ac44c9dfb185df98b699ff6979a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[09f897dcde6b143cc8a1540cd41cdf98]，请不要修改和删除此行内容。
  *
  */
 
@@ -129,15 +129,15 @@ public class BizNoticeServiceImpl extends BaseService implements BizNoticeServic
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatNoticeReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatNoticeReq.Result> stat(StatNoticeReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatNoticeReq.Result stat(StatNoticeReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

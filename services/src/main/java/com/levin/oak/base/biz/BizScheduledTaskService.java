@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.ScheduledTask;
-
+import com.levin.oak.base.biz.bo.scheduledtask.*;
 import com.levin.oak.base.services.scheduledtask.*;
 import com.levin.oak.base.services.scheduledtask.req.*;
 import com.levin.oak.base.services.scheduledtask.info.*;
@@ -34,11 +34,20 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  调度任务-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[f856e26afb6599dc19e02b7d28137549]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[aeebbd7a8ba0620b460dcc4dd7fec4c9]，请不要修改和删除此行内容。
  *
  */
 
 @Tag(name = E_ScheduledTask.BIZ_NAME + "-业务服务", description = "")
 public interface BizScheduledTaskService {
 
+    /**
+    * 统计
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return StatScheduledTaskReq.Result
+    */
+    @Operation(summary = STAT_ACTION)
+    StatScheduledTaskReq.Result stat(StatScheduledTaskReq req, Paging paging);
 }

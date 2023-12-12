@@ -59,7 +59,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  字典-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[09893692761e8078607001322a5f2815]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[bb47eace599e13a4d47e59ad43ad9802]，请不要修改和删除此行内容。
  *
  */
 
@@ -131,15 +131,15 @@ public class BizDictServiceImpl extends BaseService implements BizDictService {
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatDictReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatDictReq.Result> stat(StatDictReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatDictReq.Result stat(StatDictReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

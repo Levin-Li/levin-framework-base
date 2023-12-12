@@ -14,6 +14,7 @@ import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.E_SimpleApi;
 import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.services.role.RoleService;
+import com.levin.oak.base.services.role.info.RoleInfo;
 import com.levin.oak.base.services.role.req.CreateRoleReq;
 import com.levin.oak.base.services.role.req.RoleIdReq;
 import com.levin.oak.base.services.role.req.UpdateRoleReq;
@@ -50,16 +51,17 @@ import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 public class BizRoleServiceImpl implements BizRoleService<Serializable> {
 
     @Autowired
-    protected SimpleDao simpleDao;
+    SimpleDao simpleDao;
 
     @Autowired
-    protected RoleService roleService;
+    RoleService roleService;
 
     @Autowired
     RbacLoadService<Serializable> rbacLoadService;
 
     @Autowired
     RbacService<Serializable> rbacService;
+
 
     /**
      * 创建记录，返回主键ID
@@ -70,7 +72,9 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
      */
     public String create(Serializable userPrincipal, CreateRoleReq req) {
 
-        checkPermissions(userPrincipal, req.getCode(), req.getPermissionList());
+        checkCode(req.getCode());
+
+        checkPermissions(userPrincipal, req.getPermissionList());
 
         return roleService.create(req);
     }
@@ -83,7 +87,12 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
      * @return boolean 是否成功
      */
     public boolean update(Serializable userPrincipal, UpdateRoleReq req) {
-        checkPermissions(userPrincipal, null, req.getPermissionList());
+
+        // 忽略code，不允许修改 code
+        req.setCode(null);
+
+        checkPermissions(userPrincipal, req.getPermissionList());
+
         return roleService.update(req);
     }
 
@@ -97,7 +106,14 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
     @Override
     public boolean delete(Serializable userPrincipal, RoleIdReq req) {
 
+        RoleInfo info = roleService.findById(req);
+
+        Assert.notNull(info, "角色不存在");
+
+        checkPermissions(userPrincipal, info.getPermissionList());
+
         return roleService.delete(req);
+
     }
 
 
@@ -106,29 +122,29 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
      *
      * @param permissionList
      */
-    protected void checkPermissions(Serializable userPrincipal, String roleCode, List<String> permissionList) {
-
-        Assert.hasText(roleCode, "角色编码不能为空");
-
-        Assert.isTrue(roleCode.startsWith("R_"), "角色编码必须以 R_ 开头");
-
-        Assert.isTrue(!roleCode.equals(RbacRoleObject.SA_ROLE), "角色编码 R_SA 不可使用");
-
-        if (StringUtils.hasText(roleCode)) {
-            //@todo 检查角色编码是否已经存在
-        }
+    protected void checkPermissions(Serializable userPrincipal, List<String> permissionList) {
 
         if (permissionList == null || permissionList.isEmpty()) {
             return;
         }
 
         boolean isAuthorized = rbacService.isAuthorized(userPrincipal, true, permissionList, (rp, info) -> {
-            throw new AuthorizationException("未授权的资源：" + rp + "-" + roleCode);
+            throw new AuthorizationException("未授权的资源：" + rp + "-" + info);
         });
 
         if (!isAuthorized) {
-            throw new AuthorizationException("角色非法使用未授权的资源-" + roleCode);
+            throw new AuthorizationException("权限列表中不能存在未拥有的权限");
         }
+
+    }
+
+    protected void checkCode(String roleCode) {
+
+        Assert.hasText(roleCode, "角色编码不能为空");
+
+        Assert.isTrue(roleCode.startsWith("R_"), "角色编码必须以 R_ 开头");
+
+        Assert.isTrue(!roleCode.equalsIgnoreCase(RbacRoleObject.SA_ROLE), "角色编码 R_SA 不可使用");
     }
 
 }

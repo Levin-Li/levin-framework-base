@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  访问日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[e5c161c2af357320c8c5586551d977b1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[da274181c3bb60d5d517092eb4cded20]，请不要修改和删除此行内容。
  *
  */
 
@@ -128,15 +128,15 @@ public class BizAccessLogServiceImpl extends BaseService implements BizAccessLog
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatAccessLogReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatAccessLogReq.Result> stat(StatAccessLogReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatAccessLogReq.Result stat(StatAccessLogReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

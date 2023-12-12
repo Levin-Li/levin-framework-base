@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 字典业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[9d24fee8051f0094880981ea07ced7be]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[ebd788792d5ee682017b917d8f87560b]，请不要修改和删除此行内容。
 *
 */
 
@@ -79,20 +79,18 @@ import static com.levin.oak.base.entities.EntityConst.*;
 public class BizDictController extends DictController{
 
     /**
-    * 简单统计
+    * 统计
     *
     * @param req QueryDictReq
-    * @return  ApiResp<PagingData<StatDictReq.Result>>
+    * @return  ApiResp<StatDictReq.Result>
     */
-    //@GetMapping("/stat") //默认不开放
+    @GetMapping("/stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatDictReq.Result>> stat(@Valid StatDictReq req, SimplePaging paging) {
+    public ApiResp<StatDictReq.Result> stat(@Valid StatDictReq req, SimplePaging paging) {
 
         req = checkRequest(STAT_ACTION, req);
 
-        //return ApiResp.ok(checkResponse(STAT_ACTION, bizDictService.stat(req, paging)));
-
-        return ApiResp.error("暂不可用");
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizDictService.stat(req, paging)));
     }
 
 }

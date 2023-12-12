@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  菜单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[6533851f505ab8a82b76b04b6285f5d4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[d7576320d5787e195ca9e614725cb8f2]，请不要修改和删除此行内容。
  *
  */
 
@@ -132,15 +132,15 @@ public class BizMenuResServiceImpl extends BaseService implements BizMenuResServ
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatMenuResReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatMenuResReq.Result> stat(StatMenuResReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatMenuResReq.Result stat(StatMenuResReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 应用接入业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[45e5245d2c90b74742e66ec87d761b89]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[dbaddc9d273068779eef499af97c281f]，请不要修改和删除此行内容。
 *
 */
 
@@ -79,20 +79,18 @@ import static com.levin.oak.base.entities.EntityConst.*;
 public class BizAppClientController extends AppClientController{
 
     /**
-    * 简单统计
+    * 统计
     *
     * @param req QueryAppClientReq
-    * @return  ApiResp<PagingData<StatAppClientReq.Result>>
+    * @return  ApiResp<StatAppClientReq.Result>
     */
-    //@GetMapping("/stat") //默认不开放
+    @GetMapping("/stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatAppClientReq.Result>> stat(@Valid StatAppClientReq req, SimplePaging paging) {
+    public ApiResp<StatAppClientReq.Result> stat(@Valid StatAppClientReq req, SimplePaging paging) {
 
         req = checkRequest(STAT_ACTION, req);
 
-        //return ApiResp.ok(checkResponse(STAT_ACTION, bizAppClientService.stat(req, paging)));
-
-        return ApiResp.error("暂不可用");
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizAppClientService.stat(req, paging)));
     }
 
 }

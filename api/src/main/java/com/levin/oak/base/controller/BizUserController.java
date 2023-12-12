@@ -1,6 +1,7 @@
 package com.levin.oak.base.controller;
 
 import com.levin.commons.service.exception.AuthorizationException;
+import com.levin.oak.base.biz.bo.tenantapp.StatTenantAppReq;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import io.swagger.v3.oas.annotations.Operation;

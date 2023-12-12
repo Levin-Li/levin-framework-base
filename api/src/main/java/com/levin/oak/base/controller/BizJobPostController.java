@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 工作岗位业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:57, 代码生成哈希校验码：[d0b6de61cfba3feaeb396e8008c9d139]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[8852af1be986409e278bec010b8aa307]，请不要修改和删除此行内容。
 *
 */
 
@@ -79,20 +79,18 @@ import static com.levin.oak.base.entities.EntityConst.*;
 public class BizJobPostController extends JobPostController{
 
     /**
-    * 简单统计
+    * 统计
     *
     * @param req QueryJobPostReq
-    * @return  ApiResp<PagingData<StatJobPostReq.Result>>
+    * @return  ApiResp<StatJobPostReq.Result>
     */
-    //@GetMapping("/stat") //默认不开放
+    @GetMapping("/stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatJobPostReq.Result>> stat(@Valid StatJobPostReq req, SimplePaging paging) {
+    public ApiResp<StatJobPostReq.Result> stat(@Valid StatJobPostReq req, SimplePaging paging) {
 
         req = checkRequest(STAT_ACTION, req);
 
-        //return ApiResp.ok(checkResponse(STAT_ACTION, bizJobPostService.stat(req, paging)));
-
-        return ApiResp.error("暂不可用");
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizJobPostService.stat(req, paging)));
     }
 
 }

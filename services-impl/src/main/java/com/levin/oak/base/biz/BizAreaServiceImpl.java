@@ -59,7 +59,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  *  区域-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[869669a03d04b75215a673e496ef44d0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[8e2d27b204a26b01d7990c4560c55d02]，请不要修改和删除此行内容。
  *
  */
 
@@ -131,15 +131,15 @@ public class BizAreaServiceImpl extends BaseService implements BizAreaService {
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatAreaReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatAreaReq.Result> stat(StatAreaReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatAreaReq.Result stat(StatAreaReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

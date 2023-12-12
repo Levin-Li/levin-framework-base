@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  工作岗位-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[cf9d4786e11160f5d0e153f9c00c021b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[17176749d38831d959f29b804e1a4585]，请不要修改和删除此行内容。
  *
  */
 
@@ -129,15 +129,15 @@ public class BizJobPostServiceImpl extends BaseService implements BizJobPostServ
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatJobPostReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatJobPostReq.Result> stat(StatJobPostReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatJobPostReq.Result stat(StatJobPostReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

@@ -62,7 +62,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  机构-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[acb4119f518e5e92bb9cd0a31c5a2927]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:51, 代码生成哈希校验码：[f677ccb5962aa309232c648590fcc562]，请不要修改和删除此行内容。
  *
  */
 
@@ -134,15 +134,15 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatOrgReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatOrgReq.Result> stat(StatOrgReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatOrgReq.Result stat(StatOrgReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

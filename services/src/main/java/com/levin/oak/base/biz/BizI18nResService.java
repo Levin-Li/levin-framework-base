@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.I18nRes;
-
+import com.levin.oak.base.biz.bo.i18nres.*;
 import com.levin.oak.base.services.i18nres.*;
 import com.levin.oak.base.services.i18nres.req.*;
 import com.levin.oak.base.services.i18nres.info.*;
@@ -34,11 +34,20 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  国际化资源-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[fcbd1743c7d6c888006a02694d6ebad3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[1c0c0a10b3f3209d5fd9cb23b4c12f57]，请不要修改和删除此行内容。
  *
  */
 
 @Tag(name = E_I18nRes.BIZ_NAME + "-业务服务", description = "")
 public interface BizI18nResService {
 
+    /**
+    * 统计
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return StatI18nResReq.Result
+    */
+    @Operation(summary = STAT_ACTION)
+    StatI18nResReq.Result stat(StatI18nResReq req, Paging paging);
 }

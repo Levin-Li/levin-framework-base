@@ -59,7 +59,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  简单动态接口-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[310896e323e2e42f66a24edabb2e3494]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[7c97d9f0c6698d63bf27630a88d27dc0]，请不要修改和删除此行内容。
  *
  */
 
@@ -131,15 +131,15 @@ public class BizSimpleApiServiceImpl extends BaseService implements BizSimpleApi
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatSimpleApiReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatSimpleApiReq.Result> stat(StatSimpleApiReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatSimpleApiReq.Result stat(StatSimpleApiReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

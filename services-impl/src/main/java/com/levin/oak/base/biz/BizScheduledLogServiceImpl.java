@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  调度日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[4fe68363bc24fc795d8005bdf9e8d914]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[901d15854926584e98aa5fb787a7fe71]，请不要修改和删除此行内容。
  *
  */
 
@@ -128,15 +128,15 @@ public class BizScheduledLogServiceImpl extends BaseService implements BizSchedu
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatScheduledLogReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatScheduledLogReq.Result> stat(StatScheduledLogReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatScheduledLogReq.Result stat(StatScheduledLogReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

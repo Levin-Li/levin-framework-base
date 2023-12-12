@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  调度任务-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[5896ce37531b10be0bf15b876331961c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[09cb67d842aec6e08f5867abba16e6fe]，请不要修改和删除此行内容。
  *
  */
 
@@ -128,15 +128,15 @@ public class BizScheduledTaskServiceImpl extends BaseService implements BizSched
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatScheduledTaskReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatScheduledTaskReq.Result> stat(StatScheduledTaskReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatScheduledTaskReq.Result stat(StatScheduledTaskReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

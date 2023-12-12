@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单表单业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:57, 代码生成哈希校验码：[67d832a72e262907ef544cd57ed2b80b]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:37, 代码生成哈希校验码：[ba6eb31fc4de91b49da8fef273c6678f]，请不要修改和删除此行内容。
 *
 */
 
@@ -79,20 +79,18 @@ import static com.levin.oak.base.entities.EntityConst.*;
 public class BizSimpleFormController extends SimpleFormController{
 
     /**
-    * 简单统计
+    * 统计
     *
     * @param req QuerySimpleFormReq
-    * @return  ApiResp<PagingData<StatSimpleFormReq.Result>>
+    * @return  ApiResp<StatSimpleFormReq.Result>
     */
-    //@GetMapping("/stat") //默认不开放
+    @GetMapping("/stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatSimpleFormReq.Result>> stat(@Valid StatSimpleFormReq req, SimplePaging paging) {
+    public ApiResp<StatSimpleFormReq.Result> stat(@Valid StatSimpleFormReq req, SimplePaging paging) {
 
         req = checkRequest(STAT_ACTION, req);
 
-        //return ApiResp.ok(checkResponse(STAT_ACTION, bizSimpleFormService.stat(req, paging)));
-
-        return ApiResp.error("暂不可用");
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizSimpleFormService.stat(req, paging)));
     }
 
 }

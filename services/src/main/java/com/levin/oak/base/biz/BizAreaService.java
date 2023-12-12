@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.Area;
-
+import com.levin.oak.base.biz.bo.area.*;
 import com.levin.oak.base.services.area.*;
 import com.levin.oak.base.services.area.req.*;
 import com.levin.oak.base.services.area.info.*;
@@ -22,8 +22,9 @@ import com.levin.oak.base.services.area.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.Date;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
@@ -31,13 +32,25 @@ import java.util.Set;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.Area.*;
-
 ////////////////////////////////////
 
 /**
- * 区域-业务服务
+ *  区域-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[7d8a39dee34a2bf794efaa05939f5750]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[67bfa52ffe6a3e90e12ced117dc4cf0d]，请不要修改和删除此行内容。
+ *
  */
+
 @Tag(name = E_Area.BIZ_NAME + "-业务服务", description = "")
-public interface BizAreaService {}
+public interface BizAreaService {
+
+    /**
+    * 统计
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return StatAreaReq.Result
+    */
+    @Operation(summary = STAT_ACTION)
+    StatAreaReq.Result stat(StatAreaReq req, Paging paging);
+}

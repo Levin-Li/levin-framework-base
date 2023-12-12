@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单动态接口业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[3b83e0538ad75ca41b81b08e1e0d3cc8]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[fe51eb0dda3a08c3e6bfcb7dd397be9c]，请不要修改和删除此行内容。
 *
 */
 
@@ -79,20 +79,18 @@ import static com.levin.oak.base.entities.EntityConst.*;
 public class BizSimpleApiController extends SimpleApiController{
 
     /**
-    * 简单统计
+    * 统计
     *
     * @param req QuerySimpleApiReq
-    * @return  ApiResp<PagingData<StatSimpleApiReq.Result>>
+    * @return  ApiResp<StatSimpleApiReq.Result>
     */
-    //@GetMapping("/stat") //默认不开放
+    @GetMapping("/stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatSimpleApiReq.Result>> stat(@Valid StatSimpleApiReq req, SimplePaging paging) {
+    public ApiResp<StatSimpleApiReq.Result> stat(@Valid StatSimpleApiReq req, SimplePaging paging) {
 
         req = checkRequest(STAT_ACTION, req);
 
-        //return ApiResp.ok(checkResponse(STAT_ACTION, bizSimpleApiService.stat(req, paging)));
-
-        return ApiResp.error("暂不可用");
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizSimpleApiService.stat(req, paging)));
     }
 
 }

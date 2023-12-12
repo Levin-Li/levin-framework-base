@@ -125,11 +125,22 @@ public class BizRoleController extends RoleController {
     @Override
     public ApiResp<Boolean> update(UpdateRoleReq req, String id) {
 
-        req.updateIdWhenNotBlank(id);
-
-        req = checkRequest(UPDATE_ACTION, req);
+        req = checkRequest(UPDATE_ACTION, req.updateIdWhenNotBlank(id));
 
         return ApiResp.ok(bizRoleService.update(authService.getUserInfo(), req));
     }
 
+    /**
+     * 删除
+     *
+     * @param req RoleIdReq
+     * @param id
+     */
+    @Override
+    public ApiResp<Boolean> delete(RoleIdReq req, String id) {
+
+        req = checkRequest(DELETE_ACTION, req.updateIdWhenNotBlank(id));
+
+        return ApiResp.ok(bizRoleService.delete(authService.getUserInfo(), req));
+    }
 }

@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 应用错误日志业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[5b6fd7e91e55dfe696649c76f8352954]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[8f28dbbf47c3d9c5ca7a8f89428a55b6]，请不要修改和删除此行内容。
 *
 */
 
@@ -79,20 +79,18 @@ import static com.levin.oak.base.entities.EntityConst.*;
 public class BizAppErrorLogController extends AppErrorLogController{
 
     /**
-    * 简单统计
+    * 统计
     *
     * @param req QueryAppErrorLogReq
-    * @return  ApiResp<PagingData<StatAppErrorLogReq.Result>>
+    * @return  ApiResp<StatAppErrorLogReq.Result>
     */
-    //@GetMapping("/stat") //默认不开放
+    @GetMapping("/stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatAppErrorLogReq.Result>> stat(@Valid StatAppErrorLogReq req, SimplePaging paging) {
+    public ApiResp<StatAppErrorLogReq.Result> stat(@Valid StatAppErrorLogReq req, SimplePaging paging) {
 
         req = checkRequest(STAT_ACTION, req);
 
-        //return ApiResp.ok(checkResponse(STAT_ACTION, bizAppErrorLogService.stat(req, paging)));
-
-        return ApiResp.error("暂不可用");
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizAppErrorLogService.stat(req, paging)));
     }
 
 }

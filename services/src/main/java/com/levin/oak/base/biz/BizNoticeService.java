@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.Notice;
-
+import com.levin.oak.base.biz.bo.notice.*;
 import com.levin.oak.base.services.notice.*;
 import com.levin.oak.base.services.notice.req.*;
 import com.levin.oak.base.services.notice.info.*;
@@ -35,11 +35,20 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  通知-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[3d6d6655531f3dd2b6bdeb349f77b310]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[b225000b292037999a7a9070e5f98862]，请不要修改和删除此行内容。
  *
  */
 
 @Tag(name = E_Notice.BIZ_NAME + "-业务服务", description = "")
 public interface BizNoticeService {
 
+    /**
+    * 统计
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return StatNoticeReq.Result
+    */
+    @Operation(summary = STAT_ACTION)
+    StatNoticeReq.Result stat(StatNoticeReq req, Paging paging);
 }

@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.AppClient;
-
+import com.levin.oak.base.biz.bo.appclient.*;
 import com.levin.oak.base.services.appclient.*;
 import com.levin.oak.base.services.appclient.req.*;
 import com.levin.oak.base.services.appclient.info.*;
@@ -34,11 +34,20 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  应用接入-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[1422f71cfb0986f6bd467d59f869717f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[fa559dd1b357d312229fe0fe1a4dbd31]，请不要修改和删除此行内容。
  *
  */
 
 @Tag(name = E_AppClient.BIZ_NAME + "-业务服务", description = "")
 public interface BizAppClientService {
 
+    /**
+    * 统计
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return StatAppClientReq.Result
+    */
+    @Operation(summary = STAT_ACTION)
+    StatAppClientReq.Result stat(StatAppClientReq req, Paging paging);
 }

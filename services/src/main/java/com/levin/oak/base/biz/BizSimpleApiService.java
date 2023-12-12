@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.SimpleApi;
-
+import com.levin.oak.base.biz.bo.simpleapi.*;
 import com.levin.oak.base.services.simpleapi.*;
 import com.levin.oak.base.services.simpleapi.req.*;
 import com.levin.oak.base.services.simpleapi.info.*;
@@ -37,11 +37,20 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  简单动态接口-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[f82bc3c0afa2d84d0fc0a99c89bb11bb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[076f7b1ad9cd03c9765f5764e47811a9]，请不要修改和删除此行内容。
  *
  */
 
 @Tag(name = E_SimpleApi.BIZ_NAME + "-业务服务", description = "")
 public interface BizSimpleApiService {
 
+    /**
+    * 统计
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return StatSimpleApiReq.Result
+    */
+    @Operation(summary = STAT_ACTION)
+    StatSimpleApiReq.Result stat(StatSimpleApiReq req, Paging paging);
 }

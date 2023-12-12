@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  简单表单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[d93f30ebd6616a2508b29d0b875ddf55]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:37, 代码生成哈希校验码：[5ed45aaef5ce35f336e4fb307e404e39]，请不要修改和删除此行内容。
  *
  */
 
@@ -130,15 +130,15 @@ public class BizSimpleFormServiceImpl extends BaseService implements BizSimpleFo
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatSimpleFormReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatSimpleFormReq.Result> stat(StatSimpleFormReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatSimpleFormReq.Result stat(StatSimpleFormReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

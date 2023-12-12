@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.JobPost;
-
+import com.levin.oak.base.biz.bo.jobpost.*;
 import com.levin.oak.base.services.jobpost.*;
 import com.levin.oak.base.services.jobpost.req.*;
 import com.levin.oak.base.services.jobpost.info.*;
@@ -35,11 +35,20 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  工作岗位-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[55d681cd2916c2efe1d32102514860d0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[27a95901112ce5f81fba4ed8e6948f90]，请不要修改和删除此行内容。
  *
  */
 
 @Tag(name = E_JobPost.BIZ_NAME + "-业务服务", description = "")
 public interface BizJobPostService {
 
+    /**
+    * 统计
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return StatJobPostReq.Result
+    */
+    @Operation(summary = STAT_ACTION)
+    StatJobPostReq.Result stat(StatJobPostReq req, Paging paging);
 }

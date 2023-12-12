@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.AppClientFile;
-
+import com.levin.oak.base.biz.bo.appclientfile.*;
 import com.levin.oak.base.services.appclientfile.*;
 import com.levin.oak.base.services.appclientfile.req.*;
 import com.levin.oak.base.services.appclientfile.info.*;
@@ -34,11 +34,20 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  客户端文件-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[b98afa5468290c7f254f2c5e567bacd6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[de358ee77791719a23844bcc0fbf45d9]，请不要修改和删除此行内容。
  *
  */
 
 @Tag(name = E_AppClientFile.BIZ_NAME + "-业务服务", description = "")
 public interface BizAppClientFileService {
 
+    /**
+    * 统计
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return StatAppClientFileReq.Result
+    */
+    @Operation(summary = STAT_ACTION)
+    StatAppClientFileReq.Result stat(StatAppClientFileReq req, Paging paging);
 }

@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  应用错误日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[b215c1bbf81bde26ad393c285f64d101]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[f2b10f4cb99b597c17466da68579cb7c]，请不要修改和删除此行内容。
  *
  */
 
@@ -128,15 +128,15 @@ public class BizAppErrorLogServiceImpl extends BaseService implements BizAppErro
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatAppErrorLogReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatAppErrorLogReq.Result> stat(StatAppErrorLogReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatAppErrorLogReq.Result stat(StatAppErrorLogReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

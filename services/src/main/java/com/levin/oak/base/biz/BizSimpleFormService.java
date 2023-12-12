@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.SimpleForm;
-
+import com.levin.oak.base.biz.bo.simpleform.*;
 import com.levin.oak.base.services.simpleform.*;
 import com.levin.oak.base.services.simpleform.req.*;
 import com.levin.oak.base.services.simpleform.info.*;
@@ -36,11 +36,20 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  简单表单-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[4f136b26df28cbe898a2a51194227eae]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[47f6b2403968b4a8e852327fd09798c0]，请不要修改和删除此行内容。
  *
  */
 
 @Tag(name = E_SimpleForm.BIZ_NAME + "-业务服务", description = "")
 public interface BizSimpleFormService {
 
+    /**
+    * 统计
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return StatSimpleFormReq.Result
+    */
+    @Operation(summary = STAT_ACTION)
+    StatSimpleFormReq.Result stat(StatSimpleFormReq req, Paging paging);
 }

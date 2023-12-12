@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 通知处理日志业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:57, 代码生成哈希校验码：[46318c6f742f39f9ce0f14143ea3bff6]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[b43cc175c68178609e8661e18268f367]，请不要修改和删除此行内容。
 *
 */
 
@@ -79,20 +79,18 @@ import static com.levin.oak.base.entities.EntityConst.*;
 public class BizNoticeProcessLogController extends NoticeProcessLogController{
 
     /**
-    * 简单统计
+    * 统计
     *
     * @param req QueryNoticeProcessLogReq
-    * @return  ApiResp<PagingData<StatNoticeProcessLogReq.Result>>
+    * @return  ApiResp<StatNoticeProcessLogReq.Result>
     */
-    //@GetMapping("/stat") //默认不开放
+    @GetMapping("/stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatNoticeProcessLogReq.Result>> stat(@Valid StatNoticeProcessLogReq req, SimplePaging paging) {
+    public ApiResp<StatNoticeProcessLogReq.Result> stat(@Valid StatNoticeProcessLogReq req, SimplePaging paging) {
 
         req = checkRequest(STAT_ACTION, req);
 
-        //return ApiResp.ok(checkResponse(STAT_ACTION, bizNoticeProcessLogService.stat(req, paging)));
-
-        return ApiResp.error("暂不可用");
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizNoticeProcessLogService.stat(req, paging)));
     }
 
 }

@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 租户应用业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[078d2fadf734a1f987df697cfe585894]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[7f4b8959f095e5959014e464bdd7785e]，请不要修改和删除此行内容。
 *
 */
 
@@ -79,20 +79,18 @@ import static com.levin.oak.base.entities.EntityConst.*;
 public class BizTenantAppController extends TenantAppController{
 
     /**
-    * 简单统计
+    * 统计
     *
     * @param req QueryTenantAppReq
-    * @return  ApiResp<PagingData<StatTenantAppReq.Result>>
+    * @return  ApiResp<StatTenantAppReq.Result>
     */
-    //@GetMapping("/stat") //默认不开放
+    @GetMapping("/stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatTenantAppReq.Result>> stat(@Valid StatTenantAppReq req, SimplePaging paging) {
+    public ApiResp<StatTenantAppReq.Result> stat(@Valid StatTenantAppReq req, SimplePaging paging) {
 
         req = checkRequest(STAT_ACTION, req);
 
-        //return ApiResp.ok(checkResponse(STAT_ACTION, bizTenantAppService.stat(req, paging)));
-
-        return ApiResp.error("暂不可用");
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizTenantAppService.stat(req, paging)));
     }
 
 }

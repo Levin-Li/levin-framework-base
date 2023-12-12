@@ -59,7 +59,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  租户应用-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[2959fd3dbf2259e3de67fcc13726e906]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[2358e673130efd66008d235b66bd5ee1]，请不要修改和删除此行内容。
  *
  */
 
@@ -131,15 +131,15 @@ public class BizTenantAppServiceImpl extends BaseService implements BizTenantApp
     }
 
     /**
-    * 简单统计demo
+    * 统计
     *
     * @param req
     * @param paging 分页设置，可空
-    * @return defaultPagingData 分页数据
+    * @return StatTenantAppReq.Result
     */
     @Operation(summary = STAT_ACTION)
-    PagingData<StatTenantAppReq.Result> stat(StatTenantAppReq req, Paging paging){
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public StatTenantAppReq.Result stat(StatTenantAppReq req, Paging paging){
+        return simpleDao.findOneByQueryObj(req, paging);
     }
 
     //@Override

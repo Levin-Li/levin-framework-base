@@ -1,5 +1,7 @@
 package com.levin.oak.base.controller;
 
+import com.levin.oak.base.biz.bo.area.StatAreaReq;
+import com.levin.oak.base.biz.bo.i18nres.StatI18nResReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -93,4 +95,18 @@ public class BizAreaController extends AreaController{
         return super.checkRequest(action, req);
     }
 
+    /**
+     * 统计
+     *
+     * @param req QueryI18nResReq
+     * @return  ApiResp<StatI18nResReq.Result>
+     */
+    @GetMapping("/stat") //默认开放
+    @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
+    public ApiResp<StatAreaReq.Result> stat(@Valid StatAreaReq req, SimplePaging paging) {
+
+        req = checkRequest(STAT_ACTION, req);
+
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizAreaService.stat(req, paging)));
+    }
 }

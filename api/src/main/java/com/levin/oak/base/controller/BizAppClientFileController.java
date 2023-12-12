@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 客户端文件业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:56, 代码生成哈希校验码：[ea2d8b2ba9add312a03fb56d4989cf75]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[656ef5022b5ba005ea4726f212a1516b]，请不要修改和删除此行内容。
 *
 */
 
@@ -79,20 +79,18 @@ import static com.levin.oak.base.entities.EntityConst.*;
 public class BizAppClientFileController extends AppClientFileController{
 
     /**
-    * 简单统计
+    * 统计
     *
     * @param req QueryAppClientFileReq
-    * @return  ApiResp<PagingData<StatAppClientFileReq.Result>>
+    * @return  ApiResp<StatAppClientFileReq.Result>
     */
-    //@GetMapping("/stat") //默认不开放
+    @GetMapping("/stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatAppClientFileReq.Result>> stat(@Valid StatAppClientFileReq req, SimplePaging paging) {
+    public ApiResp<StatAppClientFileReq.Result> stat(@Valid StatAppClientFileReq req, SimplePaging paging) {
 
         req = checkRequest(STAT_ACTION, req);
 
-        //return ApiResp.ok(checkResponse(STAT_ACTION, bizAppClientFileService.stat(req, paging)));
-
-        return ApiResp.error("暂不可用");
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizAppClientFileService.stat(req, paging)));
     }
 
 }

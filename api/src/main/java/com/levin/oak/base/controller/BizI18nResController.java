@@ -57,7 +57,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 国际化资源业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 下午9:11:57, 代码生成哈希校验码：[3dc85e9ccd039d22e5e5febf3f32e221]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[7a7721dba20e7448656fafc83dcf7115]，请不要修改和删除此行内容。
 *
 */
 
@@ -79,20 +79,18 @@ import static com.levin.oak.base.entities.EntityConst.*;
 public class BizI18nResController extends I18nResController{
 
     /**
-    * 简单统计
+    * 统计
     *
     * @param req QueryI18nResReq
-    * @return  ApiResp<PagingData<StatI18nResReq.Result>>
+    * @return  ApiResp<StatI18nResReq.Result>
     */
-    //@GetMapping("/stat") //默认不开放
+    @GetMapping("/stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<PagingData<StatI18nResReq.Result>> stat(@Valid StatI18nResReq req, SimplePaging paging) {
+    public ApiResp<StatI18nResReq.Result> stat(@Valid StatI18nResReq req, SimplePaging paging) {
 
         req = checkRequest(STAT_ACTION, req);
 
-        //return ApiResp.ok(checkResponse(STAT_ACTION, bizI18nResService.stat(req, paging)));
-
-        return ApiResp.error("暂不可用");
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizI18nResService.stat(req, paging)));
     }
 
 }

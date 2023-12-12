@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
 import com.levin.oak.base.entities.TenantApp;
-
+import com.levin.oak.base.biz.bo.tenantapp.*;
 import com.levin.oak.base.services.tenantapp.*;
 import com.levin.oak.base.services.tenantapp.req.*;
 import com.levin.oak.base.services.tenantapp.info.*;
@@ -22,8 +22,9 @@ import com.levin.oak.base.services.tenantapp.info.*;
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
@@ -31,13 +32,25 @@ import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
- * 租户应用-业务服务
+ *  租户应用-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:20, 代码生成哈希校验码：[1420a9f5df90ee7d22b46c02afcc3bd6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[6831ecbc5a4812f73dc629906b5d50f5]，请不要修改和删除此行内容。
+ *
  */
+
 @Tag(name = E_TenantApp.BIZ_NAME + "-业务服务", description = "")
-public interface BizTenantAppService {}
+public interface BizTenantAppService {
+
+    /**
+    * 统计
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @return StatTenantAppReq.Result
+    */
+    @Operation(summary = STAT_ACTION)
+    StatTenantAppReq.Result stat(StatTenantAppReq req, Paging paging);
+}
