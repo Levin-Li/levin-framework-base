@@ -1,10 +1,15 @@
 package com.levin.oak.base.biz;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.levin.commons.conditional.ConditionalOn;
+import com.levin.commons.dao.PagingData;
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.dao.annotation.Eq;
 import com.levin.commons.dao.annotation.IsNull;
+import com.levin.commons.dao.support.DefaultPagingData;
+import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.rbac.RbacRoleObject;
+import com.levin.commons.rbac.RbacUserObject;
 import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.commons.utils.JsonStrArrayUtils;
 import com.levin.oak.base.biz.rbac.RbacLoadService;
@@ -16,6 +21,7 @@ import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.role.info.RoleInfo;
 import com.levin.oak.base.services.role.req.CreateRoleReq;
+import com.levin.oak.base.services.role.req.QueryRoleReq;
 import com.levin.oak.base.services.role.req.RoleIdReq;
 import com.levin.oak.base.services.role.req.UpdateRoleReq;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -62,6 +68,29 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
     @Autowired
     RbacService<Serializable> rbacService;
 
+    @Override
+    public PagingData<RoleInfo> list(Serializable userPrincipal, QueryRoleReq req, SimplePaging paging) {
+
+        PagingData<RoleInfo> pagingData = roleService.query(req, paging);
+
+        //只过滤出当前用户完全拥有权限的角色
+        if (pagingData.getItems() != null) {
+
+            //@todo 只过滤出当前用户完全拥有权限的角色
+
+            if (!(pagingData instanceof DefaultPagingData)) {
+                pagingData = new DefaultPagingData<>(pagingData);
+            }
+
+            ((DefaultPagingData) (pagingData)).setItems(
+                    pagingData.getItems().stream()
+                            .filter(roleInfo -> rbacService.canAssignRole(userPrincipal, null, roleInfo.getCode(), null))
+                            .collect(Collectors.toList())
+            );
+        }
+
+        return pagingData;
+    }
 
     /**
      * 创建记录，返回主键ID
@@ -88,6 +117,12 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
      */
     public boolean update(Serializable userPrincipal, UpdateRoleReq req) {
 
+        RoleInfo info = roleService.findById(BeanUtil.copyProperties(req, RoleIdReq.class));
+
+        Assert.notNull(info, "角色不存在");
+
+        checkCode(info.getCode());
+
         // 忽略code，不允许修改 code
         req.setCode(null);
 
@@ -109,6 +144,15 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
         RoleInfo info = roleService.findById(req);
 
         Assert.notNull(info, "角色不存在");
+
+        checkCode(info.getCode());
+
+        RbacUserObject<String> user = rbacLoadService.loadUser(userPrincipal);
+
+        //只允许用户删除自己创建的角色，或者超级管理员，或者租户管理员
+        Assert.isTrue(user.getId().equals(info.getCreator())
+                || user.isSuperAdmin()
+                || (user.isTenantAdmin() && user.getTenantId().equals(info.getTenantId())), "当前用户没有权限删除该角色");
 
         checkPermissions(userPrincipal, info.getPermissionList());
 

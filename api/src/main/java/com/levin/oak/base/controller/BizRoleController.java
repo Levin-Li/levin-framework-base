@@ -82,24 +82,7 @@ public class BizRoleController extends RoleController {
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
-        PagingData<RoleInfo> pagingData = roleService.query(req, paging);
-
-        //只过滤出当前用户完全拥有权限的角色
-        if (pagingData.getItems() != null) {
-            //@todo 只过滤出当前用户完全拥有权限的角色
-
-            if (!(pagingData instanceof DefaultPagingData)) {
-                pagingData = new DefaultPagingData<>(pagingData);
-            }
-
-            ((DefaultPagingData) (pagingData)).setItems(
-                    pagingData.getItems().stream()
-                            .filter(roleInfo -> rbacService.canAssignRole(authService.getUserInfo(), null, roleInfo.getCode(), null))
-                            .collect(Collectors.toList())
-            );
-        }
-
-        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, pagingData));
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, bizRoleService.list(authService.getUserInfo(), req, paging)));
     }
 
     /**

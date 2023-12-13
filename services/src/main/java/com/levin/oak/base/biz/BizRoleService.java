@@ -49,6 +49,16 @@ import java.util.Date;
 public interface BizRoleService<U> {
 
     /**
+     * 查询列表
+     *
+     * @param req
+     * @param paging
+     * @return
+     */
+    @Operation(summary = QUERY_LIST_ACTION)
+    PagingData<RoleInfo> list(U userPrincipal, QueryRoleReq req, SimplePaging paging);
+
+    /**
      * 创建记录，返回主键ID
      *
      * @param req
@@ -74,5 +84,6 @@ public interface BizRoleService<U> {
      */
     @Operation(summary = DELETE_ACTION)
     boolean delete(U userPrincipal, @NotNull RoleIdReq req);
+
 
 }
