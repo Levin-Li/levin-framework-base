@@ -85,5 +85,4 @@ public interface BizRoleService<U> {
     @Operation(summary = DELETE_ACTION)
     boolean delete(U userPrincipal, @NotNull RoleIdReq req);
 
-
 }

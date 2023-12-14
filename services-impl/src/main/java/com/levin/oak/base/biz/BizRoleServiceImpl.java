@@ -1,23 +1,18 @@
 package com.levin.oak.base.biz;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.levin.commons.conditional.ConditionalOn;
+import cn.hutool.core.lang.Assert;
 import com.levin.commons.dao.PagingData;
 import com.levin.commons.dao.SimpleDao;
-import com.levin.commons.dao.annotation.Eq;
-import com.levin.commons.dao.annotation.IsNull;
 import com.levin.commons.dao.support.DefaultPagingData;
 import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.rbac.RbacRoleObject;
 import com.levin.commons.rbac.RbacUserObject;
 import com.levin.commons.service.exception.AuthorizationException;
-import com.levin.commons.utils.JsonStrArrayUtils;
 import com.levin.oak.base.biz.rbac.RbacLoadService;
-import com.levin.oak.base.biz.rbac.RbacMethodService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.E_SimpleApi;
-import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.role.info.RoleInfo;
 import com.levin.oak.base.services.role.req.CreateRoleReq;
@@ -26,22 +21,17 @@ import com.levin.oak.base.services.role.req.RoleIdReq;
 import com.levin.oak.base.services.role.req.UpdateRoleReq;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.levin.commons.conditional.ConditionalOn.Action.OnMissingBean;
+import static com.levin.commons.dao.EntityOpConst.DELETE_ACTION;
+import static com.levin.commons.dao.EntityOpConst.UPDATE_ACTION;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 
@@ -73,8 +63,11 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
 
         PagingData<RoleInfo> pagingData = roleService.query(req, paging);
 
+        RbacUserObject<String> user = rbacLoadService.loadUser(userPrincipal);
+
         //只过滤出当前用户完全拥有权限的角色
-        if (pagingData.getItems() != null) {
+        if (!user.isSuperAdmin()
+                && pagingData.getItems() != null) {
 
             //@todo 只过滤出当前用户完全拥有权限的角色
 
@@ -87,6 +80,7 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
                             .filter(roleInfo -> rbacService.canAssignRole(userPrincipal, null, roleInfo.getCode(), null))
                             .collect(Collectors.toList())
             );
+
         }
 
         return pagingData;
@@ -105,6 +99,20 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
 
         checkPermissions(userPrincipal, req.getPermissionList());
 
+        RbacUserObject<String> user = rbacLoadService.loadUser(userPrincipal);
+
+        if (!user.isSuperAdmin()) {
+
+            req.setTenantId(user.getId());
+
+            Assert.notBlank(req.getTenantId(), "租户ID不能为空");
+
+            if (!user.isTenantAdmin()) {
+                req.setOrgId(user.getOrgId());
+                Assert.notBlank(req.getOrgId(), "机构ID不能为空");
+            }
+        }
+
         return roleService.create(req);
     }
 
@@ -117,16 +125,10 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
      */
     public boolean update(Serializable userPrincipal, UpdateRoleReq req) {
 
-        RoleInfo info = roleService.findById(BeanUtil.copyProperties(req, RoleIdReq.class));
-
-        Assert.notNull(info, "角色不存在");
-
-        checkCode(info.getCode());
+        loadAndCheck(userPrincipal, BeanUtil.copyProperties(req, RoleIdReq.class), DELETE_ACTION);
 
         // 忽略code，不允许修改 code
         req.setCode(null);
-
-        checkPermissions(userPrincipal, req.getPermissionList());
 
         return roleService.update(req);
     }
@@ -141,6 +143,23 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
     @Override
     public boolean delete(Serializable userPrincipal, RoleIdReq req) {
 
+        //只允许用户删除自己创建的角色，或者超级管理员，或者租户管理员
+
+        loadAndCheck(userPrincipal, req, DELETE_ACTION);
+
+        return roleService.delete(req);
+    }
+
+    /**
+     * 加载并检查当前用户是否有权限使用指定的权限
+     *
+     * @param userPrincipal
+     * @param req
+     * @param action
+     * @return RoleInfo
+     */
+    protected RoleInfo loadAndCheck(Serializable userPrincipal, RoleIdReq req, String action) {
+
         RoleInfo info = roleService.findById(req);
 
         Assert.notNull(info, "角色不存在");
@@ -149,15 +168,21 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
 
         RbacUserObject<String> user = rbacLoadService.loadUser(userPrincipal);
 
-        //只允许用户删除自己创建的角色，或者超级管理员，或者租户管理员
-        Assert.isTrue(user.getId().equals(info.getCreator())
-                || user.isSuperAdmin()
-                || (user.isTenantAdmin() && user.getTenantId().equals(info.getTenantId())), "当前用户没有权限删除该角色");
+        if (!user.isSuperAdmin()) {
 
-        checkPermissions(userPrincipal, info.getPermissionList());
+            Assert.notBlank(info.getTenantId(), "租户ID不能为空");
 
-        return roleService.delete(req);
+            if (!user.isTenantAdmin()) {
+                Assert.notBlank(info.getOrgId(), "机构ID不能为空");
+            }
 
+            //只能操作自己租户的角色
+            Assert.isTrue(user.getTenantId().equals(info.getTenantId()), "不能{}该角色{}", action, info.getId());
+        }
+
+        checkPermissions(user, info.getPermissionList());
+
+        return info;
     }
 
 
@@ -184,7 +209,7 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
 
     protected void checkCode(String roleCode) {
 
-        Assert.hasText(roleCode, "角色编码不能为空");
+        Assert.notBlank(roleCode, "角色编码不能为空");
 
         Assert.isTrue(roleCode.startsWith("R_"), "角色编码必须以 R_ 开头");
 
