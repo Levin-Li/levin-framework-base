@@ -1,6 +1,7 @@
 package com.levin.oak.base.biz.rbac;
 
 import com.levin.commons.rbac.RbacUserObject;
+import com.levin.commons.rbac.RbacUtils;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.rbac.ResPermission;
 import com.levin.commons.service.support.ContextHolder;
@@ -59,48 +60,8 @@ public class RbacMethodServiceImpl implements RbacMethodService<Serializable> {
             return true;
         }
 
-        Class<?> controllerClass = beanOrClass != null ? (beanOrClass instanceof Class ? (Class) beanOrClass : beanOrClass.getClass())
-                : method.getDeclaringClass();
-
-        ///////////////////////////////获取 res 和 action 用于权限验证 //////////////////////////////////////////
-        //
-        Tag tag = controllerClass.getAnnotation(Tag.class);
-        Operation operation = method.getAnnotation(Operation.class);
-
-        String res = controllerClass.getSimpleName().replace("Controller", "");
-
-        if (tag != null) {
-            res = Arrays.asList(tag.name(), tag.description())
-                    .stream().filter(StringUtils::hasText).findFirst().orElse(res);
-        }
-
-        String action = method.getName();
-        if (operation != null) {
-            action = Arrays.asList(operation.summary(), operation.operationId(), operation.description())
-                    .stream().filter(StringUtils::hasText).findFirst().orElse(action);
-        }
         /////////////////////////////// 获取注解 ///////////////////////////////////////////////////
-        ResAuthorize resAuthorize = cache.get(method);
-        //如果没有放入
-        if (resAuthorize == null
-                && !cache.containsKey(method)) {
-
-            resAuthorize = ClassUtils.merge(MapUtils.putFirst(ResPermission.Fields.res, res)
-                            .put(ResPermission.Fields.action, action).build()
-                    //默认条件为不空或是不是空字符串则覆盖
-                    , (k, v) -> v != null && (!(v instanceof CharSequence) || StringUtils.hasText((CharSequence) v))
-
-                    , ResAuthorize.class,
-                    AnnotatedElementUtils.getMergedAnnotation(controllerClass, ResAuthorize.class),
-                    AnnotatedElementUtils.getMergedAnnotation(method, ResAuthorize.class)
-            );
-
-            if (resAuthorize == null) {
-                resAuthorize = defaultResAuthorize;
-            }
-
-            cache.put(method, resAuthorize);
-        }
+        ResAuthorize resAuthorize = RbacUtils.getMethodResAuthorize(beanOrClass, method);
 
         if (resAuthorize == null
                 || resAuthorize.ignored()) {
@@ -125,9 +86,14 @@ public class RbacMethodServiceImpl implements RbacMethodService<Serializable> {
 
         ///////////////////////// 构建权限检查逻辑的闭包 //////////////////////////////////////
 
-        return rbacService.isAuthorized((Serializable) userInfo, resAuthorize);
+        boolean authorized = rbacService.isAuthorized(userInfo, resAuthorize);
+
+        if (!authorized && log.isDebugEnabled()) {
+            log.debug("***授权检查失败*** 用户：{} ，需要的权限：{}", userInfo, resAuthorize);
+        }
+
+        return authorized;
 
     }
-
 
 }

@@ -5,6 +5,8 @@ import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacMethodService;
+import org.springframework.aop.framework.AopProxyUtils;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -53,8 +55,16 @@ public class ControllerAuthorizeInterceptor implements HandlerInterceptor {
 
         HandlerMethod handlerMethod = (HandlerMethod) handler;
 
+        Object bean = ((HandlerMethod) handler).getBean();
+
+        Class<?> targetClass = AopUtils.getTargetClass(bean);
+
+        if (targetClass == null) {
+            targetClass = handlerMethod.getBeanType();
+        }
+
         if (classNameFilter != null
-                && !classNameFilter.test(handlerMethod.getBeanType().getName())) {
+                && !classNameFilter.test(targetClass.getName())) {
             return true;
         }
 
@@ -67,7 +77,7 @@ public class ControllerAuthorizeInterceptor implements HandlerInterceptor {
         }
 
         //检查权限
-        boolean ok = rbacMethodService.canAccess(authService.isLogin() ? authService.getUserInfo() : null, handlerMethod.getBeanType(), handlerMethod.getMethod());
+        boolean ok = rbacMethodService.canAccess(authService.isLogin() ? authService.getUserInfo() : null,targetClass, handlerMethod.getMethod());
 
         Assert.isTrue(ok, () -> new AuthorizationException("未授权的操作"));
 

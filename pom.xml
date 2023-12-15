@@ -36,7 +36,7 @@
         <levin.simple-dao.version>2.5.3-SNAPSHOT</levin.simple-dao.version>
 
         <levin.service-support.groupId>com.github.Levin-Li</levin.service-support.groupId>
-        <!--        <levin.service-support.groupId>com.levin.commons</levin.service-support.groupId>-->
+        <levin.service-support.groupId>com.levin.commons</levin.service-support.groupId>
         <levin.service-support.version>1.2.28-SNAPSHOT</levin.service-support.version>
 
         <hutool.version>5.8.11</hutool.version>
@@ -745,7 +745,7 @@
                     <!-- 生成的DTO的Schema注解中描述的配置是否使用类引用-->
                     <isSchemaDescUseConstRef>true</isSchemaDescUseConstRef>
 
-<!--                    <enableDubbo>true</enableDubbo>-->
+                    <!--                    <enableDubbo>true</enableDubbo>-->
                 </configuration>
                 <dependencies>
                     <dependency>
