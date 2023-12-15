@@ -162,7 +162,7 @@ public class BizUserController extends BaseController {
 
         checkCurrentUserCreateOrUpdateUserRole(null, req.getRoleList());
 
-        if(!StringUtils.hasText(req.getOrgId())){
+        if (!StringUtils.hasText(req.getOrgId())) {
             req.setOrgId(authService.getUserInfo().getOrgId());
         }
 
@@ -191,7 +191,7 @@ public class BizUserController extends BaseController {
     @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Boolean> update(@RequestBody UpdateUserReq req) {
         checkCurrentUserCreateOrUpdateUserRole(req.getId(), req.getRoleList());
-        return ApiResp.ok(assertTrue(bizUserService.update(authService.getUserInfo(), req), UPDATE_ACTION));
+        return ApiResp.ok(assertTrue(bizUserService.update(authService.getUserInfo(), req), UPDATE_ACTION + "失败"));
     }
 
     /**
@@ -202,7 +202,7 @@ public class BizUserController extends BaseController {
     @DeleteMapping({""})
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Boolean> delete(@NotNull UserIdReq req) {
-        return ApiResp.ok(assertTrue(bizUserService.delete(authService.getUserInfo(), req), DELETE_ACTION));
+        return ApiResp.ok(assertTrue(bizUserService.delete(authService.getUserInfo(), req), DELETE_ACTION + "失败"));
     }
 
 }
