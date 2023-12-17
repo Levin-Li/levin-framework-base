@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 机构-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[ed629a365f877e46de0745fe4a5fe021]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午10:43:55, 代码生成哈希校验码：[37bd2c1761482c5b7acf94649aa8323a]，请不要修改和删除此行内容。
  *
  */
 
@@ -72,7 +72,7 @@ import com.levin.commons.service.support.InjectConst;
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_Org.BIZ_NAME, description = E_Org.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Org.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Org.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class OrgServiceImpl extends BaseService implements OrgService {
 
     protected OrgService getSelfProxy(){
@@ -170,6 +170,7 @@ public class OrgServiceImpl extends BaseService implements OrgService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    //如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
     @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
     public OrgInfo findById(String id) {
         return findById(new OrgIdReq().setId(id));

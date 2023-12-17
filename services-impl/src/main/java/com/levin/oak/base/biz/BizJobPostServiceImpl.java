@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  工作岗位-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[17176749d38831d959f29b804e1a4585]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午10:43:55, 代码生成哈希校验码：[f41b1ec59f2468a7d4a5913254fd8292]，请不要修改和删除此行内容。
  *
  */
 
@@ -78,7 +78,7 @@ import com.levin.commons.service.support.InjectConst;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_JobPost.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_JobPost.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_JobPost.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class BizJobPostServiceImpl extends BaseService implements BizJobPostService {
 
     @Autowired

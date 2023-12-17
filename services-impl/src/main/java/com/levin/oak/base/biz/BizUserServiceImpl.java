@@ -5,11 +5,15 @@ import static com.levin.oak.base.ModuleOption.*;
 import cn.hutool.crypto.SecureUtil;
 import com.levin.commons.dao.support.*;
 
+import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.oak.base.biz.bo.user.UpdateUserPwdReq;
+import com.levin.oak.base.biz.rbac.RbacLoadService;
+import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
 import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,8 @@ import com.levin.oak.base.services.user.info.*;
 import com.levin.oak.base.services.*;
 
 import java.io.Serializable;
+import java.util.List;
+
 import com.levin.commons.dao.PagingData;
 
 ////////////////////////////////////
@@ -57,9 +63,40 @@ public class BizUserServiceImpl extends BaseService implements BizUserService<Se
     @Autowired
     UserService userService;
 
+    @Autowired
+    RbacLoadService<Serializable> rbacLoadService;
+
+    @Autowired
+    RbacService rbacService;
+
+    private static final String CK_PREFIX = E_User.CACHE_KEY_PREFIX;
 
     protected BizUserServiceImpl getSelfProxy() {
         return getSelfProxy(BizUserServiceImpl.class);
+    }
+
+
+    /**
+     * 检查用户角色
+     * <p>
+     * 保证当前用户分配的给其它用户的角色必须是自己已经拥有的角色
+     *
+     * @param targetUserId
+     * @param roleList
+     */
+    protected void checkCurrentUserCreateOrUpdateUserRole(Serializable userPrincipal,Serializable targetUserId, List<String> roleList) {
+
+        if (CollectionUtils.isEmpty(roleList)) {
+            return;
+        }
+
+        boolean ok = rbacService.canAssignRole(userPrincipal, targetUserId, roleList, (roleCode, info) -> {
+            throw new AuthorizationException("分配角色(" + roleCode + ")失败，请检查是否拥有角色所需的权限, " + info);
+        });
+
+        if (!ok) {
+            throw new AuthorizationException("分配角色失败，请检查是否拥有角色所需的权限");
+        }
     }
 
     //示例方法
@@ -99,7 +136,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService<Se
     }
 
     @Override
-    @Transactional(rollbackFor = {RuntimeException.class})
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")
     public boolean updatePwd(Serializable userPrincipal, UpdateUserPwdReq req) {
 
         Assert.notNull(req.getId(), E_User.BIZ_NAME + " id 不能为空");
@@ -132,6 +169,7 @@ public class BizUserServiceImpl extends BaseService implements BizUserService<Se
      */
     @Override
     public boolean delete(Serializable userPrincipal, UserIdReq req) {
+
         return userService.delete(req);
     }
 

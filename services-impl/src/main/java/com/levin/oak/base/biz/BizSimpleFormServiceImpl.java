@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  简单表单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:37, 代码生成哈希校验码：[5ed45aaef5ce35f336e4fb307e404e39]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午10:43:55, 代码生成哈希校验码：[bc757990e4d1d6d3ef5bb297666564cf]，请不要修改和删除此行内容。
  *
  */
 
@@ -79,7 +79,7 @@ import com.levin.commons.service.support.InjectConst;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_SimpleForm.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleForm.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleForm.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class BizSimpleFormServiceImpl extends BaseService implements BizSimpleFormService {
 
     @Autowired

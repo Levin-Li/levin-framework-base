@@ -57,7 +57,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[a8d830a7d463e4970b3a1d1623fa6e8d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午10:43:55, 代码生成哈希校验码：[b63494afae484ef1e11ba0198d90e2d7]，请不要修改和删除此行内容。
  *
  */
 
@@ -69,7 +69,7 @@ import com.levin.oak.base.entities.Area.*;
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Area.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Area.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class AreaServiceImpl extends BaseService implements AreaService {
 
     protected AreaService getSelfProxy(){
@@ -167,6 +167,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    //如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
     @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#code)", key = CK_PREFIX + "#code")
     public AreaInfo findById(String code) {
         return findById(new AreaIdReq().setCode(code));

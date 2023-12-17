@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:39, 代码生成哈希校验码：[60477840a6da85d80439523ed75522bd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午10:43:53, 代码生成哈希校验码：[13480ed05bb731d7043a75af1985eddc]，请不要修改和删除此行内容。
  *
  */
 
@@ -72,7 +72,7 @@ import com.levin.commons.service.support.InjectConst;
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Role.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Role.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class RoleServiceImpl extends BaseService implements RoleService {
 
     protected RoleService getSelfProxy(){
@@ -170,6 +170,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    //如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
     @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
     public RoleInfo findById(String id) {
         return findById(new RoleIdReq().setId(id));

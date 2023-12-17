@@ -76,21 +76,6 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @CRUD
 
 @Slf4j
-public class BizOrgController extends OrgController{
-
-    /**
-    * 统计
-    *
-    * @param req QueryOrgReq
-    * @return  ApiResp<StatOrgReq.Result>
-    */
-    @GetMapping("/stat") //默认开放
-    @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
-    public ApiResp<StatOrgReq.Result> stat(@Valid StatOrgReq req, SimplePaging paging) {
-
-        req = checkRequest(STAT_ACTION, req);
-
-        return ApiResp.ok(checkResponse(STAT_ACTION, bizOrgService.stat(req, paging)));
-    }
+public class BizOrgController extends OrgController {
 
 }

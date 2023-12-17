@@ -59,7 +59,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  简单动态接口-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[7c97d9f0c6698d63bf27630a88d27dc0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午10:43:53, 代码生成哈希校验码：[53ecfc176dc65da95a6a28d3ca971e74]，请不要修改和删除此行内容。
  *
  */
 
@@ -80,7 +80,7 @@ import com.levin.commons.service.support.InjectConst;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_SimpleApi.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleApi.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleApi.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class BizSimpleApiServiceImpl extends BaseService implements BizSimpleApiService {
 
     @Autowired

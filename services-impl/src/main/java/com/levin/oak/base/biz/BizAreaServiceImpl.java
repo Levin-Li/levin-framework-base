@@ -59,7 +59,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  *  区域-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:36, 代码生成哈希校验码：[8e2d27b204a26b01d7990c4560c55d02]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午10:43:55, 代码生成哈希校验码：[5abc4acd27352af24aa3132d785da7b5]，请不要修改和删除此行内容。
  *
  */
 
@@ -80,7 +80,7 @@ import com.levin.oak.base.entities.Area.*;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_Area.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Area.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Area.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class BizAreaServiceImpl extends BaseService implements BizAreaService {
 
     @Autowired

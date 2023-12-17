@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 访问日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[ce2d3744a23913a864ada382bd77962f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午10:43:54, 代码生成哈希校验码：[3863d559970ed2f20f1444af04119c74]，请不要修改和删除此行内容。
  *
  */
 
@@ -66,7 +66,7 @@ import com.levin.commons.service.support.InjectConst;
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_AccessLog.BIZ_NAME, description = E_AccessLog.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_AccessLog.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_AccessLog.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class AccessLogServiceImpl extends BaseService implements AccessLogService {
 
     protected AccessLogService getSelfProxy(){
@@ -164,6 +164,7 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    //如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
     @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
     public AccessLogInfo findById(Long id) {
         return findById(new AccessLogIdReq().setId(id));

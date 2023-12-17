@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度任务-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[c4ebb3c5dade9fc2c0be35482f82da79]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午10:43:54, 代码生成哈希校验码：[81d37f99c191dc521b1463ef584f5400]，请不要修改和删除此行内容。
  *
  */
 
@@ -66,7 +66,7 @@ import com.levin.commons.service.support.InjectConst;
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_ScheduledTask.BIZ_NAME, description = E_ScheduledTask.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_ScheduledTask.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_ScheduledTask.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTaskService {
 
     protected ScheduledTaskService getSelfProxy(){
@@ -164,6 +164,7 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
+    //如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
     @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
     public ScheduledTaskInfo findById(String id) {
         return findById(new ScheduledTaskIdReq().setId(id));
