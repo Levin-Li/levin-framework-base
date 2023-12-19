@@ -19,7 +19,7 @@ import java.util.Set;
 @Entity(name = EntityConst.PREFIX + "Area")
 @Cacheable
 @Data
-@EqualsAndHashCode(of = {"code"})
+@EqualsAndHashCode(of = {"id"})
 @Accessors(chain = true)
 @FieldNameConstants
 @Schema(title = "区域")
@@ -27,8 +27,8 @@ import java.util.Set;
         indexes = {
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = E_Area.code),
-                @Index(columnList = E_Area.parentCode),
+                @Index(columnList = E_Area.id),
+                @Index(columnList = E_Area.parentId),
                 @Index(columnList = E_Area.type),
         }
 )
@@ -62,39 +62,29 @@ public class Area
     @Id
     @Column(length = 64)
     @StartsWith
-    protected String code;
+    protected String id;
 
     @Schema(title = "图标")
     protected String icon;
 
     @Schema(title = "父区域ID")
     @Column(length = 64)
-    protected String parentCode;
+    protected String parentId;
 
     @Schema(title = "父区域")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parentCode", insertable = false, updatable = false)
+    @JoinColumn(name = "parentId", insertable = false, updatable = false)
     protected Area parent;
 
     @Schema(title = "子区域")
     @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE)
-    @OrderBy("orderCode ASC , code ASC")
+    @OrderBy("orderCode ASC , id ASC")
     protected Set<Area> children;
 
     @Schema(title = "类型")
     @Column(nullable = false, length = 64)
     @Enumerated(EnumType.STRING)
     protected Type type;
-
-    @Override
-    public String getParentId() {
-        return parentCode;
-    }
-
-    @Override
-    public String getId() {
-        return code;
-    }
 
     @Override
     @PrePersist

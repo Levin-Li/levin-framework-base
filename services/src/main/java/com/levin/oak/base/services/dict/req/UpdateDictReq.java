@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Date;
 import com.levin.oak.base.entities.Dict.*;
 import com.levin.commons.service.support.DefaultJsonConverter;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -43,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:02:19, 代码生成哈希校验码：[2a856a97985897373b66c1628e7556bd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[ac426db3687552b54370287e279affef]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)

@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Date;
 import com.levin.oak.base.entities.Dict.*;
 import com.levin.commons.service.support.DefaultJsonConverter;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -42,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 字典 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[4a7e16d0e73307d9b54283d3cf611475]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[e350b8cc866fd15ac7e17f9ea50b626f]，请不要修改和删除此行内容。
  *
  */
 

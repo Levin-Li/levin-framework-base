@@ -100,6 +100,17 @@ public class BizRoleController extends RoleController {
     }
 
     /**
+     * 查看详情
+     *
+     * @param req QueryRoleByIdReq
+     * @param id
+     */
+    @Override
+    public ApiResp<RoleInfo> retrieve(RoleIdReq req, String id) {
+        return super.retrieve(req, id);
+    }
+
+    /**
      * 更新
      *
      * @param req UpdateRoleReq

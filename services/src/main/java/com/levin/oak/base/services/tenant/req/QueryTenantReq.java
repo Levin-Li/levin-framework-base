@@ -39,6 +39,7 @@ import com.levin.oak.base.services.commons.req.*;
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
@@ -46,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:10, 代码生成哈希校验码：[67ccefb02ed58e0ab965a9f96c55bded]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[ed9f308ac1dea686f556d95572e2145f]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -59,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Tenant.class, alias = E_Tenant.ALIAS, resultClass = TenantInfo.class)
-public class QueryTenantReq extends BaseReq{
+public class QueryTenantReq extends BaseReq {
 
     private static final long serialVersionUID = 1557223144L;
 

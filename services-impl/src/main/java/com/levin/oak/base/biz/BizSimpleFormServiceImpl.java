@@ -50,6 +50,7 @@ import com.levin.oak.base.services.*;
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -58,7 +59,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  简单表单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午10:43:55, 代码生成哈希校验码：[bc757990e4d1d6d3ef5bb297666564cf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[31b033496cf0abddfca3de0b9135e7f5]，请不要修改和删除此行内容。
  *
  */
 

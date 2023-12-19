@@ -13,6 +13,7 @@ import com.levin.oak.base.services.scheduledtask.info.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -56,7 +57,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 调度任务测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[4163ccff913b484b54acdf246d9ff73a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[04915759e19322bd40738bde6b052f91]，请不要修改和删除此行内容。
  *
  */
 

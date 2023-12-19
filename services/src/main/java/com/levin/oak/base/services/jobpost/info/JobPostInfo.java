@@ -27,6 +27,7 @@ import static com.levin.oak.base.entities.E_JobPost.*;
 ////////////////////////////////////
 import java.util.Date;
 import com.levin.oak.base.entities.JobPost.*;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -36,7 +37,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[1852e83814de2ac90bda01ffda3786a5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[442254d6808adbd59c6cc1b5c513408d]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)

@@ -33,9 +33,11 @@ import com.levin.oak.base.entities.Role;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.services.role.info.*;
 import java.util.Set;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -44,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[5b6ba02a2973fbc9f137453127965fb5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[71fbd4cce3f088b92350c8a1d989951a]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)

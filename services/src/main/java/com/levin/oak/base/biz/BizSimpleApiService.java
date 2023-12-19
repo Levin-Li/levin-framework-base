@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.levin.oak.base.entities.SimpleApi.*;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -37,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  简单动态接口-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午10:13:35, 代码生成哈希校验码：[076f7b1ad9cd03c9765f5764e47811a9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[154e3d9d2dca09f4fd0d619bd69e0609]，请不要修改和删除此行内容。
  *
  */
 

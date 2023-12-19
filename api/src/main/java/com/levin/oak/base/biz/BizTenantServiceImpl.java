@@ -1,7 +1,7 @@
 package com.levin.oak.base.biz;
 
 import cn.hutool.core.lang.Assert;
-import com.levin.commons.service.domain.SignatureReq;
+import com.levin.commons.service.domain.DefaultSignatureReq;
 import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.exception.ServiceException;
 import com.levin.commons.utils.SignUtils;
@@ -219,26 +219,32 @@ public class BizTenantServiceImpl
 
         log.debug("签名验证 url:{}", url);
 
-        String appId = request.getHeader(SignatureReq.Fields.appId);
-        String channelCode = request.getHeader(SignatureReq.Fields.channelCode);
-        String sign = request.getHeader(SignatureReq.Fields.sign);
+        String clientId = request.getHeader(DefaultSignatureReq.Fields.clientId);
 
-        Assert.notBlank(appId, "应用ID不能为空");
+        //String clientSecret = request.getHeader(DefaultSignatureReq.Fields.clientSecret);
+
+        String timestamp = request.getHeader(DefaultSignatureReq.Fields.timestamp);
+        String nonceStr = request.getHeader(DefaultSignatureReq.Fields.nonceStr);
+        String channelCode = request.getHeader(DefaultSignatureReq.Fields.channelCode);
+
+        String sign = request.getHeader(DefaultSignatureReq.Fields.sign);
+
+        Assert.notBlank(clientId, "应用ID不能为空");
         Assert.notBlank(channelCode, "渠道编码不能为空");
-        Assert.notBlank(sign, "应用签名不能为空");
+        Assert.notBlank(sign, "签名不能为空");
 
-//        签名，验签规则:md5(Utf8(应用ID +  渠道编码 + 应用密钥 + 当前时间毫秒数/(45 * 1000) ))
+//        签名，验签规则:md5(Utf8(应用ID +  渠道编码 + 应用密钥 + timestamp + nonceStr ))
 
         AppClientInfo clientInfo = appClientService.findOne(
                 new QueryAppClientReq()
-                        .setAppId(appId.trim())
+                        .setAppId(clientId.trim())
                         .setEnable(true)
                         .setTenantId(tenantInfo.getId())
         );
 
-        Assert.notNull(clientInfo, "非法的应用ID-{}", appId);
+        Assert.notNull(clientInfo, "非法的应用ID-{}", clientId);
 
-        String newSign = SignUtils.md5Utf8Text(clientInfo.getAppId() + channelCode + clientInfo.getAppSecret() + System.currentTimeMillis() / (45 * 1000));
+        String newSign = SignUtils.md5Utf8Text(clientInfo.getAppId() + channelCode + clientInfo.getAppSecret() + timestamp + nonceStr);
 
         Assert.isTrue(sign.equals(newSign), "签名验证失败");
 

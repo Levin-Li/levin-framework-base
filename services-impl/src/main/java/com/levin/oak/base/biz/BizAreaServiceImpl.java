@@ -48,9 +48,11 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.Area.*;
@@ -59,7 +61,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  *  区域-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午10:43:55, 代码生成哈希校验码：[5abc4acd27352af24aa3132d785da7b5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午4:20:47, 代码生成哈希校验码：[e6c280796aee9f80a8d8be393c401519]，请不要修改和删除此行内容。
  *
  */
 
@@ -101,22 +103,22 @@ public class BizAreaServiceImpl extends BaseService implements BizAreaService {
     @Operation(summary = VIEW_DETAIL_ACTION)
     //@Override
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#code)", key = CK_PREFIX + "#code")
-    public AreaInfo findById(String code) {
-        return areaService.findById(code);
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    public AreaInfo findById(String id) {
+        return areaService.findById(id);
     }
 
     //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     //@Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.code)" , key = CK_PREFIX + "#req.code") //
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //
     public AreaInfo findById(AreaIdReq req) {
         return areaService.findById(req);
     }
 
     @Operation(summary = UPDATE_ACTION)
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.code) && #result", key = CK_PREFIX + "#req.code")//, beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdateAreaReq req) {
         return areaService.update(req);
@@ -124,7 +126,7 @@ public class BizAreaServiceImpl extends BaseService implements BizAreaService {
 
     @Operation(summary = DELETE_ACTION)
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.code) && #result", key = CK_PREFIX + "#req.code") // , beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") // , beforeInvocation = true
     @Transactional
     public boolean delete(AreaIdReq req) {
         return areaService.delete(req);

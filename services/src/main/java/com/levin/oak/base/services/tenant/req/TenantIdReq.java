@@ -29,26 +29,28 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_Tenant.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
-
 ////////////////////////////////////
 
 /**
  * 平台租户 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月21日 下午2:35:37, 代码生成哈希校验码：[3ae806b4678231a5a61b63a7e3cf9d37]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[5cc3abaa55b33fd6628204f0b8cdb514]，请不要修改和删除此行内容。
+ *
  */
-@Schema(title = BIZ_NAME + " 主键通用查询")
+
+@Schema(title =  BIZ_NAME + " 主键通用查询")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-// @EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @FieldNameConstants
@@ -57,20 +59,21 @@ public class TenantIdReq extends BaseReq {
 
     private static final long serialVersionUID = 1557223144L;
 
-    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     @Eq(require = true)
     @NotBlank
     protected String id;
 
-    public TenantIdReq updateIdWhenNotBlank(String id) {
-        if (isNotBlank(id)) {
+    public TenantIdReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
             this.id = id;
         }
         return this;
     }
 
+
     @PostConstruct
     public void preQuery() {
-        // @todo ID 查询之前初始化数据
+        //@todo ID 查询之前初始化数据
     }
 }

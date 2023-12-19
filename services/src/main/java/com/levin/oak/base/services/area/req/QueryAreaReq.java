@@ -37,9 +37,11 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.Area.*;
@@ -48,7 +50,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 查询区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[ab6b61f3b0b4240b61924cd1a25dc2cc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午4:20:46, 代码生成哈希校验码：[2b4e482fead0ac14f0a34491928e9bd6]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -61,7 +63,7 @@ import com.levin.oak.base.entities.Area.*;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Area.class, alias = E_Area.ALIAS, resultClass = AreaInfo.class)
-public class QueryAreaReq extends BaseReq{
+public class QueryAreaReq extends BaseReq {
 
     private static final long serialVersionUID = -445860277L;
 
@@ -77,19 +79,19 @@ public class QueryAreaReq extends BaseReq{
 
 
     @Size(max = 64)
-    @Schema(title = L_code)
-    String code;
+    @Schema(title = L_id)
+    String id;
 
-    @Schema(title = "模糊匹配-" + L_code)
+    @Schema(title = "模糊匹配-" + L_id)
     @StartsWith
-    String startsWithCode;
+    String startsWithId;
 
     @Schema(title = L_icon)
     String icon;
 
     @Size(max = 64)
-    @Schema(title = L_parentCode)
-    String parentCode;
+    @Schema(title = L_parentId)
+    String parentId;
 
 
     @Schema(title = "是否加载" + L_parent)
@@ -171,8 +173,8 @@ public class QueryAreaReq extends BaseReq{
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
-    public QueryAreaReq(String code) {
-        this.code = code;
+    public QueryAreaReq(String id) {
+        this.id = id;
     }
     @PostConstruct
     public void preQuery() {

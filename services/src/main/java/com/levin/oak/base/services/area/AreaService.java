@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 区域-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[d5692d318df7d541ae1972e1d2ce93d4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午4:20:47, 代码生成哈希校验码：[54429422c813b84aed852f9ebdad393d]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
@@ -134,11 +134,11 @@ public interface AreaService {
 
     /**
      * 通过主键查找记录，建议在服务内部调用，不要在控制器中调用
-     * @param code 主键ID
+     * @param id 主键ID
      * @return data 数据详情
      */
     @Operation(summary = VIEW_DETAIL_ACTION)
-    AreaInfo findById(@NotNull String code);
+    AreaInfo findById(@NotNull String id);
 
     /**
     * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性

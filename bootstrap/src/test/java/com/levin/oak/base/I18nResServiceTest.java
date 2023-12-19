@@ -12,6 +12,7 @@ import com.levin.oak.base.services.i18nres.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -55,7 +56,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 国际化资源测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:41, 代码生成哈希校验码：[e8ce83450620b0583491912afd57d8a5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[1dee61fdf9058e53b6427d833e97e04a]，请不要修改和删除此行内容。
  *
  */
 
@@ -100,7 +101,7 @@ public class I18nResServiceTest {
 
             // req.setLang("这是文本64");// 必填
 
-            // req.setLabel("这是文本768");// 必填
+            // req.setLabel("这是文本1800");// 必填
 
             // req.setDomain("这是文本128");//归属的子系统或应用 
 
@@ -138,7 +139,7 @@ public class I18nResServiceTest {
         // req.setId(null);//
         // req.setCategory("这是文本128");//
         // req.setLang("这是文本64");//
-        // req.setLabel("这是文本768");//
+        // req.setLabel("这是文本1800");//
         // req.setDomain("这是文本128");//归属的子系统或应用
         // req.setName("这是文本64");//
         // req.setOrgId("这是文本128");//
@@ -167,7 +168,7 @@ public class I18nResServiceTest {
 
            // req.setCategory("这是文本128");// 必填
            // req.setLang("这是文本64");// 必填
-           // req.setLabel("这是文本768");// 必填
+           // req.setLabel("这是文本1800");// 必填
            // req.setDomain("这是文本128");//归属的子系统或应用 
            // req.setName("这是文本64");// 必填
            // req.setOrgId("这是文本128");// 

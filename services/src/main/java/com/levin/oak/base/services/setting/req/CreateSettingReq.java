@@ -31,6 +31,7 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import java.util.Date;
 import com.levin.oak.base.entities.Setting.*;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -39,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:19, 代码生成哈希校验码：[57d8f1bedd7d25c641d8fd62d1b9da04]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[ef92987eb92f014e950de3c881a851f1]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)

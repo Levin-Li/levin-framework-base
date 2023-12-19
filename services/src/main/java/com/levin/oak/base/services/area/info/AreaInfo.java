@@ -26,9 +26,11 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_Area.*;
 ////////////////////////////////////
 import java.util.Date;
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.Area.*;
@@ -38,32 +40,32 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:40, 代码生成哈希校验码：[0b55a0ed09e9814ac4ddd9b904a51f17]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午4:20:46, 代码生成哈希校验码：[2d0463cc5d046b6641ca8631e20b7a3c]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"code"})
+@EqualsAndHashCode(of = {"id"})
 @ToString(exclude = {"parent","children",})
 @FieldNameConstants
-public class AreaInfo implements Serializable {
+public class AreaInfo implements Serializable, TreeObject<AreaInfo, AreaInfo> {
 
     private static final long serialVersionUID = -445860277L;
 
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_code)
-    String code;
+    @Schema(title = L_id)
+    String id;
 
     @Schema(title = L_icon)
     String icon;
 
     @Size(max = 64)
-    @Schema(title = L_parentCode)
-    String parentCode;
+    @Schema(title = L_parentId)
+    String parentId;
 
     //@Fetch //默认不加载，请通过查询对象控制
     @Schema(title = L_parent)

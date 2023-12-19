@@ -169,7 +169,6 @@ public class BizUserServiceImpl extends BaseService implements BizUserService<Se
      */
     @Override
     public boolean delete(Serializable userPrincipal, UserIdReq req) {
-
         return userService.delete(req);
     }
 

@@ -48,6 +48,7 @@ import com.levin.oak.base.services.*;
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
@@ -55,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 平台租户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午10:43:54, 代码生成哈希校验码：[ff6ff8c4cb44eccc7aace169af13f0e2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[32164cc922704454dd473dde56cf6709]，请不要修改和删除此行内容。
  *
  */
 

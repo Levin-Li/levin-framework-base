@@ -26,6 +26,7 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_ScheduledLog.*;
 ////////////////////////////////////
 import java.util.Date;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -35,7 +36,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[8310744081d179701f6cff462526e40e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[ef363bc408895cff0d03a9d204712def]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)

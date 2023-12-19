@@ -30,9 +30,11 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.Area.*;
@@ -41,7 +43,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 新增区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[6db50815ae1d7e61b0aa1c48f44abd44]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午4:20:46, 代码生成哈希校验码：[ac51a6e43114bcf31444dbe56d66a169]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -58,17 +60,17 @@ public class CreateAreaReq extends BaseReq {
 
     private static final long serialVersionUID = -445860277L;
 
-    @Schema(title = L_code )
+    @Schema(title = L_id )
     @NotBlank
     @Size(max = 64)
-    String code;
+    String id;
 
     @Schema(title = L_icon )
     String icon;
 
-    @Schema(title = L_parentCode )
+    @Schema(title = L_parentId )
     @Size(max = 64)
-    String parentCode;
+    String parentId;
 
     @Schema(title = L_type )
     @NotNull

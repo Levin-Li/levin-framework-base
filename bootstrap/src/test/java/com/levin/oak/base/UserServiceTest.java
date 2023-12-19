@@ -9,8 +9,9 @@ import com.levin.oak.base.services.user.*;
 import com.levin.oak.base.services.user.req.*;
 import com.levin.oak.base.services.user.info.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import com.levin.oak.base.entities.User.*;
 import java.util.List;
 import com.levin.oak.base.services.org.info.*;
@@ -18,6 +19,7 @@ import java.util.Date;
 import com.levin.oak.base.entities.Org;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -54,100 +56,113 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 用户测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:23, 代码生成哈希校验码：[800f25c168c3bfaf59501fb468bffadd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[f5d89d805d3eebc84f4c1fe5eab1f1d3]，请不要修改和删除此行内容。
+ *
  */
 
-// @ActiveProfiles("test")
-// @RunWith(SpringRunner.class)
+//@ActiveProfiles("test")
+//@RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-// @Transactional(rollbackFor = {Throwable.class})
+//@Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class UserServiceTest {
 
-    @Autowired private UserService userService;
+    @Autowired
+    private UserService userService;
 
-    @Autowired private BizUserService bizUserService;
+    @Autowired
+    private BizUserService bizUserService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {}
+    public static void beforeAll() throws Exception {
+    }
 
     @AfterAll
-    public static void afterAll() throws Exception {}
+    public static void afterAll() throws Exception {
+    }
 
     @BeforeEach
-    public void beforeEach() throws Exception {}
+    public void beforeEach() throws Exception {
+    }
 
     @AfterEach
-    public void afterEach() throws Exception {}
+    public void afterEach() throws Exception {
+    }
 
     @Test
     public void createUserTest() {
 
         CreateUserReq req = new CreateUserReq();
 
-        // req.setTelephone("这是文本20");//可做为登录帐号
+            // req.setOrgId("这是文本128");// 
 
-        // req.setEmail("这是文本32");//可做为登录帐号
+            // req.setTelephone("这是文本20");//可做为登录帐号 
 
-        // req.setPassword("这是文本256");//
+            // req.setEmail("这是文本32");//可做为登录帐号 
 
-        // req.setNickname("这是文本32");//
+            // req.setPassword("这是文本256");// 
 
-        // req.setAvatar("头像_1");//
+            // req.setNickname("这是文本32");// 
 
-        // req.setSex(Sex.Man);//
+            // req.setAvatar("头像_1");// 
 
-        // req.setTagList("这是文本1800");//
+            // req.setSex(Sex.Man);// 
 
-        // req.setCategory(Category.Staff);//
+            // req.setTagList("这是文本1800");// 
 
-        // req.setExpiredDate(new Date());//
+            // req.setCategory(Category.Staff);// 
 
-        // req.setState(State.Normal);// 必填
+            // req.setExpiredDate(new Date());// 
 
-        // req.setStaffNo("这是文本32");//
+            // req.setState(State.Normal);// 必填
 
-        // req.setJobPostCode("这是文本128");//
+            // req.setStaffNo("这是文本32");// 
 
-        // req.setRoleList("这是文本1800");//
+            // req.setJobPostCode("这是文本128");// 
 
-        // req.setWxOpenId("这是文本64");//
+            // req.setRoleList("这是文本1800");// 
 
-        // req.setAliOpenId("这是文本64");//
+            // req.setWxOpenId("这是文本64");// 
 
-        // req.setDomain("这是文本128");//归属的子系统或应用
+            // req.setAliOpenId("这是文本64");// 
 
-        // req.setName("这是文本64");// 必填
+            // req.setTenantId("这是文本128");// 
 
-        // req.setOptimisticLock(1);//
+            // req.setDomain("这是文本128");// 
 
-        // req.setOrgId("这是文本128");//
+            // req.setName("这是文本128");// 必填
 
-        // req.setTenantId("这是文本128");//
+            // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
 
-        // req.setOrderCode(1);//
+            // req.setOrderCode(1);// 
 
-        // req.setEnable(true);// 必填
+            // req.setEnable(true);// 必填
 
-        // req.setEditable(true);// 必填
+            // req.setEditable(true);// 必填
 
-        // req.setRemark("这是文本512");//
+            // req.setRemark("这是文本512");// 
 
-        String id = userService.create(req);
+            // req.setOptimisticLock(1);// 
+
+
+       String id  = userService.create(req);
 
         log.debug("新增用户->" + id);
 
         Assert.isTrue(id != null, "用户");
+
     }
+
 
     @Test
     public void queryUserTest() {
@@ -155,6 +170,7 @@ public class UserServiceTest {
         QueryUserReq req = new QueryUserReq();
 
         // req.setId(null);//
+        // req.setOrgId("这是文本128");//
         // req.setTelephone("这是文本20");//可做为登录帐号
         // req.setEmail("这是文本32");//可做为登录帐号
         // req.setPassword("这是文本256");//
@@ -172,18 +188,18 @@ public class UserServiceTest {
         // req.setLoadOrg(true);//加载
         // req.setWxOpenId("这是文本64");//
         // req.setAliOpenId("这是文本64");//
-        // req.setDomain("这是文本128");//归属的子系统或应用
-        // req.setName("这是文本64");//
-        // req.setOptimisticLock(1);//
-        // req.setOrgId("这是文本128");//
         // req.setTenantId("这是文本128");//
+        // req.setDomain("这是文本128");//
+        // req.setName("这是文本128");//
+        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
         // req.setCreator("这是文本128");//
         // req.setOrderCode(1);//
         // req.setEnable(true);//
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
+        // req.setOptimisticLock(1);//
 
-        PagingData<UserInfo> resp = userService.query(req, null);
+        PagingData<UserInfo> resp = userService.query(req,null);
 
         log.debug("查询用户->" + resp);
 
@@ -193,40 +209,42 @@ public class UserServiceTest {
     @Test
     public void updateUserTest() {
 
-        UpdateUserReq req = new UpdateUserReq();
+         UpdateUserReq req = new UpdateUserReq();
 
-        req.setId(id);
+         req.setId(id);
 
-        // req.setTelephone("这是文本20");//可做为登录帐号
-        // req.setEmail("这是文本32");//可做为登录帐号
-        // req.setPassword("这是文本256");//
-        // req.setNickname("这是文本32");//
-        // req.setAvatar("头像_1");//
-        // req.setSex(Sex.Man);//
-        // req.setTagList("这是文本1800");//
-        // req.setCategory(Category.Staff);//
-        // req.setExpiredDate(new Date());//
-        // req.setState(State.Normal);// 必填
-        // req.setStaffNo("这是文本32");//
-        // req.setJobPostCode("这是文本128");//
-        // req.setRoleList("这是文本1800");//
-        // req.setWxOpenId("这是文本64");//
-        // req.setAliOpenId("这是文本64");//
-        // req.setDomain("这是文本128");//归属的子系统或应用
-        // req.setName("这是文本64");// 必填
-        // req.setOptimisticLock(1);//
-        // req.setOrgId("这是文本128");//
-        // req.setTenantId("这是文本128");//
-        // req.setOrderCode(1);//
-        // req.setEnable(true);// 必填
-        // req.setEditable(true);// 必填
-        // req.setRemark("这是文本512");//
 
-        boolean ok = userService.update(req);
+           // req.setOrgId("这是文本128");// 
+           // req.setTelephone("这是文本20");//可做为登录帐号 
+           // req.setEmail("这是文本32");//可做为登录帐号 
+           // req.setPassword("这是文本256");// 
+           // req.setNickname("这是文本32");// 
+           // req.setAvatar("头像_1");// 
+           // req.setSex(Sex.Man);// 
+           // req.setTagList("这是文本1800");// 
+           // req.setCategory(Category.Staff);// 
+           // req.setExpiredDate(new Date());// 
+           // req.setState(State.Normal);// 必填
+           // req.setStaffNo("这是文本32");// 
+           // req.setJobPostCode("这是文本128");// 
+           // req.setRoleList("这是文本1800");// 
+           // req.setWxOpenId("这是文本64");// 
+           // req.setAliOpenId("这是文本64");// 
+           // req.setTenantId("这是文本128");// 
+           // req.setDomain("这是文本128");// 
+           // req.setName("这是文本128");// 必填
+           // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+           // req.setOrderCode(1);// 
+           // req.setEnable(true);// 必填
+           // req.setEditable(true);// 必填
+           // req.setRemark("这是文本512");// 
+           // req.setOptimisticLock(1);// 
 
-        log.debug("更新用户-> " + ok);
+          boolean ok = userService.update(req);
 
-        Assert.isTrue(ok, "用户");
+          log.debug("更新用户-> " + ok);
+
+          Assert.isTrue(ok, "用户");
     }
 
     @Test
@@ -240,6 +258,6 @@ public class UserServiceTest {
 
         log.debug("删除用户->" + ok);
 
-        Assert.isTrue(ok, "用户");
+        Assert.isTrue(ok , "用户");
     }
 }

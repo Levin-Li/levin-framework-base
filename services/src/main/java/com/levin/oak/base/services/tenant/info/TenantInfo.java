@@ -28,6 +28,7 @@ import static com.levin.oak.base.entities.E_Tenant.*;
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
@@ -36,7 +37,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 平台租户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月28日 下午2:37:39, 代码生成哈希校验码：[edfb39d9dd513e4ec0facffad8956aa3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[028bfa6ae8e810da34ebae4759d4dbe9]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)

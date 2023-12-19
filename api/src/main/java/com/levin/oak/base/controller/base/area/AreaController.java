@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 区域控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:26, 代码生成哈希校验码：[94c18920a69de7b3d5a80b13cf508169]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午4:20:47, 代码生成哈希校验码：[4e135db07ae753f690e9d5e99d55e118]，请不要修改和删除此行内容。
 *
 */
 
@@ -120,12 +120,12 @@ public abstract class AreaController extends BaseController{
      *
      * @param req QueryAreaByIdReq
      */
-    @GetMapping({"","{code}"})
+    @GetMapping({"","{id}"})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
     @CRUD.Op
-    public ApiResp<AreaInfo> retrieve(@NotNull @Valid AreaIdReq req, @PathVariable(required = false) String code) {
+    public ApiResp<AreaInfo> retrieve(@NotNull @Valid AreaIdReq req, @PathVariable(required = false) String id) {
 
-         req.updateCodeWhenNotBlank(code);
+         req.updateIdWhenNotBlank(id);
 
          req = checkRequest(VIEW_DETAIL_ACTION, req);
 
@@ -141,12 +141,12 @@ public abstract class AreaController extends BaseController{
      * 更新
      * @param req UpdateAreaReq
      */
-    @PutMapping({"","{code}"})
+    @PutMapping({"","{id}"})
     @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<Boolean> update(@RequestBody @Valid UpdateAreaReq req, @PathVariable(required = false) String code) {
+    public ApiResp<Boolean> update(@RequestBody @Valid UpdateAreaReq req, @PathVariable(required = false) String id) {
 
-        req.updateCodeWhenNotBlank(code);
+        req.updateIdWhenNotBlank(id);
 
         req = checkRequest(UPDATE_ACTION, req);
 
@@ -157,12 +157,12 @@ public abstract class AreaController extends BaseController{
      * 删除
      * @param req AreaIdReq
      */
-    @DeleteMapping({"","{code}"})
+    @DeleteMapping({"","{id}"})
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<Boolean> delete(@Valid AreaIdReq req, @PathVariable(required = false) String code) {
+    public ApiResp<Boolean> delete(@Valid AreaIdReq req, @PathVariable(required = false) String id) {
 
-        req.updateCodeWhenNotBlank(code);
+        req.updateIdWhenNotBlank(id);
 
         req = checkRequest(DELETE_ACTION, req);
 
@@ -173,11 +173,11 @@ public abstract class AreaController extends BaseController{
      * 删除
      * @param req AreaIdReq
      */
-    @DeleteMapping(value = {"","{code}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
-    public ApiResp<Boolean> delete2(@RequestBody @Valid AreaIdReq req, @PathVariable(required = false) String code) {
+    public ApiResp<Boolean> delete2(@RequestBody @Valid AreaIdReq req, @PathVariable(required = false) String id) {
 
-        return delete(req, code);
+        return delete(req, id);
     }
 
     //////////////////////////////////////以下是批量操作//////////////////////////////////////

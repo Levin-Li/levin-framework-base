@@ -26,6 +26,7 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_I18nRes.*;
 ////////////////////////////////////
 import java.util.Date;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -35,7 +36,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:41, 代码生成哈希校验码：[d0b2173ee12a4b049fa67bbc7acae714]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[bfa0cc0107bd9605b5af315b8a066dc3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)

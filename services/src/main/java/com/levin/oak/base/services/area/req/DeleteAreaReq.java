@@ -31,9 +31,11 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.Area.*;
@@ -42,7 +44,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 删除区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月7日 上午11:03:11, 代码生成哈希校验码：[8599fb771483d621ed07e0c2cf2dba8d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午4:20:47, 代码生成哈希校验码：[f4c52a5931ba00d5406bafa57ed6f078]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -66,17 +68,17 @@ public class DeleteAreaReq extends BaseReq {
     final boolean eqEditable = true;
 
 
-    @Schema(title = L_code + "集合", required = true, requiredMode = REQUIRED)
-    @In(value = E_Area.code)
+    @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
+    @In(value = E_Area.id)
     @NotEmpty
-    private String[] codeList;
+    private String[] idList;
 
-    public DeleteAreaReq(String... codeList) {
-        this.codeList = codeList;
+    public DeleteAreaReq(String... idList) {
+        this.idList = idList;
     }
 
-    public DeleteAreaReq setCodeList(String... codeList) {
-        this.codeList = codeList;
+    public DeleteAreaReq setIdList(String... idList) {
+        this.idList = idList;
         return this;
     }
 

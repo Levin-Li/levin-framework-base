@@ -66,11 +66,13 @@ public class ModuleSpringCacheResolver implements CacheResolver, InitializingBea
     public Collection<? extends Cache> resolveCaches(CacheOperationInvocationContext<?> context) {
 
         Collection<String> cacheNames = getCacheNames(context);
+
         if (cacheNames == null) {
             return Collections.emptyList();
         }
 
         Collection<Cache> result = new ArrayList<>(cacheNames.size());
+
         for (String cacheName : cacheNames) {
             Cache cache = getCacheManager().getCache(cacheName);
             if (cache == null) {
@@ -79,6 +81,7 @@ public class ModuleSpringCacheResolver implements CacheResolver, InitializingBea
             }
             result.add(cache);
         }
+
         return result;
     }
 

@@ -9,11 +9,14 @@ import com.levin.oak.base.services.area.*;
 import com.levin.oak.base.services.area.req.*;
 import com.levin.oak.base.services.area.info.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.Area.*;
@@ -50,79 +53,92 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 区域测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:23, 代码生成哈希校验码：[26d58f15e75738d35802be93fdaadbf2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午4:20:47, 代码生成哈希校验码：[92d2154a93ec08573b5531d687015149]，请不要修改和删除此行内容。
+ *
  */
 
-// @ActiveProfiles("test")
-// @RunWith(SpringRunner.class)
+//@ActiveProfiles("test")
+//@RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-// @Transactional(rollbackFor = {Throwable.class})
+//@Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class AreaServiceTest {
 
-    @Autowired private AreaService areaService;
+    @Autowired
+    private AreaService areaService;
 
-    @Autowired private BizAreaService bizAreaService;
+    @Autowired
+    private BizAreaService bizAreaService;
 
-    private String code;
+    private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {}
+    public static void beforeAll() throws Exception {
+    }
 
     @AfterAll
-    public static void afterAll() throws Exception {}
+    public static void afterAll() throws Exception {
+    }
 
     @BeforeEach
-    public void beforeEach() throws Exception {}
+    public void beforeEach() throws Exception {
+    }
 
     @AfterEach
-    public void afterEach() throws Exception {}
+    public void afterEach() throws Exception {
+    }
 
     @Test
     public void createAreaTest() {
 
         CreateAreaReq req = new CreateAreaReq();
 
-        // req.setIcon("图标_1");//
+            // req.setIcon("图标_1");// 
 
-        // req.setParentCode("这是文本64");//
+            // req.setParentId("这是文本64");// 
 
-        // req.setType(Type.Nation);// 必填
+            // req.setType(Type.Nation);// 必填
 
-        // req.setName("这是文本128");// 必填
+            // req.setName("这是文本128");// 必填
 
-        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
+            // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
 
-        // req.setOrderCode(1);//
+            // req.setOrderCode(1);// 
 
-        // req.setEnable(true);// 必填
+            // req.setEnable(true);// 必填
 
-        // req.setEditable(true);// 必填
+            // req.setEditable(true);// 必填
 
-        // req.setRemark("这是文本512");//
+            // req.setRemark("这是文本512");// 
 
-        String code = areaService.create(req);
+            // req.setOptimisticLock(1);// 
 
-        log.debug("新增区域->" + code);
 
-        Assert.isTrue(code != null, "区域");
+       String id  = areaService.create(req);
+
+        log.debug("新增区域->" + id);
+
+        Assert.isTrue(id != null, "区域");
+
     }
+
 
     @Test
     public void queryAreaTest() {
 
         QueryAreaReq req = new QueryAreaReq();
 
-        // req.setCode(null);//
+        // req.setId(null);//
         // req.setIcon("图标_1");//
-        // req.setParentCode("这是文本64");//
+        // req.setParentId("这是文本64");//
         // req.setLoadParent(true);//加载
         // req.setLoadChildren(true);//加载
         // req.setType(Type.Nation);//
@@ -133,8 +149,9 @@ public class AreaServiceTest {
         // req.setEnable(true);//
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
+        // req.setOptimisticLock(1);//
 
-        PagingData<AreaInfo> resp = areaService.query(req, null);
+        PagingData<AreaInfo> resp = areaService.query(req,null);
 
         log.debug("查询区域->" + resp);
 
@@ -144,25 +161,27 @@ public class AreaServiceTest {
     @Test
     public void updateAreaTest() {
 
-        UpdateAreaReq req = new UpdateAreaReq();
+         UpdateAreaReq req = new UpdateAreaReq();
 
-        req.setCode(code);
+         req.setId(id);
 
-        // req.setIcon("图标_1");//
-        // req.setParentCode("这是文本64");//
-        // req.setType(Type.Nation);// 必填
-        // req.setName("这是文本128");// 必填
-        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
-        // req.setOrderCode(1);//
-        // req.setEnable(true);// 必填
-        // req.setEditable(true);// 必填
-        // req.setRemark("这是文本512");//
 
-        boolean ok = areaService.update(req);
+           // req.setIcon("图标_1");// 
+           // req.setParentId("这是文本64");// 
+           // req.setType(Type.Nation);// 必填
+           // req.setName("这是文本128");// 必填
+           // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+           // req.setOrderCode(1);// 
+           // req.setEnable(true);// 必填
+           // req.setEditable(true);// 必填
+           // req.setRemark("这是文本512");// 
+           // req.setOptimisticLock(1);// 
 
-        log.debug("更新区域-> " + ok);
+          boolean ok = areaService.update(req);
 
-        Assert.isTrue(ok, "区域");
+          log.debug("更新区域-> " + ok);
+
+          Assert.isTrue(ok, "区域");
     }
 
     @Test
@@ -170,12 +189,12 @@ public class AreaServiceTest {
 
         AreaIdReq req = new AreaIdReq();
 
-        req.setCode(code);
+        req.setId(id);
 
         boolean ok = areaService.delete(req);
 
         log.debug("删除区域->" + ok);
 
-        Assert.isTrue(ok, "区域");
+        Assert.isTrue(ok , "区域");
     }
 }

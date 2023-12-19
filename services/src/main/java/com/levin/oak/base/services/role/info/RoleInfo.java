@@ -29,9 +29,11 @@ import com.levin.oak.base.entities.Role;
 import java.util.List;
 import com.levin.oak.base.entities.Role.*;
 import java.util.Date;
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.services.role.info.*;
 import java.util.Set;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -41,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:11:25, 代码生成哈希校验码：[e408873a1b52fdd71c3afc455ace560c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[8bc8c5a02fd5a87d6088d2626c2a034a]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -52,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 @ToString(exclude = {"parent","children",})
 @FieldNameConstants
 @JsonIgnoreProperties({"tenantId"})
-public class RoleInfo implements Serializable {
+public class RoleInfo implements Serializable, TreeObject<RoleInfo, RoleInfo> {
 
     private static final long serialVersionUID = -445356492L;
 

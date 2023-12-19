@@ -28,10 +28,12 @@ import static com.levin.oak.base.entities.E_Org.*;
 import com.levin.oak.base.services.org.info.*;
 import com.levin.oak.base.entities.Org;
 import java.util.Date;
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
 import com.levin.oak.base.entities.Org.*;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -41,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:40, 代码生成哈希校验码：[e1b46e0a4ee8b7acd802bc75fc1d0297]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[1215b676495f3d63055000afe9ebfdcc]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -52,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 @ToString(exclude = {"area","parent","children",})
 @FieldNameConstants
 @JsonIgnoreProperties({"tenantId"})
-public class OrgInfo implements Serializable {
+public class OrgInfo implements Serializable, TreeObject<OrgInfo, OrgInfo> {
 
     private static final long serialVersionUID = -1399842458L;
 

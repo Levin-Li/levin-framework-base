@@ -56,13 +56,16 @@ import javax.validation.constraints.NotNull;
 @Tag(name = E_Org.BIZ_NAME + "-业务服务", description = "")
 public interface BizOrgService {
 
+    default List<OrgInfo> loadOrgList(String tenantId) {
+        return loadOrgList(tenantId, null);
+    }
+
     /**
-     * 从已有的列表中过滤出顶级机构
+     * 加载租户的部门列表
      *
-     * @param orgList
      * @return
      */
-    List<OrgInfo> filterTopLevel(List<OrgInfo> orgList);
+    List<OrgInfo> loadOrgList(String tenantId, String parentId);
 
     /**
      * 加载当前用户有权限访问的部门列表

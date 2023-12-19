@@ -32,9 +32,11 @@ import com.levin.oak.base.services.commons.req.*;
 //自动导入列表
 import com.levin.oak.base.entities.MenuRes;
 import java.util.Date;
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.commons.rbac.MenuItem.*;
 import java.util.Set;
 import com.levin.oak.base.services.menures.info.*;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -43,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 菜单 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:20, 代码生成哈希校验码：[742bd44e8ab6005d726fe07bcd6f7671]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[1e9c8b84db239126c000636519381b18]，请不要修改和删除此行内容。
  *
  */
 

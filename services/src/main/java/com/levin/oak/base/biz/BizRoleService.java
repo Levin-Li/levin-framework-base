@@ -59,6 +59,14 @@ public interface BizRoleService<U> {
     PagingData<RoleInfo> list(U userPrincipal, QueryRoleReq req, SimplePaging paging);
 
     /**
+     * 查询用户角色列表
+     *
+     * @param userPrincipal
+     * @return
+     */
+    List<RoleInfo> loadUserRoleList(U userPrincipal);
+
+    /**
      * 创建记录，返回主键ID
      *
      * @param req

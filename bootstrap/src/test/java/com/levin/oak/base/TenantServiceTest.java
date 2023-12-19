@@ -9,11 +9,13 @@ import com.levin.oak.base.services.tenant.*;
 import com.levin.oak.base.services.tenant.req.*;
 import com.levin.oak.base.services.tenant.info.*;
 
+
 ////////////////////////////////////
-// 自动导入列表
+//自动导入列表
 import java.util.List;
 import java.util.Date;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
@@ -49,94 +51,107 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 平台租户测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月17日 上午2:26:22, 代码生成哈希校验码：[1184b11fc9ebb7bb918c24aa6b3bcb2c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[05c365c2d0eb73da534483056b8b309c]，请不要修改和删除此行内容。
+ *
  */
 
-// @ActiveProfiles("test")
-// @RunWith(SpringRunner.class)
+//@ActiveProfiles("test")
+//@RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-// @Transactional(rollbackFor = {Throwable.class})
+//@Transactional(rollbackFor = {Throwable.class})
 @Slf4j
 public class TenantServiceTest {
 
-    @Autowired private TenantService tenantService;
+    @Autowired
+    private TenantService tenantService;
 
-    @Autowired private BizTenantService bizTenantService;
+    @Autowired
+    private BizTenantService bizTenantService;
 
     private String id;
 
     @BeforeAll
-    public static void beforeAll() throws Exception {}
+    public static void beforeAll() throws Exception {
+    }
 
     @AfterAll
-    public static void afterAll() throws Exception {}
+    public static void afterAll() throws Exception {
+    }
 
     @BeforeEach
-    public void beforeEach() throws Exception {}
+    public void beforeEach() throws Exception {
+    }
 
     @AfterEach
-    public void afterEach() throws Exception {}
+    public void afterEach() throws Exception {
+    }
 
     @Test
     public void createTenantTest() {
 
         CreateTenantReq req = new CreateTenantReq();
 
-        // req.setSysName("这是文本128");//
+            // req.setSysName("这是文本128");// 
 
-        // req.setSysLogo("系统Logo_1");//
+            // req.setSysLogo("系统Logo_1");// 
 
-        // req.setLogo("租户Logo_1");//
+            // req.setLogo("租户Logo_1");// 
 
-        // req.setCode("这是文本128");//
+            // req.setCode("这是文本128");// 
 
-        // req.setTenantKey("租户编码_1");// 必填
+            // req.setTenantKey("这是文本255");// 必填
 
-        // req.setBalance(0.1d);//
+            // req.setBalance(0.1d);// 
 
-        // req.setLicenseCnt(1);//
+            // req.setLicenseCnt(1);// 
 
-        // req.setRemainingLicenseCnt(1);//
+            // req.setRemainingLicenseCnt(1);// 
 
-        // req.setLicenseExpire(new Date());//
+            // req.setLicenseExpire(new Date());// 
 
-        // req.setContractPerson("这是文本32");//
+            // req.setContractPerson("这是文本32");// 
 
-        // req.setContractPhone("这是文本32");//
+            // req.setContractPhone("这是文本32");// 
 
-        // req.setDomainList("这是文本1200");//
+            // req.setDomainList("这是文本1200");// 
 
-        // req.setAppId("这是文本64");//
+            // req.setAppId("这是文本64");// 
 
-        // req.setAppSecret("这是文本512");//
+            // req.setAppSecret("这是文本512");// 
 
-        // req.setEncryptKey("这是文本512");//
+            // req.setEncryptKey("这是文本512");// 
 
-        // req.setName("这是文本128");// 必填
+            // req.setName("这是文本128");// 必填
 
-        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
+            // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
 
-        // req.setOrderCode(1);//
+            // req.setOrderCode(1);// 
 
-        // req.setEnable(true);// 必填
+            // req.setEnable(true);// 必填
 
-        // req.setEditable(true);// 必填
+            // req.setEditable(true);// 必填
 
-        // req.setRemark("这是文本512");//
+            // req.setRemark("这是文本512");// 
 
-        String id = tenantService.create(req);
+            // req.setOptimisticLock(1);// 
+
+
+       String id  = tenantService.create(req);
 
         log.debug("新增平台租户->" + id);
 
         Assert.isTrue(id != null, "平台租户");
+
     }
+
 
     @Test
     public void queryTenantTest() {
@@ -148,7 +163,7 @@ public class TenantServiceTest {
         // req.setSysLogo("系统Logo_1");//
         // req.setLogo("租户Logo_1");//
         // req.setCode("这是文本128");//
-        // req.setTenantKey("租户编码_1");//
+        // req.setTenantKey("这是文本255");//
         // req.setBalance(0.1d);//
         // req.setLicenseCnt(1);//
         // req.setRemainingLicenseCnt(1);//
@@ -167,8 +182,9 @@ public class TenantServiceTest {
         // req.setEnable(true);//
         // req.setEditable(true);//
         // req.setRemark("这是文本512");//
+        // req.setOptimisticLock(1);//
 
-        PagingData<TenantInfo> resp = tenantService.query(req, null);
+        PagingData<TenantInfo> resp = tenantService.query(req,null);
 
         log.debug("查询平台租户->" + resp);
 
@@ -178,37 +194,39 @@ public class TenantServiceTest {
     @Test
     public void updateTenantTest() {
 
-        UpdateTenantReq req = new UpdateTenantReq();
+         UpdateTenantReq req = new UpdateTenantReq();
 
-        req.setId(id);
+         req.setId(id);
 
-        // req.setSysName("这是文本128");//
-        // req.setSysLogo("系统Logo_1");//
-        // req.setLogo("租户Logo_1");//
-        // req.setCode("这是文本128");//
-        // req.setTenantKey("租户编码_1");// 必填
-        // req.setBalance(0.1d);//
-        // req.setLicenseCnt(1);//
-        // req.setRemainingLicenseCnt(1);//
-        // req.setLicenseExpire(new Date());//
-        // req.setContractPerson("这是文本32");//
-        // req.setContractPhone("这是文本32");//
-        // req.setDomainList("这是文本1200");//
-        // req.setAppId("这是文本64");//
-        // req.setAppSecret("这是文本512");//
-        // req.setEncryptKey("这是文本512");//
-        // req.setName("这是文本128");// 必填
-        // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开
-        // req.setOrderCode(1);//
-        // req.setEnable(true);// 必填
-        // req.setEditable(true);// 必填
-        // req.setRemark("这是文本512");//
 
-        boolean ok = tenantService.update(req);
+           // req.setSysName("这是文本128");// 
+           // req.setSysLogo("系统Logo_1");// 
+           // req.setLogo("租户Logo_1");// 
+           // req.setCode("这是文本128");// 
+           // req.setTenantKey("这是文本255");// 必填
+           // req.setBalance(0.1d);// 
+           // req.setLicenseCnt(1);// 
+           // req.setRemainingLicenseCnt(1);// 
+           // req.setLicenseExpire(new Date());// 
+           // req.setContractPerson("这是文本32");// 
+           // req.setContractPhone("这是文本32");// 
+           // req.setDomainList("这是文本1200");// 
+           // req.setAppId("这是文本64");// 
+           // req.setAppSecret("这是文本512");// 
+           // req.setEncryptKey("这是文本512");// 
+           // req.setName("这是文本128");// 必填
+           // req.setPinyinName("这是文本128");//简拼或全拼，逗号隔开 
+           // req.setOrderCode(1);// 
+           // req.setEnable(true);// 必填
+           // req.setEditable(true);// 必填
+           // req.setRemark("这是文本512");// 
+           // req.setOptimisticLock(1);// 
 
-        log.debug("更新平台租户-> " + ok);
+          boolean ok = tenantService.update(req);
 
-        Assert.isTrue(ok, "平台租户");
+          log.debug("更新平台租户-> " + ok);
+
+          Assert.isTrue(ok, "平台租户");
     }
 
     @Test
@@ -222,6 +240,6 @@ public class TenantServiceTest {
 
         log.debug("删除平台租户->" + ok);
 
-        Assert.isTrue(ok, "平台租户");
+        Assert.isTrue(ok , "平台租户");
     }
 }

@@ -33,9 +33,11 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.Area.*;
@@ -44,7 +46,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 更新区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[1dc0c30114fdb3bc7e5ac8cafb292ff3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午4:20:46, 代码生成哈希校验码：[3ae0dcc30dc141550afdbe40cffa22d1]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -82,8 +84,8 @@ public class SimpleUpdateAreaReq extends BaseReq {
     String icon;
 
     @Size(max = 64)
-    @Schema(title = L_parentCode)
-    String parentCode;
+    @Schema(title = L_parentId)
+    String parentId;
 
     @Schema(title = L_type)
     Type type;
@@ -144,9 +146,9 @@ public class SimpleUpdateAreaReq extends BaseReq {
         this.icon = icon;
         return addUpdateField(E_Area.icon);
     }
-    public <T extends SimpleUpdateAreaReq> T setParentCode(String parentCode) {
-        this.parentCode = parentCode;
-        return addUpdateField(E_Area.parentCode);
+    public <T extends SimpleUpdateAreaReq> T setParentId(String parentId) {
+        this.parentId = parentId;
+        return addUpdateField(E_Area.parentId);
     }
     public <T extends SimpleUpdateAreaReq> T setType(Type type) {
         this.type = type;

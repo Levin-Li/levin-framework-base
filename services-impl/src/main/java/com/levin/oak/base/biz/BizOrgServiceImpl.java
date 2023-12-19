@@ -3,41 +3,36 @@ package com.levin.oak.base.biz;
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
 import com.levin.commons.dao.*;
-import com.levin.commons.dao.support.*;
-import com.levin.commons.service.domain.*;
+import com.levin.commons.dao.annotation.order.OrderBy;
+import com.levin.commons.rbac.RbacUserObject;
 
-import javax.annotation.*;
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.*;
 
+import com.levin.oak.base.biz.rbac.RbacLoadService;
+import com.levin.oak.base.services.role.info.RoleInfo;
 import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
-import org.springframework.beans.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
 //import org.springframework.dao.*;
 
-import javax.persistence.PersistenceException;
-
-import cn.hutool.core.lang.*;
-
-import javax.persistence.EntityExistsException;
-import javax.persistence.PersistenceException;
-
 //import org.apache.dubbo.config.annotation.*;
 
 import com.levin.oak.base.entities.*;
-import com.levin.oak.base.entities.Org;
 
 import com.levin.oak.base.services.org.*;
 import com.levin.oak.base.biz.bo.org.*;
@@ -47,26 +42,14 @@ import static com.levin.oak.base.services.org.OrgService.*;
 import com.levin.oak.base.services.org.req.*;
 import com.levin.oak.base.services.org.info.*;
 
-import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
 
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.oak.base.services.org.info.*;
-import com.levin.oak.base.entities.Org;
 
-import java.util.Date;
-
-import com.levin.oak.base.entities.Area;
-import com.levin.oak.base.services.area.info.*;
-
+import javax.annotation.PostConstruct;
 import java.util.Set;
-
-import com.levin.oak.base.entities.Org.*;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 /**
@@ -98,20 +81,40 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
     @Autowired
     OrgService orgService;
 
+    @Autowired
+    RbacLoadService<Serializable> rbacLoadService;
+
+    @Autowired
+    BizRoleService bizRoleService;
+
+    final AntPathMatcher orgIdPathMatcher = new AntPathMatcher();
+
     protected BizOrgServiceImpl getSelfProxy() {
         return getSelfProxy(BizOrgServiceImpl.class);
     }
 
+    @PostConstruct
+    public void init() {
+        orgIdPathMatcher.setCachePatterns(true);
+    }
 
     /**
-     * 从已有的列表中过滤出顶级机构
+     * 加载租户的部门列表
      *
-     * @param orgList
+     * @param tenantId
      * @return
      */
     @Override
-    public List<OrgInfo> filterTopLevel(List<OrgInfo> orgList) {
-        return null;
+    public List<OrgInfo> loadOrgList(String tenantId, String parentId) {
+
+        return simpleDao.findByQueryObj(
+                new QueryOrgReq()
+                        .setTenantId(tenantId)
+                        .setParentId(parentId)
+                        .setOrderBy(E_Org.orderCode)
+                        .setOrderDir(OrderBy.Type.Desc)
+        );
+
     }
 
     /**
@@ -123,8 +126,184 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
      */
     @Override
     public List<OrgInfo> loadOrgList(Serializable userPrincipal, int loadLevel) {
-        return null;
+        return assembleOrgTree(() -> rbacLoadService.loadUser(userPrincipal), user -> bizRoleService.loadUserRoleList(user));
     }
+
+    /**
+     * 组装树形结构
+     *
+     * @param orgList
+     * @return
+     */
+    public List<OrgInfo> assembleOrgTree(List<OrgInfo> orgList, boolean isCopy, boolean buildPath, boolean clearParent, boolean onlyRoot) {
+
+        //根据parentId属性进行树形分组
+        if (orgList == null || orgList.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        //复制数据
+        if (isCopy) {
+            orgList = orgList.stream().map(
+                    org -> BeanUtil.copyProperties(org, OrgInfo.class)
+            ).collect(Collectors.toList());
+        }
+
+        //清楚旧数据，重新构建
+        orgList.forEach(org ->
+                org.setChildren(new HashSet<>())
+                        .setNodePath(null)
+                        .setParent(null)
+        );
+
+        Map<String, OrgInfo> tempMap = new LinkedHashMap<>();
+
+        //填充数据
+        orgList.forEach(org -> tempMap.put(org.getId(), org));
+
+        //构建树形
+        orgList.forEach(org -> {
+            OrgInfo parent = tempMap.get(org.getId());
+            if (parent != null) {
+                parent.getChildren().add(org);
+                org.setParent(parent);
+            }
+        });
+
+        tempMap.clear();
+
+        //构建节点路径
+        if (buildPath) {
+            orgList.forEach(org -> {
+                List<String> paths = new ArrayList<>();
+                OrgInfo orgTemp = org;
+
+                while (orgTemp != null) {
+                    paths.add(orgTemp.getId());
+                    orgTemp = orgTemp.getParent();
+                }
+                //倒序
+                Collections.reverse(paths);
+                //构建路径
+                org.setNodePath(String.join("/", paths));
+            });
+        }
+
+        //清空parent
+        if (clearParent) {
+            orgList.forEach(org -> org.setParent(null));
+        }
+
+        if (onlyRoot) {
+            //只返回根节点
+            orgList.removeIf(org -> org.getParent() != null || (org.getNodePath() != null && org.getNodePath().contains("/")));
+        }
+
+        //防止Json toString 递归，清空父节点的属性。
+
+        return orgList;
+
+    }
+
+    /**
+     * 加载当前用户有权限访问的部门列表
+     *
+     * @param userSupplier
+     * @param userRoleSupplier
+     * @return
+     */
+    public List<OrgInfo> assembleOrgTree(Supplier<RbacUserObject<String>> userSupplier, Function<RbacUserObject<String>, List<RoleInfo>> userRoleSupplier) {
+
+        RbacUserObject<String> user = userSupplier.get();
+
+        //加载所有的部门
+        List<OrgInfo> orgList = getSelfProxy().loadOrgList(user.getTenantId());
+
+        //如果是超级管理员，则返回所有部门
+        if (user.isSuperAdmin()
+                || (user.isTenantAdmin() && StrUtil.isNotBlank(user.getTenantId()))) {
+            return assembleOrgTree(orgList, true, true, true, true);
+        }
+
+        //获取当前用户有权限访问的部门
+
+        List<RoleInfo> roleList = userRoleSupplier.apply(user);
+
+        if (roleList == null || roleList.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        //只要有一个角色是允许所有的部门，则返回所有部门
+        if (roleList.stream().anyMatch(roleInfo -> Role.OrgDataScope.All.equals(roleInfo.getOrgDataScope()))) {
+            return assembleOrgTree(orgList, true, true, true, true);
+        }
+
+        String myOrgId = null;
+
+        boolean isMyDeptAndChildren = false;
+        ///////////////////////////////////////////////
+        if (user.getOrgId() != null) {
+
+            String orgId = user.getOrgId().toString();
+
+            if (StrUtil.isNotBlank(orgId)) {
+
+                boolean isMyDept = roleList.stream()
+                        //本部门
+                        .anyMatch(roleInfo -> Role.OrgDataScope.MyDept.equals(roleInfo.getOrgDataScope()));
+
+                if (isMyDept) {
+                    myOrgId = orgId;
+                }
+
+                isMyDeptAndChildren = roleList.stream()
+                        //本部门级子部门
+                        .anyMatch(roleInfo -> Role.OrgDataScope.MyDeptAndChildren.equals(roleInfo.getOrgDataScope()));
+
+                if (isMyDeptAndChildren) {
+                    myOrgId = orgId;
+                }
+            }
+        }
+
+        //////////////////////////////////////////////////////////////
+
+        //全部的部门
+        List<OrgInfo> resultList = assembleOrgTree(orgList, true, true, true, false);
+
+        //分配的部门列表
+        Set<String> orgIdList = roleList.stream()
+                //指定部门的角色
+                .filter(roleInfo -> Role.OrgDataScope.Assigned.equals(roleInfo.getOrgDataScope()))
+                .map(RoleInfo::getAssignedOrgIdList)
+                .filter(Objects::nonNull)
+                .flatMap(List::stream)
+                .filter(StringUtils::hasText)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+
+        //
+        if (StrUtil.isNotBlank(myOrgId)) {
+            //添加匹配的逻辑
+            orgIdList.add(isMyDeptAndChildren ? (myOrgId + "/**") : myOrgId);
+        }
+
+        //清除不需要的部门
+        resultList.removeIf(
+                //不保留的部门
+                org -> !( //使用反条件，方便理解和提升性能
+                        //保留的部门
+                        orgIdList.contains(org.getId())
+                                || orgIdList.stream().anyMatch(idPattern -> orgIdPathMatcher.isPattern(idPattern) && orgIdPathMatcher.match(idPattern, org.getNodePath()))
+                )
+        );
+
+        //重新构建树形
+        resultList = assembleOrgTree(resultList, false, true, true, true);
+
+        return resultList;
+    }
+
 
     /**
      * 更新记录，并返回更新是否成功

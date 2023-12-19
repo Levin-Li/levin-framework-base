@@ -27,9 +27,11 @@ import static com.levin.oak.base.entities.E_MenuRes.*;
 ////////////////////////////////////
 import com.levin.oak.base.entities.MenuRes;
 import java.util.Date;
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.commons.rbac.MenuItem.*;
 import java.util.Set;
 import com.levin.oak.base.services.menures.info.*;
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -39,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 上午9:08:41, 代码生成哈希校验码：[088bc24bbad1600da364b2f4b3d39492]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[3d3ba8bb66671c40c0974f9ef179ffd3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -50,7 +52,7 @@ import com.levin.commons.service.support.InjectConst;
 @ToString(exclude = {"parent","children",})
 @FieldNameConstants
 @JsonIgnoreProperties({"tenantId"})
-public class MenuResInfo implements Serializable {
+public class MenuResInfo implements Serializable, TreeObject<MenuResInfo, MenuResInfo> {
 
     private static final long serialVersionUID = -887712701L;
 

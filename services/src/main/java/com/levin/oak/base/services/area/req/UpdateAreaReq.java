@@ -32,9 +32,11 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.Area.*;
@@ -43,7 +45,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 更新区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月8日 下午11:11:16, 代码生成哈希校验码：[051a13d59648e5966b541b38d5c65830]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午4:20:47, 代码生成哈希校验码：[7a0178e5892cec6d4e68e0c7cd9c424d]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -62,32 +64,32 @@ public class UpdateAreaReq extends SimpleUpdateAreaReq {
     private static final long serialVersionUID = -445860277L;
 
 
-    @Schema(title = L_code, required = true, requiredMode = REQUIRED)
+    @Schema(title = L_id, required = true, requiredMode = REQUIRED)
     @NotBlank
     @Eq(require = true)
-    String code;
+    String id;
 
     public UpdateAreaReq() {
     }
 
-    public UpdateAreaReq(String code) {
-        this.code = code;
+    public UpdateAreaReq(String id) {
+        this.id = id;
     }
 
-    public UpdateAreaReq(String code, boolean forceUpdate) {
+    public UpdateAreaReq(String id, boolean forceUpdate) {
         super(forceUpdate);
-        this.code = code;
+        this.id = id;
     }
 
-    public UpdateAreaReq updateCodeWhenNotBlank(String code){
-        if(isNotBlank(code)){
-            this.code = code;
+    public UpdateAreaReq updateIdWhenNotBlank(String id){
+        if(isNotBlank(id)){
+            this.id = id;
         }
         return this;
     }
 
-    public static UpdateAreaReq of(String code, boolean forceUpdate){
-        return new UpdateAreaReq(code, forceUpdate);
+    public static UpdateAreaReq of(String id, boolean forceUpdate){
+        return new UpdateAreaReq(id, forceUpdate);
     }
 
 }

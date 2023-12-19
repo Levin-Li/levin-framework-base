@@ -46,9 +46,11 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
+import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
+import java.io.Serializable;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 import com.levin.oak.base.entities.Area.*;
@@ -57,7 +59,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午10:43:55, 代码生成哈希校验码：[b63494afae484ef1e11ba0198d90e2d7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午4:20:47, 代码生成哈希校验码：[93a46db54e76a60f4bcdab28bc524735]，请不要修改和删除此行内容。
  *
  */
 
@@ -89,7 +91,7 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     public String create(CreateAreaReq req){
         //dao支持保存前先自动查询唯一约束，并给出错误信息
         Area entity = simpleDao.create(req, true);
-        return entity.getCode();
+        return entity.getId();
     }
 
     @Operation(summary = BATCH_CREATE_ACTION)
@@ -101,10 +103,10 @@ public class AreaServiceImpl extends BaseService implements AreaService {
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.code) && #result", key = CK_PREFIX + "#req.code")//, beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdateAreaReq req, Object... queryObjs) {
-        Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
+        Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleUpdateByQueryObj(req, queryObjs);
     }
 
@@ -127,21 +129,21 @@ public class AreaServiceImpl extends BaseService implements AreaService {
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.code) && #result", key = CK_PREFIX + "#req.code") // , beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") // , beforeInvocation = true
     @Transactional
     public boolean delete(AreaIdReq req) {
-        Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
+        Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.singleDeleteByQueryObj(req);
     }
 
     @Operation(summary = BATCH_DELETE_ACTION)
     @Transactional
     @Override
-    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#req.codeList) && #result > 0")
+    //@CacheEvict(allEntries = true, condition = "@spelUtils.isNotEmpty(#req.idList) && #result > 0")
     public int batchDelete(DeleteAreaReq req){
         //@Todo 优化批量提交
-        return Stream.of(req.getCodeList())
-            .map(code -> simpleDao.copy(req, new AreaIdReq().setCode(code)))
+        return Stream.of(req.getIdList())
+            .map(id -> simpleDao.copy(req, new AreaIdReq().setId(id)))
             .map(idReq -> getSelfProxy().delete(idReq))
             .mapToInt(n -> n ? 1 : 0)
             .sum();
@@ -168,17 +170,17 @@ public class AreaServiceImpl extends BaseService implements AreaService {
     @Override
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
     //如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#code)", key = CK_PREFIX + "#code")
-    public AreaInfo findById(String code) {
-        return findById(new AreaIdReq().setCode(code));
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    public AreaInfo findById(String id) {
+        return findById(new AreaIdReq().setId(id));
     }
 
     //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.code)" , key = CK_PREFIX + "#req.code") //
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //
     public AreaInfo findById(AreaIdReq req) {
-        Assert.notNull(req.getCode(), BIZ_NAME + " code 不能为空");
+        Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findUnique(req);
     }
 
