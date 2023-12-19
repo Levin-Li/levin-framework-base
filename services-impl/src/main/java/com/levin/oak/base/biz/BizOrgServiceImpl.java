@@ -114,19 +114,18 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
                         .setOrderBy(E_Org.orderCode)
                         .setOrderDir(OrderBy.Type.Desc)
         );
-
     }
 
     /**
      * 加载当前用户有权限访问的部门列表
      *
      * @param userPrincipal
-     * @param loadLevel
+     * @param assembleTree
      * @return
      */
     @Override
-    public List<OrgInfo> loadOrgList(Serializable userPrincipal, int loadLevel) {
-        return assembleOrgTree(() -> rbacLoadService.loadUser(userPrincipal), user -> bizRoleService.loadUserRoleList(user));
+    public List<OrgInfo> loadOrgList(Serializable userPrincipal, boolean assembleTree) {
+        return assembleOrgTree(assembleTree, () -> rbacLoadService.loadUser(userPrincipal), user -> bizRoleService.loadUserRoleList(user));
     }
 
     /**
@@ -135,7 +134,7 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
      * @param orgList
      * @return
      */
-    public List<OrgInfo> assembleOrgTree(List<OrgInfo> orgList, boolean isCopy, boolean buildPath, boolean clearParent, boolean onlyRoot) {
+    public List<OrgInfo> assembleOrgTree(List<OrgInfo> orgList, boolean isCopy, boolean buildPath, boolean clearParent, boolean assembleTree) {
 
         //根据parentId属性进行树形分组
         if (orgList == null || orgList.isEmpty()) {
@@ -194,9 +193,12 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
             orgList.forEach(org -> org.setParent(null));
         }
 
-        if (onlyRoot) {
+        if (assembleTree) {
             //只返回根节点
             orgList.removeIf(org -> org.getParent() != null || (org.getNodePath() != null && org.getNodePath().contains("/")));
+        } else {
+            //返回所有节点
+            orgList.forEach(org -> org.setChildren(null));
         }
 
         //防止Json toString 递归，清空父节点的属性。
@@ -212,7 +214,7 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
      * @param userRoleSupplier
      * @return
      */
-    public List<OrgInfo> assembleOrgTree(Supplier<RbacUserObject<String>> userSupplier, Function<RbacUserObject<String>, List<RoleInfo>> userRoleSupplier) {
+    public List<OrgInfo> assembleOrgTree(boolean assembleTree, Supplier<RbacUserObject<String>> userSupplier, Function<RbacUserObject<String>, List<RoleInfo>> userRoleSupplier) {
 
         RbacUserObject<String> user = userSupplier.get();
 
@@ -222,7 +224,7 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
         //如果是超级管理员，则返回所有部门
         if (user.isSuperAdmin()
                 || (user.isTenantAdmin() && StrUtil.isNotBlank(user.getTenantId()))) {
-            return assembleOrgTree(orgList, true, true, true, true);
+            return assembleOrgTree(orgList, true, true, true, assembleTree);
         }
 
         //获取当前用户有权限访问的部门
@@ -235,7 +237,7 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
 
         //只要有一个角色是允许所有的部门，则返回所有部门
         if (roleList.stream().anyMatch(roleInfo -> Role.OrgDataScope.All.equals(roleInfo.getOrgDataScope()))) {
-            return assembleOrgTree(orgList, true, true, true, true);
+            return assembleOrgTree(orgList, true, true, true, assembleTree);
         }
 
         String myOrgId = null;
@@ -299,7 +301,7 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
         );
 
         //重新构建树形
-        resultList = assembleOrgTree(resultList, false, true, true, true);
+        resultList = assembleOrgTree(resultList, false, true, true, assembleTree);
 
         return resultList;
     }

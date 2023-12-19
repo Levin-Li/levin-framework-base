@@ -13,6 +13,7 @@ import com.levin.oak.base.biz.rbac.RbacLoadService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.E_SimpleApi;
+import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.role.info.RoleInfo;
 import com.levin.oak.base.services.role.req.CreateRoleReq;
@@ -94,7 +95,18 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
      */
     @Override
     public List<RoleInfo> loadUserRoleList(Serializable userPrincipal) {
-        return null;
+
+        RbacUserObject<String> user = rbacLoadService.loadUser(userPrincipal);
+
+        //@todo 查询用户角色
+
+        return simpleDao.selectFrom(Role.class)
+                .eq(E_Role.tenantId, user.getTenantId())
+                .in(E_Role.code, user.getRoleList())
+                .isNullOrEq(E_Role.enable, true)
+                .orderBy(E_Role.orderCode)
+                .find(RoleInfo.class);
+
     }
 
     /**

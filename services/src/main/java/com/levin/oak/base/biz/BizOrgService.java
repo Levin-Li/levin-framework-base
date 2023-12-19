@@ -72,7 +72,7 @@ public interface BizOrgService {
      *
      * @return
      */
-    List<OrgInfo> loadOrgList(Serializable userPrincipal, int loadLevel);
+    List<OrgInfo> loadOrgList(Serializable userPrincipal, boolean assembleTree);
 
     /**
      * 创建记录，返回主键ID
