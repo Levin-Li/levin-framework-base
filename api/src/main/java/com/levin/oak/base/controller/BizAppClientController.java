@@ -13,6 +13,8 @@ import javax.validation.*;
 import java.util.*;
 import javax.annotation.*;
 
+import cn.hutool.core.lang.Assert;
+
 import javax.servlet.http.*;
 
 //import org.apache.dubbo.config.annotation.*;
@@ -57,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 应用接入业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:24, 代码生成哈希校验码：[1e4aaeb0b09c1de5c74c2c6e4984ac16]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月20日 下午5:52:51, 代码生成哈希校验码：[a5244cddb4986b33f3047102b9df9276]，请不要修改和删除此行内容。
 *
 */
 
@@ -77,6 +79,23 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 @Slf4j
 public class BizAppClientController extends AppClientController{
+
+    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION, BATCH_CREATE_ACTION, BATCH_UPDATE_ACTION, BATCH_DELETE_ACTION);
+
+    /**
+    * 检查请求
+    *
+    * @param action
+    * @param req
+    * @return
+    */
+    @Override
+    protected <T> T checkRequest(String action, T req) {
+
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作{}", action);
+
+        return super.checkRequest(action, req);
+    }
 
     /**
     * 统计

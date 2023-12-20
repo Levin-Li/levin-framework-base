@@ -1,5 +1,7 @@
 package com.levin.oak.base.controller;
 
+import cn.hutool.core.lang.Assert;
+import com.levin.oak.base.biz.rbac.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.validation.annotation.*;
-import org.springframework.util.*;
+
 import javax.validation.*;
 import java.util.*;
 import javax.annotation.*;
@@ -55,11 +57,10 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // private UserAddress userAddress;
 
 /**
-* 机构业务控制器
-*
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:26, 代码生成哈希校验码：[0c99c1d0138f1566af23380c080e968f]，请不要修改和删除此行内容。
-*
-*/
+ * 机构业务控制器
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:26, 代码生成哈希校验码：[0c99c1d0138f1566af23380c080e968f]，请不要修改和删除此行内容。
+ */
 
 //生成的控制器
 @RestController(PLUGIN_PREFIX + "BizOrgController")
@@ -78,4 +79,81 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 public class BizOrgController extends OrgController {
 
+
+    @Autowired
+    AuthService authService;
+
+    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION);
+
+    /**
+     * 检查请求
+     *
+     * @param action
+     * @param req
+     * @return
+     */
+    @Override
+    protected <T> T checkRequest(String action, T req) {
+
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作{}", action);
+
+        return super.checkRequest(action, req);
+    }
+
+    /**
+     * 新增
+     *
+     * @param req CreateOrgEvt
+     * @return ApiResp
+     */
+    @Override
+    public ApiResp<String> create(CreateOrgReq req) {
+
+        bizOrgService.checkAccessible(authService.getUserInfo(), req.getParentId(), null);
+
+        return super.create(req);
+    }
+
+    /**
+     * 查看详情
+     *
+     * @param req QueryOrgByIdReq
+     * @param id
+     */
+    @Override
+    public ApiResp<OrgInfo> retrieve(OrgIdReq req, String id) {
+
+        req.updateIdWhenNotBlank(id);
+        bizOrgService.checkAccessible(authService.getUserInfo(), null, req.getId());
+
+        return super.retrieve(req, id);
+    }
+
+    /**
+     * 更新
+     *
+     * @param req UpdateOrgReq
+     * @param id
+     */
+    @Override
+    public ApiResp<Boolean> update(UpdateOrgReq req, String id) {
+        req.updateIdWhenNotBlank(id);
+        bizOrgService.checkAccessible(authService.getUserInfo(), req.getParentId(), req.getId());
+        return super.update(req, id);
+    }
+
+    /**
+     * 删除
+     *
+     * @param req OrgIdReq
+     * @param id
+     */
+    @Override
+    public ApiResp<Boolean> delete(OrgIdReq req, String id) {
+
+        req.updateIdWhenNotBlank(id);
+        bizOrgService.checkAccessible(authService.getUserInfo(), null, req.getId());
+
+        return super.delete(req, id);
+    }
 }

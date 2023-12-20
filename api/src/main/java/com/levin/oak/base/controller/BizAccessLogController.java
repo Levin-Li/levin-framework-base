@@ -13,6 +13,8 @@ import javax.validation.*;
 import java.util.*;
 import javax.annotation.*;
 
+import cn.hutool.core.lang.Assert;
+
 import javax.servlet.http.*;
 
 //import org.apache.dubbo.config.annotation.*;
@@ -30,6 +32,8 @@ import com.levin.oak.base.controller.base.accesslog.*;
 
 import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
+
+import com.levin.oak.base.biz.bo.accesslog.*;
 
 import com.levin.oak.base.biz.*;
 
@@ -55,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 访问日志业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午8:12:22, 代码生成哈希校验码：[517e61955a35b4b16b6b2a8df19d72fc]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月20日 下午6:02:15, 代码生成哈希校验码：[648239cf60b38166f66768fc48701452]，请不要修改和删除此行内容。
 *
 */
 
@@ -76,19 +80,36 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 public class BizAccessLogController extends AccessLogController{
 
+    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, VIEW_DETAIL_ACTION, BATCH_CREATE_ACTION);
+
     /**
-     * 检查请求
-     *
-     * @param action
-     * @param req
-     * @return
-     */
+    * 检查请求
+    *
+    * @param action
+    * @param req
+    * @return
+    */
     @Override
     protected <T> T checkRequest(String action, T req) {
 
-        //租户不支持删除
-        Assert.isTrue(!action.contains(DELETE_ACTION) && !action.contains(UPDATE_ACTION), "不支持的操作");
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作{}", action);
 
         return super.checkRequest(action, req);
     }
+
+    /**
+    * 统计
+    *
+    * @param req QueryAccessLogReq
+    * @return  ApiResp<StatAccessLogReq.Result>
+    */
+    @GetMapping("/stat") //默认开放
+    @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
+    public ApiResp<StatAccessLogReq.Result> stat(@Valid StatAccessLogReq req, SimplePaging paging) {
+
+        req = checkRequest(STAT_ACTION, req);
+
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizAccessLogService.stat(req, paging)));
+    }
+
 }

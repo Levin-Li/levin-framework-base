@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.validation.annotation.*;
 import org.springframework.util.*;
-
 import javax.validation.*;
 import java.util.*;
 import javax.annotation.*;
+
+import cn.hutool.core.lang.Assert;
 
 import javax.servlet.http.*;
 
@@ -31,6 +32,8 @@ import com.levin.oak.base.controller.base.tenant.*;
 
 import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
+
+import com.levin.oak.base.biz.bo.tenant.*;
 
 import com.levin.oak.base.biz.*;
 
@@ -54,10 +57,11 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // private UserAddress userAddress;
 
 /**
- * 平台租户业务控制器
- *
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午8:12:21, 代码生成哈希校验码：[60bc04aa124fb7e9cdc797467d12d618]，请不要修改和删除此行内容。
- */
+* 平台租户业务控制器
+*
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月20日 下午6:02:14, 代码生成哈希校验码：[bf18c14d033ba937106ce3a1f97ead9a]，请不要修改和删除此行内容。
+*
+*/
 
 //生成的控制器
 @RestController(PLUGIN_PREFIX + "BizTenantController")
@@ -74,21 +78,21 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @CRUD
 
 @Slf4j
-public class BizTenantController extends TenantController {
+public class BizTenantController extends TenantController{
+
+    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, VIEW_DETAIL_ACTION);
 
     /**
-     * 检查请求
-     *
-     * @param action
-     * @param req
-     * @return
-     */
+    * 检查请求
+    *
+    * @param action
+    * @param req
+    * @return
+    */
     @Override
     protected <T> T checkRequest(String action, T req) {
 
-        //租户不支持删除
-        //租户不支持删除
-        Assert.isTrue(!action.contains(DELETE_ACTION) && !action.contains(UPDATE_ACTION), "不支持的操作");
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作{}", action);
 
         return super.checkRequest(action, req);
     }

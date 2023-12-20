@@ -1,48 +1,20 @@
 package com.levin.oak.base.biz;
 
-import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.dao.domain.TreeObject;
-import com.levin.commons.dao.domain.support.AbstractTreeObject;
-import com.levin.commons.dao.support.*;
-import com.levin.commons.service.domain.*;
 
 import java.io.Serializable;
 import java.util.*;
 
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
-import com.levin.oak.base.entities.Org;
-import com.levin.oak.base.biz.bo.org.*;
-import com.levin.oak.base.services.org.*;
 import com.levin.oak.base.services.org.req.*;
 import com.levin.oak.base.services.org.info.*;
-
-import com.levin.oak.base.*;
-import com.levin.oak.base.services.*;
 
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.oak.base.services.org.info.*;
-import com.levin.oak.base.entities.Org;
-
-import java.util.Date;
-
-import com.levin.oak.base.entities.Area;
-import com.levin.oak.base.services.area.info.*;
-
-import java.util.Set;
-
-import com.levin.oak.base.entities.Org.*;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 
 import javax.validation.constraints.NotNull;
 ////////////////////////////////////
@@ -75,40 +47,12 @@ public interface BizOrgService {
     List<OrgInfo> loadOrgList(Serializable userPrincipal, boolean assembleTree);
 
     /**
-     * 创建记录，返回主键ID
+     * 校验机构ID是否合法
      *
-     * @param req
-     * @return pkId 主键ID
+     * @param userPrincipal
+     * @param parentId
+     * @param orgId
      */
-    @Operation(summary = CREATE_ACTION)
-    String create(Serializable userPrincipal, @NotNull CreateOrgReq req);
-
-    /**
-     * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性
-     *
-     * @param req
-     * @return data 数据详情
-     */
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    OrgInfo findById(Serializable userPrincipal, @NotNull OrgIdReq req);
-
-    /**
-     * 更新记录，并返回更新是否成功
-     *
-     * @param req
-     * @param queryObjs 附加的查询条件或是更新内容
-     * @return boolean 是否成功
-     */
-    @Operation(summary = UPDATE_ACTION)
-    boolean update(Serializable userPrincipal, @NotNull UpdateOrgReq req, Object... queryObjs);
-
-    /**
-     * 删除记录，并返回删除是否成功
-     *
-     * @param req
-     * @return boolean 删除是否成功
-     */
-    @Operation(summary = DELETE_ACTION)
-    boolean delete(Serializable userPrincipal, @NotNull OrgIdReq req);
+    void checkAccessible(Serializable userPrincipal, String parentId, String orgId);
 
 }

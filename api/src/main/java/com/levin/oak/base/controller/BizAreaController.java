@@ -1,7 +1,5 @@
 package com.levin.oak.base.controller;
 
-import com.levin.oak.base.biz.bo.area.StatAreaReq;
-import com.levin.oak.base.biz.bo.i18nres.StatI18nResReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +12,8 @@ import org.springframework.util.*;
 import javax.validation.*;
 import java.util.*;
 import javax.annotation.*;
+
+import cn.hutool.core.lang.Assert;
 
 import javax.servlet.http.*;
 
@@ -32,6 +32,8 @@ import com.levin.oak.base.controller.base.area.*;
 
 import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
+
+import com.levin.oak.base.biz.bo.area.*;
 
 import com.levin.oak.base.biz.*;
 
@@ -57,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 区域业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年11月26日 上午8:12:22, 代码生成哈希校验码：[03e22f065a55e487936142534c8361f6]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月20日 下午6:02:15, 代码生成哈希校验码：[31501b1212750f756631b6df19363969]，请不要修改和删除此行内容。
 *
 */
 
@@ -78,29 +80,29 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 public class BizAreaController extends AreaController{
 
+    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, VIEW_DETAIL_ACTION);
+
     /**
-     * 检查请求
-     *
-     * @param action
-     * @param req
-     * @return
-     */
+    * 检查请求
+    *
+    * @param action
+    * @param req
+    * @return
+    */
     @Override
     protected <T> T checkRequest(String action, T req) {
 
-        //租户不支持删除
-        //租户不支持删除
-        Assert.isTrue(!action.contains(DELETE_ACTION) && !action.contains(UPDATE_ACTION), "不支持的操作");
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作{}", action);
 
         return super.checkRequest(action, req);
     }
 
     /**
-     * 统计
-     *
-     * @param req QueryI18nResReq
-     * @return  ApiResp<StatI18nResReq.Result>
-     */
+    * 统计
+    *
+    * @param req QueryAreaReq
+    * @return  ApiResp<StatAreaReq.Result>
+    */
     @GetMapping("/stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatAreaReq.Result> stat(@Valid StatAreaReq req, SimplePaging paging) {
@@ -109,4 +111,5 @@ public class BizAreaController extends AreaController{
 
         return ApiResp.ok(checkResponse(STAT_ACTION, bizAreaService.stat(req, paging)));
     }
+
 }

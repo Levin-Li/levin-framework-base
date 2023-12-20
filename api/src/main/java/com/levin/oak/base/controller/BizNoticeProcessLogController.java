@@ -13,6 +13,8 @@ import javax.validation.*;
 import java.util.*;
 import javax.annotation.*;
 
+import cn.hutool.core.lang.Assert;
+
 import javax.servlet.http.*;
 
 //import org.apache.dubbo.config.annotation.*;
@@ -57,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 通知处理日志业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:25, 代码生成哈希校验码：[1bc4138c8e53436d908a9ad821a8b70f]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月20日 下午5:52:52, 代码生成哈希校验码：[41bf35e7c4415eb44c843331c755232a]，请不要修改和删除此行内容。
 *
 */
 
@@ -77,6 +79,23 @@ import static com.levin.oak.base.entities.EntityConst.*;
 
 @Slf4j
 public class BizNoticeProcessLogController extends NoticeProcessLogController{
+
+    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION, BATCH_CREATE_ACTION, BATCH_UPDATE_ACTION, BATCH_DELETE_ACTION);
+
+    /**
+    * 检查请求
+    *
+    * @param action
+    * @param req
+    * @return
+    */
+    @Override
+    protected <T> T checkRequest(String action, T req) {
+
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作{}", action);
+
+        return super.checkRequest(action, req);
+    }
 
     /**
     * 统计
