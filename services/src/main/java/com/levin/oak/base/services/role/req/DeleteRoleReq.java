@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[bad6ce49f168c1bb187073ee93c5ea49]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:43:59, 代码生成哈希校验码：[e253ce1e78ffc72033dec95e8db92130]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -72,7 +72,7 @@ public class DeleteRoleReq extends MultiTenantOrgReq<DeleteRoleReq> {
 
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
-    @In(value = E_Role.id)
+    @In(E_Role.id)
     @NotEmpty
     private String[] idList;
 

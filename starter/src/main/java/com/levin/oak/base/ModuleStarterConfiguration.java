@@ -11,7 +11,6 @@ import com.levin.commons.utils.*;
 
 import javax.annotation.*;
 
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.*;
@@ -31,11 +30,9 @@ import org.springframework.web.bind.annotation.RestController;
  * 模块自举配置
  *
  * 模块需要自举加载的内容都需要配置在该类中
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月25日 下午2:15:44, 代码生成哈希校验码：[8c0f59e2f08c92811a68a6e6cc4d55f8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月21日 上午10:31:58, 代码生成哈希校验码：[8c0f59e2f08c92811a68a6e6cc4d55f8]，请不要修改和删除此行内容。
  *
  */
-
-@AutoConfigureAfter({})
 @Configuration(PLUGIN_PREFIX + "ModuleStarterConfiguration")
 @Slf4j
 

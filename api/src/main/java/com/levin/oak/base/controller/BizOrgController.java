@@ -1,45 +1,30 @@
 package com.levin.oak.base.controller;
 
 import cn.hutool.core.lang.Assert;
+import com.levin.commons.dao.PagingData;
+import com.levin.commons.dao.support.SimplePaging;
+import com.levin.commons.rbac.RbacUserInfo;
+import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.service.domain.ApiResp;
+import com.levin.commons.ui.annotation.CRUD;
 import com.levin.oak.base.biz.rbac.AuthService;
-import io.swagger.v3.oas.annotations.Operation;
+import com.levin.oak.base.controller.base.org.OrgController;
+import com.levin.oak.base.entities.E_Org;
+import com.levin.oak.base.services.org.info.OrgInfo;
+import com.levin.oak.base.services.org.req.CreateOrgReq;
+import com.levin.oak.base.services.org.req.OrgIdReq;
+import com.levin.oak.base.services.org.req.QueryOrgReq;
+import com.levin.oak.base.services.org.req.UpdateOrgReq;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.validation.annotation.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.*;
-import java.util.*;
-import javax.annotation.*;
-
-import javax.servlet.http.*;
-
-//import org.apache.dubbo.config.annotation.*;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import com.levin.commons.ui.annotation.*;
-import com.levin.commons.rbac.ResAuthorize;
-
-import javax.validation.constraints.*;
-
-import com.levin.oak.base.controller.*;
-import com.levin.oak.base.controller.base.org.*;
-
-import com.levin.oak.base.*;
-import com.levin.oak.base.entities.*;
-
-import com.levin.oak.base.biz.bo.org.*;
-
-import com.levin.oak.base.biz.*;
-
-import com.levin.oak.base.services.org.*;
-import com.levin.oak.base.services.org.req.*;
-import com.levin.oak.base.services.org.info.*;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
@@ -79,11 +64,10 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 public class BizOrgController extends OrgController {
 
-
     @Autowired
     AuthService authService;
 
-    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION);
+    List<String> allowOpList = Arrays.asList(CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION);
 
     /**
      * 检查请求
@@ -101,6 +85,27 @@ public class BizOrgController extends OrgController {
     }
 
     /**
+     * 分页列表查找
+     *
+     * @param req    QueryOrgReq
+     * @param paging
+     * @return ApiResp<PagingData < OrgInfo>>
+     */
+    @Override
+    public ApiResp<PagingData<OrgInfo>> list(QueryOrgReq req, SimplePaging paging) {
+
+        RbacUserInfo<String> userInfo = authService.getUserInfo();
+
+        bizOrgService.checkAccessible(userInfo, req.getTenantId(), req.getParentId(), req.getId());
+
+        if (!bizOrgService.canAccessAllOrg(userInfo)) {
+
+        }
+
+        return super.list(req, paging);
+    }
+
+    /**
      * 新增
      *
      * @param req CreateOrgEvt
@@ -109,7 +114,7 @@ public class BizOrgController extends OrgController {
     @Override
     public ApiResp<String> create(CreateOrgReq req) {
 
-        bizOrgService.checkAccessible(authService.getUserInfo(), req.getParentId(), null);
+        bizOrgService.checkAccessible(authService.getUserInfo(), req.getTenantId(), req.getParentId(), null);
 
         return super.create(req);
     }
@@ -124,7 +129,7 @@ public class BizOrgController extends OrgController {
     public ApiResp<OrgInfo> retrieve(OrgIdReq req, String id) {
 
         req.updateIdWhenNotBlank(id);
-        bizOrgService.checkAccessible(authService.getUserInfo(), null, req.getId());
+        bizOrgService.checkAccessible(authService.getUserInfo(), req.getTenantId(), null, req.getId());
 
         return super.retrieve(req, id);
     }
@@ -138,7 +143,7 @@ public class BizOrgController extends OrgController {
     @Override
     public ApiResp<Boolean> update(UpdateOrgReq req, String id) {
         req.updateIdWhenNotBlank(id);
-        bizOrgService.checkAccessible(authService.getUserInfo(), req.getParentId(), req.getId());
+        bizOrgService.checkAccessible(authService.getUserInfo(), req.getTenantId(), req.getParentId(), req.getId());
         return super.update(req, id);
     }
 
@@ -152,7 +157,7 @@ public class BizOrgController extends OrgController {
     public ApiResp<Boolean> delete(OrgIdReq req, String id) {
 
         req.updateIdWhenNotBlank(id);
-        bizOrgService.checkAccessible(authService.getUserInfo(), null, req.getId());
+        bizOrgService.checkAccessible(authService.getUserInfo(), req.getTenantId(), null, req.getId());
 
         return super.delete(req, id);
     }

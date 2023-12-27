@@ -18,7 +18,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户操作员请求对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月11日 下午5:00:18, 代码生成哈希校验码：[b312a631fb5b5b88cbc38883c0194a03]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月27日 下午5:05:45, 代码生成哈希校验码：[b312a631fb5b5b88cbc38883c0194a03]，请不要修改和删除此行内容。
  * 
  */
 @Schema(title = "操作员请求")

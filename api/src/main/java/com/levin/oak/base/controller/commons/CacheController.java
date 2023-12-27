@@ -47,7 +47,7 @@ import static com.levin.oak.base.ModuleOption.*;
 @Slf4j
 @Valid
 @ResAuthorize(domain = ID, type = EntityConst.SYS_TYPE_NAME + "-")
-@Tag(name = "缓存", description = "缓存服务")
+@Tag(name = "缓存管理")
 @MenuResTag(false)
 public class CacheController extends BaseController {
 
@@ -55,7 +55,7 @@ public class CacheController extends BaseController {
     CacheManager cacheManager;
 
     @PostMapping("evict")
-    @Operation(summary = "清除缓存", description = "返回清除成功的缓存Key")
+    @Operation(summary = "清除指定key的缓存", description = "返回清除成功的缓存Key")
     public ApiResp<List<String>> evict(@NotNull @RequestBody List<String> cacheKeys) {
 
         List<String> result = new ArrayList<>(cacheKeys.size());

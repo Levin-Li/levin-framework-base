@@ -31,6 +31,8 @@ import javax.validation.Valid;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static com.levin.commons.dao.EntityOpConst.QUERY_LIST_ACTION;
+import static com.levin.commons.dao.EntityOpConst.VIEW_DETAIL_ACTION;
 import static com.levin.oak.base.ModuleOption.*;
 
 
@@ -52,10 +54,11 @@ import static com.levin.oak.base.ModuleOption.*;
 @RestController(PLUGIN_PREFIX + "EnumController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "EnumController", matchIfMissing = true)
 @RequestMapping(API_PATH + "enums")
-@Tag(name = "业务枚举类", description = "业务枚举类服务")
+
 @Slf4j
 @Valid
-@ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME + "-枚举", onlyRequireAuthenticated = true)
+@ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME + "-", onlyRequireAuthenticated = true)
+@Tag(name = "业务枚举类", description = "业务枚举类服务")
 @MenuResTag(false)
 public class EnumController extends BaseController {
 
@@ -89,7 +92,7 @@ public class EnumController extends BaseController {
     final Map<String, EnumInfo> enumCacheMap = new ConcurrentHashMap<>();
 
     @GetMapping("")
-    @Operation(summary = "枚举列表", description = "一次性返回所有的枚举")
+    @Operation(summary = QUERY_LIST_ACTION, description = "一次性返回所有的枚举")
     public ApiResp<Map<String, EnumInfo>> enums() {
 
         synchronized (enumCacheMap) {
@@ -107,7 +110,7 @@ public class EnumController extends BaseController {
     }
 
     @GetMapping("{enumName}")
-    @Operation(summary = "单个枚举")
+    @Operation(summary = VIEW_DETAIL_ACTION, description = "查看单个类")
     public ApiResp<EnumInfo> enums(@PathVariable String enumName) {
         return ApiResp.ok(MapUtils.getAndAutoPut(enumCacheMap, enumName, null, () -> toEnumInfo(ClassUtil.loadClass(enumName))));
     }

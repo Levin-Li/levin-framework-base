@@ -49,7 +49,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SmsSendService", havingValue = "true", matchIfMissing = true)
 
 @Slf4j
-@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "SmsSendService"})
+@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "SmsSendService"}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class Sms4JSmsSendService
         implements SmsSendService {
 

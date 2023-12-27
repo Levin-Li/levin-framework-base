@@ -1,10 +1,12 @@
 package com.levin.oak.base.controller.rbac;
 
+import cn.hutool.core.util.StrUtil;
 import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
+import com.levin.oak.base.biz.BizOrgService;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.BizUserService;
 import com.levin.oak.base.biz.CaptchaService;
@@ -17,10 +19,12 @@ import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.LoginInfo;
 import com.levin.oak.base.entities.EntityConst;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
+import com.levin.oak.base.services.org.info.OrgInfo;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.biz.bo.user.UpdateUserPwdReq;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -73,6 +77,9 @@ public class RbacController extends BaseController {
 
     @Autowired
     AuthService authService;
+
+    @Autowired
+    BizOrgService bizOrgService;
 
     @Autowired
     BizTenantService bizTenantService;
@@ -213,6 +220,18 @@ public class RbacController extends BaseController {
     @Operation(tags = {"授权管理"}, summary = "修改密码")
     public ApiResp<Void> updatePwd(@RequestBody UpdateUserPwdReq req) {
         return bizUserService.updatePwd(authService.getUserInfo(), req) ? ApiResp.ok() : ApiResp.error("修改密码失败,请确认原密码是否正确");
+    }
+
+    /**
+     * 获取可分配的权限资源
+     *
+     * @return ApiResp
+     */
+    @GetMapping("authorizedOrgList")
+    @Operation(tags = {"授权管理"}, summary = "获取可访问的组织列表")
+    public ApiResp<List<OrgInfo>> getAuthorizedOrgList(boolean assembleTree
+            , @Schema(title = "根组织ID", description = "多个可用逗号分隔") String rootOrgId) {
+        return ApiResp.ok(bizOrgService.loadOrgList(authService.getUserInfo(), assembleTree, StrUtil.isBlank(rootOrgId) ? null : rootOrgId.split(",")));
     }
 
     /**

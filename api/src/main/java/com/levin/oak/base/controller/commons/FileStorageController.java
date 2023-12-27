@@ -53,10 +53,11 @@ import static com.levin.oak.base.ModuleOption.*;
 @RestController(PLUGIN_PREFIX + "FileStorageController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "FileStorageController", havingValue = "true", matchIfMissing = true)
 @RequestMapping(API_PATH + "fss")
-@Tag(name = "文件存储", description = "文件存储服务")
+
 @Slf4j
 @Valid
-@ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME+ "-文件存储", onlyRequireAuthenticated = true)
+@ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME+ "-")
+@Tag(name = "文件存储", description = "文件存储服务")
 @MenuResTag(false)
 public class FileStorageController extends BaseController {
 

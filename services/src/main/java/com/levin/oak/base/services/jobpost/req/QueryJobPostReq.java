@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[a80132346046fea5a73d5f41b6d89e42]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月27日 下午5:05:46, 代码生成哈希校验码：[626840fdc752a101396397fbc58b2c8d]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -64,7 +64,7 @@ public class QueryJobPostReq extends MultiTenantOrgReq<QueryJobPostReq> {
 
     private static final long serialVersionUID = 1018878847L;
 
-    @Schema(title = "是否包含公共数据")
+    @Schema(title = "是否包含平台公共数据")
     @Ignore
     boolean isContainsPublicData = true;
 
@@ -77,6 +77,11 @@ public class QueryJobPostReq extends MultiTenantOrgReq<QueryJobPostReq> {
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
     @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
     OrderBy.Type orderDir;
+
+    @Schema(title = L_id + "集合")
+    @In(E_JobPost.id)
+    String[] idList;
+
 
 
     @Size(max = 64)
@@ -157,6 +162,7 @@ public class QueryJobPostReq extends MultiTenantOrgReq<QueryJobPostReq> {
     public QueryJobPostReq(String id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

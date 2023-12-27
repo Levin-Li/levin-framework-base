@@ -28,7 +28,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @ConditionalOnClass({RedissonClient.class})
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SmsCodeService", havingValue = "true", matchIfMissing = true)
 @Slf4j
-@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "SmsCodeService"})
+@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "SmsCodeService"}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class SmsCodeServiceImpl
         implements SmsCodeService {
 

@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[9185a37d7e6ce06463374623433d51ac]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:44:00, 代码生成哈希校验码：[d6c9c2bbc8d634c65c58878676505b98]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -61,7 +61,7 @@ public class DeleteAppErrorLogReq extends MultiTenantReq<DeleteAppErrorLogReq> {
 
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
-    @In(value = E_AppErrorLog.id)
+    @In(E_AppErrorLog.id)
     @NotEmpty
     private Long[] idList;
 

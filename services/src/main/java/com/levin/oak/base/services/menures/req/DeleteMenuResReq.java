@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[ca96c1588ba4810d72d42b145aa3869e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:44:01, 代码生成哈希校验码：[4ccf7c50d436651dbccdc97d1a0ac866]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -70,7 +70,7 @@ public class DeleteMenuResReq extends MultiTenantReq<DeleteMenuResReq> {
 
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
-    @In(value = E_MenuRes.id)
+    @In(E_MenuRes.id)
     @NotEmpty
     private String[] idList;
 

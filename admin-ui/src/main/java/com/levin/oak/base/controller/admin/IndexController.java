@@ -205,6 +205,7 @@ public class IndexController extends BaseController {
                 .setOrderDir(OrderBy.Type.Asc)
                 .setOrderBy(QuerySettingReq.Fields.orderCode)
                 .setContainsPublicData(true)
+                .setAllOrgScope(true)
                 .setTenantId(tenantId), null);
 
         if (!pagingData.isEmpty()) {

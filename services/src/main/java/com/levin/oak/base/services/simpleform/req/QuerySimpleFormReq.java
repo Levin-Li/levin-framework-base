@@ -48,7 +48,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[1d5be17265694967d28b64af3aa92839]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月27日 下午5:05:47, 代码生成哈希校验码：[52d4d08cb919c3b88f946f068323f04b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -65,7 +65,7 @@ public class QuerySimpleFormReq extends MultiTenantOrgReq<QuerySimpleFormReq> {
 
     private static final long serialVersionUID = 1598335188L;
 
-    @Schema(title = "是否包含公共数据")
+    @Schema(title = "是否包含平台公共数据")
     @Ignore
     boolean isContainsPublicData = true;
 
@@ -78,6 +78,11 @@ public class QuerySimpleFormReq extends MultiTenantOrgReq<QuerySimpleFormReq> {
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
     @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
     OrderBy.Type orderDir;
+
+    @Schema(title = L_id + "集合")
+    @In(E_SimpleForm.id)
+    String[] idList;
+
 
 
     @Schema(title = L_commitApi)
@@ -183,6 +188,7 @@ public class QuerySimpleFormReq extends MultiTenantOrgReq<QuerySimpleFormReq> {
     public QuerySimpleFormReq(String id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

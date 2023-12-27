@@ -21,7 +21,7 @@ import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.AmisMenu;
 import com.levin.oak.base.controller.rbac.dto.AmisResp;
 import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.commons.req.CommonDataReq;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
 import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
@@ -34,7 +34,6 @@ import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -245,7 +244,7 @@ public class AmisController extends BaseController {
      */
     @RequestMapping(value = "/{uiType}", method = {RequestMethod.GET, RequestMethod.POST})
     @Operation(summary = "获取AmisUI界面(5分钟刷新)")
-    public String getUiContent(@PathVariable String uiType, String path, String type, String category, CommonDataReq shareReq) {
+    public String getUiContent(@PathVariable String uiType, String path, String type, String category, MultiTenantReq shareReq) {
 
         Assert.hasText(path, "path 必须指定");
 

@@ -26,7 +26,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @ConditionalOnClass({CaptchaUtil.class, RedissonClient.class})
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "DefaultCaptchaService",havingValue = "true",  matchIfMissing = true)
 @Slf4j
-@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "DefaultCaptchaService"})
+@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "DefaultCaptchaService"}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class DefaultCaptchaServiceImpl extends AbstractCaptchaService implements CaptchaService {
 
     ICaptcha iCaptcha;

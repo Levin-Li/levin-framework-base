@@ -1,6 +1,7 @@
 package com.levin.oak.base;
 
 import static com.levin.oak.base.ModuleOption.*;
+
 import com.levin.oak.base.entities.*;
 
 import com.levin.commons.service.domain.*;
@@ -14,6 +15,7 @@ import org.springframework.context.*;
 import org.springframework.util.*;
 
 import lombok.extern.slf4j.Slf4j;
+
 import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
@@ -23,7 +25,6 @@ import java.util.stream.*;
  * 模块插件
  *
  * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:46, 代码生成哈希校验码：[a8e9140138d85ed647daf2d4aca805bd]，请不要修改和删除此行内容。
- * 
  */
 @Slf4j
 @Component(PLUGIN_PREFIX + "ModulePlugin")
@@ -70,7 +71,7 @@ public class ModulePlugin implements Plugin, PluginManagerAware {
 
     @Override
     public <M extends MenuItem> List<M> getMenuList() {
-        return (List<M>) RbacUtils.getMenuItemByController(context, ModuleOption.ID, EntityConst.QUERY_ACTION);
+        return RbacUtils.getMenuItemByController(context, ModuleOption.ID, EntityConst.QUERY_LIST_ACTION);
     }
 
     @Override

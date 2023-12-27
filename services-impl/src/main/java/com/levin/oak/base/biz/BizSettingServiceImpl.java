@@ -50,7 +50,7 @@ import com.levin.oak.base.services.*;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_Setting.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Setting.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Setting.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class BizSettingServiceImpl extends BaseService implements BizSettingService {
 
     @Autowired

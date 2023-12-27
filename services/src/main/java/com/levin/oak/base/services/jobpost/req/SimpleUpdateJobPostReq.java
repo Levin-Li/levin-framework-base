@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[be857e8a6a545d7bf7ce4254904c6784]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月25日 下午6:02:58, 代码生成哈希校验码：[0e776b9acd354ddc7ff088fb1405eb10]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -65,7 +65,7 @@ public class SimpleUpdateJobPostReq extends MultiTenantOrgReq<SimpleUpdateJobPos
     //需要更新的字段
     @Ignore //dao 忽略
     @Schema(title = "需要更新的字段", hidden = true)
-    protected final List<String> needUpdateFields = new ArrayList<>(5);
+    protected final Set<String> needUpdateFields = new HashSet<>(5);
 
     @Schema(title = "是否强制更新", description = "强制更新模式时，只要字段被调用set方法，则会被更新，不管是否空值" , hidden = true)
     @Ignore //dao 忽略
@@ -208,7 +208,7 @@ public class SimpleUpdateJobPostReq extends MultiTenantOrgReq<SimpleUpdateJobPos
     * @return
     */
     public <T extends SimpleUpdateJobPostReq> T addUpdateField(String fieldName) {
-        boolean isAdd = needUpdateFields.contains(fieldName) || needUpdateFields.add(fieldName);
+        boolean isAdd = needUpdateFields.add(fieldName);
         return (T) this;
     }
 

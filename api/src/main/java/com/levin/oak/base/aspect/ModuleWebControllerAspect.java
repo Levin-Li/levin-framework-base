@@ -8,7 +8,6 @@ import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.domain.Desc;
 import com.levin.commons.service.support.*;
 import com.levin.commons.utils.ExceptionUtils;
-import com.levin.commons.utils.ExpressionUtils;
 import com.levin.commons.utils.IPAddrUtils;
 import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
@@ -27,7 +26,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.BeanUtils;
@@ -38,6 +36,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.ResolvableType;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
@@ -61,6 +60,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import static org.springframework.core.Ordered.HIGHEST_PRECEDENCE;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 /**
@@ -271,8 +271,34 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
      * @throws Throwable
      */
 //    @Before("modulePackagePointcut() && controllerPointcut() && requestMappingPointcut()")
-    @Before("controllerPointcut() && requestMappingPointcut()")
-    public void injectVar(JoinPoint joinPoint) {
+    @Order(HIGHEST_PRECEDENCE)
+    @Around("requestMappingPointcut()")
+    public Object injectVar(ProceedingJoinPoint joinPoint) throws Throwable {
+
+        try {
+            List<VariableResolver> variableResolvers = tryInjectVar(joinPoint);
+
+            VariableInjector.setVariableResolversForCurrentThread(variableResolvers);
+
+            return joinPoint.proceed();
+
+        } finally {
+            VariableInjector.setVariableResolversForCurrentThread(null);
+        }
+    }
+
+    public List<VariableResolver> tryInjectVar(ProceedingJoinPoint joinPoint) {
+
+        final List<VariableResolver> variableResolverList = new ArrayList<>();
+        final Map<String, ?> injectVars = Collections.emptyMap();// injectVarService.getInjectVars();
+
+        List<VariableResolver> moduleResolverList = getModuleResolverList(joinPoint);
+
+        if (moduleResolverList != null && !moduleResolverList.isEmpty()) {
+            variableResolverList.addAll(moduleResolverList);
+        }
+
+        variableResolverList.addAll(variableResolverManager.getVariableResolvers());
 
         Object[] requestArgs = joinPoint.getArgs();
 
@@ -280,7 +306,7 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         if (requestArgs == null
                 || requestArgs.length == 0
                 || Arrays.stream(requestArgs).allMatch(arg -> arg == null || BeanUtils.isSimpleValueType(arg.getClass()))) {
-            return;
+            return variableResolverList;
         }
 
         final String path = getRequestPath();
@@ -291,32 +317,22 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
         if (className.startsWith("springfox.")
                 || className.startsWith("org.springdoc.")) {
-            return;
+            return variableResolverList;
         }
 
         //去除应用路径后，进行匹配
         if (path.equals(serverProperties.getError().getPath())
                 || !frameworkProperties.getInject().isMatched(className, path)) {
-            return;
+            return variableResolverList;
         }
 
         if (log.isDebugEnabled()) {
             log.debug("开始为方法 {} 注入变量...", signature);
         }
 
-        final List<VariableResolver> variableResolverList = new ArrayList<>();
-
-        final Map<String, ?> injectVars = Collections.emptyMap();// injectVarService.getInjectVars();
-
-        List<VariableResolver> moduleResolverList = getModuleResolverList(joinPoint);
-
         if (moduleResolverList == null || moduleResolverList.isEmpty()) {
             log.warn("AOP拦截，类：{}，URI:{}, signature:{} 没有找到模块变量解析器", className, path, signature);
         }
-
-        variableResolverList.addAll(moduleResolverList);
-
-        variableResolverList.addAll(variableResolverManager.getVariableResolvers());
 
         //对方法参数进行迭代
         Arrays.stream(requestArgs)
@@ -349,6 +365,7 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
                 });
 
+        return variableResolverList;
     }
 
 
@@ -357,7 +374,8 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
      * <p>
      * 记录所有日志
      */
-    @Around("controllerPointcut() && requestMappingPointcut()")
+    @Order
+    @Around("requestMappingPointcut()") //controllerPointcut() &&
 //    @Around("modulePackagePointcut() && controllerPointcut() && requestMappingPointcut()")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
 

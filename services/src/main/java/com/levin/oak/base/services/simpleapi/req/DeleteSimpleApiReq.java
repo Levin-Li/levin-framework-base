@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[5ce03f56b390c88b3d06534ecbd2ff45]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:43:59, 代码生成哈希校验码：[02401df6dc3eb70053dce5e5d93524e2]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -68,7 +68,7 @@ public class DeleteSimpleApiReq extends MultiTenantOrgReq<DeleteSimpleApiReq> {
 
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
-    @In(value = E_SimpleApi.id)
+    @In(E_SimpleApi.id)
     @NotEmpty
     private String[] idList;
 

@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[249ad93bed451173acd434cca1f38fb1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:44:00, 代码生成哈希校验码：[3cc922e279e85df88d37507203bd29ec]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -66,7 +66,7 @@ public class DeleteNoticeReq extends MultiTenantOrgReq<DeleteNoticeReq> {
 
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
-    @In(value = E_Notice.id)
+    @In(E_Notice.id)
     @NotEmpty
     private String[] idList;
 

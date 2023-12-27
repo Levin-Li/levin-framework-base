@@ -1,30 +1,24 @@
 package com.levin.oak.base.biz;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
-import com.levin.commons.dao.Paging;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.rbac.RbacUserObject;
-import com.levin.oak.base.biz.bo.org.StatOrgReq;
 import com.levin.oak.base.biz.rbac.RbacLoadService;
 import com.levin.oak.base.entities.E_Org;
 import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.services.BaseService;
 import com.levin.oak.base.services.org.OrgService;
 import com.levin.oak.base.services.org.info.OrgInfo;
-import com.levin.oak.base.services.org.req.CreateOrgReq;
-import com.levin.oak.base.services.org.req.OrgIdReq;
 import com.levin.oak.base.services.org.req.QueryOrgReq;
-import com.levin.oak.base.services.org.req.UpdateOrgReq;
 import com.levin.oak.base.services.role.info.RoleInfo;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
@@ -35,10 +29,9 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.*;
-import static com.levin.oak.base.entities.EntityConst.*;
-import static com.levin.oak.base.services.org.OrgService.CK_PREFIX;
 ////////////////////////////////////
 
 /**
@@ -74,9 +67,12 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
     RbacLoadService<Serializable> rbacLoadService;
 
     @Autowired
-    BizRoleService bizRoleService;
+    BizRoleService<Serializable> bizRoleService;
 
     final AntPathMatcher orgIdPathMatcher = new AntPathMatcher();
+
+
+    private static BeanCopier orgInfoCopier = null;
 
     protected BizOrgServiceImpl getSelfProxy() {
         return getSelfProxy(BizOrgServiceImpl.class);
@@ -105,17 +101,42 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
         );
     }
 
+
+    /**
+     * 是否能访问所有部门
+     *
+     * @param userPrincipal
+     * @return
+     */
+    @Override
+    public boolean canAccessAllOrg(Serializable userPrincipal) {
+
+        RbacUserObject<String> user = rbacLoadService.loadUser(userPrincipal);
+
+        if (user.isSuperAdmin()
+                || (user.isTenantAdmin() && StrUtil.isNotBlank(user.getTenantId()))) {
+            return true;
+        }
+
+        List<RoleInfo> roleList = bizRoleService.loadUserRoleList(user);
+
+        return roleList != null
+                && !roleList.isEmpty()
+                && roleList.stream().anyMatch(roleInfo -> Role.OrgDataScope.All.equals(roleInfo.getOrgDataScope()));
+    }
+
     /**
      * 加载当前用户有权限访问的部门列表
      *
      * @param userPrincipal
      * @param assembleTree
+     * @param rootIdList
      * @return
      */
     @Override
-    public List<OrgInfo> loadOrgList(Serializable userPrincipal, boolean assembleTree) {
+    public List<OrgInfo> loadOrgList(Serializable userPrincipal, boolean assembleTree, String... rootIdList) {
         Assert.notNull(userPrincipal, "用户未登录");
-        return assembleOrg(assembleTree, () -> rbacLoadService.loadUser(userPrincipal), user -> bizRoleService.loadUserRoleList(user));
+        return loadOrgList(() -> rbacLoadService.loadUser(userPrincipal), user -> bizRoleService.loadUserRoleList(user), assembleTree, rootIdList);
     }
 
     /**
@@ -233,7 +254,7 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
      * @param orgList
      * @return
      */
-    public List<OrgInfo> assembleOrg(List<OrgInfo> orgList, boolean isCopy, boolean buildPathById, boolean clearParent, boolean assembleTree) {
+    public List<OrgInfo> loadOrgList(List<OrgInfo> orgList, boolean isCopy, boolean buildPathById, boolean clearParent, boolean assembleTree, String... rootIdList) {
 
         //根据parentId属性进行树形分组
         if (orgList == null || orgList.isEmpty()) {
@@ -242,10 +263,18 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
 
         //复制数据
         if (isCopy) {
-            orgList = orgList.stream().map(
-                    org -> BeanUtil.copyProperties(org, OrgInfo.class)
-            ).collect(Collectors.toList());
+            List<OrgInfo> tempList = new ArrayList<>(orgList.size());
+
+            orgList.forEach(org -> {
+                OrgInfo target = new OrgInfo();
+                //@todo 优化复制性能
+                BeanUtils.copyProperties(org, target, OrgInfo.Fields.parent, OrgInfo.Fields.children);
+                tempList.add(target);
+            });
+
+            orgList = tempList;
         }
+
 
         //构建节点路径
         if (buildPathById) {
@@ -256,7 +285,10 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
             orgList.forEach(org -> tempMap.put(org.getId(), org));
 
             //填充父节点
-            orgList.forEach(org -> org.setParent(tempMap.get(org.getId())));
+            orgList.forEach(org ->
+                    //防止死循环
+                    org.setParent(org.getId().equals(org.getParentId()) ? null : tempMap.get(org.getParentId()))
+            );
 
             tempMap.clear();
 
@@ -267,7 +299,9 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
                 List<String> paths = new ArrayList<>();
                 OrgInfo orgTemp = org;
 
-                while (orgTemp != null) {
+                //防止死循环
+                while (orgTemp != null
+                        && !paths.contains(orgTemp.getId())) {
                     paths.add(orgTemp.getId());
                     orgTemp = orgTemp.getParent();
                 }
@@ -276,8 +310,18 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
                 //构建路径
                 org.setNodePath(String.join("/", paths));
             });
+
+            //
         }
 
+        //只过滤出包含的节点
+        Set<String> rootIdSet = (rootIdList != null && rootIdList.length > 0) ?
+                Stream.of(rootIdList).filter(StrUtil::isNotBlank).collect(Collectors.toSet()) : Collections.emptySet();
+
+        if (!rootIdSet.isEmpty()) {
+            //删除路径中不包含指定节点的节点
+            orgList.removeIf(org -> StrUtil.isBlank(org.getNodePath()) || rootIdSet.stream().noneMatch(id -> ("/" + org.getNodePath() + "/").contains("/" + id + "/")));
+        }
 
         if (assembleTree) {
             orgList = assembleTreeByNodePath(orgList, clearParent);
@@ -298,17 +342,18 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
      * @param userRoleSupplier
      * @return
      */
-    public List<OrgInfo> assembleOrg(boolean assembleTree, Supplier<RbacUserObject<String>> userSupplier, Function<RbacUserObject<String>, List<RoleInfo>> userRoleSupplier) {
+    @Override
+    public List<OrgInfo> loadOrgList(Supplier<RbacUserObject<String>> userSupplier, Function<RbacUserObject<String>, List<RoleInfo>> userRoleSupplier, boolean assembleTree, String... rootIdList) {
 
         RbacUserObject<String> user = userSupplier.get();
 
         //加载所有的部门
-        List<OrgInfo> orgList = getSelfProxy().loadOrgList(user.getTenantId());
+        List<OrgInfo> orgList = loadOrgList(user.getTenantId());
 
         //如果是超级管理员，则返回所有部门
         if (user.isSuperAdmin()
                 || (user.isTenantAdmin() && StrUtil.isNotBlank(user.getTenantId()))) {
-            return assembleOrg(orgList, true, true, true, assembleTree);
+            return loadOrgList(orgList, true, true, true, assembleTree, rootIdList);
         }
 
         //获取当前用户有权限访问的部门
@@ -321,7 +366,7 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
 
         //只要有一个角色是允许所有的部门，则返回所有部门
         if (roleList.stream().anyMatch(roleInfo -> Role.OrgDataScope.All.equals(roleInfo.getOrgDataScope()))) {
-            return assembleOrg(orgList, true, true, true, assembleTree);
+            return loadOrgList(orgList, true, true, true, assembleTree, rootIdList);
         }
 
         String myOrgId = null;
@@ -355,7 +400,7 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
         //////////////////////////////////////////////////////////////
 
         //全部的部门
-        List<OrgInfo> resultList = assembleOrg(orgList, true, true, true, false);
+        List<OrgInfo> resultList = loadOrgList(orgList, true, true, true, false, rootIdList);
 
         //分配的部门列表
         Set<String> orgIdList = roleList.stream()
@@ -371,7 +416,10 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
         //
         if (StrUtil.isNotBlank(myOrgId)) {
             //添加匹配的逻辑
-            orgIdList.add(isMyDeptAndChildren ? (myOrgId + "/**") : myOrgId);
+//            final String tempOrgId = myOrgId;
+//            OrgInfo myOrg = StringUtils.hasText(tempOrgId) ? orgList.stream().filter(org -> org.getId().equals(tempOrgId)).findFirst().orElse(null) : null;
+
+            orgIdList.add(isMyDeptAndChildren ? ("**/" + myOrgId + "/**") : myOrgId);
         }
 
         //清除不需要的部门
@@ -385,20 +433,34 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
         );
 
         //利用路径节点重新构建树形
-        resultList = assembleOrg(resultList, false, false, true, assembleTree);
+        resultList = loadOrgList(resultList, false, false, true, assembleTree);
 
         return resultList;
     }
 
 
     @Override
-    public void checkAccessible(Serializable userPrincipal, String parentId, String orgId) {
+    public void checkAccessible(Serializable userPrincipal, String tenantId, String parentId, String orgId) {
 
         RbacUserObject<String> user = rbacLoadService.loadUser(userPrincipal);
 
-        if (StrUtil.isBlank(parentId)) {
-            Assert.isTrue(user.isSuperAdmin() || user.isTenantAdmin(), "组织机构上级节点不能为空");
+        Assert.notNull(user, "用户不能为空");
+
+        //优化效率
+        if (user.isSuperAdmin()) {
+            return;
         }
+
+        //租户ID必须相等
+        Assert.isTrue(user.getTenantId().equals(tenantId), "非关联的租户[{}]", tenantId);
+
+        //优化效率
+        if (user.isTenantAdmin()) {
+            return;
+        }
+
+        //只有租户管理员可以操作根节点
+        Assert.isTrue(StrUtil.isNotBlank(parentId) || user.isTenantAdmin(), "组织机构上级节点不能为空");
 
         List<OrgInfo> orgList = getSelfProxy().loadOrgList(userPrincipal, false);
 

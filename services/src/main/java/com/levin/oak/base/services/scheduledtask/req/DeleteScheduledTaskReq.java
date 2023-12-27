@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[2edea65fe0286d84b2c8561e536b2eb6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:44:00, 代码生成哈希校验码：[4bcbe0659285285292f584a09fb6510f]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -65,7 +65,7 @@ public class DeleteScheduledTaskReq extends MultiTenantOrgReq<DeleteScheduledTas
 
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
-    @In(value = E_ScheduledTask.id)
+    @In(E_ScheduledTask.id)
     @NotEmpty
     private String[] idList;
 

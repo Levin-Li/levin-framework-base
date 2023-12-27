@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[33a180a6cf323f231a3b3e6dcbe622fe]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月25日 下午6:02:57, 代码生成哈希校验码：[85c4e173274b0a2b06a3de158d99d532]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -64,7 +64,7 @@ public class SimpleUpdateAppErrorLogReq extends MultiTenantReq<SimpleUpdateAppEr
     //需要更新的字段
     @Ignore //dao 忽略
     @Schema(title = "需要更新的字段", hidden = true)
-    protected final List<String> needUpdateFields = new ArrayList<>(5);
+    protected final Set<String> needUpdateFields = new HashSet<>(5);
 
     @Schema(title = "是否强制更新", description = "强制更新模式时，只要字段被调用set方法，则会被更新，不管是否空值" , hidden = true)
     @Ignore //dao 忽略
@@ -166,7 +166,7 @@ public class SimpleUpdateAppErrorLogReq extends MultiTenantReq<SimpleUpdateAppEr
     * @return
     */
     public <T extends SimpleUpdateAppErrorLogReq> T addUpdateField(String fieldName) {
-        boolean isAdd = needUpdateFields.contains(fieldName) || needUpdateFields.add(fieldName);
+        boolean isAdd = needUpdateFields.add(fieldName);
         return (T) this;
     }
 

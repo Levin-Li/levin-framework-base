@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[f26569a3b53fc29025aed19371455fda]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月25日 下午6:00:04, 代码生成哈希校验码：[f26569a3b53fc29025aed19371455fda]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)

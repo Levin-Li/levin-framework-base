@@ -65,6 +65,7 @@ public class Role
 
     @Schema(title = "组织权限")
     public enum OrgDataScope implements EnumDesc {
+        @Schema(title = "继承父角色") Inherited,
 
         @Schema(title = "所有部门") All,
         @Schema(title = "指定部门") Assigned,

@@ -5,6 +5,7 @@ import static com.levin.oak.base.ModuleOption.*;
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
+import com.levin.oak.base.biz.BizOrgService;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.InjectVarService;
 import com.levin.commons.rbac.RbacUserInfo;
@@ -113,6 +114,10 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
     @Autowired
     AuthService baseAuthService;
 
+
+    @Autowired
+    BizOrgService bizOrgService;
+
     @Autowired
     FrameworkProperties frameworkProperties;
 
@@ -199,6 +204,8 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
             //获取登录信息
             UserInfo userInfo = baseAuthService.getUserInfo();
 
+            boolean isOrgAllScope = userInfo.isSuperAdmin() || userInfo.isTenantAdmin() || bizOrgService.canAccessAllOrg(userInfo);
+
             builder.put(InjectConst.USER_ID, userInfo.getId())
                     .put(InjectConst.USER_NAME, userInfo.getName())
                     .put(InjectConst.USER, userInfo)
@@ -206,14 +213,24 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
                     .put(InjectConst.IS_SUPER_ADMIN, userInfo.isSuperAdmin())
                     .put(InjectConst.IS_TENANT_ADMIN, userInfo.isTenantAdmin())
 
+                    .put(InjectConst.IS_ALL_ORG_SCOPE, isOrgAllScope)
+
                     .put(InjectConst.ORG, userInfo.getOrg())
                     .put(InjectConst.ORG_ID, userInfo.getOrgId());
+
+            if (!isOrgAllScope) {
+                //能访问的部门列表
+                builder.put(InjectConst.ORG_ID_LIST, bizOrgService.loadOrgList(userInfo, false).stream().map(org -> org.getId()).collect(Collectors.toList()));
+            } else {
+                builder.put(InjectConst.ORG_ID_LIST, null);
+            }
 
             if (log.isDebugEnabled()) {
                 log.debug("当前登录用户：{}, {}", userInfo, getBizStack());
             }
 
         } else {
+
             //匿名用户
             builder.put(InjectConst.USER_ID, anonymous.getId())
                     .put(InjectConst.USER_NAME, anonymous.getName())
@@ -221,6 +238,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
 
                     .put(InjectConst.IS_SUPER_ADMIN, false)
                     .put(InjectConst.IS_TENANT_ADMIN, false)
+                    .put(InjectConst.IS_ALL_ORG_SCOPE, false)
 
                     .put(InjectConst.ORG, null)
                     .put(InjectConst.ORG_ID_LIST, null)

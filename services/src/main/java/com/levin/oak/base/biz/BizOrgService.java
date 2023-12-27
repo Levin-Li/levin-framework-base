@@ -1,22 +1,21 @@
 package com.levin.oak.base.biz;
 
-import static com.levin.oak.base.entities.EntityConst.*;
-
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
-import io.swagger.v3.oas.annotations.*;
+import com.levin.commons.rbac.RbacUserObject;
+import com.levin.oak.base.services.role.info.RoleInfo;
 import io.swagger.v3.oas.annotations.tags.*;
 
 import com.levin.oak.base.entities.*;
-import com.levin.oak.base.services.org.req.*;
 import com.levin.oak.base.services.org.info.*;
 
 
 ////////////////////////////////////
 //自动导入列表
 
-import javax.validation.constraints.NotNull;
 ////////////////////////////////////
 
 /**
@@ -39,12 +38,35 @@ public interface BizOrgService {
      */
     List<OrgInfo> loadOrgList(String tenantId, String parentId);
 
+
+    /**
+     * 是否能访问所有部门
+     *
+     * @param userPrincipal
+     * @return
+     */
+    boolean canAccessAllOrg(Serializable userPrincipal);
+
     /**
      * 加载当前用户有权限访问的部门列表
      *
+     * @param userPrincipal
+     * @param assembleTree
+     * @param rootIdList    指定部分的根节点ID
      * @return
      */
-    List<OrgInfo> loadOrgList(Serializable userPrincipal, boolean assembleTree);
+    List<OrgInfo> loadOrgList(Serializable userPrincipal, boolean assembleTree, String... rootIdList);
+
+    /**
+     * 加载当前用户有权限访问的部门列表
+     *
+     * @param userSupplier
+     * @param userRoleSupplier
+     * @param assembleTree
+     * @param rootIdList
+     * @return
+     */
+    List<OrgInfo> loadOrgList(Supplier<RbacUserObject<String>> userSupplier, Function<RbacUserObject<String>, List<RoleInfo>> userRoleSupplier, boolean assembleTree, String... rootIdList);
 
     /**
      * 校验机构ID是否合法
@@ -53,6 +75,6 @@ public interface BizOrgService {
      * @param parentId
      * @param orgId
      */
-    void checkAccessible(Serializable userPrincipal, String parentId, String orgId);
+    void checkAccessible(Serializable userPrincipal, String tenantId, String parentId, String orgId);
 
 }

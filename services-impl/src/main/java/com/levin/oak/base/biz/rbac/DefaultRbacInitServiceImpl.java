@@ -33,6 +33,7 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static com.levin.oak.base.biz.BizUserService.SA_ACCOUNT;
@@ -111,6 +113,9 @@ public class DefaultRbacInitServiceImpl
 
     @Autowired
     SimpleDao simpleDao;
+
+    @Autowired
+    Environment environment;
 
     @PostConstruct
     public void init() {
@@ -302,7 +307,7 @@ public class DefaultRbacInitServiceImpl
 
                                     new ResPermission()
                                             .setDomain("*")
-                                            .setType(EntityConst.ENTITY_TYPE_NAME + "-*")
+                                            .setType(EntityConst.BIZ_TYPE_NAME + "-*")
                                             .setRes("*")
                                             .setAction("*")
                                             .toString(),
@@ -324,12 +329,33 @@ public class DefaultRbacInitServiceImpl
                             .setTenantId(tenantInfo.getId())
             );
 
-//            role = simpleDao.selectFrom(Role.class)
-//                    .eq(E_Role.code, RbacRoleObject.ADMIN_ROLE)
-//                    .eq(E_User.tenantId, tenantInfo.getId())
-//                    .findOne();
         }
 
+        role = simpleDao.selectFrom(Role.class)
+                .eq(E_Role.code, "R_STAFF")
+                .eq(E_User.tenantId, tenantInfo.getId())
+                .findOne();
+
+        if (role == null) {
+            simpleDao.create(
+                    new CreateRoleReq()
+                            .setCode("R_STAFF")
+                            .setName("员工")
+                            .setEditable(true)
+                            .setOrgDataScope(Role.OrgDataScope.MyDept)
+                            .setPermissionList(Arrays.asList(
+
+                                    new ResPermission()
+                                            .setDomain("*")
+                                            .setType(EntityConst.BIZ_TYPE_NAME + "-*")
+                                            .setRes("*")
+                                            .setAction("*")
+                                            .toString()
+
+                            ))
+                            .setTenantId(tenantInfo.getId())
+            );
+        }
         ///////////////////////////////////////////////////
 
         User user = simpleDao.selectFrom(User.class)
@@ -385,6 +411,22 @@ public class DefaultRbacInitServiceImpl
                     .setTenantId(tenantInfo.getId())
 
             );
+
+            if (Stream.of(environment.getActiveProfiles()).allMatch(p -> p.equals("dev") || p.equals("test") || p.equals("local"))) {
+
+                simpleDao.create(new CreateUserReq()
+                        .setEmail("test")
+                        .setTelephone("18912341234")
+                        .setPassword(encryptPassword("123456"))
+                        .setName("测试员工")
+                        .setStaffNo("1111")
+                        .setRoleList(Collections.singletonList("R_STAFF"))
+                        .setOrgId(orgId)
+                        .setTenantId(tenantInfo.getId())
+
+                );
+            }
+
         }
 
         ///////////////////////////////////////////////////

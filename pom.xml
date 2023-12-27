@@ -33,7 +33,7 @@
         <spring-boot-admin.version>2.7.10</spring-boot-admin.version>
 
         <levin.simple-dao.groupId>com.levin.commons</levin.simple-dao.groupId>
-        <levin.simple-dao.version>2.5.3-SNAPSHOT</levin.simple-dao.version>
+        <levin.simple-dao.version>2.5.5-SNAPSHOT</levin.simple-dao.version>
 
         <levin.service-support.groupId>com.github.Levin-Li</levin.service-support.groupId>
         <levin.service-support.groupId>com.levin.commons</levin.service-support.groupId>

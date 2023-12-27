@@ -25,7 +25,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @ConditionalOnClass({HappyCaptcha.class, RedissonClient.class})
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "HappyCaptchaService", havingValue = "true", matchIfMissing = true)
 @Slf4j
-@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "HappyCaptchaService"})
+@CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "HappyCaptchaService"}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 @Primary
 public class HappyCaptchaServiceImpl extends AbstractCaptchaService implements CaptchaService {
 

@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[e07795a7a5baa925545706030224f9b6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月27日 下午5:05:46, 代码生成哈希校验码：[6d76f802ae4a16fa152091d5e91799e1]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -63,7 +63,7 @@ public class QueryI18nResReq extends MultiTenantOrgReq<QueryI18nResReq> {
 
     private static final long serialVersionUID = -1681554652L;
 
-    @Schema(title = "是否包含公共数据")
+    @Schema(title = "是否包含平台公共数据")
     @Ignore
     boolean isContainsPublicData = true;
 
@@ -76,6 +76,11 @@ public class QueryI18nResReq extends MultiTenantOrgReq<QueryI18nResReq> {
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
     @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
     OrderBy.Type orderDir;
+
+    @Schema(title = L_id + "集合")
+    @In(E_I18nRes.id)
+    Long[] idList;
+
 
 
     @Schema(title = L_id)
@@ -160,6 +165,7 @@ public class QueryI18nResReq extends MultiTenantOrgReq<QueryI18nResReq> {
     public QueryI18nResReq(Long id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

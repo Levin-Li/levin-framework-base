@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[84f42284cc71eccbcf20a1b5d829a5ea]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:44:01, 代码生成哈希校验码：[b1c4f55560c3fdd1536f9cb5b7052b46]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -67,7 +67,7 @@ public class DeleteSimplePageReq extends MultiTenantOrgReq<DeleteSimplePageReq> 
 
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
-    @In(value = E_SimplePage.id)
+    @In(E_SimplePage.id)
     @NotEmpty
     private String[] idList;
 

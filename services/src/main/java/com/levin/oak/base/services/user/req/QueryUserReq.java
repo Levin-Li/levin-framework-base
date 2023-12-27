@@ -52,7 +52,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[f8a3e8452d8a833e69e6fa10c356b369]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:44:00, 代码生成哈希校验码：[ee0989cacef972a8b46c52e33294e22b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -78,6 +78,11 @@ public class QueryUserReq extends MultiTenantOrgReq<QueryUserReq> {
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
     @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
     OrderBy.Type orderDir;
+
+    @Schema(title = L_id + "集合")
+    @In(E_User.id)
+    String[] idList;
+
 
 
     @Size(max = 64)
@@ -247,6 +252,7 @@ public class QueryUserReq extends MultiTenantOrgReq<QueryUserReq> {
     public QueryUserReq(String id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

@@ -49,7 +49,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[39ae1a27267b505f8a112c99a9e35979]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月27日 下午5:05:46, 代码生成哈希校验码：[eeed7ae771fb3f4abb0fbd0f231e0f94]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -66,7 +66,7 @@ public class QueryDictReq extends MultiTenantOrgReq<QueryDictReq> {
 
     private static final long serialVersionUID = -445779596L;
 
-    @Schema(title = "是否包含公共数据")
+    @Schema(title = "是否包含平台公共数据")
     @Ignore
     boolean isContainsPublicData = true;
 
@@ -79,6 +79,11 @@ public class QueryDictReq extends MultiTenantOrgReq<QueryDictReq> {
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
     @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
     OrderBy.Type orderDir;
+
+    @Schema(title = L_id + "集合")
+    @In(E_Dict.id)
+    String[] idList;
+
 
 
     @Size(max = 64)
@@ -163,6 +168,7 @@ public class QueryDictReq extends MultiTenantOrgReq<QueryDictReq> {
     public QueryDictReq(String id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

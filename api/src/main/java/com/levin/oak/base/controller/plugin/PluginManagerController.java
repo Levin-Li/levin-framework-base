@@ -19,7 +19,7 @@ import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.util.List;
 
-import static com.levin.commons.dao.EntityOpConst.PLATFORM_TYPE_NAME;
+import static com.levin.commons.dao.EntityOpConst.*;
 import static com.levin.oak.base.ModuleOption.*;
 
 /**
@@ -30,10 +30,11 @@ import static com.levin.oak.base.ModuleOption.*;
 @RestController(PLUGIN_PREFIX + "PluginManagerController")
 @ConditionalOnProperty(value = PLUGIN_PREFIX + "PluginManagerController", havingValue = "true", matchIfMissing = true)
 @RequestMapping(API_PATH + "PluginManager")
-@Tag(name = "插件管理", description = "插件管理")
+
 @Slf4j
 @Valid
-@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME + "-插件")
+@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME + "-")
+@Tag(name = "插件管理", description = "插件管理")
 public class PluginManagerController extends BaseController {
 
     @Autowired
@@ -49,7 +50,7 @@ public class PluginManagerController extends BaseController {
      * @return
      */
     @GetMapping("/list")
-    @Operation(summary = "获取插件列表", description = "获取插件列表")
+    @Operation(summary = QUERY_LIST_ACTION, description = "获取插件列表")
     public ApiResp<List<Plugin>> list() {
         return ApiResp.ok(pluginManager.getInstalledPlugins());
     }
@@ -61,7 +62,7 @@ public class PluginManagerController extends BaseController {
      * @return
      */
     @GetMapping("/{pluginId}")
-    @Operation(summary = "获取插件详情", description = "获取插件详情")
+    @Operation(summary = VIEW_DETAIL_ACTION, description = "获取插件详情")
     public ApiResp<Plugin> plugin(@PathVariable String pluginId) {
         return ApiResp.ok(pluginManager.getInstalledPlugin(pluginId));
     }

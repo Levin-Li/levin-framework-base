@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[763d45a15f3b5e9d0cd61fd6e4178404]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月27日 下午5:05:46, 代码生成哈希校验码：[f0ac25ed9f21b63e5f6893245b72a341]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -63,7 +63,7 @@ public class QueryAppClientFileReq extends MultiTenantOrgReq<QueryAppClientFileR
 
     private static final long serialVersionUID = -1155395350L;
 
-    @Schema(title = "是否包含公共数据")
+    @Schema(title = "是否包含平台公共数据")
     @Ignore
     boolean isContainsPublicData = true;
 
@@ -76,6 +76,11 @@ public class QueryAppClientFileReq extends MultiTenantOrgReq<QueryAppClientFileR
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
     @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
     OrderBy.Type orderDir;
+
+    @Schema(title = L_id + "集合")
+    @In(E_AppClientFile.id)
+    String[] idList;
+
 
 
     @Size(max = 64)
@@ -160,6 +165,7 @@ public class QueryAppClientFileReq extends MultiTenantOrgReq<QueryAppClientFileR
     public QueryAppClientFileReq(String id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

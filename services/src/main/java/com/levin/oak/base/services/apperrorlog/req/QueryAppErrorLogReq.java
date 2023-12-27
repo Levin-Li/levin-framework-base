@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询应用错误日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[9e64d228fc27f5de73153b37d0ef50ec]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:44:00, 代码生成哈希校验码：[1823a6e590b8304fdf3a73c66f208cd9]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -72,6 +72,11 @@ public class QueryAppErrorLogReq extends MultiTenantReq<QueryAppErrorLogReq> {
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
     @OrderBy(value = occurTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
     OrderBy.Type orderDir;
+
+    @Schema(title = L_id + "集合")
+    @In(E_AppErrorLog.id)
+    Long[] idList;
+
 
 
     @Schema(title = L_id)
@@ -118,6 +123,7 @@ public class QueryAppErrorLogReq extends MultiTenantReq<QueryAppErrorLogReq> {
     public QueryAppErrorLogReq(Long id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据

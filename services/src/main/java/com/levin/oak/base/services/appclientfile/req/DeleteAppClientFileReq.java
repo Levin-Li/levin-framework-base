@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[ab6701f79009098c742ba83fcb2098ae]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:44:00, 代码生成哈希校验码：[ba01dcf7a558175f81a09f67fc96662f]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -65,7 +65,7 @@ public class DeleteAppClientFileReq extends MultiTenantOrgReq<DeleteAppClientFil
 
 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
-    @In(value = E_AppClientFile.id)
+    @In(E_AppClientFile.id)
     @NotEmpty
     private String[] idList;
 

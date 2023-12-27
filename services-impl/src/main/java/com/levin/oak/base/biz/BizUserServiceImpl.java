@@ -57,7 +57,7 @@ import com.levin.commons.dao.PagingData;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_User.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_User.SIMPLE_CLASS_NAME})
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_User.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class BizUserServiceImpl extends BaseService implements BizUserService<Serializable> {
 
     @Autowired

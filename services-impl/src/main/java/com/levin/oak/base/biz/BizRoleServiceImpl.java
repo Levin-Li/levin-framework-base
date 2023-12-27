@@ -106,7 +106,6 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
                 .isNullOrEq(E_Role.enable, true)
                 .orderBy(E_Role.orderCode)
                 .find(RoleInfo.class);
-
     }
 
     /**

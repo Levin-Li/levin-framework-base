@@ -53,7 +53,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[8762b83bf5b019339d6b8508e81b7aae]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:43:59, 代码生成哈希校验码：[81746a5aeb6a6f7c0fb71960a7f78de1]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -79,6 +79,11 @@ public class QueryRoleReq extends MultiTenantOrgReq<QueryRoleReq> {
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
     @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
     OrderBy.Type orderDir;
+
+    @Schema(title = L_id + "集合")
+    @In(E_Role.id)
+    String[] idList;
+
 
 
     @Size(max = 64)
@@ -230,6 +235,7 @@ public class QueryRoleReq extends MultiTenantOrgReq<QueryRoleReq> {
     public QueryRoleReq(String id) {
         this.id = id;
     }
+
     @PostConstruct
     public void preQuery() {
         //@todo 查询之前初始化数据
