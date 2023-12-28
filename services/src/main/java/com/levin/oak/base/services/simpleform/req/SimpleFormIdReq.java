@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单表单 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[2bcc75a98b8ec9ac6e0fe3524522c749]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:42, 代码生成哈希校验码：[3bcf4005f556ff17b7a530e341a8c5ca]，请不要修改和删除此行内容。
  *
  */
 
@@ -59,6 +59,10 @@ import com.levin.commons.service.support.InjectConst;
 public class SimpleFormIdReq extends MultiTenantOrgReq<SimpleFormIdReq> {
 
     private static final long serialVersionUID = 1598335188L;
+
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
+    @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
+    final boolean eqEditable = true;
 
     @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     @Eq(require = true)

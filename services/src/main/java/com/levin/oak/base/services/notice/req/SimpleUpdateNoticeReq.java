@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月25日 下午6:02:58, 代码生成哈希校验码：[4150bea34e08df40b216ac6cd72d9216]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:41, 代码生成哈希校验码：[1e5fe81fdcb7e78d7b28b2d28bdbc4b2]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -74,7 +74,7 @@ public class SimpleUpdateNoticeReq extends MultiTenantOrgReq<SimpleUpdateNoticeR
     //////////////////////////////////////////////////////////////////
 
     @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
-    @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
+    @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Size(max = 64)

@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单动态接口 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[4afa28495030fa3296f0628357eb4094]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:41, 代码生成哈希校验码：[0e7c6fd6f4cf98ca0aee0a906e256556]，请不要修改和删除此行内容。
  *
  */
 
@@ -60,6 +60,10 @@ import com.levin.commons.service.support.InjectConst;
 public class SimpleApiIdReq extends MultiTenantOrgReq<SimpleApiIdReq> {
 
     private static final long serialVersionUID = 1021385738L;
+
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
+    @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
+    final boolean eqEditable = true;
 
     @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     @Eq(require = true)

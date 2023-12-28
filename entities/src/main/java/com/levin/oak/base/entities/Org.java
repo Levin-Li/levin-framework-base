@@ -79,6 +79,7 @@ public class Org
         @Schema(title = "注销")
         canceled,
         ;
+
         @Override
         public String toString() {
             return nameAndDesc();
@@ -103,6 +104,7 @@ public class Org
         ExternalOrg,
 
         ;
+
         @Override
         public String toString() {
             return nameAndDesc();
@@ -115,7 +117,7 @@ public class Org
     protected String id;
 
     @Schema(title = "租户ID")
-    @Column(length = 64)
+    @Column(length = 64, nullable = false)
     protected String tenantId;
 
     @Schema(title = "父ID")

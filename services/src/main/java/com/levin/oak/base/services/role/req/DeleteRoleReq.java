@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:43:59, 代码生成哈希校验码：[e253ce1e78ffc72033dec95e8db92130]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:41, 代码生成哈希校验码：[e9ea453f93241b87fab556e8ec04a69d]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -62,12 +62,12 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = Role.class, alias = E_Role.ALIAS)
-public class DeleteRoleReq extends MultiTenantOrgReq<DeleteRoleReq> {
+public class DeleteRoleReq extends MultiTenantReq<DeleteRoleReq> {
 
     private static final long serialVersionUID = -445356492L;
 
     @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
-    @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
+    @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
 

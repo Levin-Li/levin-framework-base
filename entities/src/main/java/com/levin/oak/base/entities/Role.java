@@ -4,6 +4,7 @@ import com.levin.commons.dao.EntityCategory;
 import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
+import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractTreeObject;
@@ -61,7 +62,7 @@ import java.util.List;
 @EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class Role
         extends AbstractTreeObject<String, Role>
-        implements MultiTenantObject {
+        implements MultiTenantObject, MultiTenantPublicObject {
 
     @Schema(title = "组织权限")
     public enum OrgDataScope implements EnumDesc {

@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单页面 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[bc83d3896cab89831068a4b438455dbf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:42, 代码生成哈希校验码：[90264958ca71f90f9da0c2dc0a256617]，请不要修改和删除此行内容。
  *
  */
 
@@ -59,6 +59,10 @@ import com.levin.commons.service.support.InjectConst;
 public class SimplePageIdReq extends MultiTenantOrgReq<SimplePageIdReq> {
 
     private static final long serialVersionUID = 1598619295L;
+
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
+    @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
+    final boolean eqEditable = true;
 
     @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     @Eq(require = true)

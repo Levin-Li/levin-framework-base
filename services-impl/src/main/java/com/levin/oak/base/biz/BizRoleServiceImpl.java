@@ -125,14 +125,14 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
 
         if (!user.isSuperAdmin()) {
 
-            req.setTenantId(user.getId());
+            req.setTenantId(user.getTenantId());
 
             Assert.notBlank(req.getTenantId(), "租户ID不能为空");
 
-            if (!user.isTenantAdmin()) {
-                req.setOrgId(user.getOrgId());
-                Assert.notBlank(req.getOrgId(), "机构ID不能为空");
-            }
+//            if (!user.isTenantAdmin()) {
+//                req.setOrgId(user.getOrgId());
+//                Assert.notBlank(req.getOrgId(), "机构ID不能为空");
+//            }
         }
 
         return roleService.create(req);
@@ -194,9 +194,9 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
 
             Assert.notBlank(info.getTenantId(), "租户ID不能为空");
 
-            if (!user.isTenantAdmin()) {
-                Assert.notBlank(info.getOrgId(), "机构ID不能为空");
-            }
+//            if (!user.isTenantAdmin()) {
+//                Assert.notBlank(info.getOrgId(), "机构ID不能为空");
+//            }
 
             //只能操作自己租户的角色
             Assert.isTrue(user.getTenantId().equals(info.getTenantId()), "不能{}该角色{}", action, info.getId());
@@ -236,6 +236,10 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
         Assert.isTrue(roleCode.startsWith("R_"), "角色编码必须以 R_ 开头");
 
         Assert.isTrue(!roleCode.equalsIgnoreCase(RbacRoleObject.SA_ROLE), "角色编码 R_SA 不可使用");
+        Assert.isTrue(!roleCode.equalsIgnoreCase(RbacRoleObject.ADMIN_ROLE), "角色编码 R_ADMIN 不可使用");
+
+        //Assert.isTrue(!roleCode.equalsIgnoreCase(RbacRoleObject.ORG_ADMIN_ROLE), "角色编码 R_ORG_ADMIN 不可使用");
+
     }
 
 }

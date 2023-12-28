@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:44:00, 代码生成哈希校验码：[3cc922e279e85df88d37507203bd29ec]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:41, 代码生成哈希校验码：[2c907002f72f51f75fd349fc6739c69f]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -61,7 +61,7 @@ public class DeleteNoticeReq extends MultiTenantOrgReq<DeleteNoticeReq> {
     private static final long serialVersionUID = 1394869526L;
 
     @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
-    @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
+    @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
 

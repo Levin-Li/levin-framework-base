@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:43:59, 代码生成哈希校验码：[02401df6dc3eb70053dce5e5d93524e2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:41, 代码生成哈希校验码：[4f00a6c07162c7f280307996023859ab]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -63,7 +63,7 @@ public class DeleteSimpleApiReq extends MultiTenantOrgReq<DeleteSimpleApiReq> {
     private static final long serialVersionUID = 1021385738L;
 
     @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
-    @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
+    @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
 

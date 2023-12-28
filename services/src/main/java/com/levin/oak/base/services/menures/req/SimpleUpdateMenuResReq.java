@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月25日 下午6:02:58, 代码生成哈希校验码：[da82e31eb7201384b37e115318f12e0b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:42, 代码生成哈希校验码：[d509a8576d7b927102a0d43ae13314d3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -78,7 +78,7 @@ public class SimpleUpdateMenuResReq extends MultiTenantReq<SimpleUpdateMenuResRe
     //////////////////////////////////////////////////////////////////
 
     @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
-    @Eq(condition = IS_WEB_CONTEXT + " && " + NOT_SUPER_ADMIN)
+    @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
     @Size(max = 64)

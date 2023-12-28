@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[8bc8c5a02fd5a87d6088d2626c2a034a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午10:28:11, 代码生成哈希校验码：[d5a5761533e84769b9fe42287af21af0]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -73,11 +73,6 @@ public class RoleInfo implements Serializable, TreeObject<RoleInfo, RoleInfo> {
     @InjectVar(value = InjectConst.TENANT_ID)
     @Schema(title = L_tenantId)
     String tenantId;
-
-    @Size(max = 128)
-    @InjectVar(value = InjectConst.ORG_ID)
-    @Schema(title = L_orgId)
-    String orgId;
 
     @Size(max = 128)
     @Schema(title = L_parentId)

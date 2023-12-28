@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[71fbd4cce3f088b92350c8a1d989951a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午10:28:11, 代码生成哈希校验码：[8a46f6568a6e6ae52cb4f931ba813cee]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -59,7 +59,7 @@ import com.levin.commons.service.support.InjectConst;
 @NoArgsConstructor
 @Builder
 @TargetOption(entityClass = Role.class, alias = E_Role.ALIAS)
-public class CreateRoleReq extends MultiTenantOrgReq<CreateRoleReq> {
+public class CreateRoleReq extends MultiTenantReq<CreateRoleReq> {
 
     private static final long serialVersionUID = -445356492L;
 

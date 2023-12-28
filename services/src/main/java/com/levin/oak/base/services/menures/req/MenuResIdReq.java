@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 菜单 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[1e9c8b84db239126c000636519381b18]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:42, 代码生成哈希校验码：[efdda145798bcbdd3b824a1d51be55ee]，请不要修改和删除此行内容。
  *
  */
 
@@ -62,6 +62,10 @@ import com.levin.commons.service.support.InjectConst;
 public class MenuResIdReq extends MultiTenantReq<MenuResIdReq> {
 
     private static final long serialVersionUID = -887712701L;
+
+    @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
+    @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
+    final boolean eqEditable = true;
 
     @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     @Eq(require = true)

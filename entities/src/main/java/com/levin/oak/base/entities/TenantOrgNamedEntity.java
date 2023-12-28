@@ -1,8 +1,8 @@
 package com.levin.oak.base.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import com.levin.commons.dao.domain.NamedObject;
+import com.levin.commons.dao.domain.OrganizedPublicObject;
 import com.levin.commons.dao.domain.support.AbstractMultiTenantOrgObject;
 import com.levin.commons.service.domain.InjectVar;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,7 +12,6 @@ import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
 
 @Schema(title = "租户部门可命名实体")
 @MappedSuperclass
@@ -21,7 +20,7 @@ import javax.persistence.Version;
 @FieldNameConstants
 public abstract class TenantOrgNamedEntity
         extends AbstractMultiTenantOrgObject
-        implements MultiTenantPublicObject, NamedObject {
+        implements MultiTenantPublicObject, OrganizedPublicObject, NamedObject {
 
     @Schema(title = "系统域", hidden = true, description = "归属的子系统或应用")
     @Column(length = 128)
