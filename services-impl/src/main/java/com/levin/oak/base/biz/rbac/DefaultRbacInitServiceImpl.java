@@ -45,6 +45,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
+import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static com.levin.oak.base.biz.BizUserService.SA_ACCOUNT;
 
@@ -348,6 +349,13 @@ public class DefaultRbacInitServiceImpl
                                     new ResPermission()
                                             .setDomain("*")
                                             .setType(EntityConst.BIZ_TYPE_NAME + "-*")
+                                            .setRes("*")
+                                            .setAction("*")
+                                            .toString(),
+
+                                    new ResPermission()
+                                            .setDomain(PACKAGE_NAME)
+                                            .setType(EntityConst.SYS_TYPE_NAME + "-" +E_NoticeProcessLog.BIZ_NAME)
                                             .setRes("*")
                                             .setAction("*")
                                             .toString()

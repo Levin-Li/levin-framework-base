@@ -4,17 +4,16 @@ import static com.levin.oak.base.ModuleOption.*;
 
 import com.levin.commons.plugin.Plugin;
 import com.levin.commons.plugin.PluginManager;
+import com.levin.commons.service.support.*;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizOrgService;
 import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.InjectVarService;
 import com.levin.commons.rbac.RbacUserInfo;
-import com.levin.commons.service.support.InjectConst;
-import com.levin.commons.service.support.VariableInjector;
-import com.levin.commons.service.support.VariableResolverManager;
 import com.levin.commons.utils.MapUtils;
 
 import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.services.org.info.OrgInfo;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
 import com.levin.oak.base.services.user.info.UserInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +27,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -114,7 +114,6 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
     @Autowired
     AuthService baseAuthService;
 
-
     @Autowired
     BizOrgService bizOrgService;
 
@@ -136,7 +135,26 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
         //重要逻辑点
 
         //1、设置上下文
-        variableResolverManager.addSuppliers(() -> VariableInjector.newResolverByMap(() -> Arrays.asList(getInjectVars())));
+        variableResolverManager.addSuppliers(
+                () -> VariableInjector.newResolverByMap(() -> Arrays.asList(getInjectVars()))
+                , () -> new VariableResolver() {
+                    @Override
+                    public <T> ValueHolder<T> resolve(String name, T originalValue, boolean throwExWhenNotFound, boolean isRequireNotNull, Type... expectTypes) throws VariableNotFoundException {
+
+                        if (InjectConst.ORG_ID_LIST.equals(name)
+                                && baseAuthService.isLogin()) {
+
+                            List<OrgInfo> orgList = bizOrgService.loadOrgList(baseAuthService.getUserInfo(), false);
+
+                            if (orgList != null && !orgList.isEmpty()) {
+                                return new ValueHolder(null, name, orgList.stream().map(OrgInfo::getId).collect(Collectors.toList()));
+                            }
+                        }
+
+                        return ValueHolder.notValue(throwExWhenNotFound, name);
+                    }
+                }
+        );
 
         //2、动态加入用户相关的动态的会变的数据，如用户能访问的机构列表，用户权限列表
 
@@ -172,11 +190,15 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
                 .collect(Collectors.toList());
     }
 
+    protected boolean isWebContext() {
+        return RequestContextHolder.getRequestAttributes() != null;
+    }
+
     @Override
     public Map<String, ?> getInjectVars() {
 
         //如果当前不是web请求，则不注入
-        if (RequestContextHolder.getRequestAttributes() == null) {
+        if (!isWebContext()) {
             if (log.isDebugEnabled()) {
                 log.debug("当前不是web请求");
             }
@@ -220,9 +242,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
 
             if (!isOrgAllScope) {
                 //能访问的部门列表
-                builder.put(InjectConst.ORG_ID_LIST, bizOrgService.loadOrgList(userInfo, false).stream().map(org -> org.getId()).collect(Collectors.toList()));
-            } else {
-                builder.put(InjectConst.ORG_ID_LIST, null);
+                //builder.put(InjectConst.ORG_ID_LIST, bizOrgService.loadOrgList(userInfo, false).stream().map(org -> org.getId()).collect(Collectors.toList()));
             }
 
             if (log.isDebugEnabled()) {
@@ -241,7 +261,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
                     .put(InjectConst.IS_ALL_ORG_SCOPE, false)
 
                     .put(InjectConst.ORG, null)
-                    .put(InjectConst.ORG_ID_LIST, null)
+                    //   .put(InjectConst.ORG_ID_LIST, null)
                     .put(InjectConst.ORG_ID, null);
 
             log.debug("当前登录用户未登录");

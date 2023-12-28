@@ -43,25 +43,25 @@ import java.util.List;
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
                 @Index(columnList = AbstractBaseEntityObject.Fields.enable),
                 @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId),
+                @Index(columnList = E_Role.tenantId),
                 @Index(columnList = E_Role.name),
                 @Index(columnList = E_Role.code),
 
                 //优化性能
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
-                @Index(columnList = E_Role.tenantId + "," + E_Role.orgId + "," + E_Role.id),
-                @Index(columnList = E_Role.tenantId + "," + E_Role.orgId + "," + E_Role.code),
+                @Index(columnList = E_Role.tenantId),
+                @Index(columnList = E_Role.tenantId + "," + E_Role.id),
+                @Index(columnList = E_Role.tenantId + "," + E_Role.code),
         },
 
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_Role.code}),
-                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_TenantOrgNamedEntity.name}),
+                @UniqueConstraint(columnNames = {E_Role.tenantId, E_Role.code}),
+                @UniqueConstraint(columnNames = {E_Role.tenantId, E_Role.name}),
         }
 )
 @EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class Role
         extends AbstractTreeObject<String, Role>
-        implements MultiTenantObject, OrganizedObject {
+        implements MultiTenantObject {
 
     @Schema(title = "组织权限")
     public enum OrgDataScope implements EnumDesc {
@@ -93,11 +93,6 @@ public class Role
     @Column(length = 128)
     @InjectVar(InjectConst.TENANT_ID)
     protected String tenantId;
-
-    @Schema(title = "组织机构ID")
-    @Column(length = 128)
-    @InjectVar(InjectConst.ORG_ID)
-    protected String orgId;
 
     @Schema(title = "父节点")
     @Column(length = 128)

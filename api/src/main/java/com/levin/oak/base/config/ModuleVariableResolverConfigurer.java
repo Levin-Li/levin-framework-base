@@ -1,6 +1,8 @@
 package com.levin.oak.base.config;
 
 import com.levin.commons.service.support.*;
+import com.levin.oak.base.biz.BizOrgService;
+import com.levin.oak.base.biz.rbac.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -17,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static cn.dev33.satoken.stp.StpUtil.isLogin;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 
@@ -31,6 +34,12 @@ public class ModuleVariableResolverConfigurer
 
     @Autowired
     VariableInjector variableInjector;
+
+    @Autowired
+    AuthService authService;
+
+    @Autowired
+    BizOrgService bizOrgService;
 
     @Autowired
     Environment environment;
@@ -95,7 +104,7 @@ public class ModuleVariableResolverConfigurer
     }
 
     @Bean(PLUGIN_PREFIX + "DefaultHttpRequestInfoResolver")
-    @Order(1)
+    @Order(100)
     @ConditionalOnMissingBean(HttpRequestInfoResolver.class)
     HttpRequestInfoResolver httpRequestInfoResolver() {
         return new HttpRequestInfoResolver();
@@ -108,7 +117,7 @@ public class ModuleVariableResolverConfigurer
      * @return VariableResolver
      */
     @Bean(PLUGIN_PREFIX + "DefaultModuleVariableResolver")
-    @Order(2)
+    @Order(300)
     VariableResolver defaultModuleVariableResolver() {
         return VariableInjector.newResolverByMap(this::getModuleContextVars);
     }
