@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 菜单-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[40b04e774214654bd160c9439cd55cbd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:03, 代码生成哈希校验码：[cab8d90e5a51fa6ccde4b4542961b1d3]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_MenuRes.BIZ_NAME, description = E_MenuRes.BIZ_NAME + MAINTAIN_ACTION)
@@ -110,7 +110,7 @@ public interface MenuResService {
      * @return defaultPagingData 分页数据
      */
     @Operation(summary = QUERY_ACTION)
-    PagingData<MenuResInfo> query(@NotNull QueryMenuResReq req, Paging paging);
+    PagingData<MenuResInfo> query(@NotNull QueryMenuResReq req, Paging paging, Object... queryObjs);
 
     /**
      * 指定选择列查询

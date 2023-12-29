@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单动态接口-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[6bb089c5462faa99ac3b0b0b32cea0ad]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:01, 代码生成哈希校验码：[f0c2aa241a829b74fe6462dd90dea397]，请不要修改和删除此行内容。
  *
  */
 
@@ -150,8 +150,8 @@ public class SimpleApiServiceImpl extends BaseService implements SimpleApiServic
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<SimpleApiInfo> query(QuerySimpleApiReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<SimpleApiInfo> query(QuerySimpleApiReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

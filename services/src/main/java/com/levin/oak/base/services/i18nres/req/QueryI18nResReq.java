@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月27日 下午5:05:46, 代码生成哈希校验码：[6d76f802ae4a16fa152091d5e91799e1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:23, 代码生成哈希校验码：[394af20075e971f78f61a574f8f13fa3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -67,6 +67,10 @@ public class QueryI18nResReq extends MultiTenantOrgReq<QueryI18nResReq> {
     @Ignore
     boolean isContainsPublicData = true;
 
+    @Schema(title = "是否包含组织公共数据")
+    @Ignore
+    boolean isContainsOrgPublicData = true;
+
     @Ignore
     @Schema(title = "排序字段")
     String orderBy;
@@ -79,7 +83,7 @@ public class QueryI18nResReq extends MultiTenantOrgReq<QueryI18nResReq> {
 
     @Schema(title = L_id + "集合")
     @In(E_I18nRes.id)
-    Long[] idList;
+    List<Long> idList;
 
 
 

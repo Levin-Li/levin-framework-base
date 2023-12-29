@@ -147,7 +147,7 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
      */
     public boolean update(Serializable userPrincipal, UpdateRoleReq req) {
 
-        loadAndCheck(userPrincipal, BeanUtil.copyProperties(req, RoleIdReq.class), DELETE_ACTION);
+        loadAndCheck(userPrincipal, BeanUtil.copyProperties(req, RoleIdReq.class), UPDATE_ACTION);
 
         // 忽略code，不允许修改 code
         req.setCode(null);

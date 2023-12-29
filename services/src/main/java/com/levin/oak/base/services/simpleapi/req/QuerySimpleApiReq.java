@@ -49,7 +49,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月27日 下午5:05:45, 代码生成哈希校验码：[b1fa59bbbdee3988a9612d9b9be7b709]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:21, 代码生成哈希校验码：[556013afa07498c0debf44364fa79676]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -70,6 +70,10 @@ public class QuerySimpleApiReq extends MultiTenantOrgReq<QuerySimpleApiReq> {
     @Ignore
     boolean isContainsPublicData = true;
 
+    @Schema(title = "是否包含组织公共数据")
+    @Ignore
+    boolean isContainsOrgPublicData = true;
+
     @Ignore
     @Schema(title = "排序字段")
     String orderBy;
@@ -82,7 +86,7 @@ public class QuerySimpleApiReq extends MultiTenantOrgReq<QuerySimpleApiReq> {
 
     @Schema(title = L_id + "集合")
     @In(E_SimpleApi.id)
-    String[] idList;
+    List<String> idList;
 
 
 

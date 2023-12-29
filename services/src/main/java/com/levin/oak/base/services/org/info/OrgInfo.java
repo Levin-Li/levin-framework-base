@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[1215b676495f3d63055000afe9ebfdcc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午1:02:14, 代码生成哈希校验码：[2db36cd94d08243917a6c4c3daa5aa0d]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -64,6 +64,7 @@ public class OrgInfo implements Serializable, TreeObject<OrgInfo, OrgInfo> {
     @Schema(title = L_id)
     String id;
 
+    @NotBlank
     @Size(max = 64)
     @Schema(title = L_tenantId)
     String tenantId;

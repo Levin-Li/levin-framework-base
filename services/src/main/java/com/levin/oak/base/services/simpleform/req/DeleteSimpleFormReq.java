@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:42, 代码生成哈希校验码：[3229a2d126dd7689ccde9f84911abc2b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:23, 代码生成哈希校验码：[43f42cfd89f6ee2f738e6529173d8a40]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -69,7 +69,7 @@ public class DeleteSimpleFormReq extends MultiTenantOrgReq<DeleteSimpleFormReq> 
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(E_SimpleForm.id)
     @NotEmpty
-    private String[] idList;
+    String[] idList;
 
     public DeleteSimpleFormReq(String... idList) {
         this.idList = idList;

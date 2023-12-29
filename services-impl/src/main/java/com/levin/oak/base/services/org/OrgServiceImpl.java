@@ -62,7 +62,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 机构-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[7dbbc430b35ab1627fbb5b5c70f22f21]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[fa83d3650d53df2e8b57a967d742bc26]，请不要修改和删除此行内容。
  *
  */
 
@@ -154,8 +154,8 @@ public class OrgServiceImpl extends BaseService implements OrgService {
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<OrgInfo> query(QueryOrgReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<OrgInfo> query(QueryOrgReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

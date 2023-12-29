@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:41, 代码生成哈希校验码：[1e5fe81fdcb7e78d7b28b2d28bdbc4b2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:58, 代码生成哈希校验码：[e4e10a33d5dc2cd07df6b67fd2619158]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -222,7 +222,7 @@ public class SimpleUpdateNoticeReq extends MultiTenantOrgReq<SimpleUpdateNoticeR
     * @return
     */
     public <T extends SimpleUpdateNoticeReq> T addUpdateField(String fieldName) {
-        boolean isAdd = needUpdateFields.add(fieldName);
+        boolean isAdd = this.forceUpdate && needUpdateFields.add(fieldName);
         return (T) this;
     }
 

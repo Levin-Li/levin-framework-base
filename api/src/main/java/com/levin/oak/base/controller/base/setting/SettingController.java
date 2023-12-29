@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 系统设置控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:25, 代码生成哈希校验码：[2b27c5d9d60ee431de9d4de0b30b5985]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:43, 代码生成哈希校验码：[ae4cb94304456367e3e0bf9efb50edcc]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "SettingController")
+@RestController(PLUGIN_PREFIX + "SettingController")
 //@RequestMapping(API_PATH + "Setting") //setting
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SettingController", havingValue = "true",  matchIfMissing = true)

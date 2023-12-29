@@ -36,12 +36,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.ResolvableType;
+import org.springframework.core.annotation.AnnotatedElementUtils;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -271,16 +274,21 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
      * @throws Throwable
      */
 //    @Before("modulePackagePointcut() && controllerPointcut() && requestMappingPointcut()")
-    @Order(HIGHEST_PRECEDENCE)
-    @Around("requestMappingPointcut()")
+    @Order(0)
+    @Around("controllerPointcut()")
     public Object injectVar(ProceedingJoinPoint joinPoint) throws Throwable {
+
+        //如果不是请求映射方法，直接返回
+        if (!AnnotatedElementUtils.hasAnnotation(((MethodSignature) joinPoint.getSignature()).getMethod(), RequestMapping.class)) {
+            return joinPoint.proceed();
+        }
 
         try {
             List<VariableResolver> variableResolvers = tryInjectVar(joinPoint);
 
             VariableInjector.setVariableResolversForCurrentThread(variableResolvers);
 
-            return joinPoint.proceed();
+            return log(joinPoint);
 
         } finally {
             VariableInjector.setVariableResolversForCurrentThread(null);
@@ -374,8 +382,8 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
      * <p>
      * 记录所有日志
      */
-    @Order
-    @Around("requestMappingPointcut()") //controllerPointcut() &&
+//    @Order
+//    @Around("controllerPointcut()") //controllerPointcut() &&
 //    @Around("modulePackagePointcut() && controllerPointcut() && requestMappingPointcut()")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
 

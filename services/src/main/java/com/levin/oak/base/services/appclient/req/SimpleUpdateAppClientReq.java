@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:41, 代码生成哈希校验码：[f384067a2ecef574f44362b5db9e6308]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:58, 代码生成哈希校验码：[5346df3510c990029f5ca998a0c8cabb]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -216,7 +216,7 @@ public class SimpleUpdateAppClientReq extends MultiTenantOrgReq<SimpleUpdateAppC
     * @return
     */
     public <T extends SimpleUpdateAppClientReq> T addUpdateField(String fieldName) {
-        boolean isAdd = needUpdateFields.add(fieldName);
+        boolean isAdd = this.forceUpdate && needUpdateFields.add(fieldName);
         return (T) this;
     }
 

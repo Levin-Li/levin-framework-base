@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度任务-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[ca299b6e49a5a110d698a69ce1684746]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[51ec1923795912e5b38dc07af0f3cd54]，请不要修改和删除此行内容。
  *
  */
 
@@ -147,8 +147,8 @@ public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTa
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<ScheduledTaskInfo> query(QueryScheduledTaskReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<ScheduledTaskInfo> query(QueryScheduledTaskReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

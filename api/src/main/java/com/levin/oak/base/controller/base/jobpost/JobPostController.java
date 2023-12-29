@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 工作岗位控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:26, 代码生成哈希校验码：[37f3fe887a936c66543a08e440e04a38]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:44, 代码生成哈希校验码：[141b05bb6b118f90e31d3a66e94c0540]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "JobPostController")
+@RestController(PLUGIN_PREFIX + "JobPostController")
 //@RequestMapping(API_PATH + "JobPost") //jobpost
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "JobPostController", havingValue = "true",  matchIfMissing = true)

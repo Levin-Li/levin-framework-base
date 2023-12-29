@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 客户端文件-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:26, 代码生成哈希校验码：[30894ca7ae10b963ddabfda76b97bb61]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[ce520bbe2e2c55d8fbd9ea7796555485]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_AppClientFile.BIZ_NAME, description = E_AppClientFile.BIZ_NAME + MAINTAIN_ACTION)
@@ -110,7 +110,7 @@ public interface AppClientFileService {
      * @return defaultPagingData 分页数据
      */
     @Operation(summary = QUERY_ACTION)
-    PagingData<AppClientFileInfo> query(@NotNull QueryAppClientFileReq req, Paging paging);
+    PagingData<AppClientFileInfo> query(@NotNull QueryAppClientFileReq req, Paging paging, Object... queryObjs);
 
     /**
      * 指定选择列查询

@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:42, 代码生成哈希校验码：[fb4d5c3a6fe1872ec200d431f9a634c8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:23, 代码生成哈希校验码：[2507436a1f835e6714cc913540822c7a]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -67,7 +67,7 @@ public class DeleteI18nResReq extends MultiTenantOrgReq<DeleteI18nResReq> {
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(E_I18nRes.id)
     @NotEmpty
-    private Long[] idList;
+    Long[] idList;
 
     public DeleteI18nResReq(Long... idList) {
         this.idList = idList;

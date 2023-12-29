@@ -46,7 +46,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 更新区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:42, 代码生成哈希校验码：[6bccf28a880a44978f4d65a90fd758f5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:59, 代码生成哈希校验码：[5e4299238005fd06b88047e709b91e10]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -217,7 +217,7 @@ public class SimpleUpdateAreaReq extends BaseReq {
     * @return
     */
     public <T extends SimpleUpdateAreaReq> T addUpdateField(String fieldName) {
-        boolean isAdd = needUpdateFields.add(fieldName);
+        boolean isAdd = this.forceUpdate && needUpdateFields.add(fieldName);
         return (T) this;
     }
 

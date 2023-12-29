@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 租户应用控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:25, 代码生成哈希校验码：[09702796eb99b60a233a68b4d1bedeb7]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:43, 代码生成哈希校验码：[b60a850093173008b137b0a6fb040a6d]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "TenantAppController")
+@RestController(PLUGIN_PREFIX + "TenantAppController")
 //@RequestMapping(API_PATH + "TenantApp") //tenantapp
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "TenantAppController", havingValue = "true",  matchIfMissing = true)

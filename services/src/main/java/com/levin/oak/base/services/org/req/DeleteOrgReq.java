@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:42, 代码生成哈希校验码：[ba28c06479349e1da3e910cdd3da46c2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[10da02b26ac0ccbed7ee390ca0ff0354]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -74,7 +74,7 @@ public class DeleteOrgReq extends MultiTenantReq<DeleteOrgReq> {
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(E_Org.id)
     @NotEmpty
-    private String[] idList;
+    String[] idList;
 
     public DeleteOrgReq(String... idList) {
         this.idList = idList;

@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知处理日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[a4f81a857e1599b066684b458060b7fd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[6a8faff344621f0bbd6784f9209899b2]，请不要修改和删除此行内容。
  *
  */
 
@@ -147,8 +147,8 @@ public class NoticeProcessLogServiceImpl extends BaseService implements NoticePr
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<NoticeProcessLogInfo> query(QueryNoticeProcessLogReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<NoticeProcessLogInfo> query(QueryNoticeProcessLogReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 菜单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[505cdd60806724ad58257672835bbe09]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:03, 代码生成哈希校验码：[b8c8b7a78fe3abb878ed542b09a0a6d1]，请不要修改和删除此行内容。
  *
  */
 
@@ -152,8 +152,8 @@ public class MenuResServiceImpl extends BaseService implements MenuResService {
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<MenuResInfo> query(QueryMenuResReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<MenuResInfo> query(QueryMenuResReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

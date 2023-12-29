@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 调度任务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:25, 代码生成哈希校验码：[3e362bc1a8eb7e503d3644c0bfa90cfa]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:44, 代码生成哈希校验码：[db982215b40eb37a785f087cc34e649e]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "ScheduledTaskController")
+@RestController(PLUGIN_PREFIX + "ScheduledTaskController")
 //@RequestMapping(API_PATH + "ScheduledTask") //scheduledtask
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ScheduledTaskController", havingValue = "true",  matchIfMissing = true)

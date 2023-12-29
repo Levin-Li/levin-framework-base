@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 菜单控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:26, 代码生成哈希校验码：[1dd4051e19ed748986d3c5cb3982f398]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:44, 代码生成哈希校验码：[b5d728c26214b611ddd56868788047f2]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "MenuResController")
+@RestController(PLUGIN_PREFIX + "MenuResController")
 //@RequestMapping(API_PATH + "MenuRes") //menures
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "MenuResController", havingValue = "true",  matchIfMissing = true)

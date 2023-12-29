@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 角色控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:24, 代码生成哈希校验码：[e0b91a4a5e60a3fcf6766864317a961a]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:43, 代码生成哈希校验码：[f3c0ffbb0d56593b39117b2833016f04]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "RoleController")
+@RestController(PLUGIN_PREFIX + "RoleController")
 //@RequestMapping(API_PATH + "Role") //role
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "RoleController", havingValue = "true",  matchIfMissing = true)

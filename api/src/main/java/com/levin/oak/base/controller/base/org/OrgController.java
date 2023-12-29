@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 机构控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:26, 代码生成哈希校验码：[cf12c95997cb389dee0a5c8cd5937ce9]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:44, 代码生成哈希校验码：[c74722e6a29b9737620f609ecb022362]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "OrgController")
+@RestController(PLUGIN_PREFIX + "OrgController")
 //@RequestMapping(API_PATH + "Org") //org
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "OrgController", havingValue = "true",  matchIfMissing = true)

@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单页面-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[387b11e9c7ece2da739965608f6b2eff]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[fdb563757514063a4aaf2a7f8542b56e]，请不要修改和删除此行内容。
  *
  */
 
@@ -149,8 +149,8 @@ public class SimplePageServiceImpl extends BaseService implements SimplePageServ
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<SimplePageInfo> query(QuerySimplePageReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<SimplePageInfo> query(QuerySimplePageReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

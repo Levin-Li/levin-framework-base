@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 区域控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午4:20:47, 代码生成哈希校验码：[4e135db07ae753f690e9d5e99d55e118]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:44, 代码生成哈希校验码：[a30e278b18463c9aa77bddb45c0b65da]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "AreaController")
+@RestController(PLUGIN_PREFIX + "AreaController")
 //@RequestMapping(API_PATH + "Area") //area
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AreaController", havingValue = "true",  matchIfMissing = true)

@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 调度日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:25, 代码生成哈希校验码：[d0a652c8c96dee1e5f01258760f081e1]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:43, 代码生成哈希校验码：[213fc981145b4341d68c9dfea7ac6e51]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "ScheduledLogController")
+@RestController(PLUGIN_PREFIX + "ScheduledLogController")
 //@RequestMapping(API_PATH + "ScheduledLog") //scheduledlog
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ScheduledLogController", havingValue = "true",  matchIfMissing = true)

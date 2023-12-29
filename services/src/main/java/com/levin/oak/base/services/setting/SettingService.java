@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 系统设置-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:26, 代码生成哈希校验码：[de58ccd48c27040cfc46c22af93bd132]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[71c8d97fcdb34df52261c1af8599ed9b]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_Setting.BIZ_NAME, description = E_Setting.BIZ_NAME + MAINTAIN_ACTION)
@@ -110,7 +110,7 @@ public interface SettingService {
      * @return defaultPagingData 分页数据
      */
     @Operation(summary = QUERY_ACTION)
-    PagingData<SettingInfo> query(@NotNull QuerySettingReq req, Paging paging);
+    PagingData<SettingInfo> query(@NotNull QuerySettingReq req, Paging paging, Object... queryObjs);
 
     /**
      * 指定选择列查询

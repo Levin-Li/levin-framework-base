@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 简单页面-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[5f31b5440b91d1395d3b76e6e27c4335]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[af609cbbb54b63ff25c64b50b1363795]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_SimplePage.BIZ_NAME, description = E_SimplePage.BIZ_NAME + MAINTAIN_ACTION)
@@ -110,7 +110,7 @@ public interface SimplePageService {
      * @return defaultPagingData 分页数据
      */
     @Operation(summary = QUERY_ACTION)
-    PagingData<SimplePageInfo> query(@NotNull QuerySimplePageReq req, Paging paging);
+    PagingData<SimplePageInfo> query(@NotNull QuerySimplePageReq req, Paging paging, Object... queryObjs);
 
     /**
      * 指定选择列查询

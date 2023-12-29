@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 平台租户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[32164cc922704454dd473dde56cf6709]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:01, 代码生成哈希校验码：[a720bcbbefc6ffaaa9aef60963aa8d4a]，请不要修改和删除此行内容。
  *
  */
 
@@ -148,8 +148,8 @@ public class TenantServiceImpl extends BaseService implements TenantService {
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<TenantInfo> query(QueryTenantReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<TenantInfo> query(QueryTenantReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

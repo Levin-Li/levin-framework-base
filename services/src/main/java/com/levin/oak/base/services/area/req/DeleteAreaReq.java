@@ -44,7 +44,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 删除区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:42, 代码生成哈希校验码：[ed4752dfa5e7f4336384fa9b69610091]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:23, 代码生成哈希校验码：[10aa18c298559c2f867a0c57a93128b6]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -71,7 +71,7 @@ public class DeleteAreaReq extends BaseReq {
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(E_Area.id)
     @NotEmpty
-    private String[] idList;
+    String[] idList;
 
     public DeleteAreaReq(String... idList) {
         this.idList = idList;

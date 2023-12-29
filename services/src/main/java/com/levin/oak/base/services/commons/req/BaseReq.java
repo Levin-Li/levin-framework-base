@@ -33,7 +33,7 @@ import java.util.*;
 
 /**
  *  基本查询对象
- *  @author Auto gen by simple-dao-codegen, @time: 2023年12月27日 下午5:05:45, 代码生成哈希校验码：[7eb16233e7fd2730f62a244cf4290303]，请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:37:23, 代码生成哈希校验码：[7eb16233e7fd2730f62a244cf4290303]，请不要修改和删除此行内容。
  *  
  */
 @Schema(title = "基本查询对象")

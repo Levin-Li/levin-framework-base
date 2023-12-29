@@ -53,7 +53,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:44:00, 代码生成哈希校验码：[8209663f5b54d2c268104cc802f30381]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[a895c6b6819a52d95a75a8c5640c98ad]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -82,7 +82,7 @@ public class QueryOrgReq extends MultiTenantReq<QueryOrgReq> {
 
     @Schema(title = L_id + "集合")
     @In(E_Org.id)
-    String[] idList;
+    List<String> idList;
 
 
 

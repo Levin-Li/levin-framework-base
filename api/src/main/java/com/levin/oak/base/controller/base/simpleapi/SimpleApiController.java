@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单动态接口控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:24, 代码生成哈希校验码：[b11bd2b22049cb29e49343186638218a]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:43, 代码生成哈希校验码：[0b6482bf9fbfe9a05b3b3999a4ea5f2c]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "SimpleApiController")
+@RestController(PLUGIN_PREFIX + "SimpleApiController")
 //@RequestMapping(API_PATH + "SimpleApi") //simpleapi
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimpleApiController", havingValue = "true",  matchIfMissing = true)

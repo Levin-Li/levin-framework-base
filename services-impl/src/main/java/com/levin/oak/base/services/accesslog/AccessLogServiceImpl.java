@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 访问日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[5b5f56db063d28e789717dcdef296a45]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[488d8d5a3fb6727f9e3eec865223c6fc]，请不要修改和删除此行内容。
  *
  */
 
@@ -147,8 +147,8 @@ public class AccessLogServiceImpl extends BaseService implements AccessLogServic
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<AccessLogInfo> query(QueryAccessLogReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<AccessLogInfo> query(QueryAccessLogReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

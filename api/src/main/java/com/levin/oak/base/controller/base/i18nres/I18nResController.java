@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 国际化资源控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:26, 代码生成哈希校验码：[e0491efb907ad16339d1eaf94c8a2309]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:44, 代码生成哈希校验码：[6cc15a9ac5120c10f7886f6e5a17735d]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "I18nResController")
+@RestController(PLUGIN_PREFIX + "I18nResController")
 //@RequestMapping(API_PATH + "I18nRes") //i18nres
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "I18nResController", havingValue = "true",  matchIfMissing = true)

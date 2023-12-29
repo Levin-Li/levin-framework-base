@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 访问日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:25, 代码生成哈希校验码：[4be8297210d89f337c43592c87a91d09]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:44, 代码生成哈希校验码：[8830560bee1e33f39583c30c32cbcb73]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "AccessLogController")
+@RestController(PLUGIN_PREFIX + "AccessLogController")
 //@RequestMapping(API_PATH + "AccessLog") //accesslog
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AccessLogController", havingValue = "true",  matchIfMissing = true)

@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 通知处理日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:25, 代码生成哈希校验码：[82224cb3316444613581d71935005a50]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:44, 代码生成哈希校验码：[87ff297e043c80a7769c7854f889d008]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "NoticeProcessLogController")
+@RestController(PLUGIN_PREFIX + "NoticeProcessLogController")
 //@RequestMapping(API_PATH + "NoticeProcessLog") //noticeprocesslog
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "NoticeProcessLogController", havingValue = "true",  matchIfMissing = true)

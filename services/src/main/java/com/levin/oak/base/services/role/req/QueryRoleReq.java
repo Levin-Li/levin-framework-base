@@ -53,7 +53,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午10:28:11, 代码生成哈希校验码：[6181f7bc82af92a7aee0aa89800979ed]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:21, 代码生成哈希校验码：[63791a7c24254c566dea7a57d567979d]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -70,6 +70,10 @@ public class QueryRoleReq extends MultiTenantReq<QueryRoleReq> {
 
     private static final long serialVersionUID = -445356492L;
 
+    @Schema(title = "是否包含平台公共数据")
+    @Ignore
+    boolean isContainsPublicData = true;
+
     @Ignore
     @Schema(title = "排序字段")
     String orderBy;
@@ -82,7 +86,7 @@ public class QueryRoleReq extends MultiTenantReq<QueryRoleReq> {
 
     @Schema(title = L_id + "集合")
     @In(E_Role.id)
-    String[] idList;
+    List<String> idList;
 
 
 

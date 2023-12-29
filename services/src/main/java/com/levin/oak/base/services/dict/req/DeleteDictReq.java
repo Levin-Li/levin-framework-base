@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:41, 代码生成哈希校验码：[13cd9c43d94c07863f18441f8590b968]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[8d0b8d11886c1c1215aa3baf718def28]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -70,7 +70,7 @@ public class DeleteDictReq extends MultiTenantOrgReq<DeleteDictReq> {
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(E_Dict.id)
     @NotEmpty
-    private String[] idList;
+    String[] idList;
 
     public DeleteDictReq(String... idList) {
         this.idList = idList;

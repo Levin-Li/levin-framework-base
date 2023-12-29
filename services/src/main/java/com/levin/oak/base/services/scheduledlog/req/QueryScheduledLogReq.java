@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:43:59, 代码生成哈希校验码：[c75e396ad21a7aa1aec3f214317ae4c9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[1077b83adcf6f42b36cb8d64932d9131]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -75,7 +75,7 @@ public class QueryScheduledLogReq extends MultiTenantOrgReq<QueryScheduledLogReq
 
     @Schema(title = L_id + "集合")
     @In(E_ScheduledLog.id)
-    String[] idList;
+    List<String> idList;
 
 
 

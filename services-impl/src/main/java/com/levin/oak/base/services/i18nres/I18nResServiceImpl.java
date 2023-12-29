@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 国际化资源-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[97818331d02aa288079bf3d58bd7cd3f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[4aae31bddfb184f3d07fab536cb16f18]，请不要修改和删除此行内容。
  *
  */
 
@@ -147,8 +147,8 @@ public class I18nResServiceImpl extends BaseService implements I18nResService {
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<I18nResInfo> query(QueryI18nResReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<I18nResInfo> query(QueryI18nResReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

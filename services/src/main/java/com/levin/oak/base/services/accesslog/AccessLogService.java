@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 访问日志-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[f93ae0843c355d70474d6f1e0edd0bdc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[421eeca52714a1b738cf14dedca6cc31]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_AccessLog.BIZ_NAME, description = E_AccessLog.BIZ_NAME + MAINTAIN_ACTION)
@@ -110,7 +110,7 @@ public interface AccessLogService {
      * @return defaultPagingData 分页数据
      */
     @Operation(summary = QUERY_ACTION)
-    PagingData<AccessLogInfo> query(@NotNull QueryAccessLogReq req, Paging paging);
+    PagingData<AccessLogInfo> query(@NotNull QueryAccessLogReq req, Paging paging, Object... queryObjs);
 
     /**
      * 指定选择列查询

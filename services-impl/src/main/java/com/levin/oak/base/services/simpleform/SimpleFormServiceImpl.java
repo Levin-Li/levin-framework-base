@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单表单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[eaec84d06c7639f7391377c9e5d367a2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:03, 代码生成哈希校验码：[d6251dc6d87b5bb134df484c6b0d2b4f]，请不要修改和删除此行内容。
  *
  */
 
@@ -149,8 +149,8 @@ public class SimpleFormServiceImpl extends BaseService implements SimpleFormServ
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<SimpleFormInfo> query(QuerySimpleFormReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<SimpleFormInfo> query(QuerySimpleFormReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

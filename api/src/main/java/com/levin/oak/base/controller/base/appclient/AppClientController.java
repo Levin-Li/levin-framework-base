@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 应用接入控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:24, 代码生成哈希校验码：[4697988b89e8cfcd73ddea7844072bf2]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:43, 代码生成哈希校验码：[b9780eb1c8c8f712f08ee834b1f2a9d2]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "AppClientController")
+@RestController(PLUGIN_PREFIX + "AppClientController")
 //@RequestMapping(API_PATH + "AppClient") //appclient
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppClientController", havingValue = "true",  matchIfMissing = true)

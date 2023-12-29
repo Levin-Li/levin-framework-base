@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单页面控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:26, 代码生成哈希校验码：[b65f52e37a9b23dc920607a6076290a5]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:44, 代码生成哈希校验码：[839e18f8381ef3f856f5c75556c99a01]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "SimplePageController")
+@RestController(PLUGIN_PREFIX + "SimplePageController")
 //@RequestMapping(API_PATH + "SimplePage") //simplepage
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimplePageController", havingValue = "true",  matchIfMissing = true)

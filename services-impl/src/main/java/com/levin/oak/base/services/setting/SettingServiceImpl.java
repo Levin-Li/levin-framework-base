@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 系统设置-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[a15e27223cfb37afe4418f675e870c5c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[13be18906936fb0e40b4634902623772]，请不要修改和删除此行内容。
  *
  */
 
@@ -148,8 +148,8 @@ public class SettingServiceImpl extends BaseService implements SettingService {
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<SettingInfo> query(QuerySettingReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<SettingInfo> query(QuerySettingReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:41, 代码生成哈希校验码：[dbcedd8a21a156c2a8088051b6a59527]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[84916adad934962df9c67089ad39170b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -70,7 +70,7 @@ public class DeleteTenantAppReq extends MultiTenantReq<DeleteTenantAppReq> {
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(E_TenantApp.id)
     @NotEmpty
-    private String[] idList;
+    String[] idList;
 
     public DeleteTenantAppReq(String... idList) {
         this.idList = idList;

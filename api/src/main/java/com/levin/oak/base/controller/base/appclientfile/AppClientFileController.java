@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 客户端文件控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:25, 代码生成哈希校验码：[f91993a799f7b9ac8f3cc45f1468baf1]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:43, 代码生成哈希校验码：[13875cd68230b518c64ffa37972a7253]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "AppClientFileController")
+@RestController(PLUGIN_PREFIX + "AppClientFileController")
 //@RequestMapping(API_PATH + "AppClientFile") //appclientfile
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AppClientFileController", havingValue = "true",  matchIfMissing = true)

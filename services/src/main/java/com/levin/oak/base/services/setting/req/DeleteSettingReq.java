@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:41, 代码生成哈希校验码：[91cd20d66a5b4bea118b2dc7ca71e34b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[66126d419cc4b3aafaa36f52ae8e9bd2]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -68,7 +68,7 @@ public class DeleteSettingReq extends MultiTenantOrgReq<DeleteSettingReq> {
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(E_Setting.id)
     @NotEmpty
-    private String[] idList;
+    String[] idList;
 
     public DeleteSettingReq(String... idList) {
         this.idList = idList;

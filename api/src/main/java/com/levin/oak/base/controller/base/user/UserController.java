@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 用户控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:25, 代码生成哈希校验码：[53d39bd326c30a6843c0b9c7c00180e6]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:44, 代码生成哈希校验码：[f58b7051d632d305825865674a2d387b]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "UserController")
+@RestController(PLUGIN_PREFIX + "UserController")
 //@RequestMapping(API_PATH + "User") //user
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "UserController", havingValue = "true",  matchIfMissing = true)

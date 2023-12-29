@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:42, 代码生成哈希校验码：[82347d74668ba66308e26c349e2ec4a3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[56762002ed94c69e6e4f826f7135e736]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -73,7 +73,7 @@ public class DeleteUserReq extends MultiTenantOrgReq<DeleteUserReq> {
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(E_User.id)
     @NotEmpty
-    private String[] idList;
+    String[] idList;
 
     public DeleteUserReq(String... idList) {
         this.idList = idList;

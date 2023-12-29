@@ -50,7 +50,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 查询区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:44:00, 代码生成哈希校验码：[d1458120d3d5242300caa3b4b0d654c9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:23, 代码生成哈希校验码：[a9cd210cbfa4dbb21bd27c0d15082624]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -79,7 +79,7 @@ public class QueryAreaReq extends BaseReq {
 
     @Schema(title = L_id + "集合")
     @In(E_Area.id)
-    String[] idList;
+    List<String> idList;
 
 
 

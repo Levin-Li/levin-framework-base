@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
@@ -100,6 +101,20 @@ public class BizOrgController extends OrgController {
 
         if (!bizOrgService.canAccessAllOrg(userInfo)) {
 
+            //只过滤出有权限的部门列表
+            List<OrgInfo> orgList = bizOrgService.loadOrgList(userInfo, false);
+
+            Assert.isTrue(orgList != null && !orgList.isEmpty(), "没有可访问的部门");
+
+            if (req.getIdList() == null || req.getIdList().isEmpty()) {
+                //如果原来没有指定部门，则默认只显示所有有权限的部门
+                req.setIdList(orgList.stream().map(OrgInfo::getId).collect(Collectors.toList()));
+            } else {
+                //如果指定了部门，则检查是否有权限访问部门
+                req.getIdList().forEach(id -> {
+                    Assert.isTrue(orgList.stream().anyMatch(org -> org.getId().equals(id)), "部门[{}]不可访问", id);
+                });
+            }
         }
 
         return super.list(req, paging);
@@ -157,6 +172,7 @@ public class BizOrgController extends OrgController {
     public ApiResp<Boolean> delete(OrgIdReq req, String id) {
 
         req.updateIdWhenNotBlank(id);
+
         bizOrgService.checkAccessible(authService.getUserInfo(), req.getTenantId(), null, req.getId());
 
         return super.delete(req, id);

@@ -53,12 +53,12 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 通知控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月12日 下午11:15:25, 代码生成哈希校验码：[a00c73f21d0da90c1df1d9f668c63ae6]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:43, 代码生成哈希校验码：[b9ac4d5c8315e65ddc10e73438543bd3]，请不要修改和删除此行内容。
 *
 */
 
 //生成的控制器
-//@RestController(PLUGIN_PREFIX + "NoticeController")
+@RestController(PLUGIN_PREFIX + "NoticeController")
 //@RequestMapping(API_PATH + "Notice") //notice
 
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "NoticeController", havingValue = "true",  matchIfMissing = true)

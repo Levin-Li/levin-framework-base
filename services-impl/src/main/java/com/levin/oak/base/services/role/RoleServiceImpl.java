@@ -62,7 +62,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[b1aeeff043db976421ce435178c385ab]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:01, 代码生成哈希校验码：[19d12e685fe4a007a518356047e5f27b]，请不要修改和删除此行内容。
  *
  */
 
@@ -154,8 +154,8 @@ public class RoleServiceImpl extends BaseService implements RoleService {
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<RoleInfo> query(QueryRoleReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<RoleInfo> query(QueryRoleReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

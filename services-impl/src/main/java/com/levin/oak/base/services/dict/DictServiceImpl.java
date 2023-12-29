@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 字典-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[f9db500ca54c24a4138c09699e39d78f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[bae5665540561ac25fc14890eb9ea7a8]，请不要修改和删除此行内容。
  *
  */
 
@@ -150,8 +150,8 @@ public class DictServiceImpl extends BaseService implements DictService {
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<DictInfo> query(QueryDictReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<DictInfo> query(QueryDictReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

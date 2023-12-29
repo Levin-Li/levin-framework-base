@@ -51,7 +51,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月27日 下午5:05:47, 代码生成哈希校验码：[a5c8e9ec600c967216ff184c28031c53]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:23, 代码生成哈希校验码：[49baed7a1c30958a0f48db31ba42f009]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -84,7 +84,7 @@ public class QueryMenuResReq extends MultiTenantReq<QueryMenuResReq> {
 
     @Schema(title = L_id + "集合")
     @In(E_MenuRes.id)
-    String[] idList;
+    List<String> idList;
 
 
 

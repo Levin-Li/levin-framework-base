@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 工作岗位-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[7551cbc00d618f2c3b55caf7b466c42c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[85c6095da3660e1333cb3de959e5bb33]，请不要修改和删除此行内容。
  *
  */
 
@@ -148,8 +148,8 @@ public class JobPostServiceImpl extends BaseService implements JobPostService {
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public PagingData<JobPostInfo> query(QueryJobPostReq req, Paging paging) {
-        return simpleDao.findPagingDataByQueryObj(req, paging);
+    public PagingData<JobPostInfo> query(QueryJobPostReq req, Paging paging, Object... queryObjs) {
+        return simpleDao.findPagingDataByQueryObj(req, paging, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")

@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:41, 代码生成哈希校验码：[cb85b83a63954b7326601bbf0452101f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:58, 代码生成哈希校验码：[0de5e16248bb98a71d0321fe24584382]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -265,7 +265,7 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq<SimpleUpdateSimp
     * @return
     */
     public <T extends SimpleUpdateSimpleApiReq> T addUpdateField(String fieldName) {
-        boolean isAdd = needUpdateFields.add(fieldName);
+        boolean isAdd = this.forceUpdate && needUpdateFields.add(fieldName);
         return (T) this;
     }
 

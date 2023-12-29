@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 调度任务-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月9日 上午10:26:27, 代码生成哈希校验码：[4e64413936283bcd2b34ac58c391dd01]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[3c049e1281d8dcba5bc1bd8be8c0a0c0]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_ScheduledTask.BIZ_NAME, description = E_ScheduledTask.BIZ_NAME + MAINTAIN_ACTION)
@@ -110,7 +110,7 @@ public interface ScheduledTaskService {
      * @return defaultPagingData 分页数据
      */
     @Operation(summary = QUERY_ACTION)
-    PagingData<ScheduledTaskInfo> query(@NotNull QueryScheduledTaskReq req, Paging paging);
+    PagingData<ScheduledTaskInfo> query(@NotNull QueryScheduledTaskReq req, Paging paging, Object... queryObjs);
 
     /**
      * 指定选择列查询

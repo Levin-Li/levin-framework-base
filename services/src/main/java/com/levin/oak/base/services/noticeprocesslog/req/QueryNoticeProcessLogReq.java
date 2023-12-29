@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月22日 下午2:44:00, 代码生成哈希校验码：[f6c812a633e1a0950c918089f3d45e97]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[3112c6f36543ef1aaec1de2f4a29f0b9]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -75,7 +75,7 @@ public class QueryNoticeProcessLogReq extends MultiTenantOrgReq<QueryNoticeProce
 
     @Schema(title = L_id + "集合")
     @In(E_NoticeProcessLog.id)
-    String[] idList;
+    List<String> idList;
 
 
 

@@ -138,6 +138,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
         variableResolverManager.addSuppliers(
                 () -> VariableInjector.newResolverByMap(() -> Arrays.asList(getInjectVars()))
                 , () -> new VariableResolver() {
+
                     @Override
                     public <T> ValueHolder<T> resolve(String name, T originalValue, boolean throwExWhenNotFound, boolean isRequireNotNull, Type... expectTypes) throws VariableNotFoundException {
 
@@ -149,6 +150,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
                             if (orgList != null && !orgList.isEmpty()) {
                                 return new ValueHolder(null, name, orgList.stream().map(OrgInfo::getId).collect(Collectors.toList()));
                             }
+
                         }
 
                         return ValueHolder.notValue(throwExWhenNotFound, name);

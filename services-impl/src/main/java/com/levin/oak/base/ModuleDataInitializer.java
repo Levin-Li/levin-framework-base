@@ -33,7 +33,6 @@ import com.levin.oak.base.entities.ScheduledLog;
 import com.levin.oak.base.entities.TenantApp;
 import com.levin.oak.base.entities.Setting;
 import com.levin.oak.base.entities.Dict;
-import com.levin.oak.base.entities.AppErrorLog;
 import com.levin.oak.base.entities.Notice;
 import com.levin.oak.base.entities.AppClientFile;
 import com.levin.oak.base.entities.User;
