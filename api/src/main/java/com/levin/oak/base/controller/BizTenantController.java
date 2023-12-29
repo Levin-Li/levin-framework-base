@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 平台租户业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月20日 下午6:02:14, 代码生成哈希校验码：[bf18c14d033ba937106ce3a1f97ead9a]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:42:59, 代码生成哈希校验码：[0c0fc8aa906609a9a7aa99a2acd5a51c]，请不要修改和删除此行内容。
 *
 */
 
@@ -80,7 +80,8 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 public class BizTenantController extends TenantController{
 
-    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, VIEW_DETAIL_ACTION);
+    //允许的操作
+    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION, BATCH_CREATE_ACTION, BATCH_UPDATE_ACTION, BATCH_DELETE_ACTION);
 
     /**
     * 检查请求
@@ -92,8 +93,24 @@ public class BizTenantController extends TenantController{
     @Override
     protected <T> T checkRequest(String action, T req) {
 
-        Assert.isTrue(allowOpList.contains(action), "不支持的操作{}", action);
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作-{}", action);
 
         return super.checkRequest(action, req);
     }
+
+    /**
+    * 统计
+    *
+    * @param req QueryTenantReq
+    * @return  ApiResp<StatTenantReq.Result>
+    */
+    @GetMapping("/stat") //默认开放
+    @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
+    public ApiResp<StatTenantReq.Result> stat(@Valid StatTenantReq req, SimplePaging paging) {
+
+        req = checkRequest(STAT_ACTION, req);
+
+        return ApiResp.ok(checkResponse(STAT_ACTION, bizTenantService.stat(req, paging)));
+    }
+
 }
