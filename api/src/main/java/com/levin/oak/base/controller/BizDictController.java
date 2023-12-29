@@ -1,45 +1,30 @@
 package com.levin.oak.base.controller;
 
+import cn.hutool.core.lang.Assert;
+import com.levin.commons.dao.support.SimplePaging;
+import com.levin.commons.rbac.RbacUserInfo;
+import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.service.domain.ApiResp;
+import com.levin.commons.ui.annotation.CRUD;
+import com.levin.oak.base.biz.bo.dict.StatDictReq;
+import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.controller.base.dict.DictController;
+import com.levin.oak.base.entities.Dict;
+import com.levin.oak.base.entities.E_Dict;
+import com.levin.oak.base.services.dict.req.CreateDictReq;
+import com.levin.oak.base.services.dict.req.UpdateDictReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.validation.annotation.*;
-import org.springframework.util.*;
-import javax.validation.*;
-import java.util.*;
-import javax.annotation.*;
 
-import cn.hutool.core.lang.Assert;
-
-import javax.servlet.http.*;
-
-//import org.apache.dubbo.config.annotation.*;
-
-import com.levin.commons.dao.*;
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import com.levin.commons.ui.annotation.*;
-import com.levin.commons.rbac.ResAuthorize;
-
-import javax.validation.constraints.*;
-
-import com.levin.oak.base.controller.*;
-import com.levin.oak.base.controller.base.dict.*;
-
-import com.levin.oak.base.*;
-import com.levin.oak.base.entities.*;
-
-import com.levin.oak.base.biz.bo.dict.*;
-
-import com.levin.oak.base.biz.*;
-
-import com.levin.oak.base.services.dict.*;
-import com.levin.oak.base.services.dict.req.*;
-import com.levin.oak.base.services.dict.info.*;
+import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
@@ -57,11 +42,10 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // private UserAddress userAddress;
 
 /**
-* 字典业务控制器
-*
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月20日 下午5:52:52, 代码生成哈希校验码：[07b374794b621fe454f5c542a222b336]，请不要修改和删除此行内容。
-*
-*/
+ * 字典业务控制器
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月20日 下午5:52:52, 代码生成哈希校验码：[07b374794b621fe454f5c542a222b336]，请不要修改和删除此行内容。
+ */
 
 //生成的控制器
 @RestController(PLUGIN_PREFIX + "BizDictController")
@@ -78,17 +62,20 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @CRUD
 
 @Slf4j
-public class BizDictController extends DictController{
+public class BizDictController extends DictController {
 
     List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION, BATCH_CREATE_ACTION, BATCH_UPDATE_ACTION, BATCH_DELETE_ACTION);
 
+    @Autowired
+    AuthService authService;
+
     /**
-    * 检查请求
-    *
-    * @param action
-    * @param req
-    * @return
-    */
+     * 检查请求
+     *
+     * @param action
+     * @param req
+     * @return
+     */
     @Override
     protected <T> T checkRequest(String action, T req) {
 
@@ -97,12 +84,71 @@ public class BizDictController extends DictController{
         return super.checkRequest(action, req);
     }
 
+
+    private List<Dict.Item> checkList(String creator, List<Dict.Item> itemList) {
+
+        if (itemList != null
+                && !itemList.isEmpty()) {
+            itemList.forEach(item -> {
+
+                Assert.notBlank(item.getCode(), "字典项编码不能为空");
+                Assert.notBlank(item.getName(), "字典项名称不能为空");
+
+                if (!StringUtils.hasText(item.getCreator())) {
+                    item.setCreator(creator);
+                }
+
+                item.prePersist();
+
+            });
+        }
+
+        return itemList;
+    }
+
     /**
-    * 统计
-    *
-    * @param req QueryDictReq
-    * @return  ApiResp<StatDictReq.Result>
-    */
+     * 新增
+     *
+     * @param req CreateDictEvt
+     * @return ApiResp
+     */
+    @Override
+    public ApiResp<String> create(@RequestBody @Valid CreateDictReq req) {
+
+        RbacUserInfo<String> userInfo = authService.getUserInfo();
+
+        req.setType(userInfo.isSuperAdmin() ? Dict.Type.System : Dict.Type.Custom);
+
+        return super.create(req.setItemList(checkList(req.getOperatorId(), req.getItemList())));
+    }
+
+    /**
+     * 更新
+     *
+     * @param req UpdateDictReq
+     * @param id
+     */
+    @Override
+    public ApiResp<Boolean> update(@RequestBody @Valid UpdateDictReq req, @PathVariable(required = false) String id) {
+
+
+        //超级用户允许改更类型
+        if (req.getType() != null) {
+            RbacUserInfo<String> userInfo = authService.getUserInfo();
+            if (!userInfo.isSuperAdmin()) {
+                req.setType(null).removeUpdateField(E_Dict.type);
+            }
+        }
+
+        return super.update(req.setItemList(checkList(req.getOperatorId(), req.getItemList())), id);
+    }
+
+    /**
+     * 统计
+     *
+     * @param req QueryDictReq
+     * @return ApiResp<StatDictReq.Result>
+     */
     @GetMapping("/stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatDictReq.Result> stat(@Valid StatDictReq req, SimplePaging paging) {

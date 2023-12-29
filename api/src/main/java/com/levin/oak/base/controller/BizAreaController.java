@@ -97,6 +97,20 @@ public class BizAreaController extends AreaController{
         return super.checkRequest(action, req);
     }
 
+
+    /**
+     * 分页列表查找
+     *
+     * @param req    QueryAreaReq
+     * @param paging
+     * @return ApiResp<PagingData < AreaInfo>>
+     */
+    @ResAuthorize(onlyRequireAuthenticated = true)
+    @Override
+    public ApiResp<PagingData<AreaInfo>> list(@Form @Valid QueryAreaReq req, SimplePaging paging) {
+        return super.list(req, paging);
+    }
+
     /**
     * 统计
     *

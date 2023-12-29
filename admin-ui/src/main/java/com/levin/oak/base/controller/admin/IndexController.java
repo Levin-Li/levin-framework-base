@@ -309,7 +309,7 @@ public class IndexController extends BaseController {
     @SneakyThrows
     @GetMapping("editor/index")
     @Operation(summary = "页面编辑", description = "页面编辑", hidden = true)
-    @ResAuthorize(domain = ID, type = EntityConst.PLATFORM_TYPE_NAME)
+    @ResAuthorize(domain = ID, type = EntityConst.PLATFORM_TYPE_NAME+"-")
     public String editor(Model modelMap) {
 
         //        request.getRequestURL():http://localhost:8080/bzbs/system/login.jsp

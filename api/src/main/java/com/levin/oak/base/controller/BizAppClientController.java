@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 应用接入业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月20日 下午5:52:51, 代码生成哈希校验码：[a5244cddb4986b33f3047102b9df9276]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:45, 代码生成哈希校验码：[677cf22299cad59b14890cf8070c5085]，请不要修改和删除此行内容。
 *
 */
 
@@ -80,6 +80,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 public class BizAppClientController extends AppClientController{
 
+    //允许的操作
     List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION, BATCH_CREATE_ACTION, BATCH_UPDATE_ACTION, BATCH_DELETE_ACTION);
 
     /**
@@ -92,7 +93,7 @@ public class BizAppClientController extends AppClientController{
     @Override
     protected <T> T checkRequest(String action, T req) {
 
-        Assert.isTrue(allowOpList.contains(action), "不支持的操作{}", action);
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作-{}", action);
 
         return super.checkRequest(action, req);
     }

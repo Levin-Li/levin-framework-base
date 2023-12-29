@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 通知处理日志业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:55:07, 代码生成哈希校验码：[b0fc02c54750b88ce4cec8e30eb2f5fd]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:46, 代码生成哈希校验码：[932b8cf3169a3cc126c9961cc9c86abf]，请不要修改和删除此行内容。
 *
 */
 
@@ -93,7 +93,7 @@ public class BizNoticeProcessLogController extends NoticeProcessLogController{
     @Override
     protected <T> T checkRequest(String action, T req) {
 
-        Assert.isTrue(allowOpList.contains(action), "不支持的操作{}", action);
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作-{}", action);
 
         return super.checkRequest(action, req);
     }

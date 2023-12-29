@@ -58,6 +58,7 @@ public class Dict
         @Schema(title = "自定义") Custom,
 
         ;
+
         @Override
         public String toString() {
             return nameAndDesc();
@@ -72,10 +73,11 @@ public class Dict
             extends AbstractNamedEntityObject {
 
         @Id
-        @Schema(title = "编码")
+        @Schema(title = "编码", description = "字典项编码，也是ID")
         @Column(nullable = false)
         protected String code;
 
+        @Schema(title = "字典项ID",description = "只读属性，字典项ID也是字典项编码", hidden = true)
         @Override
         public String getId() {
             return code;
@@ -93,12 +95,12 @@ public class Dict
     @Enumerated(EnumType.STRING)
     protected Type type;
 
-    @Schema(title = "编码")
+    @Schema(title = "字典编码")
     @Column(nullable = false, length = 256)
     @Contains
     protected String code;
 
-    @Schema(title = "编码项", description = "Json 存储")
+    @Schema(title = "编码项", description = "字典项列表")
     @Lob
     @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {Item.class}, converter = DefaultJsonConverter.class, isRequired = "false")
     protected String itemList;

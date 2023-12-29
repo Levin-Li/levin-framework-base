@@ -1,5 +1,6 @@
 package com.levin.oak.base.controller;
 
+import cn.hutool.core.lang.Assert;
 import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.oak.base.biz.bo.tenantapp.StatTenantAppReq;
 import com.levin.oak.base.biz.rbac.AuthService;
@@ -78,7 +79,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @CRUD
 
 @Slf4j
-public class BizUserController extends BaseController {
+public class BizUserController extends UserController {
 
     private static final String BIZ_NAME = E_User.BIZ_NAME;
 
@@ -90,6 +91,23 @@ public class BizUserController extends BaseController {
 
     @Autowired
     RbacService rbacService;
+
+    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION);
+
+    /**
+     * 检查请求
+     *
+     * @param action
+     * @param req
+     * @return
+     */
+    @Override
+    protected <T> T checkRequest(String action, T req) {
+
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作-{}", action);
+
+        return super.checkRequest(action, req);
+    }
 
     /**
      * 信息脱敏
@@ -135,9 +153,10 @@ public class BizUserController extends BaseController {
      * @param req QueryUserReq
      * @return ApiResp<PagingData < UserInfo>>
      */
-    @GetMapping({"/list"})
-    @Operation(summary = QUERY_LIST_ACTION)
-    public ApiResp<PagingData<UserInfo>> query(QueryUserReq req, SimplePaging paging) {
+    @Override
+    public ApiResp<PagingData<UserInfo>> list(@Form @Valid QueryUserReq req, SimplePaging paging) {
+
+        req = checkRequest(QUERY_LIST_ACTION, req);
 
         PagingData<UserInfo> pagingData = bizUserService.query(authService.getUserInfo(), req, paging);
 
@@ -156,9 +175,10 @@ public class BizUserController extends BaseController {
      * @param req CreateUserEvt
      * @return ApiResp
      */
-    @PostMapping
-    @Operation(summary = CREATE_ACTION)
-    public ApiResp<String> create(@RequestBody CreateUserReq req) {
+    @Override
+    public ApiResp<String> create(@Valid @RequestBody CreateUserReq req) {
+
+        req = checkRequest(CREATE_ACTION, req);
 
         checkCurrentUserCreateOrUpdateUserRole(null, req.getRoleList());
 
@@ -176,9 +196,19 @@ public class BizUserController extends BaseController {
      *
      * @param req QueryUserByIdReq
      */
-    @GetMapping("")
-    @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
-    public ApiResp<UserInfo> retrieve(@NotNull UserIdReq req) {
+    @Override
+    public ApiResp<UserInfo> retrieve(@NotNull @Valid UserIdReq req, @PathVariable(required = false) String id) {
+
+        req.updateIdWhenNotBlank(id);
+
+        req = checkRequest(VIEW_DETAIL_ACTION, req);
+
+        UserInfo info = userService.findById(req);
+        org.springframework.util.Assert.notNull(info, "记录不存在");
+        // 租户校验，因为数据可能是从缓存加载的
+        org.springframework.util.Assert.isTrue(!StringUtils.hasText(req.getTenantId()) || req.getTenantId().equals(info.getTenantId()), "非法访问，租户不匹配");
+
+
         return ApiResp.ok(desensitize(bizUserService.findById(authService.getUserInfo(), req)));
     }
 
@@ -187,10 +217,15 @@ public class BizUserController extends BaseController {
      *
      * @param req UpdateUserReq
      */
-    @PutMapping({""})
-    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Boolean> update(@RequestBody UpdateUserReq req) {
+    @Override
+    public ApiResp<Boolean> update(@RequestBody @Valid UpdateUserReq req, @PathVariable(required = false) String id) {
+
+        req.updateIdWhenNotBlank(id);
+
+        req = checkRequest(UPDATE_ACTION, req);
+
         checkCurrentUserCreateOrUpdateUserRole(req.getId(), req.getRoleList());
+
         return ApiResp.ok(assertTrue(bizUserService.update(authService.getUserInfo(), req), UPDATE_ACTION + "失败"));
     }
 
@@ -199,9 +234,13 @@ public class BizUserController extends BaseController {
      *
      * @param req UserIdReq
      */
-    @DeleteMapping({""})
-    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME)
-    public ApiResp<Boolean> delete(@NotNull UserIdReq req) {
+    @Override
+    public ApiResp<Boolean> delete(@Valid UserIdReq req, @PathVariable(required = false) String id) {
+
+        req.updateIdWhenNotBlank(id);
+
+        req = checkRequest(DELETE_ACTION, req);
+
         return ApiResp.ok(assertTrue(bizUserService.delete(authService.getUserInfo(), req), DELETE_ACTION + "失败"));
     }
 

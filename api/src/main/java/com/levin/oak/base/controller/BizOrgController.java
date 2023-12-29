@@ -7,6 +7,7 @@ import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.commons.ui.annotation.CRUD;
+import com.levin.commons.ui.annotation.Form;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.controller.base.org.OrgController;
 import com.levin.oak.base.entities.E_Org;
@@ -20,9 +21,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,7 +73,7 @@ public class BizOrgController extends OrgController {
     @Autowired
     AuthService authService;
 
-    List<String> allowOpList = Arrays.asList(CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION);
+    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION);
 
     /**
      * 检查请求
@@ -80,7 +85,7 @@ public class BizOrgController extends OrgController {
     @Override
     protected <T> T checkRequest(String action, T req) {
 
-        Assert.isTrue(allowOpList.contains(action), "不支持的操作{}", action);
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作-{}", action);
 
         return super.checkRequest(action, req);
     }
@@ -93,7 +98,7 @@ public class BizOrgController extends OrgController {
      * @return ApiResp<PagingData < OrgInfo>>
      */
     @Override
-    public ApiResp<PagingData<OrgInfo>> list(QueryOrgReq req, SimplePaging paging) {
+    public ApiResp<PagingData<OrgInfo>> list(@Form @Valid QueryOrgReq req, SimplePaging paging) {
 
         RbacUserInfo<String> userInfo = authService.getUserInfo();
 
@@ -127,7 +132,7 @@ public class BizOrgController extends OrgController {
      * @return ApiResp
      */
     @Override
-    public ApiResp<String> create(CreateOrgReq req) {
+    public ApiResp<String> create(@RequestBody @Valid CreateOrgReq req) {
 
         bizOrgService.checkAccessible(authService.getUserInfo(), req.getTenantId(), req.getParentId(), null);
 
@@ -141,7 +146,7 @@ public class BizOrgController extends OrgController {
      * @param id
      */
     @Override
-    public ApiResp<OrgInfo> retrieve(OrgIdReq req, String id) {
+    public ApiResp<OrgInfo> retrieve(@NotNull @Valid OrgIdReq req, @PathVariable(required = false) String id) {
 
         req.updateIdWhenNotBlank(id);
         bizOrgService.checkAccessible(authService.getUserInfo(), req.getTenantId(), null, req.getId());
@@ -156,7 +161,7 @@ public class BizOrgController extends OrgController {
      * @param id
      */
     @Override
-    public ApiResp<Boolean> update(UpdateOrgReq req, String id) {
+    public ApiResp<Boolean> update(@RequestBody @Valid UpdateOrgReq req, @PathVariable(required = false) String id) {
         req.updateIdWhenNotBlank(id);
         bizOrgService.checkAccessible(authService.getUserInfo(), req.getTenantId(), req.getParentId(), req.getId());
         return super.update(req, id);
@@ -169,7 +174,7 @@ public class BizOrgController extends OrgController {
      * @param id
      */
     @Override
-    public ApiResp<Boolean> delete(OrgIdReq req, String id) {
+    public ApiResp<Boolean> delete(@Valid OrgIdReq req, @PathVariable(required = false) String id) {
 
         req.updateIdWhenNotBlank(id);
 

@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 租户应用业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月20日 下午5:52:52, 代码生成哈希校验码：[46477c7063cfb38afa9ec74e4692a4dd]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:46, 代码生成哈希校验码：[7b89ab8d0315773bde3f89ad9ebfcb3c]，请不要修改和删除此行内容。
 *
 */
 
@@ -80,6 +80,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 public class BizTenantAppController extends TenantAppController{
 
+    //允许的操作
     List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION, BATCH_CREATE_ACTION, BATCH_UPDATE_ACTION, BATCH_DELETE_ACTION);
 
     /**
@@ -92,7 +93,7 @@ public class BizTenantAppController extends TenantAppController{
     @Override
     protected <T> T checkRequest(String action, T req) {
 
-        Assert.isTrue(allowOpList.contains(action), "不支持的操作{}", action);
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作-{}", action);
 
         return super.checkRequest(action, req);
     }

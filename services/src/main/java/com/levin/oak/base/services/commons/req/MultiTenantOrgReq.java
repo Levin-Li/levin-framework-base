@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * 多租户多部门查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午12:49:56, 代码生成哈希校验码：[046ca880099f67fc203cc9ccbabfb2cd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:45, 代码生成哈希校验码：[1dbb0531118e6bc171bbab2a184e927f]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = "多租户多组织查询对象")
@@ -44,7 +44,7 @@ public class MultiTenantOrgReq<T extends MultiTenantOrgReq>
             , isOverride = InjectVar.SPEL_PREFIX + NOT_ALL_ORG_SCOPE // 如果不是超管 也不是 租户管理员, 那么覆盖必须的
             , isRequired = InjectVar.SPEL_PREFIX + NOT_ALL_ORG_SCOPE // 如果不是超管 也不是 租户管理员，那么值是必须的
     )
-    @Schema(title = "机构ID列表", description = "有权限的访问的数据, 只对查询有效")
+    @Schema(title = "机构ID列表", description = "有权限的访问的数据, 只对查询操作有效")
     @OR(autoClose = true, condition = "#_isQuery")
     @In(InjectConst.ORG_ID)
     @IsNull(condition = "#_isQuery && isContainsOrgPublicData() && !isAllOrgScope", value = InjectConst.ORG_ID, desc = "如果是公共数据，允许包括非该租户的数据")

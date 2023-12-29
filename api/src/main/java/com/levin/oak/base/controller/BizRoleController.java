@@ -26,6 +26,9 @@ import com.levin.oak.base.entities.*;
 import com.levin.oak.base.services.role.req.*;
 import com.levin.oak.base.services.role.info.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
 
@@ -78,7 +81,7 @@ public class BizRoleController extends RoleController {
      * @return ApiResp<PagingData < RoleInfo>>
      */
     @Override
-    public ApiResp<PagingData<RoleInfo>> list(QueryRoleReq req, SimplePaging paging) {
+    public ApiResp<PagingData<RoleInfo>> list(@Form @Valid QueryRoleReq req, SimplePaging paging) {
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
@@ -92,7 +95,7 @@ public class BizRoleController extends RoleController {
      * @return ApiResp
      */
     @Override
-    public ApiResp<String> create(CreateRoleReq req) {
+    public ApiResp<String> create(@RequestBody @Valid CreateRoleReq req) {
 
         req = checkRequest(CREATE_ACTION, req);
 
@@ -106,7 +109,7 @@ public class BizRoleController extends RoleController {
      * @param id
      */
     @Override
-    public ApiResp<RoleInfo> retrieve(RoleIdReq req, String id) {
+    public ApiResp<RoleInfo> retrieve(@NotNull @Valid RoleIdReq req, @PathVariable(required = false) String id) {
         return super.retrieve(req, id);
     }
 
@@ -117,7 +120,7 @@ public class BizRoleController extends RoleController {
      * @param id
      */
     @Override
-    public ApiResp<Boolean> update(UpdateRoleReq req, String id) {
+    public ApiResp<Boolean> update(@RequestBody @Valid UpdateRoleReq req, @PathVariable(required = false) String id) {
 
         req = checkRequest(UPDATE_ACTION, req.updateIdWhenNotBlank(id));
 
@@ -131,7 +134,7 @@ public class BizRoleController extends RoleController {
      * @param id
      */
     @Override
-    public ApiResp<Boolean> delete(RoleIdReq req, String id) {
+    public ApiResp<Boolean> delete(@Valid RoleIdReq req, @PathVariable(required = false) String id) {
 
         req = checkRequest(DELETE_ACTION, req.updateIdWhenNotBlank(id));
 

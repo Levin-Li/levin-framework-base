@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 菜单业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月20日 下午5:52:53, 代码生成哈希校验码：[451a2dd1dd6e5a1d44bbc597c69b66b3]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:47, 代码生成哈希校验码：[5176f4af41b39deaaac02af56e407176]，请不要修改和删除此行内容。
 *
 */
 
@@ -80,6 +80,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 public class BizMenuResController extends MenuResController{
 
+    //允许的操作
     List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION, BATCH_CREATE_ACTION, BATCH_UPDATE_ACTION, BATCH_DELETE_ACTION);
 
     /**
@@ -92,7 +93,7 @@ public class BizMenuResController extends MenuResController{
     @Override
     protected <T> T checkRequest(String action, T req) {
 
-        Assert.isTrue(allowOpList.contains(action), "不支持的操作{}", action);
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作-{}", action);
 
         return super.checkRequest(action, req);
     }

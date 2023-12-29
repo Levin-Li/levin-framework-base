@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 通知业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:54:01, 代码生成哈希校验码：[5205d2ffd97bd2847ae1464c815f53cd]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:46, 代码生成哈希校验码：[f04d3290bcf4604e6edc5a2f83ee2ccf]，请不要修改和删除此行内容。
 *
 */
 
@@ -93,7 +93,7 @@ public class BizNoticeController extends NoticeController{
     @Override
     protected <T> T checkRequest(String action, T req) {
 
-        Assert.isTrue(allowOpList.contains(action), "不支持的操作{}", action);
+        Assert.isTrue(allowOpList.contains(action), "不支持的操作-{}", action);
 
         return super.checkRequest(action, req);
     }
