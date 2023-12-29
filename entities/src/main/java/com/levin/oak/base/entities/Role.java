@@ -5,7 +5,6 @@ import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.commons.dao.domain.MultiTenantPublicObject;
-import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.support.AbstractBaseEntityObject;
 import com.levin.commons.dao.domain.support.AbstractTreeObject;
 import com.levin.commons.service.domain.EnumDesc;
@@ -70,8 +69,9 @@ public class Role
 
         @Schema(title = "所有部门") All,
         @Schema(title = "指定部门") Assigned,
-        @Schema(title = "仅本部门（不含子部门）") MyDept,
         @Schema(title = "本部门及子部门") MyDeptAndChildren,
+        @Schema(title = "仅本部门（不含子部门）") OnlyMyDept,
+        @Schema(title = "仅子部门(不含本部门)") OnlyChildren,
         @Schema(title = "仅本人") MySelf;
 
         @Override

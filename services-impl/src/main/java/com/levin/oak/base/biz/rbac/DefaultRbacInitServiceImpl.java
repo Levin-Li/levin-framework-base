@@ -345,7 +345,7 @@ public class DefaultRbacInitServiceImpl
                             .setCode("R_ORG_ADMIN")
                             .setName("部门管理员")
                             .setEditable(true)
-                            .setOrgDataScope(Role.OrgDataScope.MyDeptAndChildren)
+                            .setOrgDataScope(Role.OrgDataScope.OnlyChildren)
                             .setPermissionList(Arrays.asList(
 
                                     new ResPermission()

@@ -369,33 +369,6 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
             return loadOrgList(orgList, true, true, true, assembleTree, rootIdList);
         }
 
-        String myOrgId = null;
-
-        boolean isMyDeptAndChildren = false;
-        ///////////////////////////////////////////////
-        if (user.getOrgId() != null) {
-
-            String orgId = user.getOrgId().toString();
-
-            if (StrUtil.isNotBlank(orgId)) {
-
-                boolean isMyDept = roleList.stream()
-                        //本部门
-                        .anyMatch(roleInfo -> Role.OrgDataScope.MyDept.equals(roleInfo.getOrgDataScope()));
-
-                if (isMyDept) {
-                    myOrgId = orgId;
-                }
-
-                isMyDeptAndChildren = roleList.stream()
-                        //本部门级子部门
-                        .anyMatch(roleInfo -> Role.OrgDataScope.MyDeptAndChildren.equals(roleInfo.getOrgDataScope()));
-
-                if (isMyDeptAndChildren) {
-                    myOrgId = orgId;
-                }
-            }
-        }
 
         //////////////////////////////////////////////////////////////
 
@@ -413,13 +386,35 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
 
-        //
-        if (StrUtil.isNotBlank(myOrgId)) {
-            //添加匹配的逻辑
-//            final String tempOrgId = myOrgId;
-//            OrgInfo myOrg = StringUtils.hasText(tempOrgId) ? orgList.stream().filter(org -> org.getId().equals(tempOrgId)).findFirst().orElse(null) : null;
+        ///////////////////////////////////////////////
+        if (user.getOrgId() != null) {
 
-            orgIdList.add(isMyDeptAndChildren ? ("**/" + myOrgId + "/**") : myOrgId);
+            String myOrgId = user.getOrgId().toString();
+
+            if (StrUtil.isNotBlank(myOrgId)) {
+
+                boolean myDept = roleList.stream()
+                        //本部门
+                        .anyMatch(roleInfo -> Role.OrgDataScope.OnlyMyDept.equals(roleInfo.getOrgDataScope()));
+
+                boolean myChildren = roleList.stream()
+                        //本部门
+                        .anyMatch(roleInfo -> Role.OrgDataScope.OnlyChildren.equals(roleInfo.getOrgDataScope()));
+
+                if (roleList.stream()
+                        //本部门
+                        .anyMatch(roleInfo -> Role.OrgDataScope.MyDeptAndChildren.equals(roleInfo.getOrgDataScope()))) {
+                    myDept = myChildren = true;
+                }
+
+                if (myDept) {
+                    orgIdList.add(myOrgId);
+                }
+
+                if (myChildren) {
+                    orgIdList.add(("**/" + myOrgId + "/*/**"));
+                }
+            }
         }
 
         //清除不需要的部门
