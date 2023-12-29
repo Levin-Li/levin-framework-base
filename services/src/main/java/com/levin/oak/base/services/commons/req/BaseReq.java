@@ -33,7 +33,7 @@ import java.util.*;
 
 /**
  *  基本查询对象
- *  @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:45, 代码生成哈希校验码：[46ad066c2781047c0d98507e65359179]，请不要修改和删除此行内容。
+ *  @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午9:54:06, 代码生成哈希校验码：[3e0ec6596915323f831be594405c7942]，请不要修改和删除此行内容。
  *  
  */
 @Schema(title = "基本查询对象")
@@ -67,6 +67,17 @@ public abstract class BaseReq implements ServiceReq {
     @InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Ignore
     protected String operatorId;
+
+
+    @Schema(title = "是否超级管理员", hidden = true)
+    public boolean isSuperAdmin() {
+        return this.isSuperAdmin;
+    }
+
+    @Schema(title = "是否租户管理员", hidden = true)
+    public boolean isTenantAdmin() {
+        return this.isTenantAdmin;
+    }
 
     /**
      * 是否非空

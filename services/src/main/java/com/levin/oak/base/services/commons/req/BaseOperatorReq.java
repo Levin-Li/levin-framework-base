@@ -18,7 +18,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户操作员请求对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:37:23, 代码生成哈希校验码：[b312a631fb5b5b88cbc38883c0194a03]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午9:54:06, 代码生成哈希校验码：[a191868f03fa531464cf8b45231f00cb]，请不要修改和删除此行内容。
  * 
  */
 @Schema(title = "操作员请求")
@@ -44,14 +44,14 @@ public class BaseOperatorReq
     @InjectVar(value = InjectConst.IP_ADDR, isRequired = "false")
     @Schema(title = "IP地址", hidden = true)
     protected String ipAddr;
-
-    @InjectVar(value = InjectConst.IS_TENANT_ADMIN, isRequired = "false")
-    @Schema(title = "是否是租户管理员", hidden = true)
-    protected boolean isTenantAdmin = false;
-
-    @InjectVar(value = InjectConst.IS_SUPER_ADMIN, isRequired = "false")
-    @Schema(title = "是否是超级管理员", hidden = true)
-    protected boolean isSuperAdmin = false;
+//
+//    @InjectVar(value = InjectConst.IS_TENANT_ADMIN, isRequired = "false")
+//    @Schema(title = "是否是租户管理员", hidden = true)
+//    protected boolean isTenantAdmin = false;
+//
+//    @InjectVar(value = InjectConst.IS_SUPER_ADMIN, isRequired = "false")
+//    @Schema(title = "是否是超级管理员", hidden = true)
+//    protected boolean isSuperAdmin = false;
 
     @InjectVar(value = InjectConst.IS_WEB_CONTEXT, isRequired = "false")
     @Schema(title = "是否是web请求", hidden = true)
