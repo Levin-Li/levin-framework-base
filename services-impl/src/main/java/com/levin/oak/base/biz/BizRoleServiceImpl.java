@@ -236,7 +236,8 @@ public class BizRoleServiceImpl implements BizRoleService<Serializable> {
         Assert.isTrue(roleCode.startsWith("R_"), "角色编码必须以 R_ 开头");
 
         Assert.isTrue(!roleCode.equalsIgnoreCase(RbacRoleObject.SA_ROLE), "角色编码 R_SA 不可使用");
-        Assert.isTrue(!roleCode.equalsIgnoreCase(RbacRoleObject.ADMIN_ROLE), "角色编码 R_ADMIN 不可使用");
+
+//        Assert.isTrue(!roleCode.equalsIgnoreCase(RbacRoleObject.ADMIN_ROLE), "角色编码 R_ADMIN 不可使用");
 
         //Assert.isTrue(!roleCode.equalsIgnoreCase(RbacRoleObject.ORG_ADMIN_ROLE), "角色编码 R_ORG_ADMIN 不可使用");
 

@@ -41,7 +41,7 @@ import java.util.Date;
 //                @UniqueConstraint(columnNames = {E_User.tenantId, E_User.email}),
         }
 )
-@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
+@EntityCategory(EntityOpConst.BIZ_TYPE_NAME)
 public class NoticeProcessLog extends SimpleTenantOrgObject {
 
     @Id

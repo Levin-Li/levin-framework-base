@@ -230,6 +230,8 @@ public class DefaultRbacInitServiceImpl
 
     private void initUser() {
 
+        final boolean isTestEnv = Stream.of(environment.getActiveProfiles()).allMatch(p -> p.equals("dev") || p.equals("test") || p.equals("local"));
+
         QueryTenantReq req = new QueryTenantReq().setOrderBy(E_Tenant.id).setOrderDir(OrderBy.Type.Asc);
 
         //如果允许域名
@@ -340,10 +342,10 @@ public class DefaultRbacInitServiceImpl
         if (role == null) {
             simpleDao.create(
                     new CreateRoleReq()
-                            .setCode("R_STAFF")
-                            .setName("员工")
+                            .setCode("R_ORG_ADMIN")
+                            .setName("部门管理员")
                             .setEditable(true)
-                            .setOrgDataScope(Role.OrgDataScope.MyDept)
+                            .setOrgDataScope(Role.OrgDataScope.MyDeptAndChildren)
                             .setPermissionList(Arrays.asList(
 
                                     new ResPermission()
@@ -351,14 +353,8 @@ public class DefaultRbacInitServiceImpl
                                             .setType(EntityConst.BIZ_TYPE_NAME + "-*")
                                             .setRes("*")
                                             .setAction("*")
-                                            .toString(),
-
-                                    new ResPermission()
-                                            .setDomain(PACKAGE_NAME)
-                                            .setType(EntityConst.SYS_TYPE_NAME + "-" +E_NoticeProcessLog.BIZ_NAME)
-                                            .setRes("*")
-                                            .setAction("*")
                                             .toString()
+
 
                             ))
                             .setTenantId(tenantInfo.getId())
@@ -392,6 +388,7 @@ public class DefaultRbacInitServiceImpl
                 .findOne();
 
         if (StrUtil.isBlank(orgId)) {
+
             Org org = simpleDao.create(new CreateOrgReq()
                     .setName(tenantInfo.getName())
                     .setType(Org.Type.LegalPerson)
@@ -399,6 +396,31 @@ public class DefaultRbacInitServiceImpl
             );
 
             orgId = org.getId();
+
+            if (isTestEnv) {
+
+                simpleDao.create(new CreateOrgReq()
+                        .setName("运营一部")
+                        .setType(Org.Type.Department)
+                        .setParentId(orgId)
+                        .setTenantId(tenantInfo.getId())
+                );
+
+                simpleDao.create(new CreateOrgReq()
+                        .setName("采购部")
+                        .setType(Org.Type.Department)
+                        .setParentId(orgId)
+                        .setTenantId(tenantInfo.getId())
+                );
+
+                simpleDao.create(new CreateOrgReq()
+                        .setName("综合部")
+                        .setType(Org.Type.Department)
+                        .setParentId(orgId)
+                        .setTenantId(tenantInfo.getId())
+                );
+            }
+
         }
 
         user = simpleDao.selectFrom(User.class)
@@ -420,7 +442,7 @@ public class DefaultRbacInitServiceImpl
 
             );
 
-            if (Stream.of(environment.getActiveProfiles()).allMatch(p -> p.equals("dev") || p.equals("test") || p.equals("local"))) {
+            if (isTestEnv) {
 
                 simpleDao.create(new CreateUserReq()
                         .setEmail("test")
@@ -428,7 +450,7 @@ public class DefaultRbacInitServiceImpl
                         .setPassword(encryptPassword("123456"))
                         .setName("测试员工")
                         .setStaffNo("1111")
-                        .setRoleList(Collections.singletonList("R_STAFF"))
+                        .setRoleList(Collections.singletonList("R_ORG_ADMIN"))
                         .setOrgId(orgId)
                         .setTenantId(tenantInfo.getId())
 

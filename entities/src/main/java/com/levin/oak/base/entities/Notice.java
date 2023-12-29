@@ -53,7 +53,7 @@ import java.util.Date;
  * 内容类型：contentType
  *
  */
-@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
+@EntityCategory(EntityOpConst.BIZ_TYPE_NAME)
 public class Notice
         extends TenantOrgNamedEntity {
 
