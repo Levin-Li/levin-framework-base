@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 通知处理日志业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月20日 下午5:52:52, 代码生成哈希校验码：[41bf35e7c4415eb44c843331c755232a]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:55:07, 代码生成哈希校验码：[b0fc02c54750b88ce4cec8e30eb2f5fd]，请不要修改和删除此行内容。
 *
 */
 
@@ -70,7 +70,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizNoticeProcessLogController", havingValue = "true", matchIfMissing = true)
 
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = SYS_TYPE_NAME + "-")
+@ResAuthorize(domain = ID, type = BIZ_TYPE_NAME + "-")
 
 //类注解，@Tag的name属性关联权限的资源标识
 @Tag(name = E_NoticeProcessLog.BIZ_NAME, description = E_NoticeProcessLog.BIZ_NAME + MAINTAIN_ACTION)
@@ -80,6 +80,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Slf4j
 public class BizNoticeProcessLogController extends NoticeProcessLogController{
 
+    //允许的操作
     List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION, BATCH_CREATE_ACTION, BATCH_UPDATE_ACTION, BATCH_DELETE_ACTION);
 
     /**
