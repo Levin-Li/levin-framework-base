@@ -1,11 +1,13 @@
 package com.levin.oak.base.biz;
 
 import cn.hutool.core.lang.Assert;
+import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.service.domain.DefaultSignatureReq;
 import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.exception.ServiceException;
 import com.levin.commons.utils.SignUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
+import com.levin.oak.base.biz.bo.tenant.StatTenantReq;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.entities.E_Tenant;
 import com.levin.oak.base.services.appclient.AppClientService;
@@ -318,4 +320,8 @@ public class BizTenantServiceImpl
         return auditTenant(tenantInfo);
     }
 
+    @Override
+    public StatTenantReq.Result stat(StatTenantReq req, SimplePaging paging) {
+        throw new UnsupportedOperationException("not support");
+    }
 }

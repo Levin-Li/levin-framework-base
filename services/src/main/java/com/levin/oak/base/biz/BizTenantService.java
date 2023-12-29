@@ -1,5 +1,7 @@
 package com.levin.oak.base.biz;
 
+import com.levin.commons.dao.support.SimplePaging;
+import com.levin.oak.base.biz.bo.tenant.StatTenantReq;
 import io.swagger.v3.oas.annotations.tags.*;
 
 import com.levin.oak.base.entities.*;
@@ -87,5 +89,8 @@ public interface BizTenantService {
      * @return
      */
     TenantInfo loadTenantByTenantKey(String tenantKey);
+
+
+    StatTenantReq.Result stat(StatTenantReq req, SimplePaging paging);
 
 }
