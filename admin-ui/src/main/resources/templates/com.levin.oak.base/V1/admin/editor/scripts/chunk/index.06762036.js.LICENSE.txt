@@ -1,7 +1,0 @@
-/*!
- * amis-ui-editor v1.1.0
- * author: fex
- * build tool: AKFun
- * build time: Fri Nov 03 2023 16:23:25 GMT+0800 (China Standard Time)
- * build tool info: https://github.com/wibetter/akfun
- */
