@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 访问日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:44, 代码生成哈希校验码：[8830560bee1e33f39583c30c32cbcb73]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年1月5日 下午3:20:39, 代码生成哈希校验码：[6591c476cfd4e7b5a7979fe53499dd89]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class AccessLogController extends BaseController{
      * @param req QueryAccessLogReq
      * @return  ApiResp<PagingData<AccessLogInfo>>
      */
-    @GetMapping("/list")
+    @GetMapping({"list", "query", "search", "page"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<AccessLogInfo>> list(@Form @Valid QueryAccessLogReq req, SimplePaging paging) {
@@ -105,7 +105,7 @@ public abstract class AccessLogController extends BaseController{
      * @param req CreateAccessLogEvt
      * @return ApiResp
      */
-    @PostMapping
+    @PostMapping({"add", "create", "new", ""})
     @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
     public ApiResp<Long> create(@RequestBody @Valid CreateAccessLogReq req) {
@@ -120,8 +120,8 @@ public abstract class AccessLogController extends BaseController{
      *
      * @param req QueryAccessLogByIdReq
      */
-    @GetMapping({"","{id}"})
-    @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @GetMapping({"retrieve", "info", "detail", "view", "{id}", ""})
+    @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<AccessLogInfo> retrieve(@NotNull @Valid AccessLogIdReq req, @PathVariable(required = false) Long id) {
 
@@ -141,8 +141,8 @@ public abstract class AccessLogController extends BaseController{
      * 更新
      * @param req UpdateAccessLogReq
      */
-    @PutMapping({"","{id}"})
-    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @PutMapping({"update", "modify", "modifyById", "{id}", ""})
+    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateAccessLogReq req, @PathVariable(required = false) Long id) {
 
@@ -157,8 +157,8 @@ public abstract class AccessLogController extends BaseController{
      * 删除
      * @param req AccessLogIdReq
      */
-    @DeleteMapping({"","{id}"})
-    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
+    @DeleteMapping({"delete", "remove", "del", "deleteById", "{id}", ""})
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> delete(@Valid AccessLogIdReq req, @PathVariable(required = false) Long id) {
 
@@ -173,8 +173,8 @@ public abstract class AccessLogController extends BaseController{
      * 删除
      * @param req AccessLogIdReq
      */
-    @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @DeleteMapping(value = {"{id}", ""}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + "-2, 路径变量参数优先")
     public ApiResp<Boolean> delete2(@RequestBody @Valid AccessLogIdReq req, @PathVariable(required = false) Long id) {
 
         return delete(req, id);
@@ -188,7 +188,7 @@ public abstract class AccessLogController extends BaseController{
      * @param reqList List<CreateAccessLogEvt>
      * @return ApiResp
      */
-    @PostMapping("/batchCreate")
+    @PostMapping("batchCreate")
     @Operation(summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<Long>> batchCreate(@RequestBody @Valid List<CreateAccessLogReq> reqList) {
 
@@ -200,7 +200,7 @@ public abstract class AccessLogController extends BaseController{
     /**
      * 批量更新
      */
-    @PutMapping("/batchUpdate")
+    @PutMapping("batchUpdate")
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateAccessLogReq> reqList) {
 
@@ -213,7 +213,7 @@ public abstract class AccessLogController extends BaseController{
      * 批量删除
      * @param req DeleteAccessLogReq
      */
-    @DeleteMapping({"/batchDelete"})
+    @DeleteMapping({"batchDelete"})
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteAccessLogReq req) {
@@ -227,7 +227,7 @@ public abstract class AccessLogController extends BaseController{
      * 批量删除2
      * @param req @RequestBody DeleteAccessLogReq
      */
-    @DeleteMapping(value = {"/batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = {"batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete2(@RequestBody @Valid DeleteAccessLogReq req) {
 

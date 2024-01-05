@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 机构控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:00:44, 代码生成哈希校验码：[c74722e6a29b9737620f609ecb022362]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年1月5日 下午3:20:39, 代码生成哈希校验码：[cf4ce3a36b13937f57c185f53211b823]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class OrgController extends BaseController{
      * @param req QueryOrgReq
      * @return  ApiResp<PagingData<OrgInfo>>
      */
-    @GetMapping("/list")
+    @GetMapping({"list", "query", "search", "page"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<OrgInfo>> list(@Form @Valid QueryOrgReq req, SimplePaging paging) {
@@ -105,7 +105,7 @@ public abstract class OrgController extends BaseController{
      * @param req CreateOrgEvt
      * @return ApiResp
      */
-    @PostMapping
+    @PostMapping({"add", "create", "new", ""})
     @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
     public ApiResp<String> create(@RequestBody @Valid CreateOrgReq req) {
@@ -120,8 +120,8 @@ public abstract class OrgController extends BaseController{
      *
      * @param req QueryOrgByIdReq
      */
-    @GetMapping({"","{id}"})
-    @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @GetMapping({"retrieve", "info", "detail", "view", "{id}", ""})
+    @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<OrgInfo> retrieve(@NotNull @Valid OrgIdReq req, @PathVariable(required = false) String id) {
 
@@ -141,8 +141,8 @@ public abstract class OrgController extends BaseController{
      * 更新
      * @param req UpdateOrgReq
      */
-    @PutMapping({"","{id}"})
-    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @PutMapping({"update", "modify", "modifyById", "{id}", ""})
+    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateOrgReq req, @PathVariable(required = false) String id) {
 
@@ -157,8 +157,8 @@ public abstract class OrgController extends BaseController{
      * 删除
      * @param req OrgIdReq
      */
-    @DeleteMapping({"","{id}"})
-    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
+    @DeleteMapping({"delete", "remove", "del", "deleteById", "{id}", ""})
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> delete(@Valid OrgIdReq req, @PathVariable(required = false) String id) {
 
@@ -173,8 +173,8 @@ public abstract class OrgController extends BaseController{
      * 删除
      * @param req OrgIdReq
      */
-    @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @DeleteMapping(value = {"{id}", ""}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + "-2, 路径变量参数优先")
     public ApiResp<Boolean> delete2(@RequestBody @Valid OrgIdReq req, @PathVariable(required = false) String id) {
 
         return delete(req, id);
@@ -188,7 +188,7 @@ public abstract class OrgController extends BaseController{
      * @param reqList List<CreateOrgEvt>
      * @return ApiResp
      */
-    @PostMapping("/batchCreate")
+    @PostMapping("batchCreate")
     @Operation(summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody @Valid List<CreateOrgReq> reqList) {
 
@@ -200,7 +200,7 @@ public abstract class OrgController extends BaseController{
     /**
      * 批量更新
      */
-    @PutMapping("/batchUpdate")
+    @PutMapping("batchUpdate")
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateOrgReq> reqList) {
 
@@ -213,7 +213,7 @@ public abstract class OrgController extends BaseController{
      * 批量删除
      * @param req DeleteOrgReq
      */
-    @DeleteMapping({"/batchDelete"})
+    @DeleteMapping({"batchDelete"})
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteOrgReq req) {
@@ -227,7 +227,7 @@ public abstract class OrgController extends BaseController{
      * 批量删除2
      * @param req @RequestBody DeleteOrgReq
      */
-    @DeleteMapping(value = {"/batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = {"batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete2(@RequestBody @Valid DeleteOrgReq req) {
 

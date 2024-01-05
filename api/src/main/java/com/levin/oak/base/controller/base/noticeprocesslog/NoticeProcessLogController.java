@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 通知处理日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午11:55:07, 代码生成哈希校验码：[184ade7c040cf39b31cfe24f7df3d924]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年1月5日 下午3:20:39, 代码生成哈希校验码：[09d10aea85d96dad59c2335ed9a657df]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class NoticeProcessLogController extends BaseController{
      * @param req QueryNoticeProcessLogReq
      * @return  ApiResp<PagingData<NoticeProcessLogInfo>>
      */
-    @GetMapping("/list")
+    @GetMapping({"list", "query", "search", "page"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<NoticeProcessLogInfo>> list(@Form @Valid QueryNoticeProcessLogReq req, SimplePaging paging) {
@@ -105,7 +105,7 @@ public abstract class NoticeProcessLogController extends BaseController{
      * @param req CreateNoticeProcessLogEvt
      * @return ApiResp
      */
-    @PostMapping
+    @PostMapping({"add", "create", "new", ""})
     @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
     public ApiResp<String> create(@RequestBody @Valid CreateNoticeProcessLogReq req) {
@@ -120,8 +120,8 @@ public abstract class NoticeProcessLogController extends BaseController{
      *
      * @param req QueryNoticeProcessLogByIdReq
      */
-    @GetMapping({"","{id}"})
-    @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME)
+    @GetMapping({"retrieve", "info", "detail", "view", "{id}", ""})
+    @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<NoticeProcessLogInfo> retrieve(@NotNull @Valid NoticeProcessLogIdReq req, @PathVariable(required = false) String id) {
 
@@ -141,8 +141,8 @@ public abstract class NoticeProcessLogController extends BaseController{
      * 更新
      * @param req UpdateNoticeProcessLogReq
      */
-    @PutMapping({"","{id}"})
-    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @PutMapping({"update", "modify", "modifyById", "{id}", ""})
+    @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateNoticeProcessLogReq req, @PathVariable(required = false) String id) {
 
@@ -157,8 +157,8 @@ public abstract class NoticeProcessLogController extends BaseController{
      * 删除
      * @param req NoticeProcessLogIdReq
      */
-    @DeleteMapping({"","{id}"})
-    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + ", 路径变量参数优先")
+    @DeleteMapping({"delete", "remove", "del", "deleteById", "{id}", ""})
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> delete(@Valid NoticeProcessLogIdReq req, @PathVariable(required = false) String id) {
 
@@ -173,8 +173,8 @@ public abstract class NoticeProcessLogController extends BaseController{
      * 删除
      * @param req NoticeProcessLogIdReq
      */
-    @DeleteMapping(value = {"","{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + ", 路径变量参数优先")
+    @DeleteMapping(value = {"{id}", ""}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + "-2, 路径变量参数优先")
     public ApiResp<Boolean> delete2(@RequestBody @Valid NoticeProcessLogIdReq req, @PathVariable(required = false) String id) {
 
         return delete(req, id);
@@ -188,7 +188,7 @@ public abstract class NoticeProcessLogController extends BaseController{
      * @param reqList List<CreateNoticeProcessLogEvt>
      * @return ApiResp
      */
-    @PostMapping("/batchCreate")
+    @PostMapping("batchCreate")
     @Operation(summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
     public ApiResp<List<String>> batchCreate(@RequestBody @Valid List<CreateNoticeProcessLogReq> reqList) {
 
@@ -200,7 +200,7 @@ public abstract class NoticeProcessLogController extends BaseController{
     /**
      * 批量更新
      */
-    @PutMapping("/batchUpdate")
+    @PutMapping("batchUpdate")
     @Operation(summary = BATCH_UPDATE_ACTION, description = BATCH_UPDATE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchUpdate(@RequestBody @Valid List<UpdateNoticeProcessLogReq> reqList) {
 
@@ -213,7 +213,7 @@ public abstract class NoticeProcessLogController extends BaseController{
      * 批量删除
      * @param req DeleteNoticeProcessLogReq
      */
-    @DeleteMapping({"/batchDelete"})
+    @DeleteMapping({"batchDelete"})
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.Multiple)
     public ApiResp<Integer> batchDelete(@NotNull @Valid DeleteNoticeProcessLogReq req) {
@@ -227,7 +227,7 @@ public abstract class NoticeProcessLogController extends BaseController{
      * 批量删除2
      * @param req @RequestBody DeleteNoticeProcessLogReq
      */
-    @DeleteMapping(value = {"/batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = {"batchDelete"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = BATCH_DELETE_ACTION, description = BATCH_DELETE_ACTION + " " + BIZ_NAME)
     public ApiResp<Integer> batchDelete2(@RequestBody @Valid DeleteNoticeProcessLogReq req) {
 
