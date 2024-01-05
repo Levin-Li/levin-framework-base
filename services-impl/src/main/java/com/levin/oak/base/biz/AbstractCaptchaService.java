@@ -17,7 +17,9 @@ import javax.annotation.PostConstruct;
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 
 @Slf4j
@@ -43,6 +45,23 @@ public abstract class AbstractCaptchaService implements CaptchaService {
     @PostConstruct
     protected void init() {
         mapCache = redissonClient.getMapCache(CaptchaService.class.getName());
+    }
+
+    protected String getParam(Map<String, ? extends Serializable> params, String defaultValue, String... keys) {
+
+        if (keys == null || keys.length == 0
+                || params == null || params.isEmpty()) {
+            return defaultValue;
+        }
+
+        return Stream.of(keys)
+                .filter(StringUtils::hasText)
+                .map(key -> params.get(key))
+                .filter(Objects::nonNull)
+                .map(Object::toString)
+                .filter(StringUtils::hasText)
+                .findFirst()
+                .orElse(defaultValue);
     }
 
     /**

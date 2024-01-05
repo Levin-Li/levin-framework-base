@@ -511,6 +511,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>1.6.2</version>
+            </dependency>
+
+            <dependency>
                 <!-- 短信通道2   -->
                 <groupId>net.guerlab.sms</groupId>
                 <artifactId>guerlab-sms-server-starter</artifactId>
