@@ -56,7 +56,7 @@ import static com.levin.oak.base.ModuleOption.*;
 
 @Slf4j
 @Valid
-@ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME+ "-")
+@ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME + "-")
 @Tag(name = "文件存储", description = "文件存储服务")
 @MenuResTag(false)
 public class FileStorageController extends BaseController {
@@ -85,7 +85,7 @@ public class FileStorageController extends BaseController {
     @Autowired
     BizFileStorageService fileStorageService;
 
-    @PostMapping("uploadSingleFile")
+    @PostMapping({"upload", "uploadFile", "uploadSingleFile"})
     @Operation(summary = "上传单个文件", description = "返回访问Url路径")
     public ApiResp<String> uploadSingleFile(MultiTenantOrgReq req, HttpServletRequest request) {
 

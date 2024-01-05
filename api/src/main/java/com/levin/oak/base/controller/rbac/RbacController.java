@@ -96,7 +96,7 @@ public class RbacController extends BaseController {
     }
 
     //    @RequestMapping(value = "/sendSmsCode", method = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping("/sendSmsCode")
+    @GetMapping("sendSmsCode")
     @Operation(tags = {"授权管理"}, summary = "发送短信证码")
     @ResAuthorize(ignored = true)
     public ApiResp<String> sendSmsCode(AppClientReq req, @NotBlank String account) {
@@ -108,7 +108,7 @@ public class RbacController extends BaseController {
     }
 
     @SneakyThrows
-    @GetMapping("/captcha")
+    @GetMapping("captcha")
     @Operation(tags = {"授权管理"}, summary = "获取验图片证码")
     @ResAuthorize(ignored = true)
     public void genCaptcha(@NotNull AppClientReq req, @NotBlank String account, @RequestParam Map<String, String> params) {
