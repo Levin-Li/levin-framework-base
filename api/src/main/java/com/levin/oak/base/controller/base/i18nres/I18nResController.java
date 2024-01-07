@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 国际化资源控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月5日 下午3:20:39, 代码生成哈希校验码：[d03f0185d975a8146ef663b2604b591a]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:19, 代码生成哈希校验码：[f7147b3b553254c28d4409030b522715]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class I18nResController extends BaseController{
      * @param req QueryI18nResReq
      * @return  ApiResp<PagingData<I18nResInfo>>
      */
-    @GetMapping({"list", "query", "search", "page"})
+    @GetMapping({"list", "search"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<I18nResInfo>> list(@Form @Valid QueryI18nResReq req, SimplePaging paging) {
@@ -105,7 +105,7 @@ public abstract class I18nResController extends BaseController{
      * @param req CreateI18nResEvt
      * @return ApiResp
      */
-    @PostMapping({"add", "create", "new", ""})
+    @PostMapping({"create", ""})
     @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
     public ApiResp<Long> create(@RequestBody @Valid CreateI18nResReq req) {
@@ -120,7 +120,7 @@ public abstract class I18nResController extends BaseController{
      *
      * @param req QueryI18nResByIdReq
      */
-    @GetMapping({"retrieve", "info", "detail", "view", "{id}", ""})
+    @GetMapping({"retrieve", "{id}", ""})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<I18nResInfo> retrieve(@NotNull @Valid I18nResIdReq req, @PathVariable(required = false) Long id) {
@@ -141,7 +141,7 @@ public abstract class I18nResController extends BaseController{
      * 更新
      * @param req UpdateI18nResReq
      */
-    @PutMapping({"update", "modify", "modifyById", "{id}", ""})
+    @PutMapping({"update", "{id}", ""})
     @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateI18nResReq req, @PathVariable(required = false) Long id) {
@@ -157,7 +157,7 @@ public abstract class I18nResController extends BaseController{
      * 删除
      * @param req I18nResIdReq
      */
-    @DeleteMapping({"delete", "remove", "del", "deleteById", "{id}", ""})
+    @DeleteMapping({"delete", "{id}", ""})
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> delete(@Valid I18nResIdReq req, @PathVariable(required = false) Long id) {

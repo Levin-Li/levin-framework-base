@@ -48,10 +48,6 @@ public class AccessLog extends SimpleTenantOrgObject {
     @Contains
     protected String domain;
 
-    @Schema(title = "模块", description = "归属的应用或模块")
-    @Contains
-    protected String module;
-
     @Schema(title = "访问者")
     @Column(length = 64)
     @InjectVar(value = InjectConst.USER_NAME, isRequired = "false")

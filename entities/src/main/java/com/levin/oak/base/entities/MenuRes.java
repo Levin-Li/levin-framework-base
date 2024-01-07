@@ -64,10 +64,6 @@ public class MenuRes
     @Contains
     String domain;
 
-    @Schema(title = "模块", description = "归属的应用或模块")
-    @Contains
-    String module;
-
     @Schema(title = "需要的授权，权限或角色，json数组")
     @Column(length = 1800)
 //    @InjectVar(domain = "dao", expectBaseType = List.class, expectGenericTypes = {String.class}, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
@@ -97,12 +93,10 @@ public class MenuRes
     @Column(length = 1800)
     String params;
 
-
     @Override
     public boolean isAlwaysShow() {
         return Boolean.TRUE.equals(alwaysShow);
     }
-
 
     @Override
     @PrePersist

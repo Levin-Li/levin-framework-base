@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 菜单控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月5日 下午3:20:39, 代码生成哈希校验码：[7df0a6a92dc4a475500ba1fa8187c9c4]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:19, 代码生成哈希校验码：[bb6fa2506219779726670e261deffb14]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class MenuResController extends BaseController{
      * @param req QueryMenuResReq
      * @return  ApiResp<PagingData<MenuResInfo>>
      */
-    @GetMapping({"list", "query", "search", "page"})
+    @GetMapping({"list", "search"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<MenuResInfo>> list(@Form @Valid QueryMenuResReq req, SimplePaging paging) {
@@ -105,7 +105,7 @@ public abstract class MenuResController extends BaseController{
      * @param req CreateMenuResEvt
      * @return ApiResp
      */
-    @PostMapping({"add", "create", "new", ""})
+    @PostMapping({"create", ""})
     @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
     public ApiResp<String> create(@RequestBody @Valid CreateMenuResReq req) {
@@ -120,7 +120,7 @@ public abstract class MenuResController extends BaseController{
      *
      * @param req QueryMenuResByIdReq
      */
-    @GetMapping({"retrieve", "info", "detail", "view", "{id}", ""})
+    @GetMapping({"retrieve", "{id}", ""})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<MenuResInfo> retrieve(@NotNull @Valid MenuResIdReq req, @PathVariable(required = false) String id) {
@@ -141,7 +141,7 @@ public abstract class MenuResController extends BaseController{
      * 更新
      * @param req UpdateMenuResReq
      */
-    @PutMapping({"update", "modify", "modifyById", "{id}", ""})
+    @PutMapping({"update", "{id}", ""})
     @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateMenuResReq req, @PathVariable(required = false) String id) {
@@ -157,7 +157,7 @@ public abstract class MenuResController extends BaseController{
      * 删除
      * @param req MenuResIdReq
      */
-    @DeleteMapping({"delete", "remove", "del", "deleteById", "{id}", ""})
+    @DeleteMapping({"delete", "{id}", ""})
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> delete(@Valid MenuResIdReq req, @PathVariable(required = false) String id) {

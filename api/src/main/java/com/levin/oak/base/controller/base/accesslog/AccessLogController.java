@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 访问日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月5日 下午3:20:39, 代码生成哈希校验码：[6591c476cfd4e7b5a7979fe53499dd89]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:18, 代码生成哈希校验码：[4b4bdc054e377d1b78da74cf75011c9c]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class AccessLogController extends BaseController{
      * @param req QueryAccessLogReq
      * @return  ApiResp<PagingData<AccessLogInfo>>
      */
-    @GetMapping({"list", "query", "search", "page"})
+    @GetMapping({"list", "search"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<AccessLogInfo>> list(@Form @Valid QueryAccessLogReq req, SimplePaging paging) {
@@ -105,7 +105,7 @@ public abstract class AccessLogController extends BaseController{
      * @param req CreateAccessLogEvt
      * @return ApiResp
      */
-    @PostMapping({"add", "create", "new", ""})
+    @PostMapping({"create", ""})
     @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
     public ApiResp<Long> create(@RequestBody @Valid CreateAccessLogReq req) {
@@ -120,7 +120,7 @@ public abstract class AccessLogController extends BaseController{
      *
      * @param req QueryAccessLogByIdReq
      */
-    @GetMapping({"retrieve", "info", "detail", "view", "{id}", ""})
+    @GetMapping({"retrieve", "{id}", ""})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<AccessLogInfo> retrieve(@NotNull @Valid AccessLogIdReq req, @PathVariable(required = false) Long id) {
@@ -141,7 +141,7 @@ public abstract class AccessLogController extends BaseController{
      * 更新
      * @param req UpdateAccessLogReq
      */
-    @PutMapping({"update", "modify", "modifyById", "{id}", ""})
+    @PutMapping({"update", "{id}", ""})
     @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateAccessLogReq req, @PathVariable(required = false) Long id) {
@@ -157,7 +157,7 @@ public abstract class AccessLogController extends BaseController{
      * 删除
      * @param req AccessLogIdReq
      */
-    @DeleteMapping({"delete", "remove", "del", "deleteById", "{id}", ""})
+    @DeleteMapping({"delete", "{id}", ""})
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> delete(@Valid AccessLogIdReq req, @PathVariable(required = false) Long id) {

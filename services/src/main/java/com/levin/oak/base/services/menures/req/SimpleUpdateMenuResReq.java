@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:59, 代码生成哈希校验码：[2b8511dbef574a88f39bc66eafc6d086]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:19, 代码生成哈希校验码：[18aced2a4008d67b06545d51de69ac41]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -87,9 +87,6 @@ public class SimpleUpdateMenuResReq extends MultiTenantReq<SimpleUpdateMenuResRe
 
     @Schema(title = L_domain , description = D_domain)
     String domain;
-
-    @Schema(title = L_module , description = D_module)
-    String module;
 
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations)
@@ -178,10 +175,6 @@ public class SimpleUpdateMenuResReq extends MultiTenantReq<SimpleUpdateMenuResRe
     public <T extends SimpleUpdateMenuResReq> T setDomain(String domain) {
         this.domain = domain;
         return addUpdateField(E_MenuRes.domain);
-    }
-    public <T extends SimpleUpdateMenuResReq> T setModule(String module) {
-        this.module = module;
-        return addUpdateField(E_MenuRes.module);
     }
     public <T extends SimpleUpdateMenuResReq> T setRequireAuthorizations(String requireAuthorizations) {
         this.requireAuthorizations = requireAuthorizations;

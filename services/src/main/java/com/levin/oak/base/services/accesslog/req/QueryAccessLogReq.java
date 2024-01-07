@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[42d7035dbdfc8769c6e778119a1b0412]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:18, 代码生成哈希校验码：[a40e053faced6d9c9c4440a988bde22d]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -88,13 +88,6 @@ public class QueryAccessLogReq extends MultiTenantOrgReq<QueryAccessLogReq> {
     @Schema(title = "模糊匹配-" + L_domain , description = D_domain)
     @Contains
     String containsDomain;
-
-    @Schema(title = L_module , description = D_module)
-    String module;
-
-    @Schema(title = "模糊匹配-" + L_module , description = D_module)
-    @Contains
-    String containsModule;
 
     //@InjectVar(value = InjectConst.USER_NAME, isRequired = "false")
     @Size(max = 64)

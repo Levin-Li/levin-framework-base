@@ -163,30 +163,38 @@ public class DefaultRbacInitServiceImpl
 
         for (Plugin plugin : pluginManager.getInstalledPlugins()) {
 
-            MenuRes menu = simpleDao.selectFrom(MenuRes.class)
-                    .eq(E_MenuRes.domain, plugin.getId())
-                    .isNull(E_Role.tenantId)
-                    .findOne();
-
-            if (menu != null) {
-                continue;
-            }
-
-            MenuRes pluginRootMenu = simpleDao.create(new MenuRes()
+            MenuRes pluginRootMenu = (MenuRes) new MenuRes()
                     .setPath(plugin.getPackageName() + "/" + plugin.getVersion() + "/admin/index")
 //                    .setIcon(defaultIcon)
-                    .setModule(plugin.getPackageName())
+                    .setDomain(plugin.getPackageName())
                     .setName(plugin.getName())
                     .setEnable(plugin.isEnable())
                     .setOrderCode(plugin.getOrderCode())
-                    .setRemark(plugin.getRemark()));
+                    .setRemark(plugin.getRemark());
+
+            if (simpleDao.selectFrom(MenuRes.class)
+                    .eq(E_MenuRes.domain, pluginRootMenu.getDomain())
+                    .eq(E_MenuRes.path, pluginRootMenu.getPath())
+                    .isNull(E_MenuRes.tenantId)
+                    .findOne() == null) {
+                simpleDao.create(pluginRootMenu);
+            }
 
             RbacUtils.getMenuItemByController(context, plugin.getPackageName(), EntityConst.QUERY_LIST_ACTION)
                     .stream().filter(Objects::nonNull).forEach(menuItem -> {
 
-                        final int no = index.incrementAndGet();
-
                         final String path = menuItem.getPath().replace("/api/", "/admin/");
+
+                        if (simpleDao.selectFrom(MenuRes.class)
+                                .eq(E_MenuRes.domain, pluginRootMenu.getDomain())
+                                .eq(E_MenuRes.path, path)
+                                .isNull(E_MenuRes.tenantId)
+                                .findOne() != null) {
+                            //如果目录已经存在
+                            return;
+                        }
+
+                        final int no = index.incrementAndGet();
 
                         //创建菜单
                         log.info("创建菜单{} - 插件[ {} ][ {} --> {}]", no, plugin.getId(), menuItem.getName(), path);

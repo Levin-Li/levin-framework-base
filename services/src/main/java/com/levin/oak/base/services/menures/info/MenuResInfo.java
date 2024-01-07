@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[3d3ba8bb66671c40c0974f9ef179ffd3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:19, 代码生成哈希校验码：[652388bf21f3d8d3b3753bd3112da814]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -73,9 +73,6 @@ public class MenuResInfo implements Serializable, TreeObject<MenuResInfo, MenuRe
 
     @Schema(title = L_domain , description = D_domain)
     String domain;
-
-    @Schema(title = L_module , description = D_module)
-    String module;
 
     @Size(max = 1800)
     @Schema(title = L_requireAuthorizations)

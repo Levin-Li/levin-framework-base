@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单页面控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月5日 下午3:20:39, 代码生成哈希校验码：[13888d8b8369e7d11b174d022108c68e]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:19, 代码生成哈希校验码：[7290e31288fe84f54625f2351d57ec9e]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class SimplePageController extends BaseController{
      * @param req QuerySimplePageReq
      * @return  ApiResp<PagingData<SimplePageInfo>>
      */
-    @GetMapping({"list", "query", "search", "page"})
+    @GetMapping({"list", "search"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<SimplePageInfo>> list(@Form @Valid QuerySimplePageReq req, SimplePaging paging) {
@@ -105,7 +105,7 @@ public abstract class SimplePageController extends BaseController{
      * @param req CreateSimplePageEvt
      * @return ApiResp
      */
-    @PostMapping({"add", "create", "new", ""})
+    @PostMapping({"create", ""})
     @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
     public ApiResp<String> create(@RequestBody @Valid CreateSimplePageReq req) {
@@ -120,7 +120,7 @@ public abstract class SimplePageController extends BaseController{
      *
      * @param req QuerySimplePageByIdReq
      */
-    @GetMapping({"retrieve", "info", "detail", "view", "{id}", ""})
+    @GetMapping({"retrieve", "{id}", ""})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<SimplePageInfo> retrieve(@NotNull @Valid SimplePageIdReq req, @PathVariable(required = false) String id) {
@@ -141,7 +141,7 @@ public abstract class SimplePageController extends BaseController{
      * 更新
      * @param req UpdateSimplePageReq
      */
-    @PutMapping({"update", "modify", "modifyById", "{id}", ""})
+    @PutMapping({"update", "{id}", ""})
     @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateSimplePageReq req, @PathVariable(required = false) String id) {
@@ -157,7 +157,7 @@ public abstract class SimplePageController extends BaseController{
      * 删除
      * @param req SimplePageIdReq
      */
-    @DeleteMapping({"delete", "remove", "del", "deleteById", "{id}", ""})
+    @DeleteMapping({"delete", "{id}", ""})
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> delete(@Valid SimplePageIdReq req, @PathVariable(required = false) String id) {

@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单动态接口控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月5日 下午3:20:38, 代码生成哈希校验码：[f0b884074aa6f3203dd6e37e3247316c]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:18, 代码生成哈希校验码：[668c37450c344ef8240365a09c70953f]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class SimpleApiController extends BaseController{
      * @param req QuerySimpleApiReq
      * @return  ApiResp<PagingData<SimpleApiInfo>>
      */
-    @GetMapping({"list", "query", "search", "page"})
+    @GetMapping({"list", "search"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<SimpleApiInfo>> list(@Form @Valid QuerySimpleApiReq req, SimplePaging paging) {
@@ -105,7 +105,7 @@ public abstract class SimpleApiController extends BaseController{
      * @param req CreateSimpleApiEvt
      * @return ApiResp
      */
-    @PostMapping({"add", "create", "new", ""})
+    @PostMapping({"create", ""})
     @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
     public ApiResp<String> create(@RequestBody @Valid CreateSimpleApiReq req) {
@@ -120,7 +120,7 @@ public abstract class SimpleApiController extends BaseController{
      *
      * @param req QuerySimpleApiByIdReq
      */
-    @GetMapping({"retrieve", "info", "detail", "view", "{id}", ""})
+    @GetMapping({"retrieve", "{id}", ""})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<SimpleApiInfo> retrieve(@NotNull @Valid SimpleApiIdReq req, @PathVariable(required = false) String id) {
@@ -141,7 +141,7 @@ public abstract class SimpleApiController extends BaseController{
      * 更新
      * @param req UpdateSimpleApiReq
      */
-    @PutMapping({"update", "modify", "modifyById", "{id}", ""})
+    @PutMapping({"update", "{id}", ""})
     @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateSimpleApiReq req, @PathVariable(required = false) String id) {
@@ -157,7 +157,7 @@ public abstract class SimpleApiController extends BaseController{
      * 删除
      * @param req SimpleApiIdReq
      */
-    @DeleteMapping({"delete", "remove", "del", "deleteById", "{id}", ""})
+    @DeleteMapping({"delete", "{id}", ""})
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
     public ApiResp<Boolean> delete(@Valid SimpleApiIdReq req, @PathVariable(required = false) String id) {
