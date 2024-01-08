@@ -31,7 +31,8 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @CacheConfig(cacheNames = {ModuleOption.ID + ModuleOption.CACHE_DELIM + "DefaultCaptchaService"}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class DefaultCaptchaServiceImpl extends AbstractCaptchaService implements CaptchaService {
 
-    private static final List<Class<? extends Captcha>> types = Collections.unmodifiableList(Arrays.asList(GifCaptcha.class, ChineseCaptcha.class, ArithmeticCaptcha.class, ChineseGifCaptcha.class, SpecCaptcha.class));
+    //ArithmeticCaptcha.class, 排除算术验证码
+    private static final List<Class<? extends Captcha>> types = Collections.unmodifiableList(Arrays.asList(GifCaptcha.class, ChineseCaptcha.class, ChineseGifCaptcha.class, SpecCaptcha.class));
 
     @PostConstruct
     @Override

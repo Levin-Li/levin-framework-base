@@ -23,6 +23,14 @@ public class LoginInfo implements Serializable {
     @Schema(description = "access token")
     String accessToken;
 
+    @Schema(description = "refreshToken")
+    String refreshToken;
+
+
+//    expire: number;
+//    refreshToken: string;
+//    refreshExpire: number;
+
     @Schema(description = "登录用户信息")
     UserInfo userInfo;
 
