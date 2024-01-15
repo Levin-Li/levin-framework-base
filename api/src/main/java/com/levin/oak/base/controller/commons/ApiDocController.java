@@ -89,6 +89,7 @@ public class ApiDocController extends BaseController {
                 });
 
         log.debug("路径映射：{}", endpointMap);
+
     }
 
     @RequestMapping(SPRING_DOC_PATH + "**")

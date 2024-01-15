@@ -156,6 +156,18 @@
 
         <plugins>
 
+            <plugin>
+
+                <groupId>io.swagger.codegen.v3</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>3.0.52</version>
+
+                <configuration>
+
+                    <language>typescript</language>
+                </configuration>
+
+            </plugin>
 
         </plugins>
 
