@@ -10,8 +10,10 @@ import com.levin.oak.base.utils.UrlPathUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springdoc.core.GroupedOpenApi;
 import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.ApplicationContext;
@@ -30,6 +32,7 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 
 @Controller(PLUGIN_PREFIX + "ApiDocController")
 @ConditionalOnProperty(PLUGIN_PREFIX + "framework.api-doc-path")
+@ConditionalOnClass({GroupedOpenApi.class})
 @RequestMapping("${" + PLUGIN_PREFIX + "framework.api-doc-path" + ":doc}")
 @Tag(name = "ApiDoc", description = "API文档")
 @Slf4j

@@ -42,9 +42,11 @@ import org.springframework.web.filter.CorsFilter;
 //import org.apache.dubbo.config.spring.context.annotation.*;
 
 import java.lang.reflect.Type;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
+import org.h2.tools.Server;
 
 /**
  * 启动类
@@ -62,7 +64,12 @@ import java.time.temporal.ChronoUnit;
 //@EnableDubboConfig
 public class Application {
 
-    public static void main(String... args) {
+    public static void main(String... args) throws Exception {
+
+        Server server = Server.createTcpServer("-tcpAllowOthers", "-ifNotExists").start();
+        System.out.println("***INFO***  H2数据库(支持自动建库)启动成功，URL：" + server.getURL()
+                + "\n\t\t\t可以连接内存数据库和文件数据库，例如：jdbc:h2:" + server.getURL() + "/mem:dev;MODE=MySQL ，jdbc:h2:" + server.getURL() + "/~/dev;MODE=MySQL");
+
         SpringApplication.run(Application.class, args);
     }
 
@@ -115,14 +122,14 @@ public class Application {
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
         return builder -> {
             builder.cacheDefaults(RedisCacheConfiguration.defaultCacheConfig()
-                            //redis 默认缓存 60 分钟
-                            .entryTtl(Duration.of(60, ChronoUnit.MINUTES))
-                            .disableCachingNullValues()
-                            .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(
-                                    new GenericJackson2JsonRedisSerializer(
-                                            new ObjectMapper()
-                                                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false))
-                            )));
+                    //redis 默认缓存 60 分钟
+                    .entryTtl(Duration.of(60, ChronoUnit.MINUTES))
+                    .disableCachingNullValues()
+                    .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(
+                            new GenericJackson2JsonRedisSerializer(
+                                    new ObjectMapper()
+                                            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false))
+                    )));
         };
     }
 
