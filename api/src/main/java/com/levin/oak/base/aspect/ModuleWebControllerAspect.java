@@ -278,8 +278,26 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
     @Around("controllerPointcut()")
     public Object injectVar(ProceedingJoinPoint joinPoint) throws Throwable {
 
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+
+        final String className = signature.getDeclaringTypeName();
+
+        if (className.startsWith("springfox.")
+                || className.startsWith("org.springframework.")
+                || className.startsWith("org.springdoc.")
+        ) {
+            return joinPoint.proceed();
+        }
+
+        final String path = getRequestPath();
+        //去除应用路径后，进行匹配
+        if (path.equals(serverProperties.getError().getPath())
+                || !frameworkProperties.getInject().isMatched(className, path)) {
+            return joinPoint.proceed();
+        }
+
         //如果不是请求映射方法，直接返回
-        if (!AnnotatedElementUtils.hasAnnotation(((MethodSignature) joinPoint.getSignature()).getMethod(), RequestMapping.class)) {
+        if (!AnnotatedElementUtils.hasAnnotation(signature.getMethod(), RequestMapping.class)) {
             return joinPoint.proceed();
         }
 
@@ -322,17 +340,6 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
         Signature signature = joinPoint.getSignature();
 
         final String className = signature.getDeclaringTypeName();
-
-        if (className.startsWith("springfox.")
-                || className.startsWith("org.springdoc.")) {
-            return variableResolverList;
-        }
-
-        //去除应用路径后，进行匹配
-        if (path.equals(serverProperties.getError().getPath())
-                || !frameworkProperties.getInject().isMatched(className, path)) {
-            return variableResolverList;
-        }
 
         if (log.isDebugEnabled()) {
             log.debug("开始为方法 {} 注入变量...", signature);
