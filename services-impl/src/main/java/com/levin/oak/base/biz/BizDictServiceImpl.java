@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  字典-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[3ec68bf600250bd5fb07f5b1c0fcfae4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:30, 代码生成哈希校验码：[4e4b73b31b67ea2c172a52e52835f3a7]，请不要修改和删除此行内容。
  *
  */
 
@@ -91,6 +91,7 @@ public class BizDictServiceImpl extends BaseService implements BizDictService {
         return getSelfProxy(BizDictServiceImpl.class);
     }
 
+    /** 参考示例
     @Operation(summary = CREATE_ACTION)
     @Transactional
     //@Override
@@ -130,6 +131,8 @@ public class BizDictServiceImpl extends BaseService implements BizDictService {
     public boolean delete(DictIdReq req) {
         return dictService.delete(req);
     }
+
+    */
 
     /**
     * 统计

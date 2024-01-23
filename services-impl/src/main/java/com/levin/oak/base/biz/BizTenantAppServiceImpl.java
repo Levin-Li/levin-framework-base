@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  租户应用-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[2ef13aab3aaeae39b2eb41096dfdeaec]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:30, 代码生成哈希校验码：[87efae08f162bab5ac7e3e98e06076d4]，请不要修改和删除此行内容。
  *
  */
 
@@ -91,6 +91,7 @@ public class BizTenantAppServiceImpl extends BaseService implements BizTenantApp
         return getSelfProxy(BizTenantAppServiceImpl.class);
     }
 
+    /** 参考示例
     @Operation(summary = CREATE_ACTION)
     @Transactional
     //@Override
@@ -130,6 +131,8 @@ public class BizTenantAppServiceImpl extends BaseService implements BizTenantApp
     public boolean delete(TenantAppIdReq req) {
         return tenantAppService.delete(req);
     }
+
+    */
 
     /**
     * 统计

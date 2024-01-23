@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  简单动态接口-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[5d1eef52e9bb18370f34b60a86bbf017]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:30, 代码生成哈希校验码：[1d43f87efb41bde63de51ea0661f7c11]，请不要修改和删除此行内容。
  *
  */
 
@@ -91,6 +91,7 @@ public class BizSimpleApiServiceImpl extends BaseService implements BizSimpleApi
         return getSelfProxy(BizSimpleApiServiceImpl.class);
     }
 
+    /** 参考示例
     @Operation(summary = CREATE_ACTION)
     @Transactional
     //@Override
@@ -130,6 +131,8 @@ public class BizSimpleApiServiceImpl extends BaseService implements BizSimpleApi
     public boolean delete(SimpleApiIdReq req) {
         return simpleApiService.delete(req);
     }
+
+    */
 
     /**
     * 统计

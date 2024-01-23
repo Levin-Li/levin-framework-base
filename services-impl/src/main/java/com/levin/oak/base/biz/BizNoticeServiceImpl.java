@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  通知-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[ee3c6179357d454cbcad54df29f91f12]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:30, 代码生成哈希校验码：[2d89fb639e6516ae508d7fe62b71e390]，请不要修改和删除此行内容。
  *
  */
 
@@ -89,6 +89,7 @@ public class BizNoticeServiceImpl extends BaseService implements BizNoticeServic
         return getSelfProxy(BizNoticeServiceImpl.class);
     }
 
+    /** 参考示例
     @Operation(summary = CREATE_ACTION)
     @Transactional
     //@Override
@@ -128,6 +129,8 @@ public class BizNoticeServiceImpl extends BaseService implements BizNoticeServic
     public boolean delete(NoticeIdReq req) {
         return noticeService.delete(req);
     }
+
+    */
 
     /**
     * 统计

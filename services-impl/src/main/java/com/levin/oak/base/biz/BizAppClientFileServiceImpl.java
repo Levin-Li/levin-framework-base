@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  客户端文件-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[8d9c34c0091a22e178301011f09ce55e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:30, 代码生成哈希校验码：[d51f1276137ba190bffb7c6591030546]，请不要修改和删除此行内容。
  *
  */
 
@@ -88,6 +88,7 @@ public class BizAppClientFileServiceImpl extends BaseService implements BizAppCl
         return getSelfProxy(BizAppClientFileServiceImpl.class);
     }
 
+    /** 参考示例
     @Operation(summary = CREATE_ACTION)
     @Transactional
     //@Override
@@ -127,6 +128,8 @@ public class BizAppClientFileServiceImpl extends BaseService implements BizAppCl
     public boolean delete(AppClientFileIdReq req) {
         return appClientFileService.delete(req);
     }
+
+    */
 
     /**
     * 统计

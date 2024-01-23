@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  调度日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[73bd06d7bff24cfc9f9155811e3b2a16]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:30, 代码生成哈希校验码：[9224a01c61e8ad87643c408b5eb222de]，请不要修改和删除此行内容。
  *
  */
 
@@ -88,6 +88,7 @@ public class BizScheduledLogServiceImpl extends BaseService implements BizSchedu
         return getSelfProxy(BizScheduledLogServiceImpl.class);
     }
 
+    /** 参考示例
     @Operation(summary = CREATE_ACTION)
     @Transactional
     //@Override
@@ -127,6 +128,8 @@ public class BizScheduledLogServiceImpl extends BaseService implements BizSchedu
     public boolean delete(ScheduledLogIdReq req) {
         return scheduledLogService.delete(req);
     }
+
+    */
 
     /**
     * 统计

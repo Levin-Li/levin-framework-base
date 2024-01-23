@@ -1,5 +1,7 @@
 package com.levin.oak.base.biz;
 
+import com.levin.oak.base.services.org.info.OrgInfo;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

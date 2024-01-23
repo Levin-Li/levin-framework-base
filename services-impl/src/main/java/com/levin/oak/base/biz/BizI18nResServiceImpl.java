@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  国际化资源-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[d32cb996b47038f80cc466d8cf67d5e2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:31, 代码生成哈希校验码：[55146891d98fd2e2f9af3497484f45e7]，请不要修改和删除此行内容。
  *
  */
 
@@ -88,6 +88,7 @@ public class BizI18nResServiceImpl extends BaseService implements BizI18nResServ
         return getSelfProxy(BizI18nResServiceImpl.class);
     }
 
+    /** 参考示例
     @Operation(summary = CREATE_ACTION)
     @Transactional
     //@Override
@@ -127,6 +128,8 @@ public class BizI18nResServiceImpl extends BaseService implements BizI18nResServ
     public boolean delete(I18nResIdReq req) {
         return i18nResService.delete(req);
     }
+
+    */
 
     /**
     * 统计

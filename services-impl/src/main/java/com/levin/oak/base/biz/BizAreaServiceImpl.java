@@ -61,7 +61,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  *  区域-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午4:20:47, 代码生成哈希校验码：[e6c280796aee9f80a8d8be393c401519]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:31, 代码生成哈希校验码：[2898ad7e4156e856d741400071c4dde2]，请不要修改和删除此行内容。
  *
  */
 
@@ -92,6 +92,7 @@ public class BizAreaServiceImpl extends BaseService implements BizAreaService {
         return getSelfProxy(BizAreaServiceImpl.class);
     }
 
+    /** 参考示例
     @Operation(summary = CREATE_ACTION)
     @Transactional
     //@Override
@@ -131,6 +132,8 @@ public class BizAreaServiceImpl extends BaseService implements BizAreaService {
     public boolean delete(AreaIdReq req) {
         return areaService.delete(req);
     }
+
+    */
 
     /**
     * 统计

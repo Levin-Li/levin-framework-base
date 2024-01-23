@@ -169,6 +169,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
     @Override
     public void clearCache() {
         httpServletRequest.removeAttribute(INJECT_VAR_CACHE_KEY);
+        httpServletRequest.removeAttribute(INJECT_VAR_CACHE_KEY + InjectConst.ORG_ID_LIST);
     }
 
     public List<String> getBizStack(Thread thread) {
@@ -244,11 +245,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
 
             if (!isOrgAllScope) {
                 //能访问的部门列表
-                //builder.put(InjectConst.ORG_ID_LIST, bizOrgService.loadOrgList(userInfo, false).stream().map(org -> org.getId()).collect(Collectors.toList()));
-            }
-
-            if (log.isDebugEnabled()) {
-                log.debug("当前登录用户：{}, {}", userInfo, getBizStack());
+               // builder.put(InjectConst.ORG_ID_LIST, bizOrgService.loadOrgList(userInfo, false).stream().map(OrgInfo::getId).collect(Collectors.toList()));
             }
 
         } else {
@@ -266,8 +263,8 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
                     //   .put(InjectConst.ORG_ID_LIST, null)
                     .put(InjectConst.ORG_ID, null);
 
-            log.debug("当前登录用户未登录");
         }
+
 
         //租户信息
         if (tenantInfo != null) {
@@ -282,8 +279,8 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
         //缓存到请求对象重
         httpServletRequest.setAttribute(INJECT_VAR_CACHE_KEY, result);
 
-        if (log.isTraceEnabled()) {
-            log.trace("getInjectVars ok");
+        if (log.isDebugEnabled()) {
+            log.debug("当前用户信息上下文：{}, {}", result, getBizStack());
         }
 
         return result;

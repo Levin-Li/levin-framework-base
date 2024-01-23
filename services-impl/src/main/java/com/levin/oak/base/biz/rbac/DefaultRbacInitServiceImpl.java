@@ -343,7 +343,7 @@ public class DefaultRbacInitServiceImpl
         }
 
         role = simpleDao.selectFrom(Role.class)
-                .eq(E_Role.code, "R_STAFF")
+                .eq(E_Role.code, "R_ORG_ADMIN")
                 .eq(E_User.tenantId, tenantInfo.getId())
                 .findOne();
 
@@ -353,7 +353,7 @@ public class DefaultRbacInitServiceImpl
                             .setCode("R_ORG_ADMIN")
                             .setName("部门管理员")
                             .setEditable(true)
-                            .setOrgDataScope(Role.OrgDataScope.OnlyChildren)
+                            .setOrgDataScope(Role.OrgDataScope.MyDeptAndChildren)
                             .setPermissionList(Arrays.asList(
 
                                     new ResPermission()
