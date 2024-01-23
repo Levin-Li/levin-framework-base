@@ -70,7 +70,7 @@ public class Role
         @Schema(title = "所有部门") All,
         @Schema(title = "指定部门") Assigned,
         @Schema(title = "本部门及子部门") MyOrgAndChildren,
-        @Schema(title = "仅本部门（不含子部门）") OnlyMyOrg,
+        @Schema(title = "仅本部门(不含子部门)") OnlyMyOrg,
         @Schema(title = "仅子部门(不含本部门)") OnlyChildren,
         @Schema(title = "仅本人") MySelf;
 
