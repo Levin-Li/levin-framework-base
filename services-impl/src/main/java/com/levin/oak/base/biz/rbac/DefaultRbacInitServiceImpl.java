@@ -45,7 +45,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-import static com.levin.oak.base.ModuleOption.PACKAGE_NAME;
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 import static com.levin.oak.base.biz.BizUserService.SA_ACCOUNT;
 
@@ -353,7 +352,7 @@ public class DefaultRbacInitServiceImpl
                             .setCode("R_ORG_ADMIN")
                             .setName("部门管理员")
                             .setEditable(true)
-                            .setOrgDataScope(Role.OrgDataScope.MyDeptAndChildren)
+                            .setOrgDataScope(Role.OrgDataScope.MyOrgAndChildren)
                             .setPermissionList(Arrays.asList(
 
                                     new ResPermission()

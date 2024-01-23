@@ -395,7 +395,7 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
 
                 boolean myDept = roleList.stream()
                         //本部门
-                        .anyMatch(roleInfo -> Role.OrgDataScope.OnlyMyDept.equals(roleInfo.getOrgDataScope()));
+                        .anyMatch(roleInfo -> Role.OrgDataScope.OnlyMyOrg.equals(roleInfo.getOrgDataScope()));
 
                 boolean myChildren = roleList.stream()
                         //本部门
@@ -403,7 +403,7 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
 
                 if (roleList.stream()
                         //本部门
-                        .anyMatch(roleInfo -> Role.OrgDataScope.MyDeptAndChildren.equals(roleInfo.getOrgDataScope()))) {
+                        .anyMatch(roleInfo -> Role.OrgDataScope.MyOrgAndChildren.equals(roleInfo.getOrgDataScope()))) {
                     myDept = myChildren = true;
                 }
 

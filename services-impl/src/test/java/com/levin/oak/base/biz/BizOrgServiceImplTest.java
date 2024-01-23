@@ -7,7 +7,6 @@ import com.levin.oak.base.entities.Role;
 import com.levin.oak.base.services.org.info.OrgInfo;
 import com.levin.oak.base.services.role.info.RoleInfo;
 import com.levin.oak.base.services.user.info.UserInfo;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +15,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BizOrgServiceImplTest {
 
@@ -47,7 +44,7 @@ class BizOrgServiceImplTest {
 
     UserInfo user = new UserInfo().setId("U501").setOrgId("501").setTenantId("T02").setRoleList(Arrays.asList("R_USER"));
 
-    RoleInfo R_USER = new RoleInfo().setId("R_USER_01").setName("普通用户").setOrgDataScope(Role.OrgDataScope.MyDeptAndChildren).setCode("R_USER");
+    RoleInfo R_USER = new RoleInfo().setId("R_USER_01").setName("普通用户").setOrgDataScope(Role.OrgDataScope.MyOrgAndChildren).setCode("R_USER");
 
     RoleInfo R_USER_2 = new RoleInfo().setId("R_USER_01").setName("普通用户").setOrgDataScope(Role.OrgDataScope.Assigned).setAssignedOrgIdList(Arrays.asList("701")).setCode("R_USER_2");
 
