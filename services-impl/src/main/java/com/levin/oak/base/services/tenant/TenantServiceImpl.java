@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 平台租户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:01, 代码生成哈希校验码：[a720bcbbefc6ffaaa9aef60963aa8d4a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:42, 代码生成哈希校验码：[e0be0bd4f4009e6c63c42553b13b1b8d]，请不要修改和删除此行内容。
  *
  */
 
@@ -69,12 +69,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_Tenant.BIZ_NAME, description = E_Tenant.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Tenant.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class TenantServiceImpl extends BaseService implements TenantService {
+public class TenantServiceImpl extends BaseService<TenantServiceImpl> implements TenantService {
 
-    protected TenantService getSelfProxy(){
-        //return getSelfProxy(TenantService.class);
-        return getSelfProxy(TenantServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

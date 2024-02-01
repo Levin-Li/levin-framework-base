@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单页面-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[fdb563757514063a4aaf2a7f8542b56e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[f6b8e5dc806b0b15ab7f40417c64b456]，请不要修改和删除此行内容。
  *
  */
 
@@ -70,12 +70,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_SimplePage.BIZ_NAME, description = E_SimplePage.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimplePage.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class SimplePageServiceImpl extends BaseService implements SimplePageService {
+public class SimplePageServiceImpl extends BaseService<SimplePageServiceImpl> implements SimplePageService {
 
-    protected SimplePageService getSelfProxy(){
-        //return getSelfProxy(SimplePageService.class);
-        return getSelfProxy(SimplePageServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

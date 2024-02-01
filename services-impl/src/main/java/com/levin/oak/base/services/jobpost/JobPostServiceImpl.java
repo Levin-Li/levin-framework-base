@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 工作岗位-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[85c6095da3660e1333cb3de959e5bb33]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[0fc9b17293c5659cb696379b7290751d]，请不要修改和删除此行内容。
  *
  */
 
@@ -69,12 +69,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_JobPost.BIZ_NAME, description = E_JobPost.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_JobPost.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class JobPostServiceImpl extends BaseService implements JobPostService {
+public class JobPostServiceImpl extends BaseService<JobPostServiceImpl> implements JobPostService {
 
-    protected JobPostService getSelfProxy(){
-        //return getSelfProxy(JobPostService.class);
-        return getSelfProxy(JobPostServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

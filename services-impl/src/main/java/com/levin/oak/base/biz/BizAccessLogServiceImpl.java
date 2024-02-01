@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  访问日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:31, 代码生成哈希校验码：[6d31550a728ee7e7a036a9883c0b0f33]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[ca71f69016d244cc06e96c6462bd6287]，请不要修改和删除此行内容。
  *
  */
 
@@ -79,14 +79,11 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_AccessLog.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_AccessLog.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class BizAccessLogServiceImpl extends BaseService implements BizAccessLogService {
+public class BizAccessLogServiceImpl extends BaseService<BizAccessLogServiceImpl> implements BizAccessLogService {
 
     @Autowired
     AccessLogService accessLogService;
 
-    protected BizAccessLogServiceImpl getSelfProxy(){
-        return getSelfProxy(BizAccessLogServiceImpl.class);
-    }
 
     /** 参考示例
     @Operation(summary = CREATE_ACTION)

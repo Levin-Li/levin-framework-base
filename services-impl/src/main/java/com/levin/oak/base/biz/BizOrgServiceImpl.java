@@ -2,6 +2,7 @@ package com.levin.oak.base.biz;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
+import com.levin.commons.dao.SelectDao;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.rbac.RbacUserObject;
 import com.levin.oak.base.biz.rbac.RbacLoadService;
@@ -26,6 +27,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -58,7 +60,7 @@ import static com.levin.oak.base.ModuleOption.*;
 //@Validated
 @Tag(name = E_Org.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Org.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class BizOrgServiceImpl extends BaseService implements BizOrgService {
+public class BizOrgServiceImpl extends BaseService<BizOrgServiceImpl> implements BizOrgService {
 
     @Autowired
     OrgService orgService;
@@ -70,13 +72,6 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
     BizRoleService<Serializable> bizRoleService;
 
     final AntPathMatcher orgIdPathMatcher = new AntPathMatcher();
-
-
-    private static BeanCopier orgInfoCopier = null;
-
-    protected BizOrgServiceImpl getSelfProxy() {
-        return getSelfProxy(BizOrgServiceImpl.class);
-    }
 
     @PostConstruct
     public void init() {
@@ -92,13 +87,21 @@ public class BizOrgServiceImpl extends BaseService implements BizOrgService {
     @Override
     public List<OrgInfo> loadOrgList(String tenantId, String parentId) {
 
+        Assert.notBlank(tenantId, "租户ID不能为空");
+
+        Consumer< SelectDao<?>  > daoConsumer = dao -> {
+            dao.disableSafeMode();
+        };
+
         return simpleDao.findByQueryObj(
                 new QueryOrgReq()
                         .setTenantId(tenantId)
                         .setParentId(parentId)
                         .setOrderBy(E_Org.orderCode)
                         .setOrderDir(OrderBy.Type.Desc)
+                , daoConsumer
         );
+
     }
 
 

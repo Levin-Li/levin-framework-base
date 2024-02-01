@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 字典-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[bae5665540561ac25fc14890eb9ea7a8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[84b168e24f91bb0948960b6b6224d016]，请不要修改和删除此行内容。
  *
  */
 
@@ -71,12 +71,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_Dict.BIZ_NAME, description = E_Dict.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Dict.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class DictServiceImpl extends BaseService implements DictService {
+public class DictServiceImpl extends BaseService<DictServiceImpl> implements DictService {
 
-    protected DictService getSelfProxy(){
-        //return getSelfProxy(DictService.class);
-        return getSelfProxy(DictServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

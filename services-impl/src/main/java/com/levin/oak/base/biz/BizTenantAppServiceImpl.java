@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  租户应用-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:30, 代码生成哈希校验码：[87efae08f162bab5ac7e3e98e06076d4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:42, 代码生成哈希校验码：[6094efb93e99b3c03718dbb25160a6ac]，请不要修改和删除此行内容。
  *
  */
 
@@ -82,14 +82,11 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_TenantApp.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_TenantApp.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class BizTenantAppServiceImpl extends BaseService implements BizTenantAppService {
+public class BizTenantAppServiceImpl extends BaseService<BizTenantAppServiceImpl> implements BizTenantAppService {
 
     @Autowired
     TenantAppService tenantAppService;
 
-    protected BizTenantAppServiceImpl getSelfProxy(){
-        return getSelfProxy(BizTenantAppServiceImpl.class);
-    }
 
     /** 参考示例
     @Operation(summary = CREATE_ACTION)

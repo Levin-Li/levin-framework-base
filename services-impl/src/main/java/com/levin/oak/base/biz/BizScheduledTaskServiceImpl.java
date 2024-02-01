@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  调度任务-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:31, 代码生成哈希校验码：[3cefae33d6655ac85744d1cc2ccb3a13]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[ec7d6f6cae26dc3d95681c983cd89f18]，请不要修改和删除此行内容。
  *
  */
 
@@ -79,14 +79,11 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_ScheduledTask.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_ScheduledTask.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class BizScheduledTaskServiceImpl extends BaseService implements BizScheduledTaskService {
+public class BizScheduledTaskServiceImpl extends BaseService<BizScheduledTaskServiceImpl> implements BizScheduledTaskService {
 
     @Autowired
     ScheduledTaskService scheduledTaskService;
 
-    protected BizScheduledTaskServiceImpl getSelfProxy(){
-        return getSelfProxy(BizScheduledTaskServiceImpl.class);
-    }
 
     /** 参考示例
     @Operation(summary = CREATE_ACTION)

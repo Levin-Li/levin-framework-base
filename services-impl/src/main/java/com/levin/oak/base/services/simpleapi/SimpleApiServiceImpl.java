@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单动态接口-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:01, 代码生成哈希校验码：[f0c2aa241a829b74fe6462dd90dea397]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:42, 代码生成哈希校验码：[65c341af4bfee1f787c4931c3f195d86]，请不要修改和删除此行内容。
  *
  */
 
@@ -71,12 +71,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleApi.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class SimpleApiServiceImpl extends BaseService implements SimpleApiService {
+public class SimpleApiServiceImpl extends BaseService<SimpleApiServiceImpl> implements SimpleApiService {
 
-    protected SimpleApiService getSelfProxy(){
-        //return getSelfProxy(SimpleApiService.class);
-        return getSelfProxy(SimpleApiServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

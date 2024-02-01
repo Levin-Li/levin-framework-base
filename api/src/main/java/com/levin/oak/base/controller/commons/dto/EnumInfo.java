@@ -37,7 +37,7 @@ public class EnumInfo
         String label;
 
         @Schema(description = "完整描述")
-        Enum detail;
+        Enum<?> detail;
 
     }
 

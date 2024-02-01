@@ -4,6 +4,7 @@ import cn.hutool.core.util.URLUtil;
 import cn.hutool.jwt.JWT;
 import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.dao.PagingData;
+import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
@@ -11,6 +12,7 @@ import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.BizUserService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
+import com.levin.oak.base.codegen.model.ModelUtils;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.entities.EntityConst;
 import com.levin.oak.base.entities.Setting;
@@ -110,6 +112,10 @@ public class IndexController extends BaseController {
     @Autowired //@DubboReference
     SettingService settingService;
 
+
+    @Autowired
+    PluginManager pluginManager;
+
     @PostConstruct
     public void init() {
 
@@ -156,6 +162,8 @@ public class IndexController extends BaseController {
     @GetMapping({"index"})
     @Operation(summary = "首页", description = "首页", hidden = true)
     public String index(Model modelMap) throws IOException {
+
+        pluginManager.getInstalledPlugins().forEach(plugin -> log.info("{} :{}", plugin.getName(), ModelUtils.buildInfo(applicationContext, plugin)));
 
         modelMap.addAttribute("request", httpRequest);
 
@@ -309,7 +317,7 @@ public class IndexController extends BaseController {
     @SneakyThrows
     @GetMapping("editor/index")
     @Operation(summary = "页面编辑", description = "页面编辑", hidden = true)
-    @ResAuthorize(domain = ID, type = EntityConst.PLATFORM_TYPE_NAME+"-")
+    @ResAuthorize(domain = ID, type = EntityConst.PLATFORM_TYPE_NAME + "-")
     public String editor(Model modelMap) {
 
         //        request.getRequestURL():http://localhost:8080/bzbs/system/login.jsp

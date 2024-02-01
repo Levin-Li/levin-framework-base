@@ -62,7 +62,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 角色-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:01, 代码生成哈希校验码：[19d12e685fe4a007a518356047e5f27b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:42, 代码生成哈希校验码：[0220ed950ca96c4dd5d0233d76eb64b1]，请不要修改和删除此行内容。
  *
  */
 
@@ -75,12 +75,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Role.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class RoleServiceImpl extends BaseService implements RoleService {
+public class RoleServiceImpl extends BaseService<RoleServiceImpl> implements RoleService {
 
-    protected RoleService getSelfProxy(){
-        //return getSelfProxy(RoleService.class);
-        return getSelfProxy(RoleServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

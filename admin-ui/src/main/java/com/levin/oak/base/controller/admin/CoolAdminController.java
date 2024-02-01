@@ -2,47 +2,40 @@ package com.levin.oak.base.controller.admin;
 
 import cn.hutool.cache.CacheUtil;
 import cn.hutool.cache.impl.LRUCache;
-import cn.hutool.core.bean.BeanUtil;
-import com.levin.commons.rbac.MenuItem;
+import com.alibaba.fastjson2.JSONObject;
+import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.MenuResTag;
+import com.levin.commons.rbac.RbacUtils;
 import com.levin.commons.rbac.ResAuthorize;
+import com.levin.commons.service.domain.ApiResp;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.exception.AuthorizationException;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
+import com.levin.commons.service.support.SpringContextHolder;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.BizSimplePageService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacResService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.controller.BaseController;
-import com.levin.oak.base.controller.rbac.dto.AmisMenu;
-import com.levin.oak.base.controller.rbac.dto.AmisResp;
 import com.levin.oak.base.entities.EntityConst;
-import com.levin.oak.base.entities.SimpleEntity;
-import com.levin.oak.base.entities.SimpleForm;
-import com.levin.oak.base.entities.SimplePage;
-import com.levin.oak.base.services.commons.req.MultiTenantReq;
 import com.levin.oak.base.services.menures.MenuResService;
-import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.simplepage.SimplePageService;
-import com.levin.oak.base.services.simplepage.req.QuerySimplePageReq;
-import com.levin.oak.base.utils.AmisUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Data;
-import lombok.SneakyThrows;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.annotation.AnnotatedElementUtils;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.HttpStatus;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,12 +43,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.io.Serializable;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
+import java.lang.reflect.Method;
+import java.util.*;
 
 import static com.levin.oak.base.ModuleOption.*;
 
@@ -83,15 +72,21 @@ import static com.levin.oak.base.ModuleOption.*;
 public class CoolAdminController extends BaseController {
 
     @Data
-    static class ModuleItem implements Serializable {
+    @Accessors(chain = true)
+    public static class SubModuleItem implements Serializable {
 
         @Data
+        @Accessors(chain = true)
         static class Api implements Serializable {
 
+            //小写get post get
             String method;
             String path;
             String summary;
-            String dts;
+
+            //对象{ parameters:[{name:xxx, required:true,type:xxx, description:xxx}]}
+            JSONObject dts;
+
             String tag;
 
             @Schema(title = "路径前缀")
@@ -99,10 +94,10 @@ public class CoolAdminController extends BaseController {
 
             @Schema(title = "是否不要登录")
             boolean ignoreToken;
-
         }
 
         @Data
+        @Accessors(chain = true)
         static class Column implements Serializable {
 
             String propertyName;
@@ -110,13 +105,14 @@ public class CoolAdminController extends BaseController {
             String length;
             String comment;
             boolean nullable;
-
         }
 
         @Data
+        @Accessors(chain = true)
         static class Info implements Serializable {
 
             @Data
+            @Accessors(chain = true)
             static class Type implements Serializable {
 
                 @Schema(title = "类型名称")
@@ -134,7 +130,7 @@ public class CoolAdminController extends BaseController {
         @Schema(title = "归属的模块")
         String module;
 
-        @Schema(title = "实体名称")
+        @Schema(title = "实体名称", description = "建议类名")
         String name;
 
         @Schema(title = "模块ID")
@@ -146,61 +142,21 @@ public class CoolAdminController extends BaseController {
         @Schema(title = "实体列名清单")
         List<Column> columns;
 
-        @Schema(title = "访问路径")
+        @Schema(title = "访问路径", description = "api前缀")
         String prefix;
 
     }
 
-    @Autowired //@DubboReference // @Autowired //@DubboReference
-    RoleService roleService;
+    @Autowired
+    PluginManager pluginManager;
+
 
     @Autowired
-    RbacService rbacService;
-
-    @Autowired
-    RbacResService rbacResService;
-
-    @Autowired
-    AuthService authService;
-
-    @Autowired //@DubboReference // @Autowired
-    MenuResService menuResService;
-
-    @Autowired
-    ResourceLoader resourceLoader;
-
-    @Autowired
-    ServerProperties serverProperties;
-
-    @Autowired
-    FrameworkProperties frameworkProperties;
-
-    @Autowired //@DubboReference // @Autowired
-    SimplePageService simplePageService;
-
-    @Autowired //@DubboReference // @Autowired
-    BizSimplePageService bizSimplePageService;
-
-    final LRUCache<String, Page> lruCache = CacheUtil.newLRUCache(10 * 1000, 5 * 60 * 1000);
-
-    @Data
-    @Accessors(chain = true)
-    static class Page {
-
-        Boolean enable;
-
-        String path;
-
-        String content;
-
-        @InjectVar(domain = "dao", expectBaseType = String.class, converter = PrimitiveArrayJsonConverter.class, isRequired = "false")
-        List<String> requireAuthorizations;
-    }
-
+    ApplicationContext context;
 
     @PostConstruct
     public void init() {
-        log.info("默认Amis服务支持启用...");
+        log.info("默认cool-admin服务支持启用...");
     }
 
     /**
@@ -208,176 +164,59 @@ public class CoolAdminController extends BaseController {
      *
      * @return ApiResp
      */
-    @RequestMapping(value = "appMenuList", method = {RequestMethod.GET, RequestMethod.POST})
-    @Operation(summary = "获取Amis菜单列表")
-    public AmisResp getAmisAppMenuList(boolean isShowNotPermissionMenu) {
+    @RequestMapping(value = "schema", method = {RequestMethod.GET, RequestMethod.POST})
+    @Operation(summary = "cool-admin")
+    public ApiResp<Map<String, List<SubModuleItem>>> getCoolAdminSchema() {
 
-        AmisResp resp = AmisResp.builder().build();
+        final Map<String, List<SubModuleItem>> result = new HashMap<>();
 
-        resp.getData().put(AmisMenu.DATA_KEY, Collections.emptyList());
+        pluginManager.getInstalledPlugins().forEach(plugin -> {
 
-        //获取页面地址
-        String basePath = getContextPath() + API_PATH + "amis/page";
+            //查找模块的所有控制器
+            List<Object> controllers = SpringContextHolder.findBeanByPkgName(context, Controller.class, plugin.getPackageName());
 
-        List<MenuResInfo> authorizedMenuList = rbacResService.getAuthorizedMenuList(isShowNotPermissionMenu, authService.getLoginId());
+            List<SubModuleItem> subModuleItems = result.computeIfAbsent(plugin.getId(), key -> new ArrayList<>());
 
-        if (authorizedMenuList != null) {
+            controllers.forEach(controller -> {
 
-            final AtomicInteger maxDeep = new AtomicInteger();
-            final List<AmisMenu> rootMenuList = new ArrayList<>(3);
+                final Class<?> beanType = AopProxyUtils.ultimateTargetClass(controller.getClass());
 
-            List<AmisMenu> amisMenuList = authorizedMenuList.stream()
-                    .map(item -> convert(item, basePath, 1, maxDeep, rootMenuList))
-                    .collect(Collectors.toList());
+                RequestMapping requestMapping = AnnotatedElementUtils.findMergedAnnotation(beanType, RequestMapping.class);
 
-            //如果层级小于3级
-            if (frameworkProperties.isAutoAddAmisMenuRootNode()
-                    && maxDeep.get() < 3) {
+                String basePath = requestMapping.value()[0];
 
-                AmisMenu amisMenu = new AmisMenu()
-                        .setLabel("")
-                        .setChildren(amisMenuList);
-
-                amisMenuList = new ArrayList<>(2);
-                amisMenuList.add(amisMenu);
-            }
-
-            if (rootMenuList.isEmpty()) {
-                amisMenuList.add(
-                        new AmisMenu()
-                                .setLabel("首页")
-                                .setUrl("/")
-                                .setRedirect(getDefaultIndex(amisMenuList))
-                                .setDefaultPage(true)
-                );
-
-            } else if (rootMenuList.size() > 1) {
-                log.warn("菜单中有多于1个的根菜单: "
-                        + rootMenuList.stream().map(AmisMenu::getLabel).collect(Collectors.toList()));
-            }
-
-            //设置默认图标
-            amisMenuList.forEach(item -> setDefaultIcon(item, 1));
-
-            resp.getData().put(AmisMenu.DATA_KEY, amisMenuList);
-        }
-
-        return resp;
-    }
+                String entityName = basePath.substring(basePath.lastIndexOf('/') + 1);
 
 
-    /**
-     * 递归转换菜单
-     *
-     * @param item
-     * @param basePath
-     * @param deep
-     * @param rootMenuList url 为 / 的菜单节点
-     * @return
-     */
-    @SneakyThrows
-    AmisMenu convert(MenuResInfo item, String basePath, int deep, AtomicInteger maxDeep, List<AmisMenu> rootMenuList) {
+                Map<Method, ResAuthorize> methodResAuthorizeMap = RbacUtils.loadClassResAuthorize(controller, true);
 
-        if (deep < 1) {
-            deep = 1;
-        }
+                SubModuleItem subModuleItem = new SubModuleItem()
+                        .setModule(plugin.getId())
+                        .setName(entityName)
+                        .setPrefix(basePath)
+                        .setInfo(new SubModuleItem.Info().setType(new SubModuleItem.Info.Type().setName(entityName)));
 
-        if (deep > maxDeep.get()) {
-            maxDeep.set(deep);
-        }
-
-        AmisMenu amisMenu = new AmisMenu().setLabel(item.getName())
-                .setIcon(item.getIcon());
-
-        if (StringUtils.hasText(item.getPath())) {
-
-            amisMenu.setUrl(item.getPath());
-
-            String params = item.getParams();
-            if (!StringUtils.hasText(params)) {
-                params = item.getPath();
-            }
-
-            if (MenuItem.ActionType.Redirect.equals(item.getActionType())) {
-                amisMenu.setRedirect(params);
-            } else if (MenuItem.ActionType.Rewrite.equals(item.getActionType())) {
-                amisMenu.setRewrite(params);
-            } else if (MenuItem.ActionType.NewWindow.equals(item.getActionType())) {
-                amisMenu.setLink(params);
-            } else if (MenuItem.ActionType.Jsonp.equals(item.getActionType())) {
-                amisMenu.setSchemaApi("jsonp:" + basePath + "?type=jsonp&path=" + URLEncoder.encode(item.getPath(), "utf-8"));
-            } else {
-                //固定参数
-                amisMenu.setSchemaApi(basePath + "?type=json&path=" + URLEncoder.encode(item.getPath(), "utf-8"));
-            }
-        }
-
-        //是否是根菜单
-        if (StringUtils.hasText(amisMenu.getUrl())
-                && "/".equalsIgnoreCase(amisMenu.getUrl().trim())) {
-            rootMenuList.add(amisMenu);
-        }
-
-        //转换子菜单
-        if (item.getChildren() != null
-                && !item.getChildren().isEmpty()) {
-
-            amisMenu.setChildren(new ArrayList<>(item.getChildren().size()));
-
-            for (MenuResInfo child : item.getChildren()) {
-                //递归转换
-                amisMenu.getChildren().add(convert(child, basePath, deep + 1, maxDeep, rootMenuList));
-            }
-        }
-
-        return amisMenu;
-    }
+                ArrayList<SubModuleItem.Column> columns = new ArrayList<>();
+                subModuleItem.setColumns(columns);
 
 
-    private String getDefaultIndex(List<AmisMenu> amisMenuList) {
+                subModuleItems.add(subModuleItem);
 
-        //获取第二级菜单
-        return amisMenuList.stream()
-                .filter(AmisMenu::hasChildren)
-                .flatMap(m -> m.getChildren().stream())
-                .filter(m -> StringUtils.hasText(m.getUrl()))
-                .findFirst()
-                .map(AmisMenu::getUrl)
-                .orElse(null);
-    }
+                methodResAuthorizeMap.forEach((method, resAuthorize) -> {
 
-    /**
-     * 设置默认图标
-     *
-     * @param item
-     * @param deep
-     */
-    void setDefaultIcon(AmisMenu item, int deep) {
+                    RequestMapping mapping = AnnotatedElementUtils.findMergedAnnotation(method, RequestMapping.class);
 
-        //图标库
-        //https://fontawesome.com/
+                    String path = mapping.value()[0];
 
-        if (deep < 1) {
-            deep = 1;
-        }
+                });
 
-        item.setDeepLevel(deep);
+            });
 
-        boolean hasChildren = item.hasChildren();
 
-        if (!StringUtils.hasText(item.getIcon()) && deep >= 2) {
-            //如果是叶子节点
-            //图标库
-            //https://fontawesome.com/
-            item.setIcon(hasChildren ? "fa fa-cube" : "fa fa-bars");
-        }
+        });
 
-        if (hasChildren) {
-            for (AmisMenu child : item.getChildren()) {
-                //递归转换
-                setDefaultIcon(child, deep + 1);
-            }
-        }
+
+        return ApiResp.ok(result);
     }
 
 }

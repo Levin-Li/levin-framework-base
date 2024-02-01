@@ -58,7 +58,7 @@ import com.levin.commons.dao.PagingData;
 //@Validated
 @Tag(name = E_User.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_User.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class BizUserServiceImpl extends BaseService implements BizUserService<Serializable> {
+public class BizUserServiceImpl extends BaseService<BizUserServiceImpl> implements BizUserService<Serializable> {
 
     @Autowired
     UserService userService;
@@ -70,11 +70,6 @@ public class BizUserServiceImpl extends BaseService implements BizUserService<Se
     RbacService rbacService;
 
     private static final String CK_PREFIX = E_User.CACHE_KEY_PREFIX;
-
-    protected BizUserServiceImpl getSelfProxy() {
-        return getSelfProxy(BizUserServiceImpl.class);
-    }
-
 
     /**
      * 检查用户角色

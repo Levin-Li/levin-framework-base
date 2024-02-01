@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  字典-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:30, 代码生成哈希校验码：[4e4b73b31b67ea2c172a52e52835f3a7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[21475f58bedd4bfca02815d1971e41db]，请不要修改和删除此行内容。
  *
  */
 
@@ -82,14 +82,11 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_Dict.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Dict.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class BizDictServiceImpl extends BaseService implements BizDictService {
+public class BizDictServiceImpl extends BaseService<BizDictServiceImpl> implements BizDictService {
 
     @Autowired
     DictService dictService;
 
-    protected BizDictServiceImpl getSelfProxy(){
-        return getSelfProxy(BizDictServiceImpl.class);
-    }
 
     /** 参考示例
     @Operation(summary = CREATE_ACTION)

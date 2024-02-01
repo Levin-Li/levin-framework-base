@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  工作岗位-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:31, 代码生成哈希校验码：[5112ec5e52bf570d1b12c1edc873aa61]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[13fd66edc457675af960dc80cab63000]，请不要修改和删除此行内容。
  *
  */
 
@@ -80,14 +80,11 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_JobPost.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_JobPost.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class BizJobPostServiceImpl extends BaseService implements BizJobPostService {
+public class BizJobPostServiceImpl extends BaseService<BizJobPostServiceImpl> implements BizJobPostService {
 
     @Autowired
     JobPostService jobPostService;
 
-    protected BizJobPostServiceImpl getSelfProxy(){
-        return getSelfProxy(BizJobPostServiceImpl.class);
-    }
 
     /** 参考示例
     @Operation(summary = CREATE_ACTION)

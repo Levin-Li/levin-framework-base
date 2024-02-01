@@ -62,7 +62,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  菜单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:31, 代码生成哈希校验码：[320cdb91ff49a9ba2ddbf0eeef2802a1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[e81fbe1453170ccc926f98933ac5f658]，请不要修改和删除此行内容。
  *
  */
 
@@ -84,14 +84,11 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_MenuRes.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_MenuRes.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class BizMenuResServiceImpl extends BaseService implements BizMenuResService {
+public class BizMenuResServiceImpl extends BaseService<BizMenuResServiceImpl> implements BizMenuResService {
 
     @Autowired
     MenuResService menuResService;
 
-    protected BizMenuResServiceImpl getSelfProxy(){
-        return getSelfProxy(BizMenuResServiceImpl.class);
-    }
 
     /** 参考示例
     @Operation(summary = CREATE_ACTION)

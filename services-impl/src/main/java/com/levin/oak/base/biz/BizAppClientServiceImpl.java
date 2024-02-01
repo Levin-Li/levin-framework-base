@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  应用接入-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:30, 代码生成哈希校验码：[8d8c44dd3040bf882096fe0dd870bc49]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:42, 代码生成哈希校验码：[177fb84a5672783c3fea7e85da9687b3]，请不要修改和删除此行内容。
  *
  */
 
@@ -79,14 +79,11 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_AppClient.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_AppClient.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class BizAppClientServiceImpl extends BaseService implements BizAppClientService {
+public class BizAppClientServiceImpl extends BaseService<BizAppClientServiceImpl> implements BizAppClientService {
 
     @Autowired
     AppClientService appClientService;
 
-    protected BizAppClientServiceImpl getSelfProxy(){
-        return getSelfProxy(BizAppClientServiceImpl.class);
-    }
 
     /** 参考示例
     @Operation(summary = CREATE_ACTION)

@@ -59,7 +59,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  简单表单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月23日 下午2:58:31, 代码生成哈希校验码：[c33db430b177e3221a88fab071044639]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:44, 代码生成哈希校验码：[d945e1ec67ab347d1a496bd077793008]，请不要修改和删除此行内容。
  *
  */
 
@@ -81,14 +81,11 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_SimpleForm.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleForm.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class BizSimpleFormServiceImpl extends BaseService implements BizSimpleFormService {
+public class BizSimpleFormServiceImpl extends BaseService<BizSimpleFormServiceImpl> implements BizSimpleFormService {
 
     @Autowired
     SimpleFormService simpleFormService;
 
-    protected BizSimpleFormServiceImpl getSelfProxy(){
-        return getSelfProxy(BizSimpleFormServiceImpl.class);
-    }
 
     /** 参考示例
     @Operation(summary = CREATE_ACTION)

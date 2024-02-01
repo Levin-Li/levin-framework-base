@@ -74,12 +74,7 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_User.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class UserServiceImpl extends BaseService implements UserService {
-
-    protected UserService getSelfProxy(){
-        //return getSelfProxy(UserService.class);
-        return getSelfProxy(UserServiceImpl.class);
-    }
+public class UserServiceImpl extends BaseService<UserServiceImpl> implements UserService {
 
     /**
     * 创建记录，返回主键ID

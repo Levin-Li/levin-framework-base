@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 菜单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:03, 代码生成哈希校验码：[b8c8b7a78fe3abb878ed542b09a0a6d1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[5ad4c9ca826c9a51a786728bd43ee0c0]，请不要修改和删除此行内容。
  *
  */
 
@@ -73,12 +73,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_MenuRes.BIZ_NAME, description = E_MenuRes.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_MenuRes.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class MenuResServiceImpl extends BaseService implements MenuResService {
+public class MenuResServiceImpl extends BaseService<MenuResServiceImpl> implements MenuResService {
 
-    protected MenuResService getSelfProxy(){
-        //return getSelfProxy(MenuResService.class);
-        return getSelfProxy(MenuResServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

@@ -35,11 +35,11 @@ import static com.levin.oak.base.entities.EntityConst.*;
  * 抽象服务类
  *
  * @author lilw
- * @author Auto gen by simple-dao-codegen, @time: 2023年11月1日 下午3:17:35, 代码生成哈希校验码：[ce6a7c477e1b25854b7f33fc157cc57c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:54:11, 代码生成哈希校验码：[153b01ceb48fb19ea032e867a825a57a]，请不要修改和删除此行内容。
  *
  */
 @Slf4j
-public abstract class BaseService {
+public abstract class BaseService<S> {
 
     @Autowired
     protected SimpleDao simpleDao;
@@ -59,26 +59,12 @@ public abstract class BaseService {
      * @param <T>
      * @return
      */
-    protected <T> T getSelfProxy() {
-        return (T) getSelfProxy(getClass());
-    }
+    protected <T extends S> T getSelfProxy() {
 
-    /**
-     * 返回自身的代理
-     *
-     * @param type
-     * @param <T>
-     * @return
-     */
-    protected <T> T getSelfProxy(Class<T> type) {
-
-        if (selfProxy == null
-                || !type.isInstance(selfProxy)
-                || !(AopUtils.isCglibProxy(selfProxy) || AopUtils.isAopProxy(selfProxy) || AopUtils.isJdkDynamicProxy(selfProxy))) {
-            selfProxy = applicationContext.getBean(type);
+        if (selfProxy == null) {
+            selfProxy = applicationContext.getBean(AopProxyUtils.ultimateTargetClass(this));
         }
 
         return (T) selfProxy;
     }
-
 }

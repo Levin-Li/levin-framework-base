@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 系统设置-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[13be18906936fb0e40b4634902623772]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[b31e1e5569f34f271e88e92b7a7c4cc9]，请不要修改和删除此行内容。
  *
  */
 
@@ -69,12 +69,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_Setting.BIZ_NAME, description = E_Setting.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Setting.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class SettingServiceImpl extends BaseService implements SettingService {
+public class SettingServiceImpl extends BaseService<SettingServiceImpl> implements SettingService {
 
-    protected SettingService getSelfProxy(){
-        //return getSelfProxy(SettingService.class);
-        return getSelfProxy(SettingServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

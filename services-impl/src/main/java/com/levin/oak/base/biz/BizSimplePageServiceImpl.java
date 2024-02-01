@@ -88,14 +88,10 @@ import com.levin.commons.service.domain.InjectVar;
 // @Validated
 @Tag(name = E_SimplePage.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimplePage.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class BizSimplePageServiceImpl extends BaseService implements BizSimplePageService {
+public class BizSimplePageServiceImpl extends BaseService<BizSimplePageServiceImpl> implements BizSimplePageService {
 
     @Autowired
     SimplePageService simplePageService;
-
-    protected BizSimplePageServiceImpl getSelfProxy() {
-        return getSelfProxy(BizSimplePageServiceImpl.class);
-    }
 
     // @Transactional(rollbackFor = RuntimeException.class)
     // public void update(UpdateReq req){

@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 国际化资源-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[4aae31bddfb184f3d07fab536cb16f18]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[676be3616f661edd100ac602dade0a4b]，请不要修改和删除此行内容。
  *
  */
 
@@ -68,12 +68,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_I18nRes.BIZ_NAME, description = E_I18nRes.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_I18nRes.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class I18nResServiceImpl extends BaseService implements I18nResService {
+public class I18nResServiceImpl extends BaseService<I18nResServiceImpl> implements I18nResService {
 
-    protected I18nResService getSelfProxy(){
-        //return getSelfProxy(I18nResService.class);
-        return getSelfProxy(I18nResServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

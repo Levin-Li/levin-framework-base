@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:01, 代码生成哈希校验码：[1b70a0656ea89a7f5a955411e6c34feb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:42, 代码生成哈希校验码：[753865fab7dfa5e406c49a1b6c01ccb1]，请不要修改和删除此行内容。
  *
  */
 
@@ -68,12 +68,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_ScheduledLog.BIZ_NAME, description = E_ScheduledLog.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_ScheduledLog.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class ScheduledLogServiceImpl extends BaseService implements ScheduledLogService {
+public class ScheduledLogServiceImpl extends BaseService<ScheduledLogServiceImpl> implements ScheduledLogService {
 
-    protected ScheduledLogService getSelfProxy(){
-        //return getSelfProxy(ScheduledLogService.class);
-        return getSelfProxy(ScheduledLogServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

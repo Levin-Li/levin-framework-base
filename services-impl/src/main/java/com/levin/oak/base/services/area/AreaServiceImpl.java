@@ -59,7 +59,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[3216ed4692f84b904d095e043cb632c8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[4fa49392302fd201dc1e776901a0d7a5]，请不要修改和删除此行内容。
  *
  */
 
@@ -72,12 +72,8 @@ import com.levin.oak.base.entities.Area.*;
 //@Validated
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Area.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class AreaServiceImpl extends BaseService implements AreaService {
+public class AreaServiceImpl extends BaseService<AreaServiceImpl> implements AreaService {
 
-    protected AreaService getSelfProxy(){
-        //return getSelfProxy(AreaService.class);
-        return getSelfProxy(AreaServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

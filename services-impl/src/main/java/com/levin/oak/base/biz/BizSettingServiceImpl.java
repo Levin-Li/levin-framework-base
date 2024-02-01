@@ -51,14 +51,10 @@ import com.levin.oak.base.services.*;
 //@Validated
 @Tag(name = E_Setting.BIZ_NAME + "-业务服务", description = "")
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Setting.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class BizSettingServiceImpl extends BaseService implements BizSettingService {
+public class BizSettingServiceImpl extends BaseService<BizSettingServiceImpl> implements BizSettingService {
 
     @Autowired
     SettingService settingService;
-
-    protected BizSettingServiceImpl getSelfProxy() {
-        return getSelfProxy(BizSettingServiceImpl.class);
-    }
 
     //示例方法
     //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)

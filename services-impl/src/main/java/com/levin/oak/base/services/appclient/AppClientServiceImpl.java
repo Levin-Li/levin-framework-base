@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 应用接入-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:01, 代码生成哈希校验码：[8e698f92c4a4ef5d0ea8ac4bea4e05c9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:42, 代码生成哈希校验码：[80918c0a71e339859e06d314ad2d14f4]，请不要修改和删除此行内容。
  *
  */
 
@@ -68,12 +68,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_AppClient.BIZ_NAME, description = E_AppClient.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_AppClient.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class AppClientServiceImpl extends BaseService implements AppClientService {
+public class AppClientServiceImpl extends BaseService<AppClientServiceImpl> implements AppClientService {
 
-    protected AppClientService getSelfProxy(){
-        //return getSelfProxy(AppClientService.class);
-        return getSelfProxy(AppClientServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

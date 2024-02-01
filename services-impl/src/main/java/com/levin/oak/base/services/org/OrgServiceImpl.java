@@ -62,7 +62,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 机构-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[fa83d3650d53df2e8b57a967d742bc26]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[cee9be2ab327a825117b48204a98167c]，请不要修改和删除此行内容。
  *
  */
 
@@ -75,12 +75,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_Org.BIZ_NAME, description = E_Org.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Org.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class OrgServiceImpl extends BaseService implements OrgService {
+public class OrgServiceImpl extends BaseService<OrgServiceImpl> implements OrgService {
 
-    protected OrgService getSelfProxy(){
-        //return getSelfProxy(OrgService.class);
-        return getSelfProxy(OrgServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

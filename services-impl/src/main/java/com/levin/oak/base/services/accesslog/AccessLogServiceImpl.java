@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 访问日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[488d8d5a3fb6727f9e3eec865223c6fc]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[63e1a28a3ca7f9ea37ff666fd92edb2d]，请不要修改和删除此行内容。
  *
  */
 
@@ -68,12 +68,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_AccessLog.BIZ_NAME, description = E_AccessLog.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_AccessLog.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class AccessLogServiceImpl extends BaseService implements AccessLogService {
+public class AccessLogServiceImpl extends BaseService<AccessLogServiceImpl> implements AccessLogService {
 
-    protected AccessLogService getSelfProxy(){
-        //return getSelfProxy(AccessLogService.class);
-        return getSelfProxy(AccessLogServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

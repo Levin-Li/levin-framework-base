@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知处理日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[6a8faff344621f0bbd6784f9209899b2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[dcc5bf21246d458ea8f9f002a48965cd]，请不要修改和删除此行内容。
  *
  */
 
@@ -68,12 +68,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_NoticeProcessLog.BIZ_NAME, description = E_NoticeProcessLog.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_NoticeProcessLog.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class NoticeProcessLogServiceImpl extends BaseService implements NoticeProcessLogService {
+public class NoticeProcessLogServiceImpl extends BaseService<NoticeProcessLogServiceImpl> implements NoticeProcessLogService {
 
-    protected NoticeProcessLogService getSelfProxy(){
-        //return getSelfProxy(NoticeProcessLogService.class);
-        return getSelfProxy(NoticeProcessLogServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

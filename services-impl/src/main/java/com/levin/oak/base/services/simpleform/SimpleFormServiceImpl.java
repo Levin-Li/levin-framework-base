@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单表单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:03, 代码生成哈希校验码：[d6251dc6d87b5bb134df484c6b0d2b4f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:44, 代码生成哈希校验码：[57b06d890aeef2d13ba444ea24dcb984]，请不要修改和删除此行内容。
  *
  */
 
@@ -70,12 +70,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_SimpleForm.BIZ_NAME, description = E_SimpleForm.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleForm.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class SimpleFormServiceImpl extends BaseService implements SimpleFormService {
+public class SimpleFormServiceImpl extends BaseService<SimpleFormServiceImpl> implements SimpleFormService {
 
-    protected SimpleFormService getSelfProxy(){
-        //return getSelfProxy(SimpleFormService.class);
-        return getSelfProxy(SimpleFormServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

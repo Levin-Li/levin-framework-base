@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度任务-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[51ec1923795912e5b38dc07af0f3cd54]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[c4a58d5f8c3ffa10c5c8c4961fe2b38c]，请不要修改和删除此行内容。
  *
  */
 
@@ -68,12 +68,8 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_ScheduledTask.BIZ_NAME, description = E_ScheduledTask.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_ScheduledTask.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
-public class ScheduledTaskServiceImpl extends BaseService implements ScheduledTaskService {
+public class ScheduledTaskServiceImpl extends BaseService<ScheduledTaskServiceImpl> implements ScheduledTaskService {
 
-    protected ScheduledTaskService getSelfProxy(){
-        //return getSelfProxy(ScheduledTaskService.class);
-        return getSelfProxy(ScheduledTaskServiceImpl.class);
-    }
 
     /**
     * 创建记录，返回主键ID

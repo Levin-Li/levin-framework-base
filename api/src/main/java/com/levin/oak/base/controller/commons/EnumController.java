@@ -121,7 +121,7 @@ public class EnumController extends BaseController {
                 .setName(enumClass.getSimpleName())
                 .setLabel(enumClass.getSimpleName());
 
-        for (Enum anEnum : enumClass.getEnumConstants()) {
+        for (Enum<?> anEnum : enumClass.getEnumConstants()) {
 
             enumInfo.getValues().add(new EnumInfo.Item()
                     .setOrdinal(anEnum.ordinal())
