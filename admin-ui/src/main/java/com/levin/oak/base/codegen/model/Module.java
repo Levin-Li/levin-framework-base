@@ -1,14 +1,18 @@
 package com.levin.oak.base.codegen.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.springframework.beans.BeanUtils;
+import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.lang.annotation.Annotation;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 @Accessors(chain = true)
@@ -19,7 +23,6 @@ public class Module implements Serializable {
     @ToString
     public static class Service implements Serializable {
 
-        @Schema(title = "")
         String id;
 
         String name;
@@ -34,6 +37,19 @@ public class Module implements Serializable {
 
         final List<Api> apiList = new ArrayList<>();
 
+        final Set<Class<?>> importList = new LinkedHashSet<>();
+
+        public Service addImport(Class<?> type) {
+
+            if (type != null
+                    && !BeanUtils.isSimpleProperty(type)
+                    && Stream.of("java.lang.", "java.util.").noneMatch(it -> type.getName().startsWith(it))
+            ) {
+                importList.add(type);
+            }
+
+            return this;
+        }
     }
 
 
@@ -42,7 +58,6 @@ public class Module implements Serializable {
     @ToString
     public static class Api implements Serializable {
 
-        @Schema(title = "")
         String id;
 
         String name;
@@ -65,10 +80,13 @@ public class Module implements Serializable {
         String requireAuthorizations;
 
         @Schema(title = "接口返回值")
-        String returnType;
+        String returnTypeDefine;
 
         @Schema(title = "接口参数列表")
         final List<Column> paramList = new ArrayList<>();
+
+        @Schema(title = "CURD注解列表")
+        final Set<Annotation> crudAnnotations = new LinkedHashSet<>();
 
     }
 
@@ -78,7 +96,6 @@ public class Module implements Serializable {
     @ToString
     public static class DtoSchema implements Serializable {
 
-        @Schema(title = "")
         String id;
 
         String name;
@@ -87,11 +104,59 @@ public class Module implements Serializable {
 
         String desc;
 
+        String typeDefine;
+
         @Schema(title = "父类")
         String superType;
 
-        final List<Column> columnList = new ArrayList<>();
+        boolean isInterface;
 
+        List<String> interfaceList = new ArrayList<>();
+
+        List<Column> columnList = null;
+
+        @JsonIgnore
+        Class<?> classType;
+
+        final Set<Class<?>> importList = new LinkedHashSet<>();
+
+        public DtoSchema addImport(Class<?> type) {
+
+            if (type != null
+                    && type != classType
+                    && !BeanUtils.isSimpleProperty(type)
+                    && Stream.of("java.lang.", "java.util.").noneMatch(it -> type.getName().startsWith(it))
+            ) {
+                importList.add(type);
+            }
+
+            return this;
+        }
+
+        public String getFullTypeDefine() {
+
+            StringBuilder builder = new StringBuilder();
+
+            builder.append(typeDefine);
+
+            String interfaces = interfaceList.stream().collect(Collectors.joining(", "));
+
+            if (isInterface) {
+
+                builder.append(" extends " + interfaces);
+            } else {
+
+                if (StringUtils.hasText(superType)) {
+                    builder.append(" extends " + superType);
+                }
+
+                if (!interfaceList.isEmpty()) {
+                    builder.append(" implements ").append(interfaces);
+                }
+            }
+
+            return builder.toString();
+        }
     }
 
     @Data
@@ -99,7 +164,6 @@ public class Module implements Serializable {
     @ToString
     public static class Column implements Serializable {
 
-        @Schema(title = "")
         String id;
 
         String name;
@@ -108,17 +172,22 @@ public class Module implements Serializable {
 
         String desc;
 
-        //
         String requiredMode;
 
         boolean isReadOnly;
 
-        String type;
+        boolean isPathVariable;
+
+        boolean isRequestBody;
+
+        String typeDefine;
 
         String dictCode;
 
         final List<String> options = new ArrayList<>();
 
+        @Schema(title = "CURD注解列表")
+        final Set<Annotation> crudAnnotations = new LinkedHashSet<>();
     }
 
     String id;

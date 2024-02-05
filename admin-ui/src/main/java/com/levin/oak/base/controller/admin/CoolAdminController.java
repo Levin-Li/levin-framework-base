@@ -145,6 +145,10 @@ public class CoolAdminController extends BaseController {
         @Schema(title = "访问路径", description = "api前缀")
         String prefix;
 
+        public <C extends Comparable<? extends Number>> List<C> getSorted() {
+            return Collections.emptyList();
+        }
+
     }
 
     @Autowired

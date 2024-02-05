@@ -12,7 +12,7 @@ import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.BizUserService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
-import com.levin.oak.base.codegen.model.ModelUtils;
+import com.levin.oak.base.codegen.model.ModelBuildUtils;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.entities.EntityConst;
 import com.levin.oak.base.entities.Setting;
@@ -27,7 +27,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -163,7 +162,7 @@ public class IndexController extends BaseController {
     @Operation(summary = "首页", description = "首页", hidden = true)
     public String index(Model modelMap) throws IOException {
 
-        pluginManager.getInstalledPlugins().forEach(plugin -> log.info("{} :{}", plugin.getName(), ModelUtils.buildInfo(applicationContext, plugin)));
+        pluginManager.getInstalledPlugins().forEach(plugin -> log.info("{} :{}", plugin.getName(), ModelBuildUtils.buildInfo(applicationContext, plugin)));
 
         modelMap.addAttribute("request", httpRequest);
 
