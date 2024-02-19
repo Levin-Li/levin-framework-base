@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 客户端文件业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:46, 代码生成哈希校验码：[c2ebe473fdc5afb80db4edb28f780817]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年2月19日 上午10:56:10, 代码生成哈希校验码：[feaa2738f17512df5c234d950363cb0e]，请不要修改和删除此行内容。
 *
 */
 
@@ -104,7 +104,7 @@ public class BizAppClientFileController extends AppClientFileController{
     * @param req QueryAppClientFileReq
     * @return  ApiResp<StatAppClientFileReq.Result>
     */
-    @GetMapping("/stat") //默认开放
+    @GetMapping("stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatAppClientFileReq.Result> stat(@Valid StatAppClientFileReq req, SimplePaging paging) {
 

@@ -42,8 +42,8 @@ public class Module implements Serializable {
         public Service addImport(Class<?> type) {
 
             if (type != null
-                    && !BeanUtils.isSimpleProperty(type)
-                    && Stream.of("java.lang.", "java.util.").noneMatch(it -> type.getName().startsWith(it))
+                    && (type.isEnum() || !BeanUtils.isSimpleProperty(type))
+                    && Stream.of("java.lang.", "java.util.", "java.io.").noneMatch(it -> type.getName().startsWith(it))
             ) {
                 importList.add(type);
             }
@@ -62,9 +62,9 @@ public class Module implements Serializable {
 
         String name;
 
-        String method;
+        List<String> method;
 
-        String path;
+        List<String> path;
 
         String label;
 
@@ -78,6 +78,8 @@ public class Module implements Serializable {
 
         @Schema(title = "需要的权限列表")
         String requireAuthorizations;
+
+        String returnTDefinePrefix;
 
         @Schema(title = "接口返回值")
         String returnTypeDefine;
@@ -111,6 +113,8 @@ public class Module implements Serializable {
 
         boolean isInterface;
 
+        boolean isEnum;
+
         List<String> interfaceList = new ArrayList<>();
 
         List<Column> columnList = null;
@@ -124,8 +128,8 @@ public class Module implements Serializable {
 
             if (type != null
                     && type != classType
-                    && !BeanUtils.isSimpleProperty(type)
-                    && Stream.of("java.lang.", "java.util.").noneMatch(it -> type.getName().startsWith(it))
+                    && (type.isEnum() || !BeanUtils.isSimpleProperty(type))
+                    && Stream.of("java.lang.", "java.util.", "java.io.").noneMatch(it -> type.getName().startsWith(it))
             ) {
                 importList.add(type);
             }
@@ -142,10 +146,8 @@ public class Module implements Serializable {
             String interfaces = interfaceList.stream().collect(Collectors.joining(", "));
 
             if (isInterface) {
-
                 builder.append(" extends " + interfaces);
             } else {
-
                 if (StringUtils.hasText(superType)) {
                     builder.append(" extends " + superType);
                 }
@@ -179,6 +181,10 @@ public class Module implements Serializable {
         boolean isPathVariable;
 
         boolean isRequestBody;
+
+        boolean isSimpleType;
+
+        String typeDefinePrefix;
 
         String typeDefine;
 

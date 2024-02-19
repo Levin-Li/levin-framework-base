@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 系统设置业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:46, 代码生成哈希校验码：[007222a1d19af8455143a240599c840b]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年2月19日 上午10:56:09, 代码生成哈希校验码：[c7cc0cff5f7b81ca566fe68cca5dd849]，请不要修改和删除此行内容。
 *
 */
 
@@ -104,7 +104,7 @@ public class BizSettingController extends SettingController{
     * @param req QuerySettingReq
     * @return  ApiResp<StatSettingReq.Result>
     */
-    @GetMapping("/stat") //默认开放
+    @GetMapping("stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatSettingReq.Result> stat(@Valid StatSettingReq req, SimplePaging paging) {
 

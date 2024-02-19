@@ -39,7 +39,7 @@ import javax.validation.constraints.Size;
 @TargetOption(entityClass = User.class, alias = E_User.ALIAS)
 //默认更新注解
 @Update
-public class UpdateUserPwdReq extends MultiTenantReq {
+public class UpdateUserPwdReq extends MultiTenantReq<UpdateUserPwdReq> {
 
     private static final long serialVersionUID = -445263479L;
 

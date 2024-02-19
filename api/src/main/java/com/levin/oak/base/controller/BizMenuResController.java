@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 菜单业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:47, 代码生成哈希校验码：[5176f4af41b39deaaac02af56e407176]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年2月19日 上午10:56:10, 代码生成哈希校验码：[189940567cfad3f98774d2b1a4aa1a0a]，请不要修改和删除此行内容。
 *
 */
 
@@ -104,7 +104,7 @@ public class BizMenuResController extends MenuResController{
     * @param req QueryMenuResReq
     * @return  ApiResp<StatMenuResReq.Result>
     */
-    @GetMapping("/stat") //默认开放
+    @GetMapping("stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatMenuResReq.Result> stat(@Valid StatMenuResReq req, SimplePaging paging) {
 

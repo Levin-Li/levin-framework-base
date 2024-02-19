@@ -35,7 +35,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
  * 抽象服务类
  *
  * @author lilw
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:54:11, 代码生成哈希校验码：[153b01ceb48fb19ea032e867a825a57a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年2月19日 上午10:56:08, 代码生成哈希校验码：[23947aeb35c7cd66f06cf2291d758329]，请不要修改和删除此行内容。
  *
  */
 @Slf4j
@@ -46,6 +46,7 @@ public abstract class BaseService<S> {
 
     @Autowired
     protected ApplicationContext applicationContext;
+
 
     protected Object selfProxy = null;
 
@@ -67,4 +68,21 @@ public abstract class BaseService<S> {
 
         return (T) selfProxy;
     }
+
+    /**
+     * 兼容旧代码，请不要调用
+     * @param type
+     * @return
+     * @param <T>
+     */
+    @Deprecated
+    protected <T extends S> T getSelfProxy(Class<T> type) {
+
+        if (selfProxy == null) {
+            selfProxy = applicationContext.getBean(type);
+        }
+
+        return (T) selfProxy;
+    }
+
 }

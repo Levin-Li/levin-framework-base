@@ -13,6 +13,7 @@ import com.levin.oak.base.biz.BizUserService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.codegen.model.ModelBuildUtils;
+import com.levin.oak.base.codegen.model.TsGenUtils;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.entities.EntityConst;
 import com.levin.oak.base.entities.Setting;
@@ -162,7 +163,7 @@ public class IndexController extends BaseController {
     @Operation(summary = "首页", description = "首页", hidden = true)
     public String index(Model modelMap) throws IOException {
 
-        pluginManager.getInstalledPlugins().forEach(plugin -> log.info("{} :{}", plugin.getName(), ModelBuildUtils.buildInfo(applicationContext, plugin)));
+        TsGenUtils.genTsClient(applicationContext, null);
 
         modelMap.addAttribute("request", httpRequest);
 

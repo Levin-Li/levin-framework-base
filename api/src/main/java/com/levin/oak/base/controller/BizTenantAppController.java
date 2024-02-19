@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 租户应用业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:46, 代码生成哈希校验码：[7b89ab8d0315773bde3f89ad9ebfcb3c]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年2月19日 上午10:56:09, 代码生成哈希校验码：[c7216040d89d97c11ec7e26047562f01]，请不要修改和删除此行内容。
 *
 */
 
@@ -104,7 +104,7 @@ public class BizTenantAppController extends TenantAppController{
     * @param req QueryTenantAppReq
     * @return  ApiResp<StatTenantAppReq.Result>
     */
-    @GetMapping("/stat") //默认开放
+    @GetMapping("stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatTenantAppReq.Result> stat(@Valid StatTenantAppReq req, SimplePaging paging) {
 

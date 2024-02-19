@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单表单业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:47, 代码生成哈希校验码：[3447b11de0e73986fe3019eb3f923ceb]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年2月19日 上午10:56:11, 代码生成哈希校验码：[36e2ee25c95286a57a3496fdedbb4a67]，请不要修改和删除此行内容。
 *
 */
 
@@ -104,7 +104,7 @@ public class BizSimpleFormController extends SimpleFormController{
     * @param req QuerySimpleFormReq
     * @return  ApiResp<StatSimpleFormReq.Result>
     */
-    @GetMapping("/stat") //默认开放
+    @GetMapping("stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatSimpleFormReq.Result> stat(@Valid StatSimpleFormReq req, SimplePaging paging) {
 

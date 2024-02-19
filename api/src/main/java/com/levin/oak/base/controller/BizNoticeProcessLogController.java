@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 通知处理日志业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:46, 代码生成哈希校验码：[932b8cf3169a3cc126c9961cc9c86abf]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年2月19日 上午10:56:10, 代码生成哈希校验码：[7a21871fa397c9a7355f859e83d9eaa1]，请不要修改和删除此行内容。
 *
 */
 
@@ -104,7 +104,7 @@ public class BizNoticeProcessLogController extends NoticeProcessLogController{
     * @param req QueryNoticeProcessLogReq
     * @return  ApiResp<StatNoticeProcessLogReq.Result>
     */
-    @GetMapping("/stat") //默认开放
+    @GetMapping("stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatNoticeProcessLogReq.Result> stat(@Valid StatNoticeProcessLogReq req, SimplePaging paging) {
 

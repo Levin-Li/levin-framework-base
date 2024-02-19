@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 调度日志业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:46, 代码生成哈希校验码：[b2c0c08caaec647da37713848d0dc6d2]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年2月19日 上午10:56:09, 代码生成哈希校验码：[0ab59dab2a14e5cc9d6671b93b4b5f7f]，请不要修改和删除此行内容。
 *
 */
 
@@ -104,7 +104,7 @@ public class BizScheduledLogController extends ScheduledLogController{
     * @param req QueryScheduledLogReq
     * @return  ApiResp<StatScheduledLogReq.Result>
     */
-    @GetMapping("/stat") //默认开放
+    @GetMapping("stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatScheduledLogReq.Result> stat(@Valid StatScheduledLogReq req, SimplePaging paging) {
 

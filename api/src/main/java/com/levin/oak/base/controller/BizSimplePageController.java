@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单页面业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:47, 代码生成哈希校验码：[e86427cb7193d9cb05d57b41a5bc4b11]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年2月19日 上午10:56:10, 代码生成哈希校验码：[aff10f696312c715044832922ad3a5a8]，请不要修改和删除此行内容。
 *
 */
 
@@ -104,7 +104,7 @@ public class BizSimplePageController extends SimplePageController{
     * @param req QuerySimplePageReq
     * @return  ApiResp<StatSimplePageReq.Result>
     */
-    @GetMapping("/stat") //默认开放
+    @GetMapping("stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatSimplePageReq.Result> stat(@Valid StatSimplePageReq req, SimplePaging paging) {
 

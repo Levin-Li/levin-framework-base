@@ -5,9 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.levin.commons.plugin.Plugin;
+import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.RbacUtils;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.rbac.ResPermission;
+import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.support.SpringContextHolder;
 import com.levin.commons.ui.annotation.CRUD;
 import com.levin.commons.utils.LangUtils;
@@ -52,6 +54,19 @@ import java.util.stream.Stream;
 public class ModelBuildUtils {
 
 
+    public static Map<Plugin, Module> buildInfo(ApplicationContext context) {
+
+        LinkedHashMap<Plugin, Module> map = new LinkedHashMap<>();
+
+        PluginManager pluginManager = context.getBean(PluginManager.class);
+
+        for (Plugin plugin : pluginManager.getInstalledPlugins()) {
+            map.put(plugin, buildInfo(context, plugin));
+        }
+
+        return map;
+    }
+
     public static Module buildInfo(ApplicationContext context, Plugin plugin) {
 
         Module module = new Module();
@@ -89,11 +104,24 @@ public class ModelBuildUtils {
             //处理路径变量
             basePath = evalFun.apply(basePath);
 
-            String entityName = beanType.getSimpleName().replace("Controller", "");
+            String entityName = beanType.getSimpleName();
+
+            if (entityName.endsWith("Controller")) {
+                entityName = entityName.substring(0, entityName.length() - 10);
+            }
+
+            if (entityName.endsWith("Biz")) {
+                entityName = entityName.substring(3);
+            }
 
             if (!StringUtils.trimAllWhitespace(basePath).replace("//", "/").equals("/")) {
-                entityName = basePath.contains("/") ? basePath.substring(basePath.lastIndexOf('/') + 1) : basePath;
+                //entityName = basePath.contains("/") ? basePath.substring(basePath.lastIndexOf('/') + 1) : basePath;
             }
+
+            entityName = entityName.replace('-', '_').replace(' ', '_');
+
+            //首字母大写
+            entityName = entityName.substring(0, 1).toUpperCase() + entityName.substring(1);
 
             service.setId(beanType.getName())
                     .setName(entityName)
@@ -122,7 +150,8 @@ public class ModelBuildUtils {
                 Module.Api api = new Module.Api()
                         .setId(method.toGenericString())
                         .setView(isView)
-                        .setReturnTypeDefine((getTypeParameters(classStack, method.getTypeParameters()) + " " + method.getGenericReturnType().getTypeName()).trim())
+                        .setReturnTDefinePrefix(getTypeParameters(classStack, method.getTypeParameters()))
+                        .setReturnTypeDefine((method.getGenericReturnType().getTypeName()).trim())
                         .setName(method.getName())
                         .setLabel(operation == null ? "" : operation.summary())
                         .setDesc(operation == null ? "" : operation.description());
@@ -133,7 +162,7 @@ public class ModelBuildUtils {
                 classStack.forEach(service::addImport);
                 classStack.clear();
 
-                getTypeDefine(method.getGenericReturnType(), classStack);
+                String typeDefine = getTypeDefine(forMethodReturnType.getType(), classStack);
                 classStack.forEach(service::addImport);
                 classStack.clear();
 
@@ -141,8 +170,11 @@ public class ModelBuildUtils {
 
                 //简化方法ID
                 if (methodMapping != null) {
-                    api.setMethod(Stream.of(methodMapping.method()).map(Enum::name).collect(Collectors.joining(",")));
-                    api.setPath(String.join(",", methodMapping.path()));
+                    api.setMethod(Stream.of(methodMapping.method()).map(Enum::name).collect(Collectors.toList()));
+                    if (api.getMethod().isEmpty()) {
+                        api.setMethod(Arrays.asList(RequestMethod.POST.name()));
+                    }
+                    api.setPath(Arrays.asList(methodMapping.path()));
                 }
 
                 if (resAuthorize != null && !resAuthorize.ignored()) {
@@ -224,9 +256,12 @@ public class ModelBuildUtils {
                     }
 
                     if (isSimpleType(resolve)) {
-                        param.setTypeDefine(paramResolvableType.getType().getTypeName());
+                        param.setSimpleType(true)
+                                .setTypeDefine(paramResolvableType.getType().getTypeName());
                     } else {
-                        param.setTypeDefine((getTypeParameters(method.getTypeParameters()) + " " + paramResolvableType.getType().getTypeName()).trim());
+                        param.setSimpleType(resolve.isEnum())
+                                .setTypeDefinePrefix(getTypeParameters(null, method.getTypeParameters()))
+                                .setTypeDefine(paramResolvableType.getType().getTypeName().trim());
 
                         if (columnSchema == null) {
                             columnSchema = resolve.getAnnotation(Schema.class);
@@ -254,12 +289,7 @@ public class ModelBuildUtils {
                     }
 
                     //如果是枚举
-                    if (resolve != null
-                            && resolve.isEnum()) {
-                        for (Object enumConstant : resolve.getEnumConstants()) {
-                            param.getOptions().add(enumConstant.toString());
-                        }
-                    } else if (!isSimpleType(resolve)) {
+                    if (!isSimpleType(resolve)) {
                         //递归解析字段类型
                         // log.info("开始解析字段：{} 属性：{} 类型：{} - {}", resolve.getName(), columnName, forColumnType.getType().getTypeName(), readMethod.getGenericReturnType());
                         buildDtoInfo(paramResolvableType, module.getSchemas());
@@ -274,6 +304,7 @@ public class ModelBuildUtils {
             });
 
         });
+
 
         return module;
     }
@@ -302,7 +333,8 @@ public class ModelBuildUtils {
 
     private static boolean isSimpleType(Class<?> resolve) {
         return resolve == null
-                || BeanUtils.isSimpleProperty(resolve)
+                //不包含枚举
+                || (BeanUtils.isSimpleProperty(resolve) && !resolve.isEnum())
                 || resolve == Object.class
                 || resolve == Serializable.class
                 || resolve == Externalizable.class
@@ -370,7 +402,18 @@ public class ModelBuildUtils {
 
             ParameterizedType pType = (ParameterizedType) type;
 
-            typDefineBuilder.append(pType.getRawType().getTypeName());
+            Type rawType = pType.getRawType();
+
+            typDefineBuilder.append(rawType.getTypeName());
+
+            if (rawType instanceof Class) {
+                Class<?> clazzType = (Class<?>) rawType;
+                if (!stack.contains(clazzType) && clazzType != Object.class && clazzType != Enum.class) {
+                    stack.push(clazzType);
+                }
+            } else {
+                log.warn("ParameterizedType getRawType 未知类型:{}", rawType);
+            }
 
             typDefineBuilder.append(getTypeParameters(stack, pType.getActualTypeArguments()));
 
@@ -419,10 +462,6 @@ public class ModelBuildUtils {
      * @param types
      * @return
      */
-    public static String getTypeParameters(Type... types) {
-        return getTypeParameters(null, types);
-    }
-
     public static String getTypeParameters(Stack<Class<?>> stack, Type... types) {
 
         if (types == null || types.length == 0) {
@@ -467,11 +506,37 @@ public class ModelBuildUtils {
                         .setId(resolve.getName())
                         .setClassType(resolve)
                         .setInterface(resolve.isInterface())
+                        .setEnum(resolve.isEnum())
                         .setName(resolve.getSimpleName())
                         .setTypeDefine(getRootTypeDefine(resolve))
         );
 
+
+        if (dtoSchema.isEnum()) {
+
+            //如果已经存在，并且字段已经解析了，直接返回
+            if (dtoSchema.getColumnList() != null) {
+                return;
+            }
+
+            dtoSchema.setColumnList(new ArrayList<>());
+
+            for (Object _enumConstant : dtoSchema.classType.getEnumConstants()) {
+                Enum<?> enumConstant = (Enum<?>) _enumConstant;
+
+                Module.Column column = new Module.Column()
+                        .setId(enumConstant.name())
+                        .setName(enumConstant.name())
+                        .setLabel(EnumDesc.getDesc(enumConstant));
+
+                dtoSchema.getColumnList().add(column);
+            }
+
+            return;
+        }
+
         //放入
+        addImports(resolve, dtoSchema);
 
         //处理泛型
         for (ResolvableType generic : resolvableType.getGenerics()) {
@@ -509,6 +574,13 @@ public class ModelBuildUtils {
         if (resolve.isInterface()) {
 
             for (ResolvableType resolvableTypeInterface : resolvableType.getInterfaces()) {
+                if (canIgnore(resolvableTypeInterface)) {
+                    continue;
+                }
+
+                addImports(resolvableTypeInterface.resolve(), dtoSchema);
+                addImports(resolvableTypeInterface.getType(), dtoSchema);
+
                 if (!isSimpleType(resolvableTypeInterface.resolve())) {
                     buildDtoInfo(resolvableTypeInterface, outResultMap);
                 }
@@ -521,9 +593,10 @@ public class ModelBuildUtils {
             //处理父类型
             ResolvableType superResolvableType = resolvableType.getSuperType();
 
-            if (superResolvableType != null
-                    && superResolvableType.resolve() != null
-                    && superResolvableType.resolve() != Object.class) {
+            if (!canIgnore(superResolvableType)) {
+
+                addImports(superResolvableType.resolve(), dtoSchema);
+                addImports(superResolvableType.getType(), dtoSchema);
 
                 //递归
                 //递归构建父类型
@@ -538,6 +611,22 @@ public class ModelBuildUtils {
 
         log.info("解析类型 ： {} ", dtoSchema.getFullTypeDefine());
 
+    }
+
+
+    private static boolean canIgnore(ResolvableType resolvableType) {
+
+        if (resolvableType == null || resolvableType.resolve() == null) {
+            return true;
+        }
+
+        return Stream.of("java.lang.", "java.util.", "java.io.").anyMatch(it -> resolvableType.resolve().getName().startsWith(it));
+    }
+
+    private static void addImports(Type resolvableTypeInterface, Module.DtoSchema dtoSchema) {
+        Stack<Class<?>> classStack = new Stack<>();
+        getTypeDefine(resolvableTypeInterface, classStack);
+        classStack.forEach(dtoSchema::addImport);
     }
 
     private static List<Module.Column> parseColumns(ResolvableType resolvableType, Module.DtoSchema dtoSchema, Map<String, Module.DtoSchema> outResultMap) {
@@ -577,7 +666,11 @@ public class ModelBuildUtils {
 
             if (!hasSetter && AnnotatedElementUtils.findMergedAnnotation(readMethod, JsonProperty.class) == null) {
                 //如果只有get方法，并且没有注明JsonProperty，则忽略
-                //continue;
+
+                //请求对象
+                if (resolve.getName().endsWith("Req")) {
+                    continue;
+                }
             }
 
             Field field = ReflectionUtils.findField(resolve, columnName);
@@ -596,9 +689,10 @@ public class ModelBuildUtils {
             Module.Column column = new Module.Column()
                     .setId(trimId.apply(readMethod.toGenericString()))
                     .setName(columnName)
+                    .setReadOnly(!hasSetter)
                     .setRequiredMode(findConstraints(readMethod, field))
-                    //字段类型描述，包含泛型信息
-                    .setTypeDefine((getTypeParameters(readMethod.getTypeParameters()) + " " + readMethod.getGenericReturnType().getTypeName()).trim());
+                    .setTypeDefinePrefix(getTypeParameters(null, readMethod.getTypeParameters()))
+                    .setTypeDefine(readMethod.getGenericReturnType().getTypeName().trim());
 
             Stream.of(readMethod.getAnnotations()).filter(an -> an.annotationType().getPackage().getName().startsWith(CRUD.class.getPackage().getName())).forEachOrdered(column.crudAnnotations::add);
 
@@ -606,9 +700,7 @@ public class ModelBuildUtils {
                 Stream.of(field.getDeclaredAnnotations()).filter(an -> an.annotationType().getPackage().getName().startsWith(CRUD.class.getPackage().getName())).forEachOrdered(column.crudAnnotations::add);
             }
 
-            Stack<Class<?>> classStack = new Stack<>();
-            getTypeDefine(readMethod.getGenericReturnType(), classStack);
-            classStack.forEach(dtoSchema::addImport);
+            addImports(readMethod.getGenericReturnType(), dtoSchema);
 
 
             if (columnSchema != null) {
@@ -636,17 +728,13 @@ public class ModelBuildUtils {
             Class<?> columnResolve = forColumnType.resolve();
 
             //如果是枚举
-            if (columnResolve != null
-                    && columnResolve.isEnum()) {
-
-                for (Object enumConstant : columnResolve.getEnumConstants()) {
-                    column.getOptions().add(enumConstant.toString());
-                }
-            } else if (!isSimpleType(columnResolve)) {
-
+            if (!isSimpleType(columnResolve)) {
+                column.setSimpleType(columnResolve.isEnum());
                 //递归解析字段类型
                 // log.info("开始解析字段：{} 属性：{} 类型：{} - {}", resolve.getName(), columnName, forColumnType.getType().getTypeName(), readMethod.getGenericReturnType());
                 buildDtoInfo(forColumnType, outResultMap);
+            } else {
+                column.setSimpleType(true);
             }
 
             //加入字段

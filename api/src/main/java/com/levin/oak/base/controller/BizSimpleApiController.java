@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单动态接口业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午5:07:45, 代码生成哈希校验码：[63148443b15aa16a5b3f3fcfd32a8836]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年2月19日 上午10:56:09, 代码生成哈希校验码：[70108ce3e7d4a69d26ead01643492765]，请不要修改和删除此行内容。
 *
 */
 
@@ -104,7 +104,7 @@ public class BizSimpleApiController extends SimpleApiController{
     * @param req QuerySimpleApiReq
     * @return  ApiResp<StatSimpleApiReq.Result>
     */
-    @GetMapping("/stat") //默认开放
+    @GetMapping("stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatSimpleApiReq.Result> stat(@Valid StatSimpleApiReq req, SimplePaging paging) {
 
