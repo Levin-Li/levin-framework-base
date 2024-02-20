@@ -261,7 +261,7 @@ public class ModelBuildUtils {
                     } else {
                         param.setSimpleType(resolve.isEnum())
                                 .setTypeDefinePrefix(getTypeParameters(null, method.getTypeParameters()))
-                                .setTypeDefine(paramResolvableType.getType().getTypeName().trim());
+                                .setTypeDefine(paramResolvableType.getType().getTypeName());
 
                         if (columnSchema == null) {
                             columnSchema = resolve.getAnnotation(Schema.class);
@@ -383,8 +383,12 @@ public class ModelBuildUtils {
             typDefineBuilder.append(clazzType.getName());
 
             //防止递归
-            if (!stack.contains(clazzType) && clazzType != Object.class && clazzType != Enum.class) {
+            if (!stack.contains(clazzType)
+                    && clazzType != Object.class
+                    && clazzType != Enum.class) {
+
                 stack.push(clazzType);
+
                 typDefineBuilder.append(getTypeParameters(stack, clazzType.getTypeParameters()));
             }
 
@@ -392,11 +396,18 @@ public class ModelBuildUtils {
 
             TypeVariable<?> typeVariable = (TypeVariable<?>) type;
 
-            typDefineBuilder.append(typeVariable.getName())
-                    .append(getBounds(stack, true, typeVariable.getBounds()))
-            ;
+            typDefineBuilder.append(typeVariable.getName());
 
-            // typDefineBuilder.append(getTypeParameters(stack, typeVariable.getGenericDeclaration().getTypeParameters()));
+            if (typeVariable.getBounds() != null
+                    && typeVariable.getBounds().length > 0
+                    && typeVariable.getBounds()[0] instanceof Class) {
+                Class<?> clazzType = (Class<?>) typeVariable.getBounds()[0];
+                if (!stack.contains(clazzType) && clazzType != Object.class && clazzType != Enum.class) {
+                    stack.push(clazzType);
+                }
+            }
+
+            typDefineBuilder.append(getBounds(stack, true, typeVariable.getBounds()));
 
         } else if (type instanceof ParameterizedType) {
 
@@ -686,13 +697,19 @@ public class ModelBuildUtils {
             //字段类型
             ResolvableType forColumnType = ResolvableType.forType(readMethod.getGenericReturnType(), resolvableType);
 
+            if (readMethod.getDeclaringClass().getSimpleName().equals("Plugin")) {
+
+                TypeVariable<Method>[] typeParameters = readMethod.getTypeParameters();
+                log.debug("{}", readMethod.getGenericReturnType().getTypeName());
+            }
+
             Module.Column column = new Module.Column()
                     .setId(trimId.apply(readMethod.toGenericString()))
                     .setName(columnName)
                     .setReadOnly(!hasSetter)
                     .setRequiredMode(findConstraints(readMethod, field))
                     .setTypeDefinePrefix(getTypeParameters(null, readMethod.getTypeParameters()))
-                    .setTypeDefine(readMethod.getGenericReturnType().getTypeName().trim());
+                    .setTypeDefine(readMethod.getGenericReturnType().getTypeName());
 
             Stream.of(readMethod.getAnnotations()).filter(an -> an.annotationType().getPackage().getName().startsWith(CRUD.class.getPackage().getName())).forEachOrdered(column.crudAnnotations::add);
 

@@ -104,7 +104,7 @@ public class BizPermissionController extends PermissionController{
     * @param req QueryPermissionReq
     * @return  ApiResp<StatPermissionReq.Result>
     */
-    @GetMapping("/stat") //默认开放
+    @GetMapping("stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatPermissionReq.Result> stat(@Valid StatPermissionReq req, SimplePaging paging) {
 

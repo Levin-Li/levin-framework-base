@@ -35,6 +35,5 @@ export interface ${schema.typeDefine} <#if schema.superType?? || schema.interfac
     ${column.name}<#if !column.requiredMode??>?</#if>${(column.typeDefinePrefix?length > 0) ? string(column.typeDefinePrefix,'')}${(column.readOnly) ? string('()','')}: ${column.typeDefine};
 
 </#list>
-
 }
 </#if>

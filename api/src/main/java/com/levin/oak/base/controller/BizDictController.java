@@ -149,7 +149,7 @@ public class BizDictController extends DictController {
      * @param req QueryDictReq
      * @return ApiResp<StatDictReq.Result>
      */
-    @GetMapping("/stat") //默认开放
+    @GetMapping("stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatDictReq.Result> stat(@Valid StatDictReq req, SimplePaging paging) {
 

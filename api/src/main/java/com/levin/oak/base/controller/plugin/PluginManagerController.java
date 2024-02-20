@@ -5,6 +5,7 @@ import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.controller.BaseController;
+import com.levin.oak.base.controller.plugin.dto.PluginInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.levin.commons.dao.EntityOpConst.*;
 import static com.levin.oak.base.ModuleOption.*;
@@ -49,10 +51,10 @@ public class PluginManagerController extends BaseController {
      *
      * @return
      */
-    @GetMapping("/list")
+    @GetMapping("list")
     @Operation(summary = QUERY_LIST_ACTION, description = "获取插件列表")
-    public ApiResp<List<Plugin>> list() {
-        return ApiResp.ok(pluginManager.getInstalledPlugins());
+    public ApiResp<List<PluginInfo>> list() {
+        return ApiResp.ok(pluginManager.getInstalledPlugins().stream().map(this::toPluginInfo).map(p -> p.setMenuList(null)).collect(Collectors.toList()));
     }
 
     /**
@@ -61,10 +63,26 @@ public class PluginManagerController extends BaseController {
      * @param pluginId
      * @return
      */
-    @GetMapping("/{pluginId}")
+    @GetMapping("{pluginId}")
     @Operation(summary = VIEW_DETAIL_ACTION, description = "获取插件详情")
-    public ApiResp<Plugin> plugin(@PathVariable String pluginId) {
-        return ApiResp.ok(pluginManager.getInstalledPlugin(pluginId));
+    public ApiResp<PluginInfo> plugin(@PathVariable String pluginId) {
+        return ApiResp.ok(toPluginInfo(pluginManager.getInstalledPlugin(pluginId)));
+    }
+    private PluginInfo toPluginInfo(Plugin plugin) {
+
+        if (plugin == null) {
+            return null;
+        }
+
+        return new PluginInfo()
+                .setId(plugin.getId())
+                .setVersion(plugin.getVersion())
+                .setAuthor(plugin.getAuthor())
+                .setRemark(plugin.getRemark())
+                .setName(plugin.getName())
+                .setPackageName(plugin.getPackageName())
+                .setMenuList(plugin.getMenuList());
+
     }
 
 }

@@ -117,7 +117,7 @@ public class BizAreaController extends AreaController{
     * @param req QueryAreaReq
     * @return  ApiResp<StatAreaReq.Result>
     */
-    @GetMapping("/stat") //默认开放
+    @GetMapping("stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatAreaReq.Result> stat(@Valid StatAreaReq req, SimplePaging paging) {
 
