@@ -130,10 +130,11 @@ public class ModelBuildUtils {
                     .setType(serviceResAuthorize == null ? "" : serviceResAuthorize.type())
                     .setPathPrefix(basePath);
 
+            Stream.of(beanType.getAnnotations()).filter(an -> an.annotationType().getPackage().getName().startsWith(CRUD.class.getPackage().getName())).forEachOrdered(service.crudAnnotations::add);
+
             Map<Method, ResAuthorize> methodResAuthorizeMap = RbacUtils.loadClassResAuthorize(controller, true);
 
             final boolean isViewType = AnnotatedElementUtils.findMergedAnnotation(beanType, ResponseBody.class) == null;
-
 
             //
             methodResAuthorizeMap.forEach((method, resAuthorize) -> {

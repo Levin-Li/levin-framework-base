@@ -39,6 +39,10 @@ public class Module implements Serializable {
 
         final Set<Class<?>> importList = new LinkedHashSet<>();
 
+        @Schema(title = "CURD注解列表")
+        final Set<Annotation> crudAnnotations = new LinkedHashSet<>();
+
+
         public Service addImport(Class<?> type) {
 
             if (type != null

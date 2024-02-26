@@ -84,18 +84,17 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
 
         @Override
         public String getTenantId() {
-            return null;
+            return "anonymous";
         }
 
         @Override
         public <ID extends Serializable> ID getOrgId() {
-            return null;
+            return (ID) "anonymous";
         }
 
         @Override
         public <ID extends Serializable> ID getId() {
-            //throw new IllegalStateException("anonymous user");
-            return null;
+            return (ID) "anonymous";
         }
     };
 
@@ -245,7 +244,7 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
 
             if (!isOrgAllScope) {
                 //能访问的部门列表
-               // builder.put(InjectConst.ORG_ID_LIST, bizOrgService.loadOrgList(userInfo, false).stream().map(OrgInfo::getId).collect(Collectors.toList()));
+                // builder.put(InjectConst.ORG_ID_LIST, bizOrgService.loadOrgList(userInfo, false).stream().map(OrgInfo::getId).collect(Collectors.toList()));
             }
 
         } else {
@@ -260,16 +259,16 @@ public class ModuleWebInjectVarServiceImpl implements InjectVarService {
                     .put(InjectConst.IS_ALL_ORG_SCOPE, false)
 
                     .put(InjectConst.ORG, null)
-                    //   .put(InjectConst.ORG_ID_LIST, null)
-                    .put(InjectConst.ORG_ID, null);
+                    .put(InjectConst.ORG_ID, anonymous.getOrgId())
+                    .put(InjectConst.TENANT_ID, anonymous.getTenantId());
 
         }
-
 
         //租户信息
         if (tenantInfo != null) {
             builder.put(InjectConst.TENANT, tenantInfo)
-                    .put(InjectConst.TENANT_ID, tenantInfo.getId());
+                    .put(InjectConst.TENANT_ID, tenantInfo.getId())
+                    .put(InjectConst.TENANT_NAME, tenantInfo.getName());
         }
 
         final Map<String, Object> ctx = builder.build();

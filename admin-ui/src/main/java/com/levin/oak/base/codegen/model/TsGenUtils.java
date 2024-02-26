@@ -78,8 +78,6 @@ public class TsGenUtils {
                     String newName = replaceType(imp.getName(), tsTypeMap);
                     if (!isBaseTsType(newName)) {
                         importList.add(newName);
-                    } else {
-                        log.debug("---- {}", imp);
                     }
                 });
 

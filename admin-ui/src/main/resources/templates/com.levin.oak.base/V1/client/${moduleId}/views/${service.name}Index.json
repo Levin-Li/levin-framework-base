@@ -1,0 +1,662 @@
+{
+  "cg": "@author Auto gen by simple-dao-codegen, @time: ${.now}, 代码生成哈希校验码：[]，请不要修改和删除此行内容",
+  "type": "page",
+  "body": {
+    "type": "crud",
+    "syncLocation": false,
+    "api": {
+      "method": "get",
+      "url": "http://127.0.0.1:8080/com.levin.oak.base/V1/api/AccessLog/list",
+      "requestAdaptor": "",
+      "adaptor": "",
+      "messages": {
+      },
+      "dataType": "json"
+    },
+    "columns": [
+      {
+        "label": "id",
+        "type": "text",
+        "name": "id"
+      },
+      {
+        "label": "域名",
+        "type": "text",
+        "name": "domain"
+      },
+      {
+        "label": "createTime",
+        "type": "date",
+        "name": "createTime",
+        "placeholder": "-",
+        "sortable": true
+      },
+      {
+        "type": "operation",
+        "label": "操作",
+        "buttons": [
+          {
+            "label": "编辑",
+            "type": "button",
+            "actionType": "dialog",
+            "level": "link",
+            "editorSetting": {
+              "behavior": "update"
+            },
+            "dialog": {
+              "title": "编辑",
+              "body": {
+                "type": "form",
+                "api": "xxx/update",
+                "body": [
+                  {
+                    "label": "id",
+                    "name": "id",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "domain",
+                    "name": "domain",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "visitor",
+                    "name": "visitor",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "title",
+                    "name": "title",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "logType",
+                    "name": "logType",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "diffModifyData",
+                    "name": "diffModifyData",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "bizKey",
+                    "name": "bizKey",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "bizType",
+                    "name": "bizType",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "requestUri",
+                    "name": "requestUri",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "requestMethod",
+                    "name": "requestMethod",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "headInfo",
+                    "name": "headInfo",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "requestParams",
+                    "name": "requestParams",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "requestBody",
+                    "name": "requestBody",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "responseBody",
+                    "name": "responseBody",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "remoteAddr",
+                    "name": "remoteAddr",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "accessRegion",
+                    "name": "accessRegion",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "serverAddr",
+                    "name": "serverAddr",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "isException",
+                    "name": "isException",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "exceptionInfo",
+                    "name": "exceptionInfo",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "userAgent",
+                    "name": "userAgent",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "deviceName",
+                    "name": "deviceName",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "browserName",
+                    "name": "browserName",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "executeTime",
+                    "name": "executeTime",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "orgId",
+                    "name": "orgId",
+                    "type": "input-text"
+                  },
+                  {
+                    "label": "createTime",
+                    "name": "createTime",
+                    "type": "input-date"
+                  },
+                  {
+                    "label": "optimisticLock",
+                    "name": "optimisticLock",
+                    "type": "input-text"
+                  }
+                ]
+              }
+            },
+            "id": "u:878a2ed9e60f"
+          },
+          {
+            "label": "查看",
+            "type": "button",
+            "actionType": "dialog",
+            "level": "link",
+            "editorSetting": {
+              "behavior": "view"
+            },
+            "dialog": {
+              "title": "查看详情",
+              "body": {
+                "type": "form",
+                "api": "xxx/update",
+                "body": [
+                  {
+                    "label": "id",
+                    "name": "id",
+                    "type": "static"
+                  },
+                  {
+                    "label": "domain",
+                    "name": "domain",
+                    "type": "static"
+                  },
+                  {
+                    "label": "visitor",
+                    "name": "visitor",
+                    "type": "static"
+                  },
+                  {
+                    "label": "title",
+                    "name": "title",
+                    "type": "static"
+                  },
+                  {
+                    "label": "logType",
+                    "name": "logType",
+                    "type": "static"
+                  },
+                  {
+                    "label": "diffModifyData",
+                    "name": "diffModifyData",
+                    "type": "static"
+                  },
+                  {
+                    "label": "bizKey",
+                    "name": "bizKey",
+                    "type": "static"
+                  },
+                  {
+                    "label": "bizType",
+                    "name": "bizType",
+                    "type": "static"
+                  },
+                  {
+                    "label": "requestUri",
+                    "name": "requestUri",
+                    "type": "static"
+                  },
+                  {
+                    "label": "requestMethod",
+                    "name": "requestMethod",
+                    "type": "static"
+                  },
+                  {
+                    "label": "headInfo",
+                    "name": "headInfo",
+                    "type": "static"
+                  },
+                  {
+                    "label": "requestParams",
+                    "name": "requestParams",
+                    "type": "static"
+                  },
+                  {
+                    "label": "requestBody",
+                    "name": "requestBody",
+                    "type": "static"
+                  },
+                  {
+                    "label": "responseBody",
+                    "name": "responseBody",
+                    "type": "static"
+                  },
+                  {
+                    "label": "remoteAddr",
+                    "name": "remoteAddr",
+                    "type": "static"
+                  },
+                  {
+                    "label": "accessRegion",
+                    "name": "accessRegion",
+                    "type": "static"
+                  },
+                  {
+                    "label": "serverAddr",
+                    "name": "serverAddr",
+                    "type": "static"
+                  },
+                  {
+                    "label": "isException",
+                    "name": "isException",
+                    "type": "static"
+                  },
+                  {
+                    "label": "exceptionInfo",
+                    "name": "exceptionInfo",
+                    "type": "static"
+                  },
+                  {
+                    "label": "userAgent",
+                    "name": "userAgent",
+                    "type": "static"
+                  },
+                  {
+                    "label": "deviceName",
+                    "name": "deviceName",
+                    "type": "static"
+                  },
+                  {
+                    "label": "browserName",
+                    "name": "browserName",
+                    "type": "static"
+                  },
+                  {
+                    "label": "executeTime",
+                    "name": "executeTime",
+                    "type": "static"
+                  },
+                  {
+                    "label": "orgId",
+                    "name": "orgId",
+                    "type": "static"
+                  },
+                  {
+                    "label": "createTime",
+                    "name": "createTime",
+                    "type": "static"
+                  },
+                  {
+                    "label": "optimisticLock",
+                    "name": "optimisticLock",
+                    "type": "static"
+                  }
+                ]
+              }
+            },
+            "id": "u:94ce9cf6fdee"
+          },
+          {
+            "type": "button",
+            "label": "删除",
+            "actionType": "ajax",
+            "level": "link",
+            "className": "text-danger",
+            "confirmText": "确定要删除？",
+            "api": {
+              "method": "post",
+              "url": "http://127.0.0.1:8080/com.levin.oak.base/V1/api/AccessLog/list",
+              "requestAdaptor": "",
+              "adaptor": "",
+              "messages": {
+              },
+              "dataType": "json"
+            },
+            "editorSetting": {
+              "behavior": "delete"
+            },
+            "id": "u:abe7d1a13934"
+          }
+        ],
+        "id": "u:38b651558cda"
+      }
+    ],
+    "bulkActions": [
+      {
+        "type": "button",
+        "level": "danger",
+        "label": "批量删除",
+        "actionType": "ajax",
+        "confirmText": "确定要删除？",
+        "api": "/xxx/batch-delete",
+        "editorSetting": {
+          "behavior": "bulkDelete"
+        },
+        "id": "u:058fc15813bb"
+      }
+    ],
+    "itemActions": [
+    ],
+    "filterSettingSource": [
+      "id",
+      "domain",
+      "visitor",
+      "title",
+      "logType",
+      "diffModifyData",
+      "bizKey",
+      "bizType",
+      "requestUri",
+      "requestMethod",
+      "headInfo",
+      "requestParams",
+      "requestBody",
+      "responseBody",
+      "remoteAddr",
+      "accessRegion",
+      "serverAddr",
+      "isException",
+      "exceptionInfo",
+      "userAgent",
+      "deviceName",
+      "browserName",
+      "executeTime",
+      "orgId",
+      "createTime",
+      "optimisticLock"
+    ],
+    "filterEnabledList": [
+      {
+        "label": "title",
+        "value": "title"
+      },
+      {
+        "label": "userAgent",
+        "value": "userAgent"
+      },
+      {
+        "label": "accessRegion",
+        "value": "accessRegion"
+      },
+      {
+        "label": "remoteAddr",
+        "value": "remoteAddr"
+      },
+      {
+        "label": "createTime",
+        "value": "createTime"
+      }
+    ],
+    "headerToolbar": [
+      {
+        "label": "新增",
+        "type": "button",
+        "actionType": "dialog",
+        "level": "primary",
+        "editorSetting": {
+          "behavior": "create"
+        },
+        "dialog": {
+          "title": "新增",
+          "body": {
+            "type": "form",
+            "api": {
+              "method": "post",
+              "url": "http://127.0.0.1:8080/com.levin.oak.base/V1/api/AccessLog/list",
+              "requestAdaptor": "",
+              "adaptor": "",
+              "messages": {
+              },
+              "dataType": "json"
+            },
+            "body": [
+              {
+                "type": "input-text",
+                "name": "id",
+                "label": "id"
+              },
+              {
+                "type": "input-text",
+                "name": "domain",
+                "label": "domain"
+              },
+              {
+                "type": "input-text",
+                "name": "visitor",
+                "label": "visitor"
+              },
+              {
+                "type": "input-text",
+                "name": "title",
+                "label": "title"
+              },
+              {
+                "type": "input-text",
+                "name": "logType",
+                "label": "logType"
+              },
+              {
+                "type": "input-text",
+                "name": "diffModifyData",
+                "label": "diffModifyData"
+              },
+              {
+                "type": "input-text",
+                "name": "bizKey",
+                "label": "bizKey"
+              },
+              {
+                "type": "input-text",
+                "name": "bizType",
+                "label": "bizType"
+              },
+              {
+                "type": "input-text",
+                "name": "requestUri",
+                "label": "requestUri"
+              },
+              {
+                "type": "input-text",
+                "name": "requestMethod",
+                "label": "requestMethod"
+              },
+              {
+                "type": "input-text",
+                "name": "headInfo",
+                "label": "headInfo"
+              },
+              {
+                "type": "input-text",
+                "name": "requestParams",
+                "label": "requestParams"
+              },
+              {
+                "type": "input-text",
+                "name": "requestBody",
+                "label": "requestBody"
+              },
+              {
+                "type": "input-text",
+                "name": "responseBody",
+                "label": "responseBody"
+              },
+              {
+                "type": "input-text",
+                "name": "remoteAddr",
+                "label": "remoteAddr"
+              },
+              {
+                "type": "input-text",
+                "name": "accessRegion",
+                "label": "accessRegion"
+              },
+              {
+                "type": "input-text",
+                "name": "serverAddr",
+                "label": "serverAddr"
+              },
+              {
+                "type": "input-text",
+                "name": "isException",
+                "label": "isException"
+              },
+              {
+                "type": "input-text",
+                "name": "exceptionInfo",
+                "label": "exceptionInfo"
+              },
+              {
+                "type": "input-text",
+                "name": "userAgent",
+                "label": "userAgent"
+              },
+              {
+                "type": "input-text",
+                "name": "deviceName",
+                "label": "deviceName"
+              },
+              {
+                "type": "input-text",
+                "name": "browserName",
+                "label": "browserName"
+              },
+              {
+                "type": "input-text",
+                "name": "executeTime",
+                "label": "executeTime"
+              },
+              {
+                "type": "input-text",
+                "name": "orgId",
+                "label": "orgId"
+              },
+              {
+                "type": "input-date",
+                "name": "createTime",
+                "label": "createTime"
+              },
+              {
+                "type": "input-text",
+                "name": "optimisticLock",
+                "label": "optimisticLock"
+              }
+            ]
+          }
+        },
+        "id": "u:a180931f757e"
+      },
+      {
+        "type": "bulk-actions"
+      }
+    ],
+    "filter": {
+      "title": "查询条件",
+      "columnCount": 3,
+      "mode": "horizontal",
+      "body": [
+        {
+          "type": "input-text",
+          "label": "标题",
+          "name": "title",
+          "id": "u:807ec1e55b62"
+        },
+        {
+          "type": "input-text",
+          "label": "userAgent",
+          "name": "userAgent",
+          "id": "u:e91026bd61c8"
+        },
+        {
+          "type": "input-text",
+          "label": "accessRegion",
+          "name": "accessRegion",
+          "id": "u:70d3946bc067"
+        },
+        {
+          "type": "input-text",
+          "label": "remoteAddr",
+          "name": "remoteAddr",
+          "id": "u:d95cf79d5ff3"
+        },
+        {
+          "type": "input-text",
+          "label": "createTime",
+          "name": "createTime",
+          "id": "u:0c1884723e9c"
+        }
+      ],
+      "id": "u:14c69446cb4c",
+      "actions": [
+        {
+          "type": "reset",
+          "label": "重置",
+          "primary": false
+        },
+        {
+          "type": "submit",
+          "label": "搜索",
+          "primary": true
+        }
+      ],
+      "feat": "Insert"
+    },
+    "id": "u:35984d8fd84e",
+    "perPageAvailable": [
+      10
+    ],
+    "messages": {
+    },
+    "pageField": "pageIndex",
+    "perPageField": "pageSize",
+    "perPage": "",
+    "footerToolbar": [
+      {
+        "type": "statistics"
+      },
+      {
+        "type": "pagination"
+      }
+    ],
+    "alwaysShowPagination": true,
+    "defaultParams": {
+      "requireTotals": "true"
+    }
+  }
+}
