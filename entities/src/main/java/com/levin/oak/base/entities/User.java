@@ -191,12 +191,15 @@ public class User
     Org org;
 
     //////////////////////////////////////////////////////////////////////
+    @Schema(title = "Google验证码密钥")
+    @Column(length = 64)
+    String googleAuthSecretKey;
 
-    @Schema(title = "微信 OpendId")
+    @Schema(title = "微信OpendId")
     @Column(length = 64)
     String wxOpenId;
 
-    @Schema(title = "阿里 OpendId")
+    @Schema(title = "阿里OpendId")
     @Column(length = 64)
     String aliOpenId;
 

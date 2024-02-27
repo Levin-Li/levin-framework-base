@@ -52,7 +52,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[a0526cd840d4e0252f7d0e8d48b10c94]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年2月28日 上午1:15:13, 代码生成哈希校验码：[7830d9d94b121c5748eda01057c94c30]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -169,6 +169,10 @@ public class QueryUserReq extends MultiTenantOrgReq<QueryUserReq> {
     @Schema(title = "是否加载" + L_org)
     @Fetch(attrs = E_User.org, condition = "#_val == true")
     Boolean loadOrg;
+
+    @Size(max = 64)
+    @Schema(title = L_googleAuthSecretKey)
+    String googleAuthSecretKey;
 
     @Size(max = 64)
     @Schema(title = L_wxOpenId)

@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:59, 代码生成哈希校验码：[6e97c31a116d7194cd8deb27a75beffa]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年2月28日 上午1:15:13, 代码生成哈希校验码：[199a09c41e6adabd6cd139b24aa2872b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -129,6 +129,10 @@ public class SimpleUpdateUserReq extends MultiTenantOrgReq<SimpleUpdateUserReq> 
     @InjectVar(domain = "dao", isRequired = "false", converter = PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
     @Schema(title = L_roleList)
     List<String> roleList;
+
+    @Size(max = 64)
+    @Schema(title = L_googleAuthSecretKey)
+    String googleAuthSecretKey;
 
     @Size(max = 64)
     @Schema(title = L_wxOpenId)
@@ -245,6 +249,10 @@ public class SimpleUpdateUserReq extends MultiTenantOrgReq<SimpleUpdateUserReq> 
     public <T extends SimpleUpdateUserReq> T setRoleList(List<String> roleList) {
         this.roleList = roleList;
         return addUpdateField(E_User.roleList);
+    }
+    public <T extends SimpleUpdateUserReq> T setGoogleAuthSecretKey(String googleAuthSecretKey) {
+        this.googleAuthSecretKey = googleAuthSecretKey;
+        return addUpdateField(E_User.googleAuthSecretKey);
     }
     public <T extends SimpleUpdateUserReq> T setWxOpenId(String wxOpenId) {
         this.wxOpenId = wxOpenId;

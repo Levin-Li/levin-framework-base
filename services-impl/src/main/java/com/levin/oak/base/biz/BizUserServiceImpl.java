@@ -153,6 +153,9 @@ public class BizUserServiceImpl extends BaseService<BizUserServiceImpl> implemen
 
         checkCreateOrUpdateAccount(req.getEmail(), req.getTelephone());
 
+        if(!StringUtils.hasText(req.getGoogleAuthSecretKey())){
+
+        }
         return userService.create(req.setPassword(encryptPwd(req.getPassword())));
     }
 
