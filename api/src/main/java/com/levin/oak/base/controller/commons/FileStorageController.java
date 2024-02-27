@@ -56,7 +56,7 @@ import static com.levin.oak.base.ModuleOption.*;
 
 @Slf4j
 @Valid
-@ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME + "-")
+@ResAuthorize(domain = ID, type = EntityConst.COMMON_TYPE_NAME + "-", onlyRequireAuthenticated = true)
 @Tag(name = "文件存储", description = "文件存储服务")
 @MenuResTag(false)
 public class FileStorageController extends BaseController {
