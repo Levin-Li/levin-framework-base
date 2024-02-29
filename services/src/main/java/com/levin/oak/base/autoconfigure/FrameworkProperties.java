@@ -62,6 +62,14 @@ public class FrameworkProperties
      */
     private boolean enableCaptchaVerificationCode = true;
 
+
+    /**
+     * 是否允许多因子验证码
+     * 默认允许
+     */
+    private boolean enableMFAVerificationCode = true;
+
+
     /**
      * 是否允许模拟短信发生
      * 默认禁止

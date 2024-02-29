@@ -209,7 +209,7 @@ public class AuthServiceImpl
 
         if ("sms".equalsIgnoreCase(req.getVerificationCodeType())) {
 
-            Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证关闭");
+            Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证未开启");
             Assert.notNull(smsCodeService, "短信验证码服务不存在");
 
             Assert.hasText(req.getVerificationCode(), "验证码不能为空");
@@ -223,13 +223,14 @@ public class AuthServiceImpl
         } else if ("captcha".equalsIgnoreCase(req.getVerificationCodeType())) {
 
             //验证图片验证码
-            Assert.isTrue(frameworkProperties.isEnableCaptchaVerificationCode(), "图片验证关闭");
+            Assert.isTrue(frameworkProperties.isEnableCaptchaVerificationCode(), "图片验证未开启");
             Assert.notNull(captchaService, "图片验证码服务不存在");
             Assert.hasText(req.getVerificationCode(), "验证码不能为空");
             Assert.isTrue(captchaService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "图片验证码错误");
 
         } else if ("mfa".equalsIgnoreCase(req.getVerificationCodeType())) {
 
+            Assert.isTrue(frameworkProperties.isEnableMFAVerificationCode(), "多因子验证未开启");
             Assert.notNull(multiFactorAuthService, "多因子验证服务未开启");
 
             //验证图片验证码
