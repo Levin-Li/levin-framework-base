@@ -152,6 +152,7 @@
         <dependency>
             <groupId>com.github.whvcse</groupId>
             <artifactId>easy-captcha</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -159,12 +160,13 @@
             <groupId>org.dromara.sms4j</groupId>
 <!--            <artifactId>sms4j-spring-boot-starter</artifactId>-->
             <artifactId>sms4j-core</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.warrenstrange</groupId>
             <artifactId>googleauth</artifactId>
-            <version>1.5.0</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>

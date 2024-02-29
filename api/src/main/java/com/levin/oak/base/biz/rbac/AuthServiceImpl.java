@@ -15,10 +15,7 @@ import com.levin.commons.service.support.ContextHolder;
 import com.levin.commons.utils.ClassUtils;
 import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
-import com.levin.oak.base.biz.BizRoleService;
-import com.levin.oak.base.biz.BizUserService;
-import com.levin.oak.base.biz.CaptchaService;
-import com.levin.oak.base.biz.SmsCodeService;
+import com.levin.oak.base.biz.*;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
 import com.levin.oak.base.entities.User;
 import com.levin.oak.base.services.menures.MenuResService;
@@ -112,6 +109,9 @@ public class AuthServiceImpl
 
     @Autowired(required = false)
     CaptchaService captchaService;
+
+    @Autowired(required = false)
+    MultiFactorAuthService multiFactorAuthService;
 
     @Autowired(required = false)
     SmsCodeService smsCodeService;
@@ -223,13 +223,19 @@ public class AuthServiceImpl
         } else if ("captcha".equalsIgnoreCase(req.getVerificationCodeType())) {
 
             //验证图片验证码
-            if (frameworkProperties.isEnableCaptchaVerificationCode()) {
-                Assert.notNull(captchaService, "图片验证码服务不存在");
-                Assert.hasText(req.getVerificationCode(), "验证码不能为空");
-                Assert.isTrue(captchaService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "图片验证码错误");
-            } else {
-                //可以不验证
-            }
+            Assert.isTrue(frameworkProperties.isEnableCaptchaVerificationCode(), "图片验证关闭");
+            Assert.notNull(captchaService, "图片验证码服务不存在");
+            Assert.hasText(req.getVerificationCode(), "验证码不能为空");
+            Assert.isTrue(captchaService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "图片验证码错误");
+
+        } else if ("mfa".equalsIgnoreCase(req.getVerificationCodeType())) {
+
+            Assert.notNull(multiFactorAuthService, "多因子验证服务未开启");
+
+            //验证图片验证码
+            Assert.hasText(req.getVerificationCode(), "验证码不能为空");
+
+            Assert.isTrue(multiFactorAuthService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "验证码错误");
 
         } else {
             throw new IllegalArgumentException("不支持的验证码类型:" + req.getVerificationCodeType());

@@ -71,7 +71,6 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 @RestControllerAdvice(annotations = {Controller.class, RestController.class})
 public class ModuleWebControllerAdvice {
 
-
     @Autowired
     HttpServletRequest request;
 

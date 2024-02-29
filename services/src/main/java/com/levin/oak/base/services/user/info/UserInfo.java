@@ -132,9 +132,9 @@ public class UserInfo implements RbacUserInfo<String>, Serializable {
     @Schema(title = L_aliOpenId)
     String aliOpenId;
 
-    @Schema(title = L_googleAuthSecretKey )
+    @Schema(title = L_mfaSecretKey )
     @Size(max = 64)
-    String googleAuthSecretKey;
+    String mfaSecretKey;
 
     @Size(max = 128)
     @InjectVar(value = InjectConst.TENANT_ID)

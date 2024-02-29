@@ -285,6 +285,21 @@
             <artifactId>x-file-storage-spring</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.dromara.sms4j</groupId>
+            <artifactId>sms4j-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.warrenstrange</groupId>
+            <artifactId>googleauth</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

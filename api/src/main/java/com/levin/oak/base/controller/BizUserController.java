@@ -2,13 +2,11 @@ package com.levin.oak.base.controller;
 
 import cn.hutool.core.lang.Assert;
 import com.levin.commons.service.exception.AuthorizationException;
-import com.levin.oak.base.biz.bo.tenantapp.StatTenantAppReq;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
@@ -17,9 +15,6 @@ import org.springframework.util.*;
 
 import javax.validation.*;
 import java.util.*;
-import javax.annotation.*;
-
-import javax.servlet.http.*;
 
 //import org.apache.dubbo.config.annotation.*;
 
@@ -31,15 +26,12 @@ import com.levin.commons.rbac.ResAuthorize;
 
 import javax.validation.constraints.*;
 
-import com.levin.oak.base.controller.*;
 import com.levin.oak.base.controller.base.user.*;
 
-import com.levin.oak.base.*;
 import com.levin.oak.base.entities.*;
 
 import com.levin.oak.base.biz.*;
 
-import com.levin.oak.base.services.user.*;
 import com.levin.oak.base.services.user.req.*;
 import com.levin.oak.base.services.user.info.*;
 
@@ -91,6 +83,9 @@ public class BizUserController extends UserController {
 
     @Autowired
     RbacService rbacService;
+
+    @Autowired(required = false)
+    MultiFactorAuthService multiFactorAuthService;
 
     List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION);
 
@@ -147,6 +142,27 @@ public class BizUserController extends UserController {
         }
     }
 
+    @PutMapping({"resetMFASecretKey"})
+    @Operation(summary = "重置多因子认证密钥", description = "路径变量参数优先")
+    @CRUD.Op
+    public ApiResp<String> resetMFASecretKey(@Valid UserIdReq req, @PathVariable(required = false) String id, @RequestParam(required = false) boolean forQrCode) {
+
+        req.updateIdWhenNotBlank(id);
+
+        // req = checkRequest("重置多因子认证密钥", req);
+
+        UserInfo userInfo = userService.findById(req);
+
+        Assert.notNull(userInfo, "用户不存在");
+
+        final String secretKey = multiFactorAuthService.genSecretKey();
+
+        //更新数据
+        bizUserService.update(authService.getUserInfo(), new UpdateUserReq().setId(userInfo.getId()).setTenantId(userInfo.getTenantId()).setMfaSecretKey(secretKey));
+
+        return ApiResp.ok(forQrCode ? multiFactorAuthService.genQrCode(userInfo.getName(), secretKey) : secretKey);
+    }
+
     /**
      * 分页查找
      *
@@ -184,6 +200,10 @@ public class BizUserController extends UserController {
 
         if (!StringUtils.hasText(req.getOrgId())) {
             req.setOrgId(authService.getUserInfo().getOrgId());
+        }
+
+        if (multiFactorAuthService != null) {
+            req.setMfaSecretKey(multiFactorAuthService.genSecretKey());
         }
 
         return ApiResp.ok(bizUserService.create(authService.getUserInfo(), req));

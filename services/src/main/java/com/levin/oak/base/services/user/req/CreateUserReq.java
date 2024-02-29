@@ -44,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年2月28日 上午1:15:13, 代码生成哈希校验码：[9cb71e99e828f7ed15bd85ad7ab2532a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年2月29日 下午4:50:50, 代码生成哈希校验码：[e5a7dc192d72bec094b32488dd9dc5eb]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -111,9 +111,9 @@ public class CreateUserReq extends MultiTenantOrgReq<CreateUserReq> {
     @InjectVar(domain = "dao", isRequired = "false", converter = PrimitiveArrayJsonConverter.class, expectBaseType = String.class)
     List<String> roleList;
 
-    @Schema(title = L_googleAuthSecretKey )
+    @Schema(title = L_mfaSecretKey )
     @Size(max = 64)
-    String googleAuthSecretKey;
+    String mfaSecretKey;
 
     @Schema(title = L_wxOpenId )
     @Size(max = 64)

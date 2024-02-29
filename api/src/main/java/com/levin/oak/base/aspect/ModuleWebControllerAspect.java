@@ -593,30 +593,25 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
         Method method = methodSignature.getMethod();
 
-        Tag tag = method.getDeclaringClass().getAnnotation(Tag.class);
+        Class<?> beanType = joinPoint.getThis() == null ? method.getDeclaringClass() : joinPoint.getThis().getClass();
 
-        if (tag == null) {
-            tag = (Tag) methodSignature.getDeclaringType().getAnnotation(Tag.class);
-        }
+        //AnnotatedElementUtils为Spring的元注解编程模型定义了公共API，并支持注解属性覆盖。如果您不需要支持注解属性覆盖，请考虑使用AnnotationUtils。
+
+        Tag tag = AnnotatedElementUtils.findMergedAnnotation(beanType, Tag.class);
 
         String tagName = tag != null ? getFirstOrDefault("", tag.name(), tag.description()) : "";
 
         String requestName = "";
 
-        if (method.isAnnotationPresent(Operation.class)) {
+        Operation operation = AnnotatedElementUtils.findMergedAnnotation(method, Operation.class);
 
-            Operation operation = method.getAnnotation(Operation.class);
+        Schema schema = operation != null ? null : AnnotatedElementUtils.findMergedAnnotation(method, Schema.class);
 
+        if (operation != null) {
             tagName = getFirstOrDefault(tagName, operation.tags());
-
             requestName = getFirst(operation.summary(), operation.description());
-
-        } else if (method.isAnnotationPresent(Schema.class)) {
-            Schema schema = method.getAnnotation(Schema.class);
+        } else if (schema != null) {
             requestName = getFirst(schema.title(), schema.description());
-        } else if (method.isAnnotationPresent(Desc.class)) {
-            Desc desc = method.getAnnotation(Desc.class);
-            requestName = getFirst(desc.value(), desc.name());
         }
 
         if (!StringUtils.hasText(requestName)) {

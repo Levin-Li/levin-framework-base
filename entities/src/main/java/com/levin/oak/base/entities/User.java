@@ -191,9 +191,9 @@ public class User
     Org org;
 
     //////////////////////////////////////////////////////////////////////
-    @Schema(title = "Google验证码密钥")
+    @Schema(title = "多因子认证密钥")
     @Column(length = 64)
-    String googleAuthSecretKey;
+    String mfaSecretKey;
 
     @Schema(title = "微信OpendId")
     @Column(length = 64)

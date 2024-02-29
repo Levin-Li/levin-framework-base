@@ -79,7 +79,7 @@ public class BizUserServiceImpl extends BaseService<BizUserServiceImpl> implemen
      * @param targetUserId
      * @param roleList
      */
-    protected void checkCurrentUserCreateOrUpdateUserRole(Serializable userPrincipal,Serializable targetUserId, List<String> roleList) {
+    protected void checkCurrentUserCreateOrUpdateUserRole(Serializable userPrincipal, Serializable targetUserId, List<String> roleList) {
 
         if (CollectionUtils.isEmpty(roleList)) {
             return;
@@ -150,12 +150,7 @@ public class BizUserServiceImpl extends BaseService<BizUserServiceImpl> implemen
      */
     @Override
     public String create(Serializable userPrincipal, CreateUserReq req) {
-
         checkCreateOrUpdateAccount(req.getEmail(), req.getTelephone());
-
-        if(!StringUtils.hasText(req.getGoogleAuthSecretKey())){
-
-        }
         return userService.create(req.setPassword(encryptPwd(req.getPassword())));
     }
 
