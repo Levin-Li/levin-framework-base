@@ -9,6 +9,7 @@ import com.levin.commons.dao.domain.OrganizedObject;
 import com.levin.commons.dao.domain.StatefulObject;
 import com.levin.commons.dao.domain.support.AbstractMultiTenantOrgObject;
 import com.levin.commons.dao.domain.support.AbstractNamedMultiTenantObject;
+import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
@@ -69,6 +70,7 @@ public class User
 
     public enum State implements EnumDesc {
         @Schema(title = "正常") Normal,
+        @Schema(title = "登录异常冻结") FreezeByLogin,
         @Schema(title = "冻结") Freeze,
         @Schema(title = "注销") Cancellation,
         ;
@@ -159,6 +161,13 @@ public class User
     @Enumerated(EnumType.STRING)
     Category category;
 
+    @Schema(title = "连续登录错误次数")
+    Integer loginFailedCount;
+
+    @Schema(title = "锁定到期时间")
+    @Temporal(TemporalType.TIMESTAMP)
+    Date lockExpiredTime;
+
     @Schema(title = "过期时间")
     @Temporal(TemporalType.TIMESTAMP)
     Date expiredDate;
@@ -193,6 +202,7 @@ public class User
     //////////////////////////////////////////////////////////////////////
     @Schema(title = "多因子认证密钥")
     @Column(length = 64)
+    @JsonIgnore
     String mfaSecretKey;
 
     @Schema(title = "微信OpendId")

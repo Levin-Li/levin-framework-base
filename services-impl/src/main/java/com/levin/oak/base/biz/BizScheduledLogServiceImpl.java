@@ -48,6 +48,7 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 //自动导入列表
 import java.util.Date;
+import com.levin.commons.service.domain.Identifiable;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -57,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  调度日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:42, 代码生成哈希校验码：[d1b2c518a47208bf304b442d15652939]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[ab752e7c64333aa71491e27ef1b16e49]，请不要修改和删除此行内容。
  *
  */
 

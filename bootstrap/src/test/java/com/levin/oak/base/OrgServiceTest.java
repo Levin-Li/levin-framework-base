@@ -12,17 +12,19 @@ import com.levin.oak.base.services.org.info.*;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.oak.base.services.org.info.*;
-import com.levin.oak.base.entities.Org;
 import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
 import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
 import com.levin.oak.base.entities.Org.*;
 import java.io.Serializable;
+import com.levin.commons.dao.domain.StatefulObject;
+import com.levin.commons.service.support.InjectConst;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.commons.dao.domain.MultiTenantObject;
+import com.levin.oak.base.entities.Org;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -63,7 +65,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 机构测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[5da86d2acc67e19aad267a2de1db335f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:07, 代码生成哈希校验码：[cb4707953c696ad6552bef85254eaa83]，请不要修改和删除此行内容。
  *
  */
 
@@ -104,7 +106,7 @@ public class OrgServiceTest {
 
         CreateOrgReq req = new CreateOrgReq();
 
-            // req.setTenantId("这是文本64");// 
+            // req.setTenantId("这是文本64");// 必填
 
             // req.setParentId("这是文本64");// 
 
@@ -215,7 +217,7 @@ public class OrgServiceTest {
          req.setId(id);
 
 
-           // req.setTenantId("这是文本64");// 
+           // req.setTenantId("这是文本64");// 必填
            // req.setParentId("这是文本64");// 
            // req.setCode("这是文本64");//对于公司是统一信用码 
            // req.setIcon("图标_1");// 

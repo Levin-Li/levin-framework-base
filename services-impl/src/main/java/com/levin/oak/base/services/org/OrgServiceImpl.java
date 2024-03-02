@@ -45,8 +45,6 @@ import com.levin.oak.base.services.*;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.oak.base.services.org.info.*;
-import com.levin.oak.base.entities.Org;
 import java.util.Date;
 import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
@@ -54,15 +52,19 @@ import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
 import com.levin.oak.base.entities.Org.*;
 import java.io.Serializable;
+import com.levin.commons.dao.domain.StatefulObject;
+import com.levin.commons.service.support.InjectConst;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.commons.dao.domain.MultiTenantObject;
+import com.levin.oak.base.entities.Org;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 /**
  * 机构-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[cee9be2ab327a825117b48204a98167c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:06, 代码生成哈希校验码：[f32187e3d5372617752d8b47361cdaef]，请不要修改和删除此行内容。
  *
  */
 

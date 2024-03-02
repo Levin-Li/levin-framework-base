@@ -39,22 +39,25 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.User.*;
+import java.util.Date;
+import com.levin.commons.dao.domain.OrganizedObject;
+import java.io.Serializable;
+import com.levin.commons.dao.domain.StatefulObject;
+import com.levin.commons.service.support.InjectConst;
 import java.util.List;
 import com.levin.oak.base.services.org.info.*;
-import java.util.Date;
+import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.oak.base.entities.Org;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 /**
  * 统计用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[0723d7e52ae16be867e64dba73bb4bb8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:06, 代码生成哈希校验码：[e4d7c4b801e629adbd88c72afe25a49b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)

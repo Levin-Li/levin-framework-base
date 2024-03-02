@@ -38,6 +38,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.dao.domain.NamedObject;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
@@ -51,7 +52,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 统计租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[f4bd7226152008e2ae2d0ee0d86d4f8e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[dfa7e4013fce16e91607835902885d52]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)

@@ -37,22 +37,25 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.User.*;
+import java.util.Date;
+import com.levin.commons.dao.domain.OrganizedObject;
+import java.io.Serializable;
+import com.levin.commons.dao.domain.StatefulObject;
+import com.levin.commons.service.support.InjectConst;
 import java.util.List;
 import com.levin.oak.base.services.org.info.*;
-import java.util.Date;
+import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.oak.base.entities.Org;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 /**
  * 查询用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年2月29日 下午4:50:50, 代码生成哈希校验码：[1b2205ab89bcc8b4a6dba41c6d3996ce]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:06, 代码生成哈希校验码：[9f04a72c6f2b7a7e7a7760c693332e6e]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -130,6 +133,22 @@ public class QueryUserReq extends MultiTenantOrgReq<QueryUserReq> {
     @Schema(title = L_category)
     Category category;
 
+    @Schema(title = L_loginFailedCount)
+    Integer loginFailedCount;
+
+    @Schema(title = L_lockExpiredTime , description = L_lockExpiredTime + "大于等于字段值")
+    @Gte
+    Date gteLockExpiredTime;
+
+    @Schema(title = L_lockExpiredTime , description = L_lockExpiredTime + "小于等于字段值")
+    @Lte
+    Date lteLockExpiredTime;
+
+    @Schema(title = L_lockExpiredTime + "-日期范围")
+    @Between
+    String betweenLockExpiredTime;
+
+
     @Schema(title = L_expiredDate , description = L_expiredDate + "大于等于字段值")
     @Gte
     Date gteExpiredDate;
@@ -171,6 +190,7 @@ public class QueryUserReq extends MultiTenantOrgReq<QueryUserReq> {
     Boolean loadOrg;
 
     @Size(max = 64)
+    @JsonIgnore(value=true)
     @Schema(title = L_mfaSecretKey)
     String mfaSecretKey;
 

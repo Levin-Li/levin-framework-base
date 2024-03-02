@@ -37,23 +37,25 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.Role;
-import java.util.List;
 import com.levin.oak.base.entities.Role.*;
+import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import java.util.Date;
 import com.levin.commons.dao.domain.TreeObject;
-import com.levin.oak.base.services.role.info.*;
 import java.util.Set;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.io.Serializable;
+import com.levin.commons.service.support.InjectConst;
+import java.util.List;
+import com.levin.commons.dao.domain.MultiTenantObject;
+import com.levin.oak.base.services.role.info.*;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 /**
  * 查询角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:21, 代码生成哈希校验码：[63791a7c24254c566dea7a57d567979d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[eed8e22363fc5e08a5cc76b6438b79db]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)

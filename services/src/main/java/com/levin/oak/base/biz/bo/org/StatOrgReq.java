@@ -38,8 +38,6 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-import com.levin.oak.base.services.org.info.*;
-import com.levin.oak.base.entities.Org;
 import java.util.Date;
 import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
@@ -47,15 +45,19 @@ import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
 import com.levin.oak.base.entities.Org.*;
 import java.io.Serializable;
+import com.levin.commons.dao.domain.StatefulObject;
+import com.levin.commons.service.support.InjectConst;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.commons.dao.domain.MultiTenantObject;
+import com.levin.oak.base.entities.Org;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 /**
  * 统计机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[f8d2d1817cde606dbdd2e5df39a43e80]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:06, 代码生成哈希校验码：[cafb2dd7e780e0bc28e408732a39a35a]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)

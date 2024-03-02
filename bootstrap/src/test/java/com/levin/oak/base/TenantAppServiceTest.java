@@ -12,6 +12,7 @@ import com.levin.oak.base.services.tenantapp.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.dao.domain.NamedObject;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
@@ -60,7 +61,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 租户应用测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[c9716102758640aa5a7a6cf01a661b5f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:07, 代码生成哈希校验码：[0a276a969a39079e2a97b8c0391dd665]，请不要修改和删除此行内容。
  *
  */
 

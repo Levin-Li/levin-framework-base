@@ -30,6 +30,7 @@ import static com.levin.oak.base.entities.E_TenantApp.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.dao.domain.NamedObject;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
@@ -43,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[84916adad934962df9c67089ad39170b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[f29207fa240d61b2b27ed7c6f65ea1cd]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)

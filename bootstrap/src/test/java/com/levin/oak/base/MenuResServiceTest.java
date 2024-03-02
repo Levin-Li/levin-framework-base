@@ -12,6 +12,7 @@ import com.levin.oak.base.services.menures.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import com.levin.oak.base.entities.MenuRes;
 import com.levin.commons.dao.domain.TreeObject;
 import com.levin.commons.rbac.MenuItem.*;
@@ -61,7 +62,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 菜单测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[d9c70b8eaf18c4e4c1cdaced512a95be]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:07, 代码生成哈希校验码：[2da3a72d0aed5396ea74bd8cb77be706]，请不要修改和删除此行内容。
  *
  */
 
@@ -107,8 +108,6 @@ public class MenuResServiceTest {
             // req.setTenantId("这是文本64");// 
 
             // req.setDomain("系统域_1");//归属的子系统 
-
-            // req.setModule("模块_1");//归属的应用或模块 
 
             // req.setRequireAuthorizations("这是文本1800");// 
 
@@ -159,7 +158,6 @@ public class MenuResServiceTest {
         // req.setParentId("这是文本64");//
         // req.setTenantId("这是文本64");//
         // req.setDomain("系统域_1");//归属的子系统
-        // req.setModule("模块_1");//归属的应用或模块
         // req.setRequireAuthorizations("这是文本1800");//
         // req.setAlwaysShow(true);//
         // req.setTarget("这是文本64");//
@@ -197,7 +195,6 @@ public class MenuResServiceTest {
            // req.setParentId("这是文本64");// 
            // req.setTenantId("这是文本64");// 
            // req.setDomain("系统域_1");//归属的子系统 
-           // req.setModule("模块_1");//归属的应用或模块 
            // req.setRequireAuthorizations("这是文本1800");// 
            // req.setAlwaysShow(true);// 必填
            // req.setTarget("这是文本64");// 

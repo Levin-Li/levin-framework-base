@@ -25,6 +25,7 @@ import com.levin.oak.base.services.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.dao.domain.NamedObject;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
@@ -38,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  租户应用-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[9244d2c104e7205b84630380386b9c3c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[c43da5dcd5ec2aeff52ca8d96dfd51e2]，请不要修改和删除此行内容。
  *
  */
 

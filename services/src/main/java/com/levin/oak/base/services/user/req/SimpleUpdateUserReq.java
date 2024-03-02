@@ -33,21 +33,24 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.User.*;
+import java.util.Date;
+import com.levin.commons.dao.domain.OrganizedObject;
+import java.io.Serializable;
+import com.levin.commons.dao.domain.StatefulObject;
+import com.levin.commons.service.support.InjectConst;
 import java.util.List;
 import com.levin.oak.base.services.org.info.*;
-import java.util.Date;
+import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.oak.base.entities.Org;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 /**
  * 更新用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年2月29日 下午4:50:50, 代码生成哈希校验码：[1f566f9c8507d7c7eab9aa7907469de0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:06, 代码生成哈希校验码：[0a587f32f3794ab8aa7f8a1eb06b1f92]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -110,6 +113,12 @@ public class SimpleUpdateUserReq extends MultiTenantOrgReq<SimpleUpdateUserReq> 
 
     @Schema(title = L_category)
     Category category;
+
+    @Schema(title = L_loginFailedCount)
+    Integer loginFailedCount;
+
+    @Schema(title = L_lockExpiredTime)
+    Date lockExpiredTime;
 
     @Schema(title = L_expiredDate)
     Date expiredDate;
@@ -229,6 +238,14 @@ public class SimpleUpdateUserReq extends MultiTenantOrgReq<SimpleUpdateUserReq> 
     public <T extends SimpleUpdateUserReq> T setCategory(Category category) {
         this.category = category;
         return addUpdateField(E_User.category);
+    }
+    public <T extends SimpleUpdateUserReq> T setLoginFailedCount(Integer loginFailedCount) {
+        this.loginFailedCount = loginFailedCount;
+        return addUpdateField(E_User.loginFailedCount);
+    }
+    public <T extends SimpleUpdateUserReq> T setLockExpiredTime(Date lockExpiredTime) {
+        this.lockExpiredTime = lockExpiredTime;
+        return addUpdateField(E_User.lockExpiredTime);
     }
     public <T extends SimpleUpdateUserReq> T setExpiredDate(Date expiredDate) {
         this.expiredDate = expiredDate;

@@ -26,6 +26,7 @@ import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_ScheduledLog.*;
 ////////////////////////////////////
 import java.util.Date;
+import com.levin.commons.service.domain.Identifiable;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -36,7 +37,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[ef363bc408895cff0d03a9d204712def]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[311e9c2edc90c6c240f0db3a796b6bd3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -47,7 +48,7 @@ import com.levin.commons.service.support.InjectConst;
 @ToString(exclude = {})
 @FieldNameConstants
 @JsonIgnoreProperties({"tenantId"})
-public class ScheduledLogInfo implements Serializable {
+public class ScheduledLogInfo implements Serializable, Identifiable {
 
     private static final long serialVersionUID = 1319130901L;
 

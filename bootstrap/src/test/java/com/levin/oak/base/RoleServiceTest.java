@@ -13,17 +13,19 @@ import com.levin.oak.base.services.role.info.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.Role;
-import java.util.List;
 import com.levin.oak.base.entities.Role.*;
+import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import java.util.Date;
 import com.levin.commons.dao.domain.TreeObject;
-import com.levin.oak.base.services.role.info.*;
 import java.util.Set;
-import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import java.io.Serializable;
+import com.levin.commons.service.support.InjectConst;
+import java.util.List;
+import com.levin.commons.dao.domain.MultiTenantObject;
+import com.levin.oak.base.services.role.info.*;
+import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -64,7 +66,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 角色测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[3079431c8495b276883dad1e1ccd4cac]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:07, 代码生成哈希校验码：[12b0ffc0734e0d77ea5bc9df609c1868]，请不要修改和删除此行内容。
  *
  */
 
@@ -109,8 +111,6 @@ public class RoleServiceTest {
 
             // req.setTenantId("这是文本128");// 
 
-            // req.setOrgId("这是文本128");// 
-
             // req.setParentId("这是文本128");// 
 
             // req.setExtendable(true);// 
@@ -127,7 +127,7 @@ public class RoleServiceTest {
 
             // req.setIcon("图标_1");// 
 
-            // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表 必填
+            // req.setOrgDataScope(OrgDataScope.Inherited);//参考组织ID列表 必填
 
             // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组 
 
@@ -167,7 +167,6 @@ public class RoleServiceTest {
         // req.setId(null);//
         // req.setDomain("这是文本128");//归属的子系统或应用
         // req.setTenantId("这是文本128");//
-        // req.setOrgId("这是文本128");//
         // req.setParentId("这是文本128");//
         // req.setExtendable(true);//
         // req.setMutex(true);//
@@ -177,7 +176,7 @@ public class RoleServiceTest {
         // req.setGteExpiredDate(DateUtils.getZoneHour(new Date()));//最小
         // req.setLteExpiredDate(DateUtils.getEndHour(new Date()));//最大
         // req.setIcon("图标_1");//
-        // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表
+        // req.setOrgDataScope(OrgDataScope.Inherited);//参考组织ID列表
         // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组
         // req.setPermissionList("资源权限列表_1");//Json数组
         // req.setLoadParent(true);//加载
@@ -209,7 +208,6 @@ public class RoleServiceTest {
 
            // req.setDomain("这是文本128");//归属的子系统或应用 
            // req.setTenantId("这是文本128");// 
-           // req.setOrgId("这是文本128");// 
            // req.setParentId("这是文本128");// 
            // req.setExtendable(true);// 
            // req.setMutex(true);// 
@@ -218,7 +216,7 @@ public class RoleServiceTest {
            // req.setCode("这是文本128");// 必填
            // req.setExpiredDate(new Date());// 
            // req.setIcon("图标_1");// 
-           // req.setOrgDataScope(OrgDataScope.All);//参考组织ID列表 必填
+           // req.setOrgDataScope(OrgDataScope.Inherited);//参考组织ID列表 必填
            // req.setAssignedOrgIdList("组织ID列表_1");//指定的组织ID列表，Json数组 
            // req.setPermissionList("资源权限列表_1");//Json数组 
            // req.setNodePath("这是文本1800");//建议使用|包围节点ID，如|1|3|15| 

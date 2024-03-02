@@ -25,6 +25,7 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_TenantApp.*;
 ////////////////////////////////////
+import com.levin.commons.dao.domain.NamedObject;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
@@ -39,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[b28286814c122bef56bb368301b53c99]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[f6cc734577970a85ea6d09896e313314]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -50,7 +51,7 @@ import com.levin.commons.service.support.InjectConst;
 @ToString(exclude = {})
 @FieldNameConstants
 @JsonIgnoreProperties({"tenantId"})
-public class TenantAppInfo implements Serializable {
+public class TenantAppInfo implements Serializable, NamedObject {
 
     private static final long serialVersionUID = 1292984857L;
 

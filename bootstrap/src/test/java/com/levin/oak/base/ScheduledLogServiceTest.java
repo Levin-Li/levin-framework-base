@@ -12,6 +12,7 @@ import com.levin.oak.base.services.scheduledlog.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.service.domain.Identifiable;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -56,7 +57,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 调度日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[f1f63502ee6606ce1c6fa78b5f64a52f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:07, 代码生成哈希校验码：[06af10907ad04df401040df31091cdb7]，请不要修改和删除此行内容。
  *
  */
 

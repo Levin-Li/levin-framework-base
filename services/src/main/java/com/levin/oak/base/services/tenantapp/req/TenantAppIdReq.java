@@ -30,6 +30,7 @@ import static com.levin.oak.base.entities.E_TenantApp.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.dao.domain.NamedObject;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Date;
@@ -43,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 租户应用 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:41, 代码生成哈希校验码：[4a90c69b767ce5cec841aa813534e219]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[355e4be929179793771b5f5761dc5ce4]，请不要修改和删除此行内容。
  *
  */
 

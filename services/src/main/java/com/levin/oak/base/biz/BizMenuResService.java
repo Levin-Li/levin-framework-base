@@ -25,6 +25,7 @@ import com.levin.oak.base.services.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import com.levin.oak.base.entities.MenuRes;
 import java.util.Date;
 import com.levin.commons.dao.domain.TreeObject;
@@ -40,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  菜单-业务服务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[837b1a53483c895882f14c1249c97229]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:06, 代码生成哈希校验码：[a0a7fd481523aeaf47c42a785cd475ac]，请不要修改和删除此行内容。
  *
  */
 

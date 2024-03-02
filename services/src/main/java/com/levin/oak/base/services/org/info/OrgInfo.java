@@ -25,8 +25,6 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_Org.*;
 ////////////////////////////////////
-import com.levin.oak.base.services.org.info.*;
-import com.levin.oak.base.entities.Org;
 import java.util.Date;
 import com.levin.commons.dao.domain.TreeObject;
 import com.levin.oak.base.entities.Area;
@@ -34,16 +32,20 @@ import com.levin.oak.base.services.area.info.*;
 import java.util.Set;
 import com.levin.oak.base.entities.Org.*;
 import java.io.Serializable;
+import com.levin.commons.dao.domain.StatefulObject;
+import com.levin.commons.service.support.InjectConst;
+import com.levin.oak.base.services.org.info.*;
+import com.levin.commons.dao.domain.MultiTenantObject;
+import com.levin.oak.base.entities.Org;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 
 /**
  * 机构
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午1:02:14, 代码生成哈希校验码：[2db36cd94d08243917a6c4c3daa5aa0d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:06, 代码生成哈希校验码：[66320388d94ca9e9f27620c7751d59c1]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -54,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 @ToString(exclude = {"area","parent","children",})
 @FieldNameConstants
 @JsonIgnoreProperties({"tenantId"})
-public class OrgInfo implements Serializable, TreeObject<OrgInfo, OrgInfo> {
+public class OrgInfo implements Serializable, TreeObject<OrgInfo, OrgInfo>, MultiTenantObject, StatefulObject {
 
     private static final long serialVersionUID = -1399842458L;
 

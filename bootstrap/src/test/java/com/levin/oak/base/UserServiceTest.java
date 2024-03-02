@@ -13,16 +13,19 @@ import com.levin.oak.base.services.user.info.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.User.*;
+import java.util.Date;
+import com.levin.commons.dao.domain.OrganizedObject;
+import java.io.Serializable;
+import com.levin.commons.dao.domain.StatefulObject;
+import com.levin.commons.service.support.InjectConst;
 import java.util.List;
 import com.levin.oak.base.services.org.info.*;
-import java.util.Date;
+import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.oak.base.entities.Org;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
@@ -63,7 +66,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 用户测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[f5d89d805d3eebc84f4c1fe5eab1f1d3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:07, 代码生成哈希校验码：[332fc100247edf871f01de3560a235e4]，请不要修改和删除此行内容。
  *
  */
 
@@ -122,6 +125,10 @@ public class UserServiceTest {
 
             // req.setCategory(Category.Staff);// 
 
+            // req.setLoginFailedCount(1);// 
+
+            // req.setLockExpiredTime(new Date());// 
+
             // req.setExpiredDate(new Date());// 
 
             // req.setState(State.Normal);// 必填
@@ -131,6 +138,8 @@ public class UserServiceTest {
             // req.setJobPostCode("这是文本128");// 
 
             // req.setRoleList("这是文本1800");// 
+
+            // req.setMfaSecretKey("这是文本64");// 
 
             // req.setWxOpenId("这是文本64");// 
 
@@ -179,6 +188,9 @@ public class UserServiceTest {
         // req.setSex(Sex.Man);//
         // req.setTagList("这是文本1800");//
         // req.setCategory(Category.Staff);//
+        // req.setLoginFailedCount(1);//
+        // req.setGteLockExpiredTime(DateUtils.getZoneHour(new Date()));//最小
+        // req.setLteLockExpiredTime(DateUtils.getEndHour(new Date()));//最大
         // req.setGteExpiredDate(DateUtils.getZoneHour(new Date()));//最小
         // req.setLteExpiredDate(DateUtils.getEndHour(new Date()));//最大
         // req.setState(State.Normal);//
@@ -186,6 +198,7 @@ public class UserServiceTest {
         // req.setJobPostCode("这是文本128");//
         // req.setRoleList("这是文本1800");//
         // req.setLoadOrg(true);//加载
+        // req.setMfaSecretKey("这是文本64");//
         // req.setWxOpenId("这是文本64");//
         // req.setAliOpenId("这是文本64");//
         // req.setTenantId("这是文本128");//
@@ -223,11 +236,14 @@ public class UserServiceTest {
            // req.setSex(Sex.Man);// 
            // req.setTagList("这是文本1800");// 
            // req.setCategory(Category.Staff);// 
+           // req.setLoginFailedCount(1);// 
+           // req.setLockExpiredTime(new Date());// 
            // req.setExpiredDate(new Date());// 
            // req.setState(State.Normal);// 必填
            // req.setStaffNo("这是文本32");// 
            // req.setJobPostCode("这是文本128");// 
            // req.setRoleList("这是文本1800");// 
+           // req.setMfaSecretKey("这是文本64");// 
            // req.setWxOpenId("这是文本64");// 
            // req.setAliOpenId("这是文本64");// 
            // req.setTenantId("这是文本128");// 

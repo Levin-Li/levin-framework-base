@@ -30,21 +30,24 @@ import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.User.*;
+import java.util.Date;
+import com.levin.commons.dao.domain.OrganizedObject;
+import java.io.Serializable;
+import com.levin.commons.dao.domain.StatefulObject;
+import com.levin.commons.service.support.InjectConst;
 import java.util.List;
 import com.levin.oak.base.services.org.info.*;
-import java.util.Date;
+import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.oak.base.entities.Org;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 /**
  * 新增用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年2月29日 下午4:50:50, 代码生成哈希校验码：[e5a7dc192d72bec094b32488dd9dc5eb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:06, 代码生成哈希校验码：[69210ba222a32a0ef5808e1965480593]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -90,6 +93,12 @@ public class CreateUserReq extends MultiTenantOrgReq<CreateUserReq> {
 
     @Schema(title = L_category )
     Category category;
+
+    @Schema(title = L_loginFailedCount )
+    Integer loginFailedCount;
+
+    @Schema(title = L_lockExpiredTime )
+    Date lockExpiredTime;
 
     @Schema(title = L_expiredDate )
     Date expiredDate;

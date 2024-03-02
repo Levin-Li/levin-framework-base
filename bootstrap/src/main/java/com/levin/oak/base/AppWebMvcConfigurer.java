@@ -74,8 +74,8 @@ public class AppWebMvcConfigurer implements WebMvcConfigurer {
 //                .addResourceLocations("classpath:public" + H5_UI_PATH);
 
         //映射资源目录
-        registry.addResourceHandler(("/api-docs/**"))
-                .addResourceLocations(webProperties.getResources().getStaticLocations());
+//        registry.addResourceHandler(("/api-docs/**"))
+//                .addResourceLocations(webProperties.getResources().getStaticLocations());
 
     }
 
