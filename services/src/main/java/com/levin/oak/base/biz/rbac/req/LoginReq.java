@@ -60,7 +60,6 @@ public class LoginReq implements AuthReq, ServiceReq {
     protected String account;
 
     @Schema(title = "登录密码", description = "有短信验证码时，可以不要密码", required = true)
-//    @NotBlank
     @Eq
     protected String password;
 

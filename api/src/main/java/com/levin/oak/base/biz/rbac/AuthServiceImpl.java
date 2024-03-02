@@ -4,6 +4,7 @@ import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.PhoneUtil;
 import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.AuthReq;
@@ -23,6 +24,7 @@ import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.tenant.TenantService;
 import com.levin.oak.base.services.user.UserService;
 import com.levin.oak.base.services.user.info.UserInfo;
+import com.levin.oak.base.services.user.req.UpdateUserReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -45,10 +47,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
@@ -247,8 +246,40 @@ public class AuthServiceImpl
             Assert.hasText(req.getPassword(), "密码不能为空");
         }
 
+        String loginPwd = req.getPassword();
+
         //存在多个用户的情况
-        UserInfo user = bizUserService.findUser(req);
+        UserInfo user = bizUserService.findUser(req.setPassword(null));
+
+        //估计提示不明确信息
+        Assert.notNull(user, "1-帐号或密码不正确");
+
+        //如果还是指锁定期内
+        if (user.getLockExpiredTime() != null
+                && user.getLockExpiredTime().getTime() > System.currentTimeMillis()) {
+            throw new IllegalArgumentException("2-帐号锁定中...");
+        }
+
+        int errCnt = user.getLoginFailedCount() != null ? user.getLoginFailedCount() : 0;
+
+        //如果登录密码不正确
+        if (StringUtils.hasText(loginPwd)) {
+            boolean pwdOk = bizUserService.encryptPwd(loginPwd).equals(user.getPassword());
+            if (!pwdOk) {
+                //如果密码错误，需要更新错误次数
+                userService.update(new UpdateUserReq(user.getId())
+                        //如果大于3次，则一次锁定5分钟
+                        .setLockExpiredTime(errCnt > 3 ? DateUtil.offsetMinute(new Date(), (errCnt - 3) * 5).toJdkDate() : null)
+                        .setLoginFailedCount(errCnt + 1));
+            }
+            Assert.isTrue(pwdOk, "帐号或密码不正确-" + errCnt);
+        }
+
+        //如果原来有错误，清除错误次数
+        if (errCnt != 0) {
+            //更新错误次数
+            userService.update(new UpdateUserReq(user.getId()).setLoginFailedCount(0));
+        }
 
         auditUser(user);
 
@@ -376,9 +407,14 @@ public class AuthServiceImpl
             throw new IllegalArgumentException("2帐号状态异常");
         }
 
+        if (user.getLockExpiredTime() != null
+                && user.getLockExpiredTime().getTime() > System.currentTimeMillis()) {
+            throw new IllegalArgumentException("3帐号已锁定");
+        }
+
         if (user.getExpiredDate() != null
                 && user.getExpiredDate().getTime() < System.currentTimeMillis()) {
-            throw new IllegalArgumentException("3帐号已过期");
+            throw new IllegalArgumentException("4帐号已过期");
         }
 
         //如果是无租户用户，必须是 SA 角色的用户

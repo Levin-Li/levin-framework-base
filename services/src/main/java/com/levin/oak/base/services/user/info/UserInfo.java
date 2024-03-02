@@ -141,7 +141,6 @@ public class UserInfo implements RbacUserInfo<String>, Serializable, MultiTenant
     OrgInfo org;
 
     @Size(max = 64)
-    @JsonIgnore(value = true)
     @Schema(title = L_mfaSecretKey)
     String mfaSecretKey;
 

@@ -70,7 +70,7 @@ public class User
 
     public enum State implements EnumDesc {
         @Schema(title = "正常") Normal,
-        @Schema(title = "登录异常冻结") FreezeByLogin,
+        @Schema(title = "登录异常冻结") FreezeByLoginError,
         @Schema(title = "冻结") Freeze,
         @Schema(title = "注销") Cancellation,
         ;
@@ -202,7 +202,6 @@ public class User
     //////////////////////////////////////////////////////////////////////
     @Schema(title = "多因子认证密钥")
     @Column(length = 64)
-    @JsonIgnore
     String mfaSecretKey;
 
     @Schema(title = "微信OpendId")

@@ -60,7 +60,6 @@ public interface BizUserService<U> {
      */
     String encryptPwd(String pwd);
 
-
     /**
      * 创建必须是否有权限分配角色列表
      *
