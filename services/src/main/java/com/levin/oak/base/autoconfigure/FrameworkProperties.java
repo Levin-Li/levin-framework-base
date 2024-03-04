@@ -51,6 +51,12 @@ public class FrameworkProperties
     private int verificationCodeDurationOfMinutes = 5;
 
     /**
+     * 是否启用验证码
+     * 默认启用验证码
+     */
+    private boolean enableVerificationCode = true;
+
+    /**
      * 是否允许短信验证码
      * 默认允许
      */

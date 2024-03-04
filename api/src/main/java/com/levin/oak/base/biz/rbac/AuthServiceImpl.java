@@ -204,46 +204,49 @@ public class AuthServiceImpl
             Assert.hasText(req.getTenantId(), "未知的租户");
         }
 
-        boolean requirePwd = true;
+        if (frameworkProperties.isEnableVerificationCode()) {
 
-        if ("sms".equalsIgnoreCase(req.getVerificationCodeType())) {
+            boolean requirePwd = true;
 
-            Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证未开启");
-            Assert.notNull(smsCodeService, "短信验证码服务不存在");
+            if ("sms".equalsIgnoreCase(req.getVerificationCodeType())) {
 
-            Assert.hasText(req.getVerificationCode(), "验证码不能为空");
+                Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证未开启");
+                Assert.notNull(smsCodeService, "短信验证码服务不存在");
 
-            //如果是短信验证码，可以不验证密码
-            requirePwd = false;
+                Assert.hasText(req.getVerificationCode(), "验证码不能为空");
 
-            //验证短信
-            Assert.isTrue(smsCodeService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "短信验证码错误");
+                //如果是短信验证码，可以不验证密码
+                requirePwd = false;
 
-        } else if ("captcha".equalsIgnoreCase(req.getVerificationCodeType())) {
+                //验证短信
+                Assert.isTrue(smsCodeService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "短信验证码错误");
 
-            //验证图片验证码
-            Assert.isTrue(frameworkProperties.isEnableCaptchaVerificationCode(), "图片验证未开启");
-            Assert.notNull(captchaService, "图片验证码服务不存在");
-            Assert.hasText(req.getVerificationCode(), "验证码不能为空");
-            Assert.isTrue(captchaService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "图片验证码错误");
+            } else if ("captcha".equalsIgnoreCase(req.getVerificationCodeType())) {
 
-        } else if ("mfa".equalsIgnoreCase(req.getVerificationCodeType())) {
+                //验证图片验证码
+                Assert.isTrue(frameworkProperties.isEnableCaptchaVerificationCode(), "图片验证未开启");
+                Assert.notNull(captchaService, "图片验证码服务不存在");
+                Assert.hasText(req.getVerificationCode(), "验证码不能为空");
+                Assert.isTrue(captchaService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "图片验证码错误");
 
-            Assert.isTrue(frameworkProperties.isEnableMFAVerificationCode(), "多因子验证未开启");
-            Assert.notNull(multiFactorAuthService, "多因子验证服务未开启");
+            } else if ("mfa".equalsIgnoreCase(req.getVerificationCodeType())) {
 
-            //验证图片验证码
-            Assert.hasText(req.getVerificationCode(), "验证码不能为空");
+                Assert.isTrue(frameworkProperties.isEnableMFAVerificationCode(), "多因子验证未开启");
+                Assert.notNull(multiFactorAuthService, "多因子验证服务未开启");
 
-            Assert.isTrue(multiFactorAuthService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "验证码错误");
+                //验证图片验证码
+                Assert.hasText(req.getVerificationCode(), "验证码不能为空");
+                Assert.isTrue(multiFactorAuthService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "验证码错误");
 
-        } else {
-            throw new IllegalArgumentException("不支持的验证码类型:" + req.getVerificationCodeType());
-        }
+            } else {
+                throw new IllegalArgumentException("不支持的验证码类型:" + req.getVerificationCodeType());
+            }
 
-        //@todo 考虑超级用户必须要密码
-        if (requirePwd) {
-            Assert.hasText(req.getPassword(), "密码不能为空");
+            //@todo 考虑超级用户必须要密码
+            if (requirePwd) {
+                Assert.hasText(req.getPassword(), "密码不能为空");
+            }
+
         }
 
         String loginPwd = req.getPassword();
