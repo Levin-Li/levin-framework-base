@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 白名单测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午8:20:51, 代码生成哈希校验码：[e89b3553f86825095274e3b3b76a17d0]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月6日 下午2:17:35, 代码生成哈希校验码：[28cec74e3a2b8048109fdb71e2193b3c]，请不要修改和删除此行内容。
  *
  */
 
@@ -73,7 +73,7 @@ public class WhitelistServiceTest {
     @Autowired
     private BizWhitelistService bizWhitelistService;
 
-    private Long id;
+    private String id;
 
     @BeforeAll
     public static void beforeAll() throws Exception {
@@ -96,6 +96,10 @@ public class WhitelistServiceTest {
 
         CreateWhitelistReq req = new CreateWhitelistReq();
 
+            // req.setModuleId("这是文本255");// 必填
+
+            // req.setModuleName("这是文本64");// 
+
             // req.setTitle("这是文本255");// 必填
 
             // req.setDomainList("这是文本1800");//逗号或是回车隔开，可以支持*通配符 
@@ -108,6 +112,8 @@ public class WhitelistServiceTest {
 
             // req.setBrowserList("浏览器列表_1");//逗号或是回车隔开,可以支持*通配符 
 
+            // req.setMethodList("这是文本64");//逗号或是回车隔开，可以支持*通配符 
+
             // req.setOrderCode(1);// 
 
             // req.setEnable(true);// 必填
@@ -119,7 +125,7 @@ public class WhitelistServiceTest {
             // req.setOptimisticLock(1);// 
 
 
-       Long id  = whitelistService.create(req);
+       String id  = whitelistService.create(req);
 
         log.debug("新增白名单->" + id);
 
@@ -134,12 +140,15 @@ public class WhitelistServiceTest {
         QueryWhitelistReq req = new QueryWhitelistReq();
 
         // req.setId(null);//去除域名后的路径(不含参数)，规范的URL路径，中间不能有2个斜杠等
+        // req.setModuleId("这是文本255");//
+        // req.setModuleName("这是文本64");//
         // req.setTitle("这是文本255");//
         // req.setDomainList("这是文本1800");//逗号或是回车隔开，可以支持*通配符
         // req.setRegionList("这是文本1800");//逗号或是回车隔开，通常根据IP判别地区，可以支持*通配符
         // req.setIpList("这是文本1800");//逗号或是回车隔开，可以支持*通配符
         // req.setOsList("操作系统列表_1");//逗号或是回车隔开,可以支持*通配符
         // req.setBrowserList("浏览器列表_1");//逗号或是回车隔开,可以支持*通配符
+        // req.setMethodList("这是文本64");//逗号或是回车隔开，可以支持*通配符
         // req.setCreator("这是文本128");//
         // req.setOrderCode(1);//
         // req.setEnable(true);//
@@ -162,12 +171,15 @@ public class WhitelistServiceTest {
          req.setId(id);
 
 
+           // req.setModuleId("这是文本255");// 必填
+           // req.setModuleName("这是文本64");// 
            // req.setTitle("这是文本255");// 必填
            // req.setDomainList("这是文本1800");//逗号或是回车隔开，可以支持*通配符 
            // req.setRegionList("这是文本1800");//逗号或是回车隔开，通常根据IP判别地区，可以支持*通配符 
            // req.setIpList("这是文本1800");//逗号或是回车隔开，可以支持*通配符 
            // req.setOsList("操作系统列表_1");//逗号或是回车隔开,可以支持*通配符 
            // req.setBrowserList("浏览器列表_1");//逗号或是回车隔开,可以支持*通配符 
+           // req.setMethodList("这是文本64");//逗号或是回车隔开，可以支持*通配符 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填

@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增白名单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午8:29:11, 代码生成哈希校验码：[799db4447cfb7cea7e2f0dd40961fc99]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月6日 下午2:55:00, 代码生成哈希校验码：[9cd6112f957db2506029265a1757103e]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -56,8 +56,8 @@ public class CreateWhitelistReq extends BaseReq {
     private static final long serialVersionUID = 1491943753L;
 
     @Schema(title = L_id , description = D_id )
-    @NotNull
-    Long id;
+    @NotBlank
+    String id;
 
     @Schema(title = L_moduleId )
     @NotBlank
@@ -90,6 +90,9 @@ public class CreateWhitelistReq extends BaseReq {
 
     @Schema(title = L_browserList , description = D_browserList )
     String browserList;
+
+    @Schema(title = L_browserTypeList , description = D_browserTypeList )
+    String browserTypeList;
 
     @Schema(title = L_methodList , description = D_methodList )
     @Size(max = 64)

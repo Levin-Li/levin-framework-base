@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 白名单控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午8:42:29, 代码生成哈希校验码：[4a1d252e55caf35c500435448b94cd0f]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月6日 下午2:17:34, 代码生成哈希校验码：[4317907e891c36093180fbdc6607c443]，请不要修改和删除此行内容。
 *
 */
 
@@ -108,7 +108,7 @@ public abstract class WhitelistController extends BaseController{
     @PostMapping({"create", ""})
     @Operation(summary = CREATE_ACTION, description = CREATE_ACTION + " " + BIZ_NAME)
     @CRUD.Op(recordRefType = CRUD.RecordRefType.None)
-    public ApiResp<Long> create(@RequestBody @Valid CreateWhitelistReq req) {
+    public ApiResp<String> create(@RequestBody @Valid CreateWhitelistReq req) {
 
         req = checkRequest(CREATE_ACTION, req);
 
@@ -123,7 +123,7 @@ public abstract class WhitelistController extends BaseController{
     @GetMapping({"retrieve", "{id}", ""})
     @Operation(summary = VIEW_DETAIL_ACTION, description = VIEW_DETAIL_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<WhitelistInfo> retrieve(@NotNull @Valid WhitelistIdReq req, @PathVariable(required = false) Long id) {
+    public ApiResp<WhitelistInfo> retrieve(@NotNull @Valid WhitelistIdReq req, @PathVariable(required = false) String id) {
 
          req.updateIdWhenNotBlank(id);
 
@@ -144,7 +144,7 @@ public abstract class WhitelistController extends BaseController{
     @PutMapping({"update", "{id}", ""})
     @Operation(summary = UPDATE_ACTION, description = UPDATE_ACTION + " " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<Boolean> update(@RequestBody @Valid UpdateWhitelistReq req, @PathVariable(required = false) Long id) {
+    public ApiResp<Boolean> update(@RequestBody @Valid UpdateWhitelistReq req, @PathVariable(required = false) String id) {
 
         req.updateIdWhenNotBlank(id);
 
@@ -160,7 +160,7 @@ public abstract class WhitelistController extends BaseController{
     @DeleteMapping({"delete", "{id}", ""})
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION  + "(Query方式) " + BIZ_NAME + "-1, 路径变量参数优先")
     @CRUD.Op
-    public ApiResp<Boolean> delete(@Valid WhitelistIdReq req, @PathVariable(required = false) Long id) {
+    public ApiResp<Boolean> delete(@Valid WhitelistIdReq req, @PathVariable(required = false) String id) {
 
         req.updateIdWhenNotBlank(id);
 
@@ -175,7 +175,7 @@ public abstract class WhitelistController extends BaseController{
      */
     @DeleteMapping(value = {"{id}", ""}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = DELETE_ACTION, description = DELETE_ACTION + " " + BIZ_NAME + "-2, 路径变量参数优先")
-    public ApiResp<Boolean> delete2(@RequestBody @Valid WhitelistIdReq req, @PathVariable(required = false) Long id) {
+    public ApiResp<Boolean> delete2(@RequestBody @Valid WhitelistIdReq req, @PathVariable(required = false) String id) {
 
         return delete(req, id);
     }
@@ -190,7 +190,7 @@ public abstract class WhitelistController extends BaseController{
      */
     @PostMapping("batchCreate")
     @Operation(summary = BATCH_CREATE_ACTION, description = BATCH_CREATE_ACTION + " " + BIZ_NAME)
-    public ApiResp<List<Long>> batchCreate(@RequestBody @Valid List<CreateWhitelistReq> reqList) {
+    public ApiResp<List<String>> batchCreate(@RequestBody @Valid List<CreateWhitelistReq> reqList) {
 
         reqList = checkRequest(BATCH_CREATE_ACTION, reqList);
 

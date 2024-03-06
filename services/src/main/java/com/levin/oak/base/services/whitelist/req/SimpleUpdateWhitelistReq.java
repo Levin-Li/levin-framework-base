@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新白名单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午8:29:11, 代码生成哈希校验码：[ccc96996a3746bf867bb5f3e05c9be86]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月6日 下午2:55:00, 代码生成哈希校验码：[27427b9f666126ada2c414cae9e2ad07]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -104,6 +104,9 @@ public class SimpleUpdateWhitelistReq extends BaseReq {
 
     @Schema(title = L_browserList , description = D_browserList)
     String browserList;
+
+    @Schema(title = L_browserTypeList , description = D_browserTypeList)
+    String browserTypeList;
 
     @Size(max = 64)
     @Schema(title = L_methodList , description = D_methodList)
@@ -184,6 +187,10 @@ public class SimpleUpdateWhitelistReq extends BaseReq {
     public <T extends SimpleUpdateWhitelistReq> T setBrowserList(String browserList) {
         this.browserList = browserList;
         return addUpdateField(E_Whitelist.browserList);
+    }
+    public <T extends SimpleUpdateWhitelistReq> T setBrowserTypeList(String browserTypeList) {
+        this.browserTypeList = browserTypeList;
+        return addUpdateField(E_Whitelist.browserTypeList);
     }
     public <T extends SimpleUpdateWhitelistReq> T setMethodList(String methodList) {
         this.methodList = methodList;

@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 白名单 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午8:20:51, 代码生成哈希校验码：[4a3730797cc340429500a190342f9c12]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月6日 下午2:17:34, 代码生成哈希校验码：[7fb03b7df26d72333fbac3a7f7e717dc]，请不要修改和删除此行内容。
  *
  */
 
@@ -63,10 +63,10 @@ public class WhitelistIdReq extends BaseReq {
 
     @Schema(title = L_id , required = true, requiredMode = REQUIRED)
     @Eq(require = true)
-    @NotNull
-    protected Long id;
+    @NotBlank
+    protected String id;
 
-    public WhitelistIdReq updateIdWhenNotBlank(Long id){
+    public WhitelistIdReq updateIdWhenNotBlank(String id){
         if(isNotBlank(id)){
             this.id = id;
         }

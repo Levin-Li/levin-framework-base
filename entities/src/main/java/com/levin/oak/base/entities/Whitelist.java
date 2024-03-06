@@ -36,7 +36,7 @@ public class Whitelist extends AbstractBaseEntityObject {
     @Id
     @Contains
     @Schema(title = "URL路径", description = "去除域名后的路径(不含参数)，规范的URL路径，中间不能有2个斜杠等")
-    protected Long id;
+    protected String id;
 
     @Schema(title = "模块ID")
     @Column(nullable = false)
@@ -69,6 +69,9 @@ public class Whitelist extends AbstractBaseEntityObject {
 
     @Schema(title = "浏览器列表", description = "逗号或是回车隔开,可以支持*通配符")
     protected String browserList;
+
+    @Schema(title = "浏览器类型列表", description = "逗号或是回车隔开,可以支持*通配符")
+    protected String browserTypeList;
 
     @Schema(title = "Http方法列表", description = "逗号或是回车隔开，可以支持*通配符")
     @Column(length = 64)

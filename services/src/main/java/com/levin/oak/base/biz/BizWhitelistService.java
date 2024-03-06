@@ -8,8 +8,11 @@ import com.levin.commons.dao.support.*;
 import com.levin.commons.service.domain.*;
 
 import java.util.*;
+
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
+import org.springframework.util.PatternMatchUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.*;
 
 import com.levin.oak.base.entities.*;
@@ -27,27 +30,58 @@ import com.levin.oak.base.services.*;
 //自动导入列表
 import java.util.Date;
 import java.io.Serializable;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 /**
- *  白名单-业务服务
+ * 白名单-业务服务
  *
  * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午8:20:51, 代码生成哈希校验码：[6061eb694369a85be940513d321dc602]，请不要修改和删除此行内容。
- *
  */
 
 @Tag(name = E_Whitelist.BIZ_NAME + "-业务服务", description = "")
 public interface BizWhitelistService {
 
+
+    default List<String> parseItem(String rules) {
+
+        if (!StringUtils.hasText(rules)) {
+            return Collections.emptyList();
+        }
+
+        return Stream.of(rules.split("[,，\\t\\s\\n\\r|]")).filter(StringUtils::hasText).collect(Collectors.toList());
+    }
+
+    default boolean anyMatch(Supplier<String> valueSupplier, String rules) {
+
+        List<String> items = parseItem(rules);
+
+        if (items.isEmpty()) {
+            return true;
+        }
+
+        String value = valueSupplier.get();
+
+        //如果有规则但却没有值，则直接返回false
+        if (!StringUtils.hasText(value)) {
+            return false;
+        }
+
+        return items.stream().anyMatch(item -> PatternMatchUtils.simpleMatch(item, value));
+    }
+
     /**
-    * 统计
-    *
-    * @param req
-    * @param paging 分页设置，可空
-    * @return StatWhitelistReq.Result
-    */
+     * 统计
+     *
+     * @param req
+     * @param paging 分页设置，可空
+     * @return StatWhitelistReq.Result
+     */
     @Operation(summary = STAT_ACTION)
     StatWhitelistReq.Result stat(StatWhitelistReq req, Paging paging);
 }

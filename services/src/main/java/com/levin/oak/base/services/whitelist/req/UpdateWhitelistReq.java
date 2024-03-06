@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新白名单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午8:20:51, 代码生成哈希校验码：[7ef57f4330624c9bb0f3b70871b5ed1c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月6日 下午2:17:34, 代码生成哈希校验码：[2e543995bf9b1d9df7b36573249f0d61]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -60,30 +60,30 @@ public class UpdateWhitelistReq extends SimpleUpdateWhitelistReq {
 
 
     @Schema(title = L_id, required = true, requiredMode = REQUIRED)
-    @NotNull
+    @NotBlank
     @Eq(require = true)
-    Long id;
+    String id;
 
     public UpdateWhitelistReq() {
     }
 
-    public UpdateWhitelistReq(Long id) {
+    public UpdateWhitelistReq(String id) {
         this.id = id;
     }
 
-    public UpdateWhitelistReq(Long id, boolean forceUpdate) {
+    public UpdateWhitelistReq(String id, boolean forceUpdate) {
         super(forceUpdate);
         this.id = id;
     }
 
-    public UpdateWhitelistReq updateIdWhenNotBlank(Long id){
+    public UpdateWhitelistReq updateIdWhenNotBlank(String id){
         if(isNotBlank(id)){
             this.id = id;
         }
         return this;
     }
 
-    public static UpdateWhitelistReq of(Long id, boolean forceUpdate){
+    public static UpdateWhitelistReq of(String id, boolean forceUpdate){
         return new UpdateWhitelistReq(id, forceUpdate);
     }
 

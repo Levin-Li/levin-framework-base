@@ -8,10 +8,7 @@ import com.levin.oak.base.biz.InjectVarService;
 import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.biz.rbac.RbacMethodService;
 import com.levin.oak.base.biz.rbac.RbacService;
-import com.levin.oak.base.interceptor.ControllerAuthorizeInterceptor;
-import com.levin.oak.base.interceptor.DevInterceptor;
-import com.levin.oak.base.interceptor.DomainInterceptor;
-import com.levin.oak.base.interceptor.ResourceAuthorizeInterceptor;
+import com.levin.oak.base.interceptor.*;
 import com.levin.oak.base.utils.UrlPathUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -283,6 +280,11 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //                .addPathPatterns("/**")
 //                .order(Ordered.HIGHEST_PRECEDENCE);
 
+        //白名单
+        registry.addInterceptor(whitelistInterceptor())
+                .addPathPatterns("/**")
+                .order(Ordered.HIGHEST_PRECEDENCE);
+
         //api 文档资源特别处理
         if (StringUtils.hasText(frameworkProperties.getApiDocPath())) {
             //允许登录用户访问文档
@@ -353,6 +355,10 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
         return new ResourceAuthorizeInterceptor();
     }
 
+    @Bean
+    public WhitelistInterceptor whitelistInterceptor() {
+        return new WhitelistInterceptor();
+    }
 
     private InterceptorRegistration processDefaultPath(InterceptorRegistration registration, List<String> excludePathPatterns, List<String> includePathPatterns) {
 

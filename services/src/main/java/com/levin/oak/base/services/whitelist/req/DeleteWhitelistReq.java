@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除白名单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午8:20:51, 代码生成哈希校验码：[b450b8df7c0eff8e5bf545717fabf4a5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月6日 下午2:17:34, 代码生成哈希校验码：[ffe4ee3fbb09cb2ec020f3d2748b5ad9]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)
@@ -66,13 +66,13 @@ public class DeleteWhitelistReq extends BaseReq {
     @Schema(title = L_id + "集合", required = true, requiredMode = REQUIRED)
     @In(E_Whitelist.id)
     @NotEmpty
-    Long[] idList;
+    String[] idList;
 
-    public DeleteWhitelistReq(Long... idList) {
+    public DeleteWhitelistReq(String... idList) {
         this.idList = idList;
     }
 
-    public DeleteWhitelistReq setIdList(Long... idList) {
+    public DeleteWhitelistReq setIdList(String... idList) {
         this.idList = idList;
         return this;
     }

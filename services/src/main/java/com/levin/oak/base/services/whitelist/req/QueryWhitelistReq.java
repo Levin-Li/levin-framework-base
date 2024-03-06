@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询白名单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午8:29:11, 代码生成哈希校验码：[ed4cd74a4c44d1a358699b7cc70dc90d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月6日 下午2:55:00, 代码生成哈希校验码：[62a3418504b8fdab3c500e649d7e7697]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -74,12 +74,16 @@ public class QueryWhitelistReq extends BaseReq {
 
     @Schema(title = L_id + "集合")
     @In(E_Whitelist.id)
-    List<Long> idList;
+    List<String> idList;
 
 
 
     @Schema(title = L_id , description = D_id)
-    Long id;
+    String id;
+
+    @Schema(title = "模糊匹配-" + L_id , description = D_id)
+    @Contains
+    String containsId;
 
     @Size(max = 255)
     @Schema(title = L_moduleId)
@@ -114,6 +118,9 @@ public class QueryWhitelistReq extends BaseReq {
 
     @Schema(title = L_browserList , description = D_browserList)
     String browserList;
+
+    @Schema(title = L_browserTypeList , description = D_browserTypeList)
+    String browserTypeList;
 
     @Size(max = 64)
     @Schema(title = L_methodList , description = D_methodList)
@@ -170,7 +177,7 @@ public class QueryWhitelistReq extends BaseReq {
     @Schema(title = L_optimisticLock)
     Integer optimisticLock;
 
-    public QueryWhitelistReq(Long id) {
+    public QueryWhitelistReq(String id) {
         this.id = id;
     }
 

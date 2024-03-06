@@ -27,7 +27,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 白名单-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午8:20:51, 代码生成哈希校验码：[5d4dd8f9f4062c62e290779aaf80d935]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月6日 下午2:17:34, 代码生成哈希校验码：[07fec308fe0d0c34808394ec8f08dcb5]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_Whitelist.BIZ_NAME, description = E_Whitelist.BIZ_NAME + MAINTAIN_ACTION)
@@ -47,7 +47,7 @@ public interface WhitelistService {
      * @return pkId 主键ID
      */
     @Operation(summary = CREATE_ACTION)
-    Long create(@NotNull CreateWhitelistReq req);
+    String create(@NotNull CreateWhitelistReq req);
 
     /**
      * 创建记录，返回主键ID列表
@@ -55,7 +55,7 @@ public interface WhitelistService {
      * @return pkId 主键ID列表
      */
     @Operation(summary = BATCH_CREATE_ACTION)
-    List<Long> batchCreate(@NotNull List<CreateWhitelistReq> reqList);
+    List<String> batchCreate(@NotNull List<CreateWhitelistReq> reqList);
 
     /**
      * 更新记录，并返回更新是否成功
@@ -138,7 +138,7 @@ public interface WhitelistService {
      * @return data 数据详情
      */
     @Operation(summary = VIEW_DETAIL_ACTION)
-    WhitelistInfo findById(@NotNull Long id);
+    WhitelistInfo findById(@NotNull String id);
 
     /**
     * 通过主键查找记录，同时可能注入其它过滤条件（如租户过滤，部门过滤，人员过滤），试图增加数据安全性

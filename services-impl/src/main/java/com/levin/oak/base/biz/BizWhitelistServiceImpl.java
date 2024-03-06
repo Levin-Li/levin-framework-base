@@ -83,50 +83,6 @@ public class BizWhitelistServiceImpl extends BaseService<BizWhitelistServiceImpl
     @Autowired
     WhitelistService whitelistService;
 
-
-    /** 参考示例
-    @Operation(summary = CREATE_ACTION)
-    @Transactional
-    //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
-    public Long create(CreateWhitelistReq req){
-        return whitelistService.create(req);
-    }
-
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    //@Override
-    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
-    public WhitelistInfo findById(Long id) {
-        return whitelistService.findById(id);
-    }
-
-    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    //@Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //
-    public WhitelistInfo findById(WhitelistIdReq req) {
-        return whitelistService.findById(req);
-    }
-
-    @Operation(summary = UPDATE_ACTION)
-    //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
-    @Transactional
-    public boolean update(UpdateWhitelistReq req) {
-        return whitelistService.update(req);
-    }
-
-    @Operation(summary = DELETE_ACTION)
-    //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") // , beforeInvocation = true
-    @Transactional
-    public boolean delete(WhitelistIdReq req) {
-        return whitelistService.delete(req);
-    }
-
-    */
-
     /**
     * 统计
     *

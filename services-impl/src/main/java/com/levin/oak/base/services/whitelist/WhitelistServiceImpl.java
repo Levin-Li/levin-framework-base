@@ -54,7 +54,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 白名单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午8:20:51, 代码生成哈希校验码：[35c0d6852eb5e912e8e4fa95ee50c871]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月6日 下午2:17:34, 代码生成哈希校验码：[98fd7441a735fab8014661e719a1bf2d]，请不要修改和删除此行内容。
  *
  */
 
@@ -79,7 +79,7 @@ public class WhitelistServiceImpl extends BaseService<WhitelistServiceImpl> impl
     @Transactional
     @Override
     @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
-    public Long create(CreateWhitelistReq req){
+    public String create(CreateWhitelistReq req){
         //dao支持保存前先自动查询唯一约束，并给出错误信息
         Whitelist entity = simpleDao.create(req, true);
         return entity.getId();
@@ -88,7 +88,7 @@ public class WhitelistServiceImpl extends BaseService<WhitelistServiceImpl> impl
     @Operation(summary = BATCH_CREATE_ACTION)
     @Transactional
     @Override
-    public List<Long> batchCreate(List<CreateWhitelistReq> reqList){
+    public List<String> batchCreate(List<CreateWhitelistReq> reqList){
         return reqList.stream().map(this::create).collect(Collectors.toList());
     }
 
@@ -162,7 +162,7 @@ public class WhitelistServiceImpl extends BaseService<WhitelistServiceImpl> impl
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
     //如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
     @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
-    public WhitelistInfo findById(Long id) {
+    public WhitelistInfo findById(String id) {
         return findById(new WhitelistIdReq().setId(id));
     }
 
