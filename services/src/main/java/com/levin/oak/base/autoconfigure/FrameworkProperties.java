@@ -1,10 +1,8 @@
 package com.levin.oak.base.autoconfigure;
 
 import com.levin.commons.service.support.MatchConfig;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.ToString;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 import org.springframework.beans.factory.ObjectProvider;
@@ -118,6 +116,12 @@ public class FrameworkProperties
     private List<String> defaultExcludePathPatterns = new ArrayList<>(10);
 
     /**
+     * 白名单配置
+     */
+    @NestedConfigurationProperty
+    private final WhitelistCfg whitelist = new WhitelistCfg("whitelist", "白名单", "白名单访问控制");
+
+    /**
      * 请求变量注入
      */
     @NestedConfigurationProperty
@@ -152,6 +156,7 @@ public class FrameworkProperties
      */
     @NestedConfigurationProperty
     private final Cfg log = new Cfg("log", "访问日志记录", "记录访问日志到数据库中");
+
 
     @Getter(AccessLevel.PRIVATE)
     private ServerProperties serverProperties;
@@ -207,6 +212,25 @@ public class FrameworkProperties
                     )
             );
         }
+    }
+
+
+    @Getter
+    @Setter
+    @Accessors(chain = true)
+    @FieldNameConstants
+    public static class WhitelistCfg extends MatchConfig {
+
+        /**
+         * 仅仅拦截controller方法
+         */
+
+        boolean onlyControllerMethod = true;
+
+        protected WhitelistCfg(String key, String name, String description) {
+            super(key, name, description);
+        }
+
     }
 
     /**

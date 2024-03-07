@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新白名单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月6日 下午2:55:00, 代码生成哈希校验码：[27427b9f666126ada2c414cae9e2ad07]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月7日 下午12:32:49, 代码生成哈希校验码：[33b1e03524818232549b633301ed22a2]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -75,7 +75,7 @@ public class SimpleUpdateWhitelistReq extends BaseReq {
     @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
-    @Size(max = 255)
+    @Size(max = 64)
     @Schema(title = L_moduleId)
     String moduleId;
 

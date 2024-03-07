@@ -720,16 +720,22 @@ public class ModuleWebControllerAspect implements ApplicationListener<ContextRef
 
 
     private String getRequestPath() {
+        String contextPath = StringUtils.trimWhitespace(serverProperties.getServlet().getContextPath());
 
-        String contextPath = serverProperties.getServlet().getContextPath() + "/";
-
-        contextPath = contextPath.replace("//", "/");
+        if (StringUtils.hasText(contextPath)) {
+            contextPath = contextPath.replace("//", "/");
+            while (contextPath.trim().endsWith("/")) {
+                contextPath = contextPath.trim();
+                contextPath = contextPath.substring(0, contextPath.length() - 1);
+            }
+        }
 
         String path = request.getRequestURI().replace("//", "/");
 
         //去除应用路径
-        if (path.startsWith(contextPath)) {
-            path = path.substring(contextPath.length() - 1);
+        if (StringUtils.hasText(contextPath)
+                && path.startsWith(contextPath)) {
+            path = path.substring(contextPath.length());
         }
 
         return path;

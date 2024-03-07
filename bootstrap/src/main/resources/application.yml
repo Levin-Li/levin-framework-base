@@ -246,6 +246,14 @@ plugin:
 #            controller-acl:
 #              exclude-path-patterns: "/v3/api-docs/**"
 
+
+            whitelist:
+              enable: false
+              onlyControllerMethod: true
+
+              include-path-patterns: /com.levin.oak.base/**
+#              exclude-path-patterns: /**/Whitelist/**
+
             sign:
               enable: false
             log:
@@ -265,3 +273,4 @@ logging:
     root: warn
     com.levin: debug
     com.levin.oak.base: debug
+

@@ -14,6 +14,8 @@ import com.levin.oak.base.services.whitelist.info.WhitelistInfo;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -47,6 +49,9 @@ public class WhitelistInterceptor
     @Autowired
     BizWhitelistService bizWhitelistService;
 
+    @Autowired
+    ServerProperties serverProperties;
+
     @PostConstruct
     public void init() {
     }
@@ -54,12 +59,20 @@ public class WhitelistInterceptor
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        //如果不是HandlerMethod，直接放行
-        if (!(handler instanceof HandlerMethod)) {
+        FrameworkProperties.WhitelistCfg whitelistCfg = frameworkProperties.getWhitelist();
+
+        if (!whitelistCfg.isEnable()
+                //如果不是HandlerMethod，直接放行
+                || (whitelistCfg.isOnlyControllerMethod() && !(handler instanceof HandlerMethod))) {
             return true;
         }
 
-        String path = request.getRequestURI();
+        String path = getRequestPath(request);// request.getRequestURI();
+
+        if (!StringUtils.hasText(path)
+                || !whitelistCfg.isPathMatched(path)) {
+            return true;
+        }
 
         WhitelistInfo whitelistInfo = whitelistService.findById(path);
 
@@ -101,5 +114,30 @@ public class WhitelistInterceptor
 
         return true;
     }
+
+
+    private String getRequestPath(HttpServletRequest request) {
+
+        String contextPath = StringUtils.trimWhitespace(serverProperties.getServlet().getContextPath());
+
+        if (StringUtils.hasText(contextPath)) {
+            contextPath = contextPath.replace("//", "/");
+            while (contextPath.trim().endsWith("/")) {
+                contextPath = contextPath.trim();
+                contextPath = contextPath.substring(0, contextPath.length() - 1);
+            }
+        }
+
+        String path = request.getRequestURI().replace("//", "/");
+
+        //去除应用路径
+        if (StringUtils.hasText(contextPath)
+                && path.startsWith(contextPath)) {
+            path = path.substring(contextPath.length());
+        }
+
+        return path;
+    }
+
 
 }

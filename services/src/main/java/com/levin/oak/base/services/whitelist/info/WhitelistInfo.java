@@ -35,7 +35,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 白名单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月6日 下午2:55:00, 代码生成哈希校验码：[3fe6a417cc800cf82a03987e06dcd91b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月7日 下午12:32:49, 代码生成哈希校验码：[5cab15c331ad472b54a9788dbcc9ffb2]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -54,8 +54,7 @@ public class WhitelistInfo implements Serializable {
     @Schema(title = L_id , description = D_id)
     String id;
 
-    @NotBlank
-    @Size(max = 255)
+    @Size(max = 64)
     @Schema(title = L_moduleId)
     String moduleId;
 

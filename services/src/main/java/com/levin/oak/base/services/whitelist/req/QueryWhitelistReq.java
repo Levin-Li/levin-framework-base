@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询白名单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月6日 下午2:55:00, 代码生成哈希校验码：[62a3418504b8fdab3c500e649d7e7697]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月7日 下午12:32:49, 代码生成哈希校验码：[377f267f888a6ea0d24aaad72c14d3a7]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -82,10 +82,10 @@ public class QueryWhitelistReq extends BaseReq {
     String id;
 
     @Schema(title = "模糊匹配-" + L_id , description = D_id)
-    @Contains
-    String containsId;
+    @StartsWith
+    String startsWithId;
 
-    @Size(max = 255)
+    @Size(max = 64)
     @Schema(title = L_moduleId)
     String moduleId;
 
