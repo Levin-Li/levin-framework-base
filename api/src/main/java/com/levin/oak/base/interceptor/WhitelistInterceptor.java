@@ -76,7 +76,7 @@ public class WhitelistInterceptor
             log.warn("非法的IP({})访问：{}，允许的IP列表：{}", clientIp, request.getRequestURL().toString(), whitelistInfo.getIpList());
         }
 
-        Assert.isTrue(passed, "非法的请求");
+        Assert.isTrue(passed, "不支持的地址请求");
 
         passed = bizWhitelistService.anyMatch(() -> request.getServerName(), whitelistInfo.getDomainList());
 
@@ -84,11 +84,9 @@ public class WhitelistInterceptor
             log.warn("非法的域名({})访问：{}，允许的域名列表：{}", request.getServerName(), request.getRequestURL().toString(), whitelistInfo.getDomainList());
         }
 
-        Assert.isTrue(passed, "非法请求域名");
+        Assert.isTrue(passed, "不支持的域名请求");
 
         Assert.isTrue(bizWhitelistService.anyMatch(request::getMethod, whitelistInfo.getMethodList()), "不支持的请求方法" + request.getMethod());
-        Assert.isTrue(bizWhitelistService.anyMatch(request::getMethod, whitelistInfo.getMethodList()), "不支持的请求方法" + request.getMethod());
-
 
         UserAgent userAgent = UserAgentUtil.parse(request.getHeader("user-agent"));
 
@@ -98,6 +96,7 @@ public class WhitelistInterceptor
 
         Assert.isTrue(bizWhitelistService.anyMatch(() -> userAgent.getEngine() != null ? userAgent.getEngine().getName() : null, whitelistInfo.getBrowserTypeList()), "不支持的浏览器类型");
 
+        //地区匹配  ("中国|0|", "")
         Assert.isTrue(bizWhitelistService.anyMatch(() -> IPAddrUtils.searchIpRegion(clientIp), whitelistInfo.getRegionList()), "不支持的地区");
 
         return true;
