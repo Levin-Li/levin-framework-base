@@ -222,9 +222,13 @@ public class FrameworkProperties
     public static class WhitelistCfg extends MatchConfig {
 
         /**
+         * 使用web过滤器模式
+         */
+        boolean useWebFilter = false;
+
+        /**
          * 仅仅拦截controller方法
          */
-
         boolean onlyControllerMethod = true;
 
         protected WhitelistCfg(String key, String name, String description) {

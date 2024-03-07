@@ -250,6 +250,7 @@ plugin:
             whitelist:
               enable: false
               onlyControllerMethod: true
+              useWebFilter: true
 
               include-path-patterns: /com.levin.oak.base/**
 #              exclude-path-patterns: /**/Whitelist/**

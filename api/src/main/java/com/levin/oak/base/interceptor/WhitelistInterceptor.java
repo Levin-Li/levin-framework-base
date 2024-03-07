@@ -5,13 +5,11 @@ import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.levin.commons.utils.IPAddrUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
-import com.levin.oak.base.biz.BizTenantService;
 import com.levin.oak.base.biz.BizWhitelistService;
-import com.levin.oak.base.biz.rbac.AuthService;
-import com.levin.oak.base.biz.rbac.RbacService;
 import com.levin.oak.base.services.whitelist.WhitelistService;
 import com.levin.oak.base.services.whitelist.info.WhitelistInfo;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -28,20 +26,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Data
 @Slf4j
+@Accessors(chain = true)
 public class WhitelistInterceptor
         implements HandlerInterceptor {
 
     @Autowired
-    AuthService authService;
-
-    @Autowired
-    RbacService rbacService;
-
-    @Autowired
     FrameworkProperties frameworkProperties;
-
-    @Autowired
-    BizTenantService bizTenantService;
 
     @Autowired
     WhitelistService whitelistService;
@@ -57,13 +47,18 @@ public class WhitelistInterceptor
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        //如果使用过滤器模式，则直接返回
+        return frameworkProperties.getWhitelist().isUseWebFilter() || canPass(request, response, handler);
+    }
+
+    public boolean canPass(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
         FrameworkProperties.WhitelistCfg whitelistCfg = frameworkProperties.getWhitelist();
 
         if (!whitelistCfg.isEnable()
                 //如果不是HandlerMethod，直接放行
-                || (whitelistCfg.isOnlyControllerMethod() && !(handler instanceof HandlerMethod))) {
+                || (whitelistCfg.isOnlyControllerMethod() && handler != null && !(handler instanceof HandlerMethod))) {
             return true;
         }
 
