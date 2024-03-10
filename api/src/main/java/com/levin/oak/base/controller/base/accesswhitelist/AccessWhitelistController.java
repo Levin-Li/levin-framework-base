@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 访问白名单控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年3月9日 下午10:46:12, 代码生成哈希校验码：[8bb96c07c9271242ac8d59044b11e3c9]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:44, 代码生成哈希校验码：[534a963185699870aec36fa3b99f87fe]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class AccessWhitelistController extends BaseController{
      * @param req QueryAccessWhitelistReq
      * @return  ApiResp<PagingData<AccessWhitelistInfo>>
      */
-    @GetMapping({"list", "search"})
+    @GetMapping({"list"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<AccessWhitelistInfo>> list(@Form @Valid QueryAccessWhitelistReq req, SimplePaging paging) {

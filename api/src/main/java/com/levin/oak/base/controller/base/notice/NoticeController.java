@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 通知控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:18, 代码生成哈希校验码：[b80b53acb5650c644c1fb829aaae8af1]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:44, 代码生成哈希校验码：[700b6c07f2fed208dff851e86dfc90e0]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class NoticeController extends BaseController{
      * @param req QueryNoticeReq
      * @return  ApiResp<PagingData<NoticeInfo>>
      */
-    @GetMapping({"list", "search"})
+    @GetMapping({"list"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<NoticeInfo>> list(@Form @Valid QueryNoticeReq req, SimplePaging paging) {

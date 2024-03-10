@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 调度日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:18, 代码生成哈希校验码：[cf89ba22c0324290a5c5320dec077eb3]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:44, 代码生成哈希校验码：[e427b81b8151cff1fbf7ea6ff65f5b86]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class ScheduledLogController extends BaseController{
      * @param req QueryScheduledLogReq
      * @return  ApiResp<PagingData<ScheduledLogInfo>>
      */
-    @GetMapping({"list", "search"})
+    @GetMapping({"list"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<ScheduledLogInfo>> list(@Form @Valid QueryScheduledLogReq req, SimplePaging paging) {

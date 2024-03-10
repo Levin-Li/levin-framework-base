@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 工作岗位控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:19, 代码生成哈希校验码：[ef59f27507bf322cce986991e6488cd5]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:45, 代码生成哈希校验码：[01aa06fcc9e3d0c4ade18f402f2f1307]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class JobPostController extends BaseController{
      * @param req QueryJobPostReq
      * @return  ApiResp<PagingData<JobPostInfo>>
      */
-    @GetMapping({"list", "search"})
+    @GetMapping({"list"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<JobPostInfo>> list(@Form @Valid QueryJobPostReq req, SimplePaging paging) {

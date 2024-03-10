@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 机构控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:19, 代码生成哈希校验码：[8c4c1475407e3b545127eead567ec334]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:45, 代码生成哈希校验码：[3d97383b05279bb7f5fc0d710f371e7b]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class OrgController extends BaseController{
      * @param req QueryOrgReq
      * @return  ApiResp<PagingData<OrgInfo>>
      */
-    @GetMapping({"list", "search"})
+    @GetMapping({"list"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<OrgInfo>> list(@Form @Valid QueryOrgReq req, SimplePaging paging) {

@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单页面控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:19, 代码生成哈希校验码：[7290e31288fe84f54625f2351d57ec9e]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:45, 代码生成哈希校验码：[f195d6653b9796fc13c6c149f91394d0]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class SimplePageController extends BaseController{
      * @param req QuerySimplePageReq
      * @return  ApiResp<PagingData<SimplePageInfo>>
      */
-    @GetMapping({"list", "search"})
+    @GetMapping({"list"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<SimplePageInfo>> list(@Form @Valid QuerySimplePageReq req, SimplePaging paging) {

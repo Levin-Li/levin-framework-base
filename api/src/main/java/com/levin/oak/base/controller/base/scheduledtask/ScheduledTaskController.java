@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 调度任务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:18, 代码生成哈希校验码：[6a2f82cf31f47e44515dca2b4e5731a8]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:45, 代码生成哈希校验码：[0bf4416f5dd24cc9ecd0ce3fc4d93653]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class ScheduledTaskController extends BaseController{
      * @param req QueryScheduledTaskReq
      * @return  ApiResp<PagingData<ScheduledTaskInfo>>
      */
-    @GetMapping({"list", "search"})
+    @GetMapping({"list"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<ScheduledTaskInfo>> list(@Form @Valid QueryScheduledTaskReq req, SimplePaging paging) {

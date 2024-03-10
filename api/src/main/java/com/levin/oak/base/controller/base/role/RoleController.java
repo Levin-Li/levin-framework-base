@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 角色控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:17, 代码生成哈希校验码：[3c1ec881c10dbe3675ca4ce940dea05f]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:44, 代码生成哈希校验码：[290108ce71a69a1313e0a50c4e51eb05]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class RoleController extends BaseController{
      * @param req QueryRoleReq
      * @return  ApiResp<PagingData<RoleInfo>>
      */
-    @GetMapping({"list", "search"})
+    @GetMapping({"list"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<RoleInfo>> list(@Form @Valid QueryRoleReq req, SimplePaging paging) {

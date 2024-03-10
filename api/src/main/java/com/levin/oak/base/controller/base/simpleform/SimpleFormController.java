@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单表单控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:19, 代码生成哈希校验码：[7a0d0669145f212b2c3c91ad16fbee14]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:45, 代码生成哈希校验码：[fdecf9db3fc22203614a634dfff1e40e]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class SimpleFormController extends BaseController{
      * @param req QuerySimpleFormReq
      * @return  ApiResp<PagingData<SimpleFormInfo>>
      */
-    @GetMapping({"list", "search"})
+    @GetMapping({"list"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<SimpleFormInfo>> list(@Form @Valid QuerySimpleFormReq req, SimplePaging paging) {

@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 通知处理日志控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:18, 代码生成哈希校验码：[cd7656da33357d66718b21ea0de5ef3d]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:45, 代码生成哈希校验码：[bccc78f44c25a2bf741a6871b47912ba]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class NoticeProcessLogController extends BaseController{
      * @param req QueryNoticeProcessLogReq
      * @return  ApiResp<PagingData<NoticeProcessLogInfo>>
      */
-    @GetMapping({"list", "search"})
+    @GetMapping({"list"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<NoticeProcessLogInfo>> list(@Form @Valid QueryNoticeProcessLogReq req, SimplePaging paging) {

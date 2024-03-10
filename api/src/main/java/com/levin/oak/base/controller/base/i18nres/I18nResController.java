@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 国际化资源控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:19, 代码生成哈希校验码：[f7147b3b553254c28d4409030b522715]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:45, 代码生成哈希校验码：[57aceda199839316cda19a088535621b]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class I18nResController extends BaseController{
      * @param req QueryI18nResReq
      * @return  ApiResp<PagingData<I18nResInfo>>
      */
-    @GetMapping({"list", "search"})
+    @GetMapping({"list"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<I18nResInfo>> list(@Form @Valid QueryI18nResReq req, SimplePaging paging) {

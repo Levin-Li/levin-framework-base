@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 动态验证码配置控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年3月9日 下午10:46:13, 代码生成哈希校验码：[ba74e860e0a840dea77b025a3484246c]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:45, 代码生成哈希校验码：[8cd3a9b82f24fdafac78b3cbdacda8df]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class DynamicVerifyCodeCfgController extends BaseController{
      * @param req QueryDynamicVerifyCodeCfgReq
      * @return  ApiResp<PagingData<DynamicVerifyCodeCfgInfo>>
      */
-    @GetMapping({"list", "search"})
+    @GetMapping({"list"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<DynamicVerifyCodeCfgInfo>> list(@Form @Valid QueryDynamicVerifyCodeCfgReq req, SimplePaging paging) {

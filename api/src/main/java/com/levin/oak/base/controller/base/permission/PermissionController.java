@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 权限清单控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 上午11:48:06, 代码生成哈希校验码：[63bf413f301ca770b7b44d7e755f40e7]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:44, 代码生成哈希校验码：[03433dd279ce7b3ac016dc50a3aec464]，请不要修改和删除此行内容。
 *
 */
 
@@ -89,7 +89,7 @@ public abstract class PermissionController extends BaseController{
      * @param req QueryPermissionReq
      * @return  ApiResp<PagingData<PermissionInfo>>
      */
-    @GetMapping({"list", "search"})
+    @GetMapping({"list"})
     @Operation(summary = QUERY_LIST_ACTION, description = QUERY_ACTION + " " + BIZ_NAME)
     @CRUD.ListTable
     public ApiResp<PagingData<PermissionInfo>> list(@Form @Valid QueryPermissionReq req, SimplePaging paging) {
