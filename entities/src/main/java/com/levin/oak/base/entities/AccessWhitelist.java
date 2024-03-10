@@ -34,7 +34,7 @@ import java.util.Date;
         }
 )
 @Schema(title = "访问白名单", description = "主要是IP限制")
-@EntityCategory(EntityOpConst.PLATFORM_TYPE_NAME)
+@EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class AccessWhitelist extends AbstractMultiTenantObject {
 
     @Id

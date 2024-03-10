@@ -53,7 +53,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 访问白名单控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:44, 代码生成哈希校验码：[534a963185699870aec36fa3b99f87fe]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:39:30, 代码生成哈希校验码：[b2ef4cfb3cb77f61d13865181abc72f0]，请不要修改和删除此行内容。
 *
 */
 
@@ -64,7 +64,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AccessWhitelistController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME + "-")
+@ResAuthorize(domain = ID, type = SYS_TYPE_NAME + "-")
 
 //类注解
 //默认生成控制器类，@Tag的name属性关联权限的资源标识
