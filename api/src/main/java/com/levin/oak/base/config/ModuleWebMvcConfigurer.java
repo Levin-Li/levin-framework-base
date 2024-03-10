@@ -280,10 +280,15 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //                .addPathPatterns("/**")
 //                .order(Ordered.HIGHEST_PRECEDENCE);
 
-        //白名单
-        registry.addInterceptor(whitelistInterceptor())
-                .addPathPatterns("/**")
-                .order(Ordered.HIGHEST_PRECEDENCE);
+
+        if (!frameworkProperties.getWhitelist().isUseWebFilter()) {
+            //白名单
+            registry.addInterceptor(accessWhitelistInterceptor())
+                    .addPathPatterns("/**")
+                    .order(Ordered.HIGHEST_PRECEDENCE);
+
+            log.info("*** 动态基于IP的访问控制拦截器已经启用，" + frameworkProperties.getWhitelist());
+        }
 
         //api 文档资源特别处理
         if (StringUtils.hasText(frameworkProperties.getApiDocPath())) {
@@ -306,6 +311,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     , frameworkProperties.getTenantBindDomain().getIncludePathPatterns()
             ).order(Ordered.HIGHEST_PRECEDENCE + 1000);
 
+            log.info("*** 租户绑定域名拦截器已经启用，" + frameworkProperties.getTenantBindDomain());
         }
 
         //检查租户信息，要求所有的访问都必须有租户
@@ -333,15 +339,26 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
                     , frameworkProperties.getControllerAcl().getIncludePathPatterns()
             ).order(Ordered.HIGHEST_PRECEDENCE + 3000);
 
+            log.info("*** 基于权限的访问控制拦截器已经启用，" + frameworkProperties.getControllerAcl());
         }
-
-        log.info("*** 全局资源拦截器已经启用，" + frameworkProperties.getResourcesAcl());
 
         //全局资源拦截器
         registry.addInterceptor(resourceAuthorizeInterceptor())
                 .excludePathPatterns(frameworkProperties.getDefaultExcludePathPatterns())
                 .addPathPatterns("/**")
                 .order(Ordered.HIGHEST_PRECEDENCE + 4000);
+        log.info("*** 全局资源拦截器已经启用，" + frameworkProperties.getResourcesAcl());
+
+
+        if (frameworkProperties.isEnableApiDynamicVerificationCode()) {
+
+            processDefaultPath(
+                    registry.addInterceptor(dynamicVerificationInterceptor()),
+                    null, null
+            ).order(Ordered.HIGHEST_PRECEDENCE + 5000);
+
+            log.info("*** 动态验证码拦截器已经启用，" + frameworkProperties.getResourcesAcl());
+        }
 
     }
 
@@ -356,8 +373,14 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    public WhitelistInterceptor whitelistInterceptor() {
-        return new WhitelistInterceptor();
+    public AccessWhitelistInterceptor accessWhitelistInterceptor() {
+        return new AccessWhitelistInterceptor();
+    }
+
+
+    @Bean
+    DynamicVerificationInterceptor dynamicVerificationInterceptor() {
+        return new DynamicVerificationInterceptor();
     }
 
     private InterceptorRegistration processDefaultPath(InterceptorRegistration registration, List<String> excludePathPatterns, List<String> includePathPatterns) {

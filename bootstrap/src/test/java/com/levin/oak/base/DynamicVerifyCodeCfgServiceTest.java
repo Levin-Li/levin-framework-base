@@ -2,17 +2,19 @@ package com.levin.oak.base;
 
 import static com.levin.oak.base.ModuleOption.*;
 import com.levin.oak.base.entities.*;
-import com.levin.oak.base.entities.Whitelist;
+import com.levin.oak.base.entities.DynamicVerifyCodeCfg;
 
 import com.levin.oak.base.biz.*;
-import com.levin.oak.base.services.whitelist.*;
-import com.levin.oak.base.services.whitelist.req.*;
-import com.levin.oak.base.services.whitelist.info.*;
+import com.levin.oak.base.services.dynamicverifycodecfg.*;
+import com.levin.oak.base.services.dynamicverifycodecfg.req.*;
+import com.levin.oak.base.services.dynamicverifycodecfg.info.*;
 
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.oak.base.entities.VerifyCodeType;
 import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
@@ -53,9 +55,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 访问白名单测试
+ * 动态验证码配置测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月7日 下午5:31:32, 代码生成哈希校验码：[35727df9000978ed9bd24bc98aecad99]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月9日 下午10:46:14, 代码生成哈希校验码：[326d4e3a6dea7ab96e1082309932986b]，请不要修改和删除此行内容。
  *
  */
 
@@ -65,13 +67,13 @@ import org.slf4j.LoggerFactory;
 @SpringBootTest
 //@Transactional(rollbackFor = {Throwable.class})
 @Slf4j
-public class WhitelistServiceTest {
+public class DynamicVerifyCodeCfgServiceTest {
 
     @Autowired
-    private WhitelistService whitelistService;
+    private DynamicVerifyCodeCfgService dynamicVerifyCodeCfgService;
 
     @Autowired
-    private BizWhitelistService bizWhitelistService;
+    private BizDynamicVerifyCodeCfgService bizDynamicVerifyCodeCfgService;
 
     private String id;
 
@@ -92,9 +94,9 @@ public class WhitelistServiceTest {
     }
 
     @Test
-    public void createWhitelistTest() {
+    public void createDynamicVerifyCodeCfgTest() {
 
-        CreateWhitelistReq req = new CreateWhitelistReq();
+        CreateDynamicVerifyCodeCfgReq req = new CreateDynamicVerifyCodeCfgReq();
 
             // req.setTitle("这是文本255");// 必填
 
@@ -108,15 +110,13 @@ public class WhitelistServiceTest {
 
             // req.setIpList("这是文本1800");//逗号或是回车隔开，可以支持*通配符 
 
-            // req.setIpBlacklist("这是文本1800");//逗号或是回车隔开，可以支持*通配符 
+            // req.setIpExcludeList("这是文本1800");//逗号或是回车隔开，可以支持*通配符 
 
-            // req.setOsList("操作系统列表_1");//逗号或是回车隔开,可以支持*通配符 
+            // req.setVerifyCodeType(VerifyCodeType.captcha);// 必填
 
-            // req.setBrowserList("浏览器列表_1");//逗号或是回车隔开,可以支持*通配符 
+            // req.setVerifyCodeParamName("这是文本16");//默认参数名：verifyCode 
 
-            // req.setBrowserTypeList("浏览器类型列表_1");//逗号或是回车隔开,可以支持*通配符 
-
-            // req.setMethodList("这是文本64");//逗号或是回车隔开，可以支持*通配符 
+            // req.setTenantId("这是文本128");// 
 
             // req.setOrderCode(1);// 
 
@@ -129,32 +129,31 @@ public class WhitelistServiceTest {
             // req.setOptimisticLock(1);// 
 
 
-       String id  = whitelistService.create(req);
+       String id  = dynamicVerifyCodeCfgService.create(req);
 
-        log.debug("新增访问白名单->" + id);
+        log.debug("新增动态验证码配置->" + id);
 
-        Assert.isTrue(id != null, "访问白名单");
+        Assert.isTrue(id != null, "动态验证码配置");
 
     }
 
 
     @Test
-    public void queryWhitelistTest() {
+    public void queryDynamicVerifyCodeCfgTest() {
 
-        QueryWhitelistReq req = new QueryWhitelistReq();
+        QueryDynamicVerifyCodeCfgReq req = new QueryDynamicVerifyCodeCfgReq();
 
-        // req.setId(null);//去除域名后的路径(不含参数)，规范的URL路径，中间不能有2个斜杠等
+        // req.setId(null);//格式：tenantId+@+URL路径,如：tid@/base/sendSms，路径去除域名后的路径(不含参数)，规范的URL路径，中间不能有2个斜杠等
         // req.setTitle("这是文本255");//
         // req.setModuleId("这是文本64");//
         // req.setModuleName("这是文本64");//
         // req.setDomainList("这是文本1800");//逗号或是回车隔开，可以支持*通配符
         // req.setRegionList("这是文本1800");//逗号或是回车隔开，通常根据IP判别地区，可以支持*通配符
         // req.setIpList("这是文本1800");//逗号或是回车隔开，可以支持*通配符
-        // req.setIpBlacklist("这是文本1800");//逗号或是回车隔开，可以支持*通配符
-        // req.setOsList("操作系统列表_1");//逗号或是回车隔开,可以支持*通配符
-        // req.setBrowserList("浏览器列表_1");//逗号或是回车隔开,可以支持*通配符
-        // req.setBrowserTypeList("浏览器类型列表_1");//逗号或是回车隔开,可以支持*通配符
-        // req.setMethodList("这是文本64");//逗号或是回车隔开，可以支持*通配符
+        // req.setIpExcludeList("这是文本1800");//逗号或是回车隔开，可以支持*通配符
+        // req.setVerifyCodeType(VerifyCodeType.captcha);//
+        // req.setVerifyCodeParamName("这是文本16");//默认参数名：verifyCode
+        // req.setTenantId("这是文本128");//
         // req.setCreator("这是文本128");//
         // req.setOrderCode(1);//
         // req.setEnable(true);//
@@ -162,17 +161,17 @@ public class WhitelistServiceTest {
         // req.setRemark("这是文本512");//
         // req.setOptimisticLock(1);//
 
-        PagingData<WhitelistInfo> resp = whitelistService.query(req,null);
+        PagingData<DynamicVerifyCodeCfgInfo> resp = dynamicVerifyCodeCfgService.query(req,null);
 
-        log.debug("查询访问白名单->" + resp);
+        log.debug("查询动态验证码配置->" + resp);
 
-        Assert.isTrue(!resp.isEmpty(), "访问白名单");
+        Assert.isTrue(!resp.isEmpty(), "动态验证码配置");
     }
 
     @Test
-    public void updateWhitelistTest() {
+    public void updateDynamicVerifyCodeCfgTest() {
 
-         UpdateWhitelistReq req = new UpdateWhitelistReq();
+         UpdateDynamicVerifyCodeCfgReq req = new UpdateDynamicVerifyCodeCfgReq();
 
          req.setId(id);
 
@@ -183,35 +182,34 @@ public class WhitelistServiceTest {
            // req.setDomainList("这是文本1800");//逗号或是回车隔开，可以支持*通配符 
            // req.setRegionList("这是文本1800");//逗号或是回车隔开，通常根据IP判别地区，可以支持*通配符 
            // req.setIpList("这是文本1800");//逗号或是回车隔开，可以支持*通配符 
-           // req.setIpBlacklist("这是文本1800");//逗号或是回车隔开，可以支持*通配符 
-           // req.setOsList("操作系统列表_1");//逗号或是回车隔开,可以支持*通配符 
-           // req.setBrowserList("浏览器列表_1");//逗号或是回车隔开,可以支持*通配符 
-           // req.setBrowserTypeList("浏览器类型列表_1");//逗号或是回车隔开,可以支持*通配符 
-           // req.setMethodList("这是文本64");//逗号或是回车隔开，可以支持*通配符 
+           // req.setIpExcludeList("这是文本1800");//逗号或是回车隔开，可以支持*通配符 
+           // req.setVerifyCodeType(VerifyCodeType.captcha);// 必填
+           // req.setVerifyCodeParamName("这是文本16");//默认参数名：verifyCode 
+           // req.setTenantId("这是文本128");// 
            // req.setOrderCode(1);// 
            // req.setEnable(true);// 必填
            // req.setEditable(true);// 必填
            // req.setRemark("这是文本512");// 
            // req.setOptimisticLock(1);// 
 
-          boolean ok = whitelistService.update(req);
+          boolean ok = dynamicVerifyCodeCfgService.update(req);
 
-          log.debug("更新访问白名单-> " + ok);
+          log.debug("更新动态验证码配置-> " + ok);
 
-          Assert.isTrue(ok, "访问白名单");
+          Assert.isTrue(ok, "动态验证码配置");
     }
 
     @Test
-    public void deleteWhitelistTest() {
+    public void deleteDynamicVerifyCodeCfgTest() {
 
-        WhitelistIdReq req = new WhitelistIdReq();
+        DynamicVerifyCodeCfgIdReq req = new DynamicVerifyCodeCfgIdReq();
 
         req.setId(id);
 
-        boolean ok = whitelistService.delete(req);
+        boolean ok = dynamicVerifyCodeCfgService.delete(req);
 
-        log.debug("删除访问白名单->" + ok);
+        log.debug("删除动态验证码配置->" + ok);
 
-        Assert.isTrue(ok , "访问白名单");
+        Assert.isTrue(ok , "动态验证码配置");
     }
 }

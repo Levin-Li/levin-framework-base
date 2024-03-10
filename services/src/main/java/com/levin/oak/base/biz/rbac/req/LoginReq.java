@@ -67,7 +67,7 @@ public class LoginReq implements AuthReq, ServiceReq {
     @Ignore
     protected String verificationCode;
 
-    @Schema(title = "验证码类型", description = "可选择值：sms,captcha,mfa; 默认是captcha，mfa是多因子认证，默认是Google Authenticator")
+    @Schema(title = "验证码类型", description = "可选择值：sms,captcha,mfa; 默认是captcha，mfa是多因子认证(默认是Google Authenticator)")
     @Ignore
     protected String verificationCodeType = "captcha";
 

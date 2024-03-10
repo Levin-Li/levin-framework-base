@@ -17,7 +17,6 @@ import com.levin.oak.base.controller.base.accesslog.AccessLogController;
 import com.levin.oak.base.services.accesslog.AccessLogService;
 import com.levin.oak.base.services.accesslog.req.CreateAccessLogReq;
 import com.levin.oak.base.services.tenant.info.TenantInfo;
-import com.levin.oak.base.services.whitelist.WhitelistService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;

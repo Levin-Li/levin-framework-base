@@ -10,25 +10,19 @@ import com.levin.commons.plugin.PluginManager;
 import com.levin.commons.rbac.AuthReq;
 import com.levin.commons.rbac.RbacUserInfo;
 import com.levin.commons.rbac.ResAuthorize;
-import com.levin.commons.rbac.ResPermission;
 import com.levin.commons.service.exception.AuthorizationException;
-import com.levin.commons.service.support.ContextHolder;
-import com.levin.commons.utils.ClassUtils;
-import com.levin.commons.utils.MapUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.*;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
 import com.levin.oak.base.entities.User;
+import com.levin.oak.base.entities.VerifyCodeType;
 import com.levin.oak.base.services.menures.MenuResService;
 import com.levin.oak.base.services.role.RoleService;
 import com.levin.oak.base.services.tenant.TenantService;
 import com.levin.oak.base.services.user.UserService;
 import com.levin.oak.base.services.user.info.UserInfo;
 import com.levin.oak.base.services.user.req.UpdateUserReq;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -37,16 +31,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Role;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
-import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -204,11 +195,11 @@ public class AuthServiceImpl
             Assert.hasText(req.getTenantId(), "未知的租户");
         }
 
-        if (frameworkProperties.isEnableVerificationCode()) {
+        if (frameworkProperties.isEnableLoginVerificationCode()) {
 
             boolean requirePwd = true;
 
-            if ("sms".equalsIgnoreCase(req.getVerificationCodeType())) {
+            if (VerifyCodeType.sms.name().equalsIgnoreCase(req.getVerificationCodeType())) {
 
                 Assert.isTrue(frameworkProperties.isEnableSmsVerificationCode(), "短信验证未开启");
                 Assert.notNull(smsCodeService, "短信验证码服务不存在");
@@ -221,7 +212,7 @@ public class AuthServiceImpl
                 //验证短信
                 Assert.isTrue(smsCodeService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "短信验证码错误");
 
-            } else if ("captcha".equalsIgnoreCase(req.getVerificationCodeType())) {
+            } else if (VerifyCodeType.captcha.name().equalsIgnoreCase(req.getVerificationCodeType())) {
 
                 //验证图片验证码
                 Assert.isTrue(frameworkProperties.isEnableCaptchaVerificationCode(), "图片验证未开启");
@@ -229,7 +220,7 @@ public class AuthServiceImpl
                 Assert.hasText(req.getVerificationCode(), "验证码不能为空");
                 Assert.isTrue(captchaService.verify(req.getTenantId(), req.getAppId(), req.getAccount(), req.getVerificationCode()), "图片验证码错误");
 
-            } else if ("mfa".equalsIgnoreCase(req.getVerificationCodeType())) {
+            } else if (VerifyCodeType.mfa.name().equalsIgnoreCase(req.getVerificationCodeType())) {
 
                 Assert.isTrue(frameworkProperties.isEnableMFAVerificationCode(), "多因子验证未开启");
                 Assert.notNull(multiFactorAuthService, "多因子验证服务未开启");

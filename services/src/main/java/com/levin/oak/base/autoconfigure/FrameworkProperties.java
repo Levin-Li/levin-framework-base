@@ -1,7 +1,6 @@
 package com.levin.oak.base.autoconfigure;
 
 import com.levin.commons.service.support.MatchConfig;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
@@ -51,8 +50,14 @@ public class FrameworkProperties
     /**
      * 是否启用验证码
      * 默认启用验证码
+     * 主要用于登录
      */
-    private boolean enableVerificationCode = true;
+    private boolean enableLoginVerificationCode = true;
+
+    /**
+     * 是否启用非登录接口动态验证码
+     */
+    private boolean enableApiDynamicVerificationCode = true;
 
     /**
      * 是否允许短信验证码
@@ -65,7 +70,6 @@ public class FrameworkProperties
      * 默认允许
      */
     private boolean enableCaptchaVerificationCode = true;
-
 
     /**
      * 是否允许多因子验证码

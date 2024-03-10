@@ -18,6 +18,7 @@ import com.levin.oak.base.biz.rbac.req.LoginReq;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.controller.rbac.dto.LoginInfo;
 import com.levin.oak.base.entities.EntityConst;
+import com.levin.oak.base.services.commons.req.MultiTenantReq;
 import com.levin.oak.base.services.menures.info.MenuResInfo;
 import com.levin.oak.base.services.org.info.OrgInfo;
 import com.levin.oak.base.services.role.RoleService;
@@ -38,6 +39,7 @@ import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -107,8 +109,23 @@ public class RbacController extends BaseController {
         return ApiResp.ok(authService.sendSmsCode(req.getTenantId(), req.getAppId(), account));
     }
 
+    @GetMapping("sendUserSmsCode")
+    @Operation(tags = {"授权管理"}, summary = "已登录用户发送短信证码")
+    public ApiResp<String> sendUserSmsCode(MultiTenantReq<?> req, @Schema(title = "应用ID") String appId) {
+
+        Assert.notNull(req, "请求对象不能为空");
+
+        Assert.isTrue(authService.isLogin(), "未登录");
+
+        RbacUserInfo<String> userInfo = authService.getUserInfo();
+
+        Assert.hasText(userInfo.getTelephone(), "当前用户手机号未填写");
+
+        return ApiResp.ok(authService.sendSmsCode(req.getTenantId(), appId, userInfo.getTelephone()));
+    }
+
     @SneakyThrows
-    @GetMapping("captcha")
+    @GetMapping({"captcha"})
     @Operation(tags = {"授权管理"}, summary = "获取验图片证码")
     @ResAuthorize(ignored = true)
     public void genCaptcha(@NotNull AppClientReq req, @NotBlank String account, @RequestParam Map<String, String> params) {
@@ -116,8 +133,11 @@ public class RbacController extends BaseController {
         Assert.notNull(req, "请求对象不能为空");
         Assert.hasText(account, "帐号不能为空");
 
-        //  super.httpRequest, super.httpResponse
-        CaptchaService.Code code = captchaService.genCode(req.getTenantId(), req.getAppId(), account, params);
+        outputCaptcha(captchaService.genCode(req.getTenantId(), req.getAppId(), account, params));
+
+    }
+
+    private void outputCaptcha(CaptchaService.Code code) throws IOException {
 
         httpResponse.setContentType(code.getContentType());
         httpResponse.setHeader("Pragma", "No-cache");
@@ -125,6 +145,19 @@ public class RbacController extends BaseController {
         httpResponse.setDateHeader("Expires", 0L);
         httpRequest.getSession().setAttribute("captchaCode", code.getCode());
         httpResponse.getOutputStream().write(code.getImgData());
+
+    }
+
+
+    @SneakyThrows
+    @GetMapping("userCaptcha")
+    @Operation(tags = {"授权管理"}, summary = "已登录用户获取验图片证码")
+    public void genUserCaptcha(MultiTenantReq<?> req, @Schema(title = "应用ID") String appId, @RequestParam Map<String, String> params) {
+
+        Assert.notNull(req, "请求对象不能为空");
+        Assert.isTrue(authService.isLogin(), "未登录");
+
+        outputCaptcha(captchaService.genCode(req.getTenantId(), appId, authService.getUserInfo().getId(), params));
 
     }
 

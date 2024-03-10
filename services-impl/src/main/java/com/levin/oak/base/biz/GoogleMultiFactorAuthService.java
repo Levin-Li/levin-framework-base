@@ -3,7 +3,9 @@ package com.levin.oak.base.biz;
 import cn.hutool.core.lang.Assert;
 import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.biz.rbac.req.LoginReq;
+import com.levin.oak.base.services.user.UserService;
 import com.levin.oak.base.services.user.info.UserInfo;
+import com.levin.oak.base.services.user.req.UserIdReq;
 import com.warrenstrange.googleauth.GoogleAuthenticator;
 import com.warrenstrange.googleauth.GoogleAuthenticatorKey;
 import com.warrenstrange.googleauth.ICredentialRepository;
@@ -34,6 +36,9 @@ public class GoogleMultiFactorAuthService implements MultiFactorAuthService {
 
     @Autowired
     BizUserService bizUserService;
+
+    @Autowired
+    UserService userService;
 
     private static final String KEY_FORMAT = "otpauth://totp/%s?secret=%s";
 
@@ -88,7 +93,11 @@ public class GoogleMultiFactorAuthService implements MultiFactorAuthService {
     @Override
     public boolean verify(String tenantId, String appId, String account, String code) {
 
-        UserInfo user = bizUserService.findUser(new LoginReq().setTenantId(tenantId).setAppId(appId).setAccount(account));
+        UserInfo user = userService.findById(new UserIdReq(account).setTenantId(tenantId));
+
+        if (user == null) {
+            user = bizUserService.findUser(new LoginReq().setTenantId(tenantId).setAppId(appId).setAccount(account));
+        }
 
         Assert.notNull(user, "用户不存在");
         Assert.notBlank(user.getMfaSecretKey(), "用户未绑定认证密钥");
