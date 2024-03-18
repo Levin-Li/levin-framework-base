@@ -27,6 +27,7 @@ import com.levin.oak.base.services.setting.req.*;
 import com.levin.oak.base.services.setting.info.*;
 
 import com.levin.oak.base.services.*;
+import org.springframework.util.StringUtils;
 
 
 ////////////////////////////////////
@@ -121,7 +122,7 @@ public class BizSettingServiceImpl extends BaseService<BizSettingServiceImpl> im
             info = supplierForCreateIfNotaExist.get();
 
             if (info != null) {
-                info.setId(settingService.create(BeanUtil.copyProperties(info, CreateSettingReq.class)));
+                info.setId(settingService.create(BeanUtil.copyProperties(info, CreateSettingReq.class).setId((StringUtils.hasText(tenantId) ? tenantId : "") + ":" + code)));
             }
         }
 

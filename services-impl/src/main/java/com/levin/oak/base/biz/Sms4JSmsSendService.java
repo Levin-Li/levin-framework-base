@@ -148,7 +148,8 @@ public class Sms4JSmsSendService
 
         if (smsSetting == null || smsSetting.isEmpty()) {
             //创建默认配置
-            settingService.create(BeanUtil.copyProperties(newDefaultConfig(getSettingCode(tenantId, appId)), CreateSettingReq.class));
+            String settingCode = getSettingCode(tenantId, appId);
+            settingService.create(BeanUtil.copyProperties(newDefaultConfig(settingCode), CreateSettingReq.class).setId((StringUtils.hasText(tenantId) ? tenantId : "") + ":" + settingCode));
             smsSetting = getSetting(tenantId, appId);
         }
 

@@ -107,7 +107,8 @@ public class BizFileStorageServiceImpl
 
         if (setting == null || setting.isEmpty()) {
             //创建默认配置
-            settingService.create(BeanUtil.copyProperties(newDefaultConfig(getSettingCode(tenantId, appId)), CreateSettingReq.class));
+            String settingCode = getSettingCode(tenantId, appId);
+            settingService.create(BeanUtil.copyProperties(newDefaultConfig(settingCode), CreateSettingReq.class).setId((StringUtils.hasText(tenantId) ? tenantId : "") + ":" + settingCode));
             setting = getSetting(tenantId, appId);
         }
 
