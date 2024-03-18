@@ -38,7 +38,6 @@ import java.util.Set;
 import java.io.Serializable;
 import com.levin.commons.service.support.InjectConst;
 import java.util.List;
-import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.oak.base.services.role.info.*;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -48,7 +47,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 新增角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[b9f1d37037a07e37111b4b02da330702]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[5d410dfd684f5161c6fec2e0d7714525]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -65,10 +64,9 @@ public class CreateRoleReq extends MultiTenantReq<CreateRoleReq> {
 
     private static final long serialVersionUID = -445356492L;
 
-    @Schema(title = L_domain , description = D_domain )
+    @Schema(title = L_moduleId , description = D_moduleId )
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    String domain;
+    String moduleId;
 
     @Schema(title = L_parentId )
     @Size(max = 128)

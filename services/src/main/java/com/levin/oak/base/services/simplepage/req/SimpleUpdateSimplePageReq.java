@@ -44,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:59, 代码生成哈希校验码：[9c7fffcc5759a1cc8537fd18386ed1ad]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[18641bdec98bf088af1826e480362ece]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -78,6 +78,9 @@ public class SimpleUpdateSimplePageReq extends MultiTenantOrgReq<SimpleUpdateSim
     @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
+    @Schema(title = L_domain)
+    String domain;
+
     @Size(max = 128)
     @Schema(title = L_type)
     String type;
@@ -104,11 +107,6 @@ public class SimpleUpdateSimplePageReq extends MultiTenantOrgReq<SimpleUpdateSim
 
     @Schema(title = L_content)
     String content;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)
@@ -158,6 +156,10 @@ public class SimpleUpdateSimplePageReq extends MultiTenantOrgReq<SimpleUpdateSim
         }
     }
 
+    public <T extends SimpleUpdateSimplePageReq> T setDomain(String domain) {
+        this.domain = domain;
+        return addUpdateField(E_SimplePage.domain);
+    }
     public <T extends SimpleUpdateSimplePageReq> T setType(String type) {
         this.type = type;
         return addUpdateField(E_SimplePage.type);
@@ -185,10 +187,6 @@ public class SimpleUpdateSimplePageReq extends MultiTenantOrgReq<SimpleUpdateSim
     public <T extends SimpleUpdateSimplePageReq> T setContent(String content) {
         this.content = content;
         return addUpdateField(E_SimplePage.content);
-    }
-    public <T extends SimpleUpdateSimplePageReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_SimplePage.domain);
     }
     public <T extends SimpleUpdateSimplePageReq> T setName(String name) {
         this.name = name;

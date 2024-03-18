@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[d6224040f0d69fd965c3ea6835aae149]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[a8d049ed19fbb920c63dd404bba4038a]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -92,6 +92,13 @@ public class QuerySettingReq extends MultiTenantOrgReq<QuerySettingReq> {
     @Schema(title = L_id)
     String id;
 
+    @Schema(title = L_domain)
+    String domain;
+
+    @Schema(title = "模糊匹配-" + L_domain)
+    @EndsWith
+    String endsWithDomain;
+
     @Size(max = 64)
     @Schema(title = L_categoryName)
     String categoryName;
@@ -111,6 +118,9 @@ public class QuerySettingReq extends MultiTenantOrgReq<QuerySettingReq> {
     @Schema(title = L_valueType)
     ValueType valueType;
 
+    @Schema(title = L_editor , description = D_editor)
+    String editor;
+
     @Schema(title = L_valueContent)
     String valueContent;
 
@@ -120,11 +130,6 @@ public class QuerySettingReq extends MultiTenantOrgReq<QuerySettingReq> {
     @Size(max = 128)
     @Schema(title = L_inputPlaceholder)
     String inputPlaceholder;
-
-    //@InjectVar(value = "sysDomain", isRequired = "false")
-    @Size(max = 128)
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)

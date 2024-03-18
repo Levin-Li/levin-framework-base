@@ -54,7 +54,6 @@ import java.util.Set;
 import java.io.Serializable;
 import com.levin.commons.service.support.InjectConst;
 import java.util.List;
-import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.oak.base.services.role.info.*;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -64,7 +63,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 角色-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[81c4bdcc256a25b94cc217acd44824cd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[7d8f2f498a8421a5fe19746d0f081408]，请不要修改和删除此行内容。
  *
  */
 
@@ -77,6 +76,9 @@ import com.levin.commons.service.domain.InjectVar;
 //@Validated
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Role.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizRoleServiceImpl业务类中重写业务逻辑
+
 public class RoleServiceImpl extends BaseService<RoleServiceImpl> implements RoleService {
 
 

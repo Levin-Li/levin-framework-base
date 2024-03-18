@@ -36,7 +36,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[18d5813ccfd0d402e441e485659852eb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[81fd6c0f5e9bfe8d3d3fd7284f738a11]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -86,11 +86,6 @@ public class ScheduledTaskInfo implements Serializable {
 
     @Schema(title = L_nextInvokeTime)
     Date nextInvokeTime;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @NotBlank
     @Size(max = 64)

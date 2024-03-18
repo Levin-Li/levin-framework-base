@@ -32,6 +32,7 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.oak.base.entities.NoticeProcessLog.*;
 import java.util.Date;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -42,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:59, 代码生成哈希校验码：[6849900444770055bd378165cfbaad31]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[d15a7ddb4edfad961a18057cbb202f9e]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -76,9 +77,8 @@ public class SimpleUpdateNoticeProcessLogReq extends MultiTenantOrgReq<SimpleUpd
     @Schema(title = L_noticeId)
     String noticeId;
 
-    @Size(max = 128)
     @Schema(title = L_status)
-    String status;
+    Status status;
 
     @Size(max = 512)
     @Schema(title = L_remark)
@@ -112,7 +112,7 @@ public class SimpleUpdateNoticeProcessLogReq extends MultiTenantOrgReq<SimpleUpd
         this.noticeId = noticeId;
         return addUpdateField(E_NoticeProcessLog.noticeId);
     }
-    public <T extends SimpleUpdateNoticeProcessLogReq> T setStatus(String status) {
+    public <T extends SimpleUpdateNoticeProcessLogReq> T setStatus(Status status) {
         this.status = status;
         return addUpdateField(E_NoticeProcessLog.status);
     }

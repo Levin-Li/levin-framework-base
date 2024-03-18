@@ -37,7 +37,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[a1d10a30ba0c751ea205bee474946350]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[1d86880f954f7276b912efca79f3d39b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -58,6 +58,9 @@ public class SettingInfo implements Serializable {
     @Schema(title = L_id)
     String id;
 
+    @Schema(title = L_domain)
+    String domain;
+
     @NotBlank
     @Size(max = 64)
     @Schema(title = L_categoryName)
@@ -76,6 +79,9 @@ public class SettingInfo implements Serializable {
     @Schema(title = L_valueType)
     ValueType valueType;
 
+    @Schema(title = L_editor , description = D_editor)
+    String editor;
+
     @Schema(title = L_valueContent)
     String valueContent;
 
@@ -85,11 +91,6 @@ public class SettingInfo implements Serializable {
     @Size(max = 128)
     @Schema(title = L_inputPlaceholder)
     String inputPlaceholder;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @NotBlank
     @Size(max = 64)

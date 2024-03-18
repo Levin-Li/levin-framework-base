@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:58, 代码生成哈希校验码：[5dc1e06537ecd59988fd61b07aa799a2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[1372e186279524e6b173104382bbf43e]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -82,18 +82,13 @@ public class SimpleUpdateDictReq extends MultiTenantOrgReq<SimpleUpdateDictReq> 
     @Schema(title = L_type)
     Type type;
 
-    @Size(max = 256)
+    @Size(max = 255)
     @Schema(title = L_code)
     String code;
 
     @InjectVar(domain = "dao", isRequired = "false", converter = DefaultJsonConverter.class, expectBaseType = String.class)
     @Schema(title = L_itemList , description = D_itemList)
     List<Item> itemList;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)
@@ -154,10 +149,6 @@ public class SimpleUpdateDictReq extends MultiTenantOrgReq<SimpleUpdateDictReq> 
     public <T extends SimpleUpdateDictReq> T setItemList(List<Item> itemList) {
         this.itemList = itemList;
         return addUpdateField(E_Dict.itemList);
-    }
-    public <T extends SimpleUpdateDictReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_Dict.domain);
     }
     public <T extends SimpleUpdateDictReq> T setName(String name) {
         this.name = name;

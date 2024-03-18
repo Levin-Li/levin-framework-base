@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新工作岗位
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:59, 代码生成哈希校验码：[c8a1bd2bc40c70fa3c105ab1c83e3891]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[0b3637e4e29fe41c544d939e6afd7864]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -83,11 +83,6 @@ public class SimpleUpdateJobPostReq extends MultiTenantOrgReq<SimpleUpdateJobPos
 
     @Schema(title = L_type)
     Type type;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)
@@ -144,10 +139,6 @@ public class SimpleUpdateJobPostReq extends MultiTenantOrgReq<SimpleUpdateJobPos
     public <T extends SimpleUpdateJobPostReq> T setType(Type type) {
         this.type = type;
         return addUpdateField(E_JobPost.type);
-    }
-    public <T extends SimpleUpdateJobPostReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_JobPost.domain);
     }
     public <T extends SimpleUpdateJobPostReq> T setName(String name) {
         this.name = name;

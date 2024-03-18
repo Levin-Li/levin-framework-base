@@ -30,6 +30,7 @@ import static com.levin.oak.base.entities.E_NoticeProcessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.oak.base.entities.NoticeProcessLog.*;
 import java.util.Date;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -40,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 删除通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[c1ac739fc8f0bc4281a51647418fc97e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[75eda6207055ec3263dfb99a62cdd125]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = DELETE_ACTION + BIZ_NAME)

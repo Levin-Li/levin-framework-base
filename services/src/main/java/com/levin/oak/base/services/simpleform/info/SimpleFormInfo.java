@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[d8abd9553efd2a49f272683f2446f38d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[cce080bcc42b6644bdd40206935aa046]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -61,6 +61,9 @@ public class SimpleFormInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_id)
     String id;
+
+    @Schema(title = L_domain)
+    String domain;
 
     @NotBlank
     @Size(max = 128)
@@ -92,11 +95,6 @@ public class SimpleFormInfo implements Serializable {
 
     @Schema(title = L_content)
     String content;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @NotBlank
     @Size(max = 64)

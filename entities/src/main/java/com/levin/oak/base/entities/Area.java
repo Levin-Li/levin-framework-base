@@ -30,9 +30,13 @@ import java.util.Set;
                 @Index(columnList = E_Area.id),
                 @Index(columnList = E_Area.parentId),
                 @Index(columnList = E_Area.type),
+        },
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {E_Area.code})
         }
 )
 @EntityCategory(EntityOpConst.PLATFORM_TYPE_NAME)
+
 public class Area
         extends AbstractNamedEntityObject
         implements
@@ -52,6 +56,7 @@ public class Area
         @Schema(title = "村庄")
         Village,
         ;
+
         @Override
         public String toString() {
             return nameAndDesc();
@@ -63,6 +68,9 @@ public class Area
     @Column(length = 64)
     @StartsWith
     protected String id;
+
+    @Schema(title = "自定义编码", description = "自定义的映射编码，通常不使用")
+    protected String code;
 
     @Schema(title = "图标")
     protected String icon;

@@ -50,7 +50,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:06, 代码生成哈希校验码：[0a587f32f3794ab8aa7f8a1eb06b1f92]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[e821369f02f69ef2785caf7b762d9a73]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -150,10 +150,6 @@ public class SimpleUpdateUserReq extends MultiTenantOrgReq<SimpleUpdateUserReq> 
     @Size(max = 64)
     @Schema(title = L_aliOpenId)
     String aliOpenId;
-
-    @Size(max = 128)
-    @Schema(title = L_domain)
-    String domain;
 
     @Size(max = 128)
     @Schema(title = L_name)
@@ -278,10 +274,6 @@ public class SimpleUpdateUserReq extends MultiTenantOrgReq<SimpleUpdateUserReq> 
     public <T extends SimpleUpdateUserReq> T setAliOpenId(String aliOpenId) {
         this.aliOpenId = aliOpenId;
         return addUpdateField(E_User.aliOpenId);
-    }
-    public <T extends SimpleUpdateUserReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_User.domain);
     }
     public <T extends SimpleUpdateUserReq> T setName(String name) {
         this.name = name;

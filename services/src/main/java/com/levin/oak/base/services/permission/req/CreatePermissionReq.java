@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增权限清单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 上午11:48:06, 代码生成哈希校验码：[106b58f4600c6ae06dc893cc19f37f47]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[38eecc4645a1a310f0fce9dc777f9c45]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -63,9 +63,9 @@ public class CreatePermissionReq extends BaseReq {
     @Schema(title = L_icon )
     String icon;
 
-    @Schema(title = L_domain )
+    @Schema(title = L_moduleId )
     @Size(max = 128)
-    String domain;
+    String moduleId;
 
     @Schema(title = L_type )
     @Size(max = 128)

@@ -51,7 +51,7 @@ import java.util.List;
                 @Index(columnList = E_User.wxOpenId),
                 @Index(columnList = E_User.aliOpenId),
 
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
+                @Index(columnList = E_User.tenantId + "," + E_User.orgId),
                 @Index(columnList = E_User.tenantId + "," + E_User.orgId + "," + E_User.id),
                 @Index(columnList = E_User.tenantId + "," + E_User.telephone),
                 @Index(columnList = E_User.tenantId + "," + E_User.email),

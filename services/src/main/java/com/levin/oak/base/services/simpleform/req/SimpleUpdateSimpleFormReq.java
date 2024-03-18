@@ -44,7 +44,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:59, 代码生成哈希校验码：[0c7e8935a0e115b84b10665f064b3c13]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[c07aa42b87cf761c18bbfd42cbac3366]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -81,6 +81,9 @@ public class SimpleUpdateSimpleFormReq extends MultiTenantOrgReq<SimpleUpdateSim
     @Schema(title = L_commitApi)
     String commitApi;
 
+    @Schema(title = L_domain)
+    String domain;
+
     @Size(max = 128)
     @Schema(title = L_type)
     String type;
@@ -107,11 +110,6 @@ public class SimpleUpdateSimpleFormReq extends MultiTenantOrgReq<SimpleUpdateSim
 
     @Schema(title = L_content)
     String content;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)
@@ -165,6 +163,10 @@ public class SimpleUpdateSimpleFormReq extends MultiTenantOrgReq<SimpleUpdateSim
         this.commitApi = commitApi;
         return addUpdateField(E_SimpleForm.commitApi);
     }
+    public <T extends SimpleUpdateSimpleFormReq> T setDomain(String domain) {
+        this.domain = domain;
+        return addUpdateField(E_SimpleForm.domain);
+    }
     public <T extends SimpleUpdateSimpleFormReq> T setType(String type) {
         this.type = type;
         return addUpdateField(E_SimpleForm.type);
@@ -192,10 +194,6 @@ public class SimpleUpdateSimpleFormReq extends MultiTenantOrgReq<SimpleUpdateSim
     public <T extends SimpleUpdateSimpleFormReq> T setContent(String content) {
         this.content = content;
         return addUpdateField(E_SimpleForm.content);
-    }
-    public <T extends SimpleUpdateSimpleFormReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_SimpleForm.domain);
     }
     public <T extends SimpleUpdateSimpleFormReq> T setName(String name) {
         this.name = name;

@@ -83,6 +83,18 @@ public class BizSettingServiceImpl extends BaseService<BizSettingServiceImpl> im
         return simpleDao.findOneByQueryObj(req, paging);
     }
 
+    /**
+     * 更新或是清楚缓存
+     *
+     * @param tenantId
+     * @param code
+     */
+    @Override
+    @CacheEvict(condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "('' + #tenantId + #code)")
+    public void clearCache(String tenantId, String code) {
+
+    }
+
     @CacheEvict(condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "('' + #tenantId + #code)")
     @Override
     public boolean updateValue(String tenantId, String code, String valueContent) {
@@ -94,7 +106,6 @@ public class BizSettingServiceImpl extends BaseService<BizSettingServiceImpl> im
                 .setValueContent(valueContent)
                 .setTenantId(tenantId)
         );
-
     }
 
     @CachePut(unless = "#result == null", condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "('' + #tenantId + #code)")

@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[60eab7e727f2add9b20b5216d030e0d5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[be188a133fef2378ddf461aafb3ebbd8]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -69,11 +69,6 @@ public class CreateAppClientReq extends MultiTenantOrgReq<CreateAppClientReq> {
     @Schema(title = L_appToken )
     @Size(max = 512)
     String appToken;
-
-    @Schema(title = L_domain , description = D_domain )
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    String domain;
 
     @Schema(title = L_name )
     @NotBlank

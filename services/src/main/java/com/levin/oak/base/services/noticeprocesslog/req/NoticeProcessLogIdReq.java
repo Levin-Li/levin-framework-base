@@ -30,6 +30,7 @@ import static com.levin.oak.base.entities.E_NoticeProcessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.oak.base.entities.NoticeProcessLog.*;
 import java.util.Date;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -40,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知处理日志 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[76f98fd438686d092c947cd1096ff588]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[47904adbbf8b23ff809a223745cea995]，请不要修改和删除此行内容。
  *
  */
 

@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[9ac693c680e2556081abee2384348d07]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[7831894dfabf603a26f2c47c905aa9bc]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -65,17 +65,12 @@ public class CreateDictReq extends MultiTenantOrgReq<CreateDictReq> {
 
     @Schema(title = L_code )
     @NotBlank
-    @Size(max = 256)
+    @Size(max = 255)
     String code;
 
     @Schema(title = L_itemList , description = D_itemList )
     @InjectVar(domain = "dao", isRequired = "false", converter = DefaultJsonConverter.class, expectBaseType = String.class)
     List<Item> itemList;
-
-    @Schema(title = L_domain , description = D_domain )
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    String domain;
 
     @Schema(title = L_name )
     @NotBlank

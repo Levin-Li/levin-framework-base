@@ -81,7 +81,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 public class BizAccessLogController extends AccessLogController{
 
     //允许的操作
-    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION, BATCH_CREATE_ACTION, BATCH_UPDATE_ACTION, BATCH_DELETE_ACTION);
+    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, VIEW_DETAIL_ACTION);
 
     /**
     * 检查请求

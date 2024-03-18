@@ -34,7 +34,6 @@ import java.util.Set;
 import java.io.Serializable;
 import com.levin.commons.service.support.InjectConst;
 import java.util.List;
-import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.oak.base.services.role.info.*;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -45,7 +44,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[47155255ac8e15372c27149194845bd5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[e71175182415f73e3fada5ffac2f2e5c]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -56,7 +55,7 @@ import com.levin.commons.service.domain.InjectVar;
 @ToString(exclude = {"parent","children",})
 @FieldNameConstants
 @JsonIgnoreProperties({"tenantId"})
-public class RoleInfo implements Serializable, TreeObject<RoleInfo, RoleInfo>, MultiTenantObject, MultiTenantPublicObject {
+public class RoleInfo implements Serializable, TreeObject<RoleInfo, RoleInfo>, MultiTenantPublicObject {
 
     private static final long serialVersionUID = -445356492L;
 
@@ -67,9 +66,8 @@ public class RoleInfo implements Serializable, TreeObject<RoleInfo, RoleInfo>, M
     String id;
 
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
+    @Schema(title = L_moduleId , description = D_moduleId)
+    String moduleId;
 
     @Size(max = 128)
     @InjectVar(value = InjectConst.TENANT_ID)

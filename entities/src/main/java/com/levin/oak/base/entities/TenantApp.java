@@ -54,15 +54,12 @@ public class TenantApp
     String name;
 
     @Schema(title = "应用Logo", description = "")
-    @Column
     String logo;
 
     @Schema(title = "应用入口", description = "")
-    @Column
     String entryUrl;
 
     @Schema(title = "应用说明页", description = "")
-    @Column
     String infoUrl;
 
     @Schema(title = "模块列表")
@@ -71,23 +68,18 @@ public class TenantApp
     String modules;
 
     @Schema(title = "应用密钥", description = "租户安装后获得的应用密钥")
-    @Column
     String appSecret;
 
     @Schema(title = "销售价格", description = "为空或是为0表示免费")
-    @Column
     BigDecimal salePrice;
 
     @Schema(title = "采购价格", description = "购买价格")
-    @Column
     BigDecimal purchasePrice;
 
     @Schema(title = "订单编号", description = "购买的订单编号")
-    @Column
     String orderNo;
 
     @Schema(title = "到期时间", description = "为空表示永不过期")
-    @Column
     @Temporal(value = TemporalType.TIMESTAMP)
     Date expiredTime;
 

@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[a34d88a79324647ca17ab3e6e24d4642]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[b32209e034e8845738e24481a9aed015]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -66,15 +66,12 @@ public class CreateTenantAppReq extends MultiTenantReq<CreateTenantAppReq> {
     String name;
 
     @Schema(title = L_logo )
-    @Size(max = 255)
     String logo;
 
     @Schema(title = L_entryUrl )
-    @Size(max = 255)
     String entryUrl;
 
     @Schema(title = L_infoUrl )
-    @Size(max = 255)
     String infoUrl;
 
     @Schema(title = L_modules )
@@ -83,7 +80,6 @@ public class CreateTenantAppReq extends MultiTenantReq<CreateTenantAppReq> {
     List<String> modules;
 
     @Schema(title = L_appSecret , description = D_appSecret )
-    @Size(max = 255)
     String appSecret;
 
     @Schema(title = L_salePrice , description = D_salePrice )
@@ -93,7 +89,6 @@ public class CreateTenantAppReq extends MultiTenantReq<CreateTenantAppReq> {
     BigDecimal purchasePrice;
 
     @Schema(title = L_orderNo , description = D_orderNo )
-    @Size(max = 255)
     String orderNo;
 
     @Schema(title = L_expiredTime , description = D_expiredTime )

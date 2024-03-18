@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 字典
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[1b48189a6e47c48e259371c4ab0c1d9c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[b33786fc7e521bef1c5bf5d32fd2f0a7]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -65,18 +65,13 @@ public class DictInfo implements Serializable {
     Type type;
 
     @NotBlank
-    @Size(max = 256)
+    @Size(max = 255)
     @Schema(title = L_code)
     String code;
 
     @InjectVar(domain = "dao", isRequired = "false", converter = DefaultJsonConverter.class, expectBaseType = String.class)
     @Schema(title = L_itemList , description = D_itemList)
     List<Item> itemList;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @NotBlank
     @Size(max = 64)

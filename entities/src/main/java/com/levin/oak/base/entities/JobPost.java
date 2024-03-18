@@ -30,18 +30,18 @@ import javax.persistence.*;
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = JobPost.Fields.code),
                 @Index(columnList = JobPost.Fields.type),
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId),
+                @Index(columnList = E_JobPost.tenantId),
         }
 
         ,
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_JobPost.code}),
-                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_TenantOrgNamedEntity.name}),
+                @UniqueConstraint(columnNames = {E_JobPost.tenantId, E_JobPost.code}),
+                @UniqueConstraint(columnNames = {E_JobPost.tenantId, E_JobPost.name}),
         }
 )
 @EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class JobPost
-        extends TenantOrgNamedEntity {
+        extends TenantOrgSharedEntity {
 
     @Schema(title = "职位类型")
     public enum Type implements EnumDesc {

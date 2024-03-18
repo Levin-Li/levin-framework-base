@@ -4,6 +4,7 @@ package com.levin.oak.base.controller.base.permission;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import lombok.Getter;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 权限清单控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:44, 代码生成哈希校验码：[03433dd279ce7b3ac016dc50a3aec464]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月11日 下午1:45:03, 代码生成哈希校验码：[035ec9187280ad4ad11e8dd1397f91ca]，请不要修改和删除此行内容。
 *
 */
 
@@ -71,16 +72,20 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Tag(name = E_Permission.BIZ_NAME, description = E_Permission.BIZ_NAME + MAINTAIN_ACTION)
 @Validated //@Valid
 @CRUD
-
 @Slf4j
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在子类中重写业务逻辑
+
 public abstract class PermissionController extends BaseController{
 
     protected static final String BIZ_NAME = E_Permission.BIZ_NAME;
 
     @Autowired
+    @Getter
     protected PermissionService permissionService;
 
     @Autowired
+    @Getter
     protected BizPermissionService bizPermissionService;
 
     /**
@@ -96,7 +101,7 @@ public abstract class PermissionController extends BaseController{
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
-        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, permissionService.query(req, paging)));
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, getPermissionService().query(req, paging)));
     }
 
     /**
@@ -112,7 +117,7 @@ public abstract class PermissionController extends BaseController{
 
         req = checkRequest(CREATE_ACTION, req);
 
-        return ApiResp.ok(permissionService.create(req));
+        return ApiResp.ok(getPermissionService().create(req));
     }
 
     /**
@@ -129,7 +134,7 @@ public abstract class PermissionController extends BaseController{
 
          req = checkRequest(VIEW_DETAIL_ACTION, req);
 
-         PermissionInfo info = permissionService.findById(req);
+         PermissionInfo info = getPermissionService().findById(req);
          Assert.notNull(info, "记录不存在");
          // 租户校验，因为数据可能是从缓存加载的
          //Assert.isTrue(!StringUtils.hasText(req.getTenantId()) || req.getTenantId().equals(info.getTenantId()), "非法访问，租户不匹配");
@@ -150,7 +155,7 @@ public abstract class PermissionController extends BaseController{
 
         req = checkRequest(UPDATE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(permissionService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getPermissionService().update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -166,7 +171,7 @@ public abstract class PermissionController extends BaseController{
 
         req = checkRequest(DELETE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(permissionService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getPermissionService().delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -194,7 +199,7 @@ public abstract class PermissionController extends BaseController{
 
         reqList = checkRequest(BATCH_CREATE_ACTION, reqList);
 
-        return ApiResp.ok(permissionService.batchCreate(reqList));
+        return ApiResp.ok(getPermissionService().batchCreate(reqList));
     }
 
     /**
@@ -206,7 +211,7 @@ public abstract class PermissionController extends BaseController{
 
         reqList = checkRequest(BATCH_UPDATE_ACTION, reqList);
 
-        return ApiResp.ok(assertTrue(permissionService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getPermissionService().batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -220,7 +225,7 @@ public abstract class PermissionController extends BaseController{
 
         req = checkRequest(BATCH_DELETE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(permissionService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getPermissionService().batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**

@@ -12,6 +12,7 @@ import com.levin.oak.base.services.noticeprocesslog.info.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.oak.base.entities.NoticeProcessLog.*;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -56,7 +57,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 通知处理日志测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[7f92b56da2cd8eb6dcc40a7972687bb9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[48133d815db66f05f72757b2f2ab5d21]，请不要修改和删除此行内容。
  *
  */
 
@@ -99,7 +100,7 @@ public class NoticeProcessLogServiceTest {
 
             // req.setNoticeId("这是文本128");// 必填
 
-            // req.setStatus("这是文本128");// 
+            // req.setStatus(Status.Processing);// 
 
             // req.setRemark("这是文本512");// 
 
@@ -127,7 +128,7 @@ public class NoticeProcessLogServiceTest {
         // req.setId(null);//
         // req.setCreator("这是文本128");//
         // req.setNoticeId("这是文本128");//
-        // req.setStatus("这是文本128");//
+        // req.setStatus(Status.Processing);//
         // req.setRemark("这是文本512");//
         // req.setTenantId("这是文本128");//
         // req.setOrgId("这是文本128");//
@@ -149,7 +150,7 @@ public class NoticeProcessLogServiceTest {
 
 
            // req.setNoticeId("这是文本128");// 必填
-           // req.setStatus("这是文本128");// 
+           // req.setStatus(Status.Processing);// 
            // req.setRemark("这是文本512");// 
            // req.setTenantId("这是文本128");// 
            // req.setOrgId("这是文本128");// 

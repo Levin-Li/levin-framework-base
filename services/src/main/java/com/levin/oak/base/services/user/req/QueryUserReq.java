@@ -55,7 +55,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询用户
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午8:20:50, 代码生成哈希校验码：[ae6c26bea8acde2b8330ea96c695fe05]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[d7b34761a6d00ad782165a1e8734c278]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -200,10 +200,6 @@ public class QueryUserReq extends MultiTenantOrgReq<QueryUserReq> {
     @Size(max = 64)
     @Schema(title = L_aliOpenId)
     String aliOpenId;
-
-    @Size(max = 128)
-    @Schema(title = L_domain)
-    String domain;
 
     @Size(max = 128)
     @Schema(title = L_name)

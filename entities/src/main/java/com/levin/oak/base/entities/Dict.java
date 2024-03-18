@@ -2,7 +2,6 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.EntityCategory;
 import com.levin.commons.dao.EntityOpConst;
-import com.levin.commons.dao.annotation.Contains;
 import com.levin.commons.dao.domain.support.AbstractNamedEntityObject;
 import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.InjectVar;
@@ -37,19 +36,19 @@ import java.util.List;
                 @Index(columnList = E_Dict.tenantId),
                 @Index(columnList = E_Dict.orgId),
 
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
+                @Index(columnList = E_Dict.tenantId + "," + E_Dict.orgId),
 
                 @Index(columnList = E_Dict.tenantId + "," + E_Dict.orgId + "," + E_Dict.code),
         }
         ,
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_Dict.code}),
+                @UniqueConstraint(columnNames = {E_Dict.tenantId, E_Dict.code}),
 //                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_TenantOrgNamedEntity.name}),
         }
 )
 @EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class Dict
-        extends TenantOrgNamedEntity {
+        extends TenantOrgSharedEntity {
 
     private static final long serialVersionUID = -123456789L;
 
@@ -96,8 +95,7 @@ public class Dict
     protected Type type;
 
     @Schema(title = "字典编码")
-    @Column(nullable = false, length = 256)
-    @Contains
+    @Column(nullable = false)
     protected String code;
 
     @Schema(title = "编码项", description = "字典项列表")

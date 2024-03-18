@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新权限清单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 上午11:48:06, 代码生成哈希校验码：[8e6423ca96d17032f45b0a25bddde581]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[60beb6009d4abf9c34ca0324550a9f39]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -79,8 +79,8 @@ public class SimpleUpdatePermissionReq extends BaseReq {
     String icon;
 
     @Size(max = 128)
-    @Schema(title = L_domain)
-    String domain;
+    @Schema(title = L_moduleId)
+    String moduleId;
 
     @Size(max = 128)
     @Schema(title = L_type)
@@ -142,9 +142,9 @@ public class SimpleUpdatePermissionReq extends BaseReq {
         this.icon = icon;
         return addUpdateField(E_Permission.icon);
     }
-    public <T extends SimpleUpdatePermissionReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_Permission.domain);
+    public <T extends SimpleUpdatePermissionReq> T setModuleId(String moduleId) {
+        this.moduleId = moduleId;
+        return addUpdateField(E_Permission.moduleId);
     }
     public <T extends SimpleUpdatePermissionReq> T setType(String type) {
         this.type = type;

@@ -21,7 +21,6 @@ import java.util.Set;
 import java.io.Serializable;
 import com.levin.commons.service.support.InjectConst;
 import java.util.List;
-import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.oak.base.services.role.info.*;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -66,7 +65,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 角色测试
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:07, 代码生成哈希校验码：[12b0ffc0734e0d77ea5bc9df609c1868]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[31053f6eeef957a2f13a4dc6f6189507]，请不要修改和删除此行内容。
  *
  */
 
@@ -107,7 +106,7 @@ public class RoleServiceTest {
 
         CreateRoleReq req = new CreateRoleReq();
 
-            // req.setDomain("这是文本128");//归属的子系统或应用 
+            // req.setModuleId("这是文本128");//归属的子系统或应用 
 
             // req.setTenantId("这是文本128");// 
 
@@ -165,7 +164,7 @@ public class RoleServiceTest {
         QueryRoleReq req = new QueryRoleReq();
 
         // req.setId(null);//
-        // req.setDomain("这是文本128");//归属的子系统或应用
+        // req.setModuleId("这是文本128");//归属的子系统或应用
         // req.setTenantId("这是文本128");//
         // req.setParentId("这是文本128");//
         // req.setExtendable(true);//
@@ -206,7 +205,7 @@ public class RoleServiceTest {
          req.setId(id);
 
 
-           // req.setDomain("这是文本128");//归属的子系统或应用 
+           // req.setModuleId("这是文本128");//归属的子系统或应用 
            // req.setTenantId("这是文本128");// 
            // req.setParentId("这是文本128");// 
            // req.setExtendable(true);// 

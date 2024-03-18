@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:58, 代码生成哈希校验码：[6deb37fc1bc8aa1c1edf11d1c489e316]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[2d685d342dd4c2d763f2e92c11c2d91c]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -77,6 +77,9 @@ public class SimpleUpdateSettingReq extends MultiTenantOrgReq<SimpleUpdateSettin
     @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
+    @Schema(title = L_domain)
+    String domain;
+
     @Size(max = 64)
     @Schema(title = L_categoryName)
     String categoryName;
@@ -92,6 +95,9 @@ public class SimpleUpdateSettingReq extends MultiTenantOrgReq<SimpleUpdateSettin
     @Schema(title = L_valueType)
     ValueType valueType;
 
+    @Schema(title = L_editor , description = D_editor)
+    String editor;
+
     @Schema(title = L_valueContent)
     String valueContent;
 
@@ -101,11 +107,6 @@ public class SimpleUpdateSettingReq extends MultiTenantOrgReq<SimpleUpdateSettin
     @Size(max = 128)
     @Schema(title = L_inputPlaceholder)
     String inputPlaceholder;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)
@@ -155,6 +156,10 @@ public class SimpleUpdateSettingReq extends MultiTenantOrgReq<SimpleUpdateSettin
         }
     }
 
+    public <T extends SimpleUpdateSettingReq> T setDomain(String domain) {
+        this.domain = domain;
+        return addUpdateField(E_Setting.domain);
+    }
     public <T extends SimpleUpdateSettingReq> T setCategoryName(String categoryName) {
         this.categoryName = categoryName;
         return addUpdateField(E_Setting.categoryName);
@@ -171,6 +176,10 @@ public class SimpleUpdateSettingReq extends MultiTenantOrgReq<SimpleUpdateSettin
         this.valueType = valueType;
         return addUpdateField(E_Setting.valueType);
     }
+    public <T extends SimpleUpdateSettingReq> T setEditor(String editor) {
+        this.editor = editor;
+        return addUpdateField(E_Setting.editor);
+    }
     public <T extends SimpleUpdateSettingReq> T setValueContent(String valueContent) {
         this.valueContent = valueContent;
         return addUpdateField(E_Setting.valueContent);
@@ -182,10 +191,6 @@ public class SimpleUpdateSettingReq extends MultiTenantOrgReq<SimpleUpdateSettin
     public <T extends SimpleUpdateSettingReq> T setInputPlaceholder(String inputPlaceholder) {
         this.inputPlaceholder = inputPlaceholder;
         return addUpdateField(E_Setting.inputPlaceholder);
-    }
-    public <T extends SimpleUpdateSettingReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_Setting.domain);
     }
     public <T extends SimpleUpdateSettingReq> T setName(String name) {
         this.name = name;

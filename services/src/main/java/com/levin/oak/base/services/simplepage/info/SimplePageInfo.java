@@ -38,7 +38,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[48f402775c7d2002d1ae9cd3ed8a7ecf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[a46618626b823f53018213af76e2511f]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -58,6 +58,9 @@ public class SimplePageInfo implements Serializable {
     @Size(max = 64)
     @Schema(title = L_id)
     String id;
+
+    @Schema(title = L_domain)
+    String domain;
 
     @NotBlank
     @Size(max = 128)
@@ -89,11 +92,6 @@ public class SimplePageInfo implements Serializable {
 
     @Schema(title = L_content)
     String content;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @NotBlank
     @Size(max = 64)

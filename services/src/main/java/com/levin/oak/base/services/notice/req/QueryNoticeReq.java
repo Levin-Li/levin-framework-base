@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:22, 代码生成哈希校验码：[b6518f5c9d52898cc5cca8025d6379d6]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[e9689fb9efd67ae674fdde400394d643]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -114,11 +114,6 @@ public class QueryNoticeReq extends MultiTenantOrgReq<QueryNoticeReq> {
     @Between
     String betweenExpiredDate;
 
-
-    //@InjectVar(value = "sysDomain", isRequired = "false")
-    @Size(max = 128)
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)

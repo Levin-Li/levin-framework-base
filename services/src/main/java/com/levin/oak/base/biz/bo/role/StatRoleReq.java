@@ -47,7 +47,6 @@ import java.util.Set;
 import java.io.Serializable;
 import com.levin.commons.service.support.InjectConst;
 import java.util.List;
-import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.oak.base.services.role.info.*;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -57,7 +56,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 统计角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[e7880737860cfd791cd9c99db117fcbe]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[d1d0940556596a5ebbd242d6eaf8d456]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = STAT_ACTION + BIZ_NAME)

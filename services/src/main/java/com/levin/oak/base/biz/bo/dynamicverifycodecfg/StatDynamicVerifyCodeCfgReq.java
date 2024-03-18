@@ -3,47 +3,26 @@ package com.levin.oak.base.biz.bo.dynamicverifycodecfg;
 import static com.levin.oak.base.entities.EntityConst.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import com.levin.commons.dao.annotation.Ignore;
 
 import com.levin.commons.dao.*;
-import com.levin.commons.dao.annotation.*;
-import com.levin.commons.dao.annotation.update.*;
-import com.levin.commons.dao.annotation.select.*;
 import com.levin.commons.dao.annotation.stat.*;
-import com.levin.commons.dao.annotation.order.*;
-import com.levin.commons.dao.annotation.logic.*;
-import com.levin.commons.dao.annotation.misc.*;
 
-import com.levin.commons.service.domain.*;
-import com.levin.commons.dao.support.*;
-import com.levin.commons.service.support.*;
-
-import org.springframework.format.annotation.*;
-
-import javax.validation.constraints.*;
 import javax.annotation.*;
 
 import lombok.*;
 import lombok.experimental.*;
-import java.util.*;
+
 import java.io.Serializable;
 
 import com.levin.oak.base.services.dynamicverifycodecfg.req.*;
 import com.levin.oak.base.services.dynamicverifycodecfg.info.*;
-import com.levin.oak.base.entities.DynamicVerifyCodeCfg;
+import com.levin.oak.base.entities.vo.DynamicVerifyCodeCfg;
 
-import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_DynamicVerifyCodeCfg.*;
-import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
-import java.util.Date;
-import com.levin.oak.base.entities.VerifyCodeType;
-import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
+
 ////////////////////////////////////
 
 /**

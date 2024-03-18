@@ -36,7 +36,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 客户端文件
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[eca2ec48954c087025570a798764a2ad]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[3d2e634f07eb0311500bddcda58a36ce]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -72,11 +72,6 @@ public class AppClientFileInfo implements Serializable {
 
     @Schema(title = L_content , description = D_content)
     byte[] content;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @NotBlank
     @Size(max = 64)

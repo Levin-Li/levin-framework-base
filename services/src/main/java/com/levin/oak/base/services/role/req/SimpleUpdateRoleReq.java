@@ -41,7 +41,6 @@ import java.util.Set;
 import java.io.Serializable;
 import com.levin.commons.service.support.InjectConst;
 import java.util.List;
-import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.oak.base.services.role.info.*;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -51,7 +50,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 更新角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[c72cd40e9d47119bc8b81a5f2a2ea72e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[77a0eb7a2b3cdead318b37dbee68826b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -86,9 +85,8 @@ public class SimpleUpdateRoleReq extends MultiTenantReq<SimpleUpdateRoleReq> {
     final boolean eqEditable = true;
 
     @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
+    @Schema(title = L_moduleId , description = D_moduleId)
+    String moduleId;
 
     @Size(max = 128)
     @Schema(title = L_parentId)
@@ -184,9 +182,9 @@ public class SimpleUpdateRoleReq extends MultiTenantReq<SimpleUpdateRoleReq> {
         }
     }
 
-    public <T extends SimpleUpdateRoleReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_Role.domain);
+    public <T extends SimpleUpdateRoleReq> T setModuleId(String moduleId) {
+        this.moduleId = moduleId;
+        return addUpdateField(E_Role.moduleId);
     }
     public <T extends SimpleUpdateRoleReq> T setParentId(String parentId) {
         this.parentId = parentId;

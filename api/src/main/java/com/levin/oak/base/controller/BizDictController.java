@@ -131,7 +131,6 @@ public class BizDictController extends DictController {
     @Override
     public ApiResp<Boolean> update(@RequestBody @Valid UpdateDictReq req, @PathVariable(required = false) String id) {
 
-
         //超级用户允许改更类型
         if (req.getType() != null) {
             RbacUserInfo<String> userInfo = authService.getUserInfo();

@@ -45,6 +45,7 @@ import com.levin.oak.base.services.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.oak.base.entities.NoticeProcessLog.*;
 import java.util.Date;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -55,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知处理日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[dcc5bf21246d458ea8f9f002a48965cd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[5ef7af284169c49210ea9f65d406978c]，请不要修改和删除此行内容。
  *
  */
 
@@ -68,6 +69,9 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_NoticeProcessLog.BIZ_NAME, description = E_NoticeProcessLog.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_NoticeProcessLog.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizNoticeProcessLogServiceImpl业务类中重写业务逻辑
+
 public class NoticeProcessLogServiceImpl extends BaseService<NoticeProcessLogServiceImpl> implements NoticeProcessLogService {
 
 

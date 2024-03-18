@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:18, 代码生成哈希校验码：[6f1a60a11c4cf4bffcb42627e4f4f9b1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[cb10627bb6d87d05f949c5f195927ab3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -72,8 +72,12 @@ public class SimpleUpdateAccessLogReq extends MultiTenantOrgReq<SimpleUpdateAcce
 
     //////////////////////////////////////////////////////////////////
 
+    @InjectVar(value = InjectConst.DOMAIN, isRequired = "false")
     @Schema(title = L_domain , description = D_domain)
     String domain;
+
+    @Schema(title = L_moduleId , description = D_moduleId)
+    String moduleId;
 
     @Size(max = 64)
     @InjectVar(value = InjectConst.USER_NAME, isRequired = "false")
@@ -177,6 +181,10 @@ public class SimpleUpdateAccessLogReq extends MultiTenantOrgReq<SimpleUpdateAcce
     public <T extends SimpleUpdateAccessLogReq> T setDomain(String domain) {
         this.domain = domain;
         return addUpdateField(E_AccessLog.domain);
+    }
+    public <T extends SimpleUpdateAccessLogReq> T setModuleId(String moduleId) {
+        this.moduleId = moduleId;
+        return addUpdateField(E_AccessLog.moduleId);
     }
     public <T extends SimpleUpdateAccessLogReq> T setVisitor(String visitor) {
         this.visitor = visitor;

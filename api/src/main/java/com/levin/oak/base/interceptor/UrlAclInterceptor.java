@@ -3,12 +3,15 @@ package com.levin.oak.base.interceptor;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
+import com.alibaba.fastjson2.JSONObject;
 import com.levin.commons.utils.IPAddrUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.rbac.AuthService;
-import com.levin.oak.base.services.accesswhitelist.AccessWhitelistService;
-import com.levin.oak.base.services.accesswhitelist.info.AccessWhitelistInfo;
-import com.levin.oak.base.services.accesswhitelist.req.CreateAccessWhitelistReq;
+import com.levin.oak.base.entities.Setting;
+import com.levin.oak.base.entities.vo.UrlAcl;
+import com.levin.oak.base.services.setting.SettingService;
+import com.levin.oak.base.services.setting.info.SettingInfo;
+import com.levin.oak.base.services.setting.req.CreateSettingReq;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -37,20 +40,20 @@ import java.util.stream.Stream;
 @Data
 @Slf4j
 @Accessors(chain = true)
-public class AccessWhitelistInterceptor
+public class UrlAclInterceptor
         implements HandlerInterceptor {
 
     @Autowired
     FrameworkProperties frameworkProperties;
 
     @Autowired
-    AccessWhitelistService whitelistService;
-
-    @Autowired
     ServerProperties serverProperties;
 
     @Autowired
     AuthService authService;
+
+    @Autowired
+    SettingService settingService;
 
     @PostConstruct
     public void init() {
@@ -73,7 +76,7 @@ public class AccessWhitelistInterceptor
             return true;
         }
 
-        String path = getRequestPath(request, serverProperties.getServlet().getContextPath());// request.getRequestURI();
+        String path = getRequestPath(request);// request.getRequestURI();
 
         if (!StringUtils.hasText(path)
                 || !whitelistCfg.isPathMatched(path)) {
@@ -92,96 +95,107 @@ public class AccessWhitelistInterceptor
         //要满足默认的安全测路，也要满足租户自定义的安全测路
         return
                 //平台全局，尝试自动创建
-                canPass(request, getAndAutoCreate("匹配所有路径", "*@*", null))
-
-                        //域名全局，尝试自动创建
-                        && canPass(request, getAndAutoCreate("匹配域名的所有路径", "*@" + domain + "@*", null))
+                canPass(request, getAndAutoCreate("平台", "@*", null))
 
                         //租户全局   ，尝试自动创建
-                        && canPass(request, authService.isLogin() ? getAndAutoCreate("匹配租户的所有路径", "*@*@" + authService.getUserInfo().getTenantId() + "@*", authService.getUserInfo().getTenantId()) : null)
+                        && canPass(request, authService.isLogin() ? getAndAutoCreate("系统", "@" + authService.getUserInfo().getTenantId() + "@*", authService.getUserInfo().getTenantId()) : null)
 
                         //域名+租户全局   ，尝试自动创建
-                        && canPass(request, authService.isLogin() ? getAndAutoCreate("匹配域名+租户的所有路径", "*@" + domain + "@" + authService.getUserInfo().getTenantId() + "@*", authService.getUserInfo().getTenantId()) : null)
+                        && canPass(request, authService.isLogin() ? getAndAutoCreate("域名-" + domain, "@" + authService.getUserInfo().getTenantId() + "@" + domain + "@*", authService.getUserInfo().getTenantId()) : null)
 
-                        //单个路径全局
-                        && canPass(request, whitelistService.findById(path))
-
-                        //租户的单个路径
-                        && canPass(request, authService.isLogin() ? whitelistService.findById(authService.getUserInfo().getTenantId() + "@" + path) : null);
+                ;
 
     }
 
 
-    private AccessWhitelistInfo getAndAutoCreate(String title, String id, String tenantId) {
+    private UrlAcl getAndAutoCreate(String title, String id, String tenantId) {
 
-        AccessWhitelistInfo info = whitelistService.findById(id);
+        id = UrlAcl.class.getName() + id;
+
+        SettingInfo info = settingService.findById(id);
 
         if (info == null) {
 
-            whitelistService.create(
-                    new CreateAccessWhitelistReq()
+            settingService.create(
+                    new CreateSettingReq()
                             .setId(id)
-
                             //默认不启用
                             .setEnable(false)
                             .setEditable(true)
-                            .setTitle("全局配置-" + title)
+                            .setName("URL访问控制-" + title)
+                            .setGroupName("URL访问控制")
+                            .setCategoryName("系统安全")
                             .setRemark("系统自动生成的配置")
+                            //默认不启用
+                            //.setValueContent(JSONObject.toJSONString(new UrlAccessControl().setTitle(title).setEnable(false).setUrlPathExcludeList("*"), JSONWriter.Feature.WriteNullStringAsEmpty))
+                            .setEditor("form://" + UrlAcl.class.getName())
+                            .setValueType(Setting.ValueType.Json)
                             .setTenantId(tenantId)
             );
 
             return null;
         }
 
-        return info;
+        if (!Boolean.TRUE.equals(info.getEnable())
+                || !StringUtils.hasText(info.getValueContent())) {
+            return null;
+        }
+
+        return JSONObject.parseObject(info.getValueContent(), UrlAcl.class);
     }
 
-    private boolean canPass(HttpServletRequest request, AccessWhitelistInfo whitelistInfo) {
+    private boolean canPass(HttpServletRequest request, UrlAcl acl) {
 
-        if (whitelistInfo == null
-                || !Boolean.TRUE.equals(whitelistInfo.getEnable())) {
+        if (acl == null || !Boolean.TRUE.equals(acl.getEnable())) {
             return true;
         }
 
-        String clientIp = IPAddrUtils.try2GetUserRealIPAddr(request);
+        String urlPath = getRequestPath(request);
 
-        boolean passed = anyMatch(() -> clientIp, whitelistInfo.getIpList());
+        //先检查URL是否匹配，如果不匹配则直接返回通过
+        if (anyMatch(false, () -> urlPath, acl.getUrlPathExcludeList())
+
+                //检查URL是否匹配，如果不匹配则直接返回通过
+                || !anyMatch(false, () -> urlPath, acl.getUrlPathList())) {
+            return true;
+        }
+
+        final String clientIp = IPAddrUtils.try2GetUserRealIPAddr(request);
+
+        //如果IP排除的，直接通过
+        if (anyMatch(false, () -> clientIp, acl.getIpExcludeList())) {
+            //如果是排除的IP，则直接通过
+            return true;
+        }
+
+        boolean passed = anyMatch(() -> clientIp, acl.getIpList());
 
         if (!passed) {
-            log.warn("非法的IP({})访问：{}，允许的IP列表：{}", clientIp, request.getRequestURL().toString(), whitelistInfo.getIpList());
+            log.warn("非法的IP({})访问：{}，允许的IP列表：{}", clientIp, request.getRequestURL().toString(), acl.getIpList());
         }
 
         Assert.isTrue(passed, "不支持的地址请求");
 
-        //黑名单
-        passed = noneMatch(() -> clientIp, whitelistInfo.getIpBlacklist());
+        passed = anyMatch(() -> request.getServerName(), acl.getDomainList());
 
         if (!passed) {
-            log.warn("非法的IP({})访问：{}，禁止的IP列表：{}", clientIp, request.getRequestURL().toString(), whitelistInfo.getIpBlacklist());
-        }
-
-        Assert.isTrue(passed, "不支持的地址请求");
-
-        passed = anyMatch(() -> request.getServerName(), whitelistInfo.getDomainList());
-
-        if (!passed) {
-            log.warn("非法的域名({})访问：{}，允许的域名列表：{}", request.getServerName(), request.getRequestURL().toString(), whitelistInfo.getDomainList());
+            log.warn("非法的域名({})访问：{}，允许的域名列表：{}", request.getServerName(), request.getRequestURL().toString(), acl.getDomainList());
         }
 
         Assert.isTrue(passed, "不支持的域名请求");
 
-        Assert.isTrue(anyMatch(request::getMethod, whitelistInfo.getMethodList()), "不支持的请求方法" + request.getMethod());
+        Assert.isTrue(anyMatch(request::getMethod, acl.getMethodList()), "不支持的请求方法" + request.getMethod());
 
         UserAgent userAgent = UserAgentUtil.parse(request.getHeader("user-agent"));
 
-        Assert.isTrue(anyMatch(() -> userAgent.getBrowser() != null ? userAgent.getBrowser().getName() : null, whitelistInfo.getBrowserList()), "不支持的浏览器");
+        Assert.isTrue(anyMatch(() -> userAgent.getBrowser() != null ? userAgent.getBrowser().getName() : null, acl.getBrowserList()), "不支持的浏览器");
 
-        Assert.isTrue(anyMatch(() -> userAgent.getOs() != null ? userAgent.getOs().getName() : null, whitelistInfo.getOsList()), "不支持的系统类型");
+        Assert.isTrue(anyMatch(() -> userAgent.getOs() != null ? userAgent.getOs().getName() : null, acl.getOsList()), "不支持的系统类型");
 
-        Assert.isTrue(anyMatch(() -> userAgent.getEngine() != null ? userAgent.getEngine().getName() : null, whitelistInfo.getBrowserTypeList()), "不支持的浏览器类型");
+        Assert.isTrue(anyMatch(() -> userAgent.getEngine() != null ? userAgent.getEngine().getName() : null, acl.getBrowserTypeList()), "不支持的浏览器类型");
 
         //地区匹配  ("中国|0|", "")
-        Assert.isTrue(anyMatch(() -> IPAddrUtils.searchIpRegion(clientIp), whitelistInfo.getRegionList()), "不支持的地区");
+        Assert.isTrue(anyMatch(() -> IPAddrUtils.searchIpRegion(clientIp), acl.getRegionList()), "不支持的地区");
 
         return true;
     }
@@ -196,11 +210,15 @@ public class AccessWhitelistInterceptor
     }
 
     public static boolean anyMatch(Supplier<String> valueSupplier, String rules) {
+        return anyMatch(true, () -> valueSupplier.get(), rules);
+    }
+
+    public static boolean anyMatch(boolean emptyValue, Supplier<String> valueSupplier, String rules) {
 
         List<String> items = parseItem(rules);
 
         if (items.isEmpty()) {
-            return true;
+            return emptyValue;
         }
 
         String value = valueSupplier.get();
@@ -214,12 +232,12 @@ public class AccessWhitelistInterceptor
     }
 
 
-    public static boolean noneMatch(Supplier<String> valueSupplier, String rules) {
+    public static boolean noneMatch(boolean emptyValue, Supplier<String> valueSupplier, String rules) {
 
         List<String> items = parseItem(rules);
 
         if (items.isEmpty()) {
-            return true;
+            return emptyValue;
         }
 
         String value = valueSupplier.get();
@@ -233,9 +251,9 @@ public class AccessWhitelistInterceptor
     }
 
 
-    public static String getRequestPath(HttpServletRequest request, String contextPath) {
+    public static String getRequestPath(HttpServletRequest request) {
 
-        contextPath = StringUtils.trimWhitespace(contextPath);
+        String contextPath = StringUtils.trimWhitespace(request.getContextPath());
 
         if (StringUtils.hasText(contextPath)) {
             contextPath = contextPath.replace("//", "/");

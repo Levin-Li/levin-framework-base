@@ -47,6 +47,7 @@ import com.levin.oak.base.services.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.oak.base.entities.NoticeProcessLog.*;
 import java.util.Date;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -57,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  通知处理日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[bf5515a8266788c891dcc71e3b94253d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[2aa5e221ce4759311784c697bd76f932]，请不要修改和删除此行内容。
  *
  */
 

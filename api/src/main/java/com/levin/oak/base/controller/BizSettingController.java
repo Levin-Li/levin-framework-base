@@ -1,7 +1,10 @@
 package com.levin.oak.base.controller;
 
+import com.levin.commons.rbac.RbacUserInfo;
+import com.levin.oak.base.biz.rbac.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.validation.annotation.*;
 import org.springframework.util.*;
+
 import javax.validation.*;
 import java.util.*;
 import javax.annotation.*;
@@ -57,11 +61,10 @@ import static com.levin.oak.base.entities.EntityConst.*;
 // private UserAddress userAddress;
 
 /**
-* 系统设置业务控制器
-*
-* @author Auto gen by simple-dao-codegen, @time: 2024年2月19日 上午10:56:09, 代码生成哈希校验码：[c7cc0cff5f7b81ca566fe68cca5dd849]，请不要修改和删除此行内容。
-*
-*/
+ * 系统设置业务控制器
+ *
+ * @author Auto gen by simple-dao-codegen, @time: 2024年2月19日 上午10:56:09, 代码生成哈希校验码：[c7cc0cff5f7b81ca566fe68cca5dd849]，请不要修改和删除此行内容。
+ */
 
 //生成的控制器
 @RestController(PLUGIN_PREFIX + "BizSettingController")
@@ -78,18 +81,23 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @CRUD
 
 @Slf4j
-public class BizSettingController extends SettingController{
+public class BizSettingController extends SettingController {
 
     //允许的操作
-    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION, BATCH_CREATE_ACTION, BATCH_UPDATE_ACTION, BATCH_DELETE_ACTION);
+    //系统设置只允许查询和更新
+    List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION);
+
+    @Autowired
+    @Getter
+    AuthService authService;
 
     /**
-    * 检查请求
-    *
-    * @param action
-    * @param req
-    * @return
-    */
+     * 检查请求
+     *
+     * @param action
+     * @param req
+     * @return
+     */
     @Override
     protected <T> T checkRequest(String action, T req) {
 
@@ -99,11 +107,70 @@ public class BizSettingController extends SettingController{
     }
 
     /**
-    * 统计
-    *
-    * @param req QuerySettingReq
-    * @return  ApiResp<StatSettingReq.Result>
-    */
+     * 新增
+     *
+     * @param req CreateSettingEvt
+     * @return ApiResp
+     */
+    @Override
+    public ApiResp<String> create(CreateSettingReq req) {
+
+        Assert.isTrue(getAuthService().getUserInfo().isSuperAdmin(), "不支持操作");
+
+        bizSettingService.clearCache(req.getTenantId(), req.getCode());
+
+        return super.create(req);
+    }
+
+
+    /**
+     * 更新
+     *
+     * @param req UpdateSettingReq
+     * @param id
+     */
+    @Override
+    public ApiResp<Boolean> update(UpdateSettingReq req, String id) {
+
+        SettingInfo info = settingService.findById(req.updateIdWhenNotBlank(id).getId());
+        try {
+            //设置乐观锁
+            return super.update(req.setOptimisticLock(info.getOptimisticLock()), id);
+        } finally {
+            if (info != null) {
+                bizSettingService.clearCache(info.getTenantId(), info.getCode());
+            }
+        }
+    }
+
+    /**
+     * 删除
+     *
+     * @param req SettingIdReq
+     * @param id
+     */
+    @Override
+    public ApiResp<Boolean> delete(SettingIdReq req, String id) {
+
+        Assert.isTrue(authService.getUserInfo().isSuperAdmin(), "不支持操作");
+
+        SettingInfo info = settingService.findById(req.updateIdWhenNotBlank(id));
+
+        try {
+            return super.delete(req, id);
+        } finally {
+            if (info != null) {
+                bizSettingService.clearCache(info.getTenantId(), info.getCode());
+            }
+        }
+    }
+
+    /**
+     * 统计
+     *
+     * @param req QuerySettingReq
+     * @return ApiResp<StatSettingReq.Result>
+     */
     @GetMapping("stat") //默认开放
     @Operation(summary = STAT_ACTION, description = STAT_ACTION + " " + BIZ_NAME)
     public ApiResp<StatSettingReq.Result> stat(@Valid StatSettingReq req, SimplePaging paging) {

@@ -3,6 +3,7 @@ package com.levin.oak.base.entities;
 import com.levin.commons.dao.EntityCategory;
 import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.EndsWith;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,7 +31,7 @@ import javax.persistence.*;
                 @Index(columnList = E_I18nRes.lang),
                 @Index(columnList = E_I18nRes.label),
 
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
+                @Index(columnList = E_I18nRes.tenantId + "," + E_I18nRes.orgId),
 
                 @Index(columnList = E_I18nRes.tenantId + "," + E_I18nRes.orgId + "," + E_I18nRes.name),
         }
@@ -42,13 +43,17 @@ import javax.persistence.*;
 )
 @EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class I18nRes
-        extends TenantOrgNamedEntity {
+        extends TenantOrgSharedEntity {
 
     private static final long serialVersionUID = -123456789L;
 
     @Id
     @GeneratedValue
-    protected Long id;
+    Long id;
+
+    @Schema(title = "域名")
+    @EndsWith
+    String domain;
 
     @Schema(title = "分类")
     @Column(nullable = false, length = 128)

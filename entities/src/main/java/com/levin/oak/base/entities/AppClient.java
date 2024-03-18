@@ -27,20 +27,19 @@ import java.util.UUID;
                 @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId),
-                @Index(columnList = E_TenantOrgNamedEntity.domain),
+                @Index(columnList = E_TenantOrgSharedEntity.tenantId),
 
                 //复合索引
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_AppClient.id),
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
+                @Index(columnList = E_TenantOrgSharedEntity.tenantId + "," + E_AppClient.id),
+                @Index(columnList = E_TenantOrgSharedEntity.tenantId + "," + E_TenantOrgSharedEntity.orgId),
         }
         ,
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_AppClient.appId}),
+                @UniqueConstraint(columnNames = {E_TenantOrgSharedEntity.tenantId, E_AppClient.appId}),
         }
 )
 @EntityCategory(EntityOpConst.SYS_TYPE_NAME)
-public class AppClient extends TenantOrgNamedEntity {
+public class AppClient extends TenantOrgSharedEntity {
 
     @Id
 //    @GeneratedValue

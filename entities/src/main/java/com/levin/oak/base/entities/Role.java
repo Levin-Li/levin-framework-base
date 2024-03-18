@@ -61,7 +61,7 @@ import java.util.List;
 @EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class Role
         extends AbstractTreeObject<String, Role>
-        implements MultiTenantObject, MultiTenantPublicObject {
+        implements MultiTenantPublicObject {
 
     @Schema(title = "组织权限")
     public enum OrgDataScope implements EnumDesc {
@@ -85,10 +85,9 @@ public class Role
     @Column(length = 64)
     protected String id;
 
-    @Schema(title = "系统域", hidden = true, description = "归属的子系统或应用")
+    @Schema(title = "模块标识", hidden = true, description = "归属的子系统或应用")
     @Column(length = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    protected String domain;
+    protected String moduleId;
 
     @Schema(title = "租户ID")
     @Column(length = 128)
@@ -100,11 +99,9 @@ public class Role
     protected String parentId;
 
     @Schema(title = "是否可继承")
-    @Column
     protected Boolean extendable;
 
     @Schema(title = "是否互斥")
-    @Column
     protected Boolean mutex;
 
     @Schema(title = "用户数限制")

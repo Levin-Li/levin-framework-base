@@ -49,7 +49,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:21, 代码生成哈希校验码：[556013afa07498c0debf44364fa79676]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[936836cfc0228b758ad6c28d117a7dd8]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -101,6 +101,13 @@ public class QuerySimpleApiReq extends MultiTenantOrgReq<QuerySimpleApiReq> {
     @Schema(title = L_id)
     String id;
 
+    @Schema(title = L_domain)
+    String domain;
+
+    @Schema(title = "模糊匹配-" + L_domain)
+    @EndsWith
+    String endsWithDomain;
+
     @Size(max = 128)
     @Schema(title = L_type)
     String type;
@@ -133,11 +140,6 @@ public class QuerySimpleApiReq extends MultiTenantOrgReq<QuerySimpleApiReq> {
 
     @Schema(title = L_content)
     String content;
-
-    //@InjectVar(value = "sysDomain", isRequired = "false")
-    @Size(max = 128)
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)

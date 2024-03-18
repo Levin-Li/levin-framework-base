@@ -50,7 +50,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 查询区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:23, 代码生成哈希校验码：[a9cd210cbfa4dbb21bd27c0d15082624]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[0fab567dfa09a7f83f2085eabb1ea297]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -90,6 +90,9 @@ public class QueryAreaReq extends BaseReq {
     @Schema(title = "模糊匹配-" + L_id)
     @StartsWith
     String startsWithId;
+
+    @Schema(title = L_code , description = D_code)
+    String code;
 
     @Schema(title = L_icon)
     String icon;

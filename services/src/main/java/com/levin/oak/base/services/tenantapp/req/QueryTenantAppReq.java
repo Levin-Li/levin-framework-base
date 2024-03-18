@@ -50,7 +50,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[b792f5adf88304b50ab5e9380ff5830e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[fd0cb82db48283d5aa8408f2469c5446]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -91,15 +91,12 @@ public class QueryTenantAppReq extends MultiTenantReq<QueryTenantAppReq> {
     @Schema(title = L_name)
     String name;
 
-    @Size(max = 255)
     @Schema(title = L_logo)
     String logo;
 
-    @Size(max = 255)
     @Schema(title = L_entryUrl)
     String entryUrl;
 
-    @Size(max = 255)
     @Schema(title = L_infoUrl)
     String infoUrl;
 
@@ -110,7 +107,6 @@ public class QueryTenantAppReq extends MultiTenantReq<QueryTenantAppReq> {
     @Schema(title = L_modules)
     List<String> modules;
 
-    @Size(max = 255)
     @Schema(title = L_appSecret , description = D_appSecret)
     String appSecret;
 
@@ -120,7 +116,6 @@ public class QueryTenantAppReq extends MultiTenantReq<QueryTenantAppReq> {
     @Schema(title = L_purchasePrice , description = D_purchasePrice)
     BigDecimal purchasePrice;
 
-    @Size(max = 255)
     @Schema(title = L_orderNo , description = D_orderNo)
     String orderNo;
 

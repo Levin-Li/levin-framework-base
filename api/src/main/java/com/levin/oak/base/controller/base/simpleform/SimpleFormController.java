@@ -4,6 +4,7 @@ package com.levin.oak.base.controller.base.simpleform;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import lombok.Getter;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单表单控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:45, 代码生成哈希校验码：[fdecf9db3fc22203614a634dfff1e40e]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月11日 下午1:48:32, 代码生成哈希校验码：[827daf6a0fe8b212452d56eabb570e33]，请不要修改和删除此行内容。
 *
 */
 
@@ -64,23 +65,27 @@ import static com.levin.oak.base.entities.EntityConst.*;
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimpleFormController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME + "-")
+@ResAuthorize(domain = ID, type = "专家数据" + "-")
 
 //类注解
 //默认生成控制器类，@Tag的name属性关联权限的资源标识
 @Tag(name = E_SimpleForm.BIZ_NAME, description = E_SimpleForm.BIZ_NAME + MAINTAIN_ACTION)
 @Validated //@Valid
 @CRUD
-
 @Slf4j
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在子类中重写业务逻辑
+
 public abstract class SimpleFormController extends BaseController{
 
     protected static final String BIZ_NAME = E_SimpleForm.BIZ_NAME;
 
     @Autowired
+    @Getter
     protected SimpleFormService simpleFormService;
 
     @Autowired
+    @Getter
     protected BizSimpleFormService bizSimpleFormService;
 
     /**
@@ -96,7 +101,7 @@ public abstract class SimpleFormController extends BaseController{
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
-        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, simpleFormService.query(req, paging)));
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, getSimpleFormService().query(req, paging)));
     }
 
     /**
@@ -112,7 +117,7 @@ public abstract class SimpleFormController extends BaseController{
 
         req = checkRequest(CREATE_ACTION, req);
 
-        return ApiResp.ok(simpleFormService.create(req));
+        return ApiResp.ok(getSimpleFormService().create(req));
     }
 
     /**
@@ -129,7 +134,7 @@ public abstract class SimpleFormController extends BaseController{
 
          req = checkRequest(VIEW_DETAIL_ACTION, req);
 
-         SimpleFormInfo info = simpleFormService.findById(req);
+         SimpleFormInfo info = getSimpleFormService().findById(req);
          Assert.notNull(info, "记录不存在");
          // 租户校验，因为数据可能是从缓存加载的
          Assert.isTrue(!StringUtils.hasText(req.getTenantId()) || req.getTenantId().equals(info.getTenantId()), "非法访问，租户不匹配");
@@ -150,7 +155,7 @@ public abstract class SimpleFormController extends BaseController{
 
         req = checkRequest(UPDATE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(simpleFormService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getSimpleFormService().update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -166,7 +171,7 @@ public abstract class SimpleFormController extends BaseController{
 
         req = checkRequest(DELETE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(simpleFormService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getSimpleFormService().delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -194,7 +199,7 @@ public abstract class SimpleFormController extends BaseController{
 
         reqList = checkRequest(BATCH_CREATE_ACTION, reqList);
 
-        return ApiResp.ok(simpleFormService.batchCreate(reqList));
+        return ApiResp.ok(getSimpleFormService().batchCreate(reqList));
     }
 
     /**
@@ -206,7 +211,7 @@ public abstract class SimpleFormController extends BaseController{
 
         reqList = checkRequest(BATCH_UPDATE_ACTION, reqList);
 
-        return ApiResp.ok(assertTrue(simpleFormService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getSimpleFormService().batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -220,7 +225,7 @@ public abstract class SimpleFormController extends BaseController{
 
         req = checkRequest(BATCH_DELETE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(simpleFormService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getSimpleFormService().batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**

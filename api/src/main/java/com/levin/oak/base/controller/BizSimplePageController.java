@@ -59,7 +59,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单页面业务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年2月19日 上午10:56:10, 代码生成哈希校验码：[aff10f696312c715044832922ad3a5a8]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月11日 下午1:48:32, 代码生成哈希校验码：[ce2c00f9858deb4170403592f251cbd0]，请不要修改和删除此行内容。
 *
 */
 
@@ -70,7 +70,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "BizSimplePageController", havingValue = "true", matchIfMissing = true)
 
 //默认需要权限访问
-@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME + "-")
+@ResAuthorize(domain = ID, type = "专家数据" + "-")
 
 //类注解，@Tag的name属性关联权限的资源标识
 @Tag(name = E_SimplePage.BIZ_NAME, description = E_SimplePage.BIZ_NAME + MAINTAIN_ACTION)
@@ -82,6 +82,10 @@ public class BizSimplePageController extends SimplePageController{
 
     //允许的操作
     List<String> allowOpList = Arrays.asList(QUERY_LIST_ACTION, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION, VIEW_DETAIL_ACTION, BATCH_CREATE_ACTION, BATCH_UPDATE_ACTION, BATCH_DELETE_ACTION);
+
+
+    //@Autowired
+    //AuthService authService;
 
     /**
     * 检查请求
@@ -97,6 +101,12 @@ public class BizSimplePageController extends SimplePageController{
 
         return super.checkRequest(action, req);
     }
+
+    //如果业务需要请覆盖父类的方法，父类方法上的Spring注解可以不需要重写，除非业务上有需要
+    //public ApiResp<Boolean> update(@RequestBody @Valid UpdateSimplePageReq req, @PathVariable(required = false) String id) {
+    //   处理业务逻辑...
+    //   return super.update(req, id);
+    // }
 
     /**
     * 统计

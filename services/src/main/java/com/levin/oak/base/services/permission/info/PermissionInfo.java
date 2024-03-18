@@ -35,7 +35,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 权限清单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 上午11:48:06, 代码生成哈希校验码：[8fac3756cb5d5b61e92dca4ee7e2c5d1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[beaac67bbf2e34b8c68c7c680611dd18]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -59,8 +59,8 @@ public class PermissionInfo implements Serializable {
     String icon;
 
     @Size(max = 128)
-    @Schema(title = L_domain)
-    String domain;
+    @Schema(title = L_moduleId)
+    String moduleId;
 
     @Size(max = 128)
     @Schema(title = L_type)

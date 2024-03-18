@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午2:57:23, 代码生成哈希校验码：[394af20075e971f78f61a574f8f13fa3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[d878947f6023cd4e5921db610dbfdb00]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -90,6 +90,13 @@ public class QueryI18nResReq extends MultiTenantOrgReq<QueryI18nResReq> {
     @Schema(title = L_id)
     Long id;
 
+    @Schema(title = L_domain)
+    String domain;
+
+    @Schema(title = "模糊匹配-" + L_domain)
+    @EndsWith
+    String endsWithDomain;
+
     @Size(max = 128)
     @Schema(title = L_category)
     String category;
@@ -105,11 +112,6 @@ public class QueryI18nResReq extends MultiTenantOrgReq<QueryI18nResReq> {
     @Schema(title = "模糊匹配-" + L_label)
     @Contains
     String containsLabel;
-
-    //@InjectVar(value = "sysDomain", isRequired = "false")
-    @Size(max = 128)
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)

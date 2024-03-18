@@ -373,8 +373,8 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    public AccessWhitelistInterceptor accessWhitelistInterceptor() {
-        return new AccessWhitelistInterceptor();
+    public UrlAclInterceptor accessWhitelistInterceptor() {
+        return new UrlAclInterceptor();
     }
 
 

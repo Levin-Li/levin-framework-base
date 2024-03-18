@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新简单动态接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:58, 代码生成哈希校验码：[0de5e16248bb98a71d0321fe24584382]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[e77e35e1bf3c0c9ce3b01413279fb01b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -86,6 +86,9 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq<SimpleUpdateSimp
     @Schema(title = L_language)
     Language language;
 
+    @Schema(title = L_domain)
+    String domain;
+
     @Size(max = 128)
     @Schema(title = L_type)
     String type;
@@ -112,11 +115,6 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq<SimpleUpdateSimp
 
     @Schema(title = L_content)
     String content;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)
@@ -174,6 +172,10 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq<SimpleUpdateSimp
         this.language = language;
         return addUpdateField(E_SimpleApi.language);
     }
+    public <T extends SimpleUpdateSimpleApiReq> T setDomain(String domain) {
+        this.domain = domain;
+        return addUpdateField(E_SimpleApi.domain);
+    }
     public <T extends SimpleUpdateSimpleApiReq> T setType(String type) {
         this.type = type;
         return addUpdateField(E_SimpleApi.type);
@@ -201,10 +203,6 @@ public class SimpleUpdateSimpleApiReq extends MultiTenantOrgReq<SimpleUpdateSimp
     public <T extends SimpleUpdateSimpleApiReq> T setContent(String content) {
         this.content = content;
         return addUpdateField(E_SimpleApi.content);
-    }
-    public <T extends SimpleUpdateSimpleApiReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_SimpleApi.domain);
     }
     public <T extends SimpleUpdateSimpleApiReq> T setName(String name) {
         this.name = name;

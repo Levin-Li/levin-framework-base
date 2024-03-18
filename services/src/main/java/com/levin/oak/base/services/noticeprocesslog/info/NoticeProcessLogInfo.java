@@ -25,6 +25,7 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_NoticeProcessLog.*;
 ////////////////////////////////////
+import com.levin.oak.base.entities.NoticeProcessLog.*;
 import java.util.Date;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -36,7 +37,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[9f65d8b0651ed51b70a1d527014dc99e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[fcb099491024cb17e765d0a01ce14632]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -67,9 +68,8 @@ public class NoticeProcessLogInfo implements Serializable {
     @Schema(title = L_noticeId)
     String noticeId;
 
-    @Size(max = 128)
     @Schema(title = L_status)
-    String status;
+    Status status;
 
     @Size(max = 512)
     @Schema(title = L_remark)

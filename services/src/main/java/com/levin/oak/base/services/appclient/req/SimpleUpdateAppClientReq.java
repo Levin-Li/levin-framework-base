@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新应用接入
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:58, 代码生成哈希校验码：[5346df3510c990029f5ca998a0c8cabb]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[9de23f52c5b5ef961ca5e18efc528729]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -87,11 +87,6 @@ public class SimpleUpdateAppClientReq extends MultiTenantOrgReq<SimpleUpdateAppC
     @Size(max = 512)
     @Schema(title = L_appToken)
     String appToken;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)
@@ -152,10 +147,6 @@ public class SimpleUpdateAppClientReq extends MultiTenantOrgReq<SimpleUpdateAppC
     public <T extends SimpleUpdateAppClientReq> T setAppToken(String appToken) {
         this.appToken = appToken;
         return addUpdateField(E_AppClient.appToken);
-    }
-    public <T extends SimpleUpdateAppClientReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_AppClient.domain);
     }
     public <T extends SimpleUpdateAppClientReq> T setName(String name) {
         this.name = name;

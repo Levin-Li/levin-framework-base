@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:59, 代码生成哈希校验码：[a8afa472ceb4dc7c36a3bb33aa5714ff]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[25b020cf0efd54f7cc23e414a145a852]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -76,6 +76,9 @@ public class SimpleUpdateI18nResReq extends MultiTenantOrgReq<SimpleUpdateI18nRe
     @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
+    @Schema(title = L_domain)
+    String domain;
+
     @Size(max = 128)
     @Schema(title = L_category)
     String category;
@@ -87,11 +90,6 @@ public class SimpleUpdateI18nResReq extends MultiTenantOrgReq<SimpleUpdateI18nRe
     @Size(max = 1800)
     @Schema(title = L_label)
     String label;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)
@@ -141,6 +139,10 @@ public class SimpleUpdateI18nResReq extends MultiTenantOrgReq<SimpleUpdateI18nRe
         }
     }
 
+    public <T extends SimpleUpdateI18nResReq> T setDomain(String domain) {
+        this.domain = domain;
+        return addUpdateField(E_I18nRes.domain);
+    }
     public <T extends SimpleUpdateI18nResReq> T setCategory(String category) {
         this.category = category;
         return addUpdateField(E_I18nRes.category);
@@ -152,10 +154,6 @@ public class SimpleUpdateI18nResReq extends MultiTenantOrgReq<SimpleUpdateI18nRe
     public <T extends SimpleUpdateI18nResReq> T setLabel(String label) {
         this.label = label;
         return addUpdateField(E_I18nRes.label);
-    }
-    public <T extends SimpleUpdateI18nResReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_I18nRes.domain);
     }
     public <T extends SimpleUpdateI18nResReq> T setName(String name) {
         this.name = name;

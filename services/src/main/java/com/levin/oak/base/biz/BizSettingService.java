@@ -56,6 +56,14 @@ public interface BizSettingService {
     StatSettingReq.Result stat(StatSettingReq req, SimplePaging paging);
 
     /**
+     * 更新或是清楚缓存
+     *
+     * @param tenantId
+     * @param code
+     */
+    void clearCache(@Nullable String tenantId, @NotNull String code);
+
+    /**
      * 更新系统设置
      *
      * @param code

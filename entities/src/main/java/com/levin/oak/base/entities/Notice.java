@@ -31,8 +31,8 @@ import java.util.Date;
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
                 @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId),
-                @Index(columnList = E_TenantOrgNamedEntity.orgId),
+                @Index(columnList = E_Notice.tenantId),
+                @Index(columnList = E_Notice.orgId),
 
                 @Index(columnList = E_Notice.creator),
                 @Index(columnList = E_Notice.expiredDate),
@@ -55,7 +55,7 @@ import java.util.Date;
  */
 @EntityCategory(EntityOpConst.BIZ_TYPE_NAME)
 public class Notice
-        extends TenantOrgNamedEntity {
+        extends TenantOrgSharedEntity {
 
     @Schema(title = "通知内容类型")
     public enum ContentType implements EnumDesc {

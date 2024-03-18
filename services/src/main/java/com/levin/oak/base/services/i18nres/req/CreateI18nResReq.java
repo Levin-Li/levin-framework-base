@@ -39,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[a907a0f2e112adf7d01b0f4182ec0faf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[b4a0a789174070396906d64c9d7e5a2e]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -56,6 +56,9 @@ public class CreateI18nResReq extends MultiTenantOrgReq<CreateI18nResReq> {
 
     private static final long serialVersionUID = -1681554652L;
 
+    @Schema(title = L_domain )
+    String domain;
+
     @Schema(title = L_category )
     @NotBlank
     @Size(max = 128)
@@ -70,11 +73,6 @@ public class CreateI18nResReq extends MultiTenantOrgReq<CreateI18nResReq> {
     @NotBlank
     @Size(max = 1800)
     String label;
-
-    @Schema(title = L_domain , description = D_domain )
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    String domain;
 
     @Schema(title = L_name )
     @NotBlank

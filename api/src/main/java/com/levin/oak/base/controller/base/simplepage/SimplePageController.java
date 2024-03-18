@@ -4,6 +4,7 @@ package com.levin.oak.base.controller.base.simplepage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import lombok.Getter;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单页面控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:45, 代码生成哈希校验码：[f195d6653b9796fc13c6c149f91394d0]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月11日 下午1:48:32, 代码生成哈希校验码：[1ed352d138ba9824b0b45f53c86f180f]，请不要修改和删除此行内容。
 *
 */
 
@@ -64,23 +65,27 @@ import static com.levin.oak.base.entities.EntityConst.*;
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimplePageController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME + "-")
+@ResAuthorize(domain = ID, type = "专家数据" + "-")
 
 //类注解
 //默认生成控制器类，@Tag的name属性关联权限的资源标识
 @Tag(name = E_SimplePage.BIZ_NAME, description = E_SimplePage.BIZ_NAME + MAINTAIN_ACTION)
 @Validated //@Valid
 @CRUD
-
 @Slf4j
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在子类中重写业务逻辑
+
 public abstract class SimplePageController extends BaseController{
 
     protected static final String BIZ_NAME = E_SimplePage.BIZ_NAME;
 
     @Autowired
+    @Getter
     protected SimplePageService simplePageService;
 
     @Autowired
+    @Getter
     protected BizSimplePageService bizSimplePageService;
 
     /**
@@ -96,7 +101,7 @@ public abstract class SimplePageController extends BaseController{
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
-        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, simplePageService.query(req, paging)));
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, getSimplePageService().query(req, paging)));
     }
 
     /**
@@ -112,7 +117,7 @@ public abstract class SimplePageController extends BaseController{
 
         req = checkRequest(CREATE_ACTION, req);
 
-        return ApiResp.ok(simplePageService.create(req));
+        return ApiResp.ok(getSimplePageService().create(req));
     }
 
     /**
@@ -129,7 +134,7 @@ public abstract class SimplePageController extends BaseController{
 
          req = checkRequest(VIEW_DETAIL_ACTION, req);
 
-         SimplePageInfo info = simplePageService.findById(req);
+         SimplePageInfo info = getSimplePageService().findById(req);
          Assert.notNull(info, "记录不存在");
          // 租户校验，因为数据可能是从缓存加载的
          Assert.isTrue(!StringUtils.hasText(req.getTenantId()) || req.getTenantId().equals(info.getTenantId()), "非法访问，租户不匹配");
@@ -150,7 +155,7 @@ public abstract class SimplePageController extends BaseController{
 
         req = checkRequest(UPDATE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(simplePageService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getSimplePageService().update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -166,7 +171,7 @@ public abstract class SimplePageController extends BaseController{
 
         req = checkRequest(DELETE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(simplePageService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getSimplePageService().delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -194,7 +199,7 @@ public abstract class SimplePageController extends BaseController{
 
         reqList = checkRequest(BATCH_CREATE_ACTION, reqList);
 
-        return ApiResp.ok(simplePageService.batchCreate(reqList));
+        return ApiResp.ok(getSimplePageService().batchCreate(reqList));
     }
 
     /**
@@ -206,7 +211,7 @@ public abstract class SimplePageController extends BaseController{
 
         reqList = checkRequest(BATCH_UPDATE_ACTION, reqList);
 
-        return ApiResp.ok(assertTrue(simplePageService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getSimplePageService().batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -220,7 +225,7 @@ public abstract class SimplePageController extends BaseController{
 
         req = checkRequest(BATCH_DELETE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(simplePageService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getSimplePageService().batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**

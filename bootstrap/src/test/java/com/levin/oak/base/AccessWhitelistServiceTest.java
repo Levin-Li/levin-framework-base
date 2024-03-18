@@ -1,9 +1,5 @@
 package com.levin.oak.base;
 
-import static com.levin.oak.base.ModuleOption.*;
-import com.levin.oak.base.entities.*;
-import com.levin.oak.base.entities.AccessWhitelist;
-
 import com.levin.oak.base.biz.*;
 import com.levin.oak.base.services.accesswhitelist.*;
 import com.levin.oak.base.services.accesswhitelist.req.*;
@@ -12,46 +8,19 @@ import com.levin.oak.base.services.accesswhitelist.info.*;
 
 ////////////////////////////////////
 //自动导入列表
-import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 import com.levin.commons.dao.*;
-import com.levin.commons.dao.support.*;
-import com.levin.commons.service.domain.*;
 
 import org.springframework.util.*;
-import java.util.Date;
-import org.springframework.beans.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
-
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.*;
 
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Date;
-
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 访问白名单测试

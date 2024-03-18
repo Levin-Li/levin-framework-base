@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 租户应用
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[f6cc734577970a85ea6d09896e313314]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[fc2c473599e9538296b70022cd5eaa6b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -66,15 +66,12 @@ public class TenantAppInfo implements Serializable, NamedObject {
     @Schema(title = L_name)
     String name;
 
-    @Size(max = 255)
     @Schema(title = L_logo)
     String logo;
 
-    @Size(max = 255)
     @Schema(title = L_entryUrl)
     String entryUrl;
 
-    @Size(max = 255)
     @Schema(title = L_infoUrl)
     String infoUrl;
 
@@ -83,7 +80,6 @@ public class TenantAppInfo implements Serializable, NamedObject {
     @Schema(title = L_modules)
     List<String> modules;
 
-    @Size(max = 255)
     @Schema(title = L_appSecret , description = D_appSecret)
     String appSecret;
 
@@ -93,7 +89,6 @@ public class TenantAppInfo implements Serializable, NamedObject {
     @Schema(title = L_purchasePrice , description = D_purchasePrice)
     BigDecimal purchasePrice;
 
-    @Size(max = 255)
     @Schema(title = L_orderNo , description = D_orderNo)
     String orderNo;
 

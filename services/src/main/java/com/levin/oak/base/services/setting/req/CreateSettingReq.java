@@ -40,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:26, 代码生成哈希校验码：[ef92987eb92f014e950de3c881a851f1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[971a0a12d51b7650ef9bf7867027ac5b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -56,6 +56,14 @@ import com.levin.commons.service.support.InjectConst;
 public class CreateSettingReq extends MultiTenantOrgReq<CreateSettingReq> {
 
     private static final long serialVersionUID = 147875794L;
+
+    @Schema(title = L_id )
+    @NotBlank
+    @Size(max = 64)
+    String id;
+
+    @Schema(title = L_domain )
+    String domain;
 
     @Schema(title = L_categoryName )
     @NotBlank
@@ -75,6 +83,9 @@ public class CreateSettingReq extends MultiTenantOrgReq<CreateSettingReq> {
     @NotNull
     ValueType valueType;
 
+    @Schema(title = L_editor , description = D_editor )
+    String editor;
+
     @Schema(title = L_valueContent )
     String valueContent;
 
@@ -84,11 +95,6 @@ public class CreateSettingReq extends MultiTenantOrgReq<CreateSettingReq> {
     @Schema(title = L_inputPlaceholder )
     @Size(max = 128)
     String inputPlaceholder;
-
-    @Schema(title = L_domain , description = D_domain )
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    String domain;
 
     @Schema(title = L_name )
     @NotBlank

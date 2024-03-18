@@ -2,7 +2,9 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.EntityCategory;
 import com.levin.commons.dao.EntityOpConst;
+import com.levin.commons.dao.domain.StatefulObject;
 import com.levin.commons.dao.domain.support.SimpleTenantOrgObject;
+import com.levin.commons.service.domain.EnumDesc;
 import com.levin.commons.service.domain.InjectVar;
 import com.levin.commons.service.support.InjectConst;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -42,7 +44,23 @@ import java.util.Date;
         }
 )
 @EntityCategory(EntityOpConst.BIZ_TYPE_NAME)
-public class NoticeProcessLog extends SimpleTenantOrgObject {
+public class NoticeProcessLog extends SimpleTenantOrgObject  {
+
+    @Schema(title = "通知处理状态")
+    public enum Status implements EnumDesc {
+
+        @Schema(title = "处理中")
+        Processing,
+        @Schema(title = "已拒绝")
+        Rejected,
+        @Schema(title = "已完成")
+        Finished;
+
+        @Override
+        public String toString() {
+            return nameAndDesc();
+        }
+    }
 
     @Id
     @GeneratedValue(generator = "default_id")
@@ -59,8 +77,9 @@ public class NoticeProcessLog extends SimpleTenantOrgObject {
     String noticeId;
 
     @Schema(title = "处理状态")
-    @Column(length = 128)
-    String status;
+    @Column(length = 24)
+    @Enumerated(EnumType.STRING)
+    Status status;
 
     @Schema(title = "备注")
     @Column(length = 512)

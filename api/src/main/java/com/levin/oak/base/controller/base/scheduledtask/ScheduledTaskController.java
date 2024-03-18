@@ -4,6 +4,7 @@ package com.levin.oak.base.controller.base.scheduledtask;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import lombok.Getter;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 调度任务控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:45, 代码生成哈希校验码：[0bf4416f5dd24cc9ecd0ce3fc4d93653]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月11日 下午1:45:04, 代码生成哈希校验码：[80823926c141fbe82f61766137703a10]，请不要修改和删除此行内容。
 *
 */
 
@@ -71,16 +72,20 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Tag(name = E_ScheduledTask.BIZ_NAME, description = E_ScheduledTask.BIZ_NAME + MAINTAIN_ACTION)
 @Validated //@Valid
 @CRUD
-
 @Slf4j
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在子类中重写业务逻辑
+
 public abstract class ScheduledTaskController extends BaseController{
 
     protected static final String BIZ_NAME = E_ScheduledTask.BIZ_NAME;
 
     @Autowired
+    @Getter
     protected ScheduledTaskService scheduledTaskService;
 
     @Autowired
+    @Getter
     protected BizScheduledTaskService bizScheduledTaskService;
 
     /**
@@ -96,7 +101,7 @@ public abstract class ScheduledTaskController extends BaseController{
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
-        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, scheduledTaskService.query(req, paging)));
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, getScheduledTaskService().query(req, paging)));
     }
 
     /**
@@ -112,7 +117,7 @@ public abstract class ScheduledTaskController extends BaseController{
 
         req = checkRequest(CREATE_ACTION, req);
 
-        return ApiResp.ok(scheduledTaskService.create(req));
+        return ApiResp.ok(getScheduledTaskService().create(req));
     }
 
     /**
@@ -129,7 +134,7 @@ public abstract class ScheduledTaskController extends BaseController{
 
          req = checkRequest(VIEW_DETAIL_ACTION, req);
 
-         ScheduledTaskInfo info = scheduledTaskService.findById(req);
+         ScheduledTaskInfo info = getScheduledTaskService().findById(req);
          Assert.notNull(info, "记录不存在");
          // 租户校验，因为数据可能是从缓存加载的
          Assert.isTrue(!StringUtils.hasText(req.getTenantId()) || req.getTenantId().equals(info.getTenantId()), "非法访问，租户不匹配");
@@ -150,7 +155,7 @@ public abstract class ScheduledTaskController extends BaseController{
 
         req = checkRequest(UPDATE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(scheduledTaskService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getScheduledTaskService().update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -166,7 +171,7 @@ public abstract class ScheduledTaskController extends BaseController{
 
         req = checkRequest(DELETE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(scheduledTaskService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getScheduledTaskService().delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -194,7 +199,7 @@ public abstract class ScheduledTaskController extends BaseController{
 
         reqList = checkRequest(BATCH_CREATE_ACTION, reqList);
 
-        return ApiResp.ok(scheduledTaskService.batchCreate(reqList));
+        return ApiResp.ok(getScheduledTaskService().batchCreate(reqList));
     }
 
     /**
@@ -206,7 +211,7 @@ public abstract class ScheduledTaskController extends BaseController{
 
         reqList = checkRequest(BATCH_UPDATE_ACTION, reqList);
 
-        return ApiResp.ok(assertTrue(scheduledTaskService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getScheduledTaskService().batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -220,7 +225,7 @@ public abstract class ScheduledTaskController extends BaseController{
 
         req = checkRequest(BATCH_DELETE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(scheduledTaskService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getScheduledTaskService().batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**

@@ -2,7 +2,9 @@ package com.levin.oak.base.entities;
 
 import com.levin.commons.dao.EntityCategory;
 import com.levin.commons.dao.EntityOpConst;
+import com.levin.commons.dao.Unique;
 import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.EndsWith;
 import com.levin.commons.dao.domain.support.E_AbstractMultiTenantObject;
 import com.levin.commons.service.domain.EnumDesc;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -33,7 +35,7 @@ import javax.persistence.*;
                 @Index(columnList = E_Setting.categoryName),
                 @Index(columnList = E_Setting.groupName),
 
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
+                @Index(columnList = E_Setting.tenantId + "," + E_Setting.orgId),
                 @Index(columnList = E_Setting.tenantId + "," + E_Setting.orgId + "," + E_Setting.id),
                 @Index(columnList = E_Setting.tenantId + "," + E_Setting.orgId + "," + E_Setting.code),
 
@@ -46,7 +48,7 @@ import javax.persistence.*;
 )
 @EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class Setting
-        extends TenantOrgNamedEntity {
+        extends TenantOrgSharedEntity {
     public enum ValueType implements EnumDesc {
         @Schema(title = "Html")
         Html,
@@ -69,16 +71,22 @@ public class Setting
         @Schema(title = "文件")
         File,
         ;
+
         @Override
         public String toString() {
             return nameAndDesc();
         }
     }
 
+    //
     @Id
-    @GeneratedValue(generator = "default_id")
+    //@GeneratedValue(generator = "default_id")
     @Column(length = 64)
     protected String id;
+
+    @Schema(title = "域名")
+    @EndsWith
+    protected String domain;
 
     @Schema(title = "分类名称")
     @Column(nullable = false, length = 64)
@@ -91,12 +99,16 @@ public class Setting
 
     @Schema(title = "编码")
     @Column(nullable = false, length = 64)
+    @Unique({E_Setting.tenantId, E_Setting.code})
     protected String code;
 
     @Schema(title = "值类型")
     @Column(nullable = false, length = 64)
     @Enumerated(EnumType.STRING)
     protected ValueType valueType;
+
+    @Schema(title = "内容编辑器", description = "form:表单路径")
+    protected String editor;
 
     @Schema(title = "值")
     @Lob
@@ -123,7 +135,6 @@ public class Setting
         if (valueType == null) {
             valueType = ValueType.Text;
         }
-
     }
 
 }

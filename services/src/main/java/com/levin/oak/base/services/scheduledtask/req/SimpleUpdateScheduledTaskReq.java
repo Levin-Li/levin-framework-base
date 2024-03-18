@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新调度任务
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:59, 代码生成哈希校验码：[ecc987e452d74e3bea526134ae33f492]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[4348de6715bd008a50a2f54d2e44f841]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -102,11 +102,6 @@ public class SimpleUpdateScheduledTaskReq extends MultiTenantOrgReq<SimpleUpdate
 
     @Schema(title = L_nextInvokeTime)
     Date nextInvokeTime;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)
@@ -187,10 +182,6 @@ public class SimpleUpdateScheduledTaskReq extends MultiTenantOrgReq<SimpleUpdate
     public <T extends SimpleUpdateScheduledTaskReq> T setNextInvokeTime(Date nextInvokeTime) {
         this.nextInvokeTime = nextInvokeTime;
         return addUpdateField(E_ScheduledTask.nextInvokeTime);
-    }
-    public <T extends SimpleUpdateScheduledTaskReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_ScheduledTask.domain);
     }
     public <T extends SimpleUpdateScheduledTaskReq> T setName(String name) {
         this.name = name;

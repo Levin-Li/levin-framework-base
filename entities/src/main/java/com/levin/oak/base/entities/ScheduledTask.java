@@ -34,18 +34,18 @@ import java.util.Date;
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = AbstractBaseEntityObject.Fields.orderCode),
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId),
-                @Index(columnList = E_TenantOrgNamedEntity.orgId),
+                @Index(columnList = E_TenantOrgSharedEntity.tenantId),
+                @Index(columnList = E_TenantOrgSharedEntity.orgId),
                 @Index(columnList = E_ScheduledTask.groupName),
         }
 //        ,
 //        uniqueConstraints = {
-//                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_TenantOrgNamedEntity.name}),
+//                @UniqueConstraint(columnNames = {E_TenantOrgSharedEntity.tenantId, E_TenantOrgSharedEntity.name}),
 //        }
 )
 @EntityCategory(EntityOpConst.SYS_TYPE_NAME)
 public class ScheduledTask
-        extends TenantOrgNamedEntity {
+        extends TenantOrgSharedEntity {
 
     @Id
     @GeneratedValue(generator = "default_id")

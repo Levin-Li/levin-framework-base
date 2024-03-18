@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询权限清单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 上午11:48:06, 代码生成哈希校验码：[53d00493d81561df7de9b968b793937f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[bc03a5b61a1c22eee527669aec6f9e69]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -90,8 +90,8 @@ public class QueryPermissionReq extends BaseReq {
     String icon;
 
     @Size(max = 128)
-    @Schema(title = L_domain)
-    String domain;
+    @Schema(title = L_moduleId)
+    String moduleId;
 
     @Size(max = 128)
     @Schema(title = L_type)

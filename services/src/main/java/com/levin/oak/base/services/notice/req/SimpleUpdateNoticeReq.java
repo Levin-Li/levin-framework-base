@@ -43,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:58, 代码生成哈希校验码：[e4e10a33d5dc2cd07df6b67fd2619158]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[294a02dc163036316709ae37983531d3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -89,11 +89,6 @@ public class SimpleUpdateNoticeReq extends MultiTenantOrgReq<SimpleUpdateNoticeR
 
     @Schema(title = L_expiredDate)
     Date expiredDate;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @Size(max = 64)
     @Schema(title = L_name)
@@ -158,10 +153,6 @@ public class SimpleUpdateNoticeReq extends MultiTenantOrgReq<SimpleUpdateNoticeR
     public <T extends SimpleUpdateNoticeReq> T setExpiredDate(Date expiredDate) {
         this.expiredDate = expiredDate;
         return addUpdateField(E_Notice.expiredDate);
-    }
-    public <T extends SimpleUpdateNoticeReq> T setDomain(String domain) {
-        this.domain = domain;
-        return addUpdateField(E_Notice.domain);
     }
     public <T extends SimpleUpdateNoticeReq> T setName(String name) {
         this.name = name;

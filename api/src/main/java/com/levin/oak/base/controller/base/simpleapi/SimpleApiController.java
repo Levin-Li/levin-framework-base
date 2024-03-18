@@ -4,6 +4,7 @@ package com.levin.oak.base.controller.base.simpleapi;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import lombok.Getter;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 简单动态接口控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:44, 代码生成哈希校验码：[a059a9cb8a6746ddba3b2d55fd691147]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月11日 下午1:48:30, 代码生成哈希校验码：[87da11c7bc8c65d028c5dec135680152]，请不要修改和删除此行内容。
 *
 */
 
@@ -64,23 +65,27 @@ import static com.levin.oak.base.entities.EntityConst.*;
 //@ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "SimpleApiController", havingValue = "true",  matchIfMissing = true)
 
 //默认需要权限访问，默认从父类继承
-@ResAuthorize(domain = ID, type = PLATFORM_TYPE_NAME + "-")
+@ResAuthorize(domain = ID, type = "专家数据" + "-")
 
 //类注解
 //默认生成控制器类，@Tag的name属性关联权限的资源标识
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 @Validated //@Valid
 @CRUD
-
 @Slf4j
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在子类中重写业务逻辑
+
 public abstract class SimpleApiController extends BaseController{
 
     protected static final String BIZ_NAME = E_SimpleApi.BIZ_NAME;
 
     @Autowired
+    @Getter
     protected SimpleApiService simpleApiService;
 
     @Autowired
+    @Getter
     protected BizSimpleApiService bizSimpleApiService;
 
     /**
@@ -96,7 +101,7 @@ public abstract class SimpleApiController extends BaseController{
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
-        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, simpleApiService.query(req, paging)));
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, getSimpleApiService().query(req, paging)));
     }
 
     /**
@@ -112,7 +117,7 @@ public abstract class SimpleApiController extends BaseController{
 
         req = checkRequest(CREATE_ACTION, req);
 
-        return ApiResp.ok(simpleApiService.create(req));
+        return ApiResp.ok(getSimpleApiService().create(req));
     }
 
     /**
@@ -129,7 +134,7 @@ public abstract class SimpleApiController extends BaseController{
 
          req = checkRequest(VIEW_DETAIL_ACTION, req);
 
-         SimpleApiInfo info = simpleApiService.findById(req);
+         SimpleApiInfo info = getSimpleApiService().findById(req);
          Assert.notNull(info, "记录不存在");
          // 租户校验，因为数据可能是从缓存加载的
          Assert.isTrue(!StringUtils.hasText(req.getTenantId()) || req.getTenantId().equals(info.getTenantId()), "非法访问，租户不匹配");
@@ -150,7 +155,7 @@ public abstract class SimpleApiController extends BaseController{
 
         req = checkRequest(UPDATE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(simpleApiService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getSimpleApiService().update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -166,7 +171,7 @@ public abstract class SimpleApiController extends BaseController{
 
         req = checkRequest(DELETE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(simpleApiService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getSimpleApiService().delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -194,7 +199,7 @@ public abstract class SimpleApiController extends BaseController{
 
         reqList = checkRequest(BATCH_CREATE_ACTION, reqList);
 
-        return ApiResp.ok(simpleApiService.batchCreate(reqList));
+        return ApiResp.ok(getSimpleApiService().batchCreate(reqList));
     }
 
     /**
@@ -206,7 +211,7 @@ public abstract class SimpleApiController extends BaseController{
 
         reqList = checkRequest(BATCH_UPDATE_ACTION, reqList);
 
-        return ApiResp.ok(assertTrue(simpleApiService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getSimpleApiService().batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -220,7 +225,7 @@ public abstract class SimpleApiController extends BaseController{
 
         req = checkRequest(BATCH_DELETE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(simpleApiService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getSimpleApiService().batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**

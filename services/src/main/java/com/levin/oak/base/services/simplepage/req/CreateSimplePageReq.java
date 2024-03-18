@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增简单页面
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[d3d184d36bf65f3935d60daf251637df]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[96b912d19586cda5b6b8bdae1a4135c3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -57,6 +57,9 @@ import com.levin.commons.service.support.InjectConst;
 public class CreateSimplePageReq extends MultiTenantOrgReq<CreateSimplePageReq> {
 
     private static final long serialVersionUID = 1598619295L;
+
+    @Schema(title = L_domain )
+    String domain;
 
     @Schema(title = L_type )
     @NotBlank
@@ -88,11 +91,6 @@ public class CreateSimplePageReq extends MultiTenantOrgReq<CreateSimplePageReq> 
 
     @Schema(title = L_content )
     String content;
-
-    @Schema(title = L_domain , description = D_domain )
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    String domain;
 
     @Schema(title = L_name )
     @NotBlank

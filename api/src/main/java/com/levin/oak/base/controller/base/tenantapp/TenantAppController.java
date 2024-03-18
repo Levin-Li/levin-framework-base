@@ -4,6 +4,7 @@ package com.levin.oak.base.controller.base.tenantapp;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import lombok.Getter;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
 * 租户应用控制器
 *
-* @author Auto gen by simple-dao-codegen, @time: 2024年3月10日 下午3:23:44, 代码生成哈希校验码：[79c73348a18e1d4c24f17d36092fa6da]，请不要修改和删除此行内容。
+* @author Auto gen by simple-dao-codegen, @time: 2024年3月11日 下午1:45:03, 代码生成哈希校验码：[84d5ed175d7452cc0cc9f43c5e558ed7]，请不要修改和删除此行内容。
 *
 */
 
@@ -71,16 +72,20 @@ import static com.levin.oak.base.entities.EntityConst.*;
 @Tag(name = E_TenantApp.BIZ_NAME, description = E_TenantApp.BIZ_NAME + MAINTAIN_ACTION)
 @Validated //@Valid
 @CRUD
-
 @Slf4j
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在子类中重写业务逻辑
+
 public abstract class TenantAppController extends BaseController{
 
     protected static final String BIZ_NAME = E_TenantApp.BIZ_NAME;
 
     @Autowired
+    @Getter
     protected TenantAppService tenantAppService;
 
     @Autowired
+    @Getter
     protected BizTenantAppService bizTenantAppService;
 
     /**
@@ -96,7 +101,7 @@ public abstract class TenantAppController extends BaseController{
 
         req = checkRequest(QUERY_LIST_ACTION, req);
 
-        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, tenantAppService.query(req, paging)));
+        return ApiResp.ok(checkResponse(QUERY_LIST_ACTION, getTenantAppService().query(req, paging)));
     }
 
     /**
@@ -112,7 +117,7 @@ public abstract class TenantAppController extends BaseController{
 
         req = checkRequest(CREATE_ACTION, req);
 
-        return ApiResp.ok(tenantAppService.create(req));
+        return ApiResp.ok(getTenantAppService().create(req));
     }
 
     /**
@@ -129,7 +134,7 @@ public abstract class TenantAppController extends BaseController{
 
          req = checkRequest(VIEW_DETAIL_ACTION, req);
 
-         TenantAppInfo info = tenantAppService.findById(req);
+         TenantAppInfo info = getTenantAppService().findById(req);
          Assert.notNull(info, "记录不存在");
          // 租户校验，因为数据可能是从缓存加载的
          Assert.isTrue(!StringUtils.hasText(req.getTenantId()) || req.getTenantId().equals(info.getTenantId()), "非法访问，租户不匹配");
@@ -150,7 +155,7 @@ public abstract class TenantAppController extends BaseController{
 
         req = checkRequest(UPDATE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(tenantAppService.update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getTenantAppService().update(req), UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -166,7 +171,7 @@ public abstract class TenantAppController extends BaseController{
 
         req = checkRequest(DELETE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(tenantAppService.delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getTenantAppService().delete(req), DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -194,7 +199,7 @@ public abstract class TenantAppController extends BaseController{
 
         reqList = checkRequest(BATCH_CREATE_ACTION, reqList);
 
-        return ApiResp.ok(tenantAppService.batchCreate(reqList));
+        return ApiResp.ok(getTenantAppService().batchCreate(reqList));
     }
 
     /**
@@ -206,7 +211,7 @@ public abstract class TenantAppController extends BaseController{
 
         reqList = checkRequest(BATCH_UPDATE_ACTION, reqList);
 
-        return ApiResp.ok(assertTrue(tenantAppService.batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getTenantAppService().batchUpdate(reqList), BATCH_UPDATE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**
@@ -220,7 +225,7 @@ public abstract class TenantAppController extends BaseController{
 
         req = checkRequest(BATCH_DELETE_ACTION, req);
 
-        return ApiResp.ok(assertTrue(tenantAppService.batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
+        return ApiResp.ok(assertTrue(getTenantAppService().batchDelete(req), BATCH_DELETE_ACTION + BIZ_NAME + "失败"));
     }
 
     /**

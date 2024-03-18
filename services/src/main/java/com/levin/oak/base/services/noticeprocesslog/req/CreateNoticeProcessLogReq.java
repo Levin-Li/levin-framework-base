@@ -29,6 +29,7 @@ import static com.levin.oak.base.entities.E_NoticeProcessLog.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.oak.base.entities.NoticeProcessLog.*;
 import java.util.Date;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,7 +40,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增通知处理日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[8bed1d03ef8660da168173193959962c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[f2b135e3816e75453a21281781d51992]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -67,8 +68,7 @@ public class CreateNoticeProcessLogReq extends MultiTenantOrgReq<CreateNoticePro
     String noticeId;
 
     @Schema(title = L_status )
-    @Size(max = 128)
-    String status;
+    Status status;
 
     @Schema(title = L_remark )
     @Size(max = 512)

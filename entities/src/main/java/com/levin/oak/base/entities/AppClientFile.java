@@ -29,11 +29,10 @@ import javax.persistence.*;
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = InjectConst.TENANT_ID),
-                @Index(columnList = E_TenantOrgNamedEntity.domain),
 
                 @Index(columnList = E_AppClientFile.clientType),
 
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId + "," + E_TenantOrgNamedEntity.orgId),
+                @Index(columnList = E_AppClientFile.tenantId + "," + E_AppClientFile.orgId),
         }
 
 //        ,
@@ -43,7 +42,7 @@ import javax.persistence.*;
 //        }
 )
 @EntityCategory(EntityOpConst.SYS_TYPE_NAME)
-public class AppClientFile extends TenantOrgNamedEntity {
+public class AppClientFile extends TenantOrgSharedEntity {
 
     @Id
     @GeneratedValue(generator = "default_id")

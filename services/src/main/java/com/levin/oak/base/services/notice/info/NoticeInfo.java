@@ -37,7 +37,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:27, 代码生成哈希校验码：[dd13971d1ed568e7021b71293c628b96]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[e67202ac6c0515302ed0a586f818c309]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -70,11 +70,6 @@ public class NoticeInfo implements Serializable {
 
     @Schema(title = L_expiredDate)
     Date expiredDate;
-
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    @Schema(title = L_domain , description = D_domain)
-    String domain;
 
     @NotBlank
     @Size(max = 64)

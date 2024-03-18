@@ -3,6 +3,7 @@ package com.levin.oak.base.entities;
 import com.levin.commons.dao.EntityCategory;
 import com.levin.commons.dao.EntityOpConst;
 import com.levin.commons.dao.annotation.Contains;
+import com.levin.commons.dao.annotation.EndsWith;
 import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import com.levin.commons.dao.domain.support.AbstractTreeObject;
 import com.levin.commons.rbac.MenuItem;
@@ -49,7 +50,7 @@ public class MenuRes
     @Id
     @GeneratedValue(generator = "default_id")
     @Column(length = 64)
-    protected String id;
+    String id;
 
     @Schema(title = "父ID")
     @Column(length = 64)
@@ -60,9 +61,12 @@ public class MenuRes
     @InjectVar(InjectConst.TENANT_ID)
     String tenantId;
 
-    @Schema(title = "系统域", description = "归属的子系统")
-    @Contains
+    @Schema(title = "域名", description = "访问的域名")
+    @EndsWith
     String domain;
+
+    @Schema(title = "模块ID", description = "归属的子系统")
+    String moduleId;
 
     @Schema(title = "需要的授权，权限或角色，json数组")
     @Column(length = 1800)

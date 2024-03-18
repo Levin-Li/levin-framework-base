@@ -46,7 +46,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 更新区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 上午10:45:59, 代码生成哈希校验码：[5e4299238005fd06b88047e709b91e10]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[50de1122e8c95e8d4f46e2a148fb2d75]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -79,6 +79,9 @@ public class SimpleUpdateAreaReq extends BaseReq {
     @Schema(description = "可编辑条件，如果是web环境需要增加可编辑的过滤条件" , hidden = true)
     @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
+
+    @Schema(title = L_code , description = D_code)
+    String code;
 
     @Schema(title = L_icon)
     String icon;
@@ -142,6 +145,10 @@ public class SimpleUpdateAreaReq extends BaseReq {
         }
     }
 
+    public <T extends SimpleUpdateAreaReq> T setCode(String code) {
+        this.code = code;
+        return addUpdateField(E_Area.code);
+    }
     public <T extends SimpleUpdateAreaReq> T setIcon(String icon) {
         this.icon = icon;
         return addUpdateField(E_Area.icon);

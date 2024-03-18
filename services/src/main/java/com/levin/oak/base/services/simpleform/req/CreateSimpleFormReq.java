@@ -41,7 +41,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 新增简单表单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月18日 下午3:51:28, 代码生成哈希校验码：[def804feecbf42aa0de8ad6cf6cb5af8]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[e499feae40d6f33f2abc133c524f4d4a]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = CREATE_ACTION + BIZ_NAME)
@@ -60,6 +60,9 @@ public class CreateSimpleFormReq extends MultiTenantOrgReq<CreateSimpleFormReq> 
 
     @Schema(title = L_commitApi )
     String commitApi;
+
+    @Schema(title = L_domain )
+    String domain;
 
     @Schema(title = L_type )
     @NotBlank
@@ -91,11 +94,6 @@ public class CreateSimpleFormReq extends MultiTenantOrgReq<CreateSimpleFormReq> 
 
     @Schema(title = L_content )
     String content;
-
-    @Schema(title = L_domain , description = D_domain )
-    @Size(max = 128)
-    @InjectVar(value = "sysDomain", isRequired = "false")
-    String domain;
 
     @Schema(title = L_name )
     @NotBlank

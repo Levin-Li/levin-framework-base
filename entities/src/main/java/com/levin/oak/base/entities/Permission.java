@@ -31,7 +31,6 @@ import java.util.Set;
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
 
                 @Index(columnList = E_Permission.type),
-                @Index(columnList = E_Permission.domain),
         }
 )
 @EntityCategory(EntityOpConst.PLATFORM_TYPE_NAME)
@@ -48,7 +47,7 @@ public class Permission
 
     @Schema(title = "模块")
     @Column(length = 128)
-    protected String domain;
+    protected String moduleId;
 
     @Schema(title = "资源类型")
     @Column(length = 128)

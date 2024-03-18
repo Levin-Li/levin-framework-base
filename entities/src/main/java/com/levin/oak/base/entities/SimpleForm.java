@@ -32,7 +32,7 @@ import javax.persistence.Table;
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
                 @Index(columnList = InjectConst.TENANT_ID),
                 @Index(columnList = InjectConst.ORG_ID),
-                @Index(columnList = E_TenantOrgNamedEntity.domain),
+                @Index(columnList = E_SimpleEntity.domain),
 //                @Index(columnList = SimpleEntity.Fields.type),
                 @Index(columnList = SimpleEntity.Fields.path),
                 @Index(columnList = SimpleEntity.Fields.category),
@@ -47,7 +47,7 @@ import javax.persistence.Table;
 //                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_Setting.code}),
 //        }
 )
-@EntityCategory(EntityOpConst.PLATFORM_TYPE_NAME)
+@EntityCategory(EntityOpConst.EXPERT_TYPE_NAME)
 public class SimpleForm extends SimpleEntity {
 
     @Schema(title = "提交地址")

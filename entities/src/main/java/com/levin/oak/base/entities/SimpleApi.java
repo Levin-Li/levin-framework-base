@@ -25,9 +25,9 @@ import javax.persistence.*;
                 @Index(columnList = AbstractBaseEntityObject.Fields.createTime),
                 @Index(columnList = AbstractBaseEntityObject.Fields.creator),
                 @Index(columnList = AbstractNamedEntityObject.Fields.name),
-                @Index(columnList = E_TenantOrgNamedEntity.tenantId),
-                @Index(columnList = E_TenantOrgNamedEntity.orgId),
-                @Index(columnList = E_TenantOrgNamedEntity.domain),
+                @Index(columnList = E_SimpleEntity.tenantId),
+                @Index(columnList = E_SimpleEntity.orgId),
+                @Index(columnList = E_SimpleEntity.domain),
 
 //                @Index(columnList = E_SimpleEntity.type),
                 @Index(columnList = E_SimpleEntity.path),
@@ -45,7 +45,7 @@ import javax.persistence.*;
 //                @UniqueConstraint(columnNames = {E_TenantOrgNamedEntity.tenantId, E_Setting.code}),
 //        }
 )
-@EntityCategory(EntityOpConst.PLATFORM_TYPE_NAME)
+@EntityCategory(EntityOpConst.EXPERT_TYPE_NAME)
 public class SimpleApi extends SimpleEntity {
 
     public enum Language {
@@ -67,6 +67,5 @@ public class SimpleApi extends SimpleEntity {
     public void prePersist() {
         super.prePersist();
     }
-
 
 }

@@ -1,10 +1,9 @@
 package com.levin.oak.base.filter;
 
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
-import com.levin.oak.base.biz.BizAccessWhitelistService;
 import com.levin.oak.base.biz.rbac.AuthService;
-import com.levin.oak.base.interceptor.AccessWhitelistInterceptor;
-import com.levin.oak.base.services.accesswhitelist.AccessWhitelistService;
+import com.levin.oak.base.interceptor.UrlAclInterceptor;
+import com.levin.oak.base.services.setting.SettingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -30,15 +29,10 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
  */
 @Slf4j
 @Order(Ordered.HIGHEST_PRECEDENCE)
-@Component(PLUGIN_PREFIX + "AccessWhitelistFilter") //考虑提升性能，只在拦截器中处理
+@Component(PLUGIN_PREFIX + "UrlAclFilter") //考虑提升性能，只在拦截器中处理
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "AccessWhitelistFilter", matchIfMissing = true)
-public class AccessWhitelistFilter extends OncePerRequestFilter {
+public class UrlAclFilter extends OncePerRequestFilter {
 
-    @Autowired
-    AccessWhitelistService whitelistService;
-
-    @Autowired
-    BizAccessWhitelistService bizWhitelistService;
 
     @Autowired
     FrameworkProperties frameworkProperties;
@@ -47,17 +41,20 @@ public class AccessWhitelistFilter extends OncePerRequestFilter {
     ServerProperties serverProperties;
 
     @Autowired(required = false)
-    AccessWhitelistInterceptor whitelistInterceptor;
+    UrlAclInterceptor whitelistInterceptor;
 
     @Autowired
     AuthService authService;
+
+    @Autowired
+    SettingService settingService;
 
     @PostConstruct
     public void init() {
 
         if (whitelistInterceptor == null) {
-            whitelistInterceptor = new AccessWhitelistInterceptor()
-                    .setWhitelistService(whitelistService)
+            whitelistInterceptor = new UrlAclInterceptor()
+                    .setSettingService(settingService)
                     .setFrameworkProperties(frameworkProperties)
                     .setServerProperties(serverProperties)
                     .setAuthService(authService)

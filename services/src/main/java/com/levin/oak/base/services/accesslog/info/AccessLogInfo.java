@@ -36,7 +36,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月7日 下午6:26:18, 代码生成哈希校验码：[4e3b6908afbb8afc4b1f2fe8b216e26b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[11aa2f97c35896c1fe1c2c05ab0c46b8]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -56,8 +56,12 @@ public class AccessLogInfo implements Serializable {
     @Schema(title = L_id)
     Long id;
 
+    @InjectVar(value = InjectConst.DOMAIN, isRequired = "false")
     @Schema(title = L_domain , description = D_domain)
     String domain;
+
+    @Schema(title = L_moduleId , description = D_moduleId)
+    String moduleId;
 
     @Size(max = 64)
     @InjectVar(value = InjectConst.USER_NAME, isRequired = "false")
