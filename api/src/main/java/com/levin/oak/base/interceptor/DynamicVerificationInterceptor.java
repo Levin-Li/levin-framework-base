@@ -11,6 +11,7 @@ import com.levin.oak.base.biz.rbac.AuthService;
 import com.levin.oak.base.entities.Setting;
 import com.levin.oak.base.entities.VerifyCodeType;
 import com.levin.oak.base.entities.vo.DynamicVerifyCodeAcl;
+import com.levin.oak.base.entities.vo.UrlAcl;
 import com.levin.oak.base.services.setting.SettingService;
 import com.levin.oak.base.services.setting.info.SettingInfo;
 import com.levin.oak.base.services.setting.req.CreateSettingReq;
@@ -160,6 +161,7 @@ public class DynamicVerificationInterceptor
                             .setGroupName("URL访问控制")
                             .setCategoryName("系统安全")
                             .setRemark("系统自动生成的配置")
+                            .setCode(DynamicVerifyCodeAcl.class.getName())
                             //默认不启用
                             //.setValueContent(JSONObject.toJSONString(new UrlAccessControl().setTitle(title).setEnable(false).setUrlPathExcludeList("*"), JSONWriter.Feature.WriteNullStringAsEmpty))
                             .setEditor("form://" + DynamicVerifyCodeAcl.class.getName())

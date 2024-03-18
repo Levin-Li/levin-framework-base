@@ -126,6 +126,7 @@ public class UrlAclInterceptor
                             .setGroupName("URL访问控制")
                             .setCategoryName("系统安全")
                             .setRemark("系统自动生成的配置")
+                            .setCode(UrlAcl.class.getName())
                             //默认不启用
                             //.setValueContent(JSONObject.toJSONString(new UrlAccessControl().setTitle(title).setEnable(false).setUrlPathExcludeList("*"), JSONWriter.Feature.WriteNullStringAsEmpty))
                             .setEditor("form://" + UrlAcl.class.getName())
