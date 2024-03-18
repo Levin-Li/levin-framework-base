@@ -66,6 +66,7 @@ public class MenuRes
     String domain;
 
     @Schema(title = "模块ID", description = "归属的子系统")
+    @Column(length = 128)
     String moduleId;
 
     @Schema(title = "需要的授权，权限或角色，json数组")

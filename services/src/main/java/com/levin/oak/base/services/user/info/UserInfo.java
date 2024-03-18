@@ -157,10 +157,6 @@ public class UserInfo implements RbacUserInfo<String>, Serializable, MultiTenant
     @Schema(title = L_tenantId)
     String tenantId;
 
-    @Size(max = 128)
-    @Schema(title = L_domain)
-    String domain;
-
     @NotBlank
     @Size(max = 128)
     @Schema(title = L_name)

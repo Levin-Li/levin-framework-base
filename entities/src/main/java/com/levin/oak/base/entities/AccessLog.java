@@ -49,6 +49,7 @@ public class AccessLog extends SimpleTenantOrgObject {
     protected String domain;
 
     @Schema(title = "模块ID", description = "归属的子系统")
+    @Column(length = 128)
     protected String moduleId;
 
     @Schema(title = "访问者")
