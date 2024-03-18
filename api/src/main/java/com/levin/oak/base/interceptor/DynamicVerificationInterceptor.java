@@ -1,6 +1,8 @@
 package com.levin.oak.base.interceptor;
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.http.useragent.UserAgent;
+import cn.hutool.http.useragent.UserAgentUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.levin.commons.utils.IPAddrUtils;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
@@ -28,6 +30,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import static com.levin.oak.base.interceptor.UrlAclInterceptor.anyMatch;
 
 /**
  * 动态验证码拦截器
@@ -86,12 +90,13 @@ public class DynamicVerificationInterceptor
         //登录后，优先使用登录的租户
         UserInfo userInfo = authService.getUserInfo();
 
+
         DynamicVerifyCodeAcl verifyCodeAcl = StringUtils.hasText(userInfo.getTenantId()) ? getAndAutoCreate("系统", "@" + userInfo.getTenantId(), userInfo.getTenantId()) : null;
 
         //
         if (verifyCodeAcl == null) {
             //如果租户没有自定义路径，则加载全局配置
-            verifyCodeAcl = getAndAutoCreate("平台", "@*", null);
+            verifyCodeAcl = getAndAutoCreate("平台", "@", null);
         }
 
         if (verifyCodeAcl == null
@@ -100,10 +105,10 @@ public class DynamicVerificationInterceptor
             return true;
         }
 
-        String clientIp = IPAddrUtils.try2GetUserRealIPAddr(request);
-
-        //不匹配，则表示不需要动态验证
-
+        //如果路径不匹配，则直接放行
+        if (!canMatch(request, verifyCodeAcl)) {
+            return true;
+        }
 
         //用户必须是登录的用户
         Assert.notNull(userInfo, "无法获取有效的登录信息");
@@ -143,9 +148,38 @@ public class DynamicVerificationInterceptor
         return true;
     }
 
+
+    public static boolean canMatch(HttpServletRequest request, UrlAcl acl) {
+
+        final String urlPath = UrlAclInterceptor.getRequestPath(request);
+
+        final String clientIp = IPAddrUtils.try2GetUserRealIPAddr(request);
+
+        //先检查URL是否匹配，如果不匹配则直接返回通过
+        if (anyMatch(false, () -> urlPath, acl.getUrlPathExcludeList())
+                || anyMatch(false, () -> clientIp, acl.getIpExcludeList())
+                //检查URL是否匹配，如果不匹配则直接返回通过
+                || !anyMatch(false, () -> urlPath, acl.getUrlPathList())) {
+            return false;
+        }
+
+        UserAgent userAgent = UserAgentUtil.parse(request.getHeader("user-agent"));
+
+        return
+                anyMatch(() -> clientIp, acl.getIpList())
+                        && anyMatch(() -> request.getServerName(), acl.getDomainList())
+                        && anyMatch(request::getMethod, acl.getMethodList())
+                        && anyMatch(() -> userAgent.getBrowser() != null ? userAgent.getBrowser().getName() : null, acl.getBrowserList())
+                        && anyMatch(() -> userAgent.getOs() != null ? userAgent.getOs().getName() : null, acl.getOsList())
+                        && anyMatch(() -> userAgent.getEngine() != null ? userAgent.getEngine().getName() : null, acl.getBrowserTypeList())
+                        && anyMatch(() -> IPAddrUtils.searchIpRegion(clientIp), acl.getRegionList())
+                ;
+    }
+
+
     private DynamicVerifyCodeAcl getAndAutoCreate(String title, String id, String tenantId) {
 
-        id = DynamicVerifyCodeAcl.class.getName() + id;
+        id = DynamicVerifyCodeAcl.class.getSimpleName() + id;
 
         SettingInfo info = settingService.findById(id);
 
@@ -161,7 +195,7 @@ public class DynamicVerificationInterceptor
                             .setGroupName("URL访问控制")
                             .setCategoryName("系统安全")
                             .setRemark("系统自动生成的配置")
-                            .setCode(DynamicVerifyCodeAcl.class.getName())
+                            .setCode(id)
                             //默认不启用
                             //.setValueContent(JSONObject.toJSONString(new UrlAccessControl().setTitle(title).setEnable(false).setUrlPathExcludeList("*"), JSONWriter.Feature.WriteNullStringAsEmpty))
                             .setEditor("form://" + DynamicVerifyCodeAcl.class.getName())

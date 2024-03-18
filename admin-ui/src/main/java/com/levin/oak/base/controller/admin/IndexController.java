@@ -228,7 +228,7 @@ public class IndexController extends BaseController {
             //创建默认配置
             String css = "/*amis root css*/\n" + "--Layout-aside-width: 15rem;\n";
             settingService.create(new CreateSettingReq()
-                    .setId((StringUtils.hasText(tenantId) ? tenantId : "") + ":" + cssCode)
+                    .setId(cssCode + "@" + (StringUtils.hasText(tenantId) ? tenantId : ""))
                     .setCategoryName("系统界面")
                     .setGroupName("基础样式")
                     .setCode(cssCode)

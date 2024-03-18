@@ -81,7 +81,7 @@ public class Setting
     //
     @Id
     //@GeneratedValue(generator = "default_id")
-    @Column(length = 64)
+    @Column(length = 384)
     protected String id;
 
     @Schema(title = "域名")

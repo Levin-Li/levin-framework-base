@@ -95,13 +95,13 @@ public class UrlAclInterceptor
         //要满足默认的安全测路，也要满足租户自定义的安全测路
         return
                 //平台全局，尝试自动创建
-                canPass(request, getAndAutoCreate("平台", "@*", null))
+                canPass(request, getAndAutoCreate("平台", "@", null))
 
                         //租户全局   ，尝试自动创建
-                        && canPass(request, authService.isLogin() ? getAndAutoCreate("系统", "@" + authService.getUserInfo().getTenantId() + "@*", authService.getUserInfo().getTenantId()) : null)
+                        && canPass(request, authService.isLogin() ? getAndAutoCreate("系统", "@" + authService.getUserInfo().getTenantId(), authService.getUserInfo().getTenantId()) : null)
 
                         //域名+租户全局   ，尝试自动创建
-                        && canPass(request, authService.isLogin() ? getAndAutoCreate("域名-" + domain, "@" + authService.getUserInfo().getTenantId() + "@" + domain + "@*", authService.getUserInfo().getTenantId()) : null)
+                        && canPass(request, authService.isLogin() ? getAndAutoCreate("域名-" + domain, "@" + authService.getUserInfo().getTenantId() + "@" + domain, authService.getUserInfo().getTenantId()) : null)
 
                 ;
 
@@ -110,7 +110,7 @@ public class UrlAclInterceptor
 
     private UrlAcl getAndAutoCreate(String title, String id, String tenantId) {
 
-        id = UrlAcl.class.getName() + id;
+        id = UrlAcl.class.getSimpleName() + id;
 
         SettingInfo info = settingService.findById(id);
 
@@ -126,7 +126,7 @@ public class UrlAclInterceptor
                             .setGroupName("URL访问控制")
                             .setCategoryName("系统安全")
                             .setRemark("系统自动生成的配置")
-                            .setCode(UrlAcl.class.getName())
+                            .setCode(id)
                             //默认不启用
                             //.setValueContent(JSONObject.toJSONString(new UrlAccessControl().setTitle(title).setEnable(false).setUrlPathExcludeList("*"), JSONWriter.Feature.WriteNullStringAsEmpty))
                             .setEditor("form://" + UrlAcl.class.getName())
@@ -145,7 +145,7 @@ public class UrlAclInterceptor
         return JSONObject.parseObject(info.getValueContent(), UrlAcl.class);
     }
 
-    private boolean canPass(HttpServletRequest request, UrlAcl acl) {
+    public static boolean canPass(HttpServletRequest request, UrlAcl acl) {
 
         if (acl == null || !Boolean.TRUE.equals(acl.getEnable())) {
             return true;
@@ -230,25 +230,6 @@ public class UrlAclInterceptor
         }
 
         return items.stream().anyMatch(item -> PatternMatchUtils.simpleMatch(item, value));
-    }
-
-
-    public static boolean noneMatch(boolean emptyValue, Supplier<String> valueSupplier, String rules) {
-
-        List<String> items = parseItem(rules);
-
-        if (items.isEmpty()) {
-            return emptyValue;
-        }
-
-        String value = valueSupplier.get();
-
-        //如果有规则但却没有值，则直接返回false
-        if (!StringUtils.hasText(value)) {
-            return false;
-        }
-
-        return items.stream().noneMatch(item -> PatternMatchUtils.simpleMatch(item, value));
     }
 
 
