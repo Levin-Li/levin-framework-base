@@ -63,12 +63,12 @@ public class UrlAclInterceptor
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         //如果使用过滤器模式，则直接返回
-        return frameworkProperties.getWhitelist().isUseWebFilter() || canPass(request, response, handler);
+        return frameworkProperties.getUrlAcl().isUseWebFilter() || canPass(request, response, handler);
     }
 
     public boolean canPass(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
-        FrameworkProperties.WhitelistCfg whitelistCfg = frameworkProperties.getWhitelist();
+        FrameworkProperties.UrlAclCfg whitelistCfg = frameworkProperties.getUrlAcl();
 
         if (!whitelistCfg.isEnable()
                 //如果不是HandlerMethod，直接放行

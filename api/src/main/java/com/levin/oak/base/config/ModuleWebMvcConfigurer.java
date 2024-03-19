@@ -281,13 +281,13 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 //                .order(Ordered.HIGHEST_PRECEDENCE);
 
 
-        if (!frameworkProperties.getWhitelist().isUseWebFilter()) {
+        if (!frameworkProperties.getUrlAcl().isUseWebFilter()) {
             //白名单
             registry.addInterceptor(accessWhitelistInterceptor())
                     .addPathPatterns("/**")
                     .order(Ordered.HIGHEST_PRECEDENCE);
 
-            log.info("*** 动态基于IP的访问控制拦截器已经启用，" + frameworkProperties.getWhitelist());
+            log.info("*** 动态基于IP的访问控制拦截器已经启用，" + frameworkProperties.getUrlAcl());
         }
 
         //api 文档资源特别处理

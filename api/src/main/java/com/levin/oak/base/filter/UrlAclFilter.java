@@ -61,8 +61,8 @@ public class UrlAclFilter extends OncePerRequestFilter {
             ;
         }
 
-        if (frameworkProperties.getWhitelist().isUseWebFilter()) {
-            log.info("*** 动态基于IP的访问控制过滤器已经启用，" + frameworkProperties.getWhitelist());
+        if (frameworkProperties.getUrlAcl().isUseWebFilter()) {
+            log.info("*** 动态基于IP的访问控制过滤器已经启用，" + frameworkProperties.getUrlAcl());
         }
     }
 
@@ -80,11 +80,10 @@ public class UrlAclFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        if (!frameworkProperties.getWhitelist().isUseWebFilter()
+        if (!frameworkProperties.getUrlAcl().isUseWebFilter()
                 || whitelistInterceptor.canPass(request, response, null)) {
             filterChain.doFilter(request, response);
         }
-
     }
 
 }

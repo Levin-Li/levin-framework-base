@@ -123,7 +123,7 @@ public class FrameworkProperties
      * 白名单配置
      */
     @NestedConfigurationProperty
-    private final WhitelistCfg whitelist = new WhitelistCfg("whitelist", "白名单", "白名单访问控制");
+    private final UrlAclCfg urlAcl = new UrlAclCfg("urlAcl", "URL访问控制", "URL访问控制");
 
     /**
      * 请求变量注入
@@ -223,7 +223,7 @@ public class FrameworkProperties
     @Setter
     @Accessors(chain = true)
     @FieldNameConstants
-    public static class WhitelistCfg extends MatchConfig {
+    public static class UrlAclCfg extends MatchConfig {
 
         /**
          * 使用web过滤器模式
@@ -235,7 +235,7 @@ public class FrameworkProperties
          */
         boolean onlyControllerMethod = true;
 
-        protected WhitelistCfg(String key, String name, String description) {
+        protected UrlAclCfg(String key, String name, String description) {
             super(key, name, description);
         }
 
