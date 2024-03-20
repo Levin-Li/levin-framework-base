@@ -283,7 +283,7 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
 
         if (!frameworkProperties.getUrlAcl().isUseWebFilter()) {
             //白名单
-            registry.addInterceptor(accessWhitelistInterceptor())
+            registry.addInterceptor(urlAclInterceptor())
                     .addPathPatterns("/**")
                     .order(Ordered.HIGHEST_PRECEDENCE);
 
@@ -373,10 +373,9 @@ public class ModuleWebMvcConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    public UrlAclInterceptor accessWhitelistInterceptor() {
+    public UrlAclInterceptor urlAclInterceptor() {
         return new UrlAclInterceptor();
     }
-
 
     @Bean
     DynamicVerificationInterceptor dynamicVerificationInterceptor() {

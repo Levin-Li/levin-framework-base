@@ -41,7 +41,7 @@ public class UrlAclFilter extends OncePerRequestFilter {
     ServerProperties serverProperties;
 
     @Autowired(required = false)
-    UrlAclInterceptor whitelistInterceptor;
+    UrlAclInterceptor urlAclInterceptor;
 
     @Autowired
     AuthService authService;
@@ -52,8 +52,8 @@ public class UrlAclFilter extends OncePerRequestFilter {
     @PostConstruct
     public void init() {
 
-        if (whitelistInterceptor == null) {
-            whitelistInterceptor = new UrlAclInterceptor()
+        if (urlAclInterceptor == null) {
+            urlAclInterceptor = new UrlAclInterceptor()
                     .setSettingService(settingService)
                     .setFrameworkProperties(frameworkProperties)
                     .setServerProperties(serverProperties)
@@ -81,7 +81,7 @@ public class UrlAclFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         if (!frameworkProperties.getUrlAcl().isUseWebFilter()
-                || whitelistInterceptor.canPass(request, response, null)) {
+                || urlAclInterceptor.canPass(request, response, null)) {
             filterChain.doFilter(request, response);
         }
     }
