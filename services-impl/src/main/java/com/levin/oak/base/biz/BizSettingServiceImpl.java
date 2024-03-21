@@ -122,7 +122,11 @@ public class BizSettingServiceImpl extends BaseService<BizSettingServiceImpl> im
             info = supplierForCreateIfNotaExist.get();
 
             if (info != null) {
-                info.setId(settingService.create(BeanUtil.copyProperties(info, CreateSettingReq.class).setId((StringUtils.hasText(tenantId) ? tenantId : "") + ":" + code)));
+                info.setId(settingService.create(
+                        BeanUtil.copyProperties(info, CreateSettingReq.class)
+                                .setTenantId(tenantId)
+                                .setId((StringUtils.hasText(tenantId) ? tenantId : "") + ":" + code)
+                ));
             }
         }
 

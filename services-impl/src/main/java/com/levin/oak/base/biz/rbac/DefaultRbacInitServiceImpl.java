@@ -165,14 +165,14 @@ public class DefaultRbacInitServiceImpl
             MenuRes pluginRootMenu = (MenuRes) new MenuRes()
                     .setPath(plugin.getPackageName() + "/" + plugin.getVersion() + "/admin/index")
 //                    .setIcon(defaultIcon)
-                    .setDomain(plugin.getPackageName())
+                    .setModuleId(plugin.getPackageName())
                     .setName(plugin.getName())
                     .setEnable(plugin.isEnable())
                     .setOrderCode(plugin.getOrderCode())
                     .setRemark(plugin.getRemark());
 
             if (simpleDao.selectFrom(MenuRes.class)
-                    .eq(E_MenuRes.domain, pluginRootMenu.getDomain())
+                    .eq(E_MenuRes.moduleId, pluginRootMenu.getModuleId())
                     .eq(E_MenuRes.path, pluginRootMenu.getPath())
                     .isNull(E_MenuRes.tenantId)
                     .findOne() == null) {
@@ -185,7 +185,7 @@ public class DefaultRbacInitServiceImpl
                         final String path = menuItem.getPath().replace("/api/", "/admin/");
 
                         if (simpleDao.selectFrom(MenuRes.class)
-                                .eq(E_MenuRes.domain, pluginRootMenu.getDomain())
+                                .eq(E_MenuRes.moduleId, pluginRootMenu.getModuleId())
                                 .eq(E_MenuRes.path, path)
                                 .isNull(E_MenuRes.tenantId)
                                 .findOne() != null) {
@@ -225,7 +225,6 @@ public class DefaultRbacInitServiceImpl
 
 //                        .setIcon(defaultIcon)
                                         .setContent(AmisUtils.readAdminClassPathResource(path))
-                                        .setDomain(plugin.getPackageName())
                                         .setName(menuItem.getName())
                                         .setRemark("Amis默认页面")
                         );
