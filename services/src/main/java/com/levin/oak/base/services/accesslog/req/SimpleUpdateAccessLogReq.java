@@ -42,7 +42,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[cb10627bb6d87d05f949c5f195927ab3]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 上午11:40:38, 代码生成哈希校验码：[ea7bc277b830e5b80d37db83163a7d1d]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -76,6 +76,7 @@ public class SimpleUpdateAccessLogReq extends MultiTenantOrgReq<SimpleUpdateAcce
     @Schema(title = L_domain , description = D_domain)
     String domain;
 
+    @Size(max = 128)
     @Schema(title = L_moduleId , description = D_moduleId)
     String moduleId;
 

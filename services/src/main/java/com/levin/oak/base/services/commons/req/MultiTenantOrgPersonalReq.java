@@ -18,7 +18,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户个人查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月29日 下午9:54:06, 代码生成哈希校验码：[7ed01e4d6505757074327070bfa11bc9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 上午11:40:36, 代码生成哈希校验码：[ea2bf32c6c834f11097482e75b7685d7]，请不要修改和删除此行内容。
  * 
  */
 @Schema(title = "多租户多部门个人查询对象")
@@ -26,7 +26,7 @@ import lombok.experimental.FieldNameConstants;
 @Accessors(chain = true)
 @FieldNameConstants
 @ToString(callSuper = true)
-public class MultiTenantOrgPersonalReq<T extends MultiTenantOrgPersonalReq>
+public class MultiTenantOrgPersonalReq<T extends MultiTenantOrgPersonalReq<T>>
         extends MultiTenantOrgReq<T>
         implements PersonalObject {
 

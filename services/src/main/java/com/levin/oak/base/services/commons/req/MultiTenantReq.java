@@ -4,6 +4,7 @@ import com.levin.commons.dao.annotation.*;
 import com.levin.commons.dao.annotation.Ignore;
 import com.levin.commons.dao.annotation.logic.*;
 import com.levin.commons.dao.annotation.misc.Validator;
+import com.levin.commons.dao.annotation.order.OrderBy;
 import com.levin.commons.dao.domain.*;
 import com.levin.commons.service.domain.*;
 import com.levin.commons.service.support.*;
@@ -20,7 +21,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年2月26日 下午9:17:38, 代码生成哈希校验码：[e9f3f984c5ebf4b235ce0681f4c8cc87]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 上午11:40:36, 代码生成哈希校验码：[30cbe7bba6afe21da31d4ac60d5d1fe2]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = "多租户查询对象")
@@ -28,7 +29,7 @@ import lombok.experimental.FieldNameConstants;
 @Accessors(chain = true)
 @FieldNameConstants
 @ToString(callSuper = true)
-public class MultiTenantReq<T extends MultiTenantReq>
+public class MultiTenantReq<T extends MultiTenantReq<T>>
         extends BaseReq
         implements MultiTenantObject {
 
@@ -37,10 +38,12 @@ public class MultiTenantReq<T extends MultiTenantReq>
             , isOverride = InjectVar.SPEL_PREFIX + NOT_SUPER_ADMIN // 如果不是超级管理员, 那么覆盖必须的
             , isRequired = InjectVar.SPEL_PREFIX + NOT_SUPER_ADMIN // 如果不是超级管理员，那么值是必须的
     )
+    @OrderBy(condition = "#_isQuery && !isSuperAdmin && #isNotEmpty(#_fieldVal) && isContainsPublicData() && !isTenantShared()",
+            order = Integer.MIN_VALUE, scope = OrderBy.Scope.OnlyForNotGroupBy, desc = "本排序规则是本租户的数据排第一个，通常用于只取一个数据时，先取自己租户的数据")
     @OR(autoClose = true)
     @Eq
-    @IsNull(condition = "#_isQuery && !isSuperAdmin && isContainsPublicData() ", desc = "如果是公共数据，允许包括非该租户的数据")
-    @Eq(condition = "#_isQuery && !isSuperAdmin && isTenantShared()", value = "tenantShared", paramExpr = "true", desc = "如果有可共享的数据，允许包括非该租户的数据")
+    @IsNull(condition = "#_isQuery && !isSuperAdmin && isContainsPublicData() ", desc = "查询结果包含公共数据(tenantId为NULL的数据)")
+    @Eq(condition = "#_isQuery && !isSuperAdmin && isTenantShared()", value = "tenantShared", paramExpr = "true", desc = "如果有平台可共享的租户数据，查询结果包括非该租户的数据")
     //@Validator(expr = "isSuperAdmin || #isNotEmpty(#_fieldVal) " , promptInfo = "tenantId-不能为空")
     protected String tenantId;
 

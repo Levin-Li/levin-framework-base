@@ -109,11 +109,11 @@ public class BizSimplePageServiceImpl extends BaseService<BizSimplePageServiceIm
                 .eq(E_SimpleEntity.path, req.getPath())
                 .isNullOrEq(E_SimpleEntity.tenantId, req.getTenantId())
                 //排序,本租户优先
-                .orderBy(OrderBy.Type.Desc, new Case()
+                .orderByStatement(OrderBy.Type.Desc, new Case()
                         .when(E_SimpleEntity.tenantId + " IS NULL", "0")
                         .elseExpr("1")
                         .toString("(", ")")
-                ).orderBy(OrderBy.Type.Asc, E_SimpleEntity.orderCode)
+                ).orderByAsc(E_SimpleEntity.orderCode)
                 .findOne(SimplePageInfo.class);
 
     }

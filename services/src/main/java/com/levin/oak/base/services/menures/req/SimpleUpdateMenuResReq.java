@@ -48,7 +48,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[babe0929aef753f083617ac1757d3a2b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 上午11:40:38, 代码生成哈希校验码：[273d6986297d9369f557223c77ac2788]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -89,6 +89,7 @@ public class SimpleUpdateMenuResReq extends MultiTenantReq<SimpleUpdateMenuResRe
     @Schema(title = L_domain , description = D_domain)
     String domain;
 
+    @Size(max = 128)
     @Schema(title = L_moduleId , description = D_moduleId)
     String moduleId;
 

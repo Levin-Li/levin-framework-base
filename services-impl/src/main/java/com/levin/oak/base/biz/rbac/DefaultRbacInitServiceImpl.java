@@ -173,7 +173,7 @@ public class DefaultRbacInitServiceImpl
 
             if (simpleDao.selectFrom(MenuRes.class)
                     .eq(E_MenuRes.moduleId, pluginRootMenu.getModuleId())
-                    .eq(E_MenuRes.path, pluginRootMenu.getPath())
+                    .eq(MenuRes::getPath, pluginRootMenu.getPath())
                     .isNull(E_MenuRes.tenantId)
                     .findOne() == null) {
                 simpleDao.create(pluginRootMenu);
@@ -261,7 +261,7 @@ public class DefaultRbacInitServiceImpl
         }
 
         long count = simpleDao.selectFrom(AppClient.class)
-                .select(E_AppClient.appId)
+                .select(AppClient::getAppId)
                 .eq(E_AppClient.tenantId, tenantInfo.getId())
                 .count();
 
@@ -341,7 +341,7 @@ public class DefaultRbacInitServiceImpl
         }
 
         role = simpleDao.selectFrom(Role.class)
-                .eq(E_Role.code, "R_ORG_ADMIN")
+                .eq(Role::getCode, "R_ORG_ADMIN")
                 .eq(E_User.tenantId, tenantInfo.getId())
                 .findOne();
 
@@ -370,7 +370,7 @@ public class DefaultRbacInitServiceImpl
 
         User user = simpleDao.selectFrom(User.class)
                 .isNull(E_User.tenantId)
-                .eq(E_User.email, SA_ACCOUNT)
+                .eq(User::getEmail, SA_ACCOUNT)
                 .findOne();
 
         if (user == null) {
@@ -389,7 +389,7 @@ public class DefaultRbacInitServiceImpl
         /////////////////////////////////////////////////////////////
         String orgId = simpleDao.selectFrom(Org.class)
                 .select(E_Org.id)
-                .isNull(E_Org.parentId)
+                .isNull(Org::getParentId)
                 .eq(E_Org.tenantId, tenantInfo.getId())
                 .findOne();
 

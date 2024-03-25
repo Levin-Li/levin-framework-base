@@ -52,7 +52,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询菜单
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[5f81023430c8d1867c41a95e9877e6f9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 上午11:40:38, 代码生成哈希校验码：[730ae718ee39ca60e5c9711bdb87a11c]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -104,6 +104,7 @@ public class QueryMenuResReq extends MultiTenantReq<QueryMenuResReq> {
     @EndsWith
     String endsWithDomain;
 
+    @Size(max = 128)
     @Schema(title = L_moduleId , description = D_moduleId)
     String moduleId;
 

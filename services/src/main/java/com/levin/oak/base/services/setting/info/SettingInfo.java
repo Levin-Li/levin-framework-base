@@ -37,7 +37,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[1d86880f954f7276b912efca79f3d39b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 上午11:40:37, 代码生成哈希校验码：[7bfd4734b2004cb103c8099660c97f6a]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -54,7 +54,7 @@ public class SettingInfo implements Serializable {
 
 
     @NotBlank
-    @Size(max = 64)
+    @Size(max = 384)
     @Schema(title = L_id)
     String id;
 

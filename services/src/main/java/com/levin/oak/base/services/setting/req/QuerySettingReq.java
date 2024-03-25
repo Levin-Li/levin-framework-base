@@ -47,7 +47,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询系统设置
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[a8d049ed19fbb920c63dd404bba4038a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 上午11:40:37, 代码生成哈希校验码：[c37e3d6f038b7c1cc922e1631a5f306b]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -88,7 +88,7 @@ public class QuerySettingReq extends MultiTenantOrgReq<QuerySettingReq> {
 
 
 
-    @Size(max = 64)
+    @Size(max = 384)
     @Schema(title = L_id)
     String id;
 
