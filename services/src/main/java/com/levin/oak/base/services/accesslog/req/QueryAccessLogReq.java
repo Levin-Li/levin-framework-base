@@ -46,7 +46,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询访问日志
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 上午11:40:38, 代码生成哈希校验码：[614dddbf422984ceff8bf2845f35ec74]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 下午12:47:02, 代码生成哈希校验码：[9760b0ec640c2735c9a3e798397e8a92]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -70,7 +70,7 @@ public class QueryAccessLogReq extends MultiTenantOrgReq<QueryAccessLogReq> {
     //@Ignore
     @Schema(title = "排序方向")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
-    @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
+    @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE - 10000, desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
     @Schema(title = L_id + "集合")

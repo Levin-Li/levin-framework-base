@@ -54,7 +54,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 查询角色
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[d45b3f46901e6ed7cf8165d544e55686]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 下午12:47:01, 代码生成哈希校验码：[169ef83395420dc56eb1db2663b5c2be]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -82,7 +82,7 @@ public class QueryRoleReq extends MultiTenantReq<QueryRoleReq> {
     //@Ignore
     @Schema(title = "排序方向")
     @SimpleOrderBy(expr = "orderBy + ' ' + orderDir", condition = "#isNotEmpty(orderBy) && #isNotEmpty(orderDir)", remark = "生成排序表达式")
-    @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE, desc = "默认按时间排序")
+    @OrderBy(value = createTime, condition = "#isEmpty(orderBy) || #isEmpty(orderDir)", order = Integer.MAX_VALUE - 10000, desc = "默认按时间排序")
     OrderBy.Type orderDir;
 
     @Schema(title = L_id + "集合")
