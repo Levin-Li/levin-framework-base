@@ -21,7 +21,7 @@ import lombok.experimental.FieldNameConstants;
 /**
  * 多租户查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 上午11:40:36, 代码生成哈希校验码：[30cbe7bba6afe21da31d4ac60d5d1fe2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 上午11:54:59, 代码生成哈希校验码：[7c39f6cf433411ce3013ae58ce0f3f5e]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = "多租户查询对象")
@@ -29,7 +29,7 @@ import lombok.experimental.FieldNameConstants;
 @Accessors(chain = true)
 @FieldNameConstants
 @ToString(callSuper = true)
-public class MultiTenantReq<T extends MultiTenantReq<T>>
+public class MultiTenantReq<T extends MultiTenantReq<?>>
         extends BaseReq
         implements MultiTenantObject {
 

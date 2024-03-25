@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * 多租户多部门查询对象
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 上午11:44:31, 代码生成哈希校验码：[c89fbddb44394340ab2c758d41b98aec]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月25日 上午11:54:59, 代码生成哈希校验码：[b017afff92352f6be75fc2ea3551d190]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = "多租户多组织查询对象")
@@ -29,7 +29,7 @@ import java.util.List;
 @Accessors(chain = true)
 @FieldNameConstants
 @ToString(callSuper = true)
-public class MultiTenantOrgReq<T extends MultiTenantOrgReq<T>>
+public class MultiTenantOrgReq<T extends MultiTenantOrgReq<?>>
         extends MultiTenantReq<T> implements OrganizedScopeObject {
 
     public static final String IS_ALL_ORG_SCOPE = " (#" + InjectConst.IS_ALL_ORG_SCOPE + "?:false) ";
