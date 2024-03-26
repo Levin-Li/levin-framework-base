@@ -122,7 +122,7 @@ public class ModuleWebControllerAdvice {
 
         //循环获取异常的message,返回第一个有message的异常
         while (exception != null) {
-            if (exception.getMessage() != null) {
+            if (exception.getMessage() != null || exception instanceof BindException) {
 
                 if (exception instanceof BindException) {
 
