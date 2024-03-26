@@ -304,6 +304,7 @@ public class ModuleWebControllerAdvice {
 
     @ExceptionHandler({IllegalArgumentException.class,
             IllegalStateException.class,
+            BindException.class,
             MethodArgumentNotValidException.class,
             ValidationException.class,
             MissingServletRequestParameterException.class})
