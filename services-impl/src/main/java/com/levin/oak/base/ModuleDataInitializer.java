@@ -122,7 +122,6 @@ public class ModuleDataInitializer implements ApplicationContextAware, Applicati
                         .setCategory(category)
                         .setTenantId(tenant.getId())
                         .setName("租户自有数据1")
-
         );
 
         TestEntity publicOne = dao.create(

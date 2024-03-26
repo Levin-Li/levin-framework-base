@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 国际化资源-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[676be3616f661edd100ac602dade0a4b]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:56, 代码生成哈希校验码：[7a3cd47e1baf1a44db02095b647820f2]，请不要修改和删除此行内容。
  *
  */
 
@@ -68,6 +68,9 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_I18nRes.BIZ_NAME, description = E_I18nRes.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_I18nRes.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizI18nResServiceImpl业务类中重写业务逻辑
+
 public class I18nResServiceImpl extends BaseService<I18nResServiceImpl> implements I18nResService {
 
 
@@ -106,8 +109,8 @@ public class I18nResServiceImpl extends BaseService<I18nResServiceImpl> implemen
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int batchUpdate(SimpleUpdateI18nResReq setReq, QueryI18nResReq whereReq){
-       return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int batchUpdate(SimpleUpdateI18nResReq setReq, QueryI18nResReq whereReq, Object... queryObjs){
+       return simpleDao.updateByQueryObj(setReq, whereReq, queryObjs);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -154,8 +157,8 @@ public class I18nResServiceImpl extends BaseService<I18nResServiceImpl> implemen
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryI18nResReq req){
-        return (int) simpleDao.countByQueryObj(req);
+    public int count(QueryI18nResReq req, Object... queryObjs){
+        return (int) simpleDao.countByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
@@ -178,8 +181,8 @@ public class I18nResServiceImpl extends BaseService<I18nResServiceImpl> implemen
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public I18nResInfo findOne(QueryI18nResReq req){
-        return simpleDao.findOneByQueryObj(req);
+    public I18nResInfo findOne(QueryI18nResReq req, Object... queryObjs){
+        return simpleDao.findOneByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION)

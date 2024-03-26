@@ -61,7 +61,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 菜单-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:06, 代码生成哈希校验码：[0fc74c1b21bbf3173cd44f21dc114bfd]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:56, 代码生成哈希校验码：[f7d70d4a4881f5a0ca21702a3c83e7ee]，请不要修改和删除此行内容。
  *
  */
 
@@ -74,6 +74,9 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_MenuRes.BIZ_NAME, description = E_MenuRes.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_MenuRes.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizMenuResServiceImpl业务类中重写业务逻辑
+
 public class MenuResServiceImpl extends BaseService<MenuResServiceImpl> implements MenuResService {
 
 
@@ -112,8 +115,8 @@ public class MenuResServiceImpl extends BaseService<MenuResServiceImpl> implemen
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int batchUpdate(SimpleUpdateMenuResReq setReq, QueryMenuResReq whereReq){
-       return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int batchUpdate(SimpleUpdateMenuResReq setReq, QueryMenuResReq whereReq, Object... queryObjs){
+       return simpleDao.updateByQueryObj(setReq, whereReq, queryObjs);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -160,8 +163,8 @@ public class MenuResServiceImpl extends BaseService<MenuResServiceImpl> implemen
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryMenuResReq req){
-        return (int) simpleDao.countByQueryObj(req);
+    public int count(QueryMenuResReq req, Object... queryObjs){
+        return (int) simpleDao.countByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
@@ -184,8 +187,8 @@ public class MenuResServiceImpl extends BaseService<MenuResServiceImpl> implemen
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public MenuResInfo findOne(QueryMenuResReq req){
-        return simpleDao.findOneByQueryObj(req);
+    public MenuResInfo findOne(QueryMenuResReq req, Object... queryObjs){
+        return simpleDao.findOneByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION)

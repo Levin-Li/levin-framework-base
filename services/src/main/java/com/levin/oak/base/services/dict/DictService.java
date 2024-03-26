@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.tags.*;
 //import org.springframework.dao.*;
 
 import java.util.*;
+import java.util.stream.*;
+import javax.validation.*;
 import javax.validation.constraints.*;
 
 import com.levin.commons.dao.support.*;
@@ -27,7 +29,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 字典-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:56:02, 代码生成哈希校验码：[2c2abd3940fbe08190342f8241b54087]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:38:48, 代码生成哈希校验码：[6f3130cfc7a259561e4f72c1f8b95236]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_Dict.BIZ_NAME, description = E_Dict.BIZ_NAME + MAINTAIN_ACTION)
@@ -40,6 +42,12 @@ public interface DictService {
     String SERVICE_NAME = "DictService";
 
     String SERVICE_BEAN_NAME = PLUGIN_PREFIX + SERVICE_NAME;
+
+    /**
+    */
+    default Class<?> getEntityClass() {
+        return Dict.class;
+    }
 
     /**
      * 创建记录，返回主键ID
@@ -61,7 +69,7 @@ public interface DictService {
      * 更新记录，并返回更新是否成功
      *
      * @param req
-     * @param queryObjs 附加的查询条件或是更新内容
+     * @param queryObjs 附加的查询条件或是更新内容，如可以是 Consumer<UpdateDao<?>> 对象
      * @return boolean 是否成功
      */
     @Operation(summary = UPDATE_ACTION)
@@ -72,10 +80,11 @@ public interface DictService {
      *
      * @param setReq
      * @param whereReq
+     * @param queryObjs 附加的查询条件或是更新内容，如可以是 Consumer<UpdateDao<?>> 对象
      * @return int 记录数
      */
     @Operation(summary = UPDATE_ACTION)
-    int batchUpdate(@NotNull SimpleUpdateDictReq setReq, QueryDictReq whereReq);
+    int batchUpdate(@NotNull SimpleUpdateDictReq setReq, QueryDictReq whereReq, Object... queryObjs);
 
     /**
      * 批量更新记录，并返回更新记录数
@@ -107,6 +116,7 @@ public interface DictService {
      *
      * @param req
      * @param paging 分页设置，可空
+     * @param queryObjs 扩展的查询对象，可以是 Consumer<SelectDao<?>> 对象
      * @return defaultPagingData 分页数据
      */
     @Operation(summary = QUERY_ACTION)
@@ -117,20 +127,34 @@ public interface DictService {
      *
      * @param req
      * @param paging 分页设置，可空
-     * @param columnNames 列名
+     * @param selectColumnNames 列名
      * @return defaultPagingData 分页数据
      */
     @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
-    PagingData<DictInfo> selectQuery(@NotNull QueryDictReq req, Paging paging, String... columnNames);
+    PagingData<DictInfo> selectQuery(@NotNull QueryDictReq req, Paging paging, String... selectColumnNames);
+
+    /**
+    * 指定选择列查询
+    *
+    * @param req
+    * @param paging 分页设置，可空
+    * @param selectColumns 列名
+    * @return defaultPagingData 分页数据
+    */
+    @Operation(summary = QUERY_ACTION + "-指定列", description = "通常用于字段过多的情况，提升性能")
+    default PagingData<DictInfo> selectQuery(@NotNull QueryDictReq req, Paging paging, PFunction<Dict,?>... selectColumns){
+        return selectQuery(req, paging, Stream.of(selectColumns).filter(Objects::nonNull).map(PFunction::get).toArray(String[]::new));
+    }
 
     /**
      * 统计记录数
      *
      * @param req
+     * @param queryObjs 扩展的查询对象，可以是 Consumer<SelectDao<?>> 对象
      * @return record count
      */
     @Operation(summary = STAT_ACTION)
-    int count(@NotNull QueryDictReq req);
+    int count(@NotNull QueryDictReq req, Object... queryObjs);
 
     /**
      * 通过主键查找记录，建议在服务内部调用，不要在控制器中调用
@@ -152,10 +176,11 @@ public interface DictService {
      * 查询并返回第一条数据
      *
      * @param req
+     * @param queryObjs 扩展的查询对象，可以是 Consumer<SelectDao<?>> 对象
      * @return data 第一条数据
      */
     @Operation(summary = QUERY_ACTION)
-    DictInfo findOne(@NotNull QueryDictReq req);
+    DictInfo findOne(@NotNull QueryDictReq req, Object... queryObjs);
 
     /**
      * 查询并返回唯一一条数据

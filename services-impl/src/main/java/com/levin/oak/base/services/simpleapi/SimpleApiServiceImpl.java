@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单动态接口-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:42, 代码生成哈希校验码：[65c341af4bfee1f787c4931c3f195d86]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:54, 代码生成哈希校验码：[e8f16cd15a3c1a770f6ce44b47a78711]，请不要修改和删除此行内容。
  *
  */
 
@@ -71,6 +71,9 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleApi.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizSimpleApiServiceImpl业务类中重写业务逻辑
+
 public class SimpleApiServiceImpl extends BaseService<SimpleApiServiceImpl> implements SimpleApiService {
 
 
@@ -109,8 +112,8 @@ public class SimpleApiServiceImpl extends BaseService<SimpleApiServiceImpl> impl
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int batchUpdate(SimpleUpdateSimpleApiReq setReq, QuerySimpleApiReq whereReq){
-       return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int batchUpdate(SimpleUpdateSimpleApiReq setReq, QuerySimpleApiReq whereReq, Object... queryObjs){
+       return simpleDao.updateByQueryObj(setReq, whereReq, queryObjs);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -157,8 +160,8 @@ public class SimpleApiServiceImpl extends BaseService<SimpleApiServiceImpl> impl
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QuerySimpleApiReq req){
-        return (int) simpleDao.countByQueryObj(req);
+    public int count(QuerySimpleApiReq req, Object... queryObjs){
+        return (int) simpleDao.countByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
@@ -181,8 +184,8 @@ public class SimpleApiServiceImpl extends BaseService<SimpleApiServiceImpl> impl
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public SimpleApiInfo findOne(QuerySimpleApiReq req){
-        return simpleDao.findOneByQueryObj(req);
+    public SimpleApiInfo findOne(QuerySimpleApiReq req, Object... queryObjs){
+        return simpleDao.findOneByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION)

@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 客户端文件-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[0b2e8a3d0e1323c3a07fd36b24057895]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:55, 代码生成哈希校验码：[773676895f5ee2d4254744ff0d8eb980]，请不要修改和删除此行内容。
  *
  */
 
@@ -68,6 +68,9 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_AppClientFile.BIZ_NAME, description = E_AppClientFile.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_AppClientFile.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizAppClientFileServiceImpl业务类中重写业务逻辑
+
 public class AppClientFileServiceImpl extends BaseService<AppClientFileServiceImpl> implements AppClientFileService {
 
 
@@ -106,8 +109,8 @@ public class AppClientFileServiceImpl extends BaseService<AppClientFileServiceIm
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int batchUpdate(SimpleUpdateAppClientFileReq setReq, QueryAppClientFileReq whereReq){
-       return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int batchUpdate(SimpleUpdateAppClientFileReq setReq, QueryAppClientFileReq whereReq, Object... queryObjs){
+       return simpleDao.updateByQueryObj(setReq, whereReq, queryObjs);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -154,8 +157,8 @@ public class AppClientFileServiceImpl extends BaseService<AppClientFileServiceIm
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryAppClientFileReq req){
-        return (int) simpleDao.countByQueryObj(req);
+    public int count(QueryAppClientFileReq req, Object... queryObjs){
+        return (int) simpleDao.countByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
@@ -178,8 +181,8 @@ public class AppClientFileServiceImpl extends BaseService<AppClientFileServiceIm
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public AppClientFileInfo findOne(QueryAppClientFileReq req){
-        return simpleDao.findOneByQueryObj(req);
+    public AppClientFileInfo findOne(QueryAppClientFileReq req, Object... queryObjs){
+        return simpleDao.findOneByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION)

@@ -55,7 +55,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 应用接入-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:42, 代码生成哈希校验码：[80918c0a71e339859e06d314ad2d14f4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:54, 代码生成哈希校验码：[4c85dfbef9e735422df9e6fb1959d521]，请不要修改和删除此行内容。
  *
  */
 
@@ -68,6 +68,9 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_AppClient.BIZ_NAME, description = E_AppClient.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_AppClient.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizAppClientServiceImpl业务类中重写业务逻辑
+
 public class AppClientServiceImpl extends BaseService<AppClientServiceImpl> implements AppClientService {
 
 
@@ -106,8 +109,8 @@ public class AppClientServiceImpl extends BaseService<AppClientServiceImpl> impl
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int batchUpdate(SimpleUpdateAppClientReq setReq, QueryAppClientReq whereReq){
-       return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int batchUpdate(SimpleUpdateAppClientReq setReq, QueryAppClientReq whereReq, Object... queryObjs){
+       return simpleDao.updateByQueryObj(setReq, whereReq, queryObjs);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -154,8 +157,8 @@ public class AppClientServiceImpl extends BaseService<AppClientServiceImpl> impl
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryAppClientReq req){
-        return (int) simpleDao.countByQueryObj(req);
+    public int count(QueryAppClientReq req, Object... queryObjs){
+        return (int) simpleDao.countByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
@@ -178,8 +181,8 @@ public class AppClientServiceImpl extends BaseService<AppClientServiceImpl> impl
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public AppClientInfo findOne(QueryAppClientReq req){
-        return simpleDao.findOneByQueryObj(req);
+    public AppClientInfo findOne(QueryAppClientReq req, Object... queryObjs){
+        return simpleDao.findOneByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION)

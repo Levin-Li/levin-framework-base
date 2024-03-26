@@ -64,7 +64,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 机构-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:06, 代码生成哈希校验码：[f32187e3d5372617752d8b47361cdaef]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:55, 代码生成哈希校验码：[775dfdcfd4d7871726b0275a6914c327]，请不要修改和删除此行内容。
  *
  */
 
@@ -77,6 +77,9 @@ import com.levin.commons.service.domain.InjectVar;
 //@Validated
 @Tag(name = E_Org.BIZ_NAME, description = E_Org.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Org.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizOrgServiceImpl业务类中重写业务逻辑
+
 public class OrgServiceImpl extends BaseService<OrgServiceImpl> implements OrgService {
 
 
@@ -115,8 +118,8 @@ public class OrgServiceImpl extends BaseService<OrgServiceImpl> implements OrgSe
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int batchUpdate(SimpleUpdateOrgReq setReq, QueryOrgReq whereReq){
-       return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int batchUpdate(SimpleUpdateOrgReq setReq, QueryOrgReq whereReq, Object... queryObjs){
+       return simpleDao.updateByQueryObj(setReq, whereReq, queryObjs);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -163,8 +166,8 @@ public class OrgServiceImpl extends BaseService<OrgServiceImpl> implements OrgSe
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryOrgReq req){
-        return (int) simpleDao.countByQueryObj(req);
+    public int count(QueryOrgReq req, Object... queryObjs){
+        return (int) simpleDao.countByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
@@ -187,8 +190,8 @@ public class OrgServiceImpl extends BaseService<OrgServiceImpl> implements OrgSe
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public OrgInfo findOne(QueryOrgReq req){
-        return simpleDao.findOneByQueryObj(req);
+    public OrgInfo findOne(QueryOrgReq req, Object... queryObjs){
+        return simpleDao.findOneByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION)

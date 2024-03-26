@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 调度日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[61ae53b75bb21bebc079e35514ab85ef]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:55, 代码生成哈希校验码：[a4a7d71400dda44f7bf4bd746dc2c518]，请不要修改和删除此行内容。
  *
  */
 
@@ -69,6 +69,9 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_ScheduledLog.BIZ_NAME, description = E_ScheduledLog.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_ScheduledLog.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizScheduledLogServiceImpl业务类中重写业务逻辑
+
 public class ScheduledLogServiceImpl extends BaseService<ScheduledLogServiceImpl> implements ScheduledLogService {
 
 
@@ -107,8 +110,8 @@ public class ScheduledLogServiceImpl extends BaseService<ScheduledLogServiceImpl
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int batchUpdate(SimpleUpdateScheduledLogReq setReq, QueryScheduledLogReq whereReq){
-       return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int batchUpdate(SimpleUpdateScheduledLogReq setReq, QueryScheduledLogReq whereReq, Object... queryObjs){
+       return simpleDao.updateByQueryObj(setReq, whereReq, queryObjs);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -155,8 +158,8 @@ public class ScheduledLogServiceImpl extends BaseService<ScheduledLogServiceImpl
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryScheduledLogReq req){
-        return (int) simpleDao.countByQueryObj(req);
+    public int count(QueryScheduledLogReq req, Object... queryObjs){
+        return (int) simpleDao.countByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
@@ -179,8 +182,8 @@ public class ScheduledLogServiceImpl extends BaseService<ScheduledLogServiceImpl
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public ScheduledLogInfo findOne(QueryScheduledLogReq req){
-        return simpleDao.findOneByQueryObj(req);
+    public ScheduledLogInfo findOne(QueryScheduledLogReq req, Object... queryObjs){
+        return simpleDao.findOneByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION)

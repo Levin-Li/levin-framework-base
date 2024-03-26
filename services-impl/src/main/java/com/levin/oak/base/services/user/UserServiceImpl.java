@@ -46,22 +46,25 @@ import com.levin.oak.base.services.*;
 ////////////////////////////////////
 //自动导入列表
 import com.levin.oak.base.entities.User.*;
+import java.util.Date;
+import com.levin.commons.dao.domain.OrganizedObject;
+import java.io.Serializable;
+import com.levin.commons.dao.domain.StatefulObject;
+import com.levin.commons.service.support.InjectConst;
 import java.util.List;
 import com.levin.oak.base.services.org.info.*;
-import java.util.Date;
+import com.levin.commons.dao.domain.MultiTenantObject;
 import com.levin.oak.base.entities.Org;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.levin.commons.service.support.PrimitiveArrayJsonConverter;
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
-import com.levin.commons.service.support.InjectConst;
 ////////////////////////////////////
 
 /**
  * 用户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 下午3:58:50, 代码生成哈希校验码：[64c53bbf1ca0494ad9a247d482d5e55e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:40:56, 代码生成哈希校验码：[fa6cdd5326f6ba3366833a7b96816164]，请不要修改和删除此行内容。
  *
  */
 
@@ -74,7 +77,11 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_User.BIZ_NAME, description = E_User.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_User.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizUserServiceImpl业务类中重写业务逻辑
+
 public class UserServiceImpl extends BaseService<UserServiceImpl> implements UserService {
+
 
     /**
     * 创建记录，返回主键ID
@@ -111,8 +118,8 @@ public class UserServiceImpl extends BaseService<UserServiceImpl> implements Use
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int batchUpdate(SimpleUpdateUserReq setReq, QueryUserReq whereReq){
-       return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int batchUpdate(SimpleUpdateUserReq setReq, QueryUserReq whereReq, Object... queryObjs){
+       return simpleDao.updateByQueryObj(setReq, whereReq, queryObjs);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -159,8 +166,8 @@ public class UserServiceImpl extends BaseService<UserServiceImpl> implements Use
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryUserReq req){
-        return (int) simpleDao.countByQueryObj(req);
+    public int count(QueryUserReq req, Object... queryObjs){
+        return (int) simpleDao.countByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
@@ -183,8 +190,8 @@ public class UserServiceImpl extends BaseService<UserServiceImpl> implements Use
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public UserInfo findOne(QueryUserReq req){
-        return simpleDao.findOneByQueryObj(req);
+    public UserInfo findOne(QueryUserReq req, Object... queryObjs){
+        return simpleDao.findOneByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION)

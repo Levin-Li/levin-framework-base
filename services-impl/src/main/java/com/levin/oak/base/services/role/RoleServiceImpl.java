@@ -63,7 +63,7 @@ import com.levin.commons.service.domain.InjectVar;
 /**
  * 角色-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:56, 代码生成哈希校验码：[7d8f2f498a8421a5fe19746d0f081408]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:54, 代码生成哈希校验码：[1f4b4f10f5cebc925bbaf93cc33d0998]，请不要修改和删除此行内容。
  *
  */
 
@@ -117,8 +117,8 @@ public class RoleServiceImpl extends BaseService<RoleServiceImpl> implements Rol
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int batchUpdate(SimpleUpdateRoleReq setReq, QueryRoleReq whereReq){
-       return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int batchUpdate(SimpleUpdateRoleReq setReq, QueryRoleReq whereReq, Object... queryObjs){
+       return simpleDao.updateByQueryObj(setReq, whereReq, queryObjs);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -165,8 +165,8 @@ public class RoleServiceImpl extends BaseService<RoleServiceImpl> implements Rol
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryRoleReq req){
-        return (int) simpleDao.countByQueryObj(req);
+    public int count(QueryRoleReq req, Object... queryObjs){
+        return (int) simpleDao.countByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
@@ -189,8 +189,8 @@ public class RoleServiceImpl extends BaseService<RoleServiceImpl> implements Rol
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public RoleInfo findOne(QueryRoleReq req){
-        return simpleDao.findOneByQueryObj(req);
+    public RoleInfo findOne(QueryRoleReq req, Object... queryObjs){
+        return simpleDao.findOneByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION)

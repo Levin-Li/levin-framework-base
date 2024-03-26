@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 通知处理日志-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[5ef7af284169c49210ea9f65d406978c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:55, 代码生成哈希校验码：[a30ee9ec72ce4b9b14d0fa65ac0ffaeb]，请不要修改和删除此行内容。
  *
  */
 
@@ -110,8 +110,8 @@ public class NoticeProcessLogServiceImpl extends BaseService<NoticeProcessLogSer
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int batchUpdate(SimpleUpdateNoticeProcessLogReq setReq, QueryNoticeProcessLogReq whereReq){
-       return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int batchUpdate(SimpleUpdateNoticeProcessLogReq setReq, QueryNoticeProcessLogReq whereReq, Object... queryObjs){
+       return simpleDao.updateByQueryObj(setReq, whereReq, queryObjs);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -158,8 +158,8 @@ public class NoticeProcessLogServiceImpl extends BaseService<NoticeProcessLogSer
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryNoticeProcessLogReq req){
-        return (int) simpleDao.countByQueryObj(req);
+    public int count(QueryNoticeProcessLogReq req, Object... queryObjs){
+        return (int) simpleDao.countByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
@@ -182,8 +182,8 @@ public class NoticeProcessLogServiceImpl extends BaseService<NoticeProcessLogSer
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public NoticeProcessLogInfo findOne(QueryNoticeProcessLogReq req){
-        return simpleDao.findOneByQueryObj(req);
+    public NoticeProcessLogInfo findOne(QueryNoticeProcessLogReq req, Object... queryObjs){
+        return simpleDao.findOneByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION)

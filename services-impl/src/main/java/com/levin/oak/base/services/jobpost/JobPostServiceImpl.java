@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 工作岗位-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[0fc9b17293c5659cb696379b7290751d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:55, 代码生成哈希校验码：[0485d3a0767cc89ecc89960122609ce6]，请不要修改和删除此行内容。
  *
  */
 
@@ -69,6 +69,9 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_JobPost.BIZ_NAME, description = E_JobPost.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_JobPost.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizJobPostServiceImpl业务类中重写业务逻辑
+
 public class JobPostServiceImpl extends BaseService<JobPostServiceImpl> implements JobPostService {
 
 
@@ -107,8 +110,8 @@ public class JobPostServiceImpl extends BaseService<JobPostServiceImpl> implemen
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int batchUpdate(SimpleUpdateJobPostReq setReq, QueryJobPostReq whereReq){
-       return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int batchUpdate(SimpleUpdateJobPostReq setReq, QueryJobPostReq whereReq, Object... queryObjs){
+       return simpleDao.updateByQueryObj(setReq, whereReq, queryObjs);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -155,8 +158,8 @@ public class JobPostServiceImpl extends BaseService<JobPostServiceImpl> implemen
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryJobPostReq req){
-        return (int) simpleDao.countByQueryObj(req);
+    public int count(QueryJobPostReq req, Object... queryObjs){
+        return (int) simpleDao.countByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
@@ -179,8 +182,8 @@ public class JobPostServiceImpl extends BaseService<JobPostServiceImpl> implemen
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public JobPostInfo findOne(QueryJobPostReq req){
-        return simpleDao.findOneByQueryObj(req);
+    public JobPostInfo findOne(QueryJobPostReq req, Object... queryObjs){
+        return simpleDao.findOneByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION)

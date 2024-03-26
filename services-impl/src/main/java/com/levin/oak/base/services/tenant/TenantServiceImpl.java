@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 平台租户-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:42, 代码生成哈希校验码：[e0be0bd4f4009e6c63c42553b13b1b8d]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:55, 代码生成哈希校验码：[3c9f06b699b25ef39e67a9dc93c22660]，请不要修改和删除此行内容。
  *
  */
 
@@ -69,6 +69,9 @@ import com.levin.commons.service.support.InjectConst;
 //@Validated
 @Tag(name = E_Tenant.BIZ_NAME, description = E_Tenant.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Tenant.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizTenantServiceImpl业务类中重写业务逻辑
+
 public class TenantServiceImpl extends BaseService<TenantServiceImpl> implements TenantService {
 
 
@@ -107,8 +110,8 @@ public class TenantServiceImpl extends BaseService<TenantServiceImpl> implements
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int batchUpdate(SimpleUpdateTenantReq setReq, QueryTenantReq whereReq){
-       return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int batchUpdate(SimpleUpdateTenantReq setReq, QueryTenantReq whereReq, Object... queryObjs){
+       return simpleDao.updateByQueryObj(setReq, whereReq, queryObjs);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -155,8 +158,8 @@ public class TenantServiceImpl extends BaseService<TenantServiceImpl> implements
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryTenantReq req){
-        return (int) simpleDao.countByQueryObj(req);
+    public int count(QueryTenantReq req, Object... queryObjs){
+        return (int) simpleDao.countByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
@@ -179,8 +182,8 @@ public class TenantServiceImpl extends BaseService<TenantServiceImpl> implements
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public TenantInfo findOne(QueryTenantReq req){
-        return simpleDao.findOneByQueryObj(req);
+    public TenantInfo findOne(QueryTenantReq req, Object... queryObjs){
+        return simpleDao.findOneByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION)

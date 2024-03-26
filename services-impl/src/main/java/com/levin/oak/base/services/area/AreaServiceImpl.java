@@ -59,7 +59,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[4fa49392302fd201dc1e776901a0d7a5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:56, 代码生成哈希校验码：[c8a047394aa91ddcbf77df046836ca8c]，请不要修改和删除此行内容。
  *
  */
 
@@ -72,6 +72,9 @@ import com.levin.oak.base.entities.Area.*;
 //@Validated
 @Tag(name = E_Area.BIZ_NAME, description = E_Area.BIZ_NAME + MAINTAIN_ACTION)
 @CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Area.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+// *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizAreaServiceImpl业务类中重写业务逻辑
+
 public class AreaServiceImpl extends BaseService<AreaServiceImpl> implements AreaService {
 
 
@@ -110,8 +113,8 @@ public class AreaServiceImpl extends BaseService<AreaServiceImpl> implements Are
     @Override
     @Transactional
     @CacheEvict(allEntries = true, condition = "#result > 0")
-    public int batchUpdate(SimpleUpdateAreaReq setReq, QueryAreaReq whereReq){
-       return simpleDao.updateByQueryObj(setReq, whereReq);
+    public int batchUpdate(SimpleUpdateAreaReq setReq, QueryAreaReq whereReq, Object... queryObjs){
+       return simpleDao.updateByQueryObj(setReq, whereReq, queryObjs);
     }
 
     @Operation(summary = BATCH_UPDATE_ACTION)
@@ -158,8 +161,8 @@ public class AreaServiceImpl extends BaseService<AreaServiceImpl> implements Are
 
     @Override
     @Operation(summary = STAT_ACTION)
-    public int count(QueryAreaReq req){
-        return (int) simpleDao.countByQueryObj(req);
+    public int count(QueryAreaReq req, Object... queryObjs){
+        return (int) simpleDao.countByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = VIEW_DETAIL_ACTION)
@@ -182,8 +185,8 @@ public class AreaServiceImpl extends BaseService<AreaServiceImpl> implements Are
 
     @Operation(summary = QUERY_ACTION)
     @Override
-    public AreaInfo findOne(QueryAreaReq req){
-        return simpleDao.findOneByQueryObj(req);
+    public AreaInfo findOne(QueryAreaReq req, Object... queryObjs){
+        return simpleDao.findOneByQueryObj(req, queryObjs);
     }
 
     @Operation(summary = QUERY_ACTION)
