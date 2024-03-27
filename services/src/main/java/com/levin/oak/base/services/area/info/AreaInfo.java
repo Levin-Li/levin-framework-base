@@ -40,7 +40,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[efbcff22c0a165befaca93bcce64abf5]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月27日 下午4:11:36, 代码生成哈希校验码：[b3078ba3b70b01a6feec55d04c3522b3]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -57,7 +57,7 @@ public class AreaInfo implements Serializable, TreeObject<AreaInfo, AreaInfo> {
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_id)
+    @Schema(title = L_id , description = D_id)
     String id;
 
     @Schema(title = L_code , description = D_code)

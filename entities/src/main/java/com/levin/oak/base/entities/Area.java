@@ -63,13 +63,13 @@ public class Area
         }
     }
 
-    @Schema(title = "编码")
+    @Schema(title = "编码", description = "ID固定为国标的行政编码，具体参考国家行政编码")
     @Id
     @Column(length = 64)
     @StartsWith
     protected String id;
 
-    @Schema(title = "自定义编码", description = "自定义的映射编码，通常不使用")
+    @Schema(title = "自定义编码", description = "自定义的映射编码，通常建议不使用")
     protected String code;
 
     @Schema(title = "图标")

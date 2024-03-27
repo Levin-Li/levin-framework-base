@@ -92,6 +92,16 @@ public class I18nRes extends AbstractMultiTenantObject implements MultiTenantPub
         if (country == null) {
             country = "CN";
         }
-
     }
+
+//    /**
+//     * 是否可共享
+//     *
+//     * @return
+//     */
+//    @Override
+//    public boolean isTenantShared() {
+//        return Boolean.TRUE.equals(tenantShared);
+//    }
+
 }

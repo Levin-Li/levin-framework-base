@@ -49,7 +49,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月27日 下午3:55:27, 代码生成哈希校验码：[5fb0739f71e472b03827076917bc1b26]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月27日 下午4:13:53, 代码生成哈希校验码：[5fb0739f71e472b03827076917bc1b26]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)

@@ -45,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月27日 下午3:55:27, 代码生成哈希校验码：[45d45040afd7dc9c35d59a192d1c7217]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月27日 下午4:13:53, 代码生成哈希校验码：[45d45040afd7dc9c35d59a192d1c7217]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)

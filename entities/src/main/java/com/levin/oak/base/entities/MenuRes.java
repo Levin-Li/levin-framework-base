@@ -90,8 +90,9 @@ public class MenuRes
     @Schema(title = "图标")
     String icon;
 
-    @Schema(title = "路径/链接")
+    @Schema(title = "路径", description = "路由/路径/链接")
     @Contains
+    @Column(length = 512)
     String path;
 
     @Schema(title = "参数")
