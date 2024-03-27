@@ -32,7 +32,10 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.dao.domain.NamedObject;
+import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import java.util.Date;
+import com.levin.commons.dao.domain.MultiTenantSharedObject;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -42,7 +45,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 更新国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[25b020cf0efd54f7cc23e414a145a852]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月27日 下午3:55:27, 代码生成哈希校验码：[45d45040afd7dc9c35d59a192d1c7217]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = UPDATE_ACTION + BIZ_NAME)
@@ -57,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 
 //字段更新策略，强制更新时，只要字段被调用set方法，则会被更新，不管是否空值。否则只有值不为[null，空字符串, 空数组，空集合]时才会被更新。
 @Update(condition = "forceUpdate ? isUpdateField(#_fieldName) : #" + C.VALUE_NOT_EMPTY)
-public class SimpleUpdateI18nResReq extends MultiTenantOrgReq<SimpleUpdateI18nResReq> {
+public class SimpleUpdateI18nResReq extends MultiTenantReq<SimpleUpdateI18nResReq> {
 
     private static final long serialVersionUID = -1681554652L;
 
@@ -76,24 +79,31 @@ public class SimpleUpdateI18nResReq extends MultiTenantOrgReq<SimpleUpdateI18nRe
     @Eq(condition = IS_WEB_CONTEXT + " && !#_isQuery && " + NOT_SUPER_ADMIN)
     final boolean eqEditable = true;
 
+    @Schema(title = L_tenantShared)
+    boolean tenantShared;
+
     @Schema(title = L_domain)
     String domain;
+
+    @Size(max = 512)
+    @Schema(title = L_name)
+    String name;
 
     @Size(max = 128)
     @Schema(title = L_category)
     String category;
 
     @Size(max = 64)
-    @Schema(title = L_lang)
+    @Schema(title = L_lang , description = D_lang)
     String lang;
+
+    @Size(max = 64)
+    @Schema(title = L_country , description = D_country)
+    String country;
 
     @Size(max = 1800)
     @Schema(title = L_label)
     String label;
-
-    @Size(max = 64)
-    @Schema(title = L_name)
-    String name;
 
     @Schema(title = L_lastUpdateTime)
     Date lastUpdateTime;
@@ -139,9 +149,17 @@ public class SimpleUpdateI18nResReq extends MultiTenantOrgReq<SimpleUpdateI18nRe
         }
     }
 
+    public <T extends SimpleUpdateI18nResReq> T setTenantShared(boolean tenantShared) {
+        this.tenantShared = tenantShared;
+        return addUpdateField(E_I18nRes.tenantShared);
+    }
     public <T extends SimpleUpdateI18nResReq> T setDomain(String domain) {
         this.domain = domain;
         return addUpdateField(E_I18nRes.domain);
+    }
+    public <T extends SimpleUpdateI18nResReq> T setName(String name) {
+        this.name = name;
+        return addUpdateField(E_I18nRes.name);
     }
     public <T extends SimpleUpdateI18nResReq> T setCategory(String category) {
         this.category = category;
@@ -151,13 +169,13 @@ public class SimpleUpdateI18nResReq extends MultiTenantOrgReq<SimpleUpdateI18nRe
         this.lang = lang;
         return addUpdateField(E_I18nRes.lang);
     }
+    public <T extends SimpleUpdateI18nResReq> T setCountry(String country) {
+        this.country = country;
+        return addUpdateField(E_I18nRes.country);
+    }
     public <T extends SimpleUpdateI18nResReq> T setLabel(String label) {
         this.label = label;
         return addUpdateField(E_I18nRes.label);
-    }
-    public <T extends SimpleUpdateI18nResReq> T setName(String name) {
-        this.name = name;
-        return addUpdateField(E_I18nRes.name);
     }
     public <T extends SimpleUpdateI18nResReq> T setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;

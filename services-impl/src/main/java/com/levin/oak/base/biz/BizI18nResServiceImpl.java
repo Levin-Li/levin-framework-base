@@ -47,7 +47,10 @@ import com.levin.oak.base.services.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.dao.domain.NamedObject;
+import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import java.util.Date;
+import com.levin.commons.dao.domain.MultiTenantSharedObject;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -57,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  国际化资源-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[c86207dc2443aee3b89862b4b40a1cf7]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月27日 下午3:55:27, 代码生成哈希校验码：[8e1132678fb7ac3ca50b6d5899618551]，请不要修改和删除此行内容。
  *
  */
 

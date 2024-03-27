@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
@@ -85,14 +87,29 @@ public class BizDictController extends DictController {
     }
 
 
-    private List<Dict.Item> checkList(String creator, List<Dict.Item> itemList) {
+    /**
+     * 检查列表项
+     *
+     * @param creator
+     * @param itemList
+     * @return
+     */
+    private List<Dict.Item> checkItemList(String creator, List<Dict.Item> itemList) {
 
         if (itemList != null
                 && !itemList.isEmpty()) {
+
+            //检查字典项编码的唯一性
+            Map<String, String> temp = new HashMap<>(itemList.size());
+
+            //检查字典项
             itemList.forEach(item -> {
 
                 Assert.notBlank(item.getCode(), "字典项编码不能为空");
                 Assert.notBlank(item.getName(), "字典项名称不能为空");
+
+                // 检查字典项编码的唯一性
+                Assert.isNull(temp.putIfAbsent(item.getCode(), item.getName()), "字典项[{}]的编码重复出现", item.getName());
 
                 if (!StringUtils.hasText(item.getCreator())) {
                     item.setCreator(creator);
@@ -101,6 +118,7 @@ public class BizDictController extends DictController {
                 item.prePersist();
 
             });
+
         }
 
         return itemList;
@@ -119,7 +137,7 @@ public class BizDictController extends DictController {
 
         req.setType(userInfo.isSuperAdmin() ? Dict.Type.System : Dict.Type.Custom);
 
-        return super.create(req.setItemList(checkList(req.getOperatorId(), req.getItemList())));
+        return super.create(req.setItemList(checkItemList(req.getOperatorId(), req.getItemList())));
     }
 
     /**
@@ -139,7 +157,7 @@ public class BizDictController extends DictController {
             }
         }
 
-        return super.update(req.setItemList(checkList(req.getOperatorId(), req.getItemList())), id);
+        return super.update(req.setItemList(checkItemList(req.getOperatorId(), req.getItemList())), id);
     }
 
     /**

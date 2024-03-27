@@ -30,7 +30,10 @@ import static com.levin.oak.base.entities.E_I18nRes.*;
 import com.levin.oak.base.services.commons.req.*;
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.dao.domain.NamedObject;
+import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import java.util.Date;
+import com.levin.commons.dao.domain.MultiTenantSharedObject;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -40,7 +43,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 国际化资源 主键通用请求
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月28日 上午11:04:42, 代码生成哈希校验码：[27941f604f54c47a2424c763537672b1]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月27日 下午3:55:27, 代码生成哈希校验码：[fc8bc6b35e2808510df91aacacaef6bd]，请不要修改和删除此行内容。
  *
  */
 
@@ -54,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS, resultClass = I18nResInfo.class)
-public class I18nResIdReq extends MultiTenantOrgReq<I18nResIdReq> {
+public class I18nResIdReq extends MultiTenantReq<I18nResIdReq> {
 
     private static final long serialVersionUID = -1681554652L;
 

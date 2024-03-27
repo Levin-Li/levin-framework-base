@@ -36,7 +36,10 @@ import com.levin.oak.base.services.commons.req.*;
 
 ////////////////////////////////////
 //自动导入列表
+import com.levin.commons.dao.domain.NamedObject;
+import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import java.util.Date;
+import com.levin.commons.dao.domain.MultiTenantSharedObject;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -46,7 +49,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 查询国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:55, 代码生成哈希校验码：[1add5194e02bd13fa3c94c9a2979c905]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月27日 下午3:55:27, 代码生成哈希校验码：[5fb0739f71e472b03827076917bc1b26]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = QUERY_ACTION + BIZ_NAME)
@@ -59,17 +62,13 @@ import com.levin.commons.service.support.InjectConst;
 @Accessors(chain = true)
 @FieldNameConstants
 @TargetOption(entityClass = I18nRes.class, alias = E_I18nRes.ALIAS, resultClass = I18nResInfo.class)
-public class QueryI18nResReq extends MultiTenantOrgReq<QueryI18nResReq> {
+public class QueryI18nResReq extends MultiTenantReq<QueryI18nResReq> {
 
     private static final long serialVersionUID = -1681554652L;
 
     @Schema(title = "是否包含平台公共数据")
     @Ignore
     boolean isContainsPublicData = true;
-
-    @Schema(title = "是否包含组织公共数据")
-    @Ignore
-    boolean isContainsOrgPublicData = true;
 
     @Ignore
     @Schema(title = "排序字段")
@@ -90,6 +89,9 @@ public class QueryI18nResReq extends MultiTenantOrgReq<QueryI18nResReq> {
     @Schema(title = L_id)
     Long id;
 
+    @Schema(title = L_tenantShared)
+    boolean tenantShared;
+
     @Schema(title = L_domain)
     String domain;
 
@@ -97,13 +99,21 @@ public class QueryI18nResReq extends MultiTenantOrgReq<QueryI18nResReq> {
     @EndsWith
     String endsWithDomain;
 
+    @Size(max = 512)
+    @Schema(title = L_name)
+    String name;
+
     @Size(max = 128)
     @Schema(title = L_category)
     String category;
 
     @Size(max = 64)
-    @Schema(title = L_lang)
+    @Schema(title = L_lang , description = D_lang)
     String lang;
+
+    @Size(max = 64)
+    @Schema(title = L_country , description = D_country)
+    String country;
 
     @Size(max = 1800)
     @Schema(title = L_label)
@@ -112,10 +122,6 @@ public class QueryI18nResReq extends MultiTenantOrgReq<QueryI18nResReq> {
     @Schema(title = "模糊匹配-" + L_label)
     @Contains
     String containsLabel;
-
-    @Size(max = 64)
-    @Schema(title = L_name)
-    String name;
 
     //@InjectVar(value = InjectConst.USER_ID, isRequired = "false")
     @Size(max = 128)

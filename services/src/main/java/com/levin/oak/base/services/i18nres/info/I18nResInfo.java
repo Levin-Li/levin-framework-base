@@ -25,7 +25,10 @@ import com.levin.commons.dao.annotation.misc.*;
 import com.levin.oak.base.entities.*;
 import static com.levin.oak.base.entities.E_I18nRes.*;
 ////////////////////////////////////
+import com.levin.commons.dao.domain.NamedObject;
+import com.levin.commons.dao.domain.MultiTenantPublicObject;
 import java.util.Date;
+import com.levin.commons.dao.domain.MultiTenantSharedObject;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.levin.commons.service.domain.InjectVar;
@@ -36,7 +39,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 国际化资源
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:58, 代码生成哈希校验码：[5de051a85fd38a36bf45228dd65a5c0a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月27日 下午3:55:27, 代码生成哈希校验码：[09017b1460cae6317ed30d23a65f8471]，请不要修改和删除此行内容。
  *
  */
 @Schema(title = BIZ_NAME)
@@ -47,7 +50,7 @@ import com.levin.commons.service.support.InjectConst;
 @ToString(exclude = {})
 @FieldNameConstants
 @JsonIgnoreProperties({"tenantId"})
-public class I18nResInfo implements Serializable {
+public class I18nResInfo implements Serializable, MultiTenantSharedObject, NamedObject, MultiTenantPublicObject {
 
     private static final long serialVersionUID = -1681554652L;
 
@@ -56,33 +59,36 @@ public class I18nResInfo implements Serializable {
     @Schema(title = L_id)
     Long id;
 
+    @NotNull
+    @Schema(title = L_tenantShared)
+    boolean tenantShared;
+
     @Schema(title = L_domain)
     String domain;
 
     @NotBlank
+    @Size(max = 512)
+    @Schema(title = L_name)
+    String name;
+
     @Size(max = 128)
     @Schema(title = L_category)
     String category;
 
     @NotBlank
     @Size(max = 64)
-    @Schema(title = L_lang)
+    @Schema(title = L_lang , description = D_lang)
     String lang;
+
+    @NotBlank
+    @Size(max = 64)
+    @Schema(title = L_country , description = D_country)
+    String country;
 
     @NotBlank
     @Size(max = 1800)
     @Schema(title = L_label)
     String label;
-
-    @NotBlank
-    @Size(max = 64)
-    @Schema(title = L_name)
-    String name;
-
-    @Size(max = 128)
-    @InjectVar(value = InjectConst.ORG_ID)
-    @Schema(title = L_orgId)
-    String orgId;
 
     @Size(max = 128)
     @InjectVar(value = InjectConst.TENANT_ID)
