@@ -43,6 +43,7 @@ import com.levin.oak.base.services.permission.info.*;
 
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
+import com.levin.oak.base.cache.*;
 
 
 ////////////////////////////////////
@@ -56,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  权限清单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:47, 代码生成哈希校验码：[67fb1d5250d9fc9f05d19918670cea9a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午1:20:14, 代码生成哈希校验码：[498bb55eae206a6c21fee8f777695f49]，请不要修改和删除此行内容。
  *
  */
 
@@ -86,31 +87,11 @@ public class BizPermissionServiceImpl extends BaseService<BizPermissionServiceIm
     @Autowired
     PermissionService permissionService;
 
+    @Autowired
+    ModuleCacheService moduleCacheService;
+
 
     /** 参考示例
-    @Operation(summary = CREATE_ACTION)
-    @Transactional
-    //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX_EXPR + "#result") //创建也清除缓存，防止空值缓存的情况
-    public String create(CreatePermissionReq req){
-        return permissionService.create(req);
-    }
-
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    //@Override
-    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX_EXPR + "#id")
-    public PermissionInfo findById(String id) {
-        return permissionService.findById(id);
-    }
-
-    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    //@Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX_EXPR + "#req.id") //
-    public PermissionInfo findById(PermissionIdReq req) {
-        return permissionService.findById(req);
-    }
 
     @Operation(summary = UPDATE_ACTION)
     //@Override
@@ -118,14 +99,6 @@ public class BizPermissionServiceImpl extends BaseService<BizPermissionServiceIm
     @Transactional
     public boolean update(UpdatePermissionReq req) {
         return permissionService.update(req);
-    }
-
-    @Operation(summary = DELETE_ACTION)
-    //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id") // , beforeInvocation = true
-    @Transactional
-    public boolean delete(PermissionIdReq req) {
-        return permissionService.delete(req);
     }
 
     */

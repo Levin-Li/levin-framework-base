@@ -43,6 +43,7 @@ import com.levin.oak.base.services.menures.info.*;
 
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
+import com.levin.oak.base.cache.*;
 
 
 ////////////////////////////////////
@@ -63,7 +64,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  菜单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:49, 代码生成哈希校验码：[6aef67a0e33fc83dc36c16182c638e85]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午1:20:15, 代码生成哈希校验码：[8ed3e7c84e4404551e1ab2373710d83b]，请不要修改和删除此行内容。
  *
  */
 
@@ -93,31 +94,11 @@ public class BizMenuResServiceImpl extends BaseService<BizMenuResServiceImpl> im
     @Autowired
     MenuResService menuResService;
 
+    @Autowired
+    ModuleCacheService moduleCacheService;
+
 
     /** 参考示例
-    @Operation(summary = CREATE_ACTION)
-    @Transactional
-    //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX_EXPR + "#result") //创建也清除缓存，防止空值缓存的情况
-    public String create(CreateMenuResReq req){
-        return menuResService.create(req);
-    }
-
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    //@Override
-    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX_EXPR + "#id")
-    public MenuResInfo findById(String id) {
-        return menuResService.findById(id);
-    }
-
-    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    //@Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId + 
-    public MenuResInfo findById(MenuResIdReq req) {
-        return menuResService.findById(req);
-    }
 
     @Operation(summary = UPDATE_ACTION)
     //@Override
@@ -125,14 +106,6 @@ public class BizMenuResServiceImpl extends BaseService<BizMenuResServiceImpl> im
     @Transactional
     public boolean update(UpdateMenuResReq req) {
         return menuResService.update(req);
-    }
-
-    @Operation(summary = DELETE_ACTION)
-    //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId +  , beforeInvocation = true
-    @Transactional
-    public boolean delete(MenuResIdReq req) {
-        return menuResService.delete(req);
     }
 
     */

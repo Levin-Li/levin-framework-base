@@ -43,6 +43,7 @@ import com.levin.oak.base.services.area.info.*;
 
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
+import com.levin.oak.base.cache.*;
 
 
 ////////////////////////////////////
@@ -61,7 +62,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  *  区域-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:48, 代码生成哈希校验码：[3e5bb0376aec20d0d6dc962fd64e4a6e]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午1:20:15, 代码生成哈希校验码：[c7d72559ee800fc4099bdd96416aba97]，请不要修改和删除此行内容。
  *
  */
 
@@ -91,31 +92,11 @@ public class BizAreaServiceImpl extends BaseService<BizAreaServiceImpl> implemen
     @Autowired
     AreaService areaService;
 
+    @Autowired
+    ModuleCacheService moduleCacheService;
+
 
     /** 参考示例
-    @Operation(summary = CREATE_ACTION)
-    @Transactional
-    //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX_EXPR + "#result") //创建也清除缓存，防止空值缓存的情况
-    public String create(CreateAreaReq req){
-        return areaService.create(req);
-    }
-
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    //@Override
-    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX_EXPR + "#id")
-    public AreaInfo findById(String id) {
-        return areaService.findById(id);
-    }
-
-    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    //@Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX_EXPR + "#req.id") //
-    public AreaInfo findById(AreaIdReq req) {
-        return areaService.findById(req);
-    }
 
     @Operation(summary = UPDATE_ACTION)
     //@Override
@@ -123,14 +104,6 @@ public class BizAreaServiceImpl extends BaseService<BizAreaServiceImpl> implemen
     @Transactional
     public boolean update(UpdateAreaReq req) {
         return areaService.update(req);
-    }
-
-    @Operation(summary = DELETE_ACTION)
-    //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id") // , beforeInvocation = true
-    @Transactional
-    public boolean delete(AreaIdReq req) {
-        return areaService.delete(req);
     }
 
     */

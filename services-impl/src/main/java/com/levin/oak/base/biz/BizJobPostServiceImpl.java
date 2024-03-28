@@ -43,6 +43,7 @@ import com.levin.oak.base.services.jobpost.info.*;
 
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
+import com.levin.oak.base.cache.*;
 
 
 ////////////////////////////////////
@@ -58,7 +59,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  工作岗位-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:48, 代码生成哈希校验码：[5934e868bfeee907b95f068071e58bd2]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午1:20:15, 代码生成哈希校验码：[9b54f7df0d95ca2d2c2c3af5874b5633]，请不要修改和删除此行内容。
  *
  */
 
@@ -88,31 +89,11 @@ public class BizJobPostServiceImpl extends BaseService<BizJobPostServiceImpl> im
     @Autowired
     JobPostService jobPostService;
 
+    @Autowired
+    ModuleCacheService moduleCacheService;
+
 
     /** 参考示例
-    @Operation(summary = CREATE_ACTION)
-    @Transactional
-    //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX_EXPR + "#result") //创建也清除缓存，防止空值缓存的情况
-    public String create(CreateJobPostReq req){
-        return jobPostService.create(req);
-    }
-
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    //@Override
-    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX_EXPR + "#id")
-    public JobPostInfo findById(String id) {
-        return jobPostService.findById(id);
-    }
-
-    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    //@Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId + 
-    public JobPostInfo findById(JobPostIdReq req) {
-        return jobPostService.findById(req);
-    }
 
     @Operation(summary = UPDATE_ACTION)
     //@Override
@@ -120,14 +101,6 @@ public class BizJobPostServiceImpl extends BaseService<BizJobPostServiceImpl> im
     @Transactional
     public boolean update(UpdateJobPostReq req) {
         return jobPostService.update(req);
-    }
-
-    @Operation(summary = DELETE_ACTION)
-    //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId +  , beforeInvocation = true
-    @Transactional
-    public boolean delete(JobPostIdReq req) {
-        return jobPostService.delete(req);
     }
 
     */

@@ -43,6 +43,7 @@ import com.levin.oak.base.services.noticeprocesslog.info.*;
 
 import com.levin.oak.base.*;
 import com.levin.oak.base.services.*;
+import com.levin.oak.base.cache.*;
 
 
 ////////////////////////////////////
@@ -58,7 +59,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  通知处理日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:48, 代码生成哈希校验码：[d4c3c216bffa1f4774f1bcea8b15996f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午1:20:15, 代码生成哈希校验码：[c119d6359c372e64785d42494a60833c]，请不要修改和删除此行内容。
  *
  */
 
@@ -88,31 +89,11 @@ public class BizNoticeProcessLogServiceImpl extends BaseService<BizNoticeProcess
     @Autowired
     NoticeProcessLogService noticeProcessLogService;
 
+    @Autowired
+    ModuleCacheService moduleCacheService;
+
 
     /** 参考示例
-    @Operation(summary = CREATE_ACTION)
-    @Transactional
-    //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX_EXPR + "#result") //创建也清除缓存，防止空值缓存的情况
-    public String create(CreateNoticeProcessLogReq req){
-        return noticeProcessLogService.create(req);
-    }
-
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    //@Override
-    //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX_EXPR + "#id")
-    public NoticeProcessLogInfo findById(String id) {
-        return noticeProcessLogService.findById(id);
-    }
-
-    //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
-    @Operation(summary = VIEW_DETAIL_ACTION)
-    //@Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId + 
-    public NoticeProcessLogInfo findById(NoticeProcessLogIdReq req) {
-        return noticeProcessLogService.findById(req);
-    }
 
     @Operation(summary = UPDATE_ACTION)
     //@Override
@@ -120,14 +101,6 @@ public class BizNoticeProcessLogServiceImpl extends BaseService<BizNoticeProcess
     @Transactional
     public boolean update(UpdateNoticeProcessLogReq req) {
         return noticeProcessLogService.update(req);
-    }
-
-    @Operation(summary = DELETE_ACTION)
-    //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId +  , beforeInvocation = true
-    @Transactional
-    public boolean delete(NoticeProcessLogIdReq req) {
-        return noticeProcessLogService.delete(req);
     }
 
     */
