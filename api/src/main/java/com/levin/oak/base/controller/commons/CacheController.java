@@ -3,15 +3,14 @@ package com.levin.oak.base.controller.commons;
 import com.levin.commons.rbac.MenuResTag;
 import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
+import com.levin.commons.service.support.SpringCacheEventListener;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.entities.EntityConst;
-import com.levin.oak.base.listener.ModuleSpringCacheEventListener;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +59,7 @@ public class CacheController extends BaseController {
 
         List<String> result = new ArrayList<>(cacheKeys.size());
 
-        ModuleSpringCacheEventListener.cacheMap.forEach((cacheName, cache) -> {
+        SpringCacheEventListener.cacheMap.forEach((cacheName, cache) -> {
             if (!StringUtils.hasText(cacheNamePattern)
                     || PatternMatchUtils.simpleMatch(cacheNamePattern, cacheName)) {
 

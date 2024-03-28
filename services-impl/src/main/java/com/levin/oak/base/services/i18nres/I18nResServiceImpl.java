@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 国际化资源-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午5:09:27, 代码生成哈希校验码：[215e44a104e397b78cde992d6e9ce786]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:46:08, 代码生成哈希校验码：[ac0999188c6a84c05a964543122c9900]，请不要修改和删除此行内容。
  *
  */
 
@@ -199,12 +199,15 @@ public class I18nResServiceImpl extends BaseService<I18nResServiceImpl> implemen
 
     /**
     * 清除缓存
-    * @param keySuffix 缓存Key后缀，不包含前缀
+    * @param key
     */
-    @Operation(summary = CLEAR_CACHE_ACTION,  description = "通常是主键ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#keySuffix)", key = CK_PREFIX_EXPR + "#keySuffix")
-    public void clearCacheByKeySuffix(Object keySuffix){
+    @Operation(summary = GET_CACHE_ACTION, description = "通常是主键ID")
+    @Cacheable(unless = "#result == null", condition = "@spelUtils.isNotEmpty(#key)", key = "#key")
+    public <T> T getCache(String key){
+        Assert.notBlank(key, "key is empty");
+        return null;
     }
+
 
     /**
     * 清除缓存
@@ -212,13 +215,14 @@ public class I18nResServiceImpl extends BaseService<I18nResServiceImpl> implemen
     */
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "完整的缓存Key")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = "'' + #key")
-    public void clearCache(Object key) {
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = "#key")
+    public void clearCache(String key) {
+        Assert.notBlank(key, "key is empty");
     }
 
     /**
     * 清除[I18nResService.CACHE_NAME]缓存中的所有缓存
-    * @param key 缓存Key
+    *
     */
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")

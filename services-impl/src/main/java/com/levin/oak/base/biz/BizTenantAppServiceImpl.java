@@ -61,7 +61,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  租户应用-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:28, 代码生成哈希校验码：[53d215f21f9a0775bad8a4151be8e3b9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:47, 代码生成哈希校验码：[bab380bd92476f7b7f8172bdfdfe0a3e]，请不要修改和删除此行内容。
  *
  */
 
@@ -145,13 +145,6 @@ public class BizTenantAppServiceImpl extends BaseService<BizTenantAppServiceImpl
     @Operation(summary = STAT_ACTION)
     public StatTenantAppReq.Result stat(StatTenantAppReq req, Paging paging){
         return simpleDao.findOneByQueryObj(req, paging);
-    }
-
-    //@Override
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
-    public void clearCache(Object key) {
-        tenantAppService.clearCache(key);
     }
 
 }

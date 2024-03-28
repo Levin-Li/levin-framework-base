@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  字典-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:28, 代码生成哈希校验码：[0b271b4b11ae4ca042759551f3291960]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:48, 代码生成哈希校验码：[70ccf7c3a0e82b0db537f01b59d4e103]，请不要修改和删除此行内容。
  *
  */
 
@@ -144,13 +144,6 @@ public class BizDictServiceImpl extends BaseService<BizDictServiceImpl> implemen
     @Operation(summary = STAT_ACTION)
     public StatDictReq.Result stat(StatDictReq req, Paging paging){
         return simpleDao.findOneByQueryObj(req, paging);
-    }
-
-    //@Override
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
-    public void clearCache(Object key) {
-        dictService.clearCache(key);
     }
 
 }

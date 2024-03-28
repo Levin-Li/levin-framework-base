@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  通知处理日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:28, 代码生成哈希校验码：[cb5f8d57683531eb4013085b3b339449]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:48, 代码生成哈希校验码：[d4c3c216bffa1f4774f1bcea8b15996f]，请不要修改和删除此行内容。
  *
  */
 
@@ -142,13 +142,6 @@ public class BizNoticeProcessLogServiceImpl extends BaseService<BizNoticeProcess
     @Operation(summary = STAT_ACTION)
     public StatNoticeProcessLogReq.Result stat(StatNoticeProcessLogReq req, Paging paging){
         return simpleDao.findOneByQueryObj(req, paging);
-    }
-
-    //@Override
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
-    public void clearCache(Object key) {
-        noticeProcessLogService.clearCache(key);
     }
 
 }

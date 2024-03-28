@@ -8,10 +8,10 @@ import javax.annotation.*;
 import java.util.function.Supplier;
 
 import com.levin.commons.dao.support.SimplePaging;
+import com.levin.commons.service.support.SpringCacheEventListener;
+import com.levin.commons.service.support.SpringCacheEventListener.Action;
 import com.levin.oak.base.biz.bo.setting.StatSettingReq;
 import com.levin.oak.base.biz.bo.setting.UpdateSettingValueReq;
-import com.levin.oak.base.listener.ModuleSpringCacheEventListener;
-import com.levin.oak.base.listener.ModuleSpringCacheEventListener.Action;
 import org.springframework.cache.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import lombok.extern.slf4j.Slf4j;
@@ -65,7 +65,7 @@ public class BizSettingServiceImpl extends BaseService<BizSettingServiceImpl> im
         //清除缓存
         settingService.clearAllCache();
 
-        ModuleSpringCacheEventListener.add(
+        SpringCacheEventListener.add(
                 //清除缓存
                 (ctx, cache, action, key, value) -> cache.clear()
                 //只要有人变更缓存，清除整个缓存

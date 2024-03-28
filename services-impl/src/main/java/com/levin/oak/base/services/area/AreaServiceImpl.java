@@ -59,7 +59,7 @@ import com.levin.oak.base.entities.Area.*;
 /**
  * 区域-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午5:09:28, 代码生成哈希校验码：[32ed0b823c0b69ed463e769cb0ac16d4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:46:08, 代码生成哈希校验码：[fe74a41a785923f26a90befc474f7016]，请不要修改和删除此行内容。
  *
  */
 
@@ -200,12 +200,15 @@ public class AreaServiceImpl extends BaseService<AreaServiceImpl> implements Are
 
     /**
     * 清除缓存
-    * @param keySuffix 缓存Key后缀，不包含前缀
+    * @param key
     */
-    @Operation(summary = CLEAR_CACHE_ACTION,  description = "通常是主键ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#keySuffix)", key = CK_PREFIX_EXPR + "#keySuffix")
-    public void clearCacheByKeySuffix(Object keySuffix){
+    @Operation(summary = GET_CACHE_ACTION, description = "通常是主键ID")
+    @Cacheable(unless = "#result == null", condition = "@spelUtils.isNotEmpty(#key)", key = "#key")
+    public <T> T getCache(String key){
+        Assert.notBlank(key, "key is empty");
+        return null;
     }
+
 
     /**
     * 清除缓存
@@ -213,13 +216,14 @@ public class AreaServiceImpl extends BaseService<AreaServiceImpl> implements Are
     */
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "完整的缓存Key")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = "'' + #key")
-    public void clearCache(Object key) {
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = "#key")
+    public void clearCache(String key) {
+        Assert.notBlank(key, "key is empty");
     }
 
     /**
     * 清除[AreaService.CACHE_NAME]缓存中的所有缓存
-    * @param key 缓存Key
+    *
     */
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")

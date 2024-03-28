@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  调度任务-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:28, 代码生成哈希校验码：[31c34c5af4b1c0a83f84bab8b874147a]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:48, 代码生成哈希校验码：[13b890e5fc8898cebb5a6ab3e854a7f8]，请不要修改和删除此行内容。
  *
  */
 
@@ -141,13 +141,6 @@ public class BizScheduledTaskServiceImpl extends BaseService<BizScheduledTaskSer
     @Operation(summary = STAT_ACTION)
     public StatScheduledTaskReq.Result stat(StatScheduledTaskReq req, Paging paging){
         return simpleDao.findOneByQueryObj(req, paging);
-    }
-
-    //@Override
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
-    public void clearCache(Object key) {
-        scheduledTaskService.clearCache(key);
     }
 
 }

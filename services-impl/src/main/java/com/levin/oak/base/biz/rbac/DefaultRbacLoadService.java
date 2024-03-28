@@ -2,6 +2,8 @@ package com.levin.oak.base.biz.rbac;
 
 import com.levin.commons.dao.SimpleDao;
 import com.levin.commons.rbac.RbacUserObject;
+import com.levin.commons.service.support.SpringCacheEventListener;
+import com.levin.commons.service.support.SpringCacheEventListener.Action;
 import com.levin.commons.utils.JsonStrArrayUtils;
 import com.levin.oak.base.entities.E_Role;
 import com.levin.oak.base.entities.Role;
@@ -53,6 +55,13 @@ public class DefaultRbacLoadService
 
         log.info("默认Rbac初始化服务启用...");
 
+
+        roleService.clearAllCache();
+
+        //如果
+        SpringCacheEventListener.add((ctx, cache, action, key, value) -> cache.clear()
+                , RoleService.CACHE_NAME, RoleService.CK_PREFIX, Action.Put, Action.Evict);
+
     }
 
     /**
@@ -93,7 +102,7 @@ public class DefaultRbacLoadService
 
         //@todo 优化，使用缓存
 
-       // boolean hasTenant = StringUtils.hasText(tenantId);
+        // boolean hasTenant = StringUtils.hasText(tenantId);
 
         return new ArrayList<>(
                 //获取指定用户的权限列表

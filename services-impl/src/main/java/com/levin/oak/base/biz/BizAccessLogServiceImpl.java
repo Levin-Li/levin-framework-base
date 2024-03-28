@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  访问日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:28, 代码生成哈希校验码：[26cacc3842647b655a5bf5d36030453c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:48, 代码生成哈希校验码：[7bcb45d9b44f7954eb28046ac6969ca2]，请不要修改和删除此行内容。
  *
  */
 
@@ -141,13 +141,6 @@ public class BizAccessLogServiceImpl extends BaseService<BizAccessLogServiceImpl
     @Operation(summary = STAT_ACTION)
     public StatAccessLogReq.Result stat(StatAccessLogReq req, Paging paging){
         return simpleDao.findOneByQueryObj(req, paging);
-    }
-
-    //@Override
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
-    public void clearCache(Object key) {
-        accessLogService.clearCache(key);
     }
 
 }

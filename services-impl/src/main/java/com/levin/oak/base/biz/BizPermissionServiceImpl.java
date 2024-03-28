@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  权限清单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:27, 代码生成哈希校验码：[2015ea0db14f745f7ca192e9a67965f4]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:47, 代码生成哈希校验码：[67fb1d5250d9fc9f05d19918670cea9a]，请不要修改和删除此行内容。
  *
  */
 
@@ -140,13 +140,6 @@ public class BizPermissionServiceImpl extends BaseService<BizPermissionServiceIm
     @Operation(summary = STAT_ACTION)
     public StatPermissionReq.Result stat(StatPermissionReq req, Paging paging){
         return simpleDao.findOneByQueryObj(req, paging);
-    }
-
-    //@Override
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
-    public void clearCache(Object key) {
-        permissionService.clearCache(key);
     }
 
 }

@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  调度日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:28, 代码生成哈希校验码：[1956e0aad4804118f86d2db7b9dd1f47]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:47, 代码生成哈希校验码：[386be230a107aadc62348e9c3d76234b]，请不要修改和删除此行内容。
  *
  */
 
@@ -142,13 +142,6 @@ public class BizScheduledLogServiceImpl extends BaseService<BizScheduledLogServi
     @Operation(summary = STAT_ACTION)
     public StatScheduledLogReq.Result stat(StatScheduledLogReq req, Paging paging){
         return simpleDao.findOneByQueryObj(req, paging);
-    }
-
-    //@Override
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
-    public void clearCache(Object key) {
-        scheduledLogService.clearCache(key);
     }
 
 }

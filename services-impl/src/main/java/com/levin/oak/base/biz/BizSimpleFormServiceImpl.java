@@ -59,7 +59,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  简单表单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:29, 代码生成哈希校验码：[917918a9b2931d8b82df962eecbaaf0f]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:49, 代码生成哈希校验码：[835d6b39d74ee36fb40e780592100b19]，请不要修改和删除此行内容。
  *
  */
 
@@ -143,13 +143,6 @@ public class BizSimpleFormServiceImpl extends BaseService<BizSimpleFormServiceIm
     @Operation(summary = STAT_ACTION)
     public StatSimpleFormReq.Result stat(StatSimpleFormReq req, Paging paging){
         return simpleDao.findOneByQueryObj(req, paging);
-    }
-
-    //@Override
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
-    public void clearCache(Object key) {
-        simpleFormService.clearCache(key);
     }
 
 }

@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  工作岗位-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:28, 代码生成哈希校验码：[c77214a0e4e00bb959abbc751795c2c9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:51:48, 代码生成哈希校验码：[5934e868bfeee907b95f068071e58bd2]，请不要修改和删除此行内容。
  *
  */
 
@@ -142,13 +142,6 @@ public class BizJobPostServiceImpl extends BaseService<BizJobPostServiceImpl> im
     @Operation(summary = STAT_ACTION)
     public StatJobPostReq.Result stat(StatJobPostReq req, Paging paging){
         return simpleDao.findOneByQueryObj(req, paging);
-    }
-
-    //@Override
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
-    public void clearCache(Object key) {
-        jobPostService.clearCache(key);
     }
 
 }

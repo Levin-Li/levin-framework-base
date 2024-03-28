@@ -5,15 +5,14 @@ import com.levin.commons.dao.support.SimplePaging;
 import com.levin.commons.service.domain.DefaultSignatureReq;
 import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.exception.ServiceException;
+import com.levin.commons.service.support.SpringCacheEventListener;
+import com.levin.commons.service.support.SpringCacheEventListener.Action;
 import com.levin.commons.utils.SignUtils;
-import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.bo.tenant.StatTenantReq;
 import com.levin.oak.base.biz.rbac.AuthService;
-import com.levin.oak.base.entities.E_Permission;
 import com.levin.oak.base.entities.E_Tenant;
-import com.levin.oak.base.listener.ModuleSpringCacheEventListener;
-import com.levin.oak.base.listener.ModuleSpringCacheEventListener.Action;
+
 import com.levin.oak.base.services.appclient.AppClientService;
 import com.levin.oak.base.services.appclient.info.AppClientInfo;
 import com.levin.oak.base.services.appclient.req.QueryAppClientReq;
@@ -26,10 +25,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cache.Cache;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -37,12 +34,8 @@ import org.springframework.util.StringUtils;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
@@ -89,7 +82,7 @@ public class BizTenantServiceImpl implements BizTenantService {
         tenantService.clearCache(E_Tenant.SIMPLE_CLASS_NAME);
 
         //如果缓存有变化，清除列表缓存
-        ModuleSpringCacheEventListener.add((ctx, cache, action, key, value) -> cache.evict(E_Tenant.SIMPLE_CLASS_NAME)
+        SpringCacheEventListener.add((ctx, cache, action, key, value) -> cache.evict(E_Tenant.SIMPLE_CLASS_NAME)
                 , ID + CACHE_DELIM + E_Tenant.SIMPLE_CLASS_NAME, TenantService.CK_PREFIX + "*", Action.Put, Action.Evict);
     }
 

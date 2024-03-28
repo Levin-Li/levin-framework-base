@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.*;
 
 //import org.springframework.cache.annotation.*;
 //import org.springframework.dao.*;
+import org.springframework.util.*;
 
 import java.util.*;
 import java.util.stream.*;
@@ -29,7 +30,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 调度任务-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午4:50:45, 代码生成哈希校验码：[9dd9737adf56f2f634453f247822aad9]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月29日 上午12:46:08, 代码生成哈希校验码：[ca6bec39e2f07c27b4c1b4f7dce0d74c]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_ScheduledTask.BIZ_NAME, description = E_ScheduledTask.BIZ_NAME + MAINTAIN_ACTION)
@@ -42,7 +43,7 @@ public interface ScheduledTaskService {
     //缓存key前缀
     String CK_PREFIX = E_ScheduledTask.CACHE_KEY_PREFIX;
 
-    //缓存key前缀表达式
+    //缓存key前缀Spel表达式
     String CK_PREFIX_EXPR = E_ScheduledTask.CACHE_KEY_PREFIX_EXPR;
 
     String SERVICE_NAME = "ScheduledTaskService";
@@ -200,24 +201,49 @@ public interface ScheduledTaskService {
     ScheduledTaskInfo findUnique(QueryScheduledTaskReq req);
 
     /**
+     * 获取缓存
+     *
+     * @param keySuffix 缓存Key后缀，不包含前缀
+     * @return 缓存数据
+     */
+    @Operation(summary = GET_CACHE_ACTION, description = "通常是主键ID")
+    default <T> T getCacheByKeySuffix(@NotNull String keySuffix) {
+        Assert.hasText(keySuffix, "keySuffix is empty");
+        return getCache(CK_PREFIX + keySuffix);
+    }
+
+    /**
+     * 获取缓存
+     *
+     * @param key 缓存Key
+     * @return 缓存数据
+     */
+    @Operation(summary = GET_CACHE_ACTION, description = "完整的缓存Key")
+    <T> T getCache(@NotNull String key);
+
+    /**
      * 清除缓存
+     *
      * @param keySuffix 缓存Key后缀，不包含前缀
      */
-    @Operation(summary = CLEAR_CACHE_ACTION,  description = "通常是主键ID")
-    void clearCacheByKeySuffix(@NotNull Object keySuffix);
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "通常是主键ID")
+    default void clearCacheByKeySuffix(@NotNull String keySuffix) {
+        Assert.hasText(keySuffix, "keySuffix is empty");
+        clearCache(CK_PREFIX + keySuffix);
+    }
 
-     /**
-      * 清除缓存
-      * @param key 缓存Key
+    /**
+     * 清除缓存
+     *
+     * @param key 缓存Key
      */
-     @Operation(summary = CLEAR_CACHE_ACTION,  description = "完整的缓存Key")
-     void clearCache(@NotNull Object key);
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "完整的缓存Key")
+    void clearCache(@NotNull String key);
 
     /**
      * 清除所有缓存
-     * 
      */
-    @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "清除所有缓存")
     void clearAllCache();
 
 }
