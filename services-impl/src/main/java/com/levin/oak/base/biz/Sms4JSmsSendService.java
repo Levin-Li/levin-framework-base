@@ -53,8 +53,6 @@ import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
 public class Sms4JSmsSendService
         implements SmsSendService {
 
-    private static final String CACHE_NAME = Sms4JSmsSendService.class.getName();
-
     public static final String CFG_CODE = "短信通道配置";
 
 //    @Autowired

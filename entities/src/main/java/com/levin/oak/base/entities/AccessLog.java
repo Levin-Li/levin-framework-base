@@ -37,6 +37,7 @@ import java.util.Date;
 )
 @Schema(title = "访问日志")
 @EntityCategory(EntityOpConst.SYS_TYPE_NAME)
+@Cacheable(false)
 public class AccessLog extends SimpleTenantOrgObject {
 
     @Id

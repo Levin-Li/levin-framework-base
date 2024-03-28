@@ -2,36 +2,132 @@ package com.levin.oak.base.resolver;
 
 import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.*;
+
+import com.levin.oak.base.listener.ModuleSpringCacheEventListener;
+import com.levin.oak.base.listener.ModuleSpringCacheEventListener.Action;
+
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.interceptor.AbstractCacheResolver;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.cache.interceptor.CacheResolver;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+
+import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * 模块缓存解析器
  *
- * @author Auto gen by simple-dao-codegen, @time: 2023年12月17日 上午11:11:48, 代码生成哈希校验码：[6a0d3a2b4211b4ea95db834401ceaa1c]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午3:22:51, 代码生成哈希校验码：[8664d3a69ac95a9c04740d66183a645d]，请不要修改和删除此行内容。
  *
  */
+
 
 @Slf4j
 @Component(PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 @ConditionalOnProperty(prefix = PLUGIN_PREFIX, name = "ModuleSpringCacheResolver", matchIfMissing = true)
-public class ModuleSpringCacheResolver implements CacheResolver, InitializingBean {
+public class ModuleSpringCacheResolver implements CacheResolver, InitializingBean, ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     CacheManager cacheManager;
+
+    @Autowired
+    ApplicationContext applicationContext;
+
+    private static final ThreadLocal<CacheOperationInvocationContext<?>> invocationContext = new ThreadLocal<>();
+
+    @AllArgsConstructor
+    static class CacheProxy implements Cache {
+
+        Cache delegate;
+
+        Supplier<Collection<ModuleSpringCacheEventListener>> supplier;
+
+        /**
+         * Return the cache name.
+         */
+        @Override
+        public String getName() {
+            return delegate.getName();
+        }
+
+        @Override
+        public Object getNativeCache() {
+            return delegate.getNativeCache();
+        }
+
+        @Override
+        public ValueWrapper get(Object key) {
+            ValueWrapper valueWrapper = delegate.get(key);
+            onEvent(Action.Get, key, valueWrapper);
+            return valueWrapper;
+        }
+
+        @Override
+        public <T> T get(Object key, Class<T> type) {
+            T value = delegate.get(key, type);
+            onEvent(Action.Get, key, value);
+            return value;
+        }
+
+        @Override
+        public <T> T get(Object key, Callable<T> valueLoader) {
+            T value = delegate.get(key, valueLoader);
+            onEvent(Action.Get, key, value);
+            return value;
+        }
+
+        @Override
+        public void put(Object key, Object value) {
+            delegate.put(key, value);
+            onEvent(Action.Put, key, value);
+        }
+
+        @Override
+        public void evict(Object key) {
+            delegate.evict(key);
+            onEvent(Action.Evict, key, null);
+        }
+
+        @Override
+        public void clear() {
+            delegate.clear();
+            onEvent(Action.Clear, null, null);
+        }
+
+        private void onEvent(Action action, Object key, Object value) {
+
+            try {
+
+                Collection<ModuleSpringCacheEventListener> listeners = supplier != null ? supplier.get() : null;
+
+                if (listeners != null) {
+                    listeners.forEach(el -> el.onCacheEvent(invocationContext.get(), delegate, action, key, value));
+                }
+
+            } finally {
+                invocationContext.remove();
+            }
+        }
+    }
 
     /**
      * Construct a new {@code AbstractCacheResolver}.
@@ -40,7 +136,6 @@ public class ModuleSpringCacheResolver implements CacheResolver, InitializingBea
      */
     public ModuleSpringCacheResolver() {
     }
-
 
     /**
      * Set the {@link CacheManager} that this instance should use.
@@ -62,49 +157,47 @@ public class ModuleSpringCacheResolver implements CacheResolver, InitializingBea
         Assert.notNull(this.cacheManager, "CacheManager is required");
     }
 
+
+    /**
+     * Handle an application event.
+     *
+     * @param event the event to respond to
+     */
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        if (event.getApplicationContext() == applicationContext) {
+            event.getApplicationContext().getBeanProvider(ModuleSpringCacheEventListener.class).forEach(ModuleSpringCacheEventListener::add);
+        }
+    }
+
+    @NotNull
     @Override
     public Collection<? extends Cache> resolveCaches(CacheOperationInvocationContext<?> context) {
 
-        Collection<String> cacheNames = getCacheNames(context);
+        Collection<String> cacheNames = context.getOperation().getCacheNames();
 
-        if (cacheNames == null) {
+        if (cacheNames == null || cacheNames.isEmpty()) {
             return Collections.emptyList();
         }
 
-        Collection<Cache> result = new ArrayList<>(cacheNames.size());
+        invocationContext.set(context);
 
-        for (String cacheName : cacheNames) {
-            Cache cache = getCacheManager().getCache(cacheName);
-            if (cache == null) {
-                throw new IllegalArgumentException("Cannot find cache named '" +
-                        cacheName + "' for " + context.getOperation());
-            }
-            result.add(cache);
-        }
+        return cacheNames.stream().map(cacheName ->
 
-        return result;
-    }
+                ModuleSpringCacheEventListener.cacheMap.computeIfAbsent(cacheName, key -> {
 
-    protected Collection<String> getCacheNames(CacheOperationInvocationContext<?> context) {
+                    Cache cache = getCacheManager().getCache(cacheName);
 
-        Object target = context.getTarget();
+                    if (cache == null) {
+                        throw new IllegalArgumentException("Cannot find cache named '" + cacheName + "' for " + context.getOperation());
+                    }
 
-        Collection<String> result = Collections.emptySet();
+                    return new CacheProxy(cache, () -> ModuleSpringCacheEventListener.eventListeners);
 
-//        if (target instanceof UserService) {
-//
-//        } else if (target instanceof OrgService) {
-//
-//        } else if (target instanceof RoleService) {
-//
-//        }
+                })
 
-        //
-        if (!result.isEmpty()) {
-            result.addAll(context.getOperation().getCacheNames());
-        }
+        ).collect(Collectors.toList());
 
-        return result.isEmpty() ? context.getOperation().getCacheNames() : result;
     }
 
 }

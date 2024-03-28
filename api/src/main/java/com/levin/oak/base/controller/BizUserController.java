@@ -160,7 +160,8 @@ public class BizUserController extends UserController {
         //更新数据
         bizUserService.update(authService.getUserInfo(), new UpdateUserReq().setId(userInfo.getId()).setTenantId(userInfo.getTenantId()).setMfaSecretKey(secretKey));
 
-        return ApiResp.ok(forQrCode ? multiFactorAuthService.genQrCode(userInfo.getName(), secretKey) : secretKey);
+        //域名区分
+        return ApiResp.ok(forQrCode ? multiFactorAuthService.genQrCode(httpRequest.getServerName() + "_" + userInfo.getName(), secretKey) : secretKey);
     }
 
     /**

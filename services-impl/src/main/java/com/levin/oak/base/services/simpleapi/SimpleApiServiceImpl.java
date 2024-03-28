@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  * 简单动态接口-服务实现
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:34:54, 代码生成哈希校验码：[e8f16cd15a3c1a770f6ce44b47a78711]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午5:09:26, 代码生成哈希校验码：[9192ccffc212112724e086683a10ea7d]，请不要修改和删除此行内容。
  *
  */
 
@@ -70,7 +70,9 @@ import com.levin.commons.service.support.InjectConst;
 //@Valid只能用在controller， @Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_SimpleApi.BIZ_NAME, description = E_SimpleApi.BIZ_NAME + MAINTAIN_ACTION)
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleApi.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+//*** 提示 *** 如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
+@CacheConfig(cacheNames = SimpleApiService.CACHE_NAME, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 
 // *** 提示 *** 请尽量不要修改本类，如果需要修改，请在BizSimpleApiServiceImpl业务类中重写业务逻辑
 
@@ -85,7 +87,7 @@ public class SimpleApiServiceImpl extends BaseService<SimpleApiServiceImpl> impl
     @Operation(summary = CREATE_ACTION)
     @Transactional
     @Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX_EXPR + "#result") //创建也清除缓存，防止空值缓存的情况
     public String create(CreateSimpleApiReq req){
         //dao支持保存前先自动查询唯一约束，并给出错误信息
         SimpleApi entity = simpleDao.create(req, true);
@@ -101,7 +103,7 @@ public class SimpleApiServiceImpl extends BaseService<SimpleApiServiceImpl> impl
 
     @Operation(summary = UPDATE_ACTION)
     @Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdateSimpleApiReq req, Object... queryObjs) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -127,7 +129,7 @@ public class SimpleApiServiceImpl extends BaseService<SimpleApiServiceImpl> impl
 
     @Operation(summary = DELETE_ACTION)
     @Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(SimpleApiIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
@@ -168,7 +170,7 @@ public class SimpleApiServiceImpl extends BaseService<SimpleApiServiceImpl> impl
     @Override
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
     //如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX_EXPR + "#id")
     public SimpleApiInfo findById(String id) {
         return findById(new SimpleApiIdReq().setId(id));
     }
@@ -176,7 +178,7 @@ public class SimpleApiServiceImpl extends BaseService<SimpleApiServiceImpl> impl
     //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     @Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId + 
     public SimpleApiInfo findById(SimpleApiIdReq req) {
         Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
         return simpleDao.findUnique(req);
@@ -195,12 +197,29 @@ public class SimpleApiServiceImpl extends BaseService<SimpleApiServiceImpl> impl
         return simpleDao.findUnique(req);
     }
 
+    /**
+    * 清除缓存
+    * @param keySuffix 缓存Key后缀，不包含前缀
+    */
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "通常是主键ID")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#keySuffix)", key = CK_PREFIX_EXPR + "#keySuffix")
+    public void clearCacheByKeySuffix(Object keySuffix){
+    }
+
+    /**
+    * 清除缓存
+    * @param key 缓存Key
+    */
     @Override
-    @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    @Operation(summary = CLEAR_CACHE_ACTION, description = "完整的缓存Key")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = "'' + #key")
     public void clearCache(Object key) {
     }
 
+    /**
+    * 清除[SimpleApiService.CACHE_NAME]缓存中的所有缓存
+    * @param key 缓存Key
+    */
     @Override
     @Operation(summary = CLEAR_CACHE_ACTION,  description = "清除所有缓存")
     @CacheEvict(allEntries = true)

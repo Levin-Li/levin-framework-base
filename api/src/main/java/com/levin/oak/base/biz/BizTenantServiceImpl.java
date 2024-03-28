@@ -6,10 +6,14 @@ import com.levin.commons.service.domain.DefaultSignatureReq;
 import com.levin.commons.service.exception.AccessDeniedException;
 import com.levin.commons.service.exception.ServiceException;
 import com.levin.commons.utils.SignUtils;
+import com.levin.oak.base.ModuleOption;
 import com.levin.oak.base.autoconfigure.FrameworkProperties;
 import com.levin.oak.base.biz.bo.tenant.StatTenantReq;
 import com.levin.oak.base.biz.rbac.AuthService;
+import com.levin.oak.base.entities.E_Permission;
 import com.levin.oak.base.entities.E_Tenant;
+import com.levin.oak.base.listener.ModuleSpringCacheEventListener;
+import com.levin.oak.base.listener.ModuleSpringCacheEventListener.Action;
 import com.levin.oak.base.services.appclient.AppClientService;
 import com.levin.oak.base.services.appclient.info.AppClientInfo;
 import com.levin.oak.base.services.appclient.req.QueryAppClientReq;
@@ -19,8 +23,14 @@ import com.levin.oak.base.services.tenant.req.QueryTenantReq;
 import com.levin.oak.base.services.user.info.UserInfo;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cache.Cache;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.interceptor.CacheOperationInvocationContext;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -28,11 +38,13 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import static com.levin.oak.base.ModuleOption.PLUGIN_PREFIX;
+import static com.levin.oak.base.ModuleOption.*;
 import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 
 
@@ -41,8 +53,10 @@ import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 @Slf4j
 //@Validated
 @Tag(name = E_Tenant.BIZ_NAME, description = E_Tenant.BIZ_NAME + MAINTAIN_ACTION)
-public class BizTenantServiceImpl
-        implements BizTenantService {
+
+@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Tenant.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+public class BizTenantServiceImpl implements BizTenantService {
 
     @Autowired
     AuthService authService;
@@ -67,24 +81,27 @@ public class BizTenantServiceImpl
 
     final static ThreadLocal<TenantInfo> currentTenant = new ThreadLocal<>();
 
-
     @PostConstruct
     void init() {
         frameworkProperties.getSign().friendlyTip(log.isInfoEnabled(), info -> log.info(info));
+
+        //首次启动先清除缓存
+        tenantService.clearCache(E_Tenant.SIMPLE_CLASS_NAME);
+
+        //如果缓存有变化，清除列表缓存
+        ModuleSpringCacheEventListener.add((ctx, cache, action, key, value) -> cache.evict(E_Tenant.SIMPLE_CLASS_NAME)
+                , ID + CACHE_DELIM + E_Tenant.SIMPLE_CLASS_NAME, TenantService.CK_PREFIX + "*", Action.Put, Action.Evict);
     }
 
-    private static <T> T getData(T main, Predicate<T> filter, Supplier<T>... supplier) {
-
-        if (filter == null) {
-            filter = Objects::nonNull;
-        }
-
-        return filter.test(main) ? main :
-                Arrays.stream(supplier)
-                        .map(Supplier::get)
-                        .filter(filter)
-                        .findFirst()
-                        .orElse(null);
+    /**
+     * 获取所有租户列表，并缓存结果
+     *
+     * @return
+     */
+    @Cacheable(unless = "#result == null", key = "'" + E_Tenant.SIMPLE_CLASS_NAME + "'") //
+    public List<TenantInfo> getAllTenantList() {
+        List<TenantInfo> items = tenantService.query(new QueryTenantReq().setEnable(true), null).getItems();
+        return items == null ? Collections.emptyList() : items;
     }
 
     @Override
@@ -299,7 +316,9 @@ public class BizTenantServiceImpl
 
         Assert.notBlank(domain, () -> new IllegalArgumentException("domain is blank"));
 
-        TenantInfo tenantInfo = tenantService.findUnique(new QueryTenantReq().setDomainList(Arrays.asList(domain)));
+        //获取租户
+        TenantInfo tenantInfo = getSelfProxy().getAllTenantList().stream().filter(t -> t.getDomainList() != null && t.getDomainList().contains(domain)).findFirst().get();
+        // tenantService.findUnique(new QueryTenantReq().setDomainList(Arrays.asList(domain)));
 
         return auditTenant(tenantInfo);
     }
@@ -313,9 +332,10 @@ public class BizTenantServiceImpl
     @Override
     public TenantInfo loadTenantByTenantKey(String tenantKey) {
 
-        Assert.isTrue(StringUtils.hasText(tenantKey), "租户Key不能为空");
+        Assert.notBlank(tenantKey, "要加载的租户Key不能为空");
 
-        TenantInfo tenantInfo = tenantService.findUnique(new QueryTenantReq().setTenantKey(tenantKey));
+        TenantInfo tenantInfo = getSelfProxy().getAllTenantList().stream().filter(t -> tenantKey.equals(t.getTenantKey())).findFirst().get();
+        // tenantService.findUnique(new QueryTenantReq().setTenantKey(tenantKey));
 
         return auditTenant(tenantInfo);
     }
@@ -323,5 +343,24 @@ public class BizTenantServiceImpl
     @Override
     public StatTenantReq.Result stat(StatTenantReq req, SimplePaging paging) {
         throw new UnsupportedOperationException("not support");
+    }
+
+    @Autowired
+    protected ApplicationContext applicationContext;
+
+    protected BizTenantServiceImpl selfProxy = null;
+
+    /**
+     * 返回自身的代理
+     *
+     * @return
+     */
+    protected BizTenantServiceImpl getSelfProxy() {
+
+        if (selfProxy == null) {
+            selfProxy = (BizTenantServiceImpl) applicationContext.getBean(AopProxyUtils.ultimateTargetClass(this));
+        }
+
+        return selfProxy;
     }
 }

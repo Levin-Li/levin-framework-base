@@ -60,7 +60,8 @@ public class GoogleMultiFactorAuthService implements MultiFactorAuthService {
      */
     @Override
     public String genQrCode(String userName, String secretKey) {
-        return String.format(KEY_FORMAT, userName, secretKey);
+        // 生成二维码, 替换掉 :
+        return String.format(KEY_FORMAT, userName.replace(':','_'), secretKey);
     }
 
     /**

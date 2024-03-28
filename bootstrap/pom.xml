@@ -34,6 +34,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.10.2</version>
+        </dependency>
+
+        <dependency>
             <artifactId>framework-base-entities</artifactId>
             <groupId>${project.groupId}</groupId>
             <version>${project.version}</version>

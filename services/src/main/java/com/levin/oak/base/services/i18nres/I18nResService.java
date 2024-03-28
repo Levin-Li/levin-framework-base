@@ -29,7 +29,7 @@ import static com.levin.oak.base.entities.EntityConst.*;
 /**
  * 国际化资源-服务接口
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月26日 下午2:38:49, 代码生成哈希校验码：[b48b09ebdf9ae26d899903898e5a4b80]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午4:50:45, 代码生成哈希校验码：[1fa4858299dafdfb54569b42658d94bb]，请不要修改和删除此行内容。
  *
  */
 @Tag(name = E_I18nRes.BIZ_NAME, description = E_I18nRes.BIZ_NAME + MAINTAIN_ACTION)
@@ -37,7 +37,13 @@ public interface I18nResService {
 
     String BIZ_NAME = E_I18nRes.BIZ_NAME;
 
+    String CACHE_NAME = ModuleOption.ID + CACHE_DELIM + E_I18nRes.SIMPLE_CLASS_NAME;
+
+    //缓存key前缀
     String CK_PREFIX = E_I18nRes.CACHE_KEY_PREFIX;
+
+    //缓存key前缀表达式
+    String CK_PREFIX_EXPR = E_I18nRes.CACHE_KEY_PREFIX_EXPR;
 
     String SERVICE_NAME = "I18nResService";
 
@@ -195,10 +201,17 @@ public interface I18nResService {
 
     /**
      * 清除缓存
-     * @param key 缓存Key
+     * @param keySuffix 缓存Key后缀，不包含前缀
      */
-    @Operation(summary = CLEAR_CACHE_ACTION,  description = "缓存Key通常是主键ID")
-    void clearCache(@NotNull Object key);
+    @Operation(summary = CLEAR_CACHE_ACTION,  description = "通常是主键ID")
+    void clearCacheByKeySuffix(@NotNull Object keySuffix);
+
+     /**
+      * 清除缓存
+      * @param key 缓存Key
+     */
+     @Operation(summary = CLEAR_CACHE_ACTION,  description = "完整的缓存Key")
+     void clearCache(@NotNull Object key);
 
     /**
      * 清除所有缓存
