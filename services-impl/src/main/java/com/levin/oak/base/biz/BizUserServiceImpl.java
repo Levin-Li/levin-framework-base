@@ -57,7 +57,7 @@ import com.levin.commons.dao.PagingData;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_User.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_User.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+@CacheConfig(cacheNames = UserService.CACHE_NAME, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class BizUserServiceImpl extends BaseService<BizUserServiceImpl> implements BizUserService<Serializable> {
 
     @Autowired
@@ -69,7 +69,6 @@ public class BizUserServiceImpl extends BaseService<BizUserServiceImpl> implemen
     @Autowired
     RbacService rbacService;
 
-    private static final String CK_PREFIX = E_User.CACHE_KEY_PREFIX;
 
     /**
      * 检查用户角色
@@ -94,15 +93,6 @@ public class BizUserServiceImpl extends BaseService<BizUserServiceImpl> implemen
         }
     }
 
-    //示例方法
-    //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    //@Override
-    //@CacheEvict(condition = "#req.id != null", key = E_User.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
-    //public boolean update(UpdateUserReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    //}
 
     private void checkCreateOrUpdateAccount(String... accounts) {
         for (String account : accounts) {
@@ -131,7 +121,7 @@ public class BizUserServiceImpl extends BaseService<BizUserServiceImpl> implemen
     }
 
     @Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = UserService.CK_PREFIX_EXPR + "#req.id")
     public boolean updatePwd(Serializable userPrincipal, UpdateUserPwdReq req) {
 
         Assert.notNull(req.getId(), E_User.BIZ_NAME + " id 不能为空");

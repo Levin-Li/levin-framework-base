@@ -85,12 +85,12 @@ public class BizFileStorageServiceImpl
 
     protected Map<String, Object> getSetting(String tenantId, String appId) {
 
-        String value = bizSettingService.getValue(tenantId, getSettingCode(tenantId, appId));
+        String value = bizSettingService.getValue(tenantId, genCode(tenantId, appId));
 
         return (Map<String, Object>) (StringUtils.hasText(value) ? gson.fromJson(value, Map.class) : Collections.emptyMap());
     }
 
-    private String getSettingCode(String tenantId, String appId) {
+    private String genCode(String tenantId, String appId) {
         return CFG_CODE + (StringUtils.hasText(appId) ? "|" + appId : "");
     }
 
@@ -106,14 +106,18 @@ public class BizFileStorageServiceImpl
         Map<String, Object> setting = getSetting(tenantId, appId);
 
         if (setting == null || setting.isEmpty()) {
+
             //创建默认配置
-            String settingCode = getSettingCode(tenantId, appId);
+            String settingCode = genCode(tenantId, appId);
+
             settingService.create(
                     BeanUtil.copyProperties(newDefaultConfig(settingCode), CreateSettingReq.class)
                             .setTenantId(tenantId)
                             .setId(settingCode + "@" + (StringUtils.hasText(tenantId) ? tenantId : ""))
             );
+
             setting = getSetting(tenantId, appId);
+
         }
 
         String fileStorageType = (String) setting.get("fileStorageType");

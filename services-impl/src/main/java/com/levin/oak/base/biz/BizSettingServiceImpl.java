@@ -10,6 +10,8 @@ import java.util.function.Supplier;
 import com.levin.commons.dao.support.SimplePaging;
 import com.levin.oak.base.biz.bo.setting.StatSettingReq;
 import com.levin.oak.base.biz.bo.setting.UpdateSettingValueReq;
+import com.levin.oak.base.listener.ModuleSpringCacheEventListener;
+import com.levin.oak.base.listener.ModuleSpringCacheEventListener.Action;
 import org.springframework.cache.annotation.*;
 import org.springframework.boot.autoconfigure.condition.*;
 import lombok.extern.slf4j.Slf4j;
@@ -51,24 +53,23 @@ import org.springframework.util.StringUtils;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_Setting.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Setting.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+@CacheConfig(cacheNames = SettingService.CACHE_NAME, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class BizSettingServiceImpl extends BaseService<BizSettingServiceImpl> implements BizSettingService {
 
     @Autowired
     SettingService settingService;
 
-    //示例方法
-    //@Operation(tags = {BIZ_NAME}, summary = UPDATE_ACTION)
-    //@Override
-    //@CacheEvict(condition = "#req.id != null", key = E_Setting.CACHE_KEY_PREFIX + "#req.id")
-    //@Transactional(rollbackFor = {PersistenceException.class, DataAccessException.class})
-    //public boolean update(UpdateSettingReq req) {
-    //    Assert.notNull(req.getId(), BIZ_NAME + " id 不能为空");
-    //    return simpleDao.singleUpdateByQueryObj(req);
-    //}
-
     @PostConstruct
     public void init() {
+
+        //清除缓存
+        settingService.clearAllCache();
+
+        ModuleSpringCacheEventListener.add(
+                //清除缓存
+                (ctx, cache, action, key, value) -> cache.clear()
+                //只要有人变更缓存，清除整个缓存
+                , SettingService.CACHE_NAME, SettingService.CK_PREFIX, Action.Put, Action.Evict);
 
     }
 
@@ -91,29 +92,31 @@ public class BizSettingServiceImpl extends BaseService<BizSettingServiceImpl> im
      * @param code
      */
     @Override
-    @CacheEvict(condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "('' + #tenantId + #code)")
+    @CacheEvict(condition = "#code != null", key = SettingService.CK_PREFIX_EXPR + "('' + #tenantId + #code)")
     public void clearCache(String tenantId, String code) {
 
     }
 
-    @CacheEvict(condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "('' + #tenantId + #code)")
+    @CacheEvict(condition = "#code != null", key = SettingService.CK_PREFIX_EXPR + "('' + #tenantId + #code)")
     @Override
     public boolean updateValue(String tenantId, String code, String valueContent) {
 
-        Assert.notBlank(code, "系统设置编码不能为空");
+        Assert.notBlank(code, "[系统设置]的编码不能为空");
 
-        return simpleDao.singleUpdateByQueryObj(new UpdateSettingValueReq()
+        return simpleDao.singleUpdateByQueryObj(
+                new UpdateSettingValueReq()
                 .setCode(code)
                 .setValueContent(valueContent)
                 .setTenantId(tenantId)
         );
+
     }
 
-    @CachePut(unless = "#result == null", condition = "#code != null", key = E_Setting.CACHE_KEY_PREFIX + "('' + #tenantId + #code)")
+    @CachePut(unless = "#result == null", condition = "#code != null", key = SettingService.CK_PREFIX_EXPR + "('' + #tenantId + #code)")
     @Override
     public String getValue(String tenantId, String code, Supplier<SettingInfo> supplierForCreateIfNotaExist) {
 
-        Assert.notBlank(code, "系统设置编码不能为空");
+        Assert.notBlank(code, "[系统设置]的编码不能为空");
 
         SettingInfo info = settingService.findOne(new QuerySettingReq().setCode(code).setTenantId(tenantId));
 

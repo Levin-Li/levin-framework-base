@@ -58,7 +58,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  通知处理日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月18日 下午3:08:57, 代码生成哈希校验码：[2aa5e221ce4759311784c697bd76f932]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:28, 代码生成哈希校验码：[cb5f8d57683531eb4013085b3b339449]，请不要修改和删除此行内容。
  *
  */
 
@@ -79,7 +79,10 @@ import com.levin.commons.service.support.InjectConst;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_NoticeProcessLog.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_NoticeProcessLog.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+//*** 提示 *** 如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
+@CacheConfig(cacheNames = NoticeProcessLogService.CACHE_NAME, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
 public class BizNoticeProcessLogServiceImpl extends BaseService<BizNoticeProcessLogServiceImpl> implements BizNoticeProcessLogService {
 
     @Autowired
@@ -90,7 +93,7 @@ public class BizNoticeProcessLogServiceImpl extends BaseService<BizNoticeProcess
     @Operation(summary = CREATE_ACTION)
     @Transactional
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX_EXPR + "#result") //创建也清除缓存，防止空值缓存的情况
     public String create(CreateNoticeProcessLogReq req){
         return noticeProcessLogService.create(req);
     }
@@ -98,7 +101,7 @@ public class BizNoticeProcessLogServiceImpl extends BaseService<BizNoticeProcess
     @Operation(summary = VIEW_DETAIL_ACTION)
     //@Override
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX_EXPR + "#id")
     public NoticeProcessLogInfo findById(String id) {
         return noticeProcessLogService.findById(id);
     }
@@ -106,14 +109,14 @@ public class BizNoticeProcessLogServiceImpl extends BaseService<BizNoticeProcess
     //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     //@Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId + 
     public NoticeProcessLogInfo findById(NoticeProcessLogIdReq req) {
         return noticeProcessLogService.findById(req);
     }
 
     @Operation(summary = UPDATE_ACTION)
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdateNoticeProcessLogReq req) {
         return noticeProcessLogService.update(req);
@@ -121,7 +124,7 @@ public class BizNoticeProcessLogServiceImpl extends BaseService<BizNoticeProcess
 
     @Operation(summary = DELETE_ACTION)
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(NoticeProcessLogIdReq req) {
         return noticeProcessLogService.delete(req);
@@ -143,7 +146,7 @@ public class BizNoticeProcessLogServiceImpl extends BaseService<BizNoticeProcess
 
     //@Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
     public void clearCache(Object key) {
         noticeProcessLogService.clearCache(key);
     }

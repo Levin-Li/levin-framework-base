@@ -5,6 +5,7 @@ import com.levin.commons.rbac.ResAuthorize;
 import com.levin.commons.service.domain.ApiResp;
 import com.levin.oak.base.controller.BaseController;
 import com.levin.oak.base.entities.EntityConst;
+import com.levin.oak.base.listener.ModuleSpringCacheEventListener;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -12,12 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.PatternMatchUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,29 +55,53 @@ public class CacheController extends BaseController {
     @Autowired
     CacheManager cacheManager;
 
-    @PostMapping("evict")
+    @GetMapping("evict")
     @Operation(summary = "清除指定key的缓存", description = "返回清除成功的缓存Key")
-    public ApiResp<List<String>> evict(@NotNull @RequestBody List<String> cacheKeys) {
+    public ApiResp<List<String>> evict(@RequestParam @NotBlank String cacheNamePattern, List<String> cacheKeys) {
 
         List<String> result = new ArrayList<>(cacheKeys.size());
 
-        cacheManager.getCacheNames().parallelStream().forEach(cacheName -> {
+        ModuleSpringCacheEventListener.cacheMap.forEach((cacheName, cache) -> {
+            if (!StringUtils.hasText(cacheNamePattern)
+                    || PatternMatchUtils.simpleMatch(cacheNamePattern, cacheName)) {
 
-            cacheKeys.stream().filter(cacheKey -> cacheKey.startsWith(cacheName)).forEach(cacheKey -> {
-
-                Cache cache = cacheManager.getCache(cacheName);
-
-                if (cache == null) {
-                    return;
-                }
-
-                if (cache.evictIfPresent(cacheKey)) {
-                    result.add(cacheKey);
-                }
-            });
+                // 清除缓存
+                cacheKeys.stream().filter(StringUtils::hasText).forEach(cacheKey ->
+                        {
+                            if (cache.evictIfPresent(cacheKey)) {
+                                result.add(cacheKey);
+                            }
+                        }
+                );
+            }
         });
 
         return ApiResp.ok(result);
     }
+
+//    @PostMapping("evict")
+//    @Operation(summary = "清除指定key的缓存", description = "返回清除成功的缓存Key")
+//    public ApiResp<List<String>> evict(@NotNull @RequestBody List<String> cacheKeys) {
+//
+//        List<String> result = new ArrayList<>(cacheKeys.size());
+//
+//        cacheManager.getCacheNames().parallelStream().forEach(cacheName -> {
+//
+//            cacheKeys.stream().filter(cacheKey -> cacheKey.startsWith(cacheName)).forEach(cacheKey -> {
+//
+//                Cache cache = cacheManager.getCache(cacheName);
+//
+//                if (cache == null) {
+//                    return;
+//                }
+//
+//                if (cache.evictIfPresent(cacheKey)) {
+//                    result.add(cacheKey);
+//                }
+//            });
+//        });
+//
+//        return ApiResp.ok(result);
+//    }
 
 }

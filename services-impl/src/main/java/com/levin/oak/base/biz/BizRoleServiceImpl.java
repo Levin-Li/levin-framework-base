@@ -43,7 +43,7 @@ import static com.levin.oak.base.entities.EntityConst.MAINTAIN_ACTION;
 //@Validated
 @Tag(name = E_Role.BIZ_NAME, description = E_Role.BIZ_NAME + MAINTAIN_ACTION)
 
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_SimpleApi.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+@CacheConfig(cacheNames = RoleService.CACHE_NAME, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 
 public class BizRoleServiceImpl implements BizRoleService<Serializable> {
 

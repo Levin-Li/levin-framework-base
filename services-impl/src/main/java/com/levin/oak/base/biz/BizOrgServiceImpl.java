@@ -59,7 +59,7 @@ import static com.levin.oak.base.ModuleOption.*;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_Org.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Org.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+@CacheConfig(cacheNames = OrgService.CACHE_NAME, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
 public class BizOrgServiceImpl extends BaseService<BizOrgServiceImpl> implements BizOrgService {
 
     @Autowired
@@ -89,7 +89,7 @@ public class BizOrgServiceImpl extends BaseService<BizOrgServiceImpl> implements
 
         Assert.notBlank(tenantId, "租户ID不能为空");
 
-        Consumer< SelectDao<?>  > daoConsumer = dao -> {
+        Consumer<SelectDao<?>> daoConsumer = dao -> {
             dao.disableSafeMode();
         };
 

@@ -61,7 +61,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  租户应用-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月2日 下午4:32:05, 代码生成哈希校验码：[f3f50389a22e45079b617c53ea581fdf]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:28, 代码生成哈希校验码：[53d215f21f9a0775bad8a4151be8e3b9]，请不要修改和删除此行内容。
  *
  */
 
@@ -82,7 +82,10 @@ import com.levin.commons.service.support.InjectConst;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_TenantApp.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_TenantApp.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+//*** 提示 *** 如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
+@CacheConfig(cacheNames = TenantAppService.CACHE_NAME, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
 public class BizTenantAppServiceImpl extends BaseService<BizTenantAppServiceImpl> implements BizTenantAppService {
 
     @Autowired
@@ -93,7 +96,7 @@ public class BizTenantAppServiceImpl extends BaseService<BizTenantAppServiceImpl
     @Operation(summary = CREATE_ACTION)
     @Transactional
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX_EXPR + "#result") //创建也清除缓存，防止空值缓存的情况
     public String create(CreateTenantAppReq req){
         return tenantAppService.create(req);
     }
@@ -101,7 +104,7 @@ public class BizTenantAppServiceImpl extends BaseService<BizTenantAppServiceImpl
     @Operation(summary = VIEW_DETAIL_ACTION)
     //@Override
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX_EXPR + "#id")
     public TenantAppInfo findById(String id) {
         return tenantAppService.findById(id);
     }
@@ -109,14 +112,14 @@ public class BizTenantAppServiceImpl extends BaseService<BizTenantAppServiceImpl
     //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     //@Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId + 
     public TenantAppInfo findById(TenantAppIdReq req) {
         return tenantAppService.findById(req);
     }
 
     @Operation(summary = UPDATE_ACTION)
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdateTenantAppReq req) {
         return tenantAppService.update(req);
@@ -124,7 +127,7 @@ public class BizTenantAppServiceImpl extends BaseService<BizTenantAppServiceImpl
 
     @Operation(summary = DELETE_ACTION)
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(TenantAppIdReq req) {
         return tenantAppService.delete(req);
@@ -146,7 +149,7 @@ public class BizTenantAppServiceImpl extends BaseService<BizTenantAppServiceImpl
 
     //@Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
     public void clearCache(Object key) {
         tenantAppService.clearCache(key);
     }

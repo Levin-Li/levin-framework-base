@@ -57,7 +57,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  访问日志-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:43, 代码生成哈希校验码：[ca71f69016d244cc06e96c6462bd6287]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:28, 代码生成哈希校验码：[26cacc3842647b655a5bf5d36030453c]，请不要修改和删除此行内容。
  *
  */
 
@@ -78,7 +78,10 @@ import com.levin.commons.service.support.InjectConst;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_AccessLog.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_AccessLog.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+//*** 提示 *** 如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
+//@CacheConfig(cacheNames = AccessLogService.CACHE_NAME, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
 public class BizAccessLogServiceImpl extends BaseService<BizAccessLogServiceImpl> implements BizAccessLogService {
 
     @Autowired
@@ -89,7 +92,7 @@ public class BizAccessLogServiceImpl extends BaseService<BizAccessLogServiceImpl
     @Operation(summary = CREATE_ACTION)
     @Transactional
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    //@CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX_EXPR + "#result") //创建也清除缓存，防止空值缓存的情况
     public Long create(CreateAccessLogReq req){
         return accessLogService.create(req);
     }
@@ -97,7 +100,7 @@ public class BizAccessLogServiceImpl extends BaseService<BizAccessLogServiceImpl
     @Operation(summary = VIEW_DETAIL_ACTION)
     //@Override
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    //@Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX_EXPR + "#id")
     public AccessLogInfo findById(Long id) {
         return accessLogService.findById(id);
     }
@@ -105,14 +108,14 @@ public class BizAccessLogServiceImpl extends BaseService<BizAccessLogServiceImpl
     //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     //@Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
+    //@Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId + 
     public AccessLogInfo findById(AccessLogIdReq req) {
         return accessLogService.findById(req);
     }
 
     @Operation(summary = UPDATE_ACTION)
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
+    //@CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdateAccessLogReq req) {
         return accessLogService.update(req);
@@ -120,7 +123,7 @@ public class BizAccessLogServiceImpl extends BaseService<BizAccessLogServiceImpl
 
     @Operation(summary = DELETE_ACTION)
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
+    //@CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(AccessLogIdReq req) {
         return accessLogService.delete(req);
@@ -142,7 +145,7 @@ public class BizAccessLogServiceImpl extends BaseService<BizAccessLogServiceImpl
 
     //@Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
     public void clearCache(Object key) {
         accessLogService.clearCache(key);
     }

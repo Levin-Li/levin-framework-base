@@ -60,7 +60,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  国际化资源-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年3月27日 下午3:55:27, 代码生成哈希校验码：[8e1132678fb7ac3ca50b6d5899618551]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:29, 代码生成哈希校验码：[0fc05b5620d114d114b229a860ee8493]，请不要修改和删除此行内容。
  *
  */
 
@@ -81,7 +81,10 @@ import com.levin.commons.service.support.InjectConst;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_I18nRes.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_I18nRes.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+//*** 提示 *** 如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
+@CacheConfig(cacheNames = I18nResService.CACHE_NAME, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
 public class BizI18nResServiceImpl extends BaseService<BizI18nResServiceImpl> implements BizI18nResService {
 
     @Autowired
@@ -92,7 +95,7 @@ public class BizI18nResServiceImpl extends BaseService<BizI18nResServiceImpl> im
     @Operation(summary = CREATE_ACTION)
     @Transactional
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX_EXPR + "#result") //创建也清除缓存，防止空值缓存的情况
     public Long create(CreateI18nResReq req){
         return i18nResService.create(req);
     }
@@ -100,7 +103,7 @@ public class BizI18nResServiceImpl extends BaseService<BizI18nResServiceImpl> im
     @Operation(summary = VIEW_DETAIL_ACTION)
     //@Override
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX_EXPR + "#id")
     public I18nResInfo findById(Long id) {
         return i18nResService.findById(id);
     }
@@ -108,14 +111,14 @@ public class BizI18nResServiceImpl extends BaseService<BizI18nResServiceImpl> im
     //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     //@Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //#req.tenantId + 
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId + 
     public I18nResInfo findById(I18nResIdReq req) {
         return i18nResService.findById(req);
     }
 
     @Operation(summary = UPDATE_ACTION)
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdateI18nResReq req) {
         return i18nResService.update(req);
@@ -123,7 +126,7 @@ public class BizI18nResServiceImpl extends BaseService<BizI18nResServiceImpl> im
 
     @Operation(summary = DELETE_ACTION)
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") //#req.tenantId +  , beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id") //#req.tenantId +  , beforeInvocation = true
     @Transactional
     public boolean delete(I18nResIdReq req) {
         return i18nResService.delete(req);
@@ -145,7 +148,7 @@ public class BizI18nResServiceImpl extends BaseService<BizI18nResServiceImpl> im
 
     //@Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
     public void clearCache(Object key) {
         i18nResService.clearCache(key);
     }

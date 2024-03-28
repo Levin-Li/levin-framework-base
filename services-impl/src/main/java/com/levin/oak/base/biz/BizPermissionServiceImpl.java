@@ -56,7 +56,7 @@ import com.levin.commons.service.support.InjectConst;
 /**
  *  权限清单-业务服务实现类
  *
- * @author Auto gen by simple-dao-codegen, @time: 2024年1月27日 下午12:43:42, 代码生成哈希校验码：[11929c02db09423d3742d558b9b30a57]，请不要修改和删除此行内容。
+ * @author Auto gen by simple-dao-codegen, @time: 2024年3月28日 下午6:09:27, 代码生成哈希校验码：[2015ea0db14f745f7ca192e9a67965f4]，请不要修改和删除此行内容。
  *
  */
 
@@ -77,7 +77,10 @@ import com.levin.commons.service.support.InjectConst;
 //@Valid只能用在controller，@Validated可以用在其他被spring管理的类上。
 //@Validated
 @Tag(name = E_Permission.BIZ_NAME + "-业务服务", description = "")
-@CacheConfig(cacheNames = {ID + CACHE_DELIM + E_Permission.SIMPLE_CLASS_NAME}, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
+//*** 提示 *** 如果要注释缓存注解的代码可以在实体类上加上@javax.persistence.Cacheable(false)，然后重新生成代码
+@CacheConfig(cacheNames = PermissionService.CACHE_NAME, cacheResolver = PLUGIN_PREFIX + "ModuleSpringCacheResolver")
+
 public class BizPermissionServiceImpl extends BaseService<BizPermissionServiceImpl> implements BizPermissionService {
 
     @Autowired
@@ -88,7 +91,7 @@ public class BizPermissionServiceImpl extends BaseService<BizPermissionServiceIm
     @Operation(summary = CREATE_ACTION)
     @Transactional
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX + "#result") //创建也清除缓存，防止空值缓存的情况
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#result)", key = CK_PREFIX_EXPR + "#result") //创建也清除缓存，防止空值缓存的情况
     public String create(CreatePermissionReq req){
         return permissionService.create(req);
     }
@@ -96,7 +99,7 @@ public class BizPermissionServiceImpl extends BaseService<BizPermissionServiceIm
     @Operation(summary = VIEW_DETAIL_ACTION)
     //@Override
     //Spring 缓存变量可以使用Spring 容器里面的bean名称，SpEL支持使用@符号来引用Bean。
-    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX + "#id")
+    @Cacheable(unless = "#result == null ", condition = "@spelUtils.isNotEmpty(#id)", key = CK_PREFIX_EXPR + "#id")
     public PermissionInfo findById(String id) {
         return permissionService.findById(id);
     }
@@ -104,14 +107,14 @@ public class BizPermissionServiceImpl extends BaseService<BizPermissionServiceIm
     //调用本方法会导致不会对租户ID经常过滤，如果需要调用方对租户ID进行核查
     @Operation(summary = VIEW_DETAIL_ACTION)
     //@Override
-    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX + "#req.id") //
+    @Cacheable(unless = "#result == null" , condition = "@spelUtils.isNotEmpty(#req.id)" , key = CK_PREFIX_EXPR + "#req.id") //
     public PermissionInfo findById(PermissionIdReq req) {
         return permissionService.findById(req);
     }
 
     @Operation(summary = UPDATE_ACTION)
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id")//, beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id")//, beforeInvocation = true
     @Transactional
     public boolean update(UpdatePermissionReq req) {
         return permissionService.update(req);
@@ -119,7 +122,7 @@ public class BizPermissionServiceImpl extends BaseService<BizPermissionServiceIm
 
     @Operation(summary = DELETE_ACTION)
     //@Override
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX + "#req.id") // , beforeInvocation = true
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#req.id) && #result", key = CK_PREFIX_EXPR + "#req.id") // , beforeInvocation = true
     @Transactional
     public boolean delete(PermissionIdReq req) {
         return permissionService.delete(req);
@@ -141,7 +144,7 @@ public class BizPermissionServiceImpl extends BaseService<BizPermissionServiceIm
 
     //@Override
     @Operation(summary = CLEAR_CACHE_ACTION, description = "缓存Key通常是ID")
-    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX + "#key")
+    @CacheEvict(condition = "@spelUtils.isNotEmpty(#key)", key = CK_PREFIX_EXPR + "#key")
     public void clearCache(Object key) {
         permissionService.clearCache(key);
     }
